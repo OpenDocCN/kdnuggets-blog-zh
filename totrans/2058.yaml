@@ -1,0 +1,348 @@
+- en: Observability for Data Engineering
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/02/observability-data-engineering.html](https://www.kdnuggets.com/2020/02/observability-data-engineering.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Evgeny Shulman](https://www.linkedin.com/in/shulmane/), Co-founder, Databand.ai**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Observability is a fast-growing concept in the Ops community that caught fire
+    in recent years, led by major monitoring/logging companies and thought leaders
+    like Datadog, Splunk, New Relic, and Sumo Logic. It’s described as Monitoring
+    2.0 but is really much more than that. Observability allows engineers to understand
+    if a system works like it is supposed to work, based on a deep understanding of
+    its internal state and context of where it operates.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f91172cc0d285e93967ce4dc317344f0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Sumo Logic describes Observability as the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is the capability of monitoring and analyzing event logs, along with KPIs
+    and other data, that yields actionable insights. An observability platform aggregates
+    data in the three main formats (logs, metrics, and traces), processes it into
+    events and KPI measurements, and uses that data to drive actionable insights into
+    system security and performance.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Observability goes deeper than Monitoring by adding more context to system metrics,
+    providing a deeper view of system operations, and indicating whether engineers
+    need to step in for a fix. In other words, while Monitoring tells you that some
+    microservice is consuming a given amount of resources, Observability tells you
+    that its current state is associated with critical failures, and you need to intervene.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But What About Data?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Until now, Observability has lived in the realm of DevOps or DevSecOps, focused
+    on applications, microservices, network, and infrastructure health. But the teams
+    responsible for managing data pipelines (Data Engineers and DataOps) have largely
+    been forced to figure things out on their own. This might work for organizations
+    that aren’t heavily invested in their data capabilities, but for companies with
+    serious data infrastructure, the lack of specialized management tools leads to
+    major inefficiencies and productivity gaps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Don’t Existing Tools Cut It?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The typical course of action for Data Engineers today is to take a standard
+    monitoring tool that was originally built for applications or infrastructure and
+    try using it for their data processes. Using these general-purpose tools, Data
+    Engineering teams can gain insight into high-level job (or DAG) statuses and summary
+    database performance but will lack visibility into the right level of information
+    they need to manage their pipelines. This gap causes many teams to spend a lot
+    of time tracking issues or work in a state of constant paranoia.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The reason standard tools don’t cut it is that data pipelines behave very differently
+    than software applications and infrastructure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b2afd029e5c88a4d16fc751460972687.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Zabbix and Airflow, how do we get all the right data in one place?*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Differences
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here are some of the main differences between data pipelines, especially batch
+    processes, and other kinds of infrastructure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Periodicity**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most monitoring tools were built to oversee systems that are supposed to run
+    consistently, 24/7\. Any downtime is a bad thing, and it means visitors can’t
+    access a website or users can’t access an application. On the other hand, batch
+    data processes run for discrete periods by design. As a result, they require a
+    different kind of monitoring because most of the questions you’ll ask do not have
+    a simple binary answer like “on/off,” “up/down,” “green/red.” There are more dimensions
+    to understand — scheduled start times, actual start times, end times and acceptable
+    ranges.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unlike other systems, it’s also totally normal for data pipelines to regularly
+    fail before they succeed. A DAG might fail 6 or 7 times before it snaps on and
+    successfully runs. This could be due to some type of desirable job throttling
+    like database pooling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Point being, Typical behavior for DAGs is very untypical of other infra services.
+    With standard alerting, data teams get flooded with meaningless alerts, with hundreds
+    of unread notification emails, unable to sift through the noise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Long-Running Processes**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data pipelines are often long-running processes that take many hours to complete.
+    Our customers report back to us averages of around 6 hours. What’s challenging
+    about monitoring long-running processes is that errors can come out later in the
+    job and you need to wait and watch for a long time to know if there is a success
+    or failure. This leads to a higher cost of failure because of the added time of
+    restarting jobs from the beginning if an issue comes up downstream. Teams need
+    ways of gathering early warning signs and smarter methods of analyzing histories
+    to anticipate failures.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Complex Dependencies**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: DAGs are pretty much complex by definition. They have internal dependencies
+    in the form of their sequence of tasks as well as external dependencies like when
+    data becomes available and outputs of preceding jobs. This web of interdependencies
+    creates a unique set of monitoring requirements where you need to understand the
+    broader context around a process so that you know how issues cascade or trace
+    back.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data Flows**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Of course, we can’t forget that data pipelines run on data. This is another
+    complex dimension that needs to be monitored and understood, including schemas,
+    distributions, and data completeness. For example, most batch jobs operate on
+    some window of data, i.e., the last 60 days. You need to know if in that 60 days
+    there was a problem, like data not being generated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While there are tons of solutions for tracking data, what’s really different
+    about teams today is that there is much more specialization and open source usage,
+    and it’s hard to find frameworks that are easy to integrate with the modern stack
+    of tools (i.e., Airflow, Spark, Kubernetes, Snowflake), are generally applicable,
+    and provide the right level of extensibility.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Cost Attribution**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Last but not least, cost attribution is harder when it comes to pipeline monitoring
+    because teams need to look at processes from many different angles to understand
+    their ROI. Examples include looking at cost by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Environment (the pipelines on my production Spark cluster cost X)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Data source provider (the pipelines reading data from Salesforce cost Y)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Data consumer (the pipelines delivering data to the Data Science team cost Z)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Bringing these factors all together, most of the differences between monitoring
+    data pipelines and monitoring other kinds of infrastructure boil down to the fact
+    that pipelines have many more dimensions that you need to watch and require very
+    granular reporting on statuses. These issues are compounded for teams leveraging
+    more complex systems like Kubernetes and Spark. Without observability, Data Engineering
+    teams run blind and will spend the vast majority of their time trying to track
+    down issues and debugging things.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What We Suggest
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In our previous lives managing Data Engineering teams, we always struggled
+    with maintaining good visibility into projects and infrastructure. We suggest
+    giving more thought to Observability for your data stack and considering the factors
+    that make it unique. This will help you build a more robust data operation by
+    making it easier to align your team on statuses, identify issues faster, and debug
+    more quickly. Here are some best practices we recommend to begin:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(1) Make incremental investments in data/metadata collection from your DAGs**.
+    Start with tracking basic metrics about your pipeline inputs and outputs so you
+    can figure out right away if there are significant data changes, and if those
+    changes are internal to your pipeline or caused by external events. Examples include
+    reporting the number and size of input/output files.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The next step would be extracting info about pipeline internals — the intermediate
+    results. These are the input and outputs between tasks in a pipeline. Having internal
+    visibility will help you drill into exactly in the DAG where issues or changes
+    are happening.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The next most significant addition to data monitoring would be layering in the
+    tracking of schemas, distributions, and other statistical metrics of your input
+    and output files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Making these improvements incrementally will help you gain more awareness of
+    your pipelines without undertaking a massive project, and enable you to experiment
+    with the right tools and approach for each layer of visibility.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(2) Define pipeline regression tests and track your test metrics**. Just
+    like Software Engineers test application code before it goes into production,
+    Data Engineers must test pipeline code.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For teams that have a testing or CI/CD process for their pipelines, we see two
+    common issues. First of all, making sure that the data used in your data regression
+    tests are updated and represents real production data. We recommend using data
+    from the latest successful production pipeline run. Second, having some basic
+    automation that runs new DAG code on that data and alerts on issues before pushing
+    into prod.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Automating tests for your pipelines will help you understand more nuances about
+    your data flows and pick up on issues before your data consumers struggle with
+    them downstream. You can catch bugs in your pipelines, identify changes in data
+    quality before they surprise data analysts and scientists, and make decisions
+    about updating/retraining an ML model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(3) Define & monitor standard KPIs that you can align all roles on — data
+    engineers, analysts, and scientists. **For a team working on machine learning,
+    this might be data engineers having exposure to model performance indicators that
+    are built by data scientists (like R2), and data scientists having metrics of
+    the data ingestion process managed by data engineers (like a number of filtered
+    events). Creating alignment across the team on these shared metrics is powerful
+    because each side will understand issues without so much back and forth.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here’s an example — let’s say a data engineer adds an extra data source. The
+    source contains a lot of noise, so the engineer adds filters to make sure only
+    useful data is getting through. A data scientist starts using the data and trains
+    a model. Knowing how the data was prepared empowers the data scientist to manage
+    their model. They can anticipate problems that would happen if the model is productized
+    in environments without similarly filtered data, and can advise on how the data
+    should be treated when their model needs to be retrained in the future.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrapping It Up
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Beyond getting started, as your data engineering team scales, Observability
+    will become more important and it’s essential to use the right tool for the job.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Don’t assume the tools you use to run your process can monitor themselves. The
+    kinds of tools most teams use to run their data stack have significant gaps when
+    it comes to Observability — i.e., relying on Airflow to monitor Airflow can easily
+    snowball into excessive complexity and instability. Also, don’t assume you can
+    do it with the standard, time-series monitoring tool for watching scheduled jobs,
+    because of how different data processes are.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To really gain Observability, you need execution metrics (CPU, time to run,
+    I/O, data read and write), pipeline metrics (how many tasks in pipeline, SLA of
+    each task), data metrics, and ML metrics (R2, MAE, RMSE) in one place and a dedicated
+    system that can make sure your logs are accurate and statuses are in sync.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/databand-ai/observability-for-data-engineering-a2e826587205).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Applying Machine Learning to DevOps](https://www.kdnuggets.com/2018/02/applying-machine-learning-devops.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Monitor Machine Learning Models in Real-Time](https://www.kdnuggets.com/2019/01/monitor-machine-learning-real-time.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Are you monitoring your machine learning systems?](https://www.kdnuggets.com/2018/01/python-ml-monitoring-survey.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Data Governance and Observability, Explained](https://www.kdnuggets.com/2022/08/data-governance-observability-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[IMPACT 2022: The Data Observability Summit, on Oct. 25-26](https://www.kdnuggets.com/2022/09/monte-carlo-impact-2022-data-observability-summit.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[IMPACT: The Data Observability Summit is back November 8th and the…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[25 Free Courses to Master Data Science, Data Engineering, Machine…](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, July 13: Linear Algebra for Data Science; 10 Modern…](https://www.kdnuggets.com/2022/n28.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Collection of Free Courses to Learn Data Science, Data Engineering,…](https://www.kdnuggets.com/collection-of-free-courses-to-learn-data-science-data-engineering-machine-learning-mlops-and-llmops)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

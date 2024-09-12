@@ -1,0 +1,579 @@
+- en: How to Automate Hyperparameter Optimization
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/06/automate-hyperparameter-optimization.html](https://www.kdnuggets.com/2019/06/automate-hyperparameter-optimization.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Suleka Helmini](https://www.linkedin.com/in/suleka-helmini-09803b132/detail/recent-activity/),
+    WSO2**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Beginner’s Guide to Using Bayesian Optimization With Scikit-Optimize
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the machine learning and deep learning paradigm, model “parameters” and “hyperparameters”
+    are two frequently used terms where “parameters” define configuration variables
+    that are internal to the model and whose values can be estimated from the training
+    data and “hyperparameters” define configuration variables that are external to
+    the model and whose values cannot be estimated from the training data ([What is
+    the Difference Between a Parameter and a Hyperparameter?](https://machinelearningmastery.com/difference-between-a-parameter-and-a-hyperparameter/) ).
+    Thus, the hyperparameter values need to be manually assigned by the practitioner.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Every machine learning and deep learning model that we make has a different
+    set of hyperparameter values that need to be fine-tuned to be able to obtain a
+    satisfactory result. Compared to machine learning models, deep learning models
+    tend to have a larger number of hyperparameters that need optimizing in order
+    to get the desired predictions due to its architectural complexity over typical
+    machine learning models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Repeatedly experimenting with different value combinations manually to derive
+    the optimal hyperparameter values for each of these hyperparameters can be a very
+    time consuming and tedious task that requires good intuition, a lot of experience,
+    and a deep understanding of the model. Moreover, some hyperparameter values may
+    require continuous values, which will have an undefined number of possibilities,
+    and even if the hyperparameters require a discrete value, the number of possibilities
+    is enormous, thus manually performing this task is rather difficult. Having said
+    all that, hyperparameter optimization might seem like a daunting task but thanks
+    to several libraries that are readily available in the cyberspace, this task has
+    become more straightforward. These libraries aid in implementing different hyperparameter
+    optimization algorithms with less effort. A few such libraries are[ Scikit-Optimize](https://scikit-optimize.github.io/), [Scikit-Learn](https://scikit-learn.org/stable/),
+    and [Hyperopt](https://github.com/hyperopt/hyperopt).
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are several hyperparameter optimization algorithms that have been employed
+    frequently throughout the years, they are Grid Search, Random Search, and automated
+    hyperparameter optimization methods. Grid Search and Random Search both set up
+    a grid of hyperparameters but in Grid Search every single value combination will
+    be exhaustively explored to find the hyperparameter value combination that gives
+    the best accuracy values making this method very inefficient. On the other hand,
+    Random Search will repeatedly select random combinations from the grid until the
+    specified number of iterations is met and is proven to yield better results compared
+    to the Grid Search. However, even though it manages to give a good hyperparameter
+    combination we cannot be certain that it is, in fact, the best combination. Automated
+    hyperparameter optimization uses different techniques like Bayesian Optimization
+    that carries out a guided search for the best hyperparameters ([Hyperparameter
+    Tuning using Grid and Random Search](https://www.kaggle.com/willkoehrsen/intro-to-model-tuning-grid-and-random-search)).
+    Research has shown that Bayesian optimization can yield better hyperparameter
+    combinations than Random Search ([Bayesian Optimization for Hyperparameter Tuning](https://arimo.com/data-science/2016/bayesian-optimization-hyperparameter-tuning/)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we will be providing a step-by-step guide into performing a
+    hyperparameter optimization task on a deep learning model by employing Bayesian
+    Optimization that uses the Gaussian Process. We used the [gp_minimize](https://scikit-optimize.github.io/#skopt.gp_minimize) package
+    provided by the [Scikit-Optimize (skopt)](https://scikit-optimize.github.io/) library
+    to perform this task. We will be performing the hyperparameter optimization on
+    a simple stock closing price forecasting model developed using [TensorFlow](https://www.tensorflow.org/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Scikit-Optimize (skopt)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Scikit-Optimize is a library that is relatively easy to use than other hyperparameter
+    optimization libraries and also has better community support and documentation.
+    This library implements several methods for sequential model-based optimization
+    by reducing expensive and noisy black-box functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bayesian Optimization using the Gaussian Process
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bayesian optimization is one of the many functions that skopt offers. Bayesian
+    optimization finds a posterior distribution as the function to be optimized during
+    the parameter optimization, then uses an acquisition function (eg. Expected Improvement-EI,
+    another function etc) to sample from that posterior to find the next set of parameters
+    to be explored. Since Bayesian optimization decides the next point based on more
+    systematic approach considering the available data it is expected to yield achieve
+    better configurations faster compared to the exhaustive parameter optimization
+    techniques such as Grid Search and Random Search. You can read more about the
+    Bayesian Optimizer in skopt from [here](https://orbi.uliege.be/bitstream/2268/226433/1/PyData%202017_%20Bayesian%20optimization%20with%20Scikit-Optimize.pdf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code Alert!
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So, enough with the theory, let’s get down to business!
+  prefs: []
+  type: TYPE_NORMAL
+- en: This example code is done using python and TensorFlow. Furthermore, the goal
+    of this hyperparameter optimization task is to obtain the set of hyperparameter
+    values that can give the lowest possible Root Mean Square Error (RMSE) for our
+    deep learning model. We hope this will be very straight forward for any first-timer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, let us install Scikit-Optimize. You can install it using pip by executing
+    this command.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Please note that you will have to make some adjustments to your existing deep
+    learning model code in order to make it work with the optimization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, let’s do some necessary imports.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: We will now set the TensorFlow and Numpy seed as we want to get reproducible
+    results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Shown below are some essential python global variables that we have declared.
+    Among the variables, we have also declared the hyperparameters that we are hoping
+    to optimize (the 2nd set of variables).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The “input_size” depicts a part of the shape of the prediction. The “features”
+    depict the number of features in the data set and the “columns” list has the header
+    names of the two features. The “column_min_max” variable contains the upper and
+    lower scaling bounds of both the features (this was taken by examining validation
+    and training splits).
+  prefs: []
+  type: TYPE_NORMAL
+- en: After declaring all these variables it’s finally time to declare the search
+    space for each of the hyperparameters we are hoping to optimize.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you look closely you will be able to see that we have declared the ‘lstm_init_learning_rate’
+    prior to log-uniform without just putting uniform. What this does is that, if
+    you had put prior as uniform, the optimizer will have to search from 1e-4 (0.0001
+    ) to 1e-1 (0.1) in a uniform distribution. But when declared as log-uniform, the
+    optimizer will search between -4 and -1, thus making the process much more efficient.
+    This has been [advised](https://scikit-optimize.github.io/notebooks/hyperparameter-optimization.html) when
+    assigning the search space for learning rate by the skopt library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are several data types using which you can define the search space. Those
+    are Categorical, Real and Integer. When defining a search space that involves
+    floating point values you should go for “Real” and if it involves integers, go
+    for “Integer”. If your search space involves categorical values like different
+    activation functions, then you should go for the “Categorical” type.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are now going to put down the parameters that we are going to optimize in
+    the ‘dimensions’ list. This list will be passed to the ‘gp_minimize’ function
+    later on. You can see that we have also declared the ‘default_parameters’. These
+    are the default parameter values we have given to each hyperparameter. ****Remember
+    to type in the default values in the same order as you listed the hyperparameters
+    in the ‘dimensions’ list.****
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: The most important thing to remember is that the hyperparameters in the “default_parameters”
+    list will be the starting point of your optimization task. The Bayesian Optimizer
+    will use the default parameters that you have declared in the first iteration
+    and depending on the result, the acquisition function will determine which point
+    it wants to explore next.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It can be said that if you have run the model several times previously and found
+    a decent set of hyperparameter values, you can put them as the default hyperparameter
+    values and start your exploration from there. What this may do is that it will
+    help the algorithm find the lowest RMSE value faster (fewer iterations). However,
+    do keep in mind that this might not always be true. Also, remember to assign a
+    value that is within the search space that you have defined when assigning the
+    default values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What we have done up to now is setting up all the initial work for the hyperparameter
+    optimization task. We will now focus on the implementation of our deep learning
+    model. We will not be discussing the data pre-processing of the model development
+    process as this article only focuses on the hyperparameter optimization task.
+    We will include the GitHub link of the complete implementation at the end of this
+    article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, to give you a little bit more context, we divided our data set into
+    three splits for training, validation, and testing. The training set was used
+    to train the model and the validation set was used to do the hyperparameter optimization
+    task. As mentioned before, we are using the Root Mean Square Error (RMSE) to evaluate
+    the model and perform the optimization (minimize RMSE).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The accuracy assessed using the validation split cannot be used to evaluate
+    the model since the selected hyperparameters minimizing the RMSE with validation
+    split can be overfitted to the validation set during the hyperparameter optimization
+    process. Therefore, it is standard procedure to use a test split that has not
+    used at any point in the pipeline to measure the accuracy of the final model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Shown below is the implementation of our deep learning model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The “setupRNN” function contains our deep learning model. Still, you may not
+    want to understand those details, as Bayesian optimization considers that function
+    as a black-box that takes certain hyperparameters as the inputs and then outputs
+    the prediction. So if you are not interested in understanding what we have inside
+    that function, you may skip the next paragraph.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our deep learning model contains an LSTM layer, a dropout layer and an output
+    layer. The necessary information required for the model to work needs to be sent
+    to this function (in our case, it was the input and the dropout rate). You can
+    then proceed with implementing your deep learning model inside this function.
+    In our case, we used an LSTM layer to identify the temporal dependencies of our
+    stock data-set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We then fed the last output of the LSTM to the dropout layer for regularization
+    purposes and obtained the prediction through the output layer. Finally, remember
+    to return this prediction (in a classification task this can be your logit) to
+    the function that will be passed to the Bayesian Optimization ( “setupRNN” will
+    be called by this function).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you are performing a hyperparameter optimization for a machine learning algorithm
+    (using a library like Scikit-Learn) you will not need a separate function to implement
+    your model as the model itself is already given by the library and you will only
+    be writing code to train and obtain predictions. Therefore, this code can go inside
+    the function that will be returned to the Bayesian Optimization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have now come to the most important section of the hyperparameter optimization
+    task, the ‘fitness’ function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: As shown above, we are passing the hyperparameter values to a function named
+    “fitness.” The “fitness” function will be passed to the Bayesian hyperparameter
+    optimization process (*gp_minimize*). Note that in the first iteration, the values
+    passed to this function will be the default values that you defined and from there
+    onward Bayesian Optimization will choose the hyperparameter values on its own.
+    We then assign the chosen values to the python global variables we declared at
+    the beginning so that we will be able to use the latest chosen hyperparameter
+    values outside the fitness function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We then come to a rather critical point in our optimization task. If you have
+    used TensorFlow prior to this article, you would know that TensorFlow operates
+    by creating a computational graph for any kind of deep learning model that you
+    make.
+  prefs: []
+  type: TYPE_NORMAL
+- en: During the hyperparameter optimization process, in each iteration, we will be
+    resetting the existing graph and constructing a new one. This process is done
+    to minimize the memory taken for the graph and prevent the graphs from stacking
+    on top of each other. Immediately after resetting the graph you will have to set
+    the TensorFlow random seed in order to obtain reproducible results. After the
+    above process, we can finally declare the TensorFlow session.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After this point, you can start adding code responsible for training and validating
+    your deep learning model as you normally would. This section is not really related
+    to the optimization process but the code after this point will start utilizing
+    the hyperparameter values chosen by the Bayesian Optimization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The main point to remember here is to ****return**** the final metric value
+    (in this case the RMSE value) obtained for the validation split. This value will
+    be returned to the Bayesian Optimization process and will be used when deciding
+    the next set of hyperparameters that it wants to explore.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Note****: if you are dealing with a classification problem you would want
+    to put your accuracy as a negative value (eg. -96) because, even though the higher
+    the accuracy the better the model, the Bayesian function will keep trying to reduce
+    the value as it is designed to find the hyperparameter values for the ****lowest**** value
+    that is returned to it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us now put down the execution point for this whole process, the “main” function.
+    Inside the main function, we have declared the “gp_minimize” function. We are
+    then passing several essential parameters to this function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The “func” parameter is the function you would want to finally model using
+    the Bayesian Optimizer. The “dimensions” parameter is the set of hyperparameters
+    that you are hoping to optimize and the “acq_func” stands for the acquisition
+    function and is the function that helps to decide the next set of hyperparameter
+    values that should be used. There are 4 types of acquisition functions supported
+    by *gp_minimize*. They are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'LCB: lower confidence bound'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'EI: expected improvement'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'PI: probability of improvement'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'gp_hedge: probabilistically choose one of the above three acquisition functions
+    at every iteration'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The above information was extracted from the documentation. Each of these has
+    its own advantages but if you are a beginner to Bayesian Optimization, try using
+    “EI” or “gp_hedge” as “EI” is the most widely used acquisition function and “gp_hedge”
+    will choose one of the above-stated acquisition functions probabilistically thus,
+    you wouldn't have to worry too much about that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keep in mind that when using different acquisition functions there might be
+    other parameters that you might want to change that affects your chosen acquisition
+    function. Please refer the parameter list in the [documentation](https://scikit-optimize.github.io/#skopt.gp_minimize) for
+    this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Back to explaining the rest of the parameters, the “n_calls” parameter is the
+    number of times you would want to run the fitness function. The optimization task
+    will start by using the hyperparameter values defined by “x0", the default hyperparameter
+    values. Finally, we are setting the random state of the hyperparameter optimizer
+    as we need reproducible results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now when you run the *gp_optimize* function the flow of events will be:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The fitness function will use with the parameters passed to x0\. The LSTM will
+    be trained with the specified epochs and the validation input will be run to get
+    the RMSE value for its predictions. Then depending on that value, the Bayesian
+    optimizer will decide what the next set of hyperparameter values it wants to explore
+    with the help of the acquisition function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the 2nd iteration, the fitness function will run with the hyperparameter
+    values that the Bayesian optimization has derived and the same process will repeat
+    until it has iterated “n_call” times. When the complete process comes to an end,
+    the Scikit-Optimize object will get assigned to the “search _result” variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can use this object to retrieve useful information as stated in the documentation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'x [list]: location of the minimum.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'fun [float]: function value at the minimum.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'models: surrogate models used for each iteration.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'x_iters [list of lists]: location of function evaluation for each iteration.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'func_vals [array]: function value for each iteration.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'space [Space]: the optimization space.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'specs [dict]`: the call specifications.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'rng [RandomState instance]: State of the random state at the end of minimization.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The “search_result.x” gives us optimal hyperparameter values and using “search_result.fun”
+    we can obtain the RMSE value of the validation set corresponding to the obtained
+    hyperparameter values (The lowest RMSE value obtained for the validation set).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Shown below are the optimal hyperparameter values that we obtained for our model
+    and the lowest RMSE value of the validation set. If you are finding it hard to
+    figure out the order in which the hyperparameter values are being listed when
+    using “search_result.x”, it is in the same order as you specified your hyperparameters
+    in the “dimensions” list.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Hyperparameter Values:****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'lstm_num_steps: 6'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'lstm_size: 171'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'lstm_init_epoch: 3'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'lstm_max_epoch: 58'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'lstm_learning_rate_decay: 0.7518394019565194'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'lstm_batch_size: 24'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'lstm_dropout_rate: 0.21830825193089087'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'lstm_init_learning_rate: 0.0006401363567813549'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '****Lowest RMSE:**** 2.73755355221523'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Convergence Graph
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The hyperparameters that produced the lowest point of the Bayesian Optimization
+    in this graph is what we get as the optimal set of hyperparameter values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/bdd75378596d881565195f7e17f34e3b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The graph shows a comparison of the lowest RMSE values recorded for each iteration
+    (50 iterations) in Bayesian Optimization and Random Search. We can see that the
+    Bayesian Optimization has been able to converge rather better than the Random
+    Search. However, in the beginning, we can see that Random search has found a better
+    minimum faster than the Bayesian Optimizer. This can be due to random sampling
+    being the nature of Random Search.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have finally come to the end of this article, so to conclude, we hope this
+    article made your deep learning model building task easier by showing you a better
+    way of finding the optimal set of hyperparameters. Here’s to no more stressing
+    over hyperparameter optimization. Happy coding, fellow geeks!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Useful Materials:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The complete code can be found through this [link](https://github.com/suleka96/Bayesian_Hyperparameter_optimization/tree/master).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For more information about Bayesian optimization, you can refer to this [paper](https://arxiv.org/pdf/1807.02811.pdf).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For more information about acquisition functions, refer to this [paper](https://www.cse.wustl.edu/~garnett/cse515t/spring_2015/files/lecture_notes/12.pdf).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Suleka Helmini](https://www.linkedin.com/in/suleka-helmini-09803b132/)**
+    is a Software Engineer at WS02.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://dzone.com/articles/how-to-automate-hyperparameter-optimization).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[The Intuitions Behind Bayesian Optimization with Gaussian Processes](/2018/10/intuitions-behind-bayesian-optimization-gaussian-processes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Keras Hyperparameter Tuning in Google Colab Using Hyperas](/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using AutoML to Generate Machine Learning Pipelines with TPOT](/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-4.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Tasks To Automate With Python](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automate Microsoft Excel and Word Using Python](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automate the Boring Stuff with GPT-4 and Python](https://www.kdnuggets.com/2023/03/automate-boring-stuff-chatgpt-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automate Your Codebase with Promptr and GPT](https://www.kdnuggets.com/2023/04/automate-codebase-promptr-gpt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automate Graphic Design Activity with ChatGPT Canva Plugin](https://www.kdnuggets.com/automate-graphic-design-activity-with-chatgpt-canva-plugin)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

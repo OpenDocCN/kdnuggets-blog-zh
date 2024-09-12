@@ -1,0 +1,480 @@
+- en: 'Autograd: The Best Machine Learning Library You’re Not Using?'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/09/autograd-best-machine-learning-library-not-using.html](https://www.kdnuggets.com/2020/09/autograd-best-machine-learning-library-not-using.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Autograd: The Missing Machine Learning Library**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Wait, people use libraries other than TensorFlow and PyTorch?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Ask a group of deep learning practitioners for their programming language of
+    choice and you’ll undoubtedly hear a lot about Python. Ask about their go-to machine
+    learning library, on the other hand, and you’re likely to get a picture of a two
+    library system with a mix of TensorFlow and PyTorch. While there are plenty of
+    people that may be familiar with both, in general commercial applications in machine
+    learning (ML) tend to be dominated by the use of TensorFlow, while research projects
+    in artificial intelligence/ML [mostly use PyTorch](https://thegradient.pub/state-of-ml-frameworks-2019-pytorch-dominates-research-tensorflow-dominates-industry/).
+    Although there’s significant convergence between the two libraries with the introduction
+    of eager execution by default in [TensorFlow 2.0](https://blog.exxactcorp.com/tensorflow-2-0-dynamic-readable-and-highly-extended/) [released
+    last year](https://blog.tensorflow.org/2019/09/tensorflow-20-is-now-available.html),
+    and the availability of building static executable models using [Torchscript](https://pytorch.org/docs/master/jit.html),
+    most seem to stick to one or the other for the most part.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While the general consensus seems to be that you should pick TensorFlow for
+    its better deployment and edge support if you want to join a company, and PyTorch
+    for flexibility and readability if you want to work in academic research, there’s
+    more to the world of AI/ML libraries than just PyTorch and TensorFlow. Just like
+    there’s more to AI/ML than just deep learning. In fact, the gradients and tensor
+    computations powering deep learning promise to have a wide-ranging impact in fields
+    ranging from physics to biology. While we would bet that the so-called shortage
+    of ML/AI researchers is exaggerated (and who wants to dedicate their most creative
+    years to [maximizing ad engagement](https://www.fastcompany.com/3008436/why-data-god-jeffrey-hammerbacher-left-facebook-found-cloudera) and
+    recommending more addictive newsfeeds?), we expect that the tools of differentiable
+    programming will be increasingly valuable to a wide variety of professionals for
+    the foreseeable future.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Differentiable Computing is Bigger than Deep Learning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Deep learning, the use of many-layered artificial neural networks very loosely
+    based on ideas about computation in mammalian brains, is well known for its impacts
+    on fields like computer vision and natural language processing. We’ve also seen
+    that many of the lessons in hardware and software developed alongside deep learning
+    in the past decade (gradient descent, function approximation, and accelerated
+    tensor computations) have found interesting applications in the absence of neural
+    networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Automatic differentiation and [gradient descent over the parameters of quantum
+    circuits](https://pennylane.ai/qml/demos/tutorial_qubit_rotation.html) offers
+    meaningful utility for quantum computing in the era of Noisy Intermediate-Scale
+    Quantum (NISQ) computing devices (*i.e.* quantum computing devices that are available
+    now). The penultimate step in [DeepMind’s impressive upset at the CASP13](https://blog.exxactcorp.com/deepminds-protein-folding-upset/) protein
+    folding prediction conference and competition used gradient descent applied directly
+    over predicted amino acid positions, rather than a deep neural network as the
+    Google Alphabet subsidiary is well known for. These are just a few examples of
+    the power of differentiable programming unbound by the paradigm of artificial
+    neurons.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Deep learning can be categorized as a subspace of the more general differentiable
+    programming](../Images/ea7f9a42f05755997fec3fe8344e6faa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Deep learning can be categorized as a subspace of the more general differentiable
+    programming. Deep neuroevolution refers to the optimization of neural networks
+    by selection, without explicit differentiation or gradient descent.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Differentiable programming is a broader programming paradigm that encompasses
+    most of deep learning, excepting gradient-free optimization methods such as neuroevolution/evolutionary
+    algorithms. Yann LeCun, Chief AI Scientist at Facebook, touted the possibilities
+    of differentiable programming in a [Facebook post](https://www.facebook.com/yann.lecun/posts/10155003011462143?_fb_noscript=1) (content [mirrored
+    in a Github gist](https://gist.github.com/halhenke/872708ccea42ee8cafd950c6c2069814)).
+    To hear LeCun tell it, differentiable programming is little more than a rebranding
+    of modern deep learning, incorporating dynamic definitions of neural networks
+    with loops and conditionals.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I would argue that the consequences of widespread adoption of differentiable
+    programming are closer to what Andrej Karpathy describes as [“Software 2.0”](https://medium.com/@karpathy/software-2-0-a64152b37c35),
+    although he also limits his discussion largely to neural networks. It’s reasonable
+    to argue that software 2.0/differentiable programming is a broader paradigm in
+    its entirety than either LeCun or Karpathy described. Differentiable programming
+    represents a generalization beyond the constraint of neural networks as function
+    approximators to facilitate gradient-based optimization algorithms for a wide
+    range of systems. If there is a Python library that is emblematic of the simplicity,
+    flexibility, and utility of differentiable programming it has to be Autograd.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Combining Deep Learning with Differentiable Programming
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Differentiating with respect to arbitrary physical simulations and mathematical
+    primitives presents opportunities for solutions where deep neural networks are
+    inefficient or ineffective. That’s not to say you should throw away all your deep
+    learning intuition and experience. Rather, the most impressive solutions will
+    combine elements of deep learning with the broader capabilities of differentiable
+    programming, such as the work of [Degrave et al. 2018](https://arxiv.org/abs/1611.01652),
+    whose authors combined a differentiable physics engine with a neural network controller
+    to solve robotic control tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Essentially they extended the differentiable parts of the environment beyond
+    the neural network to include simulated robot kinematics. They could then backpropagate
+    through the parameters of the robot environment into the neural network policy,
+    speeding up the optimization process by about 6x to 8x in terms of sample efficiency.
+    They chose to use [Theano](http://deeplearning.net/software/theano/) as their
+    automatic differentiation library, which prevented them from differentiating through
+    conditional statements, limiting the types of contact constraints they could implement.
+    A differentiable physics simulator built with Autograd or even recent versions
+    of PyTorch or Tensorflow 2.0, which support differentiating through dynamic branching,
+    would have even more possibilities for optimizing a neural network robot controller, *e.g.* offering
+    more realistic collision detection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The [universal approximation power](https://en.wikipedia.org/wiki/Universal_approximation_theorem) of
+    deep neural networks makes them an incredible tool for problems in science, control,
+    and data science, but sometimes this flexibility is more liability than utility,
+    as anyone who has ever struggled with over-fitting can attest. As a famous quote
+    from John von Neumann puts it: “With four parameters I can fit an elephant, and
+    with five I can make him wiggle his trunk.” (an actual demonstration of this concept
+    can be found in “Drawing an elephant with 4 complex parameters” by Mayer *et al.* [[pdf](https://publications.mpi-cbg.de/getDocument.html?id=ff8080812daff75c012dc1b7bc10000c)]).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In modern machine learning practice, that means being careful not to mismatch
+    your model to your dataset, a feat that for small datasets is all too easy to
+    stumble into. In other words a big conv-net is likely to be overkill for many
+    bespoke datasets with only a few hundred to a few thousand samples. In many physics
+    problems, for example, it will be better to describe your problem mathematically
+    and run gradient descent over the free parameters. Autograd is a Python package
+    well suited to this approach, especially for Pythonicly-inclined mathematicians,
+    physicists, and others who are well-practiced at describing problems at a low
+    level with Python matrix and array computational package NumPy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Autograd: Anything you can NumPy, you can differentiate'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Here’s a simple example of what Autograd can do:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Differentiation with Autograd](../Images/e2c8eff7d2033e84302f17d109e6c79c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Differentiation with Autograd. In this case Autograd was able to differentiate
+    up to the 7th derivative before running into some numerical stability problems
+    around x=0 (note the sharp olive green spike in the center of the figure).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Autograd is a powerful automatic differentiation library that makes it possible
+    to differentiate native Python and NumPy code. Derivatives can be computed to
+    an arbitrary order (you can take derivatives of derivatives of derivatives, and
+    so on), and assigned to multiple arrays of parameters so long as the final output
+    is a scalar (e.g. a loss function). The resulting code is [Pythonic](https://stackoverflow.com/questions/25011078/what-does-pythonic-mean),
+    a.k.a. it is readable and maintainable, and it doesn’t require learning new syntax
+    or style. That means we don’t have to worry about memorizing complex APIs like
+    the contents of torch.nn or tf.keras.layers, and we can concentrate on the details
+    of our problem, *e.g.* translating mathematics into code. Autograd+NumPy is a
+    mature library that is maintained but no longer developed, so there’s no real
+    danger of future updates breaking your project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You *can* implement a neural network easily with Autograd, as the mathematical
+    primitives of dense neural layers (matrix multiplication) and convolution (you
+    can easily use Fourier transforms for this, or use convolve2d from scipy) have
+    relatively fast implementations in NumPy. To try out a simple MLP demonstration
+    on scikit-learn’s diminutive digits dataset, download this [Github gist](https://gist.github.com/riveSunder/1223824a4fb7e6831f20fde3b4871354),
+    (you may also be interested in studying the [official example](https://github.com/HIPS/autograd/blob/master/examples/neural_net.py) in
+    the autograd repository).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you copy the gist and run it in a local virtual environment you’ll need
+    to pip install both autograd, and scikit-learn, the latter for its digits dataset.
+    Once all set up, running the code should yield progress reports like the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: That’s a reasonably good result of 98.3% validation accuracy after just under
+    two minutes of training. With a little tweaking of hyperparameters, you could
+    probably push that performance to 100% accuracy or very near. Autograd handles
+    this small dataset easily and efficiently (while Autograd and NumPy operations
+    don’t run on the GPU, primitives like matrix multiply do take advantage of multiple
+    cores). But if all you wanted to do was build a shallow MLP you could do so more
+    quickly in terms of both development and computational time with a more mainstream
+    and modern machine learning library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There is some utility in building simple models at a low-level like this where
+    control is prioritized or as a learning exercise, of course, but if a small dense
+    neural network was the final goal we’d recommend you stick to PyTorch or TensorFlow
+    for brevity and compatibility with hardware accelerators like GPUs. Instead let’s
+    dive into something a bit more interesting: simulating an optical neural network.
+    The following tutorial does involve a bit of physics and a fair bit of code: if
+    that’s not your thing feel free to skip ahead to the next section where we’ll
+    touch on some of Autograd’s limitations.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Simulating an Optical Neural Network with Autograd
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Optical neural networks (ONNs) are an old idea, with the scientific journal
+    Applied Optics running special issues on the topic [in 1987](https://www.osapublishing.org/ao/issue.cfm?volume=26&issue=23) and
+    again [in 1993](https://www.osapublishing.org/ao/issue.cfm?volume=32&issue=8).
+    The concept has recently been revisited by academics (*e.g.*[ Zuo *et al*. 2019](https://www.osapublishing.org/optica/abstract.cfm?uri=optica-6-9-1132))
+    and by startups such as [Optalysys](https://www.optalysys.com/),  [Fathom Computing](https://www.wired.com/story/this-computer-uses-lightnot-electricityto-train-ai-algorithms/),
+    and [Lightmatter](https://lightmatter.co/) and [Lightelligence](https://www.lightelligence.ai/technology),
+    the last two of which were spun out of the same lab at MIT by co-authors on a [high-profile
+    paper published in Nature](https://www.nature.com/articles/nphoton.2017.93).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Light is an attractive physical phenomenon for implementing neural networks
+    due to the similarity in the mathematics used to describe both neural networks
+    and optical propagation. Thanks to the [Fourier Transform property of lenses](https://en.wikipedia.org/wiki/Fourier_optics#Applications_of_Fourier_optics_principles) and
+    the [convolution property](http://www.thefouriertransform.com/transform/properties.php) of
+    the Fourier transform, convolutional layers can be implemented with a perturbative
+    element placed after 2 focal lengths and one lens away from an input plane (this
+    is known as a [4f correlator](https://en.wikipedia.org/wiki/Optical_correlator))
+    while a matrix multiply can be implemented by placing the element 2 focal lengths
+    and 1 lens from that. But this isn’t an optics lecture, it’s a coding tutorial,
+    so let’s see some code!
+  prefs: []
+  type: TYPE_NORMAL
+- en: To install the necessary dependencies, activate your desired virtual environment
+    with your environment manager of choice and use pip to install Autograd and scikit-image
+    if you haven’t already.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pip install autograd`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: pip install scikit-image
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll be simulating an optical system that essentially operates as a single-output
+    generator, processing a flat input wavefront by passing it through a series of
+    evenly-spaced phase images. To keep the tutorial relatively simple and the line
+    count down, we will attempt to match only a single target image, shown below (you
+    can download the image to your working directory if you want to follow along).
+    After completing this simple tutorial, you may be inclined to experiment with
+    building an optical classifier, autoencoder, or some other image transformation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Autograd image transformation example](../Images/a156bf0c62efa17b762b1a91f8b2bc59.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now for some Python, starting with importing the packages we’ll need.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: We’ll use the angular spectrum method to simulate optical propagation. This
+    is a good method for near-field conditions where the aperture size of your lens
+    or beam is similar to the propagation distance. The following function executes
+    angular spectrum method propagation given a starting wavefront and its dimensions,
+    wavelength of light, and propagation distance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Instead of restricting our ONN to either convolution or matrix multiplication
+    operations, we’ll propagate our beam through a series of evenly spaced phase object
+    images. Physically, this is similar to shining a coherent beam of light through
+    a series of thin, wavy glass plates, only in this case we’ll use Autograd to backpropagate
+    through the system to design them so that they direct light from the input wavefront
+    to match a given target pattern at the end. After passing through the phase elements,
+    we’ll collect the light on the equivalent of an image sensor. This gives us a
+    nice nonlinearity in the conversion from a complex field to real-valued intensity
+    that we could use to build a more complex optical neural network by stacking several
+    of these together.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Each layer is defined by passing through a series of phase images separated
+    by short distances. This is described computationally as  propagation over a short
+    distance, followed by a thin phase plate (implemented as multiplication):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: The key to training a model in Autograd is in defining a function that returns
+    a scalar loss. This loss function can then be wrapped in Autograd’s grad function
+    to compute gradients. You can specify which argument contains the parameters to
+    compute gradients for the argnum argument to grad, and remember that the loss
+    function must return a single scalar value, not an array.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: First, let’s read in the target image and set up the input wavefront. Feel free
+    to use a 64 by 64 image of your choosing, or download the grayscale smiley image
+    from earlier in the article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, define the learning rate, propagation distance, and the model parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you’re familiar with training neural networks with PyTorch or similar librarie​s,
+    the training loop should look familiar. We call the gradient function we defined
+    earlier (which is a function transformation of the function we wrote to calculate
+    loss), and apply the resulting gradients to the parameters of our model. I found
+    the model to get much better results by updating parameters (phase_objects) by
+    only the phase of the gradient, rather than the raw complex gradient itself. The
+    real-valued phase component of the gradient is accessed by using NumPy’s np.angle,
+    and it’s converted back into complex values by np.exp(1.j * value).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: If everything worked out you should see monotonically decreasing mean squared
+    error loss and the code will save a series of figures depicting optical network’s
+    output as it gets closer and closer to matching the target image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Optimization of the optical system attempting to match the target image](../Images/18839ccfb209efdfa4bc4bc317ce4ab4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Optimization of the optical system attempting to match the target image. Each
+    of the numbered images with a blue background is the model output at different
+    training steps. Unsurprisingly for training with a single sample, the loss decreases
+    smoothly over the course of training.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: That’s it! We’ve simulated an optical system acting as a single-output generator.
+    If you have any trouble getting the code to run, try copying the code from [this
+    Github gist](https://gist.github.com/riveSunder/96267f5a52a1ebe8f567505516d4e068) all
+    in one go to prevent introducing typos.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Autograd Uses and Limitations
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Autograd is a flexible automatic differentiation package that has influenced
+    mainstream machine learning libraries in many ways. It’s not always easy to determine
+    the ancestry of how different ideas influence one another in a rapidly developing
+    space like machine learning. However, the imperative, define-by-run approach features
+    prominently in Chainer, PyTorch, and to some extent TensorFlow versions after
+    2.0 that feature eager execution. According to [libraries.io](https://libraries.io/pypi/autograd/dependents) ten
+    other Python packages depend on Autograd, including packages for [solving inverse
+    kinematics](https://github.com/lanius/tinyik), [sensitivity analysis](https://github.com/rgiordan/vittles),
+    and [Gaussian processes](https://github.com/Gattocrucco/lsqfitgp). My personal
+    favorite is the quantum machine learning package [PennyLane](https://github.com/xanaduai/pennylane).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Autograd may not be as powerful as PyTorch or TensorFlow, and it doesn’t have
+    implementations of all the latest deep learning tricks, but in some ways this
+    can be an advantage during certain stages of development. There aren’t a lot of
+    specialized APIs to memorize and the learning curve is particularly gentle for
+    anyone who is familiar with Python and/or NumPy. It doesn’t have any of the bells
+    and whistles for deployment or scaling, but it is simple and efficient to use
+    for projects where control and customization is important. It’s particularly well-suited
+    to mathematicians and physicists who need to translate abstract ideas from math
+    to code to build arbitrary machine learning or optimization solutions at a low-level
+    of implementation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The biggest con to using Autograd in our opinion is a lack of support for hardware
+    acceleration. Perhaps there’s no better way to describe this drawback than the
+    4-year-long discussion on [this Github issue](https://github.com/HIPS/autograd/issues/46),
+    which discusses various ways of introducing GPU support. If you worked your way
+    through the optical neural network tutorial in this post you’ll have already noticed
+    that running an experiment with even a modestly sized model could require a prohibitively
+    high amount of computational time. Computation speed with Autograd is enough of
+    a drawback that we don’t actually recommend using it for projects much larger
+    than the MLP or ONN generator demonstrations described above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead, consider JAX, an Apache 2.0 licensed library developed by Google Brain
+    researchers, including the Autograd developers. JAX combines hardware acceleration
+    and just-in-time compilation for substantial speedups over native NumPy code,
+    and in addition, JAX offers a set of function transformations for automatically
+    parallelizing code. JAX can be slightly more complicated than a direct NumPy replacement
+    with Autograd, but its powerful features can more than make up for that. We’ll
+    compare JAX to Autograd as well as the popular PyTorch and TensorFlow in a future
+    article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://blog.exxactcorp.com/autograd-the-best-machine-learning-library-youre-not-using/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PyTorch for Deep Learning: The Free eBook](/2020/07/pytorch-deep-learning-free-ebook.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Batch Normalization in Deep Neural Networks](/2020/08/batch-normalization-deep-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deep Learning for Signal Processing: What You Need to Know](/2020/07/deep-learning-signal-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

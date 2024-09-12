@@ -1,0 +1,411 @@
+- en: Automating Every Aspect of Your Python Project
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/09/automating-every-aspect-python-project.html](https://www.kdnuggets.com/2020/09/automating-every-aspect-python-project.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Martin Heinz](https://www.linkedin.com/in/heinz-martin/), DevOps Engineer
+    at IBM**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/af58abcae89d0c2899a8c38dbc1b2607.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Every project — regardless of whether you are working on web app, some data
+    science or AI — can benefit from well configured CI/CD, Docker images that are
+    both debuggable in development and optimized for production environment or a few
+    extra code quality tools, like *CodeClimate* or *SonarCloud*. All these are things
+    we will go over in this article and we will see how those can be added to your *Python* project!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*This is a follow up to previous article about creating *[*“Ultimate” Python
+    Project Setup*](https://towardsdatascience.com/ultimate-setup-for-your-next-python-project-179bda8a7c2c)*,
+    so you might want check that out before reading this one.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*TL;DR: Here is my repository with full source code and docs: *[*https://github.com/MartinHeinz/python-project-blueprint*](https://github.com/MartinHeinz/python-project-blueprint)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Debuggable Docker Containers for Development
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Some people don’t like *Docker* because containers can be hard to debug or because
+    their images take long time to be built. So, let’s start here, by building images
+    that are ideal for development — fast to build and easy to debug.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To make the image easily debuggable we will need base image that includes *all* the
+    tools we might ever need when debugging — things like `bash`, `vim`, `netcat`,
+    `wget`, `cat`, `find`, `grep` etc. `python:3.8.1-buster` seems like a ideal candidate
+    for the task. It includes a lot of tools by default and we can install everything
+    what is missing pretty easily. This base image is pretty *thick*, but that doesn't
+    matter here as it's going to be used only for development. Also as you probably
+    noticed, I chose very specific image - locking both version of *Python* as well
+    as *Debian* - that's intentional, as we want to minimize chance of *"breakage"* caused
+    by newer, possibly incompatible version of either *Python* or *Debian*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As an alternative you could use *Alpine* based image. That however, might cause
+    some issues, as it uses `musl libc` instead of `glibc` which *Python* relies on.
+    So, just keep that in mind if decide to choose this route.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As for the speed of builds, we will leverage multistage builds to allow us to
+    cache as many layers as possible. This way we can avoid downloading dependencies
+    and tools like `gcc` as well as all libraries required by our application (from
+    `requirements.txt`).
+  prefs: []
+  type: TYPE_NORMAL
+- en: To further speed things up we will create custom base image from previously
+    mentioned `python:3.8.1-buster`, that will include all tool we need as we cannot
+    cache steps needed for downloading and installation of these tools into final
+    runner image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Enough talking, let’s see the `Dockerfile`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Above you can see that we will go through 3 intermediate images before creating
+    final *runner* image. First of them is named `builder`. It downloads all necessary
+    libraries that will be needed to build our final application, this includes `gcc`
+    and *Python* virtual environment. After installation it also creates actual virtual
+    environment which is then used by next images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next comes the `builder-venv` image which copies list of our dependencies (`requirements.txt`)
+    into the image and then installs it. This intermediate image is needed for caching
+    as we only want to install libraries if `requirements.txt` changes, otherwise
+    we just use cache.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before we create our final image we first want to run tests against our application.
+    That’s what happens in the `tester` image. We copy our source code into image
+    and run tests. If they pass we move on to the `runner`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For runner image we are using custom image that includes some extras like `vim` or `netcat` that
+    are not present in normal *Debian* image. You can find this image on *Docker Hub* [here](https://hub.docker.com/repository/docker/martinheinz/python-3.8.1-buster-tools) and
+    you can also check out the very simple `Dockerfile` in `base.Dockerfile` [here](https://github.com/MartinHeinz/python-project-blueprint/blob/master/base.Dockerfile).
+    So, what we do in this final image - first we copy virtual environment that holds
+    all our installed dependencies from `tester` image, next we copy our tested application.
+    Now that we have all the sources in the image we move to directory where application
+    is and then set `ENTRYPOINT` so that it runs our application when image is started.
+    For the security reasons we also set `USER` to *1001*, as best practices tell
+    us that you should never run containers under `root` user. Final 2 lines set labels
+    of the image. These are going to get replaced/populated when build is ran using `make` target
+    which we will see a little later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Optimized Docker Containers for Production
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When it comes to production grade images we will want to make sure that they
+    are small, secure and fast. My personal favourite for this task is *Python* image
+    from *Distroless* project. What is *Distroless*, though?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let me put it this way — in an ideal world everybody would build their image
+    using `FROM scratch` as their base image (that is - empty image). That's however
+    not what most of us would like to do, as it requires you to statically link your
+    binaries, etc. That's where *Distroless* comes into play - it's `FROM scratch` for *everybody*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alright, now to actually describe what *Distroless* is. It’s set of images made
+    by *Google* that contain the bare minimum that’s needed for your app, meaning
+    that there are no shells, package managers or any other tools that would bloat
+    the image and create signal noise for security scanners (like [CVE](https://cve.mitre.org/))
+    making it harder to establish compliance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now that we know what we are dealing with, let’s see the *production* `Dockerfile`...
+    Well actually, we are not gonna change that much here, it''s just 2 lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: All we had to change is our base images for building and running the application!
+    But difference is pretty big — our development image was 1.03GB and this one is
+    just 103MB, that’s *quite* a difference! I know, I can already hear you — *“But
+    Alpine can be even smaller!”* — Yes, that’s right, but size doesn’t matter *that
+    much*. You will only ever notice image size when downloading/uploading it, which
+    is not that often. When the image is running, size doesn’t matter at all. What
+    is more important than size is security and in that regard *Distroless* is surely
+    superior, as *Alpine* (which is great alternative) has lots of extra packages,
+    that increase attack surface.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Last thing worth mentioning when talking about *Distroless* are *debug* images.
+    Considering that *Distroless* doesn’t contain *any* shell (not even `sh`), it
+    gets pretty tricky when you need to debug and poke around. For that, there are
+    `debug` versions of all *Distroless* images. So, when poop hits the fan, you can
+    build your production image using `debug` tag and deploy it alongside your normal
+    image, exec into it and do - for example - thread dump. You can use the debug
+    version of `python3` image like so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Single Command for Everything
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'With all the `Dockerfiles` ready, let''s automate the hell out of it with `Makefile`!
+    First thing we want to do is build our application with *Docker*. So to build
+    dev image we can do `make build-dev` which runs following target:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This target builds the image by first substituting labels at the bottom of `dev.Dockerfile` with
+    image name and tag which is created by running `git describe` and then running `docker
+    build`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Next up — building for production with `make build-prod VERSION=1.0.0`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This one is very similar to previous target, but instead of using `git` tag
+    as version, we will use version passed as argument, in the example above `1.0.0`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When you run everything in *Docker*, then you will at some point need to also
+    debug it in *Docker*, for that, there is following target:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: From the above we can see that entrypoint gets overridden by `bash` and container
+    command gets overridden by argument. This way we can either just enter the container
+    and poke around or run one off command, like in the example above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When we are done with coding and want to push the image to *Docker* registry,
+    then we can use `make push VERSION=0.0.2`. Let''s see what the target does:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It first runs `build-prod` target we looked at previously and then just runs `docker
+    push`. This assumes that you are logged into *Docker* registry, so before running
+    this you will need to run `docker login`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Last target is for cleaning up *Docker* artifacts. It uses `name` label that
+    was substituted into `Dockerfiles` to filter and find artifacts that need to be
+    deleted:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can find full code listing for this `Makefile` in my repository here: [https://github.com/MartinHeinz/python-project-blueprint/blob/master/Makefile](https://github.com/MartinHeinz/python-project-blueprint/blob/master/Makefile)
+  prefs: []
+  type: TYPE_NORMAL
+- en: CI/CD with GitHub Actions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now, let’s use all these handy `make` targets to setup our CI/CD. We will be
+    using *GitHub Actions* and *GitHub Package Registry* to build our pipelines (jobs)
+    and to store our images. So, what exactly are those?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*GitHub Actions* are *jobs/pipelines* that help you automate your development
+    workflows. You can use them to create individual tasks and then combine them into
+    custom workflows, which are then executed — for example — on every push to repository
+    or when release is created.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*GitHub Package Registry* is a package hosting service, fully integrated with
+    GitHub. It allows you to store various types of packages, e.g. Ruby *gems* or *npm* packages.
+    We will use it to store our *Docker* images. If you are not familiar with *GitHub
+    Package Registry* and want more info on it, then you can check out my blog post [here](https://martinheinz.dev/blog/6).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Now, to use *GitHub Actions*, we need to create *workflows* that are going
+    to be executed based on triggers (e.g. push to repository) we choose. These *workflows* are *YAML* files
+    that live in `.github/workflows` directory in our repository:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In there, we will create 2 files `build-test.yml` and `push.yml`. First of
+    them `build-test.yml` will contain 2 jobs which will be triggered on every push
+    to the repository, let''s look at those:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: First job called `build` verifies that our application can be build by running
+    our `make build-dev` target. Before it runs it though, it first checks out our
+    repository by executing action called `checkout` which is published on *GitHub*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The second job is little more complicated. It runs tests against our application
+    as well as 3 linters (code quality checkers). Same as for previous job, we use `checkout@v1` action
+    to get our source code. After that we run another published action called `setup-python@v1` which
+    sets up python environment for us (you can find details about it [here](https://github.com/actions/setup-python)).
+    Now that we have python environment, we also need application dependencies from
+    `requirements.txt` which we install with `pip`. At this point we can proceed to
+    run `make test` target, which triggers our *Pytest* suite. If our test suite passes
+    we go on to install linters mentioned previously - *pylint*, *flake8* and *bandit*.
+    Finally, we run `make lint` target, which triggers each of these linters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'That’s all for the build/test job, but what about the pushing one? Let’s go
+    over that too:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: First 4 lines define when we want this job to be triggered. We specify that
+    this job should start only when tags are pushed to repository (`*` specifies pattern
+    of tag name - in this case - *anything*). This is so that we don't push our Docker
+    image to *GitHub Package Registry* every time we push to repository, but rather
+    only when we push tag that specifies new version of our application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now for the body of this job — it starts by checking out source code and setting
+    environment variable of `RELEASE_VERSION` to `git` tag we pushed. This is done
+    using build-in `::setenv` feature of *GitHub Actions* (more info [here](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/development-tools-for-github-actions#set-an-environment-variable-set-env)).
+    Next, it logs into Docker registry using `REGISTRY_TOKEN` secret stored in repository
+    and login of user who initiated the workflow ( `github.actor`). Finally, on the
+    last line it runs `push` target, which builds prod image and pushes it into registry
+    with previously pushed `git` tag as image tag.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can out checkout complete code listing in the files in my repository [here](https://github.com/MartinHeinz/python-project-blueprint/tree/master/.github/workflows).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code Quality Checks using CodeClimate
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Last but not least, we will also add code quality checks using *CodeClimate* and *SonarCloud*.
+    These will get triggered together with our *test* job shown above. So, let’s add
+    few lines to it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We start with *CodeClimate* for which we first export `GIT_BRANCH` variable
+    which we retrieve using `GITHUB_REF` environment variable. Next, we download *CodeClimate* test
+    reporter and make it executable. Next we use it to format coverage report generated
+    by our test suite, and on the last line we send it to *CodeClimate* with test
+    reporter ID which we store in repository secrets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As for the *SonarCloud*, we need to create `sonar-project.properties` file
+    in our repository which looks like this (values for this file can be found on *SonarCloud* dashboard
+    in bottom right):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Other than that, we can just use existing `sonarcloud-github-action`, which
+    does all the work for us. All we have to do is supply 2 tokens - *GitHub* one
+    which is in repository by default and *SonarCloud* token which we can get from *SonarCloud* website.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Note: Steps on how to get and set all the previously mentioned tokens and
+    secrets are in the repository README *[*here*](https://github.com/MartinHeinz/python-project-blueprint/blob/master/README.md)*.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: That’s it! With tools, configs and code from above, you are ready to build and
+    automate all aspects of your next *Python* project! If you need more info about
+    topics shown/discussed in this article, then go ahead and check out docs and code
+    in my repository here: [https://github.com/MartinHeinz/python-project-blueprint](https://github.com/MartinHeinz/python-project-blueprint) and
+    if you have any suggestions/issues, please submit issue in the repository or just
+    star it if you like this little project of mine. ????
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Resources**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[The best Docker base image for your Python application](https://pythonspeed.com/articles/base-image-python-docker-images/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Google Distroless](https://github.com/GoogleContainerTools/distroless)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Scan Your Docker Images for Vulnerabilities](https://medium.com/better-programming/scan-your-docker-images-for-vulnerabilities-81d37ae32cb3)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 open source tools for container security](https://opensource.com/article/18/8/tools-container-security)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SonarCloud GitHub Action](https://github.com/SonarSource/sonarcloud-github-action)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Martin Heinz](https://www.linkedin.com/in/heinz-martin/)** is a DevOps
+    Engineer at IBM. A software developer, Martin is passionate about computer security,
+    privacy and cryptography, focused on cloud and serverless computing, and is always
+    ready to take on a new challenge.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://martinheinz.dev/blog/17). Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Free From MIT: Intro to Computer Science and Programming in Python](/2020/09/free-mit-intro-computer-science-programming-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Meets Devops: MLOps with Jupyter, Git, and Kubernetes](/2020/08/data-science-meets-devops-mlops-jupyter-git-kubernetes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploy Machine Learning Pipeline on AWS Fargate](/2020/07/deploy-machine-learning-pipeline-aws-fargate.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

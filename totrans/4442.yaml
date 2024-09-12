@@ -1,0 +1,290 @@
+- en: Building a REST API with Tensorflow Serving (Part 1)
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/07/building-rest-api-tensorflow-serving-part-1.html](https://www.kdnuggets.com/2020/07/building-rest-api-tensorflow-serving-part-1.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Guillermo Gomez](https://www.linkedin.com/in/mlgxmez/), Data Scientist
+    & Machine Learning Engineer**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/db70da63fa526846f86b9986f26b5dbc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: What is Tensorflow Serving?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: One of the features that I personally think is undervalued from Tensorflow is
+    the capability of serving Tensorflow models. At the moment of writing this post,
+    the API that helps you do that is named Tensorflow Serving, and is part of the
+    Tensorflow Extended ecosystem, or TFX for short.
+  prefs: []
+  type: TYPE_NORMAL
+- en: During the first releases of Tensorflow Serving, I found the documentation somehow
+    daunting. And there were many concepts that a data scientist is not very used
+    to work with: *Servables, sources, loaders, managers…* All these elements are
+    part of the Tensorflow Serving architecture. More details on it, [here](https://github.com/tensorflow/serving/blob/master/tensorflow_serving/g3doc/architecture.md).
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, as a gentle introduction, I will show you **how you can build a REST API
+    with Tensorflow Serving**. From saving a Tensorflow object (this is what we call
+    a *servable*) until testing the API endpoint. The first part will explain how
+    to create and save Tensorflow objects ready to be put into production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The meaning of servables
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Functions, embeddings or saved models are some of the objects that can be used
+    as servables. But how do we define those servables in Tensorflow?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Well, this is up to you but they must be able to be saved in what’s is called
+    the **SavedModel format**. This format keeps all the components of a Tensorflow
+    object in the same state once we load this object in a new environment. What are
+    these components? The relevant ones are: Weights, graph, additional assets, etc.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The module to be called to save Tensorflow objects is `tf.saved_model`. And
+    as we’ll see shortly it’s simple to use. For now, let’s see how we can generate
+    two types of servables:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tensorflow functions
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Keras models
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: TensorFlow function as servable
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Tensorflow functions are saved as valid servables if are defined in this way:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Function definition inside a class
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The parent class has to be `tf.Module`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `@tf.function` decorator somehow **translates the function definition into
+    a Tensorflow graph**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `input_signature` argument defines the type and shape of tensors that are
+    accepted to be passed in the function
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In this case we specify tensors with two dimensions, the second one be fixed
+    to have three elements while the type is going to be `float32`. Another example
+    of a Tensorflow function is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Notice that `input_signature` argument is not necessary but always is good to
+    include some safety tests when functions like this go into production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Later, we create an instance of the class and we save them:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: The first argument of `tf.saved_model.save` points to the instance object of
+    the class, whereas the second argument is the path of you local filesystem where
+    the model is going to be saved.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keras model as servable
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can follow a similar procedure for saving Keras models. This example focuses
+    on a pretrained image classification model, loaded with TensorFlow Hub. In addition,
+    we are going to build a custom class around it to preprocess input images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The class inherits from `tf.keras.Model`, and there are few things to discuss
+    about it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The input to the model is a string of bytes, which come in a JSON file, with
+    a specific set of key|value pairs. More on that in the second part of the tutorial.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: tf.reshape is the first function in the preprocessing stage because images are
+    put into an array in the JSON file. Since we impose restrictions in the input
+    with `@tf.function` it is required to do this kind of transformation.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The attribute `labels` store the image labels of *ImageNet* (available [here](https://storage.googleapis.com/download.tensorflow.org/data/ImageNetLabels.txt)).
+    We want the model to output not the label index of the output layer of the model
+    but the label with text format. The reason why it is defined in this way is explained
+    below
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'As per usual we save the model following the same procedure but with a little
+    addition:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: In order to store extra components to the SavedModel object, we have to define
+    an asset. We do so with `tf.saved_model.Asset`, and I call this function outside
+    the class definition to make it more explicit. It will probably work in the same
+    way if we do that in the class definition. **Notice here, we have to save the
+    asset as an attribute of the class instance before saving the model.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: Further details
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: These are the folders that have been generated in the local filesystem when
+    we saved the custom Keras model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/804c6f74f982c1da6a5b3ec4440cd907.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The files generated are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: the graph of the function or model, saved in a Protobuf file with extension `.pb`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the weights of the model or any TensorFlow Variable used in the servable, saved
+    in the `variables` folder
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: extra components are saved in the `assets` folder but it is empty in our examples
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'There are some questions that may arise when you build your own functions or
+    models:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**What’s the reasoning behind the choice of parent classes?** Attaching `tf.Module` class
+    to a `tf.function` allows the latter to be saved with `tf.saved_model`. The same
+    goes for the `tf.keras.Model`. You can find more info [here](https://www.tensorflow.org/guide/saved_model#reusing_savedmodels_in_python).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Why you add `/1` in the model’s path?** Servables must have an ID indicating
+    the version of the model we are running inside the container. It’s helpful to
+    keep track of multiple versions of your model when you are monitoring their metrics.
+    You can a more in-depth explanation in the following [link](https://stackoverflow.com/a/45552938).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is all for now. Thanks for reading!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Guillermo Gomez](https://www.linkedin.com/in/mlgxmez/)** builds machine
+    learning-based products in the public infrastructure and services industry. His
+    website where more tutorials can be found: [http://thelongrun.blog](http://thelongrun.blog)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://thelongrun.blog/2020/01/12/rest-api-tensorflow-serving-pt1/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Build PyTorch Models Easily Using torchlayers](/2020/04/pytorch-models-torchlayers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimize Response Time of your Machine Learning API In Production](/2020/05/optimize-response-time-machine-learning-api-production.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with TensorFlow 2](/2020/07/getting-started-tensorflow2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Top 7 Model Deployment and Serving Tools](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[OpenAI’s Whisper API for Transcription and Translation](https://www.kdnuggets.com/2023/06/openai-whisper-api-transcription-translation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Meet Gorilla: UC Berkeley and Microsoft’s API-Augmented LLM…](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,437 @@
+- en: Building an image search service from scratch
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/01/building-image-search-service-from-scratch.html/2](https://www.kdnuggets.com/2019/01/building-image-search-service-from-scratch.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/01/building-image-search-service-from-scratch.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: Text -> Text
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*Not so different after all*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Embeddings for text**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Taking a detour to the world of natural language processing (NLP), we can use
+    a similar approach to** index and search for words**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We loaded a set of pre-trained vectors from [GloVe](https://nlp.stanford.edu/projects/glove/),
+    which were obtained by crawling through all of Wikipedia and learning the semantic
+    relationships between words in that dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Just like before, we will create an index, this time containing all of the GloVe
+    vectors. Then, we can **search our embeddings** for similar words.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Searching for `said`, for example, returns this list of [`word`, `distance`]:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`[''said'', 0.0]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[''told'', 0.688713550567627]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[''spokesman'', 0.7859575152397156]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[''asked'', 0.872875452041626]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[''noting'', 0.9151610732078552]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[''warned'', 0.915908694267273]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[''referring'', 0.9276227951049805]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[''reporters'', 0.9325974583625793]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[''stressed'', 0.9445104002952576]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[''tuesday'', 0.9446316957473755]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This seems very reasonable, most words are quite similar in meaning to our original
+    word, or represent an appropriate concept. The last result (`tuesday`) also shows
+    that this model is far from perfect, but it will get us started. Now, let’s try
+    to incorporate both words and images in our model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**A sizable issue**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using the distance between embeddings as a method for search is a pretty general
+    method, but our representations for words and images seem **incompatible**. The
+    embeddings for images are of size 4096, while those for words are of size 300 — how
+    could we use one to search for the other? In addition, even if both embeddings
+    were the same size, they were trained in a completely different fashion, so it
+    is incredibly unlikely that images and related words would happen to have the
+    same embeddings randomly. We need to train a **joint model**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Image <-> Text
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*Worlds collide*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s now create a **hybrid** model that can go from words to images and vice
+    versa.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For the first time in this tutorial, we will actually be training our own model,
+    drawing inspiration from a great paper called [DeViSE](https://papers.nips.cc/paper/5204-devise-a-deep-visual-semantic-embedding-model).
+    We will not be re-implementing it exactly, though we will heavily lean on its
+    main ideas. (For another slightly different take on the paper, check out fast.ai’s
+    implementation in their [lesson 11](http://course.fast.ai/lessons/lesson11.html).)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The idea is to combine both representations by re-training our image model and **changing
+    the type of its labels**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Usually, image classifiers are trained to pick a category out of many (1000
+    for Imagenet). What this translates to is that — using the example of Imagenet — the
+    last layer is a vector of size 1000 representing the **probability of each class**.
+    This means our model has no semantic understanding of which classes are similar
+    to others: classifying an image of a `cat` as a `dog` results in as much of an
+    error as classifying it as an `airplane`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For our hybrid model, we replace this last layer of our model with the **word
+    vector of our category**. This allows our model to learn to map the semantics
+    of images to the semantics of words, and means that similar classes will be closer
+    to each other (as the word vector for `cat` is closer to `dog` than `airplane`).
+    Instead of a target of size 1000, with all zeros except for a one, we will predict
+    a **semantically rich word vector** of size 300.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We do this by adding two dense layers:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One intermediate layer of size 2000
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: One output layer of size 300 (the size of GloVe’s word vectors).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Here is what the model looked like when it was trained on Imagenet:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cf1d7ca19487c4ecfd529a923d805dca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Here is what it looks like now:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/550d43127fbaec99e1423125966513ea.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Training the model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We then re-train our model on a training split of our dataset, to learn to **predict
+    the word vector **associated with the label of the image. For an image with the
+    category cat for example, we are trying to predict the 300-length vector associated
+    with cat.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This training takes a bit of time, but is still much faster than on Imagenet.
+    For reference, it took about 6–7 hours on my laptop that has **no GPU**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is important to note how ambitious this approach is. The training data we
+    are using here (80% of our dataset, so 800 images) is minuscule, compared to usual
+    datasets (Imagenet has **a million** images, **3 orders of magnitude more**).
+    If we were using a traditional technique of training with categories, we would
+    not expect our model to perform very well on the test set, and would certainly
+    not expect it to perform at all on completely new examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once our model is trained, we have our GloVe word index from above, and we build
+    a new fast index of our image features by running all images in our dataset through
+    it, saving it to disk.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Tagging**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can now easily extract tags from any image by simply feeding our image to
+    our trained network, saving the vector of size 300 that comes out of it, and finding
+    the closest words in our index of English words from GloVe. Let’s try with this
+    image — it’s in the `bottle` class, though it contains a variety of items.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f6f739f1fad0973eb883c4aea63e303c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Here are the generated tags:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`[6676, ''bottle'', 0.3879561722278595]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[7494, ''bottles'', 0.7513495683670044]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[12780, ''cans'', 0.9817070364952087]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[16883, ''vodka'', 0.9828150272369385]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[16720, ''jar'', 1.0084964036941528]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[12714, ''soda'', 1.0182772874832153]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[23279, ''jars'', 1.0454961061477661]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[3754, ''plastic'', 1.0530102252960205]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[19045, ''whiskey'', 1.061428427696228]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[4769, ''bag'', 1.0815287828445435]`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: That’s a pretty amazing result, as most of the tags are **very relevant**. This
+    method still has room to grow, but it picks up on most of the items in the image
+    fairly well. The model learns to extract **many relevant tags**, even from categories
+    that it was not trained on!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Searching for images using text**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most importantly, we can use our joint embedding to search through our image
+    database using **any word**. We simply need to get our pre-trained word embedding
+    from GloVe, and find the images that have the most similar embeddings (which we
+    get by running them through our model).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Generalized image search with minimal data**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s start first with a word that was actually in our training set by searching
+    for `dog:`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ae17e0fcb1686cfae30e42b933d5d579.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Results for search term “`dog"`
+  prefs: []
+  type: TYPE_NORMAL
+- en: OK, pretty good results — but we could get this from any classifier that was
+    trained just on the labels! Let’s try something harder by searching for the keyword
+    `ocean`, which is not in our dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/40608dc265c7e9ee4ed46bd9450c703f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Results for search term “`ocean"`
+  prefs: []
+  type: TYPE_NORMAL
+- en: That’s awesome — our model understands that `ocean` is similar to `water`, and
+    returns many items from the `boat` class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What about searching for `street`?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/48f0297f5b9471a38fc2ed2726c267df.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Results for search term “`street"`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here, our images returned come from plenty of classes (`car`, `dog`, `bicycles`, `bus`, `person`),
+    yet most of them contain or are near a street, despite us having never used that
+    concept when training our model. Because we are **leveraging outside knowledge** through
+    pre-trained word vectors to learn a mapping from images to vectors that is more **semantically
+    rich** than a simple category, our model can generalize well to outside concepts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Beyond words**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The English language has come far, but not far enough to invent a word for everything.
+    For example, at the time of publishing this article, there is no English word
+    for “a cat lying on a sofa,” which is a perfectly valid query to type into a search
+    engine. If we want to search for multiple words at the same time, we can use a
+    very simple approach, leveraging the arithmetic properties of word vectors. It
+    turns out that summing two word vectors generally works very well. So if we were
+    to just search for our images by using the average word vector for `cat` and `sofa`,
+    we could hope to get images that are very cat-like, very sofa-like, or have a
+    cat on a sofa.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ddebc9fcad6f827cc7f9ff0e25a62c6d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Getting a combined embedding for multiple words
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s try using this hybrid embedding and searching!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f35d3fc3b4a2a49984204cdbc0ac0e38.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Results for search term “`cat"+"sofa"`
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a fantastic result, as most those images contain some version of a furry
+    animal and a sofa (I especially enjoy the leftmost image on the second row, which
+    seems like a bag of furriness next to a couch)! Our model, which was only trained
+    on single words, can handle combinations of two words. We have not built Google
+    Image Search yet, but this is definitely impressive for a relatively simple architecture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This method can actually extend quite naturally to a variety of domains (see
+    this [example](https://towardsdatascience.com/semantic-code-search-3cd6d244a39c) for
+    a joint code-English embedding), so we’d love to hear about what you end up applying
+    it to.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I hope you found this post informative, and that it has demystified some of
+    the world of content-based recommendation and semantic search. If you have any
+    questions or comments, or want to share what you built using this tutorial, reach
+    out to me on [Twitter](https://twitter.com/EmmanuelAmeisen)!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Want to learn applied Artificial Intelligence from top professionals in
+    Silicon Valley or New York?***Learn more about the [Artificial Intelligence](http://insightdata.ai/?utm_source=representations&utm_medium=blog&utm_content=top)program.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Are you a company working in AI and would like to get involved in the Insight
+    AI Fellows Program?**** Feel free to *[*get in touch*](http://insightdatascience.com/partnerships?utm_source=representations&utm_medium=blog&utm_content=top)*.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks to [Stephanie Mari](https://medium.com/@stephaniemari?source=post_page), [Bastian
+    Haase](https://medium.com/@bastianhaase?source=post_page), [Adrien Treuille](https://medium.com/@adrien_37234?source=post_page),
+    and [Matthew Rubashkin](https://medium.com/@mrubash1?source=post_page).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Emmanuel Ameisen](https://www.linkedin.com/in/ameisen/) ([@EmmanuelAmeisen](https://twitter.com/EmmanuelAmeisen))**
+    is Head of AI at Insight Data Science.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://blog.insightdatascience.com/the-unreasonable-effectiveness-of-deep-learning-representations-4ce83fc663cf).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to solve 90% of NLP problems: a step-by-step guide](/2019/01/solve-90-nlp-problems-step-by-step-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Implementing ResNet with MXNET Gluon and Comet.ml for Image Classification](/2018/12/implementing-resnet-mxnet-gluon-comet-ml-image-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Solve any Image Classification Problem Quickly and Easily](/2018/12/solve-image-classification-problem-quickly-easily.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Elevate Your Search Engine Skills with Uplimit''s Search with ML Course!](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[311 Call Centre Performance: Rating Service Levels](https://www.kdnuggets.com/2023/03/boxplot-outlier-311-call-center-performance.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning from Scratch: Decision Trees](https://www.kdnuggets.com/2022/11/machine-learning-scratch-decision-trees.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

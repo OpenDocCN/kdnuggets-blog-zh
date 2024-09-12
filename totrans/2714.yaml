@@ -1,0 +1,598 @@
+- en: 4 ways to improve your TensorFlow model – key regularization techniques you
+    need to know
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/08/tensorflow-model-regularization-techniques.html](https://www.kdnuggets.com/2020/08/tensorflow-model-regularization-techniques.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/aff83738ac2aa42970007ee48d1054b9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Photo by [Jungwoo Hong](https://unsplash.com/@oowgnuj?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reguaralization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: According to Wikipedia,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*In mathematics, statistics, and computer science, particularly in machine
+    learning and inverse problems, **regularization** is the process of adding information
+    in order to solve an ill-posed problem or to prevent overfitting.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This means that we add some extra information in order to solve a problem and
+    to prevent overfitting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Overfitting simply means that our Machine Learning Model is trained on some
+    data, and it will work extremely well on that data, but it will fail to generalize
+    on new unseen examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can see overfitting in this simple example
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/41d0f948b244917fedbb1ad53f1e1238.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*[http://mlwiki.org/index.php/Overfitting](http://mlwiki.org/index.php/Overfitting)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Where our data is strictly attached to our training examples. This results in
+    poor performance on test/dev sets and good performance on the training set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f0d1eb3f9aac8909353ede22ad87482f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*[http://mlwiki.org/index.php/Overfitting](http://mlwiki.org/index.php/Overfitting)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So in order to improve the performance of the model, we use different regularization
+    techniques. There are several techniques, but we will discuss 4 main techniques.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**L1 Regularization**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**L2 Regularization**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Dropout**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Batch Normalization**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: I will briefly explain how these techniques work and how to implement them in
+    Tensorflow 2.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to get good intuition about how and why they work, I refer you to Professor
+    Andrew NG lectures on all these topics, easily available on Youtube.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*First, I will code a model without Regularization, then I will show how to
+    improve it by adding different regularization techniques. We will use the IRIS
+    data set to show that using regularization improves the same model a lot.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model without Regularization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Code:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Basic Pre-processing**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Model Building**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**model1.summary()**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: After training the model, if we evaluate the model using the following code
+    in Tensorflow, we can find our *accuracy*, *loss*, and *mse* at the test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/bcc914cd55999fa3fbccbcc855b51ed2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let’s check the plots for Validation Loss and Training Loss.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/999093c9c77070fbcc3966d963759c55.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here, we can see that validation loss is gradually increasing after **≈ **60
+    epochs as compared to training loss. This shows that our model is overfitted.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And similarly, for model accuracy plot,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/ce2630b3aede2497175cc83d4267f212.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This again shows that validation accuracy is low as compared to training accuracy,
+    which again shows signs of overfitting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'L1 Regularization:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A commonly used Regularization technique is L1 regularization, also known as
+    Lasso Regularization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The main concept of L1 Regularization is that we have to penalize our weights
+    by adding absolute values of weight in our loss function, multiplied by a regularization
+    parameter lambda **λ, **where **λ **is manually tuned to be greater than 0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The equation for L1 is
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a3e67233246feda637e7c604bd4f2e2c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Image Credit: [Towards Data Science](https://towardsdatascience.com/intuitions-on-l1-and-l2-regularisation-235f2db4c261#2a1f).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Tensorflow Code:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here, we added an extra parameter *kernel_regularizer*, which we set it to ‘l1’
+    for L1 Regularization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s Evaluate and plot the model now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/12ce08d7b04a93c399fc82a29720239c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Hmmm, Accuracy is pretty much the same, let’s check the plots to get better
+    intuition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/bafec1e420bc0d14ed9989b77a7f4fe5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And for Accuracy,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/564a85d559cd6798cfd8f8ad66c1ba5d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Well, quite an improvement, I guess, because over validation loss is not increasing
+    that much as it was previously, but validation accuracy is not increasing much.
+    Let’s add l1 in more layers to check if it improves the model or not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: After training, let’s evaluate the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/dd8649d166180440ae16a48caefbc217.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Well, the accuracy is quite improved now, it jumped from 92 to 94\. Let’s check
+    the plots.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Loss**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/4b383f796e638d58b976918b359db9f4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, both lines are approximately overlapping, which means that our model is
+    performing just as same on the test set as it was performing on the training set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Accuracy**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/11f1226d2cfbd2ffcd9cc75dd69ecce8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And we can see that the validation loss of the model is not increasing as compared
+    to training loss, and validation accuracy is also increasing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: L2 Regularization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: L2 Regularization is another regularization technique which is also known as **Ridge
+    regularization**. In L2 regularization we add the squared magnitude of weights
+    to penalize our lost function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/75665aa67638080b50c4650abf10e2bc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Image Credit: [Towards Data Science](https://towardsdatascience.com/intuitions-on-l1-and-l2-regularisation-235f2db4c261#2a1f).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Tensorflow Code:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: After training, let’s evaluate the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the output is
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2e0ab66c243db0af399a772b08e4f0f1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here we can see that validation accuracy is 97%, which is quite good. Let’s
+    plot for more intuition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/91daa2781a6680f346a0ec85fbbc0e7d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here we can see that we are not overfitting our data. Let’s plot accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6d9448767ff37f3f0cdda2ed4ce4586b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Adding “L2” Regularization in just 1 layer has improved our model a lot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s Now add **L2** in all other layers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here we have L2 in all layers. After training, let’s evaluate it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/a982288a4c9676e91e0bfa14a759d342.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let’s plot to get more intuitions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/4e91d8818f4f27683a61a88665bc6cde.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And for accuracy
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9f1fcf25ad26e8abc9ed7678e7bee914.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can see that this model is also good and not overfitting to the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dropout
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Another common way to avoid regularization is by using the Dropout technique.
+    The main idea behind using dropout is that we randomly turn off some neurons in
+    our layer based on some probability. You can learn more about it’s working by
+    Professor NG’s video [here](https://www.youtube.com/watch?v=ARq74QuavAo).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s code it in Tensorflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: All previous imports are the same, and we are just adding an extra import here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to implement DropOut, all we have to do is to add a *Dropout *layer
+    from *tf.keras.layers* and set a dropout rate in it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: After training, let’s evaluate it on the test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/309f287e682e15e861501a280db355e5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And wow, our results are very promising, we performed 97% on our test set. Let’s
+    plot the loss and accuracy for better intuition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/023280950cc8a67e0368962442a95302.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here, we can see that our model is performing better on validation data as compared
+    to training data, which is good news.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s plot accuracy now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b20e02b39a9d2a32185c9cff67dde23b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And we can see that our model is performing better on the validation dataset
+    as compared to the training set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s add more dropout layers to see how our model performs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s Evaluate it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/e82928464719a82f92f7d4d2552ec1ea.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This model is also very good, as it is performing 98% on the test set. Let’s
+    plot to get better intuitions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/da0c05863284a9584568bbfdeafeb527.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And we can see that adding more dropout layers makes the model perform slightly
+    less good while training, but on the validation set, it is performing really well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s plot the accuracy now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7cf13a5c5ae4d14095e39147df5ae02f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And we can see the same pattern here, that our model is not performing as good
+    while training, but when we are evaluating it, it is performing really good.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Batch Normalization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The main idea behind batch normalization is that we normalize the input layer
+    by using several techniques (*sklearn.preprocessing.StandardScaler*) in our case,
+    which improves the model performance, so if the input layer is benefitted by normalization,
+    why not normalize the hidden layers, which will improve and fasten learning even
+    further.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To learn maths and get more intuition about it, I will redirect you again to
+    Professor NG’s lecture [here](https://www.youtube.com/watch?v=tNIpEZLv_eg) and [here](https://www.youtube.com/watch?v=nUUqwaxLnWs).
+  prefs: []
+  type: TYPE_NORMAL
+- en: To add it in your TensorFlow model, just add *tf.keras.layers.BatchNormalization()* after
+    your layers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s see the code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here, if you noticed that I have removed the option for *batch_size*. This is
+    because adding batch_size argument while only using *tf.keras.BatchNormalization()* as
+    regularization, this results in a really poor performance of the model. I have
+    tried to find the reason for this on the internet, but I could not find it. You
+    can also change the optimizer from *sgd *to *rmsprop *or *adam *if you really
+    want to use batch_size while training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After training, let’s evaluate the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/6a854c3c9d073d3f3f44e478a9660b6b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Validation accuracy for 1 Batch Normalization accuracy is not as good as compared
+    to other techniques. Let’s plot the loss and acc for better intuition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b9881c940d7824f31926e7bdfc5693d5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/ebb6014ef2837e4e79571228264431ed.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here we can see that our model is not performing as well on validation set as
+    on test set. Let’s add normalization to all the layers to see the results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE24]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s Evaluate it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE25]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/d61fcb3880fd979dba67308394ea06c7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: By adding Batch normalization in every layer, we achieved good accuracy. Let’s
+    plot the loss and accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5c2682bc581e0a3ee0752adb14e1bd35.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/00908e06a1cdc384b166744b2e4f4776.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: By plotting accuracy and loss, we can see that our model is still performing
+    better on the Training set as compared to the validation set, but still, it is
+    improving in performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Outcome:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This article was a brief introduction on how to use different techniques in
+    Tensorflow. If you lack the theory, I would suggest Course 2 and 3 of Deep Learning
+    Specialization at Coursera to learn more about Regularization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You also have to learn when to use which technique, and when and how to combine
+    different techniques in order to produce really fruitful results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hopefully, now you have an idea of how to implement different regularization
+    techniques in Tensorflow 2.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Getting Started with TensorFlow 2](https://www.kdnuggets.com/2020/07/getting-started-tensorflow2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Batch Normalization in Deep Neural Networks](https://www.kdnuggets.com/2020/08/batch-normalization-deep-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fighting Overfitting in Deep Learning](https://www.kdnuggets.com/2019/12/fighting-overfitting-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

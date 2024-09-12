@@ -1,0 +1,353 @@
+- en: 'skops: A New Library to Improve Scikit-learn in Production'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/02/skops-new-library-improve-scikitlearn-production.html](https://www.kdnuggets.com/2023/02/skops-new-library-improve-scikitlearn-production.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: There are various challenges when it comes to machine learning models in production.
+    These range from reproducibility in versioning to secure serialization. In this
+    blog post, I will walk you through a library called `skops`, to tackle these challenges.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We will see an end-to-end example: train a model first, serialize it, document
+    our model, and host it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Secure Serialization
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We will now save the model. We can save the model using any format, including,
+    `joblib`, `pickle` or `skops`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`skops` introduces a new serialization format. The motivation here is to avoid
+    the use of pickle or `joblib` to serialize `sklearn` models.  Serialization with
+    `pickle` or `joblib` can result in bad actors executing code on your local machine
+    and you should avoid deserializing a pickle file if it’s from a source you do
+    not trust. It’s a serialization protocol that serializes instructions for your
+    code in binary format, thus, it’s not human-readable. It can practically do anything:
+    remove everything on your machine or install malware. You should only deserialize
+    a pickle from a source that you trust.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The serialization format introduced by `skops` doesn’t rely on `pickle` and
+    lets users see what a given file contains without loading it. You can read more
+    about it [here](https://skops.readthedocs.io/en/stable/modules/classes.html#module-skops.io).
+    Let’s take a look at the API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can save a `sklearn` model or pipeline by passing the object and the file
+    path that it will be saved to.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The tricky part is to load the model from a file. We will pass the file path
+    to `load`. We have one more parameter called `trusted` which can be either `True`,
+    list of trusted types, or `False`. If set to `False`, it will only load the trusted
+    types. Let's take a look.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can get a list of untrusted types using `get_untrusted_types`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can directly pass the above list to `trusted`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you try to load without the transformer on top, loading will fail with an
+    `UntrustedTypesFoundException`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that you always need to pass something to `trusted`, as this prompts the
+    user to determine whether to trust this file or not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Model Hosting
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: If you’d like to host models open to everyone, you can do that with `skops`
+    and [ Hugging Face Hub](https://huggingface.co/). This enables easy inference
+    without downloading the model, model documentation in the model repository, and
+    building interfaces with one line of code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![skops: a new library to improve scikit-learn in production](../Images/2ae00b9390b39d888be239bc775340c6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Hugging Face Model Repository
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![skops: a new library to improve scikit-learn in production](../Images/d2eb37c88c6eaabc93dbcb60dbc5eb51.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This is built with one line of code
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s see how to create these programmatically.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`hub_utils.init` creates a local folder containing the model in the given path,
+    and the configuration file containing the requirements of the environment the
+    model is trained in, the training objective, a sample from the dataset, and more.
+    The sample data and the task identifier passed to the `init` will help Hugging
+    Face Hub enable the inference widget on the model page as well as discoverability
+    features to find the model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** The inference widget, inference API, and `gradio` integration only
+    work with pickle format for now. We are currently developing support for `skops`
+    format. Therefore, we will save the model in `pickle` for now.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The repository now contains the model and the configuration file that enable
+    inference, build environment to load the model and more. The configuration file
+    is a JSON that contains:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: a small sample of the dataset,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: columns of the dataset,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the environment requirements to load the model,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: relative path to the model file inside the repository,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the task that is being solved.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Now, we will document our model by creating a model card. The model cards in
+    skops follow the format of Hugging Face Hub model cards: it consists of a markdown
+    part and yaml metadata section. You can check out the keys of the metadata section
+    [here](https://huggingface.co/docs/hub/models-cards#model-card-metadata) for better
+    discoverability of the models. The model card follows a template that consists
+    of:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: YAML section on top for metadata (task ID, license, library name used for training,
+    and more)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: free text section in the format of markdown and sections to be filled (e.g.
+    description of the model, intended use, limitations and more),
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Below sections of the model card are automatically generated by skops:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hyperparameters of the model,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Interactive diagram of the model,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A small snippet that shows how to load and use the model,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For metadata, library name, task identifier (e.g. tabular-classification), and
+    information required by the inference widget is filled.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: skops enables programmatic editing of the model card through various methods.
+    The documentation on the card module and the default template provided by skops
+    is [ here](https://github.com/skops-dev/skops/blob/main/skops/card/default_template.md).
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can instantiate the Card class from skops to create the model card. This
+    class is an intermediate data structure that is later rendered to markdown. We
+    will later save this card to the repository where the model will be hosted. During
+    the initialization of the repository, the task name (e.g. tabular-regression)
+    and library name (e.g. scikit-learn) are written to the configuration file during
+    repository initialization. Task and library names are also needed in the card's
+    metadata, so you can use the metadata_from_config method to extract the metadata
+    from the configuration file and pass it to the card when you create it. You can
+    use `add` method to add information and edit metadata.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can evaluate the model and write it to the model card as metric. We can use
+    the `add_metrics` method which adds metrics to our model card and writes as a
+    table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Plots that visualize model performance can be added using `add_plots`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s save the model card in the local repository. The file name here should
+    be `README.md` since it is what Hugging Face Hub expects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: The repository is now ready for push to Hugging Face Hub. We can use `hub_utils`
+    for this.  Hugging Face Hub follows an authentication flow with tokens, so we
+    can pass our token in push.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Once the model is on the Hugging Face Hub, it can be downloaded by anyone using
+    `download`, unless the model is private. The repository contains the model, model
+    card, and model configuration that contains a small sample of the dataset for
+    reproducibility, requirements, and more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: The model can be easily tested using the inference widget.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![skops: a new library to improve scikit-learn in production](../Images/a0fe949f7d05a401bf767dcc47b7618d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Inference Widget in Repository
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can now use `gradio` integration for `skops`. We’ve created the interface
+    below with only one line of code! ????
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![skops: a new library to improve scikit-learn in production](../Images/ea88ae3bf3960a27251583080be7d1a1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Gradio UI for our model
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can further customize this UI like the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can pass title, description, and more to the loaded UI. Check out gradio
+    documentation on [Interface class](https://gradio.app/docs/#interface) for more
+    information on what you can customize.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: The resulting repository is [here](https://huggingface.co/scikit-learn/blog-example).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Further Resources
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[skops documentation](https://skops.readthedocs.org/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[scikit-learn organization on ???? Hub](https://huggingface.co/scikit-learn)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**[Merve Noyan](https://www.linkedin.com/in/merve-noyan-28b1a113a/)** is a
+    Google developer expert on machine learning and developer advocate at Hugging
+    Face.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Full End-to-End Deployment of a Machine Learning Algorithm into a…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Prioritizing Data Science Models for Production](https://www.kdnuggets.com/2022/04/prioritizing-data-science-models-production.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Operationalizing Machine Learning from PoC to Production](https://www.kdnuggets.com/2022/05/operationalizing-machine-learning-poc-production.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2023: Practical Strategies for Deploying ML…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Metadata Store for Production ML!](https://www.kdnuggets.com/2022/05/layer-metadata-store-production-ml.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

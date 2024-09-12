@@ -1,0 +1,263 @@
+- en: Bayesian Hyperparameter Optimization with tune-sklearn in PyCaret
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/03/bayesian-hyperparameter-optimization-tune-sklearn-pycaret.html](https://www.kdnuggets.com/2021/03/bayesian-hyperparameter-optimization-tune-sklearn-pycaret.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Antoni Baum](https://www.linkedin.com/in/yard1/), Core Contributor to
+    PyCaret and Contributor to Ray Tune**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/6d8d95a8fe51f5d25a1b7858b0b0be43.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here’s a situation every [PyCaret](https://github.com/pycaret/pycaret) user
+    is familiar with: after selecting a promising model or two from `compare_models()`,
+    it’s time to tune its hyperparameters to squeeze out all of the model’s potential
+    with `tune_model()`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: (If you would like to learn more about PyCaret — an open-source, low-code machine
+    learning library in Python, [this guide](https://pycaret.org/guide/) is a good
+    place to start.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: By default, `tune_model()` uses the tried and tested `RandomizedSearchCV`from
+    scikit-learn. However, not everyone knows about the various advanced options `tune_model()`provides.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post, I will show you how easy it is to use other state-of-the-art algorithms
+    with PyCaret thanks to [tune-sklearn](https://github.com/ray-project/tune-sklearn/),
+    a drop-in replacement for scikit-learn’s model selection module with cutting edge
+    hyperparameter tuning techniques. I’ll also report results from a series of benchmarks,
+    showing how tune-sklearn is able to easily improve classification model performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Random search vs Bayesian optimization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Hyperparameter optimization algorithms can vary greatly in efficiency.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Random search has been a machine learning staple and for a good reason: it’s
+    easy to implement, understand and gives good results in reasonable time. However,
+    as the name implies, it is completely random — a lot of time can be spent on evaluating
+    bad configurations. Considering that the amount of iterations is limited, it’d
+    make sense for the optimization algorithm to focus on configurations that it considers
+    promising by taking into account already evaluated configurations.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: That is, in essence, the idea of Bayesian optimization (BO). BO algorithms keep
+    track of all evaluations and use the data to construct a “surrogate probability
+    model”, which can be evaluated a lot faster than a ML model. The more configurations
+    have been evaluated, the more informed the algorithm becomes, and the closer the
+    surrogate model becomes to the actual objective function. That way the algorithm
+    can make an informed choice about which configurations to evaluate next, instead
+    of merely sampling random ones. If you would like to learn more about Bayesian
+    optimization, check out this [excellent article by Will Koehrsen](https://towardsdatascience.com/a-conceptual-explanation-of-bayesian-model-based-hyperparameter-optimization-for-machine-learning-b8172278050f).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fortunately, PyCaret has built-in [wrappers](https://pycaret.readthedocs.io/en/latest/api/regression.html#pycaret.regression.tune_model) for
+    several optimization libraries, and in this article, we’ll be focusing on [tune-sklearn](https://github.com/ray-project/tune-sklearn).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**tune-sklearn in PyCaret**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[tune-sklearn](https://docs.ray.io/en/master/tune/api_docs/sklearn.html) is
+    a drop-in replacement for scikit-learn’s model selection module. tune-sklearn
+    provides a scikit-learn based unified API that gives you access to various popular
+    state of the art optimization algorithms and libraries, including Optuna and scikit-optimize.
+    This unified API allows you to toggle between many different hyperparameter optimization
+    libraries with just a single parameter.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: tune-sklearn is powered by [Ray Tune](https://docs.ray.io/en/latest/tune/index.html),
+    a Python library for experiment execution and hyperparameter tuning at any scale.
+    This means that you can scale out your tuning across multiple machines without
+    changing your code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To make things even simpler, as of version 2.2.0, tune-sklearn has been integrated
+    into PyCaret. You can simply do `pip install "pycaret[full]" `and all of the optional
+    dependencies will be taken care of.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/76a744240ca14371222bc358c86aa1d9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: How it all works together
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Just by adding two arguments to `tune_model()`you can switch from random search
+    to tune-sklearn powered Bayesian optimization through [Hyperopt](http://hyperopt.github.io/hyperopt/) or [Optuna](https://optuna.org/).
+    Remember that PyCaret has built-in search spaces for all of the included models,
+    but you can always pass your own, if you wish.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But how well do they compare to random search?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**A simple experiment**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In order to see how Bayesian optimization stacks up against random search, I
+    have conducted a very simple experiment. Using the [Kaggle House Prices dataset](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/datasets),
+    I have created two popular regression models using PyCaret — [Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html) and [Elastic
+    Net](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html?highlight=elasticnet#sklearn.linear_model.ElasticNet).
+    Then, I tuned both of them using scikit-learn’s Random Search and tune-sklearn’s
+    Hyperopt and Optuna Searchers (20 iterations for all, minimizing RMSLE). The process
+    was repeated three times with different seeds and the results averaged. Below
+    is an abridged version of the code — you can find the full code [here](https://gist.github.com/Yard1/97dd054f0a5b154ffdc08df7899ba893).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Isn’t it great how easy PyCaret makes things? Anyway, here are the RMSLE scores
+    I have obtained on my machine:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Experiment’s RMSLE scores
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And to put it into perspective, here’s the percentage improvement over random
+    search:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Percentage improvement over random search
+  prefs: []
+  type: TYPE_NORMAL
+- en: All of that using the same number of iterations in comparable time. Remember
+    that given the stochastic nature of the process, your mileage may vary. If your
+    improvement is not noticeable, try increasing the number of iterations (`n_iter`)from
+    the default 10\. 20–30 is usually a sensible choice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What’s great about Ray is that you can effortlessly scale beyond a single machine
+    to a cluster of tens, hundreds or more nodes. While PyCaret doesn’t support full
+    Ray integration yet, it is possible to initialize a [Ray cluster](https://docs.ray.io/en/master/cluster/index.html) before
+    tuning — and tune-sklearn will automatically use it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Provided all of the necessary configuration is in place ( `RAY_ADDRESS`environment
+    variable), nothing more is needed in order to leverage the power of Ray’s distributed
+    computing for hyperparameter tuning. Because hyperparameter optimization is usually
+    the most performance-intensive part of creating an ML model, distributed tuning
+    with Ray can save you a lot of time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In order to speed up hyperparameter optimization in PyCaret, all you need to
+    do is install the required libraries and change two arguments in `tune_model() `—
+    and thanks to built-in tune-sklearn support, you can easily leverage Ray’s distributed
+    computing to scale up beyond your local machine.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Make sure to check out the documentation for [PyCaret](https://pycaret.readthedocs.io/), [Ray
+    Tune](https://docs.ray.io/en/latest/tune/index.html) and [tune-sklearn](https://docs.ray.io/en/latest/tune/api_docs/sklearn.html) as
+    well as the GitHub repositories of [PyCaret](https://github.com/pycaret/pycaret) and [tune-sklearn](https://github.com/ray-project/tune-sklearn).
+    Finally, if you have any questions or want to connect with the community, join [PyCaret’s
+    Slack](https://pycaret.slack.com/) and [Ray’s Discourse](https://discuss.ray.io/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Thanks to Richard Liaw and Moez Ali for proofreading and advice.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Antoni Baum](https://www.linkedin.com/in/yard1/)** is a Computer Science
+    and Econometrics MSc student, as well as a core contributor to PyCaret and contributor
+    to Ray Tune.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/distributed-computing-with-ray/bayesian-hyperparameter-optimization-with-tune-sklearn-in-pycaret-a33b1592662f).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Algorithms for Advanced Hyper-Parameter Optimization/Tuning](/2020/11/algorithms-for-advanced-hyper-parameter-optimization-tuning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Tools for Effortless Data Science](/2021/01/5-tools-effortless-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Things You Are Doing Wrong in PyCaret](/2020/11/5-things-doing-wrong-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Binary Classification with PyCaret](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Clustering in Python with PyCaret](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Announcing PyCaret 3.0: Open-source, Low-code Machine Learning in Python](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyCaret](https://www.kdnuggets.com/2022/11/getting-started-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

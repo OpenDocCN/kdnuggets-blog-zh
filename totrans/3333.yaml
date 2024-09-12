@@ -1,0 +1,617 @@
+- en: Applying Machine Learning To March Madness
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/03/machine-learning-march-madness.html](https://www.kdnuggets.com/2017/03/machine-learning-march-madness.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![March Madness](../Images/30a0777a71ac74425264a8bc65c1b855.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Introduction**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: March. Madness.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The two words that can send goosebumps to every college basketball fan in the
+    country. It’s the month where every fan will fill out a bracket, each thinking
+    that they picked the right 12 over 5 seed upset or that they were the only one
+    to pick the Cinderella team that makes it to the Elite 8\. The month where people
+    will spend hours watching regular season games, pouring over stats and expert
+    analysis, trying to carefully predict the most likely winner, only to find their
+    pick lose in the first round (Thanks Michigan State *). The month where your younger
+    sister ends up having a better bracket than you because she picked the teams with
+    the “cooler” mascots (Sad, but true story). March Madness is the sports phenomenon
+    that incites anxiety, regret, elation, and every other possible emotion in the
+    spectrum. And it’s about to start in **4 days**.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Editor: after reading this overview, don''t forget to check KDnuggets [Cartoon:
+    What Happens When AI Masters the March Madness](/2017/03/cartoon-ai-march-madness.html)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Never heard of it?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: March Madness refers to the annual collegiate men's basketball tournament. The
+    tournament is made up of 64 college teams competing in a single elimination format.
+    In order to win the championship, a team has to win 6 consecutive games.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/60b009384c814802695a6f6fb4cbd0f7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The tournament is broken up into 4 regions. Each region has 16 teams, ranked
+    from 1 to 16\. This ranking is determined by a NCAA committee and is based on
+    each team’s regular season performance. The NCAA structures the games so that
+    the highest seed in a region plays the lowest seed, the 2^(nd) highest plays the
+    2^(nd) lowest, and so on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/19661088b16f38a2118c9188cf0ae427.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**So, what’s the big deal?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One in 9.2 quintillion.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Those are the odds that you will correctly pick the winners of all 63 games
+    played over the course of the tournament. Mathematically speaking, there are 2^(63)
+    (~ 9.2 quintillion) number of ways that you can fill the bracket. In 2014, [Warren
+    Buffet famously offered 1 billion dollars](http://www.forbes.com/sites/kellyphillipserb/2014/01/21/warren-buffett-offers-1-billion-for-perfect-march-madness-bracket/#29795ef26f82)
+    to anyone who could fill out a perfect bracket (Needless to say, nobody even really
+    came close).
+  prefs: []
+  type: TYPE_NORMAL
+- en: As sports fans, predicting the outcomes of games is in our nature. We want to
+    believe our alma mater will make it to the Sweet Sixteen. We want to have the
+    bragging rights of saying that we knew 11^(th) seed VCU would make it to the Final
+    Four ([2011 was insane](http://www.ncaa.com/news/basketball-men/article/2016-02-10/march-madness-most-surprising-final-four-2011-sure)).
+    The allure of March Madness comes through the unpredictable nature of such a large
+    single elimination tournament. While it could be easy for one to just pick all
+    of the number 1 seeds to advance (this is known as picking “chalk”), tournament
+    history says that there are going to be more than a few surprises.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Throughout the next 2 weeks, fans will be streaming games in class (personal
+    experience) or at work, watching incredible buzzer-beaters, mind-blowing upsets,
+    and most importantly, hoping that their bracket doesn’t get busted within the
+    first day.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/28bd06b7470406291b84364c40bd2945.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**The Prediction Problem**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before getting into machine learning, let’s take a step back and think about
+    the idea of sports game prediction. Not a very complex topic right? Imagine this
+    situation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5c2c0c1fa1d9a2bf5d36dcbb5c2ce9be.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Let’s stop the situation right there. The fundamental question in sports prediction
+    arises: **What factors do you, as the predictor, use in determining the outcome
+    of a future sporting event?** Imagine the types of responses you might get.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Person A: “The Pats have the best defense in the NFL according to points allowed
+    per game, they have the 4^(th) fewest rushing yards allowed, and are the 3^(rd)
+    best in the league in turnover differential. They’ll win easily.”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Person B: “72 out of the 100 NFL ESPN analysts picked the Pats, so Imma go
+    with them.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Person C: “The Pats have Tom Brady and I like Tom Brady.”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Person D: “My ex-girlfriend likes the Falcons, so go Pats!”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you look at each of these responses, you’ll see that each response places
+    a different importance (“weight” in ML terms) on a particular stat/feeling/emotion
+    (“feature” in ML terms). Person A relied heavily upon regular season statistics
+    to make a prediction. Person B chose to take into account the opinions of the
+    NFL analysts at ESPN. Person C showed a personal preference toward Tom Brady,
+    causing him/her to choose the Patriots. Finally, Person D might have never watched
+    a football game before, but chose the Patriots because of negative sentiments
+    towards a particular person.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/146647342060f8291ab311336e3ec034.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The bottom-line is that we all have different ways of making predictions. We
+    all have different input features that we consider, we all have different weights
+    placed on them, and thus we all have different ways of interpreting how a future
+    sports matchup will play out.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Having all of these different viewpoints towards prediction is great. It’s what
+    allows us to have those intense disagreements before the game, and what allows
+    us to bask in the glory of bragging rights or cause us to rethink our predictive
+    thought process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The one commonality in all of our viewpoints is that **we are biased**. There’s
+    no 2 ways about it. Each and every one of us is biased in the way that we approach
+    sports prediction. We’re biased because there’s no clear cut answer to the question
+    of “What makes a good prediction?”. Should we look at stats? Should we pay attention
+    to intangibles? Should we just forget all of that and simply make predictions
+    based on personal feelings? There isn’t an easy solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That’s where machine learning comes in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Can Machine Learning Help With Predictions?**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Okay, so with the last paragraph, we’ve established the problem space. We want
+    to see if we can build an ML model that is able to look at training data (past
+    NCAA basketball games), find the relationship between a team’s success and their
+    attributes (stats), and output predictions for future games.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, why can machine learning be a possible use case for this prediction problem?
+    Well, first of all, the data is there. We have a bunch of it. Over 100,000 NCAA
+    regular season games were played over the last 25+ years, and we generally have
+    plenty of statistics about the teams for each season. Because we have all of this
+    data, we can try to use machine learning to find out what particular statistics
+    most correlate with a team winning a particular matchup. If a team allows less
+    than 60 PPG, are they more likely to win the game? If a team turns the ball over
+    more than 15 times, is that a fatal sign that they’ll lose to a team that does
+    care of the ball? These are the types of questions that we hope data analysis
+    and machine learning can lend insight to.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**All the code for this data analysis can be found in** [**this iPython Notebook**](https://github.com/adeshpande3/March-Madness-2017/blob/master/March%20Madness%202017.ipynb)**.
+    Be sure to follow along!**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Basic Model Structure**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Our ML model will take in information about two teams (Team 1 and Team 2) as
+    input, and then output a probability of Team 1 winning that matchup.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2ce664e1505fd43bf55bd23a1add8efc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, the immediate problem that comes to mind is that ML algorithms normally
+    have inputs in the form of singular matrices or vectors. We need to think of a
+    way of encapsulating information about both teams in a single vector. Let’s first
+    see if we can represent each team as a vector first.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Take the 2016 Kansas Jayhawks for example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7e121c2f80c3ecb77aee8d2c601005f0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The Jayhawks had a great season, winning their 12^(th) straight Big 12 title
+    and getting a #1 seed in the tournament. Let’s think about how to represent their
+    season in a single vector. In ML terms, what features do we want to represent?
+    Let’s start with common statistical measures.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Number of regular season wins: 29'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Average Points Per Game Scored: 80.30'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Average Points Per Game Allowed: 67.61'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Average 3’s Per Game Made: 9.21'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Average Turnovers Per Game: 14.39'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Average Assists Per Game: 18.30'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Average Rebounds Per Game: 43.73'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Average Steals Per Game: 7.66'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Then, we can think about other factors related to the conference they played
+    in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '“Power 6” Conference (Big 12, Big 10, SEC, ACC, Pac-12, Big East): 1 - Binary
+    Label'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Regular Season Conference Championship: 1 - Binary Label'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Conference Tournament Championship: 1 - Binary Label'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We can consider other more advanced metrics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Simple Rating System (Function of strength of schedule and average point differential):
+    23.87'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Strength of Schedule: 11.22'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Finally, we also look at some historical factors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Number of tournament appearances since 1985: 31'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Number of national championships since 1985: 2'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Lastly, we have one ternary label that describes the location.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Location (-1 for if Team 1 is away, 0 for neutral, and 1 for if Team 1 is home):
+    1'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To create our representation for the 2016 Kansas Jayhawks, we can just concatenate
+    all the features into a 16 dimensional vector.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e79c96dd228372610a078ff9f71d08ad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, let’s do the same with another team from the 2016 season, the Oklahoma
+    Sooners.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/902a56b445c911de464daed47922efc2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The Sooners, led by NBA first round draft pick Buddy Hield, had an incredible
+    season, winning 25 games in the regular season, and coming away with a #2 seed
+    in the tourney. We can see Oklahoma’s vector below.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7ed80897335192bab3796625f223fdd2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can think of coming up with team vectors as similar to the idea of using
+    word vectors in deep learning approaches to NLP. Before feeding the input through
+    a RNN or LSTM, we first have to transform our sentence or phrase into a usable
+    representation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Looking at the task of sports game prediction, let’s think about what we want
+    our model to do. Since ML models normally take a single input, we can represent
+    each matchup as the difference between the two team vectors (Team 1 vector - Team
+    2 vector). This is one way of representing the matchup. While some may choose
+    to concatenate the two vectors instead, taking the difference helps to emphasize
+    the ways that the teams are dissimilar from one another, which could help in determining
+    the types of stats that are influential to the outcome of a matchup.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/dcfa8fca604fe0ba5b4e7b0eebe205d7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Our model will take in this difference vector, and output the probability that
+    Team 1 wins the matchup.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The way that we train this model is by looking at the outcomes of past regular
+    season games, and by looking at the team vectors of the two competing teams. Let’s
+    take a look an actual training example to make this clearer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Oklahoma and Kansas met twice in the 2016 regular season. The first meeting,
+    played at the famous Allen Fieldhouse in Kansas, ended up being one of the greatest
+    college basketball regular season games of all time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d95a974d7ec7482d1d4ad1b16c743519.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '#1 vs #2\. Triple Overtime. Yeah, that game was intense. It’s going to be one
+    of many games in our training data. How will this particular game look like?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/98eb6598beee0bf763f25c25bd54fc25.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Make sense? The X component of every training example will be the difference
+    between the two team vectors for that season. The Y component of the training
+    example will be either [1] or [0], representing if Team 1 won or if Team 2 won,
+    respectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The [Kaggle dataset](https://www.kaggle.com/c/march-machine-learning-mania-2017/data)
+    and stats from [Sports-Reference](http://www.sports-reference.com/cbb/) had regular
+    season and tournament data from the 1993 season onwards. From 1993 to 2016, there
+    were over 115,000 games played. Our dimensionality for xTrain will be 115113 x
+    16 and 115113 x 1 for yTrain.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Applying ML Algorithms**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that we have our training set, we have to choose an ML algorithm. From simple
+    logistic regression to random forests to complex ensembles, there’s a variety
+    of models that could fit our task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Whenever you’re first starting out with a dataset and a prediction task, **always
+    try out a very simple model** (e.g Linear/Logistic Regression or Decision Trees
+    or KNN) before experimenting with more complex neural network and ensemble approaches.
+    After splitting the training data into train and sets, we train the model (using
+    [Scikit-Learn](http://scikit-learn.org/stable/) functions), and evaluate it on
+    the test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below, you can see a table of how well a bunch of our models performed. To ensure
+    that a model didn’t just get lucky with easy games to classify, we evaluated the
+    models 100 times on different train/test splits and took the average.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e9b2d879467832363a7a910939a76d89.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Gradient Boosted Trees**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This model obtained the best performance on the test sets. This model is basically
+    a type of ensemble network where you have multiple shallow regression or classification
+    trees that reweight training examples based on the errors of the previous trees
+    (If you’d like more info, check out Peter Prettenhofer’s [great talk](https://www.youtube.com/watch?v=IXZKgIsZRm0&t=892s)).
+    Gradient boosted trees work really well with heterogeneous data (data on different
+    scales) and can detect non-linear feature interactions, which was extremely useful
+    in our task. One of the interesting attributes of this model is that we can analyze
+    each of the feature’s importance to the overall classification. By looking at
+    each feature in relation to its position on the regression trees, we can examine
+    which features contributed the most to the correct classification of the games.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9bd4a7fd214322888ce3154d27008a27.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: So, as you can see, the number of regular season wins that a team has greatly
+    affects if they win the game or not. Intuitively, this makes sense. It doesn’t
+    take an advanced ML model or an expert analyst to just predict that the team with
+    the greater number of wins is more likely to win.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What’s interesting, however, is looking at the subsequent features in the list.
+    The two features that follow are SOS (strength of schedule) and location. If you
+    think about it, SOS makes intuitive sense as well. Even if a team doesn’t have
+    a high number of wins, it’s still very possible that they are a great team that
+    just played stronger opponents over the course of the season.  Location is also
+    a well known factor that influences games, as that is where the term “home-court
+    advantage” comes from.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Next Steps**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 76.37% accuracy is great, but what can we do to really push it to 80 or 85 percent?
+    Well, this is one of the tough parts of being an ML practitioner. There isn’t
+    really a clear set of guidelines for improving your model. For decision trees,
+    you can try increasing the depth of your tree. For neural networks, you can also
+    try new architectures or the classic “just add another layer” mentality. There
+    are infinitely many hyperparameters you can try to tune.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, I’m going to focus more on the representation of the data, and the
+    model itself. Here are a couple adjustments that could yield better results for
+    next year’s tourney.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition to relying on common statistical features (PPG, APG, etc), could
+    try to quantify expert opinions, fan polls, or betting lines.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use SVD or PCA to reduce dimensionality and have the model learn to predict
+    from a dataset with simpler features.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Incorporate historical information about tournament results (e.g Number of times
+    that the 12 seed wins over the 5 seed in a first round matchup)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Experiment with different ways of consolidating the 2 team vectors into one
+    (e.g concantenating, averaging, etc)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Consider using a RNN type model that looks at time series data. Instead of representing
+    a season as a single vector, could try to model a team’s progression as a time
+    series. Thus, we’d be able to find out which teams are doing particularly well
+    leading into the tournament.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Discussion of Bias in ML Models**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I want to take a little bit of time right now to address an issue that I think
+    is incredibly important for all machine learning practitioners. It’s the idea
+    of training set bias. Like I mentioned in the beginning of the post, we’re all
+    biased as human beings when it comes to prediction. In sports prediction, we have
+    personal attachments to certain teams, incomplete views of the available statistics,
+    and sometimes inconsistent criteria for judging matchups. Using machine learning
+    allows us to leverage the huge amounts of data associated with prediction tasks.
+    However, it still suffers from similar problems of bias that affect us.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The way bias affects ML models is through the training set we use and our representations
+    (in this case, our team vectors). As ML practitioners, we make conscious decisions
+    about what training data to use. For this particular model, I made the decision
+    to use all of the regular season and tournament game data since 1993\. I *could
+    have* made the decision to include data from only the more recent years or I *could
+    have* looked for datasets that had information on games before 1993.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Same with the features that I chose. I could have added features like Free Throw
+    Percentage or Number of Home Wins, etc. But I didn’t. I created the features that
+    I created because I believed that those were the most likely statistics that would
+    correlate with a team’s success.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This type of control over the dataset and feature selection means that we have
+    more responsibility over a model’s outputs than we think.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The main point is that ML models aren’t just pulling predictions out of nowhere.
+    They are black boxes in a way, but it’s still up to us to decide what data we
+    feed it and how we represent that data. While sports prediction is just a fun
+    and benign task, there are many areas (healthcare, law, insurance, etc) where
+    the results of machine learning models are incredibly important. **We need to
+    take time to make sure that the training data we use is representative of the
+    whole population, doesn’t discriminate toward a group, and that the model is well
+    fit to most examples in the both the training set and test sets**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ML Model 2017 Tournament Predictions**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For the predictions for this year’s tournament, I ran a trained Gradient Boosted
+    Classifier model on each of the first round games and had the team with the higher
+    probability advance to the next round. I then repeated the process for all subsequent
+    rounds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/00fad72ab8406d524cf9d9d166653277.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: So, do you have your bracket ready?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Shout out to my good friend [Arvind Sankar](https://www.linkedin.com/in/sankararvind)
+    for helpful discussions on feature creation and for some of the data scraping
+    scripts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Sources](https://adeshpande3.github.io/assets/Sources8.txt)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Adit Deshpande](https://twitter.com/aditdeshpande3)** is currently
+    a second year undergraduate student majoring in computer science and minoring
+    in Bioinformatics at UCLA. He is passionate about applying his knowledge of machine
+    learning and computer vision to areas in healthcare where better solutions can
+    be engineered for doctors and patients.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://adeshpande3.github.io/adeshpande3.github.io/Applying-Machine-Learning-to-March-Madness).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Cartoon: What Happens When AI Masters the March Madness](/2017/03/cartoon-ai-march-madness.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Game, Machine learning competition for students](/2017/03/data-science-game-machine-learning-competition-students.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 More Steps to Mastering Machine Learning With Python](/2017/03/seven-more-steps-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Applying Descriptive and Inferential Statistics in Python](https://www.kdnuggets.com/applying-descriptive-and-inferential-statistics-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News March 9, 2022: Build a Machine Learning Web App in 5…](https://www.kdnuggets.com/2022/n10.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News 22:n12, March 23: Best Data Science Books for…](https://www.kdnuggets.com/2022/n12.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News March 16, 2022: Learn Data Science Fundamentals & 5…](https://www.kdnuggets.com/2022/n11.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News March 30: The Most Popular Intro to Programming…](https://www.kdnuggets.com/2022/n13.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

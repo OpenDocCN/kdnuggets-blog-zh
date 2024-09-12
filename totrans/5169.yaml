@@ -1,0 +1,268 @@
+- en: Query Your Pandas DataFrames with SQL
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Query Your Pandas DataFrames with SQL](../Images/2ea84109c8d12ff5edd83ecd449d24b9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by Jeffrey Czum from Pexels (edits by author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandas — or, more specifically, its primary data container, the [DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html)
+    — has long ago solidified itself as the standard tabular data storage structure
+    in the Python data ecosystem. Using the Pandas DataFrame comes with its own specifications
+    for accessing, manipulating, and performing computations on composite data, specifications
+    which can be mastered with time and persistence thanks to its conformity to Python
+    syntax; if you are intimately familiar with Python, you are already well on your
+    way to being proficient with the standard Pandas API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are a lot of users who are not so proficient with Python, however, who
+    instead have made the jump to the language thanks to its prominent position in
+    data science and data analysis, as well as related fields and professions. Many
+    of those making the jump may also already be familiar with another of the heavyweight
+    data science languages: SQL. So why can we not query data in our Pandas DataFrames
+    using SQL, a language written specifically with tabular data access in mind?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Enter Fugue. Fugue is a project created with the decoupling of logic and execution
+    in mind, primarily with the goal of simplifying computational parallelization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fugue is an abstraction framework that lets users write code in native Python
+    or Pandas, and then port it over to Spark and Dask.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: A core component of this effort is FugueSQL. [FugueSQL](https://fugue-tutorials.readthedocs.io/en/latest/tutorials/beginner/beginner_sql.html)
+    is not **pure** SQL; it describes its syntax as a mix "between standard SQL, json
+    and python." However, you should find that for basic querying, it operates more
+    or less as you would expect. Specifically, it is designed "[t]o be fully compatible
+    with standard SQL SELECT statement." As such, it is generally more straightforward
+    for newcomers to data munging in Pandas than is querying Pandas in Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The benefits of FugueSQL can be realized in parallel code, alongside the additional
+    goals of the Fugue project, or standalone, querying your DataFrames on a lone
+    computer. In this article we will take a look at how to get up and running with
+    FugureSQL in your own work right away, and examples of how to do so.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Installation and Preparation
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'If you want to install the full Fugue library to take advantage of all of its
+    parallelization offerings, you can install as such:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'If, instead, you only want the FugueSQL API — which is all that is required
+    for the examples in this article — install as such:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Once installed, import the required libraries:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: With that, all that is left is to create a DataFrame we can use to query in
+    our examples. Since it is up to me to do so — and since I'm currently knee-deep
+    in organizing my comic book collection — let's go ahead and create a simple toy
+    comic book dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The simple DataFrame will consist of 4 columns: a particular issue of a comic
+    book title; the comic book publisher; the professionally- and independently-assigned
+    [comic book grade](https://www.mycomicshop.com/help/grading) (on a 10 point grading
+    scale); the value of the comic book in its assigned grade.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is the code to accomplish what is laid out above:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: You don't need to understand (or care) anything more about comic book collecting
+    to make sense of the following examples, so let's get into them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Example 1: Which of my books are graded above 8.0?'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The section title says it all. We are going to use FugueSQL and the standard
+    SELECT statement to query our Pandas DataFrame to determine which of my comic
+    books are graded above 8.0 on a 10 point scale.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To do this, we first need to define the SQL statement:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note the use of the Pandas DataFrame as the table name in our SELECT statement.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once the query is defined, it must be executed using the Fugue query engine:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And here is our returned query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'There are 3 books in our DataFrame graded above 8.0: Secret Wars 8; Eternals
+    1; and Department of Truth 1.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: And if you compare this result to our original DataFrame, you will find that
+    our query has been returned appropriately. It worked! Very cool, and, if you are
+    familiar with SQL syntax, very straightforward.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Example 2: Which of my books are valued above 500?'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Let's look at a second example, where we will find which of these books are
+    valued above $500, given their grade and the current market at this article's
+    publication time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Again, we will first define the SQL statement, and then execute it using the
+    FugueSQL engine.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And the results:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Of the books in our DataFrame, 3 are valued above $500\. Each of these happen
+    to be the first full appearance of 3 very popular characters, leading to their
+    relatively high values: Blade the Vampire Hunter; Deadpool; and Venom, respectively.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Example 3: Which of my books are published by Image?'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: For our last example, let's look at which of these comics were published by
+    Image Comics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Only 1 of these fit the bill: Department of Truth 1, a masterfully-written
+    contemporary masterpiece based on the idea that popular belief in conspiracy theories
+    actually alters reality, is the only one of these books published by Image.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: And what is the data type of the returned query result? Let's re-run the above
+    query, store it to a variable, and inspect its type.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: The returned result is in the form of a Fugue dataframe. Find out more about
+    the Fugue dataframe [here](https://fugue.readthedocs.io/en/latest/api/fugue.dataframe.html),
+    and how to further process returned results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For additional examples, [see this FugueSQL tutorial](https://fugue-tutorials.readthedocs.io/en/latest/tutorials/beginner/index.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13))
+    is a Data Scientist and the Editor-in-Chief of KDnuggets, the seminal online Data
+    Science and Machine Learning resource. His interests lie in natural language processing,
+    algorithm design and optimization, unsupervised learning, neural networks, and
+    automated approaches to machine learning. Matthew holds a Master''s degree in
+    computer science and a graduate diploma in data mining. He can be reached at editor1
+    at kdnuggets[dot]com.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Tips for Improving SQL Query Performance](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Merge Pandas DataFrames](https://www.kdnuggets.com/2023/01/merge-pandas-dataframes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Ways to Merge Pandas DataFrames](https://www.kdnuggets.com/2023/03/3-ways-merge-pandas-dataframes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Converting JSONs to Pandas DataFrames: Parsing Them the Right Way](https://www.kdnuggets.com/converting-jsons-to-pandas-dataframes-parsing-them-the-right-way)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Merge Large DataFrames Efficiently with Pandas](https://www.kdnuggets.com/how-to-merge-large-dataframes-efficiently-with-pandas)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

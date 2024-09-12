@@ -1,0 +1,247 @@
+- en: Speech to Text with Wav2Vec 2.0
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/03/speech-text-wav2vec.html](https://www.kdnuggets.com/2021/03/speech-text-wav2vec.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Dhilip Subramanian](https://medium.com/@sdhilip), Data Scientist and
+    AI Enthusiast**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f1afdce2c2ee8cce809cd1a6f89536a7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'From [Wav2vec 2.0: Learning the structure of speech from raw audio](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[In my previous blog](https://towardsdatascience.com/easy-speech-to-text-with-python-3df0d973b426),
+    I explained how to convert speech into text using the Speech Recognition library
+    with the help of Google speech recognition API. In this blog, we see how to convert
+    speech into text using Facebook Wav2Vec 2.0 model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Facebook](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio) recently
+    introduced and [open-sourced their new framework](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio) for
+    self-supervised learning of representations from raw audio data called Wav2Vec
+    2.0\. Facebook researchers claim this framework can enable [automatic speech recognition
+    models](https://analyticsindiamag.com/facebook-makes-advancements-in-automatic-speech-recognition/) with
+    just 10 minutes of transcribed speech data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As everyone knows, Transformers are playing a major role in Natural Language
+    Processing. The latest version of Hugging Face transformers is version 4.30 and
+    it comes with Wav2Vec 2.0\. This is the first Automatic Speech recognition speech
+    model included in the Transformers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model Architecture is beyond the scope of this blog. For detailed Wav2Vec model
+    architecture, please check [here](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s see how we can convert the audio file into text using Hugging Face transformers
+    with some simple lines of code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Installing Transformer library
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Importing necessary libraries
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Wav2Vec2 is a speech model that accepts a float array corresponding to the
+    raw waveform of the speech signal. Wav2Vec2 model was trained using connectionist
+    temporal classification (CTC) so the model output has to be decoded using Wav2Vec2Tokenizer
+    ([Ref: Hugging Face)](https://huggingface.co/transformers/model_doc/wav2vec2.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reading the audio file
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I have used Liam Neeson famous dialogue audio clip from the movie “Taken” in
+    this example which says *“I will look for you, I will find you and I will kill
+    you”*
+  prefs: []
+  type: TYPE_NORMAL
+- en: Please note the Wav2Vec model is pre-trained on 16 kHz frequency, so we make
+    sure our raw audio file is also resampled to a 16 kHz sampling rate. I have used
+    online [audio tool conversion](https://audio.online-convert.com/convert-to-wav) to
+    resample the ‘taken’ audio clip into 16kHz.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loading the audio file using the librosa library and mentioning my audio clip
+    size is 16000 Hz. It converts the audio clip into an array and is stored into
+    the ‘audio’ variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Importing pre-trained Wav2Vec model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: The next step is taking the input values, passing the audio (array) into tokenizer
+    and we want our tensors in PyTorch format instead of Python integers. return_tensors
+    = “pt” which is nothing more than PyTorch format.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Getting the logit values (non-normalized values)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Passing the logit values to softmax to get the predicted values
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Converting audio to text
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The final step is to pass the prediction to the tokenizer decode to get the
+    transcription
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: It exactly matches our audio clip.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this blog, we have seen how to convert speech into text using Wav2Vec pretrained
+    model using Transformers. This would be very helpful for NLP projects especially
+    handling audio transcripts data. If you have anything to add, please feel free
+    to leave a comment!
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can find the entire code and data in my [GitHub repo](https://github.com/sdhilip200/speech-to-text).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for reading. Keep learning and stay tuned for more!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reference
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[https://huggingface.co/transformers/model_doc/wav2vec2.html](https://huggingface.co/transformers/model_doc/wav2vec2.html)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Bio: [Dhilip Subramanian](https://medium.com/@sdhilip)** is a Mechanical
+    Engineer and has completed his Master''s in Analytics. He has 9 years of experience
+    with specialization in various domains related to data including IT, marketing,
+    banking, power, and manufacturing. He is passionate about NLP and machine learning.
+    He is a contributor to the [SAS community](https://communities.sas.com/t5/user/viewprofilepage/user-id/271305)
+    and loves to write technical articles on various aspects of data science on the
+    Medium platform.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://pub.towardsai.net/speech-to-text-with-wav2vec-2-0-b21c1e1ad701).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Easy Speech-to-Text with Python](/2020/06/easy-speech-text-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with 5 Essential Natural Language Processing Libraries](/2021/02/getting-started-5-essential-nlp-libraries.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hugging Face Transformers Package – What Is It and How To Use It](/2021/02/hugging-face-transformer-basics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Build a Text-to-Speech Converter with Python in 5 Minutes](https://www.kdnuggets.com/2022/09/build-texttospeech-converter-python-5-minutes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Evolution of Speech Recognition Metrics](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Approaches to Text Summarization: An Overview](https://www.kdnuggets.com/2019/01/approaches-text-summarization-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with Automated Text Summarization](https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is Text Classification?](https://www.kdnuggets.com/2022/07/text-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

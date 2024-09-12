@@ -1,0 +1,338 @@
+- en: Beating the Bookies with Machine Learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/03/beating-bookies-machine-learning.html](https://www.kdnuggets.com/2019/03/beating-bookies-machine-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Richard Bartels](https://www.linkedin.com/in/richard-bartels-827a7b27),
+    Data scientist at Vantage AI**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: “The dealer always wins” is a typical saying in gambling. It reflects the fact
+    that in most games of chance the house (e.g. the casino or the bookmaker) has
+    a statistical advantage. In other words, assuming the betted amount is 1, the
+    house has an expected return higher than 1, in contrast to the gambler who has
+    an expected return smaller than 1\. Therefore, if you visit the casino, most likely
+    you will make a net loss in the long run.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sports betting is no different. Both the bettor and the bookmaker can be equally
+    skilled in predicting the outcome of a match, however the bookmaker sets the rules
+    for the bet and thereby guarantee themselves a profit in the long run. The way
+    they do this is by controlling what is called the payout.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is a quick example. Lets take two darts players who are equally skilled
+    and thus objectively would both have a 50% chance of winning a head-to-head game.
+    The bookmaker can set the odds, which we will define as O₁ and O₂ for player 1
+    and 2, respectively. For this particular game O₁ = O₂ = 1.90 would be reasonable
+    odds. Meaning that for each $1 bet you get back $1.90 if you win. But what is
+    the expected value of your return, X? Well if you bet $1 on a win for player 1,
+    your expected return for this game is (remember that the win probability for each
+    player is 50%):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b4e93cdcff3f5b146ac0db4bede49b98.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: So in the long run, each dollar spent resuls in 95 cents return, and you will
+    make a loss! I.e. the ‘payout’ the bookmaker sets for this game is 95%, meaning
+    that the bookmaker will expect to make a profit of 5% over all bets, assuming
+    they assessed the win probabilities correctly. So we see the odds the bookmaker
+    set are not fair, fair odds would have been O₁ = O₂ = 2.0\. Note that these odds
+    also corresponds to equal winning probabilites for each player, namely P₁ = O₂/(O₁
+    + O₂)=0.5 and P₂ = O₁/(O₁ + O₂)=0.5.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the remainder of this blog post we will focus on the specific game of darts,
+    where games are head-to-head and results depend largely on the players’ skills.
+    However, the discussion generalizes to other sports too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/225b95959e4bafeb38500a6f18737f4c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Image credit: [http://www.1zoom.me/en/wallpaper/517285/z7641.3/](http://www.1zoom.me/en/wallpaper/517285/z7641.3/).**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to beat the bookmaker
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: What we have seen above is that bookmakers make a profit by controlling the
+    payout. In order to do so they have to set the odds accordingly. For this, they
+    need to know the probabilities. An omniscient bookmaker who gets all probabilities
+    spot on cannot be beaten (in the long run). But bookmakers are not omniscient
+    and therefore there are two ways in which they can be beaten, purely based on
+    estimating the probabilities better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you consistently assess the probabilites better than the bookmaker, by such
+    a margin that you make up for the leeway they have built into the payout.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If you only bet on those games where you know the bookmaker made a mistake and
+    the odds are ‘fair’.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In fact, strategy 1 is just a specific version of strategy 2\. Nevertheless,
+    even if you manage to predict each game more accurately than the bookmakers, you
+    are unlikely to make a profit, since the bookmakers get pretty close to getting
+    the probabilities right. This can be seen from Fig. 1, which shows that the bookmakers
+    do a pretty good job at estimating the odds correctly for darts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/838ec3c7840c4f51d165849b96c06425.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Fig. 1: Win probability derived from the bookmaker odds compared to the observed
+    win ratio (blue line) for almost 3700 games of darts. The dashed black line corresponds
+    to being able to predict the probabilities perftectly for an infinite number of
+    games. The dark (light) grey bands are the 68% (95%) intervals from intrinsic
+    noise due to the limited sample size. Since the blue line stays pretty well within
+    the grey bands. It seems the bookmakers know what they are doing.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fig. 1 illustrates that bookmakers assess the probabilities right on a large
+    sample of games. But they could still be wrong on a number of individual games.
+    Strategy 2, as outlined above, relies on identifying where the bookmakers misjudge
+    the actual probability. For instance, in the unrealistic event where the bookmaker
+    would offer equal odds, e.g. O₁ = O₂ = 1.90, in a match between reigning world
+    champion Michael van Gerwen against the world’s number 94 our intuition already
+    tells us we can likely make a profit by betting on van Gerwen. The goal is to
+    identify all such games. However, since most of the time it is not easy to tell
+    when the bookmakers are wrong, we can try to have a machine-learning (ML) algorithm
+    do this for us.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Betting on darts with the help of ML
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For the purpose of this project we used darts statistics, including features
+    such as averages, checkout percentages, number of 180s (maximum score with 3 darts)
+    and head-to-head statistics. In addition, we used historic odds in order to assess
+    whether this model could have made a profit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, to further motivate our tactics of only betting on a selection of games
+    lets consider the benchmark accuracies. If we would always bet on the player with
+    the highest win chance according to the bookmakers we achieve an accuracy of 70%.
+    Constructing a [skill-rating](https://trueskill.org/) based solely on the results
+    of matches gets to 69% accuracy on the same data. When training a machine learning
+    model, like a random forest, boosted tree or fully-connected neural network with
+    carefully constructed features and optimized on a binary-cross entropy loss function
+    we also got to 70% accuracy. Clearly we are not outperforming the bookmakers,
+    so there is little chance to make a profit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A custom loss function
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: The binary-cross entropy loss function optimizes our ability to predict the
+    outcome of games correctly, i.e. it optimizes the accuracy with which we predict
+    games. However, that is not our goal. What we want is to identify the games where
+    the bookmaker misjudges the true probability and thus offers favourable odds.
+    I.e. we want to optimize our return-on-investment. Below is a loss function constructed
+    to do exactly this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bff3bac101d86ad4e22445bcdb533b09.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The custom loss function contains two elements, the terms between square brackets
+    are the returns if we bet $1,- on player 1 or 2, respectively. Note that this
+    depends on the outcome of the game (yᵢ), if we get it wrong we loose our money.
+    The [ReLu function](https://ml-cheatsheet.readthedocs.io/en/latest/activation_functions.html#relu) contains
+    our betting strategy. It has the property that Relu(x) = 0 when x ≤ 0 and Relu(x)=x
+    otherwise. The argument is our expected return: the odds multiplied by our estimated
+    win probability minus 1\. Given the properties of the ReLu function this means
+    that it is only larger than 0 if we believe the odds are favourable for us. In
+    other words, if our model believes the odds are unfair, it won’t bet any money.
+    On the other hand, the more favourable the odds appear, the higher the amount
+    the model will bet.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This loss function ensures that what we are optimizing is not how well we can
+    predict the outcome of a game, but rather our winnings. Note that as a consequence
+    of our custom loss function, the predicted probabilities are not representative
+    of the true probabilities, since when the model thinks the bookmakers are off
+    it will push the probabilities towards the extremes (0 or 1) in order to bet more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So how does it perform?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In order to test our model performance we constructed a densely-connected neural
+    network with two hidden layers. The final layer is a sigmoid layer that predicts
+    the probability of player 1 winning. Using the bookmaker odds and the outcome
+    of the game we then compute the loss with the custom loss function described above.
+    All of this is implemented in [PyTorch](https://cs230-stanford.github.io/pytorch-getting-started.html#loss-function).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since this is a time-series, the model is trained on historical data upto a
+    given point and subsequently applied to the next 50 games. This process is then
+    repeated for the next 50 games, etc. Results are shown in Fig. 2.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/626104d2f0b35ccf7df88a9b146f4bf3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig. 2: Cumulative winnings over time for two different betting strategies.
+    Red dots are for a strategy where we always bet a fixed amount on the player with
+    the highest winning probability according to the bookmaker odds. In the long run
+    this results in a ~5% loss, corresponding to the bookmaker payout scheme. Green
+    dots are bets placed by our machine learning model. It only places a bet when
+    it expects to make a profit. The total earning fluctuate around 0\. However, there
+    are also a few major winnings, that overcompensate large losses. In this particular
+    case we made a profit of about ~10%.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our model managed to a make a profit, albeit with large fluctuations over time.
+    It suffered from a few major losses, but also made some major winnings compensating
+    the losses. In the end the return on investment was about 10%. As a benchmark
+    we took a strategy where we always bet on the player that is most likely to win
+    according to the bookmaker (which would not be very different from a model where
+    we optimize using binary cross-entropy to predict the winner). Since the odds
+    are unfair, we make a loss of about 5% in the long run.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Bookmakers make a profit by controlling the payout.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For darts, they tend to be good at assessing the winning probabilities. This
+    makes it difficult to make a profit by just predicting the outcome of darts games.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A machine learning model with a custom loss function — with the objective to
+    identify shortcomings in the bookmaker odds and make profit, rather than optimising
+    the accuracy of predicting the winner correctly — can provide a profitable betting
+    strategy.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The return on investment at any given time is subject to large fluctuations
+    and profits can only be expected over extended periods of time.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The presented model is by no means a guaranteed profit-making machine. Instead,
+    it serves as a proof-of-concept describing how to set up your machine learning
+    model to beat the bookmaker.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Acknowledgements
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Thanks to [Guido Tournois](https://medium.com/@guido.tournois) with whom I collaborated
+    on this project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio**: [Richard Bartels](https://www.linkedin.com/in/richard-bartels-827a7b27) is
+    a data scientist at Vantage AI, a data science consultancy company in the Netherlands.
+    If you need help with creating machine learning models for your data, feel free
+    to contact us at [**info@vantage-ai.com**](mailto:info@vantage-ai.com).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/vantageai/beating-the-bookies-with-machine-learning-7b429a0b5980).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Resources:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[On-line and web-based: Analytics, Data Mining, Data Science, Machine Learning
+    education](https://www.kdnuggets.com/education/online.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Software for Analytics, Data Science, Data Mining, and Machine Learning](https://www.kdnuggets.com/software/index.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[4 Reasons Why Your Machine Learning Code is Probably Bad](https://www.kdnuggets.com/2019/02/4-reasons-machine-learning-code-probably-bad.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Leveraging Agent-based Models (ABM) and Digital Twins to Prevent Injuries](https://www.kdnuggets.com/2018/08/leveraging-agent-based-models-digital-twins-prevent-injuries.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why Germany did not defeat Brazil in the final, or Data Science lessons from
+    the World Cup](https://www.kdnuggets.com/2018/07/worldcup-data-science-lessons.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI, Analytics, Machine Learning, Data Science, Deep Learning…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Breaking the Data Barrier: How Zero-Shot, One-Shot, and Few-Shot…](https://www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Federated Learning: Collaborative Machine Learning with a Tutorial…](https://www.kdnuggets.com/2021/12/federated-learning-collaborative-machine-learning-tutorial-get-started.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

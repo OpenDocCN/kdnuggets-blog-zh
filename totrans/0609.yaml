@@ -1,0 +1,362 @@
+- en: TensorFlow for Computer Vision – Transfer Learning Made Easy
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**90+% accuracy? Made possible with Transfer Learning.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Last week](https://betterdatascience.com/tensorflow-for-computer-vision-how-to-increase-model-accuracy-with-data-augmentation/),
+    you''ve seen how data augmentation can squeeze an extra couple of percent accuracy
+    from your TensorFlow models. We only scratched the surface compared to what you''ll
+    see today. We''ll finally get above 90% accuracy on the validation set with a
+    pretty straightforward approach.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You'll also see what happens to the validation accuracy if we scale down the
+    amount of training data by a factor of 20\. Spoiler alert - it will remain unchanged.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Don''t feel like reading? Watch my video instead:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can download the source code on [GitHub](https://github.com/better-data-science/TensorFlow).
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Transfer Learning in TensorFlow?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Writing neural network model architectures from scratch involves a lot of guesswork.
+    How many layers? How many nodes per layer? What activation function to use? Regularization?
+    You won't run out of questions any time soon.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Transfer learning takes a different approach. Instead of starting from scratch,
+    you take an existing neural network model that has been trained by someone really
+    smart on an enormous dataset with far superior hardware than you have at home.
+    These networks can have hundreds of layers, unlike our [2-block CNN](https://betterdatascience.com/train-image-classifier-with-convolutional-neural-networks/) implemented
+    weeks ago.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Long story short - the deeper you go into the network, the more sophisticated
+    features you'll extract.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The entire transfer learning process boils down to 3 steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Take a pretrained network** - For example, take a VGG, ResNet, or EfficientNet
+    architecture that''s been trained on millions of images to detect 1000 classes.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Cut the head of the model** - Exclude the last few layers of a pretrained
+    model and replace them with your own. For example, our [dogs vs. cats dataset](https://betterdatascience.com/top-3-prerequisites-for-deep-learning-projects/) has
+    two classes, and the final classification layer needs to resemble that.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Fine-tune the final layers** - Train the network on your dataset to adjust
+    the classifier. Weights of the pretrained model are frozen, meaning they won''t
+    update as you train the model.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: What all of this boils down to is that transfer learning allows you to get drastically
+    better results with less data. Our custom 2-block architecture gave only 76% accuracy
+    on the validation set. Transfer learning will skyrocket it to above 90%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting Started - Library and Dataset Imports
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'We’ll use the [Dogs vs. Cats dataset](https://www.kaggle.com/pybear/cats-vs-dogs?select=PetImages) from
+    Kaggle. It’s licensed under the Creative Commons License, which means you can
+    use it for free:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![TensorFlow for Computer Vision - Transfer Learning Made Easy](../Images/81716bae384a67575544cf36f83e942d.png)*Image
+    1 — Dogs vs. Cats dataset (image by author)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The dataset is fairly large — 25,000 images distributed evenly between classes
+    (12,500 dog images and 12,500 cat images). It should be big enough to train a
+    decent image classifier. The only problem is — it’s not structured for deep learning
+    out of the box. You can follow my previous article to create a proper directory
+    structure, and split it into train, test, and validation sets:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[TensorFlow for Image Classification — Top 3 Prerequisites for Deep Learning
+    Projects | Better Data Science](https://betterdatascience.com/top-3-prerequisites-for-deep-learning-projects)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Do you want to train a neural network for image classification with TensorFlow?
+    Make sure to do these three steps first.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You should also delete the *train/cat/666.jpg *and *train/dog/11702.jpg* images
+    as they’re corrupted, and your model will fail to train with them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once done, you can proceed with the library imports. We’ll only need Numpy
+    and TensorFlow today. Other imports are here to get rid of unnecessary warning
+    messages:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We''ll have to load training and validation data from different directories
+    throughout the article. The best practice is to declare a function for loading
+    the images and [data augmentation](https://betterdatascience.com/tensorflow-for-computer-vision-how-to-increase-model-accuracy-with-data-augmentation/):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let''s now load our dogs and cats dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here''s the output you should see:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![TensorFlow for Computer Vision - Transfer Learning Made Easy](../Images/605b0afd68cc15a8c20c5ddd23bdf6f5.png)Image
+    2 - Number of training and validation images (image by author)'
+  prefs: []
+  type: TYPE_IMG
+- en: Is 20K training images an overkill for transfer learning? Probably, but let's
+    see how accurate of a model can we get.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Transfer Learning with TensorFlow in Action
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: With transfer learning, we're basically loading a huge pretrained model without
+    the top classification layer. That way, we can freeze the learned weights and
+    only add the output layer to match our dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, most pretrained models were trained on the *ImageNet* dataset which
+    has 1000 classes. We only have two (cat and dog), so we'll need to specify that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'That''s where the `build_transfer_learning_model()` function comes into play.
+    It has a single parameter - `base_model` - which represents the pretrained architecture.
+    First, we''ll freeze all the layers in that model, and then build a `Sequential` model
+    from it by adding a couple of custom layers. Finally, we''ll compile the model
+    using the usual suspects:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now the fun part begins. Import the `VGG16` architecture from TensorFlow and
+    specify it as a base model to our `build_transfer_learning_model()` function.
+    The `include_top=False` parameter means we don''t want the top classification
+    layer, as we''ve declared our own. Also, note how the `input_shape` was set to
+    resemble the shapes of our images:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here''s the output after training the model for 10 epochs:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![TensorFlow for Computer Vision - Transfer Learning Made Easy](../Images/39122c33fe19479e0d46ab9b105f2ce5.png)Image
+    3 - VGG16 model on 20K training images after 10 epochs (image by author)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now that's something to write home about - 93% validation accuracy without even
+    thinking about the mode architecture. The real beauty of transfer learning lies
+    in the amount of data needed to train accurate models, which is much less than
+    with custom architectures.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**How much less?** Let''s scale our dataset down 20 times to see what happens.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Transfer Learning on a 20X Smaller Subset
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'We want to see if reducing the dataset size negatively affects the predictive
+    power. Create a new directory structure for training and validation images. Images
+    will be stored inside the `data_small` folder, but feel free to rename it to anything
+    else:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here''s the command you can use to print the directory structure:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![TensorFlow for Computer Vision - Transfer Learning Made Easy](../Images/7ef0bece76f3a8a575292c59ee516fd6.png)Image
+    4 - Directory structure (image by author)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Copy a sample of the images to the new folder. The `copy_sample()` function
+    takes `n` images from the `src_folder` and copies them to the `tgt_folder`. By
+    default, we''ll set `n` to 500:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let''s now copy the training and validation images. For the validation set,
+    we''ll copy only 100 images per class:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Use the following commands to print the number of images in each folder:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![TensorFlow for Computer Vision - Transfer Learning Made Easy](../Images/24cb32aab7a80fcb2f3eb8fa75b1d405.png)Image
+    5 - Number of training and validation images per class (image by author)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Finally, call `init_data()` function to load images from the new source:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![TensorFlow for Computer Vision - Transfer Learning Made Easy](../Images/8a1379ff83585f15d74157ed096f5e66.png)Image
+    6 - Number of training and validation images in the smaller subset (image by author)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'There are 1000 training images in total. It will be interesting to see if we
+    can get a decent model out of a dataset this small. We''ll keep the model architecture
+    identical, but train for more epochs just because the dataset is smaller. Also,
+    we can afford to train for longer since the training time per epoch is reduced:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![TensorFlow for Computer Vision - Transfer Learning Made Easy](../Images/3e1a4d6b74130dba5838e26bd6f2b569.png)Image
+    7 - Training results of the last 10 epochs (image by author)'
+  prefs: []
+  type: TYPE_IMG
+- en: And would you look at that - we got roughly the same validation accuracy as
+    with the model trained on 20K images, which is amazing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That's where the true power of transfer learning lies. You don't always have
+    access to huge datasets, so it's amazing to see we can build something this accurate
+    with such limited data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To recap, transfer learning should be your go-to approach when building image
+    classification models. You don't need to think about the architecture, as someone
+    already did that for you. You don't need to have a huge dataset, as someone already
+    trained a general-purpose model on millions of images. Finally, you don't need
+    to worry about poor performance most of the time, unless your dataset is highly
+    specialized.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The only thing you need to do is to choose a pre-trained architecture. We opted
+    for VGG16 today, but I encourage you to experiment with ResNet, MobileNet, EfficientNet,
+    and others.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here's another **homework assignment** you can do - use both models trained
+    today to predict the entire test set. How do the accuracies compare? Please let
+    me know.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Stay connected**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sign up for my [newsletter](https://mailchi.mp/46a3d2989d9b/bdssubscribe)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Subscribe on [YouTube](https://www.youtube.com/c/BetterDataScience)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Connect on [LinkedIn](https://www.linkedin.com/in/darioradecic/)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**[Dario Radečić](https://www.linkedin.com/in/darioradecic/)** is CEO and Founder
+    at Deep Data Digital, and a Data Scientist and Tech Writer.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://betterdatascience.com/tensorflow-transfer-learning/). Reposted
+    with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[KDnuggets News March 9, 2022: Build a Machine Learning Web App in 5…](https://www.kdnuggets.com/2022/n10.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Things You Need To Know About Data Management And Why It Matters…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Applications of Computer Vision](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DINOv2: Self-Supervised Computer Vision Models by Meta AI](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Discover the World of Computer Vision: Introducing MLM''s Latest…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Made Simple for Data Analysts with BigQuery ML](https://www.kdnuggets.com/machine-learning-made-simple-for-data-analysts-with-bigquery-ml)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

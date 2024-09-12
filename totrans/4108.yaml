@@ -1,0 +1,346 @@
+- en: 'Geocoding in Python: A Complete Guide'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/11/geocoding-python-complete-guide.html](https://www.kdnuggets.com/2022/11/geocoding-python-complete-guide.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Geocoding in Python: A Complete Guide](../Images/a8f230f39f95766be24eca94bc96ee99.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Andrew Stutesman](https://unsplash.com/@drewmark?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/map?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: When dealing with large datasets for machine learning, have you ever come across
+    an address column that looks like this?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Geocoding in Python: A Complete Guide](../Images/6318cb0b25a530d5683bbb65e57515ca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Location data can be very messy and difficult to process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is difficult to encode addresses, since they are of very high cardinality.
+    If you try to encode a column like this with a technique like one-hot encoding,
+    it will lead to high dimensionality, and your machine learning model might not
+    perform well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The easiest way to overcome this problem is to **geocode** these columns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Geocoding?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Geocoding is the process of converting addresses into geographical coordinates.
+    This means that you’ll be transforming raw addresses into latitude/longitude pairs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Geocoding in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: There are many different libraries available that can help you do this with
+    Python. The fastest is the **Google Maps API, **which I recommend if you have
+    more than 1000 addresses you need to convert in a short period of time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, the Google Maps API isn’t free. You will need to pay around $5 per
+    1000 request.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A free alternative to the Google Maps API is the OpenStreetMap API. However,
+    the OpenStreetMap API is a lot slower, and also slightly less accurate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, I will walk you through the geocoding process with these two
+    APIs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Method 1: Google Maps API'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Let's first use the Google Maps API to convert addresses into lat/long pairs.
+    You will first need to create a Google Cloud account to do this and enter your
+    credit card information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although this is a paid service, Google gives you $200 in free credit when you
+    first create a Google Cloud account. This means that you can make around 40,000
+    calls with their geocoding API before you get charged for it. As long as you don’t
+    hit this limit, your account will not be charged.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, [set up a free account](https://cloud.google.com/gcp/getting-started) with
+    Google Cloud. Then, once you’ve set up an account, you can follow [this](https://www.youtube.com/watch?v=OGTG1l7yin4) tutorial
+    to get your Google Maps API key.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once you’ve received your API key, you can start coding!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pre-requisites
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'We are going to use the [Zomato Restaurants Kaggle](https://www.kaggle.com/shrutimehta/zomato-restaurants-data) dataset
+    for this tutorial. Make sure to have the dataset installed in your path. Then,
+    install the googlemaps API package with this command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Imports
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Run the following lines of code to import the libraries you need to get started:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Reading the dataset
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Now, lets read the dataset and check the head of the dataframe:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Geocoding in Python: A Complete Guide](../Images/e1b79a68ffe95d0cecb702963c56f7de.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: This dataframe has 21 columns and 9551 rows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We only need the address column for geocoding, so I’m going to drop all the
+    other columns. Then, I am going to drop duplicates so we only get unique addresses:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Taking a look at the head of the dataframe again, we can see only the address
+    column:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Geocoding in Python: A Complete Guide](../Images/ee9199fd5796fd53ca08a9493e25cbc2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Great! We can start geocoding now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Geocoding
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'First, we need to access our API key with Python. Run the following lines of
+    code to do this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now, lets try geocoding one address first, and take a look at the output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output of the above code looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Geocoding in Python: A Complete Guide](../Images/d312aa8edf8c0b0b987705c0356fadba.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you get the above output, great! Everything works.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can now replicate this process for the entire dataframe:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Lets check the head of the dataframe again to see if this worked:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Geocoding in Python: A Complete Guide](../Images/4bd8b23bd238c16246a789a5a5fe0fcf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If your output looks like the screenshot above, congratulations! You have successfully
+    geocoded addresses in an entire dataframe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Method 2: OpenStreetMap API'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The OpenStreetMap API is completely free, but is slower and less accurate than
+    the Google maps API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This API was unable to locate many of the addresses in the dataset, so we will
+    be using the *locality* column this time instead.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Before we start with the tutorial, lets look at the difference between the *address* and *locality* column.
+    Run the following lines of code to do this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Your output will look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Geocoding in Python: A Complete Guide](../Images/09756fc883050be5cc34decca0a16b64.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *address* column is a lot more granular than the *locality *column, and
+    it provides the exact location of the restaurant, including the floor number.
+    This might be the reason the address isn’t recognized by the OpenStreetMap API,
+    but the locality is.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lets geocode the first locality and take a look at the output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Geocode
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Run the following lines of code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output of the above codes is very similar to the result generated by the
+    Google Maps API:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Geocoding in Python: A Complete Guide](../Images/48e35458c0ec81e3387fb6831a5a871d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, lets create a function to find the coordinates of the entire dataframe:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Great! Now, lets take a look at the head of the dataframe:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Notice that this API was unable to come up with coordinates for many of the
+    localities in the dataframe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although its a great free alternative to the Google Maps API, you risk losing
+    a lot of data if you geocode with OpenStreetMap.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That’s all for this tutorial! I hope you learnt something new from here, and
+    have a better understanding on dealing with geospatial data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Good luck with your data science journey, and thanks for reading!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Natassha Selvaraj](https://www.natasshaselvaraj.com/)** is a self-taught
+    data scientist with a passion for writing. You can connect with her on [LinkedIn](https://www.linkedin.com/in/natassha-selvaraj-33430717a/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.natasshaselvaraj.com/a-step-by-step-guide-on-geocoding-in-python/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Geocoding for Data Scientists](https://www.kdnuggets.com/2023/06/geocoding-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Complete Guide To Decision Tree Software](https://www.kdnuggets.com/2022/08/complete-guide-decision-tree-software.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Build a Data Science Enablement Team: A Complete Guide](https://www.kdnuggets.com/2022/10/build-data-science-enablement-team-complete-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, May 25: The 6 Python Machine Learning Tools Every…](https://www.kdnuggets.com/2022/n21.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, August 17: How to Perform Motion Detection Using…](https://www.kdnuggets.com/2022/n33.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n06, Feb 9: Data Science Programming…](https://www.kdnuggets.com/2022/n06.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

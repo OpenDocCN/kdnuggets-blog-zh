@@ -1,0 +1,402 @@
+- en: Intuitive Ensemble Learning Guide with Gradient Boosting
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/07/intuitive-ensemble-learning-guide-gradient-boosting.html](https://www.kdnuggets.com/2018/07/intuitive-ensemble-learning-guide-gradient-boosting.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: Using a single machine learning model may not always fit the data. Optimizing
+    its parameters also may not help. One solution is to combine multiple models together
+    to fit the data. This tutorial discusses the importance of ensemble learning with
+    gradient boosting as a study case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Introduction**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One critical step in the machine learning (ML) pipeline is to select the best
+    algorithm that fits the data. Based on some statistics and visualizations from
+    the data, the ML engineer will select the best algorithm. Let us apply that on
+    a regression example with its data shown in figure 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 1**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cd452bb8c00bc8e5697c7c1efff89210.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: By visualizing the data according to figure 2, it seems that a linear regression
+    model will be suitable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 2**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d8fa607e02e4ca34f856ecc1af2ddc85.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A regression model with just one input and one output will be formulated according
+    to the equation in figure 3.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 3**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8cc21deb9b95317fddebfed354641791.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Where a and b are the parameters of the equation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because we do not know the optimal parameters that will fit the data, we can
+    start with initial values. We can set a to 1.0 and b to 0.0 and visualize the
+    model as in figure 4.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 4**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/582d31456edef8d913fa3c9747aeca66.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It seems that the model does not fit the data based on the initial values for
+    the parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is expected that everything might not work from the first trial. The question
+    is how to enhance the results in such cases? In other words, how to maximize the
+    classification accuracy or minimize the regression error? There are different
+    ways of doing that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One simple way is to try to change the previously selected parameters. After
+    a number of trials, the model will know that the optimal parameters are a=2 and
+    b=1\. The model will fit the data in such case as shown in figure 5\. Very good.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 5**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/be32c3a96d8a9942b2a5a25b6dd797d6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: But there are some cases in which changing the model parameters will not make
+    the model fit the data. There will be some false predictions. Suppose that the
+    data has a new point (x=2, y=2). According to figure 6, it is impossible to find
+    parameters that make the model completely fits every data point.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 6**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9ed3f14b772824c56d96a5faff54b516.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: One might say that fitting 4 points and missing one is acceptable. But what
+    if there are more points that the line can not fit as in figure 7? Thus the model
+    will make more false predictions than the correct ones. There is no single line
+    to fit the entire data. The model is strong in its predictions to the points on
+    the line but weak for other points.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 7**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/762589b52f4c7a84eeab9bdc7a20de2d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Ensemble Learning**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Because a single regression model will not fit the entire data, an alternative
+    solution is to use multiple regression models. Each regression model will be able
+    to strongly fit a part of the data. The combination of all models will reduce
+    the total error across the entire data and produce a generally strong model. Using
+    multiple models in a problem is called ensemble learning. Importance of using
+    multiple models is depicted in figure 8\. Figure 8(a) shows that the error is
+    high when predicting the outcome of the sample. According to figure 8(b), when
+    there are multiple models (e.g. three models), the average of their outcomes will
+    be able to make a more accurate prediction than before.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 8**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5749554a805253a1b1564d107189fe41.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When being applied to the previous problem in figure 7, the ensemble of 4 regression
+    models fitting the data is shown in figure 9.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 9**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bae40240b28680b575171720d328b7a3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This leaves another question. If there are multiple models to fit the data,
+    how to get a single prediction? There are two ways to combine multiple regression
+    models to return a single outcome. They are bagging and boosting (which is the
+    focus of this tutorial).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In bagging, each model will return its outcome and the final outcome will be
+    returned by summarizing all of such outcomes. One way is by averaging all outcomes.
+    Bagging is parallel as all models are working at the same time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In contrast, boosting is regarded sequential as the outcome of one model is
+    the input to the next model. The idea of boosting is to use a weak learner to
+    fit the data. Because it is weak, it will not be able to fit the data correctly.
+    The weaknesses in such a learner will be fixed by another weak learner. If some
+    weaknesses still exist, then another weak learner will be used to fix them. The
+    chain got extended until finally producing a strong learner from multiple weak
+    learners.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next is to go through the explanation of how gradient boosting works.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Gradient Boosting (GB)**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Here is how gradient boosting works based on a simple example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Suppose that a regression model is to be built and the data has a single output,
+    where the first sample has an output 15\. It is depicted as in figure 10\. The
+    goal is to build a regression model that correctly predict the output of such
+    a sample.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 10**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ca0f50adb19096d37b8a0195f700b88c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The first weak model predicted the output of the first sample to be 9 rather
+    than 15 as shown in figure 11.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 11**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/3e7d934838de8899e3bb763e00476635.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'To measure the amount of loss in the prediction, its residual is calculated.
+    Residual is the difference between the desired and predicted outputs. It is calculated
+    according to the following equation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**desired – predicted1 = residual1**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Where **predicted1** and **residual1** are the predicted output and the residual
+    of the first weak model, respectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'By substituting by the values of the desired and predicted outputs, the residual
+    will be 6:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**15 – 9 = 6**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For **residual1**=6 between the predicted and the desired outputs, we could
+    create a second weak model where its target is to predict an output equal to the
+    residual of the first model. Thus the second model will fix the weakness of the
+    first model. The summation of the outputs from the two models will be equal to
+    the desired output according to the next equation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**desired = predicted1 + predicted2(residual1)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If the second weak model was able to predict the **residual1** correctly, then
+    the desired output will equal the predictions of all weak models as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**desired = predicted1 + predicted2(residual1) = 9 + 6 = 15**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But if the second weak model failed to correctly predict the value of **residual1** and
+    just returned 3 for example, then the second weak learner will also have a non-zero
+    residual calculated as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**residual2 = predicted1 - predicted2 = 6 - 3 = 3**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is depicted in figure 12.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 12**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/01af35abbd568828c1eecc3687c726f5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'To fix the weakness of the second weak model, a third weak model will be created.
+    Its goal is to predict the residual of the second weak model. Thus its target
+    is 3\. Thus the desired output of our sample will be equal to the predictions
+    of all weak models as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**desired = predicted1 + predicted2(residual1) + predicted3(residual2)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If the third weak model prediction is 2, i.e. it is unable to predict the residual
+    of the second weak model, then there will be a residual for such third model equal
+    to as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**residual3 = predicted2 – predicted3 = 3 - 2 = 1**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is depicted in figure 13.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 13**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ac903b318ace39264e89d2603faf1a38.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'As a result, a fourth weak model will be created to predict the residual of
+    the third weak model which equals to 1\. The desired output will be equal to the
+    predictions of all weak models as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**desired = predicted1 + predicted2(residual1) + predicted3(residual2) + predicted4(residual3)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the fourth weak model predicted its target correctly (i.e. residual3), then
+    the desired output of 15 has been reached using a total of four weak models as
+    shown in figure 14.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 14**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d9c8542828319814727f44251f3379df.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This is the core idea of the gradient boosting algorithm. Use the residuals
+    of the previous model as the target of the next model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Summary of GB**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As a summary, gradient boosting starts with a weak model for making predictions.
+    The target of such a model is the desired output of the problem. After training
+    such model, its residuals are calculated. If the residuals are not equal to zero,
+    then another weak model is created to fix the weakness of the previous one. But
+    the target of such new model will not be the desired outputs but the residuals
+    of the previous model. That is if the desired output for a given sample is T,
+    then the target of the first model is T. After training it, there might be a residual
+    of R for such sample. The new model to be created will have its target set to
+    R, not T. This is because the new model fills the gaps of the previous models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Gradient boosting is similar to lifting a heavy metal a number of stairs by
+    multiple weak persons. No one of the weak persons is able to lift the metal all
+    stairs. Each one can only lift it a single step. The first weak person will lift
+    the metal one step and get tired after that. Another weak person will lift the
+    metal another step, and so on until getting the metal lifted all stairs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** received his B.Sc.
+    degree with excellent with honors in information technology from the Faculty of
+    Computers and Information (FCI), Menoufia University, Egypt, in July 2015\. For
+    being ranked first in his faculty, he was recommended to work as a teaching assistant
+    in one of the Egyptian institutes in 2015 and then in 2016 to work as a teaching
+    assistant and a researcher in his faculty. His current research interests include
+    deep learning, machine learning, artificial intelligence, digital signal processing,
+    and computer vision.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.linkedin.com/pulse/intuitive-ensemble-learning-guide-gradient-boosting-study-ahmed-gad/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Introduction to Python Ensembles](/2018/02/introduction-python-ensembles.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building Convolutional Neural Network using NumPy from Scratch](/2018/04/building-convolutional-neural-network-numpy-scratch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning to Improve Machine Learning Results](/2017/09/ensemble-learning-improve-machine-learning-results.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[The Ultimate Guide to Mastering Seasonality and Boosting Business Results](https://www.kdnuggets.com/2023/08/media-mix-modeling-ultimate-guide-mastering-seasonality-boosting-business-results.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Support Vector Machines: An Intuitive Approach](https://www.kdnuggets.com/2022/08/support-vector-machines-intuitive-approach.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[An Intuitive Explanation of Collaborative Filtering](https://www.kdnuggets.com/2022/09/intuitive-explanation-collaborative-filtering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Boosting Machine Learning Algorithms: An Overview](https://www.kdnuggets.com/2022/07/boosting-machine-learning-algorithms-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning with Examples](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

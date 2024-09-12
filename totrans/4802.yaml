@@ -1,0 +1,226 @@
+- en: Optimization 101 for Data Scientists
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/08/optimization-101-data-scientists.html](https://www.kdnuggets.com/2018/08/optimization-101-data-scientists.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Rajiv Shah](http://www.rajivshah.com), data scientist at [DataRobot](http://www.datarobot.com)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a data scientist, you spend a lot of your time helping to make better decisions.
+    You build predictive models to provide improved insights. You might be predicting
+    whether an image is a cat or dog, store sales for the next month, or the likelihood
+    if a part will fail. In this post, I won't help you with making better predictions,
+    but instead how to make the **best** decision.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The post strives to give you some background on optimization. It starts with
+    a simply toy example show you the math behind an optimization calculation. After
+    that, this post tackles a more sophisticated optimization problem, trying to pick
+    the best team for fantasy football. The FanDuel image below is a very common sort
+    of game that is widely played (ask your in-laws). The optimization strategies
+    in this post were shown to consistently win! Along the way, I will show a few
+    code snippets and provide links to working code in R, Python, and Julia. And if
+    you do win money, feel free to share it :)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Fanduels](../Images/da3fa2f25676f9dd216a3d2c0cac051b.png)A simple example,
+    which I found [online](http://melaniewingard.weebly.com/uploads/3/7/5/5/37554047/09-30-16_section_3.5_linear_programming_and_optimization_continued.pdf),
+    starts with a carpenter making bookcases in two sizes, large and small. It takes
+    6 hours to make a large bookcase and 2 hours to make a small one. The profit on
+    a large bookcase is $50, and the profit on a small bookcase is $20\. The carpenter
+    can spend only 24 hours per week making bookcases and must make at least 2 of
+    each size per week. Your job as a data scientist is to help your carpenter maximize
+    her revenue.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Your initial inclination could be that since the large bookcase is the most
+    profitable, why not focus on them. In that case, you would profit (2*$20) + (3*$50)
+    which is $190\. That is a pretty good baseline, but not the best possible answer.
+    It is time to get the algebra out and create equations that define the problem.
+    First, we start with the constraints:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Our objective function which we are trying to maximize is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'If we do the algebra by hand, we can convert out constraints to **y <= 12 -
+    3x**. Then we graph all the constraints and find the feasible area for the portion
+    of making small and large bookcases:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Constraints Graph](../Images/364062ff33be713048bd27679c430db0.png)The next
+    step is figuring out the optimal point. Using the corner-point principle of linear
+    programming, the maximum and minimum values of the objective function each occur
+    at one of the vertices of the feasible region. Looking here, the maximum values
+    (2,6) is when we make 2 large bookcases and 6 small bookcases, which results in
+    an income of $220.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a very simple toy problem, typically there are many more constraints
+    and the objective functions can get complicated. There are lots of classic problems
+    in optimization such as routing algorithms to find the best path, scheduling algorithms
+    to optimize staffing, or trying to find the best way to allocate a group of people
+    to set of tasks. As a data scientist, you need to dissect what you are trying
+    to maximize and identify the constraints in the form of equations. Once you can
+    do this, we can hand this over to a computer to solve. So lets next walk through
+    a bit more complicated example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Fantasy Football**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Over the last few years, fantasy sports have increasingly grown in popularity.
+    One game is to pick a set of football players to make the best possible team.
+    Each football player has a price and there is a salary cap limit. The challenge
+    is to optimize your team to produce the highest total points while staying within
+    a salary cap limit. This type of optimization problem is known as the knapsack
+    problem or an assignment problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Simple Linear Optimization**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's start by loading a dataset and taking a look at the raw data. You need
+    to know both the salary as well as the expected points. Most football fans spend
+    a lot of time trying to predict how many points a player will score. If you want
+    to build a model for predicting the expected performance of a player, take a look
+    at [Ben's blog post](https://blog.datarobot.com/using-datarobot-to-predict-nba-player-performance).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Qbs](../Images/58575d72ba557b3ecdbd2bd30e663e56.png)The goal here is to build
+    the best possible team for a salary cap, let''s say $50,000\. A team consists
+    of a quarterback, running backs, wide receivers, tight ends, and a defense. We
+    can use the **lpSolve** package in R to set up the problem. Here is a code snippet
+    for setting up the constraints.![Constraints](../Images/4d1082b7bd4530234523c826d561cf4c.png)If
+    you parse through this, you can see we have set a minimum and maximum for QB of
+    1 player. However, for the RB, we have allowed a maximum of 3 and a minimum of
+    2\. This is not unusual in fantasy football, be because there is a role called
+    a flex player, which anyone can choose, and they can either be a RB, WR, or TE.
+    Now let''s look at the code for the objective:![Objective](../Images/7913d28ee0602c264f202c50a796c80f.png)The
+    code shows that we have set up the problem to maximize the objective of the most
+    points and include our constraints. Once the code is run, it outputs an optimal
+    team! I forked an existing repo and have made the R code and dataset are [available
+    here.](https://github.com/rajshah4/linear-optimization-fantasy-football) A more
+    sophisticated [python](https://github.com/mattbrondum/Fantasy-Football-Optimization)
+    optimization repo is also available.![Final team](../Images/9e8a00d3aa378bd94a8c3c6ad5ecea69.png)**Advanced
+    steps**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So far, we have built a very simple optimization to solve the problem. There
+    are several other strategies to further improve the optimizer. First, the variance
+    of our teams can be increased by using a strategy called **stacking**, where you
+    make sure your QB and WR are on the same team. A simple optimization is a constraint
+    for selecting a QB and WR from the same team. Another strategy is using an **overlap**
+    constraint for selecting multiple lineups. An overlap constraint ensures a diversity
+    of players and not the same set of players for each optimized team. This strategy
+    is particularly effective when submitting multiple lineups. You can read more
+    about these [strategies here](https://arxiv.org/pdf/1604.01455v2.pdf) and run
+    the code in Julia [here](https://github.com/dscotthunter/Fantasy-Hockey-IP-Code).
+    A code snippet of the stacking constraint (this is for a hockey optimization):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Goalie](../Images/c6d033abab2642ac8348c61292ffa8de.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Last year, at Sloan sports conference, [Haugh and Sighal](http://www.sloansportsconference.com/wp-content/uploads/2018/02/1001.pdf)
+    , presented a paper with additional optimization constraints. They include what
+    an **opponent’s  team** is likely to look like. After all, there are some players
+    that are much more popular. Using this knowledge, you can predict the likely teams
+    that will oppose your team. The approach here used Dirichlet regressions for modeling
+    players. The result was a much-improved optimizer that was capable of consistently
+    winning!
+  prefs: []
+  type: TYPE_NORMAL
+- en: I hope this post has shown you how optimization strategies can help you find
+    the best possible solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio**: [Rajiv Shah](http://www.rajivshah.com) is a data scientist at [DataRobot](http://www.datarobot.com),
+    where he works with customers to make and implement predictions. Previously, Rajiv
+    has been part of data science teams at Caterpillar and State Farm. He enjoys data
+    science and spends time mentoring data scientists, speaking at events, and having
+    fun with blog posts. He has a Ph.D. from the University of Illinois at Urbana
+    Champaign.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Why Germany did not defeat Brazil in the final, or Data Science lessons from
+    the World Cup](https://www.kdnuggets.com/2018/07/worldcup-data-science-lessons.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Guerrilla Guide to Machine Learning with Julia](https://www.kdnuggets.com/2017/07/guerrilla-guide-machine-learning-julia.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Only Numpy: Implementing GANs and Adam Optimizer using Numpy](https://www.kdnuggets.com/2018/08/only-numpy-implementing-gans-adam-optimizer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Linear Programming 101 for Data Scientists](https://www.kdnuggets.com/2023/02/linear-programming-101-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Pipeline Optimization with TPOT](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Neural Network Optimization with AIMET](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Gradient Descent: The Mountain Trekker''s Guide to Optimization with…](https://www.kdnuggets.com/gradient-descent-the-mountain-trekker-guide-to-optimization-with-mathematics)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

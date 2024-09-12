@@ -1,0 +1,389 @@
+- en: 'How To Write Better SQL Queries: The Definitive Guide – Part 2'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-2.html/2](https://www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-2.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Time Complexity & The Big O
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that you have examined the query plan briefly, you can start digging deeper
+    and think about the performance in more formal terms with the help of the computational
+    complexity theory. This area in theoretical computer science that focuses on classifying
+    computational problems according to their difficulty, among other things; These
+    computational problems can be algorithms, but also queries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For queries, however, you’re not necessarily classifying them according to their
+    difficulty, but rather to the time it takes to run it and get some results back.
+    This specifically is referred to as time complexity and to articulate or measure
+    this type of complexity, you can use the big O notation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With the big O notation, you express the runtime in terms of how quickly it
+    grows relative to the input, as the input gets arbitrarily large. The big O notation
+    excludes coefficients and lower order terms so that you can focus on the important
+    part of your query’s running time: its rate of growth. When expressed this way,
+    dropping coefficients and lower order terms, the time complexity is said to be
+    described asymptotically. That means that the input size goes to infinity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In database language, the complexity measures how much longer it takes a query
+    to run as the size of the data tables, and therefore the database, increase.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note** that the size of your database doesn’t only increase as more data
+    is stored in tables, but also the mere fact that indexes are present in the database
+    also plays a role in the size.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Estimating Time Complexity of Your Query Plan
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As you have seen before, the execution plan defines, among other things, what
+    algorithm is used for each operation, which makes that every query execution time
+    can be logically expressed as a function of the table size involved in the query
+    plan, which is referred to as a complexity function. In other words, you can use
+    the big O notation and your execution plan to estimate the query complexity and
+    the performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the following subsections, you’ll get a general idea about the four types
+    of time complexities and you’ll see some examples of how queries’ time complexity
+    can vary according to the context in which you run it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Hint: the indexes are part of the story here!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note**, though, that there are different types of indexes, different execution
+    plans and different implementations for different databases to consider, so that
+    the time complexities listed below are very general and can vary according to
+    your specific setting.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'O(1): Constant Time'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: An algorithm is said to run in constant time if it requires the same amount
+    of time regardless of the input size. When you’re talking about a query, it will
+    run in constant time if it requires the same amount of time regardless of the
+    table size.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'These type of queries are not really common, yet here’s one such an example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The time complexity is constant because you select one arbitrary row from the
+    table. Therefore, the length of the time should be independent of the size of
+    the table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Linear Time: O(n)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'An algorithm is said to run in linear time if its time execution is directly
+    proportional to the input size, i.e. time grows linearly as input size increases.
+    For databases, this means that the time execution would be directly proportional
+    to the table size: as the number of rows in the table grows, the time for the
+    query grows.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'An example is a query with a `WHERE` clause on a un-indexed column: a full
+    table scan or `Seq Scan` will be needed, which will result in a time complexity
+    of O(n). This means that every row needs to be read to find the one with the right
+    ID. You don’t have a limit at all, so every row does need to be read, even if
+    the first row matches the condition.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Consider also the following example of a query that would have a complexity
+    of O(n) if there’s no index on `i_id`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The previous also means that other queries, such as count queries like `COUNT(*)
+    FROM TABLE;` will have a time complexity of *O(n)*, because a full table scan
+    will be required unless the total row count is stored for the table. Then, the
+    complexity would be more like *O(1)*.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Closely related to the linear execution time is the execution time for execution
+    plans that have joins in them. Here are some examples:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A hash join has an expected complexity O(M + N). The classic hash join algorithm
+    for an inner join of two tables first prepares a hash table of the smaller table.
+    The hash table entries consist of the join attribute and its row. The hash table
+    is accessed by applying a hash function to the join attribute. Once the hash table
+    is built, the larger table is scanned and the relevant rows from the smaller table
+    are found by looking in the hash table.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Merge joins generally have a complexity of O(M+N) but it will heavily depend
+    on the indexes on the join columns and, in cases where there is no index, on whether
+    the rows are sorted according to the keys used in the join:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If both tables that are sorted according to the keys that are being used in
+    the join, then the query will have a time complexity of O(M+N).
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If both tables have an index on the joined columns, then the index already maintains
+    those columns in order and there’s no need to sort. The complexity will be O(M
+    + N).
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If neither table has an index on the joined columns, a sort of both tables will
+    need to happen first, so the complexity will look more like O(M log M + N log
+    N).
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If only one of the tables has an index on the joined columns, only the one table
+    that doesn’t have the index will need to be sorted before the merge step can happen,
+    so the complexity will look like O(M + N log N).
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For nested joins, the complexity is generally O(MN). This join is efficient
+    when one or both of the tables are extremely small (for example, smaller than
+    10 records), which is a very common situation when evaluating queries because
+    some subqueries are written to return only one row.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Remember**: a nested join is a join that compares every record in one table
+    against every record in the other.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Logarithmic Time: O(log (n))'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: An algorithm is said to run in logarithmic time if its time execution is proportional
+    to the logarithm of the input size; For queries, this means that they will run
+    if the execution time is proportional to the logarithm of the database size.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This logarithmic time complexity is true for query plans where an `Index Scan` or
+    clustered index scan is performed. A clustered index is an index where the leaf
+    level of the index contains the actual data rows of the table. A clustered is
+    much like any other index: it is defined on one or more columns. These form the
+    index key. The clustering key is then the key columns of a clustered index. A
+    clustered index scan is then basically the operation of your RDBMS reading through
+    for the row or rows from top to bottom in the clustered index.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Consider the following query example, where the there’s an index on `i_id` and
+    which would generally result in a complexity of O(log(n)):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Note** that without the index, the time complexity would have been O(n).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Quadratic Time: O(n^2)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: An algorithm is said to run in logarithmic time if its time execution is proportional
+    to the square of the input size. Once again, for databases this means that the
+    execution time for a query is proportional to the square of the database size.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A possible example of a query with quadratic time complexity is the following
+    one:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The minimum complexity would be O(n log(n)), but the maximum complexity could
+    be O(n^2), based on the index information of the join attributes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To summarize, you can also look at the [following cheat sheet](http://bigocheatsheet.com/) to
+    estimate the performance of queries according to their time complexity and how
+    well they would be performing:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ce348244bdc26be0db975529bbbb7503.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: SQL Tuning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'With the query plan and the time complexity in mind, you can consider tuning
+    your SQL query further. You could start off by paying special attention to the
+    following points:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Replace unnecessary large-table full table scans with index scans;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Make sure that you’re applying the optimal table join order;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Make sure that you’re using the indexes optimally; And
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Cache small-table full table scans.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Taking SQL Further
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Congrats! You have made it to the end of this blog post, which just gave you
+    a small peek at SQL query performance. You hopefully got more insights into anti-patterns,
+    the query optimizer, and the tools you can use to review, estimate and interpret
+    the complexity your query plan. There is, however, much more to discover! If you
+    want to know more, consider reading the book “Database Management Systems”, written
+    by R. Ramakrishnan and J. Gehrke.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally, I don’t want to withhold you this quote from a StackOverflow user:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: “My favorite antipattern is not testing your queries.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'This applies when:'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Your query involves more than one table.
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You think you have an optimal design for a query, but don’t bother to test your
+    assumptions.
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You accept the first query that works, with no clue about whether it’s even
+    close to optimized."
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If you want to get started with SQL, consider taking DataCamp’s [Intro to SQL
+    for Data Science](https://www.datacamp.com/courses/intro-to-sql-for-data-science) course!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Karlijn Willems](https://www.linkedin.com/in/karlijnwillems)** is a
+    data science journalist and writes for the [DataCamp community](https://www.datacamp.com/community/authors/karlijn-willems),
+    focusing on data science education, the latest news and the hottest trends. She
+    holds degrees in Literature and Linguistics and Information Management.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.datacamp.com/community/tutorials/sql-tutorial-query#gs.QQP_Fhg).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering SQL for Data Science](/2016/06/seven-steps-mastering-sql-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Most Underutilized Function in SQL](/2017/03/most-underutilized-function-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Doing Statistics with SQL](/2016/08/doing-statistics-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[The Definitive Guide To Switching Your Career Into Data Science](https://www.kdnuggets.com/2022/05/definitive-guide-switching-career-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Function Arguments: A Definitive Guide](https://www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Definitive Guide to Solving the Phantom Read in MySQL](https://www.kdnuggets.com/2022/06/definitive-guide-solving-phantom-read-mysql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Step by Step Guide to Reading and Understanding SQL Queries](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Write SQL in Native Python](https://www.kdnuggets.com/2022/02/easy-sql-native-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, December 7: Top 10 Data Science Myths Busted • 4…](https://www.kdnuggets.com/2022/n47.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

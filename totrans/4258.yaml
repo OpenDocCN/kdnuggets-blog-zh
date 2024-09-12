@@ -1,0 +1,358 @@
+- en: Building a Knowledge Graph for Job Search Using BERT
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/06/knowledge-graph-job-search-bert.html](https://www.kdnuggets.com/2021/06/knowledge-graph-job-search-bert.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/), Founder
+    of UBIAI**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b8badc45ee277fc3662f0bddcc1bae93.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Knowledge Graph Network
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Introduction:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: While the NLP field has been growing at an exponential rate for the last two
+    years — thanks to the development of transfer based models — their applications
+    have been limited in scope for the job search field. LinkedIn, the leading company
+    in job search and recruitment, is a good example. While I hold a PhD in Material
+    Science and a Master in Physics, I am receiving job recommendations such as Technical
+    Program Manager at MongoDB and a Go Developer position at Toptal which are both
+    web developing companies that are not relevant to my background. This feeling
+    of irrelevancy is shared by many users and is a cause of big frustration.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![LinkedIn job recommendations](../Images/2cd1dbe1c05318b0f79eaeb68dca6fe5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: LinkedIn job recommendations
+  prefs: []
+  type: TYPE_NORMAL
+- en: Job seekers should have access to the best tools to help them find the perfect
+    match to their profile without wasting time in irrelevant recommendations and
+    manual search...
+  prefs: []
+  type: TYPE_NORMAL
+- en: In general, however, traditional job recommendation systems are based on simple
+    keyword and/or semantic similarity that are usually not well suited to providing
+    good job recommendations since they don’t take into account the interlinks between
+    entities. Furthermore, with the rise of Applicant Tracking Systems (ATS), it is
+    of utmost importance to have field-relevant skills listed on your resume and to
+    uncover which industry skills are becoming more pertinent. For instance, I might
+    have extensive skills in Python programming, but the job description of interest
+    requires knowledge in Django framework, which is essentially based on Python;
+    a simple keyword search will miss that connection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this tutorial, we will build a job recommendation and skill discovery script
+    that will take unstructured text as input, and will then output job recommendations
+    and skill suggestions based on entities such as skills, years of experience, diploma,
+    and major. Building on [my previous article](https://towardsdatascience.com/how-to-train-a-joint-entities-and-relation-extraction-classifier-using-bert-transformer-with-spacy-49eb08d91b5c),
+    we will extract entities and relations from job descriptions using the BERT model
+    and we will attempt to build a knowledge graph from skills and years of experience.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Job analysis pipeline](../Images/415726197a797205a6164805956bccea.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Job analysis pipeline
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to train the NER and relation extraction model, we performed data annotation
+    using the [UBIAI tool](https://ubiai.tools/) and model training on google colab
+    as described in my previous article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Data Extraction:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'For this tutorial, I have collected job descriptions related to software engineering,
+    hardware engineering, and research from 5 major companies: Facebook, Google, Microsoft,
+    IBM, and Intel. Data was stored in a csv file.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to extract the entities and relations from the job descriptions, I
+    created a Named Entity Recognition (NER) and Relation extraction pipeline using
+    previously trained transformer models (for more information, check out [my previous
+    article](https://towardsdatascience.com/how-to-train-a-joint-entities-and-relation-extraction-classifier-using-bert-transformer-with-spacy-49eb08d91b5c)).
+    We will store the extracted entities in a JSON file for further analysis using
+    the code below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Data Exploration:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'After extracting the entities from the job descriptions, we can now start exploring
+    the data. First, I am interested to know the distribution of the required diploma
+    across multiple fields. In the box plot below, we notice few things: the most
+    sought out degree in the software engineering field is a Bachelors, followed by
+    a Masters, and a PhD. For the research field on the other hand, PhD and Masters
+    are more in demand as we would expect. For hardware engineering, the distribution
+    is more homogenous. This might seem very intuitive but it is remarkable that we
+    got this structured data automatically from purely unstructured text with just
+    few lines of code!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Diploma distribution across multiple fields](../Images/c233c77e90d522d1524a9e866f52fe4c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Diploma distribution across multiple fields
+  prefs: []
+  type: TYPE_NORMAL
+- en: I am interested to know which company is looking for PhDs in Physics and Material
+    Science since my background is in these two majors. We see that Google and Intel
+    are leading the search for these types of PhDs. Facebook is looking for more PhDs
+    in computer science and electrical engineering. Note that because of the small
+    sample size of this dataset, this distribution might not be representative of
+    the real distribution. Larger sample sizes will definitely lead to better results,
+    but that’s outside the scope of this tutorial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Diploma major distribution](../Images/30eccf5299671263c48a58deee60a24c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Diploma major distribution
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Since this is a tutorial about NLP, lets look at which diploma and majors are
+    required when “NLP” or “natural language processing” is mentioned:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Companies mentioning NLP, are seeking candidates with a Masters or PhD in computer
+    science, engineering, machine learning or statistics. On the other hand, there
+    is less demand for a Bachelor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Knowledge Graph
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With the skills and years of experience extracted, we can now build a knowledge
+    graph where the source nodes are job description IDs, target nodes are the skills,
+    and the strength of the connection is the year of experience. We use the python
+    library pyvis and networkx to build our graph; we link job descriptions to their
+    extracted skills using the years of experience as weights.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s visualize our knowledge graph! For the sake of clarity, I have only displayed
+    a few jobs in the knowledge graph. For this test, I am using a sample resume in
+    the machine learning field.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The red nodes are the sources which can be job descriptions or a resume. The
+    blue nodes are the skills. The color and label of the connection represent the
+    years of experience required (yellow = 1–5 years; red = > 5 years; dashed = no
+    experience). In the example below, Python is linking the resume to 4 jobs, all
+    of which require 2 years of experience. For the machine learning connection, no
+    experience is required. We can now begin to glean valuable insights from our unstructured
+    texts!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Knowledge graph](../Images/646fdb09c0a785af19f9f10a6ee20433.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Knowledge graph
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s find out which jobs have the highest connections to the resume:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now let’s look at the knowledge graph network containing few of the highest
+    matches:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Knowledge graph of the highest job matches](../Images/b5d038c12ee5ce9e84a29185daeda012.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Knowledge graph of the highest job matches
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice the importance of co-reference resolution in this case (which has not
+    been done in this tutorial). The skills machine-learning, machine learning models
+    and machine learning were counted as different skills but they are obviously the
+    same skill and should be counted as one. This can make our matching algorithm
+    inaccurate and highlights the importance of co-reference resolution when doing
+    NER extraction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That being said, with the knowledge graph we can directly see that both GO5957370192396288
+    and GO5859529717907456 are a good match since they don’t require extensive experience
+    whereas FB189313482022978 requires 2–4 years of experience in various skills.
+    Et voila!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Skills Augmentation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now that we have identified the connections between the resume and job descriptions,
+    the goal is to discover relevant skills that might not be in the resume but are
+    important to the field we are analyzing. For this purpose, we filter the job descriptions
+    by field — namely software engineering, hardware engineering, and research. Next,
+    we query all neighboring jobs connected to resume skills and for each job found,
+    extract the associated skills. For clear visual rendering, I have plotted word
+    frequency as a word cloud. Let’s look at the field of software engineering:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Word cloud of skills in software engineering](../Images/9859251b68539b8ee48889c9505ed923.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Word cloud of skills in software engineering
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice that Spark, SOLR, and PLSQL are mentioned frequently in jobs having connection
+    to the resume and might be important to the field.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'On the other hand, for hardware engineering:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Word cloud of skills in hardware engineering](../Images/54de32cd7b2816072358fcba61a0c33e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Word cloud of skills in hardware engineering
+  prefs: []
+  type: TYPE_NORMAL
+- en: Design, RF, and RFIC are definite needs here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And for the research field:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Word cloud of skills in research](../Images/4caba12ad0c177ee94149a7ef22f92bc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Word cloud of skills in research
+  prefs: []
+  type: TYPE_NORMAL
+- en: Popular skills include machine learning, signal processing, tensorflow, PyTorch,
+    model analyzing , etc…
+  prefs: []
+  type: TYPE_NORMAL
+- en: With just few lines of code, we have transformed unstructured data into structured
+    information and extracted valuable insights!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Conclusion:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With the recent breakthroughs in the NLP field — whether it be named entity
+    recognition, relation classification, question answering, or text classification
+    — it is becoming a necessity for companies to apply NLP in their businesses to
+    remain competitive.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this tutorial, we have built a job recommendation and skill discovery app
+    using NER and relation extraction model (using BERT transformer). We achieved
+    this by building a knowledge graph linking jobs and skills together.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Knowledge graphs combined with NLP provide a powerful tool for data mining and
+    discovery. Please feel free to share your use case demonstrating how NLP can be
+    applied to different fields. If you have any questions or want to create custom
+    models for your specific case, leave a note below or send us an email at admin@ubiai.tools.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)**
+    is the Founder of UBIAI, an annotation tool for NLP applications, and holds a
+    PhD in Physics.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/mlearning-ai/building-a-knowledge-graph-for-job-search-using-bert-transformer-8677c8b3a2e7).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to Fine-Tune BERT Transformer with spaCy 3](/2021/06/fine-tune-bert-transformer-spacy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Create and Deploy a Simple Sentiment Analysis App via API](/2021/06/create-deploy-sentiment-analysis-app-api.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Apply Transformers to Any Length of Text](/2021/04/apply-transformers-any-length-text.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[8 Innovative BERT Knowledge Distillation Papers That Have Changed…](https://www.kdnuggets.com/2022/09/eight-innovative-bert-knowledge-distillation-papers-changed-nlp-landscape.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Elevate Your Search Engine Skills with Uplimit''s Search with ML Course!](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Extractive Summarization with LLM using BERT](https://www.kdnuggets.com/extractive-summarization-with-llm-using-bert)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

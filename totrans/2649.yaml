@@ -1,0 +1,299 @@
+- en: How to easily check if your Machine Learning model is fair?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/12/machine-learning-model-fair.html](https://www.kdnuggets.com/2020/12/machine-learning-model-fair.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Jakub Wiśniewski](https://medium.com/@jakwisn/about), data science student
+    and research software engineer in MI2 DataLab**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/07aa44b896c7106722a8f78b792a2734.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Photo by [Eric Krull](https://unsplash.com/@ekrull?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/robot?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We live in a world that is getting more divided each day. In some parts of the
+    world, the differences and inequalities between races, ethnicities, and sometimes
+    sexes are aggravating. The data we use for modeling is, in the major part, a reflection
+    of the world it derives from. And the world can be biased, so data and therefore
+    the model will likely reflect that. **We propose a way in which ML engineers can
+    easily check if their model is biased. **Our fairness tool now works only with
+    classification models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Case study
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To showcase the abilities of the [dalex fairness module](https://dalex.drwhy.ai/),
+    we will be using the well-known [German Credit Data dataset](https://archive.ics.uci.edu/ml/datasets/statlog+(german+credit+data) to
+    assign risk for each credit-seeker. This simple task may require using an interpretable *decision
+    tree classifier*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once we have *dx.Explainer* we need to execute the method *model_fairness()*,
+    so it can calculate all necessary metrics among the subgroups from the *protected *vector,
+    which is an array or a list with sensitive attributes denoting sex, race, nationality,
+    etc., for each observation (individual). Apart from that, we will need to point
+    which subgroup (so which unique element of *protected*) is the most privileged,
+    and it can be done through *privileged *parameter, which in our case will be older
+    males.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This object has many attributes, and we will not go through each and every one
+    of them. A more detailed overview can be found in this [tutorial](http://dalex.drwhy.ai/python-dalex-fairness.html).
+    Instead, we will focus on one method and two plots.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So is our model biased or not?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'This question is simple, but because of the nature of bias, the response will
+    be: it depends. But this method measuring bias from different perspectives so
+    that no bias model can go through. To check fairness, one has to use *fairness_check()* method.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The following chunk is the console output from the code above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The bias was spotted in metric FPR, which is the False Positive Rate. The output
+    above suggests that the model cannot be **automatically **approved (like said
+    in the output above). So it is up to the user to decide. In my opinion, it is
+    not a fair model. Lower FPR means that the privileged subgroup is getting False
+    Positives more frequently than the unprivileged.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**More on *fairness_check()***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We get the information about bias, the conclusion, and metrics ratio raw DataFrame.
+    There are metrics TPR (True Positive Rate), ACC (Accuracy), PPV (Positive Predictive
+    Value), FPR (False Positive Rate), STP(Statistical parity). The metrics are derived
+    from a [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) for
+    each unprivileged subgroup and then divided by metric values based on the privileged
+    subgroup. There are 3 types of possible conclusions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: A DA true fair model would not exceed any metric, but when true values (target)
+    are dependent on sensitive attributes, then things get complicated and out of
+    scope for this blog. In short, some metrics will not be equal, but they will not
+    necessarily exceed the user's threshold. If you want to know more, then I strongly
+    suggest checking out the [Fairness and machine learning](https://fairmlbook.org/) book,
+    especially chapter 2.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**But one could ask why our model is not fair, on what grounds are we deciding?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The answer to this question is tricky, but the method of judging fairness seems
+    to be the best so far. Generally, the score for each subgroup should be close
+    to the score of the privileged subgroup. To put it in a more mathematical perspective,
+    the ratios between scores of privileged and unprivileged metrics should be close
+    to 1\. The closer it is to 1, the more fair the model is. But to relax this criterion
+    a little bit, it can be written more thoughtfully:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8523856f1d4ade2e4315ef6a078b2435.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Where the *epsilon *is a value between 0 and 1, it should be a minimum acceptable
+    value of the ratio. By default, it is 0.8, which adheres to the [four-fifths](https://www.hirevue.com/blog/hiring/what-is-adverse-impact-and-why-measuring-it-matters) rule
+    (80% rule) often looked at in hiring. It is hard to find a non-arbitrary boundary
+    between a fair and discriminative difference in metrics, and checking if the ratios
+    of the metrics are exactly 1 would be pointless because what if the ratio is 0.99?
+    This is why we decided to choose 0.8 as our default *epsilon *as it is the only
+    known value to be a tangible threshold for the acceptable amount of discrimination.
+    Of course, a user may change this value to their needs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bias can also be plotted
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are two bias detection plots available (however, there are more ways to
+    visualize bias in the package)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*fairness_check*— visualization of *fairness_check()* method'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*metric_scores*— visualization of *metric_scores *attribute which is raw scores
+    of metrics.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The types just need to be passed to the *type *parameter of the *plot *method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a3d7b3d913e90fd5fcc699c59f2e32dc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*fobject.plot()*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The plot above shows similar things to the fairness check output. Metric names
+    are changed to more standard fairness equivalents, but the formulas point to which
+    metrics we are referring to. Looking at the plot above, intuition is simple—if
+    the bars are reaching the red fields, then it means the metrics exceed the epsilon-based
+    range. The length of the bar is equivalent to the |1-M| where M is the unprivileged
+    Metric score divided by the privileged Metric score (so just like in fairness
+    check before).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e78a5b2ff0822266d6fbf6d17f99caa4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*fobject.plot(type=’metric_scores’)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *Metric Scores* plot paired with the *Fairness Check *give good intuition
+    about metrics and their ratios. Here the points are raw (not divided) metric scores.
+    The vertical line symbolizes a privileged metric score. The closer to that line,
+    the better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Multiple models** can be put into one plot so they can be easily compared
+    with each other. Let’s add some models and visualize the *metric_scores:*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/80899c58548296cd6f94338a1999c120.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Output of the code above.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let’s check the plot based on *fairness_check:*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/592c232f71c2dbd4549e88530a7ddd96.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We Can see that *RandomForestClassifier* is within the green zone, and therefore
+    in terms of these metrics, it is fair. On the other hand, the *LogisticRegression* is
+    reaching red zones in three metrics and, therefore, cannot be called fair.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Every plot is interactive, made with the python visualization package *plotly*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The fairness module in *dalex *is a unified and accessible way to ensure that
+    the models are fair. There are other ways to visualize bias in models, be sure
+    to check it out! In the future, bias mitigation methods will be added. There is
+    a long term plan to add support for *individual fairness* and *fairness in regression*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Be sure to check it out. You can install dalex with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'If you want to learn more about fairness, the I really recommend:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Blog about an [update in the R package](https://medium.com/responsibleml/what-is-new-in-fairmodels-a1ec6ff44d79)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Tutorial about the usage of [dalex fairness module](http://dalex.drwhy.ai/python-dalex-fairness.html)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ebook covering various topics of fairness](https://fairmlbook.org/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/responsibleml/how-to-easily-check-if-your-ml-model-is-fair-2c173419ae4c).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Overcoming the Racial Bias in AI](https://www.kdnuggets.com/2020/10/overcoming-racial-bias-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Ethics of AI](https://www.kdnuggets.com/2020/10/ethics-ai-qa-farzindar.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Navigate the road to Responsible AI](https://www.kdnuggets.com/2020/12/navigate-road-responsible-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Explore LLMs Easily on Your Laptop with openplayground](https://www.kdnuggets.com/2023/04/explore-llms-easily-laptop-openplayground.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Easily Integrate LLMs into Your Scikit-learn Workflow with Scikit-LLM](https://www.kdnuggets.com/easily-integrate-llms-into-your-scikit-learn-workflow-with-scikit-llm)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Scrape Images Easily from Websites in A No-Coding Way](https://www.kdnuggets.com/2022/06/octoparse-scrape-images-easily-websites-nocoding-way.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Leveraging AI to Design Fair and Equitable EV Charging Grids](https://www.kdnuggets.com/leveraging-ai-to-design-fair-and-equitable-ev-charging-grids)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 New Prompt Engineering Resources to Check Out](https://www.kdnuggets.com/3-new-prompt-engineering-resources)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Segment Anything Model: Foundation Model for Image Segmentation](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

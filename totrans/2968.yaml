@@ -1,0 +1,303 @@
+- en: Interpolation in Autoencoders via an Adversarial Regularizer
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/03/interpolation-autoencoders-adversarial-regularizer.html](https://www.kdnuggets.com/2019/03/interpolation-autoencoders-adversarial-regularizer.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By Taraneh Khazaei (Edited by Mahsa Rahimi & Serena McDonnell)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**A**dversarially **C**onstrained **A**utoencoder **I**nterpolation (ACAI; [Berthelot
+    et al., 2018](https://arxiv.org/abs/1807.07543)) is a regularization procedure
+    that uses an adversarial strategy to create high-quality interpolations of the
+    learned representations in autoencoders. This paper makes three main contributions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Proposed ACAI to generate semantically meaningful autoencoder interpolations.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Developed a synthetic benchmark to quantify the quality of interpolations.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Examined the performance of ACAI learned representations on downstream tasks.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: AISC recently presented and discussed this paper led by Mahsa Rahimi. The details
+    of the event can be found on the [AISC website](https://aisc.a-i.science/events/2019-02-07/),
+    and the full presentation can be viewed on [YouTube](https://www.youtube.com/watch?v=FdeHlC4QiqA&t=2871s).
+    Here, we present an overview of the paper, along with the discussion points raised
+    at the AISC session.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Interpolations in Autoencoders**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Autoencoders are a class of neural nets that attempt to output an approximate
+    reconstruction of an input xx with minimal information loss. As an autoencoder
+    is trained, it learns to encode the input data into a latent space, capturing
+    all the information needed to reconstruct the output. An autoencoder consists
+    of two parts, an encoder and a decoder, which can be described as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The encoder receives the input data ![Equation](../Images/08a1766df96545e32fa0502988b63a06.png)
+    and generates a latent code ![Equation](../Images/452c25829bc32c9923984ddf8eb43fc5.png).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The decoder receives the latent code ![Equation](../Images/ef86bd01daa526febbb16ae8422410f5.png) and
+    attempts to reconstruct the input data as ![Equation](../Images/2fa129febcdcc7e0604d61daab66c3d8.png).
+    The latent space is often of a lower dimension than the data (*m < n*).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/797a16d1970e8ea5e7caa7b8fd29343e.png)*The architecture of a standard
+    autoencoder*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Standard autoencoders focus on the reconstruction of the input x and barely
+    learn the probabilistic features of the underlying dataset. As a result, they
+    have very limited generative power. One approach that allows standard autoencoders
+    to generate synthetic data is to facilitate interpolation by mixing the latent
+    codes. However, the latent space learned by a regular autoencoder might not be
+    continuous and may have large gaps between clusters of latent codes. Simply mixing
+    the previously learned latent codes may result in interpolations that fall into
+    regions that the decoder has never seen before, which may result in the creation
+    of unrealistic data points. To mitigate this, the interpolation process needs
+    to be integrated into the autoencoder architecture and its training, allowing
+    the autoencoder to learn the underlying data manifold and to create meaningful
+    interpolations. By borrowing ideas from Generative Adversarial Networks ([Goodfellow
+    et al., 2014](https://papers.nips.cc/paper/5423-generative-adversarial-nets)),
+    ACAI effectively integrates the interpolation process into the autoencoder architecture. [Berthelot
+    et al. (2018](https://arxiv.org/abs/1807.07543)) propose a method that can create
+    high-quality interpolations that are both indistinguishable from real data, and
+    are a semantically meaningful combination of the inputs. We explain the ACAI approach
+    in detail below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![alt_text](../Images/70ed176d4a1a36cad0b2397f356e39d9.png)*A visualization
+    of the latent codes on the [MNIST](http://yann.lecun.com/exdb/mnist/) dataset
+    showing the discontinuity of the latent space.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*To read more on the continuity of the latent space you can read this [blog
+    post](https://towardsdatascience.com/intuitively-understanding-variational-autoencoders-1bfe67eb5daf).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Adversarially Constrained Autoencoder Interpolation (ACAI)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To interpolate two inputs ![Equation](../Images/b1c048a322cdd946dd237ec663a89591.png) and ![Equation](../Images/74990a2016e1ee9d8bbda70beada905e.png),
+    ACAI performs the following steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using two encoders, ![Equation](../Images/0ed13cb405f614a66e1f5d11a70fe343.png) and ![Equation](../Images/1796c6ec8e88657dc036f34bea536f8d.png)​ are
+    first encoded into the corresponding latent codes ![Equation](../Images/b46e009f9938818ff1afc4d7a6fd45da.png)​ and ![Equation](../Images/58026cfc461745fdde6a8f91a04d58dc.png)​ where ![Equation](../Images/8cf3e7845f3984dc469a57c79175e1b5.png) and ![Equation](../Images/11803a4badb4bcc13a9cf3d15e9ec1c7.png).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The two latent codes are then interpolated via a convex combination ![Equation](../Images/d07e9dffa1acc972c7c4d01927acefc1.png)
+    ​for some ![Equation](../Images/39a12604c9cccd8b5ab9e2e4c42b13af.png).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The convex combination ![Equation](../Images/96e5cf2e6344fbc505bf80fe17c4865d.png) is
+    then passed through a decoder to generate the interpolated data point, where ![Equation](../Images/27347138f718c2bdbe33ba946c7b53d6.png).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Finally, to ensure that interpolations are realistic, the decoded interpolation ![Equation](../Images/543b8d9d742e7610cfb57c36c2719dea.png)​ is
+    passed through a critic network. The goal of the critic network is to predict
+    the mixing coefficient α from the interpolated data point ![Equation](../Images/543b8d9d742e7610cfb57c36c2719dea.png)​.
+    The autoencoder is then trained to fool the critic network into thinking that ![Equation](../Images/43e99db5ec6f22a289330e918c378936.png) is
+    always 0, meaning that it attempts to fool the critic network into thinking the
+    interpolated data is actually non-interpolated.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Fooling the critic network is achieved by adding a term to the autoencoder''s
+    loss function. In ACAI, the encoders and the decoder are trained to minimize the
+    following loss function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/d547dc6d6a4588c7763d028028ef4cdf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'where λ is a scalar hyperparameter that can be used to control the weight of
+    the regularization term on the right, and ![Equation](../Images/f8743f0ceed8189e9ae6c840b7674466.png) is
+    the critic network parametrized by ![Equation](../Images/60af46ed1b6f6b52591c7c61f7e33396.png).
+    The first term of the loss function attempts to reconstruct the input, and the
+    second term tries to make the critic network output 0 at all times. The critic
+    network is trained to optimize the following loss function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/b670d0df49217a7b220d7629c47ef497.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: where ![Equation](../Images/3ed6fc16fb7ad00b363f9819c310dc0b.png) is a scalar
+    hyperparameter. The first term of the loss function attempts to recover ![Equation](../Images/43e99db5ec6f22a289330e918c378936.png).
+    The second term is a regularization term that is not crucial for creating high-quality
+    interpolations but helps with the adversarial learning process in two ways. First,
+    it enforces the critic to consistently output 0 for non-interpolated data; and
+    second, it ensures that the critic is exposed to realistic data even when the
+    autoencoder reconstructions are of poor quality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When the algorithm converges, the interpolated points are expected to be indistinguishable
+    from real data. Empirically, the authors show that the learned interpolations
+    are semantically smooth interpolations of the two inputs ![Equation](../Images/0ed13cb405f614a66e1f5d11a70fe343.png)​ and ![Equation](../Images/1796c6ec8e88657dc036f34bea536f8d.png)​.
+    Evaluation results on a set of clustering and classification tasks show that the
+    ACAI learned representations are more effective on downstream tasks than non-ACAI
+    learned representations. Given the improved performance on the downstream tasks,
+    the authors note that there may be a connection between interpolation and representation
+    learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![alt_text](../Images/6ff82a3742c8abff8495756ea7e843df.png)*The ACAI Architecture*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Benchmark Development**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The concept of semantic similarity is ambiguous, ill-defined, and difficult
+    to quantify. Another contribution of this paper is to define a benchmark to quantitatively
+    evaluate the quality of interpolations. Their benchmark is focused on the task
+    of autoencoding ![Equation](../Images/9d3aa90567a62dd42e196dc3205ef57b.png) greyscale
+    images of lines. The lines are 1616-pixels long, beginning from the center of
+    the image and extending outward at an angle ![Equation](../Images/2d7dacbe34efdfa4efa9ea4e17489a21.png),
+    with a single line per image. Using this data, a valid interpolation between ![Equation](../Images/0ed13cb405f614a66e1f5d11a70fe343.png)​ and ![Equation](../Images/1796c6ec8e88657dc036f34bea536f8d.png)​ is
+    an image of a line that smoothly and linearly adjusts ![Equation](../Images/1f3886f59db4be974a13b9d9bafda729.png) from
+    the angle of the line in ![Equation](../Images/0ed13cb405f614a66e1f5d11a70fe343.png)​ to
+    the angle of the line in ![Equation](../Images/1796c6ec8e88657dc036f34bea536f8d.png)​ while
+    traversing the shortest path. Using these images, the following two criteria can
+    be easily calculated and are used to evaluate the interpolation capability of
+    different autoencoders:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Mean distance: measures the average distance between the interpolated points
+    and real data points.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Smoothness: measures whether the angles of the interpolated lines follow a
+    linear trajectory between the start and endpoint.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: An ideal interpolation would achieve 0 for both scores. An example of an ideal
+    interpolation between \piπ and 00 is shown below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![alt_text](../Images/1e9a50982e67d482bb91e7917e096a3f.png)*A perfect interpolation
+    from ![Equation](../Images/bd8436edea644bce071fabf769a0fbf7.png) to 0*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using this benchmark, it is shown that ACAI substantially outperforms common
+    autoencoder models (e.g., denoising and variational autoencoders) for the task
+    of generating realistic and semantically meaningful interpolations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**AISC Discussions**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the AISC session, a set of [discussion points](https://youtu.be/Tu3FqCD7-BY?t=3513) were
+    raised, which can be used as pointers for future work and experimentation on autoencoder
+    interpolation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, the classification and clustering evaluations of ACAI representations
+    are conducted on three different datasets: [MNIST](http://yann.lecun.com/exdb/mnist/), [SVHN](http://ufldl.stanford.edu/housenumbers/),
+    and [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html). While the results
+    for both clustering and classification tasks are reasonable for the two simpler
+    datasets (i.e., MNIST and SVHN), the classification improvement on CIFAR is not
+    nearly as significant, and the CIFAR clustering outcome is poor for all of the
+    autoencoders, including ACAI. AISC brought up the idea of extending ACAI to be
+    more effective on complicated datasets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Second, the ACAI paper primarily focuses on computer vision tasks and even defines
+    high-quality interpolations based on visual attributes of images. It would be
+    extremely valuable to explore how ACAI and the benchmark could be extended to
+    benefit non-visual tasks such as text interpolation. Finally, in this paper, the
+    regularization procedure is applied to a vanilla autoencoder. It would be worth
+    exploring the effects of using a similar regularization mechanism on other types
+    of autoencoders. In particular, the possibility of improving the generative power
+    of [variational autoencoders using the same idea was discussed in the AISC session](https://youtu.be/Tu3FqCD7-BY?t=3574).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Additional Resources:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The datasets they evaluated ACAI on are [MNIST](http://yann.lecun.com/exdb/mnist/), [SVHN](http://ufldl.stanford.edu/housenumbers/),
+    and [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html), all of which are
+    publicly available.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An implementation of ACAI in Tensoflow is available on [GitHub](https://github.com/brain-research/acai).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Original](https://aisc.a-i.science/blog/2019/acai-interpolation-autoencoders-adversarial-regularizer/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[GANs Need Some Attention, Too](/2019/03/gans-need-some-attention-too.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Variational Autoencoders Explained in Detail](/2018/11/variational-autoencoders-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Breaking neural networks with adversarial attacks](/2019/03/breaking-neural-networks-adversarial-attacks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Deal with Missing Data Using Interpolation Techniques in Pandas](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is Adversarial Machine Learning?](https://www.kdnuggets.com/2022/03/adversarial-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,269 @@
+- en: 'Text Data Preprocessing: A Walkthrough in Python'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/03/text-data-preprocessing-walkthrough-python.html](https://www.kdnuggets.com/2018/03/text-data-preprocessing-walkthrough-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In a pair of previous posts, we first discussed a [framework for approaching
+    textual data science tasks](/2017/11/framework-approaching-textual-data-tasks.html),
+    and followed that up with a discussion on a [general approach to preprocessing
+    text data](/2017/12/general-approach-preprocessing-text-data.html). This post
+    will serve as a practical walkthrough of a text data preprocessing task using
+    some common Python tools.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Data preprocessing](../Images/ba19ee311c44299a9d508a3af2321675.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Preprocessing, in the context of the textual data science framework.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our goal is to go from what we will describe as a chunk of text (not to be confused
+    with text chunking), a lengthy, unprocessed single string, and end up with a list
+    (or several lists) of cleaned tokens that would be useful for further text mining
+    and/or natural language processing tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First we start with our imports.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Beyond the standard Python libraries, we are also using the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[NLTK](http://www.nltk.org/) - The Natural Language ToolKit is one of the best-known
+    and most-used NLP libraries in the Python ecosystem, useful for all sorts of tasks
+    from tokenization, to stemming, to part of speech tagging, and beyond'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) - BeautifulSoup
+    is a useful library for extracting data from HTML and XML documents'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Inflect](https://pypi.python.org/pypi/inflect) - This is a simple library
+    for accomplishing the natural language related tasks of generating plurals, singular
+    nouns, ordinals, and indefinite articles, and (of most interest to us) converting
+    numbers to words'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Contractions](https://github.com/kootenpv/contractions) - Another simple library,
+    solely for expanding contractions'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If you have NLTK installed, yet require the download of its any additional data,
+    [see here](https://www.nltk.org/data.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We need some sample text. We'll start with something very small and artificial
+    in order to easily see the results of what we are doing step by step.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A toy dataset indeed, but make no mistake; the steps we are taking here to preprocessing
+    this data are fully transferable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Preprocessing framework](../Images/ea02e5c68f0307f085eecd2b417016f5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The text data preprocessing framework.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Noise Removal
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let's loosely define **noise removal** as text-specific normalization tasks
+    which often take place prior to tokenization. I would argue that, while the other
+    2 major steps of the preprocessing framework (tokenization and normalization)
+    are basically task-independent, noise removal is much more task-specific.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Sample noise removal tasks could include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: removing text file headers, footers
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: removing HTML, XML, etc. markup and metadata
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: extracting valuable data from other formats, such as JSON
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As you can imagine, the boundary between noise removal and data collection and
+    assembly, on the one hand, is a fuzzy one, while the line between noise removal
+    and normalization is blurred on the other. Given its close relationship with specific
+    texts and their collection and assembly, many denoising tasks, such as parsing
+    a JSON structure, would obviously need to be implemented prior to tokenization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our data preprocessing pipeline, we will strip away HTML markup with the
+    help of the BeautifulSoup library, and use regular expressions to remove open
+    and close double brackets and anything in between them (we assume this is necessary
+    based on our sample text).
+  prefs: []
+  type: TYPE_NORMAL
+- en: While not mandatory to do at this stage prior to tokenization (you'll find that
+    this statement is the norm for the relatively flexible ordering of text data preprocessing
+    tasks), replacing contractions with their expansions can be beneficial at this
+    point, since our word tokenizer will split words like "didn't" into "did" and
+    "n't." It's not impossible to remedy this tokenization at a later stage, but doing
+    so prior makes it easier and more straightforward.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And here is the result of de-noising on our sample text.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Tokenization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Tokenization is a step which splits longer strings of text into smaller pieces,
+    or tokens. Larger chunks of text can be tokenized into sentences, sentences can
+    be tokenized into words, etc. Further processing is generally performed after
+    a piece of text has been appropriately tokenized. Tokenization is also referred
+    to as text segmentation or lexical analysis. Sometimes segmentation is used to
+    refer to the breakdown of a large chunk of text into pieces larger than words
+    (e.g. paragraphs or sentences), while tokenization is reserved for the breakdown
+    process which results exclusively in words.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For our task, we will tokenize our sample text into a list of words. This is
+    done using NTLK's `word_tokenize()` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And here are our word tokens:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Normalization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Normalization generally refers to a series of related tasks meant to put all
+    text on a level playing field: converting all text to the same case (upper or
+    lower), removing punctuation, converting numbers to their word equivalents, and
+    so on. Normalization puts all words on equal footing, and allows processing to
+    proceed uniformly.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Normalizing text can mean performing a number of tasks, but for our framework
+    we will approach normalization in 3 distinct steps: (1) stemming, (2) lemmatization,
+    and (3) everything else. For specifics on what these distinct steps may be, [see
+    this post](/2017/12/general-approach-preprocessing-text-data.html).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Remember, after tokenization, we are no longer working at a text level, but
+    now at a word level. Our normalization functions, shown below, reflect this. Function
+    names and comments should provide the necessary insight into what each does.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After calling the normalization function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Calling the stemming and lemming functions are done as below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This results in a return of 2 new lists: one of stemmed tokens, and another
+    of lemmatized tokens with respect to verbs. Depending on your upcoming NLP task
+    or preference, one of these may be more appropriate than the other. See here for
+    a [discussion on lemmatization vs. stemming](https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: And there you have a walkthrough of a simple text data preprocessing process
+    using Python on a sample piece of text. I would encourage you to perform these
+    tasks on some additional texts to verify the results. We will use this same process
+    to clean the text data for our next task, in which we will undertake some actual
+    NLP task, as opposed to spending time preparing our data for such an actual task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A General Approach to Preprocessing Text Data](/2017/12/general-approach-preprocessing-text-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Framework for Approaching Textual Data Science Tasks](/2017/11/framework-approaching-textual-data-tasks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing Key Terms, Explained](/2017/02/natural-language-processing-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

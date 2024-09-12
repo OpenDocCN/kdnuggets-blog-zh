@@ -1,0 +1,275 @@
+- en: 'Managing Machine Learning Workflows with Scikit-learn Pipelines Part 2: Integrating
+    Grid Search'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-2.html](https://www.kdnuggets.com/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-2.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Pipeline](../Images/f6e4b8b675c6c9d128270e42ce22de20.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'In our [last post](/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html)
+    we looked at Scikit-learn pipelines as a method for simplifying machine learning
+    workflows. Designed as a manageable way to apply a series of data transformations
+    followed by the application of an estimator, pipelines were noted as being a simple
+    tool useful mostly for:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Convenience in creating a coherent and easy-to-understand workflow
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Enforcing workflow implementation and the desired order of step applications
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reproducibility
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Value in persistence of entire pipeline objects (goes to reproducibility and
+    convenience)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another simple yet powerful technique we can pair with pipelines to improve
+    performance is **grid search**, which attempts to optimize model hyperparameter
+    combinations. Exhaustive grid search -- as opposed to alternate hyperparameter
+    combination optimization schemes such as randomized optimization -- tests and
+    compares all possible combinations of desired hyperparameter values, an exercise
+    in exponential growth. The trade-off in what could end up being exorbitant run
+    times would (hopefully) be the best optimized model possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'From the [official documentation](http://scikit-learn.org/stable/modules/grid_search.html):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The grid search provided by GridSearchCV exhaustively generates candidates
+    from a grid of parameter values specified with the param_grid parameter. For instance,
+    the following param_grid:'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs:
+  - PREF_BQ
+  type: TYPE_PRE
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'specifies that two grids should be explored: one with a linear kernel and C
+    values in [1, 10, 100, 1000], and the second one with an RBF kernel, and the cross-product
+    of C values ranging in [1, 10, 100, 1000] and gamma values in [0.001, 0.0001].'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Let's first recall the code from the previous post, and run a modified excerpt.
+    Since we will be using a single pipeline for this exercise, we have no need for
+    a full set as in the last post. We will use the iris dataset once again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's bring this very simple pipeline to life.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And the model''s returned accuracy and hyperparameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note, once again, that we are applying feature scaling, dimensionality reduction
+    (using PCA to project data onto 2 dimensional space), and finally applying our
+    final estimator.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let's add grid search to our pipeline, with the hopes of optimizing our
+    model's hyperparameters and improving its accuracy. Are the default model parameters
+    the best bet? Let's find out.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Since our model uses a decision tree estimator, we will use grid search to
+    optimize the following hyperparameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**criterion** - This is the function used to evaluate the quality of the split;
+    we will use both options available in Scikit-learn: Gini impurity and information
+    gain (entropy)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**min_samples_leaf** - This is the minimum number of samples required for a
+    valid leaf node; we will use the integer range 1 to 5'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**max_depth** - The is the maximum depth of the tree; we will use the integer
+    range 1 to 5'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**min_samples_split** - This is the minimum number of samples required in order
+    to split a non-leaf node; we will use the integer range 1 to 5'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**presort** - This indicates whether or not to presort the data in order to
+    speed up the location of best splits during fitting; this does not have any effect
+    on the resulting model accuracy (only on training times), but has been included
+    for the benefit of using a True/False hyperparameter in our grid search model
+    (fun, right?!?)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Here is the code to use exhaustive grid search in our adapted pipeline example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Of importance, note that our pipeline is the estimator in the grid search object,
+    and that it is at the level of the grid search object which we fit our model(s).
+    Also note that our grid parameter space is defined in a dictionary and then fed
+    to our grid search object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'What else is is happening during the grid search object''s creation? In order
+    to score our resulting models (there are a potential 2 * 5 * 5 * 5 * 2 = 500),
+    we will direct our grid search to evaluate them by their accuracy on the test
+    set. We also have denoted a cross-validation splitting strategy of 10 folds. Note
+    the following about GridSearchCV:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The parameters of the estimator used to apply these methods are optimized by
+    cross-validated grid-search over a parameter grid.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Finally, of course, our model is fit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You will want to check out the official [GridSearchCV module documentation](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html)
+    for information on all of the other useful configurations, including, but not
+    limited to, parallelism.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's try it out.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And here''s the result:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: The script reports back the highest attained accuracy (0.925), which is clearly
+    better than the default 0.867, for not much additional computation, at least not
+    in absolute terms, given our toy dataset. Our exhaustive approach, which included
+    500 models in this case, could have had much more serious computational impacts
+    on a formidable dataset, as you could imagine.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The script also reports back the optimal hyperparameter configuration for the
+    model with the highest accuracy, which can be seen above. This difference in our
+    simple example should be evidence enough to suggest that Scikit-learn defaults
+    should not be followed blindly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This all seems overly simple. And it is. Scikit-learn is almost too easy to
+    use, once you know what options are available. Our use of toy datasets is not
+    making it seem any more complex either.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But look at it this way: pipelines and grid search go together like chocolate
+    and peanut butter, and now that we have looked at the basics of how they work
+    together, we can take on some more difficult challenges. More complex data? Sure.
+    Compare a variety of estimators and numerous parameter search spaces for each
+    in order to find the "true" most optimized model possible? Why not? Mix a combination
+    of pipeline transformations into the mix for fun and profit? Yasss!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Join us next time when we will push beyond the basics of configuration and the
+    toy datasets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Managing Machine Learning Workflows with Scikit-learn Pipelines Part 1: A
+    Gentle Introduction](/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Data Preparation with Python](/2017/06/7-steps-mastering-data-preparation-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Workflows in Python from Scratch Part 1: Data Preparation](/2017/05/machine-learning-workflows-python-scratch-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Integrating ChatGPT Into Data Science Workflows: Tips and Best Practices](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Elevate Your Search Engine Skills with Uplimit''s Search with ML Course!](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Cutting Down Implementation Time by Integrating Jupyter and KNIME](https://www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Data Analytics: Integrating GitHub Copilot in Databricks](https://www.kdnuggets.com/optimizing-data-analytics-integrating-github-copilot-in-databricks)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

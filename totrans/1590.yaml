@@ -1,0 +1,385 @@
+- en: My secret sauce to be in top 2% of a Kaggle competition
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/11/secret-sauce-top-kaggle-competition.html](https://www.kdnuggets.com/2018/11/secret-sauce-top-kaggle-competition.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Abhay Pawar](https://www.linkedin.com/in/abhayspawar/), Instacart**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Competing in kaggle competitions is fun and addictive! And over the last couple
+    of years, I developed some standard ways to explore features and build better
+    machine learning models. These simple, but powerful techniques helped me get a
+    top 2% rank in [Instacart Market Basket Analysis](https://www.kaggle.com/c/instacart-market-basket-analysis) competition
+    and I use them outside of kaggle as well. So, let’s get right into it!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the most important aspects of building any supervised learning model
+    on numeric data is to understand the features well. Looking at partial dependence
+    plots of a model helps you understand how the model’s output changes with any
+    feature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/07c9b6de56eb09c892fd33c2bfcca060.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**[source](http://scikit-learn.org/stable/auto_examples/ensemble/plot_partial_dependence.html)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But, the problem with these plots is that they are created using a trained
+    model. If we could create these plots from train data directly, it could help
+    us understand the underlying data better. In fact, it can help you with all the
+    following things:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature understanding
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Identifying noisy features (**the most interesting part!**)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Feature engineering
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Feature importance
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Feature debugging
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Leakage detection and understanding
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Model monitoring
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In order to make it easily accessible, I decided to put these techniques into
+    a python package [featexp](https://github.com/abhayspawar/featexp) and in this
+    article, we’ll see how it can be used for feature exploration. We’ll use the application
+    dataset from [Home Credit Default Risk](https://www.kaggle.com/c/home-credit-default-risk/) competition
+    on Kaggle. The task of the competition is to predict defaulters using the data
+    given about them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Feature Understanding**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![](../Images/ea624a802c8f342df8575ad80e83098b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Scatter plot of feature vs. target doesn’t help**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If dependent variable (target) is binary, scatter plots don’t work because all
+    points lie either at 0 or 1\. For continuous target, too many data points make
+    it difficult to understand the target vs. feature trend. Featexp creates better
+    plots which help with this problem. Let’s try it out!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4f370ec9c6877ce1c858a553c8cd5f6a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Feature vs. target plot of DAYS_BIRTH (age)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Featexp creates equal population bins (X-axis) of a numeric feature. It then
+    calculates target’s mean in each bin and plots it in the left-hand side plot above.
+    In our case, target’s mean is nothing but default rate. The plot tells us that
+    customers with high negative values for DAYS_BIRTH (higher age) have lower default
+    rates. This makes sense since younger people are usually more likely to default.
+    These plots help us understand what the feature is telling about customers and
+    how it will affect the model. The plot on the right shows number of customers
+    in each bin.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Identifying noisy features**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Noisy features lead to overfitting and identifying them isn’t easy. In featexp,
+    you can pass a test set and compare feature trends in train/test to identify noisy
+    ones. This test set is not the actual test set. Its your local test set/validation
+    set for which you know target.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/351dde6ae8bc3e0a98dacd8ce5f3f4e2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Comparison of feature trends in train and test**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Featexp calculates two metrics to display on these plots which help with gauging
+    noisiness:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Trend correlation**(seen in test plot): If a feature doesn’t hold same trend
+    w.r.t. target across train and evaluation sets, it can lead to overfitting. This
+    happens because the model is learning something which is not applicable in test
+    data. Trend correlation helps understand how similar train/test trends are and
+    mean target values for bins in train & test are used to calculate it. Feature
+    above has 99% correlation. Doesn’t seem noisy!'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Trend changes**: Sudden and repeated changes in trend direction could imply
+    noisiness. But, such trend change can also happen because that bin has a very
+    different population in terms of other features and hence, its default rate can’t
+    really be compared with other bins.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Feature below is not holding the same trend and hence, has a low trend correlation
+    of 85%. These two metrics can be used to drop noisy features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/83ad33aa0de9f5870280829884569f80.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Example of noisy feature
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dropping low trend-correlation features works well when there are a lot of features
+    and they are correlated with each other. It leads to less overfitting and other
+    correlated features avoid information loss. It’s also important to not drop too
+    many important features as it might lead to a drop in performance. **Also, you
+    can’t identify these noisy features using feature importance because they could
+    be fairly important and still be very noisy!**
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using test data from a different time period works better because then you would
+    be making sure if feature trend holds over time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***get_trend_stats()***function in featexp returns a dataframe with trend correlation
+    and changes for each feature.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d3de62250fd43f434c6f248afa3dda3f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Dataframe returned by get_trend_stats()**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s actually try dropping features with low trend-correlation in our data
+    and see how results improve.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2e5ecf19c6de1dc2da562afc954c2ea4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**AUC for different feature selections using trend-correlation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**We can see that higher the trend-correlation threshold to drop features,
+    higher is the leaderboard (LB) AUC.** Not dropping important features further
+    improves LB AUC to 0.74\. It’s also interesting and concerning that test AUC doesn’t
+    change as much as LB AUC. Getting your validation strategy right such that local
+    test AUC follows LB AUC is also important. Whole code can be found in [featexp_demo](https://github.com/abhayspawar/featexp/blob/master/featexp_demo.ipynb) notebook.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Feature Engineering**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'The insights that you get by looking at these plots help with creating better
+    features. Just having a better understanding of data can lead to better feature
+    engineering. But, in addition to this, it can also help you in improving the existing
+    features. Let’s look at another feature EXT_SOURCE_1:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/92d9594de93911d7327e963c608c014d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Feature vs. target plot of EXT_SOURCE_1**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Customers having a high value of EXT_SOURCE_1 have low default rates. But, the
+    first bin (~8% default rate) isn’t following the feature trend (goes up and then
+    down). It has only negative values around -99.985 and a large population. This
+    probably implies that these are special values and hence, don’t follow the feature
+    trend. Fortunately, non-linear models won’t have a problem learning this relationship.
+    But, for linear models like logistic regression, such special values and nulls
+    (which will be shown as a separate bin) should be imputed with a value from a
+    bin with similar default rate instead of simply imputing with feature mean.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Feature importance**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Featexp also helps you with gauging feature importance. DAYS_BIRTH and EXT_SOURCE_1
+    both have a good trend. But, population for EXT_SOURCE_1 is concentrated in special
+    value bin implying that feature has the same information for most of the customers
+    and hence, can’t differentiate them well. This tells that it might not be as important
+    as DAYS_BIRTH. Based on XGBoost model’s feature importance, DAYS_BIRTH is actually
+    more important than EXT_SOURCE_1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Feature debugging**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Looking at Featexp’s plots helps you in capturing bugs in complex feature engineering
+    codes by doing these two things:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/427300b93d98d42509f93614b0ea11f4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Zero variation features show only a single bin**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Checking if the feature’s population distribution looks right. I’ve personally
+    encountered extreme cases like above numerous times due to minor bugs.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Always hypothesize what the feature trend will look like before looking at these
+    plots. Feature trend not looking like what you expected might hint towards some
+    problem. **And frankly, this process of hypothesizing trends makes building ML
+    models much more fun!**
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Leakage Detection**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Data leakage from target to features leads to overfitting. Leaky features have
+    high feature importance. But, understanding why leakage is happening in a feature
+    is difficult. Looking at featexp plots can help you with that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The feature below has 0% default rate in ‘Nulls’ bin and 100% in all other bins.
+    Clearly, this is an extreme case of leakage. This feature has a value only when
+    the customer has defaulted. Based on what the feature is, this could be because
+    of a bug or the feature is actually populated only for defaulters (in which case
+    it should be dropped). **Knowing what the problem is with leaky feature leads
+    to quicker debugging.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/253799c3124bc342cdd142d4037a4b0d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Understanding why a feature is leaky**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Model Monitoring**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Since featexp calculates trend correlation between two data sets, it can be
+    easily used for model monitoring. Every time the model is re-trained, the new
+    train data can be compared with a well-tested train data (typically train data
+    from the first time you built the model). Trend correlation can help you monitor
+    if anything has changed in feature w.r.t. its relationship with target.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Doing these simple things have always helped me in building better models in
+    real life and on kaggle. With featexp it takes 15 minutes to look at these plots
+    and it’s definitely worth it as you won’t be flying blind after that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio**: [Abhay Pawar](https://www.linkedin.com/in/abhayspawar/) currently
+    works as a Senior Machine Learning Engineer at Instacart, in their Search & Discovery
+    team. He works on large scale machine learning problems which help Instacart in
+    improving the quality of their service.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/my-secret-sauce-to-be-in-top-2-of-a-kaggle-competition-57cff0677d3c).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Resources:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[on-line and web-based: Analytics, Data Mining, Data Science, Machine Learning
+    education](https://www.kdnuggets.com/education/online.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Software for Analytics, Data Science, Data Mining, and Machine Learning](https://www.kdnuggets.com/software/index.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How many data scientists are there and is there a shortage?](https://www.kdnuggets.com/2018/09/how-many-data-scientists-are-there.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[An Introduction to Deep Learning for Tabular Data](https://www.kdnuggets.com/2018/05/introduction-deep-learning-tabular-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[To Kaggle Or Not](https://www.kdnuggets.com/2018/05/to-kaggle-or-not.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Getting Started with LLMOps: The Secret Sauce Behind Seamless Interactions](https://www.kdnuggets.com/getting-started-with-llmops-the-secret-sauce-behind-seamless-interactions)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GPT-4: 8 Models in One; The Secret is Out](https://www.kdnuggets.com/2023/08/gpt4-8-models-one-secret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[HuggingGPT: The Secret Weapon to Solve Complex AI Tasks](https://www.kdnuggets.com/2023/05/hugginggpt-secret-weapon-solve-complex-ai-tasks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 4 tricks for competing on Kaggle and why you should start](https://www.kdnuggets.com/2022/05/packt-top-4-tricks-competing-kaggle-start.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 Kaggle Machine Learning Projects to Become Data Scientist in 2024](https://www.kdnuggets.com/top-10-kaggle-machine-learning-projects-to-become-data-scientist-in-2024)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Most Comprehensive List of Kaggle Solutions and Ideas](https://www.kdnuggets.com/2022/11/comprehensive-list-kaggle-solutions-ideas.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

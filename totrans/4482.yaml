@@ -1,0 +1,662 @@
+- en: Getting Started with Spectral Clustering
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/05/getting-started-spectral-clustering.html](https://www.kdnuggets.com/2020/05/getting-started-spectral-clustering.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Dr. Juan Camilo Orduz](https://juanitorduz.github.io/), Mathematician
+    & Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this post I want to explore the ideas behind [spectral clustering](https://en.wikipedia.org/wiki/Spectral_clustering).
+    I do not intend to develop the theory. Instead, I will unravel a practical example
+    to illustrate and motivate the intuition behind each step of the spectral clustering
+    algorithm. I particularly recommend two references:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For an introduction/overview on the theory, see the lecture notes [A Tutorial
+    on Spectral Clustering](http://www.tml.cs.uni-tuebingen.de/team/luxburg/publications/Luxburg07_tutorial.pdf) by [Prof. Dr. Ulrike
+    von Luxburg](http://www.tml.cs.uni-tuebingen.de/team/luxburg/index.php).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For a concrete application of this clustering method you can see the PyData’s
+    talk: [Extracting relevant Metrics with Spectral Clustering](https://www.youtube.com/watch?v=3heWpR6dC8k) by
+    Dr. Evelyn Trautmann.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prepare Notebook
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Generate Sample Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let us generate some sample data. As we will see, spectral clustering is very
+    effective for non-convex clusters. In this example, we consider concentric circles:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let us plot some examples to see how the parameters affect the data structure
+    and clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/c8894108718ff5a45081a704ad65bf04.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The first two plots show 33 clear clusters. For the last one the cluster structure
+    is less clear.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spectral Clustering Algorithm
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Even though we are not going to give all the theoretical details, we are still
+    going to motivate the logic behind the spectral clustering algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Graph Laplacian
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'One of the key concepts of spectral clustering is the [graph Laplacian](https://en.wikipedia.org/wiki/Laplacian_matrix).
+    Let us describe its construction¹:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us assume we are given a data set of points
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/628675573c23169f3faa55b59ce2e594.png).'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: To this data set *X* we associate a (weighted) graph *G* which encodes how close
+    the data points are. Concretely,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The nodes of *G* are given by each data point
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/db373d731ded926a6199712cd8295a29.png).'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Two nodes ![Equation](../Images/b1af7e2fbfa7601511b5f4b136868e55.png) and ![Equation](../Images/b1af7e2fbfa7601511b5f4b136868e55.png) are
+    connected by an edge if they are *close*. The notion of *closeness* depends on
+    the distance we want to encode. There are two common choices.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: (Euclidean Distance) Given
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/81f088809e21d1638e66b0261198fa0f.png) ![Equation](../Images/584073cbd8da3032d36a754d5eb06ae5.png) and ![Equation](../Images/e555ff9b12a949daf21c9f32002fae9f.png) are
+    joint by and edge if ![Equation](../Images/da6f736c1fb8e5463247e2198341bbea.png).
+    For some applications an edge might have a weight of the form ![Equation](../Images/eb417e0b46304c6674fcdc1be311a4e2.png).'
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: (Nearest Neighbors) ![Equation](../Images/584073cbd8da3032d36a754d5eb06ae5.png) and ![Equation](../Images/e555ff9b12a949daf21c9f32002fae9f.png) are
+    joint by and edge if ![Equation](../Images/e555ff9b12a949daf21c9f32002fae9f.png) is
+    a k-nearest neighbor of ![Equation](../Images/e555ff9b12a949daf21c9f32002fae9f.png).
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Once the graph is constructed we can consider its associated [adjacency matrix](https://en.wikipedia.org/wiki/Adjacency_matrix) ![Equation](../Images/22fc3a5df44a891d66abe7740209bb57.png) which
+    has a non-zero value in the ![Equation](../Images/d8d974867821c70d67c0b36b26fdb70c.png) entry
+    if ![Equation](../Images/b1af7e2fbfa7601511b5f4b136868e55.png) and ![Equation](../Images/4d4150c9b2a5a30fb031eeec94194cdf.png) are
+    connected by an edge. On the other hand, let ![Equation](../Images/ad0c74480cf07e40fcd0d89db4843165.png) denote [degree
+    matrix](https://en.wikipedia.org/wiki/Degree_matrix) of the graph, which is the
+    diagonal matrix containing the degrees of each node. Then the graph Laplacian ![Equation](../Images/d1acf57e680b35fda6ce8a1d54c1809c.png) is
+    defined as the difference ![Equation](../Images/36bf73978d86cfa96b0e79619e028eed.png).
+    This matrix is symmetric and positive semi-definite, which implies (by the [spectral
+    theorem](https://juanitorduz.github.io/the-spectral-theorem-for-matrices/)) that
+    all its eigenvalues are real and non-negative. [Here](https://juanitorduz.github.io/documents/orduz_pydata2018.pdf) you
+    can find more details on the graph Laplacian’s definition and properties.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Motivation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Why is the graph Laplacian relevant for detecting clusters? Let us start with
+    an easy case on which the data *X* has two clusters ![Equation](../Images/394c56d673b3a944a22dfd064b7b1b2d.png), ![Equation](../Images/58f1efbbcaec2f9ce8b58c6f443c7e4e.png) so
+    spread apart that they correspond to the [connected components](https://en.wikipedia.org/wiki/Component_(graph_theory)) ![Equation](../Images/70daf2b4cc119e119b330d34b719091f.png), ![Equation](../Images/3563c17713e7c121b642fa4d6d6deef8.png) of
+    the associated graph ![Equation](../Images/e3f936b28e6b566fa65492a69c8d19d9.png).
+    Observe, from the pure definition of the graph Laplacian, that we can reorder
+    the points in such a way that the graph Laplacian decomposes as
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/9e1a00f1cbf8f5e76f26beaf7769c9e6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: where ![Equation](../Images/0cbf0ffdfb63ef726502c6218bd180b9.png) and ![Equation](../Images/d0733378c3834ee62c808977704e49e1.png) are
+    the graph Laplacians of ![Equation](../Images/70daf2b4cc119e119b330d34b719091f.png) and ![Equation](../Images/3563c17713e7c121b642fa4d6d6deef8.png) respectively.
+    One can show that the kernel (eigenspace of the zero eigenvalue) has dimension 22 and
+    it is generated by the pair of orthogonal eigenvectors ![Equation](../Images/99ad52ec914e0013f46613d30a94228e.png) and ![Equation](../Images/578eeb5f2e21c06953ba290515bc798f.png).
+    This argument is easy to generalize for many connected components.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In summary, the key property is that
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*The number of connected components of the associated graph can be obtained
+    by calculating the dimension of the kernel of the corresponding graph Laplacian.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: What if the associated graph of the data set is connected but we still want
+    to detect clusters? Well, the approach above remains somehow stable (in certain
+    sense) under small perturbations and one can detect clusters by running k-means
+    on the rows of the matrix of eigenvectors of the small eigenvalues of the graph
+    Laplacian. Again, please refer to the lecture notes suggested above to get the
+    details.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Algorithm
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here are the steps for the (unnormalized) spectral clustering². The step should
+    now sound reasonable based on the discussion above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Input:* Similarity matrix ![Equation](../Images/c0e21230b0f47a4d142b1e63b751b5a3.png) (i.e. choice
+    of distance), number *k* of clusters to construct.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Steps:*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let *W* be the (weighted) adjacency matrix of the corresponding graph.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Compute the (unnormalized) Laplacian *L*.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Compute the first *k* eigenvectors ![Equation](../Images/340e87fdf0f7fa75361e5c8e6a46be1a.png) of *L*.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Let ![Equation](../Images/287f7668a0c2dca27024ea343b202992.png) be the matrix
+    containing the vectors ![Equation](../Images/340e87fdf0f7fa75361e5c8e6a46be1a.png) as
+    columns.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For ![Equation](../Images/95ed894fa54521bff2c75a83dd08aea0.png) let ![Equation](../Images/2c527f8105d1c5242fee69dc31707f29.png) be
+    the vector corresponding to the *i*-th row of *U*.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Cluster the points ![Equation](../Images/2c527f8105d1c5242fee69dc31707f29.png) with
+    the *k*-means algorithm into clusters ![Equation](../Images/477b4ba9f8acdbd306b0f6d105825c18.png)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/9bc86f62df7589ebf0ebd687c7e37f5e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let us reproduce these steps on an example to get a better feeling on why this
+    algorithm works.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Example 1: Well-defined Clusters'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We consider sample data with the parameters defined above with `sigma` = 0.1\.
+    Note from the plots above that in this case the clusters separate well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/f97a4611ce6beab8594af5917ecacced.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: K - Means
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let us begin by running a k-means algorithm to try to get some clusters. We
+    select the number of cluster using the elbow method by considering the inertia
+    (sum of squared distances of samples to their closest cluster center) as a function
+    of the number of clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/b019d8bcb460805d2d043e1ed1dcb3a6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: From this plot we see that ![Equation](../Images/84d09e70b54382413998df3c984dfc85.png) is
+    a good choice. Let us get the clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/e3059a9e5cf46b505f23fa4c429ff056.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The result is not very surprising since *k*-means generates convex clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 1: Compute Graph Laplacian'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this first step we compute the graph Laplacian. We are going to use nearest
+    neighbors to generate the graph to model our data set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/d0d9e2e88c1f3cb09b84bfe253ede257.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Step 2: Compute Spectrum of the Graph Laplacian'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Next, we compute the eigenvalues and eigenvectors of the graph Laplacian.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The eigenvalues are represented by complex numbers. Since the graph Laplacian
+    is a symmetric matrix, we know by the [spectral theorem](https://juanitorduz.github.io/the-spectral-theorem-for-matrices/) that
+    all the eigenvalues must be real. Let us verify this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: We now compute the ![Equation](../Images/ebbe6af529c5d2cb7495acd213460fb7.png)-norms
+    of the eigenvectors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Hence, all of the eigenvectors have length ~ 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We then sort the eigenvalues in ascending order.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let us plot the sorted eigenvalues.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/f67cfa86f3804094977d27bc0e351c09.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Step 3: Find the Small Eigenvalues'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let us zoom in into small eigenvalues.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/afcad65549982c9e2bef1011d50cad25.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: From the plot we see see that the first 33 eigenvalues (sorted) are essentially
+    zero.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: For these small eigenvalues, we consider their corresponding eigenvectors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | v_0 | v_1 | v_2 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 0.031623 | 0.0 | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 0.031623 | 0.0 | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | 0.031623 | 0.0 | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | 0.031623 | 0.0 | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | 0.031623 | 0.0 | 0.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: 'Let us visualize this data frame as a heat map:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/ea0131165b6c60930073f8634160c703.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can clearly see a block structure (representing the connected components).
+    In general, finding zero eigenvalues, or the spectral gap happens, is to restrictive
+    when the clusters are not isolated connected components. Hence, we simply choose
+    the number of clusters we want to find.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 4: Run K-Means Clustering'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To select the number of clusters (which from the plot above we already suspect
+    is ![Equation](../Images/42aaa1975c4182cd2fa1ac18601919e9.png)) we run k-means
+    for various cluster values and plot the associated inertia (sum of squared distances
+    of samples to their closest cluster center).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/c77f9787b4fe915c608ee99ed5748e1e.png)From this plot we see
+    that the optimal number of clusters is ![Equation](../Images/42aaa1975c4182cd2fa1ac18601919e9.png).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE24]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/7ed923e9d74d2a7f774a2643e7021446.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Step 5: Assign Cluster Tag'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Finally we add the cluster tag to each point.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE25]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/864ee35d3fb1cfc6b0d007936166eb3e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note that via spectral clustering we can get non-convex clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To wrap up the algorithm steps we summarize them in a function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE26]'
+  prefs: []
+  type: TYPE_PRE
+- en: Example 2
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let us consider the data which has more noise:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3 Clusters
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE27]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/fc7734aa4b32d1d89239b44fd816fcaf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 2 Clusters
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE28]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/c30b2867ebc3f8be68cfd44b96cefd9f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Example 3
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For the last data set, we essentially find the same as we would with k-means.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE29]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/e238deb3594f39f8d89fc3515a6cf9f6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: SpectralClustering (Scikit-Learn)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As expected, [scikit-learn](https://scikit-learn.org/stable/) already has a [spectral
+    clustering implementation](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.SpectralClustering.html).
+    Let us compare with the results above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Example 2 (Revisited)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE30]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/a42093418da0e5f4e1143431af8f8640.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Example 3 (Revisited)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE31]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/b9b745d9dd22b0ff3eb7568bb6d20cef.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Final Remark
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In concrete applications is sometimes hard to evaluate which clustering algorithm
+    to choose. I often prefer to do some feature engineering (from intuition/domain
+    knowledge) and proceed, if possible, with k-means. For the example above we see
+    a rotationally symmetric data set, which suggest to use the radius as a new feature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE32]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let us plot the radius feature (it is one-dimensional but we project it to the
+    (diagonal) line x=yx=y).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE33]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/89ccb4ff837b01003f2969aeed5544cb.png)Then, we can just run
+    k-means.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE34]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/bc7398233baa7d80bd3c690a174d3e2d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE35]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/d19bc17d0ca6564929915d30c216ba3b.png)Finally, we visualize
+    the original data with the corresponding clusters.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE36]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/e131f8312c09746af8345d37cb6e2c60.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Laplacian Eigenmaps for Dimensionality Reduction and Data Representation](http://web.cse.ohio-state.edu/~belkin.8/papers/LEM_NC_03.pdf)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[A Tutorial on Spectral Clustering](http://www.tml.cs.uni-tuebingen.de/team/luxburg/publications/Luxburg07_tutorial.pdf)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Bio: [Dr. Juan Camilo Orduz](https://juanitorduz.github.io/)** ([@juanitorduz](https://twitter.com/juanitorduz))
+    in a Berlin based mathematician & data scientist.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://juanitorduz.github.io/spectral_clustering/). Reposted with
+    permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[The 5 Clustering Algorithms Data Scientists Need to Know](/2018/06/5-clustering-algorithms-data-scientists-need-know.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Clustering Key Terms, Explained](/2016/10/clustering-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Iterative Initial Centroid Search via Sampling for k-Means Clustering](/2018/09/iterative-initial-centroid-search-sampling-k-means-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Clustering Unleashed: Understanding K-Means Clustering](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Clustering in Python with PyCaret](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Choosing the Right Clustering Algorithm for Your Dataset](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DBSCAN Clustering Algorithm in Machine Learning](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is K-Means Clustering and How Does its Algorithm Work?](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

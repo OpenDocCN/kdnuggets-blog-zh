@@ -1,0 +1,813 @@
+- en: 10 New Things I Learnt from fast.ai Course V3
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/06/things-learnt-fastai-course.html](https://www.kdnuggets.com/2019/06/things-learnt-fastai-course.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Raimi Bin Karim](https://www.linkedin.com/in/raimibkarim/), AI Singapore**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![fast ai version three](../Images/1af1367ed8151657b506321ff250b94b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Everyone’s talking about the **fast.ai** Massive Open Online Course (MOOC) so
+    I decided to have a go at their 2019 deep learning course [Practical Deep Learning
+    for Coders, v3](https://course.fast.ai/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’ve always known some deep learning concepts/ideas (I’ve been in this field
+    for about a year now, dealing mostly with computer vision), but never really understood
+    some intuitions or explanations. I also understand that [Jeremy Howard](https://medium.com/@jeremyphoward),
+    [Rachel Thomas](https://medium.com/@racheltho) and Sylvain Gugger (follow them
+    on Twitter!) are influential people in the deep learning sphere (Jeremy has a
+    lot of experience with Kaggle competitions), so I hope to gain new insights and
+    intuitions, and some tips and tricks for model training from them. I have so much
+    to learn from these folks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So, here I am after 3 weeks of watching the videos (I didn’t do any exercises
+    ????????????????) and writing this post to compartmentalise **the** **new things
+    I learnt** to share with you. There were of course some things I was clueless
+    about so I did a little bit more research on them, and presented them in this
+    article. Towards the end, I also write about how I felt about the course (spoiler
+    alert: I love it ❣️).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Disclaimer** Different people gather different learning points, depending
+    on what deep learning background you have. This post is not recommended for beginners
+    of deep learning and is **not a summary of the course contents.** This post instead
+    assumes you have basic knowledge of neural networks, gradient descent, loss functions,
+    regularisation techniques and generating embeddings. Some experience of the following
+    would be great too: image classification, text classification, semantic segmentation
+    and generative adversarial networks.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I organised the content of my 10 learning points as such: from the theory of
+    neural networks, to architectures, to things related to loss function (learning
+    rate, optimiser), to model training (and regularisation), to the deep learning
+    tasks and finally model interpretability.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Contents: 10 *New* Things I Learnt**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Universal Approximation Theorem
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Neural Networks: Design & Architecture'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Understanding the Loss Landscape
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Gradient Descent Optimisers
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Loss Functions
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Training
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Regularisation
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Tasks
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Model Interpretability
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Appendix: Jeremy Howard on Model Complexity & Regularisation'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**0\. Fast.ai & Transfer Learning**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: “It’s always good to use transfer learning [to train your model] if you can.” — Jeremy Howard
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Fast.ai is synonymous to transfer learning and achieving great results in a
+    short amount of time. The course really lives up to its name. Transfer learning
+    and experimentalism are the two key ideas that Jeremy Howard keeps emphasizing
+    in order to be efficient Machine Learning Practitioners.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. The Universal Approximation Theorem**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![olympics](../Images/c41c363e94ced5fd799553db19e35f09.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Vincentiu Solomon](https://unsplash.com/photos/ln5drpv_ImI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+    on [Unsplash](https://unsplash.com/search/photos/astronomy?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The [universal approximation theorem](https://en.wikipedia.org/wiki/Universal_approximation_theorem)
+    says that you can approximate *any* function with just one hidden layer in a feed-forward
+    neural network. This follows that you can also achieve the same kind of approximation
+    for any neural network that goes deeper.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I mean, wow! I just got to know this like only *now*. This *is* the fundamental
+    of deep learning. If you have stacks of affine functions (or matrix multiplications)
+    and nonlinear functions, the thing you end up with can approximate any function
+    arbitrarily closely. It is the reason behind the race for different combinations
+    of affine functions and nonlinearities. It’s *the* reason why architectures are
+    getting deeper.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2\. Neural Networks: Design & Architecture**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/ac809cf72f7c6582afb9a74143f24e5b.png)In this section, I will
+    highlight the architectures that were in the limelight during the course, and
+    certain designs incorporated into state-of-the-art (SOTA) models like dropout.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ResNet-50** is pretty much SOTA, hence you would generally want to use it
+    for many image-related tasks like image classification and object detection. This
+    architecture is used a lot in the course’s Jupyter notebooks.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**U-net** is pretty much the state of the art for image segmentation tasks.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For convolutional neural networks (CNNs), stride=2 convolutions are common for
+    the first few layers
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: DenseNet uses concatenation as the final operation in the building blocks, whereas
+    ResNet uses the addition operation.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Dropout**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'At random, we throw away *activations*. Intuition: so that no activation can
+    memorise any part of the input. This would help with overfitting wherein some
+    part of the model is basically learning to recognise a particular image rather
+    than a particular feature or item. There’s also **embedding dropout** but that
+    was briefly touched upon.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**Batch normalisation (BatchNorm)**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'BatchNorm does 2 things: (1) normalise activations, and (2) introduce scaling
+    and shifting parameters to each normalised activation. However, it turns out that
+    (1) is not as important as (2). In the paper [How Does Batch Normalization Help
+    Optimization?](https://t.co/mvCCL1DLYF), it was mentioned that “[BatchNorm] reparametrizes
+    the underlying optimization problem to make its landscape significantly smooth[er].”
+    Intuition is this: because it’s now less bumpy, we can use a higher learning rate,
+    hence faster convergence (see Fig. 3.1).'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 3\. Understanding the Loss Landscape
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![olympics](../Images/cb49c9865f179d0113ede9cecd3f92dd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig 3.1: Loss landscapes; left landscape has many bumps, right is a smooth
+    landscape. Source: [https://arxiv.org/abs/1712.09913](https://arxiv.org/abs/1712.09913)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loss functions usually have bumpy and flat areas (if you visualise them in 2D
+    or 3D diagrams). Have a look at Fig. 3.2\. If you end up in a *bumpy* area, that
+    solution will tend not to generalise very well. This is because you found a solution
+    that is good in one place, but it’s not very good in other place. But if you found
+    a solution in a *flat* area, you probably will generalise well. And that’s because
+    you found a solution that is not only good at one spot, but *around* it as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![olympics](../Images/4f58cd8f2bd167281b0e80116e34d9b6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig. 3.2: Loss landscape visualised in a 2D diagram. Screenshot from course.fast.ai.
+    Most of the above paragraph are quoted from Jeremy Howard. Such a simple and beautiful
+    explanation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**4\. Gradient Descent Optimisers**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The new thing I learnt was that the RMSprop optimiser acts as an “accelerator”.
+    Intuition: if your gradient has been small for the past few steps, obviously you
+    need to go a little bit faster now.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: (For an overview of gradient descent optimisers, I have written a post titled
+    [10 Gradient Descent Optimisation Algorithms](https://towardsdatascience.com/10-gradient-descent-optimisation-algorithms-86989510b5e9).)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**5\. Loss Functions**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Learnt 2 new loss functions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pixel mean squared error (**Pixel MSE**). This can be used in semantic segmentation,
+    which was one of the course contents but not covered in this article.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Feature loss ????**. This can be used in image restoration tasks. See Task:
+    Image Generation.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '****6\. Training****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![olympics](../Images/05e65137b181548ba34871b05129bb5d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Victor Freitas](https://www.pexels.com/@victorfreitas?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)
+    from [Pexels](https://www.pexels.com/photo/man-about-to-lift-barbell-2261477/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This section looks into a combination of tweaks for:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Weight initialisation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Hyperparameter setting
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Model fitting/fine-tuning
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Other improvements
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Transfer learning**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model weights can either be (i) randomly initialised, or (ii) transferred from
+    a pre-trained model in a process called **transfer learning**. Transfer learning
+    makes use of pre-trained weights. Pre-trained weights *have useful information*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The usual model fitting for transfer learning works like this: train the weights
+    that are closer to the output and freezes the other layers.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is important that for transfer learning, one uses the **same ‘stats’ that
+    the pre-trained model was applied with**, eg. correcting the image RGB values
+    with a certain bias.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**❤️ 1cycle policy ❤️**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is truly the best thing I learnt in this course. I am guilty of taking
+    learning rates for granted all this while. [Finding a good learning rate](https://sgugger.github.io/how-do-you-find-a-good-learning-rate.html)
+    is important, because we can at the very least provide our gradient descent with
+    an educated guess of a learning rate, rather than some gut feeling value that
+    might just be suboptimal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Jeremy Howard keeps using `lr_finder()` and `fit_one_cycle()` in his code and
+    it bothers me that it works well but I don’t know why it works. So I read the
+    [paper](https://arxiv.org/abs/1803.09820) by Leslie Smith and Sylvain Gugger’s
+    [blog post](https://sgugger.github.io/the-1cycle-policy.html) (recommended readings!),
+    and this is how **1cycle** works:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '1\. Perform an **LR range test**: train the model with (linearly) increasing
+    learning rates from a small number (10e-8) to a high number (1 or 10). Plot a
+    loss vs. learning rate graph like below.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![olympics](../Images/f77e6ed2fb5541b1e84aef537b8992f6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig 6.1: Loss vs learning rate. [Source: https://sgugger.github.io/how-do-you-find-a-good-learning-rate.html](https://sgugger.github.io/how-do-you-find-a-good-learning-rate.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Choose minimum and maximum learning rate. To choose maximum learning rate,
+    look at the graph and pick a learning rate that is high enough and give lower
+    loss values (not too high, not too low). Here you’d pick 10e-2\. Choosing the
+    minimum can be about ten times lower. Here it’d be 10e-3\. For more information
+    how to pick these values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Fit the model by the no. of cycles of **cyclical learning rate**. One cycle
+    is when your training runs through the learning rates from the chosen minimum
+    learning rate to the chosen maximum, then back to the minimum.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![olympics](../Images/1de06e6c524f21514cf9bb05381bbf43.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: https://sgugger.github.io/the-1cycle-policy.html'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So why do we do it this way? The whole idea is the following. In a loss landscape,
+    we want to jump over the bumps (because we don’t want to get stuck at some trench).
+    So increasing the learning rate at the start helps the model to jump out away
+    from that trench, explore the function surface and try to find areas where the
+    loss is low and the region is not bumpy (because if it’s bumpy, it gets kicked
+    out again). This enables us to train the model more quickly. We also tend to end
+    up with much more generalisable solutions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![olympics](../Images/e3ad8465a2b40a016bd70b67d5ebf269.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig. 6.2: Screenshot from course.fast.ai'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Discriminative learning rates for pre-trained models**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Train earlier layer(s) with super low learning rate, and train later layers
+    with higher learning rate. The idea is to not drastically alter the almost-perfect
+    pre-trained weights except for minuscule amounts, and to be more aggressive with
+    teaching the layers near the outputs. Discriminative learning rate was introduced
+    in ULMFiT.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**A magic number divisor**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the 1cycle fitting, to get the minimum learning rate, divide maximum with
+    2.6⁴. This number works for NLP task. See https://course.fast.ai/videos/?lesson=4
+    at 33:30 for more information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Random forest for hyperparameter search**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It was mentioned that random forest can be used to search for hyperparameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Using default values**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When using a library or implementing a paper’s code, use the default hyperparameter
+    values and “don’t be a hero”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Model fine-tuning for pre-trained models**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I notice Jeremy’s style: after training the last layers, unfreeze all layers
+    and train all weights. However, this step is experimental because it may or may
+    not improve accuracy. If it doesn’t, I hope you have saved your last trained weights
+    ????.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Progressive resizing**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is most applicable to image-related tasks. Start training using smaller
+    versions of the images. Then, train using larger versions. To do this, use transfer
+    learning to port the trained weights to a model with the same architecture but
+    accepts different input size. Genius.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Mixed precision training**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A simplified version what this does is to use *single precision* (float32) data
+    type for backpropagation, but *half precision* (float16) for forward pass.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****7\. Regularisation****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![olympics](../Images/641fbc388d9cba403d9d62999f61f2ac.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Rosemary Ketchum](https://www.pexels.com/@ketchumcommunity?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)
+    from [Pexels](https://www.pexels.com/photo/man-wearing-black-officer-uniform-1464230/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use the **magic number 0.1** for weight decay. If you use too much weight decay,
+    your model won’t trained well enough (underfitting). If too little, you’ll tend
+    to overfit but that’s okay because you can stop the training early.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**8\. Tasks**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/9f2ec74d3ae4ab722b3ab6c7a695cbca.png)Note that not all tasks
+    covered in the course are mentioned here.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Multi-label classification
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Language Modelling
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Tabular Data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Collaborative Filtering
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Image Generation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**a) Multi-label classification**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’ve always wondered how you can carry out an [image] classification task whose
+    number of labels can vary, i.e. [multi-label classification](https://en.wikipedia.org/wiki/Multi-label_classification)
+    (not to be confused with [multi-class classification/multinomial classification](https://en.wikipedia.org/wiki/Multiclass_classification)
+    whose sibling is [binary classification](https://en.wikipedia.org/wiki/Binary_classification)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: It was not mentioned how the loss function works for multi-label classification
+    in detail. But after googling, I found out that the labels should be a vector
+    of multi-hot encoding. This means that each element must be applied to a sigmoid
+    function in the final model output. The loss function, which is a function of
+    the output and ground truth, is calculated using binary cross entropy to penalise
+    each element independently.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**b) Language Modelling**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For this language modelling task, I like how ‘language model’ is defined (rephrased):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*A language model is a model that learns to predict the next word of a sentence.
+    In order to do so, you need to know quite a lot of about English and world knowledge.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This means you need to train the model with a lot of data. This is the part
+    where the course introduces **ULMFiT**, a model that can be reused based on pre-training
+    (transfer learning, in other words).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**c) Tabular Data**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is my first encounter of using deep learning for tabular data wi with categorical
+    variables! I didn’t know you could do that? Anyway, what we can do is we can create
+    **embeddings from categorical variables**. I wouldn’t have thought about this
+    if I hadn’t taken this course. A little googling away got me a post by Rachel
+    Thomas on [An Introduction to Deep Learning for Tabular Data](https://www.fast.ai/2018/04/29/categorical-embeddings/)
+    on the use of such embeddings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So then, the question is how do you combine (a) the vector of continuous variables
+    and (b) the embeddings from categorical variables? The course didn’t mention anything
+    about this but this StackOverflow [post](https://datascience.stackexchange.com/questions/29634/how-to-combine-categorical-and-continuous-input-features-for-neural-network-trai)
+    highlights 3 possible ways:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2 models – one for (a), one for (b). Ensemble them.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 1 model, 1 input. This input is a concatenation between (a) and (b).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 1 model, 2 inputs. The 2 inputs are (a) and (b). You concatenate these two in
+    the model itself.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**d) Collaborative Filtering**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Collaborative filtering is when you’re tasked to predict how much a *user* is
+    going to like a certain *item* (in this example, let’s say we’re using movie ratings).
+    The course introduced the use **embedding** to solve this. This is my first encounter
+    of collaborative filtering using deep learning (as if I had much experience with
+    collaborative filtering in the first place)!
+  prefs: []
+  type: TYPE_NORMAL
+- en: The goal is to create an embedding of size *n* for each user and item. To do
+    that, we initialise each embedding vector randomly. Then, for every user rating
+    for a movie, we compare it with the dot product of their respective embeddings,
+    using MSE, for example. Then we perform gradient descent optimisation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**e) Image Generation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here are some things I learnt:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ‘**Crappification**’ for generating data, as and how we want them to be. I just
+    like this term that was coined.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Generative Adversarial Networks (GANs) **hate** **momentum**, so set it to 0.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It’s hard to know how the model is performing by just looking at losses. One
+    must **personally see generated images** from time to time (though the losses
+    towards the end should roughly stay the same for both discriminator and generator).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: One way to improve the quality of the generated image is by including *perceptual
+    loss* (AKA **feature loss** in fast.ai) in our loss function. Feature loss is
+    computed by taking the values from a tensor somewhere in the middle of the network.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '****9\. Model Interpretability****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![olympics](../Images/c3f4183af3e96ee1b642f3a1fbef6edb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Maria Teneva](https://unsplash.com/photos/2Wa88Py0h0A?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+    on [Unsplash](https://unsplash.com/search/photos/understand?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: In one of the lessons, Jeremy Howard showed an **activation** **heat-map** of
+    an image for an image classification task. This heat map displays the pixels that
+    were ‘activated’. This kind of visualisation will help us understand what features
+    or parts of an image resulted in the outputs of the model ????????.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**10\. Appendix: Jeremy Howard on Model Complexity & Regularisation**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![olympics](../Images/a55d90113349f5f117b3a1ddbe9b6113.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [NEW DATA SERVICES](https://unsplash.com/photos/UO-QYR28hS0?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+    on [Unsplash](https://unsplash.com/search/photos/dialogue?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: I transcribed this part of the course (Lesson 5) because the intuition is just
+    so compelling ❤️. Here Jeremy first rounds up people who think that increasing
+    model complexity is not the way to go, then reshapes their perspective, then brings
+    them to [**L2 regularisation**](https://en.wikipedia.org/wiki/Regularization_%28mathematics%29).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Oh and I was from Statistics so he caught me off guard there ????.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And so if any of you are unlucky enough to have been brainwashed by a background
+    in statistics or psychology or econometrics or any of these kinds of courses,
+    you’re gonna have to unlearn the idea that you need less parameters because what
+    you instead need to realise this is you will fit this lie that you need less parameters
+    because it’s a convenient fiction for the real truth which is you don’t want your
+    function be too complex. And having less parameters is one way of making it less
+    complex.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: But what if you had a thousand parameters and 999 of those parameters were 1e-9\.
+    Or what if there was 0? If there’s 0 then they’re not really there. Or if they’re
+    1e-9, they’re hardly there.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: So why can’t I have lots of parameters if lots of them are really small? And
+    the answer is you can. So this thing, [where] counting the number of parameters
+    is how we limit complexity, is actually extremely limiting. It’s a fiction that
+    really has a lot of problems, right? And so, if in your head complexity is scored
+    by how many parameters you have, you’re doing it all wrong. Score it properly.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: So why do we care? Why would I want to use more parameters?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Because more parameters means more nonlinearities, more interactions, more curvy
+    bits, right? And real life (of loss landscape) is full of curvy bits. Real life
+    does not look like this [under fitted line]. But we don’t want them to be more
+    curvy than necessary, or more interacting than necessary.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: So therefore let’s use lots of parameters and then penalise complexity.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Okay so one way to penalise complexity is, as I kind of suggested before: Let’s
+    sum up the value of your parameters. Now that doesn’t quite work because some
+    parameters are positive and some are negative, right? So what if we sum up the
+    square of the parameters.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: And that’s actually a really good idea.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Let’s actually create a model and in the loss function we’re gonna add the sum
+    of the square of the parameters. Now here’s a problem with that though. Maybe
+    that number is way too big and it’s so big that the best loss is to set all of
+    the parameters to 0\. Now that would be no good. So actually we wanna make sure
+    that doesn’t happen. So therefore let’s not just add the sum of the squares of
+    the parameters to the model but let’s multiply that by some number that we choose.
+    And that number that we choose in fast is called `wd`.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: You might also like to check out my article Intuitions on L1 and L2 Regularisation
+    how I explain these two regularisation techniques using gradient descent [here](https://towardsdatascience.com/intuitions-on-l1-and-l2-regularisation-235f2db4c261).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Conclusion**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'I really love this course. Here are some reasons why:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: They give intuitions and easy-to-understand explanations.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: They supplement their courses with great resources.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: They encourage you to apply deep learning to your respective domains to build
+    things.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: They seem like they’re always up to date with interesting and novel publications,
+    and incorporate them into the fastai library where appropriate.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'They also do a lot of research on deep learning (read: ULMFiT).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: They have built a community around the fastai library hence you will get support
+    easily.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Their tips and tricks are good for Kagglers and accuracy-driven modelling.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Looking forward to the next part of the course!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Raimi Bin Karim](https://www.linkedin.com/in/raimibkarim/)** is an
+    AI Engineer at AI Singapore'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/10-new-things-i-learnt-from-fast-ai-v3-4d79c1f07e33).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[fast.ai Deep Learning Part 1 Complete Course Notes](/2018/07/fast-ai-deep-learning-part-1-notes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Quick Feature Engineering with Dates Using fast.ai](/2018/03/feature-engineering-dates-fastai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[An Overview of 3 Popular Courses on Deep Learning](/2017/10/3-popular-courses-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How Fast Can BERT Go With Sparsity?](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Speed up Machine Learning with Fast Kriging (FKR)](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Make Python Code Run Incredibly Fast](https://www.kdnuggets.com/2021/06/make-python-code-run-incredibly-fast.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Step up your Python game with Fast Python for Data Science!](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Practical Deep Learning from fast.ai is Back!](https://www.kdnuggets.com/2022/07/practical-deep-learning-fastai-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simple and Fast Data Streaming for Machine Learning Projects](https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

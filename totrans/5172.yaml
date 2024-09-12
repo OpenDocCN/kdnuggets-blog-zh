@@ -1,0 +1,440 @@
+- en: Most Common SQL Mistakes on Data Science Interviews
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/11/common-sql-mistakes-data-science-interviews.html](https://www.kdnuggets.com/2021/11/common-sql-mistakes-data-science-interviews.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c43d8e46ee83bd41246ce4db2f52d87d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: These mistakes concern concepts that frequently appear in [data science coding
+    interview questions](https://www.stratascratch.com/blog/data-science-coding-interview-questions-with-5-technical-concepts/) and
+    can render your interview unsuccessful, so it’s important to know how to avoid
+    them and the ways in which we can correct them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Mistake 1: LIMIT for maximum/minimum'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Probably the most common mistake has to do with finding records in a data set
+    with the highest or the lowest values. This sounds like a straightforward problem,
+    but because of how SQL works, we frequently can’t simply use the MAX or MIN functions.
+    Instead, we need to devise another way to output the relevant rows. When doing
+    it, there is one commonly used approach that logically seems correct and, what’s
+    worse, it often produces an expected result. The problem is that the solution
+    doesn’t account for all the possibilities and skips some important edge cases.
+    Let’s see an example to understand this mistake.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/163f3659d0e8283a035e890259544add.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Link: [https://platform.stratascratch.com/coding/10353-workers-with-the-highest-salaries](https://platform.stratascratch.com/coding/10353-workers-with-the-highest-salaries)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This question comes from an actual interview for a data scientist position
+    at DoorDash. We are being asked to find the titles of workers that earn the highest
+    salary given the datasets of employees and their titles. A common and probably
+    the simplest solution to this problem looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: We need to merge two tables because the column worker_title comes from one dataset
+    and the column ‘salary from another, but that’s not the part we should focus on.
+    The rest of the code is a pretty straightforward way of returning a row with the
+    highest value. We select the columns to return, order the table by some value
+    in descending order, and only output the first row by using LIMIT 1\. Can you
+    see what the problem is with this solution?
+  prefs: []
+  type: TYPE_NORMAL
+- en: In many cases, using this approach will produce the expected output, but the
+    issue is that it skips an important and common edge case. Namely, what if there
+    is a tie in the data? What if two rows have the same highest value? As you can
+    see in this example, this solution is marked as incorrect, and that’s because
+    there are, in fact, two job titles with the same salary, which also happens to
+    be the highest salary. Using the LIMIT statement requires us to know how many
+    rows share the highest value, and in most cases, we don’t know it, and so this
+    approach is incorrect.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'How to correct this solution? There are actually multiple ways to find the
+    rows with maximum or minimum value in a robust way. One approach is to use a subquery
+    in which we find the value of interest and then to use it as a filter in the main
+    query. In our example, we can leave the first three lines of the code but instead
+    of the ORDER BY and LIMIT statements, let’s add a WHERE clause. In it, we want
+    to tell the engine to only leave these rows where the column ‘salary’ is equal
+    to the highest salary of the entire dataset. In SQL, this will look something
+    like that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: In the WHERE clause, there’s a subquery that only returns a single value - the
+    highest salary. Then we use this number to filter the dataset, outputting only
+    the rows where salary is equal to the number.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another common approach is to use the window function RANK() to add a new column
+    with a ranking of the job titles based on their salaries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you can see, the RANK() function accounts for ties in the results because
+    here, two job titles have the same salary, and they’re both given the first place.
+    We can then use this ranking as an inner query and add the main query in which
+    we only leave these titles where the rank number is equal to 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Mistake 2: Row_Number() vs Rank() vs Dense_Rank()'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/96c1aac0a09f342759de1f3fd8cfb24e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Link: [https://platform.stratascratch.com/coding/10062-fans-vs-opposition](https://platform.stratascratch.com/coding/10062-fans-vs-opposition)*​'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Speaking of RANK() and window functions in general, there is a common mistake
+    related to them. Look at one of the [SQL interview questions](https://www.stratascratch.com/blog/sql-interview-questions-you-must-prepare-the-ultimate-guide/) from
+    Facebook above. Here Facebook says that they ran a survey among their employees
+    to quantify the popularity of some new programming languages. Now they want to
+    match the people who love it most to the ones who hate it most. The biggest fan
+    gets paired with the biggest opposition, the second biggest fan with the second-biggest
+    opposition, and so on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Even though this interview question is long and seems difficult, the solution
+    isn’t particularly complicated. We can simply take the dataset and order it by
+    the popularity in descending order, then take it again, the order in ascending
+    order, and put the two tables next to each other, or in technical terms, merge
+    them. The solution may look something like that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: The key parts of this solution are the two subqueries on two sides of this ‘INNER
+    JOIN’ statement. They return the same table but are sorted in opposite ways. To
+    merge these tables together and to create the matching, the easiest way in SQL
+    is to give employees subsequent numbers based on these orderings and match these
+    numbers together so, the biggest fan will get number 1 and will be matched with
+    the biggest opposition who also gets number 1 in the ‘opposition’ table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But when we run this code, there is a problem. From the top of the results,
+    we can see that employee 17 is paired with both employees 13 and 2\. What’s more,
+    the same employees 13 and 2 are also paired with an employee 5\. And then again
+    with an employee 8\. Something is clearly wrong. Let’s modify the SELECT clause
+    to show the rankings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: What happened here? It seems like there are employees with the same score from
+    the survey. In other words, there are ties in data. And as you may remember from
+    the previous mistake, the RANK() function gives the same score to all rows that
+    share the same value. So here, employees 17, 5, and 8 all had the same highest
+    popularity score while employees 13 and 2 had the same lowest score. That’s why
+    these five got matched together in all possible combinations. But if only 13 and
+    2 shared the same worst score, then there must have been an opposition employee
+    with a rank of 3\. But since there was no fan with rank 3, they didn’t get matched
+    with anyone.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to fix this? Some would say that if the RANK() function doesn’t work, we
+    can try replacing it with DENSE_RANK(). The difference between the two is in how
+    they handle ties. If we have four values and the first two are the same, then
+    RANK() will give them ranks 1, 1, 3, and 4\. Meanwhile, DENSE_RANK() would rank
+    them as 1, 1, 2, and 3\. But is it the right solution in this case?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: We solved the problem with employee 10 not being matched with anyone like before,
+    but the other issues are still there. The DENSE_RANK() still gives the same ranking
+    to rows with the same value, so there are still some employees paired with more
+    than one person. So what’s the correct solution here? There is a third similar
+    window function called ROW_NUMBER(). Some disregard it as being ‘basic’ because
+    it simply counts the rows without dealing with tied values. But that’s exactly
+    the feature that makes this function perfect in this case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: All employees are now given unique ranks and so the pairing can be done without
+    duplicates and skipping anyone. And while this problem of pairing fans with the
+    opposition is not the most common at data science interviews, but based on this
+    example, we wanted to show you how important it is to understand the difference
+    between RANK(), DENSE_RANK(), and ROW_NUMBER() - all very similar [window functions](https://www.stratascratch.com/blog/types-of-window-functions-in-sql-and-questions-asked-by-airbnb-netflix-twitter-and-uber/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Mistake 3: Aliases in quotation marks'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/c1299e21f58af834d8d60e89fc46e5f1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In this example, we gave names to some subqueries, like ‘fans’ and ‘opposition’,
+    and to some columns as well. These are so-called aliases and are very popular
+    in SQL but are also a source of some common mistakes. Let’s switch to an easier
+    example to see them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fa25d424331eee091f4e873c3ccf5a9c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Link: [https://platform.stratascratch.com/coding/2061-users-with-many-searches?python=](https://platform.stratascratch.com/coding/2061-users-with-many-searches?python=)*​'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this recent data science interview question, Facebook asked to count the
+    number of users who made more than five searches in August 2021, based on some
+    database of searches. The solution looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'There is an inner query in which we count the number of searches for each user
+    in the required timeframe and then an outer query in which we only consider users
+    who made more than five searches, and we count them. But when we try to run it,
+    there’s an error. It says that ‘*column "augustsearches" does not exist’*. How
+    is it possible? After all, we gave the alias ‘AugustSearches’ to one of the columns
+    in the inner query, so we should be able to use it in the WHERE clause of the
+    outer query, right? Well, yes, but unfortunately, we made a mistake when assigning
+    the alias. Can you see it? The simplest way to fix it is to remove the quotation
+    marks from the alias:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'It is a common mistake because we use quotation marks when writing strings
+    in SQL, and an alias feels like a string. But the reason for it not working actually
+    originates elsewhere and has to do with the capital letters. To save memory, SQL
+    always forces the column names to small letters. So even if we write ‘WHERE AugustSearches’,
+    SQL will interpret it as ‘WHERE augustsearches’. But when we define an alias in
+    quotation marks, SQL keeps all the capitalized letters but then when we compare
+    the alias to an alias written without quotation marks, it causes the problem.
+    In theory, we could always use the aliases in quotation marks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: This code will run, but this will take much longer to compute, will consume
+    more memory, and may cause some confusion. And we need to remember quotation marks
+    every time when using an alias. So the lesson here is not to use them for aliases.
+    And to only use small letters for aliases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Mistake 4: Inconsistency in aliases'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/163f3659d0e8283a035e890259544add.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Link: [https://platform.stratascratch.com/coding/10353-workers-with-the-highest-salaries](https://platform.stratascratch.com/coding/10353-workers-with-the-highest-salaries)*​'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Another common problem is inconsistency in using aliases. It’s not a huge mistake,
+    and as long as we don’t have the same column names in different tables, it won’t
+    cause major problems. But this is a detail that can decide about the success or
+    a failure of your data science interview. Let’s get back for a moment to the question
+    from the beginning, the one about highest-earning job titles. This is another
+    possible and correct solution for this question:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Can you see the issue with aliases? First of all, we define the aliases for
+    the two tables. In this case, it’s letters ‘w’ and ‘t’. We then say ‘t.worker_title’,
+    but why in the WHERE clause do we have ‘salary’ without any alias? Why does the
+    column ‘worker_title’ in the ORDER BY clause has no alias suddenly? And look at
+    the subquery: we give aliases to the tables only to not use them when selecting
+    the only column in this query. Another issue is using the same aliases in the
+    inner and outer queries, but since, in this case, it’s always for the same tables,
+    we can let it slide. This solution will look much cleaner and clearer if we stay
+    consistent when using aliases.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Mistake 5: Unnecessary JOINs'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: But we’re not quite done yet. There is one more mistake in this solution. Yes,
+    it still works and produces an expected result, but we can’t say it’s efficient.
+    Can you see why? Look at the inner query. In it, we only select one column, salary.
+    This column comes from a table ‘worker’. It’s especially clear now that we fixed
+    the aliases. But if this is the case, then why do we merge the two tables in the
+    inner query? It’s not necessary, and it makes the solution less efficient. After
+    all, each JOIN operation takes some time to compute, and if the tables are large,
+    this time may be considerable. We know that frequently when we see that a question
+    comes with several tables, the logical first step is to merge them together. But
+    as this example shows, we should only do it when it’s necessary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Mistake 6: JOIN on columns with NULL values'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/2b82ad2a07c716522a58e9548ee991a9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Link: [https://platform.stratascratch.com/coding/9627-3-bed-minimum](https://platform.stratascratch.com/coding/9627-3-bed-minimum)*​'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let us show you one more common mistake, again related to the JOIN statements.
+    Look at this question in which Airbnb asks to find the average number of beds
+    in each neighbourhood that has at least three beds in total. While there exist
+    less complicated solutions, one valid approach is to merge the original table
+    with itself but in an aggregated way so that we already have the number of beds
+    per neighbourhood given that it’s at least three beds. We could do it using a
+    subquery or with a JOIN statement like in this solution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: When we run this code, it looks nice at first glance, but what is this space
+    here on top? And when we compare this output with the expected results, it turns
+    out our code is not correct. So what happened? Let’s run only the inner query
+    to look for clues.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: Can you see this first row? It turns out there are 33 beds that are not assigned
+    to any neighbourhood. Instead, the value for the neighbourhood is ‘NULL’. Why
+    does it cause problems? Because back in our main query, we JOIN the two tables
+    ON the neighbourhood columns - both of which contain NULL values. And in SQL,
+    if we use the operator ‘=’ between NULL values, the engine won’t be able to match
+    them correctly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'How to fix this problem? If we really need to merge two tables based on a column
+    that contains NULL values, we need to explicitly tell the engine how to deal with
+    them. So we can start as we did before, saying ‘anb.neighbourhood = fil_anb.neighbourhood’
+    and then continue by adding a second case: if a value in anb.neighbourhood is
+    NULL, a value in fil_anb.neighbourhood should also be ‘NULL’. In code, it’ll look
+    like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: These are all the examples we have prepared for you in this article. We have
+    shown you a number of different coding mistakes, some more and some less catastrophic
+    but all equally important, especially in an interview setting. There it’s not
+    only about whether a solution works but also how it’s written and if you as a
+    candidate have attention to detail. If you remember these few most common mistakes
+    and try to avoid them in the future, this will improve your chances of succeeding
+    in a [data science interview](https://www.stratascratch.com/blog/data-science-interview-guide-questions-from-80-different-companies/)!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.stratascratch.com/blog/most-common-coding-mistakes-on-data-science-interviews/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to Ace Data Science Interview by Working on Portfolio Projects](https://www.kdnuggets.com/2021/10/ace-data-science-interview-portfolio-projects.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data science SQL interview questions from top tech firms](https://www.kdnuggets.com/2021/10/data-science-sql-interview-questions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Most Common Data Science Interview Questions and Answers](https://www.kdnuggets.com/2021/08/common-data-science-interview-questions-answers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

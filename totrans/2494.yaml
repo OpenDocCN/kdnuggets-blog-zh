@@ -1,0 +1,881 @@
+- en: Introduction to Binary Classification with PyCaret
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Moez Ali](https://www.linkedin.com/in/profile-moez/), Founder & Author
+    of PyCaret**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/48f8e698fa3c51848935be2eaccf13c0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Mike U](https://unsplash.com/@roguewild?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1.0 Introduction
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PyCaret](https://www.pycaret.org/) is an open-source, low-code machine learning
+    library in Python that automates machine learning workflows. It is an end-to-end
+    machine learning and model management tool that speeds up the experiment cycle
+    exponentially and makes you more productive.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In comparison with the other open-source machine learning libraries, PyCaret
+    is an alternate low-code library that can be used to replace hundreds of lines
+    of code with few lines only. This makes experiments exponentially fast and efficient.
+    PyCaret is essentially a Python wrapper around several machine learning libraries
+    and frameworks such as scikit-learn, XGBoost, LightGBM, CatBoost, spaCy, Optuna,
+    Hyperopt, Ray, and a few more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The design and simplicity of PyCaret are inspired by the emerging role of citizen
+    data scientists, a term first used by Gartner. Citizen Data Scientists are power
+    users who can perform both simple and moderately sophisticated analytical tasks
+    that would previously have required more technical expertise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To learn more about PyCaret, you can check the official [website](https://www.pycaret.org/) or [GitHub](https://www.github.com/pycaret/pycaret).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2.0 Tutorial Objective
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'In this tutorial we will learn:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Getting Data:** How to import data from the PyCaret repository'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Setting up Environment:** How to set up an experiment in PyCaret and get
+    started with building classification models'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Create Model:** How to create a model, perform stratified cross-validation
+    and evaluate classification metrics'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Tune Model:** How to automatically tune the hyper-parameters of a classification
+    model'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Plot Model:** How to analyze model performance using various plots'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Finalize Model:** How to finalize the best model at the end of the experiment'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Predict Model:** How to make predictions on unseen data'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Save / Load Model:** How to save/load a model for future use'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 3.0 Installing PyCaret
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Installation is easy and will only take a few minutes. PyCaret’s default installation
+    from pip only installs hard dependencies as listed in the [requirements.txt](https://github.com/pycaret/pycaret/blob/master/requirements.txt) file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To install the full version:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 4.0 What is Binary Classification?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Binary classification is a supervised machine learning technique where the
+    goal is to predict categorical class labels which are discrete and unordered such
+    as Pass/Fail, Positive/Negative, Default/Not-Default, etc. A few real-world use
+    cases for classification are listed below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Medical testing to determine if a patient has a certain disease or not — the
+    classification property is the presence of the disease.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A “pass or fail” test method or quality control in factories, i.e. deciding
+    if a specification has or has not been met — a go/no-go classification.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Information retrieval, namely deciding whether a page or an article should be
+    in the result set of a search or not — the classification property is the relevance
+    of the article or the usefulness to the user.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 5.0 Overview of the Classification Module in PyCaret
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: PyCaret’s [classification module](https://pycaret.readthedocs.io/en/latest/api/classification.html) (`pycaret.classification`)
+    is a supervised machine learning module that is used for classifying the elements
+    into a binary group based on various techniques and algorithms. Some common use
+    cases of classification problems include predicting customer default (yes or no),
+    customer churn (customer will leave or stay), disease found (positive or negative).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The PyCaret classification module can be used for Binary or Multi-class classification
+    problems. It has over 18 algorithms and 14 plots to analyze the performance of
+    models. Be it hyper-parameter tuning, ensembling, or advanced techniques like
+    stacking, PyCaret’s classification module has it all.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 6.0 Dataset for the Tutorial
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'For this tutorial, we will use a dataset from UCI called [**Default of Credit
+    Card Clients Dataset**](https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients).
+    This dataset contains information on default payments, demographic factors, credit
+    data, payment history, and billing statements of credit card clients in Taiwan
+    from April 2005 to September 2005\. There are 24,000 samples and 25 features.
+    Short descriptions of each column are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ID:** ID of each client'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**LIMIT_BAL:** Amount of given credit in NT dollars (includes individual and
+    family/supplementary credit)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**SEX:** Gender (1=male, 2=female)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**EDUCATION:** (1=graduate school, 2=university, 3=high school, 4=others, 5=unknown,
+    6=unknown)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**MARRIAGE:** Marital status (1=married, 2=single, 3=others)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**AGE:** Age in years'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**PAY_0 to PAY_6:** Repayment status by n months ago (PAY_0 = last month …
+    PAY_6 = 6 months ago) (Labels: -1=pay duly, 1=payment delay for one month, 2=payment
+    delay for two months, … 8=payment delay for eight months, 9=payment delay for
+    nine months and above)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**BILL_AMT1 to BILL_AMT6:** Amount of bill statement by n months ago ( BILL_AMT1
+    = last_month .. BILL_AMT6 = 6 months ago)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**PAY_AMT1 to PAY_AMT6:** Amount of payment by n months ago ( BILL_AMT1 = last_month
+    .. BILL_AMT6 = 6 months ago)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**default:** Default payment (1=yes, 0=no) `Target Column`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Dataset Acknowledgement:'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Lichman, M. (2013). UCI Machine Learning Repository. Irvine, CA: University
+    of California, School of Information and Computer Science.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 7.0 Getting the Data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: You can download the data from the original source [**found here**](https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients) and
+    load it using pandas [**(learn how)**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html) or
+    you can use PyCaret’s data repository to load the data using the `get_data()` function
+    (This will require an internet connection).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/15c6708db0c28339c5fa0fff910992c8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: In order to demonstrate the use of the `predict_model` function on unseen data,
+    a sample of 1200 records (~5%) has been withheld from the original dataset to
+    be used for predictions at the end. This should not be confused with a train-test-split,
+    as this particular split is performed to simulate a real-life scenario. Another
+    way to think about this is that these 1200 customers are not available at the
+    time of training of machine learning models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 8.0 Setting up Environment in PyCaret
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The `setup` function in PyCaret initializes the environment and creates the
+    transformation pipeline for modeling and deployment. `setup` must be called before
+    executing any other function in pycaret. It takes two mandatory parameters: a
+    pandas dataframe and the name of the target column. All other parameters are optional
+    can be used to customize the preprocessing pipeline.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When `setup` is executed, PyCaret's inference algorithm will automatically infer
+    the data types for all features based on certain properties. The data type should
+    be inferred correctly but this is not always the case. To handle this, PyCaret
+    displays a prompt, asking for data types confirmation, once you execute the `setup`.
+    You can press enter if all data types are correct or type `quit` to exit the setup.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ensuring that the data types are correct is really important in PyCaret as it
+    automatically performs multiple type-specific preprocessing tasks which are imperative
+    for machine learning models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alternatively, you can also use `numeric_features` and `categorical_features` parameters
+    in the `setup` to pre-define the data types.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/f5680fa7ac99aa4cf1de46adb02b05af.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Once the setup has been successfully executed it displays the information grid
+    which contains some important information about the experiment. Most of the information
+    is related to the pre-processing pipeline which is constructed when `setup` is
+    executed. The majority of these features are out of scope for this tutorial, however,
+    a few important things to note are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**session_id:** A pseudo-random number distributed as a seed in all functions
+    for later reproducibility. If no `session_id` is passed, a random number is automatically
+    generated that is distributed to all functions. In this experiment, the `session_id` is
+    set as `123` for later reproducibility.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Target Type:** Binary or Multiclass. The Target type is automatically detected
+    and shown. There is no difference in how the experiment is performed for Binary
+    or Multiclass problems. All functionalities are identical.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Label Encoded:** When the Target variable is of type string (i.e. ‘Yes’ or
+    ‘No’) instead of 1 or 0, it automatically encodes the label into 1 and 0 and displays
+    the mapping (0: No, 1: Yes) for reference. In this experiment, no label encoding
+    is required since the target variable is of type numeric.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Original Data:** Displays the original shape of the dataset. In this experiment
+    (22800, 24) means 22,800 samples and 24 features including the target column.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Missing Values:** When there are missing values in the original data this
+    will show as True. For this experiment, there are no missing values in the dataset.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Numeric Features:** The number of features inferred as numeric. In this dataset,
+    14 out of 24 features are inferred as numeric.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Categorical Features:** The number of features inferred as categorical. In
+    this dataset, 9 out of 24 features are inferred as categorical.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Transformed Train Set:** Displays the shape of the transformed training set.
+    Notice that the original shape of (22800, 24) is transformed into (15959, 91)
+    for the transformed train set and the number of features has increased to 91 from
+    24 due to one-hot-encoding.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Transformed Test Set:** Displays the shape of the transformed test/hold-out
+    set. There are 6841 samples in the test/hold-out set. This split is based on the
+    default value of 70/30 that can be changed using the `train_size` parameter in
+    the setup.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Notice how a few tasks that are imperative to perform modeling are automatically
+    handled such as missing value imputation (in this case there are no missing values
+    in the training data, but we still need imputers for unseen data), categorical
+    encoding, etc. Most of the parameters in the `setup` are optional and used for
+    customizing the pre-processing pipeline. These parameters are out of scope for
+    this tutorial but we will cover them in future tutorials.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 9.0 Comparing All Models
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Comparing all models to evaluate performance is the recommended starting point
+    for modeling once the setup is completed (unless you exactly know what kind of
+    model you need, which is often not the case). This function trains all models
+    in the model library and scores them using stratified cross-validation for metric
+    evaluation. The output prints a scoring grid that shows average Accuracy, AUC,
+    Recall, Precision, F1, Kappa, and MCC across the folds (10 by default) along with
+    training times.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/f55c8b9473ff0d8d18ea4fbad477ffea.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The scoring grid printed above highlights the highest performing metric for
+    comparison purposes only. The grid by default is sorted using `Accuracy `(highest
+    to lowest) which can be changed by passing the `sort` parameter. For example `compare_models(sort
+    = 'Recall')` will sort the grid by recall instead of accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to change the fold parameter from the default value of `10` to a
+    different value then you can use the `fold` parameter. For example `compare_models(fold
+    = 5)` will compare all models on 5 fold cross-validation. Reducing the number
+    of folds will improve the training time. By default, `compare_models` return the
+    best performing model based on default sort order but can be used to return a
+    list of top N models by using `n_select` parameter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 10.0 Create a Model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '`create_model` is the most granular function in PyCaret and is often the foundation
+    behind most of the PyCaret functionalities. As the name suggests this function
+    trains and evaluates a model using cross-validation that can be set with `fold` parameter.
+    The output prints a scoring grid that shows Accuracy, AUC, Recall, Precision,
+    F1, Kappa, and MCC by fold.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For the remaining part of this tutorial, we will work with the below models
+    as our candidate models. The selections are for illustration purposes only and
+    do not necessarily mean they are the top-performing or ideal for this type of
+    data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Decision Tree Classifier (‘dt’)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: K Neighbors Classifier (‘knn’)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Random Forest Classifier (‘rf’)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: There are 18 classifiers available in the model library of PyCaret. To see a
+    list of all classifiers either check the documentation or use `models` function
+    to see the library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/34973a5648847757697f30db20a4cd38.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 10.1 Decision Tree Classifier
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/0968d4d67efa271f3665869ca1bd65ec.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 10.2 K Neighbors Classifier
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/c99040f56cd8529088616aa3c46a2897.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 10.3 Random Forest Classifier
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/54259896a7c5696c43f0c0dbf4fc3cdc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Notice that the mean score of all models matches with the score printed in `compare_models`.
+    This is because the metrics printed in the `compare_models` score grid are the
+    average scores across all CV folds. Similar to the`compare_models`, if you want
+    to change the fold parameter from the default value of 10 to a different value
+    then you can use the `fold` parameter. For Example: `create_model('dt', fold =
+    5)` will create a Decision Tree Classifier using 5 fold stratified CV.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 11.0 Tune a Model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: When a model is created using the `create_model` function it uses the default
+    hyperparameters to train the model. In order to tune hyperparameters, the `tune_model` function
+    is used. This function automatically tunes the hyperparameters of a model using
+    random grid search on a pre-defined search space. The output prints a scoring
+    grid that shows Accuracy, AUC, Recall, Precision, F1, Kappa, and MCC by fold for
+    the best model. To use the custom search grid, you can pass `custom_grid` parameter
+    in the `tune_model` function (see 11.2 KNN tuning below).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 11.1 Decision Tree Classifier
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/74b345f9e28f7da429e4226b8c01ec64.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 11.2 K Neighbors Classifier
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/bf1f90c108efa7e4fefe9b04c9e40744.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: 11.3 Random Forest Classifier
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/bc41a57e4365ed095755adfc837fa15c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: By default, `tune_model` optimizes `Accuracy` but this can be changed using `optimize` parameter.
+    For example: `tune_model(dt, optimize = 'AUC')` will search for the hyperparameters
+    of a Decision Tree Classifier that results in the highest `AUC` instead of `Accuracy`.
+    For the purposes of this example, we have used the default metric `Accuracy` only
+    for the sake of simplicity. Generally, when the dataset is imbalanced (such as
+    the credit dataset we are working with) `Accuracy` is not a good metric for consideration.
+    The methodology behind selecting the right metric to evaluate a classifier is
+    beyond the scope of this tutorial but if you would like to learn more about it,
+    you can [**click here**](https://medium.com/@MohammedS/performance-metrics-for-classification-problems-in-machine-learning-part-i-b085d432082b) to
+    read an article on how to choose the right evaluation metric.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Metrics alone are not the only criteria you should consider when finalizing
+    the best model for production. Other factors to consider include training time,
+    the standard deviation of kfolds, etc. As you progress through the tutorial series
+    we will discuss those factors in detail at the intermediate and expert levels.
+    For now, let’s move forward considering the Tuned Random Forest Classifier `tuned_rf`,
+    as our best model for the remainder of this tutorial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 12.0 Plot a Model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Before model finalization, the `plot_model` function can be used to analyze
+    the performance across different aspects such as AUC, confusion_matrix, decision
+    boundary, etc. This function takes a trained model object and returns a plot based
+    on the test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are 15 different plots available, please see the `plot_model` documentation
+    for the list of available plots.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 12.1 AUC Plot
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/260e900d7f7ce14e00835b8521e2e381.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 12.2 Precision-Recall Curve
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/b42330e418d905c9b44d8537032eec66.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 12.3 Feature Importance Plot
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/98cf38d13d31e60982e9a3d7e7ab8583.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 12.4 Confusion Matrix
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/03e51f3afc86070b952151346c2d1346.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Another* way to analyze the performance of models is to use the `evaluate_model()` function
+    which displays a user interface for all of the available plots for a given model.
+    It internally uses the `plot_model()` function.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/c4072017a375237f83ce3b8b5dfce2e7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 13.0 Predict on test / hold-out Sample
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Before finalizing the model, it is advisable to perform one final check by predicting
+    the test/hold-out set and reviewing the evaluation metrics. If you look at the
+    information grid in Section 8 above, you will see that 30% (6,841 samples) of
+    the data has been separated out as a test/hold-out sample. All of the evaluation
+    metrics we have seen above are cross-validated results based on the training set
+    (70%). Now, using our final trained model stored in the `tuned_rf` we will predict
+    the test / hold-out sample and evaluate the metrics to see if they are materially
+    different than the CV results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/b75a08012005a33bb198eef510c49c6b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The accuracy on the test/hold-out set is `**0.8116**` compared to `**0.8203**` achieved
+    on the `tuned_rf` CV results (in section 11.3 above). This is not a significant
+    difference. If there is a large variation between the test/hold-out and CV results,
+    then this would normally indicate over-fitting but could also be due to several
+    other factors and would require further investigation. In this case, we will move
+    forward with finalizing the model and predicting on unseen data (the 5% that we
+    had separated in the beginning and never exposed to PyCaret).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '(TIP: It’s always good to look at the standard deviation of CV results when
+    using `create_model`)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 14.0 Finalize Model for Deployment
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Model finalization is the last step in the experiment. A normal machine learning
+    workflow in PyCaret starts with `setup`, followed by comparing all models using
+    the `compare_models` and shortlisting a few candidate models (based on the metric
+    of interest) to perform several modeling techniques such as hyperparameter tuning,
+    ensembling, stacking, etc. This workflow will eventually lead you to the best
+    model for use in making predictions on new and unseen data. The `finalize_model` function
+    fits the model onto the complete dataset including the test/hold-out sample (30%
+    in this case). The purpose of this function is to train the final model on the
+    complete dataset before it is deployed in production. (This is optional, you may
+    or may not use finalize_model).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE24]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Caution:** One final word of caution. Once the model is finalized, the entire
+    dataset including the test/hold-out set is used for training. As such, if the
+    model is used for predictions on the hold-out set after `finalize_model` is used,
+    the information grid printed will be misleading as you are trying to predict on
+    the same data that was used for modeling. In order to demonstrate this point only,
+    we will use `final_rf` under `predict_model` to compare the information grid with
+    the one above in section 13.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE25]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/a013e2bd953b01eed34d01815befc639.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Notice how the AUC in `final_rf` has increased to `**0.7526**` from `**0.7407**`,
+    even though the model is the same. This is because the `final_rf` variable has
+    been trained on the complete dataset including the test/hold-out set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 15.0 Predict on unseen data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The `predict_model` function is also used to predict on the unseen dataset.
+    The only difference from section 13 above is that this time we will pass the `data_unseen`.
+    It is the variable created at the beginning of this tutorial and contains 5% (1200
+    samples) of the original dataset which was never exposed to PyCaret. (see section
+    7 for explanation)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE26]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/9bc7878a2506ae2f4784b4f9100094d2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The `Label` and `Score` columns are added onto the `data_unseen` set. The label
+    is the prediction and the score is the probability of the prediction. Notice that
+    predicted results are concatenated to the original dataset while all the transformations
+    are automatically performed in the background. You can also check the metrics
+    on this since you have an actual target column `default` available. To do that
+    we will use `pycaret.utils` module. See the example below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE27]'
+  prefs: []
+  type: TYPE_PRE
+- en: 16.0 Saving the model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'We have now finished the experiment by finalizing the `tuned_rf` model which
+    is now stored in `final_rf` variable. We have also used the model stored in `final_rf` to
+    predict `data_unseen`. This brings us to the end of our experiment, but one question
+    is still to be asked: What happens when you have more new data to predict? Do
+    you have to go through the entire experiment again? The answer is no, PyCaret''s
+    inbuilt function `save_model()` allows you to save the model along with the entire
+    transformation pipeline for later use.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE28]'
+  prefs: []
+  type: TYPE_PRE
+- en: 17.0 Loading the saved model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To load a saved model at a future date in the same or an alternative environment,
+    we would use PyCaret’s `load_model()` function and then easily apply the saved
+    model on new unseen data for prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE29]'
+  prefs: []
+  type: TYPE_PRE
+- en: Once the model is loaded in the environment, you can simply use it to predict
+    on any new data using the same `predict_model()` function. Below we have applied
+    the loaded model to predict the same `data_unseen` that we used in section 13
+    above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE30]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/9bc7878a2506ae2f4784b4f9100094d2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Notice that the results of `unseen_predictions` and `new_prediction` are identical.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE31]'
+  prefs: []
+  type: TYPE_PRE
+- en: 18.0 Wrap-up / Next Steps?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: This tutorial has covered the entire machine learning pipeline from data ingestion,
+    pre-processing, training the model, hyperparameter tuning, prediction, and saving
+    the model for later use. We have completed all of these steps in less than 10
+    commands which are naturally constructed and very intuitive to remember such as `create_model()`, `tune_model()`, `compare_models()`.
+    Re-creating the entire experiment without PyCaret would have taken well over 100
+    lines of code in most libraries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have only covered the basics of `pycaret.classification`. In the future tutorials
+    we will go deeper into advanced pre-processing, ensembling, generalized stacking,
+    and other techniques that allow you to fully customize your machine learning pipeline
+    and are must know for any data scientist.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thank you for reading [????](https://emojipedia.org/folded-hands/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Important Links
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: ⭐ [Tutorials](https://github.com/pycaret/pycaret/tree/master/tutorials) New
+    to PyCaret? Check out our official notebooks!
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? [Example Notebooks](https://github.com/pycaret/pycaret/tree/master/examples) created
+    by the community.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? [Blog](https://github.com/pycaret/pycaret/tree/master/resources) Tutorials
+    and articles by contributors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? [Documentation](https://pycaret.readthedocs.io/en/latest/index.html) The
+    detailed API docs of PyCaret
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? [Video Tutorials](https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g) Our
+    video tutorial from various events.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? [Discussions](https://github.com/pycaret/pycaret/discussions) Have questions?
+    Engage with community and contributors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ????️ [Changelog](https://github.com/pycaret/pycaret/blob/master/CHANGELOG.md) Changes
+    and version history.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? [Roadmap](https://github.com/pycaret/pycaret/issues/1756) PyCaret’s software
+    and community development plan.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Moez Ali](https://www.linkedin.com/in/profile-moez/)** writes about
+    PyCaret and its use-cases in the real world, If you would like to be notified
+    automatically, you can follow Moez on [Medium](https://medium.com/@moez-62905),
+    [LinkedIn](https://www.linkedin.com/in/profile-moez/), and [Twitter](https://twitter.com/moezpycaretorg1).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/introduction-to-binary-classification-with-pycaret-a37b3e89ad8d).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Beginner’s Guide to End to End Machine Learning](/2021/12/beginner-guide-end-end-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyCaret 2.3.5 Is Here! Learn What’s New](/2021/11/pycaret-here-learn-new.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using PyCaret’s New Time Series Module](/2021/12/pycaret-new-time-series-module.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Introduction to Clustering in Python with PyCaret](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Multilabel Classification: An Introduction with Python''s Scikit-Learn](https://www.kdnuggets.com/2023/08/multilabel-classification-introduction-python-scikitlearn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Announcing PyCaret 3.0: Open-source, Low-code Machine Learning in Python](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyCaret](https://www.kdnuggets.com/2022/11/getting-started-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[More Performance Evaluation Metrics for Classification Problems You…](https://www.kdnuggets.com/2020/04/performance-evaluation-metrics-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fine-Tuning BERT for Tweets Classification with HuggingFace](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

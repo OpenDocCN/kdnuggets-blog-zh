@@ -1,0 +1,415 @@
+- en: Micro, Macro & Weighted Averages of F1 Score, Clearly Explained
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/01/micro-macro-weighted-averages-f1-score-clearly-explained.html](https://www.kdnuggets.com/2023/01/micro-macro-weighted-averages-f1-score-clearly-explained.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](../Images/429ec3fe3106393e90ce45f6d2ffc16a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author and [Freepik](https://www.freepik.com/vectors/people)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The F1 score (aka F-measure) is a popular metric for evaluating the performance
+    of a classification model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the case of multi-class classification, we adopt **averaging **methods for
+    F1 score calculation, resulting in a **set of different average scores **(macro,
+    weighted, micro) in the classification report.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article looks at the meaning of these averages, **how **to calculate them,
+    and **which **one to choose for reporting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: (1) Recap of the Basics (Optional)
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '*Note: Skip this section if you are already familiar with the concepts of precision,
+    recall, and F1 score.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Precision
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '**Layman definition**: Of all the positive predictions I made, how many of
+    them are truly positive?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Calculation**: Number of True Positives (TP) divided by the Total Number
+    of True Positives (TP) **and **False Positives (FP).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](../Images/fbad1874c80df06600a6f5c9e98d8ad1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The equation for precision | Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recall
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '**Layman definition:** Of all the actual positive examples out there, how many
+    of them did I correctly predict to be positive?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Calculation: **Number of True Positives (TP) divided by the Total Number
+    of True Positives (TP) **and **False Negatives (FN).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](../Images/72f898eb906c2538341b2e6949326d34.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The equation for Recall | Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you compare the formula for precision and recall, you will notice both look
+    similar. The only difference is the second term of the denominator, where it is
+    False Positive for **precision **but False Negative for **recall**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: F1 Score
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To evaluate model performance comprehensively, we should examine **both** precision
+    and recall. The F1 score serves as a helpful metric that considers both of them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Definition**: Harmonic mean of precision and recall for a more balanced summarization
+    of model performance.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Calculation:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](../Images/1fb705ac44e1cdcd4e3b59c4ad5efd8f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The equation for F1 score | Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If we express it in terms of True Positive (TP), False Positive (FP), and False
+    Negative (FN), we get this equation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](../Images/66f6333a5a25fca51e30b8e003655ea6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The alternative equation for F1 score | Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: (2) Setting the Motivating Example
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: To illustrate the concepts of averaging F1 scores, we will use the following
+    example in the context of this tutorial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imagine we have trained an **image classification model** on a **multi-class** dataset
+    containing images of **three** classes: **A**irplane, **B**oat, and **C**ar.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](../Images/a39c452d77a57fd6c727198407488983.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by [macrovector](https://www.freepik.com/vectors/car) — [freepik.com](https://www.freepik.com/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We use this model to **predict **the classes of **ten **test set images. Here
+    are the **raw predictions**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](../Images/fd1fe5cfbe0c7580455c468d239ecd41.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample predictions of our demo classifier | Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Upon running `sklearn.metrics.classification_report`, we get the following
+    classification report:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](../Images/c0219f91435f7f9618f852e1071256a5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Classification report](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html) from
+    scikit-learn package | Image by author'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The columns (in orange) with the **per-class** scores (i.e., score for each
+    class) and **average **scores are the focus of our discussion.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can see from the above that the dataset is **imbalanced **(only one out of
+    ten test set instances is ‘Boat’). Thus the **proportion of correct matches** (aka
+    accuracy) would be ineffective in assessing model performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead, let us look at the **confusion matrix** for a holistic understanding
+    of the model predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](../Images/959f27e63613d2f0af126e8b908c968b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Confusion matrix | Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: The confusion matrix above allows us to compute the critical values of True
+    Positive (**TP**), False Positive (**FP**), and False Negative (**FN**), as shown
+    below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](../Images/21e7f5ec5267ad67577b9b0b7479a2fa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Calculated TP, FP, and FN values from confusion matrix | Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: The above table sets us up nicely to compute the **per-class** values of **precision**, **recall**,
+    and F1 score for each of the three classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is important to remember that in **multi-class classification, we calculate
+    the F1 score for each class in a One-vs-Rest (OvR) **approach instead of a single
+    overall F1 score, as seen in binary classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this **OvR** approach, we determine the metrics for each class separately,
+    as if there is a different classifier for each class. Here are the per-class metrics
+    (with the F1 score calculation displayed):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](../Images/fefe4e9cd2fc0860c7ed3deda30a9fa0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: However, instead of having multiple per-class F1 scores, it would be better
+    to **average **them to obtain a **single number** to describe overall performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, let’s discuss the **averaging **methods that led to the classification
+    report’s **three different average F1 scores**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: (3) Macro Average
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '**Macro averaging **is perhaps the most straightforward among the numerous
+    averaging methods.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The macro-averaged F1 score (or macro F1 score) is computed using the arithmetic
+    mean (aka **unweighted **mean) of all the per-class F1 scores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This method treats all classes equally regardless of their **support **values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](../Images/091a97df9f500a20cc42f3972ef5ebf1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Calculation of macro F1 score | Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: The value of **0.58** we calculated above matches the macro-averaged F1 score
+    in our classification report.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](../Images/4354a5d171fd59135b7937ce8b39e5cf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: (4) Weighted Average
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The **weighted-averaged **F1 score is calculated by taking the mean of all per-class
+    F1 scores **while considering each class’s support**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: S**upport** refers to the number of actual occurrences of the class in the dataset.
+    For example, the support value of 1 in **Boat **means that there is only one observation
+    with an actual label of Boat.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The ‘weight’ essentially refers to the proportion of each class’s support relative
+    to the sum of all support values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](../Images/bb2a60a3bf772ffeeb36194a081d256a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Calculation of weighted F1 score | Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: With weighted averaging, the output average would have accounted for the contribution
+    of each class as weighted by the number of examples of that given class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The calculated value of **0.64** tallies with the weighted-averaged F1 score
+    in our classification report.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](../Images/9f64f540f8c00419559e2c3c88dec20c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: (5) Micro Average
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Micro averaging computes a **global average **F1 score by counting the **sums** of
+    the True Positives (**TP**), False Negatives (**FN**), and False Positives (**FP**).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We first sum the respective TP, FP, and FN values across all classes and then
+    plug them into the F1 equation to get our micro F1 score.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](../Images/f3b285964495c2f053936aea18dc8cd1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Calculation of micro F1 score | Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the classification report, you might be wondering why our micro F1 score
+    of **0.60** is displayed as ‘accuracy’ and why there is **NO row stating **‘**micro
+    avg’**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](../Images/95d3d34f2a58f129eaa75d2c68809b1b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This is because micro-averaging essentially computes the **proportion **of **correctly
+    classified** observations out of all observations. If we think about this, this
+    definition is what we use to calculate overall **accuracy**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Furthermore, if we were to do micro-averaging for precision and recall, we would
+    get the same value of **0.60**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](../Images/b78fea2ad253da1945d2811318d06069.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Calculation of all micro-averaged metrics | Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: These results mean that in multi-class classification cases where each observation
+    has a **single label**, the **micro-F1**, **micro-precision**, **micro-recall,** and **accuracy **share
+    the **same **value (i.e.,** 0.60** in this example).
+  prefs: []
+  type: TYPE_NORMAL
+- en: And this explains why the classification report **only needs to display a single
+    accuracy value** since micro-F1, micro-precision, and micro-recall also have the
+    same value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**micro-F1 **= accuracy = micro-precision = micro-recall'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: (6) Which Average should I choose?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In general, if you are working with an imbalanced dataset where all classes
+    are equally important, using the **macro **average would be a good choice as it
+    treats all classes equally.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It means that for our example involving the classification of airplanes, boats,
+    and cars, we would use the macro-F1 score.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have an imbalanced dataset but want to assign greater contribution to
+    classes with more examples in the dataset, then the **weighted **average is preferred.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is because, in weighted averaging, the contribution of each class to the
+    F1 average is weighted by its size.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Suppose you have a balanced dataset and want an easily understandable metric
+    for overall performance regardless of the class. In that case, you can go with
+    accuracy, which is essentially our **micro** F1 score.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before You Go
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: I welcome you to** join me on a data science learning journey!** Follow my [Medium](https://kennethleungty.medium.com/) page
+    and check out my [GitHub](https://github.com/kennethleungty) to stay in the loop
+    of more exciting data science content. Meanwhile, have fun interpreting F1 scores!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Kenneth Leung](https://www.linkedin.com/in/kennethleungty/)** is data scientist
+    at Boston Consulting Group (BCG), and technical writer, and pharmacist.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/micro-macro-weighted-averages-of-f1-score-clearly-explained-b603420b292f).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[7 Free Kaggle Micro-Courses for Data Science Beginners](https://www.kdnuggets.com/7-free-kaggle-micro-courses-for-data-science-beginners)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Database Key Terms, Explained](https://www.kdnuggets.com/2016/07/database-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Descriptive Statistics Key Terms, Explained](https://www.kdnuggets.com/2017/05/descriptive-statistics-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Decision Tree Algorithm, Explained](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Key-Value Databases, Explained](https://www.kdnuggets.com/2021/04/nosql-explained-understanding-key-value-databases.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Gaussian Naive Bayes, Explained](https://www.kdnuggets.com/2023/03/gaussian-naive-bayes-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

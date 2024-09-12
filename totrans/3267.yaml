@@ -1,0 +1,217 @@
+- en: How to squeeze the most from your training data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/07/squeeze-most-from-training-data.html](https://www.kdnuggets.com/2017/07/squeeze-most-from-training-data.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By [David Bishop](https://www.linkedin.com/in/davbis93/?ppe=1), CTO Love
+    the Sales.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In many cases, the acquisition of well-labelled training data is a huge hurdle
+    for developing accurate prediction systems with supervised learning. At [Love
+    the Sales](https://www.lovethesales.com/), we had the requirement to apply classification
+    to the textual metadata of 2 million products (mostly fashion and homewares) into
+    1,000+ different categories – represented in a hierarchy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to achieve this, we have architected a hierarchical tree of chained
+    2-class linear (Positive vs Negative) Support Vector Machines (LibSVM), each responsible
+    for binary document classification of each hierarchical class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data structures**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A key learning, is that the way in which these SVM’s are structured can actually
+    have a significant impact on how much training data has to be applied, for example,
+    a naive approach would have been as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7562cef405029ebc5d9de69a454d8ce7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This approach requires that for every additional sub-category, two new SVM’s
+    be trained – for example, the addition of a new class for ‘Swimwear’ would require
+    an additional SVM under Men’s and Women’s – not to mention the potential complexity
+    of adding a ‘Unisex’ class at the top level. Overall, deep hierarchical structures
+    can be too rigid to work with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We were able to avoid a great deal of labelling& training work, by flattening
+    our data structures into many sub-trees like so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cd837a93f49684b9b9e5403fa77d843c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'By decoupling our classification structure from the final hierarchy, it is
+    possible to generate the final classification by traversing the SVM hierarchy
+    with each document, and interrogating the results with simple set-based logic
+    such as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Mens Slim-fit jeans = (Mens and Jeans and Slim Fit) and not Womens*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This approach vastly reduces the number of SVM’s required to classify documents,
+    as the resultant sets can be intersected to represent the final classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/54f8839c7ff414fb5494f3d80d4db388.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'It should also now be evident that adding new classes opens up an exponentially
+    increasing number of final categories. For example – adding a top-level ‘Children’s’
+    class – would immediately allow the creation of an entire dimension of new Children’s
+    categories (children’s jeans, shirts, underwear, etc), with minimal additional
+    training data (Only one additional SVM):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d7d28e3d47aec3bdd6724666d8685fbb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Data reuse**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because of the structure we chose, one key insight that we were able to leverage,
+    was that of re-using training data, via linked data relationships. Linking data
+    enabled us to re-use our training data by an overall factor of 9x – thus massively
+    reducing the cost and increasing the accuracy of predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For each individual class, we obviously want as many training-data examples
+    as possible, covering both possible outcomes. Even though we built some excellent
+    internal tooling to help with manually labelling training data in bulk – labelling
+    thousands of examples of each kind of product can be laborious, costly and error-prone.
+    We determined the best way to circumvent these issues was to attempt to reuse
+    as much training data as we could, across classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, given some basic domain knowledge of the categories – we know for
+    certain that ‘Washing machines’ can *never* be ‘Carpet cleaners’
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a9c4d64294b93b49877d18b6b7673fbf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: By adding the ability to link ‘Exclude data’, we can heavily bolster the amount
+    ‘Negative’ training examples for the ‘Washing machines’ SVM by adding to it the
+    *‘Positive’* training data from ‘Carpet cleaners’ SVM. Put more simply, given
+    that we know “Carpet cleaners can *never* be washing machines” – we may as well
+    re-use that data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This approach has a nice uptick, in that whenever the need arises to add some
+    additional training data to improve the ‘Carpet Cleaners’ SVM – it inadvertently
+    improves the ‘Washing machines’ class, via linked negative data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally, another chance for reuse, that is apparent when considering a hierarchy,
+    is that the positive training data for any child nodes, is also *always* positive
+    training data for its parent. For example: ‘Jeans’ are *always* ‘Clothing’.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bb832675df7325f3290ebb03f6e8cc19.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This means that for every positive example of training data added to the ‘Jeans’
+    SVM – an additional positive example is also added to the ‘Clothing’ SVM via the
+    link.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adding links is far more efficient than manually labelling 1000’s of examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ee21075a626c84e1c9563aa5b91802e2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When it comes to hierarchical classification systems, decoupling the classification
+    component from the resulting hierarchy, flattening the data structure and enabling
+    the reuse or training data will all be beneficial in gaining as much efficiency
+    as possible. The approaches outlined above have not only helped reduce the amount
+    of training data we needed to label, it has also given us greater flexibility
+    overall.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Reference: LibSVM –[https://www.csie.ntu.edu.tw/~cjlin/libsvm/](https://www.csie.ntu.edu.tw/~cjlin/libsvm/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: **[David Bishop](https://www.linkedin.com/in/davbis93/?ppe=1)**** is
+    CTO at LovetheSales.com – a retail sales aggregator that enables consumers to
+    find and compare every product on sale, from 100s of retailers, to find the best
+    prices on the brands and products they want. Founded in 2013, it is by far the
+    biggest sale in the world, with over 1,000,000 sale items on the site across all
+    of its regions.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[What is a Support Vector Machine, and Why Would I Use it?](/2017/02/yhat-support-vector-machine.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Ways to Get High-Quality Labeled Training Data at Low Cost](/2017/06/acquiring-quality-labeled-training-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building Regression Models in R using Support Vector Regression](/2017/03/building-regression-models-support-vector-regression.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Use Synthetic Data To Overcome Data Shortages For Machine…](https://www.kdnuggets.com/2022/03/synthetic-data-overcome-data-shortages-machine-learning-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Difference Between Training and Testing Data in Machine Learning](https://www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[New From Anaconda! Data Science Training and Cloud Hosted Notebooks](https://www.kdnuggets.com/2022/11/anaconda-new-anaconda-data-science-training-cloud-hosted-notebooks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Online Training and Workshops with Nvidia](https://www.kdnuggets.com/2022/07/online-training-workshops-nvidia.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

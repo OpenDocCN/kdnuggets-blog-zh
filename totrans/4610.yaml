@@ -1,0 +1,277 @@
+- en: Feature selection by random search in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/08/feature-selection-random-search-python.html](https://www.kdnuggets.com/2019/08/feature-selection-random-search-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Gianluca Malato](http://www.gianlucamalato.it/), Data Scientist, fiction
+    author, and software developer.**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2fa60c200e38bb2510ca3c1de6181396.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Feature selection** has always been a great task in machine learning. According
+    to my experience, I can surely say that feature selection **is much more important** than
+    model selection itself.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature selection and collinearity
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I have already written an [article](https://medium.com/data-science-journal/how-to-measure-feature-importance-in-a-binary-classification-model-d284b8c9a301) about
+    feature selection. It was an **unsupervised **way to measure feature importance
+    in a **binary classification** model, using Pearson’s chi-square test and correlation
+    coefficient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generally speaking, an unsupervised approach is often enough for a simple feature
+    selection. However, each model has **its own way** of “thinking” the features
+    and treat their correlation with the target variable. Moreover, there are models
+    that do not care too much about **collinearity **(i.e., the correlation between
+    the features) and other models that show **very big problems** when it occurs
+    (for example, linear models).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although it’s possible to **rank **the features by some kind of **relevance**
+    metrics introduced by the model (for example, the p-value of the t-test performed
+    on the coefficients of linear regression), taking only the most relevant variables
+    couldn’t be enough. Think about a feature that is equal to another one, just multiplied
+    by two. The linear correlation between these features if 1 and this simple multiplication
+    doesn’t affect the correlation with the target variable, so if we take only the
+    most relevant variables, we’ll take the original feature and the multiplied one.
+    This leads to **collinearity**, which can be quite dangerous for our model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That’s why we must introduce some way to better select our features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Random search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Random search is a really useful tool in a data scientist toolbox. It’s a very
+    simple technique very often used, for example, in cross-validation and **hyperparameter
+    optimization**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It’s very simple. If you have a multi-dimensional grid and want to look for
+    the point on this grid which maximizes (or minimizes) some **objective function**,
+    random search works as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Take a random point on the grid and measure the objective function value
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If the value is better than the best one achieved so far, keep the point in
+    memory.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Repeat for a certain, pre-defined number of times
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: That’s it. Just generating random points and look for the best one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is this a **good way** to find the global minimum (or maximum)? Of course, it’s
+    not. The point we are looking for is only one (if we are lucky) in a very large
+    space and we have only a limited number of iterations. The probability of getting
+    that single point in an *N-*point grid is *1/N*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, why is random search so much used? Because we **never really want** to maximize
+    our performance measure; we want a good, **reasonably high value** that it’s not
+    the highest possible, to avoid overfitting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That’s why random search works and can be used in feature selection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to use random search for feature selection
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Random search can be used for feature selection with quite **good results**.
+    An example of a procedure similar to a random search is the **Random Forest** model
+    which performs a random selection of the features for each tree.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The idea is pretty simple: choose the features **randomly**, measure the model
+    performances by **k-fold cross-validation**, and repeat many times. The feature
+    combination that gives the best performances is the one we are looking for.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'More precisely, these are the steps to follow:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generate a random integer number *N*between 1 and the number of features.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Generate a random sequence of *N*integer numbers between 0 and *N-1*without
+    repetition. This sequence represents our feature array. Remember that Python arrays
+    start from 0.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Train the model on these features and cross-validate it with k-fold cross-validation,
+    saving the **average value **of some performance measure.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Repeat from point 1 as many times as you want.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Finally, get the feature array that gives the best performances according to
+    the chosen performance measure.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: A practical example in Python
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For this example, I’ll use the **breast cancer dataset** included in **sklearn**
+    module. Our model will be a **logistic regression**, and we’ll perform a 5-fold
+    cross-validation using **accuracy** as the performance measure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First of all, we must import the necessary modules.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Then we can import breast cancer data and break it in input and target.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can now create a logistic regression object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Then, we can measure the average accuracy in k-fold CV with all the features.</p.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: It’s 95%. Let’s keep this in mind.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, we can implement a random search with, for example, 300 iterations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: At the end of the loop and the sorting function, the first element of *result *list
+    is the object we are looking for.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can use this value to calculate the new performance measure with this subset
+    of the features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you can see, accuracy has increased.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Random search can be a powerful tool to perform feature selection. It’s not
+    meant to give the reasons why some features are more useful than other ones (as
+    opposed to other feature selection procedures like Recursive Feature Elimination),
+    but it can be a useful tool to reach **good results** in less time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/feature-selection-by-random-search-in-python-730ffd2912e9).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[The Hitchhiker’s Guide to Feature Extraction](https://www.kdnuggets.com/2019/06/hitchhikers-guide-feature-extraction.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Step Forward Feature Selection: A Practical Example in Python](https://www.kdnuggets.com/2018/06/step-forward-feature-selection-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Multi-objective Optimization for Feature Selection](https://www.kdnuggets.com/2017/12/rapidminer-multi-objective-optimization-feature-selection.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Selection: Where Science Meets Art](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Advanced Feature Selection Techniques for Machine Learning Models](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Elevate Your Search Engine Skills with Uplimit''s Search with ML Course!](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

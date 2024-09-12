@@ -1,0 +1,225 @@
+- en: The Gentlest Introduction to Tensorflow – Part 2
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/08/gentlest-introduction-tensorflow-part-2.html](https://www.kdnuggets.com/2016/08/gentlest-introduction-tensorflow-part-2.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Soon Hin Khor, Co-organizer for Tokyo Tensorflow Meetup**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Editor''s note**: You may want to check out [part 1 of this tutorial](/2016/08/gentlest-introduction-tensorflow-part-1.html)
+    before proceeding.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Quick Review
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the [previous article](https://medium.com/@khor/the-gentlest-introduction-to-tensorflow-248dc871a224),
+    we used Tensorflow (TF) to build and learn a linear regression model with a single
+    feature so that given a feature value (house size/sqm), we can predict the outcome
+    (house price/$).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is the review with illustration below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have some data of house sizes & house prices (the gray round points)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: We model the data using linear regression (the red dash line)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: We find the ‘best’ model by training W, and b (of the linear regression model)
+    to minimize the ‘cost’ (the sum of the length of vertical blue lines, which represent
+    the differences between predictions and actual outcomes)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Given any house size, we can use the linear model to predict the house size
+    (the dotted blue lines with arrows)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![Image](../Images/db33e4c8945294c495957b1316e0b4f3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Linear regression explained in a single diagram*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In machine learning (ML) literature, we come across the term ‘training’ very
+    often, let us literally look at what that means in TF.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Linear Regression Modeling
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The goal in linear regression is to find W, b, such that given any feature value
+    (x), we can find the prediction (y) by substituting W, x, b values into the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However to find W, b that can give accurate predictions, we need to ‘train’
+    the model using available data (the multiple pairs of actual feature (x), and
+    actual outcome (y_), note the *underscore*).
+  prefs: []
+  type: TYPE_NORMAL
+- en: ‘Training’ Illustrated
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To find the best W, b values, we can initially start with any W, b values. We
+    also need to define a cost function, which is a measure of the *difference*between
+    the prediction (y) for given a feature value (x), and the actual outcome (y_)
+    for that same feature value (x). For simplicity, we use least[minimum squared
+    error](https://en.wikipedia.org/wiki/Mean_squared_error) (MSE) as our cost function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: By minimizing the cost function, we can arrive at good W, b values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our code to do training is actually very simple and it is labelled with [A,
+    B, C, D], which we will refer to later on. The full source is on [Github](https://github.com/nethsix/gentle_tensorflow/blob/master/code/linear_regression_one_feature_using_mini_batch_with_tensorboard.py).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Our linear model and cost function equations [A] can be represented as TF graph
+    as shown:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/f9f78830d98e6364ce143e3d87f069fb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Create a TF Graph with model & cost, and initialize W, b with some values*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, we select a datapoint (x, y_) [C], and feed [D] it into the TF Graph to
+    get the prediction (y) as well as the cost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/859098e2b745c3e05afe434678fb3f81.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Calculate prediction (y) & cost using a single datapoint*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To get better W, b, we perform gradient descent using TF’s*tf.train.GradientDescentOptimizer* [B]
+    to reduce the cost. In non-technical terms: given the current cost, and based
+    on the graph of how cost varies with other variables (namely W, b), the optimizer
+    will perform small tweaks (increments/decrements) to W, b so that our prediction
+    becomes better for*that single datapoint*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/1c5d01665352d94dd475d64cd4a1d1a9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Based on current cost, determine how to tweak W, b to improve prediction (y)
+    and reduce cost*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The final step in the training cycle is to update the W, b after tweaking them.
+    Note that ‘cycle’ is also referred to as ‘epoch’ in ML literature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/b79b5679f1ceeb28278aaab148182ea2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Update W, b after tweaking them, and before iterating through the next training
+    epoch*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the next training epoch, repeat the steps, but use a different datapoint!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/ddc1f1f3b8fb9cf5fb1faee426bfea52.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Training using different datapoints*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Using a variety of datapoints generalizes our model, i.e., it learns W, b values
+    that can be used to predict *any* feature value. Note that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In most cases, the more datapoints, the better your model can learn and generalize
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If you train more epochs than datapoints you have, you can re-use datapoints,
+    which is not an issue. The gradient descent optimizer always use both the datapoint, *AND* the
+    cost (calculated from the datapoint, with W, b values of that epoch) to tweak
+    W, b; the optimizer may have seen that datapoint before, but not with the same
+    cost, thus it will learn something new, and tweak W, b differently.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can train the model a fixed number of epochs or until it reaches a cost
+    threshold that is satisfactory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyTorch or TensorFlow? Comparing popular Machine Learning frameworks](https://www.kdnuggets.com/2022/02/packt-pytorch-tensorflow-comparing-popular-machine-learning-frameworks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The "Hello World" of Tensorflow](https://www.kdnuggets.com/2022/05/hello-world-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Free TensorFlow 2.0 Complete Course](https://www.kdnuggets.com/2023/02/free-tensorflow-20-complete-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

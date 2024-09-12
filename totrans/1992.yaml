@@ -1,0 +1,195 @@
+- en: How to Build a Real-Time Recommendation Engine Using Graph Databases
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/08/build-realtime-recommendation-engine-graph-databases.html](https://www.kdnuggets.com/2023/08/build-realtime-recommendation-engine-graph-databases.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: “This is for you”, “Suggested for you”, or “You may also like”, are phrases
+    that have become essential in most digital businesses, particularly in e-commerce,
+    or streaming platforms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Although they may seem like a simple concept, they imply a new era in the way
+    businesses interact and connect with their customers: the era of recommendations.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s be honest, most of us, if not all of us, have been carried away by Netflix
+    recommendations while looking for what to watch, or headed straight for the recommendations
+    section on Amazon to see what to buy next.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, I’m going to explain how a Real-Time Recommendation Engine
+    can be built using Graph databases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is a Recommendation Engine?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: A recommendation engine is a toolkit that applies advanced data filtering and
+    predictive analysis to anticipate and predict customers’ needs and wants, i.e.
+    which content, products, or services a customer is likely to consume or engage
+    with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For getting these recommendations, the engines use the combination of the following
+    information:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The customer’s past behaviors and history, e.g. purchased products or watched
+    series.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The customer’s current behaviors and relationships with other customers.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The product’s ranking by customers.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The business’ best sellers.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The behaviors and history of similar or related customers.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: What is a Graph database?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: A Graph database is a NoSQL database where the data is stored in graph structures
+    instead of tables or documents. A graph data structure consists of nodes that
+    can be connected by relationships. Both nodes and relationships can have their
+    own properties (key-value pairs), which further describe them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The following image introduces the basic concepts of the graph data structure:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![How to Build a Real-Time Recommendation Engine Using Graph Databases](../Images/b560e15b1423645e2f1a6bbe52fa31ad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Example of a graph data structure
+  prefs: []
+  type: TYPE_NORMAL
+- en: Real-Time Recommendation Engine for Streaming Platforms
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Now that we know what are a recommendation engine and a graph database, we’re
+    ready to get into how we can build a recommendation engine using graph databases
+    for a streaming platform.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The graph below stores the movies two customers have seen and the relationship
+    between the two customers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![How to Build a Real-Time Recommendation Engine Using Graph Databases](../Images/f9262cd91f247751636ac300bb058fb1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Example of a graph of the streaming platform.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Having this information stored as a graph, we can now think about movie recommendations
+    to influence the next movie to watch. The simplest strategy is to show the most
+    viewed movies on the entire platform. This can be easy using Cypher query language:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'However, this query is very generalist and does not take into account the context
+    of the customer, so it’s not optimized for any given customer. We can do it much
+    better using the social network of the customer, querying for friends and friends-of-friends
+    relationships. With Cypher is very straightforward:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: This query has two parts divided by WITH clause, which allows us to pipe the
+    results from the first part into the second.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With the first part of the query, we find the current customer (`{name: ''Marie''}`)
+    and traverse the graph matching for either Marie’s direct friends or their friends
+    (her friend-of-friends) using the flexible path-length notation `-[:IS_FRIEND_OF*1..2]->`
+    which means one or two `IS_FRIEND_OF` relationships deep.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We take care not to include Marie herself in the results (the `WHERE` clause)
+    and not to get duplicate friends-of-friends that are also direct (the `DISTINCT`
+    clause).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The second half of the query is the same as the simplest query, but now instead
+    of taking into account all the customers on the platform, we are taking into account
+    Marie’s friends and friends-of-friends.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And that’s it, we have just built our real-time recommendation engine for a
+    streaming platform.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrapping up
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'In this article, the following topics have been seen:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What a recommendation engine is and the amount of information it uses to make
+    recommendations.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: What a graph database is and how the data is stored as a graph instead of a
+    table or document.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An example of how we can build a real-time recommendation engine for streaming
+    platforms using graph databases.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**[José María Sánchez Salas](https://www.linkedin.com/in/jmssalas/)** is living
+    in Norway. He is a freelance data engineer from Murcia (Spain). In the middle
+    of business and development worlds, he also write a data engineering newsletter.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ten Key Lessons of Implementing Recommendation Systems in Business](https://www.kdnuggets.com/2022/07/ten-key-lessons-implementing-recommendation-systems-business.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Recommendation System with Hugging Face Transformers](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Faster Way to Prepare Time-Series Data with the AI & Analytics Engine](https://www.kdnuggets.com/2021/12/piexchange-faster-way-prepare-timeseries-data-ai-analytics-engine.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Geospatial Application in Python with Google Earth…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,477 @@
+- en: Introduction to Time Series Analysis in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/09/introduction-time-series-analysis-python.html](https://www.kdnuggets.com/2020/09/introduction-time-series-analysis-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'According to Wikipedia:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*A **time series** is a series of data points indexed (or listed or graphed)
+    in time order. Most commonly, a time series is a sequence taken at successive
+    equally spaced points in time. Thus it is a sequence of discrete-time data. Examples
+    of time series are heights of ocean tides, counts of sunspots, and the daily closing
+    value of the Dow Jones Industrial Average.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: So any dataset in which is taken at successive equally spaced points in time.
+    For example, we can see [this](https://fred.stlouisfed.org/series/UMTMVS) data
+    set that is **Value of Manufacturers’ Shipments for All Manufacturing Industries.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We will see some important points that can help us in analyzing any time-series
+    dataset. These are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Loading time series dataset correctly in Pandas**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Indexing in Time-Series Data**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Time-Resampling using Pandas**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Rolling Time Series**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Plotting Time-series Data using Pandas**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Loading time series dataset correctly in Pandas
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s load the dataset mentioned above in pandas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/b7d76e43e78d255bac44c5590c53ff64.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Since we want our “DATE” column as our index, but simply by reading, it is not
+    doing it, so we have to add some extra parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/17c957b5b7a0fe94c3df4b73ff4efdee.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Great, now we have added our DATE column as the index, but let’s check it’s
+    data type to know that if pandas is dealing with the index as simple objects or
+    pandas built-in DateTime datatype.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/df912a9a7cb0bcdf86d7592b138e05e4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Here we can see that Pandas is dealing with our Index column as a simple object,
+    so let’s convert it into DateTime. We can do it as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/dc43a616452b6175e8cbf211e96589c0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now we can see that *dtype* of our dataset is *datetime64[ns]*. This “[ns]”
+    shows that it is precise in nanoseconds. We can change it to “Days” or “Months”
+    if we want.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alternatively, to avoid all this fuss, we can load data in single line of code
+    using Pandas as follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/080600941b728c349994e5a00d52b0fd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here we have added *parse_dates=True*, so it will automatically use our *index *as
+    dates.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Indexing in Time-Series Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s say I want to get all the data from *2000-01-01* till *2015-05-01*. In
+    order to do this, we can simply use indexing in Pandas like this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/55b0c65bb2f602f0da3a2ef948052092.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here we have data for all the months from *2000-01-01* till *2015-01-01*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s say we want to get all the data of all the first months from *1992-01-01* to *2000-01-01*.
+    We can simply do it by adding another argument that is similar to when we slice
+    the list in python, and we add a step argument in the end.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The syntax for this in Pandas is *['starting date':'ending date':step].* Now,
+    if we observe our dataset, it is in months format, so we want data every 12 months,
+    from 1992 till 2000\. We can do it as follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/8485eb5bedf8bda1bc3238ba1c9bcd5f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And here, we can see that we can get the values of the first month of every
+    year.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Time-Resampling using Pandas
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Think of resampling as *groupby()* where we group by based on any column and
+    then apply an aggregate function to check our results. Whereas in the Time-Series
+    index, we can resample based on any *rule *in which we specify whether we want
+    to resample based on “Years” or “Months” or “Days or anything else.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some important rules for which we resample our time series index are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: M = Month End
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A = Year-End
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: MS = Month Start
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: AS = Year Start
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: and so on. You can check the detailed aliases in the [official documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#offset-aliases).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s apply this to our dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s say we want to calculate the mean value of shipment at the start of every
+    year. We can do this by calling resample at *rule='AS'* for Year Start and then
+    calling the aggregate function *mean *on it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can see the *head *of it as follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/60bfe327ed139f0258cff428ea35c299.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here we have resampled the index based on starting of every year(remember what
+    “AS” does), then applied the *mean *function on it, and now we have the mean of
+    Shipping at the start of every year.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can even use our own custom functions with *resample*. Let’s say we want
+    to calculate the sum of every year with a custom function. We can do that as follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: And then we can apply it via resampling as follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can confirm that it is working correctly by comparing it to
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/868be6bc4ec05c49f3be9e3ffe110d78.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And they both are equal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Rolling Time Series
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Rolling is also similar to Time Resampling, but in Rolling, we take a window
+    of any size and perform any function on it. In simple words, we can say that a
+    rolling window of size *k* means *k* consecutive values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s see an example. If we want to calculate the rolling average of 10 days,
+    we can do it as follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/77600abc3bb38ace716cbfbdae02a765.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now here, we can see that the first 10 values are *NaN *because there are not
+    enough values to calculate the rolling mean for the first 10 values. It starts
+    calculating the mean from the 11th value and goes on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similarly, we can check out the maximum value from a window of 30 days as follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/51cdce074f53c0680ea2c2cc121a8ba8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note that here I have added* [30:] *just because the first 30 entries, i.e.,
+    the first window, do not have values to calculate the *max *function, so they
+    are *NaN*, and for adding a screenshot, to show the first 20 values, I just skipped
+    the first 30 rows, but you do not need to do it in practice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And here, we can see that we have maximum values over a rolling window of 30
+    days.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Plotting Time-series Data using Pandas
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Interestingly, Pandas offer a good set of built-in visualization tools and tricks
+    which can help you in visualizing any kind of data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A basic line plot can be obtained just by calling *.plot* function over the
+    dataframe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/0c56aa1b82b128cc585575dce23b89e4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And here, we can see the value of Manufactures Shipment over time. Notice that
+    how nicely Pandas has handled our x-axis, which is our Time Series Index.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can further modify it by adding a title, and y-label by using *.set* on our
+    plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/041707aa6f9a85da1ae96fd71a932a94.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Similarly, we can change the plot size via *figsize *parameter in *.plot*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/af1f81d7743f010359bee424f87e619d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let’s now Plot the mean of the starting value of every year. We can do it via
+    calling *.plot* after resampling with the rule ‘AS’ as ‘AS’ is the rule for the
+    starting of the year.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/18b700aa0ce959c99ed70e3867a37255.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can also do the bar plot for the mean of starting of every year by calling *.bar* on
+    top of *.plot*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/199cb8f73f8b04c278e576509308aaa0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Similarly, we can plot the rolling mean and normal mean for the starting of
+    the month as follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here, first, we have plotted the mean of the starting of every month via resampling
+    on rule = “MS” (Month start). Then we have set *autoscale(tight=True)*. This will
+    remove the extra plot portion, which is empty. Then we have plotted the rolling
+    mean on 30 days window. Remember that the first 30 Days are null, and you will
+    observe this in the plot. Then we have set Label, Title, and Legend.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The output of this plot is
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/70c9f04160d547b08a217dd17d73fdbf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Notice how the first 30 days are missing in Rolling Average, and since it is
+    rolling average, it is pretty smooth, as compared to resample one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similarly, you can plot for specific dates as per your choice. Let’s say I want
+    to plot the maximum values for the start of every year from 1995 till 2005\. I
+    can do it as follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here, we have specified the *xlim *and *ylim*. See how I have added the dates
+    in *xlim*. The main pattern is *xlim=['starting date', 'ending date']*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/decd5fd34aa25934a01b7b491ada8b32.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And here, you can see the output of Maximum Values at the Start of Year from
+    1999 till 2014.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Learning Outcomes
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This brings us to the end of this article. Hopefully, you are now aware of the
+    basics of
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Loading time series dataset correctly in Pandas**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Indexing in Time-Series Data**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Time-Resampling using Pandas**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Rolling Time Series**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Plotting Time-series Data using Pandas**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: these topics correctly and can apply them in your own datasets too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Understanding Time Series with R](https://www.kdnuggets.com/2020/07/understanding-time-series-r.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How (not) to use Machine Learning for time series forecasting: The sequel](https://www.kdnuggets.com/2020/03/machine-learning-time-series-forecasting-sequel.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Use Python’s datetime](https://www.kdnuggets.com/2019/06/how-use-datetime.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

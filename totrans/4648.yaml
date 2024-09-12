@@ -1,0 +1,789 @@
+- en: The Hitchhiker’s Guide to Feature Extraction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/06/hitchhikers-guide-feature-extraction.html](https://www.kdnuggets.com/2019/06/hitchhikers-guide-feature-extraction.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Header image](../Images/5f86cc6fb889e4686a0a72c2c4c793f9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Good Features are the backbone of any machine learning model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And good feature creation often needs domain knowledge, creativity, and lots
+    of time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this post, I am going to talk about:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Various methods of feature creation- Both Automated and manual
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Different Ways to handle categorical features
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Longitude and Latitude features
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some Kaggle tricks
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And some other ideas to think about feature creation.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***TLDR; this post is about useful feature engineering methods and tricks that
+    I have learned and end up using often.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '1\. Automatic Feature Creation using featuretools:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/051bc46ba1fb390831ff59508a9aba88.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Automation is the future
+  prefs: []
+  type: TYPE_NORMAL
+- en: Have you read about featuretools yet? If not, then you are going to be delighted.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Featuretools** is a framework to perform automated feature engineering. It
+    excels at transforming temporal and relational datasets into feature matrices
+    for machine learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How? Let us work with a toy example to show you the power of featuretools.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us say that we have three tables in our database: **Customers, Sessions,
+    and Transactions.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/87c9b50ea1c26bb769730ab4fb383404.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Datasets and relationships
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e20dc7cbaa02de204e692c8a2e7b9e98.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/6c8c5cc1acb015cd75f2ecc7f1bbdc5b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/1a8e2e18274c92478c43dedc8176ff00.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This is a reasonably good toy dataset to work on since it has time-based columns
+    as well as categorical and numerical columns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we were to create features on this data, we would need to do a lot of merging
+    and aggregations using Pandas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Featuretools makes it so easy for us. Though there are a few things, we will
+    need to learn before our life gets easier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Featuretools works with entitysets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***You can understand an entityset as a bucket for dataframes as well as relationships
+    between them.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e4c224d30d8ecd909868d9666be07551.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Entityset = Bucket of dataframes and relationships
+  prefs: []
+  type: TYPE_NORMAL
+- en: So without further ado, let us create an empty entityset. I just gave the name
+    as customers. You can use any name here. It is just an empty bucket right now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let us add our dataframes to it. The order of adding dataframes is not important.
+    To add a dataframe to an existing entityset, we do the below operation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: So here are a few things we did here to add our dataframe to the empty entityset
+    bucket.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Provided a `entity_id`: This is just a name. Put it as customers.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '`dataframe` name set as customers_df'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '`index` : This argument takes as input the primary key in the table'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '`time_index` : The **time index** is defined as the first time that any information
+    from a row can be used. For customers, it is the joining date. For transactions,
+    it will be the transaction time.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '`variable_types`: This is used to specify if a particular variable must be
+    handled differently. In our Dataframe, we have the `zip_code` variable, and we
+    want to treat it differently, so we use this. These are the different variable
+    types we could use:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is how our entityset bucket looks right now. It has just got one dataframe
+    in it. And no relationships
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cd74bee9bf6fa51a9d17cae1312d10fc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Let us add all our dataframes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is how our entityset buckets look now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/910ec22c3a18981f103dbe64c0bc4b51.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: All three dataframes but no relationships. By relationships, I mean that my
+    bucket doesn’t know that customer_id in customers_df and session_df are the same
+    columns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can provide this information to our entityset as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After this our entityset looks like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d2eb7db8a7c43e1dd430b175051fb739.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can see the datasets as well as the relationships. Most of our work here
+    is done. We are ready to cook features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f1bcb0e1b85a7e800ac2454ad79b3534.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Cooking is no different from feature engineering. Think of features as ingredients.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Creating features is as simple as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/a4436f8d39f831bea87377cd0603d9d8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And we end up with ***73 new features.**** You can see the feature names from *`*feature_defs.*`* Some
+    of the features that we end up creating are:*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can get features like the ***Sum of std of amount(***`SUM(sessions.STD(transactions.amount))`***) ****or**** std
+    of the sum of amount(***`STD(sessions.SUM(transactions.amount))`***) ***. This
+    is what `max_depth`parameter means in the function call. Here we specify it as
+    2 to get two level aggregations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***If we change ***`*max_depth*`*to 3 we can get features like:* `MAX(sessions.NUM_UNIQUE(transactions.YEAR(transaction_time)))`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Just think of how much time you would have to spend if you had to write code
+    to get such features. Also, a caveat is that increasing the `max_depth` might
+    take longer times.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '2\. Handling Categorical Features: Label/Binary/Hashing and Target/Mean Encoding'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Creating automated features has its perks. But why would we data scientists
+    be required if a simple library could do all our work?
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is the section where I will talk about handling categorical features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**One hot encoding**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/44dd804d1a86ab98f8e287671c731e46.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: One Hot Coffee
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can use*** One hot encoding ***to encode our categorical features. So if
+    we have n levels in a category, we will get n-1 features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In our sessions_df table, we have a column named `device,` which contains three
+    levels — desktop, mobile, or tablet. We can get two columns from such a column
+    using:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/9c1108188b124037f8fb325559321b06.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This is the most natural thing that comes to mind when talking about categorical
+    features and works well in many cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**OrdinalEncoding**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sometimes there is an order associated with categories. In such a case, I usually
+    use a simple map/apply function in pandas to create a new ordinal column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example, if I had a dataframe containing temperature as three levels: high
+    medium and low, I would encode that as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/e425f5e288245e881d47397618b38e64.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Using this I preserve the information that low<medium<high
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**LabelEncoder**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We could also have used ***LabelEncoder*** to encode our variable to numbers.
+    What a label encoder essentially does is that it sees the first value in the column
+    and converts it to 0, next value to 1 and so on. This approach works reasonably
+    well with tree models, and ***I end up using it when I have a lot of levels in
+    the categorical variable. ***We can use this as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/f28727d5151cda32553d90d8c9fd8a72.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**BinaryEncoder**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: BinaryEncoder is another method that one can use to encode categorical variables.
+    It is an excellent method to use if you have many levels in a column. While we
+    can encode a column with 1024 levels using 1023 columns using One Hot Encoding,
+    using Binary encoding we can do it by just using ten columns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us say we have a column in our FIFA 19 player data that contains all club
+    names. This column has 652 unique values. One Hot encoding means creating 651
+    columns that would mean a lot of memory usage and a lot of sparse columns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we use Binary encoder, we will only need ten columns as 2⁹<652 <2¹⁰.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can binaryEncode this variable easily by using BinaryEncoder object from
+    category_encoders:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/8a4dbd75b2491befdac3f1a4681b51ca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**HashingEncoder**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/83eb3d841b017b622c2b74cb6aed4f7b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***One can think of Hashing Encoder as a black box function that converts a
+    string to a number between 0 to some prespecified value.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It differs from binary encoding as in binary encoding two or more of the club
+    parameters could have been 1 while in hashing only one value is 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can use hashing as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/64299f4b5fd80cad547a13277bfd332f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: There are bound to be collisions(two clubs having the same encoding. For example,
+    Juventus and PSG have the same encoding) but sometimes this technique works well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Target/Mean Encoding**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7576d94e734662c5ec8be7e04a3dc31d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This is a technique that I found works pretty well in Kaggle competitions. If
+    both training/test comes from the same dataset from the same time period(cross-sectional),
+    we can get crafty with features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example: In the Titanic knowledge challenge, the test data is randomly
+    sampled from the train data. In this case, we can use the target variable averaged
+    over different categorical variable as a feature.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Titanic, we can create a target encoded feature over the PassengerClass variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***We have to be careful when using Target encoding as it might induce overfitting
+    in our models.*** Thus we use k-fold target encoding when we use it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can then create a mean encoded feature as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/6947f886fc1b7a8e3354f6e0edc284f0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can see how the passenger class 3 gets encoded as 0.261538 and 0.230570
+    based on which fold the average is taken from.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This feature is pretty helpful as it encodes the value of the target for the
+    category. Just looking at this feature, we can say that the Passenger in class
+    1 has a high propensity of surviving compared with Class 3.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '3\. Some Kaggle Tricks:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: While not necessarily feature creation techniques, some postprocessing techniques
+    that you may find useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**log loss clipping Technique:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Something that I learned in the Neural Network course by Jeremy Howard. It is
+    based on an elementary Idea.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Log loss penalizes us a lot if we are very confident and wrong.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So in the case of Classification problems where we have to predict probabilities
+    in Kaggle, it would be much better to clip our probabilities between 0.05–0.95
+    so that we are never very sure about our prediction. And in turn, get penalized
+    less. Can be done by a simple `np.clip`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Kaggle submission in gzip format:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A small piece of code that will help you save countless hours of uploading.
+    Enjoy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '4\. Using Latitude and Longitude features:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This part will tread upon how to use Latitude and Longitude features well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this task, I will be using Data from the Playground competition: [New York
+    City Taxi Trip Duration](https://www.kaggle.com/c/nyc-taxi-trip-duration/data)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The train data looks like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1be75e88586a7632bfcb636262619813.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Most of the functions I am going to write here are inspired by a [Kernel](https://www.kaggle.com/gaborfodor/from-eda-to-the-top-lb-0-368) on
+    Kaggle written by Beluga.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this competition, we had to predict the trip duration. We were given many
+    features in which Latitude and Longitude of pickup and Dropoff were also there.
+    We created features like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**A. Haversine Distance Between the Two Lat/Lons:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The **haversine** formula determines the great-circle **distance **between two
+    points on a sphere given their longitudes and latitudes
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We could then use the function as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**B. Manhattan Distance Between the two Lat/Lons:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/54c342a45edd211eddb44fa42659f95a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Manhattan Skyline
+  prefs: []
+  type: TYPE_NORMAL
+- en: The distance between two points measured along axes at right angles
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We could then use the function as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**C. Bearing Between the two Lat/Lons:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A **bearing** is used to represent the direction of **one point** relative to
+    another**point**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We could then use the function as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**D. Center Latitude and Longitude between Pickup and Dropoff:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'These are the new columns that we create:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d73b9558220f2e7edecc60635a1bf5b9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '5\. AutoEncoders:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Sometimes people use Autoencoders too for creating automatic features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***What are Autoencoders?***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Encoders are deep learning functions which approximate a mapping from X to X,
+    i.e. input=output. They first compress the input features into a lower-dimensional *representation *and
+    then reconstruct the output from this representation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/21236b659aff70e01c030c3db0993e03.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can use this *representation* vector as a feature for our models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '6\. Some Normal Things you can do with your features:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '***Scaling by Max-Min:*** This is good and often required preprocessing for
+    Linear models, Neural Networks'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***Normalization using Standard Deviation: ***This is good and often required
+    preprocessing for Linear models, Neural Networks'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***Log-based feature/Target: ***Use log based features or log-based target
+    function. If one is using a Linear model which assumes that the features are normally
+    distributed, a log transformation could make the feature normal. It is also handy
+    in case of skewed variables like income.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Or in our case trip duration. Below is the graph of trip duration without log
+    transformation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ae26ed2e140adfb89b68cb4eadbbdb0f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'And with log transformation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/e67f237b5eb7a9bccf500982fec5cec7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A log transformation on trip duration is much less skewed and thus much more
+    helpful for a model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '7\. Some Additional Features based on Intuition:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Date time Features:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One could create additional Date time features based on domain knowledge and
+    intuition. For example, Time-based Features like “Evening,” “Noon,” “Night,” “Purchases_last_month,”
+    “Purchases_last_week,” etc. could work for a particular application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Domain Specific Features:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/0993d316761b5b05acdec1d5ce5e1ae4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Style matters
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Suppose you have got some shopping cart data and you want to categorize the
+    TripType. It was the exact problem in Walmart Recruiting: Trip Type Classification
+    on [Kaggle](https://www.kaggle.com/c/walmart-recruiting-trip-type-classification/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some examples of trip types: a customer may make a small daily dinner trip,
+    a weekly large grocery trip, a trip to buy gifts for an upcoming holiday, or a
+    seasonal trip to buy clothes.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To solve this problem, you could think of creating a feature like “Stylish”
+    where you create this variable by adding together the number of items that belong
+    to category Men’s Fashion, Women’s Fashion, Teens Fashion.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Or you could create a feature like “Rare”*** which is created by tagging
+    some items as rare, based on the data we have and then counting the number of
+    those rare items in the shopping cart.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Such features might work or might not work. From what I have observed, they
+    usually provide a lot of value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***I feel this is the way that Target’s “Pregnant Teen model” was made.*** They
+    would have had a variable in which they kept all the items that a pregnant teen
+    could buy and put them into a classification algorithm.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Interaction Features:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have features A and B, you can create features A*B, A+B, A/B, A-B, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, to predict the price of a house, if we have two features length
+    and breadth, a better idea would be to create an area(length x breadth) feature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Or in some case, a ratio might be more valuable than having two features alone.
+    Example: Credit Card utilization ratio is more valuable than having the Credit
+    limit and limit utilized variables.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3713c2084537b71228e7c1cd4fdcdf27.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Creativity is vital!!!
+  prefs: []
+  type: TYPE_NORMAL
+- en: These were just some of the methods I use for creating features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***But there is surely no limit when it comes to feature engineering, and it
+    is only your imagination that limits you.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: On that note, I always think about feature engineering while keeping what model
+    I am going to use in mind. Features that work in a random forest may not work
+    well with Logistic Regression.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature creation is the territory of trial and error. You won’t be able to know
+    what transformation works or what encoding works best before trying it. It is
+    always a trade-off between time and utility.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sometimes the feature creation process might take a lot of time. In such cases,
+    you might want to [parallelize your Pandas function](https://medium.com/me/stats/post/1c04f41944a1).
+  prefs: []
+  type: TYPE_NORMAL
+- en: While I have tried to keep this post as exhaustive as possible(This might very
+    well be my biggest post on medium yet), I might have missed some of the useful
+    methods. Let me know about them in the comments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can find all the code for this post and run it yourself in this [Kaggle
+    Kernel](https://www.kaggle.com/mlwhiz/feature-creation/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Take a look at the [How to Win a Data Science Competition: Learn from Top Kagglers](https://www.coursera.org/specializations/aml?siteID=lVarvwc5BD0-AqkGMb7JzoCMW0Np1uLfCA&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0) course
+    in the [Advanced machine learning specialization](https://www.coursera.org/specializations/aml?siteID=lVarvwc5BD0-AqkGMb7JzoCMW0Np1uLfCA&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0) by
+    Kazanova. This course talks about a lot of intuitive ways to improve your model.
+    Definitely recommended.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I am going to be writing more beginner friendly posts in the future too. Let
+    me know what you think about the series. Follow me up at [**Medium**](https://medium.com/@rahul_agarwal) or
+    Subscribe to my [**blog**](http://eepurl.com/dbQnuX) to be informed about them.
+    As always, I welcome feedback and constructive criticism and can be reached on
+    Twitter [@mlwhiz](https://twitter.com/MLWhiz).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Rahul Agarwal](https://www.linkedin.com/in/rahulagwl/)** is Senior
+    Statistical Analyst at WalmartLabs. Follow him on Twitter [@mlwhiz](https://twitter.com/MLWhiz).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/the-hitchhikers-guide-to-feature-extraction-b4c157e96631).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Modeling Price with Regularized Linear Model & XGBoost](/2019/05/modeling-price-regularized-linear-model-xgboost.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Doing Data Science: A Kaggle Walkthrough Part 4 – Data Transformation and
+    Feature Extraction](/2016/06/doing-data-science-kaggle-walkthrough-data-transformation-feature-extraction.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[scikit-feature: Open-Source Feature Selection Repository in Python](/2016/03/scikit-feature-open-source-feature-selection-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Selection: Where Science Meets Art](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Tractable, Feature Engineering Pipeline for Multivariate…](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Stores for Real-time AI & Machine Learning](https://www.kdnuggets.com/2022/03/feature-stores-realtime-ai-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Advanced Feature Selection Techniques for Machine Learning Models](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

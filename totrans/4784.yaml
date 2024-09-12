@@ -1,0 +1,305 @@
+- en: 'Data Augmentation For Bounding Boxes: Rethinking image transforms for object
+    detection'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/09/data-augmentation-bounding-boxes-image-transforms.html](https://www.kdnuggets.com/2018/09/data-augmentation-bounding-boxes-image-transforms.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/09/data-augmentation-object-detection-rethinking-image-transforms-bounding-boxes.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Ayoosh Kathuria](https://www.linkedin.com/in/ayoosh-kathuria-44a319132/),
+    Research Intern**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When it comes to getting good performances from deep learning tasks, the more
+    data the merrier. However, we may only have limited data with us. Data Augmentation
+    is one way to battle this shortage of data, by artificially augmenting our dataset.
+    In fact, the technique has proven to be so successful that it's become a staple
+    of deep learning systems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why does Data Augmentation work?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A very straightforward way to understand why data augmentation works is by thinking
+    of it as a way to artificially expand our dataset. As is the case with deep learning
+    applications, the more data, the merrier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another way to understand why data augmentation works so well is by thinking
+    of it as added noise to our dataset. This is especially true in case of online
+    data augmentation, or augmenting every data sample stochastically each time we
+    feed it to the training loop.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6e61e5d199221bf1c5b843f8f13cfd0a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Left*: Original Image, *Right*: Augmented Image.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each time the neural network sees the same image, it's a bit different due to
+    the stochastic data augmentation being applied to it.  This difference can be
+    seen as noise being added to our data sample each time, and this noise forces
+    the neural network to learn generalised features instead of overfitting on the
+    dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: GitHub Repo
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Everything from this article and the entire augmentation library can be found
+    in the following Github Repo.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[https://github.com/Paperspace/DataAugmentationForObjectDetection](https://github.com/Paperspace/DataAugmentationForObjectDetection)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Documentation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The documentation for this project can be found by opening the `docs/build/html/index.html` in
+    your browser or at this [link](https://augmentationlib.paperspace.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This series has 4 parts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Part 1: Basic Design and Horizontal Flipping](https://blog.paperspace.com/data-augmentation-for-bounding-boxes/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Part 2: Scaling and Translation](https://blog.paperspace.com/data-augmentation-bounding-boxes-scaling-translation/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Part 3: Rotation and Shearing](https://blog.paperspace.com/data-augmentation-for-object-detection-rotation-and-shearing/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Part 4: Baking augmentation into input pipelines](https://blog.paperspace.com/data-augmentation-for-object-detection-building-input-pipelines/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Object Detection for Bounding Boxes
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now, a lot of deep learning libraries like torchvision, keras, and specialised
+    libraries on Github provide data augmentation for classification training tasks.
+    However, the support for data augmentation for object detection tasks is still
+    missing. For example, an augmentation which horizontally flips the image for classification
+    tasks will like look the one above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, doing the same augmentation for an object detection tasks also requires
+    you to update the bounding box. For example, this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a2ac179bf8f51bd5d52db37137d3d7af.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Change of Bounding Boxes during Horizontal Flip
+  prefs: []
+  type: TYPE_NORMAL
+- en: It's this sort of data augmentation, or specifically, the detection equivalent
+    of the major data augmentation techniques** requiring us to update the bounding
+    boxes**, that we will cover in these article. To be precise, here is the exact
+    list of augmentations we will be covering.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Horizontal Flip (As shown above)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Scaling and Translating
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![](../Images/4c467e8b4a1b1c8650f02016acda5a03.png)'
+  prefs:
+  - PREF_IND
+  type: TYPE_IMG
+- en: Rotation
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![](../Images/8e8f2d946410acaa88cc23226bf65b4a.png)'
+  prefs:
+  - PREF_IND
+  type: TYPE_IMG
+- en: Shearing
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![](../Images/44408836b2cf9d23de012bdfb7b76798.png)'
+  prefs:
+  - PREF_IND
+  type: TYPE_IMG
+- en: Resizing for input to the neural network
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Technical Details
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We will be basing our little data augmentation library on **Numpy **and **OpenCV.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will define our augmentations as classes, instances of which can be called
+    to perform augmentation. We will define a uniform way to define these classes
+    so that you can also write your own data augmentations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will also define a Data Augmentation that does nothing of it's own, but combines
+    data augmentations so that they can be applied in a **Sequence**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For each Data Augmentation, we will define two variants of it, a **stochastic** one
+    and a **deterministic** one. In the stochastic one, the augmentation happens randomly,
+    whereas in deterministic, the parameters of the augmentation (like the angle to
+    be rotated are held fixed).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Example Data Augmentation: Horizontal Flip'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This article will outline the general approach to writing an augmentation. We
+    will also go over some utility functions that will help us visualise detections,
+    and some other stuff. So, let's get started.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Format for Storing Annotation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'For every image, we store the bounding box annotations in a numpy array with *N *rows
+    and 5 columns. Here, *N *represents the number of objects in the image, while
+    the five columns represent:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The top left *x* coordinate
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The top left *y* coordinate
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The right bottom *x* coordinate
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The right bottom *y* coordinate
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The class of the object
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![](../Images/7464457fea0838197eabd08fe7f60a00.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Format for storing Bounding Box Annotations
+  prefs: []
+  type: TYPE_NORMAL
+- en: I know a lot of datasets, and annotation tools store annotations in other formats,
+    so, I'd leave it you to turn whatever storage format your data annotations are
+    stored in, into the format described above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And yes, for demonstration purposes we are going to use the following image
+    of Lionel Messi scoring a beauty of a goal against Nigeria.
+  prefs: []
+  type: TYPE_NORMAL
+- en: File Organisation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We keep our code in 2 files, `data_aug.py` and `bbox_util.py`. The first file
+    is going to contain the code for augmentations while the second file will contain
+    the code for helper functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Both these files will live inside a folder called `data_aug`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us assume that you have to use these data augmentations in your training
+    loop. I'll let you figure out how you extract your images and make sure annotations
+    are in proper format.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, for sake of keeping thing simple, let us use only one image at a time.
+    You can easily move this code inside the loop, or your data fetching function
+    to extend the functionality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Clone the github repo in the folder containing the file of your training code,
+    or the file where you need to make of the augmentation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Bounding Box Deep Learning: The Future of Video Annotation](https://www.kdnuggets.com/2022/07/bounding-box-deep-learning-future-video-annotation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[IT Staff Augmentation: How AI Is Changing the Software Development Industry](https://www.kdnuggets.com/2023/05/staff-augmentation-ai-changing-software-development-industry.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Semantic Vector Search Transforms Customer Support Interactions](https://www.kdnuggets.com/how-semantic-vector-search-transforms-customer-support-interactions)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n09, Mar 2: Telling a Great Data Story: A…](https://www.kdnuggets.com/2022/n09.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Is the Difference Between SQL and Object-Relational Mapping (ORM)?](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Beginner''s Guide to Anomaly Detection Techniques in Data Science](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

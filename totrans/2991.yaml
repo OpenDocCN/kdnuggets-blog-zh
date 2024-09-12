@@ -1,0 +1,244 @@
+- en: Deep Multi-Task Learning – 3 Lessons Learned
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/02/deep-multi-task-learning.html](https://www.kdnuggets.com/2019/02/deep-multi-task-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Zohar Komarovsky](https://www.linkedin.com/in/zohar-komarovsky-7773b9b/),
+    Taboola**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For the past year, my team and I have been working on a personalized user experience
+    in the [Taboola feed](https://blog.taboola.com/taboola-feed/). We used [Multi-Task
+    Learning](http://ruder.io/multi-task) (MTL) to predict multiple Key Performance
+    Indicators (KPIs) on the same set of input features, and implemented a Deep Learning
+    (DL) model in TensorFlow to do so. Back when we started, MTL seemed way more complicated
+    to us than it does now, so I wanted to share some of the lessons learned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are already quite a few posts about implementing MTL in a DL model ([1](https://jg8610.github.io/Multi-Task), [2](https://medium.com/@kajalgupta/multi-task-learning-with-deep-neural-networks-7544f8b7b4e3), [3](https://hanxiao.github.io/2017/07/07/Get-10x-Speedup-in-Tensorflow-Multi-Task-Learning-using-Python-Multiprocessing)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Sharing is caring**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We wanted to start with the basic approach of [hard parameter sharing](http://ruder.io/multi-task/index.html#hardparametersharing).
+    Hard sharing means we have a shared subnet, followed by task-specific subnets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/80214669e0ea6d08cccad7cb7c411c68.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: An easy way to start playing with such a model in TensorFlow is using [Estimators](https://www.youtube.com/watch?v=4oNdaQk0Qv4) with [multiple
+    heads](https://www.tensorflow.org/api_docs/python/tf/contrib/estimator/multi_head).
+    Since it doesn’t look that different than other NN architectures, you may ask
+    yourself what could go wrong?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Lesson 1 – Combining losses**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first challenge we encountered with our MTL model, was defining a single
+    loss function for multiple tasks. While a single task has a well defined loss
+    function, with multiple tasks come multiple losses.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first thing we tried was simply to sum the different losses. Soon enough
+    we could see that while one task converges to good results, the others look pretty
+    bad. When taking a closer look, we could easily see why. The losses’ scales were
+    so different, that one task dominated the overall loss, while the rest of the
+    tasks didn’t have a chance to affect the learning process of the shared layers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A quick fix was replacing the sum of losses with a weighted sum, that brought
+    all losses to approximately the same scale. However, this solution involves another
+    hyperparameter that might need to be tuned every once in a while.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Luckily, we found a [great paper](https://arxiv.org/abs/1705.07115) proposing
+    to use uncertainty to weigh losses in MTL. The way it is done, is by learning
+    another noise parameter that is integrated in the loss function for each task.
+    This allows having multiple tasks, possibly regression and classification, and
+    bringing all losses to the same scale. Now we could go back to simply summing
+    our losses.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Not only did we get better results than with a weighted sum, we could forget
+    about the additional weights hyperparameters. [Here](https://github.com/yaringal/multi-task-learning-example/blob/master/multi-task-learning-example.ipynb) is
+    a Keras implementation provided by the authors of the paper.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Lesson 2 – Tuning learning rates**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It’s a common convention that learning rate is one of the most important hyperparameters
+    for [tuning neural networks](https://engineering.taboola.com/hitchhikers-guide-hyperparameter-tuning/).
+    So we tried tuning, and found a learning rate that looked really good for task
+    A, and another one that was really good for task B. Choosing the higher rate caused [dying
+    Relu’s](https://www.quora.com/What-is-the-dying-ReLU-problem-in-neural-networks) on
+    one of the tasks, while using the lower one brought a slow convergence on the
+    other task. Then what could we do? We could tune a separate learning rate for
+    each of the “heads” (task-specific subnets), and another rate for the shared subnet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Though it may sound complicated, it’s actually pretty simple. Usually when
+    training a NN in TensorFlow you use something like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*AdamOptimizer* defines how gradients should be applied, and *minimize* computes
+    and applies them. We can replace *minimize* with our own implementation that would
+    use the appropriate learning rate for each variable in our computational graph
+    when applying the gradients:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: By the way, this trick can actually also be useful for single-task networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Lesson 3 – Using estimates as features**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Once we’re past the first phase of creating a NN that predicts multiple tasks,
+    we might want to use our estimate for one task as a feature to another. In the
+    forward-pass that’s really easy. The estimate is a Tensor, so we can wire it just
+    like any other layer’s output. But what happens in backprop?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Say the estimate for task A is passed as a feature to task B. We probably wouldn’t
+    want to propagate the gradients from task B back to task A, as we already have
+    a label for A.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Don’t worry, TensorFlow’s API has [tf.stop_gradient](https://www.tensorflow.org/api_docs/python/tf/stop_gradient) just
+    for that reason. When computing the gradients, it lets you pass a list of Tensors
+    you wish to treat as constants, which is exactly what we need.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Again, this is useful in MTL networks, but not only. This technique can be used
+    whenever you want to compute a value with TensorFlow, and need to pretend that
+    the value was a constant. For example, when training Generative Adversarial Networks
+    (GANs), you don’t want to backprop through the generation process of the adversarial
+    example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**So, what’s next?**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Our models are up and running and Taboola feed is being personalized. However,
+    there is still a lot of room for improvement, and lots of interesting architectures
+    to explore. In our use case, predicting multiple tasks also means we make a decision
+    based on multiple KPIs. That can be a bit more tricky than using a single KPI…
+    but that’s already a whole new topic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for reading, I hope you found this post useful!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio**: [Zohar Komarovsky](https://www.linkedin.com/in/zohar-komarovsky-7773b9b/)
+    is an Algorithms Developer at Taboola and works on Machine Learning applications
+    for Recommendation Systems.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://engineering.taboola.com/deep-multi-task-learning-3-lessons-learned).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Resources:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[On-line and web-based: Analytics, Data Mining, Data Science, Machine Learning
+    education](https://www.kdnuggets.com/education/online.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Software for Analytics, Data Science, Data Mining, and Machine Learning](https://www.kdnuggets.com/software/index.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Trending Deep Learning Github Repositories](https://www.kdnuggets.com/2019/02/trending-top-deep-learning-github-repositories.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What were the most significant machine learning/AI advances in 2018?](https://www.kdnuggets.com/2019/01/machine-learning-ai-advances-2018.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[NLP Overview: Modern Deep Learning Techniques Applied to Natural Language
+    Processing](https://www.kdnuggets.com/2019/01/nlp-overview-modern-deep-learning-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[What I Learned From Using ChatGPT for Data Science](https://www.kdnuggets.com/what-i-learned-from-using-chatgpt-for-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ten Key Lessons of Implementing Recommendation Systems in Business](https://www.kdnuggets.com/2022/07/ten-key-lessons-implementing-recommendation-systems-business.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Lessons from a Senior Data Scientist](https://www.kdnuggets.com/2022/09/lessons-senior-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, September 28: Free Algorithms in Python Course •…](https://www.kdnuggets.com/2022/n38.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Career Lessons That Helped Me Navigate the Difficult Job Market](https://www.kdnuggets.com/2023/05/4-lessons-made-difference-navigating-current-job-market.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

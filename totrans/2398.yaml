@@ -1,0 +1,384 @@
+- en: Using Scikit-learn’s Imputer
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/07/scikitlearn-imputer.html](https://www.kdnuggets.com/2022/07/scikitlearn-imputer.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Using Scikit-learn''s Imputer](../Images/6237013757a9a03d4aae1d849299a8af.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Puzzle shape](https://www.freepik.com/photos/puzzle-shape) photo created by
+    [freepik](https://www.freepik.com)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is an Imputer?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have some missing values in your dataset, you can drop the missing values
+    row or even column. This method is highly discouraged as it reduces the size of
+    data, and the data analysis can be skewed from the ground truth. Instead, we should
+    use machine learning algorithms that are not affected by missing values or use
+    imputers to fill in the missing information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The imputer is an estimator used to fill the missing values in datasets. For
+    numerical values, it uses **mean**, **median**, and **constant**. For categorical
+    values, it uses the **most frequently used** and **constant value**. You can also
+    train your model to predict the missing labels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the tutorial, we will learn about Scikit-learn’s **SimpleImputer**, **IterativeImputer**,
+    and **KNNImputer**. We will also create a pipeline to impute categorical and numerical
+    features and feed them into a machine learning model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to use Scikit-learn's Imputer
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The [scikit-learn](https://scikit-learn.org/stable/modules/impute.html)’s imputation
+    functions provide us with an easy-to-fill option with few lines of code. We can
+    integrate these imputers and create pipelines to reproduce results and improve
+    machine learning development processes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting Started
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We will be using the [Deepnote](https://deepnote.com/) environment, which is
+    similar to Jupyter Notebook but on the cloud.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To download and unzip data from [Kaggle](https://www.kaggle.com/). You have
+    to install the Kaggle Python package and download the [spaceship-titanic](https://www.kaggle.com/competitions/spaceship-titanic/data?select=train.csv)
+    dataset using API. Finally, unzip the data into the dataset folder.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, we will import the required Python Packages for data ingestion, imputation,
+    and creating transformation pipelines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The [Spaceship Titanic](https://www.kaggle.com/competitions/spaceship-titanic/data?select=train.csv)
+    dataset is part of Kaggle’s getting started prediction competition. It consists
+    of train, test, and submission CSV files. We will be using **train.csv**, which
+    contains passenger information on space ships.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The pandas **read_csv()** function reads the train.csv and then displays the
+    dataframe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Using Scikit-learn''s Imputer](../Images/f6f658a4b29bc3a93b8c4935833f651e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Data Analysis
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In this section, we will explore columns with missing values, but first, we
+    need to check the shape of the dataset. It has 8693 rows and 14 columns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: We will now display missing value count and percentage based on columns. To
+    display it in a dataframe, we will create a new dataframe of missing values and
+    apply style gradients to the **NA Count** column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Using Scikit-learn''s Imputer](../Images/28ac6aaf0b02b65004ff589fe965ab36.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Except for **PassengerID** and **Transported**, there are missing values in
+    every column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Numerical Imputation
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We will use the information in missing columns and divide it into categorical
+    and numerical columns. We will treat them differently.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For numerical Imputation, we will select the **Age** column and display the
+    number missing value. It will help us validate the before and after results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, we will use sklearn’s **SimpleImputer** and apply it to the **Age** column.
+    It will replace missing data with the **average** value of the column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we can observe, there are no missing values left in the **Age** column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: For numerical columns, you can use **constant**, **mean**, and **median** strategy
+    and for categorical columns, you can use **most_frequent** and **constant** strategy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Categorical Imputation
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: For categorical Imputation, we will use the **HomePlanet** column which contains
+    201 missing values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: To fill categorical missing values, we will use **SimpleImputer** with the **most_frequent**
+    strategy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: We have filled all of the missing values in the HomePlanet column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Multivariate Imputer
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In **univariate Imputer,** the missing value is calculated using the same feature,
+    whereas in **multivariate Imputer** algorithms use the entire set of available
+    feature dimensions to predict the missing value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will be imputing numerical columns at once, and as we can see, they all have
+    150+ missing values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: We will use IterativeImputer with 10 **max_iter** to estimate and fill missing
+    values in numerical columns. The algorithm will consider all of the columns in
+    making value estimation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: Imputing Categorical and Numerical for Machine Learning
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Why Scikit-learn’s Imputer? Apart from Imputer, the machine learning framework
+    provides feature transformation, data manipulation, pipelines, and machine learning
+    algorithms. They all integrate smoothly. With a few lines of code, you can Impute,
+    normalize, transform, and train your model on any dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this section, we will learn how to integrate Imputer in a machine learning
+    project to get better results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we will import relevant functions from sklearn.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Then, we will drop irrelevant columns to create X and Y variables. Our target
+    column is “Transported”.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: After that, we will split them into training and test sets.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: To create numerical and categorical transformation data pipelines, we will use
+    sklearn’s Pipeline function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For **numeric_transformer**, we have used:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**KNNImputer** with 2 **n_neighbors** and uniform **weights**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the second step, we have used **StandardScaler** with the default configuration
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'For **categorical_transformer**, we have used:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**SimpleImputer** with **most_frequent** strategy'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the second step, we have used **OrdinalEncoder**, to convert categories into
+    numbers.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now, we will process and transform the training feature using **ColumnTransformer**.
+    For **numeric_transformer,** we have provided it with a list of numerical columns,
+    and for **categorical_transformer,** we will be using a list of categorical columns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** we are just preparing pipelines and transformers. We have not processed
+    any data yet.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: Finally, we will create a transform pipeline that contains a **processor** and
+    **DecisionTreeClassifier** for the binary classification task. This pipeline will
+    first process and transform the data, and then it will train the classifier model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is where the magic happens. We will fit the training dataset on the **transform**
+    pipeline. After that, we will evaluate our model using a test dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We got **75% accuracy** with the default configuration. Not bad!!!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, we will run predictions on a test dataset and create a structured **classification
+    report**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: As we can see, we have stable scores for the **True** and **False** classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: For more accuracy data scientists are using a deep learning approach for the
+    Imputation of missing values. Again, you have to decide how much time and resources
+    are required for you to build a system and what value it brings. In most cases,
+    Scikit-learn's Imputers provide greater value, and it took us a few lines of code
+    to Impute the entire dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this blog, we have learned about Imputation and how the Scikit-learn library
+    works in estimating missing values. We have also learned about univariant, multivariate,
+    categorical, and numerical imputations. In the final part, we have used data pipelines,
+    column transformers, and machine learning pipelines to impute, transform, train,
+    and evaluate our model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))
+    is a certified data scientist professional who loves building machine learning
+    models. Currently, he is focusing on content creation and writing technical blogs
+    on machine learning and data science technologies. Abid holds a Master''s degree
+    in Technology Management and a bachelor''s degree in Telecommunication Engineering.
+    His vision is to build an AI product using a graph neural network for students
+    struggling with mental illness.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Handle Missing Data with Scikit-learn''s Imputer Module](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automate Microsoft Excel and Word Using Python](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Determine the Best Fitting Data Distribution Using Python](https://www.kdnuggets.com/2021/09/determine-best-fitting-data-distribution-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Datawig, an AWS Deep Learning Library for Missing Value Imputation](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

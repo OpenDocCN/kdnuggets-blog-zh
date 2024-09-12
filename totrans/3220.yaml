@@ -1,0 +1,260 @@
+- en: How LinkedIn Makes Personalized Recommendations via Photon-ML Machine Learning
+    tool
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/10/linkedin-personalized-recommendations-photon-ml.html](https://www.kdnuggets.com/2017/10/linkedin-personalized-recommendations-photon-ml.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Yiming Ma, Bee-Chung Chen & Deepak Agarwal, LinkedIn Corp.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Recommender systems are automated computer programs that match items to users
+    in different contexts. Such systems are ubiquitous and have become an integral
+    part of our daily lives. Examples include recommending products to users on a
+    site like Amazon, recommending content to users visiting a website like Yahoo!,
+    recommending movies to users on a site like Netflix, recommending jobs to users
+    on LinkedIn, and so on. Given the significant heterogeneity in user preferences,
+    providing personalized recommendations is key to the success of such systems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To achieve this goal at scale, using machine learning models to estimate user
+    preference from feedback data is essential. Such models are constructed using
+    large amounts of high-frequency data obtained from past user interactions with
+    items. They are statistical in nature and involve challenges in areas like sequential
+    decision processes, modeling interactions with very high-dimensional categorical
+    data, and developing scalable statistical methods. New methodologies in this area
+    require close collaboration among computer scientists, machine learners, statisticians,
+    optimization experts, system experts, and, of course, domain experts. It is one
+    of the most exciting applications of big data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Many products at LinkedIn are empowered by recommender systems. A core component
+    of these systems is an easy-to-use and flexible machine learning library, called
+    Photon-ML, which is key to our productivity, agility, and developer happiness.
+    We have open-sourced most of the algorithms used by Photon-ML. In this article
+    we focus on the personalization aspect of model building and explain the modeling
+    principle as well as how to implement Photon-ML so that it can scale to hundreds
+    of millions of users.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Personalized Models in Photon-ML
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: At LinkedIn, we have observed significant lifts in user engagement and other
+    business metrics in many product domains through Photon-ML. To provide a concrete
+    example, note how we make personalized job recommendations using a Generalized
+    Additive Mixed-Effect (GAME) model, which generated 20% to 40% more job applications
+    for job seekers in our online A/B experiments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![LinkedIn image](../Images/49da1fcd3e13df7ec6787de1b1df203e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 1\. A snapshot of LinkedIn job home
+  prefs: []
+  type: TYPE_NORMAL
+- en: As the world's largest professional social network, LinkedIn provides a unique
+    value proposition for its over 500 million members to connect with all kinds of
+    opportunities for their career growth. One of the most important products we offer
+    is the Jobs Homepage, which serves as a central place for members with job-seeking
+    intent to find good jobs to apply for.  Figure 1 is a snapshot of the LinkedIn
+    Jobs Homepage. One of the main modules on the page is “Jobs you may be interested
+    in,” where relevant job thumbnails are recommended to members based on their public
+    profile data and past activities on the site. If a member is interested in a recommended
+    job, she can click on it to go to the job detail page, where the original job
+    post is shown with information such as the job title, description, responsibilities,
+    required skills and qualifications. The job detail page also has an “apply” button
+    which allows the member to apply for the job with one click, either on LinkedIn
+    or on the website of the company posting the job. One of the key success metrics
+    of LinkedIn’s jobs business is the total number of **job application clicks**
+    (i.e. the number of clicks on the “apply” button).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The goal of our model is to accurately predict the probability that a member
+    will click on the "apply" button of a recommended job. Intuitively, the model
+    consists of three components (sub-models):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A global model that captures the general behavior of how members apply for jobs,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A member-specific model with parameters (to be learned from data) specific to
+    the given member to capture member's personal behavior that deviates from the
+    general behavior, and
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A job-specific model with parameters (to be learned from data) specific to the
+    given job to capture the job's unique behavior that deviates from the general
+    behavior.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Like many recommender system applications, we observe a lot of heterogeneity
+    in the amount of data per member or job. There are new members to the site (hence
+    almost no data) as well as members who have strong job search intent and applied
+    for many jobs in the past. Similarly, for jobs, there are both popular and unpopular
+    ones. For a member with many responses to different jobs in the past, we want
+    to rely on the member-specific model. On the other hand, if the member does not
+    have much past response data, we would like the member to fall back to the global
+    model that captures the general behavior.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now let us take a deep look at how the GAME model enables such a level of personalization.
+    Let *y[mjt]* denote the binary response of whether member *m* would apply for
+    job *j* in context *t*, where the context usually includes the time and location
+    where the job is shown. We use *q[m]* to denote the feature vector of member *m*,
+    which includes the features extracted from the member''s public profile, e.g.
+    the member''s title, job function, education history, industry, etc. We use *s[j]*
+    to denote the feature vector of job *j*, which includes features extracted from
+    the job post, e.g. the job title, desired skills and experiences, etc. Let *x[mjt]*
+    represent the overall feature vector for the (*m, j, t*) triple, which can include
+    *q[m]* and *s[j]* for feature-level main effects, the outer product between *q[m]*
+    and *s[j]* for interactions among member and job features, and features of the
+    context. We assume that *x[mjt]* does not contain member IDs or item IDs as features,
+    because IDs will be treated differently from regular features. The GAME model
+    for predicting the probability of member *m* applying for job *j* using logistic
+    regression is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/200876f8b83666b6a8eb38aff11812b3.png)      **(1)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: where
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/6761cbc6946e5453aa66a263baa73dec.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: is the link function, ***b*** is the global coefficient vector (also called
+    ***fixed effect*** coefficients in the statistical literature), and *α[m]* and
+    *β[j]* are the coefficient vectors specific to member *m* and job *j*, respectively.
+    *α[m]* and *β[j]* are called ***random effect coefficients***, which capture member
+    *m*'s personal preference on different item features and job *j*'s attraction
+    for different member features. For a member *m* with many responses to different
+    items in the past, we are able to accurately estimate her personal coefficient
+    vector *α[m]* and provide personalized predictions. On the other hand, if member
+    *m* does not have much past response data, the posterior mean of *α[m]* will be
+    close to zero, and the model for member *m* will fall back to the global fixed
+    effect component *x'[mjt]b*. The same behavior applies to the per-job coefficient
+    vector *β[j]*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Photon-ML: Scalable Platform for Building Personalized Models'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To train a model using a large amount of data on a Hadoop cluster, we developed
+    Photon-ML on top of Apache Spark. One main challenge in designing a scalable algorithm
+    is that the number of model parameters to be learned from the data is huge (e.g.
+    tens of billions). If we naively train the model using standard machine learning
+    methods (e.g. MLlib provided by Spark), the network communication cost for updating
+    the large number of parameters is too high to be computationally feasible. The
+    large number of parameters mainly comes from user-specific and job-specific models.
+    As a result, the key to making the algorithm scalable is to avoid communicating
+    or broadcasting the large number of parameters in the user-specific and job-specific
+    models to the cluster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We solve the large-scale model training problem by applying parallel block-wise
+    coordinate descent (PBCD), which iteratively trains the global model, user-specific
+    models and job-specific models in turns until convergence. The global model is
+    trained using a standard distributed gradient descent method. For the user-specific
+    models and job-specific models, we designed a model parameter update scheme such
+    that the parameters in the user-specific and job-specific models do not need to
+    be communicated across machines in the cluster. Instead, a partial score per training
+    example is communicated across machines. This significantly reduced the communicate
+    cost. PBCD can be easily applied to models with different kinds of sub-models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusions and Future Work
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, we have briefly explained how to use Photon-ML to enable personalized
+    recommendations. Many intriguing optimization and implementation details have
+    been skipped due to the length limitation of this article. We highly recommend
+    our readers to check out the open-sourced Photon-ML repo. At LinkedIn, we are
+    committed to building state-of-the-art recommendation systems. We have made exciting
+    plans for Photon-ML. In the near future, we are planning to add more modeling
+    capabilities to Photon-ML, including tree models and different deep learning algorithms
+    to capture non-linear and deeper representation structures.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Recommendation System Algorithms: An Overview](/2017/08/recommendation-system-algorithms-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[9 Must-Have Datasets for Investigating Recommender Systems](/2016/02/nine-datasets-investigating-recommender-systems.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 Active Big Data, Data Science, Machine Learning Influencers on LinkedIn,
+    Updated](/2017/09/top-10-big-data-science-machine-learning-influencers-linkedin-updated.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

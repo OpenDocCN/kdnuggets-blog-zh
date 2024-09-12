@@ -1,0 +1,244 @@
+- en: 'Who is your Golden Goose?: Cohort Analysis'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/05/golden-goose-cohort-analysis.html](https://www.kdnuggets.com/2019/05/golden-goose-cohort-analysis.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/05/golden-goose-cohort-analysis.html/2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Jiwon Jeong](https://www.linkedin.com/in/jiwon-jeong/), a Graduate Research
+    Assistant at Yonsei University**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Customer segmentation is the technique of dividing customers into groups based
+    on their purchase patterns to identify who are the most profitable groups. In
+    segmenting customers, various criteria can also be used depending on the market
+    such as geographic, demographic characteristics or behavior bases. This technique
+    assumes that groups with different features require different approaches to marketing
+    and wants to figure out the groups who can boost their profitability the most.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Today, we are going to discuss how to do customer segmentation analysis with
+    the [online retail dataset](https://www.kaggle.com/jihyeseo/online-retail-data-set-from-uci-ml-repo) from
+    UCI ML repo. This analysis will be focused on two steps getting the RFM values
+    and making clusters with K-means algorithms. The dataset and the full code is
+    also available on my [Github](https://github.com/jjone36/Cohort/blob/master/Cohort_Anaylsis_Medium.ipynb).
+    The original resource of this note is from the course “[Customer Segmentation
+    Analysis in Python](https://www.datacamp.com/courses/customer-segmentation-in-python).”
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is RFM?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: RFM is an acronym of recency, frequency and monetary. **Recency **is about when
+    was the last order of a customer. It means the number of days since a customer
+    made the last purchase. If it’s a case for a website or an app, this could be
+    interpreted as the last visit day or the last login time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Frequency **is about the number of purchase in a given period. It could be
+    3 months, 6 months or 1 year. So we can understand this value as for how often
+    or how many a customer used the product of a company. The bigger the value is,
+    the more engaged the customers are. Could we say them as our VIP? Not necessary.
+    Cause we also have to think about how much they actually paid for each purchase,
+    which means monetary value.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Monetary **is the total amount of money a customer spent in that given period.
+    Therefore big spenders will be differentiated with other customers such as MVP
+    or VIP.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3425b2287bfac7a1cfbe638805f406cb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo from CleverTap
+  prefs: []
+  type: TYPE_NORMAL
+- en: These three values are commonly used quantifiable factors in cohort analysis.
+    Because of their simple and intuitive concept, they are popular among other customer
+    segmentation methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Import the data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So we are going to apply RFM to our cohort analysis today. The dataset we are
+    going to use is the transaction history data occurring from Jan 2010 to Sep 2011\.
+    As this is a tutorial guideline for cohort analysis, I’m going to use only the
+    randomly selected fraction of the original dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![importing rfm data](../Images/82ba67ed2348ffcb5e56742d2640f096.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Calculating RFM values
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first thing we’re going to count is the recency value, the number of days
+    since the last order of a customer. From which column could we get that value? **InvoiceData**.
+    With this column, we can get when was the first purchase and when was the last
+    purchase of a customer. Let’s call the first one as **CohortDay**. As **InvoiceDate** also
+    contains additional time data, we need to extract the year, month and day part.
+    After that, we’ll get **CohortDay **which is the minimum of **InvoiceDay**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![calculating rfm values](../Images/5a33209e8858b432108dd99ae9c19301.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As we randomly chose the subset of the data, we also need to know the time period
+    of our data. Like what you can see below, the final day of our dataset is December
+    9th, 2011\. Therefore set December 10th as our pining date and count backward
+    the number of days from the latest purchase for each customer. That will be the
+    recency value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/14ab7f9a8d69a837a9d3ac8359fbe2dd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before getting the recency, let’s count one more value in advance, the total
+    amount of money each customer spent. This is for counting the monetary value.
+    How can we get that? Easy! Multiplying the product price and the quantity of the
+    order in each row.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![total spend dataframe](../Images/fb9408756d1642695f6129e79e9076bd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now we are ready to get the three RFM values at once. I’ll group the data for
+    each customer and aggregate it for each recency, frequency, and monetary value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![RFM table](../Images/312a3e54cb8f148d479933ff79cf8817.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: RFM quartiles
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now we’ll group the customers based on RFM values. Cause these are continuous
+    values, we can also use the quantile values and divide them into 4 groups.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Please pay extra care for the `r_labels`. I gave the labels in descending order.
+    Why is that? Because recency means how much time has elapsed since a customer’s
+    last order. Therefore the smaller the value is, the more engaged a customer to
+    that brand. Now let’s make a new column for indicating group labels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![RFM segmentation](../Images/7998d13c65a432e39e4cae794cadebd1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: I attached all three labels in one cell as `RFM_Segment`. In this way, we can
+    easily check what level or segment a customer belongs to. `RFM_Score` is the total
+    sum of the three values. It doesn’t necessarily have to be the sum so the mean
+    value is also possible. Moreover, we can catch further patterns with the mean
+    or count values of recency, frequency and monetary grouped by this score like
+    below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![RFM_score](../Images/066155e851839111bdb97293bdb92917.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '`RFM_Score` will be the total score of a customer’s engagement or loyalty.
+    Summing up the three values altogether, we can finally categorize customers into
+    ‘Gold,’ ‘Silver,’ ‘Bronze,’ and ‘Green’.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![cohort analysis with RFM values](../Images/18d7bfac61225ee0d20d57b5a7a7b654.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Great! We’re done with one cohort analysis with RFM values. We identified who
+    is our golden goose and where we should take extra care. Now why don’t we try
+    a different method for customer segmentation and compare the two results?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Last call: Stefan Krawcyzk’s ''Mastering MLOps'' Live Cohort](https://www.kdnuggets.com/2022/08/sphere-last-call-stefan-krawcyzk-mastering-mlops.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Cluster Analysis to Segment Your Data](https://www.kdnuggets.com/using-cluster-analysis-to-segment-your-data)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Best Architecture for Your Text Classification Task: Benchmarking…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Market Data and News: A Time Series Analysis](https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best Python Courses: An Analysis Summary](https://www.kdnuggets.com/2022/01/best-python-courses-analysis-summary.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning’s Sweet Spot: Pure Approaches in NLP and Document Analysis](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

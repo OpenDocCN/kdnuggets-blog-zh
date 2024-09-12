@@ -1,0 +1,189 @@
+- en: What No One Tells You About Real-Time Machine Learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2015/11/petrov-real-time-machine-learning.html](https://www.kdnuggets.com/2015/11/petrov-real-time-machine-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)**By
+    Dmitry Petrov, FullStackML**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: During this year, I heard and read a lot about real-time machine learning. People
+    usually provide this appealing business scenario when discussing credit card fraud
+    detection systems. They say that they can continuously update credit card fraud
+    detection model in real-time (See [“What is Apache Spark?”,](https://www.youtube.com/watch?v=SxAxAhn-BDU)
+    [“…real-time use cases…”](https://www.mapr.com/blog/game-changing-real-time-use-cases-apache-spark-on-hadoop#.VhBoNJNVK1E)
+    and [“Real time machine learning”](http://www.slideshare.net/VinothKumarKannan/real-time-machine-learning)).
+    It looks fantastic but **not realistic** to me. One important detail is missing
+    in this scenario – **continuous flow of transactional data is not needed for model
+    retraining. Instead, you need continuous flow of labeled (or pre-marked as Fraud\Not-Fraud)
+    transactional data**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Real Time Machine Learning](../Images/44b636132296c26fa69da6058d3daebf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Machine learning process*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating labeled data is probably the slowest and the most expensive step in
+    most of the machine learning systems. **Machine learning algorithms learn to detect
+    the fraud transactions from the people which is much like labeled data.** Let’s
+    see how it works for fraud detection scenario.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. Creating model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For training credit card models, you need a lot of examples of transactions
+    and each transaction should be labeled as Fraud or Not-Fraud. This labels has
+    to be as accurate as possible! This is our labeled data set. This data set is
+    an input for supervised machine learning algorithms. Based on the labeled data,
+    the algorithm trains the fraud detection model. The model is usually presented
+    as a binary classifier with True (Fraud) or False (Not-Fraud) classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The labeled data set plays a central role in this process****.** It is very
+    easy to change the parameters of our algorithm such as the feature normalization
+    method or loss function. We can change the algorithm itself from logistic regression
+    to SVM or random forest for example. However, you cannot change the labeled data
+    set. This information is predefined and your model should predict the labels that
+    you already have.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2\. How long does data labeling process takes?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How can we label the freshest transactions? If customers report fraud transactions
+    or stolen credit cards, we can immediately mark the transaction as “Fraud”. What
+    should we do with the rest of the transactions? We can assume that non reported
+    transactions are “Not Fraud”. How long should we wait to be sure that they are
+    not fraud? The last time when my friend lost a credit card, she said, “I won’t
+    report the missing credit card yet. Tomorrow I’ll go to the shop that I had last
+    visited and I’ll ask them if they found my credit card.” Fortunately, the store
+    found and returned her credit card. I’m not an expert in the credit card fraud
+    field (I’m only a good card user), but from my experience, **we should wait at
+    least a couple of days before marking transactions as “Not Fraud”**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In contrast, **if somebody reported a Fraud transaction, we can immediately
+    label this transaction as “Fraud”**. A guy who reports fraud probably realizes
+    the fraud transaction only after several hours or couple days after the loss but
+    this is the best we can do.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In that way, our “freshest” labeled data set will be limited by a few “Fraud”
+    transactions with several hours or days delay and lot of “Not Fraud” transactions
+    within 2-3 days delay.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3\. Let''s try to speed up the labeling process**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our goal is to obtained the “freshest” labeled data possible. In fact, we have
+    “fresh Fraud” labels only. For “Not Fraud” labels, we have to wait a few days.
+    It might look like a good idea to build a model using only “Fresh Fraud” labeled
+    data. However, we should understand that **this labeled data set is biased** which
+    might lead to a lot of issues with the models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s imagine a new big shopping center opened yesterday and we got one single
+    fraud report regarding one single transaction from this store. Our labeled data
+    set will contain only one transaction from this shop with a “Fraud” label. All
+    other transactions from the shop are not labeled yet. The algorithm might decide
+    that this shop is a strong fraud predictor and **all transactions from this shop
+    will be erroneously mis-classified as “Fraud” immediately “in real-time”****.**
+    Advantages of real time give us real-time problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Conclusion**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we can see, the credit card fraud detection business scenario does not look
+    like the best scenario for real-time supervised machine learning. Also, I was
+    unable to imagine a good scenario from another business domains. I’d love to see
+    good scenarios of real-time machine learning. **Please share if you have any information
+    or ideas to share with the community.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: See also [this interesting discussion on Reddit](https://www.reddit.com/r/MachineLearning/comments/3ny2qa/what_no_one_tells_you_about_realtime_machine/)
+    about ideas in this post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bio: [Dmitry Petrov](https://www.linkedin.com/profile/view?id=AB4AAAB3AbYByL9xPpYxo65dZ-GMy-SFw-wP0Wk&authType=name&authToken=Zi_p&trk=wonton-desktop),
+    Ph.D. is a Data Scientist at Microsoft. He previously was a Researcher at a university.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://fullstackml.com/2015/10/07/what-no-one-tells-you-about-real-time-machine-learning/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Patterns for Streaming Realtime Analytics](/2015/08/patterns-streaming-realtime-analytics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Spark SQL for Real-Time Analytics](/2015/09/spark-sql-real-time-analytics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Interview: Ted Dunning, MapR on The Real Meaning of Real-Time in Big Data](/2015/03/interview-ted-dunning-mapr-real-time-big-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Why You Need To Learn More Than One Programming Language!](https://www.kdnuggets.com/2022/06/need-learn-one-programming-language.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Breaking the Data Barrier: How Zero-Shot, One-Shot, and Few-Shot…](https://www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Is Not Like Your Brain Part One: Neurons Are Slow,…](https://www.kdnuggets.com/2022/04/machine-learning-like-brain-part-one-neurons-slow-slow-slow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GPT-4: 8 Models in One; The Secret is Out](https://www.kdnuggets.com/2023/08/gpt4-8-models-one-secret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[ETL vs ELT: Which One is Right for Your Data Pipeline?](https://www.kdnuggets.com/2023/03/etl-elt-one-right-data-pipeline.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Pandas: How to One-Hot Encode Data](https://www.kdnuggets.com/2023/07/pandas-onehot-encode-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

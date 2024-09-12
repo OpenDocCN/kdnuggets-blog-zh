@@ -1,0 +1,777 @@
+- en: Introduction to Geographical Time Series Prediction with Crime Data in R, SQL,
+    and Tableau
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/02/introduction-geographical-time-series-crime-r-sql-tableau.html](https://www.kdnuggets.com/2020/02/introduction-geographical-time-series-crime-r-sql-tableau.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Jason Wittenauer](https://www.linkedin.com/in/jason-wittenauer-28026110/),
+    Lead Data Scientist at Huron Consulting Group**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/bc2c323f6a4f8e743055941894d91e80.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this tutorial you will learn how to prepare geographical data for time series
+    predictions.
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When reviewing geographical data, it can be difficult to prepare the data for
+    an analysis. There are specific algorithms that can be used, but they can be limited
+    in what they do. If we spend some time splitting up the data into grids and then
+    adding a time point for each grid point, it opens up more possibilities for modeling
+    algorithms and other features that can be added. However, it does create an issue
+    with the size of the data set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A five year crime data set can easily consist of 250,000 records. Once that
+    is extrapolated into a time series grid of an entire city, it can easily hit 75
+    million data points. When dealing with data of this size, it is helpful to use
+    a database to cleanse the data before sending it to a modeling script. The steps
+    we will follow are listed below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Importing data into a SQL Server database.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Cleansing and grouping data into a map grid.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Adding time data points to the set of grid data and filling in the gaps where
+    no crimes occurred.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Importing the data into R
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Running an XGBoost model to determine where crimes will occur on a specific
+    day
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: At the end, we will discuss the next steps for making the predictions more usable
+    to end users in BI tools like Tableau.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prerequisites
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Before beginning this tutorial, you will need:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: SQL Server Express installed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: SQL Management Studio or similar IDE to interface with SQL Server
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: R installed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: R Studio, Jupyter notebook, or other IDE to interface with R
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A general working knowledge of SQL and R
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Data Flow Overview
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We will be keeping the database and data flow in a simple structure for now.
+    The database itself will be very flat and the final data handoff into the Tableau
+    dashboard will be executed via a text file. In a more production ready version,
+    we would be saving the predictions back into the database and pulling from that
+    database into the reporting dashboard. For this example, we are not triyng to
+    architect everything perfectly, but just understand the basics of doing geographical
+    time series predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Our data flow is below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bfe4230ca0e6a8e92a27fc5e1955cff9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Setup the Database
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Our prediction model will be using crime data for the Baltimore area from 2012
+    to 2017\. This is located in the "Data" folder within this repo and the filename
+    is "Baltimore Incident Data.zip". Before importing this data you will need to
+    follow one of the options below to setup the database:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Option 1**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Restore a SQL database using the backup file located in the "Database Objects\Clean
+    Backup\" folder.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Option 2**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use the scripts located in the "Database Objects" folder under "Tables" and
+    "Procedures" to manually create all of the objects.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Import the Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Once the database has been successfully created, you can now import the data.
+    This will require you to do the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unzip the "Baltimore Incident Data.zip" file found in the "Data" folder.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Run the "Insert_StagingCrime" procedure and make sure it is pointed to the correct
+    import file and to the correct format file (found in the "Data" folder named "FormatFile.fmt").
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: This procedure will be truncating the Staging_Crime and inserting data from
+    the file directly into it using a BULK INSERT. The staging table itself has all
+    VARCHAR(MAX) data types which we will convert into better data types in the next
+    phase of the import process. A code snippet of the procedure is below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Review the Data.
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now that the data has been imported into the staging table, you can view it
+    by running the below code in SQL Management Studio:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Giving you the following results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| CrimeDate | CrimeTime | CrimeCode | Address | Description | InsideOutside
+    | Weapon | Post | District | Neighborhood | Location | Premise | TotalIncidents
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 02/28/2017 | 23:50:00 | 6D | 2400 KEYWORTH AVE | LARCENY FROM AUTO | O |
+    NULL | 533 | NORTHERN | Greenspring | (39.3348700000, -76.6590200000) | STREET
+    | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 02/28/2017 | 23:36:00 | 4D | 200 DIENER PL | AGG. ASSAULT | I | HANDS | 843
+    | SOUTHWESTERN | Irvington | (39.2830300000, -76.6878200000) | APT/CONDO | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 02/28/2017 | 23:02:00 | 4E | 1800 N MOUNT ST | COMMON ASSAULT | I | HANDS
+    | 742 | WESTERN | Sandtown-Winchester | (39.3092400000, -76.6449800000) | ROW/TOWNHO
+    | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 02/28/2017 | 23:00:00 | 6D | 200 S CLINTON ST | LARCENY FROM AUTO | O | NULL
+    | 231 | SOUTHEASTERN | Highlandtown | (39.2894600000, -76.5701900000) | STREET
+    | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 02/28/2017 | 22:00:00 | 6E | 1300 TOWSON ST | LARCENY | O | NULL | 943 |
+    SOUTHERN | Locust Point | (39.2707100000, -76.5911800000) | STREET | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 02/28/2017 | 21:40:00 | 6J | 1000 WILMOT CT | LARCENY | O | NULL | 312 |
+    EASTERN | Oldtown | (39.2993600000, -76.6034100000) | STREET | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 02/28/2017 | 21:40:00 | 6J | 2400 PENNSYLVANIA AVE | LARCENY | O | NULL |
+    733 | WESTERN | Penn North | (39.3094200000, -76.6417700000) | STREET | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 02/28/2017 | 21:30:00 | 5D | 1500 STACK ST | BURGLARY | I | NULL | 943 |
+    SOUTHERN | Riverside | (39.2721500000, -76.6033600000) | OTHER/RESI | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 02/28/2017 | 21:30:00 | 6D | 2100 KOKO LN | LARCENY FROM AUTO | O | NULL
+    | 731 | WESTERN | Panway/Braddish Avenue | (39.3117800000, -76.6633200000) | STREET
+    | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 02/28/2017 | 21:10:00 | 3CF | 800 W LEXINGTON ST | ROBBERY - COMMERCIAL |
+    O | FIREARM | 712 | WESTERN | Poppleton | (39.2910500000, -76.6310600000) | STREET
+    | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: Notice how this data has the point in time the crime occurred, the latitude/longitude,
+    and even crime categories. Those categories can be very useful for more advanced
+    modeling techniques and analytics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cleanse the Data and Create Grids of the Map
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Next we can move our data into a "Crime" table that has the correct data types
+    associated with it. During this step we will also split out the location field
+    into longitude and latitude fields. All of the logic to complete these steps can
+    be done by running the below execution statement:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: And now we will have data populating the "Crime" table. This will allow us to
+    complete the next step to create a grid on the city and assign each crime to one
+    of the grid squares. You will notice that we create two grids (small and large).
+    This allows us to create features that are at the crime location and a little
+    bit further away from the crime location. Essentially giving us hotspots of crime
+    throughout the city.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8d08d7dfe8dbdc5e32007faf6a1c3b15.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Run the below code to create the grids and assign a SmallGridID and LargeGridID
+    to the "Crimes" table:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This procedure is doing three separate tasks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Creating a small grid of squares on the map within the GridSmall table (Procedure:
+    Insert_GridSmall).'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Creating a large grid of squares on the map within the GridLarge table (Procedure:
+    Insert_GridLarge).'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Assigning all the crime records to a small and large square on the map.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The two procedures that create the grid squares are taking in variables to determine
+    the corners of the map and how many squares we want to have on our map. This is
+    defaulting to a small grid that is 200 by 200 and a large grid that has squares
+    twice as big at 100 by 100.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can view some of the grid data by running the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| CrimeId | GridSmallId | BotLeftLatitude | TopRightLatitude | BotLeftLongitude
+    | TopRightLongitude |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 31012 | 39.3341282000001 | 39.3349965000001 | -76.6594308000001 | -76.6585152000001
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | 19121 | 39.2828985 | 39.2837668 | -76.68873 | -76.6878144 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | 25198 | 39.3089475000001 | 39.3098158000001 | -76.6456968000001 | -76.6447812000001
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | 20657 | 39.2889766 | 39.2898449 | -76.5706176000001 | -76.5697020000001
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 5 | 16212 | 39.269874 | 39.2707423 | -76.5916764000001 | -76.5907608000001
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 6 | 22832 | 39.2985279000001 | 39.2993962000001 | -76.6035792000001 | -76.6026636000001
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 7 | 25202 | 39.3089475000001 | 39.3098158000001 | -76.6420344000001 | -76.6411188000001
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 8 | 16601 | 39.2716106 | 39.2724789 | -76.6035792000001 | -76.6026636000001
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 9 | 25781 | 39.3115524000001 | 39.3124207000001 | -76.6640088 | -76.6630932
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 10 | 20992 | 39.2907132 | 39.2915815 | -76.6319628000001 | -76.6310472000001
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: Notice how there are two points being calculated for a square, the top right
+    and bottom left points. We don't have to calculate all four points on the square
+    even though there is technically some curve to a real map when draw longitude
+    and latitude lines. When the scale gets small enough, we can just assume that
+    the squares are mostly straight lines
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create Crime Grid and Lag Features
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The last step we need to complete is creating the entire grid of the map for
+    all time periods we want to evaulate. In our case, that is one grid point per
+    day to determine if a crime is going to occur. To complete this step, the below
+    procedure needs to be executed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: During this step each crime will be grouped together on the map squares so we
+    can determine when and how many crimes occurred on each date in our data set.
+    We will also need to calculate all the filler dates for each square when no crime
+    occurred to make a complete data set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The procedure take quite awhile to run. On my laptop, it ran for about 1 hour
+    and the subsequent table ("CrimeGrid") contains about 75 million records. The
+    nice part is that the output is now saved into a table, so we will not have to
+    run it in our R script where large data operations might not run as efficiently
+    as inside a database.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also during this step we will be creating "lag features". These will be columns
+    that tell us how many times within the last day, two days, week, month, etc. that
+    a crime occured on the grid square. This is essentially helping us do a "hotspot"
+    analysis of the data, which can be used to look at other grid squares nearby to
+    see if the crime is localized to our single square or if it is clustered to all
+    nearby squares, similar to aftershocks in an earthquake. These features may or
+    may not be necessary depending on the type of modeling you do.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/17d4f4d7c22d60ce58296c4584453326.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Prediction Setup
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With all of the data cleansing and feature engineering being done on the database
+    side, the code for doing predictions is quite simple. In our example we will be
+    using XGBoost in R to analyze five years of training data to predict future crimes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To start, we load our libraries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Then import the data into R directly from the database. You could also export
+    the data to text files and read in CSV data if that is your preferred method.
+    The queries to pull the data are just written as SQL statements with some date
+    limiters. These could be re-written to pull directly from reporting stored procedures
+    with date parameters for a more productionized version of the code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| target | GridSmallId | GridLargeId | DayOfWeek | MonthOfYear | DayOfYear
+    | Year | PriorIncident1Day | PriorIncident2Days | PriorIncident3Days | PriorIncident7Days
+    | PriorIncident14Days | PriorIncident30Days | PriorIncident1Day_Large | PriorIncident2Days_Large
+    | PriorIncident3Days_Large | PriorIncident7Days_Large | PriorIncident14Days_Large
+    | PriorIncident30Days_Large |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    | --- | --- | --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 3780 | 990 | 5 | 9 | 262 | 2013 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+    0 | 0 | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 3781 | 991 | 5 | 9 | 262 | 2013 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+    0 | 0 | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 3782 | 991 | 5 | 9 | 262 | 2013 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+    0 | 0 | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 3783 | 992 | 5 | 9 | 262 | 2013 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+    0 | 0 | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 3784 | 992 | 5 | 9 | 262 | 2013 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+    0 | 0 | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 3785 | 993 | 5 | 9 | 262 | 2013 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+    0 | 0 | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: Notice in the test data set we are pull 7 days worth of data to test at once,
+    but still keeping the features coming in as if we knew what happened the prior
+    day. This is just so we can test 7 days at once and see how multiple days worth
+    of predictions look in our reporting at the very end.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another item to note is that the features labeled "_Large" are for the larger
+    grid vs. the smaller grid.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create Feature Set and Model Parameters
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We are defining the features as all of the columns that come after the first
+    "target" column in the SQL query. These are passed in as part of the labeling
+    on the train and test data sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, setup the parameters for model training. We are keeping them pretty basic
+    for now. Make sure that the evaluation metric is AUC so we can try to maximize
+    our True Positive Rate. This will prevent police officers from patrolling areas
+    unnecessarily. There could be additional work to cover all predicted areas with
+    clever patrolling, but we are not going to get into it during this tutorial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Run the Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that everything is setup, we can run the model and see how well it is predicting.
+    Keep in mind that this is using a pretty basic set of features just to demonstrate
+    one way to deal with geographic time series data. While the data sets can get
+    quite large, they are easy to understand and can run fairly quickly when using
+    cloud based services like AWS.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This particular training data set had 70 million rows and took about 30 minutes
+    to complete 67 rounds of evaluation on my laptop.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: The model found the patterns quickly and didn't get too much improvement over
+    each round. This could be enhanced with better model parameters and more features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Review Importance Matrix
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Time to analyze our features to see which ones are rating highly in the model
+    by looking at the importance matrix. This can help us determine whether the new
+    features that we add are really worth it on a large data set (larger data set
+    = extra processing time per feature added).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/b1cbdda4a2704fd96dfb44254024086d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It looks like the model it using a combination of small and large grid features
+    to determine if an incident will occur on the current day. It is interesting that
+    the longer term features seem to be more important, indicating a history of criminal
+    activity in the area and/or surrounding areas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Predict on Test and Check ROC Curve
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The last step is to check our predictions against the test data set and see
+    how well they did. We always hope that the ROC curve will spike up really high
+    and really quick, but that is not always the case. In our example, we have a decent
+    score with only basic features included in the model. This definitely shows us
+    that we can do the predictions and more time should be invested to make them better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/8aed21f0ee9d475c63d428d2786b4f2a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Review the Confusion Matrix
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We know there is a decent AUC score but let's look at the actual output of what
+    we predicted vs. what actually happened. The easiest way to do this is to review
+    the confusion matrix. We want the top left and bottom right boxes (good predictions)
+    to be big and the others (bad predictions) to be small.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: Over the course of 7 days, it looks like there were 821 incidents and our model
+    correctly predicted 367 of them. The other key point is that we incorrectly predicted
+    62 incidents, essentially sending police officers to areas where we thought a
+    crime could occur but did not. At face value, this doesn't seem too bad but we
+    would need to see how this affects response times to criminal activity vs. what
+    the current response times are at right now. The idea being that police officers
+    are in areas close enough to a crime that they can either prevent it with their
+    presence or respond to it very quickly to prevent as much harm as possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prepare Data for Reporting
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Next we can add in the longitude and latitude coordinates for the test data
+    set and export it to a CSV file. This will allow us to take a look at the actual
+    predictions on a map in a BI tool like Tableau.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| GridSmallId | target | GridLargeId.x | DayOfWeek | MonthOfYear | DayOfYear
+    | Year | PriorIncident1Day | PriorIncident2Days | PriorIncident3Days | ... | PriorIncident3Days_Large
+    | PriorIncident7Days_Large | PriorIncident14Days_Large | PriorIncident30Days_Large
+    | preds | BotLeftLatitude | TopRightLatitude | BotLeftLongitude | TopRightLongitude
+    | GridLargeId.y |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    | --- | --- | --- | --- | --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 0 | 1 | 3 | 2 | 52 | 2017 | 0 | 0 | 0 | ... | 0 | 0 | 0 | 0 | 0.2822689
+    | 39.20041 | 39.20128 | -76.71162 | -76.7107 | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 0 | 1 | 5 | 2 | 54 | 2017 | 0 | 0 | 0 | ... | 0 | 0 | 0 | 0 | 0.2822689
+    | 39.20041 | 39.20128 | -76.71162 | -76.7107 | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 0 | 1 | 7 | 2 | 56 | 2017 | 0 | 0 | 0 | ... | 0 | 0 | 0 | 0 | 0.2822689
+    | 39.20041 | 39.20128 | -76.71162 | -76.7107 | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 0 | 1 | 4 | 2 | 53 | 2017 | 0 | 0 | 0 | ... | 0 | 0 | 0 | 0 | 0.2822689
+    | 39.20041 | 39.20128 | -76.71162 | -76.7107 | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 0 | 1 | 2 | 2 | 58 | 2017 | 0 | 0 | 0 | ... | 0 | 0 | 0 | 0 | 0.2822689
+    | 39.20041 | 39.20128 | -76.71162 | -76.7107 | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 0 | 1 | 1 | 2 | 57 | 2017 | 0 | 0 | 0 | ... | 0 | 0 | 0 | 0 | 0.2822689
+    | 39.20041 | 39.20128 | -76.71162 | -76.7107 | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: Visualizing the Predictions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'It is time to see what these predictions actually look like over the course
+    of 7 days. The Tableau dashboard itself can be found here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Crime Prediction Dashboard](https://public.tableau.com/profile/jason.wittenauer#!/vizhome/CrimePrediction_15793180506290/CrimeMap)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: While looking at the predictions that were incorrect (red dots), it looks like
+    they are pretty close to predictions that were correct. This would put police
+    officers in the general vicinity of a crime occurring. So maybe the incorrect
+    predictions are not affecting the overall results very much at all. Example screenshots
+    are shown below with the correct predictions (blue) and incorrect predictions
+    (red).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Incorrect Predictions**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/216313171b15f9150960b9cb675e7d6d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Incorrect and Correct Predictions**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/189e5980bb99f292bce1fae6eaed223e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Overall it does not seem too bad, but we will need more features and/or more
+    data to capture all those missing predictions. Also, there is probably a lot more
+    we can do to focus on specific types of crimes that are occuring and key in on
+    specific prediction modeling to handle each type.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What Next?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This tutorial got us started with doing geographical time series predictions
+    using crime data. We can see that the predictions are definitely working, but
+    there is more work to be done with creating features. We might want to add in
+    some other features that check a larger area for prior crime occurences. Another
+    useful step would be to change our predictions to run hourly and map squad car
+    patrol routes by time of day. Even if the predictions are not perfect, as long
+    as you are putting a police officer in the general vicinity of a crime and it
+    is better than current patrol methodologies, then they can respond much faster
+    or even prevent the crime from occurring in the first place with just their presence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Other ideas to think about:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Remove crime data in the vicinity of police stations, fire stations, hospitals,
+    etc. since those could be biased against people submitting reports.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Add in demographic features related to census information.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Map crimes to neighborhoods instead of a square grid to predict against.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Hope you enjoyed the tutorial!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Jason Wittenauer](https://www.linkedin.com/in/jason-wittenauer-28026110/)**
+    is a data scientist focused on improving hospital earnings with a background in
+    R, Python, Microsoft SQL Server, Tableau, TIBCO Spotfire, and .NET web programming.
+    His areas of focus in healthcare are business operations, revenue improvement,
+    and expense reduction.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://github.com/jasonwi1202/Crime-Prediction/blob/master/Crime%20Prediction.ipynb).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Stock Market Forecasting Using Time Series Analysis](/2020/01/stock-market-forecasting-time-series-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What you need to know: The Modern Open-Source Data Science/Machine Learning
+    Ecosystem](/2019/06/top-data-science-machine-learning-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Justice Can’t Be Colorblind: How to Fight Bias with Predictive Policing](/2018/02/fight-bias-predictive-policing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Multivariate Time-Series Prediction with BQML](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Handling Missing Values in Time-series with SQL](https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Create Efficient Combined Data Sources with Tableau](https://www.kdnuggets.com/2022/05/create-efficient-combined-data-sources-tableau.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Prepare Your Data for Effective Tableau & Power BI Dashboards](https://www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Most Used Tableau Functions](https://www.kdnuggets.com/2022/08/10-used-tableau-functions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, August 3: 10 Most Used Tableau Functions • Is…](https://www.kdnuggets.com/2022/n31.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

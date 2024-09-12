@@ -1,0 +1,455 @@
+- en: 'Web Scraping Tutorial with Python: Tips and Tricks'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/02/web-scraping-tutorial-python.html](https://www.kdnuggets.com/2018/02/web-scraping-tutorial-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Jekaterina Kokatjuhha](https://hackernoon.com/@k.kokatjuhha)**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I was searching for flight tickets and noticed that ticket prices fluctuate
+    during the day. I tried to find out when the best time to buy tickets is, but
+    there was nothing on the Web that helped. I built a small program to automatically
+    collect the data from the web — a so-called scraper. It extracted information
+    for my specific flight destination on predetermined dates and notified me when
+    the price got lower.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Web scraping is a technique used to extract data from websites through an automated
+    process.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: I learned a lot from this experience with Web scraping, and I want to share
+    it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This post is intended for people who are interested to know about the common
+    design patterns, pitfalls and rules related to the web scraping. The article presents
+    several **use cases** and a collection of typical **problems**, such as how **not
+    to be detected**, **dos** and **don’ts**, and how to **speed up (parallelization)**
+    your scraper.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Everything will be accompanied by python snippets, so that you can start straight
+    away. This document will also go through several useful python packages.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Use Cases**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are many reasons and use cases why you would want to scrape data. Let
+    me list some of them:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: scrape pages of a e-retailer to spot if some of the clothes you want to buy
+    got discounted
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: compare prices of several clothes brands by scraping their pages
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: price of the flight tickets can vary during the day. One could crawl the travel
+    website and get alarmed once the price was lowered
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: analyze the action websites to answer the question if starting bid should be
+    low or high to attract more bidders or if the longer auction correlates with a
+    higher end bid
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Tutorial**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Structure of the tutorial:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Available packages
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Basic code
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Pitfalls
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Dos and dont’s
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Speed up — parallelization
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Before we start: **Be NICE to the servers; you DON’T want to crash a website.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. Available packages and tools**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is no universal solution for web scraping because the way data is stored
+    on each website is usually specific to that site. In fact, if you want to scrape
+    the data, you need to understand the website’s structure and either build your
+    own solution or use a highly customizable one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'However, you don’t need to reinvent the wheel: there are many packages that
+    do the most work for you. Depending on your programming skills and your intended
+    use case, you might find different packages more or less useful.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1.1 Inspect option**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most of the time you will finding yourself inspecting the [HTML](https://www.w3schools.com/html/html_intro.asp)
+    the website. You can easily do it with an “inspect” [option](https://www.lifewire.com/get-inspect-element-tool-for-browser-756549)
+    of your browser.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/19d6260b4014095739c9557a0b1e2e84.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The section of the website that holds my name, my avatar and my description
+    is called `hero hero--profile u-flexTOP` (how interesting that Medium calls its
+    writers ‘heroes’ :)). The <h1> class that holds my name is called`ui-h2 hero-title`
+    and the description is contained within the <p> class `ui-body hero-description`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can read more about [HTML tags](https://www.w3schools.com/tags/), and differences
+    between [classes](https://www.w3schools.com/html/html_classes.asp) and [ids](https://www.w3schools.com/tags/att_global_id.asp)
+    [here](https://www.quora.com/What-is-the-difference-between-class-and-id-in-HTML).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1.2 Scrapy**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There is a stand-alone ready-to-use data extracting framework called [**Scrapy**](https://scrapy.org/).
+    Apart from extracting HTML the package offers lots of functionalities like exporting
+    data in formats, logging etc. It is also highly customisable: run different spiders
+    on different processes, disable cookies¹ and set download delays². It can also
+    be used to extract data using API. However, the learning curve is not smooth for
+    the new programmers: you need to read tutorials and examples to get started.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ¹ Some sites use cookies to identify bots.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ² The website can get overloaded due to a huge amount of crawling requests.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*For my use case it was too much ‘out of the box’: I just wanted to extract
+    the links from all pages, access each link and extract information out of it.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1.3 BeautifulSoup with Requests**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**BeautifulSoup** is a library that allows you to parse the HTML source code
+    in a beautiful way. Along with it you need a **Request** library that will fetch
+    the content of the URL. However, you should take care of everything else like
+    error handling, how to export data, how to parallelize the web scraper, etc.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*I chose BeautifulSoup as it would force me to figure out a lot of stuff that
+    Scrapy handles on its own, and hopefully help me learn faster from my mistakes.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2\. Basic code**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It’s very straightforward to start scraping a website. Most of the time you
+    will find yourself inspecting [HTML](https://www.w3schools.com/html/html_intro.asp)
+    of the website to access the classes and IDs you need. Lets say we have a following
+    html structure and we want to extract the `main_price` elements. Note: `discounted_price`
+    element is optional.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6c1a80f169ffa3d5c17b025d14e354c7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The basic code would be to import the libraries, do the request, parse the html
+    and then to find the `class main_price`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/459bac4d01e6984cbc4c548222f663bd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It can happen that the `class main_price` is present in another section of the
+    website. To avoid extracting unnecessary `class main_price` from any other part
+    of the webpage we could have first addressed the `id listings_prices`and only
+    then find all elements with `class main_price`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3\. Pitfalls**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3.1 Check robots.txt**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The scraping rules of the websites can be found in the [robots.txt](https://www.robotstxt.org/robotstxt.html)
+    file. You can find it by writing robots.txt after the main domain, e.g [www.website_to_scrape.com/robots.txt](https://www.website_to_scrap.com/robots.txt).
+    These rules identify which parts of the websites are not allowed to be automatically
+    extracted or how frequently a bot is allowed to request a page. Most people don’t
+    care about it, but try to be respectful and at least look at the rules even if
+    you don’t plan to follow them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3.2 HTML can be evil**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: HTML tags can contain id, class or both. HTML id specifies a *unique* id and
+    HTML class is non-unique. Changes in the class name or element could either break
+    your code or deliver wrong results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are two ways to avoid it or at least to be alerted about it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use specific `id` rather than `class` since it is less likely to be changed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Check if the element returns `None`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: However, because some fields can be optional (like `discounted_price` in our
+    HTML example), corresponding elements would not appear on each listing. In this
+    case you can count the percentage of how many times this specific element returned
+    None to the number of listings. If it is 100%, you might want to check if the
+    element name was changed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3.3 User agent spoofing**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Every time you visit a website, it gets your [browser information](https://www.whoishostingthis.com/tools/user-agent/)
+    via [user agent](https://en.wikipedia.org/wiki/User_agent). Some websites won’t
+    show you any content unless you provide a user agent. Also, some sites offer different
+    content to different browsers. Websites do not want to block genuine users but
+    you would look suspicious if you send 200 requests/second with the same user agent.
+    A way out might be either to generate (almost) random user agent or to set one
+    yourself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**3.4 Timeout request**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[By default, Request](https://docs.python-requests.org/en/master/user/quickstart/#timeouts)
+    will keep waiting for a response indefinitely. Therefore, it is advised to set
+    the timeout parameter.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**3.5 Did I get blocked?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Frequent appearance of the [status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+    like 404 (Not Found), 403 (Forbidden), 408 (Request Timeout) might indicate that
+    you got blocked. You may want to check for those error codes and proceed accordingly. Also,
+    be ready to handle exceptions from the request.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**3.6 IP Rotation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Even if you randomize your user agent, all your requests will be from the same
+    IP address. That doesn’t sound abnormal because libraries, universities, and also
+    companies have only a few IP addresses. However, if there are uncommonly many
+    requests coming from a single IP address, a server can detect it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using shared [proxies, VPNs or TOR](https://www.privateinternetaccess.com/pages/tor-vpn-proxy)
+    can help you become a ghost ;).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: By using a shared proxy, the website will see the IP address of the proxy server
+    and not yours. A VPN connects you to another network and the IP address of the
+    VPN provider will be sent to the website.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3.7 Honeypots**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Honeypots are means to detect crawlers or scrapers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These can be ‘hidden’ links that are not visible to the users but can be extracted
+    by scrapers/spiders. Such links will have a CSS style set to display:none, they
+    can be blended by having the color of the background, or even be moved off of
+    the visible area of the page. Once your crawler visits such a link, your IP address
+    can be flagged for further investigation, or even be instantly blocked.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another way to spot crawlers is to add links with infinitely deep directory
+    trees. Then one would need to limit the number of retrieved pages or limit the
+    traversal depth.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**4\. Dos and Don''ts**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before scraping, check if there is a public API available. Public APIs provide
+    easier and faster (and legal) data retrieval than web scraping. Check out [Twitter
+    API](https://developer.twitter.com/en/docs) that provides APIs for different purposes.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In case you scrape lots of data, you might want to consider using a database
+    to be able to analyze or retrieve it fast. Follow [this tutorial](https://zetcode.com/db/sqlitepythontutorial/)
+    on how to create a local database with python.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Be polite. As [this answer](https://webmasters.stackexchange.com/questions/6205/what-user-agent-should-i-set)
+    suggests, it is recommended to let people know that you are scraping their website
+    so they can better respond to the problems your bot might cause.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Again, do not overload the website by sending hundreds of requests per second.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**5\. Speed up — parallelization**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you decide to parallelize your program, be careful with your implementation
+    so you don’t slam the server. And be sure you read the **Dos and Don’ts** section.
+    Check out the the definitions of parallelization vs concurrency, processors and
+    threads [here](https://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python)
+    and [here](https://code.tutsplus.com/articles/introduction-to-parallel-and-concurrent-programming-in-python--cms-28612).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you extract a huge amount of information from the page and do some preprocessing
+    of the data while scraping, the number of requests per second you send to the
+    page can be relatively low.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*For my other project where I scraped apartment rental prices, I did heavy
+    preprocessing of the data while scraping, which resulted in 1 request/second.
+    In order to scrape 4K ads, my program would run for about one hour.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to send requests in parallel you might want to use a [multiprocessing](https://docs.python.org/2/library/multiprocessing.html)
+    package.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s say we have 100 pages and we want to assign every processor equal amount
+    of pages to work with. If `n` is the number of CPUs, you can evenly chunk all
+    pages into the `n` bins and assign each bin to a processor. Each process will
+    have its own name, target function and the arguments to work with. The name of
+    the process can be used afterwards to enable writing data to a specific file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*I assigned 1K pages to each of my 4 CPUs which yielded 4 requests/second and
+    reduced the scraping time to around 17 mins.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Happy scraping!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bio: [Jekaterina Kokatjuhha](https://medium.com/@k.kokatjuhha) is a passionate
+    Bioinformatician with interest in Machine Learning and Data Science.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/@k.kokatjuhha/web-scraping-tutorial-with-python-tips-and-tricks-db070e70e071).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Using AutoML to Generate Machine Learning Pipelines with TPOT**](https://www.kdnuggets.com/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-4.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**A Primer on Web Scraping in R**](https://www.kdnuggets.com/2018/01/primer-web-scraping-r.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Web Scraping for Data Science with Python**](https://www.kdnuggets.com/2017/12/baesens-web-scraping-data-science-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Step-by-Step Guide to Web Scraping with Python and Beautiful Soup](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Beginner’s Guide to Web Scraping Using Python](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

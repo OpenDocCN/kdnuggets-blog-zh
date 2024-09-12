@@ -1,0 +1,475 @@
+- en: Data Validation for PySpark Applications using Pandera
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/08/data-validation-pyspark-applications-pandera.html](https://www.kdnuggets.com/2023/08/data-validation-pyspark-applications-pandera.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Data Validation for PySpark Applications using Pandera](../Images/dcef72aa649e62b1541405e7fd23c7e0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Jakub Skafiriak](https://unsplash.com/@jakubskafiriak?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+    on [Unsplash](https://unsplash.com/photos/AljDaiCbCVY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you’re a data practitioner, you’ll appreciate that data validation holds
+    utmost importance in ensuring accuracy and consistency. This becomes particularly
+    crucial when dealing with large datasets or data originating from diverse sources.
+    However, the [Pandera](https://pandera.readthedocs.io/en/stable/) Python library
+    can help to streamline and automate the data validation process. Pandera is an
+    [open-source library](https://github.com/unionai-oss/pandera) meticulously crafted
+    to simplify the tasks of schema and data validation. It builds upon the robustness
+    and versatility of pandas and introduces an intuitive and expressive API specifically
+    designed for data validation purposes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article briefly introduces the key features of Pandera, before moving on
+    to explain how Pandera data validation can be integrated with data processing
+    workflows that use native PySpark SQL since the latest release [(Pandera 0.16.0](https://github.com/unionai-oss/pandera/releases/tag/v0.16.0)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandera is designed to work with other popular Python libraries such as pandas,
+    pyspark.pandas, Dask, etc. This makes it easy to incorporate data validation into
+    your existing data processing workflows. Until recently, Pandera lacked native
+    support for [PySpark SQL](https://spark.apache.org/docs/latest/api/python/), but
+    to bridge this gap, a team at [QuantumBlack, AI by McKinsey](https://www.mckinsey.com/capabilities/quantumblack/how-we-help-clients)
+    comprising [Ismail Negm-PARI](https://github.com/mkinegm), [Neeraj Malhotra](https://github.com/NeerajMalhotra-QB),
+    [Jaskaran Singh Sidana](https://github.com/jaskaransinghsidana), [Kasper Janehag](https://github.com/kasperjanehag),
+    [Oleksandr Lazarchuk](https://github.com/oleksandr-lazarchuk), along with the
+    Pandera Founder, [Niels Bantilan](https://github.com/cosmicBboy), developed native
+    PySpark SQL support and contributed it to Pandera. The text of this article was
+    also prepared by the team, and is written in their words below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Key Features of Pandera
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: If you are unfamiliar with using Pandera to validate your data, we recommend
+    reviewing [Khuyen Tran’s](https://khuyentran1476.medium.com/) “[Validate Your
+    pandas DataFrame with Pandera](https://towardsdatascience.com/validate-your-pandas-dataframe-with-pandera-2995910e564)”
+    which describes the basics. In summary here, we briefly explain the key features
+    and benefits of a simple and intuitive API, in-built validation functions and
+    customisation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Simple and Intuitive API
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: One of the standout features of Pandera is its simple and intuitive API. You
+    can define your data schema using a declarative syntax that is easy to read and
+    understand. This makes it easy to write data validation code that is both efficient
+    and effective.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here’s an example of schema definition in Pandera:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Inbuilt Validation Functions
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Pandera provides a set of in-built functions (more commonly called checks) to
+    perform data validations. When we invoke `validate()`on a Pandera schema, it will
+    perform both schema & data validations. The data validations will invoke `check`
+    functions behind the scenes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here’s a simple example of how to run a data `check` on a dataframe object using
+    Pandera.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: As seen above, for `year` field we have defined a check `gt=2000` enforcing
+    that all values in this field must be greater than 2000 otherwise there will be
+    validation failure raised by Pandera.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here’s a list of all built-in checks available on Pandera by default:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Custom Validation Functions
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In addition to the built-in validation checks, Pandera allows you to define
+    your own custom validation functions. This gives you the flexibility to define
+    your own validation rules based on use case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For instance, you can define a lambda function for data validation as shown
+    here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Adding Support for PySpark SQL DataFrames to Pandera
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'During the process of adding support to PySpark SQL, we adhered to two fundamental
+    principles:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: consistency of interface and user experience
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: performance optimization for PySpark.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: First, let’s delve into the topic of consistency, because it is important that,
+    from a user’s perspective, they have a consistent set of APIs and an interface
+    irrespective of the chosen framework. As Pandera provides multiple frameworks
+    to choose from it was even more critical to have a consistent user experience
+    in PySpark SQL APIs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With this in mind, we can define the Pandera schema using PySpark SQL as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: In the above code, `PanderaSchema` defines the schema for incoming pyspark dataframe.
+    It has 5 fields with varying `dtypes` and enforcement of data checks on `id` and
+    `product_name` fields.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, we crafted a dummy data and enforced native PySpark SQL schema as defined
+    in `spark_schema`*.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is done to simulate schema and data validation failures.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here’s the contents of `df_fail` dataframe:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Next we can invoke Pandera’s validate function to perform schema and data level
+    validations as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: We will explore the contents of `df_out` shortly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Performance Optimization for PySpark
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Our contribution was specifically designed for optimum performance when working
+    with PySpark dataframes, which is crucial when working with large datasets in
+    order to handle the unique challenges of PySpark’s distributed computing environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandera uses PySpark’s distributed computing architecture to efficiently process
+    large datasets while maintaining data consistency and accuracy. We rewrote Pandera’s
+    custom validation functions for PySpark performance to enable faster and more
+    efficient validation of large datasets, while reducing the risk of data errors
+    and inconsistencies at high volume.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Comprehensive Error Reports
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We made another addition to Pandera for the capability to generate detailed
+    error reports in the form of a Python dictionary object. These reports are accessible
+    via the dataframe returned from the validate function. They provide a comprehensive
+    summary of all schema and data level validations, as per the user’s configurations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This feature proves to be valuable for developers to swiftly identify and address
+    any data-related issues. By using the generated error report, teams can compile
+    a comprehensive list of schema and data issues within their application. This
+    enables them to prioritize and resolve issues with efficiency and precision.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is important to note that this feature is currently available exclusively
+    for PySpark SQL, offering users an enhanced experience when working with error
+    reports in Pandera.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In above code example, remember we had invoked `validate()` on spark dataframe:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'It returned a dataframe object. Using accessors we can extract the error report
+    out of it as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As seen above, the error report is aggregated on 2 levels in a python dictionary
+    object to be easily consumed by downstream applications such as timeseries visualization
+    of errors over time using tools like Grafana:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: type of validation = `SCHEMA` or `DATA`
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: category of errors = `DATAFRAME_CHECK` or `WRONG_DATATYPE`, etc.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This new format to restructure the error reporting was introduced in 0.16.0
+    as part of our contribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ON/OFF Switch
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: For applications that rely on PySpark, having an On/Off switch is an important
+    feature that can make a significant difference in terms of flexibility and risk
+    management. Specifically, the On/Off switch allows teams to disable data validations
+    in production without requiring code changes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is especially important for big data pipelines where performance is critical.
+    In many cases, data validation can take up a significant amount of processing
+    time, which can impact the overall performance of the pipeline. With the On/Off
+    switch, teams can quickly and easily disable data validation if necessary, without
+    having to go through the time-consuming process of modifying code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our team introduced the On/Off switch to Pandera so users can easily turn off
+    data validation in production by simply changing a configuration setting. This
+    provides the flexibility needed to prioritize performance, when necessary, without
+    sacrificing data quality or accuracy in development.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To enable validations, set the following in your environment variables:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: This will be picked up by Pandera to disable all validations in the application.
+    By default, validation is enabled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Currently, this feature is only available for PySpark SQL from version 0.16.0
+    as it is a new concept introduced by our contribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Granular Control of Pandera’s Execution
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'In addition to the On/Off switch feature, we also introduced a more granular
+    control over the execution of Pandera’s validation flow. This is achieved by introducing
+    configurable settings that allow users to control execution at three different
+    levels:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`SCHEMA_ONLY`: This setting performs schema validations only. It checks that
+    the data conforms to the schema definition but does not perform any additional
+    data-level validations.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '`DATA_ONLY`: This setting performs data-level validations only. It checks the
+    data against the defined constraints and rules but does not validate the schema.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '`SCHEMA_AND_DATA`: This setting performs both schema and data-level validations.
+    It checks the data against both the schema definition and the defined constraints
+    and rules.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: By providing this granular control, users can choose the level of validation
+    that best fits their specific use case. For example, if the main concern is to
+    ensure that the data conforms to the defined schema, the `SCHEMA_ONLY` setting
+    can be used to reduce the overall processing time. Alternatively, if the data
+    is known to conform to the schema and the focus is on ensuring data quality, the
+    `DATA_ONLY` setting can be used to prioritize data-level validations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The enhanced control over Pandera’s execution allows users to strike a fine-tuned
+    balance between precision and efficiency, enabling a more targeted and optimized
+    validation experience.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: By default, validations are enabled, and depth is set to `SCHEMA_AND_DATA` which
+    can be changed to `SCHEMA_ONLY` or `DATA_ONLY` as desired by use case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Currently, this feature is only available for PySpark SQL from version 0.16.0
+    as it is a new concept introduced by our contribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Metadata at Column and Dataframe levels
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Our team added a new feature to Pandera that allows users to store additional
+    metadata at `Field` and `Schema / Model` levels. This feature is designed to allow
+    users to embed contextual information in their schema definitions which can be
+    leveraged by other applications.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, by storing details about a specific column, such as data type,
+    format, or units, developers can ensure that downstream applications are able
+    to interpret and use the data correctly. Similarly, by storing information about
+    which columns of a schema are needed for a specific use case, developers can optimize
+    data processing pipelines, reduce storage costs, and improve query performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At the schema level, users can store information to help categorize different
+    schema across the entire application. This metadata can include details such as
+    the purpose of the schema, the source of the data, or the date range of the data.
+    This can be particularly useful for managing complex data processing workflows,
+    where multiple schemas are used for different purposes and need to be tracked
+    and managed efficiently.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In the above example, we have introduced additional information on the schema
+    object itself. This is allowed at 2 levels: field and schema.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To extract the metadata on schema level (including all fields in it), we provide
+    helper functions as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: Currently, this feature is a new concept in 0.16.0 and has been added for PySpark
+    SQL and Pandas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We have introduced several new features and concepts, including an On/Off switch
+    that allows teams to disable validations in production without code changes, granular
+    control over Pandera’s validation flow, and the ability to store additional metadata
+    on column and dataframe levels. You can find even more detail in the [updated
+    Pandera documentation](https://pandera.readthedocs.io/en/stable/pyspark_sql.html)
+    for version 0.16.0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As the Pandera Founder, Niels Bantilan, explained in a [recent blog post about
+    the release of Pandera 0.16.0:](https://www.union.ai/blog-post/pandera-0-16-going-beyond-pandas-data-validation)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*To prove out the extensibility of Pandera with the new schema specification
+    and backend API, we collaborated with the* [*QuantumBlack*](https://www.mckinsey.com/capabilities/quantumblack/how-we-help-clients)
+    *team to implement a schema and backend for* [*Pyspark SQL*](https://spark.apache.org/docs/3.3.1/api/python/index.html#:~:text=PySpark%20is%20an%20interface%20for,data%20in%20a%20distributed%20environment.)
+    *… and we completed an MVP in a matter of a few months!*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This recent [contribution to Pandera](https://github.com/unionai-oss/pandera/pull/1243)’s
+    open-source codebase will benefit teams working with PySpark and other big data
+    technologies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The following team members at [QuantumBlack, AI by McKinsey](https://www.mckinsey.com/capabilities/quantumblack/how-we-help-clients)
+    are responsible for this recent contribution: [Ismail Negm-PARI](https://github.com/mkinegm),
+    [Neeraj Malhotra](https://github.com/NeerajMalhotra-QB), [Jaskaran Singh Sidana](https://github.com/jaskaransinghsidana),
+    [Kasper Janehag](https://github.com/kasperjanehag), [Oleksandr Lazarchuk](https://github.com/oleksandr-lazarchuk).
+    I’d like to thank Neeraj in particular for his assistance in preparing this article
+    for publication.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Jo Stichbury](https://www.linkedin.com/in/jostichbury/)** is a technical
+    writer at QuantumBlack, AI by McKinsey. Technical content creator writing about
+    data science and software. Old-school Symbian C++ developer, now accidental cat
+    herder and goose chaser.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PySpark for Data Science](https://www.kdnuggets.com/2023/02/pyspark-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Pydantic Tutorial: Data Validation in Python Made Simple](https://www.kdnuggets.com/pydantic-tutorial-data-validation-in-python-made-simple)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[MarshMallow: The Sweetest Python Library for Data Serialization and…](https://www.kdnuggets.com/marshmallow-the-sweetest-python-library-for-data-serialization-and-validation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why Use k-fold Cross Validation?](https://www.kdnuggets.com/2022/07/kfold-cross-validation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, May 18: 5 Free Hosting Platform For Machine…](https://www.kdnuggets.com/2022/n20.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[LangChain 101: Build Your Own GPT-Powered Applications](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

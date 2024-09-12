@@ -1,0 +1,437 @@
+- en: Matrix Decomposition Decoded
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/12/matrix-decomposition-decoded.html](https://www.kdnuggets.com/2020/12/matrix-decomposition-decoded.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Tanveer Sayyed](https://www.linkedin.com/in/tanveer-sayyed-739105185/),
+    Data Science Enthusiast**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To understand matrix decomposition we’ll have to first understand eigenvalues(referred
+    to as lambdas here on) and eigenvectors. And even before comprehending the intuition
+    behind lambdas and eigenvectors we’ll first need to uncover the purpose behind
+    using matrix and vectors in linear algebra.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So what is the purpose of a matrix and a vector in linear algebra?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In machine learning we are usually concerned with matrices which have features
+    as their columns. We have thus innately made matrices sacrosanct in our minds.
+    Now this might come as a surprise because —* the* *purpose of a matrix is to “act”
+    on (input) vectors to give (output) vectors****!*** Recall the equation of linear
+    regression using linear algebra:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The correct way to read this is — we *‘apply’* the matrix to a vector*(y)* to
+    get the output vector*(coefficients)*. Or in other words — the matrix *‘transforms/distorts’* the
+    input vector to become the output vector. In goes a vector, gets transformed/distorted
+    by a matrix, and out comes another vector. This is just like a function in calculus:
+    in goes a number x(say 3) and outcomes a number *f*(x)[say 27, if *f*(x) = x³].'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The intuition behind lambdas and eigenvectors
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Since the purpose of matrices are now clear, defining eigenvectors would be
+    easy. If we find that, the input vector which goes in and the output vector which
+    comes out, are ***still*** parallel to each other, only then that vector is called
+    eigenvector. Which means they have sustained the distortion or are not affected
+    by it. “Parallel” refers to either one of the two:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'At school we were taught that **Force **is a vector. It has a *direction* as
+    well as a *magnitude*. The same way think of eigenvectors as the *direction* of
+    the distortion and lambdas as the *magnitude* of distortion in ‘**that**’ direction.
+    Thus a matrix is decomposed/factorized(just like 6= 3*2) into a vector and its
+    magnitude which can be written as a product of both:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This is called eigen-decomposition. But how do we find eigenvectors? *From
+    the λs!* Here is how:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'What was important was knowing and understanding these steps so we’ll *not* do
+    this manually because a function already exists in *numpy* library. (And we’ll
+    be using [***this code***](https://gist.github.com/Vernal-Inertia/90b81a3bf6c5abb96c495c905749d072) to
+    display and re-scale the eigenvectors). An example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3014ed7c401fe5275d1ac0ec09796845.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Eigenvectors e1 = [-1, 0.5] and e2 = [-1, -1] are in *PINK* while the output
+    vector is in *GREEN*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note the effect of lambdas [-1, 5]. The lambdas are responsible for the scaling(change
+    in size) of the eigenvectors. λ1 is *negative*, hence we observe negative transformation
+    — output vector moves **opposite** to e1 and gets scaled 1 times length of e1\.
+    While λ2 is *positive* and hence we observe positive transformation — output vector
+    moves in the **same** direction as e2 and gets scaled 5 times length of e2.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now before we move to applications of the eigenvectors and lambdas lets first
+    get their properties into place:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. We can only find eigenvectors and lambdas of a **square** matrix.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. If A has the shape(n,n) then there would be at-most n no. of **independent** lambdas
+    and their corresponding eigenvectors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 3\. The **sum** of lambdas = trace(sum of diagonals) of the matrix.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. The **product** of lambdas = determinant of the matrix-A.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5\. For a **triangular** matrix the lambdas are the diagonal values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 6. **Repeated** lambdas are a source of trouble. For every one lambda repeated
+    we will have one less independent eigenvector.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 7\. The more **symmetric** the matrix the better. Symmetric means *A = transpose(A)*.
+    Symmetric matrices produce “*real*” lambdas. As we start moving away from symmetric
+    to asymmetric matrices the lambdas start becoming complex numbers(*a +****i****b*)
+    and hence eigenvectors start mapping to the imaginary space instead of the real
+    space. This happens despite every element of matrix-A being a real number as we
+    see in the adjacent code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Applications of eigenvectors and lambdas
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Firstly, let us be clear that eigenvalues(lambdas) are not linear. Which means
+    if x, α and y, β are eigenvalues and lambdas of matrices A, B respectively then:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A . B **≠** αβ (x . y), and, A + B **≠** αx + βy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But they do come handy when it comes to calculating powers of matrices i.e.
+    finding A²⁰ or B⁵⁰⁰. If A, B are small matrices it might be possible to calculate
+    the result on our machines. But imagine a huge matrix with lots of features as
+    columns, would it be feasible then? Would we punch-in B 500 times or run a loop
+    500 times? No, because matrix multiplication are computationally exhaustive. So
+    let’s understand how “the Eigens” come to the rescue by discussing the second
+    way of factorization/decomposition of the same matrix. And that is derived from
+    the following equation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now see how convenient it is to calculate large powers via factorization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now let’s dive a little more deeper into why exactly does this happen. Take
+    another example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Observe the eigenvectors of F**¹** and F**⁵**. They remain undistorted and keep
+    pointing in the same direction. Thus powers of a matrix has absolutely no effect
+    on eigenvectors! But observe both the lambdas when degree is changed from 1 to
+    5; λ1 is increasing(1.618 to 11.09) much more rapidly than λ2 is decreasing(**-**0.618
+    to** -**0.09). Thus the effect of λ2 almost negligible. This shows that overall
+    the matrix is an increasing one, which can be validated from its values in F**⁵**[5,3,3,2].
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since we know that matrix multiplications are computationally exhaustive then
+    for any square matrix, if it’s each |λ|is < 0 then we know that the matrix is
+    a *stable* *matrix* and if each |λ|is >0 then the matrix is blowing up and is
+    an *unstable* *matrix* so its better not to move ahead.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The above example is actually the Fibonacci matrix where the matrix F increases/gets
+    scaled approx** 1.6180399 **times each time it multiplies itself! Let’s confirm
+    this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*And that number is the value of lambda itself … isn’t that amazing!!! *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The beauty of lambdas**(eigenvalues)** is that despite being *very few* in number
+    they can open-up hidden secrets about the properties of that matrix/the transforming *f*unction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another application of “the Eigens” is of-course, principle component analysis
+    — PCA !
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why PCA?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'PCA is used for *feature extraction*/*dimensionality reduction*, which refers
+    to the method of reducing the known variables of the data, by *projection*, into
+    lesser number of variables holding the *“almost”* the same amount of information.
+    There are two *equivalent* ways to interpret PCA:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: (i) minimize the projection error,
+  prefs: []
+  type: TYPE_NORMAL
+- en: (ii) maximize the variance of the projection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here it is extremely important to note that both the above statements are actually
+    two sides of the same coin, so minimizing one is *equivalent* to maximizing the
+    second.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/40368ba4eb95d19b7b10363cc9c2c11d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Credits](http://alexhwilliams.info/itsneuronalblog/2016/03/27/pca/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is the need for projection?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We need it because when there are say 1000 features, then, we have 1000 unknown
+    variables. It turns out we need 1000 simultaneous equations to solve for all the
+    variables! But *“what if”* no solutions exists to the problem at hand?...! For
+    example just take a case of 2-variables:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: a + b = 2
+  prefs: []
+  type: TYPE_NORMAL
+- en: a + 2b = 2 …. ?
+  prefs: []
+  type: TYPE_NORMAL
+- en: What PCA does is, it finds the closest approximation to the problem at hand
+    such that certain properties of the initial data are preserved(in other words
+    noise is reduced). Projection thus helps separate noise from the data(code illustration
+    below). This is done by minimizing the least square projection error, which gives
+    the best possible solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is minimizing projection error same as minimizing least square error in linear
+    regression?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Nope. Here is how and why:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/992839f308e22326683ab9a69b32e57c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Credits: Andrew Ng'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This diagram also gives a hint as to why PCA can also be used for unsupervised
+    learning!
+  prefs: []
+  type: TYPE_NORMAL
+- en: But where do “the Eigens” pitch in?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'For that we’ll have to make ourselves aware of the steps of PCA:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since PCA is sensitive to scaling, lets normalize/standardize out matrix-A first.
+    M = mean(A) and then, C = A − M.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'The next step is to *remember* that for best results i.e. to make use of “the
+    Eigens” we need a square matrix and which is symmetrical(property-7 above). So
+    which matrix satisfies both the conditions? Ummm… Ahaan! — the *covariance matrix*!
+    So we do: V = cov(C)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: As we now have what we want, lets just quickly decompose it.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: lambdas, eigenvectors = np.linalg.eig(V )
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The lambdas are then sorted in descending order. Their corresponding eigenvectors
+    now represent the components of the reduced subspace. In the reduced subspace
+    these components (eigenvectors) have now become our new axes, and we know that
+    axes are always **orthogonal **to one another. (This can only happen when each
+    component in PCA is an independent eigenvector). The combinations of these axes
+    produce the projected data.(Click [***this ***](https://www.joyofdata.de/public/pca-3d/)link
+    to get a better understanding. Make each component point directly at you. You’ll
+    see that the first component has captured the highest variance followed by second
+    and then the third)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Select k lambdas to retain maximum explained variance. The amount of variance
+    captured by k number of lambdas is called *explained variance*.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'What was important was knowing and understanding these steps so we’ll *not* do
+    this manually because a function already exists in the *sklearn* library. For
+    simplicity we will reduce a 2-dimenstional data to 1-dimensional data while observing
+    the effect of noise during the process. Here is the code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6238965ce4f89bf609d352458ff04222.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Note the projections are exactly parallel to the principle component. The
+    near uniform closeness of the red and green dots (as compared to black and green
+    dots) depicts that noise has been reduced to a good extent.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: (If you identify anything wrong/incorrect, please do respond. Criticism is welcomed).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'References:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://www.youtube.com/playlist?list=PLE7DDD91010BC51F8(Prof.](https://www.youtube.com/playlist?list=PLE7DDD91010BC51F8(Prof.) Gilbert
+    Strang, Stanford University. Most of my content comes from here.)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Gentle Introduction to Singular-Value Decomposition (SVD) for Machine Learning](https://machinelearningmastery.com/singular-value-decomposition-for-machine-learning/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://www.youtube.com/watch?v=vs2sRvSzA3o](https://www.youtube.com/watch?v=vs2sRvSzA3o) (probably
+    the best visual representation of eigenvalues and eigenvectors)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://hadrienj.github.io/posts/Deep-Learning-Book-Series-Introduction/](https://hadrienj.github.io/posts/Deep-Learning-Book-Series-Introduction/) (the
+    code to visualize vectors)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://en.wikipedia.org/wiki/Singular_value_decomposition](https://en.wikipedia.org/wiki/Singular_value_decomposition)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Everything you did and didn''t know about PCA · Its Neuronal](http://alexhwilliams.info/itsneuronalblog/2016/03/27/pca/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Illustration of principal component analysis (PCA)](https://www.joyofdata.de/blog/illustration-of-principal-component-analysis-pca/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues](https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues) (superb
+    thread)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Practical Guide to Principal Component Analysis (PCA) in R & Python](https://www.analyticsvidhya.com/blog/2016/03/practical-guide-principal-component-analysis-python/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[In Depth: Principal Component Analysis](https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://medium.com/@zhang_yang/python-code-examples-of-pca-v-s-svd-4e9861db0a71](https://medium.com/@zhang_yang/python-code-examples-of-pca-v-s-svd-4e9861db0a71)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Tanveer Sayyed](https://www.linkedin.com/in/tanveer-sayyed-739105185/)**
+    is a Data science enthusiast. Ardent reader. Art lover. Dissent lover... rest
+    of the time swinging on the rings of Saturn.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/@tanveer2407/b06ba3470ca2). Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Mathematics for Machine Learning: The Free eBook](/2020/04/mathematics-machine-learning-book.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Essential Math for Data Science: Integrals And Area Under The Curve](/2020/11/essential-math-data-science-integrals-area-under-curve.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Free Mathematics Courses for Data Science & Machine Learning](/2020/02/free-mathematics-courses-data-science-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Essential Math for Data Science: Visual Introduction to Singular…](https://www.kdnuggets.com/2022/06/essential-math-data-science-visual-introduction-singular-value-decomposition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sparse Matrix Representation in Python](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Idiot''s Guide to Precision, Recall, and Confusion Matrix](https://www.kdnuggets.com/2020/01/guide-precision-recall-confusion-matrix.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Visualizing Your Confusion Matrix in Scikit-learn](https://www.kdnuggets.com/2022/09/visualizing-confusion-matrix-scikitlearn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Convert Text Documents to a TF-IDF Matrix with tfidfvectorizer](https://www.kdnuggets.com/2022/09/convert-text-documents-tfidf-matrix-tfidfvectorizer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Confusion Matrix, Precision, and Recall Explained](https://www.kdnuggets.com/2022/11/confusion-matrix-precision-recall-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

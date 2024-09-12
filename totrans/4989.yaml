@@ -1,0 +1,317 @@
+- en: 'Web Scraping for Dataset Curation, Part 1: Collecting Craft Beer Data'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/02/web-scraping-dataset-curation-part-1.html](https://www.kdnuggets.com/2017/02/web-scraping-dataset-curation-part-1.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Jean-Nicholas Hould, [JeanNicholasHould.com](http://JeanNicholasHould.com/?utm_source=kdnugget).**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have read some of my posts in the past, you know by now that I enjoy
+    a good craft beer. I decided to mix business with pleasure and write a tutorial
+    about how to scrape a craft beer dataset from a website in Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This post is separated in two sections: scraping and tidying the data. In the
+    first part, we’ll plan and write the code to collect a dataset from a website.
+    In the second part, we’ll apply the “tidy data” principles to this freshly scraped
+    dataset. At the end of this post, we’ll have a clean dataset of craft beers.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Web Scraping
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A web scraper is a piece of code that will automatically load web pages and
+    pull specific data for you. The web scraper will do a repetitive task that would
+    otherwise be too long for you to manually do.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, we could code a web scraper that will pull a list of product names
+    and their rating from an e-commerce website and write them in a CSV file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Scraping a website is a great way to acquire a new dataset that would otherwise
+    be unavailable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A few rules on scraping
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'As Greg Reda pointed out a few years ago [in his excellent web scraping tutorial](http://www.gregreda.com/2013/03/03/web-scraping-101-with-python/),
+    there are a few rules that you need to know about scraping:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Respect the website terms & conditions.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Don’t stress the servers. *A scraper can make thousands of web page requests
+    in a second. Make sure you don’t put too much pressure on the server.*
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Your scraper code will break.*Web pages change often. Your scraper code will
+    be outdated soon.*
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Planning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first step in building a scraper is the planning phase. Obviously, you want
+    to decide what data that you want to pull and from which website.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our case, we want to pull data from a website called [CraftCans](http://craftcans.com/db.php?search=all&sort=beerid&ord=desc&view=text).
+    This website lists 2692 craft canned beers. For this specific dataset, we wouldn’t
+    need to build a scraper to pull the data. The way it’s laid out, we could easily
+    copy and paste it into an Excel spreadsheet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/df6135b546e71463baa458485cec59da.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'For each beer, the website presents some details:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Name
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Style
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Size
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Alcohol by volume (ABV)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: IBU’s
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Brewer name
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Brewer location
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Inspect the HTML**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’d like our scraper to pull all of this information for us. In order to give
+    our scraper specific instructions, we need to look at the HTML code of CraftCans
+    website. Most modern web browser offer a way to inspect the HTML source code of
+    a web page by right click on the page.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On Google Chrome, you can right click on an element in a web page and the click
+    on “Inspect” to see the HTML code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/eba7c3a77238c4f275dcdb502c0793b0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Identify patterns**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Looking at the HTML code on the main page, you can see that this big list of
+    beer is in fact an HTML table. Each beer represents a row in this table. Generally,
+    a repeating pattern, such as an HTML table, is ideal for web scraping because
+    the logic is straightforward.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0a729e08a7fa6263370d4df52fd81299.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Libraries used
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For this project, we’ll import four libraries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**urlopen**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first one `urlopen` will be used to request an HTML page on the web and
+    return it’s content. That’s it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**BeautifulSoup4**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The second one, `BeautifulSoup4`, is a library that makes it easy to navigate
+    in an HTML document. For example, with this library you can easily select a table
+    in an HTML document and iterate over its rows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**pandas**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The third one is `pandas`. We will not use this library for the scraping part.
+    We will use it for the tidying part. `pandas` is a library designed to facilitate
+    data manipulation and analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**re for regular expressions**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, we’ll be using `re` which is part of the Python Standard Library. This
+    lib provides regular expression matching operations. Regular expressions are ways
+    to manipulate strings. For example, we can use regular expressions to list all
+    of the numbers in a string.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Write the code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Challenges with the HTML**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After some investigation on CraftCans web page, I realized there is no clean
+    ways to scrape the CraftCans website.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The HTML structure of CraftCans is kind of old school. The whole layout of the
+    page is in tables. This was a common practice in the past but now the layout is
+    generally set with some CSS.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Furthermore, there are no class or identifiers on the HTML table or rows that
+    contains the beer entries. Pointing the scraper to the specific table that we
+    want is challenging without a clean HTML structure or identifiers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution: List all table rows**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The solution I found to scrape the website is most likely not the cleanest but
+    it works.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since there are no identifiers on the table that contains the data, I use `BeautifulSoup4`
+    `findAll` function to load all of the table rows `tr` present in the CraftCans
+    page. This function returns an exhaustive list of table rows, whether or not they
+    are from the table we want to scrape.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For each row, I run a test to determine whether or not it’s a row containing
+    a beer entry or if it’s something else. The heuristic to determine if a row is
+    a beer data entry is straightforward: the row needs to contain eight cells and
+    the first cell must contain a valid numeric id.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we have the functions to determine if a row is indeed a beer entry,
+    we can now scrape the whole web page. We need to decide in which format we want
+    to store the collected data from the website. I’d like to have a JSON document
+    like this one for each beer entry in CraftCans.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Example Beer JSON Entry**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The reason I like to store the data in JSON document is because I can easily
+    transform them into a pandas `DataFrame`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Run the Scraper
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Having our functions written, we can then request the CraftCans web page with
+    `urlopen` and have our code take care of the rest.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With the list of beers returned by `get_all_beers`, we can easily create a new
+    `pandas`*DataFrame* to conveniently visualize and manipulate our data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: Jean-Nicholas Hould** is a [Data Scientist from Montreal, Canada](http://jeannicholashould.com/?utm_source=kdnugget).
+    Author at JeanNicholasHould.com.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://www.jeannicholashould.com/python-web-scraping-tutorial-for-craft-beers.html).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Tidying Data in Python](/2017/01/tidying-data-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Doing Statistics with SQL](/2016/08/doing-statistics-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Statistics 101](/2016/07/data-science-statistics-101.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Beginner’s Guide to Web Scraping Using Python](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Step-by-Step Guide to Web Scraping with Python and Beautiful Soup](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mastering Web Scraping with BeautifulSoup](https://www.kdnuggets.com/mastering-web-scraping-with-beautifulsoup)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Octoparse 8.5: Empowering Local Scraping and More](https://www.kdnuggets.com/2022/02/octoparse-85-empowering-local-scraping.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[ChatGPT-Powered Data Exploration: Unlock Hidden Insights in Your Dataset](https://www.kdnuggets.com/2023/07/chatgptpowered-data-exploration-unlock-hidden-insights-dataset.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Correctly Select a Sample From a Huge Dataset in Machine Learning](https://www.kdnuggets.com/2019/05/sample-huge-dataset-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

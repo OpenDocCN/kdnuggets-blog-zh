@@ -1,0 +1,291 @@
+- en: Data Science in the Cloud with Dask
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/10/data-science-cloud-dask.html](https://www.kdnuggets.com/2020/10/data-science-cloud-dask.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Hugo Bowne-Anderson](https://hugobowne.github.io/), Head of Data Science
+    Evangelism and VP of Marketing at [Coiled](https://coiled.io/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The capability to scale large data analyses is growing in importance when it
+    comes to data science and machine learning, and at a rapid rate. Fortunately,
+    tools like Dask and [Coiled](https://coiled.io/) are making it easy and fast for
+    folks to do just that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dask is a popular solution for scaling up analyses when working in the PyData
+    Ecosystem and Python. This is the case because Dask is designed to parallelize
+    any PyData library, and hence seamlessly works with the host of PyData tools.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Scaling up* your analysis to utilize all the cores of a sole workstation is
+    the first step when starting to work with a large dataset.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, to leverage a cluster on the cloud (Azure, Google Cloud Platform, AWS,
+    and so on) you might need to *scale out* your computation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Read on and we will:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use pandas to showcase a common pattern in data science workflows,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Utilize Dask to scale up workflows, harnessing the cores of a sole workstation,
+    and
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Demonstrate scaling out our workflow to the cloud with [Coiled Cloud](https://cloud.coiled.io/).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Find all the code [here on github](https://github.com/coiled/data-science-at-scale/blob/master/01b-data-analysis-at-scale-extended.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note: Before you get started, it’s important to think about if scaling your
+    computation is actually necessary. Consider making your pandas code more efficient
+    before you jump in. With machine learning, you can measure if more data will result
+    in model improvement by plotting learning curves before you begin.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'PANDAS AND ETL: A COMMON PATTERN IN DATA SCIENCE'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: First, we’ll use pandas on an in-memory dataset to introduce a common data science
+    pattern. This is a 700 MB subset of the NYC taxi dataset, which is about 10 GB
+    in total.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We want to see the scaling shine bright, so we picked a relatively boring workflow.
+    Now we read in the data, massage it, create a feature, and save it to Parquet
+    (not human-readable but vastly more efficient than CSV).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: This took roughly 1 minute on my laptop, a wait time for analysis we can tolerate
+    (maybe).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we want to perform the same analysis on the dataset at large.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'DASK: SCALING UP YOUR DATA SCIENCE'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The 10GB size of the data set is more than the RAM on my laptop, so we can’t
+    store it in memory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Instead we could write a for loop:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: However, the multiple cores on my laptop aren’t taken advantage of through this
+    method, nor is this a graceful solution. Here comes Dask for single machine parallelism.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Importing several aspects of Dask, we’ll spin up a local cluster and launch
+    a Dask client:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Then we import Dask DataFrame, lazily read in the data, and perform the ETL
+    pipeline just as we did with pandas before.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Taking about 5 minutes on my laptop, we’ll call this tolerable (I guess). But,
+    if we wanted to do something marginally more complex (which we commonly do!),
+    this time would quickly increase.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If I had access to a cluster on the cloud, now would be the time to utilize
+    it!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But first, let’s reflect on what we’ve just worked out:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We used a Dask DataFrame - a large, virtual dataframe divided along the index
+    into various Pandas DataFrames
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'We’re working on a local cluster, made of:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A *scheduler* (which organizes and send the work / tasks to workers) and,
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Workers,* which compute those tasks'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We’ve launched a Dask client, which is “the user-facing entry point for cluster
+    users.”
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In short - the client lives wherever you are writing your Python code and the
+    client talks to the scheduler, passing it the tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Dask](../Images/ca8caa73a57c3f6319bea6abe0e8f212.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'COILED: SCALING OUT YOUR DATA SCIENCE'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: And now what we’ve been waiting for - it’s time to burst to the cloud. If you
+    had access to cloud resources (like AWS) and knew how to configure Docker and
+    Kubernetes containers, you could get a Dask cluster launched in the cloud. This
+    would be time consuming, however.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Enter a handy alternative: Coiled, which we’ll use here. To do so, I''ve signed
+    into [Coiled Cloud](http://beta.coiled.io/) (the Beta is currently free compute!),
+    pip installed coiled, and authenticated. Feel free to follow along and do this
+    yourself.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We then perform our necessary imports, spin up a cluster (takes roughly a minute),
+    and instantiate our client:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Next we import our data (this time from s3), and perform our analysis:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: How long did this take on Coiled Cloud? *30 seconds.* This is an order of magnitude
+    less time than it took on my laptop, even for this relatively straightforward
+    analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s easy to see the power of being able to do this set of analyses in a single
+    workflow. We didn’t need to switch contexts or environments. Plus, it is straightforward
+    to go back to using Dask from Coiled on my local workstation or pandas when we’re
+    done. Cloud computing is great when needed, but can be a burden when it’s not.
+    We just had an experience that was a lot less burdensome.
+  prefs: []
+  type: TYPE_NORMAL
+- en: DO YOU NEED FASTER DATA SCIENCE?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can get started on a Coiled cluster for free right now. Coiled also handles
+    security, conda/docker environments, and team management, so you can get back
+    to doing data science and focus on your job. Get started today on [Coiled Cloud](http://beta.coiled.io/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Hugo Bowne-Anderson](https://hugobowne.github.io/)** Hugo Bowne-Anderson
+    is Head of Data Science Evangelism and VP of Marketing at **[Coiled](https://coiled.io/)**
+    ([**@CoiledHQ,**](https://twitter.com/CoiledHQ) **[LinkedIn](https://www.linkedin.com/company/coiled-computing)**).
+    He has extensive experience as a data scientist, educator, evangelist, content
+    marketer, and data strategy consultant, in industry and basic research. He also
+    has experience teaching data science at institutions such as Yale University and
+    Cold Spring Harbor Laboratory, conferences such as SciPy, PyCon, and ODSC and
+    with organizations such as Data Carpentry. He is committed to spreading data skills,
+    access to data science tooling, and open source software, both for individuals
+    and the enterprise.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Machine Learning in Dask](/2020/06/machine-learning-dask.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why and How to Use Dask with Big Data](/2020/04/dask-big-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[K-means Clustering with Dask: Image Filters for Cat Pictures](/2019/06/k-means-clustering-dask-image-filters.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[11 Best Practices of Cloud and Data Migration to AWS Cloud](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[New From Anaconda! Data Science Training and Cloud Hosted Notebooks](https://www.kdnuggets.com/2022/11/anaconda-new-anaconda-data-science-training-cloud-hosted-notebooks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Efficiently Scale Data Science Projects with Cloud Computing](https://www.kdnuggets.com/2023/05/efficiently-scale-data-science-projects-cloud-computing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Cloud Computing Enhances Data Science Workflows](https://www.kdnuggets.com/2023/08/cloud-computing-enhances-data-science-workflows.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Cloud Computing for Data Science](https://www.kdnuggets.com/introduction-to-cloud-computing-for-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 7 Free Cloud Notebooks for Data Science](https://www.kdnuggets.com/top-7-free-cloud-notebooks-for-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

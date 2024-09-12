@@ -1,0 +1,579 @@
+- en: How to deploy Machine Learning/Deep Learning models to the web
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/04/deploy-machine-learning-models-to-web.html](https://www.kdnuggets.com/2021/04/deploy-machine-learning-models-to-web.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/21d362b53192e6a8cdf55bee781e6668.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If you are in the field of machine learning for some time, you must have created
+    some machine learning or deep learning models. You must have thought about how
+    will people use your Jupyter notebook? The answer is *they won’t*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: People can not use your Jupyter notebooks, and you need to deploy your model
+    either as an API or as a complete web service, or in a mobile device, Raspberry
+    PI, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, you will learn how to deploy your deep learning model as a
+    REST API, and add a form to take the input from the user, and return the predictions
+    from the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will use FastAPI to create it as an API and deploy it for free on Heroku.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 1: Installations'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You need to install the necessary packages.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. FastAPI + Uvicorn**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will be FastAPI for API and Uvicorn server to run and host this API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**2\. Tensorflow 2**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will be using Tensorflow 2 for this tutorial, and you can use the framework
+    of your own choice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**3\. Heroku**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can install Heroku on Ubuntu directly from the terminal using the following
+    command,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: On macOS, you can install it via,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: For windows, you can install the compressed files from the official website [here](https://devcenter.heroku.com/articles/heroku-cli).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**4\. Git**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You also need to install git and make an account on GitHub so that we can push
+    directly to GitHub and connect the main branch to our Heroku, so it will automatically
+    deploy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can use *apt *to install git on Debian.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: To install it on Windows, you can download it directly from [here](https://git-scm.com/download/win).
+  prefs: []
+  type: TYPE_NORMAL
+- en: To install on macOS, you can install XCode command-line tools and run the following
+    command to activate it,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can also install it from the [website of git](https://git-scm.com/download/mac) on
+    macOS.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 2: Creating our Deep Learning Model'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We will create a simple deep learning model, which is related to sentiment analysis.
+    The dataset used can be downloaded from [Kaggle](https://www.kaggle.com/crowdflower/first-gop-debate-twitter-sentiment),
+    which is related to GOP tweets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will create this model, train it, and save it so that we can use the saved
+    model in our API, and we do not have to train the model weights every time our
+    API starts. We will create this model in the file **model.py**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here we have imported the important libraries, which will help us in the creation
+    of the model and cleaning of data. I will not dive into details of the deep learning
+    model or working of Tensorflow. For that, you can check this article on [KDnuggets](https://www.kdnuggets.com/2020/07/getting-started-tensorflow2.html),
+    and for working on the sentiment analysis model, check out this article at [CNVRG](https://cnvrg.io/sentiment-analysis-python).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will read the data using Pandas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: We will create a function to remove unwanted characters in Tweets using Regex.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: We will use Tensorflow’s tokenizer to tokenize our dataset, and Tensorflow’s
+    pad_sequences to pad our sequences.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now we will split the dataset into training and testing portions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: It is now time to design and create the deep learning model. We will simply
+    use an embedding layer and some LSTM layers with dropout.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: We will now fit the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now the deep learning model is trained, we will save the model so that we do
+    not have to train every time we reload our server. Instead, we just use the trained
+    model. Note that I have not done much hyper-parameter tuning or model improvement,
+    as you can do it by yourself to deploy an improved model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here we have saved our model in ‘hdf5’ format. You can learn more about model
+    saving and loading in [this article](https://www.kdnuggets.com/2021/02/saving-loading-models-tensorflow.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 3: Creating a REST API using FAST API'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We will create a REST API using FAST API. We will create a new file named **app.py**.
+    We will first do the important imports.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here we have imported *FastAPI* and *Form *from the fast API library, using
+    which we will create an Input Form and endpoint for our API. We have imported *HTMLResponse* from *starlette.response*,
+    which will help in creating an input form.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will start by creating an input form so that users can input data, i.e.,
+    a test string on which we can test the sentiment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: We have created our FastAPI app in the first line and used the get method on
+    the /predict route, which will return an HTML response so that the user can see
+    a real HTML page, and input the data on forms using the post method. We will use
+    that data to predict on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can run your app now by running the following command.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: This will run your app on localhost. On the *http://127.0.0.1:8000/predict* route,
+    you can see the input form.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ca483a807ab03e9028fa828b5c149db3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now let us define some helper functions, which we will use to preprocess this
+    data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: These functions are essentially doing the same work for cleaning and preprocessing
+    data, which we have used in our model.py file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we will create a POST request at the "/predict" route so that the data posted
+    using the form can be passed into our model, and we can make predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now that is quite some code. Let us break it down. We have defined a route "/predict"
+    on a POST request, where the data from the forms will be our input. We have specified
+    this in the function parameter as *Form(…)*. We pass our text to the pipeline
+    function so that it can return the cleaned and preprocessed data, which we can
+    feed to our loaded model and get the predictions. We can get the index of highest
+    predictions using the *argmax *function from numpy. We can pick the maximum probability
+    using the *max *function from Python. Note that an endpoint in FastAPI has to
+    return a dictionary or a *Pydantic *base model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can now run your app via
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: At the "/predict" route, you can give an input to your model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/130049d8adfb200d84b4b44fef322d5e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: On which the model will predict the sentiment, and return the results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/83418447b21170dc3e7bedd583a9aed9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can also make a dummy route on the home page, i.e., “/” so that it is also
+    working.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'You can see the complete code here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Docs route on FastAPI**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: FastAPI has an amazing “/docs”route for every application, where you can test
+    your API and the requests and routes it has.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'On our API, we have 3 routes in total:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8f4bfbb77669529c73ef39baa7eadee0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can test all 3 by clicking on them. We will test the most important one,
+    that is, the POST request on predict route, which performs all our calculations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7bb8707e108be543154a804039714738.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Click on ‘Try it out’ to pass in the desired text to get its sentiment:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0e2f80e43fd58c731d136e78d96c8a7c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Now you can check the results in the responses:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c0db77efa57b3cd92cf426ad98861945.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A response of 200 means that the request is successful, and you will get a valid
+    desired output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 4: Adding appropriate files helpful to deployment'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To define a Python version for your app on Heroku, you need to add a *runtime.txt* file
+    in your folder. In that file, you can define your Python version. Just write in
+    it the suitable Python version. Note that it is a sensitive file, so make sure
+    to write it in the correct format, as specified, or else Heroku will throw some
+    errors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: To run the uvicorn server on Heroku, you need to add a Procfile. Note that this
+    file has no extension. Just create a file named “*Procfile*“. Add the following
+    command in Procfile.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that you need to run the server on 0.0.0.0, and the port should be 5000
+    on Heroku.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another important file is *requirments.txt* file. Add all the important libraries
+    that your project needs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'You can add a *.gitignore* file to ignore the files which you will not use:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE24]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 5: Deploying on Github'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The next step is to deploy this web app on Github. You need to create a new
+    repository on [GitHub](https://github.com/). Then open the command line and change
+    the directory to the project directory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You need to initialize the repository:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE25]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then add all the files:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE26]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Commit all the files:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE27]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Change the branch to main:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE28]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Connect the folder to the repository on GitHub:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE29]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Push the repository:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE30]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 6: Deploying on Heroku'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You need to create a new app on the Heroku dashboard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ae54f7c7872f46ae23adf7e7666ad0bf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Choose an appropriate name for your app.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the deploy section, in the deployment method, choose GitHub.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7ffd3800a31de1615cb5b610508263f1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Search your repo here, and connect to it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c6e6a30fc28c124cf0f3f090cd0878e0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can choose automatic deploys so that every change in the deployment branch
+    on GitHub will be automatically deployed to the app. For the first time, you need
+    to manually deploy the app. Then every time you update your deployment branch
+    on GitHub, it will be automatically be deployed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4ee145d19449ea0144c2f1dc0e855f6a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: By clicking on Deploy Branch, it will start the deployment process, and you
+    can see the logs by clicking on “More”, which can help you see the logs of applications,
+    and you can see any error if you face.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2ee3e95bc44948700c828857b7fdbf66.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Once the build is successful, you can check your app by clicking on Open app.
+    You can go to all the routes you have defined earlier in your app, and test them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/922f6247d9b0abdf5cbe13e0f7c4e093.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Seeing Deployment history**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can check the deployment history of your app on GitHub by checking the environment
+    tab on the bottom left.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d2a5eea06168d3cacdae3c4abe57dbad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It will also show you all the history of deployment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9eb2568dd680657124294dfa1adeb00f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Accessing your API using Python Requests**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can access your API, which means that you can use this API on your normal
+    code to perform sentiment analysis tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE31]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/4e301cf35d5f910a673e9b67698696c8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And you will receive the output just like you were seeing the output in the
+    endpoint.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Accessing your API using Curl**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Curl is a command-line tool (you can download it from [here](https://everything.curl.dev/get))
+    used to make requests from the command line. We can send the request using the
+    following command.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE32]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here we have mentioned the type of request after -X argument, i.e., POST request.
+    Then -H shows the headers our API is using, which are application/JSON and content
+    type. Then we have to give data using the -d argument and pass in the text. To
+    add space, use *%20*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a492c7457118263f52f325cd312e63b4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can check the complete code at my GitHub repository [here](https://github.com/ahmadmustafaanis/SentimentAnalysisDeployment).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Learning Outcome**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, you learned how to deploy your machine learning/deep learning
+    model on the web as a REST API using Heroku and GitHub. You also learned how to
+    access that API using Python *requests *module and using CURL.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Overview of MLOps](https://www.kdnuggets.com/2021/03/overview-mlops.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science as a Product – Why Is It So Hard?](https://www.kdnuggets.com/2020/12/data-science-product-hard.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploying Trained Models to Production with TensorFlow Serving](https://www.kdnuggets.com/2020/11/serving-tensorflow-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploy a Machine Learning Web App with Heroku](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

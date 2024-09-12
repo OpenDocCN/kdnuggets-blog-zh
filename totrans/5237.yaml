@@ -1,0 +1,275 @@
+- en: Simple Tips for PostgreSQL Query Optimization
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/06/simple-tips-postgresql-query-optimization.html](https://www.kdnuggets.com/2018/06/simple-tips-postgresql-query-optimization.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By Pavel Tiunov, [Statsbot](https://statsbot.co/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/96ce8e920837a63f0a217c54b00279dd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A single query optimization tip can boost your database performance by 100x.
+    At one point, we advised one of our customers that had a 10TB database to use
+    a date-based multi-column index. As a result, their date range query sped up by
+    112x. In this post, we share five simple but still powerful tips for PostgreSQL
+    query optimization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although we usually advise our customers to use these tips to optimize analytic
+    queries (such as aggregation ones), this post is still very helpful for any other
+    type of query.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To keep it easy, we ran examples for this article on a test dataset. Although
+    it doesn’t show the actual performance improvement, you will see that our tips
+    solve the significant set of optimization problems and work well in real-world
+    case scenarios.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Explain analyze
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Postgres has a cool extension to the well-known `EXPLAIN` command, which is
+    called [`EXPLAIN ANALYZE`](https://www.postgresql.org/docs/9.3/static/using-explain.html#USING-EXPLAIN-ANALYZE).
+    The difference is that `EXPLAIN` shows you query cost based on collected statistics
+    about your database, and `EXPLAIN ANALYZE` actually runs it to show the processed
+    time for every stage.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We highly recommend you use `EXPLAIN ANALYZE` because there are a lot of cases
+    when `EXPLAIN` shows a higher query cost, while the time to execute is actually
+    less and vice versa. The most important thing is that the EXPLAIN command will
+    help you to understand if a specific index is used and how.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The ability to see indexes is the first step to learning PostgreSQL query optimization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One index per query
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Indexes are materialized copies of your table. They contain only specific columns
+    of the table, so you can quickly find data based on the values in these columns.
+    Indexes in Postgres also store row identifiers or row addresses used to speed
+    up the original table scans.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s always a trade-off between storage space and query time, and a lot of indexes
+    can introduce overhead for DML operations. However, when read query performance
+    is a priority, as is the case with business analytics, it’s usually a well-working
+    approach.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We advise to create one index per unique query for better performance. Look
+    further in this post to learn how to create indexes for specific queries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using multiple columns in index
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let’s review the explain analyze plan of the following simple query without
+    indexes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'An explain analyze returns:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: This query scans all of the line items to find a product with an id that is
+    greater than 80, and then sums up all the values grouped by that product id.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now we’ll add the index to this table:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: We created a [B-tree index](https://en.wikipedia.org/wiki/B-tree), which contains
+    only one column: `product_id`. After reading lots of articles about the benefits
+    of using index, one can expect a query boost from such an operation. Sorry, bad
+    news.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we need to sum up the price column in the query above, we still need to scan
+    the original table. Depending on the table statistics, Postgres will choose to
+    scan the original table instead of the index. The thing is, index lacks a `price` column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can tweak this index by adding a price column as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'If we rerun the explain plan, we’ll see our index is the forth line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: But how would putting the price column first affect the PostgreSQL query optimization?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Column order in a multicolumn index
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Well, we figured out that a multicolumn index is used in the previous query
+    because we included both columns. The interesting thing is that we can use another
+    order for these columns while defining the index:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: If we rerun explain analyze, we’ll see that `items_product_id_price_reversed` is
+    not used. That’s because this index is sorted firstly on `price` and then on `product_id`.
+    Using this index will lead to a full index scan, **which is nearly equivalent
+    to scanning the whole table**. That’s why Postgres opts to use scan for an original
+    table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s a good practice to put in the first place columns, which you use in filters
+    with the biggest number of unique values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Filters + joins
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It’s time to figure out what the best set of indexes is for a specific join
+    query, which also has some filter conditions. Usually, you can achieve optimal
+    results by trial and error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As in the case of simple filtering, choose the most restrictive filtering condition
+    and add an index for it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s consider an example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here we have join on `order_id` and filter on `created_at`. This way, we can
+    create a multicolumn index that will contain `created_at` in the first place, `order_id` in
+    the second and `price` in the third:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We’ll get the following explain plan:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you can see, `line_items_created_at_order_id_price` is used to reduce scan
+    by date condition. After that, it’s joined with orders using the `orders_pkey` index
+    scan.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Date columns are usually one of the best candidates for the first column in
+    a multicolumn index as it reduces scanning throughput in a predictable manner.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Our tips for PostgreSQL query optimization will help you to speed up queries
+    10-100x for multi-GB databases. They can solve most of your performance bottlenecks
+    in an 80/20 manner. It doesn’t mean you shouldn’t double check your queries with `EXPLAIN` for
+    real-world case scenarios.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://statsbot.co/blog/postgresql-query-optimization/?utm_source=kdnuggets&utm_medium=post&utm_campaign=postgres-sql).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Scalable Select of Random Rows in SQL](/2018/04/scalable-select-random-rows-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL Window Functions Tutorial for Business Analysis](/2017/12/sql-window-functions-tutorial-business-analytics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Calculating Customer Lifetime Value: SQL Example](/2018/02/calculating-customer-lifetime-value-sql-example.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Tips for Improving SQL Query Performance](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Query Your Pandas DataFrames with SQL](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Can We Query a Table with T5?](https://www.kdnuggets.com/2022/05/query-table-t5.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Pipeline Optimization with TPOT](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Neural Network Optimization with AIMET](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

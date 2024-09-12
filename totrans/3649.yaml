@@ -1,0 +1,359 @@
+- en: Fine Tuning LLAMAv2 with QLora on Google Colab for Free
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/fine-tuning-llamav2-with-qlora-on-google-colab-for-free](https://www.kdnuggets.com/fine-tuning-llamav2-with-qlora-on-google-colab-for-free)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Fine Tuning LLAMAv2 with QLora on Google Colab for Free](../Images/c4099ca8d941760761ce95a69a350c6b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Generated using ideogram.ai with the prompt: “A photo of LLAMA with the banner
+    written “QLora” on it., 3d render, wildlife photography”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It was a dream to fine-tune a 7B model on a single GPU for free on Google Colab
+    until recently. On 23 May 2023, Tim Dettmers and his team submitted a revolutionary
+    paper[1] on fine-tuning Quantized Large Language Models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Quantized model is a model that has its weights in a data type that is lower
+    than the data type on which it was trained. For example, if you train a model
+    in a 32-bit floating point, and then convert those weights to a lower data type
+    such as 16/8/4 bit floating point such that there is minimal to no effect on the
+    performance of the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Fine Tuning LLAMAv2 with QLora on Google Colab for Free](../Images/0b322b679c4a64d081cc5545a40f8991.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source [2]
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are not going to talk much about the theory of quantization here, You can
+    refer to the excellent blog post by Hugging-Face[2][3] and an excellent YouTube
+    video[4] by Tim Dettmers himself to understand the underlying theory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In short, it can be said that QLora means:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fine-Tuning a Quantized Large Language models using Low Rank Adaptation Matrices
+    (LoRA)[5]
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Let’s jump straight into the code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Preparation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: It is important to understand that the large language models are designed to
+    take instructions, this was first introduced in the 2021 ACL paper[6]. The idea
+    is simple, we give a language model an instruction, and it follows the instruction
+    and performs that task. So the dataset that we want to fine-tune our model should
+    be in the instruct format, if not we can convert it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the common formats is the instruct format. We will be using the Alpaca
+    Prompt Template[7] which is
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: We will be using the [SNLI dataset](https://nlp.stanford.edu/projects/snli/) which
+    is a dataset that has 2 sentences and the relationship between them whether they
+    are contradiction, entailment of each other, or neutral. We will be using it to
+    generate contradiction for a sentence using LLAMAv2\. We can load this dataset
+    simply using pandas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Fine Tuning LLAMAv2 with QLora on Google Colab for Free](../Images/d2eac6c0d0e494320d1cdd66f4ce7704.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Labels Distribution
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can see a few random contradiction examples here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Fine Tuning LLAMAv2 with QLora on Google Colab for Free](../Images/6effab1043714f8a9c0e22f8cdfe4170.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Contradiction Examples from SNLI
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we can create a small function that takes only the contradictory sentences
+    and converts the dataset instruct format.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]json'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '{{''orignal_sentence'': ''{sentence1}'', ''generated_negation'': ''{sentence2}''}}'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here is an example of the sample data point:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]json'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '{''orignal_sentence'': ''A couple playing with a little boy on the beach.'',
+    ''generated_negation'': ''A couple watch a little girl play by herself on the
+    beach.''}'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now we have our dataset in the correct format, let’s start with fine-tuning.
+    Before starting it, let’s install the necessary packages. We will be using accelerate,
+    peft (Parameter efficient Fine Tuning), combined with Hugging Face Bits and bytes
+    and transformers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can upload the formatted dataset to the drive and load it in the Colab.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can convert it to the Hugging Face dataset format easily using `from_pandas` method,
+    this will be helpful in training the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We will be using the already quantized LLamav2 model which is provided by [abhishek/llama-2–7b-hf-small-shards](https://huggingface.co/abhishek/llama-2-7b-hf-small-shards).
+    Let’s define some hyperparameters and variables here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Most of these are pretty straightforward hyper-parameters having these default
+    values. You can always refer to the documentation for more details.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can now simply use BitsAndBytesConfig class to create the config for 4-bit
+    fine-tuning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now we can load the base model with 4 bit BitsAndBytesConfig and tokenizer for
+    Fine-Tuning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can now create the LoRA config and set the training parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now we can simply use SFTTrainer which is provided by trl from HuggingFace to
+    start the training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: This will start the training for the number of epochs you have set above. Once
+    the model is trained, make sure to save it in the drive so that you can load it
+    again (as you have to restart the session in the colab). You can store the model
+    in the drive via zip and mv command.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now when you restart the Colab session, you can move it back to your session
+    again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: You need to load the base model again and merge it with the fine-tuned LoRA
+    matrices. This can be done using `merge_and_unload()` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: Inference
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: You can test your model by simply passing in the inputs in the same prompt template
+    that we have defined above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: Output
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[PRE20]json'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '{'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '"sentence": "The weather forecast predicts a sunny day with a high temperature
+    around 30 degrees Celsius, perfect for a day at the beach with friends and family.",'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '"negation": "The weather forecast predicts a rainy day with a low temperature
+    around 10 degrees Celsius, not ideal for a day at the beach with friends and family."'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '}'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: Filter Useful Output
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: There will be many times when the model will keep on predicting even after the
+    response is generated due to the token limit. In this case, you need to add a
+    post-processing function that filters the JSON part which is what we need. This
+    can be done using a simple Regex.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]json\n(.*?)\n[PRE23]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This will give you the required output instead of the model repeating random
+    output tokens.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In this blog, you learned the basics of QLora, fine-tuning a LLama v2 model
+    on Colab using QLora, Instruction Tuning, and a sample template from the Alpaca
+    dataset that can be used to instruct tune a model further.
+  prefs: []
+  type: TYPE_NORMAL
+- en: References
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[1]: QLoRA: Efficient Finetuning of Quantized LLMs, 23 May 2023, Tim Dettmers
+    et al.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[2]: [https://huggingface.co/blog/hf-bitsandbytes-integration](https://huggingface.co/blog/hf-bitsandbytes-integration)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[3]: [https://huggingface.co/blog/4bit-transformers-bitsandbytes](https://huggingface.co/blog/4bit-transformers-bitsandbytes)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[4]: [https://www.youtube.com/watch?v=y9PHWGOa8HA](https://www.youtube.com/watch?v=y9PHWGOa8HA)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[5]: [https://arxiv.org/abs/2106.09685](https://arxiv.org/abs/2106.09685)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[6]: [https://aclanthology.org/2022.acl-long.244/](https://aclanthology.org/2022.acl-long.244/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[7]: [https://crfm.stanford.edu/2023/03/13/alpaca.html](https://crfm.stanford.edu/2023/03/13/alpaca.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[8]: Colab Notebook by @[maximelabonne](https://twitter.com/maximelabonne) [https://colab.research.google.com/drive/1PEQyJO1-f6j0S_XJ8DV50NkpzasXkrzd?usp=sharing](https://colab.research.google.com/drive/1PEQyJO1-f6j0S_XJ8DV50NkpzasXkrzd?usp=sharing)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Ahmad Anis** is a passionate Machine Learning Engineer and Researcher currently
+    working at [redbuffer.ai](https://redbuffer.ai/). Beyond his day job, Ahmad actively
+    engages with the Machine Learning community. He serves as a regional lead for
+    Cohere for AI, a nonprofit dedicated to open science, and is an AWS Community
+    Builder. Ahmad is an active contributor at Stackoverflow, where he has 2300+ points.
+    He has contributed to many famous open-source projects, including Shap-E by OpenAI.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Running Mixtral 8x7b On Google Colab For Free](https://www.kdnuggets.com/running-mixtral-8x7b-on-google-colab-for-free)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fine-Tuning BERT for Tweets Classification with HuggingFace](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fine-Tuning OpenAI Language Models with Noisily Labeled Data](https://www.kdnuggets.com/2023/04/finetuning-openai-language-models-noisily-labeled-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Overview of PEFT: State-of-the-art Parameter-Efficient Fine-Tuning](https://www.kdnuggets.com/overview-of-peft-stateoftheart-parameterefficient-finetuning)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Large Language Model Fine-tuning](https://www.kdnuggets.com/7-steps-to-mastering-large-language-model-fine-tuning)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mistral 7B-V0.2: Fine-Tuning Mistral’s New Open-Source LLM with…](https://www.kdnuggets.com/mistral-7b-v02-fine-tuning-mistral-new-open-source-llm-with-hugging-face)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

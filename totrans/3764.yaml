@@ -1,0 +1,184 @@
+- en: An NLP Approach to Analyzing Twitter, Trump, and Profanity
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/11/nlp-approach-analyzing-twitter-trump-profanity.html](https://www.kdnuggets.com/2016/11/nlp-approach-analyzing-twitter-trump-profanity.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Stephanie Kim, [Algorithmia](https://algorithmia.com/)**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Analyzing Twitter for Profanity](../Images/bb1ea3b1d18c17c34e8ee5cefb33f914.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Who swears more? Do Twitter users who mention Donald Trump swear more than those
+    who mention Hillary Clinton? Let’s find out by taking a natural language processing
+    approach (or, NLP for short) to analyzing tweets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This walkthrough will provide a basic introduction to help developers of all
+    background and abilities get started with the [NLP microservices](https://algorithmia.com/tags/nlp) available
+    on Algorithmia. We’ll show you how to chain them together to perform light analysis
+    on unstructured text. Unfamiliar with NLP? Our [gentle introduction to NLP](http://blog.algorithmia.com/2015/09/getting-started-with-natural-language-processing/) will
+    help you get started.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We know that getting started with a new platform or developer tool is an investment
+    in time and energy. Sometimes it can be hard to find the information you need
+    in order to start exploring on your own. That’s why we’ve centralized all our information
+    in the [Algorithmia Developer Center](http://developers.algorithmia.com/) and [API
+    Docs](http://docs.algorithmia.com/), where users will find helpful hints, code
+    snippets, and getting started guides. These guides are designed to help developers
+    integrate algorithms into applications and projects, learn how to host their trained
+    machine learning models, or build their own algorithms for others to use via an
+    API endpoint.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, let’s tackle a project using some algorithms to retrieve content, and analyze
+    it using NLP. What better place to start than Twitter, and analyzing our favorite
+    presidential candidates?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Twitter, Trump, and Profanity: An NLP Approach'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'First, let’s find the Twitter-related algorithms on Algorithmia. Go to the
+    search bar on top of the navigation and type in “Twitter”:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Search for algorithms.](../Images/22da7c9cc026ec0a5aac0f568af93d9e.png)](http://blog.algorithmia.com/wp-content/uploads/2016/07/search_box.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You’ll get quite a few results, but find the one called [Retrieve Tweets with
+    Keyword](https://algorithmia.com/algorithms/twitter/RetrieveTweetsWithKeyword), and
+    check out the algorithm page where it will tell you such information as the algorithm’s
+    description, pricing, and the permissions set for this algorithm:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Retrieve Tweets With Keyword algorithm](../Images/08d4e6edcf8ba1c7a9e15ed584c8f1f8.png)](http://blog.algorithmia.com/wp-content/uploads/2016/07/twitter_algo_page-1.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The algorithm description provides information about the input and output data
+    structures expected, as well as the details regarding any other requirements.
+    For instance, Retrieve Tweets with Keyword requires your [Twitter API authentication
+    keys](https://dev.twitter.com/oauth/overview).
+  prefs: []
+  type: TYPE_NORMAL
+- en: At the bottom section of every algorithm page we provide the code samples for
+    your input, output, and how to call the algorithm in Python, Rust, Ruby, JavaScript,
+    NodeJS, cURL, CLI, Java, or Scala. If you have questions about the details of
+    using the Algorithmia API check out the [API docs](http://docs.algorithmia.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alright, let’s get started!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here’s the overall structure of our project:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: You’ll need a free Algorithmia account to complete this project. [Sign up for
+    free and receive an extra 10,000 credits](https://algorithmia.com/signup?invite=onTwitter).
+    Overall, the project will consist of processing around 700 tweets or so with emoticons
+    and other special characters stripped out. This means if a tweet only contained
+    URL’s and emoticons then it won’t be analyzed. Once we pull our data from the
+    Twitter API, we’ll clean it up with some regex, remove stop words, and then find
+    our swear words.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step One: Retrieve Tweets by Keyword'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We’ll use the [Retrieve Tweets by Keyword](https://algorithmia.com/algorithms/twitter/RetrieveTweetsWithKeyword) algorithm
+    first in order to query tweets from the[Twitter Search API](https://dev.twitter.com/rest/public/search):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Okay, let’s go over the obvious parts of the code snippet. This algorithm takes
+    a nested dictionary called ‘input’ that contains the keys: ‘query’, ‘numTweets’
+    and ‘auth’ which is a dictionary itself. The key ‘query’ is set as a global variable
+    called q_input and holds the system argument that is passed when executing the
+    script. In our case it will hold a presidential nominee name. The key ‘numTweets’
+    is set to the number of tweets you want to extract and the dictionary ‘auth’ holds
+    the [Twitter authentication keys and tokens](https://dev.twitter.com/oauth/overview) that
+    you got from Twitter.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you write the pull_tweets() function, pay attention to the line that sets
+    the variable ‘client’ to ‘Algorithmia.client(algorithmia_api_key)’. This is where
+    you pass in your API key that you were assigned when you signed up for an account
+    with Algorithmia. If you don’t recall where to find that it is in the My Profile page
+    in the Credentials section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next notice the variable ‘algo.’ This is where we pass in the path to the algorithm
+    we’re using. Each algorithm’s documentation will give you the appropriate path
+    in the code examples section at the bottom of the algorithm page.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And last, the list comprehension ‘tweet_list’ holds our data after looping through
+    the result of the algorithm by passing in our input variable to algo.pipe(input).result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, you simply write your data to a CSV file that is named after your query.
+    Note: if your query is a space separated string, then the script will join the
+    query with a dash.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Analyzing Scientific Articles with fine-tuned SciBERT NER Model and Neo4j](https://www.kdnuggets.com/2021/12/analyzing-scientific-articles-finetuned-scibert-ner-model-neo4j.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Analytics: The Four Approaches to Analyzing Data and How To…](https://www.kdnuggets.com/2023/04/data-analytics-four-approaches-analyzing-data-effectively.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Analyzing the Probability of Future Success with Intelligence…](https://www.kdnuggets.com/2022/02/analyzing-probability-future-success-intelligence-node-attributes-evolution-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Analyzing Diversity & Inclusion with SQL](https://www.kdnuggets.com/2022/11/analyzing-diversity-inclusion-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Master the Power of Data Analytics: The Four Approaches to Analyzing Data](https://www.kdnuggets.com/2023/03/master-power-data-analytics-four-approaches-analyzing-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide On How To Become A Data Scientist (Step By Step Approach)](https://www.kdnuggets.com/2021/05/guide-become-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

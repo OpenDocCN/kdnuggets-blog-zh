@@ -1,0 +1,378 @@
+- en: Exploratory Data Analysis on Steroids
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/07/exploratory-data-analysis-steroids.html](https://www.kdnuggets.com/2020/07/exploratory-data-analysis-steroids.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Diego Lopez Yse](https://www.linkedin.com/in/lopezyse/), Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/80ddc1bf68d487ec171689c0edca7122.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Machine Learning discussions are usually centered around algorithms and their
+    performance: how to improve the model accuracy or reduce its error rate, excel
+    at feature engineering or finetune hyperparameters. But there is a concept that
+    comes before anything else: Exploratory Data Analysis, or EDA.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**EDA is about making sense out of data before getting ourselves busy with
+    any model. **Which makes total sense, right? Which model are we going to use if
+    we don’t know our data yet?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before there was a Machine Learning model, there was EDA
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'This is a central aspect of Data Science, which sometimes gets overlooked.
+    The first step of anything you do should be to **know your data**: understand
+    it, get familiar with it. What are the answers you’re trying to get with that
+    data? What variables are you using, and what do they mean? How does it look from
+    a statistical perspective? Is data formatted correctly? Do you have missing values?
+    And duplicated? What about outliers?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This concept gets even more important as you increase your data volume: imagine
+    trying to parse through thousands or millions of registers and make sense out
+    of them. Next, I want to share my Python method to answer some of these questions
+    in the most efficient way.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Describe the dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For this article I use an economic dataset from the World Bank, describing some
+    worldwide key factors such as GDP, population levels, surface, etc. You can find
+    the dataset and full code [here](https://github.com/dlopezyse/Medium)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First, we need to import some libraries:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Pandas**, **Numpy** and **Seaborn** are key in any EDA exercise. The “xlrd”
+    package is only required for our example since we’re using an Excel file as the
+    data source.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, let’s import the dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Take a look at the data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/d8045166faa86b5d4ba84fb16704db51.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/fd04d4d1273a3b014479be54cb7314ee.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Some basic statistics of the numerical variables in the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/89d4891e9d138de1f3378df49e391c6f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'A quick way to see the structure of the dataset: 215 rows and 10 columns.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/28089f2cb6e59edc8603327192918593.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Check out the variables types: they are all floats, except for the country
+    name which is a string. Find a tutorial on how to change variable types [here](https://pbpython.com/pandas_dtypes.html).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/a7896f557c6b9e3e4b6972dbc003c402.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here we see that there are some variables with null-values (e.g. the variable
+    “population” has 1 row with missing value, “surface” 2, etc) . We’ll see how to
+    deal with them below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Missing values
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Missing values can be caused by different reasons, such data entry errors or
+    incomplete records. This is extremely common and can have a significant effect
+    on the conclusions that can be drawn from the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We’ve seen above that the dataset in this example has several missing values,
+    but let’s see how you can test any dataset. The first question you may want to
+    ask you is: are there any missing values?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/eb2fd99a352ca9405ed9fbe140807c7c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Next, you may want to check how many are they:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/747d4cc604e554e13a4de0b45de16e2c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, let’s review a summary of these missing values
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/0a9b12aceaab88b0ffca80892d2513fa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Do you see anything familiar? This is the other side of the .info() function.
+    There are different strategies for handling missing values and no universal way
+    of doing it. For this example, we’ll drop them since it makes no sense to make
+    imputations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And we review the new dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/8b3d66e3c2e71255e4c5059724be0ab9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 188 records remain, and no null-values. Now we’re ready to move forward.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can find additional ways of handling missing values [here](https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Visualize
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let’s visualize the new dataset with Seaborn:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/4780c907a2d4be72a07cfcfe0589825d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This way you can quickly identify outliers, clusters, and apparent correlations
+    between variables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s combine variables “gdp” and “population”:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/60ea5c934a8fb6fe8396b5c6858ae33f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Do you see 2 clear outliers at top right? 2 countries have extreme population
+    levels in comparison to the rest of the data universe. You can validate that observation
+    analyzing the “population” variable on its own:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/91d0345e4ae414364d3b0a3b4b90c309.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Another way to detect outliers is to draw some boxplots:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/37d84717d5f2fae767c00c0446943d83.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'You can also display the density plots of these variables and analyze their
+    skewness:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/6bcf5ab215f604385334e711be05e8f8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Check out this [link](https://python-graph-gallery.com/100-calling-a-color-with-seaborn/) for
+    additional Seaborn styling tips.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this example, I deliberately didn’t treat **outliers**, but there are multiple
+    ways of doing that. You can find some examples of outliers identification and
+    treatment [here](https://www.pluralsight.com/guides/cleaning-up-data-from-outliers).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Correlation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Correlating variables will save you huge amounts of analysis time, and it’s
+    a necessary step before performing any kind of hypothesis on your data. Correlations
+    are calculated only for numeric variables, so it’s important to know the variable
+    types in the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can find other coefficients for non-numeric variables [here](https://www.analyticsvidhya.com/blog/2016/12/introduction-to-feature-selection-methods-with-an-example-or-how-to-select-the-right-variables/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/0c09cf6873b3d46cbee0e914d1e5840c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'I’ve masked the lower left values to avoid duplications and give a clearer
+    view. The value scale at the right also provides a quick reference guide for extreme
+    values: you can easily spot high and low correlations between variables (e.g.
+    “national income” has a highly positive correlation with “purchasing power”)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Find [here](https://heartbeat.fritz.ai/seaborn-heatmaps-13-ways-to-customize-correlation-matrix-visualizations-f1c49c816f07) additional
+    ways to customize a correlation matrix.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Final thoughts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: EDA is critical for understanding any dataset. This is where you can provide
+    insights and make discoveries. Here is where you put your knowledge to work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But EDA needs a lot of prep work, because data in real world are rarely clean
+    and homogeneous. It’s often said that [80 percent of a data scientist’s valuable
+    time is spent simply finding, cleansing, and organizing data](https://www.ibm.com/cloud/blog/ibm-data-catalog-data-scientists-productivity),
+    leaving only 20 percent to actually perform analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At the same time, **perfect is the enemy of good**, and you need to drive your
+    insights within a limited time frame. Preparing your data for analysis is inevitable,
+    and the way you do that will define the quality of your EDA.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Interested in these topics? Follow me on [Linkedin](https://www.linkedin.com/in/lopezyse/) or [Twitter](https://twitter.com/lopezyse)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Diego Lopez Yse](https://www.linkedin.com/in/lopezyse/)** is an experienced
+    professional with a solid international background acquired in different industries
+    (capital markets, biotechnology, software, consultancy, government, agriculture).
+    Always a team member. Skilled in Business Management, Analytics, Finance, Risk,
+    Project Management and Commercial Operations. MS in Data Science and Corporate
+    Finance.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/exploratory-data-analysis-on-steroids-e1488324fbaa).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to Prepare Your Data](/2020/06/how-prepare-your-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fantastic Four of Data Science Project Preparation](/2019/07/fantastic-four-data-science-project-preparation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Time Complexity: How to measure the efficiency of algorithms](/2020/06/time-complexity-measure-efficiency-algorithms.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

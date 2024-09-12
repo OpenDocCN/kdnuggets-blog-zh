@@ -1,0 +1,421 @@
+- en: 'Optimization with Python: How to make the most amount of money with the least
+    amount of risk?'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/06/optimization-python-money-risk.html](https://www.kdnuggets.com/2019/06/optimization-python-money-risk.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: One of the major goals of the modern enterprise of data science and analytics
+    is to [solve complex optimization problems for business and technology companies](https://www.quora.com/Is-optimization-related-to-data-science-And-how) to
+    maximize their profit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In my article “[Linear Programming and Discrete Optimization with Python](https://towardsdatascience.com/linear-programming-and-discrete-optimization-with-python-using-pulp-449f3c5f6e99),”
+    we touched on basic discrete optimization concepts and introduced a [Python library
+    PuLP](https://pythonhosted.org/PuLP/) for solving such problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although a [linear programming (LP) problem](https://www.analyticsvidhya.com/blog/2017/02/lintroductory-guide-on-linear-programming-explained-in-simple-english/) is
+    defined only by linear objective function and constraints, it can be applied to
+    a surprisingly wide variety of problems in diverse domains ranging from healthcare
+    to economics, business to military.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we show one such amazing application of LP using Python programming
+    in the area of economic planning — ***maximizing the expected profit from a stock
+    market investment portfolio while minimizing the risk associated with it***.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sounds interesting? Please read on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to maximize profit and minimize risk in the stock market?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The 1990 Nobel prize in Economics went to [Harry Markowitz](https://en.wikipedia.org/wiki/Harry_Markowitz),
+    acknowledged for his famous [Modern Portfolio Theory (MPT)](https://www.investopedia.com/terms/m/modernportfoliotheory.asp),
+    as it is known in the parlance of financial markets. The original paper was published
+    long back in 1952.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d506899d2253d2512edd071a9d356993.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Source**: AZ Quotes'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The key word here is **Balanced**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A good, balanced portfolio must offer both **protections** (minimizing the risk)
+    and **opportunities** (maximizing profit).
+  prefs: []
+  type: TYPE_NORMAL
+- en: And, when concepts such as minimization and maximization are involved, it is
+    natural to cast the problem in terms of [**mathematical optimization theory**](https://en.wikipedia.org/wiki/Mathematical_optimization).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The fundamental idea is rather simple and is rooted in the innate human nature
+    of risk aversion.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In general, stock market statistics show that higher risk is associated with
+    a greater probability of higher return and lower risk with a greater probability
+    of smaller return.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[MPT assumes that investors are risk-averse](https://www.investopedia.com/ask/answers/041615/how-risk-aversion-measured-modern-portfolio-theory-mpt.asp), **meaning
+    that given two portfolios that offer the same expected return, investors will
+    prefer the less risky one**. Think about it. You will collect high-risk stocks
+    only if they carry a high probability of large return percentage.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**But how to quantify the risk**? It is a murky concept for sure and can mean
+    different things to different people. However, in the generally accepted economic
+    theory, the [variability (volatility) of a stock price (defined over a fixed time
+    horizon) is equated with risk](https://www.investopedia.com/ask/answers/041415/variance-good-or-bad-stock-investors.asp).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Therefore, the central optimization problem is to minimize the risk while ensuring
+    a certain amount of return in profits. Or, maximizing the profit while keeping
+    the risk below a certain threshold.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/6c736d82561c89a9ad169724c194efc2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: An example problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, we will show a very simplified version of the portfolio optimization
+    problem, which can be cast into an LP framework and solved efficiently using simple
+    Python scripting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The goal is to illustrate the power and possibility of such optimization solvers
+    for tackling complex real-life problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We work with 24 months stock price (monthly average) for three stocks — Microsoft,
+    Visa, Walmart. These are older data, but they demonstrate the process flawlessly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/720c6452c7fc5a56df3b8e439965c5a6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig: Monthly stock price of three companies over a certain 24-month period.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**How to define the return**? We can simply compute a rolling monthly return
+    by subtracting the previous month’s average stock price from the current month
+    and dividing by the previous month’s price.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/26abe6ba36d4edba2b60e21f78df92b4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The return is shown in the following figure,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/eadd3e7e8a284178646ab64be317dc36.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**The optimization model**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The return on a stock is an uncertain quantity. We can model it as a **random
+    vector**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ade5c0830ca773d434fd0773c4b0cff4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The portfolio can also be modeled as a vector.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/81315a9e4f4e079587e91afd738532a5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Therefore, the return on a certain portfolio is given by an inner product of
+    these vectors, and it is a random variable. The million-dollar question is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*How can we compare random variables (corresponding to different portfolios)
+    to select a “best” portfolio?*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Following the Markowitz model, we can formulate our problem as,
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given a fixed quantity of money (say $1000), how much should we invest in each
+    of the three stocks so as to (a) have a one month expected return of at least
+    a given threshold, and (b) minimize the risk (variance) of the portfolio return.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: We cannot invest a negative quantity. This is the **non-negativity constraint**,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/18af0c8e415bdce8996bc1c00c925ccb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Assuming no transaction cost, the total investment is restricted by the fund
+    at hand,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c90c073d616b61282f9f595b6cb8971c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Return on the investment,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/24f1fa970ddda72ec17322791cb68e30.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: But this is a **random variable**. So, we have to work with the **expected quantities**,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/df02ca87f2c93adc19718e04ee812c58.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Supposed we want a **minimum expected return**. Therefore,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e1a5c32e6e9072b2b9c767d985b2e411.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, to model the risk, we have to compute the **variance**,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7e04ba36ef1dba66aae8e917c90c3d1b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Putting together, the final optimization model is,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/005e68756eb67762c7558693a27c7601.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Next, we show how easy it is to formulate and solve this problem using a popular
+    Python library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Using Python to solve the optimization: CVXPY'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The library we are going to use for this problem is called [**CVXPY**](https://www.cvxpy.org/index.html).
+    It is a Python-embedded modeling language for convex optimization problems. It
+    allows you to **express your problem in a natural way** that follows the mathematical
+    model, rather than in the restrictive standard form required by solvers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The [**entire code is given in this Jupyter notebook**](https://github.com/tirthajyoti/Optimization-Python/blob/master/Portfolio_optimization.ipynb).
+    Here, I just show the core code snippets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To set up the necessary data, the key is to compute the return matrix from the
+    data-table of the monthly price. The code is given below,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now, if you view the original data table and the return table side by side,
+    it looks like following,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/72f14cb1e6b69aa49a982d959f57536d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Next, we simply compute the mean (expected) return and the covariance matrix
+    from this return matrix,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: After that, CVXPY allows setting up the problem simply following the mathematical
+    model we constructed above,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note the use of extremely useful classes like **quad_form()** and **Problem()**from
+    the CVXPY framework.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Voila!
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can write a simple code to solve the **Problem** and show the optimal investment
+    quantities which ensure a minimum return of 2% while also keeping the risk at
+    a minimum.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The final result is given by,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e30f99b940ad33ec5704135a5d11488f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Extending the problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Needless to say that the setup and simplifying assumptions of our model can
+    make this problem sound simpler than what it is. But once you understand the basic
+    logic and the mechanics of solving such an optimization problem, you can extend
+    it to multiple scenarios,
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hundreds of stocks, longer time horizon data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Multiple risk/return ratio and threshold
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Minimize risk or maximize return (or both)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Investing in a group of companies together
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Either/or scenario — invest either in Cococola or in Pepsi but not in both
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You have to construct more complicated matrices and a longer list of constraints,
+    use indicator variables to turn this into a [mixed-integer problem](https://www.solver.com/integer-constraint-programming) **-** but
+    all of these are inherently supported by packages like CVXPY.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Look at the examples page of the CVXPY package](https://www.cvxpy.org/examples/index.html) to
+    know about the breadth of optimization problems that can be solved using the framework.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, we discussed how the key concepts from a seminal economic theory
+    could be used to formulate a simple optimization problem for stock market investment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For illustration, we took a sample dataset of three companies’ average monthly
+    stock price and showed how a linear programming model could be set up in no time
+    using basic Python data science libraries such as NumPy, Pandas, and an optimization
+    framework called CVXPY.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Having a working knowledge of such flexible and powerful packages adds immense
+    value to the skillset of upcoming data scientists because the need for solving
+    optimization problems arise in all facets of science, technology, and business
+    problems.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Readers are encouraged to try more complex versions of this investment problem
+    for fun and learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/optimization-with-python-how-to-make-the-most-amount-of-money-with-the-least-amount-of-risk-1ebebf5b2f29).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Tirthajyoti Sarkar](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)** is
+    the Senior Principal Engineer at ON Semiconductor working on Deep Learning/Machine
+    Learning based design automation projects.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data Analytics Models in Quantitative Finance and Risk Management](https://www.kdnuggets.com/2016/12/data-analytics-models-quantitative-finance-risk-management.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Optimization Works](https://www.kdnuggets.com/2019/04/how-optimization-works.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Linear Programming and Discrete Optimization with Python using PuLP](https://www.kdnuggets.com/2019/05/linear-programming-discrete-optimization-python-pulp.html
+    "Linear Programming and Discrete Optimization with Python using PuLP")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[The Mistake Every Data Scientist Has Made at Least Once](https://www.kdnuggets.com/2022/09/mistake-every-data-scientist-made-least.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Who Will Make Money from the Generative AI Gold Rush?](https://www.kdnuggets.com/2023/08/make-money-generative-ai-gold-rush.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Ways to Make Money with ChatGPT and AI](https://www.kdnuggets.com/3-ways-to-make-money-with-chatgpt-and-ai)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Risk Management Framework for AI/ML Models](https://www.kdnuggets.com/2022/03/risk-management-framework-aiml-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Pipeline Optimization with TPOT](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

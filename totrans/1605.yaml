@@ -1,0 +1,242 @@
+- en: 'Applied Data Science: Solving a Predictive Maintenance Business Problem Part
+    3'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/10/applied-data-science-solving-predictive-maintenance-business-problem-3.html](https://www.kdnuggets.com/2018/10/applied-data-science-solving-predictive-maintenance-business-problem-3.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By Thomas Joseph, Aspire Systems**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![battery2](../Images/20707d838917ff2c96831902b2ca8a39.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the [previous post of the series](https://bayesianquest.com/2018/02/01/applied-data-science-series-solving-a-predictive-maintenance-business-problem-part-ii/) we
+    discussed the exploratory analysis phase and saw how the combination of domain
+    knowledge and single variable exploration unravels intuitions from the data. In
+    this post we will expand our analysis to multiple variables and then see how intuitions
+    we develop during the exploration phase, can lead to generating new features for
+    modelling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the example we were discussing, we were limited to analysis of a single variable
+    i.e conductance. However to get more meaningful insights we have to connect other
+    variables layer by layer to the initial variable which we have analysed to get
+    more insights on the problem. As far as battery is concerned some of the critical
+    variables other than conductance are voltage and discharge. Let us connect these
+    two variables along with the conductance profile to gain more intuitions from
+    the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Multivariable_plot](../Images/1a137240f3e6099d09b424af7f25b7ad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The above figure is a plot which depicts three variables across the same time
+    span. The idea of plotting multiple variables together across a common time span
+    is to unearth any discernible trends we can see together. A cursory look at this
+    plot will reveal some obvious observations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The fall in current and voltage in conjunction with drop in conductance.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The cyclic nature of the voltage profile.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: A gradual drop in the troughs of the voltage profile.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Having made some observations,we now need to ascertain whether these observations
+    can be codified to some definitive trends. This can be verified only by observing
+    plots for many samples of similar variables. By sampling data pertaining to many
+    batteries if we can get similar observations, then we can be sure that we have
+    unearthed some trends explaining behaviors of different variables. However just
+    unearthing some trends will not suffice. We have to get some intuitions from such
+    trends which will help in transforming the raw variables to some form which will
+    help in the modelling task. This is achieved by feature engineering the raw variables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Feature Engineering**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Many a times the given set of raw variables will not suffice for extracting
+    the required predictive power from the model. We will have to transform the raw
+    variables to generate new variables giving us the extra thrust towards better
+    predictive metrics. What transformation has to be done, will be based on the intuitions
+    we build during the exploratory analysis phase and also by combining domain knowledge. For
+    the case of batteries let us revisit some of the intuitions we build during the
+    exploratory analysis phase and see how these intuitions we build can be used for
+    feature engineering.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the [previous post](https://bayesianquest.com/2018/02/01/applied-data-science-series-solving-a-predictive-maintenance-business-problem-part-ii/) ,
+    we found out that precipitous fall in conductance is an indicator of failing health
+    of a battery. So a probable feature we can extract from the conductance variable
+    is the slope of the data points over a fixed time span.The rationale for such
+    a feature is this, if precipitous fall in conductance over time is an indicator
+    of failing health of a battery  then the slope of data points for a battery which
+    is failing will be more steeper than the battery which is healthy. It was observed
+    that through such transformation there was a positive influence on predictive
+    metrics. The dynamics of such transformation is as follows, if we have conductance
+    data for the battery for three years, we can take consecutive three month window
+    of conductance data and take the slope of all the data points and make it as a
+    feature.  By doing this, the number of rows of data for the variable also gets
+    consolidated to much fewer numbers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us also look at another example of feature engineering which we can introduce
+    to the variable, discharge voltage. As seen from the above figure, the discharge
+    voltage follows a wave like profile. It turns out that when a battery discharges
+    the voltage first drops and then it rises. This behavior is called the “Coupe
+    De Fouet” (CDF) effect. Now our thought should be, how do we combine the observed
+    wave like pattern and the knowledge about CDF into a feature ? Again we have to
+    dig into domain knowledge. As per theory on the state of health of batteries there
+    are standards for the CDF profile of a healthy battery and that of a failing battery.
+    These are prescribed by the manufacturer of the battery. For example the manufacturing
+    standards prescribe certain depth to which the voltage will fall during discharge
+    and certain height to which it will go up during a typical CDF effect. The deviance
+    between the observed CDF and the manufacture prescribed standard can be taken
+    as another feature. Similarly we can also think of other features related to voltage,
+    like depth of discharge ( DOD), number of cycles etc. Our focus should be in using
+    the available domain knowledge to transform raw variables into features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As seen from the above two examples the essence of feature engineering is all
+    about translating the domain knowledge and the trends seen in the data to more
+    meaningful features. The veracity of the models which are built depends a lot
+    on the strength of  the features built. Now that we have seen the feature engineering
+    phase let us now look at modelling strategy for this use case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Modelling Phase**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the [first part of this use case](https://bayesianquest.com/2017/09/30/applied-data-science-series-solving-a-predictive-maintenance-business-problem/) we
+    discussed about labeling strategy for training the model. Since the use case is
+    to predict which battery would fail and at what period of time, we have to look
+    back in time from the failure point label for creating different classes related
+    to periods of failure. In this specific case, the different features were created
+    by consolidating 3 months of data into a single row. So one period before failure
+    would denote 3 months before failure. So if the requirement is to predict failure
+    6 months prior to when it is likely to happen, then we will have 4 different classes
+    i.e  failure point,one period before failure(3 months prior to failure point)
+    ,two periods before failure and (6 months prior to failure point) & normal state.
+    All periods prior to 6 months can be labelled as normal state.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With respect to modelling, we can spot check with different classification algorithms
+    ( logistic regression, Naive bayes, SVM, Random Forest, XGboost .. etc). The choice
+    of final model will be based on the accuracy metrics ( sensitivity , specificity
+    etc) of the spot checked models. Another aspect which might be useful to note
+    is also that, data set could be highly unbalanced i.e the number of normal battery
+    classes is likely to outnumber the failure classes disproportionately. It will
+    be a good idea to try out class balancing methods on the data set before modelling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Wrapping up**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This post brings down curtains to the three part series on predictive analytics
+    for industrial batteries. Any use case within the manufacturing sector can be
+    quite challenging as the variables involved are very technical and would require
+    lot of interventions from related domain teams. Constant engagement of domain
+    specialist as part of the data science team is very important for the success
+    of such projects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have tried my best to write the nuances of such a difficult use case. I have
+    tried to cover the critical elements in the process. In case of any clarifications
+    on the use case and details of its implementation you can connect with me through
+    the following email id bayesianquest@gmail.com. Looking forward to hearing from
+    you.  Till then let me sign off.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Watch this space for more such use cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Thomas Joseph](https://www.linkedin.com/in/thomasjoseph24)** is Senior
+    Data Scientist at Aspire Systems, working on growing the Data Science footprint
+    and enabling superior delivery.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://bayesianquest.com/2018/10/07/applied-data-science-series-solving-a-predictive-maintenance-business-problem-part-iii/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Applied Data Science: Solving a Predictive Maintenance Business Problem](/2017/10/applied-data-science-solving-predictive-maintenance-business-problem.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Applied Data Science: Solving a Predictive Maintenance Business Problem Part
+    2](/2018/02/applied-data-science-solving-predictive-maintenance-business-problem-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mind of a Data Scientist – Part 1](/2016/10/mind-data-scientist-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Graph of Thoughts: A New Paradigm for Elaborate Problem-Solving in…](https://www.kdnuggets.com/graph-of-thoughts-a-new-paradigm-for-elaborate-problem-solving-in-large-language-models)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Solving 5 Complex SQL Problems: Tricky Queries Explained](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Definitive Guide to Solving the Phantom Read in MySQL](https://www.kdnuggets.com/2022/06/definitive-guide-solving-phantom-read-mysql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Step Blueprint to Your Next Data Science Problem](https://www.kdnuggets.com/5-step-blueprint-to-your-next-data-science-problem)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Range of NLP Applications in the Real World: A Different…](https://www.kdnuggets.com/2022/03/different-solution-problem-range-nlp-applications-real-world.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Genetic Programming in Python: The Knapsack Problem](https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,388 @@
+- en: Building a Flask API to Automatically Extract Named Entities Using SpaCy
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/04/building-flask-api-automatically-extract-named-entities-spacy.html](https://www.kdnuggets.com/2019/04/building-flask-api-automatically-extract-named-entities-spacy.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Susan Li](https://www.linkedin.com/in/susanli/), Sr. Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/06957073c64dec6ad611e5c88f73a537.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Photo credit: Pixabay'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The overwhelming amount of unstructured text data available today provides a
+    rich source of information if the data can be structured. [Named-entity Recognition
+    (NER](https://en.wikipedia.org/wiki/Named-entity_recognition))(also known as Named-entity
+    Extraction) is one of the first steps to build knowledge from semi-structured
+    and unstructured text sources.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Only after NER, we will be able to reveal at a minimum, who, and what, the information
+    contains. As a result, a data science team would be able to see a structured representation
+    of all of the the names of people, companies, locations and so on in a corpus
+    that could serve as a point of departure for further analysis and investigation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the [previous post](https://towardsdatascience.com/named-entity-recognition-with-nltk-and-spacy-8c4a7d88e7da),
+    we have learned and practiced [how to build named entity recognizer using NLTK
+    and spaCy](https://towardsdatascience.com/named-entity-recognition-with-nltk-and-spacy-8c4a7d88e7da).
+    To take steps further, create something useful, this article will cover how to
+    develop and deploy a simple named entities extractor using spaCy and serve it
+    with a Flask API in python*.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Flask API
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Our goal is to build an API that we provide text, for example, a New York Times
+    article (or any article) as input, our named entity extractor will then identify
+    and extract four types of entities: organization, person, location and money.
+    The basic architecture looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/585cde79738ef16ac1a52385245ccd80.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 1
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To build the API, we will need to create two files:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`index.html` to handle the template of the API.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '`app.py` to handle the requests and return the output file.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'And the final product will look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/989fa6eb53ead63fcf32dca581c1051d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 2
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s start building the API and create two files step-by-step. Our project
+    folder structure is like below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our project is located in ***Named-Entity-Extractor ***folder.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/1895f7c9d56de5641d784aed7d26a6c4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 3
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `templates` directory is in the same folder as the app.py in which it is
+    created.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c7f1e889a9f905b696473b42f2c7489a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 4
+  prefs: []
+  type: TYPE_NORMAL
+- en: The index.html is located in the templates folder.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**index.html**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We name our App as “Named Entity Extractor”
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use [BootstrapCDN](https://www.bootstrapcdn.com/), copy-paste the [stylesheet](https://getbootstrap.com/docs/4.1/getting-started/introduction/) `<link>` into
+    our `<head>`before all other stylesheets to load our CSS.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Get Bootstrap’s navigation header, the navbar from [a template for a simple
+    informational website](https://getbootstrap.com/docs/4.3/examples/jumbotron/#).
+    It includes a large callout called a [jumbotron](https://getbootstrap.com/docs/4.0/components/jumbotron/) and
+    three supporting pieces of content.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Copy-paste the [navbar](https://getbootstrap.com/docs/4.0/components/navbar/) code
+    from the template’s [source code](http://view-source:https//getbootstrap.com/docs/4.3/examples/jumbotron/).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Bootstrap requires a container element to wrap site contents and house our grid
+    system.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In our case, for the first container, we will create a vertical form with two
+    input fields, one “Clear” button, and one “Submit” button.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Textual form controls are styled with the `form-control` class.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We are giving our users four taskoptions (a.k. a named entity extraction tasks)
+    to choose from, they are: ***Organization***, ***Person***, ***Geopolitical*** & ***Money***.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The second container provides contextual feedback messages for our user’s action,
+    that is the results of named entity extraction.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Not only we want to print out named entity extraction results to our user, we
+    also want to print out the number of results for each of named entity extractions.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Copy-paste the [JavaScript](https://getbootstrap.com/docs/4.1/getting-started/introduction/) in
+    the `<script>`s near the end of our html page, right before the closing `</body>` tag,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**app.py**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Our `app.py` file is rather simple and easy to understand. It contains the main
+    code that will be executed by the Python interpreter to run the Flask web application,
+    it includes the spaCy code for recognizing named entities.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We ran our app as a single module; thus we initialized a new Flask instance
+    with the argument `__name__` to let Flask know that it can find the HTML template
+    folder (`templates`) in the same directory where it is located.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We use the route decorator (`@app.route('/')`) to specify the URL that should
+    trigger the execution of the `index` function.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Our `index` function simply rendered the `index.html` HTML file, which is located
+    in the `templates` folder.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Inside the `process` function, we apply nlp to the raw text user will enter,
+    and extract pre-determined named entities (***Organization***, ***Person***, ***Geopolitical*** & ***Money***)
+    from the raw text.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We use the `POST` method to transport the form data to the server in the message
+    body. Finally, by setting the `debug=True` argument inside the `app.run` method,
+    we further activated Flask's debugger.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We use the `run` function to only run the application on the server when this
+    script is directly executed by the Python interpreter, which we ensured using
+    the `if` statement with` __name__ == '__main__'`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We are almost there!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try our API
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Start the ***Command Prompt*.**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Navigate to our ***Named-Entity-Extractor*** folder.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/64bb7dcffead7af0d6de91d0cb17737c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 5
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Open your Web browser, copy-paste “[http://127.0.0.1:5000/](http://127.0.0.1:5000/)”
+    into the address bar, and we will see this form:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/d4ef9a0f40e572fa1a51bea04c77bfde.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 6
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I copy-pasted a few paragraphs of an article from [nytimes](https://www.nytimes.com/2019/03/01/world/canada/trudeau-scandal-snc-lavalin.html),
+    it is a Canadian story:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b2e2dd8f627bc6d86d5a2d258b4cc421.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 7
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Select “***Organization***” under “Select task”, then click “Submit”, this
+    is what we get:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/790997a85dbe822e89de2695edd43287.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 8
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Nice. Let’s try “***Person***” entity:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3a13f59dc8cfc3263caf0d394371f43b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 9
+  prefs: []
+  type: TYPE_NORMAL
+- en: '“***Geopolitical***” entity:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/a34c95635d45bceac6a497c5b6d382cc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 10
+  prefs: []
+  type: TYPE_NORMAL
+- en: '“***Money***” entity:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/9010368909f99c58dccbbd0c57633cb6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 11
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are done!
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you followed the above steps and made it here, congratulations! You have
+    created a simple but functioning named entity extractor at zero cost! When you
+    look back, there were only two files we need to create. and all we need are open
+    source libraries and learning how to use them to create these two files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By building an app like this, you have learned new skills and using these skills
+    to creates something useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The complete source code is available at this [repository](https://github.com/susanli2016/Named-Entity-Extractor).
+    Happy Monday!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Reference:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Susan Li](https://www.linkedin.com/in/susanli/)** is changing the world,
+    one article at a time. She is a Sr. Data Scientist, located in Toronto, Canada.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/building-a-flask-api-to-automatically-extract-named-entities-using-spacy-2fd3f54ebbc6).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[All you need to know about text preprocessing for NLP and Machine Learning](/2019/04/text-preprocessing-nlp-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building NLP Classifiers Cheaply With Transfer Learning and Weak Supervision](/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[An Introduction on Time Series Forecasting with Simple Neural Networks & LSTM](/2019/04/introduction-time-series-forecasting-simple-neural-networks-lstm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How You Can Use Machine Learning to Automatically Label Data](https://www.kdnuggets.com/2022/02/machine-learning-automatically-label-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with spaCy for NLP](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing with spaCy](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[OpenAI’s Whisper API for Transcription and Translation](https://www.kdnuggets.com/2023/06/openai-whisper-api-transcription-translation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Meet Gorilla: UC Berkeley and Microsoft’s API-Augmented LLM…](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

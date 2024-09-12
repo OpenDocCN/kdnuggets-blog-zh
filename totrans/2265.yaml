@@ -1,0 +1,213 @@
+- en: There and Back Again… a RAPIDS Tale
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: By [Kris Manohar](https://www.linkedin.com/in/kris-manohar-phd-4b9117a/) & [Kevin
+    Baboolal](https://www.linkedin.com/in/kevin-baboolal-b3313595/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![There and Back Again… a RAPIDS Tale](../Images/0aaf39d85cdb9016557725d139bcb00e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Editor
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Editor''s Note:** We are thrilled to announce that this post has been selected
+    as the winner of the KDnuggets & NVIDIA Blog Writing Contest.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Machine learning has revolutionized various domains by leveraging vast amounts
+    of data. However, there are situations where acquiring sufficient data becomes
+    a challenge due to cost or scarcity. In such cases, traditional approaches often
+    struggle to provide accurate predictions. This blog post explores the limitations
+    posed by small datasets and unveils an innovative solution proposed by TTLAB that
+    harnesses the power of the nearest neighbor approach and a specialized kernel.
+    We will delve into the details of their algorithm, its benefits, and how GPU optimization
+    accelerates its execution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Challenge of Limited Data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In machine learning, having a substantial amount of data is crucial for training
+    accurate models. However, when faced with a small dataset comprising only a few
+    hundred rows, the shortcomings become evident. One common issue is the zero frequency
+    problem encountered in some classification algorithms such as the Naive Bayes
+    Classifier. This occurs when the algorithm encounters an unseen category value
+    during testing, leading to a zero probability estimation for that case. Similarly,
+    regression tasks face challenges when the test set contains values that were absent
+    in the training set. You may even find your choice of algorithm is improved (though
+    sub-optimal)  when these missing features are excluded.  These issues also manifest
+    in larger datasets with highly imbalanced classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Overcoming Data Scarcity
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Although train-test splits often mitigate these issues, there remains a hidden
+    problem when dealing with smaller datasets. Forcing an algorithm to generalize
+    based on fewer samples can lead to suboptimal predictions. Even if the algorithm
+    runs, its predictions may lack robustness and accuracy. The simple solution of
+    acquiring more data is not always feasible due to cost or availability constraints.
+    In such situations, an innovative approach proposed by TTLAB proves to be robust
+    and accurate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The TTLAB Algorithm
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: TTLAB's algorithm tackles the challenges posed by biased and limited datasets.
+    Their approach involves taking the weighted average of all rows in the training
+    dataset to predict the value for a target variable in a test sample. The key lies
+    in adjusting the weights of each training row for every test row, based on a parameterized
+    non-linear function that calculates the distance between two points in the feature
+    space. Although the weighting function used has a single parameter (the rate of
+    decay of influence of a training sample as its distance from the test sample increases),
+    the computing effort to optimize over this parameter could be large. By considering
+    the entire training dataset, the algorithm delivers robust predictions. This approach
+    has shown remarkable success in enhancing the performance of popular models such
+    as random forests and naive Bayes. As the algorithm gains popularity, efforts
+    are underway to further enhance its efficiency. The current implementation involves
+    tuning the hyperparameter kappa, which requires a grid search. To expedite this
+    process, a successive quadratic approximation is being explored, promising faster
+    parameter optimization. Additionally, ongoing peer reviews aim to validate and
+    refine the algorithm for broader adoption.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To implement the TTLAB algorithm for classification for loops and numpy proved
+    inefficient resulting in very long runtimes. The CPU implementation showcased
+    in the linked publication focuses on classification problems, demonstrating the
+    versatility and efficacy of the approach. [https://arxiv.org/pdf/2205.14779.pdf](https://arxiv.org/pdf/2205.14779.pdf).
+    The publication also shows that the algorithm benefits greatly from vectorization,
+    hinting at further speed improvements that can be gained from GPU acceleration
+    with CuPy. In fact, to perform hyper-parameter tuning and random K-folds for result
+    validation would have taken weeks for the multitude of datasets being tested.
+    By leveraging the power of GPUs, the computations were distributed effectively,
+    resulting in improved performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Accelerating Execution with GPUs
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Even with optimizations like vectorization and .apply refactoring, the execution
+    time remains impractical for real-world applications. However, with GPU optimization,
+    the runtime is drastically reduced, bringing execution times down from hours to
+    minutes. This remarkable acceleration opens up possibilities for using the algorithm
+    in scenarios where prompt results are essential.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Following the lessons learnt from the CPU implementation, we attempted to further
+    optimize our implementation. For this, we moved up the layer to CuDF Dataframes.
+    Vectorizing calculations onto the GPU is a breeze with CuDF. For us, it was as
+    simple as changing import pandas to import CuDF (you must vectorize properly in
+    pandas.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Further down our rabbit hole we need to rely on Numba kernels. At this point,
+    things get tricky. Recall why the algorithm’s predictions are robust because each
+    prediction uses all the rows in the training dataframe. However,  the Numba kernels
+    don’t support passing CuDF dataframes. Right now the we are experimenting with
+    some tricks suggested on Github to handle this case. ([https://github.com/rapidsai/cudf/issues/13375](https://github.com/rapidsai/cudf/issues/13375))
+  prefs: []
+  type: TYPE_NORMAL
+- en: For now, we can at least pass of the raw compute to a numba kernel via the `.apply_rows`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: At this point, we did not eliminate all for loops, but simply pushing most of
+    the number crunching to Numba reduced the CuDf runtime > 50% landing us in around
+    the 2 to 4 seconds for the standard 80-20 train-test split.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrap up
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: It has been an exhilarating and delightful journey exploring the capabilities
+    of the rapids, cupy, and cudf libraries for various machine learning tasks. These
+    libraries have proven to be user-friendly and easily understandable, making it
+    accessible to most users. The design and maintenance of these libraries are commendable,
+    allowing users to dive deep into the intricacies when necessary. In just a few
+    hours a day over the course of a week, we were able to progress from being novices
+    to pushing the boundaries of the library by implementing a highly customized prediction
+    algorithm. Our next aim is to achieve unprecedented speed, aiming to break the
+    micro-second barrier with large datasets ranging from 20K to 30K. Once this milestone
+    is reached, we plan to release the algorithm as a pip package powered by rapids,
+    making it available for wider adoption and usage.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Kris Manohar](https://www.linkedin.com/in/kris-manohar-phd-4b9117a/)** is
+    a executive director at ICPC, Trinidad and Tobago.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[RAPIDS cuDF Cheat Sheet](https://www.kdnuggets.com/2023/05/cudf-data-science-cheat-sheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using RAPIDS cuDF to Leverage GPU in Feature Engineering](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[RAPIDS cuDF to Speed up Your Next Data Science Workflow](https://www.kdnuggets.com/2023/04/rapids-cudf-speed-next-data-science-workflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[RAPIDS cuDF for Accelerated Data Science on Google Colab](https://www.kdnuggets.com/2023/01/rapids-cudf-accelerated-data-science-google-colab.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Is There a Way to Bridge the MLOps Tools Gap?](https://www.kdnuggets.com/2022/08/way-bridge-mlops-tools-gap.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[R vs Python (Again): A Human Factor Perspective](https://www.kdnuggets.com/2022/01/r-python-human-factor-perspective.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

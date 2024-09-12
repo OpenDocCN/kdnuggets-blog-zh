@@ -1,0 +1,260 @@
+- en: A Brief Introduction to Kalman Filters
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/12/brief-introduction-kalman-filters.html](https://www.kdnuggets.com/2022/12/brief-introduction-kalman-filters.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Can you measure the temperature inside the core of a nuclear reactor to make
+    sure the nuclear reaction is controlled? It certainly is too hot for any thermostat
+    manufactured to date. So what’s our best bet? The closest one can go is to measure
+    the temperature of a surface close to the core and estimate the temperature inside
+    it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Brief Introduction to Kalman Filters](../Images/8e91c8673f1e8a5e5d80e0e27f9783c1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Image by snowing on Freepik](https://www.freepik.com/free-photo/business-finance-man-calculating-budget-numbers-invoices-financial-adviser-working_1202400.htm#query=estimation&position=22&from_view=search&track=sph)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us consider another example to internalize this concept where direct measurement
+    of a phenomenon is not possible – can you measure the exact position of a flying
+    object using radar technology considering variable air density, wind direction,
+    and wind speed? What if the wind changed direction? Has the empirical error associated
+    with the radar device been accommodated?
+  prefs: []
+  type: TYPE_NORMAL
+- en: The environment impacts the accuracy of these measurements – if the environment
+    isn’t controlled, you tend to get noisy readings. Therefore you would need a methodology
+    that can filter the noise of these measurements and provide a near-accurate estimate,
+    and the answer lies in Kalman Filter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is the Need for Kalman Filter?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: You must be wondering your work is not directly related to the examples and
+    the applications shared above. So, why is there a need for you to understand and
+    learn the Kalman Filters?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, maybe you don’t work with nuclear reactors or radars for that matter,
+    but what if you want to measure the position of your car moving east on a long
+    straight road? Of course, GPS technology is what people use to measure the position
+    of anything on this planet. But, GPS signals get impacted by a slight change in
+    the position of the satellite, thermal noise, clouds, dust, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What about the odometer, can it be used instead of GPS? Adding the odometer
+    readings to the last known position is a simple way to know your current position.
+    But, it turns out that the odometer readings are impacted by the size of the wheel,
+    the tire air pressure, etc. Thus, the readings from the odometer are not that
+    helpful to find the exact location.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can also measure the acceleration of the car using IMU (Inertial Measurement
+    Unit) and double integrate it to get the distance but it is accompanied by the
+    device and mathematical errors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hence, there is a need for Kalman Filters that make use of the readings from
+    all these sources to get a near-perfect estimate of position.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understanding the Kalman Filter Algorithm
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: A strong grasp of concepts like state and observation is necessary to understand
+    the internals of the Kalman filter algorithm. So, let's first define what is a
+    state.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[The state of a system](https://en.wikipedia.org/wiki/State_variable) “describes
+    enough about the system to determine its future behavior in the absence of any
+    external forces affecting the system”. For example, the actual position of the
+    car is a state which is always hidden. So, the observation i.e. odometer reading
+    is used to estimate this state.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: With that in mind, let’s intuitively understand the Kalman Filter using an example
+    of a car moving with a constant velocity in a straight line. Note that we can
+    only observe the velocity through a speedometer, which can be noisy. Let’s say
+    the velocity is 10x+10y which means 10m/s in the x-direction and 10m/s in the
+    y-direction. Say, there is a gaussian noise added to it which the Kalman Filter
+    doesn’t know.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Two-Step Process
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'A Kalman filter for estimation would broadly involve two steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Prediction:** It involves predicting the quantity (position of the car) and
+    the error covariance for the next step.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Correction:** The correction step involves computing the Kalman Gain using
+    the previous prediction along with the error between the prediction and the observation
+    to update the estimate and the error covariance.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'An overview of the process explained above is mathematically depicted in this
+    illustration:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Brief Introduction to Kalman Filters](../Images/0e8fec3c0e8f27a72edaa4065cc82368.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Two-Step Process by [balzer82 / Kalman](https://github.com/balzer82/Kalman)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The two steps are repeated for all the measurements or until the Kalman Gain
+    stabilizes, as shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Brief Introduction to Kalman Filters](../Images/9779aeff68b42bbd559925a6eacdcc34.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image from [ResearchGate](https://www.researchgate.net/publication/267424725_Human_Motion_Tracking_and_Orientation_Estimation_using_inertial_sensors_and_RSSI_measurements)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Estimation
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The first step to solving an estimation problem is to model the problem i.e.
+    defining the state vector that Kalman Filter would estimate. Note that we need
+    to estimate the position as well as velocity, hence the state vector (xk) would
+    include both. Since the distance traveled is equal to the velocity in the direction
+    and the time elapsed, the state at time k+1 (xk+1) is defined below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Brief Introduction to Kalman Filters](../Images/cc04613b9090df6e8cd2bc96b3dd9a37.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A state transition matrix A (Dynamic matrix in Kalman terms) transforms the
+    current state of the object to the next state i.e., it defines how a state is
+    transitioned. The second component is the observation, defined by a matrix H called
+    the observation matrix. Because you are only observing the constant velocity and
+    not the position, only the (1,3) and (2,4) cell of the matrix has a non-zero value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Brief Introduction to Kalman Filters](../Images/2ce09490d547378ae1f028e35f24bfe7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Minimizing Noise
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Kalman seeks to minimize noise terms which are depicted by P0, Q, and R in the
+    two-step process. The matrix P0 captures the initial uncertainty with respect
+    to the position and velocity. The matrix Q captures the noise to the system pertaining
+    to environmental factors such as wind or bumpy roads, etc. The matrix R absorbs
+    the measurement noise or errors in measurement.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Brief Introduction to Kalman Filters](../Images/808486da03ccb706e35b76fa45eb8bd2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Based on the iterative updates from the prediction and correction process, the
+    Kalman Filter removes noise from a constant velocity model (the top graph) and
+    appears like the one shown in the bottom right image. Notably, the variance in
+    the output velocity estimate has decreased over time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Brief Introduction to Kalman Filters](../Images/03b064ebe52128bf988db27618970b3e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: [The Kalman filter simply explained [Part 2]](https://www.cbcity.de/das-kalman-filter-einfach-erklaert-teil-2)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This depicts how Kalman Filter removes noise from a constant velocity model
+    where only one source of observation i.e. velocity is available. It works even
+    better if there are multiple noisy sources of observation. For example, if you
+    have the noisy odometer readings along with the velocity readings the results
+    would have been even better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Kalman Filter highlights the need for estimation and is used in some of the
+    applications where noise is introduced through various sources. The article explained
+    the internal working of the Kalman Filter through an example of 2D motion to filter
+    this noise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** is an AI strategist and
+    a digital transformation leader working at the intersection of product, sciences,
+    and engineering to build scalable machine learning systems. She is an award-winning
+    innovation leader, an author, and an international speaker. She is on a mission
+    to democratize machine learning and break the jargon for everyone to be a part
+    of this transformation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Brief Introduction to Papers With Code](https://www.kdnuggets.com/2022/04/brief-introduction-papers-code.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, April 27: A Brief Introduction to Papers With Code;…](https://www.kdnuggets.com/2022/n17.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Brief History of the Neural Networks](https://www.kdnuggets.com/a-brief-history-of-the-neural-networks)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Everything You Need to Know About MLOps: A KDnuggets Tech Brief](https://www.kdnuggets.com/tech-brief-everything-you-need-to-know-about-mlops)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Binary Classification with PyCaret](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Clustering in Python with PyCaret](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

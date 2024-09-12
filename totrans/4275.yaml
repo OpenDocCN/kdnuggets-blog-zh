@@ -1,0 +1,408 @@
+- en: Super Charge Python with Pandas on GPUs Using Saturn Cloud
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/05/super-charge-python-pandas-gpus-saturn-cloud.html](https://www.kdnuggets.com/2021/05/super-charge-python-pandas-gpus-saturn-cloud.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Tyler Folkman](https://www.linkedin.com/in/tylerfolkman/), Head of Artificial
+    Intelligence at BEN Group**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a44c71944414a7fbdd262612be3e04cd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Guillaume Jaillet](https://unsplash.com/@i_am_g?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: I once asked on LinkedIn what libraries people are most likely to import when
+    first opening up a Jupyter Notebook.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Do you know what the number one response was?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandas
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The Pandas library is used extensively by data scientists, but the truth is
+    it can often be **quite slow. **And if your data processing is slow it can really
+    lead to a lot of delays in a project. If every time you want to generate a new
+    feature for your model takes even 10 minutes, you find yourself sitting around
+    just waiting (or doing other things :) ).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fcde395d5ecbc78a921a791600066ba8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source: [https://xkcd.com/303/](https://xkcd.com/303/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The time it takes for data to process and models to train is similar to the
+    compiling time for programmers. And while you might enjoy some of your data processing
+    breaks due to long processing times, I want to show you a better way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I want to show you how you can **easily avoid being over 1,000,000% slower** when
+    using Pandas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Setup
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before we dig into the experiments, let’s talk about the hardware we will be
+    using.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To make this incredibly easy for you to follow along with, we will be using [Saturn
+    Cloud](https://www.google.com/url?q=https://www.saturncloud.io/s/freehosted/?utm_source%3DSuper%2520Charge%2520Python%2520with%2520Pandas%2520on%2520GPUs%2520using%2520Saturn%2520Cloud%26utm_medium%3Dsaturn%2520hosted%2520free&sa=D&source=editors&ust=1619151968592000&usg=AOvVaw2RRkUYh5nLiKYEOmrk-GvU).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a3cd3a8fd0a7862e0bde8a217014a150.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: Saturn Cloud'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Saturn Cloud is a really slick platform that gives you access to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 10 hours of free Jupyter per month (including GPU)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 3 hours of Dask per month (including GPU)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Deploy dashboards
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can use it for free [here](https://www.google.com/url?q=https://www.saturncloud.io/s/freehosted/?utm_source%3DSuper%2520Charge%2520Python%2520with%2520Pandas%2520on%2520GPUs%2520using%2520Saturn%2520Cloud%26utm_medium%3Dsaturn%2520hosted%2520free&sa=D&source=editors&ust=1619151968592000&usg=AOvVaw2RRkUYh5nLiKYEOmrk-GvU).
+    Making it a great place to experiment with large-scale data processing!
+  prefs: []
+  type: TYPE_NORMAL
+- en: When you start up a project on Saturn, you get access to two very important
+    pieces of hardware. A Jupyter Server and a Dask Cluster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/287800c914b3167103281790882ad50f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: Saturn Cloud'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Jupyter Server is running with 4 cores, 16 GB of RAM, and a single GPU.
+    The Dask cluster is 3 workers with 4 cores, 16GB of RAM, and a single GPU.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The other amazing thing you get when selecting the RAPIDS base project is a
+    Python kernel with all of NVIDIA’s RAPIDs libraries including CUDF, which allows
+    us to run our Pandas processing on a GPU.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting this setup with a few clicks is no small win. Even if you have a computer
+    with a GPU, getting the RAPIDs libraries working can be time-consuming because
+    you have to make sure you have the right drivers and CUDA library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Alright — now that we have our hardware setup, we need to talk about the dataset
+    we will be using.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will use the Yellow Taxi trip record data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'These data have 7,667,792 rows and 18 columns. Here is what you get when running *info() *on
+    the data frame:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: So, a decently sized dataset, but nothing too crazy. It comes in at about 1GB
+    of memory usage.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Function
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Lastly, for our experiments, we need a function to run on our data. I selected
+    a pretty simple function that creates a new feature for a potential model. Our
+    function will calculate the total amount paid divided by the trip distance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: When we find a zero value for trip_distance, we will just return a value of
+    zero.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note: You can easily vectorize this function as taxi_df[“total_per_mile”] =
+    taxi_df.total_amount / taxi_df.trip_distance, which would be significantly faster.
+    We are using a function instead so we can compare apply speeds for our experiments.
+    If you’re curious, the vectorized version took about 50 ms.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Experiment #1 — Raw Pandas'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'For our first experiment, we are just going the read the data using raw Pandas.
+    Here is the code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'With the data read in, we can apply our function to all our rows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: It took **159,198 ms** (2 minutes and 39.21 seconds) to run this calculation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While that isn’t terribly slow, it is definitely slow enough that you notice
+    the time it takes and it throws off your flow. I found myself sitting around waiting
+    and that waiting time could easily tempt you to get distracted by email, Slack,
+    or social media. And those types of distractions can really kill productivity
+    beyond the time almost 3 minutes this calculation took to run.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Can we do better?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Experiment #2 — Parallel Pandas'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Swifter is a library that makes it incredibly simple to use all the threads
+    of your CPU when running Pandas *apply*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Since *apply *is easily parallelized because you can just break the data frame
+    into chunks for each thread, this should help. Here is the code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Adding swifter to the mix brought our processing time to **88,690 ms** (1 minute
+    and 28.69 seconds). Raw pandas was 1.795 times slower and you definitely notice
+    when running the code that it got faster. That being said, you still find yourself
+    waiting for it to finish.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Experiment #3 — Pandas on a GPU'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This is where things start to get interesting. Thanks to the cuDF library will
+    allow us to run our function on the GPU. The cuDF library, “provides a pandas-like
+    API that will be familiar to data engineers & data scientists, so they can use
+    it to easily accelerate their workflows without going into the details of CUDA
+    programming.”
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To use the cuDF library, though, we have to change the format of our function
+    slightly:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now our function takes in the *total_amount*, *trip_distance*, and *out*. *Out* is
+    the array in which we will store the results. Our function then loops over all
+    the values of *total_amount* and *trip_distance* from our data frame, calculates
+    our *total_per_mile*, and stores the results in *out*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We also have to change how we apply this function to our data frame:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: We now specify what the input columns are from our data frame and how they map
+    to the function parameters. We also specify which parameter is the output (*outcols) *and
+    what type of value it is (*np.float64*).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note: reading in the data remains the same except you use cudf.read_csv() instead
+    of pd.read_csv().'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Using the cuDF library and leveraging our GPU takes the processing time down
+    to **43 ms! **That means raw pandas was 3,702 times slower! That is insane! At
+    this point, the processing time doesn’t feel like a delay at all. You run the
+    function and before you know it, you have results. Honestly, I was amazed by how
+    much faster it was to run our processing on the GPU.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But! We have 1 more experiment to run to see if we can make it even faster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Experiment #4— Pandas on a Multiple GPUs'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Dask_cuDF is a library that we can use in order to leverage our dask cluster
+    which has 3 workers, each with a GPU. Essentially, we will be running our function
+    on 3 GPUs distributed across our dask cluster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This might sound complicated, but Saturn makes it really easy. With the following
+    code, you can connect to your dask cluster:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Once connected, you read in the data as so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: And finally, you can run the function in the exact same way you did with cuDF.
+    The only difference is that we are now running on a data frame read-in with the
+    dask_cudf library, so we will be leveraging our dask cluster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How long did it take?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**12 ms**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: That is 13,267 times faster than raw Pandas or you could also say that Pandas
+    is 1,326,650% slower than running on a cluster of 3 GPUs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wow. That is fast. You could get a much larger dataset and still run this function
+    fast enough to not notice much of a delay at all.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note: This is still over 4 times faster than the Pandas vectorized version
+    of our function!'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Speed Matters
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Hopefully, I’ve convinced you to drop everything right now and go try out Pandas
+    on a GPU using Saturn Cloud.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You could argue that almost 3 minutes to wait for a function to run really isn’t
+    that long, but when you’re focused on programming and in the flow, 3 minutes really
+    feels like forever. It is enough time that you start to get distracted and could
+    easily end up wasting even more time via distraction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And if you have even larger data, those wait times will only get longer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, go try it out for yourself. I think you will be amazed by how much better
+    12 ms or even 43 ms feels when running on a GPU as compared to over 159,000 seconds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, thank you to [Saturn Cloud](https://www.google.com/url?q=https://www.saturncloud.io/s/freehosted/?utm_source%3DSuper%2520Charge%2520Python%2520with%2520Pandas%2520on%2520GPUs%2520using%2520Saturn%2520Cloud%26utm_medium%3Dsaturn%2520hosted%2520free&sa=D&source=editors&ust=1619151968594000&usg=AOvVaw2JCPkeMfcMZKVLdtIsbtjm) for
+    working with me on this article! It was my first deep dive into the platform and
+    I was truly impressed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Tyler Folkman](https://www.linkedin.com/in/tylerfolkman/)** is the
+    Head of Artificial Intelligence at BEN Group. His work explores applications of
+    machine learning in disrupting and transforming the entertainment and marketing
+    industries. Tyler''s work has earned multiple patents in the areas of entity resolution
+    and knowledge extraction from unstructured data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Applying Python’s Explode Function to Pandas DataFrames](/2021/05/applying-pythons-explode-function-pandas-dataframes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Speed Up Pandas with Modin](/2021/03/speed-up-pandas-modin.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[ETL in the Cloud: Transforming Big Data Analytics with Data Warehouse Automation](/2021/04/etl-cloud-transforming-big-data-analytics-data-warehouse-automation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Mastering GPUs: A Beginner''s Guide to GPU-Accelerated DataFrames in Python](https://www.kdnuggets.com/2023/07/mastering-gpus-beginners-guide-gpu-accelerated-dataframes-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Leveraging the Power of GPUs with CuPy in Python](https://www.kdnuggets.com/leveraging-the-power-of-gpus-with-cupy-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[From Google Colab to a Ploomber Pipeline: ML at Scale with GPUs](https://www.kdnuggets.com/2022/03/google-colab-ploomber-pipeline-ml-scale-gpus.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Cloud-Native Super Computing](https://www.kdnuggets.com/2022/03/nvidia-cloud-native-super-computing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[11 Best Practices of Cloud and Data Migration to AWS Cloud](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Super Cheat Sheets You Need To Ace Machine Learning Interview](https://www.kdnuggets.com/2022/12/7-super-cheat-sheets-need-ace-machine-learning-interview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

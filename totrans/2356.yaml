@@ -1,0 +1,380 @@
+- en: Hyperparameter Tuning Using Grid Search and Random Search in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Hyperparameter Tuning Using Grid Search and Random Search in Python](../Images/0209199f770a3f9c2a8349dc5ca5f3c8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Editor
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: All machine learning models have a set of hyperparameters or arguments that
+    must be specified by the practitioner.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, a logistic regression model has different solvers that are used
+    to find coefficients that can give us the best possible output. Each solver uses
+    a different algorithm to find an optimal result, and none of these algorithms
+    are strictly better than the other. It is difficult to tell which solver will
+    perform the best on your dataset unless you try all of them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The best hyperparameter is subjective and differs for every dataset. The [Scikit-Learn](https://scikit-learn.org/stable/)
+    library in Python has a set of default hyperparameters that perform reasonably
+    well on all models, but these are not necessarily the best for every problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The only way to find the best possible hyperparameters for your dataset is by
+    trial and error, which is the main concept behind **hyperparameter optimization**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In simple words, hyperparameter optimization is a technique that involves searching
+    through a range of values to find a subset of results that achieve the best performance
+    on a given dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are two popular techniques used to perform hyperparameter optimization
+    - grid and random search.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Grid Search
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: When performing hyperparameter optimization, we first need to define a **parameter
+    space** or **parameter grid**, where we include a set of possible hyperparameter
+    values that can be used to build the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The grid search technique is then used to place these hyperparameters in a matrix-like
+    structure, and the model is trained on every combination of hyperparameter values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The model with the best performance is then selected.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Random Search
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: While grid search looks at every possible combination of hyperparameters to
+    find the best model, random search only selects and tests a random combination
+    of hyperparameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This technique randomly samples from a grid of hyperparameters instead of conducting
+    an exhaustive search.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can specify the number of total runs the random search should try before
+    returning the best model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that you have a basic understanding of how random search and grid search
+    work, I will show you how to implement these techniques using the Scikit-Learn
+    library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Optimizing a Random Forest Classifier Using Grid Search and Random Search
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Step 1: Loading the Dataset'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Download the [Wine Quality](https://www.kaggle.com/datasets/rajyellow46/wine-quality)
+    dataset on Kaggle and type the following lines of code to read it using the [Pandas](https://pandas.pydata.org/)
+    library:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The head of the dataframe looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hyperparameter Tuning Using Grid Search and Random Search in Python](../Images/cb924c16c04680333424a19f249a9ab4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Step 2: Data Preprocessing'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The target variable “quality” contains values ranging between 1 and 10.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We will turn this into a binary classification task by assigning a value of
+    0 to all data points with a quality value of less than or equal to 5, and a value
+    of 1 to the remaining observations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s split the dependent and independent variables in this dataframe:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 3: Building the Model'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Now, let’s instantiate a random forest classifier. We will be tuning the hyperparameters
+    of this model to create the best algorithm for our dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 4: Implementing Grid Search with Scikit-Learn'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Defining the Hyperparameter Space
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We will now try adjusting the following set of hyperparameters of this model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**“Max_depth”**: This hyperparameter represents the maximum level of each tree
+    in the random forest model. A deeper tree performs well and captures a lot of
+    information about the training data, but will not generalize well to test data.
+    By default, this value is set to “None” in the Scikit-Learn library, which means
+    that the trees are left to expand completely.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**“Max_features”**: The maximum number of features that the random forest model
+    is allowed to try at each split. By default in Scikit-Learn, this value is set
+    to the square root of the total number of variables in the dataset.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**“N_estimators”**: The number of decision trees in the forest. The default
+    number of estimators in Scikit-Learn is 10.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '“Min_samples_leaf”: The minimum number of samples required to be at the leaf
+    node of each tree. The default value is 1 in Scikit-Learn.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**“Min_samples_split”**: The minimum number of samples required to split an
+    internal node of each tree. The default value is 2 in Scikit-Learn.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'We will now create a dictionary of multiple possible values for all the above
+    hyperparameters. This is also called the **hyperparameter space**, and will be
+    searched through to find the best combination of arguments:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Running Grid Search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now, we need to perform the search to find the best hyperparameter combination
+    for the model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Evaluating Model Results
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Finally, let’s print out the best model accuracy, along with the set of hyperparameters
+    that yielded this score:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The best model rendered an accuracy score of approximately 0.74, and its hyperparameters
+    are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hyperparameter Tuning Using Grid Search and Random Search in Python](../Images/6d3aac2ac36e11b8123c41c55a83a71c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, let’s use random search on the same dataset to see if we get similar results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 5: Implementing Random Search Using Scikit-Learn'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Defining the Hyperparameter Space
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now, let’s define the hyperparameter space to implement random search. This
+    parameter space can have a bigger range of values than the one we built for grid
+    search, since random search does not try out every single combination of hyperparameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It randomly samples hyperparameters to find the best ones, which means that
+    unlike grid search, random search can look through a large number of values quickly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Running Random Search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Run the following lines of code to run random search on the model: (Note that
+    we have specified *n_iter=500*, which means that the random search will run 500
+    times before choosing the best model. You can experiment with a different number
+    of iterations to see which one gives you optimal results. Keep in mind that a
+    large number of iterations will result in better performance but is time-consuming).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Evaluating Model Results
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now, run the following lines of code to print the best hyperparameters found
+    by random search, along with the highest accuracy of the best model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The best hyperparameters found by random search are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hyperparameter Tuning Using Grid Search and Random Search in Python](../Images/734136ba652922a356c39a64f55a9c84.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The highest accuracy of all the models built is approximately 0.74 as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Observe that both grid search and random search performed reasonably well on
+    the dataset. Keep in mind that if you were to run a random search on the same
+    code, your results may end up being very different from what I’ve displayed above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is because it is searching through a very large parameter grid using random
+    initialization, which can render results that vary dramatically each time you
+    use the technique.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Complete Code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Here is the complete code used in the tutorial:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Grid Search vs Random Search - Which One To Use?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'If you ever find yourself trying to choose between grid search and random search,
+    here are some pointers to help you decide which one to use:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use grid search if you already have a ballpark range of known hyperparameter
+    values that will perform well. Make sure to keep your parameter space small, because
+    grid search can be extremely time-consuming.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Use random search on a broad range of values if you don’t already have an idea
+    of the parameters that will perform well on your model. Random search is faster
+    than grid search and should always be used when you have a large parameter space.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It is also a good idea to use both random search and grid search to get the
+    best possible results.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: You can use random search first with a large parameter space since it is faster.
+    Then, use the best hyperparameters found by random search to narrow down the parameter
+    grid, and feed a smaller range of values to grid search.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Natassha Selvaraj](https://www.natasshaselvaraj.com/)** is a self-taught
+    data scientist with a passion for writing. You can connect with her on [LinkedIn](https://www.linkedin.com/in/natassha-selvaraj-33430717a/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tuning Random Forest Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-random-forest-hyperparameters.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Elevate Your Search Engine Skills with Uplimit''s Search with ML Course!](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

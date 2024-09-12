@@ -1,0 +1,371 @@
+- en: How Feature Engineering Can Help You Do Well in a Kaggle Competition – Part
+    3
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/07/feature-engineering-help-kaggle-competition-3.html](https://www.kdnuggets.com/2017/07/feature-engineering-help-kaggle-competition-3.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Gabriel Moreira, CI&T.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Header image](../Images/f1e89e36ceb486d673bddb4fa9cd5de5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the [first](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-i-9cc9a883514d)
+    and [second](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-ii-3645d92282b8)
+    parts of this series, I introduced the [Outbrain Click Prediction machine learning
+    competition](https://www.kaggle.com/c/outbrain-click-prediction) and my initial
+    tasks to tackle the challenge. I presented the main techniques used for exploratory
+    data analysis, feature engineering, cross-validation strategy and modeling of
+    baseline predictors using basic statistics and machine learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this last post of the series, I describe how I used more powerful machine
+    learning algorithms for the click prediction problem as well as the ensembling
+    techniques that took me up to the 19th position on the leaderboard (top 2%).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Follow-the-Regularized-Leader
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: One of the popular approaches for CTR Prediction is Logistic Regression with
+    a [Follow-the-Regularized-Leader (FTRL)](https://www.eecs.tufts.edu/~dsculley/papers/ad-click-prediction.pdf)
+    optimizer, which have been used in [production by Google](https://www.eecs.tufts.edu/~dsculley/papers/ad-click-prediction.pdf)
+    to predict billions of events per day, using a correspondingly large feature space.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is a linear model with a lazy representation of the coefficients (*weights*)
+    and, in conjunction with L1 regularization, it leads to very sparse coefficient
+    vectors. This sparsity property shrinks memory usage, making it scalable for feature
+    vectors with billions of dimensions, because each instance will typically have
+    only a few hundreds of nonzero values. FTRL provides efficient training on large
+    datasets by streaming examples from disk or over the network — each training example
+    only needs to be processed once (online learning).
+  prefs: []
+  type: TYPE_NORMAL
+- en: I tried two different FTRL implementations, available in [Kaggler](https://github.com/jeongyoonlee/Kaggler)
+    and [Vowpal Wabbit](https://github.com/JohnLangford/vowpal_wabbit/wiki) (VW) frameworks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For CTR prediction, it is important to understand the interactions between the
+    features. For example, the average conversion of an ad from “Nike” advertiser
+    might be very different, depending on the publisher that is displaying the ad
+    (e.g. ESPN vs. Vogue).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I considered all categorical features for models trained on [Kaggler](https://github.com/jeongyoonlee/Kaggler)
+    FTRL. The feature interactions option was enabled, meaning that for all possible
+    two-paired feature combinations, feature values were multiplied and hashed (read
+    about Feature Hashing in the [first post](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-i-9cc9a883514d))
+    to a position in a sparse feature vector with dimension of 2²⁸. This was my slowest
+    model and the training time took more than 12 hours. But my LB score jumped to
+    0.67659 for this **Approach #6**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I also tried FTRL on [VW](https://github.com/JohnLangford/vowpal_wabbit/wiki),
+    which is a very fast and efficient framework in the usage of CPU and memory resources.
+    The input data was again categorical features, with the addition of some selected
+    numeric binned features (read about Feature Binning in the [first post](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-i-9cc9a883514d)).
+    My best model was trained in two hours and lead to a LB score of 0.67512 in this
+    **Approach #7**. The accuracy was a little bit lower, but much faster than the
+    previous model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In a second FTRL model on VW, I used a VW hyperparameter to configure interactions
+    (feature pairing) of only a subset of features (namespace). In this case, interactions
+    paired only categorical features and some selected numeric features (without binning
+    transformation). That change lead to a better mode in this **Approach #8**: 0.67697.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: All those three FTRL models were ensembled for my final submissions, as we’ll
+    describe in next sections.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Field-aware Factorization Machines
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A recent variant of Factorization Machines, named [Field-aware Factorization
+    Machines (FFM)](http://www.csie.ntu.edu.tw/~cjlin/papers/ffm.pdf) was used in
+    winning solutions for two CTR prediction competitions in 2014\. FFM tries to model
+    feature interactions by learning latent factors for each features interaction
+    pair. This algorithm was made available as the [LibFFM](https://www.csie.ntu.edu.tw/~cjlin/libffm/)
+    framework and used by many competitors. LibFFM makes a very efficient usage of
+    parallel processing and memory for large datasets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the **Approach #9**, I used categorical features with paired-interactions
+    hashed to a dimensionality of 700,000\. My best model took me only 37 minutes
+    to train and it turned out to be my best single model, with a LB score of **0.67932**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In **Approach #10**, the input data contained some selected binned numeric
+    features in addition to categorical features. Training data increased to 214 minutes,
+    and LB score was **0.67841**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For **Approach #11**, I tried to train a FFM model considering only the last
+    30% of events of the training set, under the hypothesis that training on the last
+    days could improve the prediction of the next two days (50%) of test set. The
+    LB score was **0.6736**, increasing accuracy for those two last days, but decreasing
+    accuracy for previous events of test set.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Machine Learning projects it is not rare that some promising approaches end
+    up failing miserably. That happened with some FFM models. I tried to transfer
+    learning from a GBDT model to a FFM model with leaf encoding, a [winning approach](http://www.csie.ntu.edu.tw/~r01922136/kaggle-2014-criteo.pdf)
+    in a Criteo competition. However, the FFM model accuracy dropped, probably because
+    the GBDT model was not accurate enough in this context, adding more noise than
+    signal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another unsuccessful approach was to train separate FFM models, specific for
+    geographic regions with more events in test dataset, like some countries (US ~
+    80%, CA ~ 5%, GB ~ 5%, AU ~ 2%, Others ~ 8%) and U.S. states (CA ~ 10%, TX ~ 7%,
+    FL ~ 5%, NY ~ 5%). To generate predictions, each event of test set was sent to
+    the model specialized on those region. Models specialized to the U.S. performed
+    well predicting clicks for that region, but for other regions the accuracy was
+    lower. Thus, using world-wide FFM models performed better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The three selected FFM approaches were used in my final ensemble, as I show
+    next.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ensembling methods
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Ensembling methods](http://mlwave.com/kaggle-ensembling-guide/) consist of
+    combining predictions from different models to increase accuracy and generalization.
+    The less correlated models'' predictions are, the better the ensemble accuracy
+    may be. The main idea behind ensembling is that individual models are influenced
+    not only by signal, but also by random noise. Taking a diverse set of models and
+    by combining their predictions, considerable noise may be cancelled, leading to
+    better model generalization, like shown below.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2684f72c212750e2759b372eaffb703b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: From the competition [Don’t overfit](https://www.kaggle.com/c/overfitting#description)
+  prefs: []
+  type: TYPE_NORMAL
+- en: A simple, yet powerful, ensembling approach is to merge models predictions by
+    [averaging](https://en.wikipedia.org/wiki/Average). For this competition, I tested
+    many types of weighted averages types like Arithmetic, Geometric, Harmonic and
+    Ranking averages, among others.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The best approach I could find was to use a Weighted Arithmetic Average of
+    the [logit (inverse of sigmoidal logistic)](https://en.wikipedia.org/wiki/Logit)
+    of predicted CTR (probabilities), shown in Equation 1\. It considered predictions
+    of the three selected FFM models (Approaches #9, #10, and #11) as well as one
+    the FTRL models (Approach #6). Such averaging gave me a LB score of **0.68418**
+    for this **Approach #12**, a nice jump from my best single model (Approach #10,
+    with a score of 0.67932).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/74c390999bb9c9f2d3837d6cc21c02a6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Equation 1 — Ensembling by Weighted Average of logit of models predictions
+  prefs: []
+  type: TYPE_NORMAL
+- en: At that time, competition submission deadline was only a few days away. My choice
+    for the remaining time was to ensemble using a Learning-to-Rank model to merge
+    up best models predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That model was a [GBDT](https://en.wikipedia.org/wiki/Gradient_boosting) with
+    100 trees and ranking objective using [XGBoost](https://xgboost.readthedocs.io/).
+    This ensemble considered as input features the best 3 FFM and 3 FTRL model predictions
+    as well as 15 selected engineered numeric features (like user views count, user
+    preference similarity and average CTR by categories).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'That ensemble layer was trained only using validation set data (described in
+    the [second post](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-ii-3645d92282b8)),
+    in a setting named [Blending](http://mlwave.com/kaggle-ensembling-guide/). The
+    reason for that approach is that if predictions for train set were also considered
+    by ensemble model, it would prioritize more overfitted models, reducing its ability
+    to generalize for the test set. In the last competition day, **Approach #13**
+    gave me my best Public LB score (**0.68688**). The competition then finished,
+    my Private LB Score was revealed (**0.68716**) and kept me at 19th position in
+    the final leaderboard, as illustrated below.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ad9fac701d8bac781d91c18751023241.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Kaggle’s Outbrain Click Prediction final leaderboard
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have not tracked the exact submission days, but the graph below gives a sense
+    of how my LB scores evolved during the competition. It can be seen that first
+    submissions provided nice jumps on the score, but improving upon that became harder,
+    which is quite common in machine learning projects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/aca13969e6171642ff0693e191e62df1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: LB scores for my approaches during competition
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Some of the things I learned from this competition were:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A good Cross-Validation strategy is essential for competing.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: One should spend a good chunk of time in feature engineering. Adding new features
+    on datasets afterwards requires much more effort and time.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Hashing is a must for sparse data. In fact, it performed better than One-Hot
+    Encoding (OHE) in terms of simplicity and efficient.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: OHE categorical features were not optimal for decision trees ensembles. Based
+    on competitors shared experiences, tree ensembles could perform better with original
+    categorical values (ids) with enough trees, because it would reduce feature vectors
+    to a much lower dimensionality, increasing the chance that the random feature
+    sets contained more predictive features.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Testing many different frameworks is great for learning, but usually takes tons
+    of time to transform data to the required format, read documentation and tune
+    hyperparameters.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Reading scientific papers about the main techniques (FTRL and FFM) were essential
+    for guidance on hyperparameter tuning.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Studying forums posts, public Kernels (shared code) and past solutions shared
+    by competitors was great way to learn and is essential for competing. Everyone
+    should share something back!
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Ensembling based on average improves accuracy a lot, *blending* with ML models
+    leverages the bar, and *stacking* is a must. I had not time to explore stacking,
+    but according to other competitors, using out-of-fold predictions on fixed folds
+    increases the available data for ensemble training (full train set) and improves
+    final ensemble accuracy.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: One shouldn't leave generating one's submission files until the final hours
+    of the competition!
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Kaggle is like a university for cutting-edge machine learning, for those who
+    decide to embrace the challenges and learn from the process and peers. It was
+    a highly engaging experience to compete against and learn from world-class data
+    scientists.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Google Cloud Platform was a great hiking partner during that journey, providing
+    all the necessary climbing tools to overcome cliffs of big data and distributed
+    computing, while my focus and effort was directed to get to the top of the mountain.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Gabriel Moreira](https://about.me/gspmoreira)** is a scientist passionate
+    about solving problems with data. He is a Doctoral student at Instituto Tecnológico
+    de Aeronáutica - ITA, researching on Recommender Systems and Deep Learning. Currently,
+    he is [Lead Data Scientist at CI&T](https://medium.com/unstructured), leading
+    the team in the solution of customer''s challenging problems using machine learning
+    on big and unstructured data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-iii-f67567aaf57c).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How Feature Engineering Can Help You Do Well in a Kaggle Competition – Part
+    1](/2017/06/feature-engineering-help-kaggle-competition-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Feature Engineering Can Help You Do Well in a Kaggle Competition – Part
+    2](/2017/06/feature-engineering-help-kaggle-competition-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Exclusive: Interview with Jeremy Howard on Deep Learning, Kaggle, Data Science,
+    and more](/2017/01/exclusive-interview-jeremy-howard-deep-learning-kaggle-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Projects That Can Help You Solve Real World Problems](https://www.kdnuggets.com/2022/11/data-science-projects-help-solve-real-world-problems.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Rare Data Science Skills That Can Help You Get Employed](https://www.kdnuggets.com/5-rare-data-science-skills-that-can-help-you-get-employed)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Generative AI Can Help You Improve Your Data Visualization Charts](https://www.kdnuggets.com/how-generative-ai-can-help-you-improve-your-data-visualization-charts)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Free Python Resources That Can Help You Become a Pro](https://www.kdnuggets.com/free-python-resources-that-can-help-you-become-a-pro)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How a Level System can Help Forecast AI Costs](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

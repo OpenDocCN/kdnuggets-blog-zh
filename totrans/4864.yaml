@@ -1,0 +1,262 @@
+- en: 'Getting Started with PyTorch Part 1: Understanding How Automatic Differentiation
+    Works'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html](https://www.kdnuggets.com/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Ayoosh Kathuria](https://www.linkedin.com/in/ayoosh-kathuria-44a319132/),
+    Research Intern**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When I started to code neural networks, I ended up using what everyone else
+    around me was using. TensorFlow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: But recently, PyTorch has emerged as a major contender in the race to be the
+    king of deep learning frameworks. What makes it really luring is it’s dynamic
+    computation graph paradigm. Don’t worry if the last line doesn’t make sense to
+    you now. By the end of this post, it will. But take my word that it makes debugging
+    neural networks way easier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I've been using PyTorch a few months now and I've never felt better. I have
+    more energy. My skin is clearer. My eye sight has improved.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: — Andrej Karpathy (@karpathy) [May 26, 2017](https://twitter.com/karpathy/status/868178954032513024?ref_src=twsrc%5Etfw)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: If you’re wondering why your energy has been low lately, switch to PyTorch!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prerequisites
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Before we begin, I must point out that you should have at least the basic idea
+    about:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Concepts related to training of neural networks, particularly backpropagation
+    and gradient descent.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Applying the chain rule to compute derivatives.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How classes work in Python. (Or a general idea about Object Oriented Programming)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In case, you’re missing any of the above, I’ve provided links at the end of
+    the article to guide you.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, it’s time to get started with PyTorch. This is the first in a series of
+    tutorials on PyTorch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is the part 1 where I’ll describe the basic building blocks, and *Autograd*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**NOTE: **An important thing to notice is that the tutorial is made for PyTorch
+    0.3 and lower versions. The latest version on offer is 0.4\. I’ve decided to stick
+    with 0.3 because as of now, 0.3 is the version that is shipped in Conda and pip
+    channels. Also, most of PyTorch code that is used in open source hasn’t been updated
+    to incorporate some of the changes proposed in 0.4\. I, however, will point out
+    at certain places where things differ in 0.3 and 0.4.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Building Block #1 : Tensors'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you’ve ever done machine learning in python, you’ve probably come across
+    NumPy. The reason why we use Numpy is because it’s much faster than Python lists
+    at doing matrix ops. Why? Because it does most of the heavy lifting in C.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But, in case of training deep neural networks, NumPy arrays simply don’t cut
+    it. I’m too lazy to do the actual calculations here (google for “FLOPS in one
+    iteration of ResNet to get an idea), but code utilising NumPy arrays alone would
+    take months to train some of the state of the art networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is where **Tensors** come into play. PyTorch provides us with a data structure
+    called a *Tensor*, which is very similar to NumPy’s *ndarray.* But unlike the
+    latter, **tensors can tap into the resources of a GPU to significantly speed up
+    matrix operations.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is how you make a Tensor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Building Block #2 : Computation Graph'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now, we are at the business side of things. When a neural network is trained,
+    we need to compute gradients of the loss function, with respect to every weight
+    and bias, and then update these weights using gradient descent.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With neural networks hitting billions of weights, doing the above step efficiently
+    can make or break the feasibility of training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Building Block #2.1: Computation Graphs**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Computation graphs lie at the heart of the way modern deep learning networks
+    work, and PyTorch is no exception. Let us first get the hang of what they are.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Suppose, your model is described like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: If I were to actually draw the computation graph, it would probably look like
+    this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b1185cdfd81dacc7da52b88949b4cd17.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Computation Graph for our Model
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**NOW**, you must note, that the above figure is not entirely an accurate representation
+    of how the graph is represented under the hood by PyTorch. However, for now, it’s
+    enough to drive our point home.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why should we create such a graph when we can sequentially execute the operations
+    required to compute the output?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imagine, what were to happen, if you didn’t merely have to calculate the output
+    but also train the network. You’ll have to compute the gradients for all the weights
+    labelled by purple nodes. That would require you to figure your way around chain
+    rule, and then update the weights.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The computation graph is simply a data structure that allows you to efficiently
+    apply the chain rule to compute gradients for all of your parameters.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/142a367a1968d0a892540f69c74dedc3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Applying the chain rule using computation graphs
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here are a couple of things to notice. First, that the directions of the arrows
+    are now reversed in the graph. That’s because we are backpropagating, and arrows
+    marks the flow of gradients backwards.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Second, for the sake of these example, you can think of the gradients I have
+    written as *edge weights*. Notice, these gradients don’t require chain rule to
+    be computed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, in order to compute the *gradient of any node, say, L, with respect of
+    any other node, say c ( dL / dc) *all we have to do is.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Trace the path *from L to c*. This would be* L → d → c.*
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Multiply all the *edge weights* as you traverse along this path. The quantity
+    you end up with is: ( *dL / dd ) * *( *dd / dc ) = ( dL / dc)*'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If there are multiple paths, add their results. For example in case of *dL/da, *we
+    have two paths.* L → d → c → a and L → d → b→ a. *We add their contributions to
+    get the gradient of* L w.r.t. a.*
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '*[*( *dL / dd ) * *( *dd / dc ) * *( *dc / da )] *+ *[*( *dL / dd ) * *( *dd
+    / db ) * *( *db / da )]*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In principle, one could start at *L*, and start traversing the graph backwards,
+    calculating gradients for every node that comes along the way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyTorch in 5 Steps](https://www.kdnuggets.com/5-steps-getting-started-pytorch)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Ace Data Science Assessment Test by Using Automatic EDA Tools](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How I Did Automatic Image Labeling Using Grounding DINO](https://www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How ChatGPT Works: The Model Behind The Bot](https://www.kdnuggets.com/2023/04/chatgpt-works-model-behind-bot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Burtch Works 2023 Data Science & AI Professionals Salary Report…](https://www.kdnuggets.com/2023/08/burtch-works-2023-data-science-ai-professionals-salary-report.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

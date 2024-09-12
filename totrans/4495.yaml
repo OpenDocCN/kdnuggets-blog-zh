@@ -1,0 +1,456 @@
+- en: Build an app to generate photorealistic faces using TensorFlow and Streamlit
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/04/app-generate-photorealistic-faces-tensorflow-streamlit.html](https://www.kdnuggets.com/2020/04/app-generate-photorealistic-faces-tensorflow-streamlit.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Adrien Treuille](https://www.linkedin.com/in/adrien-treuille-52215718/),
+    Co-founder at Streamlit**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/d3f4b90ea22b7679cfeed5720254753b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[GAN-synthesized face]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Machine learning models are black boxes. Yes, you can run them on test sets
+    and plot fancy performance curves, but it’s *still* often hard to answer basic
+    questions about how they perform. A surprisingly powerful source of insight is
+    simply to **play with your models**! Tweak inputs. Watch outputs. Let your coworkers
+    and managers play with them too. This interactive approach is not only a powerful
+    way to gain intuition, but also a great way to get people excited about your work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Making interactive models is one of the use-cases that inspired [Streamlit](http://streamlit.io/),
+    a Python framework that makes [writing apps as easy as writing Python scripts](https://towardsdatascience.com/coding-ml-tools-like-you-code-ml-models-ddba3357eace?source=friends_link&sk=f7774c54571148b33cde3ba6c6310086).
+    This overview will walk you through creating a Streamlit app to play with one
+    of the hairiest and black-box-iest models out there: a deep *Generative Adversarial
+    Network* (GAN). In this case, we’ll visualize Nvidia’s [PG-GAN](https://research.nvidia.com/publication/2017-10_Progressive-Growing-of) [1]
+    using TensorFlow to synthesize photorealistic human faces from thin air. Then,
+    using Shaobo Guan’s amazing [TL-GAN](https://blog.insightdatascience.com/generating-custom-photo-realistic-faces-using-ai-d170b1b59255) model
+    [2], we’ll create an [app that gives us](https://github.com/streamlit/demo-face-gan) the
+    ability to tweak GAN-synthesized celebrity faces by attributes like age, smileyness,
+    male likeness, and hair color. By the end of the tutorial, you’ll have a fully
+    parametric model of humans! (Note we didn’t create the attributes. They came from
+    the [CelebA dataset](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) [3], and
+    some of them can get a bit weird…)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting started with Streamlit
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If you haven’t installed Streamlit yet, you can do so by running:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: And if you’re a seasoned Streamlit-er, you’ll need to be on 0.57.1 or later,
+    so make sure to upgrade!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Setting up your environment
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before we begin, use the commands below to check out the project’s GitHub repo
+    and running the [Face GAN demo](https://github.com/streamlit/demo-face-gan) for
+    yourself. This demo depends on Tensorflow 1, which does not support Python 3.7
+    or 3.8, so you’ll need Python 3.6\. On Mac and Linux, we recommend using [pyenv](https://github.com/pyenv/pyenv) to
+    install Python 3.6 alongside your current version, then setting up a new virtual
+    environment using venv or virtualenv. On Windows, the [Anaconda Navigator](https://docs.anaconda.com/anaconda/navigator/) allows
+    you to [pick your Python version](https://docs.anaconda.com/anaconda/navigator/tutorials/use-multiple-python-versions/) with
+    a point-and-click interface.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When you’re all set, open a terminal window and type:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Give it a minute to finish downloading the trained GAN and then try playing
+    with the sliders to explore the different faces the GAN can synthesize. Pretty
+    cool, right?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2ba8cf06358eeb8bacc34606a0900451.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The full app code is a file that has ~190 lines of code, out of which only 13
+    are Streamlit calls. **That’s right, the entire UI above is drawn from just those
+    13 lines!**
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s take a look at how the app is structured:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that you have a sense of how it is structured, let’s dive into each of the
+    5 steps above to see how they work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 1\. Download models and data files
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'This step downloads the files we need: a pre-trained PG-GAN model and a TL-GAN
+    model pre-fitted to it (we’ll dive into these a little bit later!).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `download_file` utility function is a little smarter than a pure downloader:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It checks if the file is already present in the local directory, so it only
+    downloads it if needed. It also checks if the downloaded file’s size is what we
+    expected it to be, so it’s able to fix interrupted downloads. This is a great
+    pattern to follow!
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It uses `st.progress()` and `st.warning()` to show a nice UI to the user while
+    the file downloads. Then it calls `.empty()` on those UI elements to hide them
+    when done.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Step 2\. Load the models into memory
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The next step is to load these models into memory. Here is the code for loading
+    the PG-GAN model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice the `@st.cache` decorator at the start of `load_pg_gan_model()`. Normally
+    in Python, you could just run `load_pg_gan_model()` and reuse that variable over
+    and over. Streamlit’s [execution model](https://docs.streamlit.io/main_concepts.html?highlight=execution%20model#data-flow) is
+    unique, however, in that every time a user interacts with a UI widget your script
+    executes again *in* *its entirety, *from top to bottom. By adding `@st.cache` to
+    the costly model-loading functions, we are telling Streamlit to only run those
+    functions the first time the script executes — and just reuse the cache output
+    for every execution after that. That is one of Streamlit’s most fundamental features,
+    as it lets you run scripts efficiently by caching the results of function calls.
+    This way, the large fitted GAN models will be loaded into memory exactly once;
+    and by the same token, our TensorFlow session will be created exactly once, as
+    well. (See our [launch article](https://towardsdatascience.com/coding-ml-tools-like-you-code-ml-models-ddba3357eace?source=friends_link&sk=f7774c54571148b33cde3ba6c6310086) for
+    a refresher on Streamlit’s execution model.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/434b4264564c81114912b94710a16064.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Figure 1\. How caching works in Streamlit’s execution model]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There’s one wrinkle, though: the TensorFlow session object can mutate internally
+    as we use it to run different computations. Ordinarily, [we don’t want cached
+    objects to mutate](https://docs.streamlit.io/caching.html#example-6-mutating-cached-values),
+    as that can lead to unexpected results. So when Streamlit detects such mutations,
+    it issues a warning to the user. However, in this case we happen to know that
+    it’s OK if the TensorFlow session object mutates, so [we bypass the warning](https://docs.streamlit.io/troubleshooting/caching_issues.html#how-to-fix-the-cached-object-mutated-warning) by
+    setting `allow_output_mutation=True`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 3\. Draw the sidebar UI
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If this is the first time you’re seeing Streamlit’s API for drawing widgets,
+    here’s the 30-second crash course:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You add widgets by calling API methods like `st.slider()` and `st.checkbox()`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The return value of those methods is the value shown in the UI. For example,
+    when the user moves a slider to position 42, your script will be re-executed and
+    in that execution the return value of that `st.slider()` will be 42.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can put anything in a sidebar by prepending it with `st.sidebar`. For example, `st.sidebar.checkbox()`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'So to add a slider in the sidebar, for example — a slider to allow the user
+    to tune the `brown_hair` parameter, you would just add:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In our app we want to get a little fancy to show off just how easy it is to
+    make the UI itself modifiable in Streamlit! We want to allows users to first use
+    a multiselect widget to pick a set of features they want to control in the generated
+    image, which means our UI needs to be drawn programmatically:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a36716267772f577d0c823d074729999.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'With Streamlit, the code for that is actually quite simple:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 4\. Synthesize the image
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that we have a set of features telling us what kind of face to synthesize,
+    we need to do the heavy lifting of synthesizing the face. The way we’ll do that
+    is by passing the features into the TL-GAN to generate a vector in the PG-GAN’s
+    latent space, then feed that vector to PG-GAN. If that sentence made no sense
+    to you, let’s take a detour and talk about how our two neural nets work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**A detour into GANs**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To understand how the above app generates faces from slider values, you first
+    have to understand something about how PG-GAN and TL-GAN work — but don’t worry, **you
+    can skip this section and still understand how the app works at a higher level!**
+  prefs: []
+  type: TYPE_NORMAL
+- en: PG-GAN, like any GAN, is fundamentally* a pair* of neural networks, one generative
+    and one discriminative, which are trained against each other, forever locked in
+    mortal combat. The generative network is in charge of synthesizing images it believes
+    look like faces, and the discriminative network is in charge of deciding whether
+    or not the images are indeed faces. The two networks are iteratively trained against
+    each other’s output, so each one does its best to learn to fool the other network.
+    The end result is the final generative network is able to synthesize realistic-looking
+    faces even though at the start of training all it could synthesize was random
+    noise. Its really quite amazing! In this case, the face-generating GAN we use
+    was trained on celebrity faces by Karras *et al* using their [Progressive Growing
+    of GANs](https://github.com/tkarras/progressive_growing_of_gans) algorithm (PG-GAN),
+    which trains GANs using progressively higher-resolution images. [1]
+  prefs: []
+  type: TYPE_NORMAL
+- en: The input to PG-GAN is a high-dimensional vector belonging to its so-called *latent-space*.
+    The latent-space is basically the space of all possible faces the network can
+    generate, so each random vector in that space corresponds to a unique face (or
+    at least it should! Sometimes you get weird results…) The way you typically use
+    a GAN is to give it a random vector and then check out what face gets synthesized
+    (Figure 2.a).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c71c1eb6611e2080ce5ce1eb3f020a9f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Figure 2.a]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, that sounds a bit dull and we’d rather have some more control over
+    the output. We’d like to tell PG-GAN “generate an image of a man with a beard”,
+    or “generate an image of a brown-haired woman”. That’s where the TL-GAN comes
+    in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The TL-GAN is yet another neural network, this one trained by entering random
+    vectors into PG-GAN, taking the generated faces, and running them through classifiers
+    for attributes like “is young-looking”, “is bearded”, “is brown-haired”, etc.
+    In the training phase, TL-GAN labels thousands of faces from PG-GAN with those
+    classifiers and identifies directions in the latent space that correspond to changes
+    in the labels we care about. As a result, the TL-GAN learns how to map those classes
+    (i.e. “young-looking”, “bearded”, “brown-haired”) into the appropriate random-looking
+    vector that should be input into PG-GAN to generate a face with those characteristics
+    (Figure 2.b).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/444c4f6eebf36d5528508f27adccf7f8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Figure 2.b]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Going back to our app, at this point we’ve already downloaded the pre-trained
+    GAN models and loaded them into memory, and we’ve also grabbed a feature vector
+    from the UI. So now we just have to feed those features into TL-GAN and then PG-GAN
+    to get an image out:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Optimize performance
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The `generate_image()` function above can take some time to execute, especially
+    when running on a CPU. To improve our app’s performance it would be great if we
+    could cache the output of that function, so we don’t have to re-synthesize faces
+    we’ve already seen as we move the slider back and forth.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, as you may have noticed in the snippet above already, the solution here
+    is to once again use the `@st.cache` decorator.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But notice the two arguments we passed to `@st.cache` in this case: `show_spinner=False`
+    and `hash_funcs={tf.Session: id}`. What are those there for?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The first one is easy to explain: by default, `@st.cache` shows a status box
+    in the UI letting you know that a slow-running function is currently executing.
+    We call that a “spinner”. However, in this case, we’d like to avoid showing it,
+    so the UI doesn’t jump around unexpectedly. So we set `show_spinner` to False.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The next one solves a more involved problem: the TensorFlow session object,
+    which is passed as an argument to `generate_image()`, is usually mutated by TensorFlow’s
+    internals in between runs of this cached function. This means the input arguments
+    to `generate_image()` will always be different and we’ll never actually get a
+    cache hit. In other words, the `@st.cache` decorator won’t actually do anything!
+    How can we solve this?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hash_funcs to the rescue
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The hash_funcs option allows us to specify custom hash functions that tell `@st.cache` how
+    it should interpret different objects when checking whether this is a cache hit
+    or a cache miss. In this case, we’re going to use that option to tell Streamlit
+    to hash a TensorFlow session by calling Python’s `id()` function rather than by
+    examining its contents:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This works for us because the session object in our case is actually a singleton
+    across all executions of the underlying code since it comes from the @st.cache’d `load_pg_gan_model()` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For more information about `hash_funcs`, check out our documentation about [advanced
+    caching techniques](https://docs.streamlit.io/api.html?highlight=cache#streamlit.cache).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 5\. Draw the synthesized image
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now that we have the output image, drawing it is a piece of cake! Just call
+    Streamlit’s `st.image` function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: And we’re done!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrapping up
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'So there you have it: interactive face synthesis with TensorFlow in a 190-line
+    Streamlit app and only 13 Streamlit function calls! Have fun exploring the space
+    of faces these two GANs can draw, and many thanks to [Nvidia](https://github.com/tkarras/progressive_growing_of_gans) and [Shaobo
+    Guan](https://github.com/SummitKwan/transparent_latent_gan) for letting us build
+    off their super cool demos. We hope that you have as much fun building apps and
+    playing with models as we do. ????'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For more Streamlit app examples, you can check out our gallery at[ https://www.streamlit.io/gallery](https://www.streamlit.io/gallery).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Thanks to Ash Blum, TC Ricks, Amanda Kelly, Thiago Teixeira, Jonathan Rhone
+    and Tim Conkling for their helpful input on this article.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**References:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[1] T. Karras, T. Aila, S. Laine, J. Lehtinen. *Progressive Growing of GANs
+    for Improved Quality, Stability, and Variation*. International Conference on Learning
+    Representations (ICLR 2018)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[2] S. Guan. *Controlled image synthesis and editing using a novel TL-GAN model*.
+    Insight Data Science Blog (2018)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[3] Z. Liu, P. Luo, X. Wang, X. Tang. *Deep Learning Face Attributes in the
+    Wild. *International Conference on Computer Vision (ICCV 2015)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Adrien Treuille](https://www.linkedin.com/in/adrien-treuille-52215718/)**
+    is co-founder of Streamlit, the ML tooling framework. Adrien was a computer science
+    prof at Carnegie Mellon, lead a Google X project, and was VP at Zoox.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/build-an-app-to-synthesize-photorealistic-faces-using-tensorflow-and-streamlit-dd2545828021).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Generate Realistic Human Face using GAN](/2020/03/generate-realistic-human-face-using-gan.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[12-Hour Machine Learning Challenge: Build & deploy an app with Streamlit and
+    DevOps tools](/2020/02/machine-learning-challenge-build-deploy-app-streamlit-devops.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Forgotten Algorithm](/2020/02/forgotten-algorithm-monte-carlo-simulation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[3 Ways to Generate Hyper-Realistic Faces Using Stable Diffusion](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build a Machine Learning Web App in 5 Minutes](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News March 9, 2022: Build a Machine Learning Web App in 5…](https://www.kdnuggets.com/2022/n10.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build a Command-Line App with Python in 7 Easy Steps](https://www.kdnuggets.com/build-a-command-line-app-with-python-in-7-easy-steps)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Ways to Generate Passive Income Using ChatGPT](https://www.kdnuggets.com/2023/03/4-ways-generate-passive-income-chatgpt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generate Music From Text Using Google MusicLM](https://www.kdnuggets.com/2023/06/generate-music-text-google-musiclm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

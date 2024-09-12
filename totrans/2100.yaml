@@ -1,0 +1,408 @@
+- en: 'Quantization and LLMs: Condensing Models to Manageable Sizes'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/quantization-and-llms-condensing-models-to-manageable-sizes](https://www.kdnuggets.com/quantization-and-llms-condensing-models-to-manageable-sizes)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Quantization and LLMs: Condensing Models to Manageable Sizes](../Images/c200004e40b1a5d03763bbf10e7b6bab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The Scale and Complexity of LLMs
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The incredible abilities of LLMs are powered by their vast neural networks which
+    are made up of billions of parameters. These parameters are the result of training
+    on extensive text corpora and are fine-tuned to make the models as accurate and
+    versatile as possible. This level of complexity requires significant computational
+    power for processing and storage.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Quantization and LLMs: Condensing Models to Manageable Sizes](../Images/cdcb06c3bedff816f35c168293c2ffc0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The accompanying bar graph delineates the number of parameters across different
+    scales of language models. As we move from smaller to larger models, we witness
+    a significant increase in the number of parameters with 'Small' language models
+    at the modest millions of parameters and 'Large' models with tens of billions
+    of parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, it is the GPT-4 LLM model with 175 billion parameters that dwarfs other
+    models’ parameter size. Not only is GPT-4 using the most parameters out of the
+    graphs, but it also powers the most recognizable generative AI model, ChatGPT.
+    This towering presence on the graph is representative of other LLMs of its class,
+    displaying the requirements needed to power the future’s AI chatbots, as well
+    as the processing power required to support such advanced AI systems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Cost of Running LLMs and Quantization
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Deploying and operating complex models can get costly due to their need for
+    either cloud computing on specialized hardware, such as [high-end GPUs](https://www.exxactcorp.com/category/Consumer-Graphics-Cards),
+    AI accelerators, and continuous energy consumption. Reducing the cost by choosing
+    an on-premises solution can save a great deal of money and increase flexibility
+    in hardware choices and freedom to utilize the system wherever with a trade-off
+    in maintenance and employing a skilled professional. High costs can make it challenging
+    for small business deployments to train and power an advanced AI. Here is where
+    quantization comes in handy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Quantization?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Quantization is a technique that reduces the numerical precision of each parameter
+    in a model, thereby decreasing its memory footprint. This is akin to compressing
+    a high-resolution image to a lower resolution while retaining the essence and
+    most important aspects but at a reduced data size. This approach enables the deployment
+    of LLMs on with less hardware without substantial performance loss.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ChatGPT was trained and is deployed using thousands of NVIDIA DGX systems, millions
+    of dollars of hardware, and tens of thousands more for infrastructure. Quantization
+    can enable good proof-of-concept, or even fully fledged deployments with less
+    spectacular (but still high performance) hardware.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the sections to follow, we will dissect the concept of quantization, its
+    methodologies, and its significance in bridging the gap between the highly resource-intensive
+    nature of LLMs and the practicalities of everyday technology use. The transformative
+    power of LLMs can become a staple in smaller-scale applications, offering vast
+    benefits to a broader audience.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basics of Quantization
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Quantizing a large language model refers to the process of reducing the precision
+    of numerical values used in the model. In the context of neural networks and deep
+    learning models, including large language models, numerical values are typically
+    represented as floating-point numbers with high precision (e.g., 32-bit or 16-bit
+    floating-point format). Read more about [Floating Point Precision here](https://www.exxactcorp.com/blog/hpc/what-is-fp64-fp32-fp16).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Quantization addresses this by converting these high-precision floating-point
+    numbers into lower-precision representations, such as 16- or 8-bit integers to
+    make the model more memory-efficient and faster during both training and inference
+    by sacrificing precision. As a result, the training and inferencing of the model
+    requires less storage, consumes less memory, and can be executed more quickly
+    on hardware that supports lower-precision computations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Types of Quantization
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To add depth and complexity to the topic, it is critical to understand that
+    quantization can be applied at various stages in the lifecycle of a model's development
+    and deployment. Each method has its distinct advantages and trade-offs and is
+    selected based on the specific requirements and constraints of the use case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Static Quantization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Static quantization is a technique applied during the training phase of an AI
+    model, where the weights and activations are quantized to a lower bit precision
+    and applied to all layers. The weights and activations are quantized ahead of
+    time and remain fixed throughout. Static quantization is great for known memory
+    requirements of the system the model is planning to be deployed to.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pros of Static Quantization
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Simplifies deployment planning as the quantization parameters are fixed.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reduces model size, making it more suitable for edge devices and real-time applications.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Cons of Static Quantization
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Performance drops are predictable; so certain quantized parts may suffer more
+    due to a broad static approach.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Limited adaptability for static quantization for varying input patterns and
+    less robust update to weights.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 2\. Dynamic Quantization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Dynamic Quantization involves quantizing weights statically, but activations
+    are quantized on the fly during model inference. The weights are quantized ahead
+    of time, while the activations are quantized dynamically as data passes through
+    the network. This means that quantization of certain parts of the model are executed
+    on different precisions as opposed to defaulting to a fixed quantization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pros of Dynamic Quantization
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Balances model compression and runtime efficiency without significant drop in
+    accuracy.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Useful for models where activation precision is more critical than weight precision.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Cons of Dynamic Quantization
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Performance improvements aren’t predictable compared to static methods (but
+    this isn’t necessarily a bad thing).
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Dynamic calculation means more computational overhead and longer train and inference
+    times than the other methods, while still being lighter weight than without quantization
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 3\. Post-Training Quantization (PTQ)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this technique, quantization is incorporated into the training process itself.
+    It involves analyzing the distribution of weights and activations and then mapping
+    these values to a lower bit depth. PTQ is deployed on resource-constrained devices
+    like edge devices and mobile phones. PTQ can be either static or dynamic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pros of PTQ
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Can be applied directly to a pre-trained model without the need for retraining.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reduces the model size and decreases memory requirements.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Improved inference speeds enabling faster computations during and after deployment.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Cons of PTQ
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Potential loss in model accuracy due to the approximation of weights.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Requires careful calibration and fine tuning to mitigate quantization errors.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: May not be optimal for all types of models, particularly those sensitive to
+    weight precision.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 4\. Quantization Aware Training (QAT)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: During training, the model is aware of the quantization operations that will
+    be applied during inference and the parameters are adjusted accordingly. This
+    allows the model to learn to handle quantization induced errors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pros of QAT
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Tends to preserve model accuracy compared to PTQ since the model training accounts
+    for quantization errors during training.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More robust for models sensitive to precision and is better at inferencing even
+    on lower precisions.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Cons of QAT
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Requires retraining the model resulting in longer training times.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More computationally intensive since it incorporates quantization error checking.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 5\. Binary Ternary Quantization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: These methods quantize the weights to either two values (binary) or three values
+    (ternary), representing the most extreme form of quantization. Weights are constrained
+    to +1, -1 for binary, or +1, 0, -1 for ternary quantization during or after training.
+    This would drastically reduce the number of possible quantization weight values
+    while still being somewhat dynamic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pros of Binary Ternary Quantization
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Maximizes model compression and inferencing speed and has minimal memory requirements.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Fast inferencing and quantization calculations enables usefulness on underpowered
+    hardware.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Cons of Binary Ternary Quantization
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: High compression and reduced precision results in a significant drop in accuracy.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Not suitable for all types of tasks or datasets and struggles with complex tasks.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The Benefits & Challenges of Quantization
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![Before and after quantization](../Images/d50020005166b994925cde3b76b3e3db.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The quantization of Large Language Models brings forth multiple operational
+    benefits. Primarily, it achieves a significant reduction in the memory requirements
+    of these models. Our goal for post-quantization models is for the memory footprint
+    to be notably smaller. Higher efficiency permits the deployment of these models
+    on platforms with more modest memory capabilities and decreasing the processing
+    power needed to run the models once quantized translates directly into heightened
+    inference speeds and quicker response times that enhance user experience.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the other hand, quantization can also introduce some loss in model accuracy
+    since it involves approximating real numbers. The challenge is to quantize the
+    model without significantly affecting its performance. This can be done with testing
+    the model's precision and time of completion before and after quantization with
+    your models to gauge effectiveness, efficiency, and accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By optimizing the balance between performance and resource consumption, quantization
+    not only broadens the accessibility of LLMs but also contributes to more sustainable
+    computing practices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Original**](https://www.exxactcorp.com/blog/deep-learning/what-is-quantization-and-llms).
+    Republished with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Kevin Vu](https://blog.exxactcorp.com/)** manages [Exxact Corp blog](https://blog.exxactcorp.com/)
+    and works with many of its talented authors who write about different aspects
+    of Deep Learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Large Language Models (LLMs)](https://www.kdnuggets.com/7-steps-to-mastering-large-language-models-llms)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generative AI Playground: LLMs with Camel-5b and Open LLaMA 3B on…](https://www.kdnuggets.com/2024/02/intel-generative-ai-playground-llms-with-camel-5b-and-open-llama-3b)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Vector Database for LLMs, Generative AI, and Deep Learning](https://www.kdnuggets.com/vector-database-for-llms-generative-ai-and-deep-learning)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[History and Future of LLMs](https://www.kdnuggets.com/history-and-future-of-llms)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[8 Free AI and LLMs Playgrounds](https://www.kdnuggets.com/2023/05/8-free-ai-llms-playgrounds.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What are Vector Databases and Why Are They Important for LLMs?](https://www.kdnuggets.com/2023/06/vector-databases-important-llms.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

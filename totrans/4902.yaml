@@ -1,0 +1,360 @@
+- en: TensorFlow for Short-Term Stocks Prediction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/12/tensorflow-short-term-stocks-prediction.html](https://www.kdnuggets.com/2017/12/tensorflow-short-term-stocks-prediction.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2017/12/tensorflow-short-term-stocks-prediction.html/#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Mattia Brusamento](https://www.linkedin.com/in/mattia-brusamento/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Summary**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In machine learning, a convolutional neural network (CNN, or ConvNet) is a
+    class of neural networks that has successfully been applied to image recognition
+    and analysis. In this project I''ve approached this class of models trying to
+    apply it to stock market prediction, combining stock prices with sentiment analysis.
+    The implementation of the network has been made using TensorFlow, starting from
+    the online tutorial. In this article, I will describe the following steps: dataset
+    creation, CNN training and evaluation of the model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5387a7361754e11bcdcfa9ba4e58f555.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Dataset**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this section, it's briefly described the procedure used to build the dataset,
+    the data sources and the sentiment analysis performed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Ticks**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to build a dataset, I first chose a sector and I time period to focus
+    on. I decided to pick up the Healthcare sector and the time range between 4th
+    January 2016 and 30th September 2017, to be further splitted in training set and
+    evaluation set. In particular, the list of ticks was downloaded from nasdaq.com,
+    keeping only companies with Mega, Large or Mid capitalization. Starting from this
+    list of ticks, stocks and news data were retrieved using Google Finance and Intrinio
+    API respectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Stocks Data**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As already mentioned before, stocks data has been retrieved from Google Finance
+    historical API ("https://finance.google.com/finance/historical?q={tick}&startdate={startdate}&output=csv",
+    for each tick in the list).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The time unit is the day and the value I kept is the Close price. For training
+    purposes, missing days have been filled using linear interpolation (pandas.DataFrame.interpolate):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**News Data and Sentiment Analysis**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In order to retrieve news data, I used the API from [intrinio](https://intrinio.com/).
+    For each tick, I downloaded the related news from "https://api.intrinio.com/news.csv?ticker={tick}".
+    Data are in csv format with the following columns:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'TICKER,FIGI_TICKER,FIGI,TITLE,PUBLICATION_DATE,URL,SUMMARY, here an example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '"AAAP,AAAP:UW,BBG007K5CV53,"3 Stocks to Watch on Thursday: Advanced Accelerator
+    Application SA(ADR) (AAAP), Jabil Inc (JBL) and Medtronic Plc. (MDT)",2017-09-28
+    15:45:56 +0000,https://articlefeeds.nasdaq.com/~r/nasdaq/symbols/~3/ywZ6I5j5mIE/3-stocks-to-watch-on-thursday-advanced-accelerator-application-saadr-aaap-jabil-inc-jbl-and-medtronic-plc-mdt-cm852684,InvestorPlace
+    Stock Market News Stock Advice amp Trading Tips Most major U S indices rose Wednesday
+    with financial stocks leading the way popping 1 3 The 160 S amp P 500 Index gained
+    0 4 the 160 Dow Jones Industrial Average surged 0 3 and the 160".'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: News have been de-duplicated based on the title. Finally, TICKER, PUBLICATION_DATE
+    and SUMMARY columns were kept.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sentiment Analysis was performed on the SUMMARY column using Loughran and McDonald
+    Financial Sentiment Dictionary for financial sentiment analysis, implemented in
+    the [pysentiment](https://pypi.python.org/pypi/pysentiment) python library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This library offers both a tokenizer, that performs also stemming and stop
+    words removal, and a method to score a tokenized text. The value chosen from the
+    get_score method as a proxy of the sentiment is the Polarity, computed as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***(#Positives - #Negatives)/(#Positives + #Negatives)***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The days in which there are no news are filled with 0s for Polarity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, data was groupped by tick and date, summing up the Polarity score for
+    days in which a tick has more than one news.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Full Dataset**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'By merging stocks and news data, we get a dataset as follows, with all the
+    days from 2016-01-04 to 2017-09-30 for 154 ticks, with the close value of the
+    stock and the respective polarity value:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Date | Tick | Close | Polarity |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2017-09-26 | ALXN | 139.700000 | 2.333332 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2017-09-27 | ALXN | 139.450000 | 3.599997 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2017-09-28 | ALXN | 138.340000 | 1.000000 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2017-09-29 | ALXN | 140.290000 | -0.999999 |'
+  prefs: []
+  type: TYPE_TB
+- en: '**CNN with TensorFlow**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to get started with Convolutional Neural Network in Tensorflow, I used
+    the [official tutorial](https://www.tensorflow.org/tutorials/layers) as reference.
+    It shows how to use layers to build a convolutional neural network model to recognize
+    the handwritten digits in the MNIST data set. In order to make this working for
+    our purpose, we need to adapt our input data and the network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data Model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The input data has been modelled such that a single features element is a 154x100x2
+    tensor:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 154 ticks
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 100 consecutive days
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 2 channels, one for the stock price and one for the polarity value
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Lables instead are modelled as a vector of length 154, where each element is
+    1, if the corrresponding stock raised on the next day, 0 otherwise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0ef64c9546571ab1be8c7b10d1c5b0fd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In this way, there is a sliding time window of 100 days, so the first 100 days
+    can't be used as labels. The training set contains 435 entries, while the evaluation
+    set 100.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Convolutional Neural Network**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The CNN has been built starting from the example of TensorFlow's tutorial and
+    then adapted to this use case. The first 2 convolutional and pooling layers have
+    both height equal to 1, so they perform convolutions and poolings on single stocks,
+    the last layer has height equal to 154, to learn correlations between stocks.
+    Finally, there are the dense layers, with the last one of length 154, one for
+    each stock.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The network has been dimensioned in a way that it could be trained in a couple
+    of hours on this dataset using a laptop. Part of the code is reported here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Evaluation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to evaluate the performance of the model, no standard metrics were
+    used, but it has been built a simulation closer to a practical use of the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Assuming to start with an initial capital (***C***) equal to 1, for each day
+    of the evaluation set we divide the capital in ***N*** equal parts, where N goes
+    from 1 to 154.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: We put ***C/N*** on the top N stocks that our model predicts with the highest
+    probabilities, 0 on the others.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: At this point we have a vector ***A*** that represents our daily allocation,
+    we can compute the daily gain/loss as A multiplied by the percentage variation
+    of each stock for that day.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: We and up with a new capital ***C = C + delta***, that we can re-invest on the
+    next day.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: At the end, we will end up with a capital greater or smaller than 1, depending
+    on the goodness of our choices.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'A good baseline for the model has been identified in *N=154*: this represents
+    the generic performance of all the stocks and it models the scenario in which
+    we divide the capital equally on all of them. This produces a gain around **4.27%**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For evaluation purposes, the data has been corrected, removing the days in which
+    the market was closed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The performance of the model, for different values of N, is reported in the
+    picture below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9c1a2b6f708c53059b12820c590b7509.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The red dotted line is the 0 baseline, while the orange line is the basline
+    with *N=154*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The best performance is obtained with ***N=12**, *with a gain around **8.41%**,
+    almost twice the market baseline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For almost every N greater than 10 we have a decent performance, better than
+    the baseline, while too small values of N degrade the performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Conclusion**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It has been very interesting to try Tensorflow and CNN for the first time and
+    trying to apply them to financial data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a toy example, using quite small dataset and network, but it shows the
+    potential of this models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Please feel free to provide feedbacks and advices or simply to get in touch
+    with me on LinkedIn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: **Mattia received his MS degree cum Laude in Computer Engineering from
+    Politecnico di Milano, after a period at TU Delft working on a thesis about Recommender
+    Systems. Mattia is now working as a Data Scientist in the Cyber Security area
+    for an Italian company.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Understanding Deep Convolutional Neural Networks with a practical use-case
+    in Tensorflow and Keras**](https://www.kdnuggets.com/2017/11/understanding-deep-convolutional-neural-networks-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Exploring Recurrent Neural Networks**](https://www.kdnuggets.com/2017/12/exploring-recurrent-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Data Scientist: The Hottest Job on Wall Street**](https://www.kdnuggets.com/2017/11/data-scientist-hottest-job-wall-street.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Data Science Project of Rotten Tomatoes Movie Rating Prediction:…](https://www.kdnuggets.com/2023/06/data-science-project-rotten-tomatoes-movie-rating-prediction-first-approach.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Project of Rotten Tomatoes Movie Rating Prediction:…](https://www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Multivariate Time-Series Prediction with BQML](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyTorch or TensorFlow? Comparing popular Machine Learning frameworks](https://www.kdnuggets.com/2022/02/packt-pytorch-tensorflow-comparing-popular-machine-learning-frameworks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The "Hello World" of Tensorflow](https://www.kdnuggets.com/2022/05/hello-world-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

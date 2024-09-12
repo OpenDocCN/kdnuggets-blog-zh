@@ -1,0 +1,481 @@
+- en: Crack SQL Interviews
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/12/crack-sql-interviews.html](https://www.kdnuggets.com/2020/12/crack-sql-interviews.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Xinran Waibel](https://medium.com/@xinran.waibel), Data Engineer at Netflix**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/28bddf5e7e3e283bf5224f93505b4d39.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Photo by [Green Chameleon](https://unsplash.com/@craftedbygc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/exam?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[SQL](https://en.wikipedia.org/wiki/SQL) is one of the most essential programming
+    languages for data analysis and data processing, and so SQL questions are always
+    part of the interview process for data science-related jobs, such as data analysts,
+    data scientists, and [data engineers](https://towardsdatascience.com/introduction-to-data-engineering-e16c9942dc2c).
+    SQL interviews are meant to evaluate candidates’ technical and problem-solving
+    skills. Therefore, it is critical to write not only correct queries based on sample
+    data but also consider various scenarios and edge cases as if working with real-world
+    datasets.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’ve helped design and conduct SQL interview questions for data science candidates
+    and have undergone many SQL interviews for jobs in giant technology companies
+    and startups myself. In this blog post, I will explain the common patterns seen
+    in SQL interview questions and provide tips on how to neatly handle them in SQL
+    queries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ask Questions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To nail an SQL interview, the most important thing is to make sure that you
+    have all the details of the given task and data sample by asking as many questions
+    as you need. Understanding the requirements will save you time from iterating
+    on problems later and enable you to handle edge cases well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I noticed many candidates tend to jump right into the solution without having
+    a good understanding of the SQL questions or the dataset. Later on, they had to
+    repeatedly modify their queries after I pointed out problems in their solution.
+    In the end, they wasted a lot of interview time in iteration and may not have
+    even arrived at the right solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I recommend treating SQL interviews as if you are working with a business partner
+    at work. You would want to gather all the requirements on the data request before
+    you provide a solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Example**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Find the top 3 employees who have the highest salary.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/f38e6aee1128074d742ba43ce4e81b82.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*The sample employee_salary table.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You should ask the interviewer(s) to clarify the “top 3”. Should I include exactly
+    3 employees in my results? How do you want me to handle ties? In addition, carefully
+    review the sample employee data. What is the data type of the salary field? Do
+    I need to clean the data before calculate?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Which JOIN
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/b38c9f82146473cbd37793e5e0609cd8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Source: [dofactory](https://www.dofactory.com/sql/join).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In SQL, JOIN is frequently used to combine information from multiple tables.
+    There are [four different types of JOIN](https://www.w3schools.com/sql/sql_join.asp),
+    but in most cases, we only use INNER, LEFT, and FULL JOIN because the RIGHT JOIN
+    is not very intuitive and can be easily rewritten using LEFT JOIN. In an SQL interview,
+    you need to choose the right JOIN to use based on the specific requirement of
+    the given question.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Example**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Find the total number of classes taken by each student. (Provide student id,
+    name, and number of classes taken.)*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '* ![](../Images/650f1a96487e5f43af701546c2040aaa.png)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*The sample student and* class_history *tables.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As you might have noticed, not all students appearing in the *class_history* table
+    are present in the *student* table, which might be because those students are
+    no longer enrolled. (This is actually very typical in transactional databases,
+    as records are often deleted once inactive.) Depending on whether the interviewer
+    wants inactive students in the results, we need to use either LEFT JOIN or INNER
+    JOIN to combine two tables:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/aaa40b526da2e49e36a8e2dc76dc1a6a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Photo by [petr sidorov](https://unsplash.com/@m_malkovich?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/order-by?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: GROUP BY
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: GROUP BY is the most essential function in SQL since it is widely used for data
+    aggregation. If you see keywords such as sum, average, minimum, or maximum in
+    a SQL question, it is a big hint that you should probably use GROUP BY in your
+    query. A common pitfall is mixing WHERE and HAVING when filtering data along with
+    GROUP BY — I have seen many people make this mistake.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Example**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Calculate the average required course GPA in each school year for each student
+    and find students who are qualified for the Dean’s List (GPA ≥ 3.5) in each semester.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '* ![](../Images/b23087bb326c363ff9b6294b553bb92d.png)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*The sample GPA history table.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Since we consider only the required courses in our GPA calculation, we need
+    to exclude optional courses using *WHERE is_required = TRUE*. We need the average
+    GPA per student per year, so we will GROUP BY both the *student_id* and the *school_year* columns
+    and take the average of the *gpa* column. Lastly, we only keep rows where the
+    student has an average GPA higher than 3.5, which can be implemented using HAVING.
+    Let’s put everything together:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Keep in mind that whenever GROUP BY is used in a query, you can only select
+    group-by columns and aggregated columns because the row-level information in other
+    columns has already been discarded.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some people might wonder what’s the difference between WHERE and HAVING, or
+    why we don’t just write *HAVING avg_gpa >= 3.5* instead of specifying the function.
+    I will explain more in the next section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: SQL query execution order
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Most people write SQL queries from top to bottom starting from SELECT, but
+    do you know that SELECT is one of the very last functions executed by the SQL
+    engine? Below is the execution order of a SQL query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: FROM, JOIN
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: WHERE
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: GROUP BY
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: HAVING
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: SELECT
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: DISTINCT
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: ORDER BY
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: LIMIT, OFFSET
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Consider the previous example again. Because we want to filter out optional
+    courses before computing average GPAs, I used *WHERE is_required = TRUE* instead
+    of HAVING because WHERE is executed before GROUP BY and HAVING. The reason I can’t
+    write *HAVING avg_gpa >= 3.5* is that *avg_gpa* is defined as part of SELECT,
+    so it cannot be referred to in steps executed before SELECT.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I recommend following the execution order when writing queries, which is helpful
+    if you struggle with writing complicated queries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6f497e6a24f2e659176822bf94302f9a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Photo by [Stefano Ghezzi](https://unsplash.com/@steghe?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/window?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Window functions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Window functions](https://mode.com/sql-tutorial/sql-window-functions/) frequently
+    appear in SQL interviews as well. There are five common window functions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**RANK**/**DENSE_RANK** /**ROW_NUMBER**: these assign a rank to each row by
+    ordering specific columns. If any partition columns are given, rows are ranked
+    within a partition group that it belongs to.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**LAG**/**LEAD**: it retrieves column values from a preceding or following
+    row based on a specified order and partition group.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In SQL interviews, it is important to understand the differences between ranking
+    functions and know when to use LAG/LEAD.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Example**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Find the top 3 employees who have the highest salary in each department.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/bfafcaee8b5a24f01d1d144f69b5cbc1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Another sample* employee_salary *table.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When an SQL question asks for “TOP N”, we can use either ORDER BY or ranking
+    functions to answer the question. However, in this example, it asks to calculate
+    “TOP N X in each Y”, which is a strong hint that we should use ranking functions
+    because we need to rank rows within each partition group.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The query below finds exactly 3 highest-payed employees regardless of ties:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Moreover, based on how ties should be handled, we could pick a different ranking
+    function. Again, details matter!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/091814c9fbb9f74228418c5b4fe99c55.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*A comparison of the results of* ROW_NUMBER*,* RANK*, and* DENSE_RANK *functions.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/31d0d737fa464a8561b58b3faba81720.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Photo by [Héctor J. Rivas](https://unsplash.com/@hjrc33?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/order?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Duplicates
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Another common pitfall in SQL interviews is ignoring data duplicates. Although
+    some columns seem to have distinct values in the sample data, candidates are expected
+    to consider all possibilities as if they are working with a real-world dataset.
+    For example, in the *employee_salary* table from the previous example, it is possible
+    to have employees sharing the same name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One easy way to avoid potential problems caused by duplicates is to always use
+    ID columns to uniquely identify distinct records.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Example**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Find the total salary from all departments for each employee using the **employee_salary** table.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The right solution is to GROUP BY *employee_id* and calculate the total salary
+    using *SUM(employee_salary)*. If employee names are needed, join with an employee
+    table at the end to retrieve employee name information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The wrong approach is to GROUP BY *employee_name*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'NULL'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In SQL, any predicates can result in one of the three values: true, false,
+    and [NULL](https://towardsdatascience.com/demystify-null-values-in-sql-bc7e7e1b913a),
+    a reserved keyword for *unknown or missing data values.* Handling NULL datasets
+    can be unexpectedly tricky. In an SQL interview, the interviewer might pay extra
+    attention to whether your solution has handled NULL values. Sometimes it is obvious
+    if a column is not nullable (ID columns, for instance), but for most other columns,
+    it is very likely there will be NULL values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I suggest confirming whether key columns in the sample data are nullable and,
+    if so, utilize functions such as *IS (NOT) NULL*, *IFNULL*, and *COALESCE* to
+    cover those edge cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: (Want to learn more about how to deal with NULL values? Check out [my guide
+    on working with NULL in SQL](https://towardsdatascience.com/demystify-null-values-in-sql-bc7e7e1b913a).)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Communication
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Last but not least — keep the communication going during SQL interviews.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I interviewed many candidates who barely talked except when they had questions,
+    which would be okay if they came up with the perfect solution at the end. However,
+    it is generally a good idea to keep up communication during technical interviews.
+    For example, you can talk about your understanding of the question and data, how
+    you plan to approach the problem, why you use some functions versus other alternatives,
+    and what edge cases you are considering.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**TL;DR:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Always ask questions to gather the required details first.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Carefully choose between INNER, LEFT, and FULL JOIN.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use GROUP BY to aggregate data and properly use WHERE and HAVING.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Understand the differences between the three ranking functions.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Know when to use LAG/LEAD window functions.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If you struggle with creating complicated queries, try following the SQL execution
+    order.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Consider potential data problems, such as duplicates and NULL values.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Communicate your thought process with the interviewers.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'To help you understand how to use these strategies in an actual SQL interview,
+    I will walk you through a sample SQL interview question from end to end in the
+    video below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/crack-sql-interviews-6a5fc90ec763).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Xinran Waibel](https://medium.com/@xinran.waibel) is an experienced
+    Data Engineer in the San Francisco Bay Area, currently working at Netflix. She
+    is also a technical writer for Towards Data Science, Google Cloud, and The Startup
+    on Medium.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[The Ultimate Guide to Data Engineer Interviews](https://www.kdnuggets.com/2020/12/ultimate-guide-data-engineer-interviews.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Rock a Virtual Data Interview](https://www.kdnuggets.com/2020/05/pragmatic-rock-virtual-data-interview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Data Science Interview Study Guide](https://www.kdnuggets.com/2020/01/data-science-interview-study-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[24 A/B Testing Interview Questions in Data Science Interviews and…](https://www.kdnuggets.com/2022/09/24-ab-testing-interview-questions-data-science-interviews-crack.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What it takes to crack Machine Learning Engineer interviews](https://www.kdnuggets.com/2022/10/interview-kickstart-crack-machine-learning-engineer-interviews.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

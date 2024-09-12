@@ -1,0 +1,217 @@
+- en: Optimizing Genes with a Genetic Algorithm
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/04/optimizing-genes-genetic-algorithm.html](https://www.kdnuggets.com/2022/04/optimizing-genes-genetic-algorithm.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![DNA](../Images/e334bf267c70140986d363797eb1ca51.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Introduction**'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Genetic algorithms can be a great way to tackle an optimisation problem because
+    they can reliably find a good solution, even in a complex fitness landscape with
+    many local optima. I’m using this technique for optimising a DNA sequence to accurately
+    produce lots of a useful protein. Here we will be looking at the key, big picture
+    steps of implementing a genetic algorithm rather than diving into the theory behind
+    them, but there are plenty more detailed descriptions out there, such as [here](/2018/07/genetic-algorithm-implementation-python.html)
+    and [here](https://towardsdatascience.com/introduction-to-genetic-algorithms-including-example-code-e396e98d8bf3).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the simplest terms genetic algorithms simulate a population where each individual
+    is a possible “solution” and let survival of the fittest do its thing. The difficult
+    part, as with much of data science and machine learning, is how to frame the question
+    for the computer. We will see how to improve your solutions just by framing the
+    question better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**All the code is available at** [https://github.com/DAWells/codon_path](https://github.com/DAWells/codon_path)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The Problem**'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: DNA codes for amino acids, the building blocks of proteins. Three DNA letters
+    (A, T, G, or C) in a row code for a single amino acid and is called a *codon*.
+    Several different codons could encode the same amino acid. For example CAA and
+    CAG both code for the amino acid Glutamine. Given a known protein we want to code,
+    determining the required sequence of codons should be straightforward. In reality
+    when the protein is synthesised the previous codon may have an effect on adding
+    the next amino acid, it may take longer or make a mistake. Although several codons
+    can do the same job, not all pairs work well together. My aim is to preferentially
+    use these pairs that work well together.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So why is this important? Optimising a gene in this way can allow you to get
+    more of your desired protein. A protein you might need to catalyse a chemical
+    reaction, or produce a therapeutic drug. Why is this difficult? Each codon is
+    part of two pairs, this means you can’t select the best pairs individually. Instead
+    you have to consider all pairs at once. In the example below, there’s a choice
+    of two codons at each position and how well adjacent codons work together is indicated
+    by the colour connecting them (green>yellow>red). A good codon pair may lock you
+    into a bad pair next as shown below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Three DNA letters problem](../Images/570e8cdbd4d315b99927aac20da10c48.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**The Solution**'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The first thing you need for a genetic algorithm is a score function, some way
+    to measure the fitness of possible solutions to your problem. This is used to
+    decide which solutions get to “reproduce”. Deciding how to calculate this number
+    is a vital step to any optimisation problem as it has to capture all the complexity
+    of the problem in this one value. Fortunately for me, Coleman et al 2008 calculated
+    a score for each pair of codons for all 3,721 possible codon pairs and we are
+    using this as a measure of how well a pair will work during protein synthesis.
+    So for any DNA sequence I can add up this value for each consecutive pair of codons
+    in my sequence and calculate a score; the higher this score, the better a solution
+    it is for my problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next we need to frame the question for the genetic algorithm, what form will
+    each possible solution take while the algorithm optimises it? The most obvious
+    representation for specifying codons would be a vector where each element is a
+    codon, represented by a number 1-61 (for each of the 61 codons). But this is too
+    much freedom for our algorithm because it can swap in a codon that produces the
+    wrong amino acid.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A better formulation is each element representing one of the codons that encodes
+    the correct amino acid. Figuring out what “the correct amino acid” is can be abstracted
+    away to the scoring function, which means our genetic algorithm can’t break anything.
+    Any single amino acid can be coded for by up to 6 different codons, so our solution
+    vector contains integer values ranging 0-5 encoding the 6 codons, and is as long
+    as the string of amino acids we’re optimising (or a third as long as the DNA gene).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another key benefit of making our solution vectors from 1-6 rather than 1-61
+    is a massive reduction in problem space. If L is the length of our vector there
+    are 6L rather than 61L possible solutions to explore. A smaller problem space
+    means a faster answer, which is particularly important with genetic algorithms.
+    Although they find good solutions, they do it slowly. If I hadn’t reformatted
+    to a smaller problem space I wouldn’t have had time to optimise genes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is an issue with using 0-5 to represent codons though, not all amino acids
+    have 6 codons e.g. Lysine only has 2\. The genetic algorithm might use the 5th
+    Lysine codon (which doesn’t exist); what then? You could have the score function
+    deduct points every time an invalid codon is used and hope that this pushes you
+    towards good and valid solutions but this is not using our problem space efficiently.
+    Every possible solution with an invalid codon in it is definitely not the best
+    solution. This means lots of tried solutions in our 6L space (which is still an
+    awful lot) are wasted effort.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead of a penalty, a better solution is modulo remainders. Whenever the genetic
+    algorithm asked for a codon outside of the list of real codons, I looped it back
+    to the start of the list. So if it asked for the 5th codon when there were only
+    3, it looked back to the start and counted the remaining 2\. This means that any
+    solution explored by the genetic algorithm could potentially be the optimal solution.
+    Because of this, we should get better answers, faster. In the plot below we can
+    see that the penalty algorithm is always behind the modulo algorithm and takes
+    30 generations just to get to the same start point.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![the solution graph1](../Images/67d493d89f389b8daf0d2423dbfd52e4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fortunately this allowed me to get a really good solution, much better than
+    the naturally occurring gene. Below I’ve plotted the cumulative fitness over the
+    length of the natural and optimised genes; good codon pairs increase the fitness,
+    bad pairs reduce it. The cumulative score of the natural gene is generally increasing
+    because good pairs are generally preferred but not by much. In our optimised gene
+    the slope is much steeper and consistently positive, indicating a much better
+    use of codon pairs. In all, our optimised gene is 6 times better than the natural
+    gene.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![the solution graph2](../Images/13adb47acbf8ae61d0694036b526f0e8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Conclusions**'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: To get the most out of your genetic algorithms you need to frame your question
+    such that problem space is as small and efficiently explored as possible. You
+    also need a fitness function that accurately captures the essence of what you’re
+    trying to achieve. So much of data science is just this, translating real world
+    problems into numbers so the computer can help you. With practice you can frame
+    the same question in multiple ways. Hopefully this post has shown that the same
+    question, if framed properly, can get you a better answer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**References**'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Coleman, J. R., Papamichail, D., Skiena, S., Futcher, B., Wimmer, E., & Mueller,
+    S. (2008). Virus attenuation by genome-scale changes in codon pair bias. Science,
+    320(5884), 1784–1787\. https://doi.org/10.1126/science.1155761
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[David Wells](https://dawells.github.io/)** is a bioinformatician applying
+    machine learning to genomics to develop vaccines.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Genetic Algorithm Key Terms, Explained](https://www.kdnuggets.com/2018/04/genetic-algorithm-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Genetic Programming in Python: The Knapsack Problem](https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understanding and Implementing Genetic Algorithms in Python](https://www.kdnuggets.com/understanding-and-implementing-genetic-algorithms-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Data Storage: Exploring Data Types and Normalization in SQL](https://www.kdnuggets.com/optimizing-data-storage-exploring-data-types-and-normalization-in-sql)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Data Analytics: Integrating GitHub Copilot in Databricks](https://www.kdnuggets.com/optimizing-data-analytics-integrating-github-copilot-in-databricks)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

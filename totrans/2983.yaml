@@ -1,0 +1,240 @@
+- en: GANs Need Some Attention, Too
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/03/gans-need-some-attention-too.html](https://www.kdnuggets.com/2019/03/gans-need-some-attention-too.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By Bilal Shahid (Edited by Taraneh Khazaei, Lindsay Brin)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Self-Attention Generative Adversarial Networks (SAGAN; [Zhang et al., 2018](https://arxiv.org/pdf/1805.08318.pdf))
+    are convolutional neural networks that use the self-attention paradigm to capture
+    long-range spatial relationships in existing images to better synthesize new images.
+    AISC recently presented and discussed this paper, led by Xiyang Chen. The details
+    of the event can be found on the [AISC website](https://aisc.a-i.science/events/2018-06-11/),
+    and the full presentation can be viewed on [YouTube](https://www.youtube.com/watch?v=FdeHlC4QiqA).
+    Here, we present an overview of the paper and its main contributions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Challenges with Traditional GANs
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: While excellent at generating fairly realistic images, traditional deep convolutional
+    GANs are unable to capture long-range dependencies in images. These conventional
+    GANs work well for images that do not contain a lot of structural and geometric
+    information (e.g., images depicting oceans, skies, and fields). However, when
+    there is a high rate of information variation in an image, conventional GANs tend
+    to miss out on obtaining all of this variation, and thus fail to represent the
+    global relationships faithfully. These non-local dependencies consistently appear
+    in certain classes of images. For example, GANs can draw animal images with realistic
+    fur, but often fail to draw separate feet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/4dcc98be4dcd3cddecb226515d6946d3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Output images from the previous state-of-the-art GAN (CGANs with Projections
+    Discriminator; [Miyato et al., 2018](https://arxiv.org/abs/1802.05637))***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given the limited representation capacity of the convolution operator (i.e.,
+    the receptive field is local), conventional GANs can only capture long-range relationships
+    after several convolutional layers. One approach to alleviating this problem is
+    to Increase the size of the kernel, but this is statistically and computationally
+    inefficient. Various attention and self-attention models have been formulated
+    to capture and use structural patterns and non-local relationships. However, these
+    models are generally not effective in striking a balance between computational
+    efficiency and modeling long-range relationships.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Self-Attention for GANs
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This functional gap is where SAGAN comes in. [Zhang et al. (2018)](https://arxiv.org/abs/1805.08318) propose
+    a method wherein the GAN model is equipped with a tool to capture long-range,
+    multi-level relationships in an image. This tool is the self-attention mechanism.
+    Self-attention attempts to relate different portions of the input features to
+    compute another representation of the input suitable for the task at hand. The
+    idea of self-attention has been successfully applied in the areas of reading comprehension
+    ([Cheng et al., 2016](https://arxiv.org/pdf/1601.06733.pdf)), textual entailment
+    ([Parikh et al., 2016](https://arxiv.org/pdf/1606.01933.pdf)), and video processing
+    ([X. Wang et al., 2017](https://arxiv.org/pdf/1711.07971.pdf)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bringing self-attention to the image synthesis domain draws inspiration from
+    “Non-local neural networks” ([X. Wang et al., 2017](https://arxiv.org/pdf/1711.07971.pdf))
+    that use self-attention to capture spatial-temporal information in video sequences.
+    Generally speaking, self-attention simply calculates the response at a single
+    position as a weighted sum of the features at all positions. This mechanism allows
+    the network to focus on areas of images that are widely separated yet have structural
+    relevancy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/a4ab4243f2515f6668c656ceb7f12da7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***The proposed self-attention module in Self-Attention Generative Adversarial
+    Networks ([Zhang et al., 2018](https://arxiv.org/abs/1805.08318))***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In SAGAN, the self-attention module works in conjunction with the convolution
+    network and uses the key-value-query model ([Vaswani, et al., 2017](https://arxiv.org/abs/1706.03762)).
+    This module takes the feature map, created by the convolutional neural network,
+    and transforms it into three feature spaces. These feature spaces, called key
+    f(x), value h(x), and query g(x), are created by passing the original feature
+    map through three different 1x1 convolution maps. Key f(x) and query g(x) matrices
+    are then multiplied. Next, the softmax operation is applied on each row of the
+    multiplication result. The attention map generated from softmax identifies which
+    areas of the image the network should attend to, as described in Equation (1)
+    from Zhang et al. 2018:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2be4597853e42395afd54d41f488cdbe.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Therefore, the attention map is then multiplied with value h(x) to generate
+    the self-attention feature map as follows (equation (2) from Zhang et al. 2018):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f31e7f12fd2d1aabab75c10c5e58f6fc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Finally, the output is calculated by adding the original input feature map
+    to the scaled self-attention map. The scaling parameter ???? is initialized to
+    0 at the beginning to cause the network to first focus on the local information.
+    As the scaling parameter ???? gets updated during training, the network gradually
+    learns to attend to the non-local areas of an image (Equation (3) from Zhang et
+    al. 2018):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/376658f037439643d4b741aa2caa969e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Figure](../Images/454076caa5eaf57d706de907c61b99f5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Output images from Self-Attention Generative Adversarial Networks ([Zhang,
+    et al., 2018](https://arxiv.org/abs/1805.08318))***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Handling Instability in GAN Training
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Another contribution made by the SAGAN paper is related to the well-known issue
+    of the instability of GANs’ training. The paper proposes two techniques to handle
+    this problem: Spectral normalization and Two Time-scale Update Rule (TTUR).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generators are shown to perform better and have improved training dynamics when
+    they are well-conditioned ([Odena, et al., 2018](https://arxiv.org/abs/1802.08768)).
+    With SAGANs, generator conditioning is accomplished using [spectral normalization](https://christiancosgrove.com/blog/2018/01/04/spectral-normalization-explained.html).
+    This approach was first introduced in ([Miyato et al. 2018](https://arxiv.org/pdf/1802.05957.pdf)),
+    but for the discriminator network only, to address training dynamics that may
+    result in the generator not learning the target distribution well. SAGAN employs
+    spectral normalization in both the generator and the discriminator network, limiting
+    the spectral norm of the weight matrices in both of the networks. This process
+    is beneficial because it constrains the Lipschitz constant without requiring any
+    hyper-parameter tuning, prevents the escalation of parameter magnitudes and unusual
+    gradients, and allows for fewer discriminator updates compared to the generator.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition to spectral normalization, the paper uses TTUR ([Heusel et al.,
+    2018](https://arxiv.org/abs/1706.08500)) to address the problem of slow learning
+    with regularized discriminators. Methods using regularized discriminators generally
+    require multiple discriminator updates per generator update. To accelerate the
+    learning speed, the generator and the discriminator are trained with different
+    learning rates.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: SAGAN is a substantial improvement to the state of the art for image generation
+    techniques. The effective integration of the self-attention technique enables
+    the network to faithfully capture and relate long-range spatial information in
+    a computationally efficient manner. The use of spectral normalization in both
+    the discriminator and the generator network, along with TTUR, not only reduces
+    the computational cost of training, but also improves the training stability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://aisc.a-i.science/blog/2019/self-attention-gan/). Reposted
+    with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Adversarial Examples, Explained](/2018/10/adversarial-examples-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generative Adversarial Networks – Paper Reading Road Map](/2018/10/generative-adversarial-networks-paper-reading-road-map.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What are Some “Advanced” AI and Machine Learning Online Courses?](/2019/02/some-advanced-ai-machine-learning-online-courses.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Adding an attention mechanism to RNNs](https://www.kdnuggets.com/2022/03/packt-adding-attention-mechanism-rnns.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Finally a Book on Attention!](https://www.kdnuggets.com/2022/11/mlm-finally-book-attention.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Things Aren''t Always Normal: Some of the "Other" Distributions](https://www.kdnuggets.com/2023/01/things-arent-always-normal-distributions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[I Used ChatGPT (Every Day) for 5 Months. Here Are Some Hidden Gems…](https://www.kdnuggets.com/2023/07/used-chatgpt-every-day-5-months-hidden-gems-change-life.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Some Kick Ass Prompt Engineering Techniques to Boost our LLM Models](https://www.kdnuggets.com/some-kick-ass-prompt-engineering-techniques-to-boost-our-llm-models)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[It''s alive! Build your first robots with Python and some cheap,…](https://www.kdnuggets.com/2023/06/manning-build-first-robots-python-cheap-basic-components.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

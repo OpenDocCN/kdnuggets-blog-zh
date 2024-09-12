@@ -1,0 +1,365 @@
+- en: Learning Curves for Machine Learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/01/learning-curves-machine-learning.html](https://www.kdnuggets.com/2018/01/learning-curves-machine-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/01/learning-curves-machine-learning.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Alex Olteanu](https://www.dataquest.io/blog/author/alex-olteanu/), Student
+    Success Specialist at Dataquest.io**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When building machine learning models, we want to keep error as low as possible.
+    Two major sources of error are bias and variance. If we managed to reduce these
+    two, then we could build more accurate models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But how do we diagnose bias and variance in the first place? And what actions
+    should we take once we've detected something?
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post, we'll learn how to answer both these questions using learning
+    curves. We'll work with a real world data set and try to predict the electrical
+    energy output of a power plant.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![topimage](../Images/b33264e06b657964ebe236ca92cc602e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We'll generate learning curves while trying to predict the electrical energy
+    output of a power plant. Image source: [Pexels](https://www.pexels.com/photo/black-metal-current-posts-157827/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some familiarity with scikit-learn and machine learning theory is assumed. If
+    you don't frown when I say *cross-validation* or *supervised learning*, then you're
+    good to go. If you're new to machine learning and have never tried scikit, a good
+    place to start is [this blog post](https://www.dataquest.io/blog/machine-learning-tutorial/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We begin with a brief introduction to bias and variance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The bias-variance trade-off
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In supervised learning, we *assume* there's a real relationship between feature(s)
+    and target and estimate this unknown relationship with a model. Provided the assumption
+    is true, there really is a model, which we'll call ![Equation](../Images/0124e78268c96059dbff35809fb67ffe.png),
+    which describes perfectly the relationship between features and target.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In practice, ![Equation](../Images/0124e78268c96059dbff35809fb67ffe.png) is
+    almost always completely unknown, and we try to estimate it with a model ![Equation](../Images/a94d66a6a6aee949360df0defda68828.png)
+    (notice the slight difference in notation between ![Equation](../Images/0124e78268c96059dbff35809fb67ffe.png) and ![Equation](../Images/a94d66a6a6aee949360df0defda68828.png)).
+    We use a *certain* training set and get a *certain* ![Equation](../Images/a94d66a6a6aee949360df0defda68828.png).
+    If we use a different training set, we are very likely to get a different ![Equation](../Images/f882e047405752e27ee94c30f948ef78.png).
+    As we keep changing training sets, we get different outputs for ![Equation](../Images/f882e047405752e27ee94c30f948ef78.png).
+    The amount by which ![Equation](../Images/f882e047405752e27ee94c30f948ef78.png) varies
+    as we change training sets is called **variance**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To estimate the true ![Equation](../Images/0124e78268c96059dbff35809fb67ffe.png),
+    we use different methods, like linear regression or random forests. Linear regression,
+    for instance, assumes linearity between features and target. For most real-life
+    scenarios, however, the true relationship between features and target is complicated
+    and far from linear. Simplifying assumptions give **bias** to a model. The more
+    erroneous the assumptions with respect to the true relationship, the higher the
+    bias, and vice-versa.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generally, a model ![Equation](../Images/f882e047405752e27ee94c30f948ef78.png) will
+    have some error when tested on some test data. It can be shown [mathematically](https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff#Bias.E2.80.93variance_decomposition_of_squared_error) that
+    both bias and variance can only add to a model's error. We want a low error, so
+    we need to keep both bias and variance at their minimum. However, that's not quite
+    possible. There's a trade-off between bias and variance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A low-biased method fits training data very well. If we change training sets,
+    we'll get significantly different models ![Equation](../Images/f882e047405752e27ee94c30f948ef78.png).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![low_bias](../Images/ab1470baaa9fe78506fbcac164556371.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can see that a low-biased method captures most of the differences (even
+    the minor ones) between the different training sets. ![Equation](../Images/f882e047405752e27ee94c30f948ef78.png) *varies* a
+    lot as we change training sets, and this indicates high variance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The less biased a method, the greater its ability to fit data well. The greater
+    this ability, the higher the variance. Hence, the lower the bias, the greater
+    the variance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The reverse also holds: the greater the bias, the lower the variance. A high-bias
+    method builds simplistic models that generally don''t fit well training data.
+    As we change training sets, the models ![Equation](../Images/f882e047405752e27ee94c30f948ef78.png) we
+    get from a high-bias algorithm are, generally, not very different from one another.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![high_bias](../Images/86c72c905bc8f130a0bba3d54a627202.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'If ![Equation](../Images/f882e047405752e27ee94c30f948ef78.png) doesn''t change
+    too much as we change training sets, the variance is low, which proves our point:
+    the greater the bias, the lower the variance.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Mathematically, it's clear why we want low bias and low variance. As mentioned
+    above, bias and variance can only add to a model's error. From a more intuitive
+    perspective though, we want low bias to avoid building a model that's too simple.
+    In most cases, a simple model performs poorly on training data, and it's extremely
+    likely to repeat the poor performance on test data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similarly, we want low variance to avoid building an overly complex model. Such
+    a model fits almost perfectly all the data points in the training set. Training
+    data, however, generally contains noise and is only a sample from a much larger
+    population. An overly complex model captures that noise. And when tested on *out-of-sample* data,
+    the performance is usually poor. That's because the model learns the *sample* training
+    data too well. It knows a lot about something and little about anything else.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In practice, however, we need to accept a trade-off. We can't have both low
+    bias and low variance, so we want to aim for something in the middle.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![biasvariance](../Images/6938ccb23dc3c764c12b74135c1b9c98.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source: [Scott Fortmann-Roe - Understanding the Bias-Variance Tradeoff](http://scott.fortmann-roe.com/docs/BiasVariance.html)
+  prefs: []
+  type: TYPE_NORMAL
+- en: We'll try to build some practical intuition for this trade-off as we generate
+    and interpret learning curves below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Learning curves - the basic idea
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let's say we have some data and split it into a training set and [validation](https://stats.stackexchange.com/questions/19048/what-is-the-difference-between-test-set-and-validation-set#19051) set.
+    We take one single instance (that's right, one!) from the training set and use
+    it to estimate a model. Then we measure the model's error on the validation set
+    and on that single training instance. The error on the training instance will
+    be 0, since it's quite easy to perfectly fit a single data point. The error on
+    the validation set, however, will be very large. That's because the model is built
+    around a single instance, and it almost certainly won't be able to generalize
+    accurately on data that hasn't seen before.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let's say that instead of one training instance, we take ten and repeat
+    the error measurements. Then we take fifty, one hundred, five hundred, until we
+    use our entire training set. The error scores will vary more or less as we change
+    the training set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We thus have two error scores to monitor: one for the validation set, and one
+    for the training sets. If we plot the evolution of the two error scores as training
+    sets change, we end up with two curves. These are called *learning curves*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In a nutshell, a learning curve shows how error changes as the training set
+    size increases. The diagram below should help you visualize the process described
+    so far. On the training set column you can see that we constantly increase the
+    size of the training sets. This causes a slight change in our models ![Equation](../Images/f882e047405752e27ee94c30f948ef78.png).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the first row, where n = 1 (*n* is the number of training instances), the
+    model fits perfectly that single training data point. However, the very same model
+    fits really bad a validation set of 20 different data points. So the model's error
+    is 0 on the training set, but much higher on the validation set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we increase the training set size, the model cannot fit perfectly anymore
+    the training set. So the training error becomes larger. However, the model is
+    trained on more data, so it manages to fit better the validation set. Thus, the
+    validation error decreases. To remind you, the validation set stays the same across
+    all three cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![models](../Images/266e92e6dd9cc26c3063532071441905.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'If we plotted the error scores for each training size, we''d get two learning
+    curves looking similarly to these:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![learning_curves](../Images/41b716750016cb9f85f40fba3a46795d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Learning curves give us an opportunity to diagnose bias and variance in supervised
+    learning models. We'll see how that's possible in what follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introducing the data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The learning curves plotted above are idealized for teaching purposes. In practice,
+    however, they usually look significantly different. So let's move the discussion
+    in a practical setting by using some real-world data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We''ll try to build regression models that predict the hourly electrical energy
+    output of a power plant. The data we use come from Turkish researchers Pınar Tüfekci
+    and Heysem Kaya, and can be downloaded from [here](https://archive.ics.uci.edu/ml/datasets/Combined+Cycle+Power+Plant).
+    As the data is stored in a `.xlsx` file, we use pandas'' `read_excel()` [function](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html?highlight=read_excel#pandas.read_excel) to
+    read it in:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | AT | V | AP | RH | PE |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | :-- | :-- | :-- | :-- | :-- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 14.96 | 41.76 | 1024.07 | 73.17 | 463.26 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 25.18 | 62.96 | 1020.04 | 59.08 | 444.37 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | 5.11 | 39.40 | 1012.16 | 92.14 | 488.56 |'
+  prefs: []
+  type: TYPE_TB
+- en: 'Let''s quickly decipher each column name:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| ABBREVIATION | FULL NAME |'
+  prefs: []
+  type: TYPE_TB
+- en: '| :-- | :-- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AT | Ambiental Temperature |'
+  prefs: []
+  type: TYPE_TB
+- en: '| V | Exhaust Vacuum |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AP | Ambiental Pressure |'
+  prefs: []
+  type: TYPE_TB
+- en: '| RH | Relative Humidity |'
+  prefs: []
+  type: TYPE_TB
+- en: '| PE | Electrical Energy Output |'
+  prefs: []
+  type: TYPE_TB
+- en: The `PE` column is the target variable, and it describes the net hourly electrical
+    energy output. All the other variables are potential features, and the values
+    for each are actually hourly averages (not net values, like for `PE`).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The electricity is generated by gas turbines, steam turbines, and heat recovery
+    steam generators. According to the documentation of the data set, the vacuum level
+    has an effect on steam turbines, while the other three variables affect the gas
+    turbines. Consequently, we'll use all of the feature columns in our regression
+    models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At this step we'd normally put aside a test set, explore the training data thoroughly,
+    remove any outliers, measure correlations, etc. For teaching purposes, however,
+    we'll assume that's already done and jump straight to generate some learning curves.
+    Before we start that, it's worth noticing that there are no missing values. Also,
+    the numbers are unscaled, but we'll avoid using models that have problems with
+    unscaled data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Deciding upon the training set sizes
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let's first decide what training set sizes we want to use for generating the
+    learning curves.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The minimum value is 1\. The maximum is given by the number of instances in
+    the training set. Our training set has 9568 instances, so the maximum value is
+    9568.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, we haven't yet put aside a validation set. We'll do that using an 80:20
+    ratio, ending up with a training set of 7654 instances (80%), and a validation
+    set of 1914 instances (20%). Given that our training set will have 7654 instances,
+    the maximum value we can use to generate our learning curves is 7654.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For our case, here, we use these six sizes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: An important thing to be aware of is that for each specified size a new model
+    is trained. If you're using cross-validation, which we'll do in this post, *k* models
+    will be trained for each training size (where *k* is given by the number of folds
+    used for cross-validation). To save code running time, it's good practice to limit
+    yourself to 5-10 training sizes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI, Analytics, Machine Learning, Data Science, Deep Learning…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Breaking the Data Barrier: How Zero-Shot, One-Shot, and Few-Shot…](https://www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Federated Learning: Collaborative Machine Learning with a Tutorial…](https://www.kdnuggets.com/2021/12/federated-learning-collaborative-machine-learning-tutorial-get-started.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

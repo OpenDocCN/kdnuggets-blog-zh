@@ -1,0 +1,171 @@
+- en: 'MLDB: The Machine Learning Database'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/10/mldb-machine-learning-database.html](https://www.kdnuggets.com/2016/10/mldb-machine-learning-database.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By François Maillet, MLDB.ai**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post, we’ll show how easy it is to use MLDB to build your own real­time
+    image classification service. We will use different brand of cars in this example,
+    but you can adapt what we show to train a model on any image dataset you want.
+    We will be using a TensorFlow deep convolutional neural network, transfer learning,
+    and everything will run off MLDB.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Transfer learning with the Inception model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: At a high level, transfer learning allows us to take a model that was trained
+    on one task and use its learned knowledge on another task. We use the [Inception-­v3
+    model](http://arxiv.org/abs/1512.00567), a deep convolutional neural network,
+    that was trained on the [ImageNet](http://image-net.org/) Large Visual Recognition
+    Challenge dataset. The task of that challenge was to classify images into a varied
+    set of 1000 classes, like *badger, freight car* or *cheeseburger*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Inception model was openly released as a trained TensorFlow graph. [TensorFlow](https://www.tensorflow.org/)
+    is a deep learning library that Google open­-sourced last year, and MLDB has a
+    built-­in integration for it. As you’ll see, MLDB makes it extremely simple to
+    run TensorFlow models directly in SQL.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When solving any machine learning problem, one critical step is picking and
+    designing feature extractors. They are used to take the thing we want to classify,
+    be it an image, a song or a news article, and transform it into a numerical representation,
+    called a feature vector, that can be given to a classifier. Traditionally, the
+    selection of feature extractors was done by hand. One of the really exciting things
+    about deep neural networks is that they can learn feature extractors themselves.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below is the architecture of the Inception model, where images go in from the
+    left and predictions come out to the right. The very last layer will be of size
+    1000 and give a probability for each of the classes. However, the layers that
+    come before are transformations over the raw image learned by the network because
+    they were the most useful to solve the image classification task. Some layers
+    are for example edge detectors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![MLDB CNN](../Images/a4a00cd0af2e77a5b216fcbc7af524b3.png)](https://4.bp.blogspot.com/-TMOLlkJBxms/Vt3HQXpE2cI/AAAAAAAAA8E/7X7XRFOY6Xo/s1600/image03.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So the idea will be to run images through the network, but instead of getting
+    the output of the last layer, that is specialised to the ImageNet task, getting
+    the second to last, which will give us a conceptual numerical representation of
+    the images. We can then use that representation as features that we can give to
+    a new classifier that we will train on our own task. So you can think of the Inception
+    model as a way to get from an image to a feature vector over which a new classifier
+    can efficiently operate. We are leveraging hundreds of hours of GPU compute-­time
+    that went into training the Inception model, but applying it to a completely new
+    task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Inception on MLDB
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s get started! The code below uses our pymldb library. You can read more
+    about it on the [MLDB Documentation](https://docs.mldb.ai/ipy/notebooks/_tutorials/_latest/Using%20pymldb%20Tutorial.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: What did we do here? We made a simple PUT call using pymldb to create the ​`inception`
+    function, of type *[tensorflow.graph](https://docs.mldb.ai/doc/#/v1/plugins/tensorflow/doc/TensorflowGraph.md.html)*.
+    It is parameterized using a JSON blob. The function loads a trained instance of
+    the Inception model (note that MLDB can transparently load remote resources, as
+    well as files inside of compressed archives; [more on this here](https://docs.mldb.ai/ipy/notebooks/_tutorials/_latest/Loading%20Data%20From%20An%20HTTP%20Server%20Tutorial.html)).
+    We specify that the input to the model will be the remote resource located at
+    *url*, and the output will be the ​*pool_3* layer of the model, which is the second
+    to last layer. Using the *pool_3* layer will give us high level features, while
+    the last layer called *softmax* is the one that is specialized to the ImageNet
+    task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now that the ​ inception function is created, it is available in SQL and as
+    a REST endpoint. We can then run an image through the network with a simple SQL
+    query. Here we’ll run Inception on the KDNuggets logo, and what we’ll get is the
+    numerical representation of that image. Those 2048 numbers are what we can use
+    as our feature vector:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Preparing a training dataset with SQL
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now we can import our data for training. We have a CSV file containing about
+    200 links to car images from 3 popular brands: Audi, BMW and Tesla. It’s important
+    to remember that although we are using a car dataset, you could replace it with
+    your own images of anything you want.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can import the CSV file in a dataset by running an ​[*import.text* procedure](https://docs.mldb.ai/doc/#builtin/procedures/importtextprocedure.md.html):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can generate some quick stats with SQL:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SQL results](../Images/40d084d116b38b185d2f5807714f7388.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can now use a procedure of type [transform](https://docs.mldb.ai/doc/#builtin/procedures/TransformDataset.md.html)
+    to apply the ​*Inception* model over all images and store the results in another
+    dataset. A transform procedure simply executes an SQL query and saves the result
+    in a new dataset. Running the code below is essentially doing feature extraction
+  prefs: []
+  type: TYPE_NORMAL
+- en: over our image dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training a specialized model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that we have features for all of our images, we use a procedure of type
+    *[classifier.experiment](https://docs.mldb.ai/doc/#builtin/procedures/ExperimentProcedure.md.html)*
+    to train and test a random forest classifier. The dataset will be split 50/50
+    between train and test by default.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice the contents of the ​`inputData` key, that specifies what data to use
+    for training and testing, is SQL. The `{* EXCLUDING(label)}` is a good example
+    of MLDB’s row expression syntax that is meant to work with sparse datasets with
+    millions of columns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Looking at the performance on the test set, this model is doing a pretty good
+    job:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![MLDB Out[10]](../Images/abd4814eadc1bdcae9850bd76368b649.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![MLDB Out[11]](../Images/859c33d6a895df6860ea564c1e4483e5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Doing real­time predictions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now that we have a trained model, how do we use it to score new images? There
+    are two things we need to do for this: extract the features from the image and
+    then run that in our newly trained classifier. This is essentially our scoring
+    pipeline.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What we do is create a function called *brand_predictor* of type [sql.expression](https://docs.mldb.ai/doc/#builtin/functions/SqlQueryFunction.md.html).
+    This allows us to persist an SQL expression as a function that we can then call
+    many times. When we trained our classifier above, the training procedure created
+    a *car_brand_cls_scorer_0* automatically, available in the usual SQL/Rest, that
+    will run the model. It will be expecting an input column named ​*features*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And just like that we’re now ready to score new images off the internet:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0] {    "output": {      "scores": [        [          "\"audi\"",           [            -8,             "2016-05-05T04:18:03Z"          ]        ],         [          "\"bmw\"",           [            -7.333333492279053,             "2016-05-05T04:18:03Z"          ]        ],         [          "\"tesla\"",           [            0.2666666805744171,             "2016-05-05T04:18:03Z"          ]        ]      ]    }  }
+    [PRE1]`'
+  prefs: []
+  type: TYPE_NORMAL

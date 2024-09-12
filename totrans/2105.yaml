@@ -1,0 +1,263 @@
+- en: 'LSTMs Rise Again: Extended-LSTM Models Challenge the Transformer Superiority'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/lstms-rise-again-extended-lstm-models-challenge-the-transformer-superiority](https://www.kdnuggets.com/lstms-rise-again-extended-lstm-models-challenge-the-transformer-superiority)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![LSTMs Rise Again](../Images/159eea8cbfb38f1606c4fa351a3de0ad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: LSTMs were initially introduced in the early 1990s by authors [Sepp Hochreiter](https://scholar.google.at/citations?user=tvUH3WMAAAAJ&hl=en)
+    and [Jurgen Schmidhuber](https://scholar.google.com/citations?user=gLnCTgIAAAAJ&hl=en).
+    The original model was extremely compute-expensive and it was in the mid-2010s
+    when RNNs and LSTMs gained attention. With more data and better GPUs available,
+    LSTM networks became the standard method for language modeling and they became
+    the backbone for the first large language model. That was the case until the release
+    of [Attention-Based Transformer Architecture](https://arxiv.org/abs/1706.03762)
+    in 2017\. LSTMs were gradually outdone by the Transformer architecture which is
+    now the standard for all recent Large Language Models including ChatGPT, Mistral,
+    and Llama.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, the recent release of the **[xLSTM paper](https://arxiv.org/abs/2405.04517)**
+    by the original LSTM author Sepp Hochreiter has caused a major stir in the research
+    community. The results show comparative pre-training results to the latest LLMs
+    and it has raised a question if LSTMs can once again take over Natural Language
+    Processing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: High-Level Architecture Overview
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The original LSTM network had some major limitations that limited its usability
+    for larger contexts and deeper models. Namely:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: LSTMs were sequential models that made it hard to parallelize training and inference.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: They had limited storage capabilities and all information had to be compressed
+    into a single cell state.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The recent xLSTM network introduces new sLSTM and mLSTM blocks to address both
+    these shortcomings. Let us take a birds-eye view of the model architecture and
+    see the approach used by the authors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Short Review of Original LSTM
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The LSTM network used a hidden state and cell state to counter the vanishing
+    gradient problem in the vanilla RNN networks. They also added the forget, input
+    and output sigmoid gates to control the flow of information. The equations are
+    as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![LSTM Equation](../Images/9401b41e35bec3728ce22f18db903377.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image from [Paper](https://arxiv.org/abs/2405.04517)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The cell state (ct) passed through the LSTM cell with minor linear transformations
+    that helped preserve the gradient across large input sequences.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The xLSTM model modifies these equations in the new blocks to remedy the known
+    limitations of the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: sLSTM Block
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The block modifies the sigmoid gates and uses the exponential function for
+    the input and forget gate. As quoted by the authors, this can improve the storage
+    issues in LSTM and still allow multiple memory cells allowing memory mixing within
+    each head but not across head. The modified sLSTM block equation is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![sLSTM Equation](../Images/d2abcf38ff255621e3659e5d35a26b36.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image from [Paper](https://arxiv.org/abs/2405.04517)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Moreover, as the exponential function can cause large values, the gate values
+    are normalized and stabilized using log functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: mLSTM Block
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To counter the parallelizability and storage issues in the LSTM network, the
+    xLSTM modifies the cell state from a 1-dimensional vector to a 2-dimensional square
+    matrix. They store a decomposed version as key and value vectors and use the same
+    exponential gating as the sLSTM block. The equations are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![mLSTM Equation](../Images/8fff002f2873a8f54c668208a7d318fa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image from [Paper](https://arxiv.org/abs/2405.04517)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Architecture Diagram
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![xLSTM Architecture Diagram](../Images/eb03b32b1d213056a0f3ece07c260e13.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image from [Paper](https://arxiv.org/abs/2405.04517)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The overall xLSTM architecture is a sequential combination of mLSTM and sLSTM
+    blocks in different proportions. As the diagram shows, the xLSTM block can have
+    any memory cell. The different blocks are stacked together with layer normalizations
+    to form a deep network of residual blocks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Evaluation Results and Comparison
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The authors train the xLSTM network on language model tasks and compare the
+    perplexity *(lower is better)* of the trained model with the current Transformer-based
+    LLMs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The authors first train the models on 15B tokens from SlimPajama. The results
+    showed that xLSTM outperform all other models in the validation set with the lowest
+    perplexity score.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![xLSTM Evaluation and Comparison](../Images/601c3fa61e44dba4d5701227f48d4eb5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image from [Paper](https://arxiv.org/abs/2405.04517)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sequence Length Extrapolation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The authors also analyze performance when the test time sequence length exceeds
+    the context length the model was trained on. They trained all models on a sequence
+    length of 2048 and the below graph shows the validation perplexity with changes
+    in token position:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![xLSTM equence Length Extrapolation](../Images/19523ecbdaaaac64f805fbf8f96065ac.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image from [Paper](https://arxiv.org/abs/2405.04517)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The graph shows that even for much longer sequences, xLSTM networks maintain
+    a stable perplexity score and perform better than any other model for much longer
+    context lengths.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Scaling xLSMT to Larger Model Sizes
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The authors further train the model on 300B tokens from the SlimPajama dataset.
+    The results show that even for larger model sizes, xLSTM scales better than the
+    current Transformer and Mamba architecture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Scaling xLSMT](../Images/48ffcf08af07141efd683e72144e3295.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image from [Paper](https://arxiv.org/abs/2405.04517)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrapping Up
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: That might have been difficult to understand and that is okay! Nonetheless,
+    you should now understand why this research paper has got all the attention recently.
+    It has been shown to perform at least as well as the recent large language models
+    if not better. It is proven to be scalable for larger models and can be a serious
+    competitor for all recent LLMs built on Transformers. Only time will tell if LSTMs
+    will regain their glory once again, but for now, we know that the xLSTM architecture
+    is here to challenge the superiority of the renowned Transformers architecture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)****
+    Kanwal is a machine learning engineer and a technical writer with a profound passion
+    for data science and the intersection of AI with medicine. She co-authored the
+    ebook "Maximizing Productivity with ChatGPT". As a Google Generation Scholar 2022
+    for APAC, she champions diversity and academic excellence. She''s also recognized
+    as a Teradata Diversity in Tech Scholar, Mitacs Globalink Research Scholar, and
+    Harvard WeCode Scholar. Kanwal is an ardent advocate for change, having founded
+    FEMCodes to empower women in STEM fields.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[If I Had To Start Learning Data Science Again, How Would I Do It?](https://www.kdnuggets.com/2020/08/start-learning-data-science-again.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[R vs Python (Again): A Human Factor Perspective](https://www.kdnuggets.com/2022/01/r-python-human-factor-perspective.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[There and Back Again… a RAPIDS Tale](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why Emily Ekdahl chose co:rise to level up her job performance as a…](https://www.kdnuggets.com/2022/08/corise-emily-ekdahl-chose-corise-level-job-performance-machine-learning-engineer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Drag, Drop, Analyze: The Rise of No-Code Data Science](https://www.kdnuggets.com/drag-drop-analyze-the-rise-of-nocode-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Rise and Fall of Prompt Engineering: Fad or Future?](https://www.kdnuggets.com/the-rise-and-fall-of-prompt-engineering-fad-or-future)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

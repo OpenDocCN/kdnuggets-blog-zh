@@ -1,0 +1,449 @@
+- en: Building a Question-Answering System from Scratch
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/10/building-question-answering-system-from-scratch.html](https://www.kdnuggets.com/2018/10/building-question-answering-system-from-scratch.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Alvira Swalin](https://www.linkedin.com/in/alvira-swalin), University
+    of San Francisco**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/ffaad18510a91a7f920a2e0b2e449237.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As my Masters is coming to an end, I wanted to work on an interesting NLP project
+    where I can use all the techniques(not exactly) I have learned at [USF](https://www.usfca.edu/arts-sciences/graduate-programs/data-science).
+    With the help of my professors and discussions with the batch mates, I decided
+    to build a question-answering model from scratch. I am using the [Stanford Question
+    Answering Dataset (SQuAD)](https://rajpurkar.github.io/SQuAD-explorer/). The problem
+    is pretty famous with all the big companies trying to jump up at the leaderboard
+    and using advanced techniques like attention based RNN models to get the best
+    accuracy. All the GitHub repositories that I found related to SQuAD by other people
+    have also used RNNs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, my goal is not to reach the state of the art accuracy but to learn
+    different NLP concepts, implement them and explore more solutions. I always believed
+    in starting with basic models to know the baseline and this has been my approach
+    here as well. This part will focus on introducing **Facebook sentence embeddings** and
+    how it can be used in building QA systems. In the future parts, we will try to
+    implement deep learning techniques, specifically sequence modeling for this problem.
+    All the codes can be found on this [Github repository](https://github.com/aswalin/SQuAD).
+  prefs: []
+  type: TYPE_NORMAL
+- en: But let’s first understand the problem. I will give a brief overview, however,
+    a detailed understanding of the problem can be found [here](https://rajpurkar.github.io/mlx/qa-and-squad/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****SQuAD Dataset****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**S**tanford **Qu**estion **A**nswering **D**ataset (SQuAD) is a new reading
+    comprehension dataset, consisting of questions posed by crowdworkers on a set
+    of Wikipedia articles, where the answer to every question is a segment of text,
+    or *span*, from the corresponding reading passage. With 100,000+ question-answer
+    pairs on 500+ articles, SQuAD is significantly larger than previous reading comprehension
+    datasets.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For each observation in the training set, we have a **context, question, and
+    text. **Example of one such observation-
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d2e67ce3ed9c8e12b607144dede178a9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The goal is to find the text for any new question and context provided. This
+    is a closed dataset meaning that the answer to a question is always a part of
+    the context and also a continuous span of context. I have broken this problem
+    into two parts for now -
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting the sentence having the right answer (highlighted yellow)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Once the sentence is finalized, getting the correct answer from the sentence
+    (highlighted green)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Introducing Infersent, Facebook Sentence Embedding
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: These days we have all types of embeddings [word2vec](https://deeplearning4j.org/word2vec.html), [doc2vec](https://medium.com/scaleabout/a-gentle-introduction-to-doc2vec-db3e8c0cce5e), [food2vec](https://jaan.io/food2vec-augmented-cooking-machine-intelligence/), [node2vec](https://docs.google.com/presentation/d/1L-633fYUokbYqTC8R5FUfhlmWnpCO5ey6JMZ_kAnJlM/edit?usp=sharing),
+    so why not sentence2vec. The basic idea behind all these embeddings is to use
+    vectors of various dimensions to represent entities numerically, which makes it
+    easier for computers to understand them for various downstream tasks. Articles
+    explaining these concepts are linked for your understanding.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Traditionally, we used to average the vectors of all the words in a sentence
+    called the bag of words approach. Each sentence is tokenized to words, vectors
+    for these words can be found using glove embeddings and then take the average
+    of all these vectors. This technique has performed decently, but this is not a
+    very accurate approach as it does not take care of the order of words.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here comes [**Infersent**](https://github.com/facebookresearch/InferSent), it
+    is a *sentence embeddings* method that provides semantic sentence representations.
+    It is trained on natural language inference data and generalizes well to many
+    different tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The process goes like this-
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a vocabulary from the training data and use this vocabulary to train
+    infersent model. Once the model is trained, provide sentence as input to the encoder
+    function which will return a 4096-dimensional vector irrespective of the number
+    of words in the sentence. [[demo](https://github.com/facebookresearch/InferSent/blob/master/encoder/demo.ipynb)]
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: These embeddings can be used for various downstream tasks like finding similarity
+    between two sentences. I have implemented the same for Quora-Question Pair kaggle
+    competition. You can check it out [here](https://github.com/aswalin/Kaggle/blob/master/Quora.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Coming to the SQuAD problem, below are the ways I have tried using sentence
+    embedding to solve the first part of the problem described in the previous section-
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Break the paragraph/context into multiple sentences. The two packages that
+    I know for processing text data are - [Spacy](https://spacy.io/usage/spacy-101) & [Textblob](http://textblob.readthedocs.io/en/dev/).
+    I have used package TextBlob for the same. It does intelligent splitting, unlike
+    spacy’s sentence detection which can give you random sentences on the basis of
+    period. An example is provided below:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/ca4451fbbd3a0c447b6c7e972aebb1cb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Example: Paragraph**![](../Images/18cb89bff424258612e9078996a36da2.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**TextBlob is splitting it into 7 sentences which makes sense**![](../Images/91c395758fe4a535ffc4a4695a281ba3.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Spacy is splitting it into 12 sentences**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Get the vector representation of each sentence and question using Infersent
+    model
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Create features like distance, based on cosine similarity and Euclidean distance
+    for each sentence-question pair
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I have further solved the problem using two major methods-
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unsupervised Learning where I am not using the target variable. Here, I am returning
+    the sentence form the paragraph which has the minimum distance from the given
+    question
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Supervised Learning - Creation of training set has been very tricky for this
+    part, the reason being the fact that there is no fixed number of sentences in
+    each part and answer can range from one word to multiple words. The only paper
+    I could find that has implemented logistic regression is by the Stanford team
+    who has launched this competition & dataset. They have used multinomial logistic
+    regression explained in this [paper](https://arxiv.org/pdf/1606.05250.pdf) and
+    have created **180 million features (sentence detection accuracy for this model
+    was 79%)**, but it is not clear how they have defined the target variable. If
+    anyone has any idea, please, clarify the same in the comments. I will explain
+    my solution later.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Unsupervised Learning Model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here, I first tried using euclidean distance to detect the sentence having minimum
+    distance from the question. The accuracy of this model came around 45%. Then,
+    I switched to cosine similarity and the accuracy improved from **45% to 63%**.
+    This makes sense because euclidean distance does not care for alignment or angle
+    between the vectors whereas cosine takes care of that. Direction is important
+    in case of vectorial representations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But this method does not leverage the rich data with target labels that we are
+    provided with. However, considering the simple nature of the solution, this is
+    still giving a good result without any training. I think the credit for the decent
+    performance goes to Facebook sentence embedding.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Supervised Learning Models**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here, I have transformed the target variable form text to the sentence index
+    having that text. For the sake of simplicity, I have restricted my paragraph length
+    to 10 sentences (around 98% of the paragraphs have 10 or fewer sentences). Hence,
+    I have 10 labels to predict in this problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For each sentence, I have built one feature based on cosine distance. If a paragraph
+    has less number of sentences, then I am replacing it’s feature value with 1 (maximum
+    possible cosine distance) to make total 10 sentences for uniformity. It will be
+    easier to explain this process with an example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s take the first observation/row of the training set. The sentence having
+    the answer is bolded in the context.:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Example**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Question — “To whom did the Virgin Mary allegedly appear in 1858 in Lourdes
+    France?”
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Context** — “Architecturally, the school has a Catholic character. Atop the
+    Main Building\’s gold dome is a golden statue of the Virgin Mary. Immediately
+    in front of the Main Building and facing it, is a copper statue of Christ with
+    arms upraised with the legend “Venite Ad Me Omnes”. Next to the Main Building
+    is the Basilica of the Sacred Heart. Immediately behind the basilica is the Grotto,
+    a Marian place of prayer and reflection. **It is a replica of the grotto at Lourdes,
+    France where the Virgin Mary reputedly appeared to Saint Bernadette Soubirous
+    in 1858**. At the end of the main drive (and in a direct line that connects through
+    3 statues and the Gold Dome), is a simple, modern stone statue of Mary.”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Text** — “Saint Bernadette Soubirous”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case, the target variable will become 5, because that’s the index of
+    the bolded sentence. We will have 10 features each corresponding to one sentence
+    in the paragraph. The missing values for column_cos_7, column_cos_8, and column_cos_9
+    are filled with 1 because these sentences do not exists in the paragraph
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7ec4f696e582859ebe279d905caab25d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Dependency Parsing**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another feature that I have used for this problem is the **“Dependency Parse
+    Tree”**. This is marginally improving the accuracy of the model by 5%. Here, I
+    have used Spacy tree parsing as it is has a rich API for navigating through the
+    tree.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4f431c6bf4bc8837ebb7120539b02d2a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/dd61f1c282f3cb4d254fdd035a864dab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'For more details: Please check out [Stanford Lecture](https://web.stanford.edu/~jurafsky/slp3/14.pdf)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Relations among the words are illustrated above the sentence with directed,
+    labeled arcs from heads to dependents. We call this a Typed Dependency structure
+    because the labels are drawn from a fixed inventory of grammatical relations.
+    It also includes a root node that explicitly marks the root of the tree, the head
+    of the entire structure.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Let’s visualize our data using Spacy tree parse. I am using the same example
+    provided in the previous section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Question — “**To whom did the Virgin Mary allegedly appear in 1858 in Lourdes
+    France?”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4ee78a27dfb5465d1b781369fce13092.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Sentence having the answer —** “It is a replica of the grotto at Lourdes,
+    France where the Virgin Mary reputedly appeared to Saint Bernadette Soubirous
+    in 1858”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2a333ad526351d87dcad356a1ffa0675.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Roots of All the Sentences in the Paragraph**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/212b7aca80799750cf331fae8e684db8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The idea is to match the root of the question which is “**appear**” in this
+    case to all the roots/sub-roots of the sentence. Since there are multiple verbs
+    in a sentence, we can get multiple roots. If the root of the question is contained
+    in the roots of the sentence, then there are higher chances that the question
+    is answered by that sentence. Considering that in mind, I have created one feature
+    for each sentence whose value is either 1 or 0\. Here, 1 represents that the root
+    of question is contained in the sentence roots and 0 otherwise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note: It is important to do stemming before comparing the roots of sentences
+    with the question root. In the previous example, root word for question is **appear **while
+    the root word in the sentence is **appeared**. If you don’t stem **appear** &
+    **appeared** to a common term, them matching won’t be possible.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The example below is the transposed data with 2 observations from the processed
+    training data. So, we have 20 features in total combining cosine distance and
+    root match for 10 sentences in a paragraph. The target variable ranges from 0
+    to 9.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7b616d1d1df8e6e2ad0a747de57bc06f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Note: It is very important to standardize all the columns in your data for
+    logistic regression.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Once, the training data is created, I have used **multinomial logistic regression,
+    random forest & gradient boosting techniques**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The accuracy of **multinomial logistic regression **is **65%** for the validation
+    set. Considering the original model which had a lot of features with an accuracy
+    of **79%**, this one is quite simpler. The **random forest** gave an accuracy
+    of **67%** and finally, **XGBoost** worked best with an accuracy of **69%**on
+    the validation set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I will be adding more features (NLP related) to improve these models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ideas related to feature engineering or other improvements are highly welcomed.
+    All the codes related to above concepts are provided [here](https://github.com/aswalin/SQuAD).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the next part, we will focus on the text extraction (correct span) from the
+    sentences shortlisted in this part. In the meantime, check out my other blogs [here](https://medium.com/@aswalin)!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**References**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Github Repository with Codes](https://github.com/aswalin/SQuAD)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Facebook Repo for Infersent](https://github.com/facebookresearch/InferSent)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Best Resource Paper explaining the Logistic Regression](https://arxiv.org/pdf/1606.05250.pdf)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Blog Explaining the Problem](https://rajpurkar.github.io/mlx/qa-and-squad/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Leaderboard & Dataset](https://rajpurkar.github.io/SQuAD-explorer/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Bio: [Alvira Swalin](https://www.linkedin.com/in/alvira-swalin)** ([**Medium**](https://medium.com/@aswalin))
+    is currently pursuing Master''s in Data Science at USF, I am particularly interested
+    in Machine Learning & Predictive Modeling. She is a Data Science Intern at Price
+    (Fx).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/building-a-question-answering-system-part-1-9388aadff507).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[CatBoost vs. Light GBM vs. XGBoost](/2018/03/catboost-vs-light-gbm-vs-xgboost.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Choosing the Right Metric for Evaluating Machine Learning Models – Part 1](/2018/04/right-metric-evaluating-machine-learning-models-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Choosing the Right Metric for Evaluating Machine Learning Models – Part 2](/2018/06/right-metric-evaluating-machine-learning-models-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a Recommender System for Amazon Products with Python](https://www.kdnuggets.com/2023/02/building-recommender-system-amazon-products-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Recommendation System with Hugging Face Transformers](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How a Level System can Help Forecast AI Costs](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learning System Design: Top 5 Essential Reads](https://www.kdnuggets.com/learning-system-design-top-5-essential-reads)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Monitor Your File System With Python’s Watchdog](https://www.kdnuggets.com/monitor-your-file-system-with-pythons-watchdog)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning from Scratch: Decision Trees](https://www.kdnuggets.com/2022/11/machine-learning-scratch-decision-trees.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

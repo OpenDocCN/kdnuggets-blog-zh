@@ -1,0 +1,303 @@
+- en: Training and Visualising Word Vectors
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/01/training-visualising-word-vectors.html](https://www.kdnuggets.com/2018/01/training-visualising-word-vectors.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Priyanka Kochhar](https://github.com/priya-dwivedi), Deep Learning Consultant**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this tutorial I want to show how you can implement a skip gram model in tensorflow
+    to generate word vectors for any text you are working with and then use tensorboard
+    to visualize them. I found this exercise super useful to i) understand how skip
+    gram model works and ii) get a feel for the kind of relationship these vectors
+    are capturing about your text before you use them downstream in CNNs or RNNs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I trained a skip gram model on text8 dataset which is collection of English
+    Wikipedia articles. I used Tensorboard to visualize the embeddings. Tensorboard
+    allows you to see the whole word cloud by using PCA to select 3 main axis to project
+    the data. Super cool! You can type in any word and it will show its neighbours.
+    You can also isolate the 101 points closest to it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: See clip below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/95e7808cb6d9ccfb709d13388288fc97.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can find the full code on my [Github](https://github.com/priya-dwivedi/Deep-Learning/blob/master/word2vec_skipgram/Skip-Grams-Solution.ipynb) repo.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To visualize training, I also looked at the closest predicted word to a random
+    set of words. In the first iteration the closest predicted words seem very arbitrary
+    which makes sense since all word vectors were randomly initialized
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: By the end of training, the model had become much better at finding relationship
+    between words.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Word2Vec and Skip Gram model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Creating word vectors is the process of taking a large corpus of text and creating
+    a vector for each word such that words that share common contexts in the corpus
+    are located in close proximity to one another in the vector space.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These word vectors can get amazingly good at capturing contextual relationship
+    between words (example vectors for black, white and red would be close together)
+    and we get far better performance with using these vectors instead of raw words
+    for NLP tasks like text classification or new text generation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are two main models for generating these word vectors — Continuous Bag
+    of Words (CBOW) and Skip Gram Model. The CBOW model tries to predict the center
+    word given context word while skip gram model tries to predict context words given
+    center word. A simplified example would be:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'CBOW: The cat ate _____. Fill in the blank, in this case, it’s “food”.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Skip-gram: ___ ___ ___ food. Complete the word’s context. In this case, it’s
+    “The cat ate”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you are interested in a more detailed comparison of these two methods, then
+    please see this [link](https://iksinc.wordpress.com/tag/continuous-bag-of-words-cbow/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Various papers have found that Skip gram model results in better word vectors
+    and so I have focused on implementing that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Implementing Skip Gram model in Tensorflow
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here I will list the main steps to build the model. Please see the detailed
+    implementation on my [Github](https://github.com/priya-dwivedi/Deep-Learning/blob/master/word2vec_skipgram/Skip-Grams-Solution.ipynb)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Preprocessing the data
+  prefs: []
+  type: TYPE_NORMAL
+- en: We first clean our data. Remove any punctuation, digits and split the text into
+    individual words. Since programs deal much better with integers than words we
+    map every word to an int by creating a vocab to int dictionary. Code below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 2\. Subsampling
+  prefs: []
+  type: TYPE_NORMAL
+- en: Words that show up often such as “the”, “of”, and “for” don’t provide much context
+    to the nearby words. If we discard some of them, we can remove some of the noise
+    from our data and in return get faster training and better representations. This
+    process is called subsampling by [Mikolov](https://arxiv.org/pdf/1301.3781.pdf).
+    For each word in the training set, we’ll discard it with probability given by
+    inverse of its frequency.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Creating inputs and targets
+  prefs: []
+  type: TYPE_NORMAL
+- en: The input for skip gram is each word (coded as int) and the target is words
+    around that window. Mikolov et al found that performance was better if this window
+    was variable in size and words closer to to the center word were sampled more
+    frequently.
+  prefs: []
+  type: TYPE_NORMAL
+- en: “Since the more distant words are usually less related to the current word than
+    those close to it, we give less weight to the distant words by sampling less from
+    those words in our training examples… If we choose window size=5, for each training
+    word we will select randomly a number R in range between 1 and window size, and
+    then use R words from history and R words from the future of the current word
+    as correct labels.”
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 4\. Building the model
+  prefs: []
+  type: TYPE_NORMAL
+- en: From [Chris McCormick’s blog](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/),
+    we can see the general structure of the network that we will build.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/968c128d8ca16ad61a212372dd92165f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We’re going to represent an input word like “ants” as a one-hot vector. This
+    vector will have 10,000 components (one for every word in our vocabulary) and
+    we’ll place a “1” in the position corresponding to the word “ants”, and 0s in
+    all of the other positions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The output of the network is a single vector (also with 10,000 components) containing,
+    for every word in our vocabulary, the probability that a randomly selected nearby
+    word is that vocabulary word.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At the end of training the hidden layer will have the trained word vectors.
+    The size of the hidden layer corresponds to the num of dimensions in our vector.
+    In the example above each word will have a vector of length 300.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You may have noticed that the skip-gram neural network contains a huge number
+    of weights… For our example with 300 features and a vocab of 10,000 words, that’s
+    3M weights in the hidden layer and output layer each! Training this on a large
+    dataset would be prohibitive, so the word2vec authors introduced a number of tweaks
+    to make training feasible. You can read more about them in the [link](http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/).
+    The code on [Github](https://github.com/priya-dwivedi/Deep-Learning/blob/master/word2vec_skipgram/Skip-Grams-Solution.ipynb) implements
+    these to speed up training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5\. Visualizing using Tensorboard
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can using the embeddings projector in Tensorboard to visualize the embeddings.
+    To do this you need to do a few things:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Save your model at the end of training in a checkpoints directory
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Create a metadata.tsv file that has the mapping for each int back to word so
+    that Tensorboard displays words instead of ints. Save this tsv file in the same
+    checkpoints directory
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Run this code:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Open tensorboard by pointing it to the checkpoints directory
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: That’s it!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Give me a ❤️ if you liked this post:) Hope you pull the code and try it yourself.
+    If you have other ideas on this topic please comment on this post or mail me at
+    [priya.toronto3@gmail.com](mailto:priya.toronto3@gmail.com)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Other writings**:[ https://medium.com/@priya.dwivedi/](https://medium.com/@priya.dwivedi/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'PS: I have a deep learning consultancy and love to work on interesting problems.
+    If you have a project that we can work collaborate on then please contact me at
+    [priya.toronto3@gmail.com](mailto:priya.toronto3@gmail.com)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**References:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Udacity](https://www.udacity.com/) Deep Learning Nanodegree'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Priyanka Kochhar](https://github.com/priya-dwivedi)** has been a data
+    scientist for 10+ years. She now has her own deep learning consultancy and loves
+    to work on interesting problems. She has helped several startups deploy innovative
+    AI based solutions. If you have a project that she can collaborate on then please
+    contact her at [priya.toronto3@gmail.com](mailto:priya.toronto3@gmail.com)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/training-and-visualising-word-vectors-2f946c6430f8).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Framework for Approaching Textual Data Science Tasks](/2017/11/framework-approaching-textual-data-tasks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A General Approach to Preprocessing Text Data](/2017/12/general-approach-preprocessing-text-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beyond Word2Vec Usage For Only Words](/2018/01/beyond-word2vec-for-words.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Automate Microsoft Excel and Word Using Python](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Ultimate Guide To Different Word Embedding Techniques In NLP](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Online Training and Workshops with Nvidia](https://www.kdnuggets.com/2022/07/online-training-workshops-nvidia.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Difference Between Training and Testing Data in Machine Learning](https://www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[New From Anaconda! Data Science Training and Cloud Hosted Notebooks](https://www.kdnuggets.com/2022/11/anaconda-new-anaconda-data-science-training-cloud-hosted-notebooks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

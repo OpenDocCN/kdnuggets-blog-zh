@@ -1,0 +1,206 @@
+- en: (Deep Learning’s Deep Flaws)’s Deep Flaws
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2015/01/deep-learning-flaws-universal-machine-learning.html](https://www.kdnuggets.com/2015/01/deep-learning-flaws-universal-machine-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: A few well-publicized recent papers have tempered the hype surrounding deep
+    learning. The papers identify both that images can be subtly altered to induce
+    misclassification and that seemingly random garbage images can easily be generated
+    which receive high confidence classifications. A wave of press has sensationalized
+    the message. Several blog posts, a YouTube video, and others have amplified and
+    occasionally distorted the results, professing the gullibility of deep networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given the hoopla, it's appropriate to examine these findings. While some are
+    intriguing, others are less surprising. Some are nearly universal problems with
+    machine learning in adversarial settings. Further, after examining these findings,
+    it seems clear that they are only shocking given an unrealistic conception of
+    what deep networks actually do, i.e., an unrealistic expectation that modern feed-forward
+    neural networks exhibit human-like cognition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The criticisms are two-fold, stemming from two separate papers. The first, ["Intriguing
+    Properties of Neural Networks"](http://cs.nyu.edu/~zaremba/docs/understanding.pdf),
+    is a paper published last year by Google's Christian Szegedy and others. In it,
+    they reveal that one can subtly alter images in ways imperceptible to humans and
+    yet induce misclassification by a trained convolutional neural network (CNN).
+  prefs: []
+  type: TYPE_NORMAL
+- en: To be clear, this paper is well-written, well-conceived, and presents modest
+    but insightful claims. The authors present two results. The main result shows
+    that random linear combinations of the hidden units in the final layer of a neural
+    network are semantically indistinguishable from the units themselves. They suggest
+    that the space spanned by these hidden units is actually what is important and
+    not which specific basis spans that space.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The second, more widely covered claim regards the altering of images. The authors
+    non-randomly alter a set of pixels so as to induce misclassification. The result
+    is a seemingly identical but misclassified image. This finding raises interesting
+    questions about the applications of deep learning to adversarial situations. The
+    authors also point out that this challenges the smoothness assumption, i.e., that
+    examples very close to each other should have the same classification with high
+    probability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The adversarial case is definitely worth thinking about. Still, optimizing images
+    for misclassification requires access to the model. This scenario may not always
+    be realistic. A spammer, for example may be able to send out emails and see which
+    emails are classified as spam by Google's filter, but they're unlikely to gain
+    the opportunity to access Google's spam-filtering algorithm so as to optimize
+    maximally spam-like emails which are nevertheless not filtered. Similarly, to
+    fool deep learning face detection software, one would need access to the underlying
+    convolutional neural net in order to precisely doctor the image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It's worth noting that nearly all machine learning algorithms are susceptible
+    to adversarial chosen examples. Consider a logistic regression classifier with
+    thousands of features, many of which have non-zero weight. If one such feature
+    is numerical, the value of that feature could be set very high or very low to
+    induce misclassification, without altering any of the other thousands of features.
+    To a human who could only perceive a small subset of the features at a time, this
+    alteration might not be perceptible. Alternatively, if any features had very high
+    weight in the model, they might only need to have their values shifted a small
+    amount to induce misclassification. Similarly, for decision trees, a single binary
+    feature might be switched to direct an example into the wrong partition at the
+    final layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This pathological case for neural networks is different in some ways. One crucial
+    difference is that the values taken by pixels are constrained. Still, given nearly
+    any machine learning model with many features and many degrees of freedom, it
+    is easy to engineer pathological adversarial examples. This is true even for much
+    simpler models that are better understood and come with theoretical guarantees.
+    Perhaps, we should not be surprised that deep learning too is susceptible to adversarially
+    chosen examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The second paper, ["Deep Networks are Easily Fooled"](http://arxiv.org/pdf/1412.1897v2.pdf)
+    by Anh Nguyen of the University of Wyoming, appears to make a bolder proclamation.
+    Citing the work of Szegedy et. al., they set out to examine the reverse problem,
+    i.e., how to fabricate a seemingly nonsensical example, which despite its apparent
+    lack of content nonetheless receives a high confidence classification. The authors
+    use gradient ascent to train gibberish images (unrecognizable to the human eye)
+    which are classified strongly into some clearly incorrect object class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Second layer of convolutional neural network visualized](../Images/8c12470a515a5f24014c9325e7204a14.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: From a standpoint of mathematical intuition, this is what we should expect.
+    In the previous case, the altered images were constrained to be indistinguishable
+    from some source image. Here, the images are constrained only not to look like
+    anything! In the whole space of possible images, actual recognizable images are
+    a minuscule subset of images, leaving nearly the entire vector space open. Further,
+    here it is very easy to find a corresponding problem in virtually every other
+    machine learning method. Given any linear classifier, one could find some spot
+    that is both far from the decision boundary and also far away from any other data
+    point that has ever been seen. Given a topic model, one could create a nonsensical
+    mishmash of randomly ordered words which appears to get the same inferred topic
+    distribution as some chosen real document.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The primary sense in which this result might be surprising is that convolutional
+    neural networks' have come to rival human abilities when it comes to the task
+    of object detection. In this sense, it may be important to distinguish the capabilities
+    of CNNs from human abilities. The authors make this point from the outset, and
+    the argument is reasonable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As both Michael I. Jordan and Geoff Hinton have recently discussed, deep learning's
+    great successes have attracted a wave of hype. The recent wave of negative publicity
+    illustrates that this hype cuts both ways. The success of deep learning has rightfully
+    tempted many to examine its shortcomings. However, it's worth keeping in mind
+    that many of the problems are ubiquitous in most machine learning contexts. Perhaps
+    more widespread interest in algorithms robust to adversarial examples could benefit
+    the entire machine learning community.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Zachary Chase Lipton](../Images/240b273c667af1a53a99fd93d1fd39ce.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**[Zachary Chase Lipton](http://zacklipton.com)** is a PhD student in the Computer
+    Science Engineering department at the University of California, San Diego. Funded
+    by the [Division of Biomedical Informatics](http://healthsciences.ucsd.edu/som/medicine/divisions/dbmi/pages/default.aspx),
+    he is interested in both theoretical foundations and applications of machine learning.
+    In addition to his work at UCSD, he has interned at Microsoft Research Labs.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Geoff Hinton AMA: Neural Networks, the Brain, and Machine Learning](/2014/12/geoff-hinton-ama-neural-networks-brain-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Does Deep Learning Have Deep Flaws?](/2014/06/deep-learning-deep-flaws.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deep Learning can be easily fooled](/2015/01/deep-learning-can-be-easily-fooled.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Differential Privacy: How to make Privacy and Data Mining Compatible](/2015/01/differential-privacy-data-mining-compatible.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI, Analytics, Machine Learning, Data Science, Deep Learning…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[15 Free Machine Learning and Deep Learning Books](https://www.kdnuggets.com/2022/10/15-free-machine-learning-deep-learning-books.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, November 2: The Current State of Data Science…](https://www.kdnuggets.com/2022/n43.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[15 More Free Machine Learning and Deep Learning Books](https://www.kdnuggets.com/2022/11/15-free-machine-learning-deep-learning-books.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Datawig, an AWS Deep Learning Library for Missing Value Imputation](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

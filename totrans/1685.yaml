@@ -1,0 +1,390 @@
+- en: Time Series for Dummies – The 3 Step Process
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/03/time-series-dummies-3-step-process.html](https://www.kdnuggets.com/2018/03/time-series-dummies-3-step-process.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By Chris St. Jeor & Sean Ankenbruck, Zencos**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After a satisfying meal of Chinese takeout, you absentmindedly crack open the
+    complimentary fortune cookie. Glancing at the fortune inside, you read, “A dream
+    you have will come true.” Scoffing, you toss the small piece of paper and pop
+    the cookie in your mouth. Being the intelligent, well-reasoned person you are,
+    you know the fortune is insignificant—no one can predict the future. However,
+    that thought may be incomplete. There is a way to predict the future with great
+    accuracy: time series modeling.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Time series modeling may not be able to tell you when you will meet the love
+    of your life or whether you should wear the blue or the red tie to work, but it
+    is very good at using historical data to identify existing patterns and use them
+    to predict what will happen in the future. Unlike most advanced analytics solutions,
+    time series modeling is a low-cost solution that can provide powerful insights.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This post will walk through the three fundamental steps of building a quality
+    time series model: making data stationary, selecting the right model, and evaluating
+    model accuracy. The examples in this post use historical page views data for a
+    major automotive marketing company.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 1: Making Data Stationary'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Time series involves the use of data that are indexed by equally spaced increments
+    of time (minutes, hours, days, weeks, etc.). Due to the discrete nature of time
+    series data, many time series data sets have a seasonal and/or trend element built
+    into the data. The first step in time series modeling is to account for existing
+    seasons (a recurring pattern over a fixed period of time) and/or trends (upward
+    or downward movement in the data). Accounting for these embedded patterns is what
+    we call making the data stationary.  Examples of trending and seasonal data can
+    be seen if figures 1 and 2 below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/4193944adcb0067c3ed247eb798e730e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 1: Example of Upward Trending Data*![Image](../Images/63607051018efa77882c94164fea3902.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Figure 2: Example of Seasonal Data*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Stationarity?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As we previously mentioned, the first step in time series modeling is to remove
+    the effects of the trend or season that exist within the data to make it stationary.
+    We keep throwing around the term *stationarity*, but what exactly does it mean?
+  prefs: []
+  type: TYPE_NORMAL
+- en: A stationary series is one where the mean of the series is no longer a function
+    of time. With trending data, as time increase the mean of the series either increases
+    or decreases with time (think of the steady increase in housing prices over time).
+    For seasonal data, the mean of the series fluctuates in accordance with the season
+    (think of the increase and decrease in temperature every 24 hours).
+  prefs: []
+  type: TYPE_NORMAL
+- en: How do we achieve stationarity?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are two methods that can be applied to achieve stationarity, difference
+    the data or linear regression. To take a difference, you calculate the difference
+    between consecutive observations. To use linear regression, you include binary
+    indicator variables for your seasonal component in the model. Before we decide
+    which of these methods to apply, let’s explore our data. We plotted the historical
+    daily page views using SAS Visual Analytics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/66a0d98d8b7cbfdc781033f67c33987d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 3: Time Series Plot of Raw Page Views*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The initial pattern seems to repeat itself every seven days indicating a weekly
+    season. The prolonged increase in the number of page views over time indicates
+    that there is a slightly upward trend. With a general idea of the data we then
+    applied a statistical test of stationarity, the Augmented Dickey-Fuller (ADF)
+    test. The ADF test is a unit-root test of stationarity. We won’t get into the
+    details here, but a unit-root indicates if the series is nonstationary so we use
+    this test to determine the appropriate method to handle the trend or season (differencing
+    or regression). Based on the ADF test for the data above we removed the seven-day
+    season by regressing on dummy variables for day of the week and removed the trend
+    by differencing the data. The resulting stationary data can be seen in the figure
+    below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/efc6cc474068dd6241ce271a12a29466.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 4: Stationary Data After Removing Season and Trend*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 2: Building Your Time Series Model'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that the data is stationary, the second step in time series modeling is
+    to establish a base level forecast. We should also note that most base level forecasts
+    do not require the first step of making your data stationary. This is only required
+    for more advanced models such as ARIMA modeling which we will discuss momentarily.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Establish a Base Level Forecast
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are several types of time series models. To build a model that can accurately
+    forecast future page views (or whatever you are interested in forecasting), it
+    is necessary to decide on the type of model that is appropriate for your data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The simplest option is to assume that future values of y (the variable you are
+    interested in forecasting) are equal to the most current value of y. This is considered
+    the most basic, or “naïve model”, where the most recent observation is the most
+    likely outcome for tomorrow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A second type of model is the average model. In this model, all observations
+    in the data set are given equal weight. Future forecasts of y are calculated as
+    the average of the observed data. The forecast generated could be quite accurate
+    if the data is level, but would provide a very poor forecast if the data is trending
+    or has a seasonal component. The forecasted values for the page views data using
+    the average model can be seen below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/317b10b247af0777058d122686282f14.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 5: Average (Mean) Model Forecast*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the data has either a seasonal or trend element, then a better option for
+    a base level model is to implement an exponential smoothing model (ESM). ESMs
+    strike a happy medium between the naïve and average models mentioned above, where
+    the most recent observation is given the greatest weight and the weight of all
+    previous observations decrease exponentially into the past. ESMs also allow for
+    a seasonal and/or trending component to be incorporated into the model. The following
+    table provides an example of an initial weight of 0.7 decreasing exponentially
+    at a rate of 0.3.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **Observation** | **Weight (α = 0.7)** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Yt (current observation) | 0.7 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Yt-1 | 0.21 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Yt-2 | 0.063 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Yt-3 | 0.0189 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Yt-4 | 0.00567 |'
+  prefs: []
+  type: TYPE_TB
+- en: '*Table 1: Example of the exponentially decreasing effect of past observations
+    of Y.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are various types of ESMs that can be implemented in time series forecasting.
+    The ideal model to use will depend on the type of data you have. The table below
+    provides a quick guide as to what type of ESM to use depending on the combination
+    of trend and season in the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **Type of Exponential Smoothing Model** | **Trend** | **Season** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Simple ESM |  |  |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Linear ESM | X |  |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Seasonal ESM |  | X |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Winters ESM | X | X |'
+  prefs: []
+  type: TYPE_TB
+- en: '* Table 2: Model Selection Table*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because of the strong seven-day season and upward trend in the data, we selected
+    an additive winters ESM as the new base level model. The forecast generated does
+    a decent job of continuing the slight upward trend and captures the seven-day
+    season. However, there is still more pattern in the data that can be removed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/66da7daba447fb8e7a7d63aaf21b6c2a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 6: Additive Winters ESM Forecast*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ARIMA Modeling
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After identifying the model that best accounts for the trend and season in the
+    data, you ultimately have enough information to generate a decent forecast, as
+    we see in Figure 2 above. However, these models are still limited in that they
+    do not account for the correlation that the variable of interest has with itself
+    over previous periods of time. We refer to this correlation as autocorrelation,
+    which is commonly found in time series data. If the data has autocorrelation,
+    as ours does, then there may be additional modeling that can be done to further
+    improve upon the baseline forecast.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To capture the effects of autocorrelation in a time series model, it is necessary
+    to implement an Autoregressive Integrated Moving Average (or ARIMA) model. ARIMA
+    models include parameters to account for season and trend (like using dummy variables
+    for days of the week and differencing), but also allow for the inclusion of autoregressive
+    and/or moving average terms to deal with the autocorrelation imbedded in the data.
+    By using the appropriate ARIMA model, we can further increase the accuracy of
+    the page views forecast as seen in Figure 3 below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/fc8b6515e5df9eab2837fe356c258be5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 7: Seasonal ARIMA Model Forecast*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 3: Evaluating Model Accuracy'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: While you can see the improved accuracy of each of the models presented, visually
+    identifying which model has the best accuracy is not always reliable. Calculating
+    the MAPE (Mean Absolute Percent Error) is a quick and easy way to compare the
+    overall forecast accuracy of a proposed model – the lower the MAPE the better
+    the forecast accuracy. Comparing the MAPE of each of the models previously discussed,
+    it is easy to see that the seasonal ARIMA model provides the best forecast accuracy.
+    Note that there are several other types of comparison statistics that can be used
+    for model comparison.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **Model Error Validation** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **Model** | **MAPE** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Naïve | 9.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Mean | 10.2 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Winters ESM | 6.9 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Seasonal ARIMA | 4.4 |'
+  prefs: []
+  type: TYPE_TB
+- en: '*Table 3: Model Error Rate Comparison*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In summary, the trick to building a powerful time series forecasting model is
+    to remove as much of the noise (trend, season, and autocorrelation) as possible
+    so that the only remaining movement unaccounted for in the data is pure randomness.
+    For our data we found that a seasonal ARIMA model with regression variables for
+    day of the week provided the most accurate forecast. The ARIMA model forecast
+    was more accurate when compared to the naïve, average, and ESM models mentioned
+    above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While no time series model will be able to help you in your love life, there
+    are many types of time series models at your disposal to help predict anything
+    from page views to energy sales. The key to accurately predicting your variable
+    of interest is to first, understand your data, and second, apply the model that
+    best meets the needs of your data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Chris St. Jeor**, a consultant for the Zencos Data Science team, helps businesses
+    find actionable insights in their data. While working as an Economist for the
+    Idaho Department of Labor, Chris produced labor forecasts and economic impact
+    analyses for technical stakeholders. Chris has a BS in Economics and an MS in
+    Analytics from the Institute for Advanced Analytics at NC State University. Chris’s
+    enthusiasm for machine learning and predictive modeling is only rivaled by his
+    enthusiasm for his family. Whether hiking trails or exploring a new museum, he
+    is constantly on the move with his wife and two kids.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Sean Ankenbruck** brings a diverse background to the Zencos team with experience
+    in government, investment banking, wholesale energy trading and web application
+    development. He has a passion for code and enjoys the opportunity to use his skills
+    to solve complex problems. When not working on an analytical project, Sean spends
+    his time contributing to the Zencos blog where he uses data to tell an interesting
+    story. A North Carolina native, Sean received a BS in Business and a MS in Analytics
+    from NC State University.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Time Series Analysis: A Primer](/2017/01/time-series-analysis-primer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Time Series Analysis with Generalized Additive Models](/2017/04/time-series-analysis-generalized-additive-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automated Feature Engineering for Time Series Data](/2017/11/automated-feature-engineering-time-series-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

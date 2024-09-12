@@ -1,0 +1,150 @@
+- en: 'Useful Data Science: Feature Hashing'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/01/useful-data-science-feature-hashing.html](https://www.kdnuggets.com/2016/01/useful-data-science-feature-hashing.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By Will McGinnis**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the previous post about [categorical encoding](http://www.willmcginnis.com/2015/11/29/beyond-one-hot-an-exploration-of-categorical-variables/) we
+    explored different methods for converting categorical variables into numeric features.
+     In this post, we will explore another method: feature hashing.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature hashing, or the hashing trick is a method for turning arbitrary features
+    into a sparse binary vector.  It can be extremely efficient by having a standalone
+    hash function that requires no pre-built dictionary of possible categories to
+    function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A simple implementation that allows the user to pick the desired output dimensionality
+    is to simply hash the input value into a number, then divide it by the desired
+    output dimensionality and take the remainder, R.  With that, you can encode the
+    feature as a vector of zeros with a one in index R.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In psuedo-code, from wikipedia’s article:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`function hashing_vectorizer(features : array of string, N : integer): x :=
+    new vector[N] for f in features: h := hash(f) x[h mod N] += 1 return x`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Or in python, from [categorical encoding](https://github.com/wdm0006/categorical_encoding):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`def hash_fn(x): tmp = [0for_inrange(N)] for val in x.values: tmp[hash(val)%
+    N] += 1 return pd.Series(tmp, index=cols)`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`cols = [''col_%d''% d for d in range(N)] X = X.apply(hash_fn, axis=1)`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'How well does this work out though? Well, last time, we ran all of the encoders
+    using the same model and compared the scores.  Some encodings are a little bit
+    different every time (depending on how the initial ordinal transform goes), so
+    we run the models 100 times, and produce a boxplot of their scores.  Using the
+    mushroom dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Categorical Encoding Scores](../Images/a9a36cbf5da8885b83438dc34c5d2a8f.png)](http://i2.wp.com/www.willmcginnis.com/wp-content/uploads/2016/01/mushroom_boxplot.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this plot you can see a couple of interesting things.  First, the binary
+    encoding that was introduced in the last post, while it performs well on average,
+    has pretty high variance run-to-run, which is not ideal.   Also, you can see a
+    gradual rise in performance as the number of components used for the hashing encoder
+    increases, but it saturates at 16, because there just aren’t enough categories
+    to need more than 16 components for this dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the next post, I’ll introduce the scikit-learn compatible transformers for
+    each of these, some examples using them, and some rules of thumb for building
+    good models on high-dimension categorical data without blowing out your memory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Check out the updated repository to try your own encoders, use mine, or to
+    try this out on your own data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://github.com/wdm0006/categorical_encoding](https://github.com/wdm0006/categorical_encoding)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://www.willmcginnis.com/2016/01/16/even-further-beyond-one-hot-hashing/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data science job market – what it’s like](/2015/10/data-science-job-market.html
+    "Data science job market – what it’s like")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Michael Li, Data Incubator on Data-driven Hiring for Data Scientists](/2015/04/interview-michael-li-data-incubator-hiring.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Art of Data Science: The Skills You Need and How to Get Them](/2015/12/art-data-science-skills.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, December 7: Top 10 Data Science Myths Busted • 4…](https://www.kdnuggets.com/2022/n47.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Useful Intermediate SQL Queries for Data Science](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Genuinely Useful Bash Scripts for Data Science](https://www.kdnuggets.com/2023/02/bash-scripts-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Useful Python Automation Scripts](https://www.kdnuggets.com/2022/11/3-useful-python-automation-scripts.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Are Kaggle Competitions Useful for Real World Problems?](https://www.kdnuggets.com/are-kaggle-competitions-useful-for-real-world-problems)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

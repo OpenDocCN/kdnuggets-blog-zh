@@ -1,0 +1,327 @@
+- en: Packaging and Distributing Your Python Project to PyPI for Installation Using
+    pip
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/06/packaging-distributing-python-project-pypi-pip.html](https://www.kdnuggets.com/2018/06/packaging-distributing-python-project-pypi-pip.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/06/packaging-distributing-python-project-pypi-pip.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Image](../Images/e94c180ce0c478ac7d7d309180b0ba0c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You might worked with several languages such as Java, C++, and Python and created
+    a number of projects but unfortunately these projects are buried and no one knows
+    about. Why not making these projects alive by making them available online? This
+    tutorial will explain the steps required to package your Python projects, distribute
+    them in distribution formats using steptools, upload them into the Python Package
+    Index (PyPI) repository using twine, and finally installation using Python installers
+    such as pip and conda.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The platform used in this tutorial is Linux Ubuntu 18.04 with Python 3.6.5\.
+    But you can still use other platforms such as Windows with little or no difference
+    in the commands used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This tutorial has the following steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Creating a Simple Python Project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2. How Python Locates Libraries?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3. Manual Installation by Copying Project Files to **site-packages.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4. How Python Installers Locate Libraries?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5. Preparing the Package and its Files (**__init__.py** and **setup.py**).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 6. Distributing the Package.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 7. Uploading the Distribution Files Online to Test PyPI.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 8. Installing the Distributed Package from Test PyPI.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 9. Importing and Using the Installed Package.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 10\. Using PyPI rather than Test PyPI.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Creating a Simple Python Project
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let us create a very simple project and distribute it. To be able to package
+    and distribute any Python project, there must be an associated folder containing
+    all of the required files for the project. The folder name will be later the project
+    name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This project will have just a single level containing a single Python file.
+    The project structure is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/539bf1e4ea7dd0312fa558c030a59721.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The used project/folder name is **“printmsg”** to reflect its use. That folder
+    is saved into the Desktop. The Python file inside it is named **“print_msg_file.py”**.
+    The Python file contains a function and a variable. The function is named **“print_msg_func”** which
+    will print a message once called. The variable is named “version” which holds
+    the version of the project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is the implementation inside the **“print_msg_file.py”** file. The **“print_msg_func”**function
+    prints a hello message when called. Due to the **if** statement, the file will
+    automatically call the function once executed directly as the main program. But
+    it will not if that file is imported into another file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next is to execute that file to know that everything is running well such as
+    Python being installed properly. A Python file is to be executed from either the
+    Linux terminal or Windows Command Prompt by issuing the python command followed
+    by the location of the file. Figure 1 shows how to run the Python file using both
+    Windows and Ubuntu.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 1**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2e0d8c743dd46d3e1727402850c5c93d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The CMD/terminal are opened in the **“printmsg”** directory and its contents
+    are displayed to ensure the target file **“print_msg_file.py”** is already existing.
+    Then the python command is issued to run the file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After making sure everything is working, it is possible to import that project
+    into another Python file in order to be able to call its content. If a file to
+    be imported into another, the legacy way for doing this is to create another file
+    in the same directory of that file. For example, another Python file named **“second_file.py”** is
+    to import the project and call its function as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: At first, the project is imported as in line 1\. Then it is used to call its
+    function in line 2\. After opening the terminal and setting its current directory
+    to the printmsg folder, the new file **“inside_project.py”** can be executed as
+    in figure 2\. The function got called successfully.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 2**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a6173b60846158410eaeab6b9b736009.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Because the imported module is in the same directory of the script it is called
+    from, the process is straightforward. Just type the name of the module in an import
+    statement. There is an important question. What if the script calling the file
+    is in a different directory than the module it would like to import? Let us try
+    to create another Python file not located in the same directory of the imported
+    module and try to import the module again. The file is named “**outside_project.py**”
+    which is located into the desktop. In other words, that file is located one level
+    up to the module. It has the same code used in the previous file **“inside_project.py”** After
+    running this file from the terminal, the result is shown in figure 3.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 3**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0685bd874fe3a6f397a84caaf0758ddb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The module is not found because the file and the module to be imported are
+    in different directories. The file is located in “~/Desktop/” directory and the
+    module is located in “~/Desktop/printmsg/” directory. To solve that issue, the **printmsg** is
+    appended to the name of the module to make the interpreter knows where it can
+    find the module. The code will be as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: The result of executing the “outside_project.py” file is shown in figure 4.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 4**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ae2e4911577f0782b806e3f8baf4fd2e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: But appending the folder name in the path from the file to the module it imports
+    is tiresome specially if the file is away from the module in more than one levels.
+    To solve this issue, let us have a brief overview about how Python interpreter
+    locates imported libraries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. How Python Locates Libraries?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When Python interpreter encounters an import statement, it searches in some
+    of its directories for that imported library. If it is not found in any of those
+    directories, then it will raise an error as in figure 3.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are multiple sources of such paths that is searched for a given library.
+    For example, paths can be inside the *PYTHONHOME* or *PYTHONPATH* environment
+    variables, current script directory, and the **site-packages** directory. The
+    list of all directories that Python searches in are listed in the **path** property
+    of the **sys** built-in module. It can be printed as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The sys.path list is printed using the terminal and result is shown in figure
+    5.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 5**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/31460a56e020442c480b35ddb8d12137.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In our example, the module is not located in any of the directories listed in **sys.path** and
+    this is why an exception is thrown. We can fix that by moving the library into
+    one of these paths. The directory that will be used is the **site-packages** directory.
+    The reason is that the installed libraries using **pip** or **conda** are added
+    to that directory. Let us see how to add our project into that directory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Manual Installation by Copying Project Files to site-packages
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In figure 5, the site-packages directory is listed as a search path for imported
+    libraries. By simply copying and pasting the project directory “**printmsg**”
+    inside the site-packages directory, the **print_msg_file** module can be imported.
+    Figure 6 shows that the **printmsg** project is copied into site-packages.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 6**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ece64f28293297fd0ac6c2f90c2f303a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Based on the previous two lines of code listed below, the “**outside_project.py**”
+    file can now successfully import the project and print the output as in figure
+    4\. In this case, the imported module **print_msg_file** is prepended by the directory
+    of the project “**printmsg**” but this will be valid wherever the “**outside_project.py**”
+    file is located.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 4\. How Python Installers Locate Libraries?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Up to this point, in order to import the project successfully it should be copied
+    manually inside the **site-packages** directory. Before doing that, the project
+    should be transferred to the machine by anyway such as being downloaded from any
+    file hosting server. But all of work is manual. Some users will find such work
+    is tiresome to do for every library they are to install. As a result, there is
+    alternative way for installing libraries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some installers are available to receive the library name and they take care
+    of downloading and installing it automatically. **But how to make our own libraries
+    accessible by these installers?** These installers searches for the libraries
+    inside software repositories such as Python Package Index (PyPI). Once found,
+    they download and install it automatically. So, rather than asking how to make
+    our own libraries accessible by Python installers, the question should now be
+    how to upload our own libraries to such repositories? This is because by uploading
+    these libraries to such repositories, they will implicitly be accessible by the
+    Python installers. Such software repositories accept the libraries in distribution
+    formats such as Wheel built distribution. So, our question now should be how to
+    prepare our project into Wheel distribution format? In order to generate the Wheel
+    distribution format, there are a number of files to be packaged together. These
+    files include the actual project Python files, any supplemental files required
+    by those files, and also some helper files to give some sort of details about
+    your project. So, the sequence to be followed is to prepare the package files,
+    generate the distribution files, and upload such files to the Python package repository
+    (PyPI). These points will be covered in the next sections.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Pip Install YOU: A Beginner''s Guide to Creating Your Python Library](https://www.kdnuggets.com/pip-install-you-a-beginners-guide-to-creating-your-python-library)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Forget PIP, Conda, and requirements.txt! Use Poetry Instead And…](https://www.kdnuggets.com/2023/07/forget-pip-conda-requirementstxt-poetry-instead-thank-later.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Managing Python Dependencies with Poetry vs Conda & Pip](https://www.kdnuggets.com/managing-python-dependencies-with-poetry-vs-conda-pip)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Create a Sampling Plan for Your Data Project](https://www.kdnuggets.com/2022/11/create-sampling-plan-data-project.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Orchestrate a Data Science Project in Python With Prefect](https://www.kdnuggets.com/2022/02/orchestrate-data-science-project-python-prefect.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Free Python Project Coding Course](https://www.kdnuggets.com/2022/08/free-python-project-coding-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

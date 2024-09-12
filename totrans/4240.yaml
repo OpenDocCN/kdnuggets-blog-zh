@@ -1,0 +1,274 @@
+- en: Understanding BERT with Hugging Face
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/07/understanding-bert-hugging-face.html](https://www.kdnuggets.com/2021/07/understanding-bert-hugging-face.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![bert-lg-hugging-face.jpg](../Images/095380cfb6379c817ecc69910337478f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Using BERT and Hugging Face to Create a Question Answer Model**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In a recent post on[ BERT](https://www.exxactcorp.com/blog/Deep-Learning/how-do-bert-transformers-work),
+    we discussed BERT transformers and how they work on a basic level. The article
+    covers BERT architecture, training data, and training tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, we don’t really understand something before we implement it ourselves.
+    So in this post, we will implement a Question Answering Neural Network using BERT
+    and a Hugging Face Library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**What is a Question Answering Task?**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this task, we are given a question and a paragraph in which the answer lies
+    to our [BERT Architecture](https://www.exxactcorp.com/blog/Deep-Learning/a-deep-dive-into-the-transformer-architecture-the-development-of-transformer-models) and
+    the objective is to determine the start and end span for the answer in the paragraph.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/042fb23b542c92d878f7fb880dd4e8ff.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Image of BERT Finetuning for Question-Answer Task*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As explained in the previous post, in the above example we provide two inputs
+    to the BERT architecture. The paragraph and the question are separated by the
+    <SEP> token. The purple layers are the output of the BERT encoder.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We now define two vectors S and E (which will be learned during fine-tuning)
+    both having shapes (1x768). We then take a dot product of these vectors with the
+    second sentence’s output vectors from BERT, giving us some scores. We then apply
+    Softmax over these scores to get probabilities. The training objective is the
+    sum of the log-likelihoods of the correct start and end positions. Mathematically,
+    for the Probability vector for Start positions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![equation-700.jpg](../Images/2457015fb5dfbd7b790e050ef2eb1594.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Where T_i is the word we are focusing on. An analogous formula is for End positions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To predict a span, we get all the scores — S.T and E.T and get the best span
+    as the span having the maximum Score, that is max(S.T_i + E.T_j) among all j≥i.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**How Do We Do This Using Hugging Face?**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Hugging Face](https://huggingface.co/) provides a pretty straightforward way
+    to do this.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The output is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: So, here we just used the pretrained tokenizer and model on the [SQuAD dataset](https://huggingface.co/datasets/squad) provided
+    by Hugging Face to get this done.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Once we have the model we just get the start and end probability scores and
+    predict the span as the one that lies between the token that has the maximum start
+    score and the token that has the maximum end score.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example, if the start scores for paragraph are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And the end scores are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: We will get the output as input_ids[answer_start:answer_end] where answer_start
+    is the index of word general(one with max start score) and answer_end is index
+    of (BERT(One with max end score). And the answer would be “general purpose architectures”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Fine-Tuning Our Own Model Using a Question-Answering Dataset**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In most cases, we will want to train our own QA model on our own datasets. In
+    this situation, we will start from the SQuAD dataset and the base BERT Model in
+    the Hugging Face library to finetune it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s look at how the SQuAD Dataset looks before we start fine tuning:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can see each example containing the Context, Answer and the Start token for
+    the Answer. We can use the script below to preprocess the data to the required
+    format once we have the data in the above form. The script takes care of a lot
+    of things amongst which the most important are the cases where the answer lies
+    around max_length and calculating the span using the answer and the start token
+    index.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once we have data in the required format we can just fine tune our BERT base
+    model from there.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/f592cf5eaa766177b529c57fd508cca9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Output from Fine Tuning BERT Base Model*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once we train our model we can use it as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case also we take the index of max start scores and max end scores and
+    predict the answer as the one that is between. If we want to get the exact implementation
+    as provided in the BERT Paper we can tweak the above code a little and find out
+    the indexes which maximize (start_score + end_score)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6827e92363f87bb01fd57443ee9d9ccf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Code Output from Model Training*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**References**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Attention Is All You Need](https://arxiv.org/abs/1706.03762): The Paper which
+    introduced Transformers.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[BERT Paper](https://arxiv.org/abs/1810.04805): Do read this paper.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hugging Face](https://huggingface.co/transformers/usage.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In this post, I covered how we can create a Question Answering Model from scratch
+    using BERT. I hope it would have been useful both for understanding BERT as well
+    as Hugging Face library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you want to look at other posts in this series check these out:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Understanding Transformers, the Data Science Way](https://mlwhiz.com/blog/2020/09/20/transformers/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understanding Transformers, the Programming Way](https://mlwhiz.com/blog/2020/10/10/create-transformer-from-scratch/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Explaining BERT Simply Using Sketches](https://mlwhiz.medium.com/explaining-bert-simply-using-sketches-ba30f6f0c8cb)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We will be writing more topics like this in the future, so let us know what
+    you think about it. Should we write on heavily technical topics or aim more for
+    beginner level? The comment section is your friend. Use it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.exxactcorp.com/blog/Deep-Learning/understanding-bert-with-hugging-face).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[The Best Way to Learn Practical NLP?](/2021/06/best-way-learn-practical-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Generate Meaningful Sentences Using a T5 Transformer](/2021/05/generate-meaningful-sentences-t5-transformer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Create and Deploy a Simple Sentiment Analysis App via API](/2021/06/create-deploy-sentiment-analysis-app-api.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Fine-Tune BERT for Sentiment Analysis with Hugging Face Transformers](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 Machine Learning Demos: Hugging Face Spaces Edition](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A community developing a Hugging Face for customer data modeling](https://www.kdnuggets.com/2022/08/objectiv-community-developing-hugging-face-customer-data-modeling.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build AI Chatbot in 5 Minutes with Hugging Face and Gradio](https://www.kdnuggets.com/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Use Hugging Face AutoTrain to Fine-tune LLMs](https://www.kdnuggets.com/how-to-use-hugging-face-autotrain-to-finetune-llms)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Finetune Mistral AI 7B LLM with Hugging Face AutoTrain](https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,708 @@
+- en: 'Spam Filter in Python: Naive Bayes from Scratch'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/07/spam-filter-python-naive-bayes-scratch.html](https://www.kdnuggets.com/2020/07/spam-filter-python-naive-bayes-scratch.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Alex Olteanu](https://www.linkedin.com/in/alex-olteanu-92b174116/), Data
+    Scientist at [Dataquest](https://www.dataquest.io/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this blog post, we're going to build a spam filter using Python and the multinomial
+    [Naive Bayes](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)
+    algorithm. Our goal is to code a spam filter from scratch that classifies messages
+    with an accuracy greater than 80%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To build our spam filter, we'll use a dataset of 5,572 SMS messages. Tiago A.
+    Almeida and José María Gómez Hidalgo put together the dataset, you can download
+    it from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/sms+spam+collection).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We're going to focus on the Python implementation throughout the post, so we'll
+    assume that you are already familiar with multinomial Naive Bayes and conditional
+    proability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you need to fill in any gaps before moving forward, Dataquest has a course
+    that covers both [conditional probability and multinomial Naive Bayes](https://www.dataquest.io/course/conditional-probability/),
+    as well as a broad variety of other course you could use to fill in gaps in your
+    knowledge and earn a [data science certificate](https://www.dataquest.io/blog/data-science-certificate/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Exploring the Dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let''s start by opening the `SMSSpamCollection` file with the `read_csv()` function
+    from the `pandas` package. We''re going to use:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`sep=''\t''` because the data points are tab separated'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`header=None` because the dataset doesn''t have a header row'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`names=[''Label'', ''SMS'']` to name the columns'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`(5572, 2)`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/265504bcc608cf71d6887f351635d352.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Below, we see that about 87% of the messages are ham (non-spam), and the remaining
+    13% are spam. This sample looks representative, since in practice most messages
+    that people receive are ham.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`ham 0.865937 spam 0.134063 Name: Label, dtype: float64`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training and Test Set
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We're now going to split our dataset into a training set and a test set. We'll
+    use 80% of the data for training and the remaining 20% for testing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We'll randomize the entire dataset before splitting to ensure that spam and
+    ham messages are spread properly throughout the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`(4458, 2) (1114, 2)`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We'll now analyze the percentage of spam and ham messages in the training and
+    test sets. We expect the percentages to be close to what we have in the full dataset,
+    where about 87% of the messages are ham, and the remaining 13% are spam.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`ham 0.86541 spam 0.13459 Name: Label, dtype: float64`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`ham 0.868043 spam 0.131957 Name: Label, dtype: float64`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The results look great! We'll now move on to cleaning the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Cleaning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'When a new message comes in, our multinomial Naive Bayes algorithm will make
+    the classification based on the results it gets to these two equations below,
+    where "w[1]" is the first word, and w[1],w[2], ..., w[n] is the entire message:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/f1e9827fbae3494998643a8431efc05b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Equation](../Images/17a9e66d3702a62babe9fb63a985ec59.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If P(Spam | w[1],w[2], ..., w[n]) is greater than P(Ham | w[1],w[2], ..., w[n]),
+    then the message is spam.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To calculate P(w[i]|Spam) and P(w[i]|Ham), we need to use separate equations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/b05463d443bba797ea7fa001401c07cd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Equation](../Images/5429c2fc55cf1708455741c1ff29934f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Let''s clarify some of the terms in these equations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/29c67324c5a672f11833f2fbc6200ab4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Equation](../Images/7dc722bce7c206cc698010e5b4db3407.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Equation](../Images/515c66e8edb41425717b34df1143ea53.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Equation](../Images/3a44382d98df6f625f2677df3849cab5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Equation](../Images/de4d6dcb2277aec1e921deb5a004ce88.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Equation](../Images/2fadcfbd0c5858609020e66b5b7132ce.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'To calculate all these probabilities, we''ll first need to perform a bit of
+    data cleaning to bring the data into a format that allows us to easily extract
+    all the information we need. Right now, our training and test sets have this format
+    (the messages below are fictitious to make the example easier to understand):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![img](../Images/c9833ab5ce3d6c76ae567b4a3100b0c6.png)To make the calculations
+    easier, we want bring the data to this format (the table below is a transformation
+    of the table you see above):![img](../Images/2704688e1ce498ab335df58469957288.png)Notice
+    in the transformation above:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `SMS` column is replaced by a series of new columns that represent unique
+    words from the vocabulary — the vocabulary is the set of unique words from all
+    of our sentences.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Each row describes a single message. The first row has the values `spam, 2,
+    2, 1, 1, 0, 0, 0, 0, 0`, which tell us that:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The message is spam.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The word "secret" occurs two times inside the message.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The word "prize" occurs two times inside the message.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The word "claim" occurs one time inside the message.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The word "now" occurs one time inside the message.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The words "coming," "to," "my," "party," and "winner" occur zero times inside
+    the message.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: All words in the vocabulary are in lowercase, so "SECRET" and "secret" are considered
+    the same word.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The order of words in the original sentences is lost.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Punctuation is no longer taken into account (for instance, we can't look at
+    the table and conclude that the first message initially had two exclamation marks).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Letter Case and Punctuation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let's begin the data cleaning process by removing the punctuation and making
+    all the words lowercase.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/562a84e7285cd77e18428d9a3e94080f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/b47074671f9ef0ab7bd26ac95a3fae62.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Creating the Vocabulary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let''s now create the vocabulary, which in this context means a list with all
+    the unique words in our training set. In the code below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We transform each message in the`SMS` column into a list by splitting the string
+    at the space character — we're using the [`Series.str.split()` method](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.split.html).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We initiate an empty list named `vocabulary`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We iterate over the transformed `SMS` column.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Using a nested loop, we iterate over each message in the `SMS` column and append
+    each string (word) to the `vocabulary` list.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We transform the `vocabulary` list into a set using the [`set()` function](https://docs.python.org/3/library/functions.html#func-set).
+    This will remove the duplicates from the `vocabulary` list.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We transform the `vocabulary` set back into a list using the [`list()` function](https://docs.python.org/3/library/functions.html#func-list).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: It looks like there are 7,783 unique words in all the messages of our training
+    set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`7783`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Final Training Set
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We're now going to use the vocabulary we just created to make the data transformation
+    we want.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![img](../Images/0b66cc95e81e151004b29a6816b5fe57.png)Eventually, we''re going
+    to create a new DataFrame. We''ll first build a dictionary that we''ll then convert
+    to the DataFrame we need.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For instance, to create the table we see above, we can use this dictionary:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/e573e195fcd92e1668cda41655532212.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'To create the dictionary we need for our training set, we can use the code
+    below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We start by initializing a dictionary named `word_counts_per_sms`, where each
+    key is a unique word (a string) from the vocabulary, and each value is a list
+    of the length of the training set, where each element in that list is a `0`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The code `[0] * 5` outputs `[0, 0, 0, 0, 0]`. So the code `[0] * len(training_set['SMS'])` outputs
+    a list of the length of `training_set['SMS']`.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We loop over `training_set['SMS']` using the [`enumerate()` function](https://docs.python.org/3/library/functions.html#enumerate) to
+    get both the index and the SMS message (`index` and `sms`).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Using a nested loop, we loop over `sms` (where `sms` is a list of strings, where
+    each string represents a word in a message).
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We increment `word_counts_per_sms[word][index]` by `1`.
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now that we have the dictionary we need, let's do the final transformations
+    to our training set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/bf4b842ef1b6274cd9a35b80c629f812.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The `Label` column is missing, so we'll use the [`pd.concat()` function](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.concat.html) to
+    concatenate the DataFrame we just built with the DataFrame containing the training
+    set. This way, we'll also have the `Label` and the `SMS` columns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/7f797b923991a3a7eaad114b44298b68.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Calculating Constants First
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now that we''re done with cleaning the training set, we can begin coding the
+    spam filter. The multinomial Naive Bayes algorithm will need to answer these two
+    probability questions to be able to classify new messages:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/f1e9827fbae3494998643a8431efc05b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Equation](../Images/17a9e66d3702a62babe9fb63a985ec59.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Also, to calculate P(w[i]|Spam) and P(w[i]|Ham) inside the formulas above,
+    we''ll need to use these equations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/b05463d443bba797ea7fa001401c07cd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Equation](../Images/5429c2fc55cf1708455741c1ff29934f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Some of the terms in the four equations above will have the same value for
+    every new message. We can calculate the value of these terms once and avoid doing
+    the computations again when a new messages comes in. As a start, let''s first
+    calculate:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: P(Spam) and P(Ham)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: N[Spam], N[Ham], N[Vocabulary]
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'It''s important to note that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: N[Spam] is equal to the number of words in all the spam messages — it's *not* equal
+    to the number of spam messages, and it's not equal to the total number of *unique* words
+    in spam messages.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: N[Ham] is equal to the number of words in all the non-spam messages — it's *not* equal
+    to the number of non-spam messages, and it's not equal to the total number of *unique* words
+    in non-spam messages.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We'll also use Laplace smoothing and set ![Equation](../Images/fa6e5d31b57abbc4612155e378c2b80f.png).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Calculating Parameters
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that we have the constant terms calculated above, we can move on with calculating
+    the parameters P(w[i]|Spam) and P(w[i]|Ham).
+  prefs: []
+  type: TYPE_NORMAL
+- en: P(w[i]|Spam) and P(w[i]|Ham) will vary depending on the individual words. For
+    instance, P("secret"|Spam) will have a certain probability value, while P("cousin"|Spam)
+    or P("lovely"|Spam) will most likely have other values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Therefore, each parameter will be a conditional probability value associated
+    with each word in the vocabulary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The parameters are calculated using these two equations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/b05463d443bba797ea7fa001401c07cd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Equation](../Images/5429c2fc55cf1708455741c1ff29934f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: Classifying A New Message
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now that we have all our parameters calculated, we can start creating the spam
+    filter. The spam filter is understood as a function that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Takes in as input a new message (w[1], w[2], ..., w[n]).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Calculates P(Spam|w[1], w[2], ..., w[n]) and P(Ham|w[1], w[2], ..., w[n]).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Compares the values of P(Spam|w[1], w[2], ..., w[n]) and P(Ham|w[1], w[2],
+    ..., w[n]), and:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If P(Ham|w[1], w[2], ..., w[n]) > P(Spam|w[1], w[2], ..., w[n]), then the message
+    is classified as ham.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If P(Ham|w[1], w[2], ..., w[n]) < P(Spam|w[1], w[2], ..., w[n]), then the message
+    is classified as spam.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If P(Ham|w[1], w[2], ..., w[n]) = P(Spam|w[1], w[2], ..., w[n]), then the algorithm
+    may request human help.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note that some new messages will contain words that are not part of the vocabulary.
+    We will simply ignore these words when we're calculating the probabilities.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s start by writing a first version of this function. For the `classify()` function
+    below, notice that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The input variable `message` needs to be a string.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'We perform a bit of data cleaning on the string `message`:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We remove the punctuation using the [`re.sub()` function](https://docs.python.org/3/library/re.html#re.sub).
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We bring all letters to lower case using the [`str.lower()` method](https://docs.python.org/3/library/stdtypes.html#str.lower).
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We split the string at the space character and transform it into a Python list
+    using the [`str.split()` method](https://docs.python.org/3/library/stdtypes.html#str.split).
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We calculate `p_spam_given_message` and `p_ham_given_message`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We compare `p_spam_given_message` with `p_ham_given_message` and then print
+    a classification label.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: We'll now test the spam filter on two new messages. One message is obviously
+    spam, and the other is obviously ham.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`P(Spam|message): 1.3481290211300841e-25 P(Ham|message): 1.9368049028589875e-27
+    Label: Spam`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`P(Spam|message): 2.4372375665888117e-25 P(Ham|message): 3.687530435009238e-21
+    Label: Ham`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Measuring the Spam Filter's Accuracy
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The two results look promising, but let's see how well the filter does on our
+    test set, which has 1,114 messages.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We'll start by writing a function that returns classification labels instead
+    of printing them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now that we have a function that returns labels instead of printing them, we
+    can use it to create a new column in our test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/84541adc5e9b95ca33c7a6bc27415ac7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'We can compare the predicted values with the actual values to measure how good
+    our spam filter is with classifying new messages. To make the measurement, we''ll
+    use **accuracy** as a metric:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/1185d75031e99251338213769eee62f2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`Correct: 1100 Incorrect: 14 Accuracy: 0.9874326750448833`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The accuracy is close to 98.74%, which is really good. Our spam filter looked
+    at 1,114 messages that it hasn't seen in training, and classified 1,100 correctly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next Steps
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this blog post, we managed to code a spam filter for SMS messages using the
+    multinomial Naive Bayes algorithm. The filter had an accuracy of 98.74% on the
+    test set we used, which is a promising result. Our initial goal was an accuracy
+    of over 80%, and we managed to accomplish that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some of the next steps you can take include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Analyzing the 14 messages that were classified incorrectly and trying to figure
+    out why the algorithm classified them incorrectly
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Making the filtering process more complex by making the algorithm sensitive
+    to letter case
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Alex Olteanu](https://www.linkedin.com/in/alex-olteanu-92b174116/)**
+    is a Data Scientist at Dataquest.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Probability Learning: Bayes’ Theorem](/2019/10/probability-learning-bayes-theorem.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Naïve Bayes Algorithm: Everything you need to know](/2020/06/naive-bayes-algorithm-everything.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Probability Learning: Naive Bayes](/2019/11/probability-learning-naive-bayes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, April 13: Python Libraries Data Scientists Should…](https://www.kdnuggets.com/2022/n15.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Gaussian Naive Bayes, Explained](https://www.kdnuggets.com/2023/03/gaussian-naive-bayes-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Naïve Bayes Algorithm: Everything You Need to Know](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Filter Data with Python](https://www.kdnuggets.com/2022/02/filter-data-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Python Itertools Filter Functions You Probably Didn''t Know](https://www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Ways Understanding Bayes Theorem Will Improve Your Data Science](https://www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

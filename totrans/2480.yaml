@@ -1,0 +1,284 @@
+- en: Versioning Machine Learning Experiments vs Tracking Them
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/12/versioning-machine-learning-experiments-tracking.html](https://www.kdnuggets.com/2021/12/versioning-machine-learning-experiments-tracking.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By [Maria Khalusova](https://www.linkedin.com/in/maria-khalusova-a958aa14/?originalSubdomain=ca),
+    Senior Developer Advocate at Iterative**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Versioning Machine Learning Experiments vs Tracking Them](../Images/86ffbd4ee67e0886da4b36b7d3f226a0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Debby Hudson](https://unsplash.com/@hudsoncrafted?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: When working on a machine learning project it is common to run numerous experiments
+    in search of a combination of an algorithm, parameters and data preprocessing
+    steps that would yield the best model for the task at hand. To keep track of these
+    experiments Data Scientists used to log them into Excel sheets due to a lack of
+    a better option. However, being mostly manual, this approach had its downsides.
+    To name a few, it was error-prone, inconvenient, slow, and completely detached
+    from the actual experiments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Luckily, over the last few years experiment tracking has come a long way and
+    we have seen a number of tools appear on the market that improve the way experiments
+    can be tracked, e.g. Weights&Biases, MLflow, Neptune. Usually such tools offer
+    an API you can call from your code to log the experiment information. It is then
+    stored in a database, and you use a dashboard to compare experiments visually.
+    With that, once you change your code, you no longer have to worry about forgetting
+    to write the results down — that’s done automatically for you. The dashboards
+    help with visualization and sharing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a great improvement in keeping track of what has been done, but… Spotting
+    an experiment that has produced the best metrics in a dashboard does not automatically
+    translate into having that model ready for deployment. It’s likely that you need
+    to reproduce the best experiment first. However, the tracking dashboards and tables
+    that you directly observe are weakly connected to the experiments themselves.
+    Thus, you still may need to semi-manually trace your steps back to stitch together
+    the exact code, data and pipeline steps to reproduce the experiment. Could this
+    be automated?
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this blog post I’d like to talk about versioning experiments instead of tracking
+    them, and how this can result in easier reproducibility on top of the benefits
+    of experiment tracking.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To achieve this I will be using [DVC](http://dvc.org/), an open source tool
+    that is mostly known in the context of Data Versioning (after all it’s in the
+    name). However, this tool can actually do a lot more. For instance, you can use
+    DVC to define ML pipelines, run multiple experiments, and compare metrics. You
+    can also version all the moving parts that contribute to an experiment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Experiment Versioning
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To [start versioning](https://dvc.org/doc/command-reference/exp/init) experiments
+    with DVC you’ll need to initialize it from any Git repo as shown below. Note,
+    that DVC expects you to have your project structured in a certain logical way,
+    and you may need to reorganize your folders a bit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: You may also notice that DVC assumes that you store parameters and metrics in
+    files instead of logging them with an API. This means you’ll need to modify your
+    code to read parameters from a YAML file and write metrics to a JSON file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, when initializing, DVC automatically creates a basic pipeline and stores
+    it in a dvc.yaml file. With that, your training code, pipeline, parameters, and
+    metrics now live in files that can be versioned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits of Experiment-as-Code Approach
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Clean code
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: When set up this way, your code no longer depends on an experiment tracking
+    API. Instead of inserting tracking API calls in your code to save experiment information
+    in a central database, you save it in readable files. These are always available
+    in your repo, your code stays clean, and you have less dependencies. Even without
+    DVC, you can read, save, and version your experiment parameters and metrics with
+    Git, though using plain Git is not the most convenient way to compare ML experiments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Reproducibility
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Experiment tracking databases do not capture everything you need to reproduce
+    an experiment. One important piece that is often missing is the pipeline to run
+    the experiment end to end. Let’s take a look at the`dvc.yaml` file, the pipeline
+    file that has been generated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: This pipeline captures the command to run the experiment, parameters and other
+    dependencies, metrics, plots, and other outputs. It has a single `default` stage,
+    but you can add as many stages as you need. When treating all aspects of an experiment
+    as code, including the pipeline, it becomes easier for anyone to reproduce the
+    experiment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reduce noise
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In a dashboard, you can see all of your experiments, and I mean ALL of them.
+    At a certain point you will have so many experiments, you will have to sort, label,
+    and filter them simply to keep up. With experiment versioning you have more flexibility
+    in what you share and how you organize things.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For instance, you can try an experiment in a new Git branch. If something goes
+    wrong or the results are uninspiring, you can choose not to push the branch. This
+    way you can reduce some unnecessary clutter that you would otherwise encounter
+    in an experiment tracking dashboard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At the same time, if a particular experiment looks promising, you can push it
+    to your repo along with your code so that the results stay in sync with the code
+    and pipeline. The results are shared with the same people, and it’s already organized
+    using your existing branch name. You can keep iterating on that branch, start
+    a new one if an experiment diverges too much, or merge into your main branch to
+    make it your primary model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why use DVC?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Even without DVC, you can change your code to read parameters from files and
+    write metrics to other files, and track changes with Git. However, DVC adds a
+    few ML-specific capabilities on top of Git that can simplify comparing and reproducing
+    the experiments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Large Data Versioning
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Large data and models aren’t easily tracked in Git, but with DVC you can track
+    them using your own storage, yet they are Git-compatible. When initialized DVC
+    starts tracking the `models` folder, making Git ignore it yet storing and versioning
+    it so you can back up versions anywhere and check them out alongside your experiment
+    code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Single-command reproducibility
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Codifying the entire experiment pipeline is a good first step towards reproducibility,
+    but it still leaves it to the user to execute that pipeline. With DVC you can
+    reproduce the entire experiment with a single command. Not only that, but it will
+    check for cached inputs and outputs and skip recomputing data that’s been generated
+    before which can be a massive time saver at times.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Better branch organization
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'While Git branching is a flexible way to organize and manage experiments, there
+    are often too many experiments to fit any Git branching workflow. DVC tracks experiments
+    so you don’t need to create commits or branches for each one:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Once you decide which of these experiments are worth sharing with the team,
+    they can be converted into Git branches:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: This way you will avoid creating a clutter of branches in your repo, and can
+    focus on comparing only promising experiments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To summarize, experiment versioning allows you to codify your experiments in
+    such a way that your experiment logs are always connected to the exact data, code,
+    and pipeline that went into the experiment. You have control over which experiments
+    end up shared with your colleagues for comparison, and this can prevent clutter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, reproducing a versioned experiment becomes as easy as running a single
+    command, and it can even take less time than initially, if some of the pipeline
+    steps have cached outputs that are still relevant.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thank you for staying with me until the end of the post! To learn more about
+    managing experiments with DVC, [check out the docs](https://dvc.org/doc/user-guide/experiment-management)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Maria Khalusova](https://www.linkedin.com/in/maria-khalusova-a958aa14/?originalSubdomain=ca)**
+    ([@mariaKhalusova](https://twitter.com/mariaKhalusova)) is a Senior Developer
+    Advocate at Iterative. She works on open source MLOps tooling.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/versioning-machine-learning-experiments-vs-tracking-them-f3096a67faa1).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[7 Best Tools for Machine Learning Experiment Tracking](https://www.kdnuggets.com/2023/02/7-best-tools-machine-learning-experiment-tracking.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Developing an Open Standard for Analytics Tracking](https://www.kdnuggets.com/2022/07/developing-open-standard-analytics-tracking.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hydra Configs for Deep Learning Experiments](https://www.kdnuggets.com/2023/03/hydra-configs-deep-learning-experiments.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Design Experiments for Data Collection](https://www.kdnuggets.com/2022/04/design-experiments-data-collection.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Is Not Like Your Brain Part 6: The Importance of…](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Programming Languages and When To Use Them](https://www.kdnuggets.com/2022/02/data-science-programming-languages.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

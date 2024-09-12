@@ -1,0 +1,549 @@
+- en: Deploying a Streamlit WebApp to Heroku using DAGsHub
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html](https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/8777cf1d33a7bf623889d0403ebf12e4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Cover by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a beginner, it’s hard to  realize how the end product of your project should
+    look. You start with a basic machine learning pipeline, and as the project evolves,
+    you adjust and enhance the components to meet your golden metric. But the journey
+    doesn't stop here. To communicate your work with the world, you'd like to have
+    a way for people to interact with the model and evaluate its performance. In this
+    blog, we will be learning how to build a Streamlit application using only python
+    and deploy it to a remote Heroku server. .
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Example project - Pneumonia-Classification
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We will use the [Pneumonia-Classification](https://dagshub.com/nirbarazida/pneumonia-Classification/)
+    project and showcase how to deploy its Streamlit app to the cloud. The project
+    is divided into five tasks, data labeling, data processing, modeling, evaluation,
+    and streamlit. We will be using the Chest X-Ray dataset that is available on [Kaggle](https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia).
+    The dataset contains 5,863 frontal-view check X-ray images. It is divided into
+    three folders: **train**, **test**, **val** and each folder contains subfolders
+    **Pneumonia** and **Normal**. Our dataset is under  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+    license and can be used for commercial purposes. We will be focusing on creating
+    a web app and deploying it to the cloud, but if you want to learn more about data
+    preprocessing and model building, you check out the [project](https://dagshub.com/kingabzpro/Pneumonia-Classification/src/DVC).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/10b0cacfc6ad9f5a367debb028608f50.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by [Cell](http://www.cell.com/cell/fulltext/S0092-8674(18)30154-5)
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Streamlit?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Streamlit](https://streamlit.io/) is an open-source library that allows you
+    to build web applications using ONLY Python. It provides customization options
+    to design the application according to your needs without requiring any prior
+    knowledge in web development. Using Streamlit, data science practitioners can
+    easily communicate their work with technical colleagues or not-so-technical stakeholders
+    by building an web application *for their model*.​'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to create a Streamlit application
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this section we will focus on learning core components of Streamlit and briefly
+    understand how other components help us create interactive Streamlit app. The
+    core component consists of selecting or uploading images, loading Tensorflow models
+    and running predictions to display the results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The other component that we used in the application:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Page setting**](https://docs.streamlit.io/library/api-reference/utilities/st.set_page_config)**:**
+    for header, favicon and application initial configuration.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Markdown**](https://docs.streamlit.io/library/api-reference/text/st.markdown)**:**
+    for writing title, subheading, and description.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Image**](https://docs.streamlit.io/library/api-reference/media/st.image)**:**
+    for displaying cover image.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Expander**](https://docs.streamlit.io/library/api-reference/layout/st.expander)**:**
+    multi-element container that can be expanded/collapsed for Image pool.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Columns**](https://docs.streamlit.io/library/api-reference/layout/st.columns)**:**
+    for creating an image pool table.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Progress**](https://docs.streamlit.io/library/api-reference/status/st.progress)**:**
+    display progress bar for running model inference.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Selecting & Uploading
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The streamlit [sidebar](https://docs.streamlit.io/library/api-reference/layout/st.sidebar)
+    function is quite handy as it allows us to add extra functionality into the app.
+    The sidebar option adds additional interactivity of **selectbox** and **file**_**uploader**.
+    The select box is a drop down option box, which allows us to select from healthy
+    or sick xray images. The file_uploader allows us to upload the new Xray image
+    for Pneumonia prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: selectbox**:** drop down option for selecting single option.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: file_uploader**:** uploading X-ray image to application.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/3dd09c9a0df517ab0e9e012f06e50ac4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image of sidebar with selectbox and file_uploader
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model Prediction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The model prediction uses tensorflow to load the model and predict the classification.
+    The function below is activated if the option is selected or the image is uploaded.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The `get_prediction` function loads the Tensorflow model, predicts on the image
+    (selected / uploaded) and displays the results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: I have also used streamlit [progress](https://docs.streamlit.io/library/api-reference/status/st.progress)
+    function to show progress bar. We have also used a streamlit **success** and **warning**
+    function to display the prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code below reads the option from the select box and runs the prediction
+    on image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/853cf7d766daaa119d9971688668c150.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Running prediction with the progress bar is at 50%
+  prefs: []
+  type: TYPE_NORMAL
+- en: The function below reads the uploaded file and runs the prediction on image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/3660d550769a8fa8de75e709f3897a22.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image of successful Pneumonia prediction
+  prefs: []
+  type: TYPE_NORMAL
+- en: What’s Next..
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After creating a Streamlit application for your project and running it locally,
+    it's time to deploy and share it with the world. For people who are not familiar
+    with the process, deploying an application to the cloud can be very challenging.
+    In the next section, we will cover the main issues you might face, explore the
+    options to overcome them and choose the best one for the given task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Choosing a deployment Server for a Streamlit application
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Selecting a cloud provider to host the app can be [frustrating and overwhelming](https://en.wikipedia.org/wiki/Overchoice#:~:text=Overchoice%20or%20choice%20overload%20is,his%201970%20book%2C%20Future%20Shock.)
+    due to the inflation of platforms and the unclarity of their advantages. To help
+    you in the process, I compared three cloud services; AWS, Heroku, and Huggingface,
+    which work well for machine learning applications designed with Streamlit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/c985a73c219122fd700e02726bacf9e0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Cloud Server Comparison
+  prefs: []
+  type: TYPE_NORMAL
+- en: AWS EC2
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Amazon cloud service](https://aws.amazon.com/ec2/) provides secure and resizable
+    compute capacity. EC2 allows you to deploy the entire machine learning workflow
+    and you can also configure it for a better machine. It is not user-friendly and
+    the learning curve is quite steep. However, The EC2 provides faster inference
+    by using GPU support. If you are interested in learning and deploying your Streamlit
+    app using AWS, I suggest you read the great  [blog](https://medium.com/swlh/showcase-you-streamlit-web-app-to-the-world-with-aws-ec2-db603c69aa28)
+    written by [Nishtha Goswami](https://medium.com/@goswaminishtha?source=post_page-----db603c69aa28-----------------------------------).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hugging Face
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[HuggingFace Spaces](https://huggingface.co/spaces) provides easy deployment
+    and fast inference solutions but it has a drawback as you are restricted to using
+    only Streamlit or [Gradiao](https://www.gradio.app/) frameworks. The Spaces servers
+    don’t provide flexibility in terms of DVC integration and developing MLOps solutions,
+    but they do offer a paid enterprise solution called [Infinity](https://huggingface.co/infinity)
+    which comes with a lot of flexibility and faster inference.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Heroku
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Salesforce Heroku](https://www.heroku.com/home) comes with a user-friendly
+    experience, automation, and flexibility of using multiple [third-party integrations](https://devcenter.heroku.com/categories/add-ons).
+    **Biases Alert**: my first ever cloud experience was with Heroku and because the
+    process was incredibly easy, I kept using their services.Heroku comes with two
+    drawbacks; storage limitation (500MB) and slow model inference compared to other
+    cloud services. These drawbacks can easily be resolved by using Docker deployment
+    and adopting optimizing techniques.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to Deploy a Streamlit Application on Heroku
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Deploy the streamlit app in five steps; Project initialization, creating a web
+    app(streamlit), setting up DVC, setting up a web app, and finally deploying it
+    to the server. In this section, we will learn about [Heroku GUI](https://id.heroku.com/)
+    and [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) to initialize
+    applications, setting up project for deployment and pushing the code to a cloud
+    server.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/a4e9aba94166b26e83924c62d70e595b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Steps involved in deploying webapp to Heroku server
+  prefs: []
+  type: TYPE_NORMAL
+- en: Project Initialization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are two methods of initializing the project; using Heroku website and
+    Heroku CLI. If you are a beginner then you can use a website to perform all the
+    tasks from creating an app to deploying the app.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Initialize an Heroku project using GUI
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Signup](https://id.heroku.com/signup/login) for a free Heroku account.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Download [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) and
+    install it.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Log in](https://id.heroku.com/login) to your account.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Go to the dashboard and [create a new application](https://dashboard.heroku.com/apps).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Type the application name and select the server’s region.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: From the command terminal type git clone https://git.heroku.com/<your-app-name>.git
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/414ae0be532d135ea06c314ec19765da.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Initializing Heroku app using GUI
+  prefs: []
+  type: TYPE_NORMAL
+- en: Initialize an Heroku project using Heroku CLI
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Signup](https://id.heroku.com/signup/login) for a free Heroku account.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'From your command terminal, change directories to the project location and
+    type: git init.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Installing Heroku CLI: sudo snap install --classic heroku'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Login: heroku login. This will guide you to the login section in your browser.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Creating the App: heroku create <your-app-name> .'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Setting Up DVC
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For data and model versioning I am using [DVC](https://dvc.org/) and [DAGsHub](https://dagshub.com/)
+    for remote storage. In this section, we will be automating DVC to pull data from
+    a remote server using Heroku [buildpack](https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-apt).
+    Why buildpack? Why can’t we simply pull data directly? If we pull the dataset
+    without a buildpack the webapp won't register new DVC files. In short, if you
+    want DVC to work for you then you have to use the buildpack. It adds support for
+    apt-based dependencies for both compile and runtime. Thanks to [GuilhermeBrejeiro](https://github.com/GuilhermeBrejeiro)
+    and his project [deploy_ML_model_Heroku_FastAPI](https://github.com/GuilhermeBrejeiro/deploy_ML_model_Heroku_FastAPI)
+    which has helped me automate DVC.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '1\. Install buildpack using shell: heroku buildpacks:add --index 1 heroku-community/apt
+    or go to app settings and add buildpack as shown below.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/ec3a5cb7f4222119fa53c982261ae304.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Adding a build pack
+  prefs: []
+  type: TYPE_NORMAL
+- en: '2\. Create an Aptfile and add a link to DVC latest version: [https://github.com/iterative/dvc/releases/download/2.8.3/dvc_2.8.3_amd64.deb](https://github.com/iterative/dvc/releases/download/2.8.3/dvc_2.8.3_amd64.deb).
+    Make sure that its `.deb` file.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/7e471d4dffb62f18efd3ce2d00544099.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 3\. Add these lines of code in **streamlit_app.py** to pull 4 images and a model.
+    This method is used to optimize storage and promote faster build. I have used
+    **dvc config** to make it compatible with Heroku server environment. You can read
+    more about configs [here](https://dvc.org/doc/command-reference/config).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code is checking the [**dyno**](https://www.heroku.com/dynos) and **.dvc**
+    folder in the directory and then executing dvc configuration which will enable
+    the Heroku server to pull dvc files. Lastly, it’s pulling only the model folder,
+    sample images from DVC servers, and deleting unnecessary files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Setting Up App
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We need to make some changes so that Heroku can build and run apps smoothly
+    without crashing. We will be setting up the **PORT** config variable, creating
+    **Profile** and replacing python packages in **requirement.txt**. In most cases
+    the heroku needs only requirement.txt to build an app and Procfile to run the
+    app.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Setting Port
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We can set up the PORT using Heroku CLI: heroku config:set PORT=8080 or we
+    can go to the dashboard settings and add it manually as shown below. This part
+    is optional but it’s preferred to set up a port number to avoid [H10](https://devcenter.heroku.com/articles/error-codes#h10-app-crashed)
+    error.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/c30750e20c3e93b85dfa1b19ff31c8c3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Config variables
+  prefs: []
+  type: TYPE_NORMAL
+- en: Procfile
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The Procfile contains a web initialization command: web: streamlit run --server.port
+    $PORT streamlit_app.py. Without it the app won''t run.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Requirements
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Finally, make changes in the requirements.txt file to avoid storage and dependencies
+    issues. For example, we changed the dependencies in our project as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Replace **tensorflow** with **tensorflow-cpu** to reduce slug size from 765MB
+    to 400MB.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Replace **opencv-python** with **opencv-python-headless** to avoid installing
+    extra C++ dependencies.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Remove other packages except **Numpy**, **Pillow**, and **Streamlit**.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/c675716b4cc6caf39b55d7084963299c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Heroku Deployment Packages
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tips
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We only need a few folders and files, add other folders into the `**.slugignore`**
+    file to optimize storage. The `[.slugingore](https://devcenter.heroku.com/articles/slug-compiler#ignoring-files-with-slugignore)`
+    file works similarly to `.gitingore` but it ignores files during build.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Deploying
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Deploying is the most simple part of this guide as we need to commit all the
+    changes and push our code to the Heroku remote server.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: The Streamlit Image classification web application is deployed on  ([dagshub-pc-app.herokuapp.com](https://dagshub-pc-app.herokuapp.com/)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Deploying a Streamlit WebApp to Heroku using DAGsHub](../Images/9b1ab414ea59a8ffa87e0856d972e005.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It will take less than five minutes to deploy your app to the Heroku server.
+    If you are still facing issues in deployment, you can check out my [DAGsHub repository](https://dagshub.com/kingabzpro/Pneumonia-Classification/src/DVC)
+    for the reference.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this blog we have learned how to integrate DVC and DAGsHub with Heroku servers.
+    We have also learned various ways to optimize the storage and avoid dependency
+    issues. Building your web app and then deploying it to the server is satisfying
+    as you have now ability to share it with your colleagues and friends. We have
+    built a pneumonia classification web app using DVC, streamlit, tensorflow, pillow
+    and Heroku. If you want to reduce the slug size try using **joblib** to load the
+    model and perform prediction. You can also use a [docker](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml)
+    file to deploy your web application as they are not subject to size restrictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))
+    is a certified data scientist professional who loves building machine learning
+    models. Currently, he is focusing on content creation and writing technical blogs
+    on machine learning and data science technologies. Abid holds a Master''s degree
+    in Technology Management and a bachelor''s degree in Telecommunication Engineering.
+    His vision is to build an AI product using a graph neural network for students
+    struggling with mental illness.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Tips & Tricks of Deploying Deep Learning Webapp on Heroku Cloud](https://www.kdnuggets.com/2021/12/tips-tricks-deploying-dl-webapps-heroku.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploy a Machine Learning Web App with Heroku](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Answering Questions with HuggingFace Pipelines and Streamlit](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DIY Automated Machine Learning with Streamlit](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[LangChain + Streamlit + Llama: Bringing Conversational AI to Your…](https://www.kdnuggets.com/2023/08/langchain-streamlit-llama-bringing-conversational-ai-local-machine.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[12 Essential Commands for Streamlit](https://www.kdnuggets.com/2023/01/12-essential-commands-streamlit.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

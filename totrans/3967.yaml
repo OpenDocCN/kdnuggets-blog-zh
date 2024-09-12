@@ -1,0 +1,297 @@
+- en: How to Deal with Missing Data Using Interpolation Techniques in Pandas
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Missing Data Using Interpolation Techniques in Pandas](../Images/dda5fbd49996fb026458e295787c567f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author | DALLE-3 & Canva
+  prefs: []
+  type: TYPE_NORMAL
+- en: Missing values in real-world datasets are a common problem. This can occur for
+    various reasons, such as missed observations, data transmission errors, sensor
+    malfunctions, etc. We cannot simply ignore them as they can skew the results of
+    our models. We must remove them from our analysis or handle them so our dataset
+    is complete. Removing these values will lead to information loss, which we do
+    not prefer. So scientists devised various ways to handle these missing values,
+    like imputation and interpolation. People often confuse these two techniques;
+    imputation is a more common term known to beginners. Before we proceed further,
+    let me draw a clear boundary between these two techniques.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imputation is basically filling the missing values with statistical measures
+    like mean, median, or mode. It is pretty simple, but it does not take into account
+    the trend of the dataset. However, interpolation estimates the value of missing
+    values based on the surrounding trends and patterns. This approach is more feasible
+    to use when your missing values are not scattered too much.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we know the difference between these techniques, let's discuss some
+    of the interpolation methods available in Pandas, then I will walk you through
+    an example. After which I will share some tips to help you choose the right interpolation
+    technique.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Types of Interpolation Methods in Pandas
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Pandas offers various interpolation methods *(''linear'', ''time'', ''index'',
+    ''values'', ''pad'', ''nearest'', ''zero'', ''slinear'', ''quadratic'', ''cubic'',
+    ''barycentric'', ''krogh'', ''polynomial'', ''spline'', ''piecewise_polynomial'',
+    ''from_derivatives'', ''pchip'', ''akima'', ''cubicspline'')* that you can access
+    using the `interpolate()` function. The syntax of this method is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'I know these are a lot of methods, and I don’t want to overwhelm you. So, we
+    will discuss a few of them that are commonly used:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Linear Interpolation:** This is the default method, which is computationally
+    fast and simple. It connects the known data points by drawing a straight line,
+    and this line is used to estimate the missing values.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Time Interpolation:** Time-based interpolation is useful when your data is
+    not evenly spaced in terms of position but is linearly distributed over time.
+    For this, your index needs to be a datetime index, and it fills in the missing
+    values by considering the time intervals between the data points.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Index Interpolation:** This is similar to time interpolation, where it uses
+    the index value to calculate the missing values. However, here it does not need
+    to be a datetime index but needs to convey some meaningful information like temperature,
+    distance, etc.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Pad (Forward Fill) and Backward Fill Method:** This refers to copying the
+    already existent value to fill in the missing value. If the direction of propagation
+    is forward, it will forward fill the last valid observation. If it''s backward,
+    it uses the next valid observation.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Nearest Interpolation:** As the name suggests, it uses the local variations
+    in the data to fill in the values. Whatever value is nearest to the missing one
+    will be used to fill it in.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Polynomial Interpolation:** We know that real-world datasets are mainly non-linear.
+    So this function fits a polynomial function to the data points to estimate the
+    missing value. You will also need to specify the order for this (e.g., order=2 for
+    quadratic).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Spline Interpolation:** Don’t be intimidated by the complex name. A spline
+    curve is formed using piecewise polynomial functions to connect the data points,
+    resulting in a final smooth curve. You will note that the interpolate function
+    also has `piecewise_polynomial` as a separate method. The difference between the
+    two is that the latter does not ensure continuity of the derivatives at the boundaries,
+    meaning it can take more abrupt changes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Enough theory; let's use the Airline Passengers dataset, which contains monthly
+    passenger data from 1949 to 1960 to see how interpolation works.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Code Implementation: Airline Passenger Dataset'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We will introduce some missing values in the Airline Passenger Dataset and then
+    interpolate them using one of the above techniques.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 1: Making Imports & Loading Dataset'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Import the basic libraries as mentioned below and load the CSV file of this
+    dataset into a DataFrame using the `pd.read_csv` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`parse_dates` will convert the ‘Month’ column to a `datetime` object, and `index_col`
+    sets it as the DataFrame''s index.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 2: Introduce Missing Values'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Now, we will randomly select 15 different instances and mark the ‘Passengers’
+    column as `np.nan`, representing the missing values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 3: Plotting Data with Missing Values'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: We will use Matplotlib to visualize how our data looks after introducing 15
+    missing values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Graph after interpolation](../Images/e9dd40ecbd7dbfdc49f35a8dc895278b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Graph of original dataset
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can see that the graph is split in between, showing the absence of values
+    at those locations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 4: Using Interpolation'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Though I will share some tips later to help you pick the right interpolation
+    technique, let’s focus on this dataset. We know that it is time-series data, but
+    since the trend doesn’t seem to be linear, simple time-based interpolation that
+    follows a linear trend doesn’t fit well here. We can observe some patterns and
+    oscillations along with linear trends within a small neighborhood only. Considering
+    these factors, spline interpolation will work well here. So, let's apply that
+    and check how the visualization turns out after interpolating the missing values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Graph after interpolation](../Images/2d70d3ccedc65c63fac5ce32bdffcbe0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Graph after interpolation
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can see from the graph that the interpolated values complete the data points
+    and also preserve the pattern. It can now be used for further analysis or forecasting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tips for Choosing the Interpolation Method
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'This bonus part of the article focuses on some tips:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Visualize your data to understand its distribution and pattern. If the data
+    is evenly spaced and/or the missing values are randomly distributed, simple interpolation
+    techniques will work well.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If you observe trends or seasonality in your time series data, using spline
+    or polynomial interpolation is better to preserve these trends while filling in
+    the missing values, as demonstrated in the example above.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Higher-degree polynomials can fit more flexibly but are prone to overfitting.
+    Keep the degree low to avoid unreasonable shapes.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For unevenly spaced values, use indexed-based methods like index, and time to
+    fill gaps without distorting the scale. You can also use backfill or forward-fill
+    here.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If your values do not change frequently or follow a pattern of rising and falling,
+    using the nearest valid value also works well.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Test different methods on a sample of the data and evaluate how well the interpolated
+    values fit versus actual data points.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'If you want to explore other parameters of the `dataframe.interpolate` method,
+    the Pandas documentation is the best place to check it out: [Pandas Documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.interpolate.html).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)****
+    Kanwal is a machine learning engineer and a technical writer with a profound passion
+    for data science and the intersection of AI with medicine. She co-authored the
+    ebook "Maximizing Productivity with ChatGPT". As a Google Generation Scholar 2022
+    for APAC, she champions diversity and academic excellence. She''s also recognized
+    as a Teradata Diversity in Tech Scholar, Mitacs Globalink Research Scholar, and
+    Harvard WeCode Scholar. Kanwal is an ardent advocate for change, having founded
+    FEMCodes to empower women in STEM fields.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Deal with Categorical Data for Machine Learning](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Ways to Deal with the Lack of Data in Machine Learning](https://www.kdnuggets.com/2019/06/5-ways-lack-data-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Black Friday Deal - Master Machine Learning for Less with DataCamp](https://www.kdnuggets.com/2022/11/datacamp-black-friday-deal-master-machine-learning-less-datacamp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Optimal Way to Input Missing Data with Pandas fillna()](https://www.kdnuggets.com/2023/02/optimal-way-input-missing-data-pandas-fillna.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Datawig, an AWS Deep Learning Library for Missing Value Imputation](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Identify Missing Data in Time-Series Datasets](https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

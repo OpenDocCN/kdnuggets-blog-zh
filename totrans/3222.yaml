@@ -1,0 +1,244 @@
+- en: Learn Generalized Linear Models (GLM) using R
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/10/learn-generalized-linear-models-glm-r.html](https://www.kdnuggets.com/2017/10/learn-generalized-linear-models-glm-r.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Chaitanya Sagar, Perceptive Analytics.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Editor''s note:** Data files discussed below can be acquired here:'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[**cola.csv**](https://gist.githubusercontent.com/mmmayo13/0112df82bf54961e60edfe6a69bbe22c/raw/2ceaa9131ebb40595a4d76a423ffe5c1c91ca6e3/cola.csv)'
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**penalty.csv**](https://gist.githubusercontent.com/mmmayo13/0e57f0b86ee3e1d58f067ecf36efc9fe/raw/6a433f74c589a68ae436ee9a358e6965dae34a63/penalty.csv)'
+  prefs:
+  - PREF_BQ
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Generalized Linear Model (GLM) helps represent the dependent variable as a linear
+    combination of independent variables. Simple linear regression is the traditional
+    form of GLM. Simple linear regression works well when the dependent variable is
+    normally distributed. The assumption of normally distributed dependent variable
+    is often violated in real situations. For example, consider a case where dependent
+    variable can take only positive values and has fat tail. The dependent variable
+    is number of coffee sold and the independent variable is the temperature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![R GLM header](../Images/c27e32b99685cf77c1f9961d64d36346.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let's assume that we have modeled a linear relationship between the variables.
+    The expected number of coffee sold decreases by 10 units as temperature increases
+    by 1 degree. The problem with this kind of model is that it can give meaningless
+    results. There will be situation when a increase of 1 degree in temperature would
+    force the model to output negative number for number of coffee sold. GLM comes
+    in handy in these types of situations. GLM is widely used to model situations
+    where the independent variable has arbitrary distributions i.e. distributions
+    other than normal distribution.  The basic intuition behind GLM is to not model
+    dependent variable as a linear combination of independent variable but model a
+    function of dependent variable as a linear combination of dependent variable.
+    This function used to transform independent variable is known as link function.
+    In the above example the distribution of number of coffee sold will not be normal
+    but poisson and the log transformation (log will be the link function in this
+    case) of the variable before regression would lead to a logical model. The ability
+    of GLM to transform data with arbitrary distribution to fit a meaningful linear
+    model makes it a powerful tool.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this article, we aim to discuss various GLMs that are widely used in the
+    industry. We focus on: a) log-linear regression b) interpreting log-transformations
+    and c) binary logistic regression. We also review the underlying distributions
+    and the applicable link functions. However, we start the article with a brief
+    discussion on the traditional form of GLM, simple linear regression. Along with
+    the detailed explanation of the above model, we provide the steps and the commented
+    R script to implement the modeling technique on R statistical software.  For the
+    purpose of illustration on R, we use sample datasets. We hope that you find the
+    article useful.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Linear Regression**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Linear regression is the most basic form of GLM. Linear regression models a
+    linear relationship between the dependent variable, without any transformation,
+    and the independent variable. The model assumes that the variables are normally
+    distributed. It is represent in the form Yi= α+ βXi [Eq. 1]. The coefficients
+    are computed using the Ordinary Least Square (OLS) method.  For a detailed explanation
+    on linear regression and OLS, please refer to our earlier article at [https://www.kdnuggets.com/2017/03/building-regression-models-support-vector-regression.html](https://www.kdnuggets.com/2017/03/building-regression-models-support-vector-regression.html).
+    The article provides explanation and an example of linear regression. We hope
+    that now you are comfortable with the idea of linear regression.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, with the objective of showing limitation of linear regression, we will
+    implement the linear model on R using a not so perfect case. The data consists
+    of two variables - Temperature and Coca-Cola sales in a university campus. Please
+    click here to download. Let us visualize the data and fit a linear model to predict
+    sales of coca cola based on given temperature.  The R code is below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Figure 1 Scatter Plot**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Fig 1](../Images/6ec534da855e0214a6d21717e6d0b9bd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 1 visualizes the data to provide us with a better understanding of the
+    relationship between Temperature and Coca-Cola sales. We observe that sales increase
+    exponentially with increase in temperature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The relationship between Temperature and Cola Sales is represented in Equation
+    [2]. The Root Mean Square Error for the model is pretty high at 241.49\. The values
+    of cola sales can be obtained by plugging the temperature in the equation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Eq](../Images/67b12841cd5b8dbc8164e94de4fd67e2.png) [2]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 2 Overlay best-fit line given by simple linear regression on scatter
+    plot**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Fig 2](../Images/d3b10cad33ee77171133e808e1aa5267.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 2 shows the best-fit line as per the simple linear regression. The fit
+    is bad and leads to absurd predictions. As per the model the Cola sales will be
+    negative for temperature below 10 units. There are two ways to deal with the situation.
+    First, fit a non-linear model. Second, transform the data to fit a linear model.
+    In the next section we will discuss the second method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Log-Linear Regression**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Log-linear regression becomes a useful tool when the dependent and independent
+    variable follow an exponential relationship. It means that Y does not change linearly
+    with a unit change in X but Y changes by a constant percentage with unit change
+    in X.  For example, the amount due, in case of compound interest, follows an exponential
+    relationship with time, T. As T increases by one unit, the amount due increases
+    by a certain percentage i.e. interest rate. Another example can be that of expected
+    salary and education. Expected salary does not follow a linear relationship with
+    level of education. It grows exponentially with level of education. Such growth
+    models depict a variety of real life situations and can be modeled using log-linear
+    regression.  Apart from exponential relationship, log transformation on dependent
+    variable is also used when dependent variable follows: a) log-normal distribution
+    - log-normal distribution is distribution of a random variable whose log follows
+    normal distribution. Thus, taking log of a log-normal random variable makes the
+    variable normally distributed and fit for linear regression.  b) Poisson distribution
+    - Poisson distribution is the distribution of random variable that results from
+    a Poisson experiment. For example, the number of successes or failures in a time
+    period T follows Poisson distribution.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article we focus on the exponential relationship, which is expressed
+    as *Y=a(b)^X* [Eq. 2].  In this case, a log transformation would make the relationship
+    linear. We can represent *log(Y)* as a linear combination on Xs. Taking log on
+    both sides in the equation, we get log *(Y)=log(a)+log⁡(b)X*. Now we can estimate
+    the model using OLS. Please note that this equation is very similar to Eq. 1,
+    *log(a)* and *log(b)* are equivalent to *α* and *β* respectively. Now we will
+    look into interpretation of log linear models. *log(a)* is the constant term and
+    *log(b)* is the growth rate with which Y grows for a unit change in X. A negative
+    value of *log(b)* would indicate that Y decreases by a certain percentage for
+    unit increase in X. Now we will implement the model on R using the Coca-Cola sales
+    data. The R code is below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Figure 3 Best-fit line given by log-linear regression**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Fig 3](../Images/904c64eb887ca12a309765d48c122b41.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 3 displays the best-fit line using log-linear regression. We can look
+    at it as a two-step process i.e. data transformation by taking log on both sides
+    and then using simple linear regression on the transformed data. The computed
+    model is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Eq 3](../Images/941ecb922ca885c4364c6b798ac5daab.png) [3]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Cola sales can be predicted by plugging the values of temperature in Equation
+    [3]. We observe that the fit has greatly improved over the simple linear regression.
+    The RMSE for the transformed model is 0.24 only. Please note that log-linear regression
+    has also solved the issue of absurd negative values for cola sales. For no value
+    of temperature we get a negative value of cola sales. A simple log transformation
+    helps us to deal with the absurdity. In the next section we will discuss other
+    log transformations that come handy in various situations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Reasons Why You Should Use Linear Regression Models Instead of…](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 3 Free Resources to Learn Linear Algebra for Machine Learning](https://www.kdnuggets.com/2022/03/top-3-free-resources-learn-linear-algebra-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn About Large Language Models](https://www.kdnuggets.com/2023/03/learn-large-language-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Comparing Linear and Logistic Regression](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Linear vs Logistic Regression: A Succinct Explanation](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

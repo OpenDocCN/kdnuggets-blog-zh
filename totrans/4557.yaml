@@ -1,0 +1,312 @@
+- en: How to Speed up Pandas by 4x with one line of code
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/11/speed-up-pandas-4x.html](https://www.kdnuggets.com/2019/11/speed-up-pandas-4x.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Pandas](https://pandas.pydata.org/) is the go-to library for processing data
+    in Python. It’s easy to use and quite flexible when it comes to handling different
+    types and sizes of data. It has tons of [different functions](https://dev.pandas.io/docs/user_guide/index.html) that
+    make manipulating data a breeze.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/637b258d0b1a651f13343b312131a6fb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*The popularity of various Python packages over time. [Source](https://stackoverflow.blog/2017/09/14/python-growing-quickly/)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But there is one drawback: Pandas is *slow* for larger datasets.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: By default, Pandas executes its functions as a single process using a single
+    CPU core. That works just fine for smaller datasets since you might not notice
+    much of a difference in speed. But with larger datasets and so many more calculations
+    to make, speed starts to take a major hit when using only a single core. It’s
+    doing just one calculation at a time for a dataset that can have *millions* or
+    even *billions *of rows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Yet most modern machines made for Data Science have *at least *2 CPU cores.
+    That means, for the example of 2 CPU cores, that 50% or more of your computer’s
+    processing power won’t be doing anything by default when using Pandas. The situation
+    gets even worse when you get to 4 cores (modern Intel i5) or 6 cores (modern Intel
+    i7). Pandas simply wasn’t designed to use that computing power effectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Modin](https://github.com/modin-project/modin) is a new library designed to
+    accelerate Pandas by automatically distributing the computation across **all of
+    the system’s available CPU cores**. With that, Modin claims to be able to get [nearly
+    linear speedup](https://modin.readthedocs.io/en/latest/#faster-pandas-even-on-your-laptop) to
+    the number of CPU cores on your system for Pandas DataFrames of any size.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s see how it all works and go through a few code examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How Modin Does Parallel Processing With Pandas
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Given a DataFrame in Pandas, our goal is to perform some kind of calculation
+    or process on it in the fastest way possible. That could be taking the mean of
+    each column with *.mean()*, grouping data with *groupby*, dropping all duplicates
+    with *drop_duplicates()*, or any of the other built-in Pandas functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the previous section, we mentioned how Pandas only uses one CPU core for
+    processing. Naturally, this is a big bottleneck, especially for larger DataFrames,
+    where the lack of resources really shows through.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In theory, parallelizing a calculation is as easy as applying that calculation
+    on different data points across every available CPU core. For a Pandas DataFrame,
+    a basic idea would be to divide up the DataFrame into a few pieces, as many pieces
+    as you have CPU cores, and let each CPU core run the calculation on its piece.
+    In the end, we can aggregate the results, which is a computationally cheap operation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/3fa16195a5acf43a3969a8c66c906475.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*How a multi-core system can process data faster. For a single-core process
+    (left), all 10 tasks go to a single node. For the dual-core process (right), each
+    node takes on 5 tasks, thereby doubling the processing speed.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: That’s exactly what Modin does. It slices your DataFrame into different parts
+    such that each part can be sent to a different CPU core. Modin partitions the
+    DataFrames across both the *rows *and the *columns*. This makes Modin’s parallel
+    processing [scalable to DataFrames of any shape](https://modin.readthedocs.io/en/latest/architecture.html#dataframe-partitioning).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imagine if you are given a DataFrame with many columns but fewer rows. Some
+    libraries only perform the partitioning across rows, which would be inefficient
+    in this case since we have more columns than rows. But with Modin, since the partitioning
+    is done across both dimensions, the parallel processing remains efficient all
+    shapes of DataFrames, whether they are wider (lots of columns), longer (lots of
+    rows), or both.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5b89c639a28c62e3f40bef41799c69fd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*A Pandas DataFrame (left) is stored as one block and is only sent to one CPU
+    core. A Modin DataFrame (right) is partitioned across rows and columns, and each
+    partition can be sent to a different CPU core up to the max cores in the system.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The figure above is a simple example. Modin actually uses a *Partition Manager* that
+    can change the size and shape of the partitions based on the type of operation.
+    For example, there might be an operation that requires entire rows or entire columns.
+    In that case, the [Partition Manager](https://modin.readthedocs.io/en/latest/architecture.html#partition-manager) will
+    perform the partitions and distribution to CPU cores in the most optimal way it
+    can find. It’s flexible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To do a lot of the heavy lifting when it comes to executing the parallel processing,
+    Modin can use either [Dask](https://dask.org/) or [Ray](https://github.com/ray-project/ray/).
+    Both of them are parallel computing libraries with Python APIs, and you can select
+    one or the other to use with Modin at runtime. Ray will be the safest one to use
+    for now as it is more stable — the Dask backend is experimental.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But hey, that’s enough theory. Let’s get to the code and speed benchmarks!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benchmarking Modin Speed
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The easiest way to install and get Modin working is via pip. The following
+    command installs Modin, Ray, and all of the relevant dependencies:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: For our following examples and benchmarks, we’re going to be using the [*CS:GO
+    Competitive Matchmaking Data*](https://www.kaggle.com/skihikingkevin/csgo-matchmaking-damage)from
+    Kaggle. Each row of the CSV contains data about a round in a competitive match
+    of CS:GO.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll stick to experimenting with just the biggest CSV file for now (there are
+    several) called *esea_master_dmg_demos.part1.csv*, which is 1.2GB. With such a
+    size, we should be able to see how Pandas slows down and how Modin can help us
+    out. For the tests, I’ll be using an [i7–8700k CPU](https://ark.intel.com/content/www/us/en/ark/products/126684/intel-core-i7-8700k-processor-12m-cache-up-to-4-70-ghz.html),
+    which has 6 physical cores and 12 threads.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first test we’ll do is simply reading in the data with our good’ol *read_csv()*.
+    The code itself is the exact same for both Pandas and Modin.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To measure the speed, I imported the *time *module and put a *time.time()* before
+    and after the *read_csv()*. As a result, Pandas took 8.38 seconds to load the
+    data from CSV to memory while Modin took 3.22 seconds. That’s a speedup of 2.6X.
+    Not too shabby for just changing the import statement!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s do a couple of heavier processes on our DataFrame. Concatenating multiple
+    DataFrames is a common operation in Pandas — we might have several or more CSV
+    files containing our data, which we then have to read one at a time and concatenate.
+    We can easily do this with the *pd.concat()* function in Pandas and Modin.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’d expect that Modin should do well with this kind of an operation since it’s
+    handling a lot of data. The code is shown below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the above code, we concatenated our DataFrame to itself 5 times. Pandas was
+    able to complete the concatenation operation in 3.56 seconds while Modin finished
+    in 0.041 seconds, an 86.83X speedup! It appears that even though we only have
+    6 CPU cores, the partitioning of the DataFrame helps a lot with the speed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Pandas function commonly used for DataFrame cleaning is the *.fillna()* function.
+    This function finds all NaN values within a DataFrame and replaces them with the
+    value of your choice. There’s a lot of operations going on there. Pandas has to
+    go through every single row and column to find NaN values and replace them. This
+    is a perfect opportunity to apply Modin since we’re repeating a very simple operation
+    many times.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This time, Pandas ran the* .fillna()* in 1.8 seconds while Modin took 0.21 seconds,
+    an 8.57X speedup!
+  prefs: []
+  type: TYPE_NORMAL
+- en: A caveat and final benchmarks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So is Modin always this fast?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, not always.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are some cases where Pandas is actually faster than Modin, even on this
+    big dataset with 5,992,097 (almost 6 million) rows. The table below shows the
+    run times of Pandas vs. Modin for some experiments I ran.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see, there were some operations in which Modin was significantly
+    faster, usually reading in data and finding values. Other operations, such as
+    performing statistical calculations, were much faster in Pandas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Practical Tips for using Modin
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Modin is still a fairly young library and is constantly being developed and
+    expanded. As such, not all of the Pandas functions have been fully accelerated
+    yet. If you try and use a function with Modin that is not yet accelerated, it
+    will default to Pandas, so there won’t be any code bugs or errors. For the full
+    list of Pandas methods that are supported by Modin, see [this page](https://modin.readthedocs.io/en/latest/UsingPandasonRay/dataframe_supported.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: By default, Modin will use all of the CPU cores available on your machine. There
+    may be some cases where you wish to limit the number of CPU cores that Modin can
+    use, especially if you want to use that computing power elsewhere. We can limit
+    the number of CPU cores Modin has access to through an initialization setting
+    in Ray since Modin uses it on the backend.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'When working with big data, it’s not uncommon for the size of the dataset to
+    exceed the amount of memory (RAM) on your system. Modin has a specific flag that
+    we can set to *true*, which will enable its *out of core* mode. Out of core basically
+    means that Modin will use your disk as overflow storage for your memory, allowing
+    you to work with datasets far bigger than your RAM size. We can set the following
+    environment variable to enable this functionality:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So there you have it! Your guide to accelerating Pandas functions using Modin.
+    Very easy to do by changing just the import statement. Hopefully, you find Modin
+    useful in at least a few situations to accelerate your Pandas functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data Cleaning and Preprocessing for Beginners](https://www.kdnuggets.com/2019/11/data-cleaning-preprocessing-beginners.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Advanced Features of Pandas and How to Use Them](https://www.kdnuggets.com/2019/10/5-advanced-features-pandas.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Simple Hacks to Speed up Your Data Analysis in Python](https://www.kdnuggets.com/2019/07/10-simple-hacks-speed-data-analysis-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Simple Ways to Speed Up Your Python Code](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

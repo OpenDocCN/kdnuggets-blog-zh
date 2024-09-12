@@ -1,0 +1,572 @@
+- en: Building a Structured Financial Newsfeed Using Python, SpaCy and Streamlit
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/09/-structured-financial-newsfeed-using-python-spacy-and-streamlit.html](https://www.kdnuggets.com/2021/09/-structured-financial-newsfeed-using-python-spacy-and-streamlit.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/), Data Science
+    Instructor | Mentor | YouTuber**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Structured Financial Newsfeed Using Python, SpaCy and Streamlit](../Images/525c4bf0536a3f880f235189e8c33d1c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: One of the very interesting and widely used applications of NLP is Named Entity
+    Recognition(NER).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting insights from raw and unstructured data is of vital importance. Uploading
+    a document and getting the important bits of information from it is called information
+    retrieval.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Information retrieval has been a major task/challenge in NLP. And NER(or NEL
+    — Named Entity Linking) is used in several domains(finance, drugs, e-commerce,
+    etc.) for information retrieval purposes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this tutorial post, I’ll show you how you can leverage NEL to develop a custom
+    stock market news feed that lists down the buzzing stocks on the internet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pre-requisites
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: There are no such pre-requisites as such. You might need to have some familiarity
+    with python and the basic tasks of NLP like tokenization, POS tagging, dependency
+    parsing, et cetera.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’ll cover the important bits in more detail, so even if you’re a complete beginner
+    you’ll be able to wrap your head around what’s going on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, let’s get on with it, follow along and you’ll have a minimal stock news
+    feed that you can start researching.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Tools/setup you’ll need:**'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Google Colab for initial testing and exploration of data and the SpaCy library.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: VS Code(or any editor) to code the Streamlit application.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Source of stock market information(news) on which we’ll perform NER and later
+    NEL.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: A virtual python environment(I am using conda) along with libraries like Pandas,
+    SpaCy, Streamlit, Streamlit-Spacy(if you want to show some SpaCy renders.)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Objective
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The goal of this project is to learn and apply Named Entity Recognition to extract
+    important entities(publicly traded companies in our example) and then link each
+    entity with some information using a knowledge base(Nifty500 companies list).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll get the textual data from RSS feeds on the internet, extract the names
+    of buzzing stocks, and then pull their market price data to test the authenticity
+    of the news before taking any position in those stocks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note: NER may not be a state-of-the-art problem but it has many applications
+    in the industry.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Moving on to Google Colab for experimentation and testing:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 1: Extracting the trending stocks news data'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To get some reliable authentic stock market news, I’ll be using [Economic Times](https://economictimes.indiatimes.com/markets/stocks/rssfeeds/2146842.cms) and [Money
+    Control](https://www.moneycontrol.com/rss/buzzingstocks.xml) RSS feeds for this
+    tutorial but you can also use/add your country’s RSS feeds or Twitter/Telegram(groups)
+    data to make your feed more informative/accurate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The opportunities are immense. This tutorial should serve as a stepping stone
+    to apply NEL to build apps in different domains solving different kinds of information
+    retrieval problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you go on to look at the RSS feed, it looks something like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cc1a6f5d622cf5f3e83e7bc7d0f6315a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms](https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our goal is to get the textual headlines from this RSS feed and then we’ll use
+    the SpaCy to extract the main entities from the headlines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The headlines are present inside the <title> tag of the XML here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Firstly, we need to capture the entire XML document and we can use the `**requests**` library
+    to do that. Make sure you have these packages installed in your runtime environment
+    in colab.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can run the following command to install almost any package right from
+    a colab’s code cell:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Send a `GET` request at the provided link to capture the XML doc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Run the cell to check what you get in the response object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It should give you a successful response with HTTP code 200 as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/32fa6a5235798fcfe47128fcc891a836.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Now that you have this response object, we can pass its content to the BeautifulSoup
+    class to parse the XML document as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This should give you all the headlines inside a Python list:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d243f2acf112117879f8e373ee8221c3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Awesome, we have the textual data out of which we will extract the main entities(which
+    are publicly traded companies in this case) using NLP.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s time to put NLP into action.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 2: Extracting entities from the headlines'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: This is the exciting part. We’ll be using a **pre-trained core language model **from
+    the `**spaCy**` library to extract the main entities in a headline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A little about spaCy and the core models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**spaCy** is an open-source NLP library that processes textual data at a superfast
+    speed. It is the leading library in NLP research which is being used in enterprise-grade
+    applications at scale. spaCy is well-known for scaling with the problem. And it
+    supports more than 64 languages and works well with both TensorFlow and PyTorch.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Talking about core models, spaCy has two major classes of pretrained language
+    models that are trained on different sizes of textual data to give us state-of-the-art
+    inferences.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Core Models — for general-purpose basic NLP tasks.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Starter Models — for niche applications that require transfer learning. We can
+    leverage the model’s learned weights to fine-tune our custom models without having
+    to train the model from scratch.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Since our use case is basic in this tutorial, we are going to stick with the `en_core_web_sm` core
+    model pipeline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So, let’s load this into our notebook:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '***Note:*** Colab already has this downloaded for us but if you try to run
+    it in your local system, you’ll have to download the model first using the following
+    command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'en_core_web_sm is basically an English pipeline optimized for CPU which has
+    the following components:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: tok2vec — token to vectors(performs tokenization on the textual data),
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: tagger — adds relevant metadata to each token. spaCy makes use of some statistical
+    models to predict the part of speech(POS) of each token. More in the [documentation](https://spacy.io/models/en).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: parser — dependency parser establishes relationships among the tokens.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Other components include senter, ner, attribute_ruler, lemmatizer.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now, to test what this model can do for us, I’ll pass a single headline through
+    the instantiated model and then check the different parts of a sentence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The pipeline performs all the tasks from tokenization to NER. Here we have
+    the tokens first:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6d2917dbe55b3aaa0813afa881b488a9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can look at the tagged part of speech using the `pos_ `attribute.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5efb57780795368a90a99a8bafe56987.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each token is tagged with some metadata. For example, Trade is a Proper Noun,
+    Setup is a Noun, `:` is punctuation, so on, and so forth. The entire list of Tags
+    is given [here](https://spacy.io/models/en).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And then, you can look at how they are related by looking at the dependency
+    graph using `dep_` attribute:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/45aabe9dbacbb7638e622b37d4f2b7a8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here, Trade is a Compound, Setup is Root, Nifty is appos(Appositional modifier).
+    Again, all the syntactic tags can be found [here](https://spacy.io/models/en).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can also visualize the relationship dependencies among the tokens using
+    the following displacy `render()` method:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'which will give this graph:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/aaf67d47e41b6990f01d0a7e67f61cc6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Entity extraction
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'And to look at the important entities of the sentence, you can pass `**''ent’**` as
+    style in the same code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/aca72aeee53f1c5d7988bf6430bc89e4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by author — I used another headline because the one we used above didn’t
+    have any entities.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have different tags for different entities like the day has DATE, Glasscoat
+    has GPE which can be Countries/Cities/States. We are majorly looking for entities
+    that have ORG tag that’ll give us Companies, agencies, institutions, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are now capable of extracting entities from the text. Let’s get down to extracting
+    the organizations from all the headlines using ORG entities.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This will return a list of all the companies as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ea49df1fea8fe173af6aa627ea237b75.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: So easy, right?
+  prefs: []
+  type: TYPE_NORMAL
+- en: That’s the magic of spaCy now!
+  prefs: []
+  type: TYPE_NORMAL
+- en: The next step is to look up all these companies in a knowledge base to extract
+    the right stock symbol for that company and then use libraries like yahoo-finance
+    to extract their market details like price, return, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 3 — Named Entity Linking
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To learn about what stocks are buzzing in the market and get their details on
+    your dashboard is the goal for this project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have the company names but in order to get their trading details, we’ll need
+    the company’s trading stock symbol.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since I am extracting the details and news of Indian Companies, I am going to
+    use an external database of [Nifty 500 companies(a CSV file).](https://www1.nseindia.com/products/content/equities/indices/nifty_500.htm)
+  prefs: []
+  type: TYPE_NORMAL
+- en: For every company, we’ll look it up in the list of companies using pandas, and
+    then we’ll capture the stock market statistics using the [yahoo-finance ](https://pypi.org/project/yfinance/)library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: One thing that you should notice here is that I’ve added a “.NS” after each
+    stock symbol before passing it to the `Ticker` class of the `yfinance` library.
+    It is because indian NSE stock symbols are stored with a `.NS` suffix in `yfinance`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And the buzzing stocks would turn up in a dataframe like below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8a464b3bde7133a42af081ddc2a1cce0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Voila! isn’t this great? Such a simple yet profound app that could point you
+    in the right direction with the right stocks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now to make it more accessible, we can create a web application out of the code
+    that we have just written using Streamlit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 4 — Building a web app using Streamlit
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: It’s time to move to an editor and create a new project and virtual environment
+    for the NLP application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting started with Streamlit is super easy for such demo data applications.
+    Make sure you have streamlit installed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now, let’s create a new file called app.py and start writing functional code
+    to get the app ready.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Import all the required libraries at the top.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Add a title to your application:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Test your app by running `streamlit run app.p`y in your terminal. It should
+    open up an app in your web browser.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have added some extra functionality to capture data from multiple sources.
+    Now, you can add an RSS feed URL of your choice into the application and the data
+    will be processed and the trending stocks will be displayed in a dataframe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To get access to the entire code base, you can check out my repository here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[GitHub - dswh/NER_News_Feed](https://github.com/dswh/NER_News_Feed)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can add multiple styling elements, different data sources, and other types
+    of processing to make it more efficient and useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: My app in its current state looks like the image in the banner.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you want to follow me step-by-step, watch me code this application here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next Steps!
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Instead of picking a financial use case, you can also pick any other application
+    of your choice. Healthcare, e-commerce, research, and many others. All industries
+    require documents to be processed and important entities to be extracted and linked.
+    Try out another idea.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A simple idea is extracting all the important entities of a research paper and
+    then creating a knowledge graph of it using the Google Search API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, if you want to take the stock news feed app to another level, you can
+    add some trading algorithms to generate buy and sell signals as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I encourage you to go wild with your imagination.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How you can connect with me!
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: If you liked this post and would like to see more of such content, you can subscribe
+    to [**my newsletter**](https://dswharshit.substack.com/publish/settings#twitter-account)** or **[**my
+    YouTube channel**](https://www.youtube.com/channel/UCH-xwLTKQaABNs2QmGxK2bQ) where
+    I’ll keep sharing such useful and quick projects that one can build.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you’re someone who is just getting started with programming or want to get
+    into data science or ML, you can check out my course at [**WIP Lane Academy**](https://www.wiplane.com/p/foundations-for-data-science-ml)**.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks to Elliot Gunn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/)** is an engineer
+    with amalgamated experience in web technologies and data science(aka full-stack
+    data science). He has mentored over 1000 AI/Web/Data Science aspirants, and is
+    designing data science and ML engineering learning tracks. Previously, Harshit
+    developed data processing algorithms with research scientists at Yale, MIT, and
+    UCLA.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://dswharshit.medium.com/d19736fdd70c). Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data Science Learning Roadmap for 2021](/2021/02/data-science-learning-roadmap-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Machine Learning Leverages Linear Algebra to Solve Data Problems](/2021/09/machine-learning-leverages-linear-algebra-solve-data-problems.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learning Data Science and Machine Learning: First Steps After The Roadmap](/2021/08/learn-data-science-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Structured Approach To Building a Machine Learning Model](https://www.kdnuggets.com/2022/06/structured-approach-building-machine-learning-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with spaCy for NLP](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing with spaCy](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploying a Streamlit WebApp to Heroku using DAGsHub](https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Answering Questions with HuggingFace Pipelines and Streamlit](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DIY Automated Machine Learning with Streamlit](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,428 @@
+- en: Fast AutoML with FLAML + Ray Tune
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/09/fast-automl-flaml-ray-tune.html](https://www.kdnuggets.com/2021/09/fast-automl-flaml-ray-tune.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Qingyun Wu](https://twitter.com/qingyun_wu), [Chi Wang](https://www.linkedin.com/in/chi-wang-49b15b16/),
+    [Antoni Baum](https://www.linkedin.com/in/yard1/), [Richard Liaw](https://twitter.com/richliaw)
+    & [Michael Galarnyk](https://twitter.com/GalarnykMichael)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/de7c7c129074f49504448e84d6e97174.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[FLAML](https://github.com/microsoft/FLAML) is a lightweight Python library
+    from Microsoft Research that finds accurate machine learning models in an efficient
+    and economical way using [cutting edge](https://arxiv.org/abs/2005.01571) algorithms
+    designed to be resource-efficient and easily parallelizable. FLAML can also utilize [Ray
+    Tune](https://docs.ray.io/en/master/tune/index.html) for distributed hyperparameter
+    tuning to scale up these AutoML methods across a cluster.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This blog highlights:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The need for economical AutoML methods
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Economical AutoML with FLAML
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to scale FLAML’s optimization algorithms with Ray Tune
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The need of economical AutoML methods
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: AutoML is known to be a resource and time consuming operation as it involves
+    trials and errors to find a hyperparameter configuration with good performance.
+    Since the space of possible configuration values is often very large, there is
+    a need for an economical AutoML method that can more effectively search them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The high resource and time consumption of hyperparameter search in AutoML boils
+    down to the following two factors:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: large number of candidate hyperparameter configurations (trial) needed to find
+    a configuration with good performance
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: high ‘evaluation’ cost of each hyperparameter as the evaluation involves training
+    and validating a machine learning model with the given training data.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: To address both of these factors, Microsoft Researchers have developed [FLAML](https://github.com/microsoft/FLAML) (Fast
+    Lightweight AutoML).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**What is FLAML?**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'FLAML is a newly released library containing state-of-the-art hyperparameter
+    optimization algorithms. FLAML leverages the structure of the search space to
+    optimize for both cost and model performance simultaneously. It contains two new
+    methods developed by Microsoft Research:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cost-Frugal Optimization (CFO)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: BlendSearch
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Cost-Frugal Optimization (CFO) is a method that conducts its search process
+    in a cost-aware fashion. The search method starts from a low-cost initial point
+    and gradually moves towards a higher cost region while optimizing the given objective
+    (like model loss or accuracy).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Blendsearch is an extension of CFO that combines the frugality of CFO and the
+    exploration ability of Bayesian optimization. Like CFO, BlendSearch requires a
+    low-cost initial point as input if such point exists, and starts the search from
+    there. However, unlike CFO, BlendSearch will not wait for the local search to
+    fully converge before trying new start points.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The economical HPO methods in FLAML are inspired by two key insights:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Many machine learning algorithms have hyperparameters that can cause a large
+    variation in the training cost. For example, an XGBoost model with 10 trees will
+    train much quicker than a model with 1000 trees.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The “cost” for parameters is often ‘continuous and consistent’ — evaluating
+    trees=10 is cheaper than evaluating trees=100, which itself is cheaper than evaluating
+    trees=500.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Together, these insights provide useful* structural information* about the hyperparameters
+    in the cost space. The methods, i.e., CFO and BlendSearch, are able to effectively
+    leverage these insights to reduce the cost incurred along the way without affecting
+    the convergence to the optimal solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Does FLAML Work?**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the latest [AutoML benchmark](https://openml.github.io/automlbenchmark/), [FLAML](https://arxiv.org/pdf/1911.04706.pdf) is
+    able to achieve the same or better performance as the state-of-the-art AutoML
+    solutions using only 10% of the computation resource on over 62% of the tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: FLAML’s performance is attributed to its economical optimization methods. The
+    new HPO methods (CFO, BlendSearch) leverage the structure of the search space
+    to choose search orders optimized for both good performance and low cost. This
+    can make a big difference in search efficiency under budget constraints.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Figure 1 shows a typical result obtained from FLAML and a state-of-the-art hyperparameter
+    tuning library [Optuna](https://github.com/optuna/optuna) for tuning LightGBM
+    with 9-dimensional hyperparameters. You can see that FLAML is able to achieve
+    a better solution in a much shorter amount of time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6b87b2f4515439e522f2a79d7adf4781.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 1\. Validation loss (1-auc) curve for tuning LightGBM on a [classification
+    dataset](https://www.openml.org/d/23517). The lines and shaded area show the mean
+    and standard deviation of validation loss over 10 runs. Results in this figure
+    are obtained from experiments with 1 cpu without parallelization (image by authors).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The following code example shows how to get started with FLAML with just several
+    lines of code (assuming the training dataset is provided and saved as `X_train`, `y_train`).
+    The task is to tune hyperparameters of the LightGBM model with a time budget of
+    60 seconds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: In this example, we search over a default search space for LightGBM, which is
+    already provided in FLAML. FLAML provides rich customization options about one’s
+    concerned task, such as the learner class, the search space, the evaluation metric,
+    etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A walkthrough example
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Now we use a toy example to demonstrate cost-frugal behavior of CFO in tuning
+    XGBoost with two hyperparameters: # of trees and # of leaves.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: How CFO and BlendSearch Work
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The two GIFs below demonstrate the search trajectory of CFO in the loss and
+    evaluation cost (i.e., the evaluation time ) space respectively. CFO begins with
+    a low-cost initial point (specified through `low_cost_init_value` in the search
+    space) and performs local updates following its randomized local search strategy.
+    With such a strategy, CFO can quickly move toward the low-loss region, showing
+    a good convergence property. Additionally, CFO tends to avoid exploring the high-cost
+    region until necessary. This search strategy is further grounded with a [provable
+    convergence rate and bounded cost in expectation](https://arxiv.org/abs/2005.01571).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cd50c94bbee1cf7e9397ad9f8c1d2775.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 2\. CFO in tuning the # of leaves and the # of trees for XGBoost. The
+    two heatmaps show the loss and cost distribution of all configurations. The black
+    dots are the points evaluated in CFO. Black dots connected by lines are points
+    that yield better loss performance when evaluated (image by authors).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: BlendSearch further combines this local search strategy used in CFO with global
+    search. It leverages the frugality of CFO and the space exploration capability
+    of global search methods such as Bayesian optimization. Specifically, BlendSearch
+    maintains one global search model, and gradually creates local search threads
+    over time based on the hyperparameter configurations proposed by the global model.
+    It further prioritizes the global search thread and multiple local search threads
+    depending on their real-time performance and cost. It can further improve the
+    efficiency of CFO in tasks with complicated search space, e.g., a search space
+    that contains multiple disjoint, non-continuous subspaces.
+  prefs: []
+  type: TYPE_NORMAL
+- en: FLAML vs Bayesian Optimization Performance
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Figure 3 shows typical behaviors of the economical HPO methods in FLAML (CFO
+    is labeled `LS’ in this figure) versus a Bayesian Optimization (BO) method for
+    tuning XGBoost with 11 hyperparameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: From Figure 3(a), we observe that the evaluation time for the proposed configurations
+    in BO can be very long. When the total resource is limited, e.g., 1 cpu-hour (or
+    less), BO is not able to give a satisfying result (Figure 3(b)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'FLAML’s CFO (labeled LS) and BlendSearch have clear advantages in finding good
+    configurations quickly: they are able to concentrate on configurations that have
+    low evaluation time, while navigating ones with good performance, i.e., low loss.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/48ce7d9823e8612a6841e19d5028e40d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 3\. (a) is a scatter plot of the hyperparameter configurations proposed
+    by different methods, with x-axis and y-axis being the evaluation time and loss.
+    The evaluation time of a hyperparameter configuration is the time taken for training
+    a machine learning model with the hyperparameter configuration on the training
+    data and validating its performance on a validation dataset. The loss is the validation
+    loss. (b) shows the best loss obtained by different methods over wall-clock time.
+    ([image source](https://openreview.net/pdf?id=VbLH04pRA3))
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to scale up CFO and BlendSearch with Ray Tune’s distributed tuning
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'To speed up hyperparameter optimization, you may want to parallelizeyour hyperparameter
+    search. For example, BlendSearch is able to work well in a parallel setting: It
+    leverages multiple search threads that can be independently executed without obvious
+    degradation of performance. This desirable property is not always true for existing
+    optimization algorithms such as Bayesian Optimization.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To achieve parallelization, FLAML is integrated with Ray Tune. Ray Tune is a
+    Python library that accelerates hyperparameter tuning by allowing you to leverage
+    cutting edge optimization algorithms at scale. Ray Tune also allows you to scale
+    out hyperparameter search from your laptop to a cluster without changing your
+    code. You can either use Ray Tune in FLAML or run the hyperparameter search methods
+    from FLAML in Ray Tune to parallelize your search. The following code example
+    shows the former usage, which is achieved by simply configuring the `n_concurrent_trials` argument
+    in FLAML.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/a14bf0e97837d77213d5398128880542.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Logo source ([XGBoost](https://github.com/dmlc/xgboost), [FLAML](https://github.com/microsoft/FLAML), [Ray
+    Tune](https://github.com/ray-project/ray))
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code below shows the latter usage, an end-to-end example of how to use BlendSearch
+    with Ray Tune.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Other key Ray Tune features include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Automatic integration with experiment tracking tools like Tensorboard and Weights/Biases
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Support for GPUs
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Early stopping
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A scikit-learn API to easily integrate with [XGBoost](https://www.anyscale.com/blog/distributed-xgboost-training-with-ray), [LightGBM](https://www.anyscale.com/blog/introducing-distributed-lightgbm-training-with-ray), [Scikit-Learn](https://github.com/ray-project/tune-sklearn),
+    etc.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Benchmark results
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We have conducted an experiment to check how well BlendSearch stacks up to Optuna
+    (with multivariate TPE sampler) and random search in a highly parallelized setting.
+    We have used a subset of 12 datasets from the [AutoML Benchmark](https://www.openml.org/s/218).
+    Each optimization run was conducted with 16 trials in parallel for 20 minutes,
+    using 3-fold cross-validation, using ROC-AUC (weighted one-vs-rest for multiclass
+    datasets). The runs were repeated three times with different random seeds. Reproduction
+    code can be found [here](https://github.com/Yard1/Blendsearch-on-Ray-benchmark).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d8580e50635a1d1a0d2d0cdd7c82268e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by authors
+  prefs: []
+  type: TYPE_NORMAL
+- en: BlendSearch achieved the best cross-validation score in 6 out of 12 datasets.
+    Furthermore, BlendSearch had an average of 2.52% improvement over random search,
+    compared to Optuna’s 1.96%. It is worth noting that BlendSearch was using univariate
+    Optuna-TPE as its global searcher — using multivariate TPE would most likely improve
+    the scores further.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c286e797360d45720a6c4d34881c0612.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: image by authors
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition, thanks to its cost-frugal approach, BlendSearch evaluated, on average,
+    twice the number of trials than the other searchers in the same time limit. This
+    shows that the gap between BlendSearch and the other algorithms will increase
+    with bigger time budgets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: FLAML is a newly released library containing [state-of-the-art](https://arxiv.org/abs/2005.01571) hyperparameter
+    optimization algorithms that leverages the structure of the search space to optimize
+    for both cost and model performance simultaneously. FLAML can also utilize [Ray
+    Tune](https://docs.ray.io/en/latest/tune/index.html) for distributed hyperparameter
+    tuning to scale up these economical AutoML methods across a cluster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For more information on FLAML, please see the [GitHub repository](https://github.com/microsoft/FLAML) and
+    the [project page](https://aka.ms/flaml). If you would like to keep up to date
+    with all things Ray, consider [following @raydistributed on twitter](https://twitter.com/raydistributed) and [sign
+    up for the newsletter](https://anyscale.us5.list-manage.com/subscribe?u=524b25758d03ad7ec4f64105f&id=d94e960a03).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/fast-automl-with-flaml-ray-tune-64ff4a604d1c).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Machine Learning Pipeline Optimization with TPOT](/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Binary Classification with Automated Machine Learning](/2021/05/binary-classification-automated-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Overview of AutoNLP from Hugging Face with Example Project](/2021/06/overview-autonlp-hugging-face-example-project.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How To Fine-Tune ChatGPT 3.5 Turbo](https://www.kdnuggets.com/how-to-finetune-chatgpt-35-turbo)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Use Hugging Face AutoTrain to Fine-tune LLMs](https://www.kdnuggets.com/how-to-use-hugging-face-autotrain-to-finetune-llms)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Fine-Tune BERT for Sentiment Analysis with Hugging Face Transformers](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Fast Can BERT Go With Sparsity?](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Speed up Machine Learning with Fast Kriging (FKR)](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Make Python Code Run Incredibly Fast](https://www.kdnuggets.com/2021/06/make-python-code-run-incredibly-fast.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

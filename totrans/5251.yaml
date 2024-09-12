@@ -1,0 +1,273 @@
+- en: A Guide for Customer Retention Analysis with SQL
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/12/guide-customer-retention-analysis-sql.html/2](https://www.kdnuggets.com/2017/12/guide-customer-retention-analysis-sql.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Other techniques for customer retention**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'There are, of course, other ways to think about customer retention analysis.
+    In particular, we might want to look at how to deal with returning customers:
+    if in p1 there are 100 customers and in p2 80 of them return, in p3 do we want
+    to keep the original 100 or look only at the 80?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the above example, I talked only about period-to-period retention, but I
+    also classified those who were “laggers,” or who took more than one month to return.
+    A business may want, through targeted marketing efforts, to reward customers who
+    keep a monthly visit pattern, or perhaps, to encourage those who visit less than
+    once a month to come back more often.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, another way to look at it would be to look at what proportion of our visitors
+    in any given month are retained, how many are returning, and how many are new.
+    In this case, we would want to change our perspective slightly, and look not at
+    the next visit, but at the previous one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: So then, it’s simple to count the number of each type of customer in any given
+    month.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'With a simple export and graph, you will get something that looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/06bbf2a36485a2126a2fde49610ed717.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Data visualized with [Statsbot](https://statsbot.co/solutions/product-analytics?utm_source=blog&utm_medium=article&utm_campaign=retention)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Cohort tables**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A popular way to analyze customer retention is through the use of cohorts, i.e.
+    defining each user by their first visit, and then seeing how they return over
+    time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Ideally, our end product will be a table like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![](../Images/576d75b8d5ef77fe52b287521d5bacb7.png)](https://cdn-images-1.medium.com/max/1000/1*V5RIvodtHhnYwPkkxVbPhg.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, actually, ideally, our table will show that the number of new users is
+    increasing every month, and that retention is improving over time. But you get
+    the idea!
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to build this, we need first to establish the number of new users for
+    each month, and the amount of time that they stick around. Then, getting the percentages
+    will be easy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our first subquery will classify each customer according to their initial visit,
+    and the length of time that they are retained.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: By month, we can then calculate the number of new users.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: We also want to get a picture of whether a new user in, say, month 1, returned
+    in both month 2 and 3 or only in month 3\. So, we’ll create a subquery that allows
+    us to track the visit pattern of each customer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Then, we’ll combine these to get a lovely final product. For each month a new
+    user is recruited, we’ll have the size of their group, as well as, for each subsequent
+    month, the percentage of those users who returned. Just like the table above!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In order to do that, we run the following script:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This would give us a table which looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fbb300660ec5330666fa3ee299aef4d1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can then do a pivot table in Excel (or similar) in order to get the table
+    above, or use a business intelligence tool such as [**Statsbot**](https://statsbot.co/solutions/product-analytics?utm_source=blog&utm_medium=article&utm_campaign=retention) to
+    get data right from our database without coding SQL.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2d3b3ed685d6d5a4bf107380eac7f5f2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '****Interpretation****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Producing such a table is, of course, only the first step, and a pretty useless
+    one at that if we don’t know how to interpret the numbers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Taking our original table again, I’ll run through the basics of cohort analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![](../Images/576d75b8d5ef77fe52b287521d5bacb7.png)](https://cdn-images-1.medium.com/max/1000/1*V5RIvodtHhnYwPkkxVbPhg.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: First of all, we’re going to look at the number of new users per month. Are
+    we managing to recruit a healthy number of clients for our business? Here we can
+    see that we are recruiting between 500 and 600 new clients per month. Is this
+    what we had aimed to do? This is a discussion that should be had with the marketing
+    team.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then, is the number of new clients per month rising? If not, why? Are there
+    peaks and troughs? So, for example, we can see that there were only 504 new customers
+    in period 6, but 583 in period 5 and 598 in period 7\. These are huge swings in
+    the numbers. If there is something to explain it, like we’re a business that caters
+    to school groups and there was a week of school vacation during that period, fine.
+    But we need to have an explanation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After that, the actual retention percentages. One business objective is going
+    to be to improve our retention over time, i.e. to have an upward trend as we go
+    down the lines. So, if we retain a higher percentage of new users who joined in
+    period 2 than those who joined in period 1, we are on track.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As we see in the table above, this is what happened: after 1 month, 63% of
+    new users from period 1 returned, but 68% of new users from period 2 returned.
+    So we’re doing well! Basically, our customer experience should be getting better
+    over time, so that people are more likely to come back.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After that, another metric we will look at is the rate at which we lose people.
+    It is expected that, over time, retention will fall. This is the reason that we
+    always need to keep recruiting! But, if we can slow customer attrition, so that
+    the fall between each period gets smaller, then we can spend more resources on
+    serving client needs, and not just on trying to find new clients. This, in turn,
+    will help retention, as clients will like that we are paying more attention to
+    them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Frequency of visits****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One element that I have neglected until now is frequency of visits, which is
+    the other side of customer retention analysis. It is generally accepted that a
+    customer who remains loyal to your business is worth much more than a new customer,
+    or even one whose engagement is patchy (i.e. returning customers).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adding a count of visits per customer, per month, or average lag time will complete
+    the picture of how customers are interacting with your business. You can also
+    build cohorts with the amount of customers, revenue from returning customers,
+    etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Final thoughts**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Customer retention analysis will add depth to any business analysis, and allow
+    decision makers to track not only the success of their recruitment strategy, but
+    also how well they are performing in terms of customer experience. If your clients
+    don’t come back, then there’s something to be worked on, either in terms of the
+    quality of your product, or in terms of the relationship that you have with your
+    customers. Retention analysis allows for easy flagging of this type of issue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Luba Belokon](https://www.linkedin.com/in/luba-belokon-35078512b/)**
+    is Content Jedi at Statsbot.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://blog.statsbot.co/customer-retention-analysis-93af9daee46b?utm_source=kdnuggets&utm_medium=post&utm_campaign=sql).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Machine Learning Algorithms: Which One to Choose for Your Problem](/2017/11/machine-learning-algorithms-choose-your-problem.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning to Improve Machine Learning Results](/2017/09/ensemble-learning-improve-machine-learning-results.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide For Time Series Prediction Using Recurrent Neural Networks (LSTMs)](/2017/10/guide-time-series-prediction-recurrent-neural-networks-lstms.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How To Collect Data For Customer Sentiment Analysis](https://www.kdnuggets.com/2022/12/collect-data-customer-sentiment-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Step by Step Guide to Reading and Understanding SQL Queries](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Breaking Down DENSE_RANK(): A Step-by-Step Guide for SQL Enthusiasts](https://www.kdnuggets.com/breaking-down-denserank-a-step-by-step-guide-for-sql-enthusiasts)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Essential Guide to SQL’s Execution Order](https://www.kdnuggets.com/the-essential-guide-to-sql-execution-order)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Cleaning in SQL: How To Prepare Messy Data for Analysis](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Collection of Guides on Mastering SQL, Python, Data Cleaning, Data…](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

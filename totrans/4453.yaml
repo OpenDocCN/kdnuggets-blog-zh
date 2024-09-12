@@ -1,0 +1,253 @@
+- en: PyTorch Multi-GPU Metrics Library and More in New PyTorch Lightning Release
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/07/pytorch-multi-gpu-metrics-library-pytorch-lightning.html](https://www.kdnuggets.com/2020/07/pytorch-multi-gpu-metrics-library-pytorch-lightning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [William Falcon](https://www.linkedin.com/in/wfalcon/), Founder PyTorch
+    Lightning**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ~~Today~~ [Recently] we released 0.8.1 which is a major milestone for PyTorch
+    Lightning. With incredible user adoption and growth, we’re continuing to build
+    tools to easily do AI research.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This major release puts us on track for final API changes for our v1.0.0 coming
+    soon!
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyTorch Lightning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PyTorch Lightning](https://github.com/williamFalcon/pytorch-lightning) is
+    a very light-weight structure for PyTorch — it’s more of a style guide than a
+    framework. But once you structure your code, we give you free GPU, TPU, 16-bit
+    precision support and much more!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ef2f603e54b5900e4a2f036e227a0de1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Lightning is just structured PyTorch
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0369c0f2cbddf52f5c2337bc65d9c6a0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Metrics**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This release has a major new package inside lightning, a multi-GPU metrics package!
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are two key facts about the metrics package in Lightning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It works with plain PyTorch!
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It automatically handles multi-GPUs for you via DDP. That means that even if
+    you calculate the accuracy on one or 20 GPUs, we handle that for you automatically.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The metrics package also includes mappings to sklearn metrics to bridge between
+    numpy, sklearn and PyTorch, as well as a fancy class you can use to implement
+    your own metrics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The metrics package has over 18 metrics currently implemented (including functional
+    metrics). Check out [our documentation](https://pytorch-lightning.readthedocs.io/en/stable/metrics.html#functional-metrics) for
+    a full list!
+  prefs: []
+  type: TYPE_NORMAL
+- en: overfit_batches
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This release also cleaned up really cool debugging tools we’ve had in lightning
+    for a while. The overfit_batches flag can now let you overfit on a small subset
+    of data to sanity check that your model doesn’t have major bugs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The logic is that if you can’t even overfit 1 batch of data, then there’s no
+    use in training the rest of the model. This can help you figure out if you’ve
+    implemented something correctly, or to make sure your math is correct
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'If you do this in Lightning, this is what you will get:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Faster multi-GPU training
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Another key part of this release is speed-ups we made to distributed training
+    via DDP. The change comes from allowing DDP to work with num_workers>0 in Dataloaders
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Today when you use DDP by launching it via .spawn() and you try to use num_workers>0
+    in Dataloader, your program will likely freeze and not start training (this is
+    also true outside of Lightning).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The solution for most is to set num_workers=0, but that means that your training
+    is going to be reaaaaally slow. To enable num_workers>0 AND DDP, we now launch
+    DDP under the hood without spawn. This removes a lot of other weird restrictions
+    like the need to pickle everything and the need for model weights to not be available
+    once training has finished (because the weights were learned in a subprocess with
+    different memory).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Thus, our implementation of DDP here is much much faster than normal. But of
+    course, we keep both for flexibility:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Other cool features of the release
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: .test() now automatically loads the best model weights for you!
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Install lightning via conda now
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: ModelCheckpoint tracks the path to the best weights
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Automatically move data to correct device during inference
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: many more speed improvements including single-TPU speed-ups (we already support
+    multi-tpu out of the box as well)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Try Lightning today
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you haven’t yet! give Lightning a chance :)
+  prefs: []
+  type: TYPE_NORMAL
+- en: This video explains how to refactor your PyTorch code into Lightning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [William Falcon](https://www.linkedin.com/in/wfalcon/)** is an AI Researcher,
+    and Founder at PyTorch Lightning. He is trying to understand the brain, build
+    AI and use it at scale.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/pytorch/pytorch-multi-gpu-metrics-and-more-in-pytorch-lightning-0-8-1-b7cadd04893e).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Pytorch Lightning vs PyTorch Ignite vs Fast.ai](/2019/08/pytorch-lightning-vs-pytorch-ignite-vs-fast-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[9 Tips For Training Lightning-Fast Neural Networks In Pytorch](/2019/08/9-tips-training-lightning-fast-neural-networks-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Lit BERT: NLP Transfer Learning In 3 Steps](/2019/11/lit-bert-nlp-transfer-learning-3-steps.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Introduction to Deep Learning Libraries: PyTorch and Lightning AI](https://www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unlock the Power of AI - A Special Release by KDnuggets and Machine…](https://www.kdnuggets.com/2023/07/mlm-unlock-power-ai-special-release-kdnuggets-machine-learning-mastery.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[More Performance Evaluation Metrics for Classification Problems You…](https://www.kdnuggets.com/2020/04/performance-evaluation-metrics-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Lightning AI Studio For Free](https://www.kdnuggets.com/using-lightning-ai-studio-for-free)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[skops: A New Library to Improve Scikit-learn in Production](https://www.kdnuggets.com/2023/02/skops-new-library-improve-scikitlearn-production.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

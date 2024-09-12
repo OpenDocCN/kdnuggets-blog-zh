@@ -1,0 +1,537 @@
+- en: The Fast and Effective Way to Audit ML for Fairness
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/01/fast-effective-way-audit-ml-fairness.html](https://www.kdnuggets.com/2023/01/fast-effective-way-audit-ml-fairness.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![The Fast and Effective Way to Audit ML for Fairness](../Images/79379a1186dc17c25289bbbd628d235f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Ruth Bader Ginsburg on the Difficulty of Getting at Unconscious Bias in our
+    Courts (1)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The Notorious RBG is right. It’s hard to get at unconscious bias in our legal
+    system. However, unlike the supreme court, we data scientists have new open-source
+    toolkits that make it easy to audit our machine-learning models for bias and fairness.
+    If Waylan Jennings and Willie Nelson had it to do over today, I like to think
+    their famous duet might go something more like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ♪Mammas don't let your babies grow up to be Supreme Court Justices♪
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ♪Let ‘em be analysts and data scientists and such♪
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ♪There ain't no Python library to make the law fairer♪
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ♪So it's easier to be a data scientist than a justice out there♪ (2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The [Aequitas](http://www.datasciencepublicpolicy.org/our-work/tools-guides/aequitas/)
+    Fairness and Bias Toolkit (3) is an example of one of these Python libraries.
+    I decided to take it for a test drive using one of the most popular data sets
+    available. You are probably already familiar with the [Titanic](https://www.kaggle.com/code/alexisbcook/titanic-tutorial)
+    data used in the Kaggle beginners tutorial. This challenge is to predict passenger
+    survival on the Titanic. I built a no frills Random Forest Classifier model using
+    this data and fed it into the Aequitas toolkit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After only nine additional lines of code, I was ready to see if my initial model
+    is fair to children. I was stunned by the results. **My initial model hates children.**
+    It is reasonably accurate when predicting an adult will survive. But 2.9 times
+    more likely to be wrong when predicting a child will survive. In the statistical
+    parlance of data science, the false positive rate is 2.9 times higher for children
+    than adults. It is a significant disparity in fairness. Worse yet **my initial
+    model also disadvantages females and passengers from the lower socio-economic
+    class** when predicting survival.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![The Fast and Effective Way to Audit ML for Fairness](../Images/b8d188296e282cece7f5a3f27d868004.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The Article in a Nutshell
+  prefs: []
+  type: TYPE_NORMAL
+- en: Do you know if your ML models are fair? If you don’t, you should! This article
+    will demonstrate how to easily audit any supervised learning model for fairness
+    using the open source Aequitas toolkit. We will also comment on the much tougher
+    task of improving fairness in your model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This project is coded in Python using Google Colaboratory. The complete code
+    base is available on my [Titanic-Fairness](https://github.com/FauxGrit/Titanic-Fairness.git)
+    GitHub page. Here is the workflow at a high level:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![The Fast and Effective Way to Audit ML for Fairness](../Images/8965af75ef0a9ae6534f7d0821915081.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Analytics Workflow
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 1: Format Input Data'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Let's start at the end. Once the work of building a model is complete we have
+    everything we need to format the input data frame for the Aequitas toolkit. The
+    input data frame is required to contain columns labeled ‘score’ and ‘label_value’
+    as well as at least one attribute to measure fairness against. Here is the input
+    table for our Random Forest model after formatting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![The Fast and Effective Way to Audit ML for Fairness](../Images/fbea57d3850c64be0fe5ae9ac0ada2a3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Initial Titanic Survival ML Model formatted as Aequitas Input Data
+  prefs: []
+  type: TYPE_NORMAL
+- en: The predictions for our model in the ‘score’ column are binary as either 1 for
+    survival or 0 for not. The ‘score’ values may also be a probability between 0
+    and 1 as in a logistic regression model. In this case threshold(s) must be defined
+    as described in the [configuration](https://dssg.github.io/aequitas/config.html)
+    documentation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We used ‘age’ from the original data set to engineer a categorical attribute
+    separating each passenger as either an ‘Adult’ or a ‘Child’. Aequitas will also
+    accept continuous data. If we provide ‘age’ as a continuous variable, as it exists
+    in the original data set, then Aequitas will automatically transform it into four
+    categories based on quartiles.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 2: Define Model Fairness'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Defining fairness is hard. There are many measures of bias and fairness. Also,
+    perspective often varies depending on which sub-group it is coming from. How do
+    we decide what to care about? The Aequitas team provides a [fairness decision
+    tree](http://www.datasciencepublicpolicy.org/wp-content/uploads/2021/04/Fairness-Full-Tree.png)
+    that can help. It is built around understanding either the assistive, or punitive,
+    impact of the associated interventions. Fairlearn is another toolkit. The Fairlearn
+    documentation provides an excellent framework to perform a [fairness assessment](https://fairlearn.org/main/user_guide/assessment/index.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fairness is dependent on the specifics of the use case. So we will need to define
+    a contrived use case for the Kaggle Titanic data set. To do that, please suspend
+    reality, go back in time, and imagine that after the wreckage of the Atlantic
+    in 1873, the Republic in 1909, and the Titanic in 1912, the White Star Line has
+    consulted with us.  We are to build a model to predict survival in the event of
+    another major catastrophe at sea. We will provide a prediction for each prospective
+    passenger of the [HMHS Britannic](https://en.wikipedia.org/wiki/HMHS_Britannic),
+    the company's third and final Olympic class of steamship.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![The Fast and Effective Way to Audit ML for Fairness](../Images/f6eee10f0b23ed52990e1f1d8cade547.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Britannic Postcard from 1914 (4)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thinking through our contrived case example, our model is punitive when we incorrectly
+    predict survival for a prospective passenger. They might be gravely over confident
+    in the event the Britannic has a mishap at sea. This type of model error is a
+    false positive.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let's consider the demographics of our passengers. Our data set includes
+    labels for sex, age, and socio-economic class. We will evaluate each group for
+    fairness. But let's start with children as our primary fairness objective.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we need to translate our objective into terms that are compatible with Aequitas. 
+    We can define our model fairness objective as minimizing disparity in the false
+    positive rate (fpr) of children versus adults (reference group). Disparity is
+    simply the ratio of the false positive rate for children to that of the reference
+    group. We will also define a policy tolerance that the disparity across groups
+    can be no more than 30%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 3: Utilize the Aequitas Toolkit'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Finally we end at the start. To begin our audit we need to install Aequitas,
+    import the necessary libraries, and initialize the Aequitas classes. Here is the
+    Python code to do that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![The Fast and Effective Way to Audit ML for Fairness](../Images/b8d85a9c2523871cbb9ca9c623c4131a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Install Aequitas and Initialize
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Group( ) class is used to hold confusion matrix calculations and related
+    metrics for each subgroup. Things like false positive count, true positive count,
+    group size, etc. for each subgroup of children, adults, females, and so on. And
+    the Bias( ) class is used to hold disparity calculations between groups. For example
+    the ratio of the false positive rate for children to the false positive rate of
+    the reference group (adults).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next we specify that we want to audit the ‘Age_Level’ attribute and use ‘Adult’
+    as the reference group. This is a Python dictionary and it may include more than
+    a single entry.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![The Fast and Effective Way to Audit ML for Fairness](../Images/77ec9c8719c335d9fa1c07977d7445d3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Specify ‘Age_Level’ as the Attribute to Evaluate for Fairness
+  prefs: []
+  type: TYPE_NORMAL
+- en: The last two things to specify are the metrics we wish to visualize and our
+    tolerance for disparity. We are interested in false positive rates (fpr). The
+    tolerance is used as a reference in the visualization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![The Fast and Effective Way to Audit ML for Fairness](../Images/a7403e8fb79fbdc3155125088c87585a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Specify Fairness Metrics and Tolerance
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we call the get_crosstabs( ) method using our previously formatted input
+    data frame (dfAequitas) and setting the attribute columns to the attributes_to_audit
+    list we defined. The second line creates our bias dataframe (bdf) using the get_disparity_predefined_groups(
+    ) method. And the third line plots the disparity metrics using Aequitas plot (ap).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![The Fast and Effective Way to Audit ML for Fairness](../Images/4897d2b27d0d277d5452975433bf0167.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![The Fast and Effective Way to Audit ML for Fairness](../Images/ddf9bff1980401c342e6106df2d3943e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Aequitas Disparity Visualization with Cursor Rollover
+  prefs: []
+  type: TYPE_NORMAL
+- en: Immediately we see that the subgroup of children are in the red, outside of
+    our 30% tolerance for disparity. With six lines of code for setup/configuration
+    and three more for creating the plot, we have a clear visualization of how our
+    model performs against our fairness objective. Clicking on the group reveals there
+    are 36 children in the test data with a false positive rate (fpr) of 17%. This
+    is 2.88 times higher than the reference group. The pop-up for the reference group
+    reveals 187 Adults with a false positive rate of 6%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 4: Mitigate Model Bias'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Improving model fairness can be significantly more challenging than identifying
+    it. But there is a growing amount of serious research on this topic. Below is
+    a table, adapted from the Aequitas documentation, that summarizes how to improve
+    model fairness.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![The Fast and Effective Way to Audit ML for Fairness](../Images/f8460dea7e8d46115d7856ffcfd9855a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Adapted from Aequitas Documentation (5,6)
+  prefs: []
+  type: TYPE_NORMAL
+- en: When working to improve input data, a common mistake is to think a model can’t
+    be biased if it doesn’t even have data on age, race, gender, or other demographics.
+    This is a fallacy. ‘***There is no fairness through unawareness***. A demographic
+    blind model can discriminate.’ (7) Do NOT remove sensitive attributes from your
+    model without considering the impact. This will preclude the ability to audit
+    for fairness and it may make the bias worse.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are toolkits available that can help mitigate bias in ML models. Two of
+    the most prominent are [AI Fairness 360](https://www.ibm.com/blogs/research/2018/09/ai-fairness-360/)
+    by IBM and [Fairlearn](https://fairlearn.org/) by Microsoft. These are robust
+    and well documented open source toolkits. When using, be mindful of the resulting
+    tradeoffs with model performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For our example, we will mitigate bias with the third bullet by using fairness
+    metrics in our model selection. So we built a few more classification models in
+    our search for fairness. The following table summarizes our metrics for each candidate
+    model. Recall that our initial model is the Random Forest Classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![The Fast and Effective Way to Audit ML for Fairness](../Images/49ccb80b916d344a9918899149ff1912.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Classification Model Fairness Metrics for Children compared with Adults
+  prefs: []
+  type: TYPE_NORMAL
+- en: And here is the Aequitas plot for the highlighted 30% threshold XGBoost model
+    which meets our fairness objective.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![The Fast and Effective Way to Audit ML for Fairness](../Images/66f67bedafec90d22a3beebaea160c6d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: XGBoost with 30% Threshold Meets our Fairness Objective
+  prefs: []
+  type: TYPE_NORMAL
+- en: Success? The group of children are out of the red shaded area. But is this really
+    the best model? Lets compare the two XGBoost models.  These models both predict
+    a continuous probability of survival from 0 to 100%. A threshold value is then
+    used to convert the probability to a binary output of 1 for survival or 0 for
+    not. The default is 50%. When we lower the threshold to 30% the model predicts
+    more passengers to survive. For example, a passenger with a 35% probability meets
+    the new threshold and the prediction is now ‘survival.’ This also creates more
+    false positive errors. In our test data, moving the threshold to 30% adds 13 more
+    false positives to the larger reference group containing adults and only 1 more
+    false positive to the group of children. This makes them close to parity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So the  30% XGBoost model is meeting our fairness objective in a way that is
+    not preferable. Instead of raising the model performance for our protected group,
+    we lowered the performance of the reference group to achieve parity within our
+    tolerance. This is not a desirable solution but is representative of the difficult
+    tradeoffs in a real world use case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bonus Section - More Examples of Aequitas Visualizations
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The disparity tolerance plot is only one example of the built in Aequitas visualizations.
+    This section will demonstrate other options. All of the following data is associated
+    with our initial Random Forest model. The code to produce each of the examples
+    is also included on my [Titanic-Fairness](https://github.com/FauxGrit/Titanic-Fairness.git)
+    GitHub page.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first example is a Treemap of disparity in false positive rates across all
+    of the attributes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![The Fast and Effective Way to Audit ML for Fairness](../Images/72b9509a1ab24431759d3f50da3d4db8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Treemap of Disparity in False Positive Rates across All Attributes
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The relative size of each group is provided by the area. The darker the color
+    the larger the disparity. Brown means a higher false positive rate than the reference
+    and teal means lower. The reference group is automatically selected as the group
+    with the largest population. So the above chart, from left to right, is interpreted
+    as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Children have a much higher false positive rate than Adults,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Upper Class Passengers have a much lower false positive rate than Lower Class,
+    and
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Females have a much higher false positive rate than males.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More concisely, the treemap indicates our initial model is unfair to Children,
+    Lower Class Passengers, and Females. The next plot shows similar information as
+    a more traditional bar chart. But in this example we see the absolute false positive
+    rate instead of the disparity (or ratio) with the reference group.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![The Fast and Effective Way to Audit ML for Fairness](../Images/5afa57b335afa7387f129c60c5e27e10.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Bar Chart of False Positive Rates as Absolute Values across All Attributes
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This bar chart points out a large problem with females having a 42% false positive
+    rate. We can produce a similar bar chart plots for any of the following metrics:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Predicted Positive Group Rate Disparity (pprev),
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Predicted Positive Rate Disparity (ppr),
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: False Discovery Rate (fdr),
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: False Omission Rate (for),
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: False Positive Rate (fpr), and
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: False Negative Rate (fnr).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And finally, there are also methods to print the raw data used in the charts.
+    Below is an example of the basic counts for each group from the initial Random
+    Forest model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![The Fast and Effective Way to Audit ML for Fairness](../Images/15e1114c21c8a36cd66b50f8846ed3aa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Table of Raw Counts for Confusion Matrix by Group
+  prefs: []
+  type: TYPE_NORMAL
+- en: As highlighted above, there are 3 children scored as false positives out of
+    18 total who were predicted to survive. 3 divided by 18 gives us a 17% false positive
+    rate.  The next table provides these metrics as percentages. In the below table,
+    notice the highlighted false positive rate for children is 17% as expected.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![The Fast and Effective Way to Audit ML for Fairness](../Images/2f7a49eacd4253a28a893f0405e71148.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Confusion Matrix Table Expressed as Percentages by Group
+  prefs: []
+  type: TYPE_NORMAL
+- en: The ratio of the false positive rate of children to adults is 2.88 calculated
+    from the highlights above as 0.167 divided by 0.0579\. This is the disparity for
+    children relative to the reference group. Aequitas provides a method to directly
+    print all of the disparity values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![The Fast and Effective Way to Audit ML for Fairness](../Images/36752f61c3240a9704bbdb50025c5eb4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Table of Raw Counts for Confusion Matrix by Group
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The importance of fairness in machine learning is self-evident when we are working
+    in public policy or credit decisioning. Even if not working in these areas, it
+    makes sense to incorporate a fairness audit into your base machine learning workflow.
+    For example, it may be useful to know if your models are disadvantageous to your
+    biggest, most profitable, or longest tenure customers.  Fairness audits are easy
+    to do and will provide insights into the areas where your model both over, and
+    under, performs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'One last tip: fairness audits should also be incorporated into due diligence
+    efforts. If acquiring a company with machine learning models then perform a fairness
+    audit. All that is required is test data with the predictions and attribute labels
+    from those models. This helps understand the risk that the models might be discriminating
+    against a particular group, which could lead to legal issues or reputational damage.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reference
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Parody of original song lyrics by Waylon Jennings & Willie Nelson
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Britannic postcard image from the public domain site wikimedia originally published
+    on ibiblio.org by Frederic Logghe. Link:  [https://commons.wikimedia.org/wiki/File:Britannic_postcard.jpg](https://commons.wikimedia.org/wiki/File:Britannic_postcard.jpg)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Pedro Saleiro, Benedict Kuester, Loren Hinkson, Jesse London, Abby Stevens,
+    Ari Anisfeld, Kit T. Rodolfa, Rayid Ghani, ‘Aequitas: A Bias and Fairness Audit
+    Toolkit’ Link: [https://arxiv.org/abs/1811.05577](https://arxiv.org/abs/1811.05577)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Britannic postcard image from the public domain site wikimedia originally published
+    on ibiblio.org by Frederic Logghe. Link:  [https://commons.wikimedia.org/wiki/File:Britannic_postcard.jpg](https://commons.wikimedia.org/wiki/File:Britannic_postcard.jpg)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Muhammad Bilal Zafar, Isabel Valera, Manuel Gomez Rodriguez, Krishna P. Gummadi,
+    ’Fairness Constraints: Mechanisms for Fair Classification’ Link: [http://proceedings.mlr.press/v54/zafar17a/zafar17a.pdf](http://proceedings.mlr.press/v54/zafar17a/zafar17a.pdf)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Hardt, Moritz and Price, Eric and Srebro, Nathan, ‘Equality of Opportunity
+    in Supervised Learning’ Link: [https://arxiv.org/abs/1610.02413](https://arxiv.org/abs/1610.02413)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Rayid Ghani, Kit T Rodolfa, Pedro Saleiro, ‘Dealing with Bias and Fairness
+    in AI/ML/Data Science Systems’ Slide 65\. Link: [https://dssg.github.io/aequitas/examples/compas_demo.html#Putting-Aequitas-to-the-task](https://dssg.github.io/aequitas/examples/compas_demo.html#Putting-Aequitas-to-the-task)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**[Matt Semrad](https://www.linkedin.com/in/mattsemrad)** is analytics leader
+    with 20+ years of experience building organizational capabilities in high growth
+    technology companies.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Comprehensive Survey on Trustworthy Graph Neural Networks:…](https://www.kdnuggets.com/2022/05/comprehensive-survey-trustworthy-graph-neural-networks-privacy-robustness-fairness-explainability.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simple and Fast Data Streaming for Machine Learning Projects](https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Fast Can BERT Go With Sparsity?](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Speed up Machine Learning with Fast Kriging (FKR)](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Make Python Code Run Incredibly Fast](https://www.kdnuggets.com/2021/06/make-python-code-run-incredibly-fast.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Step up your Python game with Fast Python for Data Science!](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

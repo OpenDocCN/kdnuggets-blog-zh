@@ -1,0 +1,248 @@
+- en: 'Building a Bot to Answer FAQs: Predicting Text Similarity'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/03/bot-answer-faqs-predicting-text-similarity.html](https://www.kdnuggets.com/2017/03/bot-answer-faqs-predicting-text-similarity.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Amanda Sivaraj, [indico](https://indico.io/).**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In our [previous tutorial on customer support bots](https://indico.io/blog/building-bot-better-customer-support/),
+    we trained a bot using the Custom Collection API to direct customers to the team
+    member who is best suited to assist them with their problem or query. The bot
+    improved our team’s response times as we no longer had to rely on a human facilitator
+    (who also plays many other roles in our company #startuplife) to do the job. However,
+    we’re generally only able to respond during our office hours of 11am-7pm EST,
+    so there’s still lag for inquiries outside of that period. How can we improve
+    this? Build a bot to answer frequently asked questions, reducing lag time for
+    more customers and ensuring our engineers don’t need to spend more time than necessary
+    away from the products we’re building for you :).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1157128c1d56bcc71b5f88ab2458fa93.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The Task
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We’ll conduct a nearest neighbour search in Python, comparing a user input question
+    to a list of FAQs. To do this, we’ll use indico’s Text Features API to find all
+    the [feature vectors](https://en.wikipedia.org/wiki/Feature_vector) for the text
+    data, and calculate the distance between these vectors to those of the user’s
+    input question in 300-dimensional space. Then we’ll return the appropriate answer
+    based to the FAQ that the user’s question is most similar to (if it meets a certain
+    confidence threshold).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting Started
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: First, [get the skeleton code](https://github.com/IndicoDataSolutions/SuperCell/tree/master/faqs_bot)
+    from our SuperCell GitHub repo.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You’ll need to install all necessary packages if you don’t have them — `texttable`
+    and, of course, `indicoio`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you haven’t already set up your indico account, follow our [Quickstart Guide](https://indico.io/docs#quickstart).
+    It will walk you through the process of getting your API key and installing the
+    `indicoio` Python library. If you run into any problems, check the [Installation](https://indico.io/docs#install)
+    section of the docs. If all else fails, you can also reach out to us through that
+    little chat bubble. Assuming your account is all set up and you’ve installed everything,
+    let’s get started!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Go to the top of your file and import `indicoio`. Don’t forget to set your API
+    key. There are a [number of ways you can do it](https://indico.io/docs#config);
+    I like to put mine in a configuration file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Using indico’s Text Features API
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You’ll need to store your FAQs and their respective answers in a dictionary.
+    For simplicity’s sake, I’ve created a dictionary, `faqs`, of five questions and
+    answers in the script itself. This will be our starting dataset. We only need
+    to find the text features for the questions and not the answers, so we extract
+    `faqs.keys()` and then feed that data into our `make_feats()` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, let’s update the `run()` function. Save out `feats` to a Pickle file so
+    you don’t have to keep re-running the Text Features API on the static list of
+    FAQs every time you want to compare a user’s question to it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Comparing FAQs to User Input
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now that we’ve got the feature representations for the FAQ text data, let’s
+    move on to the next phase: collecting and comparing user questions to our FAQs.
+    So that everyone can run this script locally, no matter what customer support
+    chat service you plan to hook this up to, we’ll just use `raw_input()`. You’ll
+    need to set up your own webhook according to your messaging app’s docs.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First, let’s get an input, add it to the list of FAQs, as well as find the
+    text features for the input and them to the main `feats` list. This will simplify
+    things later when we need to calculate the distances for all the feature representations.
+    Update the `input_question()` function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Time to update the `run()` function again. This time, you can just load the
+    Pickle file with the FAQ features you found earlier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So now we’ve got a list of feature vectors for all the FAQs and the user’s question!
+    How will this help us figure out which FAQ the input is most similar to? Similarity
+    between pieces of text is measured by similarity between their corresponding feature
+    vectors. We predict their similarity in the `calculate_distances` function, which
+    calculates the distance between these vectors in cosine space. Cosine is generally
+    the comparison metric of choice when you’re dealing with points in high dimensional
+    space. `calculate_distances` produces an `m` by `n` matrix that stores the distance
+    between document `m` and document `n` at `distance_matrix[m][n]`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Update `run()` once again:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally, let’s see how well our nearest neighbours search performs! The `similarity_text()`
+    function will sort through the `distance_matrix` and order each piece of text
+    according to level of similarity, and then print it out in a table. We don’t want
+    our bot to give an answer if it’s not very confident that it’s found an FAQ match
+    though, so we need to set a confidence threshold. Add the following code to `similarity_text()`,
+    just below `print t.draw()`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If the bot’s confidence level meets the threshold, it should return the appropriate
+    FAQ answer. Otherwise, it should notify your customer support manager (you’ll
+    have to hook that up based on your messaging app’s docs):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Update `run()` one last time and then, well, run the code!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'How well did it perform? Here’s an example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![FAQs bot results in terminal](../Images/a0756344aaf110af06e421f5d7e6f105.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Woo! It performed quite well, even though the input question’s word choice differed
+    from and was more concise than the FAQ match, our rich text features were still
+    able to capture its meaning. So, what’s happening here — why does this work?
+  prefs: []
+  type: TYPE_NORMAL
+- en: indico’s Text Features API creates of hundreds of thousands of rich feature
+    vector representations for a given text input, learned using deep learning techniques.
+    These feature vectors — numerical representations in multi-dimensional space —
+    are a computer’s way of assigning meaning to a word.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When we fed the list of FAQs into the Text Features algorithm, it essentially
+    identified certain words in each question as “significant”, and determined where
+    they could be found in multi-dimensional space. Text Features then combined these
+    word representations to produce a representation of the entire “document” (in
+    this case, an FAQ — you could also pass in an entire article to find its feature
+    representation). It did the same thing when we showed it our new input question.
+    We then used these document representations to calculate the distance between
+    them to determine how conceptually similar the two “documents” are. The closer
+    the features in multi-dimensional space, the closer they are in meaning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next Steps
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: At the heart of it, this was an exercise in predicting text similarity. What
+    other applications can you imagine for this task? If you create something cool
+    with our APIs, definitely let us know at [contact@indico.io](mailto:contact@indico.io)!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Amanda Sivaraj](https://www.linkedin.com/in/amandasivaraj/)** is a
+    content creator, digital marketer, and data and tech enthusiast. She develops
+    content and tutorials for [indico](https://indico.io/), which provides machine
+    learning tools for automated text and image analysis.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://indico.io/blog/faqs-bot-text-features-api/). Reposted with
+    permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Chatbots on Steroids: 10 Key Machine Learning Capabilities to Fuel Your Chatbot](/2017/01/chatbots-steroids-10-key-machine-learning-capabilities.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Artificial Intelligence and Speech Recognition for Chatbots: A Primer](/2017/01/artificial-intelligence-speech-recognition-chatbots-primer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Concise Overview of Recent Advances in Chatbot Technologies](/2017/01/grakn-year-review-chatbot-technologies.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How ChatGPT Works: The Model Behind The Bot](https://www.kdnuggets.com/2023/04/chatgpt-works-model-behind-bot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Answer Data Science Coding Interview Questions](https://www.kdnuggets.com/2022/01/answer-data-science-coding-interview-questions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 Advanced Data Science SQL Interview Questions You Must Know…](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Google Answer to ChatGPT by Adding Generative AI into Docs and Gmail](https://www.kdnuggets.com/2023/03/google-answer-chatgpt-adding-generative-ai-docs-gmail.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Evaluating Methods for Calculating Document Similarity](https://www.kdnuggets.com/evaluating-methods-for-calculating-document-similarity)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Predicting Cryptocurrency Prices Using Regression Models](https://www.kdnuggets.com/2022/05/predicting-cryptocurrency-prices-regression-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,214 @@
+- en: The Architecture Used at LinkedIn to Improve Feature Management in Machine Learning
+    Models
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/05/architecture-linkedin-feature-management-machine-learning-models.html](https://www.kdnuggets.com/2020/05/architecture-linkedin-feature-management-machine-learning-models.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/de2349e35739a8558babeb6723ed2e75.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: LinkedIn is one of the companies at the forefront of machine learning innovation.
+    Regularly faced with applying machine learning at massive levels of scalability,
+    the LinkedIn engineering team has become a regular contributor to open source
+    machine learning stacks as well as content that details some of the best practices
+    learned in their machine learning journey. At the heart of the LinkedIn experience,
+    we have the content feed that recommends new connections, jobs or candidates for
+    a position. That content feed is powered by many recommendation systems based
+    on machine learning models that need constant experimentation, versioning and
+    evaluation. Those goals depend on a very robust feature engineering process. Recently,
+    LinkedIn unveiled some details about their approach to feature engineering to
+    enable rapid experimentation which contains some very unique innovations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The scale of the machine learning problems that an organization like LinkedIn
+    deals with results incomprehensible for data scientists. Building an maintaining
+    a single, effective machine learning models is hard enough so imagine coordinating
+    the execution of thousands of machine learning programs to achieve a cohesive
+    experience. Feature engineering is one of the key element to allow rapid experimentation
+    of machine learning programs. For instance, let’s assume that a LinkedIn member
+    is described using 100 features and that the content feed rendered in the member’s
+    homepage is powered by 50+ machine learning models. Assuming that every second,
+    there are tens of thousands of people loading their LinkedIn pages, the number
+    of feature computations required is something like the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*(number of features) X (number of concurrent LinkedIn members) X (number of
+    machine learning models) > 100 X 10000 X 50 > 50,000,000 per second*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: That number is just unfathomable to most organizations starting their machine
+    learning journey. Such a scale requires representing features in a flexible and
+    easy to interpret manner that can be reused across different infrastructures such
+    as Spark, Hadoop, database systems and others. The latest version of LinkedIn’s
+    feature architecture introduces the concept of typed features to represent features
+    in an expressive and reusable format. This idea arose from challenges with the
+    previous version of LinkedIn’s machine learning inference and training architecture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The First Version
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Like any large, agile organization, LinkedIn’s machine learning architecture
+    evolved across different disparate infrastructures. For instance, the following
+    figure represents the feature architecture for LinkedIn’s online and offline inference
+    infrastructures based on Spark and Hadoop respectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The online feature architecture was optimized for universality representing
+    strings to store categoricals and a single value type of floats. This design incurred
+    an efficiency cost in representing integer counts, categoricals with known domains,
+    and interacted features. On the other hand, the HDFS feature snapshot was optimized
+    for simple offline joins, was specific per feature rather than uniform, and did
+    not take into account online systems. The constant translation between the different
+    types of feature representations introduced regular friction in the possible experimentation
+    with features and challenges replicating updates across the different systems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e97c7e3a10de2833e992fe723e364cdb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Typed Features
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To address some of the limitations of the initial feature architecture, LinkedIn
+    introduced a new way of storing features throughout our systems in a single format
+    of tensors with feature-specific metadata. Tensors are a standard computation
+    unit used across most of the popular deep learning frameworks such as TensorFlow
+    or PyTorch. From that perspective, the use of tensors facilitate the implementation
+    of complex linear algebra operations without sacrificing the underlying format.
+    Most data scientists are familiar with the tensor structure so the new representation
+    results relatively easy to incorporate in machine learning programs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One thing that is important to notice is that the new LinkedIn structure is
+    designed specifically for features and not relying on a generic data type format
+    like Avro. By building on top of tensors, features are always serialized in the
+    same generic schema. This allows for flexibility in quickly adding new features
+    to systems without changing any APIs. This is achievable thanks to the metadata,
+    which maps what previously would have been space-inefficient strings or custom-defined
+    schemas to integers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The following code illustrates the definition of a feature using LinkedIn’s
+    new typed feature schema. Concretely, defines a feature “historicalActionsInFeed”
+    that will list historical actions a member has taken on the feed. The feature
+    metadata information is defined inside the flagship namespace, with names and
+    versions. This allows for any system to look up the feature in the metadata system
+    using the urn *urn:li:(flagship,historicalActionsInFeed,1,0).* From this feature
+    definition, there are two important dimensions, which include a categorical listing
+    of different action types in *“feedActions”* as well as a discrete count representing
+    different time windows in a member’s history.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The Second Version
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Having a new feature and metadata representation model in place makes distribution
+    the new challenge. How to effectively distribute new features across thousands
+    of machine learning models and dozens of infrastructure components. The answer
+    was simpler than expected. LinkedIn created a single, textual source of truth
+    for each metadata type that is stored under source control and published as an
+    artifact library. How clever! Any machine learning system can pull the desired
+    metadata constructs by simply declaring a dependency. Additionally, the LinkedIn
+    typed feature solution includes a metadata resolution library that operates against
+    different feature stores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6ce7c7ed73781167a00b2bb2cb5e8fa9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: LinkedIn new type feature architecture includes some interesting ideas that
+    can streamline feature engineering for large scale machine learning systems. By
+    using tensors are the underlying computation unit, Linked has created a feature
+    representation that is easily pluggable into any machine learning frameworks.
+    Additionally, the use of metadata can enrich the representation of the feature.
+    Early reports indicate that the new typed feature architecture has increased the
+    performance of LinkedIn’s inference systems for over 20% which is a remarkable
+    number at that scale. It would be interesting to see some of these ideas open
+    sourced in the near future.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/@jrodthoughts/the-architecture-used-at-linkedin-to-improve-feature-management-in-machine-learning-models-c7bd6ae54db).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[4 Tips for Advanced Feature Engineering and Preprocessing](/2019/08/4-tips-advanced-feature-engineering-preprocessing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Microsoft Research Unveils Three Efforts to Advance Deep Generative Models](/2020/05/microsoft-research-three-efforts-advance-deep-generative-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Hitchhiker’s Guide to Feature Extraction](/2019/06/hitchhikers-guide-feature-extraction.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, May 18: 5 Free Hosting Platform For Machine…](https://www.kdnuggets.com/2022/n20.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Mesh Architecture: Reimagining Data Management](https://www.kdnuggets.com/2022/05/data-mesh-architecture-reimagining-data-management.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Ways to Improve Your Machine Learning Models](https://www.kdnuggets.com/7-ways-to-improve-your-machine-learning-models)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Advanced Feature Selection Techniques for Machine Learning Models](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n07, Feb 16: How to Learn Math for Machine…](https://www.kdnuggets.com/2022/n07.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

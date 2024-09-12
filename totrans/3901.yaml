@@ -1,0 +1,521 @@
+- en: Coding habits for data scientists
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/05/coding-habits-data-scientists.html](https://www.kdnuggets.com/2020/05/coding-habits-data-scientists.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [David Tan](https://www.thoughtworks.com/profiles/david-tan), ThoughtWorks**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*[Originally published](https://www.thoughtworks.com/insights/blog/coding-habits-data-scientists)
+    in ThoughtWorks Insights. Reposted with permission.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a ML practitioner, you would know that code can get out of hand, quickly.
+    What starts as an awesome ML model easily becomes a big blob of code that's hard
+    to understand. As a consequence, modifying code becomes painful and error-prone,
+    and it becomes increasingly difficult for ML practitioners to evolve their ML
+    solutions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This article shares some techniques for identifying bad habits that add to
+    complexity in code as well as habits that can help us partition complexity. It''s
+    also now a **[video series](https://www.youtube.com/watch?v=Edn6XxWmtEs&list=PLO9pkowc_99ZhP2yuPU8WCfFNYEx2IkwR&index=2)**
+    that cover topics such as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to refactor a Jupyter notebook
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Automated testing for your ML codebase
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to improve your productivity using an IDE
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Get started with Docker in 17 minutes
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If you’ve tried your hand at machine learning or data science, you know that
+    code can get [messy](https://github.com/davified/clean-code-ml/blob/master/notebooks/titanic-original.ipynb)
+    quickly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Typically, code to train ML models is written in Jupyter notebooks, and it’s
+    full of (i) side effects (e.g., print statements, pretty-printed dataframes, data
+    visualisations) and (ii) glue code without any abstraction, modularisation, and
+    automated tests. While this may be fine for notebooks targeted at teaching people
+    about the machine learning process, in real projects, it’s a recipe for an unmaintainable
+    mess. The lack of good coding habits makes code hard to understand, and consequently,
+    modifying code becomes painful and error-prone. This makes it increasingly difficult
+    for data scientists and developers to evolve their ML solutions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we’ll share techniques for identifying bad habits that add
+    to the complexity in code as well as habits that can help us partition complexity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What contributes to complexity?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*One of the most important techniques for managing software complexity is to
+    design systems so that developers only need to face a small fraction of the overall
+    complexity at any given time. - [John Ousterhout](https://www.amazon.com/Philosophy-Software-Design-John-Ousterhout/dp/1732102201)*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: To tackle complexity, we must first know what it looks like. Something is complex
+    when it’s [composed of interconnected parts](https://www.etymonline.com/word/complex).
+    Every time we write code in a way that adds another moving part, we increase complexity
+    and add one more thing to hold in our head.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'While we cannot — and should not try to — escape from the essential complexity
+    of a problem, we often add unnecessary accidental complexity and unnecessary cognitive
+    load through bad practices such as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Not having abstractions.**When we write all code in a single Python notebook
+    or script without abstracting it into functions or classes, we force the reader
+    to read many lines of code and figure out the “how,” to find out what the code
+    is doing.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Long functions that do multiple things.**This forces us to have to hold all
+    the intermediate data transformations in our head while working on one part of
+    the function.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Not having unit tests.**When we refactor, the only way to ensure that we
+    haven’t broken anything is to restart the kernel and run the entire notebook(s).
+    We’re forced to take on the complexity of the whole codebase even though we just
+    want to work on one small part of it.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Complexity is unavoidable, but it can be compartmentalized. In our homes, when
+    we don't actively organise and rationalise where, why, and how we place things,
+    mess accumulates and what should have been a simple task (e.g., finding a key)
+    becomes unnecessarily time-consuming and frustrating. The same applies to our
+    codebase. New code is constantly being added for data cleaning, feature engineering,
+    bug fixes, handling new data, and so on. Unless we vigilantly maintain our codebase
+    and continuously refactor (and we can’t refactor without unit tests), mess and
+    complexity are guaranteed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the remainder of this article, we’ll share some common bad habits that increase
+    complexity and better habits that help to manage complexity:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ​Keep code clean
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use functions to abstract away complexity
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Smuggle code out of Jupyter notebooks as soon as possible
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Apply test-driven development
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Make small and frequent commits
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Habits for reducing complexity
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Keep code clean**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unclean code adds to complexity by making code difficult to understand and modify.
+    As a consequence, changing code to respond to business needs becomes increasingly
+    difficult and sometimes even impossible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'One such bad coding habit (or “code smell”) is dead code. Dead code is code
+    that is executed but whose result is never used in any other computation. Dead
+    code is yet another unrelated thing that developers have to hold in our heads
+    when coding. For example, compare these two code samples:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Clean code practices have been written about extensively in [several languages](https://github.com/abiodunjames/Awesome-Clean-Code-Resources),
+    including [Python](https://github.com/zedr/clean-code-python). We’ve adapted these
+    “clean code” principles, and you can find them in this [clean-code-ml repo](https://github.com/davified/clean-code-ml):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Design ([code samples](https://github.com/davified/clean-code-ml/blob/master/docs/design.md))
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Don't expose your internals (Keep implementation details hidden)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Dispensables ([code samples](https://github.com/davified/clean-code-ml/blob/master/docs/dispensables.md))
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Remove dead code
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Avoid print statements (even glorified print statements such as **head()**,**df.describe()**,** df.plot()**
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Variables ([code samples](https://github.com/davified/clean-code-ml/blob/master/docs/variables.md))
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Variable names should reveal intent
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Functions ([code samples](https://github.com/davified/clean-code-ml/blob/master/docs/functions.md))
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use functions to keep code “DRY” (Don’t Repeat Yourself)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Functions should do one thing
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Use functions to abstract away complexity**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Functions simplify our code by abstracting away complicated implementation details
+    and replacing them with a simpler representation — its name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Imagine you’re in a restaurant. You’re given a menu. Instead of telling you
+    the name of the dishes, this menu spells out the recipe for each dish. For example,
+    one such dish is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Step 1\. In a large pot, heat up the oil. Add carrots, onions and celery;
+    stir until onion is soft. Add herbs and garlic and cook for a few more minutes.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '*Step 2\. Add in lentils, add tomatoes and water. Bring soup to a boil and
+    then reduce heat to let it simmer for 30 minutes. Add spinach and cook until spinach
+    is soft. Finally, season with vinegar, salt and pepper.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'It would have been easier for us if the menu hid all the steps in the recipe
+    (i.e., the implementation details) and instead gave us the name of the dish (an
+    interface, an abstraction of the dish). (Answer: that was lentil soup).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To illustrate this point, here’s a code sample from a notebook in Kaggle’s Titanic
+    competition before and after refactoring.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: What did we gain by abstracting away the complexity into functions?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Readability**. We just have to read the interface (i.e., categorize_column())
+    to know what it’s doing. We didn’t have to read each line or search the internet
+    for things that we don’t understand (e.g., pd.qcut). If I still didn’t understand
+    what the function did based on its name and usage, I can read its unit tests or
+    its definition.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Because it’s now a function, we can easily write a unit test for it. If we accidentally
+    change its behaviour, the unit tests will fail and give us feedback within milliseconds.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To repeat the same transformation on any column (e.g., ‘Age’ or ‘Income’), we
+    just need one line (not seven lines) of code.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'When we refactor to functions, our entire notebook can be simplified and made
+    more elegant:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# bad example*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[See notebook](https://github.com/davified/clean-code-data-science/blob/master/notebooks/titanic-notebook-1.ipynb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Our mental overhead is now drastically reduced. We’re no longer forced to process
+    many many lines of implementation details to understand the entire flow. Instead,
+    the abstractions (i.e., functions) abstract away the complexity and tell us what
+    they do, and save us from having to spend mental effort figuring out how they
+    do it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Smuggle code out of Jupyter notebooks as soon as possible**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In interior design, there is a concept (the “[Law of Flat Surfaces](https://en.wikipedia.org/wiki/Law_of_flat_surfaces)”)
+    that states "any flat surface within a home or office tends to accumulate clutter."
+    Jupyter notebooks are the flat surface of the ML world.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6555c8c503fcbd08787c0828595c5e45.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sure, Jupyter notebooks are great for quick prototyping. But it's where we tend
+    to put many things — glue code, print statements, glorified print statements **(df.describe() **or** df.plot())**,
+    unused import statements, and even stack traces. Despite our best intentions,
+    so long as the notebooks are there, mess tends to accumulate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notebooks are useful because they give us fast feedback, and that’s often what
+    we want when we’re given a new dataset and a new problem. However, the longer
+    the notebooks become, the harder it is to get feedback on whether our changes
+    are working.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In contrast, if we had extracted our code into functions and Python modules,
+    and if we have unit tests, the test runner will give us feedback on our changes
+    in a matter of seconds, even when there are hundreds of functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/aab1436e8dea2ef7b6d4dccc99589dae.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 1: The more code we have, the harder it is for notebooks to give us
+    fast feedback on whether everything is working as expected.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hence, our goal is to move code out of notebooks into Python modules and packages
+    as early as possible. That way, they can rest within the safe confines of unit
+    tests and domain boundaries. This will help to manage complexity by providing
+    a structure for organizing code and tests logically and make it easier for us
+    to evolve our ML solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, how do we move code out of Jupyter notebooks?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Assuming you already have your code in a Jupyter notebook, you can follow this
+    process:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f182b2d0c197d0d9b1c6b448a2d23c67.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 2: [How to refactor a Jupyter notebook](https://github.com/davified/clean-code-ml/blob/master/docs/refactoring-process.md).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The details of each step in this process (e.g., how to run tests in watch mode)
+    can be found in the [clean-code-ml repo](https://github.com/davified/clean-code-ml/blob/master/docs/refactoring-exercise.md).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Apply test-driven development**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So far, we’ve talked about writing tests after the code is already written in
+    the notebook. This recommendation isn’t ideal, but it’s still far better than
+    not having unit tests.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is a myth that we cannot apply test-driven development ([TDD](https://www.thoughtworks.com/insights/blog/test-driven-development-best-thing-has-happened-software-design))
+    to machine learning projects. To us, this is simply untrue. In any machine learning
+    project, most of the code is concerned with data transformations (e.g., data cleaning,
+    feature engineering), and a small part of the codebase is actual machine learning.
+    Such data transformations can be written as pure functions that return the same
+    output for the same input, and as such, we can apply TDD and reap its benefits.
+    For example, TDD can help us break down big and complex data transformations into
+    smaller bite-size problems that we can fit in our head, one at a time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As for testing that the actual machine learning part of the code works as we
+    expect it to, we can write functional tests to assert that the metrics of the
+    model (e.g., accuracy, precision, etc.) are above our expected threshold. In other
+    words, these tests assert that the model functions according to our expectations
+    (hence the name, functional test). Here’s an [example](https://github.com/davified/clean-code-ml/blob/master/src/tests/test_model_metrics.py) of
+    such a test:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Make small and frequent commits**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When we don’t make small and frequent commits, we increase mental overhead.
+    While we’re working on this problem, the changes for earlier ones are still shown
+    as uncommitted. This distracts us visually and subconsciously; it makes it harder
+    for us to focus on the current problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, look at the first and second images below. Can you find out which
+    function we’re working on? Which image gave you an easier time?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5876a792c417d3bf346971b0694a3176.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/2d0e582607aa4da59dc8d5eb21d22d8e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'When we make small and frequent commits, we get the following benefits:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reduced visual distractions and cognitive load.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We needn’t worry about accidentally breaking working code if it’s already been
+    committed.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In addition to [red-green-refactor](https://blog.cleancoder.com/uncle-bob/2014/12/17/TheCyclesOfTDD.html),
+    we can also [red-red-red-revert](https://www.facebook.com/notes/kent-beck/one-bite-at-a-time-partitioning-complexity/1716882961677894/).
+    If we were to inadvertently break something, we can easily fall back checkout
+    to the latest commit, and try again. This saves us from wasting time undoing problems
+    that we accidentally created when we were trying to solve the essential problem.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: So, how small of a commit is small enough? Try to commit when there is a single
+    group of logically related changes and passing tests. One technique is to look
+    out for the word “and” in our commit message, e.g., “Add exploratory data analysis and
+    split sentences into tokens and refactor model training code.” Each of these three
+    changes could be split up into three logical commits. In this situation, you can
+    use **[git add --patch](https://nuclearsquid.com/writings/git-add/)** to stage
+    code in smaller batches to be committed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*“I''m not a great programmer; I''m just a good programmer with great habits.”
+    - Kent Beck, pioneer of Extreme Programming and xUnit testing frameworks*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: These are habits that have helped us manage complexity in machine learning and
+    data science projects. We hope it helps you become more agile and productive in
+    your data projects as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [David](https://www.thoughtworks.com/profiles/david-tan) has been
+    with ThoughtWorks for 2 years, and was working in the government sector in a non-technical
+    role before he decided to embark on a career in software engineering. Over the
+    last two years, he has worked on several machine learning side projects on tasks
+    such as stock market price prediction, fraud protection, and beer quantity image
+    recognition. He is also a trainer for the ThoughtWorks JumpStart! program. David
+    is passionate about agile software development and knowledge sharing. During his
+    free time he enjoys spending time with his family as a new dad.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[10 Python Tips and Tricks You Should Learn Today](https://www.kdnuggets.com/2020/01/10-python-tips-tricks-learn-today.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 Coding Mistakes Made by Data Scientists](https://www.kdnuggets.com/2019/04/top-10-coding-mistakes-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Reasons Why Your Machine Learning Code is Probably Bad](https://www.kdnuggets.com/2019/02/4-reasons-machine-learning-code-probably-bad.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, May 4: 9 Free Harvard Courses to Learn Data…](https://www.kdnuggets.com/2022/n18.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Hard Coding in a Data Science Project - Use Config Files Instead](https://www.kdnuggets.com/2023/06/stop-hard-coding-data-science-project-config-files-instead.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Answer Data Science Coding Interview Questions](https://www.kdnuggets.com/2022/01/answer-data-science-coding-interview-questions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[15 Python Coding Interview Questions You Must Know For Data Science](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Hard Python Coding Interview Questions For Data Science](https://www.kdnuggets.com/2023/03/3-hard-python-coding-interview-questions-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Free University Courses to Learn Coding for Data Science](https://www.kdnuggets.com/5-free-university-courses-to-learn-coding-for-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,399 @@
+- en: Adventures in MLOps with Github Actions, Iterative.ai, Label Studio and NBDEV
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/09/adventures-mlops-github-actions-iterative-ai-label-studio-and-nbdev.html](https://www.kdnuggets.com/2021/09/adventures-mlops-github-actions-iterative-ai-label-studio-and-nbdev.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Aaron Soellinger](https://www.linkedin.com/in/aaronsoellinger/) & [Will
+    Kunz](https://www.linkedin.com/in/willkunz/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When designing the MLOps stack for our project, we needed a solution that allowed
+    for a high degree of customization and flexibility to evolve as our experimentation
+    dictated. We considered large platforms that encompassed many functions, but found
+    it limiting in some key areas. Ultimately we decided on an approach where separate
+    specialized tools were implemented for labeling, data versioning, and continuous
+    integration. This article documents our experience building this custom MLOps
+    approach.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1de6ffdf729c70393d5fa10dec24c761.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Finding Dan | Dan Grinwis](https://unsplash.com/@finding_dan?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/unknown?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: NBDEV
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/c7067d28a0d19f6b72674420ae109bc3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: (Taken from [https://github.com/fastai/nbdev](https://github.com/fastai/nbdev))
+  prefs: []
+  type: TYPE_NORMAL
+- en: The classic problem using Jupyter for development was moving from prototype
+    to production required copy/pasting code from a notebook to a python module. NBDEV
+    automates the transition between notebook and module, thus enabling the Jupyter
+    notebook to be an official part of a production pipeline. NBDEV allows the developer
+    to state which module a notebook should create, which notebook cells to push to
+    the module and which notebook cells are tests. A key capability of NBDEV is its
+    approach to testing within the notebooks, and the NBDEV template even provides
+    a base Github Action to implement testing in the CI/CD framework. The resulting
+    Python module requires no editing by the developer, and can easily be integrated
+    into other notebooks or the project at large using built-in python import functionality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Iterative.ai: DVC/CML'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/8ddbc52ba48451e1af2a6aa73e4bd4eb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: (Taken from [https://iterative.ai/](https://iterative.ai/))
+  prefs: []
+  type: TYPE_NORMAL
+- en: The files used in machine learning pipelines are often large archives of binary/compressed
+    files, which are not accessible or cost prohibitive for existing version control
+    solutions like git. DVC solves data versioning by representing large datasets
+    as a hash of the file contents which enables DVC to track changes. It works similar
+    to git (e.g. `dvc add`, `dvc push`). When you run `dvc add` on your dataset, it
+    gets added to the `.gitignore` and tracked for changes by `dvc`. CML is a project
+    that provides functionality for publishing model artifacts from Github Actions
+    workflows into comments attached Github Issues, Pull Requests, etc... That is
+    important because it helps us start to fill in the gaps in the Pull Requests accounting
+    for training data changes and resulting model accuracy and effectiveness.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Github Actions
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/986a4058fc9c06b2bca4e15d272a9a31.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: (Taken from [https://github.com/features/actions](https://github.com/features/actions))
+  prefs: []
+  type: TYPE_NORMAL
+- en: We want automated code testing, including building models in the automated testing
+    pipeline. Github Actions is in competition with CircleCI, Travis, Jenkins, which
+    is to automate testing around code pushes, commits, pull requests, etc. Since
+    we’re already using Github to host our repos, we avoid another 3rd party app by
+    using Actions. In this project we need to use Github self-hosted runners to run
+    jobs on an on-prem GPU cluster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Label Studio
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/6fc4d94e308f6e66b77a6e2c52de00ec.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: (Taken from [https://labelstud.io/](https://labelstud.io/))
+  prefs: []
+  type: TYPE_NORMAL
+- en: We did a deep dive into how we’re using Label Studio found [here](https://towardsdatascience.com/development-of-a-benchmark-dataset-with-an-interface-to-the-fastai-dataloader-using-label-studio-d3aa3c26661f).
+    Label Studio is a solution for labeling data. It works well, and is flexible to
+    run in a variety of environments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why use them together?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The setup is designed to deploy models faster. That means, more data scientists
+    working harmoniously in parallel, transparency in the repository and faster onboarding
+    time for new people. The goal is to standardize the types of activities that data
+    scientists need to do in project and provide clear instructions for them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The following is a list of tasks we want to streamline with this system design:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Automate the ingest from Label Studio and provide a single point for ingesting
+    that into the model training and evaluation activities.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Automated testing on the data pipeline code, that is unit testing and re-deployment
+    of containers used by the process.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Automated testing on the model code, that is unit testing and re-deployment
+    of containers used by the process.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Enable automated testing to include model re-training and evaluation criteria.
+    When the model code changes, train a model with the new code and compare it to
+    the existing incumbent model.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Trigger model retraining when training data changes.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Below is the description of pipeline for each task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Traditional CI/CD Pipeline
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'This pipeline implements automated testing feedback for each pull request that
+    includes evaluation of syntax, unit, regression and integration tests. The outcome
+    of this process is a functionally tested docker image to our private repository.
+    This process maximizes the likelihood that the latest best code is in a fully
+    tested image available in the repository for downstream tasks. Here’s how the
+    developer lifecycle works in the context of a new feature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a4761dfdadbb159032a87bf8245781ca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here we show how the workflow function for while editing the code. Using NBDEV
+    enables us to work directly from the Jupyter notebooks including writing the tests
+    directly in the notebook. NBDEV requires that all the cells in the notebooks run
+    without exception (unless the cell is flagged not to run). (Image by Author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data pipeline
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Label Studio currently lacks event hooks enabling updates on-changes to the
+    label data stored. So we take a `cron` triggered approach, updating the dataset
+    every hour. Additionally, while the label studio training dataset is small enough,
+    the updates can be done as part of the training pipeline as well. We have the
+    ability to trigger the data pipeline refresh on demand using the Github Actions
+    interface.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/576cc3526614e7f27fd041cfba29247a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The data pipeline feeds from Label Studio, and persists every version of the
+    dataset and relevant inputs to the DVC cache stored in AWS S3\. (Image by Author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model Pipeline
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The modeling pipeline integrates model training into the CI/CD pipeline for
+    the repository. This enables each pull request to evaluate the syntax, unit, integration
+    and regression tests configured on the codebase, but also can provide feedback
+    that includes evaluating the new resulting model
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2a951bf045884ee15bffc2627b7c0e24.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The workflow in this case, run the model training experiment specified in the
+    configuration file (model_params.yaml) and update the model artifact (best-model.pth)
+    (Image by Author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benchmark Evaluation Pipeline
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The benchmarking pipeline forms an “official submission” process to ensure all
+    modeling activities are measured against the metrics of the project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6efd84d0d1769b4a465bcff6626bcd4f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The newly trained model in best-model.pth is evaluated against the benchmark
+    dataset and the results are tagged with the latest commit hash and persisted in
+    AWS S3\. (Image by Author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Workflow
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Here is the DAG definition file that is used by DVC. It captures the workflow
+    steps and their inputs, and allows for reproducibility across users and machines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Findings
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The Github Actions workflow `cron` trigger is not extremely reliable. It does
+    not guarantee timing.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: DVC does not work in a clear manner inside a Github Action workflow that is
+    triggered on push. It will alter the trackers that are source controlled and when
+    that is committed it will create another Github action.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The Github Actions orchestration as a mechanism to run model requires a self-hosted
+    runner to use a GPU. This means connecting to a GPU instance in the cloud or on-prem,
+    and this presents issues with access control. For example, we can’t open source
+    the exact repo without removing that self-hosted runner configuration from the
+    repo or else random people would be able to run workloads on our training server
+    by pushing code to the project.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: NBDEV built-in workflow is testing the code in the wrong place. It’s testing
+    the notebook instead of the compiled package. On the one hand, it’s nice to be
+    able to say that the “tests can be written right into the notebook”. On the other
+    hand, testing the notebooks directly tests leaves open the possibility that the
+    code package created by NBDEV fails even though the notebook ran. What we need
+    is the ability to test the NBDEV-compiled package directly
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: NBDEV doesn’t interoperate with “traditional” Python development in the sense
+    that NBDEV is a one-way street. It simply allows the project to be developed in
+    the interactive Jupyter notebook style. It makes it impossible to develop the
+    Python modules directly. If at any point, the project wants to be converted to
+    “traditional” Python development testing would need to be accomplished another
+    way.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In the beginning, we were using Weights & Biases as our experiment tracking
+    dashboard, however there were issues deploying it into a Github Action. What we
+    can say is that the user experience for implementing `wandb` hit its first hiccup
+    in the Action Workflow. Removing Weights & Biases resolved the problem straight
+    away. Before that, `wandb` stood out as the best user experience in MLOps.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Conclusions**'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Ultimately, it took one week to complete the implementation of these tools
+    for managing our code with Github Actions, Iterative.ai tools (DVC & CML) and
+    NBDEV. This provides us with the following capabilities:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Work from Jupyter notebooks as the system of record for the code. We like Jupyter.
+    The main use case it accomplishes is to enable us to work directly on any hardware
+    we can SSH into by hosting a Jupyter server there and forwarding it to a desktop.
+    To be clear, we would be doing this even if we were not using NBDev because the
+    alternative is using Vim or some such tool that we don’t like as much. Past experiments
+    to connect to remote servers with VS Code or Pycharm failed. So it’s Jupyter.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Testing the code, and testing the model it creates. Now as part of the CI/CD
+    pipeline we can evaluate whether or not the model resulting from the changes to
+    the repo make the model better, worse or stay the same. This is all available
+    in the pull request before it is merged into `main`.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Using Github Actions server as an orchestrator for training runs begins to allow
+    multiple data scientists to work simultaneously in a more clear manner. Going
+    forward, we will see the limitations of this setup for orchestrating the collaborative
+    data science process.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**[Aaron Soellinger](https://www.linkedin.com/in/aaronsoellinger/)** has formerly
+    worked as a data scientist and software engineer solving problems in finance,
+    predictive maintenance and sports. He currently works as a machine learning systems
+    consultant with Hoplabs working on a multi-camera computer vision application.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Will Kunz](https://www.linkedin.com/in/willkunz/)** is a back end software
+    developer, bringing a can-do attitude and dogged determination to challenges.
+    It doesn''t matter if it''s tracking down an elusive bug or adapting quickly to
+    a new technology. If there''s a solution, Will wants to find it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/machine-learning-lifecycle-with-mlops-github-actions-label-studio-iterative-ai-and-nbdev-30515f444a3e).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[MLOps Best Practices](/2021/07/mlops-best-practices.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[MLOps is an Engineering Discipline: A Beginner’s Overview](/2021/07/mlops-engineering-discipline.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[MLOps And Machine Learning Roadmap](/2021/08/mlops-machine-learning-roadmap.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Schedule & Run ETLs with Jupysql and GitHub Actions](https://www.kdnuggets.com/2023/05/schedule-run-etls-jupysql-github-actions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GitHub Actions For Machine Learning Beginners](https://www.kdnuggets.com/github-actions-for-machine-learning-beginners)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Multi-label NLP: An Analysis of Class Imbalance and Loss Function…](https://www.kdnuggets.com/2023/03/multilabel-nlp-analysis-class-imbalance-loss-function-approaches.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How You Can Use Machine Learning to Automatically Label Data](https://www.kdnuggets.com/2022/02/machine-learning-automatically-label-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Run an LLM Locally with LM Studio](https://www.kdnuggets.com/run-an-llm-locally-with-lm-studio)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Lightning AI Studio For Free](https://www.kdnuggets.com/using-lightning-ai-studio-for-free)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

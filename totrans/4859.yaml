@@ -1,0 +1,414 @@
+- en: Building Convolutional Neural Network using NumPy from Scratch
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/04/building-convolutional-neural-network-numpy-scratch.html](https://www.kdnuggets.com/2018/04/building-convolutional-neural-network-numpy-scratch.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using already existing models in ML/DL libraries might be helpful in some cases.
+    But to have better control and understanding, you should try to implement them
+    yourself. This article shows how a CNN is implemented just using NumPy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Convolutional neural network (CNN) is the state-of-art technique for analyzing
+    multidimensional signals such as images. There are different libraries that already
+    implements CNN such as TensorFlow and Keras. Such libraries isolates the developer
+    from some details and just give an abstract API to make life easier and avoid
+    complexity in the implementation. But in practice, such details might make a difference.
+    Sometimes, the data scientist have to go through such details to enhance the performance.
+    The solution in such situation is to build every piece of such model your own.
+    This gives the highest possible level of control over the network. Also, it is
+    recommended to implement such models to have better understanding over them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this article, CNN is created using only NumPy library. Just three layers
+    are created which are convolution (conv for short), ReLU, and max pooling. The
+    major steps involved are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reading the input image.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Preparing filters.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Conv layer: Convolving each filter with the input image.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'ReLU layer: Applying ReLU activation function on the feature maps (output of
+    conv layer).'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Max Pooling layer: Applying the pooling operation on the output of ReLU layer.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Stacking conv, ReLU, and max pooling layers.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 1\. Reading input image
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The following code reads an already existing image from the skimage Python library
+    and converts it into gray.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Reading image is the first step because next steps depend on the input size.
+    The image after being converted into gray is shown below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9918355e27eee617861e7da70ab64717.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 2\. Preparing filters
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The following code prepares the filters bank for the first conv layer (**l1** for
+    short):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: A zero array is created according to the number of filters and the size of each
+    filter. **2** filters of size **3x3** are created that is why the zero array is
+    of size (**2**=num_filters, **3**=num_rows_filter, **3**=num_columns_filter).
+    Size of the filter is selected to be 2D array without depth because the input
+    image is gray and has no depth (i.e. 2D ). If the image is RGB with 3 channels,
+    the filter size must be (3, 3, **3**=depth).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The size of the filters bank is specified by the above zero array but not the
+    actual values of the filters. It is possible to override such values as follows
+    to detect vertical and horizontal edges.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 3\. Conv Layer
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'After preparing the filters, next is to convolve the input image by them. The
+    next line convolves the image with the filters bank using a function called **conv**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Such function accepts just two arguments which are the image and the filter
+    bank which is implemented as below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: The function starts by ensuring that the depth of each filter is equal to the
+    number of image channels. In the code below, the outer **if** checks if the channel
+    and the filter have a depth. If a depth already exists, then the inner **if** checks
+    their inequality. If there is no match, then the script will exit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Moreover, the size of the filter should be odd and filter dimensions are equal
+    (i.e. number of rows and columns are odd and equal). This is checked according
+    to the following two **if**blocks. If such conditions don’t met, the script will
+    exit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Not satisfying any of the conditions above is a proof that the filter depth
+    is suitable with the image and convolution is ready to be applied. Convolving
+    the image by the filter starts by initializing an array to hold the outputs of
+    convolution (i.e. feature maps) by specifying its size according to the following
+    code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Because there is no stride nor padding, the feature map size will be equal to
+    (img_rows-filter_rows+1, image_columns-filter_columns+1, num_filters) as above
+    in the code. Note that there is an output feature map for every filter in the
+    bank. That is why the number of filters in the filter bank (**conv_filter.shape[0]**)
+    is used to specify the size as a third argument.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The outer loop iterates over each filter in the filter bank and returns it
+    for further steps according to this line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'If the image to be convolved has more than one channel, then the filter must
+    has a depth equal to such number of channels. Convolution in this case is done
+    by convolving each image channel with its corresponding channel in the filter.
+    Finally, the sum of the results will be the output feature map. If the image has
+    just a single channel, then convolution will be straight forward. Determining
+    such behavior is done in such **if-else** block:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'You might notice that the convolution is applied by a function called **conv_** which
+    is different from the **conv** function. The function **conv** just accepts the
+    input image and the filter bank but doesn’t apply convolution its own. It just
+    passes each set of input-filter pairs to be convolved to the **conv_** function.
+    This is just for making the code simpler to investigate. Here is the implementation
+    of the **conv_** function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'It iterates over the image and extracts regions of equal size to the filter
+    according to this line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then it apply element-wise multiplication between the region and the filter
+    and summing them to get a single value as the output according to these lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: After convolving each filter by the input, the feature maps are returned by
+    the **conv** function. The following figure shows the feature maps returned by
+    such conv layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e4c0c0a326887a12ba8bba90e0b89ef6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The output of such layer will be applied to the ReLU layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. ReLU Layer
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The ReLU layer applies the ReLU activation function over each feature map returned
+    by the conv layer. It is called using the **relu** function according to the following
+    line of code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The **relu** function is implemented as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: It is very simple. Just loop though each element in the feature map and return
+    the original value in the feature map if it is larger than 0\. Otherwise, return
+    0\. The outputs of the ReLU layer are shown in the next figure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6a34742304b4eb20efa413b0db333e45.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The output of the ReLU layer is applied to the max pooling layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5\. Max Pooling Layer
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The max pooling layer accepts the output of the ReLU layer and applies the
+    max pooling operation according to the following line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'It is implemented using the **pooling** function as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The function accepts three inputs which are the output of the ReLU layer, pooling
+    mask size, and stride. It simply creates an empty array, as previous, that holds
+    the output of such layer. The size of such array is specified according to the
+    size and stride arguments as in such line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then it loops through the input, channel by channel according to the outer
+    loop that uses the looping variable **map_num**. For each channel in the input,
+    max pooling operation is applied. According to the stride and size used, the region
+    is clipped and the max of it is returned in the output array according to this
+    line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: The outputs of such pooling layer are shown in the next figure. Note that the
+    size of the pooling layer output is smaller than its input even if they seem identical
+    in their graphs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/88b52b4406486be95476b61cb4d73864.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 6\. Stacking Layers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Up to this point, the CNN architecture with conv, ReLU, and max pooling layers
+    is complete. There might be some other layers to be stacked in addition to the
+    previous ones as below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: The previous conv layer uses **3** filters with their values generated randomly.
+    That is why there will be **3** feature maps resulted from such conv layer. This
+    is also the same for the successive ReLU and pooling layers. Outputs of such layers
+    are shown below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7cd7d3910289c53ae3909123d2aed941.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: The following figure shows the outputs of the previous layers. The previous
+    conv layer accepts just a single filter. That is why there is only one feature
+    map as output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5f5d177e21f6fa407f83af913641b829.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: But remember, the output of each previous layer is the input to the next layer.
+    For example, such lines accepts the previous outputs as their inputs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: 7\. Complete Code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The complete code is available in [**github**](https://github.com/ahmedfgad/NumPyCNN) ([https://github.com/ahmedfgad/NumPyCNN](https://github.com/ahmedfgad/NumPyCNN)).
+    The code contains the visualization of the outputs from each layer using the **Matplotlib** library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** received his B.Sc.
+    degree with excellent with honors in information technology from the Faculty of
+    Computers and Information (FCI), Menoufia University, Egypt, in July 2015\. For
+    being ranked first in his faculty, he was recommended to work as a teaching assistant
+    in one of the Egyptian institutes in 2015 and then in 2016 to work as a teaching
+    assistant and a researcher in his faculty. His current research interests include
+    deep learning, machine learning, artificial intelligence, digital signal processing,
+    and computer vision.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.linkedin.com/pulse/building-convolutional-neural-network-using-numpy-from-ahmed-gad/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Derivation of Convolutional Neural Network from Fully Connected Network Step-By-Step](/2018/04/derivation-convolutional-neural-network-fully-connected-step-by-step.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Is Learning Rate Useful in Artificial Neural Networks?](/2018/01/learning-rate-useful-neural-network.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Avoid Overfitting with Regularization](/2018/02/avoid-overfitting-regularization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a Convolutional Neural Network with PyTorch](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

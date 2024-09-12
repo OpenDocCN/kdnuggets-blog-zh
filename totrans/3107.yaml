@@ -1,0 +1,255 @@
+- en: Three techniques to improve machine learning model performance with imbalanced
+    datasets
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/06/three-techniques-improve-machine-learning-model-performance-imbalanced-datasets.html](https://www.kdnuggets.com/2018/06/three-techniques-improve-machine-learning-model-performance-imbalanced-datasets.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Sabber Ahamed](https://www.linkedin.com/in/sabber-ahamed/), Computational
+    Geophysicist and Machine Learning Enthusiast**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/d95931c8777822e1ce4b0bdff0d5f216.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This project was part of one my recent job interview skill test for a “Machine
+    learning engineer” position. I had to complete the project in 48 hours which includes
+    writing a 10-page report in latex. The dataset has classes and highly imbalanced.
+    The primary objective of this project was to handle data imbalance issue. In the
+    following subsections, I describe three techniques I used to overcome the data
+    imbalance problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*First, let’s get started familiarizing with datasets:*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Datasets:** There are three labels [1, 2, 3] in the training data which makes
+    the problem a multi-class problem. Training datasets have 17 features and 38829
+    individual data point. Whereas in testing data, there are 16 features without
+    the label and have 16641 data points. The training dataset is very unbalanced.
+    The majority of the data belongs to class-1 (95%) whereas class-2 and class-3
+    have 3.0% and 0.87% data respectively. Since the datasets do not have any null
+    values and already scaled, I did not do any further processing. Due to some internal
+    reasons, I am not going to share the datasets but the detail results and techniques.
+    The following figure show data imbalance.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0dd80c79593879c874f341bf5cc91ca6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 1: The graph shows the data imbalance in training dataset. The majority
+    of the data belongs to class-1 (95%) whereas class-2 and class-3 have 3.0% and
+    0.87% data respectively'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Algorithm:** After preliminary observation, I decided to use Random forest
+    (RF) algorithm since it outperforms the other algorithms such as support vector
+    machine, Xgboost, LightGBM, etc. RF is a bagging type of ensemble classifier that
+    uses many such single trees to make predictions. There are a couple of reasons
+    for choosing RF in this project:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: RF is robust to overfitting (thus solving one of the most significant disadvantages
+    of single decision tree).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Parameterization remains quite intuitive and straightforward.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: There are many successful use cases where the random forest algorithm was used
+    in highly unbalanced datasets as we have in this project.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: I have prior implementation experience of the algorithm.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: To find the best parameters, I performed a grid search over specified parameter
+    values using *scikit-sklearn* implemented GridSearchCV. More details can be found
+    on the [Github](https://github.com/msahamed/handle_imabalnce_class).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**To handle data imbalance issue, I have used the following three techniques :**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**A. Use Ensemble Cross-Validation (CV):** In this project, I used cross-validation
+    to justify the model robustness. The entire datasets were divided into five subsets.
+    In each CV, 4 out of 5 subsets are used for training, and remaining set was used
+    to validate the model. In each CV, the model also predicts (probabilities, not
+    the class) the test data. At the end of the cross-validation, we have five testing
+    prediction probabilities. Finally, I average the prediction probabilities for
+    all class. Training performance of the model was steady and has the almost constant
+    recall and f1 score on each CV. This technique helped me predicting test data
+    very well in one of the Kaggle competitions in which I became top 25th out of
+    5355 which is top 1%. The following partial code snippets shows the implementation
+    of the Ensemble cross-validation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**B. Set Class Weight/Importance:** Cost-sensitive learning is among the many
+    other approaches to make the random forest more suitable for learning from very
+    imbalanced data. The RF has the tendency to be biased on the majority class. Therefore,
+    imposing a costly penalty on the minority class misclassification can be useful.
+    Since this technique is proven the way of improving model performance, I assign
+    a high weight to the minority class (i.e., higher misclassification cost). The
+    class weights are then incorporated into the RF algorithm. I determine a class
+    weight from the ratio between the number of the dataset in class-1 and the number
+    of the dataset in the class. For example, the ratio between the number of datasets
+    in class-1 and class-3 is approximately 110, and the ratio for class-1 and class-2
+    is about 26\. Later, I slightly modify the number for improving the model performance
+    in trail and error basis. The following code snippets show the implementation
+    of the different class weights.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**C. Over-Predict a Label than Under-Predict:** This is technique is optional.
+    I have applied this technique since I was asked to implement. It looks to me this
+    method is very effecting to improve minority class performance. In brief, the
+    technique is to penalize the model most if it misclassified class-3, a little
+    less for class-2 and the least for class-1.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To implement the method, I changed the probability threshold for each class.
+    To do so, I set the probability for class-3, class-2 and class-1 in increasing
+    order (i.e, class-3 = 0.25, class-2 = 0.35, class-1 = 0.50), so that the model
+    is forced to over predict class. Detail implementation of this algorithm can be
+    found on this project [Github page](https://github.com/msahamed/handle_imabalnce_class).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Final Result:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The following results show that how the above three techniques helped improving
+    the model performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. Result with ensemble cross-validation:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7e6e91a0261e4ccef8b4c66c382c4743.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**2\. Result with ensemble cross-validation + class weight:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f9b62acb4bcfb59d2baa192d99f976c6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**3\. Result with ensemble cross-validation + class weight+ over-predict a
+    label:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d1a9e45d40d5bfdb074b638f74d497e3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Conclusion**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Since I had minimal experience in implementing the technique, initially over-prediction
+    seems to be tricky to me. However, researching on the method helps me find a way
+    to get around the problem. Due to time constrained I could not focus on fine-tuning
+    and feature engineering of the model. There are many scopes to improve the model
+    further. For example, deleting unnecessary features and adding some extra feature
+    by engineering. I have tried LightGBM and XgBoost as well. But in this short time,
+    I found Random forest outperforms the other algorithms. We might try some other
+    algorithms including a neural network to improve the model. Finally, I would say,
+    from this data challenge I learned how to handle unbalanced data in a well-organized
+    way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thank you very much reading. The full code can be found on [Github](https://github.com/msahamed/handle_imabalnce_class).
+    Let me know if you have any question or this article needs any correction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Sabber Ahamed](https://www.linkedin.com/in/sabber-ahamed/)** is the
+    Founder of [xoolooloo.com](https://www.xoolooloo.com/). Computational Geophysicist
+    and Machine Learning Enthusiast.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/@sabber/working-with-highly-imbalanced-datasets-in-machine-learning-projects-c70c5f2a7b16).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[7 Techniques to Handle Imbalanced Data](/2017/06/7-techniques-handle-imbalanced-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learning from Imbalanced Classes](/2016/08/learning-from-imbalanced-classes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Dealing with Unbalanced Classes, SVMs, Random Forests, and Decision Trees
+    in Python](/2016/04/unbalanced-classes-svm-random-forests-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[7 Techniques to Handle Imbalanced Data](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, August 31: The Complete Data Science Study Roadmap…](https://www.kdnuggets.com/2022/n35.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unsupervised Disentangled Representation Learning in Class…](https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Overcoming Imbalanced Data Challenges in Real-World Scenarios](https://www.kdnuggets.com/2023/07/overcoming-imbalanced-data-challenges-realworld-scenarios.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sky''s the Limit: Learn how JetBlue uses Monte Carlo and Snowflake…](https://www.kdnuggets.com/2022/12/monte-carlo-jetblue-snowflake-build-trust-improve-model-accuracy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

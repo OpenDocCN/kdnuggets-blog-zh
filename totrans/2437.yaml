@@ -1,0 +1,395 @@
+- en: DBSCAN Clustering Algorithm in Machine Learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/d2cb5b01a0ce10194d0ada7a6d683441.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Credits](https://www.stratio.com/blog/graph-database-clustering-solution/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_BQ
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In 2014, the DBSCAN algorithm was awarded the test of time award (an award given
+    to algorithms which have received substantial attention in theory and practice)
+    at the leading data mining conference, ACM [SIGKDD](https://en.wikipedia.org/wiki/SIGKDD).
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: — [Wikipedia](https://en.wikipedia.org/wiki/DBSCAN)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Clustering analysis is an unsupervised learning method that separates the data
+    points into several specific bunches or groups, such that the data points in the
+    same groups have similar properties and data points in different groups have different
+    properties in some sense.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It comprises of many different methods based on different distance measures.
+    E.g. K-Means (distance between points), Affinity propagation (graph distance),
+    Mean-shift (distance between points), DBSCAN (distance between nearest points),
+    Gaussian mixtures (Mahalanobis distance to centers), Spectral clustering (graph
+    distance), etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Centrally, all clustering methods use the same approach i.e. first we calculate
+    similarities and then we use it to cluster the data points into groups or batches.
+    Here we will focus on the **Density-based spatial clustering of applications with
+    noise** (**DBSCAN**) clustering method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you are unfamiliar with the clustering algorithms, I advise you to read the [Introduction
+    to Image Segmentation with K-Means clustering](https://towardsdatascience.com/introduction-to-image-segmentation-with-k-means-clustering-83fd0a9e2fc3).
+    You may also read the article on [Hierarchical Clustering](https://medium.com/swlh/what-is-hierarchical-clustering-c04e9972e002).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Why do we need a Density-Based clustering algorithm like DBSCAN when we already
+    have K-means clustering?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: K-Means clustering may cluster loosely related observations together. Every
+    observation becomes a part of some cluster eventually, even if the observations
+    are scattered far away in the vector space. Since clusters depend on the mean
+    value of cluster elements, each data point plays a role in forming the clusters.
+    A slight change in data points *might* affect the clustering outcome. This problem
+    is greatly reduced in DBSCAN due to the way clusters are formed. This is usually
+    not a big problem unless we come across some odd shape data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another challenge with *k*-means is that you need to specify the number of clusters
+    (“*k*”) in order to use it. Much of the time, we won’t know what a reasonable *k* value
+    is *a priori*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'What’s nice about DBSCAN is that you don’t have to specify the number of clusters
+    to use it. All you need is a function to calculate the distance between values
+    and some guidance for what amount of distance is considered “close”. DBSCAN also
+    produces more reasonable results than *k*-means across a variety of different
+    distributions. Below figure illustrates the fact:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e50803f50d89d5d6ebad229f6ccec366.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Credits](https://github.com/NSHipster/DBSCAN)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Density-Based Clustering Algorithms
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '**Density**-Based **Clustering** refers to unsupervised learning methods that
+    identify distinctive groups/clusters in the data, based on the idea that a cluster
+    in data space is a contiguous region of high point density, separated from other
+    such clusters by contiguous regions of low point density.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is a base
+    algorithm for density-based clustering. It can discover clusters of different
+    shapes and sizes from a large amount of data, which is containing noise and outliers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The DBSCAN algorithm uses two parameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**minPts:** The minimum number of points (a threshold) clustered together for
+    a region to be considered dense.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**eps (ε):** A distance measure that will be used to locate the points in the
+    neighborhood of any point.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: These parameters can be understood if we explore two concepts called Density
+    Reachability and Density Connectivity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Reachability** in terms of density establishes a point to be reachable from
+    another if it lies within a particular distance (eps) from it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Connectivity**, on the other hand, involves a transitivity based chaining-approach
+    to determine whether points are located in a particular cluster. For example,
+    p and q points could be connected if p->r->s->t->q, where a->b means b is in the
+    neighborhood of a.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are three types of points after the DBSCAN clustering is complete:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0cf15c12e52f0f6b8bc9a54334ba2888.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Core** — This is a point that has at least *m* points within distance *n* from
+    itself.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Border** — This is a point that has at least one Core point at a distance *n*.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Noise** — This is a point that is neither a Core nor a Border. And it has
+    less than *m* points within distance *n* from itself.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Algorithmic steps for DBSCAN clustering**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The algorithm proceeds by arbitrarily picking up a point in the dataset (until
+    all points have been visited).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If there are at least ‘minPoint’ points within a radius of ‘ε’ to the point
+    then we consider all these points to be part of the same cluster.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The clusters are then expanded by recursively repeating the neighborhood calculation
+    for each neighboring point
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c8cebaa015d5f15db51754a37b800bf8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[DBSCAN in action](https://www.digitalvidya.com/blog/the-top-5-clustering-algorithms-data-scientists-should-know/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Parameter Estimation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Every data mining task has the problem of parameters. Every parameter influences
+    the algorithm in specific ways. For DBSCAN, the parameters **ε** and **minPts** are
+    needed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**minPts**: As a rule of thumb, a minimum *minPts* can be derived from the
+    number of dimensions *D* in the data set, as `***minPts* ≥ *D* + 1**`. The low
+    value `***minPts* = 1**` does not make sense, as then every point on its own will
+    already be a cluster. With `***minPts* ≤ 2**`, the result will be the same as
+    of [hierarchical clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering) with
+    the single link metric, with the dendrogram cut at height ε. Therefore, *minPts* must
+    be chosen at least 3\. However, larger values are usually better for data sets
+    with noise and will yield more significant clusters. As a rule of thumb,`** *minPts* =
+    2·*dim***` can be used, but it may be necessary to choose larger values for very
+    large data, for noisy data or for data that contains many duplicates.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**ε**: The value for ε can then be chosen by using a [k-distance graph](https://en.wikipedia.org/wiki/Nearest_neighbor_graph),
+    plotting the distance to the `***k* = *minPts*-1**` nearest neighbor ordered from
+    the largest to the smallest value. Good values of ε are where this plot shows
+    an “elbow”: if ε is chosen much too small, a large part of the data will not be
+    clustered; whereas for a too high value of ε, clusters will merge and the majority
+    of objects will be in the same cluster. In general, small values of ε are preferable,
+    and as a rule of thumb, only a small fraction of points should be within this
+    distance of each other.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Distance function**: The choice of distance function is tightly linked to
+    the choice of ε, and has a major impact on the outcomes. In general, it will be
+    necessary to first identify a reasonable measure of similarity for the data set,
+    before the parameter ε can be chosen. There is no estimation for this parameter,
+    but the distance functions need to be chosen appropriately for the data set.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: DBSCAN Python Implementation Using Scikit-learn
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Let us first apply DBSCAN to cluster spherical data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We first generate 750 spherical training data points with corresponding labels.
+    After that standardize the features of your training data and at last, apply DBSCAN
+    from the sklearn library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/41b07d566d9620c082570549d34d0606.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Figure](../Images/1e525079ab694b4045301028a5362803.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: DBSCAN to cluster spherical data
+  prefs: []
+  type: TYPE_NORMAL
+- en: The black data points represent outliers in the above result. Next, apply DBSCAN
+    to cluster non-spherical data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7b63b835b30fbbbf9fdb264633ed815c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Figure](../Images/9a389869897afcf88efcddccd8c73c75.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: DBSCAN to cluster non-spherical data
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Which is absolutely perfect. If we compare with K-means it would give a completely
+    incorrect output like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/7083a07ac0e7d75433e0c904a6bd8a6c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: K-means clustering result
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Complexity of DBSCAN
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '**Best Case:** If an indexing system is used to store the dataset such that
+    neighborhood queries are executed in logarithmic time, we get `**O(nlogn)**` average
+    runtime complexity.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Worst Case:** Without the use of index structure or on degenerated data (e.g.
+    all points within a distance less than ε), the worst-case run time complexity
+    remains `**O(*n*²)**`.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Average Case:** Same as best/worst case depending on data and implementation
+    of the algorithm.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Density-based clustering algorithms can learn clusters of arbitrary shape, and
+    with the Level Set Tree algorithm, one can learn clusters in datasets that exhibit
+    wide differences in density.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, I should point out that these algorithms are somewhat more arduous
+    to tune contrasted to parametric clustering algorithms like K-Means. Parameters
+    like the epsilon for DBSCAN or for the Level Set Tree are less intuitive to reason
+    about compared to the number of clusters parameter for K-Means, so it’s more difficult
+    to choose good initial parameter values for these algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That is all for this article. I hope you guys have enjoyed reading it, please
+    share your suggestions/views/questions in the comment section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Thanks for Reading!**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)**
+    is a Big data developer at CirrusLabs. He has over 4 years of working experience
+    in various sectors like Telecom, Analytics, Sales, Data Science having specialisation
+    in various Big data components.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/swlh/dbscan-clustering-algorithm-in-machine-learning-d465a4cca1e8).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Implementing DBSCAN in Python](https://www.kdnuggets.com/2022/08/implementing-dbscan-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, August 24: Implementing DBSCAN in Python • How to…](https://www.kdnuggets.com/2022/n34.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Clustering Unleashed: Understanding K-Means Clustering](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Choosing the Right Clustering Algorithm for Your Dataset](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is K-Means Clustering and How Does its Algorithm Work?](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Clustering with scikit-learn: A Tutorial on Unsupervised Learning](https://www.kdnuggets.com/2023/05/clustering-scikitlearn-tutorial-unsupervised-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

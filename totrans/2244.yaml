@@ -1,0 +1,213 @@
+- en: Multivariate Time-Series Prediction with BQML
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Multivariate Time-Series Prediction with BQML](../Images/f6601849ad09b52789b510bc3f570317.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image from [Pexels](https://www.pexels.com/photo/graphs-display-on-an-ipad-187041/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Last winter, I gave a presentation on ‘**More predictable time-series model
+    with BQML**’ at [**GDG DevFest Tashkent 2022**](https://gdg.community.dev/events/details/google-gdg-tashkent-presents-devfest-tashkent-22/)
+    in Tashkent, the capital of Uzbekistan.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I was going to share some of the material and code after DevFest I used in the
+    presentation, but time has passed, and new features have been released in BQML
+    that overlap some of the content.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Therefore, I’ll instead mention the new features and some of the things that
+    are still valid briefly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Time-Series Model and BQML
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '**Time series data** is used by many organizations for a variety of purposes,
+    and it’s important to note that “**predictive analytic**s” is all about the “future”
+    in time. Time series predictive analytics has been used in the short, medium,
+    and long term, and while it has many inaccuracies and risks, it has also been
+    steadily improving.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since “prediction” seems to be so useful, you might be tempted to apply a time
+    series prediction model if you have time series data. But time series prediction
+    models are usually computationally intensive, and if you have a lot of data, it
+    will be more computationally intensive. So it’s cumbersome and hard to process
+    it, load it to the analytics environment and analyze it
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you are using **Google BigQuery** for data management, you can use **BQM**L
+    (BigQuery ML) to apply machine learning algorithms to your data in a simple, easy,
+    and fast way. A lot of people use BigQuery to process a lot of data, and a lot
+    of that data is often time series data. And **BQML also supports time series models.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: The basis of the time series model currently supported by BQML is the [**AutoRegressive
+    Integrated Moving Average (ARIMA)**](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average)
+    model. The ARIMA model predicts using only existing time series data and is known
+    to have good short-term prediction performance, and since it combines AR and MA,
+    it is a popular model that can cover a wide range of time series models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, this model is computationally intensive overall, and since it only
+    utilizes time series data with normality, it is difficult to use it in cases with
+    trends or seasonality. Therefore, ***ARIMA_PLUS*** in BQML includes several additional
+    features as options. You can add time series decomposition, seasonality factors,
+    spikes and dips, coefficient changes, and more to your model, or you can go through
+    them separately and manually adjust the model. I also personally like the fact
+    that you can adjust for periodicity by automatically incorporating holiday options,
+    which is one of the benefits of using a platform that doesn’t require you to manually
+    add informations related to dates.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Multivariate Time-Series Prediction with BQML](../Images/8791fc9a35fae94548b0139f3a6c3c30.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Structure of ARIMA_PLUS (from [BQML Manual](https://cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series))
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can refer to this [page](https://cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
+    for more information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, when it comes to real-world applications, time series prediction is
+    not as simple as this. Of course, we’ve been able to identify multiple cycles
+    and add interventions to multiple time series with ARIMA_PLUS, but there are many
+    external factors related to time series data, and only very few events happen
+    in isolation. **Stationarity can be hard to find in time-series data.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the original presentation, I looked at how to deal with these real-world
+    time series data for making prediction model- to **decompose these time series**,
+    clean up the decomposed data, import it into Python, and then **weave it with
+    other variables to create a multivariate time series function, estimate causality
+    and incorporate it into a prediction model, and estimate the degree to which the
+    effect varies with changes in events.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'New Feature: ARIMA_PLUS_XREG'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: And in the only last few months, **a new feature for creating multivariate time
+    series functions with external variables(*****ARIMA_PLUS_XREG, XREG*** **below)
+    has become an outright feature in BQML**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can read all about it [here](https://cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series)(it’s
+    in preview as of July 2023, but I’m guessing it’ll be available later this year).
+  prefs: []
+  type: TYPE_NORMAL
+- en: I apply [the official tutorial](https://cloud.google.com/bigquery/docs/arima-plus-xreg-single-time-series-forecasting-tutorial?hl=ko)
+    to see how it compares to a traditional univariate time series model and we can
+    see how it works.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The steps are the same as in the tutorial, so I won’t duplicate them, but here
+    are the two models I created. First, I created a traditional *ARIMA_PLUS* model
+    and then an *XREG* model using the same data but adding the temperature and wind
+    speed at the time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ARIMA_PLUS
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: A model that uses these multiple data would look something like this
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Multivariate Time-Series Prediction with BQML](../Images/cd984e9f6e14ec62d2a62ec4ccf7b0b5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Structure ARIMA_PLUS_XREG (from [BQML Manual](https://cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series))
+  prefs: []
+  type: TYPE_NORMAL
+- en: Two models are compared with ML.Evaluate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Results are below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ARIMA_PLUS**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Multivariate Time-Series Prediction with BQML](../Images/53d50aecd494ec5e09b358e6a89863d8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**ARIMA_PLUS_XREG**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Multivariate Time-Series Prediction with BQML](../Images/1857f75e7b6e853a6d79c20129d41b29.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can see that the **XREG model is ahead on basic performance metrics such
+    as MAE, MSE, and MAPE.** (Obviously, this is not a perfect solution, **data-dependent**,
+    and we can just say that we got another useful tool.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Multivariate time series analysis is a much-needed option in many cases, but
+    it’s often difficult to apply due to various reasons. Now, we can use it if the
+    reasons are in data and analysis steps. It looks like we have a good option for
+    that, so it’s good to know about it and hopefully it will be useful in many cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[JeongMin Kwon](https://www.linkedin.com/in/jeongmin-kwon-a5069734/)** is
+    a freelance senior Data Scientist in 10+ years of hands-on experience leveraging
+    machine learning models and data mining.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a Tractable, Feature Engineering Pipeline for Multivariate…](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Project of Rotten Tomatoes Movie Rating Prediction:…](https://www.kdnuggets.com/2023/06/data-science-project-rotten-tomatoes-movie-rating-prediction-first-approach.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Project of Rotten Tomatoes Movie Rating Prediction:…](https://www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

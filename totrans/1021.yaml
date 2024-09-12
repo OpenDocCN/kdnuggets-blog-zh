@@ -1,0 +1,343 @@
+- en: Generate Synthetic Time-series Data with Open-source Tools
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html](https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Generate Synthetic Time-series Data with Open-source Tools](../Images/a38f7eb18adf87ff57a1f54d4e214cf3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Time series data, a sequence of measurements of the same variables across multiple
+    points in time, is ubiquitous in the modern data world. Just as with tabular data,
+    we often want to generate synthetic time series data to protect sensitive information
+    or create more training data when real data is rare. Some applications for synthetic
+    time series data include sensor readings, timestamped log messages, financial
+    market prices, and medical records. The additional dimension of time where trends
+    and correlations across time are just as important as correlations between variables
+    creates added challenges for synthetic data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'At Gretel, we’ve previously published blogs on synthesizing time series data
+    ([financial data](https://gretel.ai/blog/creating-synthetic-time-series-data-for-global-financial-institutions-a-poc-deep-diveQ),
+    [time series basics](https://gretel.ai/blog/creating-synthetic-time-series-data)),
+    but are always looking at new models that can improve our synthetic data generation.
+    We really liked the DoppelGANger model and associated paper ([Using GANs for Sharing
+    Networked Time Series Data: Challenges, Initial Promise, and Open Questions](https://arxiv.org/abs/1909.13403)
+    by Lin et. al.) and are in the process of incorporating this model into our [APIs](https://gretel.ai/products)
+    and [console](https://console.gretel.cloud/). As part of that work, we reimplemented
+    the DoppelGANger model in PyTorch and are thrilled to release it as part of our
+    open source [gretel-synthetics](https://github.com/gretelai/gretel-synthetics)
+    library.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we give a brief overview of the DoppelGANger model, provide
+    sample usage of our PyTorch implementation, and demonstrate excellent synthetic
+    data quality on a task synthesizing daily wikipedia web traffic with a ~40x runtime
+    speedup compared to the TensorFlow 1 implementation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: DoppelGANger Model
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: DoppelGANger is based on a generative adversarial network ([GAN](https://developers.google.com/machine-learning/gan))
+    with some modifications to better fit the time series generation task. As a GAN,
+    the model uses an adversarial training scheme to simultaneously optimize the discriminator
+    (or critic) and generator networks by comparing synthetic and real data. Once
+    trained, arbitrary amounts of synthetic time-series data can be created by passing
+    input noise to the generator network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In their [paper](https://arxiv.org/abs/1909.13403), Lin et al. review existing
+    synthetic time series approaches and their own observations to identify limitations
+    and propose several specific improvements that make up DoppelGANger. These range
+    from generic GAN improvements, to time-series specific tricks. A few of these
+    key modifications are listed below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generator contains an [LSTM](https://colah.github.io/posts/2015-08-Understanding-LSTMs/)
+    to produce sequence data, but with a batch setup where each LSTM cell outputs
+    multiple time points to improve temporal correlations.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Supports variable-length sequences in both training and generation (planned,
+    but not yet implemented in our PyTorch version). For example, one model can use
+    and create 10 or 15 seconds of sensor measurements.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Supports fixed variables (attributes) that do not vary over time. This information
+    is often found with time series data, for example, an industry or sector associated
+    with each stock in financial price history data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Supports per-example scaling of continuous variables to handle data with large
+    dynamic range. For example, differences of several orders of magnitude in page
+    views for popular versus rare wikipedia pages.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Uses [Wasserstein loss with gradient penalty](https://jonathan-hui.medium.com/gan-wasserstein-gan-wgan-gp-6a1a2aa1b490)
+    to reduce mode collapse and improve training.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A small note on terminology and data setup. DoppelGANger requires training data
+    with multiple examples of time series. Each **example** consists of 0 or more
+    **attribute** values, fixed variables that do not vary over time, and 1 or more
+    **features** that are observed at each time point. When combined into a training
+    data set, the examples look like a 2d array of attributes (example x fixed variable)
+    and a 3d array of features (example x time x time variable). Depending on the
+    task and available data, this setup may require splitting a few long time sequences
+    into shorter chunks that can be used as the examples for training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Overall these modifications to a basic GAN provide an expressive time series
+    model that produces high-fidelity synthetic data. We are particularly impressed
+    with DoppelGANger’s ability to learn and generate data with temporal correlations
+    at different scales, such as weekly and yearly trends. For full details on the
+    model, please read the excellent [paper](https://arxiv.org/abs/1909.13403) by
+    Lin et. al.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sample Usage
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Our PyTorch implementation supports 2 styles of input (numpy arrays or pandas
+    DataFrame) plus a number of configuration options for the model. For full reference
+    documentation, see [https://synthetics.docs.gretel.ai/](https://synthetics.docs.gretel.ai/en/latest/models/timeseries_dgan.html)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The simplest way to use our model is with your training data in a pandas DataFrame.
+    For this setup, the data must be in a “wide” format where each row is an example,
+    some columns may be attributes, and the remaining columns are the time series
+    values. The following snippet demonstrates training and generating data from a
+    DataFrame.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: If your data isn’t already in this “wide” format, you may be able to use the
+    [pandas pivot](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pivot.html)
+    method to convert it to the expected structure. The DataFrame input is somewhat
+    limited currently, though we have plans to support other ways of accepting of
+    time series data in the future. For the most control and flexibility, you can
+    also pass numpy arrays directly for training (and similarly receive the attribute
+    and feature arrays back when generating data), demonstrated below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Runnable versions of these snippets are available at [sample_usage.ipynb](https://github.com/gretelai/public_research/blob/main/oss_doppelganger/sample_usage.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Results
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: As a new implementation that switches from TensorFlow 1 to PyTorch (with potential
+    differences in underlying components such as optimizers, parameter initialization,
+    etc.), we want to confirm our PyTorch code works as expected. To do this, we’ve
+    replicated a selection of results from the original paper. Since our current implementation
+    only supports fixed-length sequences, we focus on a data set of wikipedia web
+    traffic (WWT).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The WWT data set, used by Lin et. al. and originally from [Kaggle](https://www.kaggle.com/competitions/web-traffic-time-series-forecasting/),
+    contains daily traffic measurements to various wikipedia pages. There are 3 discrete
+    attributes (domain, access type, and agent) associated with each page and a single
+    time series feature of daily page views for 1.5 years (550 days). See Image 1
+    for a few example time series from the WWT data set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Scaled daily page views for 3 wikipedia pages with page attributes listed
+    on the right](../Images/aab1b50cadd29990b12994b432f3907c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Image 1: Scaled daily page views for 3 wikipedia pages with page attributes
+    listed on the right.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note the page views are log scaled to [-1,1] based on min/max page views across
+    the entire data set. The training data of 50k pages we used in our experiments
+    (already scaled) is available as a [csv on S3](https://gretel-public-website.s3.us-west-2.amazonaws.com/datasets/wiki-web-traffic-data/wikipedia-web-traffic-training.csv).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We present 3 images showing different aspects of the fidelity of the synthetic
+    data. In each image, we compare the real data with 3 synthetic versions: 1) fast
+    PyTorch implementation with larger batch size and smaller learning rate, 2) PyTorch
+    implementation with original parameters, 3) TensorFlow 1 implementation. In Image
+    2, we look at the distribution of attributes where the synthetic data is a close
+    match to the real distributions (modeled after Figure 19 from the [appendix of
+    Lin et. al.](https://arxiv.org/abs/1909.13403)).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![v](../Images/04f392d189a052b1c1c3f9032de32662.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Image 2: Attribute distributions of real and synthetic WWT data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the challenges with the WWT data is that different time series have very
+    different ranges of page views. Some wikipedia pages consistently receive lots
+    of traffic, while others are much less popular, but occasionally get a spike due
+    to some relevant current event, for example, a breaking news story related to
+    the page. Lin et. al. found that DoppelGANger is highly effective at generating
+    time series on different scales (Figure 6 of the original paper). In Image 3,
+    we provide similar plots showing the distribution of time series midpoints. For
+    each example, the midpoint is halfway between the minimum and maximum page views
+    attained over the 550 days. Our PyTorch implementation shows similar fidelity
+    for the midpoints.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Time series midpoint distributions of real and synthetic WWT data](../Images/e8eac3e5b9a89c12f1dab7838c0a33ed.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Image 3: Time series midpoint distributions of real and synthetic WWT data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lastly, traffic to most wikipedia pages exhibits weekly and yearly patterns.
+    To evaluate these patterns, we use autocorrelation, that is, Pearson correlation
+    of page views at different time lags (1 day, 2 days, etc.). Autocorrelation plots
+    for the 3 synthetic versions are shown in Image 4 (similar to Figure 1 of the
+    original paper).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Autocorrelation for real and synthetic WWT data](../Images/7ea0c5cc1f63ff8151ab4e409ceb6968.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Image 4: Autocorrelation for real and synthetic WWT data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Both PyTorch versions produce the weekly and yearly trend as observed in the
+    original paper. The TensorFlow 1 results don’t match Figure 1 of Lin et al. exactly
+    as the above plots are from our experiments. We observed somewhat inconsistent
+    training using the original parameters where the model occasionally does not pick
+    up the yearly (or even weekly) pattern. The lower learning rate (1e-4) and larger
+    batch size (1000) used in our fast version makes retrainings more consistent.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Analysis code to produce the images in this section and to train the 3 models
+    are shared as notebooks on [github](https://github.com/gretelai/public_research/tree/main/oss_doppelganger).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Runtime
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Last but not least, a crucial aspect of more complex models is runtime. An amazing
+    model that takes weeks to train is much more practically limited than one that
+    takes an hour to train. Here, the PyTorch implementation compares extremely well
+    (though as the authors note in their paper, they did not do performance optimization
+    on the TensorFlow 1 code). All models were trained using the GPU and ran on GCP
+    n1-standard-8 instances (8 virtual CPUs, 30 GB RAM) with an NVIDIA Tesla T4\.
+    Going from 13 hours to 0.3 hours is crucial for making this impressive model more
+    useful in practice!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **Version** | **Training time** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| TensorFlow 1  | 12.9 hours |'
+  prefs: []
+  type: TYPE_TB
+- en: '| PyTorch, batch_size=100 (original parameters) | 1.6 hours |'
+  prefs: []
+  type: TYPE_TB
+- en: '| PyTorch, batch_size=1000 | 0.3 hours |'
+  prefs: []
+  type: TYPE_TB
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Gretel.ai has added a PyTorch implementation of the DoppelGANger time series
+    model to our open-source gretel-synthetics library. We showed this implementation
+    produces high-quality synthetic data, and is substantially faster (~40x) than
+    the previous TensorFlow 1 implementation. **If you enjoyed this post, leave a
+    ⭐ on our** [**gretel-synthetics GitHub**](https://github.com/gretelai/gretel-synthetics)**,
+    and let us know on our** [**Slack**](https://gretel.ai/slackinvite) **if you have
+    any questions!** Please watch for more blogs on time series as we incorporate
+    DoppelGANger into our APIs and add additional features such as support for variable-length
+    sequences.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Credits
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Thanks to the authors of the excellent DoppelGANger paper: [Using GANs for
+    Sharing Networked Time Series Data: Challenges, Initial Promise, and Open Questions](http://arxiv.org/abs/1909.13403)
+    by Zinan Lin, Alankar Jain, Chen Wang, Giulia Fanti, Vyas Sekar. And we’re especially
+    grateful to Zinan Lin for responding to questions about the paper and TensorFlow
+    1 code.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Kendrick Boyd](https://www.linkedin.com/in/kendrickboyd/)** is Principal
+    ML Engineer at [Gretel.ai](http://gretel.ai/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Generate Synthetic Tabular Dataset](https://www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Combining Data Management and Data Storytelling to Generate Value](https://www.kdnuggets.com/combining-data-management-and-data-storytelling-to-generate-value)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[High-Fidelity Synthetic Data for Data Engineers and Data Scientists Alike](https://www.kdnuggets.com/2022/tonic-high-fidelity-synthetic-data-engineers-scientists-alike.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Use Synthetic Data To Overcome Data Shortages For Machine…](https://www.kdnuggets.com/2022/03/synthetic-data-overcome-data-shortages-machine-learning-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Democratize AI/ML and Data Science with AI-generated Synthetic Data](https://www.kdnuggets.com/2022/11/mostly-ai-democratize-aiml-data-science-aigenerated-synthetic-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Synthetic Data Platforms: Unlocking the Power of Generative AI for…](https://www.kdnuggets.com/2023/07/synthetic-data-platforms-unlocking-power-generative-ai-structured-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

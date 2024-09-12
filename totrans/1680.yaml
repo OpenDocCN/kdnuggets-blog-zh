@@ -1,0 +1,310 @@
+- en: A Beginner’s Guide to Data Engineering – Part II
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/03/beginners-guide-data-engineering-part-2.html/2](https://www.kdnuggets.com/2018/03/beginners-guide-data-engineering-part-2.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/03/beginners-guide-data-engineering-part-2.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: The Anatomy of an Airflow Pipeline
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/b3883f7be24a82be7a7c39fb4e3216e7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now that we have learned about the concept of fact tables, dimension tables,
+    date partitions, and what it means to do data backfilling, let’s crystalize these
+    concepts and put them in an actual Airflow ETL job.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Defining the Directed Acyclic Graph (DAG)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we mentioned in the [earlier post](https://medium.com/@rchang/a-beginners-guide-to-data-engineering-part-i-4227c5c457d7),
+    any ETL job, at its core, is built on top of three building blocks: **E**xtract, **T**ransform,
+    and **L**oad. As simple as it might sound conceptually, ETL jobs in real life
+    are often complex, consisting of many combinations of E, T, and L tasks. As a
+    result, it is often useful to visualize complex data flows using a graph. Visually,
+    a *node* in a graph represents a task, and an *arrow* represents the dependency
+    of one task on another. Given that data only needs to be computed once on a given
+    task and the computation then carries forward, the graph is *directed *and *acyclic*.This
+    is why Airflow jobs are commonly referred to as “DAGs” (**D**irected **A**cyclic **G**raphs).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9c6359d1c3dedca683467b64d23bcb98.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Source](https://medium.com/airbnb-engineering/https-medium-com-jonathan-parks-scaling-erf-23fd17c91166):
+    A screenshot of Airbnb’s Experimentation Reporting Framework DAG'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the clever designs about Airflow UI is that it allows any users to visualize
+    the DAG in a [graph view](https://airflow.apache.org/ui.html#graph-view), using
+    code as configuration. The author of a data pipeline must define the structure
+    of dependencies among tasks in order to visualize them. This specification is
+    often written in a file called the *DAG definition file, *which lays out the anatomy
+    of an Airflow job.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Operators: Sensors, Operators, and Transfers**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'While DAGs describe *how* to run a data pipeline, operators describe *what* to
+    do in a data pipeline. Typically, there are three broad categories of operators:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Sensors: **waits for a certain time, external file, or upstream data source'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Operators: **triggers a certain action (e.g. run a bash command, execute
+    a python function, or execute a Hive query, etc)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Transfers: **moves data from one location to another'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Shrewd readers can probably see how each of these operators correspond to the
+    **E**xtract,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**T**ransform, and **L**oad steps that we discussed earlier.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Sensors** unblock the data flow after a certain time has passed or when data
+    from an upstream data source becomes available. At Airbnb, given that most of
+    our ETL jobs involve Hive queries, we often used `[NamedHivePartitionSensors](https://github.com/apache/incubator-airflow/blob/master/airflow/sensors/named_hive_partition_sensor.py)` to
+    check whether the most recent partition of a Hive table is available for downstream
+    processing.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Operators** trigger data transformations, which corresponds to the **T**ransform
+    step. Because Airflow is open-source, contributors can [extend](https://github.com/apache/incubator-airflow/tree/master/airflow/operators) `BaseOperator`class
+    to create custom operators as they see fit. At Airbnb, the most common operator
+    we used is `[HiveOperator](https://github.com/apache/incubator-airflow/blob/master/airflow/operators/hive_operator.py#L22)` (to
+    execute hive queries), but we also use `[PythonOperator](https://github.com/apache/incubator-airflow/blob/master/airflow/operators/python_operator.py)` (e.g.
+    to run a Python script) and `[BashOperator](https://github.com/apache/incubator-airflow/blob/master/airflow/operators/bash_operator.py)` (e.g.
+    to run a bash script, or even a fancy Spark job) fairly often. The possibilities
+    are endless here!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, we also have special operators that **Transfers **data from one place
+    to another, which often maps to the **L**oad step in ETL. At Airbnb, we use `[MySqlToHiveTransfer](https://github.com/apache/incubator-airflow/blob/master/airflow/operators/mysql_to_hive.py)`
+    or `[S3ToHiveTransfer](https://github.com/apache/incubator-airflow/blob/master/airflow/operators/s3_to_hive_operator.py)`
+    pretty often, but this largely depends on one’s data infrastructure and where
+    the data warehouse lives.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**A Simple Example**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below is a simple example that demonstrate how to define a DAG definition file,
+    instantiate a Airflow DAG, and define the corresponding DAG structure using the
+    various operators we described above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When the DAG is rendered, we see the following graph view:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8c6afb760a294b42682b86dae4f3237f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Graph View of the toy example DAG
+  prefs: []
+  type: TYPE_NORMAL
+- en: ETL Best Practices To Follow
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/2027a30a151a5a2c88b0ff1cdd567049.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Image Credit](http://www.omen-azen.com/eat-together-1/): Building your craft
+    takes practice, so it’s wise to follow best practices'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Like any craft, writing Airflow jobs that are succinct, readable, and scalable
+    requires practice. On my first job, ETL to me was just a series of mundane mechanical
+    tasks that I had to get done. I did not see it as a craft nor did I know the best
+    practices. At Airbnb, I learned a lot about best practices and I started to appreciate
+    good ETLs and how beautiful they can be. Below, I list out a non-exhaustive list
+    of principles that good ETL pipelines should follow:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Partition Data Tables: **As we mentioned earlier,data partitioning can be
+    especially useful when dealing with large-size tables with a long history. When
+    data is partitioned using datestamps, we can leverage dynamic partitions to parallelize
+    backfilling.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Load Data Incrementally: **This principle makes your ETL more modular and
+    manageable, especially when building dimension tables from the fact tables. In
+    each run, we only need to append the new transactions to the dimension table from
+    previous date partition instead of scanning the entire fact history.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Enforce Idempotency: **Many data scientists rely on point-in-time snapshots
+    to perform historical analysis. This means the underlying source table should
+    not be mutable as time progresses, otherwise we would get a different answer.
+    Pipeline should be built so that the same query, when run against the same business
+    logic and time range, returns the same result. This property has a fancy name
+    called Idempotency.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Parameterize Workflow: **Just like how templates greatly simplified the organization
+    of HTML pages, Jinja can be used in conjunction with SQL. As we mentioned earlier,
+    one common usage of Jinja template is to incorporate the backfilling logic into
+    a typical Hive query. [Stitch Fix](https://www.google.com/search?q=stitchfix+jinja&oq=stitchfix+jinja&aqs=chrome..69i57j69i59.3030j0j1&sourceid=chrome&ie=UTF-8) has
+    a very nice post that summarized how they use this technique for their ETL.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Add Data Checks Early and Often: **When processing data, it is useful to
+    write data into a staging table, check the data quality, and only then exchange
+    the staging table with the final production table. At Airbnb, we call this the *stage-check-exchange* paradigm.
+    Checks in this 3-step paradigm are important defensive mechanisms — they can be
+    simple checks such as counting if the total number of records is greater than
+    0 or something as complex as an anomaly detection system that checks for unseen
+    categories or outliers.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A skeleton of stage-check-exchange operation (aka “Unit Test” for data pipelines)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Build Useful Alerts & Monitoring System: **Since ETL jobs can often take
+    a long time to run, it’s useful to add alerts and monitoring to them so we do
+    not have to keep an eye on the progress of the DAG constantly. Different companies
+    monitor DAGs in many creative ways — at Airbnb, we regularly use EmailOperators
+    to send alert emails for jobs missing SLAs. Other teams have used alerts to flag
+    experiment imbalances. Yet another [interesting example](https://www.slideshare.net/cloudera/building-robust-pipelines-with-airflow-wrangle-conference-2017) is
+    from Zymergen where they report model performance metrics such as R-squared with
+    a SlackOperator.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Many of these principles are inspired by a combination of conversations with
+    seasoned data engineers, my own experience building Airflow DAGs, and readings
+    from Gerard Toonstra’s [ETL Best Practices with Airflow](https://gtoonstra.github.io/etl-with-airflow/principles.html).
+    For the curious readers, I highly recommend this following talk from Maxime:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Source](https://www.youtube.com/watch?v=dgaoqOZlvEA): Maxime, the original
+    author of Airflow, talking about ETL best practices'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recap of Part II
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the second post of this series, we discussed star schema and data modeling
+    in much more details. We learned the distinction between fact and dimension tables,
+    and saw the advantages of using datestamps as partition keys, especially for backfilling.
+    Furthermore, we dissected the anatomy of an Airflow job, and crystallized the
+    different operators available in Airflow. We also highlighted best practices for
+    building ETL, and showed how flexible Airflow jobs can be when used in conjunction
+    with Jinja and SlackOperators. The possibilities are endless!
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the last post of the series, I will discuss a few advanced data engineering
+    patterns — specifically, how to go from building pipelines to building frameworks.
+    I will again use a few example frameworks that we used at Airbnb as motivating
+    examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you found this post useful, please visit [**Part I**](https://medium.com/@rchang/a-beginners-guide-to-data-engineering-part-i-4227c5c457d7)and
+    stay tuned for **Part III**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*I want to appreciate *[*Jason Goodman*](https://medium.com/@jasonkgoodman)* and
+    Michael Musson for providing invaluable feedback to me*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Robert Chang](https://www.linkedin.com/in/robert-chang-877b1720/)**
+    is a data scientist at Airbnb working on Machine Learning, Machine Learning Infrastructure,
+    and Host Growth. Prior to Airbnb, he was a data scientist at Twitter and have
+    a degree in Statistics from Stanford University and a degree of Operations Research
+    from UC Berkeley.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/a-beginners-guide-to-data-engineering-part-ii-47c4e7cbda71).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Beginner’s Guide to Data Engineering  –  Part I](/2018/01/beginners-guide-data-engineering-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Advice For New and Junior Data Scientists](/2017/11/chang-advice-new-junior-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Build a Data Science Pipeline](/2017/07/build-data-science-pipeline.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Beginner’s Guide to Data Engineering](https://www.kdnuggets.com/2023/07/beginner-guide-data-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Beginner''s Guide to Anomaly Detection Techniques in Data Science](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Data Science: A Beginner''s Guide](https://www.kdnuggets.com/2023/07/introduction-data-science-beginner-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beginner’s Guide to Data Cleaning with Pyjanitor](https://www.kdnuggets.com/beginners-guide-to-data-cleaning-with-pyjanitor)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Beginner''s Guide to End to End Machine Learning](https://www.kdnuggets.com/2021/12/beginner-guide-end-end-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Essential Machine Learning Algorithms: A Beginner''s Guide](https://www.kdnuggets.com/2021/05/essential-machine-learning-algorithms-beginners.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,292 @@
+- en: 'Going deeper with recurrent networks: Sequence to Bag of Words Model'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/08/deeper-recurrent-networks-sequence-bag-words-model.html](https://www.kdnuggets.com/2017/08/deeper-recurrent-networks-sequence-bag-words-model.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Solomon Fung, [MarianaIQ](https://www.marianaiq.com/).**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Until the last 5 years or so, it was infeasible to uncover topics and emotions
+    across the web without powerful computing resources. Engineers didn’t have efficient
+    methods to make sense of words and documents at a large scale. Now, with deep
+    learning, we can convert unstructured text to computable formats, effectively
+    incorporating semantic knowledge for training machine learning models. Harnessing
+    the vast data troves of the digital world can help us understand people more directly,
+    going beyond the limitations of collecting data points through measurements and
+    survey results. Here’s a glimpse into how we achieve this at MarianaIQ.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Going deeper with recurrent networks**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Recurrent neural network (RNN)** is a network containing neural layers that
+    have a temporal feedback loop. A neuron in this layer receives the current inputs
+    as well as its own outputs from the previous time-step. An RNN can operate across
+    a sequence of inputs since the recurrent layer “remembers” previous inputs while
+    processing the current input. When an RNN network is computed, the software will
+    “unroll” the network (as shown below) by rapidly cloning the RNN across all the
+    time-steps and computing the signals for the forward pass. During the backwards
+    pass, the loss is back-propagated through time (BPTT) like a feed-forward network,
+    except the parameters’ adjustments across the clones are shared.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ace7189de7f2ded3e526319a2c9a5818.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Fig 1\. Recurrent Network Architecture**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We use a sophisticated RNN called **Long Short-Term Memory (LSTM)⁷**, whose
+    neurons include gated activations that act like inner switches for advanced memory
+    capabilities. Another distinction for LSTMs is passing along a “hidden state”
+    of activations to the next time-step, separate from its outputs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With a dataset of product reviews, we could feed an RNN word-by-word and predict
+    the rating with a softmax layer after receiving the final word. Another RNN application
+    is a language model, where each input predicts the next input. Well-trained RNNs
+    have generated text to mimic the style of [Shakespeare’s plays](http://karpathy.github.io/2015/05/21/rnn-effectiveness/),
+    [Obama’s speeches](https://medium.com/@samim/obama-rnn-machine-generated-political-speeches-c8abd18a2ea0),
+    [lines of computer code](https://github.com/tonybeltramelli/pix2code) or even
+    [composing music](http://www.hexahedria.com/2015/08/03/composing-music-with-recurrent-neural-networks/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e38412451a37bf6df27037a59d9b4c99.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Fig 2.Training an RNN to generate Shakespeare with word-by-word prediction**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using dual RNNs to encode one language and decode to another language, we can
+    train powerful and elegant **sequence-to-sequence** translation models (“seq2seq”
+    learning)⁸. Much of Google Translate intelligence now relies on this technology.
+    These RNNs work with one-hot input vectors or untrained/pre-trained embeddings,
+    representing text either at a character level or word level.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solving titles: Our Seq2BoW model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can combine RNNs with Word2vec to map job titles to interests using a model
+    we’ll call “Seq2BoW” (sequence to bag of words). The RNN learns to compose the
+    embedding for any title from its word sequence, giving us two advantages:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we no longer require a vocabulary list to exhaustively capture so many
+    combinations of similar titles.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Second, the titles and interests exist in the same embedding space so we can
+    query across the two vocabularies to see how they relate in meaning. Not only
+    can we assess how similar titles are, we can find out why by contrasting their
+    inferred interests.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The training set consists of job descriptions containing titles and extracted
+    keywords. We use a new embedding layer for the title words (tokens) and feed these
+    through an LSTM to compute a fixed title embedding. This new title embedding is
+    trained to predict the interests occurring in the same description.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To do this, we use a **linear layer** to project the new title embedding onto
+    the vector space for interests (pre-trained on our own corpus using Word2vec).
+    A linear layer is a neural layer without a nonlinear activation, so it is merely
+    a linear transformation from the LSTM output to the existing interest vector space.
+    We train the word predictions like Word2vec with positive and negative embeddings
+    according to the keywords that appear in the job description for the associated
+    title.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For speedup, we combined the dot products between the RNN projection and positive
+    word and negative words together into the same training sample using a softmax
+    layer for predicting only the positive word instead of training separate embedding
+    pairs like in Word2vec.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/67aa5ff2954a3f2062b0eefab46998e5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Fig 3\. Training a title RNN (one positive and one negative sample)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We use [Keras](https://keras.io/) on the [Tensorflow](https://www.tensorflow.org/)
+    backend. Running on an NVIDIA GPU gave us the computation power to blaze through
+    10 million job descriptions in 15 minutes (32 wide RNN and 24 wide pre-trained
+    interest word vectors). We can demonstrate the representational abilities of these
+    vectors with a few examples below (all lists are computer “generated”).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Using our interest vocabulary trained with Word2vec, we can enter any interest
+    keyword, look up its vector and find all the words belonging to the closest vectors:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Marketing Content**: Content generation, Corporate blogging, Content syndication,
+    Bylined articles, Social media strategy, Online content creation, Content curation,
+    Content production'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Juggling**: Roller skating, Ventriloquism, Circus arts, Unicycle, Street
+    dance, Swing dance, Comedic timing, Acrobatics'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Brain Surgery**: Medical research, Neurocritical care, Skull base surgery,
+    Endocrine surgery, Brain tumors, Medical education, Pediatric cardiology, Hepatobiliary
+    surgery'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With the Seq2BoW title model, we can find related interests, given any title:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Marketing Analytics:** Marketing mix modeling, Adobe insight, Lifetime value,
+    Attribution modeling, Customer analysis, Spss clementine, Data segmentation, Spss
+    modeler'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data Engineer**: Spark, Apache Pig, Hive, Pandas, Map Reduce, Apache Spark,
+    Octave, Vertica'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Winemaker**: Viticulture, Winemaking, Wineries, Red wine, Wine tasting, Food
+    pairing, Champagne, Beer'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can create a separate title vocabulary by computing and storing the vectors
+    for the most frequent titles. Then, we can query among these vectors to find related
+    titles:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**CEO**: Chairman, General Partner, Chief Executive, Coo, President, Founder/Ceo,
+    President/Ceo, Board Member'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Dishwasher**: Crew Member, Crew, Kitchen Staff, Busser, Barback, Shift Leader,
+    Carhop, Sandwich Artist'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Code Monkey:** Senior Software Development Engineer, Lead Software Developer,
+    Senior Software Engineer II, Software Designer, Software Engineer III, Lead Software
+    Engineer, Technical Principal, Lead Software Development Engineer'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can also find titles near any interest:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Cold Calling**: Account management, Sales presentations, Direct sales, Sales
+    process, Sales operations, Outside sales, Sales, Sales management'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Baking**: Chef Instructor, Culinary Arts Instructor, Culinary Instructor,
+    Baker, Head Baker, Pastry Chef, Pastry, Assistant Pastry Chef'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Neural Networks:** Senior Data Scientist, Principal Data Scientist, Machine
+    Learning, Data Scientist, Algorithm Engineer, Quantitative Researcher, Research
+    Programmer, Lead Scientist'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can extend beyond relating interests and titles and add various inputs or
+    outputs to the Seq2BoW model. For example, we could consider company information,
+    educational background, geographic location or other individual social and consumer
+    insights and harness the flexibility of deep learning to understand how these
+    relate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Understanding text powers ABM at scale**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The ABM intelligence used by MarianaIQ relies on powerful and concise representations
+    of identity. We use Deep Learning to compute semantic embeddings for keywords
+    and titles. To train useful machine learning models, we feed in unique labeled
+    vectors of individuals and accounts, each containing attributes concatenated with
+    our embeddings – a heterogeneous but harmonious combination of structured and
+    unstructured data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By learning from data collected across the web, **we avoid the narrower and
+    biased perspective of traditional consultants.** We can quickly and accurately
+    provide quantitative assessments such as deciding who will be more responsive
+    to particular topics or identifying who looks more like a potential buyer. These
+    analyses are only feasible through today’s machine learning, but they’re the secret
+    sauce that allows ABM to function at scale for our customers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Solomon Fung](https://www.marianaiq.com/company-team/sol/) has a
+    variety of degrees to his name, a reflection of his diverse interests. A California
+    resident since his master’s degree at Stanford, he originally hails from Canada.
+    His current focus at MarianaIQ is big data – his algorithms are designed to help
+    companies better understand and predict the behavior of individual consumers.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Building, Training, and Improving on Existing Recurrent Neural Networks](/2017/05/building-training-improving-existing-recurrent-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Build a Recurrent Neural Network in TensorFlow](/2017/04/build-recurrent-neural-network-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using the TensorFlow API: An Introductory Tutorial Series](/2017/06/using-tensorflow-api-tutorial-series.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Sentiment Analysis in Python: Going Beyond Bag of Words](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Stay on Top of What''s Going on in the AI World](https://www.kdnuggets.com/2022/03/stay-top-going-ai-world.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Segment Anything Model: Foundation Model for Image Segmentation](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Simple Things to Try Before Neural Networks](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Interpretable Neural Networks with PyTorch](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

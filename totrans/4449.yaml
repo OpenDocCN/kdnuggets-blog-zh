@@ -1,0 +1,440 @@
+- en: A Complete Guide To Survival Analysis In Python, part 1
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/07/complete-guide-survival-analysis-python-part1.html](https://www.kdnuggets.com/2020/07/complete-guide-survival-analysis-python-part1.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Pratik Shukla](https://medium.com/@shuklapratik22), Aspiring machine
+    learning engineer**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/31349bd6fcd2cbb4fc301d14602cad1f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Survival Analysis Basics
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Survival analysis** is a set of statistical approaches used to find out the
+    time it takes for an event of interest to occur. Survival analysis is used to
+    study the **time** until some **event** of interest (often referred to as **death**)
+    occurs. Time could be measured in years, months, weeks, days, etc. The event of
+    interest could be anything of interest. It could be an actual death, a birth,
+    a retirement, etc.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**How it can be useful to analyze ongoing COVID-19 pandemic data?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: (1) We can find the number of days until patients showed COVID-19 symptoms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: (2) We can find for which age group it’s deadlier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: (3) We can find which treatment has the highest survival probability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: (4) We can find whether a person’s sex has a significant effect on their survival
+    time?
+  prefs: []
+  type: TYPE_NORMAL
+- en: (5) We can also find the median number of days of survival for patients.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are going to perform a thorough analysis of patients with lung cancer. Don’t
+    worry once you understand the logic behind it, you’ll be able to perform it on
+    any data set. **Exciting, isn’t it?**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Survival analysis** is used in a variety of field such as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cancer studies for patients survival time analyses.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sociology for “event-history analysis”.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In Engineering for “failure-time analysis”.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Time until product failure.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Time until a warranty claim.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Time until a process reaches a critical level.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Time from initial sales contact to a sale.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Time from employee hire to either termination or quit.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Time from a salesperson hire to their first sale.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In** cancer studies**, typical research questions include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: (1) What is the impact of certain clinical characteristics on patient’s survival?
+    For example, is there any difference between the group of people who has higher
+    blood sugar and those who don’t?
+  prefs: []
+  type: TYPE_NORMAL
+- en: (2) What is the probability that an individual survives a specific period (years,
+    months, days)? For example, given a set of cancer patients, we will be able to
+    tell that if 300(random number) days after the diagnosis of cancer has been passed,
+    then the probability of that person being alive at that time will be 0.7 (random
+    number).
+  prefs: []
+  type: TYPE_NORMAL
+- en: (3) Are there differences in survival between groups of patients? For example,
+    let’s say there are 2 groups of people diagnosed with cancer. Those 2 groups were
+    given 2 different kinds of treatments. Now our goal here will be to find out if
+    there is a significant difference between the survival time for those 2 different
+    groups based on the treatment they were given.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Objectives
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In cancer studies, most of the survival analyses use the following methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: (1) *Kaplan-Meier plots* to visualize survival curves.
+  prefs: []
+  type: TYPE_NORMAL
+- en: (2) *Nelson-Aalen plots* to visualize the cumulative hazard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: (3) *Log-rank test* to compare the survival curves of two or more groups
+  prefs: []
+  type: TYPE_NORMAL
+- en: (4) *Cox proportional hazards regression* to find out the effect of different
+    variables like age, sex, weight on survival.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fundamental concepts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Here, we start by defining fundamental terms of survival analysis, including:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Survival time and event.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Censoring of data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Survival function and hazard function.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Survival time and type of events in cancer studies**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Survival Time: referred to an amount of time until when a subject is alive
+    or actively participates in a survey.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are mainly three types of events, including:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '(1) **Relapse**: a deterioration in someone’s state of health after a temporary
+    improvement.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '(2) **Progression**: the process of developing or moving gradually towards
+    a more advanced state. ( Improvement in health.)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '(3) **Death**: the destruction or permanent end of something.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Censoring**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As mentioned above, survival analysis focuses on the occurrence of an event
+    of interest (e.g., birth, death, retirement). But there is still a possibility
+    that the event may not be observed for various reasons. Such observations are
+    known as censored observations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Censoring may arise in the following ways:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A patient has not (yet) experienced the event of interest (death or relapse
+    in our case) within the study period.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: A patient is not followed anymore.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If a patient moves to another city, then follow-up might not be possible for
+    the hospital staff.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This type of censoring, named *right censoring*, is handled in survival analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are three general types of censoring, right-censoring, left-censoring,
+    and interval-censoring.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Right Censoring**: The death of the person.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Left Censoring**: The event can’t be observed for some reason. It includes
+    events that occurred before the experiment started. (e.g., number of days from
+    birth when the kid started walking.)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Interval Censoring**: When we have data for some intervals only.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Survival and hazard functions**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We generally use two related probabilities to analyse survival data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: (1) The survival probability
+  prefs: []
+  type: TYPE_NORMAL
+- en: (2) The hazard probability
+  prefs: []
+  type: TYPE_NORMAL
+- en: To find survival probability, we’ll be using survivor function S(t), which is
+    the Kaplan-Meier Estimator. Survival probability is the probability that an individual
+    (e.g., patient) survives from the time origin (e.g., diagnosis of cancer) to a
+    specified future time t. For example, S(200) = 0.7 means that after 200 days has
+    passed since the diagnosis of cancer, the patient’s survival probability has dropped
+    to 0.7\. If the person stays alive at the end of an experiment, then that data
+    will be censored.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The hazard probability, denoted by h(t), is the probability that an individual(e.g.,
+    patient) who is under observation at a time t has an event(e.g., death) at that
+    time. For example, If h(200) = 0.7, then it means that the probability of that
+    person being dead at time t=200 days is 0.7.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that, in contrast to the survivor function, which focuses on not having
+    an event, the hazard function focuses on the event occurring. I think we can clearly
+    see that higher survival probability and lower hazard probability is good for
+    the patient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s move forward to the cool coding part!
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can download the dataset from[**here**](http://www-eio.upc.edu/~pau/cms/rdata/datasets.html)**.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data Description**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/010e11ed7d28dab0b7bb154110c52bd0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Kaplan-Meier Estimator**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The **Kaplan–Meier estimator **is a non-parametric statistic used to estimate
+    the survival function (probability of a person surviving) from lifetime data.
+    In medical research, it is often used to measure the fraction of patients living
+    for a certain amount of time after treatment. For example, Calculating the amount
+    of time(year, month, day) certain patient lived after he/she was diagnosed with
+    cancer or his treatment starts. The estimator is named after **Edward L. Kaplan **and** Paul
+    Meier**, whom each submitted similar manuscripts to the *Journal of the American
+    Statistical Association*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The formula for Kaplan-Meier is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The probability at time ti, S(ti), is calculated as
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ae70426452c647803c7ed859097684bb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can also write it as
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/854946ffba5051c7f2c81319669bc7f1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Survival Function
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e388e30963e21680a6bdc76a830363b8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/d5ebaf4bf7136b37bfe7b6b37ce25f1c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/38184031cb7e60634b8c214cee5ddb8d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In a more generalized way, we can say that,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d3faa690662787d7f0a811fd9c1ae2c4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Survival function simplified.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, we can say that,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7b17ea03014fb8b35ace095c340f8cb9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the next article, we’ll implement Kaplan-Meier fitter and Nelson-Aalen fitter
+    using python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Final Result**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: At the end of this three-part series, you’ll be able to plot graphs like this
+    from which we can extrapolate on the survival of a patient. **Hang tight!**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b50e84624c7516ce908860e4ee3be605.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The whole series:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Complete Guide To Survival Analysis In Python, part 1](https://www.kdnuggets.com/2020/07/complete-guide-survival-analysis-python-part1.html)This
+    three-part series covers a review with step-by-step explanations and code for
+    how to perform statistical survival analysis used to investigate the time some
+    event takes to occur, such as patient survival during the COVID-19 pandemic, the
+    time to failure of engineering products, or even the time to closing a sale after
+    an initial customer contact.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Complete Guide To Survival Analysis In Python, part 2](https://www.kdnuggets.com/2020/07/guide-survival-analysis-python-part-2.html)We
+    look at a detailed example implementing the Kaplan-Meier fitter theory as well
+    as the Nelson-Aalen fitter theory, both with examples and shared code.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Complete Guide To Survival Analysis In Python, part 3](https://www.kdnuggets.com/2020/07/guide-survival-analysis-python-part-3.html)We
+    look at a detailed example implementing the Kaplan-Meier fitter based on different
+    groups, a Log-Rank test, and Cox Regression, all with examples and shared code.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/@shuklapratik22/a-complete-guide-to-survival-analysis-in-python-956e6223c081).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: **[Pratik Shukla](https://medium.com/@shuklapratik22) is an aspiring
+    machine learning engineer who loves to put complex theories in simple ways. Pratik
+    pursued his undergraduate in computer science and is going for a master''s program
+    in computer science at University of Southern California.  “Shoot for the moon.
+    Even if you miss it you will land among the stars. -- Les Brown”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Survival Analysis for Business Analytics](https://www.kdnuggets.com/2017/11/survival-analysis-business-analytics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 8 Basic Statistics Concepts for Data Science](https://www.kdnuggets.com/2020/06/8-basic-statistics-concepts.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Challenges of Building a Predictive Churn Model](https://www.kdnuggets.com/2017/03/datascience-building-predictive-churn-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

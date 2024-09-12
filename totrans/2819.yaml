@@ -1,0 +1,319 @@
+- en: What Does it Mean to Deploy a Machine Learning Model?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/02/deploy-machine-learning-model.html](https://www.kdnuggets.com/2020/02/deploy-machine-learning-model.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Luigi Patruno](https://mlinproduction.com/about/), Data Scientist and
+    the founder of ML in Production**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I recently asked the [Twitter community](https://twitter.com/MLinProduction/status/1211359661980626945) about
+    their biggest machine learning pain points and what work their teams plan to focus
+    on in 2020\. One of the most frequently mentioned pain points was deploying machine
+    learning models. More specifically, **“How do you deploy machine learning models
+    in an automated, reproducible, and auditable manner?”**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5759b6c72706b494901df2657ae4c751.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Good question!
+  prefs: []
+  type: TYPE_NORMAL
+- en: The topic of ML deployment is rarely discussed when machine learning is taught.
+    Boot camps, data science graduate programs, and online courses tend to focus on
+    training algorithms and neural network architectures because these are "core"
+    machine learning ideas. I don’t disagree with that, but I’d argue that if a data
+    scientist can’t deploy a model, he won’t be able to add much, if any, value to
+    a business.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you search for resources on how to deploy a model, you’ll find plenty of
+    blog posts about writing Flask APIs. Many of these are well done, but not all
+    ML models need to be deployed behind a Flask API. In fact, sometimes, this is
+    counterproductive. These posts rarely discuss what factors to consider when deploying
+    a model, the variety of tools that can be used, and other important ideas. These
+    topics are extensive and a single blog post wouldn’t do them justice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That’s why I’m writing a multi-part blog series on deploying machine learning
+    models. This series will discuss what it means to deploy an ML model, what factors
+    to consider when deploying models, what software development tactics to use, and
+    the tools and frameworks to utilize. If you’d like to be alerted when each of
+    these posts is published, leave me your email address!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Before discussing any tools, let’s begin by asking: what does it mean to deploy
+    a model?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What does it mean to deploy a Machine Learning Model?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before you think about what tools to use to deploy your model, you need to have
+    a firm grasp on what deployment means. To attain that understanding, it’s helpful
+    to put yourself in the shoes of a software engineer. How does a software engineer
+    think about "deploying" code? How does the concept of deploying code transfer
+    to the domain of machine learning? Thinking about deployment as a software engineer
+    rather than as a data scientist will dramatically simplify what it means to deploy
+    a model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To understand what it means to deploy an ML model, let’s briefly discuss the
+    lifecycle of an ML project. Hypothetically, a product manager (PM) will discover
+    some user need and determine that machine learning can be used to solve this problem.
+    This will involve creating a new product or augmenting an existing product with
+    machine learning capabilities, typically in the form of a supervised learning
+    model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The PM will meet with an ML team lead to plan the project by defining project
+    goals, choosing a metric, and setting up the codebase. If appropriate training
+    and validation data exist, the project will be handed off to data scientists or
+    ML engineers to handle the iterative process of feature engineering and model
+    selection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The goal at this stage** is to build a model with a level of predictive performance
+    that meets or exceeds the goals set during the planning stage. Throughout these
+    initial stages, the users’ needs that motivated this project are still unmet.
+    These needs won’t be satisfied even when a model exists that achieves the minimum
+    required levels of predictive performance.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/266944f1f97e3f77c84bc654c67932b0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*[Setting Up Machine Learning Projects. Full Stack Deep Learning](https://full-stack-deep-learning.aerobaticapp.com/e372_eb327323-811b-4de9-8894-76ec4cfd6458/assets/slides/fsdl_2_projects.pdf)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A machine learning model can only begin to add value to an organization when
+    that model’s insights routinely become available to the users for which it was
+    built. The process of taking a trained ML model and making its predictions available
+    to users or other systems is known as **deployment**. Deployment is entirely distinct
+    from routine machine learning tasks like feature engineering, model selection,
+    or model evaluation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As such, deployment is not very well understood amongst data scientists and
+    ML engineers who lack backgrounds in software engineering or DevOps. But luckily
+    these skills aren’t very difficult. With practice, any data scientist can learn
+    how to deploy their models to production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How do you decide how to deploy?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To decide *how* to deploy a model, you need to understand how end-users should
+    interact with the model’s predictions. This is best understood through a few examples.
+    We’ll work our way up in complexity, beginning with a very simple use case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Deployment Example 1: Deploying a Lead Scoring Model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Suppose a data scientist has built a lead scoring model for a group of technical
+    analysts who are well versed in SQL. The analysts seek to group new leads into
+    buckets based on their likelihood of converting into customers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each morning they would like to use data from the database to create/update
+    dashboards they maintain in a BI tool.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since the analysts know SQL and expect model scores to be stored in the database,
+    "deploying" the lead scoring model means generating daily lead scores for new
+    leads and storing these in the analysts’ database.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The key aspects of this deployment are
+  prefs: []
+  type: TYPE_NORMAL
+- en: predictions can be generated on a group of new leads,
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: these predictions need to be made available each day, and
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: the predictions need to be stored in a database. The deployment process needs
+    to satisfy these three constraints in order for the ML model to add value to the
+    business.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Consider a slightly more complex situation.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The head of Sales finds out about the model and wants to make the model’s insights
+    available to his account executives. Naturally and much to our chagrin, the account
+    execs don’t know SQL, so storing the predictions in a database isn’t enough in
+    this case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Product Manager determines that lead scores need to be visible in the CRM
+    tool the account executives use in order to add business value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Deployment aspects 1 and 2 from the previous example (generating predictions
+    for a group of leads and doing so once a day) are still valid, but aspect 3 is
+    not. Deployment involves having the scores flow from the database into the CRM
+    tool. This will involve setting up additional ETLs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b1e21f1c0ce21536fc93739a638013b9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Deployment Example 2: Deploying a Recommender System**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For our final example, let’s consider how a recommender system, a popular application
+    of machine learning, might be deployed. Suppose that we work for an e-commerce
+    company that wishes to show users recommendations of products to purchase. We’ll
+    consider two variations of deployment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Scenario 1: The company wishes to display product recommendations to users
+    after they login to either the web or mobile application. Predictions need to
+    be *available* upon request, which can be at any time of day. This places a latency
+    constraint on our deployment, which affects whether we can generate predictions
+    on-the-fly as a user logs in, or whether we have to generate and cache predictions
+    beforehand. The deployment must make the model’s predictions available to both
+    the mobile and web applications. Thus separating our deployment from either of
+    these applications is desirable.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Scenario 2: The company wishes to add 5 recommendations to its marketing emails
+    to existing customers. These emails are sent to users twice a week; one email
+    goes out Monday afternoon and another goes out Friday morning. In this case, recommendations
+    can be computed for all users at the same time and cached. Latency requirements
+    are much less strict compared to the previous scenario. Storing these recommendations
+    in a database is sufficient. The process for generating the emails can look up
+    the user’s recommendations in this database and add the top 5 to the personalized
+    emails.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As we see from each of these examples, there are multiple factors to consider
+    when determining how to deploy a machine learning model. These factors include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: how frequently predictions should be generated
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: whether predictions should be generated for a single instance at a time or a
+    batch of instances
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the number of applications that will access the model
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the latency requirements of these applications
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Automated deployment of machine learning models is one of the biggest pain points
+    facing data scientists and ML engineers in 2020\. Since models can only add value
+    to an organization when insights are regularly available to end-users, it's imperative
+    that ML practitioners understand how to deploy their models as simply and efficiently
+    as possible. The first step in determining how to deploy a model is understanding
+    how end users should interact with that model’s predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://mlinproduction.com/what-does-it-mean-to-deploy-a-machine-learning-model-deployment-series-01/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: **[Luigi Patruno](https://twitter.com/MLinProduction) is a data scientist
+    and machine learning consultant. He is currently the Director of Data Science
+    at 2U, where he leads a team of data scientists responsible for building machine
+    learning models and infrastructure. As a consultant, Luigi helps companies generate
+    value by applying modern data science methods to strategic business and product
+    initiatives. He founded [MLinProduction.com](http://mlinproduction.com/) to collect
+    and share best practices for operationalizing machine learning and he''s taught
+    graduate courses in statistics, data analysis, and big data engineering.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Why are Machine Learning Projects so Hard to Manage?](https://www.kdnuggets.com/2020/02/machine-learning-projects-manage.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deployment of Machine learning models using Flask](https://www.kdnuggets.com/2019/12/excelr-deployment-machine-learning-flask.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why is Machine Learning Deployment Hard?](https://www.kdnuggets.com/2019/10/machine-learning-deployment-hard.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Deploy a Machine Learning Web App with Heroku](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Survey: Machine Learning Projects Still Routinely Fail to Deploy](https://www.kdnuggets.com/survey-machine-learning-projects-still-routinely-fail-to-deploy)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Successfully Deploy Data Science Projects](https://www.kdnuggets.com/2022/01/successfully-deploy-data-science-projects.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn How to Design & Deploy Responsible AI Systems](https://www.kdnuggets.com/2023/10/teradata-design-deploy-responsible-ai-systems-whitepaper)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn How to Design & Deploy Responsible AI Systems](https://www.kdnuggets.com/2023/11/teradata-design-deploy-responsible-ai-systems-whitepaper)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Can AI-Powered RPA and IA Mean For Businesses?](https://www.kdnuggets.com/2022/12/aipowered-rpa-ia-mean-businesses.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

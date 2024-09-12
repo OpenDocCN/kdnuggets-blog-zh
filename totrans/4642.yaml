@@ -1,0 +1,247 @@
+- en: 'Scalable Python Code with Pandas UDFs: A Data Science Application'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/06/scalable-python-code-pandas-udfs.html](https://www.kdnuggets.com/2019/06/scalable-python-code-pandas-udfs.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Ben Weber](https://www.linkedin.com/in/ben-weber-3b87482/), Data Scientist
+    at Zynga and Advisor at Mischief**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/9c97c2e4ab5c7ae71e54f8cb66b86416.png)Source:[https://pxhere.com/en/photo/1417846](https://pxhere.com/en/photo/1417846)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: PySpark is a really powerful tool, because it enables writing Python code that
+    can scale from a single machine to a large cluster. While libraries such as MLlib
+    provide good coverage of the standard tasks that a data scientists may want to
+    perform in this environment, there’s a breadth of functionality provided by Python
+    libraries that is not set up to work in this distributed environment. While libraries
+    such as [Koalas](https://github.com/databricks/koalas) should make it easier to
+    port Python libraries to PySpark, there’s still a gap between the corpus of libraries
+    that developers want to apply in a scalable runtime and the set of libraries that
+    support distributed execution. This post discusses how bridge this gap using the
+    the functionality provided by [Pandas UDFs](https://databricks.com/blog/2017/10/30/introducing-vectorized-udfs-for-pyspark.html) in
+    Spark 2.3+.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I encountered Pandas UDFs, because I needed a way of scaling up automated feature
+    engineering for a project I developed at Zynga. We have dozens of games with diverse
+    event taxonomies, and needed an automated approach for generating features for
+    different models. The plan was to use the [Featuretools](https://github.com/Featuretools/featuretools)library
+    to perform this task, but the challenge we faced was that it worked only with
+    Pandas on a single machine. Our use case required scaling up to a large cluster
+    and we needed to run the Python library in a parallelized and distributed mode.
+    I was able to present our approach for achieving this scale at Spark Summit 2019.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The approach we took was to first perform a task on the driver node in a Spark
+    cluster using a sample of data, and then scale up to the full data set using Pandas
+    UDFs to handle billions of records of data. We used this approach for our feature
+    generation step in our modeling pipeline. This method can also be applied to different
+    steps in a data science workflow, and can also be used in domains outside of data
+    science. We provide a deep dive into our approach in the following post on Medium:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Portfolio-Scale Machine Learning at Zynga**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Automating predictive modeling across dozens of games*medium.com](https://medium.com/zynga-engineering/portfolio-scale-machine-learning-at-zynga-bda8e29ee561)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This post walks through an example where Pandas UDFs are used to scale up the
+    model application step of a batch prediction pipeline, but the use case for UDFs
+    are much more extensive than covered in this blog.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Data Science Application
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Pandas UDFs can be used in a variety of applications for data science, ranging
+    from feature generation to statistical testing to distributed model application.
+    However, this method for scaling up Python is not limited to data science, and
+    can be applied to a wide variety of domains, as long as you can encode your data
+    as a data frame and you can partition your task into subproblems. To demonstrate
+    how Pandas UDFs can be used to scale up Python code, we’ll walk through an example
+    where a batch process is used to create a likelihood to purchase model, first
+    using a single machine and then a cluster to scale to potentially billions or
+    records. The full source code for this post is available on [github](https://github.com/bgweber/StartupDataScience/blob/master/python/SK_Scale.ipynb),
+    and the libraries that we’ll use are pre-installed on the Databricks community
+    edition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first step in our notebook is loading the libraries that we’ll use to perform
+    distributed model application. We need Pandas to load our dataset and to implement
+    the user-defined function, sklearn to build a classification model, and pyspark
+    libraries for defining a UDF.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, we’ll load a data set for building a classification model. In this code
+    snippet, a CSV is eagerly fetched into memory using the Pandas `read_csv`function
+    and then converted to a Spark dataframe. The code also appends a unique ID for
+    each record and a partition ID that is used to distribute the data frame when
+    using a PDF.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The output of this step is shown in the table below. The Spark dataframe is
+    a collection of records, where each records specifies if a user has previously
+    purchase a set of games in the catalog, the label specifies if the user purchased
+    a new game release, and the user_id and parition_id fields are generated using
+    the spark sql statement from the snippet above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/5fb756e02f53f580bd1a8f9fca103b6a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We now have a Spark dataframe that we can use to perform modeling tasks. However,
+    for this example we’ll focus on tasks that we can perform when pulling a sample
+    of the data set to the driver node. When running the `toPandas()` command, the
+    entire data frame is eagerly fetched into the memory of the driver node. This
+    is fine for this example, since we’re working with a small data set. But it’s
+    a best practice to sample your data set before using the toPandas function. Once
+    we pull the data frame to the driver node, we can use sklearn to build a logistic
+    regression model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As long as your complete data set can fit into memory, you can use the single
+    machine approach to model application shown below, to apply the sklearn model
+    to a new data frame. However, if you need to score millions or billions of records,
+    then this single machine approach may fail.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The outcome of this step is a data frame of user IDs and model predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/eb8ffafef48ebd22b3285de170ac448f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the last step in the notebook, we’ll use a Pandas UDF to scale the model
+    application process. Instead of pulling the full dataset into memory on the driver
+    node, we can use Pandas UDFs to distribute the dataset across a Spark cluster,
+    and use pyarrow to translate between the spark and Pandas data frame representations.
+    The result is the same as the code snippet above, but in this case the data frame
+    is distributed across the worker nodes in the cluster, and the task is executed
+    in parallel on the cluster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The result is the same as before, but the computation has now moved from the
+    driver node to a cluster of worker nodes. The input and output of this process
+    is a Spark dataframe, even though we’re using Pandas to perform a task within
+    our UDF.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/b1c4e6103b662858295fbdb9769d5e07.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: For more details on setting up a Pandas UDF, check out my prior post on getting
+    up and running with PySpark.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**A Brief Introduction to PySpark**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*PySpark is a great language for performing exploratory data analysis at scale,
+    building machine learning pipelines, and…*towardsdatascience.com](https://towardsdatascience.com/a-brief-introduction-to-pyspark-ff4284701873)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This was an introduction that showed how to move sklearn processing from the
+    driver node in a Spark cluster to the worker nodes. I’ve also used this functionality
+    to scale up the[Featuretools](https://github.com/Featuretools/featuretools) library
+    to work with billions of records and create hundreds of predictive models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Pandas UDFs are a feature that enable Python code to run in a distributed environment,
+    even if the library was developed for single node execution. Data scientist can
+    benefit from this functionality when building scalable data pipelines, but many
+    different domains can also benefit from this new functionality. I provided an
+    example for batch model application and linked to a project using Pandas UDFs
+    for automated feature generation. There’s many applications of UDFs that haven’t
+    yet been explored and there’s a new scale of compute that is now available for
+    Python developers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Ben Weber](https://www.linkedin.com/in/ben-weber-3b87482/)** is a distinguished
+    Data Scientist at Zynga and Advisor at Mischief.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/scalable-python-code-with-pandas-udfs-a-data-science-application-dd515a628896).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Optimus v2: Agile Data Science Workflows Made Easy](/2018/08/optimus-v2-agile-data-science-workflows-made-easy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Swiftapply  – Automatically efficient pandas apply operations](/2018/04/swiftapply-automatically-efficient-pandas-apply-operations.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deep Learning With Apache Spark: Part 1](/2018/04/deep-learning-apache-spark-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a Scalable ETL with SQL + Python](https://www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Build a Scalable Data Architecture with Apache Kafka](https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Geospatial Application in Python with Google Earth…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build An AI Application with Python in 10 Easy Steps](https://www.kdnuggets.com/build-an-ai-application-with-python-in-10-easy-steps)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

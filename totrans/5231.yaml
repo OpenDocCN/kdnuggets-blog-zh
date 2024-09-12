@@ -1,0 +1,300 @@
+- en: 'SQL Case Study: Helping a Startup CEO Manage His Data'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/09/sql-case-study-helping-startup-ceo-manage-data.html/2](https://www.kdnuggets.com/2018/09/sql-case-study-helping-startup-ceo-manage-data.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/09/sql-case-study-helping-startup-ceo-manage-data.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**How many rows do exist in a table?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We would like to know how many persons in this startup. We do that by counting
+    the number of rows using count(*):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**How many rows with minimum values in a column?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We would like to know which persons in the startup have the lowest salary and
+    how many of them. Let’s try this query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This will introduce an error which says:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Aggregate functions are like COUNT(), MIN(), MAX(), AVG(), SUM(), etc. which
+    take values in a column as an input and returns a single value (or NULL) . Here
+    MIN() is used after WHERE clause, so we can do that by checking the salary if
+    it equals the minimum value (or not) which we can get from another query, not
+    by aggregating it, like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: But this will produce illogical value which is 1000$, so what happened?!
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is done because of the collation sequence, if you are interested in the
+    ASCII collating orders you can see this [link](https://www.ibm.com/support/knowledgecenter/SS6SG3_6.1.0/com.ibm.cobol61.ent.doc/PGandLR/ref/rlebcasc.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, what should we do now?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Actually, I did something not efficient at the beginning of creating the table
+    which is storing the column salary as varchar. The reason exists at the *RidFilter*‘s
+    *answer* of this [stackoverflow question](https://stackoverflow.com/questions/3008371/storing-numbers-as-varchar).
+  prefs: []
+  type: TYPE_NORMAL
+- en: But believe it or not, I dealt with some data like that. It includes dollar
+    sign stored as varachar so let’s fix it to be able to do some operations on it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Removing a character from a string:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This problem can be solved by first removing the dollar sign and then converting
+    this varchar to numeric value which can be integer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: This REPLACE() function will result in the values in salary column without the
+    dollar sign (i.e. replacing the $ by nothing), but beware that this is not edited
+    into the table. So, we need to use it next time we need to operate on it. Also,
+    beware that this column is still string not numeric, so we need to cast it into
+    decimal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, we can apply the MIN() on the casted replaced values of the salaries:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: The CAST() function converts the new salary column into decimal values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Remember, we still see the salary with the dollar sign in the startup table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To make it available in the table without the dollar sign, we use the UPDATE()
+    function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: We, now, return to our problem which is finding out the persons inside the startup
+    who have the lowest salary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We could use just one query with a subquery instead of the last two separate
+    queries:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can also count them using COUNT(*):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**The three lowest paid:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We would like to get the three lowest paid engineers in the startup. We can
+    do that by first querying all the rows using ORDER BY clause followed by ASC or
+    just ORDER BY which will order the output ascendingly by default.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Adding to ‘LIMIT 3’ will bring the first three corresponding to the rows with
+    the lowest salaries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The three highest paid:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice what we changed!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Total salaries:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s say the CEO wants to know the total cost of the salaries, so we can do
+    that using the aggregate function SUM():'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Adding a column to a table:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s say, he wants now to hire females, so he would add another column named
+    sex. This can be done using ALTER clause:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We should update each row like that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Using for loop:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Of course, this is a cumbersome if we do it manually. That’s why we should use
+    loops instead.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'SQL does not have loops, but it can only be used inside a procedural language
+    function or a ‘Do’ statement as answered [here](https://stackoverflow.com/questions/19145761/postgres-for-loop):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**(Kind of) histogram:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'One of the possible requirements is to know the frequency of something occurrence.
+    We can get the frequency of the city among the engineers in the startup by counting
+    each row occurrence for each city value. That’s why we use GROUPY BY clause:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is like histogram; it shows us how frequent value occurs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can name any column if we follow it by AS:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'I hope you find this article useful. If you want to know about my story before
+    getting the first internship in data science, I wrote an [article](https://medium.com/@ezzeddinabdullah/from-electronics-and-communications-engineering-to-data-science-a373448a783d)
+    at medium about it. If you want to see more updates and challenges, please follow
+    me on:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Linkedin: [https://www.linkedin.com/in/ezzeddinabdullah/](https://www.linkedin.com/in/ezzeddinabdullah/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Medium: [https://medium.com/@ezzeddinabdullah](https://medium.com/@ezzeddinabdullah)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Twitter: [https://twitter.com/EzzEddinAbdulah](https://twitter.com/EzzEddinAbdulah)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Quora: [https://www.quora.com/profile/Ezz-El-Din-Abdullah](https://www.quora.com/profile/Ezz-El-Din-Abdullah)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Ezz El Din Abdullah](https://www.linkedin.com/in/ezzeddinabdullah/)
+    is a former Data Scientist Intern & Programming Tutor.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[SQL Cheat Sheet](/2018/07/sql-cheat-sheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Scalable Select of Random Rows in SQL](/2018/04/scalable-select-random-rows-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[To SQL or not To SQL: that is the question!](/2018/05/sql-not-sql-question.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Automated Machine Learning with Python: A Case Study](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[12 Tips: From Data Analyst to Startup Co-Founder](https://www.kdnuggets.com/2021/12/12-tips-data-analyst-to-co-founder.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Hurdles of Building a Deep Tech Startup in the Age of ChatGPT](https://www.kdnuggets.com/2023/04/10-hurdles-building-deep-tech-startup-age-chatgpt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, August 31: The Complete Data Science Study Roadmap…](https://www.kdnuggets.com/2022/n35.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Super Study Guide: A Free Algorithms and Data Structures eBook](https://www.kdnuggets.com/2022/06/super-study-guide-free-algorithms-data-structures-ebook.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Complete Data Science Study Roadmap](https://www.kdnuggets.com/2022/08/complete-data-science-study-roadmap.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

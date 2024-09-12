@@ -1,0 +1,228 @@
+- en: 'Understanding Feature Engineering: Deep Learning Methods for Text Data'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/03/understanding-feature-engineering-deep-learning-methods-text-data.html](https://www.kdnuggets.com/2018/03/understanding-feature-engineering-deep-learning-methods-text-data.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Editor''s note:** This post is only one part of a far more thorough and in-depth
+    original, [found here](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa),
+    which covers much more than what is included here.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Header image](../Images/aefd6a27ee58fbc6ac8f6ff555b80662.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Working with unstructured text data is hard especially when you are trying
+    to build an intelligent system which interprets and understands free flowing natural
+    language just like humans. You need to be able to process and transform noisy,
+    unstructured textual data into some structured, vectorized formats which can be
+    understood by any machine learning algorithm. Principles from Natural Language
+    Processing, Machine Learning or Deep Learning all of which fall under the broad
+    umbrella of Artificial Intelligence are effective tools of the trade. Based on
+    my previous posts, an important point to remember here is that any machine learning
+    algorithm is based on principles of statistics, math and optimization. Hence they
+    are not intelligent enough to start processing text in their raw, native form.
+    We covered some traditional strategies for extracting meaningful features from
+    text data in [***Part-3: Traditional Methods for Text Data***](https://towardsdatascience.com/understanding-feature-engineering-part-3-traditional-methods-for-text-data-f6f7d70acd41)***. ***I
+    encourage you to check out the same for a brief refresher. In this article, we
+    will be looking at more advanced [feature engineering](https://www.kdnuggets.com/2018/12/feature-engineering-explained.html)
+    strategies which often leverage deep learning models. More specifically we will
+    be covering the [**Word2Vec**](https://en.wikipedia.org/wiki/Word2vec), [**GloVe**](https://nlp.stanford.edu/projects/glove/)and [**FastText**](https://research.fb.com/fasttext/)
+    models.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Motivation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We have discussed time and again including in [***our previous article***](https://towardsdatascience.com/understanding-feature-engineering-part-3-traditional-methods-for-text-data-f6f7d70acd41) that
+    Feature Engineering is the secret sauce to creating superior and better performing
+    machine learning models. Always remember that even with the advent of automated
+    feature engineering capabilities, you would still need to understand the core
+    concepts behind applying the techniques. Otherwise they would just be black box
+    models which you wouldn’t know how to tweak and tune for the problem you are trying
+    to solve.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Shortcomings of traditional models**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Traditional (count-based) feature engineering strategies for textual data involve
+    models belonging to a family of models popularly known as the Bag of Words model.
+    This includes term frequencies, TF-IDF (term frequency-inverse document frequency),
+    N-grams and so on. While they are effective methods for extracting features from
+    text, due to the inherent nature of the model being just a bag of unstructured
+    words, we lose additional information like the semantics, structure, sequence
+    and context around nearby words in each text document. This forms as enough motivation
+    for us to explore more sophisticated models which can capture this information
+    and give us features which are vector representation of words, popularly known
+    as embeddings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The need for word embeddings**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: While this does make some sense, why should we be motivated enough to learn
+    and build these word embeddings? With regard to speech or image recognition systems,
+    all the information is already present in the form of rich dense feature vectors
+    embedded in high-dimensional datasets like audio spectrograms and image pixel
+    intensities. However when it comes to raw text data, especially count based models
+    like Bag of Words, we are dealing with individual words which may have their own
+    identifiers and do not capture the semantic relationship amongst words. This leads
+    to huge sparse word vectors for textual data and thus if we do not have enough
+    data, we may end up getting poor models or even overfitting the data due to the
+    curse of dimensionality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/40ca1b5efc5f8f11dd7c2cef40e687c7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Comparing feature representations for audio, image and textTo overcome the shortcomings
+    of losing out semantics and feature sparsity in bag of words model based features,
+    we need to make use of [***Vector Space Models (VSMs)***](https://en.wikipedia.org/wiki/Vector_space_model)in
+    such a way that we can embed word vectors in this continuous vector space based
+    on semantic and contextual similarity. In fact the [***distributional hypothesis***](https://en.wikipedia.org/wiki/Distributional_semantics#Distributional_Hypothesis) in
+    the field of [***distributional semantics***](https://en.wikipedia.org/wiki/Distributional_semantics#Distributional_Hypothesis) tells
+    us that words which occur and are used in the same context, are semantically similar
+    to one another and have similar meanings. In simple terms, *‘a word is characterized
+    by the company it keeps’*. One of the famous papers talking about these semantic
+    word vectors and various types in detail is [*‘Don’t count, predict! A systematic
+    comparison of context-counting vs. context-predicting semantic vectors’ *by Baroni
+    et al](http://clic.cimec.unitn.it/marco/publications/acl2014/baroni-etal-countpredict-acl2014.pdf).
+    We won’t go into extensive depth but in short, there are two main types of methods
+    for contextual word vectors. ***Count-based methods*** like [***Latent Semantic
+    Analysis (LSA)***](https://en.wikipedia.org/wiki/Latent_semantic_analysis)which
+    can be used to compute some statistical measures of how often words occur with
+    their neighboring words in a corpus and then building out dense word vectors for
+    each word from these measures. ***Predictive methods*** like [***Neural Network
+    based language models***](http://www.scholarpedia.org/article/Neural_net_language_models) try
+    to predict words from its neighboring words looking at word sequences in the corpus
+    and in the process it learns distributed representations giving us dense word
+    embeddings. We will be focusing on these predictive methods in this article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature Engineering Strategies
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s look at some of these advanced strategies for handling text data and extracting
+    meaningful features from the same, which can be used in downstream machine learning
+    systems. Do note that you can access all the code used in this article in [**my
+    GitHub repository**](https://github.com/dipanjanS/practical-machine-learning-with-python/tree/master/bonus%20content/feature%20engineering%20text%20data) also
+    for future reference. We’ll start by loading up some basic dependencies and settings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We will now take a few corpora of documents on which we will perform all our
+    analyses. For one of the corpora, we will reuse our corpus from our previous article, [***Part-3:
+    Traditional Methods for Text Data***](https://towardsdatascience.com/understanding-feature-engineering-part-3-traditional-methods-for-text-data-f6f7d70acd41).
+    We mention the code as follows for ease of understanding.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/44fbb13a0bedc1a2e7f4026c47ee522c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Our sample text corpusOur toy corpus consists of documents belonging to several
+    categories. Another corpus we will use in this article is the [***The King James
+    Version of the Bible***](https://www.gutenberg.org/files/10/10-h/10-h.htm) available
+    freely from [***Project Gutenberg***](https://www.gutenberg.org/) through the `corpus` module
+    in `nltk`. We will load this up shortly, in the next section. Before we talk about
+    feature engineering, we need to pre-process and normalize this text.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Text pre-processing**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There can be multiple ways of cleaning and pre-processing textual data. The
+    most important techniques which are used heavily in Natural Language Processing
+    (NLP) pipelines have been highlighted in detail in the ***‘Text pre-processing’*** section
+    in [***Part 3 of this series***](https://towardsdatascience.com/understanding-feature-engineering-part-3-traditional-methods-for-text-data-f6f7d70acd41).
+    Since the focus of this article is on feature engineering, just like our previous
+    article, we will re-use our simple text pre-processor which focuses on removing
+    special characters, extra whitespaces, digits, stopwords and lower casing the
+    text corpus.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once we have our basic pre-processing pipeline ready, let’s first apply the
+    same to our toy corpus.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s now load up our other corpus based on [***The King James Version of the
+    Bible***](https://www.gutenberg.org/files/10/10-h/10-h.htm)using `nltk` and pre-process
+    the text.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The following output shows the total number of lines in our corpus and how the
+    pre-processing works on the textual content.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Bio: [Dipanjan Sarkar](https://www.linkedin.com/in/dipanzan)** is a Data
+    Scientist @Intel, an author, a mentor @Springboard, a writer, and a sports and
+    sitcom addict.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Text Data Preprocessing: A Walkthrough in Python](/2018/03/text-data-preprocessing-walkthrough-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A General Approach to Preprocessing Text Data](/2017/12/general-approach-preprocessing-text-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Framework for Approaching Textual Data Science Tasks](/2017/11/framework-approaching-textual-data-tasks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understanding Python''s Iteration and Membership: A Guide to…](https://www.kdnuggets.com/understanding-pythons-iteration-and-membership-a-guide-to-__contains__-and-__iter__-magic-methods)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Practical Approach To Feature Engineering In Machine Learning](https://www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Tractable, Feature Engineering Pipeline for Multivariate…](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using RAPIDS cuDF to Leverage GPU in Feature Engineering](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

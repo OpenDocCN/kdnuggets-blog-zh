@@ -1,0 +1,274 @@
+- en: Ensemble Learning to Improve Machine Learning Results
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/09/ensemble-learning-improve-machine-learning-results.html](https://www.kdnuggets.com/2017/09/ensemble-learning-improve-machine-learning-results.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Vadim Smolyakov, [Statsbot](https://statsbot.co/).**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Ensemble learning helps improve machine learning results by combining several
+    models. This approach allows the production of better predictive performance compared
+    to a single model. That is why ensemble methods placed first in many prestigious
+    machine learning competitions, such as the Netflix Competition, KDD 2009, and
+    Kaggle.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*The *[*Statsbot*](http://statsbot.co/?utm_source=kdnuggets)* team wanted to
+    give you the advantage of this approach and asked a data scientist, Vadim Smolyakov,
+    to dive into three basic ensemble learning techniques.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ensemble methods are meta-algorithms that combine several machine learning techniques
+    into one predictive model in order to **decrease** **variance** (bagging), **bias** (boosting),
+    or **improve predictions** (stacking).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Ensemble methods can be divided into two groups:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*sequential* ensemble methods where the base learners are generated sequentially
+    (e.g. AdaBoost).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The basic motivation of sequential methods is to** exploit the dependence between
+    the base learners.** The overall performance can be boosted by weighing previously
+    mislabeled examples with higher weight.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '*parallel* ensemble methods where the base learners are generated in parallel
+    (e.g. Random Forest).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The basic motivation of parallel methods is to **exploit independence between
+    the base learners** since the error can be reduced dramatically by averaging.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Most ensemble methods use a single base learning algorithm to produce homogeneous
+    base learners, i.e. learners of the same type, leading to *homogeneous ensembles*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are also some methods that use heterogeneous learners, i.e. learners of
+    different types, leading to *heterogeneous ensembles*. In order for ensemble methods
+    to be more accurate than any of its individual members, the base learners have
+    to be as accurate as possible and as diverse as possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bagging
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Bagging stands for bootstrap aggregation. One way to reduce the variance of
+    an estimate is to average together multiple estimates. For example, we can train
+    M different trees on different subsets of the data (chosen randomly with replacement)
+    and compute the ensemble:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2cceadad307359316c9dd527421af74e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Bagging uses bootstrap sampling to obtain the data subsets for training the
+    base learners. For aggregating the outputs of base learners, bagging uses *voting
+    for classification* and *averaging for regression*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can study bagging in the context of classification on the Iris dataset.
+    We can choose two base estimators: a decision tree and a k-NN classifier. Figure
+    1 shows the learned decision boundary of the base estimators as well as their
+    bagging ensembles applied to the Iris dataset.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Accuracy: 0.63 (+/- 0.02) [Decision Tree]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Accuracy: 0.70 (+/- 0.02) [K-NN]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Accuracy: 0.64 (+/- 0.01) [Bagging Tree]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Accuracy: 0.59 (+/- 0.07) [Bagging K-NN]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/33f9ea715faa9a1a1c6673eb09c5d0c9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The decision tree shows the axes’ parallel boundaries, while the k=1 nearest
+    neighbors fit closely to the data points. The bagging ensembles were trained using
+    10 base estimators with 0.8 subsampling of training data and 0.8 subsampling of
+    features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The decision tree bagging ensemble achieved higher accuracy in comparison to
+    the k-NN bagging ensemble. K-NN are less sensitive to perturbation on training
+    samples and therefore they are called stable learners.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Combining stable learners is less advantageous since the ensemble will not
+    help improve generalization performance.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The figure also shows how the test accuracy improves with the size of the ensemble.
+    Based on cross-validation results, we can see the accuracy increases until approximately
+    10 base estimators and then plateaus afterwards. Thus, adding base estimators
+    beyond 10 only increases computational complexity without accuracy gains for the
+    Iris dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can also see the learning curves for the bagging tree ensemble. Notice an
+    average error of 0.3 on the training data and a U-shaped error curve for the testing
+    data. The smallest gap between training and test errors occurs at around 80% of
+    the training set size.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*A commonly used class of ensemble algorithms are forests of randomized trees.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In **random forests**, each tree in the ensemble is built from a sample drawn
+    with replacement (i.e. a bootstrap sample) from the training set. In addition,
+    instead of using all the features, a random subset of features is selected, further
+    randomizing the tree.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a result, the bias of the forest increases slightly, but due to the averaging
+    of less correlated trees, its variance decreases, resulting in an overall better
+    model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/47a13d5d5d421a4b111aa4691973b497.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'In an **extremely randomized trees** algorithm randomness goes one step further:
+    the splitting thresholds are randomized. Instead of looking for the most discriminative
+    threshold, thresholds are drawn at random for each candidate feature and the best
+    of these randomly-generated thresholds is picked as the splitting rule. This usually
+    allows reduction of the variance of the model a bit more, at the expense of a
+    slightly greater increase in bias.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Boosting**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Boosting refers to a family of algorithms that are able to convert weak learners
+    to strong learners. The main principle of boosting is to fit a sequence of weak
+    learners− models that are only slightly better than random guessing, such as small
+    decision trees− to weighted versions of the data. More weight is given to examples
+    that were misclassified by earlier rounds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The predictions are then combined through a weighted majority vote (classification)
+    or a weighted sum (regression) to produce the final prediction. The principal
+    difference between boosting and the committee methods, such as bagging, is that
+    base learners are trained in sequence on a weighted version of the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The algorithm below describes the most widely used form of boosting algorithm
+    called **AdaBoost**,which stands for adaptive boosting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8a53b5e180f2642f01752d190c29b478.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We see that the first base classifier y1(x) is trained using weighting coefficients
+    that are all equal. In subsequent boosting rounds, the weighting coefficients
+    are increased for data points that are misclassified and decreased for data points
+    that are correctly classified.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The quantity epsilon represents a weighted error rate of each of the base classifiers.
+    Therefore, the weighting coefficients alpha give greater weight to the more accurate
+    classifiers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/66139941634db7f9ed0861cb2c93e1a9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The AdaBoost algorithm is illustrated in the figure above. Each base learner
+    consists of a decision tree with depth 1, thus classifying the data based on a
+    feature threshold that partitions the space into two regions separated by a linear
+    decision surface that is parallel to one of the axes. The figure also shows how
+    the test accuracy improves with the size of the ensemble and the learning curves
+    for training and testing data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Gradient Tree Boosting** is a generalization of boosting to arbitrary differentiable
+    loss functions. It can be used for both regression and classification problems.
+    Gradient Boosting builds the model in a sequential way.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e584f410462ef7eb0adbaaab2e999d99.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'At each stage the decision tree hm(x) is chosen to minimize a loss function
+    L given the current model Fm-1(x):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6bb6db30a3c9eda743f67859a8b19ec8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The algorithms for regression and classification differ in the type of loss
+    function used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning with Examples](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[When Would Ensemble Techniques be a Good Choice?](https://www.kdnuggets.com/2022/07/would-ensemble-techniques-good-choice.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Ultimate Guide to Mastering Seasonality and Boosting Business Results](https://www.kdnuggets.com/2023/08/media-mix-modeling-ultimate-guide-mastering-seasonality-boosting-business-results.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Ways to Improve Your Machine Learning Models](https://www.kdnuggets.com/7-ways-to-improve-your-machine-learning-models)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why Humbling Yourself Will Improve Your Data Science Skills](https://www.kdnuggets.com/2022/01/humbling-improve-data-science-skills.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

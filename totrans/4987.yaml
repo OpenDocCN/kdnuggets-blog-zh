@@ -1,0 +1,217 @@
+- en: Introduction to Correlation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/02/datascience-introduction-correlation.html](https://www.kdnuggets.com/2017/02/datascience-introduction-correlation.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By [DataScience.com](https://www.datascience.com/blog/introduction-to-correlation-learn-data-science-tutorials)**
+    Sponsored Post.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Introduction: What Is Correlation and Why Is It Useful?'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Correlation is one of the most widely used — and widely misunderstood — statistical
+    concepts. In this overview, we provide the definitions and intuition behind several
+    types of correlation and illustrate how to calculate correlation using the Python
+    `pandas` library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The term "correlation" refers to a mutual relationship or association between
+    quantities. In almost any business, it is useful to express one quantity in terms
+    of its relationship with others. For example, sales might increase when the [marketing
+    department spends](https://www.datascience.com/blog/data-science-and-predictive-modeling-for-marketers)
+    more on TV advertisements, or a [customer's average purchase amount](https://www.datascience.com/blog/capturing-better-customers-with-lifetime-value-modeling)
+    on an e-commerce website might depend on a number of factors related to that customer.
+    Often, correlation is the first step to understanding these relationships and
+    subsequently building better business and statistical models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, why is correlation a useful metric?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Correlation can help in predicting one quantity from another
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Correlation can (but often does not, as we will see in some examples below)
+    indicate the presence of a causal relationship
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Correlation is used as a basic quantity and foundation for many other modeling
+    techniques
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More formally, correlation is a statistical measure that describes the association
+    between random variables. There are several methods for calculating the correlation
+    coefficient, each measuring different types of strength of association. Below
+    we summarize three of the most widely used methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Types of Correlation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Before we go into the details of how correlation is calculated, it is important
+    to introduce the concept of *covariance*. Covariance is a statistical measure
+    of association between two variables *X* and *Y*. First, each variable is centered
+    by subtracting its mean. These centered scores are multiplied together to measure
+    whether the increase in one variable associates with the increase in another.
+    Finally, expected value (*E*) of the product of these centered scores is calculated
+    as a summary of association. Intuitively, the product of centered scores can be
+    thought of as the area of a rectangle with each point''s distance from the mean
+    describing a side of the rectangle:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![$$Cov(X, Y) = E $$](../Images/c34466377253011b6ccc4a7f919108a5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If both variables tend to move in the same direction, we expect the "average"
+    rectangle connecting each point (X_i, Y_i) to the means (X_bar, Y_bar) to have
+    a large and positive diagonal vector, corresponding to a larger positive product
+    in the equation above. If both variables tend to move in opposite directions,
+    we expect the average rectangle to have a diagonal vector that is large and negative,
+    corresponding to a larger negative product in the equation above. If the variables
+    are unrelated, then the vectors should, on average, cancel out — and the total
+    diagonal vector should have a magnitude near 0, corresponding to a product near
+    0 in the equation above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you are wondering what "expected value" is, it is another way of saying
+    the average, or mean *μ,* of a random variable. It is also referred to as "expectation."
+    In other words, we can write the following equation to express the same quantity
+    in a different way:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![$E(Y) = \bar{Y} = \mu_Y$](../Images/ce3d5bc1a02dc97c1484cbdb47ace4b3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The problem with covariance is that it keeps the scale of the variables *X* and *Y,* and
+    therefore can take on any value. This makes interpretation difficult and comparing
+    covariances to each other impossible. For example, *Cov*(*X*, *Y*)  = 5.2 and *Cov*(*Z*,
+    *Q*) = 3.1 tell us that these pairs are positively associated, but it is difficult
+    to tell whether the relationship between *X* and *Y* is stronger than *Z* and
+    *Q* without looking at the means and distributions of these variables. This is
+    where correlation becomes useful — by standardizing covariance by some measure
+    of variability in the data, it produces a quantity that has intuitive interpretations
+    and consistent scale.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pearson Correlation Coefficient
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Pearson is the most widely used correlation coefficient. Pearson correlation
+    measures the linear association between continuous variables. In other words,
+    this coefficient quantifies the degree to which a relationship between two variables
+    can be described by a line. Remarkably, while correlation can have many interpretations,
+    the same formula developed by Karl Pearson over 120 years ago is still the most
+    widely used today.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this section, we will introduce several popular formulations and intuitive
+    interpretations for Pearson correlation (referred to as *ρ*).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The original formula for correlation, developed by Pearson himself, uses raw
+    data and the means of two variables, *X* and *Y*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![$$ \rho_{X,Y} = \frac{\sum(X_i - \bar{X})(Y_i - \bar{Y})}{\sqrt{\sum(X_i
+    - \bar{X})^2 \sum(Y_i -\bar{Y})^2} } $$](../Images/37095e24cc09cb5933b5930662fafc5e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In this formulation, raw observations are centered by subtracting their means
+    and re-scaled by a measure of standard deviations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A different way to express the same quantity is in terms of expected values,
+    means *μ[X]*, *μ[Y,]* and standard deviations *σ**[X]*, *σ**[Y]*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![$$ \rho_{X,Y} = \frac{E[(X-\mu_{X})(Y-\mu_{Y})] }{\sigma_{X}\sigma_{Y}}$$](../Images/05c9de55054695689e263cf82293bb76.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Notice that the numerator of this fraction is identical to the above definition
+    of covariance, since mean and expectation can be used interchangeably. Dividing
+    the covariance between two variables by the product of standard deviations ensures
+    that correlation will always fall between -1 and 1\. This makes interpreting the
+    correlation coefficient much easier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The figure below shows three examples of Pearson correlation. The closer *ρ* is
+    to 1, the more an increase in one variable associates with an increase in the
+    other. On the other hand, the closer *ρ* is to -1, the increase in one variable
+    would result in decrease in the other. Note that if *X* and *Y* are independent,
+    then *ρ* is close to 0, but not vice versa! In other words, Pearson correlation
+    can be small even if there is a strong relationship between two variables. We
+    will see shortly how this can be the case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ac977f11f9ff30a81755703fa11cfa31.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: So, how can we interpret Pearson correlation?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Read the rest on DataScience.com : [Introduction to Correlation](https://www.datascience.com/blog/introduction-to-correlation-learn-data-science-tutorials)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Introduction to Correlation](https://www.kdnuggets.com/2023/05/introduction-correlation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Binary Classification with PyCaret](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Clustering in Python with PyCaret](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Essential Math for Data Science: Visual Introduction to Singular…](https://www.kdnuggets.com/2022/06/essential-math-data-science-visual-introduction-singular-value-decomposition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Pandas for Data Science](https://www.kdnuggets.com/2020/06/introduction-pandas-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Brief Introduction to Papers With Code](https://www.kdnuggets.com/2022/04/brief-introduction-papers-code.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

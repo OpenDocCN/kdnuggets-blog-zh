@@ -1,0 +1,382 @@
+- en: Development & Testing of ETL Pipelines for AWS Locally
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/08/development-testing-etl-pipelines-aws-locally.html](https://www.kdnuggets.com/2021/08/development-testing-etl-pipelines-aws-locally.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Subhash Sreenivasachar](https://www.linkedin.com/in/subhashsreenivasachar/),
+    Software Engineer Technical Lead at Epsilon**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: AWS plays a pivotal role in helping engineers, data-scientists focus on building
+    solutions and problem solving without worrying about the need to setup infrastructure.
+    With Serverless & pay-as-you-go approach for pricing, AWS provides ease of creating
+    services on the fly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: AWS Glue is widely used by Data Engineers to build serverless ETL pipelines.
+    PySpark being one of the common tech-stack used for development. However, despite
+    the availability of services, there are certain challenges that need to be addressed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Debugging code in AWS environment whether for ETL script (PySpark) or any other
+    service is a challenge.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ongoing monitoring of AWS service usage is key to keep the cost factor under
+    control
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: AWS does offer Dev Endpoint with all the spark libraries installed, but considering
+    the price, it’s not viable for use for large development teams
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Accessibility of AWS services may be ***limited*** for certain users
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Solution
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Solutions for AWS can be developed, tested in local environment without worrying
+    about accessibility or cost factor. Through this article, we are addressing two
+    problems -
+  prefs: []
+  type: TYPE_NORMAL
+- en: Debugging PySpark code locally without using AWS dev endpoints.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Interacting with AWS Services locally
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Both problems can be solved with use of Docker images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we do away the need for a server on AWS environment & instead, a docker
+    image running on the machine acts as the environment to execute the code.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: AWS provides a sandbox image which can be used for PySpark scripts. Docker image
+    can be setup to execute PySpark Code. [https://aws.amazon.com/blogs/big-data/developing-aws-glue-etl-jobs-locally-using-a-container/](https://aws.amazon.com/blogs/big-data/developing-aws-glue-etl-jobs-locally-using-a-container/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: With docker machine available to execute the code, there’s a need for a service
+    like S3 to store (read/write) files while building an ETL pipeline.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Interactions with S3 can be replaced with [LocalStack](https://localstack.cloud/)
+    which provides an easy-to-use test/mocking framework for developing Cloud applications.
+    It spins up a testing environment on your local machine that provides the same
+    functionality and APIs as the real AWS cloud environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Header](../Images/f2ac8f59636e1ab8666404cc4e3bc9f0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: So far, the article deals with building an ETL pipeline and use of services
+    available. However, similar approach can be adapted to any use case while working
+    with AWS services like SNS, SQS, CloudFormation, Lambda functions etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Approach
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Use docker containers as remote interpreter
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Run PySpark session on the containers
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Spin up S3 service locally using LocalStack
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use PySpark code to read and write from S3 bucket running on LocalStack
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pre-requisites
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Following tools must be installed on your machine
+  prefs: []
+  type: TYPE_NORMAL
+- en: Docker
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: PyCharm Professional/ VisualStudio Code
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Setup
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Download or pull docker images (docker pull <image name>)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: libs:glue_libs_1.0.0_image_01
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: localstack/localstack
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Docker containers can be used as remote interpreters in PyCharm professional
+    version.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Implementation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With Docker installed and images pulled to your local machine, start setting
+    PyCharm with configurations to start the containers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a docker-compose.yml file
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Create a DockerFile
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Use requirements file with packages to be installed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Setup Python remote interpreter
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Setup Python interpreter using the docker-compose file.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Select `glue-service` in PyCharm Docker Compose settings.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Docker-compose file creates and runs the containers for both images
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: LocalStack by default runs on port 4566 and S3 service is enabled on it
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Required libraries to be imported
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Add a file to S3 bucket running on LocalStack
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: http://host.docker.internal:4566 is the S3 running locally inside docker container
+  prefs: []
+  type: TYPE_NORMAL
+- en: Setup PySpark session to read from S3
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: PySpark session connects to S3 via mock credentials provided
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can read from S3 directly using the PySpark session created
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Finally, it’s possible to write to S3 in any preferred format
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Once the above-mentioned steps have been followed, we can create a dummy csv
+    file with mock data for testing and you should be good to
+  prefs: []
+  type: TYPE_NORMAL
+- en: Add file to S3 (which is running on LocalStack)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Read from S3
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Write back to S3 as parquet
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You should be able to run the .py file to execute & PySpark session will be
+    created that can read from S3 bucket which is running locally using LocalStack
+    API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Additionally, you can also check if LocalStack is running with [http://localhost:4566/health](http://localhost:4566/health)
+  prefs: []
+  type: TYPE_NORMAL
+- en: LocalStack provides you ability to run commands using AWS CLI as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Use of Docker & Localstack provides a quick and easy way to run Pyspark code,
+    debug on containers and write to S3 which is running locally. All this without
+    having to connect to any AWS service.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**References:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Glue endpoint: [https://docs.aws.amazon.com/glue/latest/dg/dev-endpoint.html](https://docs.aws.amazon.com/glue/latest/dg/dev-endpoint.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Docker: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'PyCharm: [https://www.jetbrains.com/pycharm/](https://www.jetbrains.com/pycharm/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'PyCharm Remote interpreter: [https://www.jetbrains.com/help/pycharm/using-docker-compose-as-a-remote-interpreter.html](https://www.jetbrains.com/help/pycharm/using-docker-compose-as-a-remote-interpreter.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'LocalStack: [https://localstack.cloud](https://localstack.cloud/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Subhash Sreenivasachar](https://www.linkedin.com/in/subhashsreenivasachar/)**
+    is Lead Software Engineer at Epsilon Digital Experience team, building engineering
+    solutions to solve data science problems specifically personalization, and help
+    drive ROI for clients.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[MLOps is an Engineering Discipline: A Beginner’s Overview](/2021/07/mlops-engineering-discipline.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[ETL in the Cloud: Transforming Big Data Analytics with Data Warehouse Automation](/2021/04/etl-cloud-transforming-big-data-analytics-data-warehouse-automation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What’s ETL?](/2021/04/whats-etl.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Hypothesis Testing and A/B Testing](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Scalable ETL with SQL + Python](https://www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[ETL vs ELT: Data Integration Showdown](https://www.kdnuggets.com/2022/08/etl-elt-data-integration-showdown.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Does ETL Have to Do with Machine Learning?](https://www.kdnuggets.com/2022/08/etl-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL and Data Integration: ETL and ELT](https://www.kdnuggets.com/2023/01/sql-data-integration-etl-elt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

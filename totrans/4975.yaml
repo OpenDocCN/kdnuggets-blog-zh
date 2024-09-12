@@ -1,0 +1,295 @@
+- en: 'K-Means & Other Clustering Algorithms: A Quick Intro with Python'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/03/k-means-clustering-algorithms-intro-python.html](https://www.kdnuggets.com/2017/03/k-means-clustering-algorithms-intro-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Nikos Koufos, [LearnDataSci](http://www.learndatasci.com/) Author.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Clustering is the grouping of objects together so that objects belonging in
+    the same group (cluster) are more similar to each other than those in other groups
+    (clusters). In this intro cluster analysis tutorial, we'll check out a few algorithms
+    in Python so you can get a basic understanding of the fundamentals of clustering
+    on a real dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For the clustering problem, we will use the famous *Zachary’s Karate Club*
+    dataset. The story behind the data set is quite simple: There was a Karate Club
+    that had an administrator “John A” and an instructor “Mr. Hi” (both pseudonyms).
+    Then a conflict arose between them, causing the students (Nodes) to split into
+    two groups. One that followed John and one that followed Mr. Hi.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Visualization of Karate Club Clustering](../Images/f34f92e5fccc0a8debafe667480bffb6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: [Wikipedia](https://en.wikipedia.org/wiki/Zachary''s_karate_club)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting Started with Clustering in Python
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: But enough with the introductory talk, let’s get to main reason you are here,
+    the code itself. First of all, you need to install both [scikit-learn](http://scikit-learn.org/)
+    and [networkx](https://networkx.github.io/) libraries to complete this tutorial.
+    If you don’t know how, the links above should help you. Also, feel free to follow
+    along by grabbing the source code for this tutorial over on [Github](https://github.com/LearnDataSci/blog-post-resources/blob/master/Karate%20Club%20Clustering/Classifiers.py).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Usually, the datasets that we want to examine are available in text form (JSON,
+    Excel, simple txt file, etc.) but in our case, [networkx](https://networkx.github.io/)
+    provide it for us. Also, to compare our algorithms, we want the truth about the
+    members (who followed whom) which unfortunately is not provided. But with these
+    two lines of code, you will be able to load the data and store the truth (from
+    now on we will refer it as ground truth):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The final step of the data preprocessing, is to transform the graph into a
+    matrix (desirable input for our algorithms). This is also quite simple:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Before we get going with the Clustering Techniques, I would like you to get
+    a visualization on our data. So, let’s compile a simple function to do that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: What that function does is to simply extract the number of clusters that are
+    in our result and then assign a different color to each of them (up to 10 for
+    the given time is fine) before plotting them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![zacharys karate club cluster nodes](../Images/3f4fd1bd77a0f8eccd8114e9294a882b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Clustering Algorithms
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Some clustering algorithms will cluster your data quite nicely and others will
+    end up failing to do so. That is one of the main reasons why clustering is such
+    a difficult problem. But don’t worry, we won’t let you drown in an ocean of choices.
+    We'll go through a few algorithms that are known to perform very well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**K-Means Clustering**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![k-means clustering](../Images/2320bd58c7dced4d4b53fa875a2d2e61.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: [github.com/nitoyon/tech.nitoyon.com](https://github.com/nitoyon/tech.nitoyon.com)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'K-means is considered by many the gold standard when it comes to clustering
+    due to its simplicity and performance, and it''s the first one we''ll try out.
+    When you have no idea at all what algorithm to use, K-means is usually the first
+    choice. Bear in mind that K-means might under-perform sometimes due to its concept:
+    spherical clusters that are separable in a way so that the mean value converges
+    towards the cluster center. To simply construct and train a K-means model, use
+    the follow lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Agglomerative Clustering**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The main idea behind agglomerative clustering is that each node starts in its
+    own cluster, and recursively merges with the pair of clusters that minimally increases
+    a given linkage distance. The main advantage of agglomerative clustering (and
+    hierarchical clustering in general) is that you don’t need to specify the number
+    of clusters. That of course, comes with a price: performance. But, in scikit’s
+    implementation, you can specify the number of clusters to assist the algorithm’s
+    performance. To create and train an agglomerative model use the following code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Spectral**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The Spectral clustering technique applies clustering to a projection of the
+    normalized Laplacian. When it comes to image clustering, spectral clustering works
+    quite well. See the next few lines of Python for all the magic:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Affinity Propagation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Well this one is a bit different. Unlike the previous algorithms, you can see
+    AF does not require the number of clusters to be determined before running the
+    algorithm. AF, performs really well on several computer vision and biology problems,
+    such as clustering pictures of human faces and identifying regulated transcripts:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Metrics & Plotting
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Well, it is time to choose which algorithm is more suitable for our data. A
+    simple visualization of the result might work on small datasets, but imagine a
+    graph with one thousand, or even ten thousand, nodes. That would be slightly chaotic
+    for the human eye. So, let me show how to calculate the Adjusted Rand Score (ARS)
+    and the Normalized Mutual Information (NMI):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'If you''re unfamiliar with these metrics, here''s a quick explanation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Normalized Mutual Information (NMI)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Mutual Information of two random variables is a measure of the mutual dependence
+    between the two variables. Normalized Mutual Information is a normalization of
+    the Mutual Information (MI) score to scale the results between 0 (no mutual information)
+    and 1 (perfect correlation). In other words, 0 means dissimilar and 1 means perfect
+    match.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Adjusted Rand Score (ARS)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adjusted Rand Score on the other hand, computes a similarity measure between
+    two clusters by considering all pairs of samples and counting pairs that are assigned
+    in the same or different clusters in the predicted and true clusters. If that's
+    a little weird to think about, have in mind that, for now, 0 is the lowest similarity
+    and 1 is the highest.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, to get a combination of these metrics (the NMI and ARS), we simply calculate
+    the average value of their sum. And remember, the higher the number, the better
+    the result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Below, I have plotted the score evaluation so we can get a better understanding
+    of our results. We could plot them in many ways, as points, as a straight line,
+    but I think a bar chart is the better choice for our case. To do so, just use
+    the following code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you can see in the chart below, K-means and Agglomerative clustering have
+    the best results for our dataset (best possible outcome). That of course, does
+    not mean that Spectral and AF are low-performing algorithms, just that the did
+    not fit in our data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Clustering Score Evaluation](../Images/bc767fb2612fb0eac38cb7a8b335e5bb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Well, that's it for this one!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for joining me in this clustering intro. I hope you found some value
+    in seeing how we can easily manipulate a public dataset and apply several different
+    clustering algorithms in Python. Let me know if you have any questions in the
+    comments below, and feel free to attach a clustering project you've experimented
+    with!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: Nikos Koufos** is a **[LearnDataSci](http://www.learndatasci.com/)**
+    Author, postgraduate in Computer Science & Engineering at the University Ioannina,
+    Greece, and Computer Science undergraduate teaching assistant.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://www.learndatasci.com/k-means-clustering-algorithms-python-intro/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Comparing Clustering Techniques: A Concise Technical Overview](/2016/09/comparing-clustering-techniques-concise-technical-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automatically Segmenting Data With Clustering](/2017/02/automatically-segmenting-data-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Clustering Key Terms, Explained](/2016/10/clustering-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Clustering Unleashed: Understanding K-Means Clustering](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is K-Means Clustering and How Does its Algorithm Work?](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On with Unsupervised Learning: K-Means Clustering](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Quick Guide to Find the Right Minds for Annotation](https://www.kdnuggets.com/2022/04/quick-guide-find-right-minds-annotation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Quick Data Science Tips and Tricks to Learn SAS](https://www.kdnuggets.com/2022/05/sas-quick-data-science-tips-tricks-learn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

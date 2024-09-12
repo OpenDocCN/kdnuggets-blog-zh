@@ -1,0 +1,309 @@
+- en: A Key Missing Part of the Machine Learning Stack
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/04/missing-part-machine-learning-stack.html](https://www.kdnuggets.com/2020/04/missing-part-machine-learning-stack.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Malo Marrec](https://www.linkedin.com/in/malo-marrec/), Independent at
+    cloudnative.fr**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/eddab375a6fe2bcdb19f51b4eb2cea5d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A few years ago, most machine learning (ML) and data science platform initiatives
+    were focused on solving *compute orchestration*. Many companies posited that managing
+    and sharing GPUs was a big issue, that Kubernetes was to be a cornerstone and
+    that building tools around it was the right bet. Hence Rise ML or the company
+    I co-founded, Clusterone, or open-source projects like Kubeflow. Some have failed,
+    some have succeeded, most are still in very early days ([Kubeflow announced a
+    1.0 release candidate recently](https://medium.com/kubeflow/kubeflow-1-0-cloud-native-ml-for-everyone-a3950202751)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: It seems to me that most of the focus at that time was on training models, but
+    no framework had all the pieces of the ML puzzle. Those who claimed to cover the
+    complete story were focused on training + deployment. Data management, feature
+    extraction, feature selection were overlooked by the main platforms, as well as
+    the communication gap between data scientists and data engineers. Most platform
+    companies ignored that pain, “We don’t want to rebuild ETL,” was the rationale.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Fast forward to the present, and the picture has changed. Machine learning
+    teams have realized that they were wasting massive amounts of time on the first
+    step of model development: feature definition and extraction. And as ML experimentation
+    and pipeline development were being influenced by best practices from software
+    engineering (versioned, standardized, isolated, or containerized), feature engineering
+    needed to become more structured and reliable. The rigor that applied to code
+    management had been missing in data and feature management, but that was changing.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the last year, we saw lots of momentum forming around a new trend (but an
+    old idea): **feature stores**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: And we have seen big announcements and fundraises from companies like [Logical
+    Clocks](https://www.logicalclocks.com/) and [Kaskada](https://kaskada.com/), and
+    Open Source projects such as [Feast](https://blog.gojekengineering.com/feast-bridging-ml-models-and-data-efd06b7d1644)
+    gaining momentum.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Feature Stores
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s begin with an example. Suppose I am working in the data science team of
+    a hotel booking platform company. I am tasked with building a hotel capacity prediction
+    system. I have a data table of when customers check-in, and a table of when customers
+    check out. I want to predict if a given hotel is going to have spare capacity.
+    The first step will be for me to try and define useful ways of looking at the
+    data. In our example, comparing check-in date and check out date per customer
+    will yield whether a given room in a hotel is vacant or not. I can aggregate that
+    at the hotel level and know how many rooms are available/free at a given time.
+    From that *feature*, I can try and predict if there will be free rooms given capacity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To get there, I have explored data, have written code to extract a potentially
+    useful feature — including code to query, clean, filter, and aggregate data from
+    the hotel booking database. Only after completing that, did I start working on
+    my model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Turns out that the *feature (*the number of free rooms in a hotel) is probably
+    useful to many other folks in other data science teams across the company: the
+    one that predicts high-level financial outcomes, the one that builds a product
+    to help hotels forecast cleaning requirements, etc. But each of those teams is
+    re-implementing the same feature computation pipeline so that they can use the
+    same feature in their algorithms.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Worse, to ship the model to production, the data science team typically hands-off
+    the model to the data engineering team, which will make it production-ready (executable
+    at scale, faster, etc.). That team will typically rewrite the feature computation
+    code (e.g., add more efficient ways to compare tables in real-time as new bookings
+    are added)
+  prefs: []
+  type: TYPE_NORMAL
+- en: At the end of the day, you may end up with many ways a feature such as the number
+    of free rooms in a hotel is defined.
+  prefs: []
+  type: TYPE_NORMAL
+- en: “As data scientists, you and I will choose different ways to look at things,
+    say round things up differently. It can have a big impact. And every time we have
+    to recompile every feature when we go to prod.” said Davit Bzhalava, a principal
+    data scientist at Swedbank
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are several issues here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: there is **no single point of truth**, which means models might behave differently
+    in prod vs. training
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: a **lot of rework** is induced by several teams rewriting stuff, either by lack
+    of a centralized way to define features or by lack of awareness that a feature
+    is already defined somewhere else
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: teams end up **copying data a lot**, especially “in a big org with a lot of
+    legacy, you have to query from many places. People end up copying a lot of data
+    to bring it all together”, Davit Bzhalava added.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: That’s where feature stores come in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A feature store is a central place where data features are defined, curated,
+    consistently served, and shared. It offers traceability of the data from the source
+    to the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Architecturally speaking, “it’s a dual database.” says Dr. Jim Dowling, CEO
+    at Logical Clocks. “You have a low latency database for getting low latency access
+    to feature data in online applications. And then you have a scale-out database
+    that can store large volumes of feature data for training bigger and better models.”
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Beyond that, feature stores redefine the way teams work and sit at the very
+    center of the data science workflow, which is probably why they took a while to
+    hit the market: they are complex products to build.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Gaining Momentum
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Project building feature stores are gaining momentum. It all started in 2017
+    when Uber Engineering introduced its internal [Michelangelo platform](https://eng.uber.com/michelangelo-machine-learning-platform/).
+    Since them, we have seen several open source projects gaining momentum, such as
+    [Feast](https://feast.dev/), an open-source feature store maintained by Gojek,
+    a South Asian on-demand booking app.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Like with any technology, some companies prefer adopting Open Source, which
+    typically requires integrating multiple components into a platform. Some companies
+    prefer picking commercial products.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Two companies that have been first to announce their products to the market
+    are Logical Clocks and Kaskada. Logical Clocks [released an open-source](https://www.logicalclocks.com/news/introducing-the-feature-store-the-data-warehouse-for-machine-learning)
+    feature store and commercially supported version in January 2019\. Kaskada is
+    currently in [Beta](https://kaskada.com/), according to the company website. Both
+    companies’ idea is to offer an end-to-end, integrated platform prominently featuring
+    a feature store.
+  prefs: []
+  type: TYPE_NORMAL
+- en: “We released the first open-source feature store in late 2018, and now we have
+    released the first managed feature store in the cloud on AWS. When we started
+    building the feature store in 2018, I thought it was too late almost. Late 2017,
+    Uber had written about feature stores. But not many people have implemented them
+    since because it requires quite a bit of engineering to get right from the beginning
+    to end.” says Dr. Dowling from Logical Clocks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I heard similar thoughts from Kaskada, a Seattle-based startup [that recently
+    raised $8M](https://www.google.com/search?q=kaskada+raises+8M&oq=kaskada+raises+8M&aqs=chrome..69i57j33.3481j0j7&sourceid=chrome&ie=UTF-8).
+    “We are building an end to end platform for feature engineering. We are not just
+    a feature store. We enable you to build and visualize features. And then all the
+    way to production and monitor the data in production. And I suspect that this
+    will be the biggest differentiator, in particular vs. OSS,” says Kaskada’s CEO
+    Davor Bonaci.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adoption triggers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I always wonder what triggers the adoption of platform software. True, it will
+    give access to next-level capabilities, or as Davor Bonaci has it “enable companies
+    in the next tier of IT capabilities to have Amazon-like, Google-like data infrastructure.”
+    But on the other hand, it will require process changes and mindset changes. Data
+    scientists will have to think a bit more about best practices for defining features
+    and computational issues. Data engineers will be involved earlier on in the process,
+    and not just handed-off models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It seems that the reason why feature stores are gaining adoption now is that,
+    after a few years of experimentation, companies are now starting to run models
+    in production. And they are seeing the complexity of doing so and feeling the
+    need for more robust engineering (this reminds me a lot of DevOps: once you reach
+    a certain scale, you re-architect, automate and make sure you are not reliant
+    on that one team member that knows how to run things).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I asked what made a good feature store, and when is the right time to adopt.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Davit Bzhalava from Swedebank said that what triggered adoption was seeing people
+    come and go from teams and feeling the need to apply DevOps principles to ML.
+    “*Y*ou need to reach the deployment point to realize that this is a problem. Then
+    you have models in productions, people come and go, and you realize you need to
+    make things more robust. We experienced that, then ran a POC of feature stores
+    to solve it. We are now thinking about how we roll it out org-wise*.*” I heard
+    similar thoughts listening to this collection of feature store real-world stories.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Davor Bonaci, CEO at Kaskada, agrees. “If we look at the market a couple of
+    years ago, it was only a couple of companies that had meaningful ML use cases.
+    Today we are seeing a transition to companies that have actual workloads in production.
+    And they start realizing how much time they lose by having loose feature definition
+    practices”. He also gives his views on how to select a feature store. “There are
+    feature stores that are actual engines, and that store the formula, and compute
+    on-demand. Some are just databases. So is it a database, or is it a store that
+    has ways of expressing and compute features?”
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dr. Dowling, CEO at Logical Clock, concludes, “Feature stores can reduce both
+    the cost of development and the time-to-market for ML models, by pooling company-wide
+    feature engineering efforts and improving collaboration between data engineering
+    and data science teams. While feature stores may vary in their capabilities — our
+    feature store versions features and feature data, in general, it is not unreasonable
+    to claim that a feature store will help improve ML model engineering by decomposing
+    a monolithic end-to-end ML pipeline into more manageable and testable feature
+    engineering and model training pipelines.”
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the past few years, machine learning has evolved from experimentation to
+    production for many companies. This has created an emerging need for more robust
+    and efficient approaches to model development, in particular in the mostly underlooked
+    area of feature computation and management. The rise of feature stores has triggered
+    a new wave of machine learning platforms. Adoption is still in its early days,
+    but we will probably see big players emerge and big moves in the next few years.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[4 Tips for Advanced Feature Engineering and Preprocessing](https://www.kdnuggets.com/2019/08/4-tips-advanced-feature-engineering-preprocessing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Hitchhiker’s Guide to Feature Extraction](https://www.kdnuggets.com/2019/06/hitchhikers-guide-feature-extraction.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Quick Guide to Feature Engineering](https://www.kdnuggets.com/2019/02/quick-guide-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Set Up Your Data Science Stack on a Budget](https://www.kdnuggets.com/2022/01/data-science-stack-budget.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Resilient ML Stack is Modular](https://www.kdnuggets.com/2022/06/comet-resilient-ml-stack-modular.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Free Full Stack LLM Bootcamp](https://www.kdnuggets.com/2023/06/free-full-stack-llm-bootcamp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[This Week in AI, August 7: Generative AI Comes to Jupyter & Stack…](https://www.kdnuggets.com/2023/mm/this-week-ai-2023-08-07.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Full Stack Everything? Organizational Intersections Between Data…](https://www.kdnuggets.com/2022/08/full-stack-everything-organizational-intersections-data-science-dev-tech.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Reasons Why a Universal Semantic Layer is Beneficial to Your Data Stack](https://www.kdnuggets.com/2024/01/cube-6-reasons-why-a-universal-semantic-layer-is-beneficial)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

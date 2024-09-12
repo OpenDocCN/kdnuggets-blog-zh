@@ -1,0 +1,280 @@
+- en: K-Nearest Neighbors – the Laziest Machine Learning Technique
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/09/rapidminer-k-nearest-neighbors-laziest-machine-learning-technique.html](https://www.kdnuggets.com/2017/09/rapidminer-k-nearest-neighbors-laziest-machine-learning-technique.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Rapidminer** Sponsored Post.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: K-Nearest Neighbors (K-NN) is one of the simplest machine learning algorithms. Like
+    other machine learning techniques, it was inspired by human reasoning. For example,
+    when something significant happens in your life, you memorize that experience
+    and use it as a guideline for future decisions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let me give you a scenario of a person dropping a glass. While the glass is
+    falling, you’ve made the prediction that the glass will break when it hits the
+    ground. But how can you do this? You never have seen this glass break before,
+    right?
+  prefs: []
+  type: TYPE_NORMAL
+- en: No, indeed not. But, you have seen similar glasses drop to the floor before. And
+    while the situation might not be exactly the same, you know that a glass dropping
+    from 5-feet onto a concrete floor usually breaks, giving you a high level of confidence
+    that will be the outcome.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But what about dropping a glass from a short distance onto a soft carpet? Have
+    you experienced this as well? We can see that the distance and ground surface
+    both play a role in the outcome.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is the same reasoning the K-NN algorithm is using. When a new situation
+    occurs, it scans through all past experiences and looks up the k closest experiences. Those
+    experiences (or: data points) are what we call the *k nearest neighbors*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have a classification task, for example you want to predict if the glass
+    will break, you take the majority vote of all k neighbors.  If k=5 and in 3 or
+    more of your most similar experiences the glass broke, it will go with the prediction
+    “yes, it will break”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s now assume that you want to predict the number of pieces a glass will
+    break into. In this case, you want to predict a number which we call “regression”. 
+    You take the average value of your k neighbors’ numbers of glass pieces as a prediction
+    or score. If k=5 and the numbers of pieces are 1 (did not break), 4, 8, 2, and
+    10 you will end up with the prediction of 5.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image 1](../Images/b133c96278078528875b7573035a61a3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We have blue and orange data points.  For a new data point (green), we can determine
+    the most likely class by looking up the classes of the nearest neighbors.  Here,
+    the decision would be “blue”, because that is the majority of the neighbors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So why is this algorithm “lazy”? That’s because it doesn’t do any training when
+    you supply the training data. At training time, all it is doing is storing the
+    data set. It doesn’t do any calculations at this point. Nor does it try to derive
+    a more compact model from the data which it could use for scoring.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Theory
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: All the computation happens during scoring, i.e. when you apply the model on
+    unseen data points. You need to determine which k data points out of our training
+    set are closest to the data point we want to get a prediction for.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s say that our data points look like the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image 3](../Images/26b69ffabb4f16ef558ec40647ddf6b7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We have a table of *n* rows and *m+1* columns where the first *m* columns are
+    the attributes we use to predict the remaining label column (also known as “target”). For
+    now, let’s also assume that all attribute values *x* are numerical, while the
+    label values for *y* are categorical, i.e. we have a classification problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can now define a distance function which calculates the distance between
+    data points. It should find the closest data points from our training data for
+    any new point. The [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) is
+    often a good choice for a distance function if the data is numerical. If our new
+    data point has attribute values *s**1* to *s**m*, we can calculate the distance *d(s,
+    x**j**)* between point *s* to any data point *x**j* by
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image 2](../Images/2b252eb7e0ab1cac7587e110fb382969.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The k data points with the closest value for this distance become our k neighbors. For
+    a classification task, we now use the most frequent of all values *y*from our
+    k neighbors. For regression tasks, where *y* is numerical, we use the average
+    of all values *y* from our k neighbors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But what if our attributes are not numerical and don’t consist of numerical
+    and categorical attributes? Then you can use any other distance measure which
+    can handle this type of data.  [This article](https://dzone.com/articles/machine-learning-measuring) discusses
+    some frequent choices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By the way, K-NN models with k=1 are the reason why calculating training errors
+    are completely pointless.  Can you see why?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Practical Usage
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: K-NN should be a standard tool in your toolbox. It is fast, easy to understand,
+    and easy to tune to different kinds of predictive problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data Preparation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are some things to consider with K-NN. We have seen that the key part
+    of the algorithm is the definition of a distance measure, and the Euclidean distance
+    is often used. This distance measure treats all data columns in the same way though.
+    It subtracts the values for each dimension before it sums up the squares of those
+    distances. And that means that columns with a wider data range have a larger influence
+    on the distance than columns with a smaller data range.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, you need to normalize the data set so that all columns are roughly on the
+    same scale. There are two common ways of normalization. First, you could bring
+    all values of a column into a range between 0 and 1\. Or you could change the
+    values of each column so that the column has a mean 0 with a standard deviation
+    of 1 afterwards. We call this type of normalization [z-transformation or standard
+    score](https://en.wikipedia.org/wiki/Standard_score).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Tip: Whenever you know that the machine learning algorithm is making use of
+    a distance measure, you should normalize the data. Another famous example would
+    be k-Means clustering.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Parameters to Tune**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The most important parameter you need to tune is k, the number of neighbors
+    used to make the class decision. The minimum value is 1 in which case you only
+    look at the closest neighbor for each prediction to make your decision. In theory,
+    you could use a value for k which is as large as your total training set. This
+    would make no sense though, since in this case you would always predict the majority
+    class of the complete training set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is a good way to interpret the meaning behind k. Small numbers indicate
+    “local” models, which can be non-linear and the decision boundary between the
+    classes wiggle a lot. If the number grows, the wiggling gets less until you almost
+    end up with a linear decision boundary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image 4](../Images/2333f9c70bb9393a0cfa603bd82d1f56.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We see a data set in two dimensions on the left.  In general, the top right
+    is red and the bottom left is the blue class.  But there are also some local groups
+    inside of both areas.  Small values for k lead to more wiggly decision boundaries. 
+    For larger values the decision boundary becomes smoother, almost linear in this
+    case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Good values for k depend on the data you have and if the problem is non-linear. You
+    should try a couple of values between 1 and about 10% of the size of the training
+    data set size to see if there is a promising area worth the further optimization
+    of k.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The second parameter you might want to consider is the type of distance function
+    you are using.  For numerical values, Euclidean distance is a good choice.  You
+    might want to try [Manhattan distance](https://en.wikipedia.org/wiki/Taxicab_geometry) which
+    is sometimes used as well.  For text analytics, [cosine distance](https://en.wikipedia.org/wiki/Cosine_similarity) can
+    be another good alternative worth trying.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Memory Usage & Runtimes**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Please note that all this algorithm is doing is storing the complete training
+    data.  So, the memory needs grow linearly with the number of data points you provide
+    for training.  Smarter implementations of this algorithm might choose to store
+    the data in a more compact fashion. But in a worst-case scenario you still end
+    up with a lot of memory usage.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For training, the runtime is as good as it gets.  The algorithm is doing no
+    calculations at all besides storing the data which is fast.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The runtime for scoring though can be large though which is unusual in the world
+    of machine learning.  All calculations happen during model application. Hence,
+    the scoring runtime scales linearly with the number of data columns m and the
+    number of training points n. If you need to score fast and the number of training
+    data points is large, then K-NN is not a good choice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**RapidMiner Processes**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Want to build this machine learning model yourself? [Download RapidMiner](http://go.rapidminer.com/l/32612/2017-09-05/8243cb)
+    and use the processes below*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Train and apply a K-NN model: [knn_training_scoring](https://ingomierswacom.files.wordpress.com/2017/05/knn_training_scoring.zip)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Optimize the value for k: [knn_optimize_parameter](https://ingomierswacom.files.wordpress.com/2017/05/knn_optimize_parameter.zip)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Download the Zip-file and extract its content.  The result will be an .rmp
+    file which can be loaded into RapidMiner via “File” -> “Import Process”.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[From Theory to Practice: Building a k-Nearest Neighbors Classifier](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Nearest Neighbors for Classification](https://www.kdnuggets.com/2022/04/nearest-neighbors-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[K-nearest Neighbors in Scikit-learn](https://www.kdnuggets.com/2022/07/knearest-neighbors-scikitlearn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Parallel Processing in Prompt Engineering: The Skeleton-of-Thought…](https://www.kdnuggets.com/parallel-processing-in-prompt-engineering-the-skeleton-of-thought-technique)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,470 @@
+- en: Building an image search service from scratch
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/01/building-image-search-service-from-scratch.html](https://www.kdnuggets.com/2019/01/building-image-search-service-from-scratch.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/01/building-image-search-service-from-scratch.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Emmanuel Ameisen](https://www.linkedin.com/in/ameisen/), Head of AI at
+    Insight Data Science**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/99a2bb1a64166a78df8fbd109586dda2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Teaching computers to look at pictures the way we do
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Want to learn applied Artificial Intelligence from top professionals in
+    Silicon Valley or New York?***Learn more about the [Artificial Intelligence](http://insightdata.ai/?utm_source=representations&utm_medium=blog&utm_content=top)
+    program at Insight.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Are you a company working in AI and would like to get involved in the Insight
+    AI Fellows Program?**** Feel free to *[*get in touch*](http://insightdatascience.com/partnerships?utm_source=representations&utm_medium=blog&utm_content=top)*.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*For more content like this, follow *[*Insight*](https://twitter.com/InsightDataSci)* and *[*Emmanuel*](https://twitter.com/EmmanuelAmeisen)* on
+    Twitter.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why similarity search?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*An image is worth a thousand words, and even more lines of code.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Many products **fundamentally appeal to our perception**. When browsing through
+    outfits on clothing sites, looking for a vacation rental on Airbnb, or choosing
+    a pet to adopt, the way something looks is often an important factor in our decision.
+    The way we perceive things is a strong predictor of what kind of items we will
+    like, and therefore a valuable quality to measure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, making computers understand images the way humans do has been a computer
+    science challenge for quite some time. Since 2012, Deep Learning has slowly started
+    overtaking classical methods such as [Histograms of Oriented Gradients](https://en.wikipedia.org/wiki/Histogram_of_oriented_gradients) (HOG)
+    in perception tasks like image classification or object detection. One of the
+    main reasons often credited for this shift is deep learning’s ability to automatically **extract
+    meaningful representations** when trained on a large enough dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/3ff1a1e4787003e862ab6ca309ad7c8b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Visual search at Pinterest
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is why many teams — like at [Pinterest](https://medium.com/@Pinterest_Engineering/introducing-a-new-way-to-visually-search-on-pinterest-67c8284b3684), [StitchFix](https://multithreaded.stitchfix.com/blog/2015/09/17/deep-style/),
+    and [Flickr](http://code.flickr.net/2017/03/07/introducing-similarity-search-at-flickr/) — started
+    using Deep Learning to learn representations of their images, and **provide recommendations **based
+    on the content users find visually pleasing. Similarly, Fellows at [Insight](http://insightdatascience.com/) have
+    used deep learning to build models for applications such as helping people find
+    cats to adopt, recommending sunglasses to buy, and searching for art styles.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Many recommendation systems are based on [collaborative filtering](https://en.wikipedia.org/wiki/Collaborative_filtering):
+    leveraging user correlations to make recommendations (“users that liked the items
+    you have liked have also liked…”). However, these models require a **significant
+    amount of data** to be accurate, and [struggle](https://en.wikipedia.org/wiki/Cold_start_%28computing%29) to
+    handle **new items**that have not yet been viewed by anyone. Item representation
+    can be used in what’s called [content-based](https://en.wikipedia.org/wiki/Recommender_system#Content-based_filtering) recommendation
+    systems, which do not suffer from the problem above.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition, these representations allow consumers to **efficiently search**
+    photo libraries for images that are similar to the selfie they just took (querying
+    by image), or for photos of particular items such as cars (querying by text).
+    Common examples of this include Google Reverse Image Search, as well as Google
+    Image Search.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Based on our experience providing technical mentorship for many semantic understanding
+    projects, we wanted to write a tutorial on how you would go about **building your
+    own representations**, both for image and text data, and **efficiently do similarity
+    search**. By the end of this post, you should be able to build a quick semantic
+    search model from scratch, no matter the size of your dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***This post is accompanied by ***[***an annotated code notebook***](http://insight.streamlit.io/0.13.3-8ErS/index.html?id=QAKzY9mLjr4WbTCgxz3XBX)*** using ***[***streamlit***](http://streamlit.io/)
+    ***and a ***[***self-standing codebase***](https://github.com/hundredblocks/semantic-search)*** demonstrating
+    and applying all these techniques. Feel free to run the code and follow along!***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What’s our plan?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**A break to chat about optimization**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In machine learning, just like in software engineering, there are many ways
+    to tackle a problem, each with different tradeoffs. If we are doing research or
+    local prototyping, we can get away with very inefficient solutions. But if we
+    are building an image similarity search engine that needs to be maintainable and
+    scalable, we have to consider both how we can **adapt to data evolution**, and **how
+    fast our model can run**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s imagine a few approaches:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a427ef58daaf78749bd20d1d063f63e6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Workflow for approach 1
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1/ We build an end-to-end model that is trained on all our images to take an
+    image as an input, and output a similarity score over all of our images. Predictions
+    happen quickly (one forward pass), but we would need to** train a new model** every
+    time we add a new image. We would also quickly reach a state with so many classes
+    that it would be extremely **hard to optimize** it correctly. This approach is
+    fast, but does not scale to large datasets. In addition, we would have to label
+    our dataset by hand with image similarities, which could be extremely time consuming.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ddbe731e434abeb62b80a84f4113608a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Workflow for approach 2
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2/ Another approach is to build a model that takes in two images, and outputs
+    a pairwise similarity score between 0 and 1 ([Siamese Networks](https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf)[PDF],
+    for example). These models are accurate for large datasets, but lead to another
+    scalability issue. We usually want to find a similar image by **looking through
+    a vast collection of images**, so we have to run our similarity model once for
+    each image pair in our dataset. If our model is a CNN, and we have more than a
+    dozen images, this becomes too slow to even be considered. In addition, this only
+    works for image similarity, not text search. This method scales to large datasets,
+    but is slow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/49246a68255663d7d010e7b1b53a460d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Workflow for approach 3
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3/ There is a simpler method, which is similar to [word embeddings](https://en.wikipedia.org/wiki/Word_embedding).
+    If we find an **expressive vector representation, or embedding **for images, we
+    can then calculate their similarity by looking at **how close their vectors are
+    to each other**. This type of search is a common problem that is well studied,
+    and many libraries implement fast solutions (we will use [Annoy](https://github.com/spotify/annoy) here).
+    In addition, if we calculate these vectors for all images in our database ahead
+    of time, this approach is both fast (one forward pass, and an efficient similarity
+    search), and scalable. Finally, if we manage to find **common embeddings** for
+    our images and our words, we could use them to do text to image search!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because of its simplicity and efficiency, the third method will be the focus
+    of this post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**How do we get there?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, how do we actually use **deep learning representations** to create a **search
+    engine?**
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Our final goal is to have a search engine that can take in images and output
+    either similar images or tags, and take in text and output similar words, or images.
+    To get there, we will go through three successive steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Searching for **similar images to an input image** (Image → Image)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Searching for **similar words to an input word** (Text → Text)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Generating **tags for images**, and **searching images using tex**t (Image ↔
+    Text)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To do this, we will use **embeddings**, vector representations of images and
+    text. Once we have embeddings, searching simply becomes a matter of finding vectors
+    close to our input vector.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The way we find these is by calculating the [cosine similarity](https://en.wikipedia.org/wiki/Cosine_similarity) between
+    our image embedding, and embeddings for other images. Similar images will have
+    similar embeddings, meaning a **high cosine similarity between embeddings**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s start with a dataset to experiment with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Images**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our image dataset consists of a total of a **1000 images**, divided in 20 classes
+    with 50 images for each. This dataset can be found [here](http://vision.cs.uiuc.edu/pascal-sentences/).
+    Feel free to use the script in the linked code to automatically download all image
+    files. *Credit to Cyrus Rashtchian, Peter Young, Micah Hodosh, and Julia Hockenmaier
+    for the dataset.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This dataset contains a category and a set of captions for every image. To
+    make this problem harder, and to show how well our approach generalizes, we will **only
+    use the categories**, and disregard the captions. We have a total of 20 classes,
+    which I’ve listed out below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`aeroplane` `bicycle` `bird` `boat` `bottle` `bus` `car` `cat` `chair` `cow`
+    `dining_table` `dog` `horse` `motorbike` `person` `potted_plant` `sheep` `sofa`
+    `train` `tv_monitor`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b9d72a5ca3bde69eba594c1d7642d0d0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image examples. As we can see, the labels are quite noisy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can see our labels are pretty **noisy**: many photos contain multiple categories,
+    and the label is not always from the most prominent one. For example, on the bottom
+    right, the image is labeled `chair` and not `person`even though 3 people stand
+    in the center of the image, and the chair is barely visible.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Text**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition, we load word embeddings that have been pre-trained on Wikipedia
+    (this tutorial will use the ones from the [GloVe](https://nlp.stanford.edu/projects/glove/) model).
+    We will use these vectors to incorporate text to our semantic search. For more
+    information on how these word vectors work, see [Step 7](https://blog.insightdatascience.com/how-to-solve-90-of-nlp-problems-a-step-by-step-guide-fda605278e4e) of
+    our NLP tutorial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Image -> Image
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*Starting simple*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are now going to load a model that was **pre-trained** on a large data set
+    ([Imagenet](http://www.image-net.org/)), and is freely available online. We use
+    VGG16 here, but this approach would work with any recent CNN architecture. We
+    use this model to generate **embeddings** for our images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cf1d7ca19487c4ecfd529a923d805dca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: VGG16 (credit to Data Wow Blog)
+  prefs: []
+  type: TYPE_NORMAL
+- en: What do we mean by generating embeddings? We will use our pre-trained model **up
+    to the penultimate layer**, and store the value of the activations. In the image
+    below, this is represented by the embedding layer highlighted in green, which
+    is before the final classification layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b48af203c047c628d0d3b0cbe99dafb1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: For our embeddings, we use the layer before the final classification layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once we’ve used the model to generate image features, we can then store them
+    to disk and re-use them **without needing to do inference again**! This is one
+    of the reasons that embeddings are so popular in practical applications, as they
+    allow for huge efficiency gains. On top of storing them to disk, we will build
+    a **fast index** of the embeddings using [Annoy](https://github.com/spotify/annoy),
+    which will allow us to very quickly find the nearest embeddings to any given embedding.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Below are our embeddings. Each image is now represented by a sparse vector
+    of size 4096. *Note: the reason the vector is sparse is that we have taken the
+    values after the activation function, which zeros out negatives.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9e88bd3f556fc3351ff4b2fcc6a7665c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image Embeddings
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Using our embeddings to search through images****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can now simply take in an image, get its embedding, and look in our fast
+    index to find similar embeddings, and thus similar images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is especially useful since image labels are often **noisy**, and there
+    is more to an image than its label.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, in our dataset, we have both a class `cat`, and a class `bottle`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Which class do you think this image is labeled as?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f4adf6aa30619bed0551ca62dceeeab9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Cat or Bottle? (Image rescaled to 224x224, which is what the neural network sees.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The correct answer is **bottle** … This is an actual issue that comes up often
+    in real datasets. Labeling images as unique categories is quite limiting, which
+    is why we hope to use more nuanced representations. Luckily, this is exactly what **deep
+    learning is good at**!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s see if our image search using embeddings does better than human labels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Searching for similar images to`dataset/bottle/2008_000112.jpg`…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1513c1ebe450a4c5323649217f9ec054.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Great — we mostly get more images of **cats**, which seems very reasonable!
+    Our pre-trained network has been trained on a wide variety of images, including
+    cats, and so it is able to accurately find similar images, even though it has
+    never been trained on this particular dataset before.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, one image in the middle of the bottom row shows a shelf of bottles.
+    This approach perform wells to find similar images, in general, but sometimes
+    we are only interested in **part of the image**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, given an image of a cat and a bottle, we might be only interested
+    in similar cats, not similar bottles.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Semi-supervised search**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A common approach to solve this issue is to use an **object detection** model
+    first, detect our cat, and do image search on a cropped version of the original
+    image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This adds a huge computing overhead, which we would like to avoid if possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is a simpler “hacky” approach, which consists of **re-weighing** the activations.
+    We do this by loading the last layer of weights we had initially discarded, and
+    only use the weights tied to the index of the class we are looking for to re-weigh
+    our embedding. This cool trick was initially brought to my attention by [Insight](http://insightdatascience.com/) Fellow [Daweon
+    Ryu](https://www.linkedin.com/in/daweonryu/). For example, in the image below,
+    we use the weights of the `Siamese cat` class to re-weigh the activations on our
+    dataset (highlighted in green). Feel free to check out the attached notebook to
+    see the implementation details.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a9273d9908a7a583903e6318b8b97a5d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The hack to get weighted embeddings. The classification layer is shown for reference
+    only.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s examine how this works by weighing our activations according to class `284` in
+    Imagenet, `Siamese cat`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Searching for similar images to`dataset/bottle/2008_000112.jpg` using weighted
+    features…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e4c0c5e0d27fe2fd2c6b80ea47d6aa2f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can see that the search has been biased to look for **Siamese cat-like things**.
+    We no longer show any bottles, which is great. You might however notice that our
+    last image is of a sheep! This is very interesting, as biasing our model has led
+    to a **different kind of error**, which is more appropriate for our current domain.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have seen we can search for similar images in a **broad** way, or by **conditioning
+    on a particular class** our model was trained on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a great step forward, but since we are using a model **pre-trained on
+    Imagenet**, we are thus limited to the 1000 **Imagenet classes**. These classes
+    are far from all-encompassing (they lack a category for people, for example),
+    so we would ideally like to find something more **flexible. **In addition, what
+    if we simply wanted to search for cats **without providing an input image?**
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to do this, we are going to use more than simple tricks, and leverage
+    a model that can understand the semantic power of words.
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Elevate Your Search Engine Skills with Uplimit''s Search with ML Course!](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[311 Call Centre Performance: Rating Service Levels](https://www.kdnuggets.com/2023/03/boxplot-outlier-311-call-center-performance.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning from Scratch: Decision Trees](https://www.kdnuggets.com/2022/11/machine-learning-scratch-decision-trees.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

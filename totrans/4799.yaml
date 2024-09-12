@@ -1,0 +1,318 @@
+- en: A Crash Course in MXNet Tensor Basics & Simple Automatic Differentiation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/08/mxnet-tensor-basics-simple-derivatives.html](https://www.kdnuggets.com/2018/08/mxnet-tensor-basics-simple-derivatives.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: I originally intended to play around with MXNet **long** ago, around the time
+    that Gluon was released publicly. Things got busy. I got sidetracked.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I finally started using MXNet recently. In the interests of getting to know
+    my way around, I thought covering some basics, such as how tensors and derivatives
+    are handled, might be a good place to start (such as I did [here](/2018/05/pytorch-tensor-basics.html)
+    and [here with PyTorch](/2018/05/simple-derivatives-pytorch.html)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This won't repeat what is in those previous PyTorch articles step by step, so
+    look at those if you want any further context. What's below should be relatively
+    straightforward, however.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/c9ead3edd581b0c90d3776aceec4f638.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[MXNet](https://mxnet.apache.org/) is an open source neural network framework,
+    a "flexible and efficient library for deep learning." [Gluon](https://gluon-crash-course.mxnet.io/)
+    is the imperative high-level API for MXNet, which provides additional flexibility
+    and ease of use. You can think of the relationship between MXNet and Gluon as
+    being similar to TensorFlow and Keras. We won''t cover Gluon any further herein,
+    but will explore it in future posts.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: MXNet's tensor implementation comes in the form of the `[ndarray](https://mxnet.apache.org/api/python/ndarray/ndarray.html)`
+    package. Here you will find what's needed to build multidimensional (*n*-dimensional)
+    arrays and perform some of the operations on them required for implementing neural
+    networks, along with the [`autograd`](http://mxnet.apache.org/api/python/autograd/autograd.html)
+    package. It is this package we will make use of below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**`ndarray` (Very) Basics**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First, let''s import what we need from the library, in such a way as to simplify
+    making our API calls:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now, let''s create a basic `ndarray` (on the CPU):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that printing an `ndarray` also prints out the type of the object (again,
+    `NDArray`), as well as its size and the device to which it is attached (in this
+    case, CPU).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'What if we wanted to create an ndarray object with a GPU [context](https://mxnet-test.readthedocs.io/en/latest/api/context.html)
+    (note that a context is the device type and ID which should be used to perform
+    operations on the object)? First, let''s determine whether or not there is a [GPU
+    available to MXNet](https://stackoverflow.com/questions/49076092/is-there-a-way-to-check-if-mxnet-uses-my-gpu):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: This response denotes that there is a GPU device, and its ID is 0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s create an `ndarray` on this device:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The output here confirms that an `ndarray` of zeros of size 2 x 2 was created
+    with a context of GPU.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To get a returned transposed `ndarray` (as opposed to simply a transpose view
+    of the original):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Reshape an `ndarray` as a view, without alteration of the original data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Some ndarray info:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[See here](https://gluon.mxnet.io/chapter01_crashcourse/ndarray.html) for more
+    on `ndarray` basics.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**MXNet `ndarray` To and From Numpy `ndarray`**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It's easy to go from Numpy `ndarrays` to MXNet `ndarrays` and vice versa.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Matrix-matrix multiplication**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here''s how to compute a matrix-matrix dot product:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[See here](https://gluon.mxnet.io/chapter01_crashcourse/linear-algebra.html)
+    for more on linear algebra operations with `ndarray`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Using autograd to Find and Solve a Derivative**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: On to solving a derivative with the MXNet `[autograd](http://mxnet.apache.org/api/python/autograd/autograd.html)`
+    package for automatic differentiation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First we will need a function for which to find the derivative. Arbitrarily,
+    let''s use this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/f63c40b9d1ac08484e874bdc8ba90142.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: To see us work out the first order derivative of this function by hand, as well
+    as find the value of our derivative function for a given value of *x*, [see this
+    post](/2018/05/simple-derivatives-pytorch.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For reasons which should be obvious, we have to represent our function in Python
+    as such:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now let''s find the value of our derivative function for a given value of *x*.
+    Let''s arbitrarily use 2:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Line by line, the above code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: defines the value (2) we want to compute the derivative with regard to as an
+    MXNet ndarray object
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: uses `**attach_grad()**` to allocate space for the gradient to be computed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the code block denoted with `**ag.record()**` contains the computation to be
+    performed with regard to computing and tracking the gradient
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: defines the function we want to compute the derivative of
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: uses autograd's **backward()** to compute the sum of gradients, using the chain
+    rule
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: outputs the value stored in the *x* `ndarray`'s **grad** attribute, which, as
+    shown below
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: This value, 233, matches what we calculated by hand [in this post](/2018/05/simple-derivatives-pytorch.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[See here](https://gluon.mxnet.io/chapter01_crashcourse/autograd.html) for
+    more on automatic differentiation with `autograd`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This has been a very basic overview of simple `ndarray` operations and derivatives
+    in MXNet. As these are 2 of the staples of building neural networks, this should
+    provide some familiarity with the library's approaches to these basic buildings
+    blocks, and allow for diving in to some more complex code. Next time we will create
+    some simple neural networks with MXNet and Gluon, exploring the libraries more
+    in-depth.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For more (right now!) on MXNet, Gluon, and deep learning in general, the freely-available
+    book [**Deep Learning - The Straight Dope**](https://gluon.mxnet.io/), written
+    by those intimately involved in the development and evangelizing of these libraries,
+    is definitely worth looking at.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PyTorch Tensor Basics](/2018/05/pytorch-tensor-basics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simple Derivatives with PyTorch](/2018/05/simple-derivatives-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[WTF is a Tensor?!?](/2018/05/wtf-tensor.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Free Artificial Intelligence And Deep Learning Crash Course](https://www.kdnuggets.com/2022/07/free-artificial-intelligence-deep-learning-crash-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Free Python Crash Course](https://www.kdnuggets.com/2022/07/free-python-crash-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Free MLOps Crash Course for Beginners](https://www.kdnuggets.com/2022/08/free-mlops-crash-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Free Intermediate Python Programming Crash Course](https://www.kdnuggets.com/2022/12/free-intermediate-python-programming-crash-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unlock Your Potential with This FREE DevOps Crash Course](https://www.kdnuggets.com/2023/03/corise-unlock-potential-with-this-free-devops-crash-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[WTF is a Tensor?!?](https://www.kdnuggets.com/2018/05/wtf-tensor.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

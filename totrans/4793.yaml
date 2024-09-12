@@ -1,0 +1,1099 @@
+- en: Multi-Class Text Classification with Scikit-Learn
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/08/multi-class-text-classification-scikit-learn.html](https://www.kdnuggets.com/2018/08/multi-class-text-classification-scikit-learn.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Susan Li](https://www.linkedin.com/in/susanli/), Sr. Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Header iamge](../Images/be0b63e6281d95bf41066b2df2b31734.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are lots of applications of text classification in the commercial world.
+    For example, news stories are typically organized by topics; content or products
+    are often tagged by categories; users can be classified into cohorts based on
+    how they talk about a product or brand online...
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'However, the vast majority of text classification articles and tutorials on
+    the internet are binary text classification such as email spam filtering (spam
+    vs. ham), sentiment analysis (positive vs. negative). In most cases, our real
+    world problem are much more complicated than that. Therefore, this is what we
+    are going to do today: Classifying Consumer Finance Complaints into 12 pre-defined
+    classes. The data can be downloaded from [data.gov](https://catalog.data.gov/dataset/consumer-complaint-database).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We use [Python](https://www.python.org/) and [Jupyter Notebook](http://jupyter.org/) to
+    develop our system, relying on [Scikit-Learn](http://scikit-learn.org/stable/) for
+    the machine learning components. If you would like to see an implementation in [PySpark](https://spark.apache.org/docs/0.9.0/mllib-guide.html),
+    read the [next article](https://medium.com/@actsusanli/multi-class-text-classification-with-pyspark-7d78d022ed35).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Problem Formulation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The problem is supervised text classification problem, and our goal is to investigate
+    which supervised machine learning methods are best suited to solve it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given a new complaint comes in, we want to assign it to one of 12 categories.
+    The classifier makes the assumption that each new complaint is assigned to one
+    and only one category. This is multi-class text classification problem. I can’t
+    wait to see what we can achieve!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Exploration
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Before diving into training machine learning models, we should look at some
+    examples first and the number of complaints in each class:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/97c9210f6dafaff433f843ba7c445543.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 1
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this project, we need only two columns — “Product” and “Consumer complaint
+    narrative”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Input**: Consumer_complaint_narrative'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Example: “I have outdated information on my credit report that I have previously
+    disputed that has yet to be removed this information is more then seven years
+    old and does not meet credit reporting requirements”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Output**: product'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Example: Credit reporting'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will remove missing values in “Consumer complaints narrative” column, and
+    add a column encoding the product as an integer because categorical variables
+    are often better represented by integers than strings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We also create a couple of dictionaries for future use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After cleaning up, this is the first five rows of the data we will be working
+    on:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/807df708fc7b3049cd05f88e958d8c0c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 2
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imbalanced Classes
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We see that the number of complaints per product is imbalanced. Consumers’ complaints
+    are more biased towards Debt collection, Credit reporting and Mortgage.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/aaf1ebe71d3affac992417b2fda835de.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 3
+  prefs: []
+  type: TYPE_NORMAL
+- en: When we encounter such problems, we are bound to have difficulties solving them
+    with standard algorithms. Conventional algorithms are often biased towards the
+    majority class, not taking the data distribution into consideration.In the worst
+    case, minority classes are treated as outliers and ignored. For some cases, such
+    as fraud detection or cancer prediction, we would need to carefully configure
+    our model or artificially balance the dataset, for example by [undersampling or
+    oversampling](https://en.wikipedia.org/wiki/Oversampling_and_undersampling_in_data_analysis) each
+    class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, in our case of learning imbalanced data, the majority classes might
+    be of our great interest. It is desirable to have a classifier that gives high
+    prediction accuracy over the majority class, while maintaining reasonable accuracy
+    for the minority classes. Therefore, we will leave it as it is.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Text Representation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The classifiers and learning algorithms can not directly process the text documents
+    in their original form, as most of them expect numerical feature vectors with
+    a fixed size rather than the raw text documents with variable length. Therefore,
+    during the preprocessing step, the texts are converted to a more manageable representation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'One common approach for extracting features from text is to use the bag of
+    words model: a model where for each document, a complaint narrative in our case,
+    the presence (and often the frequency) of words is taken into consideration, but
+    the order in which they occur is ignored.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Specifically, for each term in our dataset, we will calculate a measure called
+    Term Frequency, Inverse Document Frequency, abbreviated to tf-idf. We will use
+    `sklearn.feature_extraction.text.TfidfVectorizer` to calculate a `tf-idf` vector
+    for each of consumer complaint narratives:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`sublinear_df` is set to `True` to use a logarithmic form for frequency.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`min_df` is the minimum numbers of documents a word must be present in to be
+    kept.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`norm` is set to `l2`, to ensure all our feature vectors have a euclidian norm
+    of 1.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`ngram_range` is set to `(1, 2)` to indicate that we want to consider both
+    unigrams and bigrams.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`stop_words` is set to `"english"` to remove all common pronouns (`"a"`, `"the"`, ...)
+    to reduce the number of noisy features.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`(4569, 12633)`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, each of 4569 consumer complaint narratives is represented by 12633 features,
+    representing the tf-idf score for different unigrams and bigrams.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can use `sklearn.feature_selection.chi2` to find the terms that are the
+    most correlated with each of the products:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '‘**Bank account or service**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Most correlated unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: bank
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: overdraft
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Most correlated bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: overdraft fees
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: checking account
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Consumer Loan**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Most correlated unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: car
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: vehicle
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Most correlated bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: vehicle xxxx
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: toyota financial
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Credit card**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Most correlated unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: citi
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: card
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Most correlated bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: annual fee
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: credit card
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Credit reporting**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Most correlated unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: experian
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: equifax
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Most correlated bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: trans union
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: credit report
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Debt collection**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Most correlated unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: collection
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: debt
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Most correlated bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: collect debt
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: collection agency
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Money transfers**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Most correlated unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: wu
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: paypal
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Most correlated bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: western union
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: money transfer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Mortgage**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Most correlated unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: modification
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: mortgage
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Most correlated bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: mortgage company
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: loan modification
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Other financial service**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Most correlated unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: dental
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: passport
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Most correlated bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: help pay
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: stated pay
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Payday loan**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Most correlated unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: borrowed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: payday
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Most correlated bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: big picture
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: payday loan
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Prepaid card**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Most correlated unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: serve
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: prepaid
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Most correlated bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: access money
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: prepaid card
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Student loan**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Most correlated unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: student
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: navient
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Most correlated bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: student loans
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: student loan
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Virtual currency**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Most correlated unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: handles
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: https
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Most correlated bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: xxxx provider
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: money want
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: They all make sense, don’t you think so?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Multi-Class Classifier: Features and Design**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To train supervised classifiers, we first transformed the “Consumer complaint
+    narrative” into a vector of numbers. We explored vector representations such as
+    TF-IDF weighted vectors.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: After having this vector representations of the text we can train supervised
+    classifiers to train unseen “Consumer complaint narrative” and predict the “product”
+    on which they fall.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: After all the above data transformation, now that we have all the features and
+    labels, it is time to train the classifiers. There are a number of algorithms
+    we can use for this type of problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Naive Bayes Classifier**: the one most suitable for word counts is the multinomial
+    variant:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: After fitting the training set, let’s make some predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`[‘Debt collection’]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/c56b05736e00cea1f083ecc4bf8f7726.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 4
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`[‘Credit reporting’]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/2086ae633dd9e4e36b9ba17aeafd6736.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 5
+  prefs: []
+  type: TYPE_NORMAL
+- en: Not too shabby!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model Selection
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We are now ready to experiment with different machine learning models, evaluate
+    their accuracy and find the source of any potential issues.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We will benchmark the following four models:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Logistic Regression
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: (Multinomial) Naive Bayes
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Linear Support Vector Machine
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Random Forest
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/e6c6e2e6283254136c4b1d3729aa82e3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 6
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: model_name
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**LinearSVC: **0.822890'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**LogisticRegression:** 0.792927'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**MultinomialNB:** 0.688519'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**RandomForestClassifier:** 0.443826'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Name: accuracy, dtype: float64'
+  prefs: []
+  type: TYPE_NORMAL
+- en: LinearSVC and Logistic Regression perform better than the other two classifiers,
+    with LinearSVC having a slight advantage with a median accuracy of around 82%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model Evaluation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Continue with our best model (LinearSVC), we are going to look at the confusion
+    matrix, and show the discrepancies between predicted and actual labels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/f8fbabd453d6a7a8637fd755bdc4903e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 7
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The vast majority of the predictions end up on the diagonal (predicted label
+    = actual label), where we want them to be. However, there are a number of misclassifications,
+    and it might be interesting to see what those are caused by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/66a1a34905edd60666acad6ce28f03a3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 8![](../Images/03e695d7ef265ff1f060cc879fe5bed4.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Figure 9
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see, some of the misclassified complaints are complaints that touch
+    on more than one subjects (for example, complaints involving both credit card
+    and credit report). This sort of errors will always happen.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Again, we use the [chi-squared test](https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test) to
+    find the terms that are the most correlated with each of the categories:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '‘**Bank account or service**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Top unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: bank
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: account
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Top bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: debit card
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: overdraft fees
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Consumer Loan**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Top unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: vehicle
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: car
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Top bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: personal loan
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: history xxxx
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Credit card**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Top unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: card
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: discover
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Top bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: credit card
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: discover card
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Credit reporting**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Top unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: equifax
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: transunion
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Top bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: xxxx account
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: trans union
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Debt collection**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Top unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: debt
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: collection
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Top bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: account credit
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: time provided
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Money transfers**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Top unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: paypal
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: transfer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Top bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: money transfer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: send money
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Mortgage**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Top unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: mortgage
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: escrow
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Top bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: loan modification
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: mortgage company
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Other financial service**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Top unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: passport
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: dental
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Top bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: stated pay
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: help pay
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Payday loan**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Top unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: payday
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: loan
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Top bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: payday loan
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: pay day
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Prepaid card**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Top unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: prepaid
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: serve
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Top bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: prepaid card
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: use card
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Student loan**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Top unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: navient
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: loans
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Top bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: student loan
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: sallie mae
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '‘**Virtual currency**’:'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Top unigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: https
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: tx
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Top bigrams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: money want
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: xxxx provider
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: They are consistent within our expectation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally, we print out the classification report for each class:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/441988d26ccea0a588f2939d9cdc863f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 9
+  prefs: []
+  type: TYPE_NORMAL
+- en: Source code can be found on [Github](https://github.com/susanli2016/Machine-Learning-with-Python/blob/master/Consumer_complaints.ipynb).
+    I look forward to hear any feedback or questions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Susan Li](https://www.linkedin.com/in/susanli/)** is changing the world,
+    one article at a time. She is a Sr. Data Scientist, located in Toronto, Canada.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/multi-class-text-classification-with-scikit-learn-12f1e60e0a9f).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Text Classification & Embeddings Visualization Using LSTMs, CNNs, and Pre-trained
+    Word Vectors](/2018/07/text-classification-lstm-cnn-pre-trained-word-vectors.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[WTF is TF-IDF?](/2018/08/wtf-tf-idf.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing Nuggets: Getting Started with NLP](/2018/06/getting-started-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[What is Text Classification?](https://www.kdnuggets.com/2022/07/text-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Best Architecture for Your Text Classification Task: Benchmarking…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[More Performance Evaluation Metrics for Classification Problems You…](https://www.kdnuggets.com/2020/04/performance-evaluation-metrics-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Binary Classification with PyCaret](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fine-Tuning BERT for Tweets Classification with HuggingFace](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Algorithms for Classification](https://www.kdnuggets.com/2022/03/machine-learning-algorithms-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,329 @@
+- en: How to do Everything in Computer Vision
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/02/everything-computer-vision.html](https://www.kdnuggets.com/2019/02/everything-computer-vision.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)![Figure](../Images/8e51a1b5b1c74e6f15f1ee81b3c1b006.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Mask-RCNN doing object detection and instance segmentation
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Want to do Computer Vision? Deep Learning is the way to go these days. Large
+    scale datasets plus the representational power of deep Convolutional Neural Networks
+    (CNNs) make for super accurate and robust models. Only one challenge still remains:
+    how to design your model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With a field as broad and complex as computer vision, the solution isn’t always
+    clear. The many standard tasks in computer vision all require special consideration:
+    classification, detection, segmentation, pose estimation, enhancement and restoration,
+    and action recognition. Although the state-of-the-art networks used for each of
+    them exhibit common patterns, they’ll all still need their own unique design twist.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So how can we build models for all of those different tasks?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let me show you how to do everything in Computer Vision with Deep Learning!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Classification
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The most well known of them all! Image classification networks start with an
+    input of *fixed size. *The input image can have any number of channels, but is
+    usually 3 for an RGB image. When you design your network, the resolution can technically
+    be any size as long as it is large enough to support the amount of downsampling
+    you will do throughout the network. For example, if you downsample 4 times within
+    the network, then your input needs to at least be 4² = 16 x 16 pixels in size.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you go deeper into the network the spatial resolution will decrease as we
+    try to squeeze all of that information and get down to a 1-dimensional vector
+    representation. To insure that the network always has the capacity to carry forward
+    all of the information it extracts, we increase the number of feature maps proportionally
+    to the depth to accommodate the reduction in spatial resolution. I.e we are losing
+    spatial information in our downsampling process, and to accommodate the loss we
+    expand our feature maps to increase our semantic information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After a certain amount of downsampling that you have selected, the feature maps
+    are vectorized and fed into a series of fully connected layers. The last layer
+    has as many outputs as there are classes in your dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/591b3afafa3c1ba51183474506ac49c5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Object Detection
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Object detectors come in 2 flavours: one-stage and two-stage. Both of them
+    start out with “anchor boxes”; these are default bounding boxes. Our detector
+    is going to predict the *difference* between those boxes and the ground-truth,
+    rather than predicting the boxes directly.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In a two-stage detector we naturally have two networks: a box proposal network
+    and a classification network. The box proposal network proposes coordinates for
+    bounding boxes where it thinks there is a high likelihood that objects are there;
+    again these are *relative* to the anchor boxes. The classification network then
+    takes each of these bounding boxes and classifies the potential object that lies
+    within it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In a one-stage detector, the proposal and classifier networks are fused into
+    one single stage. The network directly predicts both the bounding box coordinates
+    and the class which resides within that box. Because the two stages are fused
+    together, one-stage detectors tend to be faster than two-stage. But the two-stage
+    detectors have higher accuracy due to the separation of the two tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/969ef8b51646f839a7a9648728c4337a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The Faster-RCNN two-stage object detection architecture![Figure](../Images/0be8d94083d3a339242c26d3f45aa040.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The SSD one-stage object detection architecture
+  prefs: []
+  type: TYPE_NORMAL
+- en: Segmentation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Segmentation is one of the more unique tasks in computer vision in that the
+    networks need to learn both low- and high-level information. Low-level information
+    to accurately segment each area and object in the image by the pixel, and high-level
+    information to directly classify those pixels. This leads to networks being designed
+    to combine the information from earlier layers and high-resolution (low-level
+    spatial information) with deeper layers and low-resolution (high-level semantic
+    information).
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we can see below, we first run our image through a standard classification
+    network. We then extract features from each stage of the network, thus using information
+    from a range of low-to-high. Each information level is processed independently
+    before combining them all together in turn. As the information is combined, we
+    upsample the feature maps to eventually get to the full image resolution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To learn more details about how segmentation with deep learning works, check
+    out [this article](https://towardsdatascience.com/semantic-segmentation-with-deep-learning-a-guide-and-code-e52fc8958823).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3c3bf26f47d1e4fc2a532b728a7deab7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The GCN Segmentation architecture
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pose Estimation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Pose estimation models need to accomplish 2 tasks: (1) detect keypoints in
+    an image for each body part (2) find out how to properly connect those keypoints.
+    This is done in three stages:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: (1) Extract features from the image using a standard classification network
+  prefs: []
+  type: TYPE_NORMAL
+- en: (2) Given those features, train a sub-network to predict a set of 2D heatmaps.
+    Each heatmap is associated with a particular keypoint and contains confidence
+    values for each image pixel about whether a keypoint likely exists there or not
+  prefs: []
+  type: TYPE_NORMAL
+- en: (3) Again given the features from the classification network, we train a sub-network
+    to predict a set of 2D vector fields, where each vector field encodes the degree
+    of association between the keypoints. Keypoints with high association are then
+    said to be connected.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training the model in this way with the sub-networks will jointly optimise detecting
+    the keypoints and connecting them together.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e271162f9bf7faad065120ef15091627.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The OpenPose Pose Estimation architecture
+  prefs: []
+  type: TYPE_NORMAL
+- en: Enhancement and Restoration
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enhancement and restoration networks are their own unique beast. We don’t do *any* downsampling
+    with these since what we are really concerned about is high-pixel / spatial accuracy.
+    Downsampling would really kill this information since it would reduce how many
+    pixels we have for spatial accuracy. Instead, all processing is done at the full
+    image resolution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We begin by passing the image we want to enhance / restore to our network without
+    any modification, at full-resolution. The network simply consists of a stack of
+    many convolutions and activation function. These blocks are typically inspired
+    and occasionally direct copies of those originally developed for image classification
+    such as [Residual Blocks](https://arxiv.org/pdf/1512.03385.pdf), [Dense Blocks](https://arxiv.org/pdf/1608.06993.pdf), [Squeeze
+    Excitation Blocks](https://arxiv.org/pdf/1709.01507.pdf), etc. There is no activation
+    function on the last layer, not even sigmoid or softmax, since we want to predict
+    the image pixels directly and do not require any probabilities or scores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That’s about all there is to these types of networks! Lots of processing at
+    the image’s full-resolution to achieve high spatial accuracy, using the same convolutions
+    that have been proven to work with other tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/4241804302e82822e35bd2ecaa6d868c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The EDSR Super-Resolution architecture
+  prefs: []
+  type: TYPE_NORMAL
+- en: Action Recognition
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Action Recognition is one of the few applications that specifically requires *video
+    data* to work well. To classify an action we need to have knowledge of the change
+    in the scene that is taking place over time; this naturally leads us to requiring
+    videos. Our network must be trained to learn both *spatial* and *temporal* information
+    i.e changes in *space* and *time*. The perfect network for this is a *3D-CNN*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A 3D-CNN is, as the name of course suggests, a Convolutional Net that uses
+    3D convolutions! They differ from regular CNNs by the fact that the convolutions
+    are applied in 3-dimensions: width, height, and *time*. Thus, each output pixel
+    is predicted from calculations that are based on both the pixels around it and
+    the pixels in previous and subsequent frames in the same locations!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/39e99ebba274c96308b31a606822f0d3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Passing images in a large batch directly
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The video frames can be passed in several ways:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: (1) In a large batch directly, such as in the first figure. Since we are passing
+    a sequence of frames, both spatial and temporal information is available
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e5e704adf682f38d75b8971205ff2a50.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Single frame + optical flow (left). Video + optical flow (right)
+  prefs: []
+  type: TYPE_NORMAL
+- en: (2) We could also pass a single image frame in one stream (spatial information
+    of the data) and its corresponding optical flow representation from the video
+    (temporal information of the data). We’ll extract features from both using regular
+    2D CNNs, before combining them to be passed to our 3D CNN, which combines both
+    types of information
+  prefs: []
+  type: TYPE_NORMAL
+- en: (3) Pass our sequence of frames to one 3D CNN and the optical flow representation
+    of the video to another 3D CNN. Both of the data streams have spatial and temporal
+    information available. This would be the slowest option but also potentially the
+    most accurate, given that we are doing specific processing for two different representations
+    of our video that both contain all of our information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: All of these networks output the action classification of the video.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Like to learn?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Follow me on[ twitter](https://twitter.com/GeorgeSeif94) where I post all about
+    the latest and greatest AI, Technology, and Science!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [George Seif](https://towardsdatascience.com/@george.seif94)** is a
+    Certified Nerd and AI / Machine Learning Engineer.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/how-to-do-everything-in-computer-vision-2b442c469928).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Solve any Image Classification Problem Quickly and Easily](/2018/12/solve-image-classification-problem-quickly-easily.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[An Introduction to Scikit Learn: The Gold Standard of Python Machine Learning](/2019/02/introduction-scikit-learn-gold-standard-python-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Setup a Python Environment for Machine Learning](/2019/02/setup-python-environment-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Discover the World of Computer Vision: Introducing MLM''s Latest…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Applications of Computer Vision](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Things You Need To Know About Data Management And Why It Matters…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News March 9, 2022: Build a Machine Learning Web App in 5…](https://www.kdnuggets.com/2022/n10.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DINOv2: Self-Supervised Computer Vision Models by Meta AI](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

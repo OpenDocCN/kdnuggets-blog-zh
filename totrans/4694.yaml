@@ -1,0 +1,354 @@
+- en: Feature Reduction using Genetic Algorithm with Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/03/feature-reduction-genetic-algorithm-python.html](https://www.kdnuggets.com/2019/03/feature-reduction-genetic-algorithm-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/03/feature-reduction-genetic-algorithm-python.html?page=2#comments)![practical-computer-vision-applications-deep-learning](../Images/1bf50c2f23d12814ce8634a5b1cee1e1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Using the raw data for training a machine learning algorithm might not be the
+    suitable choice in some situations. The algorithm, when trained by raw data, has
+    to do feature mining by itself for detecting the different groups from each other.
+    But this requires large amounts of data for doing feature mining automatically.
+    For small datasets, it is preferred that the data scientist do the feature mining
+    step on its own and just tell the machine learning algorithm which feature set
+    to use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The used feature set has to be representative of the data samples and thus we
+    have to take care of selecting the best features. The data scientist suggests
+    using some types of features that seems helpful in representing the data samples
+    based on the previous experience. Some features might prove their robustness in
+    representing the samples and others not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There might be some types of feature that might affect the results of the trained
+    model wither by reducing the accuracy for classification problems or increasing
+    the error for regression problems. For example, there might be some noise elements
+    in the feature vector and thus they should get removed. The feature vector might
+    also include 2 or more correlated elements. Just using one element will substitute
+    for the other. In order to remove such types of elements, there are 2 helpful
+    steps which are **feature selection** and **reduction**. This tutorial focuses
+    on **feature reduction**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Assuming there are 3 features F1, F2, and F3 and each one has 3 feature elements.
+    Thus, the feature vector length is 3x3=9\. Feature selection just selects specific
+    types of features and excludes the others. For example, just select F1 and F3
+    and remove F3\. The feature vector length is now 6 rather than 9\. In **feature
+    reduction**, specific elements from each feature might be excluded. For example,
+    this step might remove the **first** and **third** elements from F3 while keeping
+    the second element. Thus, the feature vector length is reduced from 9 to just
+    7.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before starting in this tutorial, it is worth mentioning that it is an extension
+    to a previously published 2 tutorials in my LinkedIn profile.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The first tutorial is titled "**Artificial Neural Network Implementation using
+    NumPy and Classification of the Fruits360 Image Dataset**". It starts by extracting
+    a feature vector of length 360 from 4 classes of the Fruits360 dataset. Then,
+    it builds an artificial neural network (ANN) using NumPy from scratch in order
+    to classify the dataset. It is available here [https://www.linkedin.com/pulse/artificial-neural-network-implementation-using-numpy-fruits360-gad](https://www.linkedin.com/pulse/artificial-neural-network-implementation-using-numpy-fruits360-gad).
+    Its GitHub project is available here: [https://github.com/ahmedfgad/NumPyANN](https://github.com/ahmedfgad/NumPyANN).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The second tutorial is titled "**Artificial Neural Networks Optimization using
+    Genetic Algorithm**". It builds and uses the GA for optimizing the ANN parameters
+    in order to increase the classification accuracy. It is available here [https://www.linkedin.com/pulse/artificial-neural-networks-optimization-using-genetic-ahmed-gad](https://www.linkedin.com/pulse/artificial-neural-networks-optimization-using-genetic-ahmed-gad).
+    Its GitHub project is also available here: [https://github.com/ahmedfgad/NeuralGenetic](https://github.com/ahmedfgad/NeuralGenetic).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This tutorial discusses how to use the genetic algorithm (GA) for reducing the
+    feature vector extracted from the Fruits360 dataset of length 360\. This tutorial
+    starts by discussing the steps to be followed. After that, the steps are implemented
+    in Python mainly using NumPy and Sklearn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The implementation of this tutorial is available in my GitHub page here: [https://github.com/ahmedfgad/FeatureReductionGenetic](https://github.com/ahmedfgad/FeatureReductionGenetic)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: GA starts from an initial population which consists of a number of chromosomes
+    (i.e. solutions) where each chromosome has a sequence of genes. Using a fitness
+    function, the GA selects the best solutions as parents for creating a new population.
+    The new solutions in such a new population are created by applying 2 operations
+    over the parents which are the crossover and the mutation. When applying GA to
+    a given problem, we have to determine the representation of the gene, the suitable
+    fitness function, and how the crossover and the mutation are applied. Let’s see
+    how things work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: More Information about GA
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'You can read more about GA from the following resources I prepared:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction to Optimization with Genetic Algorithm
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/](https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[/2018/03/introduction-optimization-with-genetic-algorithm.html](/2018/03/introduction-optimization-with-genetic-algorithm.html)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b](https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Genetic Algorithm (GA) Optimization - Step-by-Step Example
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://www.slideshare.net/AhmedGadFCIT/genetic-algorithm-ga-optimization-stepbystep-example](https://www.slideshare.net/AhmedGadFCIT/genetic-algorithm-ga-optimization-stepbystep-example)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Genetic Algorithm Implementation in Python
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/](https://www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[/2018/07/genetic-algorithm-implementation-python.html](/2018/07/genetic-algorithm-implementation-python.html)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://towardsdatascience.com/genetic-algorithm-implementation-in-python-5ab67bb124a6](https://towardsdatascience.com/genetic-algorithm-implementation-in-python-5ab67bb124a6)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://github.com/ahmedfgad/GeneticAlgorithmPython](https://github.com/ahmedfgad/GeneticAlgorithmPython)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: I also wrote a book in 2018 that covers GA in one of its chapters. The book
+    is titled "**Practical Computer Vision Applications Using Deep Learning with CNNs**"
+    which is available here at Springer [https://www.springer.com/us/book/9781484241660](https://www.springer.com/us/book/9781484241660).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Chromosome Representation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The gene in GA is the building block for the chromosome. At first, we need to
+    determine what genes are inside the chromosome. To do that, take into regard that
+    every property that may affect the results should be regarded as a gene. Because
+    the target of our problem is selecting the best set of feature elements, thus
+    every feature element might affect the results if selected or not. Thus, every
+    feature element is regarded as a gene. The chromosome will consist of all genes
+    (i.e. all feature elements). Because there are 360 feature elements, then there
+    will be 360 genes. A good piece of information is now clear that the length of
+    the chromosome is 360.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After determining what are the selected genes, next is to determine the gene
+    representation. There are different representations such as decimal, binary, float,
+    string, and others. Our target is to know whether the gene (i.e. feature element)
+    is selected or not in the reduced set of features. Thus, the value assigned to
+    the gene should reflect whether it is selected or not. Based on this description,
+    it is very clear that there are 2 possible values for each gene. One value signifies
+    that the gene is selected and another when it is not selected. Thus, the binary
+    representation is the best choice. When the gene value is 1, then it will be selected
+    in the reduced feature set. When 0, then it will be neglected.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a summary, the chromosome will consist of 360 genes represented in binary.
+    There is a one-to-one mapping between the feature vector and the chromosome according
+    to the next figure. That is the first gene in the chromosome is linked to the
+    first element in the feature vector. When the value for that gene is 1, this means
+    the first element in the feature vector is selected.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![chromosome-representation](../Images/db95ac7af78596be8d5db825557827dc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fitness Function
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: By getting how to create the chromosome, the initial population can be initialized
+    randomly easily is NumPy. After being initialized, the parents are selected. GA
+    is based on **Darwin**’s theory "**Survival of the Fittest**". That is the best
+    solutions in the current population are selected for mating in order to produce
+    better solutions. By keeping the good solutions and killing the bad solutions,
+    we can reach an optimal or semi-optimal solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The criterion used for selecting the parents is the fitness value associated
+    with each solution (i.e. chromosome). The higher the fitness value the better
+    the solution. The fitness value is calculated using a fitness function. So, what
+    is the best function for use in our problem? The target of our problem is creating
+    a reduced feature vector that increases the classification accuracy. Thus, the
+    criterion that judges whether a solution is good or not is the **classification
+    accuracy**. As a result, the fitness function will return a number that specifies
+    the classification accuracy for each solution. The higher the accuracy the better
+    the solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to return a classification accuracy, there must be a machine learning
+    model to get trained by the feature elements returned by each solution. We will
+    use the support vector classifier (SVC) for this case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The dataset is divided into train and test samples. Based on the train data,
+    the SVC will be trained using the selected feature elements by each solution in
+    the population. After being trained, it will be tested according to the test data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Based on the fitness value of each solution, we can select the best of them
+    as parents. These parents are placed together in the mating pool for generating
+    offspring which will be the members of the new population of the next generation.
+    Such offspring are created by applying the crossover and mutation operations over
+    the selected parents. Let’s configure such operations as discussed next.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Crossover and Mutation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Based on the fitness function, we can filter the solutions in the current population
+    for selecting the best of them which are called the parents. GA assumes that mating
+    2 good solutions will produce a third better solution. Mating means exchanging
+    some genes from 2 parents. The genes are exchanged using the crossover operation.
+    There are different ways in which such an operation can be applied. This tutorial
+    uses the single-point crossover in which a point divides the chromosome. Genes
+    before the point are taken from one solution and genes after the point are taken
+    from the other solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By just applying crossover, all genes are taken from the previous parents. There
+    is no new gene introduced in the new offspring. If there is a bad gene in all
+    parents, then this gene will be transferred to the offspring. For such a reason,
+    the mutation operation is applied in order to introduce new genes in the offspring.
+    In the binary representation of the genes, the mutation is applied by flipping
+    the values of some randomly selected genes. If the gene value is 1, then it will
+    be 0 and vice versa.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After generating the offspring, we can create the new population of the next
+    generation. This population consists of the previous parents in addition to the
+    offspring.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At this point, all steps are discussed. Next is to implement them in Python.
+    Note that I wrote a previous tutorial titled "**Genetic Algorithm Implementation
+    in Python**" for implementing the GA in Python which I will just modify its code
+    for working with our problem. It is better to read it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Python Implementation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The project is organized into 2 files. One file is named "GA.py" which holds
+    the implementation of the GA steps as functions. Another file, which is the main
+    file, just imports this file and calls its function within a loop that iterates
+    through the generations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The main file starts by reading the features extracted from the Fruits360 dataset
+    according to the code below. The features are returned into the **data_inputs**
+    variable. Details about extracting these features are available in the 2 tutorials
+    referred to at the beginning of the tutorial. The file also reads the class labels
+    associated with the samples in the variable **data_outputs**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some samples are selected for training with their indices stored in the **train_indices**
+    variable. Similarly, the test samples indices are stored in the **test_indices**
+    variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: It initializes all parameters of GA. This includes the number of solutions per
+    population which is set to 8 according to the **sol_per_pop** variable, number
+    of offspring which is set to 4 in the **num_parents_mating** variable, and number
+    of mutations which is set to 3 in the **num_mutations** variable. After that,
+    it creates the initial population randomly in a variable called **new_population**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is an empty list named **best_outputs** which holds the best result after
+    each generation. This helps to visualize the progress of the GA after finishing
+    all generations. The number of generations is set to 100 in the **num_generations**
+    variable. Note that you can change all of these parameters which might give better
+    results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Genetic Algorithm Key Terms, Explained](https://www.kdnuggets.com/2018/04/genetic-algorithm-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Genes with a Genetic Algorithm](https://www.kdnuggets.com/2022/04/optimizing-genes-genetic-algorithm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Dimensionality Reduction Techniques in Data Science](https://www.kdnuggets.com/2022/09/dimensionality-reduction-techniques-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Genetic Programming in Python: The Knapsack Problem](https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understanding and Implementing Genetic Algorithms in Python](https://www.kdnuggets.com/understanding-and-implementing-genetic-algorithms-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

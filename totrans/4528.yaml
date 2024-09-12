@@ -1,0 +1,839 @@
+- en: Random Forest® — A Powerful Ensemble Learning Algorithm
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/01/random-forest-powerful-ensemble-learning-algorithm.html](https://www.kdnuggets.com/2020/01/random-forest-powerful-ensemble-learning-algorithm.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the article [**Decision Tree Algorithm — Explained**](https://towardsdatascience.com/decision-tree-algorithm-explained-83beb6e78ef4)**,** we
+    have learned about Decision Tree and how it is used to predict the class or value
+    of the target variable by learning simple decision rules inferred from prior data(training
+    data).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: But the common problem with Decision trees, especially having a table full of
+    columns, they fit a lot. Sometimes it looks like the tree memorized the training
+    data set. If there is no limit set on a decision tree, it will give you 100% accuracy
+    on the training data set because in the worse case it will end up making 1 leaf
+    for each observation. Thus this affects the accuracy when predicting samples that
+    are not part of the training set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Random forest is one of several ways to solve this problem of overfitting, now
+    let us dive deeper into the working and implementation of this powerful machine
+    learning algorithm. But before that, I would suggest you get familiar with the [**Decision
+    tree algorithm**](https://towardsdatascience.com/decision-tree-algorithm-explained-83beb6e78ef4)**.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: Random forest is an ensemble learning algorith, so before talking about random
+    forest let us first briefly understand what are Ensemble Learning algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ensemble Learning algorithms
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Ensemble learning algorithms are [**meta-algorithms**](https://cs.stackexchange.com/questions/107003/what-is-a-meta-algorithm) that
+    combine several machine learning algorithms into one predictive model in order
+    to decrease variance, bias or improve predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The algorithm can be any [machine learning](https://www.toptal.com/machine-learning/machine-learning-theory-an-introductory-primer) algorithm
+    such as logistic regression, decision tree, etc. These models, when used as inputs
+    of ensemble methods, are called ”**base models**”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c8cd4a109b77a8574900f3219f03440a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Ensemble learning](https://www.commonlounge.com/discussion/1697ade39ac142988861daff4da7f27d)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ensemble methods usually produce more accurate solutions than a single model
+    would. This has been the case in a number of machine learning competitions, where
+    the winning solutions used ensemble methods. In the popular Netflix Competition, [the
+    winner used an ensemble method](http://blog.echen.me/2011/10/24/winning-the-netflix-prize-a-summary/) to
+    implement a powerful collaborative filtering algorithm. Another example is KDD
+    2009 where the winner also [used ensemble methods](http://jmlr.org/proceedings/papers/v7/niculescu09/niculescu09.pdf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Ensemble algorithms or methods can be divided into two groups:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Sequential ensemble methods —** where the base learners are generated sequentially
+    (e.g. AdaBoost).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The basic motivation of sequential methods is to** exploit the dependence between
+    the base learners.** The overall performance can be boosted by weighing previously
+    mislabeled examples with higher weight.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**Parallel ensemble methods — **where the base learners are generated in parallel
+    (e.g. Random Forest).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The basic motivation of parallel methods is to **exploit independence between
+    the base learners** since the error can be reduced dramatically by averaging.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Most ensemble methods use a single base learning algorithm to produce homogeneous
+    base learners, i.e. learners of the same type, leading to *homogeneous ensembles*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are also some methods that use heterogeneous learners, i.e. learners of
+    different types, leading to *heterogeneous ensembles*. In order for ensemble methods
+    to be more accurate than any of its individual members, the base learners have
+    to be as accurate as possible and as diverse as possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is the Random Forest algorithm?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Random forest is a supervised ensemble learning algorithm that is used for both
+    classifications as well as regression problems. But however, it is mainly used
+    for classification problems. As we know that a forest is made up of trees and
+    more trees mean more robust forest. Similarly, the random forest algorithm creates
+    decision trees on data samples and then gets the prediction from each of them
+    and finally selects the best solution by means of voting. It is an ensemble method
+    that is better than a single decision tree because it reduces the over-fitting
+    by averaging the result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ba9e4638bff4eb8673f4aa3fe4504931.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As per majority voting, the final result is ‘Blue’.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The fundamental concept behind random forest is a simple but powerful one — **the
+    wisdom of crowds.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**“A large number of relatively uncorrelated models(trees) operating as a committee
+    will outperform any of the individual constituent models.”**'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The low correlation between models is the key.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The reason why Random forest produces exceptional results is that the trees
+    protect each other from their individual errors. While some trees may be wrong,
+    many others will be right, so as a group the trees are able to move in the correct
+    direction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Why the name “Random”?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Two key concepts that give it the name random:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A random sampling of training data set when building trees.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Random subsets of features considered when splitting nodes.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**How is Random Forest ensuring Model diversity?**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Random forest ensures that the behavior of each individual tree is not too
+    correlated with the behavior of any other tree in the model by using the following
+    two methods:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bagging or Bootstrap Aggregation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Random feature selection
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bagging or Bootstrap Aggregation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Decision trees are very sensitive to the data they are trained on, small changes
+    to the training data set can result in a significantly different tree structure.
+    The random forest takes advantage of this by allowing each individual tree to **randomly
+    sample from the dataset with replacement**, resulting in different trees. This
+    process is called Bagging.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that with bagging we are not subsetting the training data into smaller
+    chunks and training each tree on a different chunk. Rather, if we have a sample
+    of size **N**, we are still feeding each tree a training set of size **N**. But
+    instead of the original training data, we take a random sample of size **N** with
+    replacement.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example — If our training data is [1,2,3,4,5,6], then we might give one
+    of our trees the list [1,2,2,3,6,6] and we can give another tree a list [2,3,4,4,5,6].
+    Notice that the lists are of length **6** and some elements are repeated in the
+    randomly selected training data we can give to our tree(because we sample with
+    replacement).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6bf318832e23fd46e08e0f9a91735ea0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Bagging](https://medium.com/machine-learning-through-visuals/machine-learning-through-visuals-part-1-what-is-bagging-ensemble-learning-432059568cc8)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The above figure shows how random samples are taken from the dataset with replacement.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Random feature selection**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In a normal decision tree, when it is time to split a node, we consider every
+    possible feature and pick the one that produces the most separation between the
+    observations in the left node vs right node. In contrast, each tree in a random
+    forest can pick only from a random subset of features. This forces even more variation
+    amongst the trees in the model and ultimately results in low correlation across
+    trees and more diversification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So in random forest, we end up with trees that are trained on different sets
+    of data and also use different features to make decisions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e67b08d6c0c6c220df6974f3b1aacc30.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Random feature selection by different trees in random forest.](https://towardsdatascience.com/understanding-random-forest-58381e0602d2)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: And finally, uncorrelated trees have created that buffer and predict each other
+    from their respective errors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Random Forest creation pseudocode:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Randomly select “**k**” features from total “**m**” features where **k << m**
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Among the “**k**” features, calculate the node “**d**” using the best split
+    point
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Split the node into **daughter nodes** using the **best split**
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Repeat the 1 **to 3 **steps until “l” number of nodes has been reached
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Build forest by repeating steps 1 **to 4 **for “n” number times to create **“n”
+    number of trees.**
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Random Forest classifier Building in Scikit-learn
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this section, we are going to build a Gender Recognition classifier using
+    the Random Forest algorithm from the voice dataset. The idea is to identify a
+    voice as male or female, based upon the acoustic properties of the voice and speech.
+    The dataset consists of 3,168 recorded voice samples, collected from male and
+    female speakers. The voice samples are pre-processed by acoustic analysis in R
+    using the seewave and tuneR packages, with an analyzed frequency range of 0hz-280hz.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The dataset can be downloaded from [kaggle](https://www.kaggle.com/primaryobjects/voicegender).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The goal is to create a Decision tree and Random Forest classifier and compare
+    the accuracy of both the models. The following are the steps that we will perform
+    in the process of model building:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. Importing Various Modules and Loading the Dataset**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2\. Exploratory Data Analysis (EDA)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3\. Outlier Treatment**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**4\. Feature Engineering**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**5\. Preparing the Data**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**6\. Model building**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**7\. Model optimization**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So let us start.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step-1: Importing Various Modules and Loading the Dataset**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now load the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Step-2: Exploratory Data Analysis (EDA)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/ca05f41757ed2a156f3fa9e4d28daf21.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Dataset
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The following acoustic properties of each voice are measured and included within
+    our data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**meanfreq**: mean frequency (in kHz)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**sd**: standard deviation of the frequency'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**median**: median frequency (in kHz)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Q25**: first quantile (in kHz)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Q75**: third quantile (in kHz)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**IQR**: interquartile range (in kHz)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**skew**: skewness'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**kurt**: kurtosis'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**sp.ent**: spectral entropy'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**sfm**: spectral flatness'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**mode**: mode frequency'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**centroid**: frequency centroid'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**peakf**: peak frequency (the frequency with the highest energy)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**meanfun**: the average of fundamental frequency measured across an acoustic
+    signal'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**minfun**: minimum fundamental frequency measured across an acoustic signal'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxfun**: maximum fundamental frequency measured across an acoustic signal'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**meandom**: the average of dominant frequency measured across an acoustic
+    signal'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**mindom**: minimum of dominant frequency measured across an acoustic signal'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**maxdom**: maximum of dominant frequency measured across an acoustic signal'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**dfrange**: the range of dominant frequency measured across an acoustic signal'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**modindx**: modulation index which is calculated as the accumulated absolute
+    difference between adjacent measurements of fundamental frequencies divided by
+    the frequency range'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**label**: male or female'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that we have 3168 voice samples and for each sample, 20 different acoustic
+    properties are recorded. Finally, the ‘label’ column is the target variable which
+    we have to predict which is the gender of the person.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now our next step is handling the missing values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/3d4ab01e6f8f8f1ab79de5a677cfb979.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: No missing values in our dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now I will perform the univariate analysis. Note that since all of the features
+    are ‘numeric’ the most reasonable way to plot them would either be a ‘histogram’
+    or a ‘boxplot’.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, univariate analysis is useful for outlier detection. Hence besides plotting
+    a boxplot and a histogram for each column or feature, I have written a small utility
+    function that tells the remaining no. of observations for each feature if we remove
+    its outliers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To detect the outliers I have used the standard 1.5 InterQuartileRange (IQR)
+    rule which states that any observation lesser than ‘first quartile — 1.5 IQR’
+    or greater than ‘third quartile +1.5 IQR’ is an outlier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let us plot the first feature i.e. meanfreq.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/624323449e7fffa3e321bd53d7e8ccfc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Inferences made from the above plots —
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 1) First of all, note that the values are in compliance with that observed from
+    describing the method data frame.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2) Note that we have a couple of outliers w.r.t. to 1.5 quartile rule (represented
+    by a ‘dot’ in the box plot). Removing these data points or outliers leaves us
+    with around 3104 values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3) Also, from the distplot that the distribution seems to be a bit -ve skewed
+    hence we can normalize to make the distribution a bit more symmetric.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4) LASTLY, NOTE THAT A LEFT TAIL DISTRIBUTION HAS MORE OUTLIERS ON THE SIDE
+    BELOW TO Q1 AS EXPECTED AND A RIGHT TAIL HAS ABOVE THE Q3.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similar inferences can be made by plotting other features also, I have plotted
+    some, you guys can check for all.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/528e6dcf2f3d93b61ac0767cb58b5a48.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/503c1f320cfa9db2122f5771a1353ebe.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/8a4b6927f6c352fec079f57ed0d90983.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/ed1818a5915e5afd2cd131fb5f3694a6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now plot and count the target variable to check if the target class is balanced
+    or not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/2556a11af165d6b8342f6329f7fc412e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Plot for Target variable
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have the equal number of observations for the ‘males’ and the ‘females’ class
+    hence it is a balanced dataset and we don't need to do anything about it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now I will perform Bivariate analysis to analyze the correlation between different
+    features. To do it I have plotted a ‘heat map’ which clearly visualizes the correlation
+    between different features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/ef81ec187ed9d1a6bdee14801ecae880.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Heatmap
+  prefs: []
+  type: TYPE_NORMAL
+- en: Inferences made from above heatmap plot—
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1) Mean frequency is moderately related to label.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2) IQR and label tend to have a strong positive correlation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3) Spectral entropy is also quite highly correlated with the label while sfm
+    is moderately related with label.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4) skewness and kurtosis aren’t much related to label.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5) meanfun is highly negatively correlated with the label.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 6) Centroid and median have a high positive correlation expected from their
+    formulae.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 7) Also, meanfreq and centroid are exactly the same features as per formulae
+    and so are the values. Hence their correlation is perfect 1\. In this case, we
+    can drop any of that column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that centroid in general has a high degree of correlation with most of
+    the other features so I’m going to drop centroid column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 8) sd is highly positively related to sfm and so is sp.ent to sd.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 9) kurt and skew are also highly correlated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 10) meanfreq is highly related to the median as well as Q25.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 11) IQR is highly correlated to sd.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 12) Finally, self relation ie of a feature to itself is equal to 1 as expected.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that we can drop some highly correlated features as they add redundancy
+    to the model but let us keep all the features for now. In the case of highly correlated
+    features, we can use dimensionality reduction techniques like Principal Component
+    Analysis(PCA) to reduce our feature space.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Step-3: Outlier Treatment**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here we have to deal with the outliers. Note that we discovered the potential
+    outliers in the **‘univariate analysis’ **section. Now to remove those outliers
+    we can either remove the corresponding data points or impute them with some other
+    statistical quantity like median (robust to outliers) etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For now, I shall be removing all the observations or data points that are an
+    outlier to ‘any’ feature. Doing so substantially reduces the dataset size.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that the new shape is (1636, 20), we are left with 20 features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step-4: Feature Engineering**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here I have dropped some columns which according to my analysis proved to be
+    less useful or redundant.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/9e3a8003ba3bb2eaa7260f514c0dad23.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Filtered dataset
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let us create some new features. I have done two new things here. Firstly
+    I have made ‘meanfreq’, ’median’ and ‘mode’ to comply with the standard relation **3Median=2Mean
+    +Mode. **For this, I have adjusted values in the ‘median’ column as shown below.
+    You can alter values in any of the other columns say the ‘meanfreq’ column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/db847c3a8ec43122f924de7ca815459e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The second new feature that I have added is a new feature to measure the ‘skewness’.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this, I have used the ‘[Karl Pearson Coefficient](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)’
+    which is calculated as **Coefficient = (Mean — Mode )/StandardDeviation**
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can also try some other coefficient also and see how it compared with the
+    target i.e. the ‘label’ column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/9a3f6b669fd8d37f900fe827d25d2d9c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Step-5: Preparing the Data**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first thing that we’ll do is normalize all the features or basically we’ll
+    perform feature scaling to get all the values in a comparable range.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next split your data into train and test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Step-6: Model building**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we’ll build two classifiers, decision tree, and random forest and compare
+    the accuracies of both of them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: Put the accuracies in a data frame.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/c48ef2acaab7d53398af2864b80b12f8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Plot the accuracies:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fe7c93dfae09b6abfa44b730c4bd5406.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As we have seen, just by using the default parameters for both of our models,
+    the random forest classifier outperformed the decision tree classifier(as expected).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step-7: Parameter Tuning with GridSearchCV**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lastly, let us also tune our random forest classifier using GridSearchCV.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/ffa2c3d7da8a4fdfe128e44e35d6697f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/492709261b434d559975c2c3f5cc524f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: After hyperparameter optimization as we can see the results are pretty good
+    :)
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want you can also check the Importance of each feature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/9da677f171e6c3452da909f93b05617c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that you hopefully have the conceptual framework of random forest and this
+    article has given you the confidence and understanding needed to start using the
+    random forest on your projects. The random forest is a powerful machine learning
+    model, but that should not prevent us from knowing how it works. The more we know
+    about a model, the better equipped we will be to use it effectively and explain
+    how it makes predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can find the source code in my [Github repository.](https://github.com/nageshsinghc4/Gender-prediction-from-voice-data--random-forest)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, that’s all for this article hope you guys have enjoyed reading it and
+    I’ll be glad if the article is of any help. Feel free to share your comments/thoughts/feedback
+    in the comment section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/76b044b507540a50ce22f2596d637aba.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Source](http://bestanimations.com/Nature/Flora/Trees/Trees.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for reading!!!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)**
+    is a Big data developer at CirrusLabs. He has over 4 years of working experience
+    in various sectors like Telecom, Analytics, Sales, Data Science having specialisation
+    in various Big data components.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/random-forest-a-powerful-ensemble-learning-algorithm-2bf132ba639d).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Random Forests® is a registered trademark of Minitab.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Friendly Introduction to Support Vector Machines](/2019/09/friendly-introduction-support-vector-machines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Comparing Decision Tree Algorithms: Random Forest vs. XGBoost](/2019/08/activestate-decision-tree-random-forest-xgboost.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build an Artificial Neural Network From Scratch: Part 1](/2019/11/build-artificial-neural-network-scratch-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Does the Random Forest Algorithm Need Normalization?](https://www.kdnuggets.com/2022/07/random-forest-algorithm-need-normalization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Random Forest vs Decision Tree: Key Differences](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tuning Random Forest Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-random-forest-hyperparameters.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why we will always need humans to train AI — sometimes in real-time](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning with Examples](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

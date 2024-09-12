@@ -1,0 +1,315 @@
+- en: Exploring Recurrent Neural Networks
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/12/exploring-recurrent-neural-networks.html](https://www.kdnuggets.com/2017/12/exploring-recurrent-neural-networks.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By Packtpub.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**In this tutorial, taken from** [**Hands-on Deep Learning with Theano**](https://www.packtpub.com/big-data-and-business-intelligence/hands-deep-learning-tensorflow?utm_source=kdnuggets&utm_medium=referral&utm_campaign=outreach)
+    **by Dan Van Boxel, we’ll be exploring recurrent neural networks. We’ll start
+    off by looking at the basics, before looking at RNNs through a motivating weather
+    modeling problem. We’ll also implement and train an RNN in TensorFlow.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/84d853461087d54cfc8652330bb59d7b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In a typical model, you have some X input features and some Y output you want
+    to predict. We usually consider our different training samples as independent
+    observations. So, the features from data point one shouldn't impact the prediction
+    for data point two. But what if our data points are correlated? The most common
+    example is that each data point, **Xt**, represents features collected at time
+    **t**. It's natural to suppose that the features at time t and time t+1 will both
+    be important to the prediction at time t+1\. In other words, history matters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, when modeling, you could just include twice as many input features, adding
+    the previous time step to the current ones, and computing twice as many input
+    weights. But, if you're going through all the effort of building a neural network
+    to compute transform features, it would be nice if you could use the intermediate
+    features from the previous time step, in the current time step network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: RNNs do exactly this. Consider your input, **Xt** as usual, but add in some
+    state, **St-1** that comes from the previous time step, as additional features.
+    Now you can compute weights as usual to predict **Yt**, and you produce a new
+    internal state, **St**, to be used in the next time step. For the first time step,
+    it's typical to use a default or zero initial state. Classic RNNs are literally
+    this simple, but there are more advanced structures common in literature today,
+    such as gated recurrent units and long short-term memory circuits. These are beyond
+    the scope of this tutorial, but work on the same principles and generally apply
+    to the same types of problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Modeling the weights
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'You might be wondering how we''ll compute weights with all these dependents
+    on the previous time step. Computing the gradients does involve recursing back
+    through the time computation, but fear not, TensorFlow handles the tedious stuff
+    and let''s us do the modeling:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: To use RNNs, we need a data modeling problem with a time component.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The font classification problem isn't really appropriate here. So, let's take
+    a look at some weather data. The **weather.npz** file is a collection of weather
+    station data from a city in the United States over several decades. The **daily**
+    array contains measurements from every day of the year. There are six columns
+    to the data, starting with the date. Next, is the precipitation, measuring any
+    rainfall in inches that day. After this, come two columns for snow—the first is
+    measured snow currently on the ground, while the latter is snowfall on that day,
+    again, in inches. Finally, we have some temperature information, the daily high
+    and the daily low in degrees Fahrenheit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The **weekly** array, which we'll use, is a weekly summary of the daily information.
+    We'll use the middle date to indicate the week, then, we'll sum up all rainfall
+    for the week. For snow, however, we'll average the snow on the ground, since it
+    doesn't make sense to add snow from one cold day to the same snow sitting on the
+    ground the next day. Snowfall though, we'll total for the week, just like rain.
+    Finally, we'll average the high and low temperatures for the week respectively.
+    Now that you've got a handle on the dataset, what shall we do with it? One interesting
+    time-based modeling problem would be trying to predict the season of a particular
+    week using it's weather information and the history of previous weeks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the Northern Hemisphere, in the United States, it's warmer during the months
+    of June through August and colder during December through February, with transitions
+    in between. Spring months tend to be rainy, and winter often includes snow. While
+    one week can be highly variable, a history of weeks should provide some predictive
+    power.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understanding RNNs
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'First, let''s read in the data from a compressed NumPy array. The `weather.npz`
+    file happens to include the daily data as well, if you wish to explore your own
+    model; `np.load` reads both arrays into a dictionary and will set weekly to be
+    our data of interest; `num_weeks` is naturally how many data points we have, here,
+    several decades worth of information:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To format the weeks, we use a Python `datetime.datetime` object reading the
+    storage string in year month day format:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can use the date of each week to assign its season. For this model, because
+    we''re looking at weather data, we use the meteorological season rather than the
+    common astronomical season. Thankfully, this is easy to implement with the Python
+    function. Grab the month from the `datetime` object and we can directly compute
+    this season. Spring, season zero, is March through May, summer is June through
+    August, autumn is September through November, and finally, winter is December
+    through February. The following is the simple function that just evaluates the
+    month and implements that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let''s note that we have four seasons and five input variables and, say, 11
+    values in our history state:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now you''re ready to compute the labels:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: We do this directly in one-hot format, by making an all-zeroes array and putting
+    a one in the position of the assign season.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cool! You just summarized decades of time with a few commands.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As these input features measure very different things, namely rainfall, snow,
+    and temperature, on very different scales, we should take care to put them all
+    on the same scale. In the following code, we grab the input features, skipping
+    the date column of course, and subtract the average to center all features at
+    zero:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Then, we scale each feature by dividing by its standard deviation. This accounts
+    for temperatures ranging roughly 0 to 100, while rainfall only changes between
+    about 0 and 10\. Nice work on the data prep! It isn't always fun, but it's a key
+    part of machine learning and TensorFlow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s now jump into the TensorFlow model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We input our data as normal with a placeholder variable, but then you see this
+    strange reshaping of the entire data set into one big tensor. Don''t worry, this
+    is because we technically have one long, unbroken sequence of observations. The
+    `y_` variable is just our output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: We'll be computing a probability for every week for each season.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `cell` variable is the key to the recurrent neural network:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: This tells TensorFlow how the current time step depends on the previous. In
+    this case, we'll use a basic RNN cell. So, we're only looking back one week at
+    a time. Suppose that it has state size or 11 values. Feel free to experiment with
+    more exotic cells and different state sizes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To put that cell to use, we''ll use `tf.nn.dynamic_rnn`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This intelligently handles the recursion rather than simply unrolling all the
+    time steps into a giant computational graph. As we have thousands of observations
+    in one sequence, this is critical to attain reasonable speed. After the cell,
+    we specify our input `x_`, then `dtype` to use 32 bits to store decimal numbers
+    in a float, and then the empty `initial_state`. We use the outputs from this to
+    build a simple model. From this point on, the model is almost exactly as you would
+    expect from any neural network:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We''ll multiply the output of the RNN cells, some weights, and add a bias to
+    get a score for each class for that week:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Our categorical cross_entropy loss function and train optimizer should be very
+    familiar to you:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Great work setting up the TensorFlow model! To train this, we''ll use a familiar
+    loop:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Since this is a fictitious problem, we''ll not worry too much about how accurate
+    the model really is. The goal here is just to see how an RNN works. You can see
+    that it runs just like any TensorFlow model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e065c883fa632039fd0f6cae87a3439f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If you do look at the accuracy, you can see that it's doing pretty well; much
+    better than the 25 percent random guessing, but still has a lot to learn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**We hope you enjoyed this extract from** [**Hands On Deep Learning with TensorFlow**](https://www.packtpub.com/big-data-and-business-intelligence/hands-deep-learning-tensorflow?utm_source=kdnuggets&utm_medium=referral&utm_campaign=outreach)**.
+    If you’d like to learn more visit packtpub.com.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**A Guide For Time Series Prediction Using Recurrent Neural Networks (LSTMs)**](https://www.kdnuggets.com/2017/10/guide-time-series-prediction-recurrent-neural-networks-lstms.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Going deeper with recurrent networks: Sequence to Bag of Words Model**](https://www.kdnuggets.com/2017/08/deeper-recurrent-networks-sequence-bag-words-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**7 Steps to Mastering Deep Learning with Keras**](https://www.kdnuggets.com/2017/10/seven-steps-deep-learning-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Exploring Neural Networks](https://www.kdnuggets.com/exploring-neural-networks)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Simple Things to Try Before Neural Networks](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Interpretable Neural Networks with PyTorch](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deep Neural Networks Don''t Lead Us Towards AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Image Classification with Convolutional Neural Networks (CNNs)](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,551 @@
+- en: 'Audio File Processing: ECG Audio Using Python'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/02/audio-file-processing-ecg-audio-python.html](https://www.kdnuggets.com/2020/02/audio-file-processing-ecg-audio-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Taposh Dutta Roy](https://www.linkedin.com/in/taposh/), Kaiser Permanente**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7b8f48ae23706fa2aae3aea5c20770e6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In my last post on “[Basics of Audio File Processing](https://medium.com/@taposhdr/basics-of-audio-file-processing-in-r-81c31a387e8e) in
+    R” we talked about the fundamentals of audio processing and looked into some examples
+    in R. In this post, we will look into an application of audio file processing,
+    for a good cause — Analysis of ECG Heart beat and write code in python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To understand this better, we will look into : Basic anatomy of the heart,
+    measurements, origin and characteristics of heart sounds, techniques for heart
+    sound analysis and python code for analyzing the sound. Our python code in this
+    article will discuss how to read, and process data and develop a very simple model.
+    In the next article, we will do more processing of data and develop a better model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Further, note that I am not a clinician, thus all my knowledge is generated
+    by reading papers, blogs and articles. I have listed all my sources and references.
+    I will start with the location of heart in the [thoracic cavity](https://www.britannica.com/science/thoracic-cavity),
+    as shown below
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0ce449771d078af447901847a7d914a0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: Google'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Basic Anatomy of Mammalian Heart**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/70f0cb04e69acf7a59fa0dcf0ff80357.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'source : medmov'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are 5 basic anatomical areas of a mammalian heart :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The four cardiac chambers
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The four cardiac valves
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The four layers of cardiac tissue
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The great heart vessels
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The natural cardiac pacemakers and the conduction system of the heart
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Human Heart
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The human heart is a four-chambered pump with two *atria* for collection of
+    blood from the veins and two *ventricles* for pumping out the blood to the arteries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/deae6bf9c9cfbfa73c49a746b70502c2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source : Research work of [Dr. Amit Guy](https://fhs.mcmaster.ca/medicine/cardiology/faculty_member_amit.htm)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The right side of the heart pumps blood to the pulmonary circulation (lungs),
+    and the left side pumps blood to the systemic circulation (the rest of the body).
+    The blood from the pulmonary circulation returns to the left atrium (through the
+    pulmonary veins), and the blood from the systemic circulation returns to the right
+    atrium (through the superior/inferior vena cava).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Two sets of valves control the flow of blood: the AV-valves (mitral and tricuspid)
+    between the atria and the ventricles, and the semilunar valves (aortic and pulmonary)
+    between the ventricles and the arteries.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Electrical Control
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/e71aebfb802cd512adc647144e09e081.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The periodic activity of the heart is controlled by an electrical conducting
+    system. The electrical signal originates in specialized pacemaker cells in the
+    right atrium (the *sino-atria node)*, and is propagated through the atria to the
+    AV-node (a delay junction) and to the ventricles. The electrical action potential
+    excites the muscle cells and causes the mechanical contraction of the heart chambers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Mechanical System : Systole & Diastole'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/20ee09a66c1336b731417db4027b9b26.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The contraction phase of the ventricles is called *systole*. The ventricular
+    systole is followed by a resting or filling phase that is called *diastole*. The
+    mechanical activity of the heart includes blood flow, vibrations of the chamber
+    walls and opening and closing of the valves.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The systole is sub-divided into :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a73d6a6c015719cdacb742ea8679ad6f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The diastole is sub-divided into
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bf3f88a387562cfc72035292648d9c2a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Figure](../Images/c0180ff64d96efc098cd6dc9c3312185.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Right side: vertical section of the cardiac muscle shows the internal structure
+    of the heart. Left side: schematic representation of a reciprocating type pump
+    having a pumping chamber and input output ports with oppositely oriented valves.
+    (Source : [https://www.morganclaypool.com/doi/pdf/10.2200/S00187ED1V01Y200904BME031](https://www.morganclaypool.com/doi/pdf/10.2200/S00187ED1V01Y200904BME031))'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Modulating System
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Human body is a complex system with a variety of sub-systems that work in tandem.
+    Some of these systems that help our heart modulate are — Autonomous Nervous System,
+    Hormonal System, Respiratory System. These along with electrical and mechanical
+    factors make our heart work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The autonomous nervous system regulates the heart rate: the sympathetic system
+    enhances automaticity, while the parasympathetic system (vagus nerve) inhibits
+    it. The nervous system also modulates the mechanical contractility of the heart
+    chambers.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The hormonal system secretes hormones like insulin and epinephrine, which effect
+    the contractility of the heart muscle.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The respiratory system causes periodic changes in the thoracic pressure, and
+    thus effect the blood flow, venous pressure and venous return, triggering a reflex
+    responses (baroreceptor reflex, bainbridge reflex) that modulates the heart rate.
+    The heart rate is increased during inspiration and decreased during expiration.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Other mechanical factors are the peripheral resistance of the blood vessels,
+    that can change due to internal or external factors (stenosis), the resulting
+    venous return, the state of the valves (torn, calcified)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Other electrical factors are ectopic pacemaker cells, conduction problems, reentry
+    circuits
+  prefs: []
+  type: TYPE_NORMAL
+- en: The complexity and interaction of the system as depicted by Dr. Guy Amit is
+    shown below -
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/9d01b8e574d965bdfdee6ef9c1d1c088.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: Research by Dr. Amit Guy'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Heart Sounds
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/773f06278986563a3ea481bb14394bc3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source: [https://www.youtube.com/watch?v=FtXNnmifbhE&list=PL3n8cHP87ijDnqI8_5WQlS4tN37D6P4dH](https://www.youtube.com/watch?v=FtXNnmifbhE&list=PL3n8cHP87ijDnqI8_5WQlS4tN37D6P4dH)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Four locations are most often used to listen to the heart sounds, which are
+    named according to the positions where the valves can be best heard:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Aortic area — centered at the second right intercostal space.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pulmonic area — in the second intercostal space along the left sternal border.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Tricuspid area — in the fourth intercostal space along the left sternal edge.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Mitral area — at the cardiac apex, in the fifth intercostal space on the midclavicular
+    line.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The different types of heart sounds are as follows :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**S1** — onset of the ventricular contraction'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**S2** — closure of the semilunar valves'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**S3 **— ventricular gallop'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**S4** — atrial gallop'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**EC** — Systolic ejection click'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**MC** — Mid-systolic click'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**OS** — Diastolic sound or opening snap'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Murmurs**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Fundamental heart sounds (FHSs) usually include the first (S1) and second (S2)
+    heart sounds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: S1 occurs at the beginning of isovolumetric ventricular contraction, when the
+    mitral and tricuspid valves close due to the rapid increase in pressure within
+    the ventricles.
+  prefs: []
+  type: TYPE_NORMAL
+- en: S2 occurs at the beginning of diastole with the closure of the aortic and pulmonic
+    valves.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While the FHSs are the most recognizable sounds of the heart cycle, the mechanical
+    activity of the heart may also cause other audible sounds, such as the third heart
+    sound (S3), the fourth heart sound (S4), systolic ejection click (EC), mid-systolic
+    click (MC), diastolic sound or opening snap (OS), as well as heart murmurs caused
+    by the turbulent, high-velocity flow of blood.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We obtain the ECG data from [Physionet challenge site](https://physionet.org/content/challenge-2016/1.0.0/)’s
+    2016 challenge — Classification of Heart Sound Recordings. The goal for this challenge
+    is to classify normal vs abnormal vs unclear heart sounds. For our purpose we
+    will classify into 2 categories — normal and abnormal ( to make it easy for demonstration
+    purpose)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Python Code**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Similar to R, there are several libraries used to process audio data in python.
+    In this code we will use the one of the libraries — [librosa](https://librosa.github.io/librosa/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: librosa
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: scipy
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: wav
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We will use librosa since we can use it for audio feature extraction as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/80a65853cb9f18e0b864e61f2f7abb83.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Installing Libraries
+  prefs: []
+  type: TYPE_NORMAL
+- en: Librosa returns the data and the sampling rate which is by default set to 22050,
+    but you can change this or use raw sampling rate. Lets load a single audio file
+    and look at the signal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/af16372e694f6eaea53c33977b0f9906.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Next, reload all the training data-sets and create a complete training file.
+    The code below explains on how to do this. We will also classify the data into
+    normal and abnormal data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8e9a9b5e968a0a2b0d9bb8471fd8e4de.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/09ed2f3e202f0e8f40dfc8bf884084e5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/6d8815f15ed36ff7515007d35e65f036.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Observe : the length of the files are different'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/22b8415ba0aa828de857521be100e366.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'One other thing to note here is the audio file duration. The first file was
+    20 sec while the 2nd one was 35 secs. There are two approaches to addressing this
+    are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Pad the audio with zeros to given length
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Repeat audio to given length, for example max length of all audio samples
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Also, note our library Librosa has the default sampling rate set to 22050 (
+    fyi, you can change this or use raw sampling rate). Please check the definition
+    of Sampling rate and other details in the prior post : “[Basics of Audio File
+    Processing in R](https://medium.com/@taposhdr/basics-of-audio-file-processing-in-r-81c31a387e8e)”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/4ac0de6ba1f0fd588f485f11d5df0083.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sampling & Setting all files to be of same length
+  prefs: []
+  type: TYPE_NORMAL
+- en: Helper functions for Zero Padding and Repeating Audio
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/2867472698ba8df33ca02527a4c704a3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Get data for processing by a model (note: this process takes time)![Figure](../Images/879ef1c084429620e2a0ef7bd2cbf593.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: All files of same length and zero padded
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lets review the wave_files, we see below we have a row for each file and a value
+    for each of the 110250 columns. (Remember our audio length is 110250)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1868bf248f349a61858a6a70b1861c0e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We are almost ready to get pass this data to an algorithm. We need to create
+    our test and training data-sets. This is training the model with raw data and
+    no feature engineering of any sort. Let’s see what we get.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a356bb2ffd81cc918a76b77bdfe1e0b4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We will use “adam” optimizer and binary_crossentropy, for details on these,
+    please check the [paper](https://arxiv.org/abs/1412.6980).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ab4f8afd1eb44526fd1265cda3611764.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Figure](../Images/971dd759c34e6fcfa11e54bac300c069.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the next article we will use some frequency strategies that we discussed
+    in the initial article with python to improve to score.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Source code: [https://github.com/taposh/audio_processing/blob/master/code/python-code/heart_beat_python.ipynb](https://github.com/taposh/audio_processing/blob/master/code/python-code/heart_beat_python.ipynb)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: Taposh Dutta Roy** leads Innovation Team of KPInsight at Kaiser Permanente.
+    These are his thoughts based on his personal research. These thoughts and recommendations
+    are not of Kaiser Permanente and Kaiser Permanente is not responsible for the
+    content. If you have questions Mr. Dutta Roy can be reached via [linkedin](https://www.linkedin.com/in/taposh/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**References:**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Goldberger AL, Amaral LAN, Glass L, Hausdorff JM, Ivanov PCh, Mark RG, Mietus
+    JE, Moody GB, Peng C-K, Stanley HE. PhysioBank, PhysioToolkit, and PhysioNet:
+    Components of a New Research Resource for Complex Physiologic Signals (2003).
+    Circulation. 101(23):e215-e220.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Basics of Audio File Processing in R](https://medium.com/@taposhdr/basics-of-audio-file-processing-in-r-81c31a387e8e)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In today’s day and age, digital audio has been part and parcel of our life.
+    One can talk to Siri or Alexa or “Ok…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Basic anatomy of the human heart - The Cardio Research Web Project](http://www.cardio-research.com/basic-anatomy-of-the-human-heart)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The heart has evolved in mammals to deliver its unique and crucial function
+    of ejecting and collecting blood to and…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Basic anatomy of the human heart - The Cardio Research Web Project](http://www.cardio-research.com/basic-anatomy-of-the-human-heart)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The heart has evolved in mammals to deliver its unique and crucial function
+    of ejecting and collecting blood to and…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[McMaster University Department of Medicine >> Cardiology](https://fhs.mcmaster.ca/medicine/cardiology/faculty_member_amit.htm)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Division of Cardiology participates actively in undergraduate MD teaching
+    and the training of Residents in…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[LibROSA - librosa 0.7.2 documentation](https://librosa.github.io/librosa/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: LibROSA is a python package for music and audio analysis. It provides the building
+    blocks necessary to create music…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://arxiv.org/abs/1412.6980](https://arxiv.org/abs/1412.6980)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://www.researchgate.net/publication/210290203_Phonocardiography_Signal_Processing](https://www.researchgate.net/publication/210290203_Phonocardiography_Signal_Processing)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Thoracic cavity | anatomy](https://www.britannica.com/science/thoracic-cavity)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thoracic cavity, the second largest hollow space of the body. It is enclosed
+    by the ribs, the vertebral column, and the…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/@taposhdr/audio-file-processing-ecg-audio-using-python-a919a9351952).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Building an Audio Classifier using Deep Neural Networks](/2017/12/audio-classifier-deep-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Ways AI Is Changing The Healthcare Industry](/2020/01/5-ways-ai-changing-healthcare-industry.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Python String Processing Tips & Tricks](/2020/01/python-string-processing-primer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Parallel Processing Large File in Python](https://www.kdnuggets.com/2022/07/parallel-processing-large-file-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, July 20: Machine Learning Algorithms Explained in…](https://www.kdnuggets.com/2022/n29.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Monitor Your File System With Python’s Watchdog](https://www.kdnuggets.com/monitor-your-file-system-with-pythons-watchdog)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bark: The Ultimate Audio Generation Model](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[WavJourney: A Journey into the World of Audio Storyline Generation](https://www.kdnuggets.com/wavjourney-a-journey-into-the-world-of-audio-storyline-generation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

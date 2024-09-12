@@ -1,0 +1,572 @@
+- en: 'Convolutional Neural Networks: A Python Tutorial Using TensorFlow and Keras'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/07/convolutional-neural-networks-python-tutorial-tensorflow-keras.html](https://www.kdnuggets.com/2019/07/convolutional-neural-networks-python-tutorial-tensorflow-keras.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Convolutional Neural Networks are a part of what made Deep Learning reach the
+    headlines so often in the last decade. Today we’ll train an **image classifier** to
+    tell us whether an image contains a dog or a cat, using TensorFlow’s eager API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Artificial Neural Networks have disrupted several industries lately, due to
+    their unprecedented capabilities in many areas. However, different **Deep Learning
+    architectures** excel on each one:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Image Classification (Convolutional Neural Networks).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Image, audio and text generation (GANs, RNNs).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Time Series Forecasting (RNNs, LSTM).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Recommendations Systems (Boltzmann Machines).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A huge et cetera (e.g., regression).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Today we’ll focus on the first item of the list, though each of those deserves
+    an article of its own.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What are Convolutional Neural Networks?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In MultiLayer Perceptrons (MLP), the *vanilla* Neural Networks, each layer’s
+    neurons connect to **all** the neurons in the next layer. We call this type of
+    layers **fully connected**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Fully connected neural network](../Images/7217b688dccd14aeb4eaa64a43a95669.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*A MLP. Source: [astroml](http://www.astroml.org/book_figures/appendix/fig_neural_network.html)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A Convolutional Neural Network is different: they have Convolutional Layers.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: On a fully connected layer, each neuron’s output will be a linear transformation
+    of the previous layer, composed with a non-linear [activation function](http://www.datastuff.tech/machine-learning/why-do-neural-networks-need-an-activation-function/) (e.g., *ReLu* or *Sigmoid*).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conversely, the output of each neuron in a **Convolutional Layer** is only a
+    function of a (typically small) **subset** of the previous layer’s neurons.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/91595c3b86cf4b582b747851d6c72bcb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Source: [Brilliant](https://brilliant.org/wiki/convolutional-neural-network/)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Outputs on a Convolutional Layer will be the result of applying a **convolution** to
+    a subset of the previous layer’s neurons, and then an activation function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is a convolution?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The convolution operation, given an input matrix *A* (usually the previous layer’s
+    values) and a (typically much smaller) weight matrix called a **kernel** or **filter** *K*,
+    will output a new matrix *B*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cb31402ba56929809d073152b6eff087.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*by @[RaghavPrabhu](https://medium.com/@RaghavPrabhu/understanding-of-convolutional-neural-network-cnn-deep-learning-99760835f148)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If *K* is a *CxC* matrix, the first element in *B* will be the result of:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Taking the first *CxC* submatrix of *A*.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Multiplying each of its elements by its corresponding weight in *K*.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Adding all the products.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: These two last steps are equivalent to flattening both *A*’s submatrix and *K*,
+    and computing the dot product of the resulting vectors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We then slide K to the right to get the next element, and so on, repeating this
+    process for each of *A*‘s rows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/07d573c4b79deab51d5e0ed20f39d65b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Convolution visualization by @[RaghavPrabhu](https://medium.com/@RaghavPrabhu/understanding-of-convolutional-neural-network-cnn-deep-learning-99760835f148)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Depending on what we want, we could only start with our kernel centered at the *Cth*row
+    and column, to avoid “going out of bounds”, or assume all elements “outside A”
+    have a certain default value (typically 0) –This will define whether *B*‘s size
+    is smaller than *A*‘s or the same.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see, if *A* was an *NxM* matrix, now each neuron’s value in* B* won’t
+    depend on *N*M* weights, but only on *C*C* (much less) of them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This makes a convolutional layer much lighter than a fully connected one, helping
+    convolutional models learn a lot faster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Granted, we will end up using many kernels on each layer (getting a stack of
+    matrices as each layer’s output). However, that will still require a lot less
+    weights than our good old MLP.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why does this work?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Why can we **ignore** how each neuron affects most of the others? Well, this
+    whole system holds up on the premise that each neuron is **strongly affected by
+    its “neighbors”**. Faraway neurons, however, have only a small bearing on it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This assumption is **intuitively true in images**–if we think of the input layer,
+    each neuron will be a pixel or a pixel’s RGB value. And that’s part of the reason
+    why this approach works so well for image classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, if I take a region of a picture where there’s a blue sky, it’s
+    likely that nearby regions will show the sky as well, using similar tones.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A pixel’s neighbors will usually have similar RGB values to it. If they don’t,
+    then that probably means we are on the edge of a figure or object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you do some convolutions with pen and paper (or a calculator), you’ll realize
+    certain kernels will increase an input’s intensity if it’s on a certain kind of
+    edge. In other edges, they could decrease it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As an example, let’s consider the following kernels *V* and *H*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c2caebb00259f30ea88adc9f43177ed9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Filters for vertical and horizontal edges*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*V* filters vertical edges (where colors above are very different from colors
+    below), whereas *H* filters horizontal edges. Notice how one is the transposed
+    version of the other.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Convolutions by example
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Here’s an unfiltered picture of a litter of kittens:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A cute kitten litter for image preprocessing.](../Images/35c396010e9743ccb6df9a84481c5b06.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Here’s what happens if we apply the horizontal and vertical edge filters, respectively:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![kittens after horizontal and vertical convolutional edge filters](../Images/e902ebda2262e2623748ddc1a6daddeb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can see how some features become a lot more noticeable, whereas others fade
+    away. Interestingly, each filter showcases different features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is how Convolutional Neural Networks learn to identify features in an image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Letting them fit their own kernel weights is a lot easier than any manual approach.
+    Imagine trying to figure out how you should express the relationship between pixels…
+    by hand!
+  prefs: []
+  type: TYPE_NORMAL
+- en: To really grasp what each convolution does to a picture, I strongly recommend
+    you play around on [this website](http://setosa.io/ev/image-kernels/). It helped
+    me more than any book or tutorial could. Go ahead, bookmark it. It’s fun.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alright, you’ve learned some theory already. Now let’s move on to the practical
+    part.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How do you train a Convolutional Neural Network in TensorFlow?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: TensorFlow is Python’s most popular Deep Learning framework.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’ve heard good things about PyTorch too, though I’ve never had the chance to
+    try it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’ve already written one tutorial on [how to train a Neural Network with TensorFlow’s
+    Keras API](http://www.datastuff.tech/machine-learning/autoencoder-deep-learning-tensorflow-eager-api-keras/),
+    focusing on AutoEncoders.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Today will be different: we will try three different architectures, and see
+    which one does better.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As usual, all the code is available on [GitHub](https://github.com/StrikingLoo/Cats-and-dogs-classifier-tensorflow-CNN),
+    so you can try everything out for yourself or follow along. Of course I’ll also
+    be showing you Python snippets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We will be training a neural network to predict whether an image contains a
+    dog or a cat. To do this we’ll use Kaggle’s [cats and dogs Dataset](https://www.kaggle.com/c/dogs-vs-cats).
+    It contains 12500 pictures of cats and 12500 of dogs, with different resolutions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loading and Preprocessing our Image Data with NumPy
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A neural network receives a features vector or matrix as an input, typically
+    with **fixed dimensions**. How do we generate that from our pictures?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lucky for us, Python’s Image library provides us an easy way to load an image
+    as a NumPy array. A HeightxWidth matrix of RGB values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We already did that on when we did [image filters in Python](http://www.datastuff.tech/machine-learning/k-means-clustering-with-dask-editing-pictures-of-kittens/),
+    so I’ll just reuse that code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'However we still have to fix the fixed dimensions part: which **dimensions** do
+    we choose for our **input layer**?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is important, since we will have to **resize every picture** to the chosen
+    resolution. We do not want to distort **aspect ratios** too much in case it brings
+    too much **noise for the network**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here’s how we can see what the most common shape is in our dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I sampled the first 1000 pictures for this, though the result did not change
+    when I looked at 5000.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The most common shape was 375×500, though I decided to divide that by 4 for
+    our network’s input.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is what our image loading code looks like now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, you can load the data with this snippet. I chose to use a sample of
+    4096 pictures for the training set and 1024 for validation. However, that’s just
+    because my PC couldn’t handle much more due to RAM size.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feel free to increase these numbers to the max (like 10K for training and 2500
+    for validation) if you try this at home!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training our Neural Networks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: First of all, as a sort of baseline, let’s see how good a normal **MLP** does
+    on this task. If Convolutional Neural Networks are so revolutionary, I’d expect
+    the results to be **terrible** for this experiment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So here’s a single hidden layer fully connected neural network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: All the trainings for this article were made using AdamOptimizer, since it’s
+    the fastest one. I only tuned the learning rate per model (here it was 1e-5).
+  prefs: []
+  type: TYPE_NORMAL
+- en: I trained this model for 10 epochs, and it basically converged to **random guessing**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I made sure to **shuffle the training data**, since I loaded it in order and
+    that could’ve biased the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I used **MSE** as loss function, since it’s usually **more intuitive to interpret**.
+    If your MSE is 0.5 in binary classification, you’re as good as **always predicting
+    0**. However, MLPs with more layers, or different loss functions **did not perform
+    better**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Historically, other well established Supervised Learning algorithms, like [Boosted
+    Trees (using XGBoost)](http://www.datastuff.tech/machine-learning/xgboost-predicting-life-expectancy-with-supervised-learning/) have
+    performed even worse on image classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training a Convolutional Neural Network
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: How much good can a single convolutional layer do? Let’s add one to our model
+    and see.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this network, I decided to add a single convolutional layer (with 24 kernels),
+    followed by 2 fully connected layers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: All Max Pooling does is reduce every four neurons to a single one, with the
+    highest value between the four.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After only 5 epochs, it was already **performing much better** than the previous
+    networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With a validation MSE of 0.36, it was a lot better than random guessing already.
+    Notice however that I had to use a **much smaller learning rate**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, even though it learned in less epochs, **each epoch** took **much longer**.
+    The model is also quite a lot heavier (200+ MB).
+  prefs: []
+  type: TYPE_NORMAL
+- en: I decided to also start measuring the Pearson correlation between predictions
+    and validation labels. This model scored a 15.2%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Neural Network with two Convolutional Layers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Since that model had done so much better, I decided I would try out a bigger
+    one. I added **another convolutional layer**, and made both a lot bigger (48 kernels
+    each).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This means the model gets to learn **more complex features** from the images.
+    However it also predictably meant my RAM almost exploded. Also, training took **a
+    lot longer** (half an hour for 15 epochs).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Results were superb. The Pearson correlation coefficient between predictions
+    and labels reached 0.21, with validation MSE reaching as low as 0.33.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s measure the network’s accuracy. Since 1 is a cat and 0 is a dog, I could
+    say “If the model predicts a value higher than some threshold t, then predict *cat*.
+    Else predict *dog*.”
+  prefs: []
+  type: TYPE_NORMAL
+- en: After trying 10 straightforward thresholds, this network had a **maximum accuracy
+    of 61%**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Even bigger Convolutional Neural Network
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Since clearly **increasing the size of the model** made it learn better, I tried
+    making both convolutional layers **a lot bigger**, with **128 filters** each.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I left the rest of the model untouched, and didn’t change the learning rate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This model finally reached a correlation of 30%! Its best **accuracy was 67%**,
+    which means it was right two thirds of the time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I still thought an even bigger model could fit the data even better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because of this, for the next training I decided to **double the fully connected
+    layers’ size** to 512 neurons.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, I did **reduce the first Convolutional Layer’s size** **by half**,
+    to just 64 filters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Usually, I’ve found I get better model performance if I make the first Convolutional
+    Layers smaller, and increase their size as they go deeper.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Luckily, my predictions were correct!
+  prefs: []
+  type: TYPE_NORMAL
+- en: The model with fully connected layers with twice the size reached a **validation
+    loss of 0.75**, and a **correlation of 42%**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Its **accuracy was 75%,** which means it predicted the right label 3 out of
+    4 times!
+  prefs: []
+  type: TYPE_NORMAL
+- en: That clearly shows it learned, even if it’s not a state-of-the-art score (let
+    alone human-defeating).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This proves that, at least in this case, **increasing the fully connected layers’
+    size worked better than increasing the quantity of convolutional filters**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I could’ve kept on trying bigger and bigger models, but convergence was already
+    taking about an hour.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Usually, there’s a **tradeoff** to be made between a model’s **size**, and **time
+    constraints**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Size limits how well the network can fit the data (a **small model** will **underfit**),
+    but I won’t wait 3 days for my model to learn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The same concerns usually apply if you have a business deadline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We’ve seen Convolutional Neural Networks are **significantly better** than vanilla
+    architectures at **image classification** tasks. We also tried different **metrics**
+    to measure **model performance** (correlation, accuracy).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We learned about the **tradeoff** between a **model’s size** (which prevents
+    underfitting) and its **convergence speed**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lastly, we used TensorFlow’s eager API to easily train a Deep Neural Network,
+    and numpy for (albeit simple) image preprocessing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For future articles, I believe we could experiment a lot more with different
+    pooling layers, filter sizes, striding and a different preprocessing for this
+    same task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Did you find this article useful? Would you have preferred to learn more about
+    anything else? Is anything not clear enough? Let me know in the comments!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Find me on [Twitter](https://www.twitter.com/strikingloo), [Medium](https://www.medium.com/@strikingloo) or [Dev.to](http://www.dev.to/strikingloo) if
+    you have any questions, or want to contact me for anything.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*If you want to become a Data Scientist, here’s my [recommended Machine Learning
+    reading list](http://www.datastuff.tech/data-science/3-machine-learning-books-that-helped-me-level-up-as-a-data-scientist/).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Luciano Strika](http://www.datastuff.tech)** is a computer science
+    student at Buenos Aires University, and a data scientist at MercadoLibre. He also
+    writes about machine learning and data on [**www.datastuff.tech**](http://www.datastuff.tech).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://www.datastuff.tech/machine-learning/convolutional-neural-networks-an-introduction-tensorflow-eager).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[3 Machine Learning Books that Helped me Level Up as a Data Scientist](/2019/05/3-machine-learning-books-helped-level-up-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Training a Neural Network to Write Like Lovecraft](/2019/07/training-neural-network-write-like-lovecraft.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Probability Distributions Every Data Scientist Should Know](/2019/07/5-probability-distributions-every-data-scientist-should-know.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,520 @@
+- en: 'Breaking Down DENSE_RANK(): A Step-by-Step Guide for SQL Enthusiasts'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/breaking-down-denserank-a-step-by-step-guide-for-sql-enthusiasts](https://www.kdnuggets.com/breaking-down-denserank-a-step-by-step-guide-for-sql-enthusiasts)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Breaking Down DENSE_RANK(): A Step-by-Step Guide for SQL Enthusiasts](../Images/2c67fa689690681dbae6745c0c6bb474.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Editor
+  prefs: []
+  type: TYPE_NORMAL
+- en: In today's data-driven world, SQL (Structured Query Language) stands as a cornerstone
+    for managing and manipulating database systems. A core component of SQL's power
+    and flexibility lies in its [window functions](/2017/12/sql-window-functions-tutorial-business-analytics.html/2),
+    a category of functions that perform calculations across sets of rows related
+    to the current row.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imagine you're looking at your data through a sliding window, and based on the
+    position and size of this window, you perform calculations or transformations
+    on your data. That's essentially what SQL window functions do. They handle tasks
+    like computation of running totals, averages, or rankings, which are challenging
+    to perform using standard SQL commands.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the most robust tools in the window functions toolbox is the ranking
+    function, specifically the `DENSE_RANK()` function. This function is a godsend
+    for data analysts, allowing us to rank different rows of data without any gaps.
+    Whether you're diving into sales figures, website traffic data, or even a simple
+    list of student test scores, `DENSE_RANK()` is indispensable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we'll delve into the inner workings of `DENSE_RANK()`, juxtaposing
+    it with its close siblings `RANK()` and `ROW_NUMBER()`, and showcasing how to
+    avoid common pitfalls that might trip you up in your SQL journey. Ready to level
+    up your data analysis skills? Let's dive in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understanding the Role of Ranking Functions in SQL
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Ranking functions in SQL are a subset of window functions that assign a unique
+    rank to each row within a result set. These rank values correspond to a specific
+    order, determined by the ORDER BY clause within the function. Ranking functions
+    are a mainstay of SQL, used extensively in data analysis for diverse tasks, such
+    as finding the top salesperson, identifying the best-performing web page, or determining
+    the highest grossing film for a particular year.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are three principal ranking functions in SQL, namely `RANK()`, `ROW_NUMBER()`,
+    and `DENSE_RANK()`. Each of these functions operates slightly differently, but
+    they all serve the common purpose of ranking data based on specified conditions.
+    `RANK()` and `DENSE_RANK()` functions have similar behavior in that they assign
+    the same rank to rows with identical values. The crucial difference lies in how
+    they handle the subsequent rank. `RANK()` skips the next rank whereas `DENSE_RANK()`
+    does not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the other hand, the [`ROW_NUMBER()`](/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science)
+    function assigns a unique row number to each row disregarding whether the order
+    by column values are identical. While `RANK()`, `DENSE_RANK()`, and `ROW_NUMBER()`
+    might seem interchangeable at a glance, understanding their nuances is pivotal
+    to effective data analysis in SQL. The choice between these functions can significantly
+    impact your results and the insights derived from your data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is DENSE_RANK() in SQL?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '`DENSE_RANK()` is a potent ranking function in SQL that assigns a unique rank
+    value within a specified partition. In crux, `DENSE_RANK()` gives non-gap rankings
+    for your data, meaning each unique value is given a distinct rank, and identical
+    values receive the same rank. Unlike its counterpart `RANK()`, `DENSE_RANK()`
+    does not skip any ranks if there is a tie between the values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To break it down, let's visualize a scenario where you have a dataset of student
+    scores, and three students have secured the same score, say, 85 marks. Using `RANK()`,
+    all three students will receive a rank of 1, but the next best score will be ranked
+    4, skipping ranks 2 and 3\. However, `DENSE_RANK()` handles this differently.
+    It will assign a rank of 1 to all three students, and the next best score will
+    receive a rank of 2, ensuring there is no gap in the ranking.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, when should one use `DENSE_RANK()`? It's particularly handy in scenarios
+    where you require continuous ranking without any gaps. Consider a use case where
+    you need to award the top three performers. If you have ties in your data, using
+    `RANK()` might lead you to miss out on awarding a deserving candidate. That's
+    when `DENSE_RANK()` comes to the rescue, ensuring all top scorers get their due
+    recognition, and the ranks are not skipped.
+  prefs: []
+  type: TYPE_NORMAL
+- en: DENSE_RANK() vs RANK() vs ROW_NUMBER() in SQL
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Understanding the differences between `DENSE_RANK()`, `RANK()`, and `ROW_NUMBER()`
+    is essential for efficient data analysis in SQL. All three functions are powerful
+    in their right, but their subtle differences can significantly impact the outcome
+    of your data analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's start with `RANK()`. This function assigns a unique rank to each distinct
+    value within a data set, with the same rank assigned to identical values. However,
+    when `RANK()` encounters a tie (identical values), it skips the next rank(s) in
+    the sequence. For instance, if you have three products with the same sales figures,
+    `RANK()` will assign the same rank to each of these products but will then skip
+    the next rank. This means that if these three products are the best-selling products,
+    they will all be assigned rank 1, but the next best-selling product will be assigned
+    rank 4, not rank 2.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, let's consider `DENSE_RANK()`. Similar to `RANK()`, `DENSE_RANK()` assigns
+    the same rank to identical values, but it does not skip any ranks. Using the previous
+    example, with `DENSE_RANK()`, the three best-selling products would still be assigned
+    rank 1, but the next best-selling product would be assigned rank 2, not rank 4.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, `ROW_NUMBER()` takes a different approach. It assigns a unique rank
+    to every row, regardless of whether the values are identical. This means even
+    if three products have the same sales figures, `ROW_NUMBER()` will assign a unique
+    number to each, making it perfect for situations where you need to assign a distinct
+    identifier to each row.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unraveling the Syntax and Usage of SQL's DENSE_RANK()
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'The syntax of `DENSE_RANK()` is straightforward. It''s used in conjunction
+    with the `OVER()` clause, partitioning the data before assigning ranks. The syntax
+    is as follows: `DENSE_RANK() OVER (ORDER BY column)`. Here, `column` refers to
+    the column by which you want to rank your data. Let''s consider an example where
+    we have a table named `Sales` with columns `SalesPerson` and `SalesFigures`. To
+    rank the salespeople by their sales figures, we would use the `DENSE_RANK()` function
+    as follows: `DENSE_RANK() OVER (ORDER BY SalesFigures DESC)`. This SQL query will
+    rank the salespeople from highest to lowest based on their sales figures.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using `DENSE_RANK()` in conjunction with `PARTITION BY` can be particularly
+    insightful. For instance, if you want to rank salespeople within each region,
+    you can partition your data by `Region` and then rank within each partition. The
+    syntax for this would be `DENSE_RANK() OVER (PARTITION BY Region ORDER BY SalesFigures
+    DESC)`. This way, you are not just getting a comprehensive ranking but also a
+    nuanced understanding of performance within each region.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Practical Examples of SQL DENSE_RANK() Function
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Apple SQL Question: Find the Top Sales Performers for Each Sales Date'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '**Table: sales_data**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Output**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Apple Top Sales Performer Solution
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '**Step 1: Understand the Data**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First, let''s understand the data in the sales_data table. It has three columns:
+    employee_id, sales_date, and total_sales. This table represents sales data with
+    information about the employee, the date of the sale, and the total sales amount.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 2: Analyze the DENSE_RANK() Function**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The query uses the DENSE_RANK() window function to rank employees based on their
+    total sales within each sales date partition. DENSE_RANK() is used to assign a
+    rank to each row within the partition of sales_date, with the ordering based on
+    total_sales in descending order.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 3: Break Down the Query Structure**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, let''s break down the structure of the query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'SELECT Clause: This specifies the columns that will be included in the final
+    result. In this case, it''s employee_id, sales_date, and total_sales.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'FROM Clause: This is where the actual data comes from. It includes a subquery
+    (enclosed in parentheses) that selects columns from the sales_data table and adds
+    a calculated column using DENSE_RANK().'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'DENSE_RANK() Function: This function is used within the subquery to assign
+    a rank to each row based on the total_sales column, and it is partitioned by sales_date.
+    This means that the ranking is done separately for each sales date.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'WHERE Clause: This filters the results to include only rows where the sales_rank
+    is equal to 1\. This ensures that only the top sales performer for each sales
+    date is included in the final result.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Step 4: Execute the Query**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When you execute this query, it will produce a result set that includes the
+    employee_id, sales_date, and total_sales for the top sales performer on each sales
+    date.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 5: Review the Output**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The final output table, named top_performers, will contain the desired information:
+    the top sales performer for each sales date, based on the DENSE_RANK() calculation'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Google SQL Question: Find, for Each Product, the Customer Who Provided the
+    Highest Review Score'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '**Table: product_reviews**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Output**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Google Highest Review Score Solution
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '**Step 1: Understand the Data**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The product_reviews table contains information about customer reviews for various
+    products. It includes columns such as customer_id, product_id, review_date, review_score,
+    and helpful_votes. This table represents data related to customer reviews, with
+    details about the customer, the product being reviewed, the date of the review,
+    the review score, and the number of helpful votes received.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 2: Analyze the DENSE_RANK() Function**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this query, the DENSE_RANK() window function is utilized to rank rows within
+    each partition defined by product_id and review_date. The ranking is determined
+    based on two criteria: review_score in descending order and helpful_votes in descending
+    order. This means that rows with higher review scores and a greater number of
+    helpful votes will be assigned lower ranks.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 3: Break Down the Query Structure**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, let''s break down the structure of the query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'SELECT Clause: Specifies the columns that will be included in the final result.
+    It includes customer_id, product_id, review_date, review_score, and helpful_votes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'FROM Clause: This part includes a subquery (enclosed in parentheses) that selects
+    columns from the product_reviews table and adds a calculated column using DENSE_RANK().
+    The calculation is performed over a partition defined by product_id and review_date,
+    and the ranking is based on both review_score and helpful_votes in descending
+    order.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'DENSE_RANK() Function: This function is applied within the subquery to assign
+    a rank to each row based on the specified criteria. The ranking is done separately
+    for each combination of product_id and review_date.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'WHERE Clause: Filters the results to include only rows where the rank_within_product
+    is equal to 1\. This ensures that only the top-ranked row for each product on
+    each review date is included in the final result.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Step 4: Execute the Query**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Executing this query will produce a result set containing the desired information:
+    customer_id, product_id, review_date, review_score, and helpful_votes for the
+    top-ranked review based on both review score and helpful votes within each product
+    and review date combination.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 5: Review the Output**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The final output table, named top_reviewers, will display the top-ranked reviews
+    for each product on each review date, considering both the review score and the
+    number of helpful votes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Avoiding Common Mistakes with DENSE_RANK() in SQL
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: While `DENSE_RANK()` is a highly useful function in SQL, it’s not uncommon for
+    analysts, especially those new to SQL, to make mistakes when using it. Let’s take
+    a closer look at some of these common errors and how to avoid them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One common mistake is misunderstanding how `DENSE_RANK()` handles null values.
+    Unlike some SQL functions, `DENSE_RANK()` treats all NULLs as identical. This
+    means that if you are ranking data where some values are NULL, `DENSE_RANK()`
+    will assign the same rank to all NULL values. Be mindful of this when working
+    with datasets that contain NULL values, and consider replacing NULLs with a value
+    that represents their meaning in your context, or excluding them depending on
+    your specific requirements.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another frequent error is overlooking the importance of partitioning when using
+    `DENSE_RANK()`. The `PARTITION BY` clause allows you to divide your data into
+    distinct segments and perform the ranking within these partitions. Neglecting
+    to use `PARTITION BY` can lead to erroneous results, particularly when you want
+    ranks to restart for different categories or groups.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Related to this is the improper use of the `ORDER BY` clause with `DENSE_RANK()`.
+    `DENSE_RANK()` assigns ranks in ascending order by default, meaning the smallest
+    value gets the rank of 1\. If you need the ranking to be in descending order,
+    you must include the `DESC` keyword in your `ORDER BY` clause. Failure to do so
+    will produce rankings that might not align with your expectations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lastly, some analysts mistakenly use `DENSE_RANK()` where `ROW_NUMBER()` or
+    `RANK()` might be more appropriate, and vice versa. As we have discussed, all
+    three of these functions have unique behaviors. Understanding these nuances and
+    selecting the correct function for your specific use-case is critical to conducting
+    accurate and effective data analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**How Mastering DENSE_RANK() Enhances Efficient Data Analysis in SQL**'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Mastering the use of `DENSE_RANK()` can significantly enhance the efficiency
+    of data analysis in SQL, particularly where rankings and comparisons are involved.
+    This function offers a nuanced approach to ranking, one that maintains a continuity
+    in the ranking scale by assigning the same rank to identical values without skipping
+    any rank numbers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is particularly helpful in analyzing large datasets, where data points
+    can often share identical values. For instance, in a sales dataset, multiple salespeople
+    may have achieved the same sales figures. `DENSE_RANK()` enables a fair ranking,
+    where each of these salespeople are assigned the same rank. Additionally, the
+    use of `DENSE_RANK()` in conjunction with `PARTITION BY` allows for focused, category-specific
+    analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This function's application becomes even more potent when dealing with null
+    values. Instead of excluding these from the ranking process, `DENSE_RANK()` treats
+    all nulls as identical and assigns them the same ranking. This ensures that even
+    though the exact values might be missing, the data points are not ignored, thereby
+    providing a more comprehensive analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Frequently Asked Questions
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Where can I practice [SQL interview questions](https://bigtechinterviews.com/sql-interview-questions/),
+    including DENSE_RANK()?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To enhance your SQL skills, we recommend practicing online on platforms such
+    as BigTechInterviews, Leetcode, or similar sites.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What does DENSE_RANK() do in SQL?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: DENSE_RANK() is a SQL window function that assigns ranks to rows of data based
+    on a specified column. It handles ties by giving them the same rank without leaving
+    any gaps in the ranking sequence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is the difference between RANK(), ROW_NUMBER(), and DENSE_RANK() in SQL?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: RANK() and ROW_NUMBER() assign ranks to data, but they handle ties differently.
+    RANK() leaves gaps in ranking for tied data, while ROW_NUMBER() assigns a unique
+    number to each row without considering ties. On the other hand, DENSE_RANK() assigns
+    identical ranks to tied data points without any gaps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to use DENSE_RANK() in the WHERE clause in SQL?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: DENSE_RANK() is a window function and cannot be directly used in the WHERE clause.
+    Instead, it can be used in combination with other functions like ROW_NUMBER()
+    or RANK(), which can then be used in the WHERE clause to filter data based on
+    rank.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Can DENSE_RANK() be used without PARTITION BY?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: No, specifying PARTITION BY is crucial for the proper functioning of DENSE_RANK().
+    Without it, all data would be treated as one group, leading to inaccurate and
+    meaningless ranking. Mastering the use of DENSE_RANK() in SQL can significantly
+    enhance your data analysis skills.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is the difference between RANK() and DENSE_RANK()?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The main distinction between RANK() and DENSE_RANK() lies in how they handle
+    ties. While RANK() leaves gaps in ranking for tied data, DENSE_RANK() assigns
+    identical ranks to tied data points without any gaps. Additionally, RANK() always
+    increments the rank number by 1 for each new row, whereas DENSE_RANK() maintains
+    a continuous ranking.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[](https://www.linkedin.com/in/john-h-24005524a/)**[John Hughes](https://www.linkedin.com/in/john-h-24005524a/)****
+    was a previous Data Analyst at Uber turned founder of SQL learning platform called
+    BigTechInterviews (BTI). He is passionate about learning new programming languages
+    and helping candidates gain the confidence and skills to pass their technical
+    interviews. He calls Denver, CO home.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Breaking Down AutoGPT](https://www.kdnuggets.com/2023/05/breaking-autogpt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Breaking Down Quantum Computing: Implications for Data Science and AI](https://www.kdnuggets.com/breaking-down-quantum-computing-implications-for-data-science-and-ai)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Step by Step Guide to Reading and Understanding SQL Queries](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Cutting Down Implementation Time by Integrating Jupyter and KNIME](https://www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide On How To Become A Data Scientist (Step By Step Approach)](https://www.kdnuggets.com/2021/05/guide-become-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Structure a Data Science Project: A Step-by-Step Guide](https://www.kdnuggets.com/2022/05/structure-data-science-project-stepbystep-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,402 @@
+- en: Scaling Computer Vision Models with Dataflow
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/07/scaling-computer-vision-models-dataflow.html](https://www.kdnuggets.com/2020/07/scaling-computer-vision-models-dataflow.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Pablo Soto](https://www.linkedin.com/in/psoto23/), Founding Partner at
+    [Pento](https://pento.ai/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/3c33a6f2dd790f9371940a8acaa33124.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will shortly introduce the Google Cloud service [Dataflow](https://cloud.google.com/dataflow),
+    and how it can be used to run predictions on millions of images in a serverless
+    way. No cluster creation, no maintenance, and you only pay for what you use. We
+    will start by providing a context on why we think this is important, a brief introduction
+    to a couple of concepts and then go directly into a use case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Scaling Machine Learning models is hard and expensive. It is costly mainly
+    for two reasons: because the infrastructure is expensive, and because your experimentation
+    pipeline is slow causing your ML team to be constantly waiting for the results.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is easy to underestimate how is expensive it is to have an ML team waiting
+    for results. Not only because of the time wasted but also because people get frustrated
+    and end up losing motivation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One way to optimize your ML experimentation process it is to build and manage
+    your own infrastructure. This is common in big companies, but this is often prohibitively
+    expensive for smaller companies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Traditional software development had similar challenges years ago, companies
+    needed to scale, mainly driven by business needs (slow services/API/website don''t
+    scale). Cloud Providers saw an opportunity to provide services that allow companies
+    to scale without upfront costs. They mainly approach this issue in two ways: services
+    that are easier to manage and serverless services. The latter were particularly
+    attractive for small companies that didn''t have a big DevOps team or much money
+    to pay for their own infrastructure.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A similar trend is happening in Machine Learning. This time is driven by the
+    scarcity and high cost of ML talent. Like SW, small companies can't invest a huge
+    amount of money to create a custom optimized infrastructure to ML, it requires
+    a team of experts to build it and maintain it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cloud Providers saw an opportunity to add value similarly by providing Serverless
+    solutions to ML. GCP, in particular, has done this for a while. GCP AI Platform
+    offers different services for each stage of an ML project. But they also count
+    on other services that can help solve ML challenges.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Dataflow?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Dataflow](https://cloud.google.com/dataflow) is a fully managed processing
+    service, that uses [Apache Beam](https://beam.apache.org/) as its programming
+    model to define and execute pipelines. Dataflow is one of the [many runners](https://beam.apache.org/documentation/runners/capability-matrix/) that
+    Beam supports.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Apache Beam provides a portable API layer for building sophisticated data-parallel
+    processing pipelines that may be executed across a diversity of execution engines,
+    or runners.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Dataflow in particular has some interesting features:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fully managed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Autoscaling
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Easy implementation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: What is Apache Beam?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As mentioned above, Beam is a programming model used to define and execute a
+    processing pipeline. It provides an interface to create a processing pipeline
+    that can be executed in multiple environments (such as Spark, Hadoop, Dataflow).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Use case: Extracting image features with a pre-trained ResNet50'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'As Computer Vision engineers, we often need to extract embeddings using a CNN
+    model. Here we will present how to build a Dataflow pipeline that generates image
+    feature embedding using a pre-trained ResNet50\. Our pipeline will consist of
+    3 simple steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Load images
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Extract features
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Store features
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: To implement our pipeline we are going to use the Apache Beam Python SDK, Keras,
+    Pillow, and Click. Because we will use non-python dependencies we have to structure
+    our code as it is described [here](https://beam.apache.org/documentation/sdks/python-pipeline-dependencies/#nonpython).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The first thing we need to do is create a pipeline configuration:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you can see the options change depending on whether we are executing the
+    pipeline locally or on Dataflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Then we need to create a [Pipeline](https://beam.apache.org/documentation/programming-guide/#creating-a-pipeline):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`p` is our pipeline, to add new steps to the pipeline use the operator `|` as
+    follow:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'If you want to explicitly name the step you can use the operator `>>`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And now we need to specify the steps for our pipeline. There are multiple ways
+    to implement it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Built-in implementations: BigQuery connector, ReadFile, etc.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Custom implementation: Map, Filter, ParDo'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here you can see we have added the three steps mentioned above. We are loading
+    the paths to the images from a CSV file in Google Cloud, then we load the images,
+    extract their embedding, and store them in Google Cloud Storage.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In all the steps in our pipeline we expect to receive one input and return one
+    output. To apply these type steps we must use the method `beam.Map`. Alternatively,
+    If you are dealing with steps that could potentially receive/return zero or more
+    inputs/outputs, you could use `beam.ParDo`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that the pipeline is defined, let's take a look at implementations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loading images
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: At this step, we need to download the image from GCS, load it as a Pillow Image,
+    resize it, and convert it into a numpy array object. The reason why we download
+    and resize in a single step, is that we want to reduce the data transferred between
+    steps in the pipeline, thus decreasing the cost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Beam provides a set of [built-in Connector](https://beam.apache.org/documentation/io/built-in/) to
+    handle I/O.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Extracting features
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this step, we need to load the ResNet model and run the predictions. To avoid
+    loading the model multiple times on the same worker, a singleton wrapper was added
+    to the `FeatureExtractor` class. Once we extract the embedding, we add it to the
+    item dictionary, and as we do not longer need to have the full image loaded in
+    memory, we remove it from dictionary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Storing features
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that we have the embedding we just need to store it in GCS.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Dataflow allows you to specify the machine type, number of workers, objective,
+    etc, providing a lot of flexibility to find the right configuration for the task
+    at hand. You can check all the options [here](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#setting-other-cloud-dataflow-pipeline-options).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once you run your Dataflow pipeline you will see logs about the status of the
+    execution in your machine. Another alternative is to use Dataflow web UI. You
+    can learn more about it [on its doccumentation](https://cloud.google.com/dataflow/docs/guides/using-monitoring-intf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Dataflow UI](../Images/7cf31c9576737830d5cefcbb9631a793.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can find the [full code here](https://github.com/pento-group/dataflow-demo).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Apache Beam also supports branching your pipeline. Let''s say you want to create
+    2D visualizations of your embedding, you can do this by branching your pipeline
+    in the following way:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: This allows Beam to execute `store` and `reduce_dim` independently, providing
+    more flexibility to optimize the pipeline, and therefore improving its performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Scale
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Dataflow provides [multiple configurations](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#setting-other-cloud-dataflow-pipeline-options) that
+    allow you to customize the way you want to scale, in a really easy way. By default,
+    it chooses the values that improve performance. During the execution itself, Dataflow
+    changes the configuration to optimize the performance, changing, for instance,
+    the number of workers, the machine type, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can let Dataflow find out what is the best configuration each time you
+    run the pipeline. But if you already know what your jobs need, such as the amount
+    of RAM, or whether it is CPU intensive, what is the maximum throughput supported
+    by your external services (i.e.: your DB or API capacity), it is better to specify
+    this information directly. This will help Dataflow converge faster into the right
+    configuration, speeding up the executing and reducing costs.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dataflow should be enough to cover most of small/medium size companies requirements
+    to scale. To have a number as reference, Dataflow is able to execute the use case
+    presented above at rate of 5k images per seconds, using up to 1k workers. Here
+    it is the list of [Dataflow quotas](https://cloud.google.com/dataflow/quotas),
+    the main one being the 1k workers limit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Apache Beam is a simple programming model that allows you to execute ML steps
+    in a structured way and running it in different environments. One of these environments
+    is Dataflow, a Beam execution engine that is fully managed, supports autoscaling,
+    and allows us to optimize for different objectives.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dataflow is a good tool to run your ML models at scale without too much investment
+    upfront or maintenance. It provides a simple API and has an active OSS community.
+    In this article, we show how simple it is to build an image embedding extractor
+    using Apache Beam, and scale to millions of images. In this way you can save hundreds
+    of dollars without worring about the infrastructure, while speeding up your experimentation
+    process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Resources
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Dataflow runner documentation](https://beam.apache.org/documentation/runners/dataflow/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Dynamic work rebalancing in Dataflow](https://cloud.google.com/blog/products/gcp/no-shard-left-behind-dynamic-work-rebalancing-in-google-cloud-dataflow)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Apache Beam Python SDK Quickstart](https://beam.apache.org/get-started/quickstart-py/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Python examples:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Apache Beam Python SDK code examples](https://github.com/apache/beam/tree/master/sdks/python/apache_beam/examples)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GCP VisionML integration for Apache Beam](https://github.com/apache/beam/blob/master/sdks/python/apache_beam/ml/gcp/visionml.py)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Pablo Soto](https://www.linkedin.com/in/psoto23/)** is a Founding Partner
+    at **[Pento](https://pento.ai/)**, machine learning specialists.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://pento.ai/blog/scaling-computer-vision-dataflow). Reposted
+    with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[6 Easy Steps to Implement a Computer Vision Application Using Tensorflow.js](/2020/06/6-easy-steps-implement-computer-vision-application-tensorflow-js.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Crop Disease Detection Using Machine Learning and Computer Vision](/2020/06/crop-disease-detection-computer-vision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Auto Rotate Images Using Deep Learning](/2020/07/auto-rotate-images-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[DINOv2: Self-Supervised Computer Vision Models by Meta AI](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Discover the World of Computer Vision: Introducing MLM''s Latest…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Applications of Computer Vision](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Things You Need To Know About Data Management And Why It Matters…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News March 9, 2022: Build a Machine Learning Web App in 5…](https://www.kdnuggets.com/2022/n10.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

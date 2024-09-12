@@ -1,0 +1,345 @@
+- en: How to Find Weaknesses in your Machine Learning Models
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/09/weaknesses-machine-learning-models.html](https://www.kdnuggets.com/2021/09/weaknesses-machine-learning-models.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Michael Berk](https://www.linkedin.com/in/michael-berk-48783a146/), Data
+    Scientist at Tubi**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Any time you simplify data using a summary statistic, you lose information.
+    Model accuracy is no different. When simplifying your model’s fit to a summary
+    statistic, you lose the ability to determine where your performance is lowest/highest
+    and why.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine Learning Accuracy Performance Deep Learning Model Drift Bias FreaAI
+    Frea ai IBM data slicing](../Images/f4d29e3365fe6c2bbed992bac867cd27.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 1: example of areas of the data where model performance is low. Image
+    by author.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To combat this problem, researchers at IBM recently developed a method called [FreaAI](https://arxiv.org/pdf/2108.05620.pdf) that
+    identifies interpretable data slices where a given model has poor accuracy. From
+    these slices, the engineer can then take the necessary steps to ensure the model
+    will perform as intended.
+  prefs: []
+  type: TYPE_NORMAL
+- en: FreaAI is unfortunately not open source, but many of the concepts can be easily
+    implemented in your favorite tech stack. Let’s dive in…
+  prefs: []
+  type: TYPE_NORMAL
+- en: Technical TLDR
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'FreaAI finds slices in testing data with statistically significant low performance.
+    They are returned to the engineer for examination. The method steps are the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Use Highest Prior Density (HPD) methods to find univariate data slices with
+    low accuracy. **These univariate data slices reduce the search space and show
+    where our data are more likely to be problematic.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Use decisions trees to find bivariate data slices with low accuracy. **These
+    bivariate data slices reduce the search space for categorical predictors and 2nd-order
+    interactions to show where our data are more likely to be problematic.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Remove all data slices that don’t meet certain heuristics.** The main two
+    are minimal support of the testing set and statistically significant increase
+    in error.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: But, what’s actually going on?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: That was a lot of jargon, so let’s slow down a bit a really understand what’s
+    going on…
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. The Problem
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: When developing a model, we often use “accuracy” measures to determine fit.
+    One example is Mean Squared Error, which is used in linear regression and defined
+    in figure 2.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine Learning Accuracy Performance Deep Learning Model Drift Bias FreaAI
+    Frea ai IBM data slicing](../Images/e8f1354a8ec32a3f741874c6a5b525cf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 2: Mean Squared Error formula. Image by author — [src](https://www.probabilitycourse.com/chapter9/9_1_5_mean_squared_error_MSE.php).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: But this averaged error only tells us how well were doing **on average**. We
+    don’t know if we’re performing really well on certain areas of our data or really
+    poorly on other areas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a long-standing problem in predictive modeling that has recently gotten
+    lots of attention.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. The Solution
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: One solution is FreaAI. The method was developed at IBM and looks to determine
+    where in our data our model underperforms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are two main steps. The first involves creating data slices and the second
+    involves determining if the model underperforms in those data slices. The output
+    of FreaAI is a set of “locations” in our data where model performance is low.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2.1\. Data Slicing**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Combinatorial Testing (CT) is a framework that sequentially looks at all groups
+    of predictors to find areas of poor performance. For example, if we have two categorical
+    predictors, color and shape, we’d look at all possible combinations and see where
+    accuracy drops.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, leveraging combinatorial testing on large datasets is computationally
+    impossible — with each new column we see an exponential increase in the number
+    of combinations required. So, we need to define a method that helps us search
+    through features to find potential areas of inaccuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine Learning Accuracy Performance Deep Learning Model Drift Bias FreaAI
+    Frea ai IBM data slicing](../Images/94461909e59d19dc5df2267481024fb4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 3: example of a 50% highest density region (HDR) in blue. Image by author
+    — [src](https://mathematica.stackexchange.com/questions/173282/computing-credible-region-highest-posterior-density-from-empirical-distributio).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first method leveraged in FreaAI uses something called [Highest Density
+    Regions (HDR)](https://stats.stackexchange.com/questions/148439/what-is-a-highest-density-region-hdr) (figure
+    3). In short, HDR finds the smallest area of a numeric feature where a certain
+    proportion of the data can be found i.e. high-density areas. In figure 3, the
+    area is differentiated by the horizontal blue dotted line — 50% of our data are
+    above that line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: From there we iteratively decrease this range by a value of ε (default to 0.05)
+    and look for increases in accuracy. **If the accuracy does increase on a given
+    iteration, we know that the model did not perform well in the area between the
+    prior iteration and current iteration.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: To determine areas of poor fit on with numeric predictors, we iteratively run
+    this HDR method for all predictors in our testing set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pretty cool, right?
+  prefs: []
+  type: TYPE_NORMAL
+- en: The second method leverages decision trees to handle all non-numeric predictors
+    as well as combinations of two features. In short, we fit a decision tree and
+    look to find what splits of those features minimized accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine Learning Accuracy Performance Deep Learning Model Drift Bias FreaAI
+    Frea ai IBM data slicing](../Images/9fbe22ea608bbee93f4f618bc932facf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 4: example of a decision tree on a continues univariate predictor “age”.
+    Image by author.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In figure 4, each *decision node* (blue) is a split on our feature(s) and each *end
+    node* (number) is the accuracy for that split. By fitting these trees, we can
+    really reduce the search space and more quickly find areas of poor performance. **Furthermore,
+    because trees are so robust for many different kinds of data, we can run this
+    on categorical predictors or more than one predictors to capture interaction effects.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is decision tree approach is repeated for all combinations of features,
+    as well as single features that were not numeric.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2.2\. Heuristics for Data Slicing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now up to here, we’ve only concerned ourselves with developing data slices
+    using accuracy, but there are other heuristics that help us find **useful** data
+    slices:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Statistically Significant**: to ensure that we’re only looking at data slices
+    that have meaningful drops in accuracy, we only only keep slices with performance
+    4% lower than bottom bound of our error’s confidence interval. By doing so, we
+    can state with probability *α* that our data slices have higher error.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Explainable**: we also want to ensure that the problematic areas found can
+    be acted upon, so we only look at two or three features when creating combinations.
+    By limiting to low-order interactions, there’s a higher chance that our engineers
+    can develop solutions.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Minimal Support**: finally, the data slice must have enough error to be worth
+    investigating. We required that there must be at least 2 misclassifications or
+    it must cover 5% of the testing error — whichever value is larger is the criteria
+    we go with.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It’s also interesting to note that you can tailor other heuristics to your business
+    needs. Misclassifying some users is worse than others, so you can build that in
+    to your data slicing criteria — think [precision/recall tradeoff](https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Summary and Takeaways
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: So, there you have it — FreaAI in all its glory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Again, FreaAI is not open source, but hopefully it will be released to the public
+    in the future. In the meantime, you can apply the frameworks we talked about to
+    your own predictive models and determine where there’s systematic underperformance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3.1\. Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To recap, FreeAI uses HDR and decision trees to reduce the search space for
+    our predictors. It then iteratively looks at individual features as well as combinations
+    to determine where there’s low performance. These low-performance areas have some
+    extra heuristics that ensure the findings are actionable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3.2\. Why should you care?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Well, first this framework helps engineers identify model weaknesses. When those
+    weaknesses are found, they can be (hopefully) corrected, thereby improve the forecasts.
+    This gain is especially enticing for black box models, such as neural nets, because
+    there are no model coefficients.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By isolating areas of the data that underperform, we get a window into the
+    black box.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: FreaAI also hold interesting potential for other applications. One example is
+    identifying model drift, which is what happens when a trained model becomes less
+    and less effective over time. A [hypothesis testing framework to determine model
+    drift](https://arxiv.org/pdf/2108.05319.pdf) was just released by IBM.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another interesting application would be determining model bias. In this case,
+    bias is the concept of being unfair, such as refusing to give someone a loan based
+    on their gender. By looking at different data splits where model performance is
+    low, you can stumble upon areas of bias.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Thanks for reading! I’ll be writing 37 more posts that bring academic research
+    to the DS industry. Check out my comments for links to the main source for this
+    post as well as some useful resources.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Michael Berk](https://www.linkedin.com/in/michael-berk-48783a146/)**
+    (**[https://michaeldberk.com/](https://michaeldberk.com/)**) is a Data Scientist
+    at Tubi.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/how-to-find-weaknesses-in-your-machine-learning-models-ae8bd18880a3).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Antifragility and Machine Learning](/2021/09/antifragility-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Adventures in MLOps with Github Actions, Iterative.ai, Label Studio and NBDEV](/2021/09/adventures-mlops-github-actions-iterative-ai-label-studio-and-nbdev.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Math 2.0: The Fundamental Importance of Machine Learning](/2021/09/math-fundamental-importance-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,640 @@
+- en: Building a Recommender System, Part 2
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/07/building-recommender-system-part-2.html](https://www.kdnuggets.com/2019/07/building-recommender-system-part-2.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By Matthew Mahowald, [Open Data Group](https://www.opendatagroup.com/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In a previous post, we looked at neighborhood-based methods for building recommender
+    systems. This post explores an alternative technique for collaborative filtering
+    using latent factor models. The technique we’ll use naturally generalizes to deep
+    learning approaches (such as autoencoders), so we’ll also implement our approach
+    using Tensorflow and Keras.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Cinema doors](../Images/62ea85463bb6b53abb44cb4d031ff0c4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The Dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We’ll re-use the same MovieLens dataset for this post that we worked on last
+    time for our collaborative filtering model. [GroupLens](https://grouplens.org)
+    has [made the dataset available here](https://grouplens.org/datasets/movielens/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First, let’s load in this data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s take a quick look at the top 20 most-viewed files:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '|  | title | genre |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| movieid |  |  |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2858 | American Beauty (1999) | Comedy&#124;Drama |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 260 | Star Wars: Episode IV - A New Hope (1977) | Action&#124;Adventure&#124;Fantasy&#124;Sci-Fi
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1196 | Star Wars: Episode V - The Empire Strikes Back… | Action&#124;Adventure&#124;Drama&#124;Sci-Fi&#124;War
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1210 | Star Wars: Episode VI - Return of the Jedi (1983) | Action&#124;Adventure&#124;Romance&#124;Sci-Fi&#124;War
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 480 | Jurassic Park (1993) | Action&#124;Adventure&#124;Sci-Fi |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2028 | Saving Private Ryan (1998) | Action&#124;Drama&#124;War |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 589 | Terminator 2: Judgment Day (1991) | Action&#124;Sci-Fi&#124;Thriller
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2571 | Matrix, The (1999) | Action&#124;Sci-Fi&#124;Thriller |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1270 | Back to the Future (1985) | Comedy&#124;Sci-Fi |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 593 | Silence of the Lambs, The (1991) | Drama&#124;Thriller |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1580 | Men in Black (1997) | Action&#124;Adventure&#124;Comedy&#124;Sci-Fi
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1198 | Raiders of the Lost Ark (1981) | Action&#124;Adventure |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 608 | Fargo (1996) | Crime&#124;Drama&#124;Thriller |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2762 | Sixth Sense, The (1999) | Thriller |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 110 | Braveheart (1995) | Action&#124;Drama&#124;War |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2396 | Shakespeare in Love (1998) | Comedy&#124;Romance |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1197 | Princess Bride, The (1987) | Action&#124;Adventure&#124;Comedy&#124;Romance
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 527 | Schindler’s List (1993) | Drama&#124;War |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1617 | L.A. Confidential (1997) | Crime&#124;Film-Noir&#124;Mystery&#124;Thriller
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1265 | Groundhog Day (1993) | Comedy&#124;Romance |'
+  prefs: []
+  type: TYPE_TB
+- en: Preprocessing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Collaborative filtering models typically work best when each item has a decent
+    number of ratings. Let’s restrict to only the 500 most popular films (as determined
+    by number of ratings). We’ll also reindex by `movieid` and `userid`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, [as mentioned in the previous post](/2019/04/building-recommender-system.html),
+    we should normalize our rating data. We create an adjusted rating by subtracting
+    off the overall mean rating, the mean rating for each item, and then the mean
+    rating for each user.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This produces a “preference rating” ![\tilde{r}_{u,i}](../Images/52a9c49297042d77a17cce1bba397ac4.png)
+    defined by
+  prefs: []
+  type: TYPE_NORMAL
+- en: '!['
+  prefs: []
+  type: TYPE_NORMAL
+- en: \tilde{r}_{u,i} := r_{u,i} - \bar{r} - \bar{r}_{i} - \bar{r}_{u}
+  prefs: []
+  type: TYPE_NORMAL
+- en: '](../Images/7e596563eff0b2daefe4be7079d610a7.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The intuition for ![\tilde{r}](../Images/15faa8d8c7bbf110f5cdc90f3df75b49.png)
+    is that ![\tilde{r} = 0](../Images/b0fdf67af6503f0804a125e9413b19a8.png) means
+    that user ![u](../Images/c1155b10039d460302206caf78e70b84.png)’s rating for item
+    ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png) is exactly what we would
+    guess if all we knew was the average overall ratings, item ratings, and user ratings.
+    Any values above or below 0 indicate deviations in preference from this baseline.
+    To distinguish ![\tilde{r}](../Images/15faa8d8c7bbf110f5cdc90f3df75b49.png) from
+    the raw rating ![r](../Images/dc16d9309e95f2dd60bba8a2d99d78b4.png), I’ll refer
+    to the former as the user’s *preference* for item ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png)
+    and the latter as the user’s *rating* of item ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s build the preference data using ratings for the 500 most popular films:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output of this block of code is two objects: `prefs`, which is a dataframe
+    of preferences indexed by `movieid` and `userid`; and `pref_matrix`, which is
+    a matrix whose ![(i,j)](../Images/eb0b8c3c59dc87afe6d3a1ddaa4dd520.png)th entry
+    corresponds to the rating user ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png)
+    gives movie ![j](../Images/4b5e5503442fdfa2029fcc9208d6ca1a.png) (i.e. the columns
+    are movies and each row is a user). In cases where the user hasn’t rated the item,
+    this matrix will have a `NaN`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The maximum and minimum preferences in this data are 3.923 and -4.643, respectively.
+    Next, we’ll build an actual model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Latent-factor collaborative filtering
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'At this stage, we’ve constructed a matrix ![P](../Images/7a36f354985d6a6caf213c0934bdc243.png)
+    (called `pref_matrix` in the Python code above). The idea behind latent-factor
+    collaborative filtering models is that each user’s preferences can be predicted
+    by a small number of latent factors (usually much smaller than the overall number
+    of items available):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '!['
+  prefs: []
+  type: TYPE_NORMAL
+- en: \tilde{r}_{u,i} \approx f_{i}(\lambda_{1}(u), \lambda_{2}(u), \ldots, \lambda_{n}(u))
+  prefs: []
+  type: TYPE_NORMAL
+- en: '](../Images/95ea1e92b71a45cf8e1b2d3317fd764b.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Latent factor models thus require answering two related questions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For a given user ![u](../Images/c1155b10039d460302206caf78e70b84.png), what
+    are the corresponding latent factors ![\lambda_{k}(u)](../Images/7182e3b55bb891245c408f09bac9c180.png)?
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For a given collection of latent factors, what is the function ![f_{i}](../Images/f105567a69855b0e0e3fc7a24547c4e4.png),
+    i.e., what is the relationship between the latent factors and a user’s preferences
+    for each item?
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'One approach to this problem is to attempt to solve for both the ![f_{i}](../Images/f105567a69855b0e0e3fc7a24547c4e4.png)’s
+    and ![\lambda_{k}](../Images/f5faabc2a6741e3731804ea32acf6217.png)’s by making
+    the simplifying assumption that each of these functions is linear:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '!['
+  prefs: []
+  type: TYPE_NORMAL
+- en: \lambda_{k}(u) = \sum_{i} a_{i} \tilde{r}_{u,i}
+  prefs: []
+  type: TYPE_NORMAL
+- en: '](../Images/c1594024dae526ec375179d67d522f5d.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '!['
+  prefs: []
+  type: TYPE_NORMAL
+- en: f_{i} = \sum_{k} b_{k} \lambda_{k}
+  prefs: []
+  type: TYPE_NORMAL
+- en: '](../Images/f8b09f43d5e1f4139f75aaacc54cd15b.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Taken over all items and users, this can be re-written as a linear algebra
+    problem problem: find matrices ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png)
+    and ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png) such that'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![ P \approx F  \Lambda  P, ](../Images/03898dea92e52495175d8b468b0cf8a4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: where ![P](../Images/7a36f354985d6a6caf213c0934bdc243.png) is the matrix of
+    preferences, ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png) is the
+    linear transformation that projects a user’s preferences onto latent variable
+    space, and ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png) is the linear
+    transformation that reconstructs the user’s ratings from that user’s representation
+    in latent variable space.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The product ![F \Lambda](../Images/57fc7a9b4718945cec840bfd8965af63.png) will
+    be a square matrix. However, by choosing a number of latent variables strictly
+    less than the number of items, this product will necessarily not be full rank.
+    In essence, we are solving for ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png)
+    and ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png) such that the product
+    ![F \Lambda](../Images/57fc7a9b4718945cec840bfd8965af63.png) best approximates
+    the identity transformation *on the preferences matrix* ![P](../Images/7a36f354985d6a6caf213c0934bdc243.png).
+    Our intuition (and hope) is that this will reconstruct accurate preferences for
+    each user. (We will tune our loss function to ensure that this is in fact the
+    case.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model implementation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'As advertised, we’ll be building our model in Keras + Tensorflow so that we’re
+    well-positioned for any future generalization to deep learning approaches. This
+    is also a natural approach to the type of problem we’re solving: the expression'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '!['
+  prefs: []
+  type: TYPE_NORMAL
+- en: P \approx F \Lambda P
+  prefs: []
+  type: TYPE_NORMAL
+- en: '](../Images/a7661198c171c6721f2751bc69e02d3c.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: can be thought of as describing a two-layer dense neural network whose layers
+    are defined by ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png) and ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png)
+    and whose activation function is just the identity map (i.e. the function ![\sigma(x)
+    = x](../Images/80b0e6e0e12ab684d6e97147cadeac6b.png)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, let’s import the packages we’ll need and set the encoding dimension (the
+    number of latent variables) we want for this model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, define the model itself as a composition of an “encoding” layer (projection
+    onto latent variable space) and a “decoding” layer (recovery of preferences from
+    latent variable representation). The recommender model itself is just a composition
+    of these two layers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Custom loss functions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: At this point, we could train our model directly to just reproduce its inputs
+    (this is essentially a very simple autoencoder). However, we’re actually interested
+    in picking ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png) and ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png)
+    that correctly fill in *missing* values. We can do this through a careful application
+    of masking and a custom loss function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Recall that `prefs_matrix` currently consists largely of NaNs—in fact, there’s
+    only one zero value in the whole dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In `prefs_matrix`, we can fill any missing values with zeros. This is a reasonable
+    choice because we’ve already performed some normalization of the ratings, so 0
+    represents our naive guess for a user’s preference for a given item. Then, to
+    create training data, use `prefs_matrix` as the target and selectively mask nonzero
+    elements in `prefs_matrix` to create the input (“forgetting” that particular user-item
+    preference). We can then build a loss function which strongly penalizes incorrectly
+    guessing the “forgotten” values, i.e., one which is trained to construct novel
+    ratings from known ratings. Here’s our function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: By default, the loss this returns is a 20%-80% weighted sum of the overall MSE
+    and the MSE of just the missing ratings. This loss function requires the input
+    (with missing preferences), the predicted preferences, and the true preferences.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At least as of the date of this post, Keras and TensorFlow don’t currently support
+    custom loss functions with three inputs (other frameworks, such as PyTorch, do).
+    We can get around this fact by introducing a “dummy” loss function and a simple
+    wrapper model. Loss functions in Keras require only two inputs, so this dummy
+    function will ignore the “true” values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, our wrapper model. The idea here is to use a lambda layer (‘`loss`’) to
+    apply our custom loss function (`'lambda_mse'`), and then use our custom loss
+    function for the actual optimization. Using Keras’s functional API makes it very
+    easy to wrap the recommender we already defined with this simple wrapper model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Training
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To generate training data for our model, we’ll start with the preferences matrix
+    `pref_matrix` and randomly mask (i.e. set to 0) a certain fraction of the known
+    ratings for each user. Structuring this as a generator allows us to make an essentially
+    unlimited collection of training data (though in each case, the output is constrained
+    to be drawn from the same fixed set of known ratings). Here’s the generator function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s check that this generator’s masking functionality is working correctly:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To complete the story, we’ll define a training function that calls this generator
+    and allows us to set a few other parameters (number of epochs, early stopping,
+    etc):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Recall that ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png) and ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png)
+    are ![500 \times 25](../Images/d6a778a96473fa10c2db7ceb09d870b7.png) and ![25
+    \times 500](../Images/580ce03d74e594872245387cc94bd042.png) dimensional matrices,
+    respectively, so this model has ![2 \times 25 \times 500 = 25000](../Images/6eef3c56cc0d237518afec6f983426c7.png)
+    parameters. A good rule of thumb with linear models is to have at least 10 observations
+    per parameter, meaning we’d like to see 250,000 individual user ratings vectors
+    during training. We don’t have nearly enough users for that, though, so for this
+    tutorial, we’ll skimp by quite a bit—let’s settle for a maximum of 12,500 observations
+    (stopping the model earlier if loss doesn’t improve).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: The output of this training process (at least on my machine) gives a loss of
+    0.6321, which means that on average we’re within about 0.7901 units of a user’s
+    true preference when we haven’t seen it before (recall that this loss is 80% from
+    unknown preferences, and 20% from the knowns). Preferences in our data range between
+    -4.64 and 3.92, so this is not too shabby!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Predicting ratings
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To generate a prediction with our model, we have to call the `recommender` model
+    we trained earlier after normalizing the ratings along the various dimensions.
+    Let’s assume that the input to our predict function will be a dataframe indexed
+    by (`movieid`, `userid`), and with a single column named `"rating"`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s test it out! Here’s some sample ratings for a single fake user, who really
+    likes Star Wars and Jurassic Park and doesn’t like much else:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| userid | 1 | title |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| movieid |  |  |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 260 | 4.008329 | Star Wars: Episode IV - A New Hope (1977) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1198 | 3.942005 | Raiders of the Lost Ark (1981) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1196 | 3.860034 | Star Wars: Episode V - The Empire Strikes Back… |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1148 | 3.716259 | Wrong Trousers, The (1993) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 904 | 3.683811 | Rear Window (1954) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2019 | 3.654374 | Seven Samurai (The Magnificent Seven) (Shichin… |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 913 | 3.639756 | Maltese Falcon, The (1941) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 318 | 3.637150 | Shawshank Redemption, The (1994) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 745 | 3.619762 | Close Shave, A (1995) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 908 | 3.608473 | North by Northwest (1959) |'
+  prefs: []
+  type: TYPE_TB
+- en: Interestingly, even though the user gave *Star Wars* a 5 as input, the model
+    only predicts a rating of 4.08 for *Star Wars*. But it does recommend *the Empire
+    Strikes Back* and *Raiders of the Lost Ark*, which seem like reasonable recommendations
+    for those preferences.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now let’s reverse this user’s ratings for Star Wars and Jurassic Park, and
+    see how the ratings change:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| userid | 1 | title |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| movieid |  |  |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2019 | 3.532214 | Seven Samurai (The Magnificent Seven) (Shichin… |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 50 | 3.489284 | Usual Suspects, The (1995) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2858 | 3.480124 | American Beauty (1999) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 745 | 3.466157 | Close Shave, A (1995) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1148 | 3.415981 | Wrong Trousers, The (1993) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1197 | 3.415527 | Princess Bride, The (1987) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 527 | 3.386785 | Schindler’s List (1993) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 750 | 3.342154 | Dr. Strangelove or: How I Learned to Stop Worr… |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1252 | 3.338330 | Chinatown (1974) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1207 | 3.335204 | To Kill a Mockingbird (1962) |'
+  prefs: []
+  type: TYPE_TB
+- en: Note that *Seven Samurai* features prominently in both lists. In fact, *Seven
+    Samurai* has the highest average rating of any film in this dataset (at 4.56),
+    and looking at the top 20 or top 50 recommended films for both users has even
+    more common films showing up that happen to be very highly rated overall.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusions and further reading
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The latent factor representation we’ve built can also be thought of as defining
+    an embedding of *items* into some lower-dimensional space, as opposed to an embedding
+    of *users*. This lets us do some interesting things—for example, we can compare
+    distances between each item’s vector representation to understand how similar
+    or different two films are. Let’s compare *Star Wars* against *The Empire Strikes
+    Back* and *American Beauty*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that 33 is the column index corresponding to *Star Wars* (different from
+    its `movieid` of 260), 144 is the column index corresponding to *Empire Strikes
+    Back*, and 401 is the column index of *American Beauty*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: Comparing the distances, we see that with a distance of 0.209578, *Star Wars*
+    and *Empire Strikes Back* are much closer in latent factor space than *Star Wars*
+    and *American Beauty* are.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With a little bit of further work, it’s also possible to answer other questions
+    in latent factor space like “which film is least similar to *Star Wars*?”
+  prefs: []
+  type: TYPE_NORMAL
+- en: Variations on this type of technique lead to autoencoder-based recommender systems.
+    For futher reading, there’s also a family of related models known as matrix factorization
+    models, which can incorporate both item and user features as well as the raw ratings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Building a Recommender System](/2019/04/building-recommender-system.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[K-Means Clustering: Unsupervised Learning for Recommender Systems](/2019/04/k-means-clustering-unsupervised-learning-recommender-systems.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building Recommender systems with Azure Machine Learning service](/2019/05/recommender-systems-azure-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a Recommender System for Amazon Products with Python](https://www.kdnuggets.com/2023/02/building-recommender-system-amazon-products-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Recommendation System with Hugging Face Transformers](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How a Level System can Help Forecast AI Costs](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learning System Design: Top 5 Essential Reads](https://www.kdnuggets.com/learning-system-design-top-5-essential-reads)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

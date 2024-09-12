@@ -1,0 +1,372 @@
+- en: Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/building-a-formula-1-streaming-data-pipeline-with-kafka-and-risingwave](https://www.kdnuggets.com/building-a-formula-1-streaming-data-pipeline-with-kafka-and-risingwave)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](../Images/61bb9011d7231856a58a2c22fc62f979.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Real-time data has arrived and is here to stay. There’s no doubt that every
+    day the amount of streaming data increases exponentially and we need to find the
+    best way to extract, process, and visualize it. For instance, each Formula 1 car
+    produces around 1.5 terabytes of data through a race weekend ([source](https://www.racecar-engineering.com/articles/data-analytics-managing-f1s-digital-gold/#:~:text=Each%20Formula%201%20car%20carries,data%20throughout%20a%20race%20weekend.)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we are not going to stream the car’s data, but we will be streaming,
+    processing, and visualizing the race’s data simulating we’re live on a Formula
+    1 race. Before we get started, it’s important to mention that this article will
+    not be focused on what each technology is, but on how to implement them in a streaming
+    data pipeline, so some knowledge about Python, Kafka, SQL, and data visualization
+    is expected.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prerequisites
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '**F1 Source Data**: The Formula 1 data used in this data streaming pipeline
+    was downloaded from Kaggle and can be found as [Formula 1 World Championship (1950
+    - 2023)](https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020?select=lap_times.csv).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Python:** Python 3.9 was used to build this pipeline, but any version greater
+    than 3.0 should work. Further details on how to download and install Python can
+    be found on the [official Python website](https://www.python.org/downloads/).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Kafka:** Kafka is one of the main technologies used in this streaming pipeline,
+    so it’s important to have it installed before you get started. This streaming
+    pipeline was built on MacOS, so brew was used to install Kafka. More details can
+    be found on the [official brew website](https://formulae.brew.sh/formula/kafka).
+    We also need a Python library to use Kafka with Python. This pipeline uses kafka-python.
+    Installation details can be found on their [official website](https://kafka-python.readthedocs.io/en/master/).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**RisingWave (Streaming Database):** There are multiple streaming databases
+    available in the market, but the one used in this article and one of the best
+    is RisingWave. Getting started with RisingWave is pretty simple and it only takes
+    a couple of minutes. A full tutorial on how to get started can be found on their
+    [official website](https://www.risingwave.dev/docs/current/get-started/).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Grafana Dashboard:** Grafana was used in this streaming pipeline to visualize
+    the Formula 1 data in real time. Details on how to get started can be found on
+    [this website](https://www.risingwave.dev/docs/current/grafana-integration/).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Streaming the Source Data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Now that we have all the prerequisites, it’s time to start building the Formula
+    1 data streaming pipeline. The source data is stored in a JSON file, so we have
+    to extract it and send it through a Kafka topic. To do so, we will be using the
+    below Python script.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Setting up Kafka
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The Python script to stream the data is all set to start streaming the data,
+    but the Kafka topic F1Topic is not created yet, so let’s create it. First, we
+    need to initialize Kafka. To do so, we have to start Zookeper, then start Kafka,
+    and finally create the topic with the below commands. Remember that Zookeper and
+    Kafka should be running in a separate terminal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](../Images/1d8a37dabe5fded7b0985f49b670a78b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Setting up the Streaming Database RisingWave
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Once RisingWave is installed, it’s very easy to start it. First, we need to
+    initialize the database and then we have to connect to it via the Postgres interactive
+    terminal psql. To initialize the streaming database RisingWave, we have to execute
+    the below command.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: The above command launches RisingWave in playground mode, where data is temporarily
+    stored in memory. The service is designed to automatically terminate after 30
+    minutes of inactivity, and any data stored will be deleted upon termination. This
+    method is recommended for tests only, [RisingWave Cloud](https://www.risingwave.dev/cloud/intro/)
+    should be used for production environments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After RisingWave is up and running, it’s time to connect to it in a new terminal
+    via the Postgress interactive terminal with the below command.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](../Images/c816d777ef84b8c406f0b7c4868ed4b8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: With the connection established, it’s time to start pulling the data from the
+    Kafka topic. In order to get the streaming data into RisingWave we need to create
+    a source. This source will establish the communication between the Kafka topic
+    and RisingWave, so let’s execute the below command.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](../Images/9090340484e1b06428324dea97d381e3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If the command runs successfully, then we can see the message “CREATE SOURCE”
+    and the source has been created. It’s important to highlight that once the source
+    is created, the data is not ingested into RisingWave automatically. We need to
+    create a materialized view to start the data movement. This materialized view
+    will also help us to create the Grafana dashboard in the next step.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s create the materialized view with the same schema as the source data with
+    the following command.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](../Images/9b0e745277388c695722c81310b769dd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If the command runs successfully, then we can see the message “CREATE MATERIALIZED_VIEW”
+    and the materialized view has been created and now it’s time to test it out!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Execute the Python script to start streaming the data and in the RisingWave
+    terminal query the data in real time. RisingWave is a Postgres-compatible SQL
+    database, so if you are familiar with PostgreSQL or any other SQL database everything
+    will flow smoothly to query your streaming data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](../Images/3d14ebdc7fb5cb2792d10859af3e6839.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As you can see the streaming pipeline is now up and running, but we are not
+    taking all the advantages of the streaming database RisingWave. We can add more
+    tables to join data in real time and build a fully functional application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s create the races table so we can join the streaming data with the race
+    table and get the actual name of the race instead of the race id.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](../Images/18711795a7b00d830f27307bec3cb759.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, let’s insert the data for the specific race id that we need.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](../Images/dde90853d3bc601a175c38bf103bfbdc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let’s follow the same procedure but with the driver’s table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](../Images/84278fe3a968267f841a7def11070f9a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And finally, let’s insert the driver’s data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have the tables ready to start joining the streaming data, but we need the
+    materialized view where all the magic will happen. Let’s create a materialized
+    view where we can see the top 3 positions in real-time, joining the driver id
+    and the race id to get the actual names.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Last, but not least let’s create the last materialized view to see how many
+    times a driver got the position number one during the whole race.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: And now, it’s time to build the Grafana dashboard and see all the joined data
+    in real-time thanks to the materialized views.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Setting up the Grafana Dashboard
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The final step in this streaming data pipeline is visualizing the streaming
+    data in a real-time dashboard. Before we create the Gafana dashboard, we need
+    to create a data source to establish the connection between Grafana and our streaming
+    database RisingWave following the below steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Go to Configuration > Data sources.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Click the Add data source button.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Select PostgreSQL from the list of supported databases.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Fill in the PostgreSQL Connection fields like so:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](../Images/951ebdcdd9cc0e872a4735fd6afdd662.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Scroll down and click on the save and test button. The database connection is
+    now established.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](../Images/bf607d178e9e24a6b6ea5ae8f54e2d54.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now go to dashboards in the left panel, click on the new dashboard option, and
+    add a new panel. Select the table visualization, switch to the code tab, and let’s
+    query the materialized view live_positions where we can see the joined data for
+    the top 3 positions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](../Images/4c0575c2a81230a7fe1eaac0ed549871.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let’s add another panel to visualize the current lap. Select the gauge visualization
+    and in the code tab query the max lap available in the streaming data. Gauge customization
+    is up to you.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](../Images/b7ea9fca41c7a2e9a5638a52437d0ca8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Finally, let’s add another panel to query the materialized view times_in_position_one
+    and see in real-time how many times a driver got the number one position during
+    the whole race.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](../Images/447ca46324e2b01fbae5bfec41b27aab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Visualizing the Results
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Finally, all the components for the streaming data pipeline are up and running.
+    The Python script has been executed to start streaming the data through the Kafka
+    topic, the streaming database RisingWave is reading, processing, and joining the
+    data in real-time. The materialized view f1_lap_times reads the data from the
+    Kafka topic and each panel in the Grafana dashboard is a different materialized
+    view joining data in real-time to show detailed data thanks to the joins done
+    by the materialized views to the races and drivers tables. The Grafana dashboard
+    queries the materialized views and all the processing has been simplified thanks
+    to the materialized views processed in the streaming database RisingWave.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](../Images/8b9e238e85d295a6099097f4cbdfb25d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**[Javier Granados](https://medium.com/@JavierGr)** is a Senior Data Engineer
+    who likes to read and write about data pipelines. He specialize in cloud pipelines
+    mainly on AWS, but he is always exploring new technologies and new trends. You
+    can find him in Medium at https://medium.com/@JavierGr'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Build a Scalable Data Architecture with Apache Kafka](https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building Data Pipeline with Prefect](https://www.kdnuggets.com/building-data-pipeline-with-prefect)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Tractable, Feature Engineering Pipeline for Multivariate…](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building Your First ETL Pipeline with Bash](https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simple and Fast Data Streaming for Machine Learning Projects](https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python in Finance: Real Time Data Streaming within Jupyter Notebook](https://www.kdnuggets.com/python-in-finance-real-time-data-streaming-within-jupyter-notebook)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

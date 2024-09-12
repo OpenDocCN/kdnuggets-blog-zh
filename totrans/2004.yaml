@@ -1,0 +1,450 @@
+- en: 'Data Quality Dimensions: Assuring Your Data Quality with Great Expectations'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Data Quality Dimensions: Assuring Your Data Quality with Great Expectations](../Images/49c001ca3799cfb522d7d5dbbb5f00f1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Mikael Blomkvist](https://www.pexels.com/photo/a-group-of-people-with-graphs-and-pie-charts-on-table-6476258/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data quality plays a crucial role in any data management process. Organizations
+    rely on data to inform their decision-making and drive various business efficiencies.
+    However, if data is riddled with inaccuracies, errors, or inconsistencies, it
+    can do more harm than good.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: According to a [2020 Gartner survey](https://www.gartner.com/en/documents/3986583),
+    the average cost of poor data quality is $12.8 million per year. As indicated
+    in the latest [State of Data Quality](https://greatexpectations.io/static/abb8fc238738a68f75b0207b21131298/State_of_Data_Quality_Report-MQ.pdf)
+    report, production delay (product launch delay) is a telling symptom of poor data
+    quality. High-quality, error-free data increases the reliability and trustworthiness
+    of the insights derived from it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To improve the quality of your data, you need a framework for measuring it.
+    Data quality dimensions can help you achieve this goal. Dimensions enable you
+    to measure coverage and identify any components that need data quality testing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This article presents six dimensions of data quality: Completeness, Consistency,
+    Integrity, Timelessness, Uniqueness, and Validity. By addressing them, you can
+    gain a comprehensive understanding of the quality of your data and identify areas
+    for improvement. Here is where Great Expectation (GX) comes into play.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Great Expectations
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Great Expectations (GX) is a Python-based open-source tool for managing data
+    quality. It provides data teams with the ability to profile, test, and create
+    reports on data. The tool features a user-friendly command-line interface (CLI),
+    making it easy to set up new tests and customize existing reports.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Great Expectations can be integrated with a variety of extract, transform, and
+    load (ETL) tools such as Airflow and databases. A comprehensive list of integrations
+    and official documentation can be found on the Great Expectations [website](https://greatexpectations.io/integrations).
+  prefs: []
+  type: TYPE_NORMAL
+- en: GX features many expectations in its [repository](https://greatexpectations.io/expectations/).
+    This article demonstrates how to use a single expectation to implement data quality
+    dimensions with GX.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Before starting with implementation, we need to know more about the data we
+    will use to  demonstrate how dimensions work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's say that I need to create a Data Mart analysis to find out how many orders
+    the sales department took per region over the past three years.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We have some raw data for orders:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '|  | **Order ID** | **Order Date** | **Sales** | **Customer Name** |'
+  prefs: []
+  type: TYPE_TB
+- en: '|  | 5955 | 2021-05-27 | 314.6217 | Ann Chong |'
+  prefs: []
+  type: TYPE_TB
+- en: '|  | 21870 | 2022-08-28 | 996.9088 | Doug Bickford |'
+  prefs: []
+  type: TYPE_TB
+- en: '|  | 3 | 2019-03-04 | 6025.7924 | Beth Paige |'
+  prefs: []
+  type: TYPE_TB
+- en: '|  | 19162 | 2021-04-11 | 403.5025 | Carlos Soltero |'
+  prefs: []
+  type: TYPE_TB
+- en: '|  | 12008 | 2022-11-29 | 4863.0199 | Fred Wasserman |'
+  prefs: []
+  type: TYPE_TB
+- en: '|  | 18630 | 201-09-16 | 4.9900 | Neola Schneider |'
+  prefs: []
+  type: TYPE_TB
+- en: '|  | 18378 | 2022-01-03 | 1566.3223 | Doug Bickford |'
+  prefs: []
+  type: TYPE_TB
+- en: '|  | 15149 | 2020-03-12 | 1212.7117 | Michelle Lonsdale |'
+  prefs: []
+  type: TYPE_TB
+- en: '|  | 9829 | 2022-06-27 | 695.7497 | Eugene Barchas |'
+  prefs: []
+  type: TYPE_TB
+- en: '|  | 5188 | 2020-08-15 | 16426.6293 | Doug Bickford |'
+  prefs: []
+  type: TYPE_TB
+- en: 'And some raw data for customers:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **Customer Name** | **Province** | **Region** | **Customer Segment** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Andrew Allen | Saskatchewan | Nunavut | Consumer |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Trudy Brown | Nova Scotia | Nunavut | Corporate |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Dionis Lloyd | Nunavut | West | Corporate |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Cynthia Arntzen | Northwest Territories | Atlantic | Corporate |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Brooke Gillingham | Ontario | Ontario | Small Business |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Alejandro Savely | Nova Scotia | Nunavut | Consumer |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Harold Pawlan | Newfoundland | Prairie | Corporate |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Peter Fuller | Manitoba | Quebec | Consumer |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Ionia McGrath | Quebec | Quebec | Home Office |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Fred Wasserman | Ontario | Atlantic | Consumer |'
+  prefs: []
+  type: TYPE_TB
+- en: 'To conduct the Data Mart analysis, I will use a table based on Customer Name
+    (customer_regional_sales):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Data Quality Dimensions: Assuring Your Data Quality with Great Expectations](../Images/593563cfafa85434f268fdc7ea83c65a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Implementing Data Quality Checks in Great Expectations
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'For the purpose of this article, the following approach has been used:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keep data in 3 csv files
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use Pandas for reading csv
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use the Great Expectations method from_pandas for converting Pandas dataframe.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is a good demonstration of Expectations for each dimension.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Great Expectations evaluates data with Expectations. Expectations are statements
+    expressed in a declarative manner that can be assessed by a computer, but also
+    carry meaning for human interpretation. GX has 309 Expectations, and you can implement
+    custom expectations as well. All expectations can be found [here](https://greatexpectations.io/expectations).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Completeness
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Completeness is a dimension of data quality that measures whether all expected
+    data is present in a dataset. In other words, completeness refers to whether all
+    required data points or values are present in a dataset, and if not, how many
+    are missing. It is also important to check if the column exists at all.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'GreatExpectations has a specific Expectation for checking completeness:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: expect_column_values_to_not_be_null — expect the column values to not be null.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order for values to be considered as exceptions, they must be clearly null
+    or missing. For example, a NULL in PostgreSQL or an np.NaN in Pandas. Simply having
+    an empty string is not enough to be considered null, unless it has been transformed
+    into a null type.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It can be applied for our use case:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Uniqueness
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Uniqueness is a dimension of data quality that refers to the degree to which
+    each record in a dataset represents a unique and distinct entity or event. It
+    measures whether the data is free of duplicates or redundant records, and whether
+    each record represents a unique and distinct entity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: expect_column_values_to_be_unique — Expect each column value to be unique.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next dimensions require more business context.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Timelessness
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Timelessness is a dimension of data quality that measures the relevance and
+    accuracy of data over time. It refers to whether the data is up to date. For instance,
+    my requirement is that the data set should have records for the last four years.
+    If the data set has older records, I should get an error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For testing timelessness I use Expectation: expect_column_values_to_be_between'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It will work, because I can parse the date and compare it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Validity
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Validity is a dimension of data quality that measures whether the data is accurate
+    and conforms to the expected format or structure. Because invalid data can disrupt
+    the training of AI algorithms on a dataset, organizations should establish a set
+    of methodical business rules for evaluating data validity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, in the USA birth dates typically include a month, a day, and a
+    year, while social security numbers consist of ten digits. Phone numbers in the
+    US begin with a three-digit area code. So it may be more challenging to determine
+    a specific format for a birth date.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In my data set, the date column “Order Date” has the format YYYY-MM-DD, so I
+    should check it for all values in the column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: GX has an Expectation for date — expect_column_values_to_be_valid_date. This
+    Expectation is based on the method “parse” from dateutil.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you need to check the length of the string, then you should use Expectation
+    — expect_column_value_lengths_to_equal
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It is a universal practice to use regex for my date format:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: My vision is that most Expectations in the GX repo should be able to check the
+    Validity dimension.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Consistency
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Consistency is a dimension of data quality that refers to the degree to which
+    data is uniform and accurate across a dataset. It measures whether the data is
+    logically coherent and conforms to expected values, ranges, and rules. To evaluate
+    consistency, I typically compare data values to known standards or values and
+    check for discrepancies or deviations. Also, I use statistical methods to identify
+    and correct inconsistencies in the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As an example for my dataset, I have created a rule that the “Sales” column,
+    which represents the profit of each order, cannot be negative. Also, I know that
+    the max sum is 25,000.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Great Expectations has the Expectation — expect_column_values_to_be_between,
+    that fits it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Also, you can use expectations with statistical checks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[expect_column_mean_to_be_between](https://greatexpectations.io/expectations/expect_column_mean_to_be_between?filterType=Backend%20support&gotoPage=1&showFilters=false&viewType=Summary)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[expect_column_stdev_to_be_between](https://greatexpectations.io/expectations/expect_column_stdev_to_be_between?filterType=Backend%20support&gotoPage=1&showFilters=false&viewType=Summary)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Integrity
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: integrity ensures that the data is correct and valid, especially when it is
+    used in more than one place. It involves checking that the data is accurate and
+    consistent when it comes to connections between different datasets, and making
+    sure that it follows the rules set by the business.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have two sources and one dataset related to these two datasets. It means that
+    I have to check that data was not lost when I made the transformation. For me,
+    the most important param is Order ID. I want to be sure that all orders are placed
+    in customer_regional_sales
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Great Expectations has several ways to resolve it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Using Expectation — expect_column_values_to_be_in_set.  It expects each column
+    value to be in a given set. In this case, I need to compare Order ID from the
+    “orders” data set with Order ID customer_regional_sales:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs:
+  - PREF_IND
+  type: TYPE_PRE
+- en: This Expectation will fail if the column customer_regional_sales.order_id is
+    not equal to orders.order_id.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Using the previous Expectation, but with the evaluation param. You can learn
+    more about how it can be done in the official [documentation](https://docs.greatexpectations.io/docs/guides/expectations/advanced/how_to_dynamically_load_evaluation_parameters_from_a_database/).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Comparing two tables using  UserConfigurableProfiler. Check out how to do this
+    in the official documentation [here](https://docs.greatexpectations.io/docs/guides/expectations/advanced/how_to_compare_two_tables_with_the_user_configurable_profiler).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Finally, if you want to check the integrity of your Change Data Capture, you
+    need to use a [Data Quality Gate](https://github.com/provectus/data-quality-gate).
+    DQG allows you to deploy Data Quality with GX on AWS in one click. Read our case
+    study on this solution on the [AWS tech blog](https://aws.amazon.com/ru/blogs/apn/how-provectus-built-a-high-load-data-quality-pipeline-on-aws-for-lane-health/).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: This article demonstrates how to implement data quality dimensions in your data
+    using the Great Expectations library. By using Expectations to validate your data,
+    you can ensure that it meets the requirements for a variety of data quality dimensions,
+    including completeness, validity, consistency, uniqueness, and more. While I have
+    covered a few examples, there are many other Expectations that you can use to
+    meet your specific business needs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By improving your data quality approach, you can avoid costly bugs and improve
+    the accuracy and reliability of your data and the insights derived from it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have any questions or suggestions, please feel free to leave a comment
+    below or contact me directly on [LinkedIn](https://www.linkedin.com/in/chumagin/).
+    Thank you for reading!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Aleksei Chumagin](https://www.linkedin.com/in/chumagin/)** is an accomplished
+    QA expert, and serves as Head of QA at Provectus. Aleksei has extensive experience
+    in testing, programming, and team building. His strong data quality expertise
+    makes him a valuable asset to the Provectus team. Aleksei is an active contributor
+    to the Great Expectations community.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Overcome Your Data Quality Issues with Great Expectations](https://www.kdnuggets.com/2023/01/overcome-data-quality-issues-great-expectations.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Career: 7 Expectations vs Reality](https://www.kdnuggets.com/2022/06/data-science-career-7-expectations-reality.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science: Reality vs Expectations](https://www.kdnuggets.com/2022/03/data-science-reality-expectations.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Telling a Great Data Story: A Visualization Decision Tree](https://www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n09, Mar 2: Telling a Great Data Story: A…](https://www.kdnuggets.com/2022/n09.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

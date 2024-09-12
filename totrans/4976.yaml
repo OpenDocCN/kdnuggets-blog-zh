@@ -1,0 +1,280 @@
+- en: A Simple XGBoost Tutorial Using the Iris Dataset
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/03/simple-xgboost-tutorial-iris-dataset.html](https://www.kdnuggets.com/2017/03/simple-xgboost-tutorial-iris-dataset.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Ieva Zarina, Software Developer, Nordigen.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I had the opportunity to start using [xgboost](https://xgboost.readthedocs.io/en/latest/) machine
+    learning algorithm, it is fast and shows [good results](https://github.com/dmlc/xgboost/tree/master/demo#usecases).
+    Here I will be using multiclass prediction with the [iris dataset](https://en.wikipedia.org/wiki/Iris_flower_data_set)
+    from[ scikit-learn](http://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![XGBoost](../Images/6ecd41b989b70db02e5ee3380e71a510.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The XGBoost algorithm ([source](https://www.slideshare.net/JaroslawSzymczak1/xgboost-the-algorithm-that-wins-every-competition)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Installing Anaconda and xgboost
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In order to work with the data, I need to install various scientific libraries
+    for python. The best way I have found is to use [Anaconda](https://www.continuum.io/downloads).
+    It simply installs all the libs and helps to [install new ones](http://conda.pydata.org/docs/using/pkgs.html#install-a-package).
+    You can download the installer for Windows, but if you want to install it on a
+    Linux server, you can just copy-paste this into the terminal:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After this, **use conda to install pip** which you will need for installing
+    xgboost. It is important to install it using Anaconda (in Anaconda’s directory),
+    so that pip installs other libs there as well:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now, a very important step: **install [xgboost Python Package](https://github.com/dmlc/xgboost/tree/master/python-package)
+    dependencies** beforehand. I install these ones from experience:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'I upgrade my python virtual environment to have no [trouble](https://github.com/dmlc/xgboost/issues/463)
+    with python versions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And finally I can install xgboost with pip (keep fingers crossed):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This command installs the latest xgboost version, but if you want to use a
+    previous one, just specify it with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now test if everything is has gone well – type **python** in the terminal and
+    try to import xgboost:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you see no errors – perfect.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Xgboost Demo with the Iris Dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here I will use the Iris dataset to show a simple example of how to use Xgboost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First you **load the dataset** from sklearn, where X will be the data, y –
+    the class labels:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then you **split the data** into train and test sets with 80-20% [split](http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.train_test_split.html):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Next you need to create the Xgboost specific **[DMatrix](http://xgboost.readthedocs.io/en/latest/python/python_intro.html)**
+    data format from the numpy array. Xgboost can work with numpy arrays directly,
+    load data from svmlignt files and other formats. Here is how to work with **numpy
+    arrays**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'If you want to use svmlight for less memory consumption, first **[dump](http://scikit-learn.org/stable/modules/generated/sklearn.datasets.dump_svmlight_file.html)**the
+    numpy array into **svmlight format **and then just pass the filename to DMatrix:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now for the Xgboost to work you need to set the **[parameters](https://github.com/dmlc/xgboost/blob/master/doc/parameter.md)**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Different datasets perform better with different parameters. The result can
+    be really low with one set of params and really good with others. You can look
+    at [this Kaggle script](https://www.kaggle.com/tanitter/introducing-kaggle-scripts/grid-search-xgboost-with-scikit-learn) how
+    to search for the best ones. Generally try with eta 0.1, 0.2, 0.3, max_depth in
+    range of 2 to 10 and num_round around few hundred.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Train
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Finally the training can begin. You just type:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To see how the model looks you can also [dump](http://xgboost.readthedocs.io/en/latest/python/python_intro.html#training)
+    it in human readable form:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And it looks something like this (f0, f1, f2 are features):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can see that each tree is no deeper than 3 levels as set in the params.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Use the model to [**predict classes**](http://xgboost.readthedocs.io/en/latest/python/python_intro.html#prediction)
+    for the test set:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'But the predictions look something like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here each column represents class number 0, 1, or 2\. For each line you need
+    to select that column **where the probability is the highest**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now you get a nice list with **predicted classes**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Determine the [**precision**](http://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html)
+    of this prediction:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Perfect! Now **[save](http://scikit-learn.org/stable/modules/model_persistence.html)**
+    the model for later use:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now you have a working model saved for later use, and ready for more prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'See the full code on [github](https://gist.github.com/IevaZarina/ef63197e089169a9ea9f3109058a9679)
+    or below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Ieva Zarina](https://www.linkedin.com/in/ieva-zarina-60515a72/)** is
+    a Software Developer at Nordigen.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://ieva.rocks/2016/08/25/iris_dataset_and_xgboost_simple_tutorial/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[7 More Steps to Mastering Machine Learning With Python](/2017/03/seven-more-steps-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What I Learned Implementing a Classifier from Scratch in Python](/2017/02/learned-implementing-classifier-scratch-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[XGBoost: Implementing the Winningest Kaggle Algorithm in Spark and Flink](/2016/03/xgboost-implementing-winningest-kaggle-algorithm-spark-flink.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What are the Assumptions of XGBoost?](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tuning XGBoost Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Leveraging XGBoost for Time-Series Forecasting](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[WTF is the Difference Between GBM and XGBoost?](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Pydantic Tutorial: Data Validation in Python Made Simple](https://www.kdnuggets.com/pydantic-tutorial-data-validation-in-python-made-simple)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

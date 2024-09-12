@@ -1,0 +1,228 @@
+- en: Robust Word2Vec Models with Gensim & Applying Word2Vec Features for Machine
+    Learning Tasks
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/04/robust-word2vec-models-gensim.html](https://www.kdnuggets.com/2018/04/robust-word2vec-models-gensim.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Editor''s note:** This post is only one part of a far more thorough and in-depth
+    original, [found here](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa),
+    which covers much more than what is included here.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Robust Word2Vec Models with Gensim
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: While our implementations are decent enough, they are not optimized enough to
+    work well on large corpora. The `[**gensim**](https://radimrehurek.com/gensim/)` framework,
+    created by Radim Řehůřek consists of a robust, efficient and scalable implementation
+    of the Word2Vec model. We will leverage the same on our Bible corpus. In our workflow,
+    we will tokenize our normalized corpus and then focus on the following four parameters
+    in the Word2Vec model to build it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`**size**`**:** The word embedding dimensionality'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`**window**`**:** The context window size'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`**min_count**`**:** The minimum word count'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`**sample**`**: **The downsample setting for frequent words'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: After building our model, we will use our words of interest to see the top similar
+    words for each of them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ca2b2f3fb686c91a092f9e806ac00ddb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The similar words here definitely are more related to our words of interest
+    and this is expected given that we ran this model for more number of iterations
+    which must have yield better and more contextual embeddings. Do you notice any
+    interesting associations?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/775e2a392863dacc34e2c4181fd5dee0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Noah’s sons come up as the most contextually similar entities from our model!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s also visualize the words of interest and their similar words using their
+    embedding vectors after reducing their dimensions to a 2-D space with t-SNE.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/72f48cdd6154c442a2a26cae94e64f8b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Visualizing our word2vec word embeddings using t-SNE
+  prefs: []
+  type: TYPE_NORMAL
+- en: The red circles have been drawn by me to point out some interesting associations
+    which I found out. We can clearly see based on what I depicted earlier that ***noah ***and
+    his sons are quite close to each other based on the word embeddings from our model!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Applying Word2Vec features for Machine Learning Tasks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If you remember reading the previous article [***Part-3: Traditional Methods
+    for Text Data***](https://towardsdatascience.com/understanding-feature-engineering-part-3-traditional-methods-for-text-data-f6f7d70acd41)you
+    might have seen me using features for some actual machine learning tasks like
+    clustering. Let’s leverage our other top corpus and try to achieve the same. To
+    start with, we will build a simple Word2Vec model on the corpus and visualize
+    the embeddings.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8b3bc365fee36478c6c1a7c8621bf9c2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Visualizing word2vec word embeddings on our toy corpus
+  prefs: []
+  type: TYPE_NORMAL
+- en: Remember that our corpus is extremely small so to get meaninful word embeddings
+    and for the model to get more context and semantics, more data helps. Now what
+    is a word embedding in this scenario? It’s typically a dense vector for each word
+    as depicted in the following example for the word ***sky***.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now suppose we wanted to cluster the eight documents from our toy corpus, we
+    would need to get the document level embeddings from each of the words present
+    in each document. One strategy would be to average out the word embeddings for
+    each word in a document. This is an extremely useful strategy and you can adopt
+    the same for your own problems. Let’s apply this now on our corpus to get features
+    for each document.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/29c8deae1fd070bcbcf525afbcec1bae.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Document level embeddings
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we have our features for each document, let’s cluster these documents
+    using the [***Affinity Propagation***](https://en.wikipedia.org/wiki/Affinity_propagation) algorithm,
+    which is a clustering algorithm based on the concept of *“message passing”* between
+    data points and does not need the number of clusters as an explicit input which
+    is often required by partition-based clustering algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b39b4c68ab91b60f63ed7e20aa842781.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Clusters assigned based on our document features from word2vec
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can see that our algorithm has clustered each document into the right group
+    based on our Word2Vec features. Pretty neat! We can also visualize how each document
+    in positioned in each cluster by using [***Principal Component Analysis (PCA)***](https://en.wikipedia.org/wiki/Principal_component_analysis) to
+    reduce the feature dimensions to 2-D and then visualizing the same (by color coding
+    each cluster).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/640851dacfaad50813cd37baaf08bd8f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Visualizing our document clusters
+  prefs: []
+  type: TYPE_NORMAL
+- en: Everything looks to be in order as documents in each cluster are closer to each
+    other and far apart from other clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Dipanjan Sarkar](https://www.linkedin.com/in/dipanzan)** is a Data
+    Scientist @Intel, an author, a mentor @Springboard, a writer, and a sports and
+    sitcom addict.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Text Data Preprocessing: A Walkthrough in Python](/2018/03/text-data-preprocessing-walkthrough-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A General Approach to Preprocessing Text Data](/2017/12/general-approach-preprocessing-text-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Framework for Approaching Textual Data Science Tasks](/2017/11/framework-approaching-textual-data-tasks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Applying Descriptive and Inferential Statistics in Python](https://www.kdnuggets.com/applying-descriptive-and-inferential-statistics-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Working With Sparse Features In Machine Learning Models](https://www.kdnuggets.com/2021/01/sparse-features-machine-learning-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Tasks To Automate With Python](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Representation for Natural Language Processing Tasks](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[HuggingGPT: The Secret Weapon to Solve Complex AI Tasks](https://www.kdnuggets.com/2023/05/hugginggpt-secret-weapon-solve-complex-ai-tasks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Coding Tasks ChatGPT Can''t Do](https://www.kdnuggets.com/5-coding-tasks-chatgpt-cant-do)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

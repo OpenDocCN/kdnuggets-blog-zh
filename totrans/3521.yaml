@@ -1,0 +1,222 @@
+- en: Recycling Deep Learning Models with Transfer Learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2015/08/recycling-deep-learning-representations-transfer-ml.html](https://www.kdnuggets.com/2015/08/recycling-deep-learning-representations-transfer-ml.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: Deep learning models are indisputably the state of the art for many problems
+    in machine perception. Using neural networks with many hidden layers of artificial
+    neurons and millions of parameters, deep learning algorithms exploit both hardware
+    capabilities and the abundance of gigantic datasets. In comparison, [linear models
+    saturate quickly and under-fit.](/2015/03/more-training-data-or-complex-models.html)
+    But what if you don't have big data?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![alex-net](../Images/cea8af8f7a15a3b311bf1c9aced99a13.png)](/wp-content/uploads/alex-net.jpeg)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Say you have a novel research problem, such as identifying cancerous moles given
+    photographs. Assume further that you generated a dataset of 10,000 labeled images.
+    While this might seem like big data, it's a pittance by comparison to the authoritative
+    datasets on which deep learning has its greatest successes. It might seem that
+    all is lost. Fortunately there's hope.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Consider the famous ImageNet database created by Stanford Professor [Fei-Fei
+    Li](http://vision.stanford.edu/feifeili/). The dataset contains millions of images,
+    each belonging to 1 of 1000 distinct hierarchically organized object categories.
+    As [Dr. Li relates in her TED talk](/2015/03/more-training-data-or-complex-models.html),
+    a child sees millions of distinct images while growing up. Intuitively, to train
+    a model strong enough to compete with human object recognition capabilities, a
+    similarly large training set might be required. Further, the methods which dominate
+    at this scale of data might not be those which dominate on the same task given
+    smaller datasets. Dr. Li's insight quickly paid off. Alex Krizhevsky, Ilya Sutskever
+    and Geoffrey Hinton handily won the 2012 ImageNet competition, establishing convolutional
+    neural networks (CNNs) as the state of the art in computer vision.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![imagenet_logo](../Images/cf46dc9cb368c60807a3f825a02b3827.png)](/wp-content/uploads/imagenet_logo.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To extend Dr. Li's metaphor, although a child sees millions of images throughout
+    development, once grown, a human can easily learn to recognize a new class of
+    object, without learning to see from scratch. Now consider a CNN trained for object
+    recognition on the ImageNet dataset. Given an image from any among the 1000 ImageNet
+    categories, the top-most hidden layer of the neural network constitutes a single
+    vector representation sufficiently flexible to be useful for classifying images
+    into each of the 1000 categories. It seems reasonable to guess that this representation
+    would also be useful for an additional as-of-yet unseen object category.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Following this line of thinking, computer vision researchers now commonly use
+    pre-trained CNNs to generate representations for novel tasks, where the dataset
+    may not be large enough to train an entire CNN from scratch. Another common tactic
+    is to take the pre-trained ImageNet network and then to fine-tune the entire network
+    to the novel task. This is typically done by training end-to-end with backpropagation
+    and stochastic gradient descent. I first learned about this fine-tuning technique
+    last year in conversations with [Oscar Beijbom](http://vision.ucsd.edu/~beijbom/website/).
+    Beijbom, a vision researcher at UCSD, has successfully used this technique to
+    differentiate pictures of various types of coral.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A terrific paper from last year''s NIPs conference](http://arxiv.org/abs/1411.1792)
+    by Jason Yosinski of Cornell, in collaboration with Jeff Clune, Yoshua Bengio
+    and Hod Lipson, tackles this issue with a rigorous empirical investigation. The
+    authors focus on the ImageNet dataset and the 8-layer AlexNet architecture of
+    ImageNet fame. They note that the lowest layers of convolutional neural networks
+    have long been known to resemble conventional computer vision features like edge
+    detectors and Gabor filters. Further, they note that the topmost hidden layer
+    is somewhat specialized to the task it was trained for. Therefore they systematically
+    explore the following questions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Where does the transition from broadly useful to highly specialized features
+    take place?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: What is the relative performance of fine-tuning an entire network vs. freezing
+    the transferred layers?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To study these questions, the authors restrict their attention to the ImageNet
+    dataset, but consider two 50-50 splits of the data into subsets A and B. In the
+    first set of experiments, they split the data by randomly assigning each image
+    category to either subset A or subset B. In the second set of experiments, the
+    authors consider a split with greater contrast, assigning to one set only natural
+    images and to the other only images of man-made objects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The authors examine the case in which the network is pre-trained on task A and
+    then trained further on B, keeping the first k layers and randomly initializing.
+    They also consider the same experiment but pre-training on task B, randomly initializing
+    the top 8-k layers, and then continuing to train on the same task B.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In all cases, they find that fine-tuning end-to-end on a pre-trained network
+    outperforms freezing the transferred k layers completely. Interestingly they also
+    find that when pre-trained layers are frozen, the transferability of features
+    is nonlinear in the number of pre-trained layers. They hypothesize that this owes
+    to complex interactions between the nodes in adjacent layers which are difficult
+    to relearn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To wax poetic, this might be analogous to performing a hemispherectomy on a
+    fully grown human, replacing the right half of the brain with a blank slate child's
+    brain. Ignoring the biological absurdity of this example it might seem intuitive
+    that a fresh right brain hemisphere would have trouble filling the expected role
+    of one to which the left hemisphere was fully adapted.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![hemispherectomy](../Images/6756492ffa3a95fef566cc13f22a5e15.png)](/wp-content/uploads/hemispherectomy.jpg)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I defer to [the original paper](http://arxiv.org/abs/1411.1792) for a complete
+    description of the experiments. One question which is not addressed in this paper
+    but could inspire future research, is how these results hold up when the new task
+    has far fewer examples than the original task. In practice, this imbalance in
+    the number of labeled examples between the original task and the new one, is often
+    what motivates transfer learning. A preliminary approach could be to repeat this
+    exact work but with a 999 to 1 split instead of a 500-500 split of the categories.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generally, data labeling is expensive. For many tasks it may even be prohibitively
+    expensive. Thus it's of economic and academic interest to develop a deeper understanding
+    of how we could leverage the labels we do have to perform well on tasks not as
+    well endowed. Yosinski's work is a great step in this direction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Zachary Chase Lipton](../Images/240b273c667af1a53a99fd93d1fd39ce.png) **[Zachary
+    Chase Lipton](http://zacklipton.com)** is a PhD student in the Computer Science
+    Engineering department at the University of California, San Diego. Funded by the
+    [Division of Biomedical Informatics](http://healthsciences.ucsd.edu/som/medicine/divisions/dbmi/pages/default.aspx),
+    he is interested in both theoretical foundations and applications of machine learning.
+    In addition to his work at UCSD, he has interned at Microsoft Research Labs.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deep Learning and the Triumph of Empiricism](/2015/07/deep-learning-triumph-empiricism-over-theoretical-mathematical-guarantees.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Not So Fast: Questioning Deep Learning IQ Results](/2015/06/questioning-deep-learning-iq-results.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Myth of Model Interpretability](/2015/04/model-interpretability-neural-networks-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[(Deep Learning’s Deep Flaws)’s Deep Flaws](/2015/01/deep-learning-flaws-universal-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science’s Most Used, Confused, and Abused Jargon](/2015/02/data-science-confusing-jargon-abused.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Differential Privacy: How to make Privacy and Data Mining Compatible](/2015/01/differential-privacy-data-mining-compatible.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is Transfer Learning?](https://www.kdnuggets.com/2022/01/transfer-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Practical Guide to Transfer Learning using PyTorch](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Exploring the Potential of Transfer Learning in Small Data Scenarios](https://www.kdnuggets.com/exploring-the-potential-of-transfer-learning-in-small-data-scenarios)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Transfer Learning to Boost Model Performance](https://www.kdnuggets.com/using-transfer-learning-to-boost-model-performance)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,448 @@
+- en: Deep Learning-based Real-time Video Processing
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/02/deep-learning-based-real-time-video-processing.html](https://www.kdnuggets.com/2021/02/deep-learning-based-real-time-video-processing.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Serhii Maksymenko](https://www.linkedin.com/in/sergey-maximenko/), AI/ML
+    Solution Architect at [MobiDev](https://mobidev.biz/services/machine-learning-consulting)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**What is Serial Video Processing**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Video data is a common asset which is used everyday, whether it is a live stream
+    in a personal blog or security camera in a manufacturing building. A machine learning
+    appliance is becoming a normal tool for processing video in a variety of tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The video processing approach in this article is considered within the context
+    of a personal data security application which was developed by the MobiDev Team.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In a nutshell, video processing can be seen as a sequence of operations done
+    for each frame. Each frame includes processes of decoding, computation and encoding.
+    Decoding is a conversion of the video frame from compressed format to the raw
+    format. Computation is a certain operation which we need to do with the frame.
+    And encoding is conversion of the processed frame back to the compressed state.
+    This is a serial process. Although such an approach looks straightforward and
+    easy to implement, it is not practical in most cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/1a160098d81fe81c45136e4fb28e9f7e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source [https://mobidev.biz/wp-content/uploads/2021/01/serial-video-processing.png](https://mobidev.biz/wp-content/uploads/2021/01/serial-video-processing.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: To make the above mentioned approach a workable one, it is necessary to set
+    measurement criteria such as, speed, accuracy and flexibility. However, to get
+    all these in one system might be  impossible. Usually there is a trade-off between
+    speed and accuracy in such cases. If we choose not to pay attention to speed,
+    we’ll have a nice algorithm, but it will be extremely slow, and as a result, useless.
+    If we simplify the algorithm too much, then the results may not be as good as
+    expected. Consequently, a fast and accurate white elephant is impossible to integrate.
+    The solution is supposed to be flexible in terms of input, output and configuration.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, how to make the processing faster, while keeping the accuracy at a reasonably
+    high level? There are two possible ways to solve the issue. The first one is to
+    make the algorithms run in parallel, so they might be possible to keep using slower
+    accurate models. The second one is to make a certain effort to accelerate the
+    algorithms themselves or their parts with no significant loss of the accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Parallel Processing Method**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**File splitting **'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first approach is obvious. The video is split into parts and processed in
+    parallel. This is a simple and straightforward way. It can be implemented with
+    the help of video time pointers. In this method, splitting is virtual, and is
+    not a real sub-file generation. However, in the output, we anyway have multiple
+    video files which need to be combined into a single one. This makes the approach
+    limited or at least uncomfortable when it comes to the tasks involved, especially
+    using neighbouring frames for calculation. In order to deal with such a thing,
+    we had to split the video with an overlap, so any information won’t be missed
+    at joint places.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3cb8aa6b74319548afb9ce390a4ccfec.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source [https://mobidev.biz/wp-content/uploads/2021/01/file-splitting-video-processing.png](https://mobidev.biz/wp-content/uploads/2021/01/file-splitting-video-processing.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because of this, it is impossible to deal with a stream from a web camera, for
+    example. The file splitting approach enables processing of video files only. Besides,
+    it may be difficult to pause, resume or even move the processing at a different
+    position in timespin with this method. Despite the simplicity of the file splitting,
+    it doesn’t meet the flexibility requirements.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Pipeline Architecture**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Instead of splitting the video, the pipeline approach is aimed to split and
+    parallelize the operations, which are performed during the processing. Basic operations
+    for the usual video pipeline are decoding, computation and encoding. At least
+    these three can be done in a concurrent way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why is the pipeline approach more flexible? One of the benefits of the pipeline
+    is the ease  with which you can manipulate the components due to requirements.
+    Decoding can work by using a video file and encode frames into another file. That’s
+    a common case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f339af0b6c6f2c7ce45ae20a996877e6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source [https://mobidev.biz/wp-content/uploads/2021/01/pipeline-approach-video-processing.png](https://mobidev.biz/wp-content/uploads/2021/01/pipeline-approach-video-processing.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alternatively, input can be RTSP streamed from an IP camera. Output can be through
+    a WebRTC connection in the browser or mobile application. There is a unified architecture
+    which is based on a video stream for all combinations of input and output formats.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The computation part of the process is not necessarily an atomic operation.
+    It can be logically split into sub-operations which can create more pipeline stages.
+    It is not always reasonable however, to create too many components because multiprocessing
+    latency may fade out the gain in performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basically, the pipeline looks like exactly what we need in terms of flexibility.
+    That’s not only because of  changing the input and output format, but also because
+    we can stop and continue the processing at any time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Optimizing Pipeline Components**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Time Profiling**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/842677f7cb6785f72acf9036fa1fa1dc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source [https://mobidev.biz/wp-content/uploads/2021/01/time-profiling-video-processing.png](https://mobidev.biz/wp-content/uploads/2021/01/time-profiling-video-processing.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: To understand what needs to be optimized, it is necessary to observe the time
+    each stage of the pipeline takes. That way, it is easier to find out where the
+    bottleneck is. The slowest pipeline stage defines the output FPS. It may be boring
+    to do the measurements, but they can be automated without very much effort. The
+    pipeline is using a queue for data exchange. Therefore, there will be a certain
+    waiting time in the components. Usually, we need to write down how long each operation
+    takes, how long each operation waits for the data from the previous component,
+    and how long each operation waits for its result to send to the next component.
+    Having this information simplifies performance analysis a lot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Decoding and Encoding **'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Decoding and encoding can be done in 2 ways: software and hardware. Hardware
+    acceleration is possible due to the decoder and encoder installed in NVIDIA cards
+    in addition to CUDA cores. Here is a list of options which can be used for implementing
+    the hardware acceleration of decoding and encoding.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Compile OpenCV with CUDA support
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Compile FFmpeg with NVDEC/NVENC codecs support
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use GStreamer with NVDEC/NVENC codecs support
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use NVIDIA Video Processing Framework
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Decoding and Encoding**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Compiling from the source may be non-trivial, but it should be straightforward
+    if you follow the instructions carefully. This can be done in an isolated environment
+    such as a docker container, so that it is easy to deploy it on other machines
+    or in cloud instances and you do not need to repeat the compiling procedure each
+    time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Compiling OpenCV with CUDA can optimize not only decoding, but also other calculations
+    in the pipeline if they are performed using OpenCV. However, they will need to
+    be written in C++ I suppose, because Python wrapper has no solid support for it.
+    But that will be worth it in situations where you’d like to perform both decoding
+    and numeric calculations on a GPU without copying from CPU memory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Custom installation of FFmpeg and GStreamer allows using a built-in NVIDIA decoder
+    and encoder. It is suggested going with FFmpeg first, because that should be easier
+    in terms of maintenance. Moreover, many libraries use FFmpeg under the hood, so 
+    replacing it will automatically improve these libraries' performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Python wrapper gives a possibility to decode a frame right into a PyTorch tensor
+    on GPU so that we can start inference without an extra copying from CPU to GPU.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Computation (CPU)**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Use Mixed Precision technique
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: TensorRT
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Resize before inference
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Batch inference
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The customers do not always have a GPU in the list of their hardware. Processing
+    using a neural network is rare on a CPU, but it is still possible with certain
+    limitations. It’s not appropriate to make large models for this purpose but more
+    lightweight models will work. For example, in our work, we were able to get 30
+    FPS with an SSD object detection model on the CPU. Latest versions of Tensorflow
+    and PyTorch are optimized for running certain operations on multiple cores and
+    they can be controlled with the help of parameters. So, the absence of GPU doesn’t
+    mean that the mission is impossible. For instance, this can be the case if you
+    are dealing with cloud computing with limited resources.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But of course, a GPU is a must if you want a good model to work at your desired
+    speed. We also applied certain techniques in order to speed-up GPU inference even
+    more. In those cases, if your GPU supports fp16, it will be simple to apply mixed
+    precision, which is part of the latest versions of PyTorch and TensorFlow. It
+    enables use of fp16 precision for certain layers and fp32 for the rest, keeping
+    the numerical stability of the network and therefore keeping the accuracy. An
+    alternative and even more efficient way of model acceleration is TensorRT conversion.
+    It is a more challenging method, but it can give 5x faster inference. In addition,
+    there are other obvious optimization options such as resizing and batch inference.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f294c44f7b39169849067aca049c5bbf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source [https://mobidev.biz/wp-content/uploads/2021/01/flexibility-of-pipeline-approach.png](https://mobidev.biz/wp-content/uploads/2021/01/flexibility-of-pipeline-approach.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**How the Pipeline Approach Can Be Implemented in the Application**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/2b8692653886d76cc015d8a788e3e699.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source [https://mobidev.biz/wp-content/uploads/2021/01/face-blurring-video-processing.png](https://mobidev.biz/wp-content/uploads/2021/01/face-blurring-video-processing.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The flexibility of the system was essential in this case, because we aimed to
+    process not only video files, but also different formats of video live-stream.
+    It showed a good FPS in the range of 30-60, depending on the configuration used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Additionally, we applied some other improvements: interpolation with tracking,
+    sharing memory between processes, and adding several workers for the pipeline
+    component.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Interpolation with tracking**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5083d42b2cf5e5b0ca47f5ac8ca7457a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source [https://mobidev.biz/wp-content/uploads/2021/01/interpolation-tracking-video-processing.png](https://mobidev.biz/wp-content/uploads/2021/01/interpolation-tracking-video-processing.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: You may be thinking, do we really need to make computation for each single frame?
+    No, it is possible to skip frames with a certain interval, assuming that bonding
+    boxes will be interpolated with the help of a tracking algorithm. An algorithm
+    can be simple. For example, matching by the distance between centroids. That will
+    be enough to have a pretty  good interpolation, and therefore much better FPS.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the tracking stage, this is essential to use more complex tracking algorithms
+    or correlation tracker. But they really impact the speed if there are too many
+    faces on the video. For example, if it is a crowded street video, then we cannot
+    afford the tracking algorithm to be too complex.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since we skip some frames, we’d like to know what the quality of the interpolated
+    frames is. Therefore, we calculated the F1 metric and ensured that we don’t have
+    too many false positives and false negatives because of interpolation. F1 value
+    was around 0,95 for most of the video examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Sharing Memory **'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The next point is sharing memory between processes. An app can keep sending
+    data through the queue but that was really slow. Alternative ways of sharing memory
+    between processes in Python are tricky. Here are some of them:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: torch.multiprocessing
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Linux/dev/shm
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: SharedMemory in Python 3.8
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The PyTorch version of multiprocessing has the ability to pass a tensor handle
+    through the queue so that another process can just get a pointer to the existing
+    GPU memory. However, we decided to use another approach: system level shared memory.
+    This method uses a special folder as a link to a space in RAM memory. There are
+    libraries which provide a Python interface for using this memory. It drastically
+    improved the speed of interprocess communication. Python 3.8 API for shared memory
+    is another possible approach.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Multiple Workers**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Compare latency
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Take  into account CUDA streams
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Correct the order of frames
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Finally, we need to add several workers for a pipeline component. That’s something
+    good to consider, but it is not always working correctly. We did that for the
+    face detection stage. However, the same can be done for any computationally heavy
+    operation which doesn’t require an ordered input. The thing is, that it really
+    depends on the operations which are done inside. In cases where we had comparatively
+    fast face detection, we got lower FPS after adding more detection workers. The
+    time which is required for managing one more process can be bigger than the time
+    we gained from it. Then, neural networks which are used in the multiple workers,
+    will calculate tensors in a serial CUDA stream unless a separate stream is created
+    for each network, which may be tricky.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/149097ac697aa4502950caf54325d751.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source [https://mobidev.biz/wp-content/uploads/2021/01/pipeline-architecture-video-processing.png](https://mobidev.biz/wp-content/uploads/2021/01/pipeline-architecture-video-processing.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: One more technical issue which comes from multiple workers, is that due to their
+    concurrent nature, they don’t guarantee the order to be the same as in the input
+    sequence. Therefore, it requires additional effort to fix the order in the pipeline
+    stages where it is important (for example, encoding). The same problem actually
+    happens in the case of skipping frames. Anyway, with a certain configuration,
+    multiple workers gave an improvement as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[OpenAI Releases Two Transformer Models that Magically Link Language and Computer
+    Vision](/2021/01/openai-transformer-models-link-language-computer-vision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Python Libraries for Deep Learning, Natural Language Processing & Computer
+    Vision](/2020/11/top-python-libraries-deep-learning-natural-language-processing-computer-vision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 Computer Vision Papers 2020](/2021/01/top-10-computer-vision-papers-2020.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Bounding Box Deep Learning: The Future of Video Annotation](https://www.kdnuggets.com/2022/07/bounding-box-deep-learning-future-video-annotation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Text-2-Video Generation: Step-by-Step Guide](https://www.kdnuggets.com/2023/08/text2video-generation-stepbystep-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing Key Terms, Explained](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Representation for Natural Language Processing Tasks](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python String Processing Cheatsheet](https://www.kdnuggets.com/2020/01/python-string-processing-primer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

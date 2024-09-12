@@ -1,0 +1,284 @@
+- en: 'Pandas on Steroids: End to End Data Science in Python with Dask'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/11/pandas-steroids-dask-python-data-science.html](https://www.kdnuggets.com/2020/11/pandas-steroids-dask-python-data-science.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Ravi Shankar](https://www.linkedin.com/in/ravi-shankar-83863441/), Data
+    Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/2dba06d5b5ef5894865533eb15a7b35a.png)Dask - Familiar pandas
+    with superpowers'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As the saying goes, a data scientist spends 90% of their time in cleaning data
+    and 10% in complaining about the data. Their complaints may range from data size,
+    faulty data distributions, Null values, data randomness, systematic errors in
+    data capture, differences between train and test sets and the list just goes on
+    and on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One common bottleneck theme is the enormity of data size where either the data
+    doesn't fit into memory or the processing time is so large(In order of multi-mins)
+    that the inherent pattern analysis goes for a toss. Data scientists by nature
+    are curious human beings who want to identify and interpret patterns normally
+    hidden from cursory Drag-N-Drop glance. They need to wear multiple hats and make
+    the data confess via repeated tortures(read iterations ????)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'They wear multiple hats during exploratory data analysis and from a minimal
+    dataset with 6 columns on New York Taxi Fare dataset([https://www.kaggle.com/c/new-york-city-taxi-fare-prediction](https://www.kaggle.com/c/new-york-city-taxi-fare-prediction))
+    - ID, Fare, Time of Trip, Passengers and Location, their questions may range from:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How the fares have changed Year-Over-Year?
+  prefs:
+  - PREF_BQ
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Has the number of trips increased across the years?
+  prefs:
+  - PREF_BQ
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Do people prefer traveling alone or they have company?
+  prefs:
+  - PREF_BQ
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Has the small distance rides increased as people have become lazier?
+  prefs:
+  - PREF_BQ
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: What time of the day and day of week do people want to travel?
+  prefs:
+  - PREF_BQ
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Is there emergence of new hotspots in the city recently except the regular Air
+    Port pickup and drop?
+  prefs:
+  - PREF_BQ
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Are people taking more inter-city trips?
+  prefs:
+  - PREF_BQ
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Has the traffic increased leading to more fares/time taken for the same distances?
+  prefs:
+  - PREF_BQ
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Are there cluster of pick-up and Drop points or areas which see high traffic?
+  prefs:
+  - PREF_BQ
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Are there outliers in data i.e 0 distance and fare of $100+ and so on?
+  prefs:
+  - PREF_BQ
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Do the demand change during Holiday season and airport trips increase?
+  prefs:
+  - PREF_BQ
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Is there any correlation of weather i.e rain or snow with the taxi demand?
+  prefs:
+  - PREF_BQ
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Even after answering these questions, multiple sub-threads can emerge i.e can
+    we predict how the Covid affected New year is going to be, How the annual NY marathon
+    shifts taxi demand, If a particular route if more prone to have multiple passengers(Party
+    hub) vs Single Passengers( Airport to Suburbs).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To quench these curiosities, time is of the essence and its criminal to keep
+    the data scientists waiting for 5+ minutes to read a csv file(55 Mn rows) or do
+    a column add followed by aggregation. Also, since the majority of Data Scientists
+    are self-taught and they have been so much used to pandas data frame API that
+    they wouldn''t want to start the learning process all over again with a different
+    API like numba, Spark or datatable. I have tried juggling between DPLYR(R), Pandas(Python)
+    and pyspark(Spark) and it is a bit unfulfilling/unproductive considering the need
+    for a uniform pipeline and code syntax. However, for the curious folks, I have
+    written a pyspark starter guide here: [https://medium.com/@ravishankar_22148/billions-of-rows-milliseconds-of-time-pyspark-starter-guide-c1f984023bf2](https://medium.com/@ravishankar_22148/billions-of-rows-milliseconds-of-time-pyspark-starter-guide-c1f984023bf2)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In subsequent sections, I am trying to provide a hands on guide to Dask with
+    minimal architectural change from our beloved Pandas:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. Data Read and Profiling**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Dask vs Pandas speed
+  prefs: []
+  type: TYPE_NORMAL
+- en: How is Dask able to process data ~90X faster i.e Sub 1 secs to 91 secs in pandas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/76f6d452602d9621a742e24474e658c1.png)*Source: *[*https://dask.org/*](https://dask.org/)'
+  prefs: []
+  type: TYPE_IMG
+- en: What makes Dask so popular is the fact that it makes analytics scalable in Python
+    and not necessarily need switching back and forth between SQL, Scala and Python.The
+    magical feature is that this tool requires minimum code changes. It breaks down
+    computation into pandas data frames and thus operates in parallel to enable fast
+    calculations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/643af4e780c97b3377bbe76e9f67246e.png)*Source:* [*https://docs.dask.org/en/latest/*](https://docs.dask.org/en/latest/)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**2\. Data Aggregation**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With absolutely 0 change from Pandas API, it is able to perform aggregation
+    and sorting in milliseconds. Please note .**compute() **function at the end of
+    lazy computation which brings the results of big data to memory in Pandas Data
+    Frame.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3\. Machine Learning**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Code snippet below provides a working example of feature engineering and ML
+    model building in Dask using XGBoost
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature Engineering and ML Model with Dask
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Conclusion:**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Dask is a powerful tool offering parallel computing, big data handling and creating
+    end to end Data Science pipeline. It has a steep learning curve as the API is
+    almost similar to pandas and it can handle Out Of Memory computations(~10X of
+    RAM) like a breeze.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since it is a living blog, I will be writing subsequent parts in Dask series
+    where we will be targeting Kaggle leaderboard using parallel processing. Let me
+    know in comments if you are facing any issues in setting up Dask or unable to
+    perform any Dask Operations or even for a general chit-chat. Happy Learning!!!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Sources:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://ml.dask.org/](https://ml.dask.org/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://dask.org/](https://dask.org/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://medium.com/@ravishankar_22148/billions-of-rows-milliseconds-of-time-pyspark-starter-guide-c1f984023bf2](https://medium.com/@ravishankar_22148/billions-of-rows-milliseconds-of-time-pyspark-starter-guide-c1f984023bf2)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://towardsdatascience.com/how-i-learned-to-love-parallelized-applies-with-python-pandas-dask-and-numba-f06b0b367138](https://towardsdatascience.com/how-i-learned-to-love-parallelized-applies-with-python-pandas-dask-and-numba-f06b0b367138)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://www.kaggle.com/yuliagm/how-to-work-with-big-datasets-on-16g-ram-dask](https://www.kaggle.com/yuliagm/how-to-work-with-big-datasets-on-16g-ram-dask)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://medium.com/better-programming/what-is-dask-and-how-can-it-help-you-as-a-data-scientist-72adec7cec57](https://medium.com/better-programming/what-is-dask-and-how-can-it-help-you-as-a-data-scientist-72adec7cec57)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Bio: [Ravi Shankar](https://www.linkedin.com/in/ravi-shankar-83863441/)**
+    is a Data Scientist-II at Amazon Pricing.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/analytics-vidhya/pandas-on-steroids-dask-end-to-end-data-science-with-python-code-1845d3722c8a).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Machine Learning in Dask](/2020/06/machine-learning-dask.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science in the Cloud with Dask](/2020/10/data-science-cloud-dask.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why and How to Use Dask with Big Data](/2020/04/dask-big-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,259 @@
+- en: How I Did Automatic Image Labeling Using Grounding DINO
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html](https://www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: As a Machine Learning developer, I personally feel image labeling is unexciting,
+    time-consuming, and an expensive task. But thankfully, with recent developments
+    in the computer vision domain, particularly the introduction of powerful zero-shot
+    object detectors like **Grounding DINO**, we can actually automate most of the
+    image labeling process for the majority of use cases. We can actually write a
+    Python script that will do 95% of the work for us. Our only task is to review
+    those annotations at the very end and possibly add or remove some bounding boxes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![How I Did Automatic Image Labeling Using Grounding DINO](../Images/ffad343eeb8ea2486f378e11fd6c4dd0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Before getting into Auto Image labeling we should know what is Grounding DINO
+    ? and why are we using it ?*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Grounding DINO can detect dominant objects with given prompt inputs such as
+    category names or referring expressions. The primary solution to open set object
+    detection is introducing language to a closed set detector. DINO for open set
+    concept generalization: to effectively fuse language and vision modalities, we
+    conceptually divide a closed set detector into three phases: backbone, neck, and
+    head. We then propose a tight fusion solution by fusing language information in
+    neck query initialization and head Grounding DINO includes a feature enhancer,
+    language-guided query selection, and a cross-modality decoder for cross-modality
+    fusion.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Grounding DINO achieves a 52.5 percentage AP(Average Precision) on the COCO
+    dataset detection zero shot transfer benchmark that is without any training data
+    from COCO dataset after fine-tuning on COCO dataset it achieves 63.0 AP. With
+    a mean 26.1 AP, it establishes a new record on the OdinW zero shot benchmark.
+    We also explore how to leverage pre-trained DINO by training language and fusion
+    modules only. Grounding DINO from DINO converges much faster than baseline models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: our Grounding DINO can also collaborate with stable diffusion for image editing,
+    for example we can detection the Green Mountain in the image and generate new
+    images with a text prompt Red Mountain also it can modify the background of a
+    person by first detecting a face we can also use GLIGEN for more detailed controls
+    like assigning each box an object this is our model Grounding DINO for open set
+    object detection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Okay, dive into the auto image labeling part, and here i’m* ***Google colab***
+    *for high Computing Power.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s begin,
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Let’s make sure that we have GPU access. We can use the nvidia-smi command to
+    check if the GPU is connected or not to check if the GPU is connected or not.
+    In case you face any problems, navigate to Edit -> Notebook settings -> Hardware
+    accelerator, set it to GPU, and then click Save. which will greatly shorten the
+    time it takes for auto-labeling to be complete.
+  prefs: []
+  type: TYPE_NORMAL
+- en: nvidia-smi
+  prefs: []
+  type: TYPE_NORMAL
+- en: Install Grounding DINO Model
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Our project will use groundbreaking design?—?[Grounding DINO](https://github.com/IDEA-Research/GroundingDINO)
+    for zero-shot detection. We have to install it first.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The [supervision](https://github.com/roboflow/supervision) python index package
+    will help us process, filter, and visualize our detections as well as to save
+    our dataset and will be the glue that holds all the pieces of our demo together.
+    With Grounding DINO, a lesser version of the “supervision” was installed. But
+    for this demonstration, we require the new features added in the most recent iterations.
+    In order to install version “0.6.0,” we first uninstall the current “supervision”
+    version.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The Grounding DINO Model Weights Download
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We require the configuration and model weights files in order to run Grounding
+    DINO. We have already cloned the Grounding DINO repository, which contains the
+    configuration file. On the other hand, we must download the weights file. We check
+    to see if the paths are accurate and that the files are present on disc after
+    writing the paths to both files to the variablesGROUNDING_DINO_CONFIG_PATHand
+    GROUNDING_DINO_CHECKPOINT_PATH.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Assuming you have already installed PyTorch, you can use the following command
+    line to import torchand set the device to use for computation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Load Grounding DINO Model
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Dataset Preparation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Create a folder called data and move the unlabelled images to that folder.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Single Image Mask Auto Annotation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Before we automatically annotate the entire dataset let’s focus for a moment
+    on a single image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Zero-Shot Object Detection with Grounding DINO
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We will use the enhance_class_name function, which is described below, to use
+    some prompt engineering to get better Grounding DINO detection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![XXXXX](../Images/df7c2c4d3992db0607ce63ed07c568bc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Full Dataset Mask Auto Annotation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Extract Labels from Images
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Plotting the Results
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![XXXXX](../Images/f1fe739133f9fb0f92645477361e5364.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Save labels in Pascal VOC XML
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Thanks for reading !!!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is a link for [entire colab fil](https://colab.research.google.com/drive/17yOBr8kVfbJPfEl3pZVbfJBEqlqqsHtM?usp=sharing)e.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reference:[https://arxiv.org/abs/2303.05499](https://arxiv.org/abs/2303.05499)
+    & [https://github.com/IDEA-Research/GroundingDINO](https://github.com/IDEA-Research/GroundingDINO)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Parthiban M](https://www.linkedin.com/in/parthibanma/)** currently lives
+    in Chennai (India) and work at [SeeWise](https://www.seewise.ai/) . He is a ML
+    Developer with wide experience in understanding the problems and providing solutions
+    by developing ML models using Computer vision, TensorFlow and Deep learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Ace Data Science Assessment Test by Using Automatic EDA Tools](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Labeling for Machine Learning: Market Overview, Approaches, and Tools](https://www.kdnuggets.com/2021/12/data-labeling-ml-overview-and-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Convert an RGB Image to Grayscale](https://www.kdnuggets.com/2019/12/convert-rgb-image-grayscale.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Image Classification with Convolutional Neural Networks (CNNs)](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

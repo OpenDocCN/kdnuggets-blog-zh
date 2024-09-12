@@ -1,0 +1,523 @@
+- en: 'Shapash: Making Machine Learning Models Understandable'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/04/shapash-machine-learning-models-understandable.html](https://www.kdnuggets.com/2021/04/shapash-machine-learning-models-understandable.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Yann Golhen](https://twitter.com/GolhenY), MAIF, Lead Data Scientist**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/51fc6f2804c9a06c9bd2adee12ade00b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*[Shapash Web App Demo](https://shapash-demo.ossbymaif.fr/)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Shapash](https://github.com/MAIF/shapash) by [MAIF](https://www.maif.fr/) is
+    a Python Toolkit that facilitates the understanding of Machine Learning models
+    to data scientists. It makes it easier to share and discuss the model interpretability
+    with non-data specialists: business analysts, managers, and end-users.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Concretely, Shapash provides easy-to-read visualizations and a [web app](https://shapash-demo.ossbymaif.fr/).
+    Shapash displays results with appropriate wording (preprocessing inverse/post-processing).
+    Shapashis useful in an operational context as it enables data scientists to use
+    explicability from exploration to production: You can easily deploy local explainability
+    in production to complete each of your forecasts/recommendations with a summary
+    of the local explainability.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post, we will present the main features of Shapash and how it operates.
+    We will illustrate the implementation of the library on a concrete use case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Elements of context
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Interpretability and explicability of models are hot topics. There are many
+    articles, publications, and open-source contributions about it. All these contributions
+    do not deal with the same issues and challenges.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Most data scientists use these techniques for many reasons: to better understand
+    their models, to check that they are consistent and unbiased, as well as for debugging.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'However, there is more to it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Intelligibility matters for pedagogic purposes. Intelligible Machine Learning
+    models can be debated with people that are not data specialists: business analysts,
+    final users…*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Concretely, there are two steps in our Data Science projects that involve non-specialists:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Exploratory step & Model fitting**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: At this step, data scientists and business analysts discuss what is at stake
+    and define the essential data they will integrate into the projects. It requires
+    understanding the subject well and the main drivers of the problem we are modeling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To do this, data scientists study global explicability, features importance,
+    and which role the model’s top features play. They can also locally look at some
+    individuals, especially outliers. A Web App is interesting at this phase because
+    they need to look at visualizations and graphics. Discussing these results with
+    business analysts is interesting to challenge the approach and validate the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Deploying the model in a production environment**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'That’s it! The model is validated, deployed, and gives predictions to the end-users.
+    Local explicability can bring them a lot of value, only if there is a way to provide
+    them with a good, useful, and understandable summary. It will be valuable to them
+    for two reasons:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Transparency brings trust: They will trust models if they understands them.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Human stays in control: No model is 100% reliable. When they can understand
+    the algorithm’s outputs, users can overturn the algorithm suggestions if they
+    think they rest on incorrect data.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Shapash has been developed to help data scientists to meet these needs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fecdf3e40f045d5ad620d22a65d0dab2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Shapash key features
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Easy-to-read visualizations, for everyone.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'A web app: To understand how a model works, you have to look at multiple graphs,
+    features importance, and global contribution of a feature to a model. A web app
+    is a useful tool for this.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Several methods to show results with appropriate wording (preprocessing inverse,
+    post-processing). You can easily add your data dictionaries, *category-encoders*object,
+    or sklearn *ColumnTransformer* for more explicit outputs.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Functions to easily save *Pickle*files and to export results in tables.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Explainability summary: the summary is configurable to fit with your need and
+    to focus on what matters for local explicability.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Ability to easily deploy in a production environment and to complete every prediction/recommendation
+    with a local explicability summary for each operational apps (Batch or API)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Shapashis open to several ways of proceeding: It can be used to easily access
+    results or to work on better wording. Very few arguments are required to display
+    results. But the more you work with cleaning and documenting the dataset, the
+    clearer the results will be for the end-user.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Shapash works for Regression, Binary Classification, or Multiclass problems.
+    It is compatible with many models: *Catboost*, *Xgboost*, *LightGBM*, *Sklearn
+    Ensemble*, *Linear models*, *SVM*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Shapash is based on local contributions calculated with Shap (shapley values),
+    Lime, or any technique which allows computing summable local contributions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Installation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'You can install the package through pip:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Shapash Demonstration
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s useShapash on a concrete dataset. In the rest of this article, we will
+    show you how Shapash can explore models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We will use the famous “House Prices” dataset from [Kaggle](https://www.kaggle.com/c/house-prices-advanced-regression-techniques) to
+    fit a regressor and predict house prices! Let’s start by loading the Dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/20e1aaad4f5cddcee1e4273d8f4aa92d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Encode the categorical features:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Train, test split and model fitting:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And predict test data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s discover and use Shapash SmartExplainer.
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*Step 1 — Import*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*Step 2 — Initialise a SmartExplainer Object*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'features_dict: dict that specifies the meaning of each column name of the x
+    pd.DataFrame.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Step 3 — Compile*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: The compile method permits to use of another optional parameter: *postprocess. *It
+    gives the possibility to apply new functions to specify to have better wording
+    (regex, mapping dict, …).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, we can display results and understand how the regression model works!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Step 4 — Launching the Web App*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: The web app link appears in Jupyter output (access the demo [here](https://shapash-demo.ossbymaif.fr/)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**There are four parts to this Web App:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fed8547ee11acd20063b0ea415d750eb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Each one interacts to help to explore the model easily.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Features Importance*****:** you can click on each feature to update the
+    contribution plot below.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Contribution plot*****:** How does a feature influence the prediction? Display
+    violin or scatter plot of each local contribution of the feature.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Local Plot:***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Local explanation: which features contribute the most to the predicted value.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can use several buttons/sliders/lists to configure the summary of this local
+    explainability. We will describe below with the *filter *method the different
+    parameters you can work your summary with.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This web app is a useful tool to discuss with business analysts the best way
+    to summarize the explainability to meet operational needs.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***Selection Table:*** It allows the Web App user to select:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A subset to focus the exploration on this subset
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A single row to display the associated local explanation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'How do you use the data table to select a subset? At the top of the table,
+    just below the name of the column that you want to use to filter, specify:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*=Value, >Value, <Value*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*If you want to select every row containing a specific word, just type that
+    word without “=”*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'There are a few options available on this web app (top right button). The most
+    important one is probably the size of the sample (default: 1000). To avoid latency,
+    the web app relies on a sample to display the results. Use this option to modify
+    this sample size.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To kill the app:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*Step 5 — The plots*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: All the plots are available in jupyter notebooks, and the paragraph below describes
+    the key points of each plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Feature Importance**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This parameter allows comparing features importance of a subset. It is useful
+    to detect specific behavior in a subset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/63a1ec40bd82fef446f805462e1b6c03.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Contribution plot**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Contribution plots are used to answer questions like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How a feature impacts my prediction? Does it contribute positively? Is the feature
+    increasingly contributing? decreasingly? Are there any threshold effects? For
+    a categorical variable, how does each modality contributes? This plot completes
+    the importance of the features for the interpretability, the global intelligibility
+    of the model to better understand the influence of a feature on a model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are several parameters on this plot. Note that the plot displayed adapts
+    depending on whether you are interested in a categorical or continuous variable
+    (Violin or Scatter) and depending on the type of use case you address (regression,
+    classification).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/d361f2b143a435b2e754e9f26f978b40.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Contribution plot applied to a continuous feature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Classification Case: Titanic Classifier — Contribution plot applied to categorical
+    feature.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8e8f2b9b10e345aaf31c24e2f09765e6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/dc03bafa2582a69592c94f8d65ff3311.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Local plot**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can use local plots for local explainability of models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *filter()* and *local_plot()* methods allow you to test and choose the best
+    way to summarize the signal that the model has picked up. You can use it during
+    the exploratory phase. You can then deploy this summary in a production environment
+    for the end-user to understand in a few seconds what are the most influential
+    criteria for each recommendation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will publish a second article to explain how to deploy local explainability
+    in production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Combine the filter and local_plot methods**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Use the *filter* method to specify how to summarize local explainability. You
+    have four parameters to configure your summary:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'max_contrib: maximum number of criteria to display'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'threshold: minimum value of the contribution (in absolute value) necessary
+    to display a criterion'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'positive: display only positive contribution? Negative? (default None)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'features_to_hide: list of features you don’t want to display'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: After defining these parameters, we can display the results with the *local_plot()*
+    method, or export them with *to_pandas().*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/d03e113c530d150bab918467be11a2ff.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Export to pandas DataFrame:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/61069feea112c819793560776973a889.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Compare plot**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: With the *compare_plot()* method, the SmartExplainer object makes it possible
+    to understand why two or more individuals do not have the same predicted values.
+    The most decisive criterion appears at the top of the plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/5ebef70c948abff403a8f237c1017e12.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We hope that Shapash will be useful in building trust in AI. Thank you in advance
+    to all those who will give us their feedback, idea… Shapash is opensource! Feel
+    free to contribute by commenting on this post or directly on the [GitHub discussions](https://github.com/MAIF/shapash/discussions).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://pub.towardsai.net/shapash-making-ml-models-understandable-by-everyone-8f96ad469eb3).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Introduction to the White-Box AI: the Concept of Interpretability](https://www.kdnuggets.com/2021/03/introduction-white-box-ai-interpretability.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deep learning doesn’t need to be a black box](https://www.kdnuggets.com/2021/02/deep-learning-not-black-box.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Explaining the Explainable AI: A 2-Stage Approach](https://www.kdnuggets.com/2020/10/explaining-explainable-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

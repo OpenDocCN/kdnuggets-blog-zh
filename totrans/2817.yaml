@@ -1,0 +1,421 @@
+- en: Using AI to Identify Wildlife in Camera Trap Images from the Serengeti
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/02/using-ai-identify-wildlife-images-serengeti.html](https://www.kdnuggets.com/2020/02/using-ai-identify-wildlife-images-serengeti.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Marek Rogala](https://www.linkedin.com/in/marrogala/) and [Jędrzej Świeżewski,
+    PhD,](https://www.linkedin.com/in/swiezew/) [Appsilon](https://appsilon.com/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An opportunity for biodiversity research...
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Camera trap imaging (automatic photography of animal species in the wild) is
+    becoming the gold standard in biodiversity conservation efforts. It allows for
+    accurately monitoring large swaths of land at an unprecedented scale. However,
+    the sheer volume of data generated using these devices makes it very difficult
+    for humans to analyse. With recent developments in machine learning and computer
+    vision, we acquired the tools to resolve this issue and provide the biodiversity
+    community with an ability to tap the potential of the knowledge generated automatically
+    with systems triggered by a combination of heat and motion.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/03a373af4a8cc9ecf8e46e92aa13c817.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Camera traps, arguably less obstructive than human surveyors, still attract
+    attention
+  prefs: []
+  type: TYPE_NORMAL
+- en: …and a challenge for the Machine Learning community
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We recently took part in **Hakuna-ma Data**, a competition organised by [DrivenData](https://www.drivendata.org/competitions/59/camera-trap-serengeti/page/145/) in
+    partnership with [Microsoft’s AI for Earth](https://www.microsoft.com/en-us/ai/ai-for-earth),
+    which asked participants to build an algorithm for wildlife detection that would
+    generalise well across time and locations. This competition differed from previous
+    iterations in the sense that researchers, data scientists and developers did not
+    have direct access to the test image set. Rather, they were asked to submit their
+    models and have them executed by the event organizers in Microsoft Azure. 811
+    participants from around the world trained their models on the publicly available
+    data from 10 seasons to finally submit their solution to be tested on the 11th
+    season’s private data set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We congratulate all our fellow competitors and the *ValAn_picekl* team for taking
+    the grand prize of $12,000\. We are also proud to announce that we took 5th place
+    in the final leaderboard and we would like to share how we managed to achieve
+    this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can play with our final model in a ready-to-run Google Colab notebook [here](https://colab.research.google.com/github/Appsilon/serengeti_try_it_yourself/blob/master/classify_images_on_colab.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our approach
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The competition involved processing large volumes of images so using a fast
+    neural network framework with strong GPUs in the backend was a must. We were provisioning
+    virtual machines from Google Cloud Platform equipped with sufficiently powerful
+    GPUs (ranging from Tesla K80 to Tesla V100 for the most heavy lifting). Typically
+    we were running a few of them in parallel to speed up experimentation. We worked
+    with Python code, coordinating crucial parts of code in a GitHub repository and
+    using notebooks for fast experimenting and visual inspection of the performance
+    of models. We built the models in Fast.ai (with PyTorch backend), and used the
+    integration with [Weights & Biases](https://www.wandb.com/) for keeping track
+    of our experiments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Based on previous [studies](https://www.pnas.org/content/115/25/E5716) of the
+    dataset, we decided to work with ResNet 50, an architecture of a rather moderate
+    depth. Since we joined the competition very close to the end, we opted not to
+    experiment with other (or simply deeper) architectures, and after seeing promising
+    initial results of this one, decided to focus on improving them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Given the lack of time we had to optimise our strategy. We used an agile approach:
+    we quickly created our baseline “MVP” (Minimum Viable Product) of a solution and
+    then iterated a lot based on its results. Initially, submissions were allowed
+    only every five days, which gave us a natural sprint-like rhythm.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The dataset was challenging in itself: 6.6 million photos with relatively large
+    resolution – several terabytes of data. We reused a version of the dataset provided
+    by one of the participants in which the photos’ resolution had been significantly
+    scaled down (by a factor 4 on each side).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![class of image and percentage of occurrence ](../Images/317f4a3731b22e9118ed502993f0a611.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The dataset was very imbalanced – around 75% of the images were empty. The most
+    popular animals are wildebeest, zebra and Thomson’s gazelle. On the other side
+    of the spectrum you have super rare animals like steenbok or bats, visible only
+    in a handful of photos.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/74b46d7bdee3dcddb6f66523f5aa0f2e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As rare as in nature – rhinos were one of the least common species in the dataset
+  prefs: []
+  type: TYPE_NORMAL
+- en: Top 5 things that worked
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We believe the following 5 key factors contributed the most to our models’
+    success:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. Large validation set**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This was crucial to ensure that the model generalises well, because we were
+    assessed on the last season – a private, unseen dataset. Each season comes from
+    a different year. We decided to hold out an entire season (season 8) for validation
+    – we wanted it to contain many images (almost a million!), and yet be relatively
+    recent – since the test set consisted of yet unpublished season 11\. This choice
+    was also supported by a study of the distributions of individual species across
+    seasons. We noticed that only the last three seasons (8, 9 and 10) contained photos
+    of a few of the relatively rare species.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2\. Training with growing resolution**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We divided the training process into three stages. Each stage had a part in
+    which we trained only the final layers of the network followed by training of
+    all the layers. At each stage we trained the model on images of an increasingly
+    higher resolution, letting us train longer without overfitting. The maximal resolution
+    we used was 512×384, which was still a quarter of the provided images in each
+    dimension.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The final model was trained in the following stages:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5 epochs on network’s final layers on 128×96 px images
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 5 epochs on all layers on 128×96 px images
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 5 epochs on network’s final layers on 256×192 px images
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 5 epochs on all layers on 256×192 px images
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 5 epochs on network’s final layers on 512×384 px images
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 5 epochs on all layers on 512×384 px images
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This approach significantly sped up our training – even a model operating on
+    128×96 images achieved a good accuracy, and we could train it much faster than
+    the 512×384 model. At this point we would like to give kudos to Pavel Pleskov,
+    a participant of the competition who, in the spirit of healthy rivalry, shared
+    a scaled down version of the dataset with the community saving us download time
+    and allowing many more participants to join.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3\. Data augmentation / one cycle fitting**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We used standard image augmentations during training (horizontal flips, small
+    rotations, small zooms, small warps and tweaks of lighting) to keep the model
+    from overfitting on a pixel level and help it generalize. We used [Leslie Smith’s
+    one cycle policy](https://arxiv.org/pdf/1803.09820.pdf) to speed up the training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**4\. Aggressive undersampling**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We eliminated large portions of the most frequent classes (e.g., 95% of empty
+    photos) from our training to put more stress during training on examples from
+    the less frequent classes. This allowed us to train significantly faster, helping
+    the model to focus on the challenging part of the input space. A caveat here was
+    to remove them in a smart way – keeping examples with more than one animal in
+    the training set as they are harder for models to get right.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b843ba700b8e735ff3b98deeceb8be35.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Multiple animals in one picture – a challenging case for an ML model
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**5\. Inspection of losses / post-processing**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: What helped us to push the accuracy into top places was working deeply with
+    the data and results given by our initial models. We wanted to see which images
+    we got wrong and what happened in each range of our predicted certainty. To minimize
+    our loss and optimize our submission we studied individual classes and inspected
+    where we lose the most.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At this stage we chose to incorporate a simple inference mechanism from all
+    the images in a sequence and not just single images. We took the predictions from
+    the first image of each sequence (again guided by results on the validation set),
+    unless the maximum prediction for a given species in a photo later in the sequence
+    was higher and exceeded a certain threshold (this way we allowed, e.g., birds
+    from “otherbird” flying by in frames later in the sequence to affect the prediction).
+    Analogously for the “empty” category, we took the prediction from the first photo
+    in a sequence unless in a later photo, the prediction for this class was below
+    a certain threshold (this way, if an animal appeared only later, the prediction
+    for “empty” was toned down suitably).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We next processed ranges of predicted values for each of the species with a
+    high occurrence frequency and grid-searched for basic linear transformations minimizing
+    our loss on the validation set. This helped the score a lot – most likely by getting
+    the model’s returned probabilities to reflect species distribution in the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In retrospect – what we would like to have done
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'There were a few more ideas we were eager to try, but because we joined the
+    competition only 3 weeks before its conclusion, we did not. Most notably:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Focal loss**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The dataset at hand was highly imbalanced. An alternative to the aggressive
+    downsampling we implemented (see above), would have been to use a modified loss
+    function, namely the focal loss. While [first proposed](https://arxiv.org/pdf/1708.02002.pdf) in
+    the context of object detection, it has been recently used also in the context
+    of imbalanced classification problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**More training time, more epochs**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Various signs indicated that our models might have been simply trained longer
+    to achieve even better scores. Wary of overfitting, we have approached the training
+    schedules conservatively, however given more time, we would have liked to explore
+    longer training at the various stages (see above).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Use a 2-stage approach: animal location detection and animal classification**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We considered using a two stage approach, with the first model focusing on animal
+    presence regardless of its species, and the second model focusing on species classification.
+    Such an approach could have boosted accuracy and was suggested by previous research.
+    Due to limited time we chose not to try this approach.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After the competition we learned about great work in this area by Siyu Yang
+    and Dan Morris from Microsoft AI for Earth. They built [a model for animal detection
+    in pictures](https://medium.com/microsoftazure/accelerating-biodiversity-surveys-with-azure-machine-learning-9be53f41e674).
+    It identifies the presence of animals in photos, providing bounding boxes for
+    positive predictions. The strength of the model comes from it being trained on
+    data from multiple geographical locations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: They suggest a very interesting approach of using a generic model for detecting
+    animal location, and a second project- and location-specific model for species
+    classification. One clear advantage is that the second model can focus precisely
+    on the animal, which clearly has a potential to give better accuracy. This method
+    can also help a lot when it comes to recognizing multiple animals in a picture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data cleaning**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Investigating our models’ performance, we noticed many examples of mislabels
+    (e.g., only a leg of a zebra visible in a single image of a sequence – labelled
+    as empty, was classified as a zebra by our model with high certainty). There were
+    also many examples of images taken at night in which human labellers spotted no
+    animals, while models were very sure about seeing them. After manually tweaking
+    the color levels of such images, the darkness indeed revealed the detected animals.
+    This fact touches on a very important topic: whether we should build models to
+    replicate the labelers’ work (an approach promoted by the rules of the competition)
+    or rather should we focus on models, which are as good as possible in detecting
+    animals in the captured images.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why we joined and what it meant for us
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The competition gave us a deep dive into the world of wildlife image classification.
+    We are very satisfied with the result and had a lot of fun whilst working on these
+    models. We were able to demonstrate and polish our computer vision skills, which
+    will be critical to our [AI for Good](https://appsilon.com/ai-for-good/) initiative.
+    We are currently in the process of building a pilot version of a wildlife image
+    classifier for the National Parks Agency of Gabon and we will apply our new knowledge
+    to this end. Stay tuned for more information about our upcoming projects. We are
+    determined to show that AI can have a tangible, positive impact on life and the
+    world we all share.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Follow Appsilon Data Science on Social Media**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Follow[ @Appsilon](https://twitter.com/appsilon) on Twitter
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Follow Appsilon on[ LinkedIn](https://www.linkedin.com/company/appsilon)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sign up for our company[ newsletter](https://appsilon.com/blog/)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Try out our R Shiny[ open source](https://appsilon.com/opensource/) packages
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sign up for the AI for Good[ newsletter](https://appsilon.com/ai-for-good/)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We are hiring [software engineers](https://appsilon.com/careers/)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Original](https://appsilon.com/using-ai-identify-wildlife-camera-trap-images-serengeti/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Create Your Own Computer Vision Sandbox](/2020/02/computer-vision-sandbox.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A bird’s-eye view of modern AI from NeurIPS 2019](/2020/01/modern-ai-from-neurips-2019.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI and Machine Learning In Our Every Day Life](/2020/02/ai-machine-learning-everyday-life.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[4 Factors to Identify Machine Learning Solvable Problems](https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Identify Missing Data in Time-Series Datasets](https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

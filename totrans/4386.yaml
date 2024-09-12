@@ -1,0 +1,351 @@
+- en: Which flavor of BERT should you use for your QA task?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/10/flavor-bert-use-qa-task.html](https://www.kdnuggets.com/2020/10/flavor-bert-use-qa-task.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Olesya Bondarenko](https://www.linkedin.com/in/ovbondarenko/), [Tangible
+    AI](https://tangibleai.com/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/efabd8cadd6a17ae6382400d8e2b50db.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Evan Dennis](https://unsplash.com/@evan__bray?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Making an intelligent chatbot has never been easier, thanks to the abundance
+    of open source natural language processing libraries, curated datasets and the
+    power of transfer learning. Building a basic question-answering functionality
+    with Transformers library can be as simple as this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And here is the output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: BOOM! It works!
+  prefs: []
+  type: TYPE_NORMAL
+- en: That low confidence score is a little worrisome, though. You’ll see how that
+    comes into play later, when we talk about BERT’s ability to detect impossible
+    questions and irrelevant contexts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, taking some time to choose the right model for your task will ensure
+    that you are getting the best possible out of the box performance from your conversational
+    agent. Your choice of both language models and a benchmarking dataset will make
+    or break the performance of your chatbot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: BERT (Bidirectional Encoding Representations for Transformers) models perform
+    very well on complex information extraction tasks. They can capture not only meaning
+    of words, but also the context. Before choosing model (or settling for the default
+    option) you probably want to evaluate your candidate model for accuracy and resources
+    (RAM and CPU cycles) to make sure that it actually meets your expectations. In
+    this article you will see how we benchmarked our QA model using [Stanford Question
+    Answering Dataset (SQuAD)](https://rajpurkar.github.io/SQuAD-explorer/). There
+    are many other good question-answering datasets you might want to use, including
+    Microsoft’s [NewsQA](https://www.microsoft.com/en-us/research/project/newsqa-dataset/), [CommonsenseQA](https://www.tau-nlp.org/commonsenseqa), [ComplexWebQA](https://www.tau-nlp.org/compwebq),
+    and many others. To maximize accuracy for your application you’ll want to choose
+    a benchmarking dataset representative of the questions, answers, and contexts
+    you expect in your application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Huggingface Transformers library](https://github.com/huggingface/transformers) has
+    a large catalogue of pretrained models for a variety of tasks: sentiment analysis,
+    text summarization, paraphrasing, and, of course, question answering. We chose
+    a few candidate question-answering models from the repository of available [models](https://huggingface.co/models?filter=question-answering).
+    Lo and behold, many of them have already been fine-tuned on the SQuAD dataset.
+    Awesome! Here are a few SQuAD fine-tuned models we are going to evaluate:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: distilbert-base-cased-distilled-squad
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: bert-large-uncased-whole-word-masking-finetuned-squad
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ktrapeznikov/albert-xlarge-v2-squad-v2
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: mrm8488/bert-tiny-5-finetuned-squadv2
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: twmkn9/albert-base-v2-squad2
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'We ran predictions with our selected models on both versions of SQuAD (version
+    1 and version 2). The difference between them is that SQuAD-v1 contains only answerable
+    questions, while SQuAD-v2 contains unanswerable questions as well. To illustrate
+    this, let us look at the below example from the SQuAD-v2 dataset. An answer to
+    Question 2 is impossible to derive from the given context from Wikipedia:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Question 1:**** “In what country is Normandy located?”*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '***Question 2:**** “Who gave their name to Normandy in the 1000’s and 1100’s”*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '***Context:**** “The Normans (Norman: Nourmands; French: Normands; Latin: Normanni)
+    were the people who in the 10th and 11th centuries gave their name to Normandy,
+    a region in France. They were descended from Norse (“Norman” comes from “Norseman”)
+    raiders and pirates from Denmark, Iceland and Norway who, under their leader Rollo,
+    agreed to swear fealty to King Charles III of West Francia. Through generations
+    of assimilation and mixing with the native Frankish and Roman-Gaulish populations,
+    their descendants would gradually merge with the Carolingian-based cultures of
+    West Francia. The distinct cultural and ethnic identity of the Normans emerged
+    initially in the first half of the 10th century, and it continued to evolve over
+    the succeeding centuries.”*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Our ideal model should be able to understand that context well enough to compose
+    an answer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us get started!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To define a model and a tokenizer in Transformers, we can use AutoClasses.
+    In most cases Automodels can derive the settings automatically from the model
+    name. We need only a few lines of code to set it up:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: We will use the human level performance as our target for accuracy. SQuAD leaderboard
+    provides human level performance for this task, which is 87% accuracy of finding
+    the exact answer and 89% f1 score.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You might ask, “How do they know what human performance is?” and “What humans
+    are they talking about?” Those Stanford researchers are clever. They just used
+    the same crowd-sourced humans that labeled the SQuAD dataset. For each question
+    in the test set they had multiple humans provide alternative answers. For the
+    human score they just left one of those answers out and checked to see if it matched
+    any of the others using the same text comparison algorithm that they used to evaluate
+    the machine model. The average accuracy for this “leave one human out” dataset
+    is what determined the human level score that the machines are shooting for.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To run predictions on our datasets, first we have to transform the SQuAD downloaded
+    files into computer-interpretable features. Luckily, the Transformers library
+    already has a handy set of functions to do exactly that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We will use PyTorch and its GPU capability (optional) to make predictions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Importantly, the model inputs should be adjusted for a DistilBERT model (such
+    as `distilbert-base-cased-distilled-squad`). We should exclude the “token_type_ids”
+    field due to the difference in DistilBERT implementation compared to BERT or ALBERT
+    to avoid the script erroring out. Everything else will stay exactly the same.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally, to evaluate the results, we can apply `squad_evaluate()` function
+    from Transformers library:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here is an example report generated by squad_evaluate:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now let us compare exact answer accuracy scores (“exact”) and f1 scores for
+    the predictions generated for our two benchmarking datasets, SQuAD-v1 and SQuAD-v2\.
+    All models perform substantially better on the dataset without negatives (SQuAD-v1),
+    but we do have a clear winner (`ktrapeznikov/albert-xlarge-v2-squad-v2`). Overall,
+    it performs better on both datasets. Another great news is that our generated
+    report for this model matches exactly the [report](https://huggingface.co/ktrapeznikov/albert-xlarge-v2-squad-v2) posted
+    by the author. The accuracy and f1 fall just a little short of the human level
+    performance, but is still a great result for a challenging dataset like SQuAD.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/85a80a058a58873103cf1a94c571a9d7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Table 1: Accuracy Scores for Each of 5 Models on SQuAD v1 & v2'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We are going to compare the full reports for SQuAD-v2 predictions in the next
+    table. Looks like `ktrapeznikov/albert-xlarge-v2-squad-v2` did almost equally
+    well on both tasks: (1) identifying the correct answers to the answerable questions,
+    and (2) weeding out the answerable questions. Interestingly though, `bert-large-uncased-whole-word-masking-finetuned-squad` offers
+    a significant (approximately 5%) boost to the prediction accuracy on the first
+    task (answerable questions), but completely failing on the second task.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ad6851a7b682fa593807d34d0e4eb284.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Table 2: Separate Accuracy Scores for Impossible Questions'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can optimize the model to perform better on identifying unanswerable questions
+    by adjusting the null threshold for the best f1 score. Remember, the best f1 threshold
+    is one of the outputs computed by the squad_evaluate function (`best_f1_thresh`).
+    Here is how the prediction metrics for SQuAD-v2 change when we apply `best_f1_thresh` from
+    the SQuAD-v2 report:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/2d82c766c61c3f4c2ba9836d38e89037.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Table 3: Adjusted Accuracy Scores'
+  prefs: []
+  type: TYPE_NORMAL
+- en: While this adjustment helps the model more accurately identify the unanswerable
+    questions, it does so at the expense of the accuracy of answered questions. This
+    trade-off should be carefully considered in the context of your application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s use the Transformers QA pipeline to test drive the three best models
+    with a few questions of our own. We picked the following the following passage
+    from a Wikipedia article on computational linguistics as an unseen example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Note that the last two questions are impossible to answer from the given context.
+    Here is what we got from each model we tested:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you can see, it is hard to evaluate a model based on a single data point,
+    since the results are all over the map. While each model gave the correct answer
+    to the first question (“When was computational linguistics invented?”), the other
+    questions proved to be more difficult. This means that even our best model probably
+    should be fine-tuned again on a custom dataset to improve further.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Take away:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Open source pretrained (and fine-tuned!) models can kickstart your natural language
+    processing project.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Before anything else, try to reproduce the original results reported by the
+    author, if available.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Benchmark your models for accuracy. Even models fine-tuned on the exact same
+    dataset can perform very differently.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Olesya Bondarenko](https://www.linkedin.com/in/ovbondarenko/)** is
+    Lead Developer at Tangible AI where she leads the effort to make QAry smarter.
+    QAry is an open source question answering system you can trust with your most
+    private data and questions.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://tangibleai.com/benchmarking-bert-based-transformers-for-question-answering-and-reading-comprehension-tests/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[BERT, RoBERTa, DistilBERT, XLNet: Which one to use?](/2019/09/bert-roberta-distilbert-xlnet-one-use.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simple Question Answering (QA) Systems That Use Text Similarity Detection
+    in Python](/2020/04/simple-question-answering-systems-text-similarity-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Spotting Controversy with NLP](/2020/05/spotting-controversy-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Best Architecture for Your Text Classification Task: Benchmarking…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Which Metric Should I Use? Accuracy vs. AUC](https://www.kdnuggets.com/2022/10/metric-accuracy-auc.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[ETL vs ELT: Which One is Right for Your Data Pipeline?](https://www.kdnuggets.com/2023/03/etl-elt-one-right-data-pipeline.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[RAG vs Finetuning: Which Is the Best Tool to Boost Your LLM Application?](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Reasons Why You Should Use Linear Regression Models Instead of…](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

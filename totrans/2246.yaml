@@ -1,0 +1,283 @@
+- en: 'LGBMClassifier: A Getting Started Guide'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/07/lgbmclassifier-gettingstarted-guide.html](https://www.kdnuggets.com/2023/07/lgbmclassifier-gettingstarted-guide.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![LGBMClassifier: A Getting-Started Guide](../Images/9691d4e5776180b0d0451b093e2119c0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Editor
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are a vast number of machine learning algorithms that are apt to model
+    specific phenomena. While some models utilize a set of attributes to outperform
+    others, others include weak learners to utilize the remainder of attributes for
+    providing additional information to the model, known as ensemble models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The premise of the ensemble models is to improve the model performance by combining
+    the predictions from different models by reducing their errors. There are two
+    popular ensembling techniques: bagging and boosting.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bagging, aka Bootstrapped Aggregation, trains multiple individual models on
+    different random subsets of the training data and then averages their predictions
+    to produce the final prediction. Boosting, on the other hand, involves training
+    individual models sequentially, where each model attempts to correct the errors
+    made by the previous models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we have context about the ensemble models, let us double-click on the
+    boosting ensemble model, specifically the Light GBM (LGBM) algorithm developed
+    by Microsoft.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is LGBMClassifier?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: LGBMClassifier stands for Light Gradient Boosting Machine Classifier. It uses
+    decision tree algorithms for ranking, classification, and other machine-learning
+    tasks. LGBMClassifier uses a novel technique of Gradient-based One-Side Sampling
+    (GOSS) and Exclusive Feature Bundling (EFB) to handle large-scale data with accuracy,
+    effectively making it faster and reducing memory usage.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Gradient-based One-Side Sampling (GOSS)?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Traditional gradient boosting algorithms use all the data for training, which
+    can be time-consuming when dealing with large datasets. LightGBM's GOSS, on the
+    other hand, keeps all the instances with large gradients and performs random sampling
+    on the instances with small gradients. The intuition behind this is that instances
+    with large gradients are harder to fit and thus carry more information. GOSS introduces
+    a constant multiplier for the data instances with small gradients to compensate
+    for the information loss during sampling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Exclusive Feature Bundling (EFB)?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In a sparse dataset, most of the features are zeros. EFB is a near-lossless
+    algorithm that bundles/combines mutually exclusive features (features that are
+    not non-zero simultaneously) to reduce the number of dimensions, thereby accelerating
+    the training process. Since these features are "exclusive", the original feature
+    space is retained without significant information loss.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Installation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'The LightGBM package can be installed directly using pip – python''s package
+    manager. Type the command shared below either on the terminal or command prompt
+    to download and install the LightGBM library onto your machine:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Anaconda users can install it using the “conda install” command as listed below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Based on your OS, you can choose the installation method using [this guide](https://lightgbm.readthedocs.io/en/latest/Installation-Guide.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hands-On!
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Now, let''s import LightGBM and other necessary libraries:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Preparing the Dataset
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'We are using the popular Titanic dataset, which contains information about
+    the passengers on the Titanic, with the target variable signifying whether they
+    survived or not. You can download the dataset from [Kaggle](https://www.kaggle.com/competitions/titanic/data)
+    or use the following code to load it directly from Seaborn, as shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Drop unnecessary columns such as “deck”, “embark_town”, and “alive” because
+    they are redundant or do not contribute to the survival of any person on the ship.
+    Next, we observed that the features “age”, “fare”, and “embarked” have missing
+    values – note that different attributes are imputed with appropriate statistical
+    measures.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Lastly, we convert the categorical variables to numerical variables using pandas'
+    categorical codes. Now, the data is prepared to start the model training process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Training the LGBMClassifier Model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To begin training the LGBMClassifier model, we need to split the dataset into
+    input features and target variables, as well as training and testing sets using
+    the train_test_split function from scikit-learn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s label encode categorical (“who”) and ordinal data (“class”) to ensure
+    that the model is supplied with numerical data, as LGBM doesn’t consume non-numerical
+    data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, we specify the model hyperparameters as arguments to the constructor,
+    or we can pass them as a dictionary to the set_params method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The last step to initiate the model training is to load the dataset by creating
+    an instance of the LGBMClassifier class and fitting it to the training data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, let us evaluate the trained classifier’s performance on the unseen or
+    test dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Hyperparameter Tuning
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The LGBMClassifier allows for much flexibility via hyperparameters which you
+    can tune for optimal performance. Here, we will briefly discuss some of the key
+    hyperparameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**num_leaves**: This is the main parameter to control the complexity of the
+    tree model. Ideally, the value of num_leaves should be less than or equal to 2^(max_depth).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**min_data_in_leaf**: This is an important parameter to prevent overfitting
+    in a leaf-wise tree. Its optimal value depends on the number of training samples
+    and num_leaves.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**max_depth**: You can use this to limit the tree depth explicitly. It''s best
+    to tune this parameter in case of overfitting.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Let''s tune these hyperparameters and train a new model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that the actual tuning of hyperparameters is a process that involves trial
+    and error and may also be guided by experience and a deeper understanding of the
+    boosting algorithm and subject matter expertise (domain knowledge) of the business
+    problem you're working on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post, you learned about the LightGBM algorithm and its Python implementation.
+    It is a flexible technique that is useful for various types of classification
+    problems and should be a part of your machine-learning toolkit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** is an AI strategist and
+    a digital transformation leader working at the intersection of product, sciences,
+    and engineering to build scalable machine learning systems. She is an award-winning
+    innovation leader, an author, and an international speaker. She is on a mission
+    to democratize machine learning and break the jargon for everyone to be a part
+    of this transformation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Getting Started with Automated Text Summarization](https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started Cleaning Data](https://www.kdnuggets.com/2022/01/getting-started-cleaning-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with SQL Cheatsheet](https://www.kdnuggets.com/2022/08/getting-started-sql-cheatsheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with spaCy for NLP](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyCaret](https://www.kdnuggets.com/2022/11/getting-started-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

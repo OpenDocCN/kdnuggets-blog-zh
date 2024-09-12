@@ -1,0 +1,532 @@
+- en: 'LightGBM: A Highly-Efficient Gradient Boosting Decision Tree'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/06/lightgbm-gradient-boosting-decision-tree.html](https://www.kdnuggets.com/2020/06/lightgbm-gradient-boosting-decision-tree.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The power of the LightGBM algorithm cannot be taken lightly (pun intended).
+    LightGBM is a distributed and efficient [gradient boosting framework](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html) that
+    uses [tree-based learning](https://www.analyticsvidhya.com/blog/2016/04/tree-based-algorithms-complete-tutorial-scratch-in-python/).
+    It’s [histogram-based](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html) and
+    places continuous values into discrete bins, which leads to faster training and
+    more efficient memory usage. In this piece, we’ll explore LightGBM in depth.
+  prefs: []
+  type: TYPE_NORMAL
+- en: LightGBM Advantages
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'According to the official docs, here are the advantages of the LightGBM framework:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Faster training speed and higher efficiency
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Lower memory usage
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Better accuracy
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Support of parallel and GPU learning
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Capable of handling large-scale data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Parameter Tuning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The framework uses a leaf-wise tree growth algorithm, which is unlike many other
+    tree-based algorithms that use depth-wise growth. Leaf-wise tree growth algorithms
+    tend to converge faster than depth-wise ones. However, they tend to be more prone
+    to overfitting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/56ad54fca4c0ecc23b36a5ca30e21996.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[source](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)![Figure](../Images/008a899a4e51dafd9da8c073fcc560db.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[source](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here are the parameters we need to tune to get good results on a leaf-wise
+    tree algorithm:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`num_leaves`: Setting the number of leaves to `num_leaves = 2^(max_depth)` will
+    give you the same number of leaves as a depth-wise tree. However, it isn’t a good
+    practice. Ideally, the number of leaves should be smaller than `2^(max_depth)`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`min_data_in_leaf` prevents overfitting. It’s set depending on `num_leaves` and
+    the number of training samples. For a large dataset, it can be set to hundreds
+    or thousands.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`max_depth` for limiting the depth of the tree.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Faster speeds on the algorithm can be obtained by using:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: a small `max_bin`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`save_binary` to speed up data loading in future learning'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: parallel learning
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: bagging, through setting `bagging_freq` and `bagging_fraction`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`feature_fraction` for feature sub-sampling'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In order to get better accuracy, one can use a large `max_bin`, use a small
+    learning rate with large `num_iterations`, and use more training data. One can
+    also use many `num_leaves`, but it may lead to overfitting. Speaking of overfitting,
+    you can deal with it by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Increasing `path_smooth`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Using a larger training set
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Trying `lambda_l1`, `lambda_l2`, and `min_gain_to_split` for regularization
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Avoid growing a very deep tree
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Machine learning is rapidly moving closer to where data is collected — edge
+    devices. [Subscribe to the Fritz AI Newsletter to learn more about this transition
+    and how it can help scale your business.](https://www.fritz.ai/newsletter?utm_campaign=fritzai-newsletter-scale6&utm_source=heartbeat)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Categorical Features
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A common way of processing categorical features in machine learning is one-hot
+    encoding. This method is not optimal for tree learners, and especially for high-cardinality
+    categorical features. Trees built on one-hot encoded features are unbalanced and
+    have to grow too deep in order to obtain good accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using the `categorical_feature` attribute, we can specify categorical features
+    (without one-hot encoding) for their model. Categorical features should be encoded
+    as non-negative integers less than `Int32.MaxValue`. They should start from zero.
+  prefs: []
+  type: TYPE_NORMAL
+- en: LightGBM Applications
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'LightGBM can be best applied to the following problems:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Binary classification using the `logloss` objective function
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Regression using the `L2` loss
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Multi-classification
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Cross-entropy using the `logloss` objective function
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: LambdaRank using `lambdarank` with NDCG as the objective function
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Metrics
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The metrics supported by LightGBM are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: L1 loss
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: L2 loss
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Log loss
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Classification error rate
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: AUC
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: NDCG
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: MAP
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Multi-class log loss
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Multi-class error rate
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Fair
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Huber
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Poisson
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quantile
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: MAPE
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Kullback-Leibler
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Gamma
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Tweedie
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Handling Missing Values
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: By default, LightGBM is able to handle missing values. You can disable this
+    by setting `use_missing=false`. It uses NA to represent missing values, but to
+    use zero you can set it `zero_as_missing=true`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Core Parameters
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Here are some of the core parameters for LightGBM:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`task` defaults to `train`. Other options are `predict`, `convert_model`, and `refit`.
+    The alias for this parameter is `task_type.` `convert_model` converts the model
+    into an if-else format.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`objective` defaults to regression. The other options are `regression_l1`,
+    `huber`, `fair`, `poisson`, `quantile`, `mape`, `gamma`, `tweedie`, `binary`,
+    `multiclass`, `multiclassova`, `cross_entropy`, `cross_entropy_lambda`, `lambdarank`,
+    and `rank_xendcg`. The aliases for this parameter are `objective_type`, `app`,
+    and `application`.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`boosting` defaults to `gbdt` — a traditional Gradient Boosting Decision Tree.
+    Other options are `rf`, — Random Forest, `dart`, — [Dropouts meet Multiple Additive
+    Regression Trees](https://arxiv.org/abs/1505.01866), `goss` — Gradient-based One-Side
+    Sampling. This parameter’s aliases are `boosting_type` and `boost`.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`num_leaves`: maximum tree leaves for base learners — defaults to 31'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`max_depth`: maximum tree depth for base learners'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`learning_rate`: the boosting learning rate'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`n_estimators`: number of boosted trees to fit — defaults to 200000'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`importance_type`: the type of importance to be filled in the `feature_importances_`.
+    Using `split` means that the number of times a feature is used in a model will
+    be contained in the result.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`device_type`: device for the tree learning — CPU Or GPU. Can be used with `device` as
+    the alias.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Learning Control Parameters
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let’s look at a couple of learning control parameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`force_col_wise`: When set to true, it forces col-wise histogram building.
+    It’s recommended to set this to true when the number of columns is large, or the
+    total number of bins is large. You can also set it to true when you want to reduce
+    cost on memory, and when the `num_threads` is large, e.g greater than 20\. This
+    parameter is only used with a CPU.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`force_row_wise`: When set to true, it forces row-wise histogram building.
+    This parameter is only used with a CPU. You can turn this one on when the number
+    of data points is large, the total number of bins is smaller, and when the `num_threads` is
+    small (e.g. less than or equal to 16). It can also be set to true when you want
+    to use a small `bagging_fraction` or `goss` boosting to speed up training.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`neg_bagging_fraction`: Used for imbalanced binary classification problems.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`bagging_freq`: The frequency for bagging. Zero means bagging is disabled.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`feature_fraction`: Can be used to deal with overfitting. For instance, setting
+    it to 0.5 would mean that LightGBM will select 50% of the features at each tree
+    node.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`extra_trees`: Set to true when you want to use extremely randomized trees.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`early_stopping_round`: When true, training stops once a certain parameter
+    fails to improve.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`max_drop`: Defaults to 50\. Signifies the number of trees to drop on every
+    iteration.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`cat_l2`: L2 regularization in a categorical split'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`cat_smooth`: Reduces the effect of noise in categorical features, especially
+    for categories with limited data.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`path_smooth`: Helps prevent overfitting on leaves with few samples.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Objective Parameters
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Here are a couple of objective parameters to take note of:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`is_unbalance`: Can be set to true if the training data is unbalanced for classification
+    problems.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`num_class`: Used to indicate the number of classes in a multi-classification
+    problem.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`scale_pos_weight`: Weight of labels with positive class. Cannot be used together
+    with `is_unbalance`. This parameter increases the overall performance metric of
+    the model but may result in poor estimates of the individual class probabilities.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Practical Implementation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We’ll now look at a quick implementation of the algorithm. We’ll use scikit-lean’s
+    wrapper for the classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As always, we start by importing the model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The next step is to create an instance of the model while setting the objective.
+    The options for the objective are regression for `LGBMRegressor`, binary or multi-class
+    for `LGBMClassifier`, and LambdaRank for `LGBMRanker`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'When fitting the model, we can set the categorical features:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Once you run predictions on the model, you can also obtain the important features:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'I hope that this has given you enough background into LightGBM to start experimenting
+    on your own. We’ve seen that we can use it for both regression and classification
+    problems. For more information on the framework, you can check out the official
+    docs:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Welcome to LightGBM''s documentation! - LightGBM 2.3.2 documentation**](https://lightgbm.readthedocs.io/en/latest/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: LightGBM is a gradient boosting framework that uses tree based learning algorithms.
+    It is designed to be distributed...
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Derrick Mwiti](https://derrickmwiti.com/)** is a data analyst, a writer,
+    and a mentor. He is driven by delivering great results in every task, and is a
+    mentor at Lapid Leaders Africa.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://heartbeat.fritz.ai/lightgbm-a-highly-efficient-gradient-boosting-decision-tree-53f62276de50).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Research Guide: Advanced Loss Functions for Machine Learning Models](/2019/11/research-guide-advanced-loss-functions-machine-learning-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automated Machine Learning in Python](/2019/01/automated-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Federated Learning: An Introduction](/2020/04/federated-learning-introduction.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[3 Reasons Why Data Scientists Should Use LightGBM](https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simplifying Decision Tree Interpretability with Python & Scikit-learn](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Decision Tree Algorithm, Explained](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understanding by Implementing: Decision Tree](https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Telling a Great Data Story: A Visualization Decision Tree](https://www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Random Forest vs Decision Tree: Key Differences](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

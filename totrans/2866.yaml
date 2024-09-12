@@ -1,0 +1,268 @@
+- en: How to Extend Scikit-learn and Bring Sanity to Your Machine Learning Workflow
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/10/extend-scikit-learn-bring-sanity-machine-learning-workflow.html](https://www.kdnuggets.com/2019/10/extend-scikit-learn-bring-sanity-machine-learning-workflow.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Déborah Mesquita](https://www.deborahmesquita.com/), Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Header image](../Images/0f2138fd024b90313a27d9ab9bd22757.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We usually hear (and say) that machine learning is just a commercial name for
+    Statistics. That might be true, but if we're building models using computers what
+    machine learning really comprehends is Statistics *and* **Software Engineering**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To make great products: do machine learning like the great engineer you are,
+    not like the great machine learning expert you aren''t - Rules of Machine Learning:
+    Best Practices for ML Engineering [1]'
+  prefs:
+  - PREF_BQ
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This combination of Statistics and Software Engineering brings new challenges
+    to the Software Engineering world. Developing applications in the ML domain is
+    fundamentally different from prior software application domains, as Microsoft
+    researchers point out [2].
+  prefs: []
+  type: TYPE_NORMAL
+- en: When you don't work in a large company or when you're just starting out in the
+    field it's difficult to learn and apply Software Engineering best practices because
+    finding this information is not easy. Fortunately, open-source projects can be
+    a great source of knowledge and can help us address this need of learning from
+    people that have more experience than us. One of my favorite ML libraries (and
+    source of knowledge) is **Scikit-learn**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The project does a great job of providing an easy-to-use interface while also
+    providing solid implementations, being both a great way to start in the field
+    of ML and also a tool used in the industry. Using scikit-learn tools and even
+    reading maintainer's answers on the issue discussions on Github is a great way
+    to learn from them. Scikit has a lot of contributors from industry and from academia,
+    so as these people make contributions their knowledge gets “embedded” in the library.
+    One rule of thumb of scikit-learn's project is that user code should not be tied
+    to scikit-learn — which is a library, and not a framework [3]. This makes it easy
+    to extend scikit functionalities to suit our needs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Today we're going to learn how to do this, building a custom transformer and
+    learning how to use it to build pipelines. By doing so our code becomes easy to
+    maintain and reuse, two aspects of Software Engineering best practices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The scikit-learn API
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If you''re familiar with scikit-learn you probably know how to use objects
+    such as estimators and transformers, but it''s good to formalize their definitions
+    so we can build on top of them. The basic API consists of three interfaces (and
+    once class can implement multiple interfaces):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: estimator - the base object, implements the fit() method
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: predictor - an interface for making predictions, implements the predict() method
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: transformer - interface for converting data, implements the transform() method
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Scikit-learn has many out-of-the-box transformers and predictors, but we often
+    need to transform data in different ways. Building custom transformers using the
+    transformer interface makes our code maintainable and we can also use the new
+    transformer with other scikit objects like Pipeline and RandomSearchCV or GridSearchCV.
+    Let's see how to do that. All the code can be found [here](https://github.com/dmesquita/extending-scikit)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Building a custom transformer
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'There are two kinds of transformers: stateless transformers and stateful transformers.
+    Stateless transformers *treat samples independently* while stateful transformations
+    *depend on the previous data*. If we need a stateful transformer the save the
+    state on fit() method. Both stateless and stateful transformers should return
+    self.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most examples of custom transformers use numpy arrays, so let's try something
+    different and build a transformer that uses spaCy models. Our goal is to create
+    a model to classify documents. We want to know if lemmatization and stopword removal
+    can increase the performance of the model. RandomSearchCV and GridSearchCV are
+    great to experiment if different parameters can improve the performance of a model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When we create a transformer class inheriting from the BaseEstimator class
+    we get get*parameters() and set*parameters() methods for free, allowing us to
+    use the new transformer in the search to find best parameter values. But to do
+    that we need to follow some rules [4]:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The name of the keyword arguments accepted by **init**() should **correspond**
+    to the attribute on the instance
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: All parameter should have **sensitive defaults**, so a user can instantiate
+    an estimator simply calling EstimatorName()
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The validations should be done *where the parameters are used;* this means that
+    should be no logic (not even input validation) on **init**()
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The parameters we need are the spaCy language model, lemmatization and remove_stopwords.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using scikit-learn pipelines
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In machine learning many tasks are expressible as **sequences or combinations
+    of transformations to data** [3]. Pipelines offer a clear overview of our preprocessing
+    steps, turning a chain of estimators into one single estimator. Using pipelines
+    is also a way to make sure that we are always performing the exactly same steps
+    while training, doing cross-validation or making a prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each step of the pipeline should implement the transform() method. To create
+    the model we'll use the new transformer, a TfidfVectorizer and a RandomForestClassifier.
+    Each of these steps will turn into a pipeline step. The steps are defined as tuples,
+    where the first element is the name of the step and the second element is the
+    estimator object per se.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With that we can use the pipeline object to call fit() and predict() methods,
+    like text*pipeline.fit(train, labels and text*clf.predict(data). We can use all
+    methods the last step of the pipeline implements, so we can also call text*clf.predict*proba(data)
+    to get the probability scores from the RandomForestClassifier for example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finding the best parameters with GridSearchCV
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With GridSearchCV we can run an exhaustive search of the best parameters on
+    a grid of possible values (RandomizedSearchCV is the non-exhaustive alternative).
+    To do that we define a dict for the parameters, where the keys should be **name_of_pipeline_step*__*parameter_name**
+    and the values should be lists with parameter values we want to try.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The RandomizedSaerchCV is also an estimator, so we can use all methods from
+    the estimator used to create the RandomizedSaerchCV object (scikit API is indeed
+    really consistent).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Takeaways
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Machine Learning comes with challenges that the Software Engineering world is
+    not familiar with. Building experiments represents a large part of our workflow,
+    and doing that with messy code doesn't usually end up well. When we extend scikit-learn
+    and use the components to write our experiments we make the task of maintaining
+    our codebase easier, bringing sanity to our day-to-day tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**References**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[1] [https://developers.google.com/machine-learning/guides/rules-of-ml](https://developers.google.com/machine-learning/guides/rules-of-ml)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[2] [https://www.microsoft.com/en-us/research/uploads/prod/2019/03/amershi-icse-2019*Software*Engineering*for*Machine_Learning.pdf](https://www.microsoft.com/en-us/research/uploads/prod/2019/03/amershi-icse-2019_Software_Engineering_for_Machine_Learning.pdf)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[3] [https://arxiv.org/pdf/1309.0238.pdf](https://arxiv.org/pdf/1309.0238.pdf)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[4] [https://scikit-learn.org/stable/developers/contributing.html#apis-of-scikit-learn-objects](https://scikit-learn.org/stable/developers/contributing.html#apis-of-scikit-learn-objects)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Déborah Mesquita](https://www.deborahmesquita.com/)** ([linkedin.com/in/deborahmesquita](http://linkedin.com/in/deborahmesquita))is
+    a data scientist who loves the craft of writing. She likes to think she''s a polymath
+    data scientist but the truth is that she still needs to learn a lot of Statistics.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Train sklearn 100x Faster](/2019/09/train-sklearn-100x-faster.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science with Optimus Part 1: Intro](/2019/04/data-science-with-optimus-part-1-intro.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Step Guide to Scalable Deep Learning Pipelines with d6tflow](/2019/09/5-step-guide-scalable-deep-learning-pipelines-d6tflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Web LLM: Bring LLM Chatbots to the Browser](https://www.kdnuggets.com/2023/05/webllm-bring-llm-chatbots-browser.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Streamline Your Machine Learning Workflow with Scikit-learn Pipelines](https://www.kdnuggets.com/streamline-your-machine-learning-workflow-with-scikit-learn-pipelines)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 GPTs to Help Improve Your Data Science Workflow](https://www.kdnuggets.com/7-gpts-to-help-improve-your-data-science-workflow)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Easily Integrate LLMs into Your Scikit-learn Workflow with Scikit-LLM](https://www.kdnuggets.com/easily-integrate-llms-into-your-scikit-learn-workflow-with-scikit-llm)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 MLOps Courses from Google to Level Up Your ML Workflow](https://www.kdnuggets.com/5-mlops-courses-from-google-to-level-up-your-ml-workflow)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[RAPIDS cuDF to Speed up Your Next Data Science Workflow](https://www.kdnuggets.com/2023/04/rapids-cudf-speed-next-data-science-workflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,359 @@
+- en: Classifying Heart Disease Using K-Nearest Neighbors
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/07/classifying-heart-disease-using-k-nearest-neighbors.html/2](https://www.kdnuggets.com/2019/07/classifying-heart-disease-using-k-nearest-neighbors.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/07/classifying-heart-disease-using-k-nearest-neighbors.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: Building Heart disease classifier using K-NN algorithm
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6a437752eaeb7dc85b172a17d10271d1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[source](https://brainfeedmagazine.com/now-machine-learning-can-predict-death-with-over-90-accuracy/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The most crucial task in the healthcare field is disease diagnosis. If a disease
+    is diagnosed early, many lives can be saved. Machine learning classification techniques
+    can significantly benefit the medical field by providing an accurate and quick
+    diagnosis of diseases. Hence, save time for both doctors and patients. As heart
+    disease is the number one killer in the world today, it becomes one of the most
+    difficult diseases to diagnose.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this section, we are going to build a K-NN classifier which will predict
+    the presence of heart disease in a patient or not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can download the dataset from the [UCI Machine Learning repository](https://archive.ics.uci.edu/ml/datasets/Heart+Disease).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This database contains 76 attributes, but all published experiments refer to
+    using a subset of 14 of them. In particular, the Cleveland database is the only
+    one that has been used by ML researchers to this date. The “goal” field refers
+    to the presence of heart disease in the patient. It is integer valued from 0 (no
+    presence) to 4.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Dataset contains following features:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`age — age in years sex — (1 = male; 0 = female) cp — chest pain type trestbps — resting
+    blood pressure (in mm Hg on admission to the hospital) chol — serum cholestoral
+    in mg/dl fbs — (fasting blood sugar > 120 mg/dl) (1 = true; 0 = false) restecg — resting
+    electrocardiographic results thalach — maximum heart rate achieved exang — exercise
+    induced angina (1 = yes; 0 = no) oldpeak — ST depression induced by exercise relative
+    to rest slope — the slope of the peak exercise ST segment ca — number of major
+    vessels (0–3) colored by flourosopy thal — 3 = normal; 6 = fixed defect; 7 = reversable
+    defect target — have disease or not (1=yes, 0=no)`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lets load all the required libraries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let''s load our dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/de816097286e89389a9f6b8831fc1858.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Our original data set looks like this
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let us explore our dataset and count the number of patients who have heart
+    disease:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: So out of all the patients 165 patients actually have heart disease. Now also
+    visualize.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/1d34de775212dad0e591f8d3bb54be24.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: count of the number of patients having heart disease(target =1)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let's classify target variable between male and female and visualize the
+    result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/99499b6f2e55696b826d0feba2edfbf7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: count of the male and female having heart disease
+  prefs: []
+  type: TYPE_NORMAL
+- en: So from the above figure, it is evident that in our dataset, 207 males and 96
+    females are there.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us also see the relation between “Maximum Heart Rate” and “Age”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/52404eb038b7c8c2f92ef243d70d37d0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Scatter plot between Age and Maximum heart rate
+  prefs: []
+  type: TYPE_NORMAL
+- en: So from the above, the maximum heart rate occurs in between age 50–60 years.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ok, now let's label our dataset with **X**(matrix of independent variables)
+    and **y**(vector of the dependent variable).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, we split 75% of the data to the training set while 25% of the data to
+    test set using below code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now, Our dataset contains features which are highly varying in magnitudes, units,
+    and range. But since most of the machine learning algorithms use Euclidean distance
+    between two data points in their computations, this is a problem. To suppress
+    this effect, we need to bring all features to the same level of magnitudes. This
+    can be achieved by a method called feature scaling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So our next step is to normalize the data which can be done using StandardScaler()
+    from sci-kit learn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Our next step is to K-NN model and train it with the training data. Here n_neighbors
+    is the value of factor K.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: So the most important point to note here is to choose the optimal value of K
+    and for that, we will start with K=5.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, since your K-NN model is ready with K=5\. Let's train our test data and
+    check its accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Accuracy: 0.82**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For K=6
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Accuracy: 0.86**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For K=7
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Accuracy: 0.87**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For K=8
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Accuracy: 0.87**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For K=9
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Accuracy: 0.86**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So as we can see that ***Accuracy is maximum that is 87% when K=7***.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's also check the confusion matrix and see how many records were predicted
+    correctly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**[PRE16]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the output, 26 and 40 are correct predictions, and 7 and 3 are incorrect
+    predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to improve the performance of your classifier?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Well, there are many ways in which the KNN algorithm can be improved.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Changing the distance measure** for different applications may help improve
+    the accuracy of the algorithm. (i.e. Hamming distance for text classification).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Dimensionality reduction** techniques like PCA should be executed prior to
+    applying K-NN'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Rescaling your data** makes the distance measure more meaningful. For instance,
+    given 2 features height and weight, an observation such as z=[220,60]z=[220,60]
+    will clearly skew the distance metric in favor of height. One way of fixing this
+    is by column-wise subtracting the mean and dividing by the standard deviation.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Approximate Nearest Neighbor** techniques such as using *k-d trees* to store
+    the training data can be performed to decrease testing time.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Conclusion**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Congratulations, you have successfully built a heart disease classifier using
+    K-NN which is capable of classifying heart patient with optimal accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we have learned the K-NN, it’s working, the curse of dimensionality,
+    model building and evaluation on heart disease dataset using Python Scikit-learn
+    package.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, I hope you guys have enjoyed reading this article. Let me know your thoughts/suggestions/questions
+    in the comment section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can reach me out on [LinkedIn](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/) for
+    any query.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for reading !!!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)**
+    is a Big data developer at CirrusLabs. He has over 4 years of working experience
+    in various sectors like Telecom, Analytics, Sales, Data Science having specialisation
+    in various Big data components.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/implement-k-nearest-neighbors-classification-algorithm-c99be8f14052).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Beginner’s Guide to Linear Regression in Python with Scikit-Learn](/2019/03/beginners-guide-linear-regression-python-scikit-learn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build Your First Chatbot Using Python & NLTK](/2019/05/build-chatbot-python-nltk.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Predict Age and Gender Using Convolutional Neural Network and OpenCV](/2019/04/predict-age-gender-using-convolutional-neural-network-opencv.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[From Theory to Practice: Building a k-Nearest Neighbors Classifier](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Nearest Neighbors for Classification](https://www.kdnuggets.com/2022/04/nearest-neighbors-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[K-nearest Neighbors in Scikit-learn](https://www.kdnuggets.com/2022/07/knearest-neighbors-scikitlearn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automate Microsoft Excel and Word Using Python](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Determine the Best Fitting Data Distribution Using Python](https://www.kdnuggets.com/2021/09/determine-best-fitting-data-distribution-python.html)**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

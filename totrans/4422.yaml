@@ -1,0 +1,810 @@
+- en: Explainable and Reproducible Machine Learning Model Development with DALEX and
+    Neptune
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/08/explainable-reproducible-machine-learning-model-development-dalex-neptune.html](https://www.kdnuggets.com/2020/08/explainable-reproducible-machine-learning-model-development-dalex-neptune.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Jakub Czakon](https://www.linkedin.com/in/jakub-czakon-2b797b69/), Sr
+    Data Scientist at neptune.ai, [Przemysław Biecek](https://www.linkedin.com/in/pbiecek/),
+    Founder of MI2DataLab & Adam Rydelek, Research Engineer at MI2DataLab**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f6bf1686db1df1c4f1f5dfd97c02ac5f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Machine learning model development is hard, especially in the real world.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Typically, you need to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: understand the business problem,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: gather the data,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: explore it,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: set up a proper validation scheme,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: implement models and tune parameters,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: deploy them in a way that makes sense for the business,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: inspect model results only to find out new problems that you have to deal with.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And that is not all.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You should have the **experiments** you run and **models** you train **versioned** in
+    case you or anyone else needs to inspect them or reproduce the results in the
+    future. From my experience, this moment comes when you least expect it and the
+    feeling of “I wish I had thought about it before” is so very real (and painful).
+  prefs: []
+  type: TYPE_NORMAL
+- en: But there is even more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With ML models serving real people, misclassified cases (which are a natural
+    consequence of using ML) are affecting peoples’ lives and sometimes treating them
+    very unfairly.  It makes the ability to **explain your models’ predictions** a
+    requirement rather than just a nice to have.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So what can you do about it?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fortunately, today there are tools that make dealing with both of those problems
+    possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The best part is you can combine them to **have your models versioned, reproducible,
+    and explainable**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Read on to learn how to:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: explain machine learning models with **DALEX** explainers
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: make your models versioned and experiments reproducible with **Neptune**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: automatically save model explainers and interactive explanation charts for every
+    training run with **Neptune + DALEX integration**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: compare, debug, and audit every model you build with **versioned explainers**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Let’s dive in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Explainable Machine Learning with DALEX
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Nowadays a model that scores high on the test set is often not enough. That’s
+    why there is a growing interest in eXplainable Artificial Intelligence (**XAI**),
+    which is a set of methods and techniques that make you understand the model’s
+    behavior.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are many XAI methods available in multiple programming languages. Some
+    of the most commonly used in machine learning are *LIME*, *SHAP, *or *PDP*, but
+    there are many more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is easy to get lost in the vast amount of techniques and that is where the **eXplainable
+    Artificial Intelligence pyramid** comes in handy. It gathers the needs related
+    to the exploration of models into an extensible drill-down map. The left side
+    is about needs related to a single instance, the right side to a model as a whole.
+    Consecutive layers dig into more and more detailed questions about the model behavior
+    (local or global).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/0a85199219440aaa9d112da40313744e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: XAI pyramide | Find more in the [Explanatory Model Analysis ebook](https://pbiecek.github.io/ema/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: DALEX (available in R and Python) is a tool that **helps you to understand how** complex
+    models are working. It currently works for tabular data only (but text and vision
+    will come in the future).
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is integrated with most popular frameworks used for building machine learning
+    models like *keras, sklearn, xgboost, lightgbm, H2O *and many more!
+  prefs: []
+  type: TYPE_NORMAL
+- en: The core object in **DALEX** is an **explainer**. It connects training or evaluation
+    data and a trained model and extracts all the information that you need to explain
+    it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once you have it you can create visualizations, show model parameters, and dive
+    into other model-related information. You can share it with your team or save
+    it for later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating an explainer for any model is really easy, as you can see in this example
+    using *sklearn*!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Model explanation for observations (local explanations)**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When you want to understand **why your model made a particular prediction**,
+    local explanations are your best friend.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It all starts with a prediction and moving down the left half of the pyramid
+    above you can explore and understand what happened.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'DALEX gives you a bunch of methods that show the influence of each variable
+    locally:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[SHAP](https://github.com/slundberg/shap): calculates contributions of features
+    to the model prediction using classic Shapley values'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Break Down](https://pbiecek.github.io/breakDown/): decomposes predictions
+    into parts that can be attributed to each variable with so-called “greedy explanations”'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Break Down with interactions](https://pbiecek.github.io/breakDown/reference/break_down.html):
+    extends “greedy explanations” to account for feature interactions'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Moving down the pyramid, the next crucial part of local explanations is **understanding
+    the sensitivity of the model **to changes in feature values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There is an easy way to plot such information in DALEX:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Ceteris Paribus](https://github.com/pbiecek/ceterisParibus): shows changes
+    in model prediction allowing for differences only in a single variable while keeping
+    all others constant'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Following up on our example Random Forest model created on the Titanic dataset,
+    we can easily create the plots mentioned above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![local explanations dalex](../Images/af80b569c95394071aa04cf71a65a0de.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Model understanding (global explanations)**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When you want to understand **which features are generally important for your
+    model** when it makes decisions you should look into global explanations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To understand the model on the global level DALEX provides you with the variable
+    importance plots. Variable importance plots, specifically [permutation feature
+    importance](https://christophm.github.io/interpretable-ml-book/feature-importance.html),
+    enable the user to understand each variable’s influence on the model as a whole,
+    and distinguish the most important ones.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Such visualizations can be seen as a global equivalent of SHAP and Break Down
+    plots which depict similar information for a single observation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Moving down the pyramid, on a dataset level, there are techniques such as Partial
+    Dependence Profiles and Accumulated Local Dependence that let you **visualize
+    the way the model reacts as a function of selected variables.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let’s create some global explanations for our example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![global explanations dalex](../Images/af19a0391f6e9c8dde1f156b86505d31.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Reusable and organized explanation objects**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A clean, structured, and easy to use collection  of XAI visualizations is great
+    but there is more to DALEX than that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Packaging your models in **DALEX explainers** gives you a **reusable and organized
+    way of storing and versioning** any work you do with machine learning **models**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The explainer object created using DALEX contains:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: a model to be explained,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: model name and class,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: task type,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: data which will be used to calculate the explanations,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: model predictions for such data,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: predict function,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: model residuals,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: sampling weights for observations,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: additional model information (package, version, etc.)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Having all this information stored in a single object makes creating local and
+    global explanations easy (as we saw before).
+  prefs: []
+  type: TYPE_NORMAL
+- en: It also makes reviewing, sharing, and comparing models and explanations at every
+    stage of model development possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Experiment and model versioning with Neptune
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the perfect world, all your machine learning models and experiments are versioned
+    in the same way as you version your software projects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unfortunately, to keep track of your ML projects you need way more than just
+    committing your code to Github.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In a nutshell, to **version machine learning models properly** you should keep
+    track of:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: code, notebooks, and configuration files
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: environment
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: parameters
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: datasets
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: model files
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: results like evaluation metrics, performance charts or predictions
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some of those things work nicely with .git (code, environment configs) but others
+    not so much.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Neptune makes it easy to keep track of all that by letting you log everything
+    and anything you feel is important.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You just add a few lines to your scripts:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: And every experiment or model training you run is versioned and waiting for
+    you in the Neptune app (and database ????).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5c1627d06e0e3712b005925b22acce45.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[See it in Neptune](https://ui.neptune.ai/o/shared/org/dalex-integration/e/DAL-79/details)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your team can access all of the experiments and models, compare results, and
+    find the information quickly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You may be thinking: “Ok great, so I have my models versioned but”:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: what if I want to debug the model weeks or months after they were trained?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: what if I want to see the prediction explanations or variable importance for
+    every experiment run?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: what if somebody asks me to check if this model is unfairly biased and I don’t
+    have the code or data it was trained on?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: I hear you, and that’s where DALEX integration comes in!
+  prefs: []
+  type: TYPE_NORMAL
+- en: DALEX + Neptune = versioned and explainable models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Why not have your DALEX **explainers logged and versioned for every experiment** with
+    interactive explanation charts rendered in a nice UI, easy to share with anyone
+    you want.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Exactly, why not!
+  prefs: []
+  type: TYPE_NORMAL
+- en: With Neptune-DALEX integration, you can get all that at a cost of 3 additional
+    lines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Also, there are some very real benefits that come with this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can **review models** that others created and share yours easily
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can **compare** the behavior of any of the created models
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can **trace and audit every model** for unwanted bias and other problems
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can **debug** and compare models for which the training data, code or parameters
+    are missing
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Ok, it sounds cool, but how does it actually work?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s get into this now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Version local explanations**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To log local model explanations you just need to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create an observation vector
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Create your DALEX explainer object
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pass them to the `log_local_explanations` function from `neptunecontrib`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Interactive explanation charts will be waiting for you in the “Artifacts” section
+    of the Neptune app:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/354524bc9f4a79a229dbf7c8eb896a22.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[See it in Neptune](https://ui.neptune.ai/shared/dalex-integration/e/DAL-78/artifacts?path=charts%2F&file=SHAP.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The following plots are created:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: variable importance
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: partial dependence (if numerical features are specified)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: accumulated dependence (if categorical features are specified)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Version global explanations**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'With global model explanations it’s even simpler:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create your DALEX explainer object
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pass it to the `log_global_explanations` function from `neptunecontrib`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: (optional) specify categorical features for which you would like to plot
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'That’s it. Now you can go to the “Artifacts” section and find your local explanations
+    charts:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8a1ad29846aabf8b31bcc54d6e62aaa6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[See it in Neptune](https://ui.neptune.ai/o/shared/org/dalex-integration/e/DAL-78/artifacts?path=charts%2F&file=Variable%20Importance.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The following plots are created:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: break down,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: break down with interactions,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: shap,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ceteris paribus for numeric variables,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ceteris paribus for categorical variables
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Version explainer objects **'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: But if you really want to version your explanations you should **version the
+    explainer object** itself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The benefits of saving it?:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can always create a visual representation of it later
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can dive into details in the tabular format
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can use it however you like (even if you don’t know how at the moment ????)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'and it’s super simple:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: You may be thinking:  “How else am I going to use the explainer objects?”
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let me show you in the next sections.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Fetch and analyze explanations of trained models**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'First of all, if you logged your explainer to Neptune you can fetch it directly
+    into your script or notebook:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now that you have the model explanation you can debug your model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One possible scenario is that you have an observation for which your model fails
+    miserably.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You want to figure out why.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you have your DALEX explainer object saved you can:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: create local explanations and see what happened.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: check how changing features affect the results.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8b46514b05aa3005b55ae67533d11601.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[See it in Neptune](https://ui.neptune.ai/shared/dalex-integration/n/6b9d8213-9d1c-4a7d-a448-d2d9e29f7878/66389c83-b397-4ec6-a1fc-8b5847980fe5)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Of course, you can do way more, especially if you want to compare models and
+    explanations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s dive into that now!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Compare models and explanations **'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'What if you want to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: compare the current model idea with the models that are running in production?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: see whether experimental ideas from last year would work better on freshly collected
+    data?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Having a clean structure of experiments and models and a single place where
+    you store them makes it really easy to do.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can compare experiments based on parameters, data version, or metrics in
+    the Neptune UI:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/264e24ab0f479d0ae3aea82e2c3eec12.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[See it in Neptune](https://ui.neptune.ai/o/shared/org/dalex-integration/compare?shortId=%5B%22DAL-78%22%2C%22DAL-77%22%2C%22DAL-76%22%2C%22DAL-75%22%2C%22DAL-72%22%5D&viewId=495b4a41-3424-4d01-9064-70be82716196)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You **see the diffs in two clicks** and can drill down to whatever info you
+    need with one or two more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ok, it is really useful when it comes to comparing hyperparameters and metrics
+    but what about the explainers?
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can go into each experiment and [look at the interactive explanation charts](https://ui.neptune.ai/o/shared/org/dalex-integration/e/DAL-78/artifacts?path=charts%2F&file=Break%20Down%20Interactions.html) to
+    see if there is something fishy going on with your model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What’s better, Neptune lets you access all the information you logged programmatically,
+    including model explainers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can **fetch explainer objects for each experiment and compare them**. Just
+    use `get_pickle` function from `neptunecontrib` and then visualize multiple explainers
+    with DALEX `.plot`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/6169f3b94a4c2d57e5fa4cc80356ca92.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[See it in Neptune](https://ui.neptune.ai/o/shared/org/dalex-integration/n/comparison-6b9d8213-9d1c-4a7d-a448-d2d9e29f7878/4bf30571-1ef1-4c63-9241-6d3b2cab65a7)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: That is the beauty of DALEX plots. You can pass multiple explainers and they
+    will do the magic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Of course, you can compare previously trained models with the one that you are
+    currently working on to see if you are going in the right direction. Just append
+    it to the list of explainers and pass to the `.plot` method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Final thoughts**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Ok, to sum up.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this article, you’ve learned about:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Various model explanation techniques and how to package those explanations with 
+    DALEX explainers
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How you can version machine learning models and experiments with Neptune
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to version model explainers and interactive explanation charts for every
+    training you run with Neptune + DALEX integration
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to compare and debug models you train with explainers
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: With all that information, I hope your model development process will now be
+    more organized, reproducible, and explainable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Happy training!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![](../Images/c89ec4635ace581269125d4065e3d508.png)](https://docs.neptune.ai/integrations/dalex.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Jakub Czakon**](https://www.linkedin.com/in/jakub-czakon-2b797b69/) is Senior
+    Data Scientist at neptune.ai.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Przemysław Biecek**](https://www.linkedin.com/in/pbiecek/) is Founder of
+    MI2DataLab, Principal Data Scientist at Samsung R&D Institute Poland.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Adam Rydelek** is a Research Engineer at MI2DataLab, Student in Data Science
+    at Warsaw University of Technology.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://neptune.ai/blog/explainable-and-reproducible-machine-learning-with-dalex-and-neptune).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A simple and interpretable performance measure for a binary classifier](/2020/03/interpretable-performance-measure-binary-classifier.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Explaining “Blackbox” Machine Learning Models: Practical Application of SHAP](/2020/05/explaining-blackbox-machine-learning-models-practical-application-shap.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Interpretability part 3: opening the black box with LIME and SHAP](/2019/12/interpretability-part-3-lime-shap.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Build a Reproducible and Maintainable Data Science Project: A Free…](https://www.kdnuggets.com/2022/08/free-book-build-reproducible-maintainable-data-science-project.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Explainable AI: 10 Python Libraries for Demystifying Your Model''s Decisions](https://www.kdnuggets.com/2023/01/explainable-ai-10-python-libraries-demystifying-decisions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Closing the Gap Between Human Understanding and Machine Learning:…](https://www.kdnuggets.com/2023/06/closing-gap-human-understanding-machine-learning-explainable-ai-solution.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Open Assistant: Explore the Possibilities of Open and Collaborative…](https://www.kdnuggets.com/2023/04/open-assistant-explore-possibilities-open-collaborative-chatbot-development.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[12 VSCode Tips and Tricks for Python Development](https://www.kdnuggets.com/2023/05/12-vscode-tips-tricks-python-development.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

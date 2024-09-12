@@ -1,0 +1,470 @@
+- en: An Overview of Human Pose Estimation with Deep Learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/06/human-pose-estimation-deep-learning.html](https://www.kdnuggets.com/2019/06/human-pose-estimation-deep-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Bharath Raj](https://www.linkedin.com/in/bharathrajn/), Associate Engineer,
+    and [Yoni Osin](https://www.linkedin.com/in/yoni-osin-41791aa5/), VP of R&D at
+    BeyondMinds**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Human Pose Skeleton represents the orientation of a person in a graphical
+    format. Essentially, it is a set of coordinates that can be connected to describe
+    the pose of the person. Each coordinate in the skeleton is known as a part (or
+    a joint, or a keypoint). A valid connection between two parts is known as a pair
+    (or a limb). Note that, not all part combinations give rise to valid pairs. A
+    sample human pose skeleton is shown below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![COCO keypoint format for human pose skeletons](../Images/52ae5cc813101fc0517fb7973a34d2a4.png)
+    Left: COCO keypoint format for human pose skeletons. Right: Rendered human pose
+    skeletons. ([Source](https://github.com/CMU-Perceptual-Computing-Lab/openpose))'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Knowing the orientation of a person opens avenues for several real-life applications,
+    some of which are discussed towards the end of this blog. Several approaches to
+    Human Pose Estimation were introduced over the years. The earliest (and slowest)
+    methods typically estimating the pose of a single person in an image which only
+    had one person to begin with. These methods often identify the individual parts
+    first, followed by forming connections between them to create the pose.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Naturally, these methods are not particularly useful in many real-life scenarios
+    where images contain multiple people.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Multi-Person Pose Estimation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Multi-Person pose estimation is more difficult than the single person case
+    as the location and the number of people in an image are unknown. Typically, we
+    can tackle the above issue using one of two approaches:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The simple approach is to incorporate a person detector first, followed by estimating
+    the parts and then calculating the pose for each person. This method is known
+    as the **top-down** approach.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Another approach is to detect all parts in the image (i.e. parts of every person),
+    followed by associating/grouping parts belonging to distinct persons. This method
+    is known as the **bottom-up** approach.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Typical Top-Down approach](../Images/0e4922934a541b2d3062b04952051ab8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Top: Typical Top-Down approach. Bottom: Typical Bottom-Up approach. ([Image
+    Source](https://unsplash.com/photos/XuN44TajBGo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText))'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Typically, the top-down approach is easier to implement than the bottom-up approach
+    as adding a person detector is much simpler than adding associating/grouping algorithms.
+    It is hard to judge which approach has better performance overall as it really
+    comes down to which among the person detector and associating/grouping algorithms
+    is better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this blog, we will focus on multi-person human pose estimation using deep
+    learning techniques. In the next section, we will review some of the popular top-down
+    and bottom-up approaches for the same.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Deep Learning Methods
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**1\. OpenPose**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[OpenPose](https://arxiv.org/pdf/1812.08008.pdf) is one of the most popular
+    bottom-up approaches for multi-person human pose estimation, partly because of
+    their well documented [GitHub](https://github.com/CMU-Perceptual-Computing-Lab/openpose) implementation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As with many bottom-up approaches, OpenPose first detects parts (key points)
+    belonging to every person in the image, followed by assigning parts to distinct
+    individuals. Shown below is the architecture of the OpenPose model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Flowchart of the OpenPose architecture](../Images/c75cef9a2fe93fc363d86ad3f3b60b3a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Flowchart of the OpenPose architecture. ([Source](https://arxiv.org/pdf/1611.08050.pdf))
+  prefs: []
+  type: TYPE_NORMAL
+- en: The OpenPose network first extracts features from an image using the first few
+    layers (VGG-19 in the above flowchart). The features are then fed into two parallel
+    branches of convolutional layers. The first branch predicts a set of 18 confidence
+    maps, with each map representing a particular part of the human pose skeleton.
+    The second branch predicts a set of 38 Part Affinity Fields (PAFs) which represents
+    the degree of association between parts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Steps involved in human pose estimation using OpenPose](../Images/d8d2fa450aa073d722e4ec7e348a2d18.png)
+    Steps involved in human pose estimation using OpenPose. ([Source](https://arxiv.org/pdf/1812.08008.pdf))'
+  prefs: []
+  type: TYPE_IMG
+- en: Successive stages are used to refine the predictions made by each branch. Using
+    the part confidence maps, bipartite graphs are formed between pairs of parts (as
+    shown in the above image). Using the PAF values, weaker links in the bipartite
+    graphs are pruned. Through the above steps, human pose skeletons can be estimated
+    and assigned to every person in the image. For a more thorough explanation of
+    the algorithm, you may refer to their [paper](https://arxiv.org/pdf/1812.08008.pdf) and
+    to this [blog post](https://arvrjourney.com/human-pose-estimation-using-openpose-with-tensorflow-part-2-e78ab9104fc8).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2\. DeepCut**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[DeepCut](https://arxiv.org/abs/1511.06645) is a bottom-up approach for multi-person
+    human pose estimation. The authors approached the task by defining the following
+    problems:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Produce a set of `**D**`body part candidates. This set represents all possible
+    locations of body parts for every person in the image. Select a subset of body
+    parts from the above set of body part candidates.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Label each selected body part with one of `**C**` body part classes. The body
+    part classes represent the types of parts, such as “arm”, “leg”, “torso” etc.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Partition body parts that belong to the same person.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![olympics](../Images/bb9e0130b0f4a1b0a5ac8ab8e8c6cab5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Pictorial representation of the approach. ([Source](https://arxiv.org/pdf/1511.06645.pdf))
+  prefs: []
+  type: TYPE_NORMAL
+- en: The above problems were jointly solved by modeling it into an [Integer Linear
+    Programming](https://en.wikipedia.org/wiki/Integer_programming) (ILP) problem.
+    It is modeled by considering triples `**(x, y, z)**` of binary random variables
+    with domains as stated in the images below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![olympics](../Images/b2facd07488ec7b17de6071620afb7d9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Domains of the binary random variables. ([Source](https://arxiv.org/pdf/1511.06645.pdf))
+  prefs: []
+  type: TYPE_NORMAL
+- en: Consider two body part candidates `d` and `d'` from the set of body part candidates `D` and
+    classes `c` and `c'` from the set of classes `C`. The body part candidates were
+    obtained through a [Faster RCNN](https://arxiv.org/abs/1506.01497) or a Dense
+    CNN. Now, we can develop the following set of statements.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If `x(d,c) = 1` then it means that body part candidate `d` belongs to class `c`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Also, `y(d,d') = 1 `indicates that body part candidates `d` and `d'`belong to
+    the same person.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: They also define `z(d,d’,c,c’) = x(d,c) * x(d’,c’) * y(d,d’)`. If the above
+    value is 1, then it means that body part candidate `d` belongs to class `c`, body
+    part candidate `d'` belongs to class `c'`, and finally body part candidates `d,d’` belong
+    to the same person.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The last statement can be used to partition pose belonging to different people.
+    Clearly, the above statements can be formulated in terms of linear equations as
+    functions of `(x,y,z)`. In this way, the Integer Linear Program (ILP) is set up,
+    and the pose of multiple persons can be estimated. For the exact set of equations
+    and much more detailed analysis, you can check out their paper [here](https://arxiv.org/pdf/1511.06645.pdf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3\. RMPE (AlphaPose)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[RMPE](https://arxiv.org/abs/1612.00137) is a popular top-down method of Pose
+    Estimation. The authors posit that top-down methods are usually dependent on the
+    accuracy of the person detector, as pose estimation is performed on the region
+    where the person is located. Hence, errors in localization and duplicate bounding
+    box predictions can cause the pose extraction algorithm to perform sub-optimally.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Effect of duplicate predictions](../Images/17cbc644352043aa4a34d155dcf4a851.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Effect of duplicate predictions (left) and low confidence bounding boxes (right).
+    ([Source](https://arxiv.org/pdf/1612.00137.pdf))
+  prefs: []
+  type: TYPE_NORMAL
+- en: To resolve this issue, the authors proposed the usage of Symmetric Spatial Transformer
+    Network (SSTN) to extract a high-quality single person region from an inaccurate
+    bounding box. A Single Person Pose Estimator (SPPE) is used in this extracted
+    region to estimate the human pose skeleton for that person. A Spatial De-Transformer
+    Network (SDTN) is used to remap the estimated human pose back to the original
+    image coordinate system. Finally, a parametric pose Non-Maximum Suppression (NMS)
+    technique is used to handle the issue of redundant pose deductions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Furthermore, the authors introduce a Pose Guided Proposals Generator to augment
+    training samples that can better help train the SPPE and SSTN networks. The salient
+    feature of RMPE is that this technique can be extended to any combination of a
+    person detection algorithm and an SPPE.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**4\. Mask RCNN**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Mask RCNN](https://arxiv.org/abs/1703.06870) is a popular architecture for
+    performing semantic and instance segmentation. The model parallelly predicts both
+    the bounding box locations of the various objects in the image and a mask that
+    semantically segments the object. The basic architecture can be quite easily extended
+    for human pose estimation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![olympics](../Images/61cd3ed8667b8e8a16477684669409d4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Flowchart describing the Mask RCNN Architecture. ([Source](https://medium.com/@jonathan_hui/image-segmentation-with-mask-r-cnn-ebe6d793272))
+  prefs: []
+  type: TYPE_NORMAL
+- en: The basic architecture first extracts feature maps from an image using a CNN.
+    These feature maps are used by a Region Proposal Network (RPN) to get bounding
+    box candidates for the presence of objects. The bounding box candidates select
+    an area (region) from the feature map extracted by the CNN. Since the bounding
+    box candidates can be of various sizes, a layer called RoIAlign is used to reduce
+    the size of the extracted feature such that they are all of the uniform size.
+    Now, this extracted feature is passed into the parallel branches of CNNs for final
+    prediction of the bounding boxes and the segmentation masks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us focus on the branch that performs segmentation. Suppose an object in
+    our image can belong to one among K classes. The segmentation branch outputs `**K**` binary
+    masks of size `**m x m**`, where each binary mask represents all objects belonging
+    to that class alone. We can extract key points belonging to every person in the
+    image by modeling each type of keypoint as a distinct class and treating this
+    like a segmentation problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Parallely, the objection detection algorithm can be trained to identify the
+    location of the persons. By combining the information of the location of the person
+    as well as their set of keypoints, we obtain the human pose skeleton for every
+    person in the image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This method nearly resembles the top-down approach, but the person detection
+    stage is performed in parallel to the part detection stage. In other words, the
+    keypoint detection stage and person detection stage are independent of each other.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**5\. Other Methods**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Multi-Person Human Pose Estimation is a vast field with a plethora of approaches
+    to tackle the problem. For brevity, only a select few approaches are explained
+    here. For a more exhaustive list of approaches, you may check out the following
+    links:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Awesome Human Pose Estimation](https://github.com/cbsudux/awesome-human-pose-estimation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Papers with Code](https://paperswithcode.com/sota/multi-person-pose-estimation-on-mpii-multi)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Applications
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Pose Estimation has applications in myriad fields, some of which are listed
+    below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. Activity Recognition**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Tracking the variations in the pose of a person over a period of time can also
+    be used for activity, gesture and gait recognition. There are several use cases
+    for the same, including:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Applications to detect if a person has fallen down or is sick.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Applications that can autonomously teach proper workout regimes, sport techniques
+    and dance activities.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Applications that can understand full-body sign language. (Ex: Airport runway
+    signals, traffic policemen signals, etc.).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Applications that can enhance security and surveillance.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Tracking the gait of the person](../Images/2b0bf07ba2418cbda034bd3eeaf77e42.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Tracking the gait of the person is useful for security and surveillance purposes.
+    ([Image source](http://www.ee.oulu.fi/~gyzhao/research/gait_recognition.htm))
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2\. Motion Capture and Augmented Reality**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An interesting application of human pose estimation is for CGI applications.
+    Graphics, styles, fancy enhancements, equipment and artwork can be superimposed
+    on the person if their human pose can be estimated. By tracking the variations
+    of this human pose, the rendered graphics can “naturally fit” the person as they
+    move.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Example of CGI Rendering](../Images/d82f726c995dc636cf3c91ae1ac01f8b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Example of CGI Rendering. ([Source](https://i.kym-cdn.com/photos/images/facebook/001/012/571/0a4.jpg))
+  prefs: []
+  type: TYPE_NORMAL
+- en: A good visual example of what is possible can be seen through [Animoji](https://www.wired.com/story/all-the-face-tracking-tech-behind-apples-animoji/).
+    Even though the above only tracks the structure of a face, the idea can be extrapolated
+    for the key points of a person. The same concepts can be leveraged to render Augmented
+    Reality (AR) elements that can mimic the movements of a person.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3\. Training Robots**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead of manually programming robots to follow trajectories, robots can be
+    made to follow the trajectories of a human pose skeleton that is performing an
+    action. A human instructor can effectively teach the robot certain actions by
+    just demonstrating the same. The robot can then calculate how to move its articulators
+    to perform the same action.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**4\. Motion Tracking for Consoles**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An interesting application of pose estimation is for tracking the motion of
+    human subjects for interactive gaming. Popularly, Kinect used 3D pose estimation
+    (using IR sensor data) to track the motion of the human players and to use it
+    to render the actions of the virtual characters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![olympics](../Images/aa55d13a78c9ec2f044803018daf1825.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The Kinect sensor in action. ([Source](https://appleinsider.com/articles/14/07/11/apples-secret-plans-for-primesense-3d-tech-hinted-at-by-new-itseez3d-ipad-app))
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Great strides have been made in the field of human pose estimation, which enables
+    us to better serve the myriad applications that are possible with it. Moreover,
+    research in related fields such as Pose Tracking can greatly enhance its productive
+    utilization in several fields. The concepts listed in this blog are not exhaustive
+    but rather strives to introduce some popular variants of these algorithms and
+    their real-life applications.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Bharath Raj](https://www.linkedin.com/in/bharathrajn/) is an associate engineer
+    at Siemens PLM Software. He loves to experiment with Machine Learning and Computer
+    Vision concepts. You can check out his projects [here](https://thatbrguy.github.io).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Yoni Osin](https://www.linkedin.com/in/yoni-osin-41791aa5/) is the VP of R&D
+    at BeyondMinds'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/beyondminds/an-overview-of-human-pose-estimation-with-deep-learning-d49eb656739b).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to do Everything in Computer Vision](/2019/02/everything-computer-vision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Tensorflow Object Detection to do Pixel Wise Classification](/2018/03/tensorflow-object-detection-pixel-wise-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Implementing a CNN for Human Activity Recognition in Tensorflow](/2016/11/implementing-cnn-human-activity-recognition-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[The Gap Between Deep Learning and Human Cognitive Abilities](https://www.kdnuggets.com/2022/10/gap-deep-learning-human-cognitive-abilities.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Closing the Gap Between Human Understanding and Machine Learning:…](https://www.kdnuggets.com/2023/06/closing-gap-human-understanding-machine-learning-explainable-ai-solution.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[R vs Python (Again): A Human Factor Perspective](https://www.kdnuggets.com/2022/01/r-python-human-factor-perspective.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beyond Human Boundaries: The Rise of SuperIntelligence](https://www.kdnuggets.com/beyond-human-boundaries-the-rise-of-superintelligence)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing: Bridging Human Communication with AI](https://www.kdnuggets.com/natural-language-processing-bridging-human-communication-with-ai)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beyond Coding: Why The Human Touch Matters](https://www.kdnuggets.com/beyond-coding-why-the-human-touch-matters)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

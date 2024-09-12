@@ -1,0 +1,434 @@
+- en: Topic Modeling with Streamlit
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/05/topic-modeling-streamlit.html](https://www.kdnuggets.com/2021/05/topic-modeling-streamlit.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Bryan Patrick Wood](https://www.linkedin.com/in/bpw1621/), Senior Data
+    Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What does it take to create and deploy a topic modeling web application quickly? I
+    endeavored to find this out using Python NLP packages for topic modeling, Streamlit
+    for the web application framework, and Streamlit Sharing for deployment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I had been directed to use topic modeling on a project professionally, so I
+    already had direct experience with relevant techniques on a challenging real-world
+    problem. However, I encountered several unexpected difficulties sharing topic
+    modeling results with a non-technical audience.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Is this a topic modeling?](../Images/1d77b0e2fd987bcadf8d4bdc5a33f30f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Shortly after, I was consulted on implementing a topic modeling feature in a
+    product system operating at scale. Here, again, the group I was trying to assist
+    had a hard time understanding exactly what to expect out of topic modeling and
+    keeping the important differences between supervised, semi-supervised, and unsupervised
+    machine learning approaches straight⁸.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This motivated me to put something together to *show, don't tell* so to speak.
+    I wanted something tangible for the folks I was dealing with to play around with.
+    This was also a good excuse to use Streamlit and try out Streamlit Sharing. I
+    had been proselytizing Streamlit for a few use-cases professionally when really
+    I had only played around with a few toy examples. Deploying via Streamlit Sharing
+    was new and piqued my curiosity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Disclaimers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: First, the application is still very much a work in progress / prototype. There
+    is functionality stubbed out that is not implemented (e.g., using non-negative
+    matrix factorization¹). Code all needs to be refactored out of a sprawling 250
+    line script too. Focus was on getting enough of the piece parts working well enough
+    to allude to robust capabilities that could be implemented and having enough of
+    a complete application to stimulate discussion. Second, Streamlit had good support
+    for literate programming². As a result, some narrative is repeated from the application
+    here. As such, if you have already gone to the application you can skim some of
+    what follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Topic Modeling
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As I would find out, *topic modeling* can mean different things to different
+    people. The words *topic* and *model* are common enough where most people can
+    look at them and formulate an opinion on what the technique must accomplish when
+    successful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Without additional qualifications, the term *topic modeling* usually refers
+    to types of statistical models used in the discovery of *abstract topics* that occur
+    in a collection of documents⁶. These techniques are almost always fully unsupervised
+    although semi-supervised and supervised variants do exist. Among the most commonly
+    used techniques, and the one that is fully implemented in the application, is
+    Latent Dirichlet Allocation (LDA)⁷.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'At a superficial level, LDA is just a matrix factorization of the words document
+    relationship matrix (viz., below) into a two relationship matrices: words to topics
+    and topics to documents. The theory posits an underlying distribution of words
+    in topics and topics in documents but that is more of interest if one wishes to
+    understand underlying theory which is well exposed elsewhere.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Topic Modeling as Matrix Factorization](../Images/ec21f12bebdf350c46fc119b29b080c7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Not going deep into LDA theory here: that is a topic for its own blog post
+    and another time.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I had done a lot of experimentation on the professional project. That experimentation is
+    not directly useful outside its context which I cannot share. I will highlight
+    some snippets of code that may be of use to an aspiring topic modeler.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Preprocessing is vitally important in all machine learning problems. In NLP
+    problems, there tends to be a lot more choices than in other domains. For topic
+    modeling specifically, one usually wants to remove various types of named entities
+    before applying modeling. The following function was used to *denoise* the text
+    documents
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: I also experimented with using bigram and trigram phrases through `gensim.models.Phrases`
+    and `gensim.models.phrases.Phraser` but did not see a big lift. Using the bigrams
+    and trigrams themselves rather than as a preprocessing step may have been more
+    impactful. The final step in document preprocessing was using [spaCy](https://spacy.io/) to
+    perform lemmantization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The modeling code is `gensim` standard fare
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: I had intended to add more modeling options but ran out of time. At very least,
+    I will be adding in an option to use NMF in the future. Anecdotally, NMF can produce
+    better topics depending on the dataset being investigated. Adding any method that
+    is not unsupervised will be a much bigger lift.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![pyLDAvis](../Images/7be71f009e899f4be236f583d0322a41.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![termite plot](../Images/5c7ee06f790d27e9381543c44cfa4c35.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'For visualization, I liberally took from [Topic modeling visualization – How
+    to present the results of LDA models?](https://www.machinelearningplus.com/nlp/topic-modeling-visualization-how-to-present-results-lda-models) specifically
+    for the model result visualizations: it is a good reference for visualizing topic
+    model results.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: pyLDAvis⁹ is also a good topic modeling visualization but did not fit great
+    with embedding in an application. Termite plots^(10) are another interesting topic
+    modeling visualization available in Python using the [textaCy package](https://textacy.readthedocs.io/en/stable/api_reference/viz.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The most involved visualization I had time for was the word clouds and since
+    there was already a Python package to do just that the task was trivial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Airline Tweets Wordcloud](../Images/332fb1c3ae82559e02f9535e03e9cd50.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The settings required a little playing around with to get something that looked
+    decent. Adding additional visualizations is the main place I felt like I ran out
+    of time and will likely revisit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Streamlit
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Streamlit is an open-source Python library that makes it easy to create and
+    share beautiful, custom web apps for machine learning and data science. I will
+    focus on the *create* here and on the *sharing* in the sequel although sharing
+    on a trusted local area network is trivial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The main value proposition is taking a data science or machine learning artifact
+    to web application quick for the purpose of sharing with folks that would not
+    be comfortable with something like a Jupyter notebook. On this it delivers. I
+    went from script to web application in a couple hours. That allowed me to share
+    a web application with a group of decision makers that were trying to make heads
+    or tails of what topic modeling even meant. I was very impressed from the provider-end
+    and received feedback of the same from the receiver-end.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another benefit would be its pure Python nature (i.e., no HTML, CSS, JS, etc.)
+    so no need to require data scientists to learn wonky web technologies they have
+    no interest in learning. A comparison with Plotly Dash probably deserves its own
+    blog post but the Dash approach is very much more in the camp of making React
+    easier to do in Python. It is very much focused on
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Probably not a big concern from most folks thinking about using this technology
+    given its target but its worth noting, for those with experience in traditional
+    GUI application frameworks, that Streamlit works more like an immediate mode user
+    interface^(11). That is, it reruns the script from top to bottom each time a UI
+    action (e.g., button is clicked) is performed. Aggressive caching, via the `@cache` decorator,
+    allows for efficient execution: only rerun the code you need to on each change.
+    This requires the user to make those decisions, and the arguments to be hashable.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It even supports screencast recording natively! Helps with showing folks how
+    to use what you are sharing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Record a Screencast](../Images/2f408d21acdccf85a76b8eaead94e788.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'This video shows the use of `st.sidebar` context manager: a staple for application
+    documentation, settings, and even navigation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: <https://bpw1621.com/images/streamlit-topic-modeling/streamlit-sidebar.webm>
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This next video shows how usage of the new `st.beta.expander` context manager:
+    it is fantastic especially for adding literate exposition sections that the user
+    will want to collapse after they have read it to regain the screen real estate.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: <https://bpw1621.com/images/streamlit-topic-modeling/streamlit-expander.webm>
+  prefs: []
+  type: TYPE_NORMAL
+- en: The last thing I'll highlight in the application is the usage of the new `st.beta.columns` context
+    manager that was used to create a grid of word clouds for the individual topics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Topic Wordclouds](../Images/fe10eea86d8b17221de8a0cc4f3ee847.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here is the code
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: There is a ton more to dive into here but nothing that cannot be gained from
+    jumping in and trying something yourself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Streamlit Sharing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The Streamlit Sharing tagline is pretty good: *deploy, manage, and share your
+    apps with the world, directly from Streamlit — all for free*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The ease of sharing a machine learning application prototype was *delightful*.
+    I had originally deployed on an Amazon AWS EC2 instance to meet a deadline (viz.,
+    below). Given my background and experience with AWS I would not say it was overly
+    difficult to deploy this way, but I know talented machine learning professionals
+    that might have had trouble here. Moreover, most would not want to spend their
+    time on role access, security settings, setting up DNS records, etc. And yes,
+    their time is most definitely better spent on what they do best.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to use this service you need to request and be granted an account.
+    You do that [here](https://streamlit.io/sharing). You will get a transactional
+    email letting you now that you are in the queue for access, but the invite is
+    not coming just yet. I would suggest, if you think you will want to try this out
+    anytime soon, that you sign up right away.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once access is granted it is pretty easy to just follow the gif above or the
+    directions [here](https://docs.streamlit.io/en/stable/deploy_streamlit_app.html#).
+    There are a couple of things that required me iterate on my github repository
+    to get everything working including
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using setup.py / setup.cfg correctly means you do not need a requirements.txt
+    file, but the service requires one
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is common for machine learning packages to download data and models
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the case of [spaCy](https://spacy.io/), they transitioned to making their
+    models available as Python packages so nothing to do there but add the model I
+    needed to requirements.txt
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the case of [NLTK](https://www.nltk.org/), I had to add a call to nltk.download
+    to grab stopwords in my main application script
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Otherwise it was completely straight-forward and accomplished in just a couple
+    clicks. Official guidance on deployment of Streamlit applications can be found [here](https://docs.streamlit.io/en/stable/deploy_streamlit_app.html#).
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is also important to note that this is absolutely not a replacement for production
+    deployment. Each user is limited to 3 applications. Individual applications are
+    limited to being run in a shared environment that can get up to 1 CPU, 800 MB
+    of RAM, and 800 MB of dedicated storage.³ So not the right place for your next
+    start-up's web application, but a great value proposition for sharing quick prototypes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrap Up
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you have gotten this far I would like to thank you for taking the time. If
+    on reading this you were interested enough to play around with the application
+    and have feedback I would love to hear it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The prototype application can be accessed on Streamlit Sharing⁴ and the code
+    is available on Github⁵. Intention is to augment and improve what is there time
+    permitting. Plan to get my thought for improvements and expansion into Github
+    issues as I have time to work on them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Non-negative Matrix Factorization Wikipedia](https://en.wikipedia.org/wiki/Non-negative_matrix_factorization)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Literate Programming Wikipedia](https://en.wikipedia.org/wiki/Literate_programming)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Streamlit Sharing Resource Limits](https://docs.streamlit.io/en/stable/deploy_streamlit_app.html#:~:text=of%20the%20app.-,Resource%20limits,in%20a%20shared%20execution%20environment.)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Streamlit Topic Modeling Application](https://share.streamlit.io/bpw1621/streamlit-topic-modeling/streamlit_topic_modeling/app.py)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Streamlit Topic Modeling Application Github Repository](https://github.com/bpw1621/streamlit-topic-modeling)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Topic Model Wikipedia](https://en.wikipedia.org/wiki/Topic_model)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Latent Dirichlet Allocation Wikipedia](https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Unsupervised, supervised and semi-supervised learning Cross Validated Question](https://stats.stackexchange.com/questions/517/unsupervised-supervised-and-semi-supervised-learning)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[pyLDAvis Github](https://github.com/bmabey/pyLDAvis)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Termite: Visualization Techniques for Assessing Textual Topic Models](http://vis.stanford.edu/papers/termite)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Immediate mode GUI Wikepedia](https://en.wikipedia.org/wiki/Immediate_mode_GUI)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Bio: [Bryan Patrick Wood](https://www.linkedin.com/in/bpw1621/)** ([**@bpw1621**](https://twitter.com/bpw1621))is
+    a Senior Data Scientist, and is leading a data science team tackling some of the
+    most important challenges facing the nation. Check out his [personal website](https://bpw1621.com/)
+    for more.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://bpw1621.com/archive/streamlit-topic-modeling/). Reposted
+    with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Production-Ready Machine Learning NLP API with FastAPI and spaCy](/2021/04/production-ready-machine-learning-nlp-api-fastapi-spacy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn Neural Networks for Natural Language Processing Now](/2021/04/learn-neural-networks-natural-language-processing-now.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Better data apps with Streamlit’s new layout options](/2020/11/streamlit-better-data-apps-new-layout-options.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Topic Modeling Approaches: Top2Vec vs BERTopic](https://www.kdnuggets.com/2023/01/topic-modeling-approaches-top2vec-bertopic.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Answering Questions with HuggingFace Pipelines and Streamlit](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DIY Automated Machine Learning with Streamlit](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[LangChain + Streamlit + Llama: Bringing Conversational AI to Your…](https://www.kdnuggets.com/2023/08/langchain-streamlit-llama-bringing-conversational-ai-local-machine.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploying a Streamlit WebApp to Heroku using DAGsHub](https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[12 Essential Commands for Streamlit](https://www.kdnuggets.com/2023/01/12-essential-commands-streamlit.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

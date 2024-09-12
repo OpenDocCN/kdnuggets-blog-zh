@@ -1,0 +1,594 @@
+- en: 'High-Performance Deep Learning: How to train smaller, faster, and better models
+    – Part 4'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part4.html](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part4.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9970edb2850289adc136ca465d25bc5e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the previous parts ([Part 1](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html),
+    [Part 2](https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html),
+    [Part 3](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part3.html)),
+    we discussed why efficiency is important for deep learning models to achieve high-performance
+    models that are pareto-optimal, as well as the focus areas for efficiency in Deep
+    Learning. We also covered two of the focus areas (Compression Techniques and Learning
+    Techniques). Let us continue to spend more time covering the other focus areas.
+    You are also welcome to go through our [survey paper on efficiency in deep learning](https://arxiv.org/abs/2106.08962).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Automation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Another stream of efforts has been around delegating some of the manual work
+    in efficiency to automation. If we let automation help with network design and
+    tuning, it would reduce human involvement and the bias that comes along with it.
+    The trade-off, though, is increased computational costs that come along with it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Hyper-Parameter Optimization (HPO)**: One of the commonly used methods that
+    fall under this category is Hyper-Parameter Optimization (HPO) [1]. We know that
+    tuning hyper-parameters such as initial learning rate, weight decay, etc., are
+    crucial for faster convergence [2]. There can also be parameters that decide the
+    network architecture, such as the number of fully connected layers, the number
+    of filters in a convolutional layer, etc.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: While we can build intuition with experimentation, finding the best hyper-parameter
+    values requires a manual search for the exact values that optimize the given objective
+    function (typically the loss value on the validation set).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the user has prior experience on the hyper-parameters to be tuned, a simple
+    algorithm for automating HPO that can be used is Grid Search (also referred to
+    as Parameter Sweep). In this case we search for all the distinct and valid combinations
+    of the given hyper-parameters based on the valid range of each provided by the
+    user. For example, if the possible values for learning rate (lr) are {0.01, 0.05},
+    and the possible values for the weight decay (decay) are {0.1, 0.2}, then there
+    would be 4 possible combinations possible {lr=0.01, decay=0.1}, {lr=0.01, decay=0.2},
+    {lr=0.05, decay=0.1}, and {lr=0.05, decay=0.2}.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each of the above combinations is a *trial,* and each trial can then be run
+    in parallel. The optimal combination of the hyper-parameters is found once all
+    the trials have been completed. Since this approach tries all possible combinations,
+    the total number of trials grows very quickly, and hence it suffers from the curse
+    of dimensionality [3].
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another approach is Random Search [4], where trials are sampled randomly from
+    the search space which is constructed using the range of possible values provided
+    by the user. Similar to Grid Search, each trial still runs independently in parallel.
+    However, Random Search is easy to scale depending on the computational capacity
+    available since the trials are independently and identically distributed (iid),
+    and thus the likelihood of finding the optimal trial increases with the number
+    of trials. This allows for pre-empting the search if the best trial so far is
+    good enough. There are also methods like Successive Halving (SHA) [5] and HyperBand
+    [6] that are similar to random search, but they allocate more resources to the
+    trials which are performing well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9ca0b362fe05d2c92248f7703eb48306.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Grid Search, Random Search, and Bayesian Optimization. [Source](https://en.wikipedia.org/w/index.php?title=Hyperparameter_optimization)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bayesian Optimization (BO)-based search [7] is a more involved method, where
+    it keeps a separate model for predicting if a given trial is likely to improve
+    on the optimal trial found so far. The model learns to predict this likelihood
+    based on the performance of the past trials. BO improves over Random Search in
+    that the search is guided rather than random. Thus, fewer trials are required
+    to reach the optimum. Since the selection of trials depends on the results of
+    the past trials, this method is sequential. However, it is possible to spawn multiple
+    trials at the same time in parallel (based on the same estimates), which might
+    lead to faster convergence at the cost of some wasted trials when compared to
+    purely sequential BO.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In terms of practical usage, HPO is available for users in several software
+    toolkits that incorporate the algorithms themselves as well as an easy-to-use
+    interface (UI to specify the hyper-parameters and their ranges), including Vizier
+    [8] (an internal Google tool, also available via Google Cloud for black-box tuning).
+    Amazon offers Sagemaker [9], which is functionally similar and can also be accessed
+    as an AWS service. NNI [10], Tune [11], and Advisor [12] are other open-source
+    HPO software packages that can be used locally. These toolkits also provide an
+    option for Early Stopping of trials that are not promising. Vizier uses the Median
+    Stopping Rule, where a trial is terminated if its performance at a time step *t*
+    is below the median performance of all trials run till that point in time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Neural Architecture Search (NAS)**: We can think of NAS as an extension of
+    HPO where we are searching for parameters that change the network architecture
+    itself. NAS can be considered to comprise of the following parts:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Search Space:* These are the neural net operations that are allowed in the
+    graph (Convolution (1×1, 3× 3, 5 × 5), Fully Connected, Pooling, etc.), and how
+    they connect with each other.  This is provided by the user.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '*Search Algorithm & State:* This is the algorithm that controls the architecture
+    search itself. Typically the standard algorithms that apply in HPO (Grid Search,
+    Random Search, Bayesian Optimization, Evolutionary Algorithms) can be used for
+    NAS as well, along with Reinforcement Learning (RL) [13] and Gradient Descent
+    [14].'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '*Evaluation Strategy:* This defines what metric we use to evaluate the model’s
+    *fitness*. It can simply be a conventional metric like validation loss, accuracy,
+    etc. Or it can also be a compound metric, as in the case of MNasNet [15], which
+    creates a single custom metric based on accuracy as well as model latency.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![](../Images/989bce40cf3d67a66e9086d6ec346ff7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Neural Architecture Search: The controller is responsible for generating candidate
+    models based on the search space and the feedback received from the model evaluation.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The search algorithm with the search space and state can be viewed as a ‘controller’
+    which generates sample candidate networks. The evaluation stage trains and evaluates
+    the generated candidates for fitness. This fitness value is then passed as feedback
+    to the search algorithm, which will use it for generating better candidates.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Zoph et al.’s paper from 2016 [13] demonstrated that end-to-end neural network
+    architectures could be generated using Reinforcement Learning. In this case, the
+    controller is itself a Recurrent Neural Network (RNN), which generates the architectural
+    hyper-parameters of a feed-forward network one layer at a time, such as the number
+    of filters, stride, filter size, etc. Training the controller itself is expensive,
+    though (taking 22,400 GPU hours [16]), since the entire candidate network has
+    to be trained from scratch for a single gradient update to happen. In a follow-up
+    paper [16], the authors refine the search space to search for *cells*: A ‘Normal
+    Cell’ that takes in an input, processes it, and returns an output of the same
+    spatial dimensions. And a ‘Reduction Cell’ processes its input and returns an
+    output whose spatial dimensions are scaled down by a factor of 2\. Each cell is
+    a combination of ???? blocks. The controller’s RNN generates one block at a time,
+    where it picks outputs of two blocks in the past, the respective operations to
+    apply on them, and how to combine them into a single output. The Normal and Reduction
+    cells are stacked in alternating fashion (???? Normal cells followed by 1 Reduction
+    cell, where ???? is tunable) to construct an end-to-end network for CIFAR-10 and
+    ImageNet.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Learning these cells individually rather than learning the entire network seems
+    to improve the search time by 7× when compared to the end-to-end network search
+    in [13] while beating the state-of-the-art in CIFAR-10 at that time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/dd702b82dac94007e1eaf168e23a1b10.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*A Normal and Reduction Cell. Source: [16]*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Other approaches such as evolutionary techniques [17], differentiable architecture
+    search [14], progressive search [18], parameter sharing [19], etc. try to reduce
+    the cost of architecture search (in some cases reducing the compute cost to a
+    couple of GPU days instead of thousands of GPU days). These are covered in detail
+    in [20].
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When evaluating candidate networks, it is also possible to focus on not just
+    quality but also footprint metrics like model size, latency, etc. Architecture
+    Search can help with multi-objective searches that optimize for both. As an example,
+    MNasNet [15] incorporates the model’s latency on a target mobile device into the
+    objective function directly, as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c88b99cd0a05ea82161005b7307f808b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Multi-Object reward function in MNasNet.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/55058749bb9c46eb639000459abcb5c0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Generating candidate models in MNASNet, which also optimize for latency on
+    mobile devices. Source: [15]*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: where ???? is the candidate model, ???????????? is the accuracy metric, and
+    ???????????? is the latency of the given model on the desired device. ???? is
+    the target latency. ???? is recommended to be −0.07.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Overall, automation plays a critical role in model efficiency. HPO is now a
+    natural step in training models and can extract significant quality improvements
+    while minimizing human involvement. HPO is also available in both independent
+    software libraries, as well as through Cloud services. Similarly, recent advances
+    in Neural Architecture Search (NAS) also make it feasible to construct architectures
+    in a learned manner while having constraints on both quality and footprint. Assuming
+    several hundred GPU hours worth of compute required for the NAS run to finish,
+    and an approx cost of $3 GPU/hour on leading cloud computing services, this makes
+    using NAS methods financially feasible and not similar in cost to manual experimentation
+    with model architecture when optimizing for multiple objectives.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Efficient Architectures (Models & Layers)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Another common theme is to redesign efficient layers and models that are better
+    than the baseline and can be used for a specific task or as a black box in general.
+    In this section, we lay out examples of such efficient layers and models to illustrate
+    this idea.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Vision:** One of the classic examples of efficient layers in the Vision domain
+    is the use of convolutional layers, which improved over Fully Connected (FC) layers
+    in Vision models. FC layers suffer from two primary issues:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: (1) FC layers ignore the spatial information of the input pixels. Intuitively,
+    it is hard to build an understanding of the given input by looking at individual
+    pixel values in isolation. They also ignore the spatial locality in nearby regions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: (2) Using FC layers also leads to an explosion in the number of parameters when
+    working with even moderately sized inputs. A 100 × 100 RGB image with 3 channels
+    would lead to each neuron in the first layer having 3 × 10⁴ connections. This
+    makes the network susceptible to overfitting also.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Convolutional Layers avoid this by learning filters, where each filter is a
+    3D weight matrix of a fixed size (3x3, 5x5, etc.), with the third dimension being
+    the same as the number of channels in the input. Each filter is convolved over
+    the input to generate a *feature map* for that given filter. Each filter can learn
+    to detect features like edges (horizontal, vertical, diagonal, etc.), leading
+    to higher values in the feature maps where that feature is present. Collectively,
+    the feature maps from a single convolutional layer can extract meaningful information
+    from the image. Convolutional layers stacked on top will then use the feature
+    maps generated by the previous layer as the input, progressively learning more
+    complex features (each pixel in the feature maps is generated from a progressively
+    larger fraction of the image as one starts stacking the layers, increasing the
+    *receptive field* for the filter in the next layer).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c2527ad7c06c81c339df4fb0558be37c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Illustration of a convolution operation on a 2D input (blue), with a 2x2 filter
+    (green). [Source](https://github.com/vdumoulin/conv_arithmetic).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9c48da6a9e44a6704ea9e29e81df5678.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*3D visualization of the convolution operation. [Source](https://towardsdatascience.com/a-basic-introduction-to-separable-convolutions-b99ec3102728)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The core idea behind the efficiency of Convolutional Layers is that the same
+    filter is used everywhere in the image, regardless of where the filter is applied,
+    hence, enforcing spatial invariance while sharing the parameters. Going back to
+    the example of a 100×100 RGB image with 3 channels, a 5 × 5 filter would imply
+    a total of 75 (5 × 5 × 3) parameters. Each layer can learn multiple unique filters
+    and still be within a very reasonable parameter budget. This also has a regularizing
+    effect, wherein a dramatically reduced number of parameters allow for easier optimization
+    and better generalization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Depth-Separable Convolutional Layers**: In the convolution operation, each
+    filter is used to convolve over the two spatial dimensions and the third channel
+    dimension. As a result, the size of each filter is s[x] x s[y] x input_channels,
+    where s[x] and s[y] are typically equal. This is done for each filter, resulting
+    in the convolution operation happening both spatially in the *x* and *y* dimensions
+    and depthwise in the z dimension.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Depth-separable convolution breaks this into two steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Doing a point-wise convolution with 1 x 1 filters, such that the resulting feature
+    map now has a depth of output_channels.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Doing a spatial convolution with s[x] x s[y] filters in the x and y dimensions.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: These two operations stacked together (without any intermediate non-linear activation)
+    results in an output of the same shape as a regular convolution, with much fewer
+    parameters (1 x 1 x input_channels x output_channels + s[x] x s[y] x output_channels,
+    v/s s[x] x s[y] x input_channels x output_channels for the regular convolution). 
+    Similarly, there is an order of magnitude less computation since the point-wise
+    convolution is much cheaper for convolving with each input channel depth-wise
+    (more calculations [here](https://www.geeksforgeeks.org/depth-wise-separable-convolutional-neural-networks/)
+    & [here](https://arxiv.org/pdf/1704.04861.pdf)).  The Xception model architecture
+    [21] demonstrated using depth-wise separable convolutions in the Inception architecture,
+    allowing convergence sooner in terms of steps and a higher accuracy on the ImageNet
+    dataset while keeping the number of parameters the same.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The MobileNet model architecture [22], which was designed for mobile and embedded
+    devices, also uses depth-wise separable layers instead of regular convolutional
+    layers. This helps them reduce the number of parameters as well as the number
+    of multiply-add operations by 7-10x and allows deployment on Mobile for Computer
+    Vision tasks. Users can expect a latency between 10-100 ms, depending on the model.
+    MobileNet also provides a knob via the depth multiplier for scaling the network
+    to allow the user to trade-off between accuracy and latency.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Attention Mechanism**: On the Natural Language front, we have seen rapid
+    progress too. For sequence-to-sequence models, a persistent issue was that of
+    information-bottleneck. These models typically have an encoder layer, which encodes
+    an input sequence, and a decoder sequence that generates another sequence in response.
+    An example of such a task can be machine translation, where the input sequence
+    is a sentence in the source language and the output sequence is the sentence in
+    the target language.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The way this was traditionally done was with RNNs in both encoders and decoders.
+    However, the first decoder layer could only see the hidden state of the final
+    encoder step. This is a ‘bottleneck’ because the first decoder step would have
+    to extract all information from the final hidden state.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0572503216411994f09cfc4a68f95771.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Information bottleneck for the decoder for a machine translation task from
+    English to Hindi.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Attention mechanism was introduced in Bahdanau et al. [23] to allow the
+    decoder to be able to see all the encoder states. It is a way to highlight the
+    relevant parts of an input sequence and compress the input sequence to a *context
+    vector*, based on the similarity of the sequence with another vector (known as
+    the query vector). In the case of sequence-to-sequence tasks like machine translation,
+    this allows tailoring the input to the decoder based on all the encoder states
+    (represented as keys and values) and the previous hidden state of the decoder
+    (query vector). The context vector is a weighted sum of the encoder states based
+    on the previous hidden state of the decoder. Since Attention creates a weighted
+    sum of the encoder states, the weights can also be used for visualizing the behavior
+    of the network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/23384e064b8600c78f717611afc56206.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Use of attention in the decoder. [Source](https://arxiv.org/pdf/1902.02181.pdf#:~:text=The%20attention%20mechanism%20is%20a,to%20its%20higher%20level%20representation.)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Transformer & Friends**: The Transformer architecture [24] was proposed in
+    2017, which introduced using attention for both the decoder and the encoder. In
+    the encoder, they use self-attention where the keys, values, and query vectors
+    are all derived from the previous encoder layers. Transformer networks were two
+    orders of magnitude cheaper to train than the comparable alternatives at the time
+    of the paper being authored.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/87a8b89453c8d581c2a89ed72dd26879.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Transformer architecture. [Source](https://jalammar.github.io/illustrated-transformer/)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another core idea is that self-attention allows parallelizing the process of
+    deriving relationships between the tokens in the input sequences. RNNs inherently
+    force the process to occur one step at a time. For example, in an RNN, the context
+    of a token might not be fully understood until the entire sequence has been processed.
+    With attention, all tokens are processed together, and pairwise relationships
+    can be learned. This makes it easier to leverage optimized training devices like
+    GPUs and TPUs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As introduced in Part 3, the BERT model architecture [25] beat the state-of-the-art
+    in several NLU benchmarks. BERT is a stack of Transformer encoder layers that
+    are pre-trained using a bi-directional masked language model training objective.
+    It can also be used as a general-purpose encoder which can then be used for other
+    tasks. Other similar models like the GPT family [26] have also been used for solving
+    many NLU tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: References
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[1] Tong Yu and Hong Zhu. 2020\. Hyper-parameter optimization: A review of
+    algorithms and applications. arXiv preprint arXiv:2003.05689 (2020).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[2] Jeremy Jordan. 2020\. Setting the learning rate of your neural network.
+    Jeremy Jordan (Aug 2020). https://www. jeremyjordan.me/nn-learning-rate'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[3] [https://en.wikipedia.org/wiki/Curse_of_dimensionality](https://en.wikipedia.org/wiki/Curse_of_dimensionality)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[4] James Bergstra and Yoshua Bengio. 2012\. Random search for hyper-parameter
+    optimization. Journal of machine learning research 13, 2 (2012).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[5] Kevin Jamieson and Ameet Talwalkar. 2016\. Non-stochastic best arm identification
+    and hyperparameter optimization. In Artificial Intelligence and Statistics. PMLR,
+    240–248'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[6] Lisha Li, Kevin Jamieson, Giulia DeSalvo, Afshin Rostamizadeh, and Ameet
+    Talwalkar. 2017\. Hyperband: A novel bandit-based approach to hyperparameter optimization.
+    The Journal of Machine Learning Research 18, 1 (2017), 6765–6816.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[7] Apoorv Agnihotri and Nipun Batra. 2020\. Exploring bayesian optimization.
+    Distill 5, 5 (2020), e26.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[8] Daniel Golovin, Benjamin Solnik, Subhodeep Moitra, Greg Kochanski, John
+    Karro, and D Sculley. 2017\. Google vizier: A service for black-box optimization.
+    In Proceedings of the 23rd ACM SIGKDD international conference on knowledge discovery
+    and data mining. 1487–1495.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[9] Valerio Perrone, Huibin Shen, Aida Zolic, Iaroslav Shcherbatyi, Amr Ahmed,
+    Tanya Bansal, Michele Donini, Fela Winkelmolen, Rodolphe Jenatton, Jean Baptiste
+    Faddoul, et al. 2020\. Amazon SageMaker Automatic Model Tuning: Scalable Black-box
+    Optimization. arXiv preprint arXiv:2012.08489 (2020).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[10] Microsoft Research. 2019\. Neural Network Intelligence - Microsoft Research.
+    https://www.microsoft.com/enus/research/project/neural-network-intelligence [Online;
+    accessed 3\. Jun. 2021].'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[11] Richard Liaw, Eric Liang, Robert Nishihara, Philipp Moritz, Joseph E Gonzalez,
+    and Ion Stoica. 2018\. Tune: A research platform for distributed model selection
+    and training. arXiv preprint arXiv:1807.05118 (2018).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[12] Dihao Chen. 2021\. advisor. https://github.com/tobegit3hub/advisor [Online;
+    accessed 3\. Jun. 2021].'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[13] Barret Zoph and Quoc V Le. 2016\. Neural architecture search with reinforcement
+    learning. arXiv preprint arXiv:1611.01578 (2016).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[14] Hanxiao Liu, Karen Simonyan, and Yiming Yang. 2018\. Darts: Differentiable
+    architecture search. arXiv preprint arXiv:1806.09055 (2018).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[15] Mingxing Tan, Bo Chen, Ruoming Pang, Vijay Vasudevan, Mark Sandler, Andrew
+    Howard, and Quoc V Le. 2019\. Mnasnet: Platform-aware neural architecture search
+    for mobile. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern
+    Recognition. 2820–2828'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[16] Barret Zoph, Vijay Vasudevan, Jonathon Shlens, and Quoc V Le. 2018\. Learning
+    transferable architectures for scalable image recognition. In Proceedings of the
+    IEEE conference on computer vision and pattern recognition. 8697–8710.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[17] Esteban Real, Alok Aggarwal, Yanping Huang, and Quoc V Le. 2019\. Regularized
+    evolution for image classifier architecture search. In Proceedings of the aaai
+    conference on artificial intelligence, Vol. 33\. 4780–4789.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[18] Chenxi Liu, Barret Zoph, Maxim Neumann, Jonathon Shlens, Wei Hua, Li-Jia
+    Li, Li Fei-Fei, Alan Yuille, Jonathan Huang, and Kevin Murphy. 2018\. Progressive
+    neural architecture search. In Proceedings of the European conference on computer
+    vision (ECCV). 19–34.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[19] Hieu Pham, Melody Guan, Barret Zoph, Quoc Le, and Jeff Dean. 2018\. Efficient
+    neural architecture search via parameters sharing. In International Conference
+    on Machine Learning. PMLR, 4095–4104.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[20] Thomas Elsken, Jan Hendrik Metzen, Frank Hutter, et al. 2019\. Neural
+    architecture search: A survey. J. Mach. Learn. Res. 20, 55 (2019), 1–21.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[21] François Chollet. 2017\. Xception: Deep learning with depthwise separable
+    convolutions. In Proceedings of the IEEE conference on computer vision and pattern
+    recognition. 1251–1258'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[22] Mark Sandler, Andrew Howard, Menglong Zhu, Andrey Zhmoginov, and Liang-Chieh
+    Chen. 2018\. Mobilenetv2: Inverted residuals and linear bottlenecks. In Proceedings
+    of the IEEE conference on computer vision and pattern recognition. 4510–4520.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[23] Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio. 2014\. Neural machine
+    translation by jointly learning to align and translate. arXiv preprint arXiv:1409.0473
+    (2014).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[24] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+    Aidan N Gomez, Lukasz Kaiser, and Illia Polosukhin. 2017\. Attention is all you
+    need. arXiv preprint arXiv:1706.03762 (2017).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[25] Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2018\.
+    Bert: Pre-training of deep bidirectional transformers for language understanding.
+    arXiv preprint arXiv:1810.04805 (2018).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[26] Tom B Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan,
+    Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell,
+    et al. 2020\. Language models are few-shot learners. arXiv preprint arXiv:2005.14165
+    (2020).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Automating Machine Learning Model Optimization](https://www.kdnuggets.com/2021/03/automating-machine-learning-model-optimization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Algorithms for Advanced Hyper-Parameter Optimization/Tuning](https://www.kdnuggets.com/2020/11/algorithms-for-advanced-hyper-parameter-optimization-tuning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Attention mechanism in Deep Learning, Explained](https://www.kdnuggets.com/2021/01/attention-mechanism-deep-learning-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[7 Ways ChatGPT Makes You Code Better and Faster](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[oBERT: Compound Sparsification Delivers Faster Accurate Models for NLP](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn Machine Learning 4X Faster by Participating in Competitions](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why we will always need humans to train AI — sometimes in real-time](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

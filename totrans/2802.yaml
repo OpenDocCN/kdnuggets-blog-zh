@@ -1,0 +1,301 @@
+- en: Software Interfaces for Machine Learning Deployment
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/03/software-interfaces-machine-learning-deployment.html](https://www.kdnuggets.com/2020/03/software-interfaces-machine-learning-deployment.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Luigi Patruno](https://mlinproduction.com/about/), Data Scientist and
+    the founder of ML in Production**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/741c813aec2c11d4c0beb00d70c39134.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In our [previous post](https://www.kdnuggets.com/2020/02/deploy-machine-learning-model.html) on
+    machine learning deployment, we introduced what it means to deploy a machine learning
+    model. We learned that in order to make the predictions from a trained model available
+    to users and other software systems we need to consider a number of factors including
+    how frequently predictions should be generated and whether predictions should
+    be generated on a single sample of data or batch of samples at a time. In this
+    post, we’ll begin to examine **how to implement** the deployment process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Whereas many blog posts rush directly to implementing Flask APIs or using workflow
+    schedulers, we’re going to start at a more fundamental level. We’ll begin by discussing *software
+    interfaces*, which can be thought of as the boundaries between pieces of software.
+    An analogy is that a piece of software is a puzzle piece, and an entire software
+    system is the completed puzzle. When properly designed, interfaces allow you to
+    connect many different software components, leading to large and complex projects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In terms of ML deployment, well-constructed interfaces facilitate reproducible,
+    automated, plug-and-play deployments. A good interface lets you easily roll out
+    model updates, version control the models you deploy, and more.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Let’s get started!
+  prefs: []
+  type: TYPE_NORMAL
+- en: What’s an Interface?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Imagine a manager who assigns an employee the task of creating a report. A
+    good manager might say: "I need you to produce a report with the following charts
+    and figures. To produce that report, use customer transaction data." The manager
+    has explicitly defined the desired outcome (the report) and hinted at a methodology
+    (use of the customer transaction data).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In contrast, a bad manager might do any of the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Not specify the input **– Ask for the report but not specify which data to
+    use or hint at whom the employee should speak with to discover appropriate datasets.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Not make the deliverable clear **– Give the employee a bunch of data but
+    not tell the employee what should be produced.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Micromanage **– Tell the employee what tools to use to produce the report,
+    what steps to follow, and promise him that any deviance from this plan will be
+    met by swift and firm punishment.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Software interfaces](https://blog.robertelder.org/interfaces-most-important-software-engineering-concept/) are
+    like managers. A good interface explicitly states the necessary inputs and the
+    output it produces. For example, an interface implemented as a function will list
+    all required arguments and what’s returned by the function. Interfaces can be
+    thought of as the "boundaries" between separate chunks of software that define
+    how different pieces of software communicate with one another. When interfaces
+    are constructed well, different software, even software written by developers
+    working on separate teams or companies, can communicate and work in tandem.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Software engineers are taught to focus on the interfaces they develop rather
+    than how the functions are implemented. The implementation is important, but can
+    always be updated. But it’s significantly harder to update an interface after
+    it’s released, especially if your interface is external facing. Therefore time
+    invested defining an interface is time well spent.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Basic Interface for Machine Learning Models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: How would a software engineer think about what a machine learning model actually
+    does? Abstractly speaking, a model accepts data, acts on that data in some way,
+    and then returns a result. It’s really that simple. How the model is acting on
+    the data could be incredibly involved, like a forward pass of a convolutional
+    neural network applying convolutions to tensors of image data, but these are implementation
+    details.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The boundary of a machine learning model is made up of the inputs to the model,
+    i.e. the features, and the output(s) the model predicts. Therefore a well-constructed
+    interface must be built with both the input features and predicted outputs in
+    mind. To illustrate, let’s define this interface with a simple function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: This function takes as its input a model and a set of input_features and returns
+    a prediction. Notice that we haven’t *implemented* the function, i.e., we haven’t
+    written *how* the function combines the model and the features to generate the
+    prediction. We’ve simply created a contract or a promise – we guarantee the function
+    will return a prediction if the caller provides a model and input_features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Multiple Interfaces for Machine Learning Models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The *predict() *method we defined accepts a single feature vector and returns
+    a single prediction. How do we know this? The documentation states that *input_features* is
+    a numpy array of shape* (1, n) *where *n* is the dimension of the feature vector.
+    This is great if your model expects to predict a single instance at a time, but
+    not so great if the model is also expected to predict on batches of samples. You
+    could work around this by writing for-loops, but it’s unlikely that a loop will
+    be very efficient. Instead, we should define another method that directly handles
+    the batch case. Let’s call it *predict_batch*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This method defines a contract whereby it promises to return a batch of predictions
+    if a model and batch of input features are provided. Again, we haven’t implemented
+    the method – that’s left to the developer of the method. The developer may choose
+    to use a loop and call *predict *over and over. Or the developer may do something
+    else. This is irrelevant for the purposes of deployment. What *does matter* is
+    that we have 2 interfaces: one that predicts a sample and another that predicts
+    a batch of samples.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Machine Learning Object Oriented Programming – MLOOP
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So far we’ve ignored the *model *parameter required by both the *predict *and *predict_batch* methods.
+    Let me explain why this is problematic for machine learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Most engineers developing machine learning models today want to use the best
+    tool available. If the engineer is building a classic model, like logistic regression
+    or random forest, the engineer might choose to use [scikit-learn](https://scikit-learn.org/stable/).
+    But for deep learning, that engineer might choose to use [Tensorflow](https://www.tensorflow.org/) or [PyTorch](https://pytorch.org/).
+    Even within classical ML, the engineer may opt for the [xgboost](https://xgboost.readthedocs.io/en/latest/) implementation
+    of gradient boosted trees. The model objects from each library have slightly different
+    APIs. And we can’t predict what APIs future ML libraries will implement. This
+    would make the implementations of our interfaces very messy. For instance, we
+    DO NOT want our implementation to look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: This implementation would be hard to maintain and would make it difficult to
+    debug runtime errors. Also, imagine what would happen if we wanted to pass additional
+    parameters to predict when using one model but not another. For instance, what
+    if we wished to pass additional parameters, only predicting with an sklearn model.
+    The number of arguments to the function would grow, but these parameters would
+    be useless for non-sklearn models. How would we describe that in the documentation?
+    These are just a few reasons why object-oriented programming, creating classes
+    and objects, is preferred.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Our interface is composed of two methods: *predict *and *predict_batch*. Let’s
+    define a base class with these two methods:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This base class acts as a *template* for our data science team. If a data scientist
+    wants to use scikit-learn models, he just needs to subclass the Model class and
+    implement the necessary methods. If another data scientist wants to use Tensorflow,
+    no problem, just create a Tensorflow subclass! To illustrate, let’s create the
+    sklearn subclass:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Since sklearn Predictors expect 2D input, we reshaped the input_features argument
+    in the predict method. This is a key benefit of the object-oriented approach.
+    We can define the interface that is relevant for the types of problems we’re solving *AND* take
+    advantage of [excellent 3rd party machine learning libraries!](https://github.com/EthicalML/awesome-production-machine-learning)
+  prefs: []
+  type: TYPE_NORMAL
+- en: And the benefits don’t stop there. We can add additional methods that simplify
+    our ML workflows. For example, once a model has been trained, we typically need
+    a way to serialize the model and then deserialize it at inference time. Hence,
+    we can add two methods, serialize() and deserialize(), to our interface. We can
+    even provide default implementations of these methods in the base Model class
+    and create library-specific implementations in the subclasses.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Additional examples of useful interface methods include moving serialized models
+    from a local filesystem to some model store or remote filesystem like S3\. There’s
+    no limit to the methods you can add.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating good interfaces upfront will save your machine learning team A LOT
+    of time as you take on additional projects by making deployments automated and
+    repeatable.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[Original](https://mlinproduction.com/software-interfaces-for-machine-learning-deployment-deployment-series-02/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Luigi Patruno](https://twitter.com/MLinProduction) is a data scientist
+    and machine learning consultant. He is currently the Director of Data Science
+    at 2U, where he leads a team of data scientists responsible for building machine
+    learning models and infrastructure. As a consultant, Luigi helps companies generate
+    value by applying modern data science methods to strategic business and product
+    initiatives. He founded [MLinProduction.com](http://mlinproduction.com/) to collect
+    and share best practices for operationalizing machine learning and he''s taught
+    graduate courses in statistics, data analysis, and big data engineering.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[What Does it Mean to Deploy a Machine Learning Model?](https://www.kdnuggets.com/2020/02/deploy-machine-learning-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[MLOps for production-level machine learning](https://www.kdnuggets.com/2019/11/cnvrg-mlops-production-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deployment of Machine learning models using Flask](https://www.kdnuggets.com/2019/12/excelr-deployment-machine-learning-flask.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Full End-to-End Deployment of a Machine Learning Algorithm into a…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[From Data Collection to Model Deployment: 6 Stages of a Data…](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Back to Basics Week 4: Advanced Topics and Deployment](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 7 Model Deployment and Serving Tools](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Software Developer vs Software Engineer](https://www.kdnuggets.com/2022/05/software-developer-software-engineer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Software Mistakes and Tradeoffs: New book by Tomasz Lelek and…](https://www.kdnuggets.com/2021/12/manning-software-mistakes-tradeoffs-book.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,676 @@
+- en: 'Machine Learning 101: The What, Why, and How of Weighting'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/11/machine-learning-what-why-how-weighting.html](https://www.kdnuggets.com/2019/11/machine-learning-what-why-how-weighting.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Eric Hart](https://www.linkedin.com/in/erichart07), Altair**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One thing I get asked about a lot is weighting. What is it? How do I do it?
+    What do I need to worry about? By popular demand, I recently put together a lunch-and-learn
+    at my company to help address all these questions. The goal was to be applicable
+    to a large audience, (e.g., with a gentle introduction), but also some good technical
+    advice/details to help practitioners. This blog was adapted from that presentation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model Basics
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Before we talk about weighting, we should all get on the same page about what
+    a model is, what they are used for, and some of the common issues that modelers
+    run into. Models are basically tools that humans can use to (over-)simplify the
+    real world in a rigorous way. Often, they take the form of equations or rules
+    sets, and they usually try to capture patterns that are found in data. People
+    often divide models into one of two high-level categories in terms of what they
+    are being used for (and yes, there can be overlap): Inference and Prediction.
+    Inference means trying to use models to help understand the world. Think scientists
+    trying to uncover physical truths from data. Prediction means trying to make guesses
+    about what is going to happen. For most of the rest of this discussion, we’re
+    going to be focused on models built with purposes of prediction in mind.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you’re building a model to make predictions, you’re going to need a way to
+    measure how good that model is at making predictions. A good place to start is
+    with Accuracy. The Accuracy of a model is simply the percentage of its predictions,
+    which turn out to be correct. This can be a useful measure, and indeed it’s essentially
+    the default measure for a lot of automatic tools for training models, but it certainly
+    has some shortcomings. For one thing, accuracy doesn’t care about how *likely*
+    the model thinks each prediction is (the probabilities associated with the guesses).
+    Accuracy also doesn’t care about which predictions the model makes (e.g. if it’s
+    deciding between a positive or negative event, accuracy doesn’t give one of them
+    priority over the other). Accuracy also doesn’t care about differences between
+    the set of records the accuracy is measured on and the real population which the
+    model is supposed to apply to. These things can be important.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s jump into an example. Recently, the 2019 World Series concluded. I’m
+    going to contrast some predictions for that world series below. Spoiler Alert:
+    I’m going to tell you who won the world series.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The 2019 world series took place between the Washington Nationals and the Houston
+    Astros
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9c2dfabf71423bfb460a253e451e1088.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Let’s investigate some models. I have an internal model in my head, which I
+    won’t explain. It gave these predictions for each of the 7 games of the series:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/58ac86de1ea73efc53dd45369e6d9059.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Apparently, I was pretty high on the Nationals. Meanwhile, one of my favourite
+    websites, FiveThirtyEight, has an advanced statistical model which they use to
+    [predict games](https://projects.fivethirtyeight.com/2019-mlb-predictions/games/).
+    It gave these predictions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/27c27d7f45360b0f6216d3b2ac42e425.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'It’s worth noting: these are individual game predictions, made in advance of
+    each game if it was going to happen; these are not predictions for the series
+    as a whole. Since the series is a best-of-seven, once a team wins 4 games, no
+    more games will be played, so obviously neither of the two sets of predictions
+    above will happen exactly as is.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: These predictions are based on things like team strength, home field advantage,
+    and specifics of which pitcher is starting each game. FiveThirtyEight’s model
+    predicted the home team to win in every game, except game 5, when Houston’s best
+    pitcher, Gerrit Cole, was pitching in Washington.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Anyway, let’s spoil the series, see what happened, and compare accuracy. Here
+    was the real result:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/59a08570ab450a514ca828522b710d22.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The series went 7 games, with Washington winning the first and last 2\. (As
+    an aside, the away team won every game in this series, which had never happened
+    before in this, or any other, major North American professional sport.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So, let’s look at how we each did:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'My result:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/3d63fbbe561744ffa05c383878948cf5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: I got 5 of the 7 games right, for an accuracy of 0.71
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'FiveThirtyEight’s Result:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/217b2691814f7b9459e1642846d718d1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: FiveThirtyEight got only 1 game right, for an accuracy of 0.14.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So, you might be tempted to think that my model is better than FiveThirtyEight’s,
+    or at least that it did better in this case. But predictions aren’t the whole
+    story. FiveThirtyEight’s model comes not only with predictions, but with helpful
+    probabilities, suggesting how likely FiveThirtyEight thinks each team is to win.
+    In this case, those probabilities looked like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/512177b89c3f8a7d8e3477dd702d1c3a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Meanwhile, I’m the jerk who is always certain he’s right about everything. You
+    all know the type. My probabilities looked like this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8ca907801052ee91f3937c13aa01ac07.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: With this in mind, even though I had a higher accuracy, you might rethink which
+    model you prefer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s important to discuss this because we’re going to be talking about accuracy
+    again soon while addressing some of the shortcomings of certain models. It’s important
+    to remember that accuracy can be a useful metric, but it doesn’t always give you
+    a full picture. There are other tools for measuring the quality of models that
+    pay attention to things like probabilities, and other more subtle concepts than
+    just prediction. A few examples I like to use are Lift Charts, ROC Curves, and
+    Precision-Recall Curves. These are good tools that can be used to help choose
+    a good model, but none of them are fool-proof on their own. Also, these tools
+    are more visual, and often, machine learning algorithms need a single number underneath,
+    so accuracy ends up getting baked into a lot of algorithms as the default measure
+    of choice, even when that’s detrimental to some external goal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The What of Weighting
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Consider the following data table:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7737da7e5ee9b0ce07831615c29e7625.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Say you want to build a model to predict the value of ‘DV’ using only Age and
+    Sex. Because there is only one example with DV=1, you may have a hard time predicting
+    that value. If this is a dataset about credit lending, and the DV is whether someone
+    is going to default (1 meaning they defaulted), you may care more about being
+    correct on the DV=1 cases than the DV=0 cases. Take a minute and see if you can
+    come up with a good model (e.g. some rules) to predict DV=1 on this dataset. (Spoiler,
+    you can’t possibly get 100% accuracy).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here are some possible examples:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Intercept Only Model
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Always Predict 0
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Accuracy = 0.9
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 27 Year Olds
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Predict DV=1 for 27-year-olds, and 0 otherwise
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Accuracy = 0.9
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Young Women
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Predict DV=1 for women under 30, and 0 otherwise
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Accuracy = 0.9
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'All these models have the same accuracy, but some of them may be more useful
+    in certain use cases. If you ask a decision tree or a logistic regression algorithm
+    to build a model on these datasets, they will both give you model #1 by default.
+    The models don’t know that you might care more about the DV=1 cases. So, how can
+    we make the DV=1 cases more important to the model?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Idea #1: Oversampling: Duplicate existing rare event records and leave common
+    event records alone.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Idea #2: Undersampling: Remove some of the common event records, keep all the
+    rare event records.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In both cases, we manually use a different population to train the model on
+    than what we naturally had, with the express purpose of affecting the model we’re
+    going to build.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Weighting is kind of like this, but instead of duplicating or removing records,
+    we assign different weights to each record as a separate column. For example,
+    instead of doing this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8e1ccac8de78c3b91a0f1a7598449283.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'We could just do this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7482df33d0431ab1092f363c806acd0c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'You might legitimately ask if it’s possible for machine learning algorithms
+    to handle weighted data this way, but a legitimate answer is: “yes, it’s fine,
+    don’t worry about it.”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In fact, we don’t even need to give integer weights. You could even do something
+    like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fc15a2418d14aa5378db84104c7551ec.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'But for now, let’s stick to the integer weights. Say you want to build your
+    model on the weighted dataset above:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/acac8fd83d85d21e3784ff62b0f453d1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Then if we revisit the possible models we discussed before, we see this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Intercept Only Model
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Weighted Accuracy (for training model): 0.82'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Real Accuracy = 0.9
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 27 Year Olds
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Weighted Accuracy (for training model): 0.91'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Real Accuracy = 0.9
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Young Women
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Weighted Accuracy (for training model): 0.91'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Real Accuracy = 0.9
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: By weighting, even though we haven’t changed the real accuracy, we’ve changed
+    the weighted accuracy, which would cause the first option to be less desirable
+    than the latter two at training time. In fact, if you build a model on this weighted
+    table, a decision tree naturally finds the second model, while a Logistic Regression
+    naturally finds the third model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A common question I get about weighting is: how do you handle things after
+    model training? Do you have to apply your weights during validation or deployment?
+    The answer is No! The point of weighting was to influence your model, not to influence
+    the world. Once your model is trained, your weights are no longer needed (or useful)
+    for anything.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Why of Weighting
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the previous section we got a vague sense of why you might want to use weighting
+    to influence model selection, but let’s dive in a little deeper.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'One reason you might want to use weighting is if your training data isn’t a
+    representative sample of the data you plan to apply your model to. Pollsters come
+    across this problem all the time. Fun fact: with a truly random sample of just
+    2500 people, pollsters could predict election results within +/- 1%. The problem
+    is how to get a truly random sample. This is difficult, so pollsters routinely
+    apply weights to different poll participants to get the sample demographics to
+    more closely match the expected voting demographics. There’s a great story from
+    2016 about how one person was responsible for strongly skewing an entire poll.
+    You can read about it [here](https://www.nytimes.com/2016/10/13/upshot/how-one-19-year-old-illinois-man-is-distorting-national-polling-averages.html).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here’s a common argument I hear for another reason you might want to use weighting:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fraud is rare
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Need to upweight rare cases
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Then the model performs better overall
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This common argument turns out to be wrong. In general, weighting causes models
+    to perform worse overall but causes them to perform better on certain segments
+    of the population. In the case of fraud, the missing piece from the above argument
+    is that failing to catch fraud is usually more expensive than falsely flagging
+    non-fraudulent transactions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'What we really want to talk about as a good reason for weighting is cost-sensitive
+    classification. Some examples:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In fraud detection, false negatives tend to cost more than false positives
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In credit lending, defaults tend to be more expensive than rejected loans that
+    would not have defaulted
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In preventative maintenance, part failures tend to be more expensive than premature
+    maintenance
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: All of these are only true within reason. You can’t go all the way to the extreme,
+    because flagging every transaction as fraudulent, rejecting all loan applications,
+    or spending all your time repairing systems instead of using them are all clearly
+    bad business decisions. But the point is, certain kinds of misclassification are
+    more expensive than other kinds of misclassification, so we might want to influence
+    our model to make decisions that are wrong more often, but still less expensive
+    overall. Using weighting is a reasonable tool to help solve this problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The How of Weighting
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*Note upfront: a lot of the great information from this section comes from
+    the [same paper](http://web.cs.iastate.edu/~honavar/elkan.pdf).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This brings us to an important question: how do you weight? With most modern
+    data science software, you just use computer magic and the weights are taken care
+    of for you.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: But, of course, there are still important decisions to make. Should you over-sample
+    or under-sample, or just use weighting? Should you use advanced packages like
+    SMOTE or ROSE? What weights should you pick?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Well, good news: I’m going to tell you the optimal thing to do. But of course,
+    since I’m a data scientist, I’m going to give you a lot of caveats first:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This method is only “optimal” for cost-sensitive classification issues (e.g.
+    you have different costs for different outcomes of what you’re predicting). I’m
+    not going to help pollsters out here (sorry).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This method assumes you know the costs associated with your problem, and that
+    the costs are fixed. If the true costs are unknown, or variable, this gets a lot
+    harder.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Before we get right down to the formulas, let’s talk about a little trap that
+    you might fall into baseline/reference errors. Here’s a typical looking cost-matrix
+    example from the German credit dataset from the [Statlog project](https://archive.ics.uci.edu/ml/datasets/Statlog+%28German+Credit+Data%29).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '|  | Actual Bad | Actual Good |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Predict Bad | 0 | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Predict Good | 5 | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: If you look at this for a few minutes, the rationale for where this came from
+    becomes clear. This is meant to imply that if you misclassify someone who will
+    default and give them a loan, you’ll lose $5, but if you misclassify someone who
+    would not have defaulted and don’t give them credit, you lose the opportunity
+    to make $1, which is itself a cost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But something is wrong here. If the intention is that when you predict bad
+    you don’t extend someone''s credit, then it seems clear that the costs associated
+    with predicting bad should be the same no matter what would have actually happened.
+    In fact, this cost matrix is likely supposed to be this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '|  | Actual Bad | Actual Good |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Predict Bad | 0 | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Predict Good | 5 | -1 |'
+  prefs: []
+  type: TYPE_TB
+- en: Where there is a negative cost (or benefit) of predicting good on someone who
+    will actually repay their loan. While these two cost matrices are similar, they
+    are not interchangeable. If you imagine a situation where you get one customer
+    of each type, the first matrix suggests your total costs will be $6, and the second
+    suggests your total costs will be $4\. The second is clearly what is intended
+    here. For this reason, it’s often beneficial to frame your matrix in terms of
+    benefits instead of costs. That said, I’m still going to give the formula in terms
+    of costs, and leave it to the reader to figure out how to translate it to a benefit
+    formula.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So, say you have a cost matrix that looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '|  | Actual Negative | Actual Positive |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Predict Negative | C[00] | C[01] |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Predict Positive | C[10] | C[11] |'
+  prefs: []
+  type: TYPE_TB
+- en: 'First, we will state 2 reasonableness criteria:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: C[10] > C[00]
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: C[01] > C[11]
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: These criteria basically say that your costs are higher if you misclassify something
+    than if you don’t. Reasonable, right?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now define:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9681028b0f2e8bf5e750bd2f7936636c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Then you should upweight your negative examples by ![Equation](../Images/fb4d62e25fde4f552be319c7f5a77978.png) (and
+    leave your positive examples alone).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Actually, we can even take this a step further. Many machine learning models
+    produce probabilities (as opposed to just predictions) and then use a threshold
+    to convert that probability into a prediction. In other words, you have some rules
+    like: if the probability of being positive is greater than 0.5 predict positive,
+    otherwise predict negative. But you could instead have a rule that says something
+    else, e.g., if the probability of being positive is greater than 0.75 predict
+    positive, otherwise predict negative. The number here (0.5 or 0.75 in the above
+    examples) is called a “threshold.” More on that is coming a little later, but
+    for now, we can write down a formula for how to make a model with threshold p[0]
+    act as though it has threshold p^*, we can do that by upweighting the negative
+    examples by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/70476b54f61b643db3f28ce912759d15.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note that in the special case where p[0] is 0.5 (as is typical), this reduces
+    to the previous formula.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once again, it’s worth noting that the case of variable costs is a lot harder.
+    If you’re using decision trees, some smoothing is a good idea, but in general,
+    it’s too involved to say much more here. But you can check out [this paper](http://cseweb.ucsd.edu/~elkan/kddbianca.pdf)
+    for some ideas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Why Not of Weighting
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Weighting is kind of like pretending to live in a fantasy world to make better
+    decisions about the real world. Instead of this, you could just make better decisions
+    without the pretend part.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s return to our discussion about thresholds from the previous section. Instead
+    of using weights to make a machine learning model with one threshold behave as
+    though it had a different threshold, you could just change the threshold of that
+    model directly. This would (presumably) lead to a poorly calibrated model, but
+    it might still be a good business decision because it might reduce costs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In fact, if you return to the cost matrix considered previously,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '|  | Actual Negative | Actual Positive |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Predict Negative | C[00] | C[01] |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Predict Positive | C[10] | C[11] |'
+  prefs: []
+  type: TYPE_TB
+- en: the optimal threshold for making decisions in order to minimize costs is precisely
+    p^*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/389f1604cc4120736dd7e6a564667f21.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This is often simpler, and empirical evidence suggests that adjusting the threshold
+    directly works a little better than weighting [in practice](http://web.cs.iastate.edu/~honavar/elkan.pdf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: So basically, after all that talk about weighting, my general advice is, if
+    possible don’t weight at all, but adjust your threshold instead! But of course,
+    many of the ideas overlap, so hopefully, this discussion was still useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Also, one last tip: If you aren’t worried about cost-sensitive classification
+    problems (e.g., problems where you have different costs associated with different
+    predictions and DV cases), you probably shouldn’t be thinking about using weighting
+    as a tool. Unless you’re a pollster.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Dr. Eric Hart](https://www.linkedin.com/in/erichart07) is a Senior
+    Data Scientist on the services team at Altair. He has a background in engineering
+    and mathematics, and likes using his problem solving skill to tackle interesting
+    data challenges. He’s also a Blokus world champion.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to Balance the Five Analytic Dimensions](https://www.kdnuggets.com/2015/09/how-balance-five-analytic-dimensions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to fix an Unbalanced Dataset](https://www.kdnuggets.com/2019/05/fix-unbalanced-dataset.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Comparing Machine Learning Models: Statistical vs. Practical Significance](https://www.kdnuggets.com/2019/01/comparing-machine-learning-models-statistical-vs-practical-significance.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Linear Programming 101 for Data Scientists](https://www.kdnuggets.com/2023/02/linear-programming-101-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[LangChain 101: Build Your Own GPT-Powered Applications](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Prompt Engineering 101: Mastering Effective LLM Communication](https://www.kdnuggets.com/prompt-engineering-101-mastering-effective-llm-communication)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Algorithms - What, Why, and How?](https://www.kdnuggets.com/2022/09/machine-learning-algorithms.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why Do Machine Learning Models Die In Silence?](https://www.kdnuggets.com/2022/01/machine-learning-models-die-silence.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine learning does not produce value for my business. Why?](https://www.kdnuggets.com/2021/12/machine-learning-produce-value-business.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

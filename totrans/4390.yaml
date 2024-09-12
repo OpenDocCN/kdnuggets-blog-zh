@@ -1,0 +1,366 @@
+- en: Feature Ranking with Recursive Feature Elimination in Scikit-Learn
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/10/feature-ranking-recursive-feature-elimination-scikit-learn.html](https://www.kdnuggets.com/2020/10/feature-ranking-recursive-feature-elimination-scikit-learn.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/95584b7d1e39d41ec7aaa93bdb355848.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Photo by Element5 Digital on Unsplash](https://unsplash.com/photos/LTyDj7u_TU4)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Feature selection](https://heartbeat.fritz.ai/search?q=feature%20selection) is
+    an important task for any machine learning application. This is especially crucial
+    when the data in question has many features. The optimal number of features also
+    leads to improved model accuracy. Obtaining the most important features and the
+    number of optimal features can be obtained via feature importance or feature ranking.
+    In this piece, we’ll explore feature ranking.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recursive Feature Elimination
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first item needed for recursive feature elimination is an estimator; for
+    example, a linear model or a decision tree model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These models have coefficients for linear models and feature importances in
+    decision tree models. In selecting the optimal number of features, the estimator
+    is trained and the features are selected via the coefficients, or via the feature
+    importances. The least important features are removed. This process is repeated
+    recursively until the optimal number of features is obtained.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Application in Sklearn
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Scikit-learn makes it possible to implement recursive feature elimination via
+    the `sklearn.feature_selection.**RFE**`class. The class takes the following parameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`estimator` — a machine learning estimator that can provide features importances
+    via the `coef_` or `feature_importances_` attributes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`n_features_to_select` — the number of features to select. Selects `half` if
+    it''s not specified.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`step` — an integer that indicates the number of features to be removed at
+    each iteration, or a number between 0 and 1 to indicate the percentage of features
+    to remove at each iteration.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Once fitted, the following attributes can be obtained:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`ranking_` — the ranking of the features.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`n_features_` — the number of features that have been selected.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`support_` — an array that indicates whether or not a feature was selected.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Application
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As noted earlier, we’ll need to work with an estimator that offers a `feature_importance_s` attribute
+    or a `coeff_` attribute. Let’s work through a quick example. The dataset has 13
+    features—we’ll work on getting the optimal number of features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/209209c877a917a2b8030c25653e1f1d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let’s obtain the `X` and `y` features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We’ll split it into a testing and training set to prepare for modeling:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s get a couple of imports out of the way:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Pipeline` — since we’ll perform some cross-validation. It’s best practice
+    in order to avoid data leakage.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`RepeatedStratifiedKFold` — for repeated stratified cross-validation.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`cross_val_score` — for evaluating the score on cross-validation.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`GradientBoostingClassifier` — the estimator we’ll use.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`numpy` — so that we can compute the mean of the scores.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The first step is to create an instance of the `RFE` class while specifying
+    the estimator and the number of features you’d like to select. In this case, we’re
+    selecting 6:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Next, we create an instance of the model we’d like to use:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: We’ll use a `Pipeline` to transform the data. In the `Pipeline` we specify `rfe` for
+    the feature selection step and the model that’ll be used in the next step.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We then specify a `RepeatedStratifiedKFold` with 10 splits and 5 repeats. The
+    stratified K fold ensures that the number of samples from each class is well balanced
+    in each fold. `RepeatedStratifiedKFold` repeats the stratified K fold the specified
+    number of times, with a different randomization in each repetition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The next step is to fit this pipeline to the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: With that in place, we can check the support and the ranking. The support indicates
+    whether or not a feature was chosen.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can put that into a dataframe and check the result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/91d6aa62aa3531efcd67be1b1099da9d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can also check the relative rankings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/1b2724743842b9841ead3da64919e86c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Automatic Feature Selection
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Instead of manually configuring the number of features, it would be very nice
+    if we could automatically select them. This can be achieved via recursive feature
+    elimination and cross-validation. This is done via the `sklearn.feature_selection.RFECV` class.
+    The class takes the following parameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`estimator` — similar to the `RFE` class.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`min_features_to_select` — the minimum number of features to be selected.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`cv`— the cross-validation splitting strategy.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The attributes returned are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`n_features_` — the optimal number of features selected via cross-validation.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`support_` — the array containing information on the selection of a feature.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`ranking_` — the ranking of the features.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`grid_scores_` — the scores obtained from cross-validation.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The first step is to import the class and create its instance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: The next step is to specify the pipeline and the cv. In this pipeline we use
+    the just created `rfecv`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s fit the pipeline and then obtain the optimal number of features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: The optimal number of features can be obtained via the `n_features_` attribute.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: The rankings and support can be obtained just like last time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: With the `grid_scores_` we can plot a graph showing the cross-validated scores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/9fe7d440cbcadab2f300a2a7f716b781.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Numbers of features against the accuracy plot
+  prefs: []
+  type: TYPE_NORMAL
+- en: Final Thoughts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The process for applying this in a regression problem is the same. Just ensure
+    to use regression metrics instead of accuracy. I hope this piece has given you
+    some insight on selecting the optimal number of features for your machine learning
+    problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**mwitiderrick/Feature-Ranking-with-Recursive-Feature-Elimination**](https://github.com/mwitiderrick/Feature-Ranking-with-Recursive-Feature-Elimination)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature Ranking with Recursive Feature Elimination - mwitiderrick/Feature-Ranking-with-Recursive-Feature-Elimination
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Derrick Mwiti](https://derrickmwiti.com/)** is a data analyst, a writer,
+    and a mentor. He is driven by delivering great results in every task, and is a
+    mentor at Lapid Leaders Africa.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://heartbeat.fritz.ai/feature-ranking-with-recursive-feature-elimination-3e22db639208).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How I Consistently Improve My Machine Learning Models From 80% to Over 90%
+    Accuracy](/2020/09/improve-machine-learning-models-accuracy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[LightGBM: A Highly-Efficient Gradient Boosting Decision Tree](/2020/06/lightgbm-gradient-boosting-decision-tree.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fast Gradient Boosting with CatBoost](/2020/10/fast-gradient-boosting-catboost.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Selection: Where Science Meets Art](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Tractable, Feature Engineering Pipeline for Multivariate…](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Stores for Real-time AI & Machine Learning](https://www.kdnuggets.com/2022/03/feature-stores-realtime-ai-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Advanced Feature Selection Techniques for Machine Learning Models](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

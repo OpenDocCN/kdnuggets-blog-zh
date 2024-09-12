@@ -1,0 +1,242 @@
+- en: A Guide to Train an Image Classification Model Using Tensorflow
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Humans learn to identify and label visuals at a very early age. Now, computers
+    are able to classify images at scale and with very high accuracy with the advent
+    of machine learning and deep learning algorithms. Such advanced algorithms  have
+    a multitude of applications — the common ones include distinguishing healthy lung
+    scans, facial recognition by a mobile device, or classifying objects into different
+    categories for a retailer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Guide to Train an Image Classification Model Using Tensorflow](../Images/472ad8cf48e76d29710c311e72f06031.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Facial Recognition](https://www.freepik.com/free-vector/man-face-scan-biometric-digital-technology_5597121.htm#query=facial%20recognition&position=1&from_view=search&track=sph)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The post explains one such application of computer vision i.e. image classification
+    and illustrates how to train a model on a small dataset of images using Tensorflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dataset and Objectives
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'For the purpose of this demo, we will use the [MNIST](https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=mnist)
+    dataset which contains images of digits from 0 to 9\. Sample images are shown
+    below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Guide to Train an Image Classification Model Using Tensorflow](../Images/dfcba57b4b12bbea981a23980db6396f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Tensorflow-dataset](https://www.tensorflow.org/datasets/catalog/mnist)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The objective of training this model is to classify the images to their respective
+    label i.e. their respective digit equivalent. Deep neural network architecture
+    with one input, one output, two hidden, and one dropout layer is used for training
+    the model. CNN or Convolutional Neural Network is the preferred choice for larger
+    images because of its ability to capture relevant information while reducing the
+    size of the input.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting Started
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Firstly, import all the relevant libraries starting with TensorFlow, to_categorical
+    (for converting numeric class values to categories), Sequential, Flatten, Dense,
+    and Dropout for building Neural Network architecture. If some of these libraries
+    are new to you, then do not worry. They are explained in the upcoming section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hyperparameters
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'The following pointers help you choose the right set of hyperparameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's define some hyperparameters as a starting point, you can tune them to
+    run different experiments. We have chosen a mini-batch size of 128\. The batch
+    size can take any value but selecting a batch size as a power of 2 is memory efficient
+    and hence, is a preferred choice. Let us also understand one of the prime reasoning
+    behind deciding appropriate batch size – a tiny batch size would make the convergence
+    very noisy and a very large batch size might not fit in the memory of your computer.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Let's keep the number of epochs as 50 to quickly train the model. The dataset
+    is small and simple and justifies the low epoch number.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Next, you need to add hidden layers. We have kept two hidden layers of 128 neurons
+    each – you can experiment with 64 and 32 as well. Higher numbers are not recommended
+    for a simple dataset like MINST.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can try different learning rates like 0.01, 0.05, and 0.1\. For the purpose
+    of this demo, it is kept at 0.01.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Other hyperparameters like decay steps and decay rate are chosen as 2000, and
+    0.9 respectively. They are used to reduce the learning rate as the training progresses.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Adamax is picked as an optimizer, although you have options of other optimizers
+    like Adam, RMSProp, SGD, etc to choose from. You can read more about the [available
+    list of optimizers](https://www.tensorflow.org/api_docs/python/tf/keras/optimizers)
+    along with their differences to choose the right one for your solution.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Creating Train and Test Set
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Tensorflow library also includes the MNIST dataset which you can get by calling
+    datasets.mnist and then load_data() on the object to get the train (60,000 samples)
+    and test (10,000 samples) datasets separately.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Next, you need to reshape and normalize the training and test images, where
+    normalization bounds image pixel intensity between 0 and 1.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Convert train and test labels to categorical by using the to_categorical method
+    imported earlier. This is essential to communicate to the TensorFlow framework
+    that the output labels i.e. 0 to 9 are classes and not numerical in nature.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Designing Neural Network Architecture
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: It is important to understand the nuanced details of how to design a neural
+    network architecture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Define DNN (Deep Neural Network) structure by adding Flatten to convert 2D image
+    matrices to vectors. The input neurons correspond to the numbers in these vectors.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Next, Dense() method is used to add two hidden dense layers pulling in the hyperparameters
+    from the “params” dictionary defined earlier. Let’s use the activation function
+    for these layers as “relu” i.e. Rectified Linear Unit which is one of the most
+    used activation functions in neural network hidden layers.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Next add the dropout layer using the Dropout method. It is used to avoid overfitting
+    while training the neural network. An overfit model has a tendency to remember
+    the training set exactly and is unable to generalize over unseen datasets.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The output layer is the last layer in our network, which is defined using the
+    Dense() method. It is important to note that the output layer has 10 neurons corresponding
+    to the number of classes (digits).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Time to Train
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Now that we have defined the architecture, let’s compile and train the neural
+    network with the given training data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Define a learning rate schedule with ExponentialDecay (exponentially decaying
+    learning rate) with initial learning rate, decay steps, and decay rate as arguments.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Define loss function as CategoricalCrossentropy (for multi-class classification).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Compile the model by passing the optimizer (adamax), loss function, and metrics
+    (choosing accuracy because all classes are equally important and uniformly distributed)
+    as arguments.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Fit the model by calling a fit method with x_train, y_train, batch_size, epochs,
+    and validation_data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Call the evaluate method over the model object to get a score for how well the
+    model is performing on the unseen dataset.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can save the model object to be deployed in production using the save method
+    called over the model object.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The post explained the primer to train a Deep Neural Network for an Image Classification
+    task and is a good starting point to get familiar with image classification tasks
+    using neural networks. It elaborated on the choices and reasoning behind how we
+    choose the right set of parameters and architecture, in general.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** is an AI strategist and
+    a digital transformation leader working at the intersection of product, sciences,
+    and engineering to build scalable machine learning systems. She is an award-winning
+    innovation leader, an author, and an international speaker. She is on a mission
+    to democratize machine learning and break the jargon for everyone to be a part
+    of this transformation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Understanding Classification Metrics: Your Guide to Assessing Model…](https://www.kdnuggets.com/understanding-classification-metrics-your-guide-to-assessing-model-accuracy)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Image Classification with Convolutional Neural Networks (CNNs)](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Segment Anything Model: Foundation Model for Image Segmentation](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why we will always need humans to train AI — sometimes in real-time](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Algorithms for Classification](https://www.kdnuggets.com/2022/03/machine-learning-algorithms-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

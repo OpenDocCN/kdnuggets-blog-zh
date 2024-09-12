@@ -1,0 +1,159 @@
+- en: Implementing Your Own k-Nearest Neighbor Algorithm Using Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/01/implementing-your-own-knn-using-python.html/2](https://www.kdnuggets.com/2016/01/implementing-your-own-knn-using-python.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Measuring distance between all cases**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given a new flower from an unknown species, you want to assign it a species
+    based on what other flowers it is most similar to. For this, you need a measure
+    of similarity. One such measure is the Euclidean distance, where distance d between
+    two points (a1, a2) and (b1, b2) is given by d = sqrt((a1-b1)^2 + (a2-b2)^2).
+    Each flower in the iris dataset has 4 dimensions (i.e. 4 features), and so you
+    write a function to find the distance between each flower. The previous distance
+    formula generalises to higher dimensions, such that the distance between two points
+    (a1, a2, a3, a4) and (b1, b2, b3, b4) is simply
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll be making use of the zip function and list comprehensions. The zip function
+    aggregates elements from lists (or other iterables, like strings) to return a
+    list of tuples, such that zip([1,2,3], [4,5,6]) will return [(1,4), (2,5), (3,6)].
+    List comprehensions are a powerful Pythonic construct that facilitate quick computations
+    on lists. For example, you could quickly get the square of all numbers 1 to 100
+    with [pow(x, 2) for x in range(101)], or double the values of odd numbers from
+    1 to 10 with [x*2 for x in range(11) if x%2==1]. Here, you are iterating over
+    values from the corresponding dimensions in the two data points, calculating the
+    differences squared, and storing each dimension's differences squared in diffs_squared_distance.
+    These are then summed and returned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Euclidean distance equation](../Images/90c059417c1578146bbf2fc73cf08172.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'For example, you can now get the distance between the first two training data
+    instances:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Or any other tuple you''d like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Getting the distances to all neighbours**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Next, a function that returns sorted distances between a test case and all
+    training cases is needed. One solution is the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let''s unpack these function: first, you need to calculate the distances from
+    any given test data point to all the instances in the training sets. This can
+    be done by iterating over each training_instance in training_set, and using the
+    helper function _get_tuple_distance (the leading underscore indicates the function
+    is intended for internal use only) to calculate the distance between it and the
+    test instance. It also handily returns the training instance it''s working on
+    (the usefulness of this will become apparent later). To test this function, try:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: This returns the train instances train[0] itself, followed by the distance (1.23)
+    between it and the test[0] instance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This pairwise calculation is done for every train instance and the given test
+    instance. You can get a feel for what is happening with this command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Next, the distances (e.g. like the 1.23, 4.47, 4.26 here) are sorted in order
+    to find the k closest neighbours to the test instance. To understand how we can
+    return the sorted distances, play with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Which are the training instances ranked from closest to furthest from our test
+    instance, as desired. The function takes the k parameter, which controls how many
+    nearest neighbours are returned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a side note, instead of using a sort to order the distances from a test case
+    in decreasing order, it would be computationally cheaper to find the maximum in
+    the list of distances - specifically, the sort here has complexity n log(n) while
+    passing through an array to find the maximum is O(n). If you were optimising our
+    script for efficiency (rather than focusing on doing an educational demo), these
+    types of considerations would become quite important.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[From Theory to Practice: Building a k-Nearest Neighbors Classifier](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Nearest Neighbors for Classification](https://www.kdnuggets.com/2022/04/nearest-neighbors-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[K-nearest Neighbors in Scikit-learn](https://www.kdnuggets.com/2022/07/knearest-neighbors-scikitlearn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[LangChain 101: Build Your Own GPT-Powered Applications](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build Your Own PandasAI with LlamaIndex](https://www.kdnuggets.com/build-your-own-pandasai-with-llamaindex)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Make Your Own GPTs with ChatGPT''s GPTs!](https://www.kdnuggets.com/make-your-own-gpts-with-chatgpts-gpts)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

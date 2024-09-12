@@ -1,0 +1,268 @@
+- en: 'Clustering in Crowdsourcing: Methodology and Applications'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/11/clustering-crowdsourcing-methodology-applications.html](https://www.kdnuggets.com/2021/11/clustering-crowdsourcing-methodology-applications.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Daniil Likhobaba](https://www.linkedin.com/in/daniil-likhobaba-4a33201bb/),
+    Analyst at Toloka**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Clustering is the task of grouping a set of objects in such a way that objects
+    in the same group (called a cluster) are more similar to each other than to those
+    in other groups. In most cases, clustering calls for knowing the distances between
+    objects, which normally takes the form of a distance matrix. However, the function
+    of distance is often unknown, or clustering rules cannot be defined. Consequently,
+    it makes more sense to describe the process in the labeling instructions and utilize
+    crowdsourcing to cluster the data. Alas, no ready pipeline currently exists for
+    this purpose, while most papers on the subject are limited to theory. We wanted
+    to see if we could come up with a more practical solution. This is what we ended
+    up with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Paired object labeling
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the beginning, we recreated a simple algorithm from [Larsen et al. (WWW'20)](https://dl.acm.org/doi/10.1145/3366423.3380045),
+    where all of the labeled data is broken down into two clusters. To do this, we
+    needed to compare the two subsets of objects against each other twice and then
+    aggregate the data using a specialized algorithm. Having said that, two-cluster
+    tasks are quite rare. To top it off, doing a paired subset comparison that comprises
+    all of the objects is very expensive. Lastly, the algorithm gives out a single
+    set with a complement to it, which isn’t proper clustering, technically speaking.
+    But we had to start somewhere nonetheless.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data was taken from [Leipzig Corpora Collection](https://wortschatz.uni-leipzig.de/en/download)
+    – 360 English and German words each.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e6510c40af2664a3b48d3545f4b708b6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The crowd performers had to indicate whether the two words on display belonged
+    to the same language. The results were surprisingly good: 98% of the words in
+    each language group were correctly identified. This was the first promising step.
+    But since we wanted a more efficient solution, we continued to look for viable
+    alternatives.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f94d8e1b7d0e1410110dd96f29457740.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Multiple comparisons
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In the [Gomes et al. paper (](https://proceedings.neurips.cc/paper/2011/hash/c86a7ee3d8ef0b551ed58e354a836f2b-Abstract.html)[NIPS''11](https://proceedings.neurips.cc/paper/2011/hash/c86a7ee3d8ef0b551ed58e354a836f2b-Abstract.html)[)](https://proceedings.neurips.cc/paper/2011/hash/c86a7ee3d8ef0b551ed58e354a836f2b-Abstract.html),
+    the authors suggest an approach that allows for any number of image clusters.
+    It works in the following way: we start with a page that contains images and a
+    color palette. The performer selects a color and labels similar-looking images
+    with it. Then the person selects a different color and groups together a different
+    subset of images according to another shared characteristic. This goes on until
+    all of the images have been color-labeled.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The tasks are created at random. The main parameter is the average number of
+    pages on which each image is displayed. This number has to be chosen for each
+    case, or it has to be defined in terms of its relation to the dataset size. The
+    labeled data gets aggregated with a probabilistic model provided in the article,
+    and the algorithm subsequently produces the clusters. What’s interesting is that
+    this approach doesn’t call for known distances between the objects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Clustering of shoes by style
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In order to test the aforementioned method, we took a dataset from the [SIGMOD/](https://dl.acm.org/doi/abs/10.1145/3318464.3383127)[PODS'20](https://dl.acm.org/doi/abs/10.1145/3318464.3383127)
+    [Toloka tutorial](https://dl.acm.org/doi/abs/10.1145/3318464.3383127) consisting
+    of 100 images with people wearing clothes. In order to skip what Machine Learning
+    has been trained to do already, we asked the crowd performers to group the objects
+    by style regardless of the color. The logic behind it was that most of us can
+    tell one fashion style of clothes from another, even if we can’t always verbalize
+    the defining feature of any particular style. The instructions contained certain
+    features and details that could be taken into account to help the performers,
+    for example, the high heel.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/58e03041140b4be3bbdfc147557b149d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the end, we received seven easily identifiable shoe clusters. Among them
+    were men’s shoes, women’s boots, sports shoes, and four others. We were glad to
+    see that women’s shoes and women’s sandals formed two separate clusters. Sample
+    images from each cluster can be seen below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/009ba0afcdc6cdb6ea9fed6ca25fe407.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: One can browse through all of the subsets and see firsthand how neatly the clustering
+    was done even with the naked eye. This methodology proved valid to us, but we
+    decided to explore it further.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Clustering of dresses by style
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now, we wanted to see this method in action on a larger dataset. We took 2,000
+    images of dresses from the [Feidegger](https://github.com/zalandoresearch/feidegger)
+    dataset and again decided to cluster them by style. However, unlike shoes, dresses
+    tend to contain more features, which is why we needed to come up with a precise
+    but concise set of instructions for the crowd performers completing this assignment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The main difficulty was that we couldn't describe all of the possibilities and
+    special cases to the performers since we didn’t actually know the structure of
+    this dataset. We approached our colleagues from the [Crowd Solutions Architect
+    (CSA)](https://www.kdnuggets.com/2021/06/data-careers-crowd-solutions-architect.html)
+    team at [Toloka](https://toloka.ai/) with this dilemma. They helped us configure
+    quality control, create a practice pool with a training program, and write up
+    appropriate instructions. As a result, the task was made clear to the performers,
+    which, in turn, boosted the labeling quality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The instructions did not contain any worst-case scenarios or all of the grouping
+    criteria. The performers were advised to focus on pinpointing the style of a dress,
+    level of detail (for example, the size of the neckline but not its shape), and
+    identify images with the overall similar vs. different looking dresses. We wanted
+    to explain what logic could be used to compare the dresses, outline a basic approach
+    to clustering, but not list any specific characteristics for the performers to
+    memorize and cling to during the actual labeling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The training was conducted with the difficulty level rising incrementally, starting
+    with a two-dress comparison and eventually going all the way up to eight dresses.
+    The key rules were explained en-route to the final exam that consisted of multiple
+    images with the clearly visible differences.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/aa05cc1cd1bc5e514569d402229fac22.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/6da7585319f8b28ab184124cd3e6d2c1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: After that, Russian was added as an interface language, and a maximum of eight
+    images per page was set for the subsequent assignment. This was done to simplify
+    the task and reduce the average processing time per page down to 40 seconds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4f8de1915036abe7c4a09cd5f131c176.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'During the assignment, one aspect was of particular interest – the parameter
+    that was responsible for the expected value of the number of pages containing
+    the images. This parameter’s relation to the dataset size was defined, which told
+    us how many object comparisons were needed for successful aggregation. We ended
+    up with 12 easily interpretable clusters: among them were fluffy sleeveless dresses,
+    long dresses with sleeves, knitted dresses, and so on. The picture below shows
+    some of the objects from each cluster we acquired.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/eae10f32dda7c9019b69622dee65b6bf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Takeaway
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As a result of these efforts, we were able to confirm that clustering through
+    crowdsourcing is indeed possible and works impressively well. The quality we obtained
+    met our expectations, and we came up with a replicable pipeline. Moreover, we
+    found a way to make the instructions clear to the performers and created a suitable
+    interface for the task. Crucially, all this was possible without the paired comparison
+    we started with. The labeling did not take a long time and was cheaper than previously
+    anticipated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are currently working on evaluating the quality of the resulting markup using
+    the crowdsourced-based evaluation approach by [Chang et al. (NIPS '11)](https://proceedings.neurips.cc/paper/2009/file/f92586a25bb3145facd64ab20fd554ff-Paper.pdf).
+    They suggest using intruders, i.e., adding a deliberately incorrect object to
+    the cluster and asking performers to find it. The more often performers choose
+    this obviously incorrect object and not some other object in the cluster, the
+    higher we consider the quality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We believe that using crowdsourcing for clustering may be useful in e-commerce,
+    search result ranking, and when investigating the structure of an unknown dataset
+    in any field.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[What is Clustering and How Does it Work?](https://www.kdnuggets.com/2021/10/clustering-what-is-how-works.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Open Innovation and Crowdsourcing in Machine Learning – Getting premium value
+    out of data](https://www.kdnuggets.com/2017/06/open-innovation-crowdsourcing-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Clustering Unleashed: Understanding K-Means Clustering](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Is Academia Obsessing Over Methodology at the Cost of True Insights?](https://www.kdnuggets.com/is-academia-obsessing-over-methodology-at-the-cost-of-true-insights)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is K-Means Clustering and How Does its Algorithm Work?](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Clustering with scikit-learn: A Tutorial on Unsupervised Learning](https://www.kdnuggets.com/2023/05/clustering-scikitlearn-tutorial-unsupervised-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On with Unsupervised Learning: K-Means Clustering](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unveiling Hidden Patterns: An Introduction to Hierarchical Clustering](https://www.kdnuggets.com/unveiling-hidden-patterns-an-introduction-to-hierarchical-clustering)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

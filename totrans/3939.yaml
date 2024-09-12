@@ -1,0 +1,312 @@
+- en: How Not To Program the TensorFlow Graph
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/05/how-not-program-tensorflow-graph.html](https://www.kdnuggets.com/2017/05/how-not-program-tensorflow-graph.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Aaron Schumacher, Deep Learning Analytics.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using TensorFlow from Python is like using Python to program [another computer](http://planspace.org/20170328-tensorflow_as_a_distributed_virtual_machine/).
+    Some Python statements build your TensorFlow program, some Python statements execute
+    that program, and of course some Python statements aren’t involved with TensorFlow
+    at all. Being thoughtful about the graphs you construct can help you avoid confusion
+    and performance pitfalls. Here are a few considerations.![](../Images/e09c1745abd025c932b954fd964eedfb.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Avoid having many identical ops
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Lots of methods in TensorFlow create ops in the computation graph, but do not
+    execute them. You may want to execute multiple times, but that doesn’t mean you
+    should create lots of copies of the same ops.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A clear example is `tf.global_variables_initializer()`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: If the call to `tf.global_variables_initializer()` is repeated, for example
+    directly as the argument to `session.run()`, there are downsides.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: A new initializer op is created every time the argument to `session.run()` here
+    is evaluated. This creates multiple initializer ops in the graph. Having multiple
+    copies isn’t a big deal for small ops in an interactive session, and you might
+    even want to do it in the case of the initializer if you’ve created more variables
+    that need to be included in initialization. But think about whether you need lots
+    of duplicate ops.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating ops inside `session.run()`, you also don’t have a Python variable referring
+    to those ops, so you can’t easily reuse them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Python, if you create an object that nothing refers to, it can be garbage
+    collected. The abandoned object will be deleted and and memory it used will be
+    freed. That doesn’t happen to things in the TensorFlow graph; everything you put
+    in the graph stays there.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s pretty clear that `tf.global_variables_initializer()` returns an op. But
+    ops are also created in less obvious ways.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s compare to how NumPy works.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: At this point there are two arrays in memory, `x` and `y`. The `y` has the value
+    2.0, but there’s no record of *how* it came to have that value. The addition has
+    left no record of itself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: TensorFlow is different.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now only `x` is a TensorFlow variable; `y` is an `add` op, which can return
+    the result of that addition if we ever run it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One more comparison.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here `y` is assigned to refer to one result array `x + 1.0`, and then reassigned
+    to point to a different one. The first one will be garbage collected and disappear.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: In this case, `y` refers to one `add` op in the TensorFlow graph, and then `y`
+    is reassigned to point to a different `add` op in the graph. Since `y` only points
+    to the second `add` now, we don’t have a convenient way to work with the first
+    one. But both the `add` ops are still around, in the graph, and will stay there.
+  prefs: []
+  type: TYPE_NORMAL
+- en: (As an aside, Python’s mechanism for defining class-specific addition [and so
+    on](http://www.python-course.eu/python3_magic_methods.php), which is how `+` is
+    made to create TensorFlow ops, is pretty neat.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Especially if you’re just working with the default graph and running interactively
+    in a regular REPL or a notebook, you can end up with a lot of abandoned ops in
+    your graph. Every time you re-run a notebook cell that defines any graph ops,
+    you aren’t just redefining ops—you’re creating new ones.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Often it’s okay to have a few extra ops floating around when you’re experimenting.
+    But things can get out of hand.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: If `x` is a NumPy array, or just a regular Python number, this will run in constant
+    memory and finish with one value for x.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But if `x` is a TensorFlow variable, there will be over a million ops in your
+    TensorFlow graph, just defining a computation and not even *doing* it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One immediate fix for TensorFlow is to use a `tf.assign` op, which gives behavior
+    more like what you might expect.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: This revised version does not create any ops inside the loop, which is generally
+    good advice. TensorFlow does have [control flow constructs](https://www.tensorflow.org/api_guides/python/control_flow_ops)
+    including [while loops](https://www.tensorflow.org/api_docs/python/tf/while_loop).
+    But only use these when really needed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Be conscious of when you’re creating ops, and only create the ones you need.
+    Try to keep op creation distinct from op execution. And after interactive experimentation,
+    eventually get to a state, probably in a script, where you’re only creating the
+    ops that you need.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Avoid constants in the graph
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A particularly unfortunate op to needlessly add to a graph is accidental constant
+    ops, especially large ones.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: There are a million ones in the NumPy array `many_ones`. We can add them up.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: What if we add them up with TensorFlow?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: The result is the same, but the mechanism is quite different. This not only
+    added some ops to the graph—it put a copy of the entire million-element array
+    into the graph as a constant.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Variations on this pattern can result in accidentally loading an entire data
+    set into the graph as constants. A program might still run, for small data sets.
+    Or your system might fail.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One simple way to avoid storing data in the graph is to use the `feed_dict`
+    mechanism.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: As before, be clear about what you’re adding to the graph and when. Concrete
+    data usually only enters the graph at moments of evaluation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: TensorFlow as Functional Programming
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: TensorFlow ops are like functions. This is especially clear when an op has one
+    or more placeholder inputs; evaluating the op in a session is like calling a function
+    with those arguments. So Python functions that return TensorFlow ops are like
+    [higher-order functions](https://en.wikipedia.org/wiki/Higher-order_function).
+  prefs: []
+  type: TYPE_NORMAL
+- en: You might decide that it’s worth putting a constant into the graph. For example,
+    if you have to reshape a lot of tensors to 28×28, you might make an op that does
+    that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is like [currying](https://en.wikipedia.org/wiki/Currying) in that the
+    `shape` argument has now been set. The `[28, 28]` has become a constant in the
+    graph and specified that argument. Now to evaluate `reshape_to_28` we only have
+    to provide `input_tensor`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Broader connections have been suggested between [neural networks, types, and
+    functional programming](http://colah.github.io/posts/2015-09-NN-Types-FP/). It’s
+    interesting to think of TensorFlow as a system that supports this kind of construction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’m working on [Building TensorFlow systems from components](http://conferences.oreilly.com/oscon/oscon-tx/public/schedule/detail/57823),
+    a workshop at [OSCON 2017](https://conferences.oreilly.com/oscon/oscon-tx).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Find [Aaron](http://planspace.org/aaron/) on [Twitter](https://twitter.com/planarrowspace)
+    | [LinkedIn](https://www.linkedin.com/in/ajschumacher) | [Google+](https://plus.google.com/112658546306232777448/)
+    | [GitHub](https://github.com/ajschumacher) | [email](mailto:ajschumacher@gmail.com)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://planspace.org/20170404-how_not_to_program_the_tensorflow_graph/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Aaron Schumacher](https://www.linkedin.com/in/ajschumacher/)** is a
+    Senior Data Scientist and Software Engineer at Deep Learning Analytics. He tweets
+    at [@planarrowspace](https://twitter.com/planarrowspace).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to Build a Recurrent Neural Network in TensorFlow](/2017/04/build-recurrent-neural-network-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Gentlest Introduction to Tensorflow – Part 1](/2016/08/gentlest-introduction-tensorflow-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[An Overview of Python Deep Learning Frameworks](/2017/02/python-deep-learning-frameworks-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[AWS AI & ML Scholarship Program Overview](https://www.kdnuggets.com/2022/09/aws-ai-ml-scholarship-program-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Enroll in a 4-year Computer Science Degree Program For Free](https://www.kdnuggets.com/enroll-in-a-4-year-computer-science-degree-program-for-free)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Join UC''s Information Session for the Master''s in Business…](https://www.kdnuggets.com/2022/10/ucincinnati-join-ucs-information-session-masters-business-analytics-program.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Maximize Your Value With The 3rd Best Online Master’s In Data…](https://www.kdnuggets.com/2023/05/bay-path-maximize-value-online-masters-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Advance your Career with the 3rd Best Online Master''s in Data…](https://www.kdnuggets.com/2023/07/bay-path-advance-career-3rd-best-online-masters-data-science-program.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Pursue A Master’s In Data Science With The 3rd Best Online Program](https://www.kdnuggets.com/2023/09/bay-path-pursue-masters-data-science-3rd-best-online-program)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,385 @@
+- en: Speed up your Numpy and Pandas with NumExpr Package
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/07/speed-up-numpy-pandas-numexpr-package.html](https://www.kdnuggets.com/2020/07/speed-up-numpy-pandas-numexpr-package.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/07d9b21986edd14fe9e3deee4350911d.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Image source: [Pixabay](https://pixabay.com/vectors/cheetah-wildcat-fast-speed-spotted-40986/) and
+    author made collage
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Numpy and Pandas are probably the two most widely used core Python libraries
+    for data science (DS) and machine learning (ML)tasks. Needless to say, the speed
+    of evaluating numerical expressions is critically important for these DS/ML tasks
+    and these two libraries do not disappoint in that regard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Under the hood, they use fast and optimized [vectorized](https://www.pythonlikeyoumeanit.com/Module3_IntroducingNumpy/VectorizedOperations.html) operations
+    (as much as possible) to speed up the mathematical operations. Plenty of articles
+    have been written about how Numpy is much superior (especially when you can vectorize
+    your calculations) over plain-vanilla Python loops or list-based operations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**How Fast Numpy Really is and Why?**](https://towardsdatascience.com/how-fast-numpy-really-is-e9111df44347)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A comparison with standard Python Lists
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Data science with Python: Turn your conditional loops to Numpy vectors**](https://towardsdatascience.com/data-science-with-python-turn-your-conditional-loops-to-numpy-vectors-9484ff9c622e)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It pays to even vectorize conditional loops for speeding up the overall data
+    transformation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we show, how using a simple extension library, called ‘**NumExpr**’,
+    one can improve the speed of the mathematical operations, which the core Numpy
+    and Pandas yield.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s see it in the action
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The example Jupyter notebook can be found [here in my Github repo](https://github.com/tirthajyoti/Machine-Learning-with-Python/blob/master/Pandas%20and%20Numpy/Speed-up-Numpy-Pandas-with-Numexpr.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Install the NumExpr library
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: First, we need to make sure we have the library `numexpr`. So, as expected,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The project is hosted [here](https://github.com/pydata/numexpr) on Github. It
+    is from the [PyData](https://pydata.org/) stable, the organization under NumFocus,
+    which also gave rise to Numpy and Pandas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As per the source, “*NumExpr is a fast ****numerical expression evaluator**** for
+    NumPy. With it, expressions that operate on arrays, are ****accelerated**** and
+    use ****less memory**** than doing the same calculation in Python. In addition,
+    its ****multi-threaded capabilities**** can make use of all your cores — which
+    generally results in substantial performance scaling compared to NumPy.*” ([source](https://github.com/pydata/numexpr))
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is the [detailed documentation](https://numexpr.readthedocs.io/projects/NumExpr3/en/latest/) for
+    the library and examples of various use cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A simple vector-scalar operation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We start with the simple mathematical operation — adding a scalar number, say
+    1, to a Numpy array. For using the NumExpr package, all we have to do is to wrap
+    the same calculation under a special method `evaluate` in a symbolic expression.
+    The following code will illustrate the usage clearly,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9151358f63997517985321a60910702c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Wow! That was magical! All we had to do was to write the familiar `a+1` Numpy
+    code in the form of a symbolic expression `"a+1"` and pass it on to the `ne.evaluate()` function.
+    And we got a significant speed boost — **from 3.55 ms to 1.94 ms on average**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that we ran the same computation 200 times in a 10-loop test to calculate
+    the execution time. Now, of course, **the exact results are somewhat dependent
+    on the underlying hardware**. You are welcome to evaluate this on your machine
+    and see what improvement you got.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Arithmetic involving two arrays
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s dial it up a little and involve two arrays, shall we? Here is the code
+    to evaluate a simple linear expression using two arrays,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2fb3d0e17369e442cfc07efc77c58aa7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: That is a big improvement in the compute time from **11.7 ms to 2.14 ms, on
+    the average**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A somewhat complex operation involving more arrays
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now, let’s notch it up further involving more arrays in a somewhat complicated
+    rational function expression. Suppose, we want to evaluate the following involving **five
+    Numpy arrays, each with a million random numbers **(drawn from a Normal distribution),
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4f5a0970dab28c7eb22af18247ceb198.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here is the code. We create a Numpy array of the shape (1000000, 5) and extract
+    five (1000000,1) vectors from it to use in the rational function. Also note, how
+    the symbolic expression in the NumExpr method understands ‘**sqrt**’ natively
+    (we just write `sqrt`).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f5b8b997d60404918e425a18c47cce92.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Whoa! That shows a huge speed boost **from 47 ms to ~ 4 ms**, on average. In
+    fact, this is a trend that you will notice that **the more complicated the expression
+    becomes and the more number of arrays it involves, the higher the speed boost
+    becomes with Numexpr**!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Logical expressions/ Boolean filtering
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As it turns out, we are not limited to the simple arithmetic expression, as
+    shown above. One of the most useful features of Numpy arrays is to use them directly
+    in an expression involving logical operators such as `>` or `<` to create Boolean
+    filters or masks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can do the same with NumExpr and speed up the filtering process. Here is
+    an example where we check whether the Euclidean distance measure involving 4 vectors
+    is greater than a certain threshold.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a859e7ef111b52dcd51605795a8530e9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This kind of filtering operation appears all the time in a data science/machine
+    learning pipeline, and you can imagine how much compute time can be saved by strategically
+    replacing Numpy evaluations by NumExpr expressions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Complex numbers!
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We can make the jump from the real to the imaginary domain pretty easily. NumExpor
+    works equally well with the complex numbers, which is natively supported by Python
+    and Numpy. Here is an example, which also illustrates the use of a transcendental
+    operation like a logarithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/96ff385600bb92277827d427a71f5798.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Impact of the array size
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Next, we examine the impact of the size of the Numpy array over the speed improvement.
+    For this, we choose a simple conditional expression with two arrays like `2*a+3*b
+    < 3.5` and plot the relative execution times (after averaging over 10 runs) for
+    a wide range of sizes. The code is in the Notebook and the final result is shown
+    below,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8857e6ead9bf9dc48c62d85461792e88.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Image source: Author code generated'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandas “eval” method
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This is a Pandas method that evaluates a Python symbolic expression (as a string). **By
+    default, it uses the NumExpr engine** for achieving significant speed-up. Here
+    is an excerpt of from the [official doc](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.eval.html),
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1f6511b840664f4a696b3fc9a2be3994.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We show a simple example with the following code, where we construct four DataFrames
+    with 50000 rows and 100 columns each (filled with uniform random numbers) and
+    evaluate a nonlinear transformation involving those DataFrames — in one case with
+    native Pandas expression, and in other case using the `pd.eval()` method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/09bde7b98a72d185e11a17f783413f79.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Impact of the DataFrame size
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We do a similar analysis of the impact of the size (number of rows, while keeping
+    the number of columns fixed at 100) of the DataFrame on the speed improvement.
+    The result is shown below,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/70354a3d16de2fd2df65fb2ce214c53c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Image source: Author code generated'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How it works and supported operators
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The details of the manner in which Numexpor works are somewhat complex and involve
+    optimal use of the underlying compute architecture. You can [**read about it here**](https://numexpr.readthedocs.io/projects/NumExpr3/en/latest/intro.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: A short explanation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Basically, the expression is compiled using Python `compile` function, variables
+    are extracted and a parse tree structure is built. This tree is then compiled
+    into a Bytecode program, which describes the element-wise operation flow using
+    something called ‘**vector registers**’ (each 4096 elements wide). The key to
+    speed enhancement is Numexpr’s **ability to handle chunks of elements at a time**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/60845f55358c0a70b6c5736506a98e8d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'NumExpr evaluation flow, Source: Author made with Google Drawing'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It **skips the Numpy’s practice of using temporary arrays**, which waste memory
+    and cannot be even fitted into cache memory for large arrays.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, the **virtual machine is written entirely in C** which makes it faster
+    than native Python. It is also **multi-threaded** allowing faster parallelization
+    of the operations on suitable hardware.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Supported operators
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: NumExpr supports a wide array of mathematical operators to be used in the expression
+    but not conditional operators like `if` or `else`. The [**full list of operators
+    can be found here**](https://numexpr.readthedocs.io/projects/NumExpr3/en/latest/user_guide.html#supported-operators).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Threadpool configuration
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can also control the number of threads that you want to spawn for parallel
+    operations with large arrays by setting the environment variable `NUMEXPR_MAX_THREAD`.
+    Currently, the maximum possible number of threads is 64 but there is no real benefit
+    of going higher than the number of virtual cores available on the underlying CPU
+    node.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, we show how to take advantage of the special virtual machine-based
+    expression evaluation paradigm for speeding up mathematical calculations in Numpy
+    and Pandas. Although this method may not be applicable for all possible tasks,
+    a large fraction of data science, data wrangling, and statistical modeling pipeline
+    can take advantage of this with minimal change in the code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, you can check the author’s [**GitHub**](https://github.com/tirthajyoti?tab=repositories)** repositories **for
+    code, ideas, and resources in machine learning and data science. If you are, like
+    me, passionate about AI/machine learning/data science, please feel free to [add
+    me on LinkedIn](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) or [follow
+    me on Twitter](https://twitter.com/tirthajyotiS).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Tirthajyoti Sarkar](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)**
+    is Sr Principal Engineer at ON Semiconductor.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/speed-up-your-numpy-and-pandas-with-numexpr-package-25bd1ab0836b).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Build Pipelines with Pandas Using pdpipe](/2019/12/build-pipelines-pandas-pdpipe.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning in Dask](/2020/06/machine-learning-dask.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Google’s New Explainable AI Service](/2019/12/googles-new-explainable-ai-service.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

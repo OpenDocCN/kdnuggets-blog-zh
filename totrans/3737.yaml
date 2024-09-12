@@ -1,0 +1,435 @@
+- en: Classifying Long Text Documents Using BERT
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Sinequa**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What do we want to achieve?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We want to classify texts into predefined categories which is a very common
+    task in NLP. For many years, the classical approach for simple documents was to
+    generate features using [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) and
+    combine it with [logistic regression](https://en.wikipedia.org/wiki/Logistic_regression).
+    Formerly we used to rely on this stack at Sinequa for textual classification,
+    and, spoiler alert, with the model presented here we have beaten our baseline
+    from 5% to 30% for very noisy and long documents datasets. This former approach
+    had two main issues: the feature sparsity that we tackled via compression techniques
+    and the word-matching issue that we tamed leveraging Sinequa’s powerful linguistic
+    capacities (mainly through our homegrown tokenizer).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Later on, the pandora box of language models (pre-trained on humongous corpora
+    in an unsupervised fashion and fine-tuned on downstream supervised tasks) was
+    opened and TF-IDF based techniques were not state of the art anymore. Such language
+    models could be [word2vec](https://arxiv.org/pdf/1301.3781.pdf) combined with
+    LSTMs or CNNs, ELMo, and most importantly the Transformer (in 2017: [https://arxiv.org/pdf/1706.03762.pdf](https://arxiv.org/pdf/1706.03762.pdf)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[BERT](https://arxiv.org/pdf/1810.04805.pdf) is a Transformer based language
+    model that has gained a lot of momentum in the last couple of years since it beat
+    all NLP baselines by far and came as a natural choice to build our text classification.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is the challenge then?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Transformer based language models such as BERT are really good at understanding
+    the semantic context (where bag-of-words techniques fail) because they were designed
+    specifically for that purpose. As explained in the introduction, BERT outperforms
+    all NLP baselines, but as we say in the scientific community, “no free lunch”.
+    This extensive semantic comprehension of a model like BERT offers comes with a
+    big caveat: it cannot deal with very long text sequences. Basically, this limitation
+    is 512 tokens (a token being a word or a subword of the text) which represent
+    more or less two or three Wikipedia paragraphs and we obviously don’t want to
+    consider only such a small sub-part of a text to classify it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To illustrate this, let’s consider the task of classifying comprehensive product
+    reviews into positive or negative reviews. The first sentences or paragraphs may
+    only contain a description of the product and it would likely require to go further
+    down the review to understand whether the reviewer actually likes the product
+    or not. If our model does not encompass the whole content, it might not be possible
+    to make the right prediction. Therefore, one requirement for our model is to capture
+    the context of a document while managing correctly long-time dependencies between
+    the sentences at the beginning and the end of the document.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Technically speaking, the core limitation is the memory footprint that grows
+    quadratically with the number of tokens along with the use of pre-trained models
+    that come with a fixed size determined by Google (& al.). This is expected since
+    each token is “attentive” [https://arxiv.org/pdf/1706.03762.pdf] to every other
+    token and therefore requires a [N x N] attention matrix, with [N] the number of
+    tokens. For example, BERT accepts a maximum of 512 tokens which hardly qualifies
+    as long text. And going beyond 512 tokens rapidly reaches the limits of even modern
+    GPUs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another problem that arises using Transformers in a production environment is
+    the very slow inference due to the size of the models (110M parameters for BERT
+    base) and, again, the quadratic cost. So, our goal is not only to find an architecture
+    that fits into memory during the training but to find one that also responds reasonably
+    fast during inference.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The last challenge we address here is to build a model based on various feature
+    types: long text of course, but also additional textual metadata (such as title,
+    abstract …) and categories (location, authors …).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, how to deal with really long documents?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The main idea is to split the document into shorter sequences and feed these
+    sequences into a BERT model. We obtain the CLS embedding for each sequence and
+    merge the embeddings. There are a couple of possibilities to perform the merge,
+    we experimented with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Convolutional Neural Networks (CNN)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Long Short-Term Memory Networks (LSTM)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Transformers (to aggregate Transformers, yes :) )
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Our experiments on different standard text classification corpora showed that
+    using additional Transformer layers to merge the produced embeddings works best
+    without introducing a large computational cost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Want the formal description, right?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We consider a text classification task with *L* labels. For a document *D*,
+    its tokens given by the [WordPiece tokenization](https://medium.com/@makcedward/how-subword-helps-on-your-nlp-model-83dd1b836f46) can
+    be written *X =( x₁, …, xₙ) *with *N* the total number of token in *D*. Let K
+    be the maximal sequence length (up to 512 for BERT). Let *I* be the number of
+    sequences of *K *tokens or less in *D*, it is given by I=⌊ N/K ⌋.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note that if the last sequence in the document has a size lower to *K* it will
+    be padded with 0 until the *Kᵗʰ* index. Then if *s*ⁱ with *i****∈ ****{1, ..,
+    I},* is the *i*-th sequence with *K* elements in *D*, we have:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Classifying Long Text Documents Using BERT](../Images/fe2509ceb48bea5689f16d7a8f8c8ee4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can note that
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Classifying Long Text Documents Using BERT](../Images/27b03622aad1a7ae0acb19ec0608d055.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: BERT returns the CLS embedding but also an embedding per token.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let define the embeddings per token returned by BERT for the i-th sequence
+    of the document such as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Classifying Long Text Documents Using BERT](../Images/35c447f8e3bd57d3afd2a4c217f40271.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: where *CLS* is the embedding of the special token inserted in front of each
+    text sequence fed to BERT, it is generally considered as an embedding summarizing
+    the full sequence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To combine the sequences, we only use *CLSᵢ* and do not use *y*. We use *t* transformers *T₁,
+    …,Tₜ* to obtain the final vector to feed to the last dense layer of the network:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Classifying Long Text Documents Using BERT](../Images/525bf66dd2e6ee6f0f01f037fd2fc077.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: where **∘** is the function composition operation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given the last dense layer weights *W ∈ *ℝᴸˣᴴ where *H* is the hidden size of
+    the transformer and bias *b* *∈ *ℝᴸ
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The probabilities ***P*** *∈ *ℝᴸ are given by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Classifying Long Text Documents Using BERT](../Images/ca67617333e27a025e6f4a90cda4b273.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Finally, applying *argmax *on the vector *P* returns the predicted label. For
+    a summary of the above architecture, you can have a look at figure 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The architecture above enables us to leverage BERT for the text classification
+    task bypassing the maximum sequence length limitation of transformers while at
+    the same time keeping the context over multiple sequences. Let’s see how to combine
+    it with other types of features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to deal with metadata?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Oftentimes, a document comes with more than just its content. There can be metadata
+    that we divide into two groups, textual metadata, and categorical metadata.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Textual Metadata
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: By textual metadata, we mean short text that has (after tokenization) a relatively
+    small number of tokens. This is required to fit entirely into our language model.
+    A typical example of such metadata would be titles or abstracts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given a document with *M* metadata annotation. Let
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Classifying Long Text Documents Using BERT](../Images/f70c6576edd8fae6d57820c73e26627c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'be the CLS embeddings produced by BERT for each metadata. The same technique
+    as above is used to get the probability vector as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Classifying Long Text Documents Using BERT](../Images/8b53f277d7ed866c65bdc58c0c6c187e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Categorical Metadata
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Categorical metadata can be a numerical or textual value that represents a category.
+    Numerical values can be the number of pages whereas textual values can be the
+    publisher name or a geo-location.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A common way to deal with such features is to implement [the Wide and Deep architecture](https://export.arxiv.org/pdf/1606.07792).
+    Our experiments showed that results yielded by the deep part of this network were
+    sufficiently good and the wide part was not required.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We encode the categorical metadata in a single cross-category vector using one-hot
+    encoding. This encoding is then passed into an embedding layer that learns a vector
+    representation for each distinct category. The last step is to apply a pooling
+    layer on the resulting embedding matrix.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We considered max, average and min pooling and found that using average pooling
+    worked best for our test corpora.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How does the complete architecture look?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Hope you stuck around until now, the following figure will hopefully make things
+    a lot clearer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Classifying Long Text Documents Using BERT](../Images/cafa9638af84fb59586d0e154088a182.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 1
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are three sub-models, one for text, another for textual metadata, and
+    the last one for categorical metadata. The output of the three sub-models is merely
+    concatenated into a single vector before passing it through a dropout layer and
+    finally into the last dense layer with a softmax activation for the classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You probably have noticed that there are multiple BERT instances depicted in
+    the architecture, not only for the text input but also for the textual metadata.
+    As BERT comes with many parameters to train, we decided not to include a separate
+    BERT model per sub-model, but instead share the weights of a single model in between
+    the sub-models. Sharing weights certainly reduces the RAM used by the model (enabling
+    training with larger batch-size, so accelerating training in a sense) but it does
+    not change the inference-time since there will still be as many BERT executions
+    no matter whether their weights are shared or not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What about inference time?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: By now, you must have guessed that including that many invocations of the BERT
+    model do not come for free. And it is true that it is computationally expensive
+    to run inference of such a model. However, there are a couple of tricks to improve
+    inference times. In the following, we focus on CPU inference as this is very important
+    in production environments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A couple of notes for the conducted experiments:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We consider a simplified model only containing a text feature.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We limited the tokens that we used per document to 25,600 tokens which correspond
+    roughly to around 130,000 characters if the document contains English text.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We perform the experiments with documents that have the above described maximum
+    length. In practice, documents have varying sizes and as we use dynamic size tensors
+    in our model, inference times are considerably faster for short documents. As
+    a rule of thumb, when using a document that is half as long reduces the inference
+    time by 50 %.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Classifying Long Text Documents Using BERT](../Images/0845164d19924ac923409789417a43cc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Classifying Long Text Documents Using BERT](../Images/4550d304174ee43ad464ad219c6fd843.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**References**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://arxiv.org/abs/2006.04152](https://arxiv.org/abs/2006.04152), [https://arxiv.org/pdf/2001.08950.pdf](https://arxiv.org/pdf/2001.08950.pdf)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://blog.tensorflow.org/2020/04/tfrt-new-tensorflow-runtime.html](https://blog.tensorflow.org/2020/04/tfrt-new-tensorflow-runtime.html)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://www.tensorflow.org/xla?hl=fr](https://www.tensorflow.org/xla?hl=fr)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://medium.com/microsoftazure/accelerate-your-nlp-pipelines-using-hugging-face-transformers-and-onnx-runtime-2443578f4333](https://medium.com/microsoftazure/accelerate-your-nlp-pipelines-using-hugging-face-transformers-and-onnx-runtime-2443578f4333)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: What else is there to do?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Linear Transformers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Building a Transformer-like architecture that does not come with the quadratic
+    complexity in time and memory is currently a very active field of research. There
+    are a couple of candidates that are definitely worth trying once pre-trained models
+    will be released:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Linformer [[https://arxiv.org/pdf/2006.04768.pdf](https://arxiv.org/pdf/2006.04768.pdf)]
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: BigBird [[https://arxiv.org/pdf/2007.14062.pdf](https://arxiv.org/pdf/2007.14062.pdf)]
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reformers [[https://arxiv.org/pdf/2001.04451.pdf](https://arxiv.org/pdf/2001.04451.pdf)]
+    (only O(N log(N)) complexity)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Performers [[https://arxiv.org/pdf/2009.14794.pdf](https://arxiv.org/pdf/2009.14794.pdf)]
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: etc…
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A preliminary test with the very promising [Longformer ](https://arxiv.org/pdf/2004.05150.pdf)model
+    could not be executed successfully. We tried to train a LongFormer model using
+    the TensorFlow implementation of [Hugging Face](https://huggingface.co/transformers/model_doc/longformer.html).
+    However, it appears that the implementation is not yet memory-optimized as it
+    was not possible to train it even on a large GPU with 48 GB of memory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Inference time is the cornerstone of any ML project that needs to run in production,
+    so we do plan to use such “linear transformers” in the future in addition to pruning
+    and quantization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Are we done yet?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Yes, thanks for sticking with us until the end. If you have questions or remarks
+    about our model, feel free to comment. We would love to hear from you.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://sinequa.medium.com/classifying-long-textual-documents-up-to-25-000-tokens-using-bert-9d2dd55ca060).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Convert Text Documents to a TF-IDF Matrix with tfidfvectorizer](https://www.kdnuggets.com/2022/09/convert-text-documents-tfidf-matrix-tfidfvectorizer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Converting Text Documents to Token Counts with CountVectorizer](https://www.kdnuggets.com/2022/10/converting-text-documents-token-counts-countvectorizer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GPT4All is the Local ChatGPT for your Documents and it is Free!](https://www.kdnuggets.com/2023/06/gpt4all-local-chatgpt-documents-free.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Extractive Summarization with LLM using BERT](https://www.kdnuggets.com/extractive-summarization-with-llm-using-bert)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Long Does It Take to Learn Data Science Fundamentals?](https://www.kdnuggets.com/2022/03/long-take-learn-data-science-fundamentals.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fine-Tuning BERT for Tweets Classification with HuggingFace](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

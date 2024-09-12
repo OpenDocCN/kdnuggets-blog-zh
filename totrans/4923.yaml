@@ -1,0 +1,199 @@
+- en: 'Python Data Preparation Case Files: Group-based Imputation'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/09/python-data-preparation-case-files-group-based-imputation.html](https://www.kdnuggets.com/2017/09/python-data-preparation-case-files-group-based-imputation.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Header image](../Images/00e1dafff08a57b5dc7e3551854f78ad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This is the second post in this series on Python data preparation, and focuses
+    on group-based imputation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Refresher
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: While the first post demonstrated a simple manner for imputing missing values,
+    based on the same variable's mean, this isn't really the most complex approach
+    to filling in missing values. Suppose, as in our dataset example (see [the first
+    post](/2017/09/python-data-preparation-case-files-basic-imputation.html)), we
+    have customers in 4 states, and we are interested in using residence in these
+    states as a means to treating customers as distinct groups, and filling in missing
+    values accordingly. This is a more nuanced approach.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A bit more specifically, let's use the mean account balance of customers in
+    a given state to determine the value to use for other customer missing balance
+    values in the same state.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I won't go into any more detail about the mock data or task; feel free to look
+    at [the first post](/2017/09/python-data-preparation-case-files-basic-imputation.html)
+    for the requisite background. Also, [grab the dataset here](https://drive.google.com/file/d/0B6GhBwm5vaB2ekdlZW5WZnppb28/view?usp=sharing)
+    (as it sits after the first post's exercises).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Dataset](../Images/b227855f302f981c69eaedf6495c4b1a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Figure 1:** Mock bank dataset for our exercise (after exercise 1).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Process
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The process is pretty cut and dry this time out, as we only have a single task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Imputing Missing Account Balances**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will assume that our domain experts have concluded that missing account balances
+    are best replaced with the mean account balances of customers in the same state
+    (lending to why we had to drop instances with missing state values). This will
+    be done for both checking and savings accounts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, let's have a look at the current state of missing values in our dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Our checking account balance (pardon the 'q'; I'm Canadian) and savings account
+    balances have 23 and 91 missing values, respectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: First, let's compare the by-state balance means with the overall mean (prior
+    to imputation), for interest's sake.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Though perhaps not as dramatic as hoped, it should be clear to see why such
+    group-based imputation is a valid approach to a problem such as this. The mean
+    savings account balance difference between California ($9174.56) and New York
+    ($10443.61), for example, is nearly $1270\. Taking an overall mean of $9603.64
+    to fill in missing values would not provide the most accurate picture. This goes
+    to [goodness of fit](https://en.wikipedia.org/wiki/Goodness_of_fit).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's go ahead and fill in these missing values by using the Pandas 'groupby'
+    and 'transform' functionality, along with a lambda function. We then round the
+    result in the line of code beneath.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: That's it. Our pertinent missing values are now filled in with the mean values
+    of those in the same state.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Checking the results:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Bingo!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let's save the dataset for next time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: That's it for this exercise. We still have to deal with 'sex' and 'age' variable
+    missing values. Next time we will look at regression-based imputation to help
+    deal with one of these.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Data Preparation with Python](/2017/06/7-steps-mastering-data-preparation-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Workflows in Python from Scratch Part 1: Data Preparation](/2017/05/machine-learning-workflows-python-scratch-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Preparation Tips, Tricks, and Tools: An Interview with the Insiders](/2016/10/data-preparation-tips-tricks-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[3 Approaches to Data Imputation](https://www.kdnuggets.com/2022/12/3-approaches-data-imputation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Approaches to Data Imputation](https://www.kdnuggets.com/2023/01/approaches-data-imputation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Datawig, an AWS Deep Learning Library for Missing Value Imputation](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Preparation and Raw Data in Machine Learning](https://www.kdnuggets.com/2022/07/data-preparation-raw-data-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Preparation with SQL Cheatsheet](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Preparation in R Cheatsheet](https://www.kdnuggets.com/2021/10/data-preparation-r-dplyr-cheat-sheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

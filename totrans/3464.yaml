@@ -1,0 +1,257 @@
+- en: 5 Reasons Machine Learning Applications Need a Better Lambda Architecture
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/05/5-reasons-machine-learning-applications-lambda-architecture.html](https://www.kdnuggets.com/2016/05/5-reasons-machine-learning-applications-lambda-architecture.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Monte Zweben](https://www.linkedin.com/in/mzweben), CEO [Splice Machine](http://www.splicemachine.com).**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Lambda architectures are ubiquitous in machine learning and data science applications.
+    The Lambda Architecture enables a continuous processing of real-time data without
+    the traditional ETL lag that plagues traditional operational (OLTP) and analytical
+    (OLAP) implementations. In traditional architectures, OLTP databases are normalized
+    for performance and then extensive ETL pipelines de-normalize this data, typically
+    into star schemas on OLAP engines. This process usually takes at least a day.
+    The Lambda Architecture circumvents this lag. In its purist form, the Lambda Architecture
+    sends data down two paths: a batch processing layer and a speed layer. The batch
+    layer aggregates the raw data and trains models. The results of the batch layer
+    are then transferred to a serving layer for the application to surface. The speed
+    layer allows applications to access the most current data that “missed” the last
+    batch processing window.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So how do companies implement this architecture? For the batch layer, they typically
+    use a batch analytics processing engine on Hadoop, like MapReduce, Hive or Spark.
+    For the serving layer, they use a NoSQL/Key-Value engine that performs well on
+    batch imports and reads like ElephantDB and Voldemort. For the speed layer, they
+    need a data store that supports fast reads and writes like Cassandra or HBase.
+    At the front of this architecture, there typically is a queuing system like Kafka
+    and a streaming system like Storm, Spark or even Flink to break continuous data
+    into chunks for processing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![enterprise-lambda-architecture](../Images/51bb8dcf553f16aa169359104b316f66.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Enterprises keep this architecture working with what I like to call enterprise
+    duct tape. It is a painful process that gets the job done, but at a great cost.
+    Here are the five reasons we need a better Lambda architecture:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Simplify Operational Complexity – It is very expensive to keep these systems
+    synchronized based on versions and tuned for performance. It requires expertise
+    in too many technologies
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Eliminate Need For Specialized Coding Skills – Developers have to be able to
+    write pretty low-level code to handle basic operations like joins, aggregations,
+    sorts, and groupings, let alone applying analytics. They have to write batch programs
+    to cleanse and filter individual records
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Provide Access to Standard Tools – 99% of data scientists know SQL and have
+    used BI visualization tools. Why would we throw away these powerful tools, now
+    that they don’t have the same performance and flexibility issues that the first
+    generation of databases had?
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Minimize Storage – Lambda typically requires at least duplicating the data in
+    multiple engines
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Support Integrated Applications – The modern application does not have application
+    logic separated from analytical logic. These workloads need to co-mingle. You
+    want to be able to use the operational raw data for business applications in the
+    moment, use it to perform feature engineering and train models, and be able to
+    visualize it — all concurrently. This requires the ACID properties of traditional
+    databases, the ingestion capabilities of NoSQL and the scale-out capabilities
+    of the Hadoop/Spark engines
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: So what is a better solution? We call it Lambda-R (ƛ-R) for the Relational Lambda.
+    With the new scale-out RDBMS systems, you can now get all the benefits of Lambda
+    with a much simpler architecture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![simplified-lambda-architecture](../Images/081697c7ce40abe4816a5b69122d6ab9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Here’s how a machine learning application can use  ƛ-R :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Batch file ingestion – Imports of raw data files are directly inserted into
+    sharded tables in parallel with indexes that are atomically updated with the data
+    for fast access
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Real-time stream ingestion – Stored procedures continuously ingest streams with
+    standard SQL and auto-shards
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Data cleansing – Use standard SQL, with constraints and triggers, to clean up
+    small subsets of data as well as entire data sets efficiently, without big batch
+    runs or file explosions
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Feature engineering and extensive ETL – Execute complex aggregations, joins,
+    sorts, and groupings with efficient SQL that is automatically parallelized and
+    optimized without writing code at the application level
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Model training – Stored procedures execute analytics directly on the data, for
+    example, using built-in functions like ResultSetToRDD that take SQL results and
+    treat them as Spark RDDs or execute R and Python libraries directly on database
+    result sets.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Application logic – ACID semantics enable the architecture to power concurrent
+    CRUD applications without additional moving parts
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Model execution – Stored procedures and user-defined functions wrap models
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reporting and data visualization – Use Tableau, Domo, MicroStrategy and other
+    ODBC/JDBC tools turnkey
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: One scale out RDBMS that can do this is Splice Machine. Splice Machine is a
+    dual-engine RDBMS that is built on Hadoop and Spark.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The Splice Machine RDBMS provides:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ANSI SQL – Splice Machine provides ANSI SQL-99 coverage, including full DDL
+    and DML
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ACID Transactions – Splice Machine provides fully ACID transactions with Snapshot
+    Isolation semantics, which scale both to very small operational queries and large
+    analytics
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In-Place Updates – Updates in Splice Machine scale from a single row to millions
+    of rows with a single transaction
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Secondary Indexing – Splice Machine supports true secondary indices on data,
+    in both unique and non-unique forms
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Referential Integrity – Referential integrity, such as Primary and Foreign key
+    constraints, can be enforced without requiring any behavior from the underlying
+    application
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Joins – Splice Machine supports inner, outer, cross and natural joins using
+    join algorithms such as broadcast, merge, merge sort, batch nested loop, and nested
+    loop joins
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Resource Isolation The cost-based optimizer chooses a dataflow engine based
+    on the estimation of the query plan – OLTP runs on HBase and OLAP runs on Spark
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In summary, by centralizing on a  ƛ-R architecture, teams can build ML applications
+    very quickly, maintain them with standard operational personnel, and be able to
+    tightly integrate ML into the application without extensive use of “Enterprise
+    Duct Tape”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Interview: Antonio Magnaghi, TicketMaster on Unifying Heterogeneous Analytics
+    through Lambda Architecture](/2015/05/interview-antonio-magnaghi-ticketmaster-analytics-lambda.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bill Moreau, USOC on Empowering World’s Best Athletes through Analytics](/2015/03/interview-bill-moreau-usoc-athletes-analytics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hobson Lane, SHARP Labs on How Analytics can Show You “All the Light You Cannot
+    See”](/2015/05/interview-hobson-lane-sharp-labs-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Python Lambda Functions, Explained](https://www.kdnuggets.com/2023/01/python-lambda-functions-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, May 18: 5 Free Hosting Platform For Machine…](https://www.kdnuggets.com/2022/n20.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Reasons Why You Need Synthetic Data](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n07, Feb 16: How to Learn Math for Machine…](https://www.kdnuggets.com/2022/n07.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Is Not Like Your Brain Part 3: Fundamental Architecture](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-3-fundamental-architecture.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Things You Need to Know When Building LLM Applications](https://www.kdnuggets.com/2023/08/5-things-need-know-building-llm-applications.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

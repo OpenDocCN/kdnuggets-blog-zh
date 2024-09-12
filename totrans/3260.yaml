@@ -1,0 +1,245 @@
+- en: Lessons Learned From Benchmarking Fast Machine Learning Algorithms
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/08/lessons-benchmarking-fast-machine-learning-algorithms.html](https://www.kdnuggets.com/2017/08/lessons-benchmarking-fast-machine-learning-algorithms.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By Miguel Fierro, Mathew Salvaris, Guolin Ke, and Tao Wu, all at Microsoft**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Boosted decision trees are responsible for more than half of the winning solutions
+    in machine learning challenges hosted at Kaggle, according to [KDnuggets](/2016/03/xgboost-implementing-winningest-kaggle-algorithm-spark-flink.html).
+    In addition to superior performance, these algorithms have practical appeal as
+    they require minimal tuning. In this post, we evaluate two popular tree boosting
+    software packages: [XGBoost](https://github.com/dmlc/xgboost) and [LightGBM](https://github.com/Microsoft/LightGBM),
+    including their GPU implementations. Our results, based on tests on six datasets,
+    are summarized as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: XGBoost and LightGBM achieve similar accuracy metrics.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: LightGBM has lower training time than XGBoost and its histogram-based variant,
+    XGBoost hist, for all test datasets, on both CPU and GPU implementations. The
+    training time difference between the two libraries depends on the dataset, and
+    can be as big as 25 times.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: XGBoost GPU implementation does not scale well to large datasets and ran out
+    of memory in half of the tests.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: XGBoost hist may be significantly slower than the original XGBoost when feature
+    dimensionality is high.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: All our code is open-source and can be found in [this repo](https://github.com/Azure/fast_retraining/).
+    We will explain the algorithms behind these libraries and evaluate them across
+    different datasets. Do you like your machine learning to be quick? Then keep reading.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Basics of Boosted Decision Trees
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Gradient boosting](https://en.wikipedia.org/wiki/Gradient_boosting) is a machine
+    learning technique that produces a prediction model in the form of an ensemble
+    of weak classifiers, optimizing a differentiable loss function. One of the most
+    popular types of gradient boosting is boosted decision trees, that internally
+    is made up of an ensemble of weak [decision trees](https://en.wikipedia.org/wiki/Decision_tree_learning).
+    There are two different strategies to compute the trees: level-wise and leaf-wise.
+    The level-wise strategy grows the tree level by level. In this strategy, each
+    node splits the data prioritizing the nodes closer to the tree root. The leaf-wise
+    strategy grows the tree by splitting the data at the nodes with the highest loss
+    change. Level-wise growth is usually better for smaller datasets whereas leaf-wise
+    tends to overfit. Leaf-wise growth [tends to excel in larger datasets](http://researchcommons.waikato.ac.nz/handle/10289/2317) where
+    it is considerably faster than level-wise growth.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/12f36bb713456993f64393f64e51e30e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A key challenge in training boosted decision trees is the [computational cost
+    of finding the best split](https://arxiv.org/abs/1706.08359) for each leaf. Conventional
+    techniques find the [exact split](https://arxiv.org/abs/1603.02754) for each leaf,
+    and require scanning through all the data in each iteration. A different approach [approximates
+    the split](https://arxiv.org/abs/1611.01276) by building histograms of the features.
+    That way, the algorithm doesn’t need to evaluate every single value of the features
+    to compute the split, but only the bins of the histogram, which are bounded. This
+    approach turns out to be much more efficient for large datasets, without adversely
+    affecting accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[XGBoost started in 2014](http://homes.cs.washington.edu/~tqchen/2016/03/10/story-and-lessons-behind-the-evolution-of-xgboost.html),
+    and it has become popular due to its use in many [winning Kaggle competition entries](https://github.com/dmlc/xgboost/blob/master/demo/README.md).
+    Originally XGBoost was based on a level-wise growth algorithm, but recently has
+    added an option for leaf-wise growth that implements split approximation using
+    histograms. We refer to this version as XGBoost hist. LightGBM is a more recent
+    arrival, started in March 2016 and open-sourced in August 2016\. It is based on
+    a leaf-wise algorithm and histogram approximation, and has attracted a lot of
+    attention due to its speed (Disclaimer: Guolin Ke, a co-author of this blog post,
+    is a key contributor to LightGBM). Apart from multithreaded CPU implementations,
+    GPU acceleration is now available on both [XGBoost](https://github.com/dmlc/xgboost/tree/master/plugin/updater_gpu) and [LightGBM](https://github.com/Microsoft/LightGBM/blob/master/docs/GPU-Tutorial.md) too.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Evaluating XGBoost and LightGBM
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We performed [machine learning experiments](https://github.com/Azure/fast_retraining/) across
+    six different datasets. These experiments are in the python notebooks in our [github
+    repo](https://github.com/Azure/fast_retraining/). We also showed the specific [compilation
+    versions of XGBoost and LightGBM](https://github.com/Azure/fast_retraining/blob/master/INSTALL.md) that
+    we used and provided the steps to [install them and set up the experiments](https://github.com/Azure/fast_retraining/blob/master/INSTALL.md).
+    We tried classification and regression problems with both CPU and GPU.  All experiments
+    were run on an Azure NV24 VM with 24 cores, 224 GB of memory and NVIDIA M60 GPUs.
+    The operating system was Ubuntu 16.04\. In all experiments, we found XGBoost and
+    LightGBM had similar accuracy metrics (F1-scores are shown here), so we focused
+    on training times in this blog post. The table below shows training times and
+    the training time ratios between the two libraries in both CPU and GPU implementations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7669a13d7f013ffb9c8711007bf4bfa1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Learnings from the Benchmark
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As it is usually said, no benchmark is true but some of them are useful. From
+    our experiments, we found the leaf-wise implementation faster than the level-wise
+    one in general. However, the CPU results for BCI and Planet Kaggle datasets, as
+    well as the GPU result for BCI, show that XGBoost hist takes considerably longer
+    than standard XGBoost. This is due to the large size of the datasets, as well
+    as the large number of features, which causes considerable memory overhead for
+    XGBoost hist.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We also found that XGBoost GPU implementation did not scale well, as it gave
+    out of memory errors for 3 larger datasets. In addition, we had to terminate XGBoost
+    training on the Airline dataset after 5 hours.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, between LightGBM and XGBoost, we found that LightGBM is faster for
+    all tests where XGBoost and XGBoost hist finished, with the biggest difference
+    of 25 times for XGBoost and 15 times for XGBoost hist, respectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We wanted to investigate the effect of different data sizes and number of rounds
+    in the performance of CPU vs GPU. In the next table, we show the results of using
+    subsamples of the Airline dataset. When comparing the CPU and GPU training times,
+    we see that the GPU version of LightGBM outperforms the CPU one when the dataset
+    is large and for a high number of rounds. As expected, with small datasets, the
+    additional IO overhead of copying the data between RAM and GPU memory overshadows
+    the speed benefits of running the computation on GPU. Here, we did not observe
+    any performance gains in using  XGBoost hist on GPU.  As a side note, the standard
+    implementation of XGBoost (exact split instead of histogram based) does not benefit
+    from GPU either, as compared to multi-core CPU, per this [recent paper](https://arxiv.org/abs/1706.08359).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1fed194178d3ccb9ca962b4b9dc785ba.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Overall, we find that LightGBM is faster than XGBoost, in both CPU and GPU implementations.
+    Furthermore, if XGBoost is used, we would recommend keeping a close eye on feature
+    dimensionality and memory consumption. The significant speed advantage of LightGBM
+    translates into the ability to do more iterations and/or quicker hyperparameter
+    search, which can be very useful if you have a limited time budget for optimizing
+    your model or want to experiment with different feature engineering ideas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Happy coding!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Miguel, Mathew, Guolin & Tao.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Acknowledgment: We would like to thank Steve Deng, David Smith and Huseyin
+    Yildiz from Microsoft for their assistance and feedback on this post.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://blogs.technet.microsoft.com/machinelearning/2017/07/25/lessons-learned-benchmarking-fast-machine-learning-algorithms/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: **Miguel Fierro, Data Scientist, Mathew Salvaris, Data Scientist, Guolin
+    Ke, Associate Researcher, and Tao Wu, Principal Data Science Manager, all at Microsoft.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Simple XGBoost Tutorial Using the Iris Dataset](/2017/03/simple-xgboost-tutorial-iris-dataset.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Dask and Pandas and XGBoost: Playing nicely between distributed systems](/2017/04/dask-pandas-xgboost-playing-nicely-distributed-systems.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Decision Tree Classifiers: A Concise Technical Overview](/2016/10/decision-trees-concise-technical-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Best Architecture for Your Text Classification Task: Benchmarking…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, September 28: Free Algorithms in Python Course •…](https://www.kdnuggets.com/2022/n38.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Speed up Machine Learning with Fast Kriging (FKR)](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simple and Fast Data Streaming for Machine Learning Projects](https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Practical Deep Learning from fast.ai is Back!](https://www.kdnuggets.com/2022/07/practical-deep-learning-fastai-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What I Learned From Using ChatGPT for Data Science](https://www.kdnuggets.com/what-i-learned-from-using-chatgpt-for-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,272 @@
+- en: 'Ensemble Methods Explained in Plain English: Bagging'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/05/ensemble-methods-explained-plain-english-bagging.html](https://www.kdnuggets.com/2021/05/ensemble-methods-explained-plain-english-bagging.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Claudia Ng](https://www.linkedin.com/in/claudian37/), Senior Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, I will go over a popular homogenous model ensemble method —
+    bagging. Homogenous ensembles combine a large number of base estimators or weak
+    learners of the same algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The principle behind homogenous ensembles is the idea of “wisdom of the crowd”
+    — the collective predictions of many diverse models is better than any set of
+    predictions made by a single model. There are three requirements to achieve this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The models must be independent;
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Each model performs slightly better than random guessing;
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: All individual models have similar performance on their own.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: When these three requirements are satisfied, adding more models should improve
+    the performance of your ensemble.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ensemble methods help to reduce variance and combat overfitting to your train
+    dataset, thus allowing your model to better learn generalized patterns rather
+    than overfitting to the noise in your train dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bagging
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: How Bagging Works
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In bagging, a large number of independent weak models are combined to learn
+    the same task with the same goal. The term “bagging” comes from `**b**ootstrap
+    + **agg**regat**ing**`, whereby each weak learner is trained on a random subsample
+    of data sampled with replacement (bootstrapping), and then the models’ predictions
+    are aggregated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bootstrapping guarantees independence and diversity, because each subsample
+    of data is sampled separately with replacement and we are left with different
+    subsets to train our base estimators.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The base estimators are weak learners that perform only slightly better than
+    random guessing. An example of such a model is a shallow decision tree limited
+    to a maximum depth of three. The predictions from these models are then combined
+    through averaging.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bagging can be applied to both classification and regression problems. For regression
+    problems, the final predictions will be an average (soft voting) of the predictions
+    from base estimators. For classification problems, the final predictions will
+    be the majority vote (hard voting).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1a9eebf7d3097b0745810830dfd1012f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Diagram of Bagging Algorithms
+  prefs: []
+  type: TYPE_NORMAL
+- en: Implementing Bagging Algorithms with Scikit-Learn
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can build your own bagging algorithm using `[BaggingRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.BaggingRegressor.html)` or `[BaggingClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.BaggingClassifier.html)` in
+    the Python package Scikit-Learn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To begin, instantiate your base estimator and enter this as your base estimator
+    in `BaggingRegressor` or `BaggingClassifier`. Below are an example of a bagging
+    regressor with a linear regression as the base estimator, and an example of a
+    bagging classifier with a decision tree classifier as the base estimator. The
+    default number of estimators is 10.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Random Forest
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Random forest® is a popular example of a bagging algorithm. It uses averaging
+    to ensemble a number of individual decision trees trained on a subset of the train
+    dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Using [scikit-learn’s random forest algorithm](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html) in
+    Python, you can specify tree-specific parameters. The following are some important
+    hyperparameters to tune so that it is optimized for your dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`n_estimators`: number of trees to train to be aggregated. Usually between
+    100 to 500 trees is enough and generally, more trees will improve your model (with
+    diminishing returns) but it will also be more computationally expensive;'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`max_depth` : the maximum depth of a tree. A deeper tree will help to reduce
+    the bias but at the expense of increasing variance. The aggregation of multiple
+    trees in the random forest algorithm can help to combat this, but you should still
+    be careful;'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`max_features`: the maximum number of features to consider at each split. A
+    good starting point is usually the square root of the number of features.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Another important concept in the random forest algorithm is the out-of-bag (OOB)
+    score. When performing bootstrapping, there will be instances left out of the
+    subsamples used to train the estimators. These out-of-sample instances can be
+    used to evaluate the model to obtain an out-of-bag (OOB) score, in essence like
+    a pseudo-validation set for the random forest model. To obtain the OOB score,
+    set `oob_score=True` when initializing your random forest object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that scikit-learn’s random forest algorithms will return an error if there
+    are null values in your features, so remember to fill null values with pandas’ `fillna` before
+    calling fit on your data, otherwise it will throw an error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pros and Cons of Bagging
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Reduces variance**: Given that the sampling is done truly randomly with bootstrapping,
+    bagging usually helps to reduce variance and combat overfitting.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Easy to parallelize**: Estimators are independent, so models can be built
+    in parallel with bagging.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Greater stability and robustness**: The high number of estimators aggregated
+    together help to provide more stability and robustness to the predictions.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Difficult to interpret**: The final predictions of a bagging algorithm are
+    based on the mean predictions from the base estimators. While this improves accuracy,
+    it becomes more difficult to interpret the model.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Bagging is based on the idea of collective learning, where many independent
+    weak learners are trained on bootstrapped subsamples of data and then aggregated
+    via averaging. It can be applied to both classification and regression problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The random forest algorithm is a popular example of a bagging algorithm. When
+    tuning hyperparameters in the random forest algorithm for your dataset, the important
+    three areas to pay attention to are: i) number of trees (`n_estimators`), ii)
+    prune the trees (start with `max_depth` but also explore samples required in a
+    node and/or for splitting), iii) the maximum number of features to consider at
+    each split (`max_features`).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bagging is a very powerful concept and example of model ensemble methods. Hope
+    this inspires you to try out a bagging algorithm next time you approach a predictive
+    modeling problem!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Claudia Ng](https://www.linkedin.com/in/claudian37/)** is a Senior
+    Data Scientist.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://pub.towardsai.net/ensemble-methods-explained-in-plain-english-bagging-47bef8ac7690).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[XGBoost: What it is, and when to use it](/2020/12/xgboost-what-when.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Comprehensive Guide to Ensemble Learning – Exactly What You Need to Know](/2021/05/comprehensive-guide-ensemble-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Microsoft Explores Three Key Mysteries of Ensemble Learning](/2021/02/microsoft-explores-three-key-mysteries-ensemble-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[10 Basic Statistical Concepts in Plain English](https://www.kdnuggets.com/10-basic-statistical-concepts-in-plain-english)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[When Would Ensemble Techniques be a Good Choice?](https://www.kdnuggets.com/2022/07/would-ensemble-techniques-good-choice.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning with Examples](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

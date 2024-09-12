@@ -1,0 +1,319 @@
+- en: 37 Reasons why your Neural Network is not working
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/08/37-reasons-neural-network-not-working.html](https://www.kdnuggets.com/2017/08/37-reasons-neural-network-not-working.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](/2017/08/37-reasons-neural-network-not-working.html/2#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Slav Ivanov](https://twitter.com/slavivanov), Entrepreneur & ML Practitioner**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The network had been training for the last 12 hours. It all looked good: the
+    gradients were flowing and the loss was decreasing. But then came the predictions:
+    all zeroes, all background, nothing detected. “What did I do wrong?” — I asked
+    my computer, who didn’t answer.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Where do you start checking if your model is outputting garbage (for example
+    predicting the mean of all outputs, or it has really poor accuracy)?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A network might not be training for a number of reasons. Over the course of
+    many debugging sessions, I would often find myself doing the same checks. I’ve
+    compiled my experience along with the best ideas around in this handy list. I
+    hope they would be of use to you, too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Table of Contents
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 0\. How to use this guide?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: I. Dataset issues
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: II. Data Normalization/Augmentation issues
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: III. Implementation issues
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: IV. Training issues
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 0\. How to use this guide?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'A lot of things can go wrong. But some of them are more likely to be broken
+    than others. I usually start with this short list as an emergency first response:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Start with a simple model that is known to work for this type of data (for example,
+    VGG for images). Use a standard loss if possible.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Turn off all bells and whistles, e.g. regularization and data augmentation.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If fine-tuning a model, double check the preprocessing, for it should be the
+    same as the original model’s training.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Verify that the input data is correct.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Start with a really small dataset (2–20 samples). Overfit on it and gradually
+    add more data.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Start gradually adding back all the pieces that were omitted: augmentation/regularization,
+    custom loss functions, try more complex models.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If the steps above don’t do it, start going down the following big list and
+    verify things one by one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I. Dataset issues
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/63268de4720c5d16ff843c53129d4356.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 1\. Check your input data
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Check if the input data you are feeding the network makes sense. For example,
+    I’ve more than once mixed the width and the height of an image. Sometimes, I would
+    feed all zeroes by mistake. Or I would use the same batch over and over. So print/display
+    a couple of batches of input and target output and make sure they are OK.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Try random input
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Try passing random numbers instead of actual data and see if the error behaves
+    the same way. If it does, it’s a sure sign that your net is turning data into
+    garbage at some point. Try debugging layer by layer /op by op/ and see where things
+    go wrong.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Check the data loader
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Your data might be fine but the code that passes the input to the net might
+    be broken. Print the input of the first layer before any operations and check
+    it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. Make sure input is connected to output
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Check if a few input samples have the correct labels. Also make sure shuffling
+    input samples works the same way for output labels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5\. Is the relationship between input and output too random?
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Maybe the non-random part of the relationship between the input and output is
+    too small compared to the random part (one could argue that stock prices are like
+    this). I.e. the input are not sufficiently related to the output. There isn’t
+    an universal way to detect this as it depends on the nature of the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 6\. Is there too much noise in the dataset?
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This happened to me once when I scraped an image dataset off a food site. There
+    were so many bad labels that the network couldn’t learn. Check a bunch of input
+    samples manually and see if labels seem off.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The cutoff point is up for debate, as [this paper](https://arxiv.org/pdf/1412.6596.pdf) got
+    above 50% accuracy on MNIST using 50% corrupted labels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 7\. Shuffle the dataset
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: If your dataset hasn’t been shuffled and has a particular order to it (ordered
+    by label) this could negatively impact the learning. Shuffle your dataset to avoid
+    this. Make sure you are shuffling input and labels together.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 8\. Reduce class imbalance
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Are there a 1000 class A images for every class B image? Then you might need
+    to balance your loss function or [try other class imbalance approaches](http://machinelearningmastery.com/tactics-to-combat-imbalanced-classes-in-your-machine-learning-dataset/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 9\. Do you have enough training examples?
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: If you are training a net from scratch (i.e. not finetuning), you probably need
+    lots of data. For image classification, [people say](https://stats.stackexchange.com/a/226693/30773) you
+    need a 1000 images per class or more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 10\. Make sure your batches don’t contain a single label
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This can happen in a sorted dataset (i.e. the first 10k samples contain the
+    same class). Easily fixable by shuffling the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 11\. Reduce batch size
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[This paper](https://arxiv.org/abs/1609.04836) points out that having a very
+    large batch can reduce the generalization ability of the model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Addition 1\. Use standard dataset (e.g. mnist, cifar10)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'Thanks to @[hengcherkeng](https://medium.com/@hengcherkeng) for this one:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When testing new network architecture or writing a new piece of code, use the
+    standard datasets first, instead of your own data. This is because there are many
+    reference results for these datasets and they are proved to be ‘solvable’. There
+    will be no issues of label noise, train/test distribution difference , too much
+    difficulty in dataset, etc.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: II. Data Normalization/Augmentation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/56f24da5948f3ae4863dff3e9c3d02f6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**12\. Standardize** the features'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Did you standardize your input to have zero mean and unit variance?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 13\. Do you have too much data augmentation?
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Augmentation has a regularizing effect. Too much of this combined with other
+    forms of regularization (weight L2, dropout, etc.) can cause the net to underfit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 14\. Check the preprocessing of your pretrained model
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: If you are using a pretrained model, make sure you are using the same normalization
+    and preprocessing as the model was when training. For example, should an image
+    pixel be in the range [0, 1], [-1, 1] or [0, 255]?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 15\. Check the preprocessing for train/validation/test set
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'CS231n points out a [common pitfall](http://cs231n.github.io/neural-networks-2/#datapre):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: “… any preprocessing statistics (e.g. the data mean) must only be computed on
+    the training data, and then applied to the validation/test data. E.g. computing
+    the mean and subtracting it from every image across the entire dataset and then
+    splitting the data into train/val/test splits would be a mistake. “
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Also, check for different preprocessing in each sample or batch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[3 Reasons Why You Should Use Linear Regression Models Instead of…](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

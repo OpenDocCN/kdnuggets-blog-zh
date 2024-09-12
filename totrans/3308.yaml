@@ -1,0 +1,388 @@
+- en: 'Introducing Dask-SearchCV: Distributed hyperparameter optimization with Scikit-Learn'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/05/dask-searchcv-distributed-hyperparameter-optimization-scikit-learn.html](https://www.kdnuggets.com/2017/05/dask-searchcv-distributed-hyperparameter-optimization-scikit-learn.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Jim Crist, Continuum Analytics.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Last summer I spent some time experimenting with combining [dask](http://dask.pydata.org/en/latest/)
+    and [scikit-learn](http://scikit-learn.org/stable/) (chronicled in this [series](http://jcrist.github.io/dask-sklearn-part-1.html)
+    [of blog](http://jcrist.github.io/dask-sklearn-part-2.html) [posts](http://jcrist.github.io/dask-sklearn-part-3.html)).
+    The library that work produced was extremely alpha, and nothing really came out
+    of it. Recently I picked this work up again, and am happy to say that we now have
+    something I can be happy with. This involved a few major changes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A sharp reduction in scope. The previous rendition tried to implement both *model*
+    and *data* parallelism. Not being a machine-learning expert, the data parallelism
+    was implemented in a less-than-rigorous manner. The scope is now pared back to
+    just implementing hyperparameter searches (model parallelism), which is something
+    we can do well.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Optimized graph building. Turns out when people are given the option to run
+    grid search across a cluster, they immediately want to scale up the grid size.
+    At the cost of more complicated code, we can handle extremely large grids (e.g.
+    500,000 candidates now takes seconds for the graph to build, as opposed to minutes
+    before). *It should be noted that for grids this size, an active search may perform
+    significantly better*. Relevant issue: [#29](https://github.com/dask/dask-searchcv/issues/29).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Increased compatibility with Scikit-Learn. Now with only a few exceptions, the
+    implementations of `GridSearchCV` and `RandomizedSearchCV` should be drop-ins
+    for their scikit-learn counterparts.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'All these changes have led to a name change (previously was `dask-learn`).
+    The new library is [`dask-searchcv`](http://dask-searchcv.readthedocs.io/). It
+    can be installed via conda or pip:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post I'll give a brief overview of the library, and touch on when you
+    might want to use it over other options.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What's a grid search?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Many machine learning algorithms have *hyperparameters* which can be tuned to
+    improve the performance of the resulting estimator. A [grid search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search)
+    is one way of optimizing these parameters — it works by doing a parameter sweep
+    across a cartesian product of a subset of these parameters (the "grid"), and then
+    choosing the best resulting estimator. Since this is fitting many independent
+    estimators across the same set of data, it can be fairly easily parallelized.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Example using Text Classification
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We'll be reproducing [this example](http://scikit-learn.org/stable/auto_examples/model_selection/grid_search_text_feature_extraction.html).
+    using the newsgroups dataset from the scikit-learn docs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Setup
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'First we need to load the data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, we'll build a pipeline to do the feature extraction and classification.
+    This is composed of a[CountVectorizer](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html),
+    a [TfidfTransformer](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html),
+    and a [SGDClassifier](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'All of these take several parameters. We''ll only do a grid search across a
+    few of them:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Fitting with Scikit-Learn
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In Scikit-Learn, a grid search is performed using the `GridSearchCV` class,
+    and can (optionally) be automatically parallelized using [joblib](https://pythonhosted.org/joblib/index.html).
+    Here we'll parallelize across 8 processes (the number of cores on my machine).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Fitting with Dask-SearchCV
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The implementation of `GridSearchCV` in Dask-SearchCV is (almost) a drop-in
+    replacement for the Scikit-Learn version. A few lesser used parameters aren't
+    implemented, and there are a few new parameters as well. One of these is the `scheduler`
+    parameter for specifying which dask[scheduler](http://dask.pydata.org/en/latest/scheduler-choice.html#choosing-between-schedulers)
+    to use. By default, if the global scheduler is set then it is used, and if the
+    global scheduler is not set then the threaded scheduler is used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this case, we''ll use the distributed scheduler setup locally with 8 processes,
+    each with a single thread. We choose this setup because:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We're working with python strings instead of numpy arrays, which means that
+    the GIL is held for some of the tasks. This means we at least want to use a couple
+    processes to get true parallelism (which excludes the threaded scheduler).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For most graphs, the distributed scheduler will be more efficient than the multiprocessing
+    scheduler, as it can be smarter about moving data between workers. Since a distributed
+    scheduler is easy to setup locally (just create a `dask.distributed.Client()`)
+    there's not really a downside to using it when you want multiple processes.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Note the changes between using Scikit-Learn and Dask-SearchCV here are quite
+    small:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Why is the dask version faster?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you look at the times above, you'll note that the dask version was `~1.3X`
+    faster than the scikit-learn version. This is not because we have optimized any
+    of the pieces of the `Pipeline`, or that there's a significant amount of overhead
+    to `joblib`. The reason is simply that the dask version is doing less work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given a smaller grid
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'and the same pipeline as above, the Scikit-Learn version looks something like
+    (simplified):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As a directed acyclic graph, this might look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Scikit-Learn Grid Search Graph](../Images/fb1f4a2c477cc380179c1536b5d1ecd9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'In contrast, the dask version looks more like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As a directed acyclic graph, this might look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Dask-SearchCV Grid Search Graph](../Images/579dd09f9c87c7484ced84ddcfc673be.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Looking closely, you can see that the Scikit-Learn version ends up fitting earlier
+    steps in the pipeline multiple times with the same parameters and data. Due to
+    the increased flexibility of Dask over Joblib, we're able to merge these tasks
+    in the graph and only perform the fit step once for any parameter/data/estimator
+    combination. For pipelines that have relatively expensive early steps, this can
+    be a big win when performing a grid search.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Distributed Grid Search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Since Dask decouples the scheduler from the graph specification, we can easily
+    switch from running on a single machine to running on a cluster with a quick change
+    in scheduler. Here I''ve setup a cluster of 3 [m4.2xlarge](https://aws.amazon.com/ec2/pricing/on-demand/)
+    instances for the workers (each with 8 single-threaded processes), and another
+    instance for the scheduler. This was easy to do with a single command using the
+    [`dask-ec2`](https://github.com/dask/dask-ec2) utility:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To switch to using the cluster instead of running locally, we just instantiate
+    a new client, and then rerun:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Roughly a 3x speedup, which is what we'd expect given 3x more workers. By just
+    switching out schedulers we were able to scale our grid search out across multiple
+    workers for increased performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below you can see the [diagnostic plot](http://distributed.readthedocs.io/en/latest/web.html)
+    for this run. These show the operations that each of 24 workers were doing over
+    time. We can see that we're keeping the cluster fairly well saturated with work
+    (blue) and not idle time (white). There's a fair bit of serialization (red), but
+    the values being serialized are small, so this is relatively cheap to do. Note
+    that this plot is also a bit misleading, as the red boxes are drawn on top of
+    the running tasks, making it look worse than it really is.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Distributed grid search task plot](../Images/1d69dc7b91f6f13fb870a5c37f74d3b9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Distributed Grid Search with Joblib
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'For comparison, we''ll also run the Scikit-Learn grid search using joblib with
+    the [`dask.distributed`](http://distributed.readthedocs.io/en/latest/joblib.html)
+    backend. This is also only a few lines changed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Analysis
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In this post we performed 4 different grid searches over a pipeline:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Looking at these numbers we can see that both the Scikit-Learn and Dask-SearchCV
+    implementations scale as more cores are added. However, the Dask-SearchCV implementation
+    is faster in both cases because it's able to merge redundant calls to `fit` and
+    can avoid unnecessary work. For this simple pipeline this saves only a minute
+    or two, but for more expensive transformations or larger grids the savings may
+    be substantial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When is this useful?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For single estimators (no `Pipeline` or `FeatureUnion`) Dask-SearchCV performs
+    only a small constant factor faster than using Scikit-Learn with the `dask.distributed`
+    backend. The benefits of using Dask-SearchCV in these cases will be minimal.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the model contains meta estimators (`Pipeline` or `FeatureUnion`) then you
+    may start seeing performance benefits, especially if early steps in the pipeline
+    are relatively expensive.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the data your're fitting on is already on a cluster, then Dask-SearchCV will
+    (currently) be more efficient, as it works nicely with remote data. You can pass
+    dask arrays, dataframes or delayed objects to `fit`, and everything will work
+    fine without having to bring the data back locally.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If your data is too large for Scikit-Learn to work nicely, then this library
+    won't help you. This is just for scheduling Scikit-Learn estimator fits in an
+    intelligent way on small-medium data. It doesn't reimplement any of the algorithms
+    found in Scikit-Learn to scale to larger datasets.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Future work
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Currently we just mirror the Scikit-Learn classes `GridSearchCV` and `RandomizedSearchCV`
+    for doing passive searches through a parameter space. While we [can handle very
+    large grids](https://github.com/dask/dask-searchcv/issues/29) at some point switching
+    to an active search method might be best. Something like this could be built up
+    using the asynchronous methods in `dask.distributed`, and I think would be fun
+    to work on. If you have knowledge in this domain, please weigh in on the [related
+    issue](https://github.com/dask/dask-searchcv/issues/32).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*This work is supported by [Continuum Analytics](http://continuum.io/), [the
+    XDATA program](https://www.darpa.mil/program/XDATA), and the Data Driven Discovery
+    Initiative from the [Moore Foundation](https://www.moore.org/). Thanks also to
+    [Matthew Rocklin](http://matthewrocklin.com/blog/) and [Will Warner](https://github.com/electronwill)
+    for feedback on drafts of this post.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Jim Crist](https://twitter.com/jiminy_crist)** holds a Bachelors and
+    a (tentative) Masters in Mechanical Engineering from the University of Minnesota.
+    Whilst procrastinating on his thesis, he got involved in the scientific Python
+    community. He is currently a software developer at Continuum Analytics.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://jcrist.github.io/introducing-dask-searchcv.html). Reposted
+    with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Dask and Pandas and XGBoost: Playing nicely between distributed systems](/2017/04/dask-pandas-xgboost-playing-nicely-distributed-systems.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introducing Dask for Parallel Programming: An Interview with Project Lead
+    Developer](/2016/09/introducing-dask-parallel-programming.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[An Introduction to Scientific Python (and a Bit of the Maths Behind It) –
+    Matplotlib](/2016/06/intro-scientific-python-matplotlib.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Mesh & Its Distributed Data Architecture](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n07, Feb 16: How to Learn Math for Machine…](https://www.kdnuggets.com/2022/n07.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introducing the Testing Library for Natural Language Processing](https://www.kdnuggets.com/2023/04/introducing-testing-library-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

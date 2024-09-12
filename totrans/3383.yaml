@@ -1,0 +1,263 @@
+- en: An Intuitive Explanation of Convolutional Neural Networks
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/11/intuitive-explanation-convolutional-neural-networks.html](https://www.kdnuggets.com/2016/11/intuitive-explanation-convolutional-neural-networks.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By [Ujjwal Karn](https://ujjwalkarn.me/).**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**What are Convolutional Neural Networks and why are they important?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Convolutional Neural Networks (**ConvNets** or **CNNs**) are a category of Neural
+    Networks that have proven very effective in areas such as image recognition and
+    classification. ConvNets have been successful in identifying faces, objects and
+    traffic signs apart from powering vision in robots and self driving cars.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![convnets use.png](../Images/7748ce554a355790e730098db0a86116.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Figure 1: Source [1]**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In **Figure 1** above, a ConvNet is able to recognize scenes and the system
+    is able to suggest relevant tags such as ‘bridge’, ‘railway’ and ‘tennis’ while
+    **Figure 2** shows an example of ConvNets being used for recognizing everyday
+    objects, humans and animals. Lately, ConvNets have been effective in several Natural
+    Language Processing tasks (such as sentence classification) as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Screen Shot 2016-08-07 at 4.17.11 PM.png](../Images/ccc07aae6c66f4bb30726c2997a95724.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 2: Source [2]'
+  prefs:
+  - PREF_H5
+  type: TYPE_NORMAL
+- en: ConvNets, therefore, are an important tool for most machine learning practitioners
+    today. However, understanding ConvNets and learning to use them for the first
+    time can sometimes be an intimidating experience. The primary purpose of this
+    blog post is to develop an understanding of how Convolutional Neural Networks
+    work on images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you are new to neural networks in general, I would recommend reading [this
+    short tutorial on Multi Layer Perceptrons](http://ujjwalkarn.me/2016/08/09/quick-intro-neural-networks/) to
+    get an idea about how they work, before proceeding. Multi Layer Perceptrons are
+    referred to as “Fully Connected Layers” in this post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The LeNet Architecture (1990s)
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: LeNet was one of the very first convolutional neural networks which helped propel
+    the field of Deep Learning. This pioneering work by Yann LeCun was named [LeNet5](http://yann.lecun.com/exdb/publis/pdf/lecun-01a.pdf) after
+    many previous successful iterations since the year 1988 [3]. At that time the
+    LeNet architecture was used mainly for character recognition tasks such as reading
+    zip codes, digits, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below, we will develop an intuition of how the LeNet architecture learns to
+    recognize images. There have been several new architectures proposed in the recent
+    years which are improvements over the LeNet, but they all use the main concepts
+    from the LeNet and relatively easier to understand if you have a clear understanding
+    of the former.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Screen Shot 2016-08-07 at 4.59.29 PM.png](../Images/a8fc34dea1cebd5aeb8736caf96e53fe.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 3: A simple ConvNet. Source [5]'
+  prefs:
+  - PREF_H5
+  type: TYPE_NORMAL
+- en: 'The Convolutional Neural Network in **Figure 3 **is similar in architecture
+    to the original LeNet and classifies an input image into four categories: dog,
+    cat, boat or bird (the original LeNet was used mainly for character recognition
+    tasks). As evident from the figure above, on receiving a boat image as input,
+    the network correctly assigns the highest probability for boat (0.94) among all
+    four categories. The sum of all probabilities in the output layer should be one
+    (explained later in this post).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are four main operations in the ConvNet shown in **Figure 3** above:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Convolution
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Non Linearity (ReLU)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Pooling or Sub Sampling
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Classification (Fully Connected Layer)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: These operations are the basic building blocks of *every* Convolutional Neural
+    Network, so understanding how these work is an important step to developing a
+    sound understanding of ConvNets. We will try to understand the intuition behind
+    each of these operations below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Images are a matrix of pixel values
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Essentially, every image can be represented as a matrix of pixel values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![8-gif.gif](../Images/95a0b5d309f5a500e50c29884bf02f1b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 4: Every image is a matrix of pixel values. Source [6]'
+  prefs:
+  - PREF_H6
+  type: TYPE_NORMAL
+- en: '[Channel](https://en.wikipedia.org/wiki/Channel_(digital_image)) is a conventional
+    term used to refer to a certain component of an image. An image from a standard
+    digital camera will have three channels – red, green and blue – you can imagine
+    those as three 2d-matrices stacked over each other (one for each color), each
+    having pixel values in the range 0 to 255.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A [grayscale](https://en.wikipedia.org/wiki/Grayscale "Grayscale") image, on
+    the other hand, has just one channel. For the purpose of this post, we will only
+    consider grayscale images, so we will have a single 2d matrix representing an
+    image. The value of each pixel in the matrix will range from 0 to 255 – zero indicating
+    black and 255 indicating white.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Convolution Step
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: ConvNets derive their name from the [“convolution” operator](https://en.wikipedia.org/wiki/Convolution).
+    The primary purpose of Convolution in case of a ConvNet is to extract features
+    from the input image. Convolution preserves the spatial relationship between pixels
+    by learning image features using small squares of input data. We will not go into
+    the mathematical details of Convolution here, but will try to understand how it
+    works over images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As we discussed above, every image can be considered as a matrix of pixel values.
+    Consider a 5 x 5 image whose pixel values are only 0 and 1 (note that for a grayscale
+    image, pixel values range from 0 to 255, the green matrix below is a special case
+    where pixel values are only 0 and 1):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Screen Shot 2016-07-24 at 11.25.13 PM](../Images/113af8d18204fc9f1acc99c287a0da88.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Also, consider another 3 x 3 matrix as shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Screen Shot 2016-07-24 at 11.25.24 PM](../Images/b7821d30b80d65701e63e230f851dff1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Then, the Convolution of the 5 x 5 image and the 3 x 3 matrix can be computed
+    as shown in the animation in **Figure 5** below:![Convolution_schematic](../Images/1a23e603601fbcb937a792689e209f91.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Figure 5: The Convolution operation. The output matrix is called Convolved Feature
+    or **Feature Map. Source [7]**
+  prefs:
+  - PREF_H6
+  type: TYPE_NORMAL
+- en: Take a moment to understand how the computation above is being done. We slide
+    the orange matrix over our original image (green) by 1 pixel (also called ‘stride’)
+    and for every position, we compute element wise multiplication (between the two
+    matrices) and add the multiplication outputs to get the final integer which forms
+    a single element of the output matrix (pink). Note that the 3×3 matrix “sees”
+    only a part of the input image in each stride.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In CNN terminology, the 3×3 matrix is called a ‘**filter**‘ or ‘kernel’ or ‘feature
+    detector’ and the matrix formed by sliding the filter over the image and computing
+    the dot product is called the ‘Convolved Feature’ or ‘Activation Map’ or the ‘**Feature
+    Map**‘. It is important to note that filters acts as feature detectors from the
+    original input image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It is evident from the animation above that different values of the filter
+    matrix will produce different Feature Maps for the same input image. As an example,
+    consider the following input image:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![111.png](../Images/fdd2207625369b1488033a9ce74ac160.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the table below, we can see the effects of convolution of the above image
+    with different filters. As shown, we can perform operations such as Edge Detection,
+    Sharpen and Blur just by changing the numeric values of our filter matrix before
+    the convolution operation [8] – this means that different filters can detect different
+    features from an image, for example edges, curves etc. More such examples are
+    available in Section 8.2.4 [here](http://docs.gimp.org/en/plug-in-convmatrix.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Screen Shot 2016-08-05 at 11.03.00 PM.png](../Images/5ba80b2c13837d95579808846e8af58d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[An Intuitive Explanation of Collaborative Filtering](https://www.kdnuggets.com/2022/09/intuitive-explanation-collaborative-filtering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Image Classification with Convolutional Neural Networks (CNNs)](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Comprehensive Guide to Convolutional Neural Networks](https://www.kdnuggets.com/2023/06/comprehensive-guide-convolutional-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Convolutional Neural Network with PyTorch](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Support Vector Machines: An Intuitive Approach](https://www.kdnuggets.com/2022/08/support-vector-machines-intuitive-approach.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Linear vs Logistic Regression: A Succinct Explanation](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,230 @@
+- en: Building a Scalable ETL with SQL + Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html](https://www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In this short post, we’ll build a modular ETL pipeline that transforms data
+    with SQL and visualizes it with Python and R. This pipeline will be a fully scalable
+    ETL pipeline in a cost-effective manner. It can be reproduced in some of your
+    other projects. We’ll leverage an example dataset (StackExchange), see how to
+    extract the data into a specific format, transform and clean it, and then load
+    it into the database for downstream analysis like analyst reporting or ML predictions.
+    If you’d like to go directly to a live example, you can check out the entire pipeline
+    in the [ETL template here](https://github.com/ploomber/projects/tree/master/templates/etl).
+    I’ll review some of the principles that are in this template, and provide a deeper
+    look into how to achieve those.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The main concepts we’ll cover:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Connect to any database via Python.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Templating SQL tasks](https://docs.ploomber.io/en/latest/user-guide/sql-templating.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Parallelization - running queries in parallel with Ploomber
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Orchestration through DAGs
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Architecture Diagram
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We’ll first start by reviewing the overall architecture of our pipeline with
+    the dataset to understand better how it’s built and what we can achieve with this
+    demo pipeline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Architecture diagram](../Images/7ae9bfafceb1faa5c59039dbe93dd9f6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Here we can see the pipeline; it starts by extracting our dataset using and
+    storing it (this snippet’s source can be found at preprocess/download.py):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: With Ploomber you can parameterize the paths and create dependencies on these
+    paths. We can see how each output, like the extracted and zipped data, is saved
+    back into the task’s path specified in the pipeline.yaml. Breaking this component
+    into a modular piece allows us to develop faster. The next time the pipeline changes,
+    we won’t have to rerun this task as its outputs are cached.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Extractions, Formating, and Aggregations
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'The next phase in our pipeline is to transform the raw data and aggregate it.
+    We have configured the client once, through a get_client function (taken from
+    the db.py):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'I then created SQL queries that leverage this client each time (we can see
+    it’s a local DB, but it depends on the use case and can connect to anything SQLAlchemy
+    supports). This same client can be used or another one can be used for the aggregations.
+    In this pipeline, I took the raw data and push it into 3 different tables: **users,
+    comments, and posts**. We’ll talk in the next section about which template I’ve
+    used and how does it work.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: SQL As Templates
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Another capability in Ploomber is that users can just write the SQL queries,
+    declare the inputs/output file and Ploomber dumps the data into the correct location.
+    This can be completely automated through templates so you can have 1 or many clients,
+    multiple input or output tables and it allows you to focus on actually writing
+    SQL and not dealing with the DB client, connection strings, or custom scripts
+    that can’t be reused.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The first example we’ll see relates to the previous section - uploading our
+    CSVs as a table (this snippet is taken from the *pipeline.yaml*):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can see here that our source data is the users.csv we just got from our
+    data extraction task, we’re using the SQLUpload class and uploading a users table.
+    We’re creating each of these tasks for the three tables we’ve got: users, comments,
+    and posts.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now since the raw data was loaded into the database, we’d like to create some
+    aggregations, to do so, we can continue with our users table example and see how
+    to  leverage .sql files within our pipeline:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can see our source is the *upvotes-by-location.sql* (right below this paragraph),
+    the output product is another table **upvotes_by_location**, and it depends on
+    the **upload-users** task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can dive a level deeper to the source code in the *./sql* folder:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here we’re overwriting the table (parameterized from the pipeline.yaml), grouping
+    by location, and taking only users with 1+ votes. Separating these tasks and components
+    of table uploads, aggregations and grouping will also allow us to parallelize
+    our workflow and run faster - we’ll cover it next. The final step in our sample
+    pipeline is a plotting task that takes those newly created tables and visualizes
+    them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Parallelization And Orchestration
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Having this notion of a templatized project, orchestrating the tasks of SQL
+    allows us to develop test, and deploy datasets for multiple purposes. In our example,
+    we’re running on 3 tables with a limited number of rows and columns. In an enterprise
+    setting, for instance, we can easily get to 20+ tables with millions of rows,
+    which can become a real pain to run sequentially.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Parallelization and orchestration](../Images/3b85db1f729f3aa1dc0313d5149d6f31.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In our case, orchestration and parallelization helped us to focus on actual
+    code which is the main task, not infrastructure. We’re able to generate those
+    3 independent workflows, run them in parallel and reduce our time for insights.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In this post I tried to cover most of the software engineering best practices
+    Ploomber can offer through an ETL pipeline (SQL based), some of these concepts
+    like modularity, code reusability, and portability can save a lot of time and
+    improve the overall efficiency of your team. We’re always up for feedback and
+    questions, make sure to give it a try yourself, and share your experiences. Please
+    join our slack channel for further updates or questions!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Ido Michael](https://www.linkedin.com/in/ido-michael/)** co-founded Ploomber
+    to help data scientists build faster. He''d been working at AWS leading data engineering/science
+    teams. Single-handedly he built 100’s of data pipelines during those customer
+    engagements together with his team. Originally from Israel, he came to NY for
+    his MS at Columbia University. He focused on building Ploomber after he constantly
+    found that projects dedicated about 30% of their time just to refactoring the
+    dev work (prototype) into a production pipeline.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building Your First ETL Pipeline with Bash](https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Build a Scalable Data Architecture with Apache Kafka](https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL and Data Integration: ETL and ELT](https://www.kdnuggets.com/2023/01/sql-data-integration-etl-elt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Does ETL Have to Do with Machine Learning?](https://www.kdnuggets.com/2022/08/etl-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

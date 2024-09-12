@@ -1,0 +1,427 @@
+- en: Labelling Data Using Snorkel
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/07/labelling-data-using-snorkel.html](https://www.kdnuggets.com/2020/07/labelling-data-using-snorkel.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Alister D’Costa](https://www.linkedin.com/in/alisterdcosta/), [Stefan
+    Denkovski](https://www.linkedin.com/in/stefandenkovski/), [Michal Malyska](https://www.linkedin.com/in/malyskamichal/),
+    [Sally Moon](https://www.linkedin.com/in/sallysaeyoungmoon/), [Brandon Rufino](https://www.linkedin.com/in/brandon-rufino/),
+    [NLP4H](https://nlp4h.com/authors/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/e16079ec47d75638df56b6c91eb5db14.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this tutorial, we will walk through the process of using Snorkel to generate
+    labels for an unlabelled dataset. We will provide you examples of basic Snorkel
+    components by guiding you through a real clinical application of Snorkel. Specifically,
+    we will use Snorkel to try to boost our results in predicting [Multiple Sclerosis
+    (MS) severity scores](https://www.mstrust.org.uk/a-z/expanded-disability-status-scale-edss).
+    Enjoy!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Check out the *[*Snorkel Intro Tutorial*](https://www.snorkel.org/use-cases/01-spam-tutorial)* for
+    a walk through on spam labelling. For more examples of high-performance in real-world
+    uses of Snorkel, see *[*Snorkel’s publication list*](https://www.snorkel.org/resources/)*.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Check out our other work focused on NLP for MS severity classification *[*here*](https://medium.com/@nlp4health/ms-bert-using-neurological-examination-notes-for-multiple-sclerosis-severity-classification-f75f13600d3e)*.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Snorkel?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Snorkel is a system that facilitates the process of building and managing training
+    datasets without manual labelling. The first component of a Snorkel pipeline includes
+    labelling functions, which are designed to be weak heuristic functions that predict
+    a label given unlabelled data. The labelling functions that we developed for MS
+    severity score labelling were the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Multiple key-word searches (using regular expressions) within the text. For
+    example, in finding a severity score we searched for the phrase in numeric format
+    and in roman numeral format.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Common baselines such as logistic regression, linear discriminant analysis,
+    and support vector machines which were trained using term frequency-inverse document
+    frequency (or tf-idf for short) features.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Word2Vec Convolutional Neural Network (CNN).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Our MS-BERT classifier described [in this blog post](https://medium.com/@nlp4health/ms-bert-using-neurological-examination-notes-for-multiple-sclerosis-severity-classification-f75f13600d3e).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The second component of the Snorkel pipeline is a generative model that outputs
+    a single confidence weighted training label per data point given predictions from
+    all the labelling functions. It does this by learning to estimate the accuracy
+    and correlations of the labelling functions based on their agreements and disagreements.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Snorkel Tutorial
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To reiterate, in this article we demonstrate label generation for MS severity
+    scores. A common measurement of MS severity is EDSS or the Expanded Disability
+    Status Scale. This is a scale that increases from 0 to 10 depending on the severity
+    of MS symptoms. We will refer to EDSS in general as the MS severity score but
+    for our keen readers we thought we would provide this information. This score
+    is further described [here](https://www.mstrust.org.uk/a-z/expanded-disability-status-scale-edss).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 0: Acquire a Dataset'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In our task, we worked with a dataset compiled by a leading MS research hospital,
+    containing over *70,000* MS consult notes for about 5000 patients. Of the 70,000
+    notes only *16,000* are manually labeled by an expert for MS severity. This means
+    that their are approximately *54,000* unlabelled notes. As you may or not be aware,
+    having a larger dataset to train models generally lead to better model performance.
+    Hence, we used Snorkel to generate what we call ‘silver’ labels for our *54,000* unlabelled
+    notes. The *16,000* ‘gold’ labelled notes were used to train our classifiers before
+    creating their respective labelling function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 1: Installing Snorkel'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To install Snorkel to your project, you can run the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 2: Adding the Labelling Functions'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Setting up
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Labelling functions allow you to define weak heuristics and rules that predict
+    a label given unlabelled data. These heuristics can be derived from expert knowledge
+    or other labelling models. In the case of MS severity score prediction, our labelling
+    functions included: key-word search functions derived from clinicians, baseline
+    models trained to predict MS severity scores (tf-idf, word2vec cnn, etc.), and
+    our MS-BERT classifier.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you will see below, you mark labelling functions by adding “@labeling_function()”
+    above the function. For each labelling function, a single row of a dataframe containing
+    unlabelled data (i.e. one observation/sample) is passed in. Each labelling function
+    applies heuristics or models to obtain a prediction for each row. If the prediction
+    is not found, the function abstains (i.e. returns -1).
+  prefs: []
+  type: TYPE_NORMAL
+- en: When all labelling functions have been defined, you can make use of the “PandasLFApplier”
+    to obtain a matrix of predictions given all labelling functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Upon running the following code, you will obtain a (N X num_lfs) L_predictions
+    matrix, where N is number of observations in ‘df_unlabelled’ and ‘num_lfs’ is
+    the number of labelling functions defined in ‘lfs’.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Labelling Function Example #1: Key-Word Search'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Below shows an example of a key-word search (using regular expressions) used
+    to extract MS severity scores recorded in decimal form. The regular expression
+    functions are applied to attempt to search for the MS severity score recorded
+    in decimal form. If found, the function returns the score in the appropriate output
+    format. Else, the function abstains (i.e. returns -1) to indicate that the score
+    is not found.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Labelling Function Example #2: Trained Classifier'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Above we see an example using a key-word search. To integrate a trained classifier,
+    you must perform one extra step. That is, you must train and export your model
+    before creating your labelling function. Here is an example of how we trained
+    a logistic regression that was built on top of tf-idf features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With the model trained, implementing a labelling function is as simple as this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 3(a): Using Snorkel’s Majority Vote'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Some would say the simpliest function Snorkel uses to generate a label is ‘Majority
+    Vote’. Majority Vote, as the name implies, makes a prediction based on the most
+    voted for class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To implement Majority Vote you must specify the ‘cardinality’ (i.e. number of
+    classes).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 3(b): Using Snorkel’s Label Model'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To take advantage of Snorkel’s full functionality, we used the ‘Label Model’
+    to generate a single confidence-weighted label given a matrix of predictions obtained
+    from all the labelling functions (i.e. L_unlabelled). The Label Model predicts
+    by learning to estimate the accuracy and correlations of the labelling functions
+    based on their agreements and disagreements.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can define a Label Model and specify ‘cardinality’. After you fit the Label
+    Model with L_unlabelled, it will generate single predictions for the unlabelled
+    data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 4: Evaluation Tools'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: LF Analysis — Coverage, Overlaps, Conflicts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To better understand how your labelling functions are functioning, you can make
+    use of Snorkel’s LFAnalysis. The LF analysis reports the polarity, coverage, overlap,
+    and conflicts of each labelling function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The definition of these terms are as follows and you can refer to the [Snorkel
+    documentation](https://snorkel.readthedocs.io/en/v0.9.1/packages/_autosummary/labeling/snorkel.labeling.LFAnalysis.html#snorkel.labeling.LFAnalysis.lf_polarities) for
+    more information:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Polarity: Infer the polarities of each LF based on evidence in a label matrix.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Coverage: Computes the fraction of data points with at least one label.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Overlap: Computes the fraction of data points with at least two (non-abstain)
+    labels.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Conflicts: Computes the fraction of data points each labelling function disagrees
+    with at least one other labelling function.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: LFAnalysis will provide an analysis of how your labelling functions performed
+    relative to each other.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ‘get_label_buckets’
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Snorkel provides some more evaluation tools to help you understand the quality
+    of your labelling functions. In particular, ‘get_label_buckets’ is a handy way
+    to combine labels and make comparisons. For more information, read the [Snorkel
+    documentation](https://snorkel.readthedocs.io/en/v0.9.1/packages/_autosummary/analysis/snorkel.analysis.get_label_buckets.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The following code allows you to compare the true labels (y_gold) and predicted
+    labels (y_preds) to view data points that were correctly or incorrectly labelled
+    by Snorkel. This will allow you to pin-point which data points are difficult to
+    correctly label, so that you can fine-tune your labelling functions to cover these
+    edge cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note, for this analysis we went back and created a L_train matrix which contains
+    our labelling function predictions for our ‘gold’ labelled dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alternatively, you can use ‘get_label_buckets’ to make comparisons between labelling
+    functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The following code allows you to compare the label predictions in L_unlabelled
+    to observe how different labelling functions label datapoints differently.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 5: Deployment'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Choosing the Best Labelling Model to Label Unlabelled Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Following the procedure outlined above, we developed various labelling functions
+    based on key-word searches, baseline models, and our MS-BERT classifier. We experimented
+    with various ensembles of labelling functions and used Snorkel’s Label Model to
+    obtain predictions for a held-out labelled dataset. This allowed us to determine
+    which ensemble of labelling functions would be best to label our unlabelled dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As shown in the table below, we observed that the MS-BERT classifier (MSBC)
+    alone outperformed all ensembles that contain itself by at least 0.02 on Macro-F1\.
+    The addition of weaker heuristics and classifiers consistently decreased the ensemble’s
+    performance. Furthermore, we observed that the amount of conflict for the MS-BERT
+    classifier increased as weaker classifiers and heuristics were added to the ensemble.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/bcd40b9154f9ad113f7b3c41b440b185.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note, Rule Based (RB) refers to our key-word searches. LDA refers to linear
+    discriminant analysis. TFIDFs refer to all models built on top of tf-idf features
+    (i.e. logistic regression, linear discriminant analysis, and support vector machines).
+  prefs: []
+  type: TYPE_NORMAL
+- en: To understand our findings, we have to remind ourselves that Snorkel’s label
+    model learns to predict the accuracy and correlations of the labelling functions
+    based on agreements and disagreements amongst each other. Therefore in the presence
+    of a strong labelling function, such as our MS-BERT classifier, the addition of
+    weaker labelling functions introduces more disagreements with the strong labelling
+    functions and therefore decreases performance. From these findings, we learned
+    that Snorkel may be more suited for situations where you *only* have weak heuristics
+    and rules. However, if you already have a strong labelling function, developing
+    a Snorkel ensemble with weaker heuristics may compromise performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Therefore, the MS-BERT classifier alone was chosen to label our unlabelled dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Semi-Supervised Labelling Results
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The MS-BERT classifier was used to obtain ‘silver’ labels for our unlabelled
+    dataset. These ‘silver’ labels were combined with our ‘gold’ labels to obtain
+    a silver+gold dataset. To infer the quality of the silver labels, new MS-BERT
+    classifiers were developed: 1) MS-BERT+ (trained on silver+gold labelled data);
+    and 2) MS-BERT-silver (trained on silver labelled data). These classifiers were
+    evaluated on a held-out test dataset that was previously used to evaluate our
+    original MS-BERT classifier (trained on gold labelled data). MS-BERT+ achieved
+    a Macro-F1 of 0.86238 and a Micro-F1 of 0.92569, and MS-BERT-silver achieved a
+    Macro-F1 of 0.82922 and a Micro-F1 of 0.91442\. Although their performance was
+    slightly lower that our original MS-BERT classifier (Macro-F1 of 0.88296, Micro-F1
+    of 0.94177), they still outperformed the previous best baseline models for MS
+    severity prediction. The strong results of MS-BERT-silver helps show the effectiveness
+    of using our MS-BERT classifier as a labelling function. It demonstrates potential
+    to reduce tedious hours required by a professional to read through a patient’s
+    consult note and manually generate MS severity scores.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thank You!
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Thanks for reading everyone! If you have any questions please do not hesitate
+    to contact us at nlp4health (at gmail dot) com. :)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Acknowledgements
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We would like to thank the researchers and staff at the Data Science and Advanced
+    Analytics (DSAA) department, St. Michael’s Hospital, for providing consistent
+    support and guidance throughout this project. We would also like to thank Dr.
+    Marzyeh Ghassemi, and Taylor Killan for providing us the opportunity to work on
+    this exciting project. Lastly, we would like to thank Dr. Tony Antoniou and Dr.
+    Jiwon Oh from the MS clinic at St. Michael’s Hospital for their support on the
+    neurological examination notes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Originally published at *[*https://nlp4h.com*](https://nlp4h.com/blog/snorkel_tutorial/)*.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [The authors](https://nlp4h.com/authors/)** are a group of graduate
+    students at University of Toronto working on NLP for healthcare.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/swlh/a-snorkel-tutorial-using-clinical-notes-to-predict-multiple-sclerosis-severity-scores-e3863801630f).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Hand labeling is the past. The future is #NoLabel AI](/2020/02/hand-labeling-past-future-nolabel-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[From Languages to Information: Another Great NLP Course from Stanford](/2020/06/languages-information-another-great-nlp-course-stanford.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Unreasonable Progress of Deep Neural Networks in Natural Language Processing
+    (NLP)](/2020/06/unreasonable-progress-deep-neural-networks-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Determine the Best Fitting Data Distribution Using Python](https://www.kdnuggets.com/2021/09/determine-best-fitting-data-distribution-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Ways Hackers Are Using Data Science to Steal Billions](https://www.kdnuggets.com/2022/02/4-ways-hackers-data-science-steal-billions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Data Science to Make Clean Energy More Equitable](https://www.kdnuggets.com/2022/03/data-science-make-clean-energy-equitable.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Ace Data Science Assessment Test by Using Automatic EDA Tools](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Data Visualization Using Matplotlib](https://www.kdnuggets.com/2022/12/introduction-data-visualization-matplotlib.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

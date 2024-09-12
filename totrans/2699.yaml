@@ -1,0 +1,276 @@
+- en: 'Key Machine Learning Technique: Nested Cross-Validation, Why and How, with
+    Python code'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/10/nested-cross-validation-python.html](https://www.kdnuggets.com/2020/10/nested-cross-validation-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Omar Martinez](https://www.linkedin.com/in/omarmartinez182/), Arcalea**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we’ll briefly discuss and implement a technique that, in the
+    grand scheme of things, might be getting less attention than it deserves. The
+    previous statement comes from the observation that it’s a well-known issue that
+    some models have a tendency to underperform in production compared to the performance
+    in the model building stage. While there is an abundance of potential culprits
+    for this issue, a common cause could lie in the model selection process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A standard model selection process will usually include a hyperparameter optimization
+    phase, in which, through the use of a validation technique, such as k-fold cross-validation
+    (CV), an “optimal” model will be selected based on the results of a validation
+    test. However, this process is vulnerable to a form of selection bias, which makes
+    it unreliable in many applications. This is discussed in detail on a paper from
+    Gavin Cawley & Nicola Talbot, in which we can find the following nugget of information:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*“In a biased evaluation protocol, occasionally observed in machine learning
+    studies, an initial model selection step is performed using all of the available
+    data, often interactively as part of a “preliminary study.” The data are then
+    repeatedly re-partitioned to form one or more pairs of random, disjoint design
+    and test sets. These are then used for performance evaluation using the same fixed
+    set of hyper-parameter values. This practice may seem at first glance to be fairly
+    innocuous, however the test data are no longer statistically pure, as they have
+    been “seen” by the models in tuning the hyperparameters.”*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '- [On Over-fitting in Model Selection and Subsequent Selection Bias in Performance
+    Evaluation](https://jmlr.csail.mit.edu/papers/volume11/cawley10a/cawley10a.pdf),
+    2010.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: To illustrate why this is happening, let’s use an example. Suppose that we are
+    working on a machine learning task, in which we are selecting a model based on
+    *n* rounds of hyperparameter optimization, and we do this by using a grid search
+    and cross-validation. Now, if we are using the same train and test data at each
+    one of the *nth* iterations, this means that information of performance on the
+    test set is being incorporated into the training data via the choice of hyperparameters.
+    At each iteration, this information can be capitalized by the process to find
+    the best performing hyperparameters, and that leads to a test dataset that is
+    no longer pure for performance evaluation. If *n* is large at some point, then
+    we might consider the test set as a secondary training set (loosely speaking).
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the bright side, there are some techniques that can help us tackle this problem.
+    One consists of having a train set, a test set, and also a validation set, and
+    then tuning hyperparameters based on performance on the validation set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The other strategy, and the focus of this article, is **nested cross-validation**,
+    which coincides with one of the proposed solutions from the paper above, by treating
+    the hyperparameter optimization as a part of the model fitting itself and evaluating
+    it with a different validation set that is part of an outer layer of cross-validation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Put simply, fitting, including the fitting of the hyperparameters, that in itself
+    includes an inner CV process, is just like any other part of the model process
+    and not a tool to evaluate model performance for that particular fitting approach.
+    To evaluate performance, you use the outer cross-validation process. In practice,
+    you do this by letting grid-search (or any other object you use for optimization)
+    handle the inner cross-validation and then use cross_val_score to estimate generalization
+    error in the outer loop. Thus, the final score will be obtained by averaging test
+    set scores over several splits, as a regular CV process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here’s a simplified overview of the approach. This illustration is by no means
+    technically rigorous but is to provide some intuition behind the whole process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/de4aa608e4442ce1f06da7ffe8109d41.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Simplified Illustration of the Nested Cross-Validation Process.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Nested Cross-validation in Python
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Implementing nested CV in python, thanks to [scikit-learn](https://scikit-learn.org/),
+    is relatively straightforward.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s look at an example. We’ll start by loading the [wine dataset](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_wine.html#sklearn.datasets.load_wine)
+    from sklearn.datasets and all of the necessary modules.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, we proceed to instantiate the classifier and then specify the number of
+    rounds/trials we would like to run, in other words, how many times we’ll perform
+    the whole process of going through both the inner and outer loops. Because this
+    is computationally expensive and we are doing this only for demonstration purposes,
+    let's choose 20\. Remember, the number of rounds represents how many times you’ll
+    split your dataset differently on each of the CV processes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The next step involves creating a dictionary that will establish the hyperparameter
+    space that we are going to explore in each round, and we also create two empty
+    arrays to store the results from the nested and the non-nested processes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The next step is crucial, we are going to create a for loop that will iterate
+    for the number of rounds we've specified, and that will contain two different
+    cross-validation objects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this example, we'll use 5-fold cross-validation for both the outer and inner
+    loops, and we use the value of each round (i) as the random_state for both CV
+    objects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then, we proceed to create and configure the object to perform the hyperparameter
+    optimization. In this case, we'll use grid-search. Notice that we pass to grid-search
+    the 'inner_cv' object as the cross-validation method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Subsequently, notice that for the final scores of the "nested" cross-validation
+    process, we use the cross_val_score function and feed it the classifier object
+    'clf' (includes its own CV process), which is the object we used to perform the
+    hyperparameter optimization, and also the 'outer_cv' cross-validation object.
+    In this process, we also fit the data and then store the results of each process
+    inside the empty arrays we created before.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can now calculate the difference in the accuracy scores of both the "simple"
+    cross-validation and the nested cross-validation processes to see how much they
+    disagree with each other on average.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case, by nested cross-validation scores, we mean the scores of the nested
+    process (not to be confused with the inner cross-validation process), and we compare
+    them with the scores of the regular process (non-nested).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Output:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: As we can see, the non-nested scores, on average, are more optimistic. Thus,
+    relying solely on the information of that process might result in a biased model
+    selection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can also plot the scores of each iteration and create a plot to get a visual
+    comparison of how both processes behaved.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Output:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4fd278f5460b4e7fb02cff5c757ca4a7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Finally, we can also plot the difference in each round for both CV processes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Output:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2866efccbead0cc67410ff0a538a951f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Final thoughts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: While cross-validation is an industry-standard to assess generalization, it’s
+    important to consider the problem at hand and potentially implement a more rigorous
+    process to avoid a selection bias while choosing the final model. From personal
+    experience, this is significatively more important when you’re dealing with small
+    datasets and when the system is built to support non-trivial decisions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Nested cross-validation is not a perfect process, it is **computationally expensive**,
+    and it’s definitely not a panacea for poor model performance in production. However,
+    in most scenarios, the process will allow you to get a more realistic view of
+    the generalization capacity of each model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can find the notebook with all of the code from the article on [GitHub](https://github.com/omartinez182/data-science-notebooks/blob/master/Nested_Cross_Validation_in_Python.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Eduardo Martinez](https://www.linkedin.com/in/omarmartinez182/) is
+    a marketer with a postgraduate degree in business analytics. Currently at [Arcalea](https://arcalea.com/),
+    Eduardo consolidates data science frameworks with marketing processes.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How (and Why) to Create a Good Validation Set](https://www.kdnuggets.com/2017/11/create-good-validation-set.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Reasons Why You Should Use Cross-Validation in Your Data Science Projects](https://www.kdnuggets.com/2018/10/5-reasons-cross-validation-data-science-projects.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building Reliable Machine Learning Models with Cross-validation](https://www.kdnuggets.com/2018/08/building-reliable-machine-learning-models-cross-validation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Parallel Processing in Prompt Engineering: The Skeleton-of-Thought…](https://www.kdnuggets.com/parallel-processing-in-prompt-engineering-the-skeleton-of-thought-technique)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI, Analytics, Machine Learning, Data Science, Deep Learning…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Announcing PyCaret 3.0: Open-source, Low-code Machine Learning in Python](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Main 2021 Developments and Key 2022 Trends in AI, Data Science,…](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Key Data Science, Machine Learning, AI and Analytics Developments of 2022](https://www.kdnuggets.com/2022/12/key-data-science-machine-learning-ai-analytics-developments-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

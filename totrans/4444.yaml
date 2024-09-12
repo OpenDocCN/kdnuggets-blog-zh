@@ -1,0 +1,364 @@
+- en: 'PyTorch LSTM: Text Generation Tutorial'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/07/pytorch-lstm-text-generation-tutorial.html](https://www.kdnuggets.com/2020/07/pytorch-lstm-text-generation-tutorial.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Domas Bitvinskas](https://domasbitvinskas.com/), Closeheat**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Long Short Term Memory (LSTM) is a popular Recurrent Neural Network (RNN) architecture.
+    This tutorial covers using LSTMs on PyTorch for generating text; in this case
+    - pretty lame jokes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For this tutorial you need:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basic familiarity with Python, PyTorch, and machine learning
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A locally installed [Python](https://www.python.org/) v3+, [PyTorch](https://pytorch.org/) v1+, [NumPy](https://numpy.org/) v1+
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is LSTM?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: LSTM is a variant of RNN used in deep learning. You can use LSTMs if you are
+    working on sequences of data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here are the most straightforward use-cases for LSTM networks you might be
+    familiar with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Time series forecasting (for example, stock prediction)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Text generation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Video classification
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Music generation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Anomaly detection
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: RNN
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before you start using LSTMs, you need to understand how RNNs work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: RNNs are neural networks that are good with sequential data. It can be video,
+    audio, text, stock market time series or even a single image cut into a sequence
+    of its parts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Standard neural networks (convolutional or vanilla) have one major shortcoming
+    when compared to RNNs - they cannot reason about previous inputs to inform later
+    ones. You cannot solve some machine learning problems without some kind of memory
+    of past inputs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example, you might run into a problem when you have some video frames of
+    a ball moving and want to predict the direction of the ball. The way a standard
+    neural network sees the problem is: you have a ball in one image and then you
+    have a ball in another image. It does not have a mechanism for connecting these
+    two images as a sequence. Standard neural networks cannot connect two separate
+    images of the ball to the concept of “the ball is moving.” All it sees is that
+    there is a ball in the image #1 and that there''s a ball in the image #2, but
+    network outputs are separate.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![CNN Prediction](../Images/baa3bd7a309f8f353a6148d3b91b7a0c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Compare this to the RNN, which remembers the last frames and can use that to
+    inform its next prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![RNN Prediction](../Images/07258636d83044d793a5b5e1d3dc6c8a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: LSTM vs RNN
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Typical RNNs can't memorize long sequences. The effect called “vanishing gradients”
+    happens during the backpropagation phase of the RNN cell network. The gradients
+    of cells that carry information from the start of a sequence goes through matrix
+    multiplications by small numbers and reach close to 0 in long sequences. In other
+    words - information at the start of the sequence has almost no effect at the end
+    of the sequence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can see that illustrated in the Recurrent Neural Network example. Given
+    long enough sequence, the information from the first element of the sequence has
+    no impact on the output of the last element of the sequence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: LSTM is an RNN architecture that can memorize long sequences - up to 100 s of
+    elements in a sequence. LSTM has a memory gating mechanism that allows the long
+    term memory to continue flowing into the LSTM cells.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![LSTM Cell](../Images/c94720cbdb164fbdc2e54c03668782df.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Text generation with PyTorch
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'You will train a joke text generator using LSTM networks in PyTorch and follow
+    the best practices. Start by creating a new folder where you''ll store the code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`$ mkdir text-generation`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To create an LSTM model, create a file `model.py` in the `text-generation`
+    folder with the following content:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is a standard looking PyTorch model. `Embedding` layer converts word indexes
+    to word vectors. `LSTM` is the main learnable part of the network - PyTorch implementation
+    has the gating mechanism implemented inside the `LSTM` cell that can learn long
+    sequences of data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As described in the earlier [What is LSTM?](https://closeheat.com/blog/pytorch-lstm-text-generation-tutorial#what-is-lstm) section
+    - RNNs and LSTMs have extra state information they carry between training episodes.
+    `forward` function has a `prev_state` argument. This state is kept outside the
+    model and passed manually.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It also has `init_state` function. Calling this at the start of every epoch
+    to initializes the right shape of the state.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For this tutorial, we use Reddit clean jokes dataset to train the network. [Download
+    (139KB)](https://raw.githubusercontent.com/amoudgl/short-jokes-dataset/master/data/reddit-cleanjokes.csv) the
+    dataset and put it in the `text-generation/data/` folder.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The dataset has 1623 jokes and looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To load the data into PyTorch, use PyTorch `Dataset` class. Create a `dataset.py`
+    file with the following content:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: This `Dataset` inherits from the PyTorch's `torch.utils.data.Dataset` class
+    and defines two important methods `__len__` and `__getitem__`. Read more about
+    how `Dataset` classes work in PyTorch [Data loading tutorial](https://pytorch.org/tutorials/beginner/data_loading_tutorial.html#dataset-class).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`load_words` function loads the dataset. Unique words are calculated in the
+    dataset to define the size of the network''s vocabulary and embedding size. `index_to_word`
+    and `word_to_index` converts words to number indexes and visa versa.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is part of the process is *tokenization*. In the future, [torchtext](https://github.com/pytorch/text) team
+    plan to improve this part, but they are re-designing it and the new API is too
+    unstable for this tutorial today.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Create a `train.py` file and define a `train` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Use PyTorch `DataLoader` and `Dataset` abstractions to load the jokes data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use `CrossEntropyLoss` as a loss function and `Adam` as an optimizer with default
+    params. You can tweak it later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In his famous [post](https://karpathy.github.io/2019/04/25/recipe/) Andrew Karpathy
+    also recommends keeping this part simple at first.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Text generation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Add `predict` function to the `train.py` file:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Execute predictions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Add the following code to `train.py` file to execute the defined functions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Run the `train.py` script with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`$ python train.py`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can see the loss along with the epochs. The model predicts the next 100
+    words after `Knock knock. Whos there?` when the training finishes. By default,
+    it runs for 10 epochs and takes around 15 mins to finish training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you skipped to this part and want to run the code, here's a Github [repository](https://github.com/closeheat/pytorch-lstm-text-generation-tutorial) you
+    can clone.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next steps
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Congratulations! You've written your first PyTorch LSTM network and generated
+    some jokes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here''s what you can do next to improve the model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Clean up the data by removing non-letter characters.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Increase the model capacity by adding more `Linear` or `LSTM` layers.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Split the dataset into train, test, and validation sets.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Add checkpoints so you don't have to train the model every time you want to
+    run prediction.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Domas Bitvinskas](https://domasbitvinskas.com/)** (**[@domasbitvinskas](https://twitter.com/domasbitvinskas)**)
+    leads machine learning and growth experiments at Closeheat.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://closeheat.com/blog/pytorch-lstm-text-generation-tutorial).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PyTorch for Deep Learning: The Free eBook](/2020/07/pytorch-deep-learning-free-ebook.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generating cooking recipes using TensorFlow and LSTM Recurrent Neural Network:
+    A step-by-step guide](/2020/07/generating-cooking-recipes-using-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Most Important Fundamentals of PyTorch you Should Know](/2020/06/fundamentals-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Retrieval Augmented Generation: Where Information Retrieval Meets…](https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Text-2-Video Generation: Step-by-Step Guide](https://www.kdnuggets.com/2023/08/text2video-generation-stepbystep-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[LSTMs Rise Again: Extended-LSTM Models Challenge the Transformer…](https://www.kdnuggets.com/lstms-rise-again-extended-lstm-models-challenge-the-transformer-superiority)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[YOLOv5 PyTorch Tutorial](https://www.kdnuggets.com/2022/12/yolov5-pytorch-tutorial.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Text Summarization Development: A Python Tutorial with GPT-3.5](https://www.kdnuggets.com/2023/04/text-summarization-development-python-tutorial-gpt35.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bark: The Ultimate Audio Generation Model](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

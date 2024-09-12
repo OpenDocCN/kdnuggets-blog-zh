@@ -1,0 +1,476 @@
+- en: How to Create Custom Real-time Plots in Deep Learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/12/create-custom-real-time-plots-deep-learning.html](https://www.kdnuggets.com/2020/12/create-custom-real-time-plots-deep-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/09f302a5f8f4d5b2f8b8eda6d0830a4f.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Image source: [**Pixabay**](https://pixabay.com/photos/garage-floors-parking-construction-1149542/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: What do we mean by real-time plots?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Training a complex deep learning model with a large dataset can be time-consuming.
+    As the epochs go by, reams of numbers flash on your screen. Your eyes (and the
+    brain) get tired.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Where is that exciting accuracy plot constantly updating you about the progress?
+    How do you know if the model is learning something useful? And, just how fast?
+  prefs: []
+  type: TYPE_NORMAL
+- en: A ***real-time visual update ***would be pretty great, won’t it?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Humans, after all, are visual creatures.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Humans Are Visual Creatures**](https://www.seyens.com/humans-are-visual-creatures/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here we gathered some interesting facts to emphasize why using visual aids in
+    scientific communication is so important...
+  prefs: []
+  type: TYPE_NORMAL
+- en: And by *visual*, I don’t mean all the scores of numbers pouring down on your
+    screen as you turned the verbosity of the model ON.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Not this.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/a09377ffebfe8e2b0f095871e98d674f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**We want that.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/97fbf52e2cd7ee6dd47da8a45468611f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let’s see how we can get there.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Where is that exciting accuracy plot constantly updating you about the progress?
+    How do you know if the model is learning something useful? And, just how fast?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: What do we mean by custom plots?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are established tools for regular jobs. But many a time, we need customized
+    output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tensorboard is cool but may not work for all needs
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you are working with TensorFlow/Keras for your deep learning tasks, chances
+    are strong that you have heard about or used Tensorboard. It is a fantastic dashboarding
+    utility where you can pass on the log of the training and can get fantastic visual
+    updates.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Get started with TensorBoard | TensorFlow**](https://www.tensorflow.org/tensorboard/get_started)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In machine learning, to improve something you often need to be able to measure
+    it. TensorBoard is a tool for providing...
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3d58a74739c05eb95f99ced75497b5ee.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image source: [**Tensorboard**](https://www.tensorflow.org/tensorboard)
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can get standard loss, accuracy plots very easily with Tensorboard. If you
+    just want to monitor those and nothing else in your DL model, you can stop reading
+    this article and just go with the Tensorboard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But what about the case when you have a highly imbalanced dataset to work with,
+    and you want to plot **precision, recall, and F1-score**? Or, another less advertised
+    classification metric like [**Matthew’s coefficient**](https://en.wikipedia.org/wiki/Matthews_correlation_coefficient)?
+    How about the case where you just care about the ratio of True Negative and False
+    Negative and want to create your own metric?
+  prefs: []
+  type: TYPE_NORMAL
+- en: How do you see a live, real-time update of these non-standard metrics as your
+    training progresses?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keras has built-in calculations for a confusion matrix
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Fortunately, Keras provides the basic logs of four fundamental quantities corresponding
+    to a confusion matrix — True Positive (TP), False Positive (FP), True Negative
+    (TN), and False Negative (FN). They come from the Keras Metrics module.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Module: tf.keras.metrics | TensorFlow Core v2.3.0**](https://www.tensorflow.org/api_docs/python/tf/keras/metrics)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Built-in metrics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can simply define a list of metrics we want in the training log of your model
+    and pass that list while compiling the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: And then,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: So, we can get these measures (they are calculated on the training dataset though)
+    as part of the training log. Once we get them, we can compute any custom metrics
+    we want for a classification task from the first-principle definitions. For example,
+    here we show the formulae for some of those non-standard metrics,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8de41f4b30ce8573040d305b52603e3e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image source: [Wikipedia](https://en.wikipedia.org/wiki/Precision_and_recall)
+  prefs: []
+  type: TYPE_NORMAL
+- en: But, how do we create the custom real-time plots from these computed values?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**We use callbacks, of course!**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How do you see a live, real-time update of these non-standard metrics as your
+    training progresses?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Custom callbacks for live visualization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Callbacks are a class of amazing utility that can be called at certain points
+    (or on every epoch if you like) of your training. In short, they can be used to **process
+    data (related to the model performance or the algorithm) on a real-time basis** while
+    the training is undergoing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is the TensorFlow official page for the Keras callbacks. But for our purpose, **we
+    have to write a custom plotting class** derived from the base Callback class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Module: tf.keras.callbacks | TensorFlow Core v2.3.0**](https://www.tensorflow.org/api_docs/python/tf/keras/callbacks)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Callbacks: utilities called at certain points during model training.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Demo Jupyter notebook
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The demo Jupyter notebook is [**located here**](https://github.com/tirthajyoti/Deep-learning-with-Python/blob/master/Notebooks/Custom-real-time-plots-with-callbacks.ipynb) on
+    my Github repo. [**This repository**](https://github.com/tirthajyoti/Deep-learning-with-Python) contains
+    many other useful deep learning tutorial-style notebooks. So, please feel free
+    to star or fork.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An imbalanced dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/47bc59c70b76f2bef4725c3d7edbd46f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image source: [**Pixabay**](https://pixabay.com/illustrations/balance-swing-equality-measurement-2108024/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: We created a synthetic dataset with imbalanced class frequencies (much more
+    negatives than positives) for the binary classification task in the demo. This
+    situation is quite common in practical data analytics projects and it emphasizes
+    the need to have a visual dashboard for custom classification metrics, where accuracy
+    is not a good metric.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The following code creates a dataset with **90% negative and 10% positive** samples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: The pairplot below shows a sample data distribution with the two classes. Note
+    the imbalance in the kernel density plots.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b9d660279e2cc9116455c123a2a1f065.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Data distribution by classes for the synthetic dataset**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Callbacks are a class of amazing utility that can be called at certain points
+    (or on every epoch if you like) of your training.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The custom callback class
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The custom callback class essentially does the following,
+  prefs: []
+  type: TYPE_NORMAL
+- en: initiates a bunch of lists to store values
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: extracts the metrics from the model at the end of each epoch
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: computes classification metrics from those extractions
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: and store them in those lists
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: creates multiple plots
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Here is the **initialization**,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/3856b6e836edad3d0db2e702a284186f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here is the **extraction**,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/e99f274458bc9262b27380369b1ba64c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here is the **computation**,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/c2458e1c6d89203ed6bb98ee11c5d469.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here is the **storage**,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/b7d4cec14b79606613bb18250242275f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And, I won’t bore you with a standard Matplotlib code for plotting except the
+    following bit, which **refreshes your Jupyter notebook plots on every iteration**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Also, **you don’t have to plot every epoch** as that may be taxing and slowing
+    down the display or the machine. You can choose to plot, say, every 5th epoch.
+    Just put the whole plotting code under a condition (here `epoch` is the epoch
+    number you get from the training log)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Don’t worry about how all of these work together, as the [**demo notebook is
+    still there**](https://github.com/tirthajyoti/Deep-learning-with-Python/blob/master/Notebooks/Custom-real-time-plots-with-callbacks.ipynb) for
+    you.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Result
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here is a typical result, showing loss and precision/recall/F1-score in a simple
+    dashboard style. Note, how the recall starts at a high value but the precision
+    and F1-scores are low for this imbalanced dataset. These are the metrics you can
+    compute and monitor in real-time with this kind of callback!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/a30fe77c85543471d9015055dbbd5a71.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: More results — probability distributions!
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can do whatever computation you want with the model (trained at that point),
+    at each epoch end and visualize the result. For example, we could predict the
+    output probabilities, and plot their distributions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note, how few are given high probabilities at the beginning and slowly the model
+    starts learning the true distribution of the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/c56c2ff6cae1a1770cdaac86d7f82ec8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We showed how you can create a dashboard of living, breathing visualizations
+    of a deep learning model performance, with simple code snippets. Following the
+    approach, outlined here, you don’t have to depend on Tensorboard or any third-party
+    software. You can create your own computations and plots, customized to the fullest
+    extent as you want.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that the method described above works only for Jupyter notebooks. You have
+    to adapt it differently for standalone Python scripts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On that, there is another fantastic article written on this subject, which you
+    can check here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**How to plot the model training in Keras — using custom callback function
+    and using TensorBoard**](https://medium.com/@kapilvarshney/how-to-plot-the-model-training-in-keras-using-custom-callback-function-and-using-tensorboard-41e4ce3cb401)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I started exploring the different ways to visualize the training process while
+    working on the Dog breed identification...
+  prefs: []
+  type: TYPE_NORMAL
+- en: You may also like…
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you liked this article, you may also like the following deep learning articles
+    from me,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Are you using the “Scikit-learn wrapper” in your Keras Deep Learning model?**](https://towardsdatascience.com/are-you-using-the-scikit-learn-wrapper-in-your-keras-deep-learning-model-a3005696ff38)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to use the special wrapper classes from Keras for hyperparameter tuning?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Activation maps for deep learning models in a few lines of code**](https://towardsdatascience.com/a-single-function-to-streamline-image-classification-with-keras-bd04f5cfe6df)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We illustrate how to show the activation maps of various layers in a deep CNN
+    model with just a couple of lines of...
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**A single function to streamline image classification with Keras**](https://towardsdatascience.com/a-single-function-to-streamline-image-classification-with-keras-bd04f5cfe6df)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We show, how to construct a single, generalized, utility function to pull images
+    automatically from a directory and...
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can check the author’s [**GitHub**](https://github.com/tirthajyoti?tab=repositories)** repositories **for
+    code, ideas, and resources in machine learning and data science. If you are, like
+    me, passionate about AI/machine learning/data science, please feel free to [add
+    me on LinkedIn](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) or [follow
+    me on Twitter](https://twitter.com/tirthajyotiS).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Tirthajyoti Sarkar - Sr. Principal Engineer - Semiconductor, AI, Machine
+    Learning - ON…**](https://towardsdatascience.com/activation-maps-for-deep-learning-models-in-a-few-lines-of-code-ed9ced1e8d21)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Making data science/ML concepts easy to understand through writing: https://medium.com/@tirthajyoti
+    Open-source and...'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/how-to-create-custom-real-time-plots-in-deep-learning-ecbdb3e7922f).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Simple Python Package for Comparing, Plotting & Evaluating Regression Models](/2020/11/simple-python-package-comparing-plotting-evaluating-regression-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[20 Core Data Science Concepts for Beginners](/2020/12/20-core-data-science-concepts-beginners.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn Deep Learning with this Free Course from Yann LeCun](/2020/11/learn-deep-learning-free-course-yann-lecun.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How To Create Custom Context Managers in Python](https://www.kdnuggets.com/how-to-create-custom-context-managers-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introducing OpenChat: The Free & Simple Platform for Building…](https://www.kdnuggets.com/2023/06/introducing-openchat-free-simple-platform-building-custom-chatbots-minutes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tailor ChatGPT to Fit Your Needs with Custom Instructions](https://www.kdnuggets.com/2023/08/tailor-chatgpt-fit-needs-custom-instructions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Create a Dataset for Machine Learning](https://www.kdnuggets.com/2022/02/create-dataset-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Create a Time Series Ratio Analysis Dashboard](https://www.kdnuggets.com/2023/06/wolfer-create-time-series-ratio-analysis-dashboard.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[From Zero to Hero: Create Your First ML Model with PyTorch](https://www.kdnuggets.com/from-zero-to-hero-create-your-first-ml-model-with-pytorch)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

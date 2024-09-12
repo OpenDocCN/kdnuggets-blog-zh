@@ -1,0 +1,339 @@
+- en: Fine-Tuning Transformer Model for Invoice Recognition
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/06/fine-tuning-transformer-model-invoice-recognition.html](https://www.kdnuggets.com/2021/06/fine-tuning-transformer-model-invoice-recognition.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/), Founder
+    of UBIAI**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/bef1163c62c44789046be68101904276.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Invoice recognition
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Building on my recent tutorial on [how to annotate PDFs and scanned images for
+    NLP applications](https://towardsdatascience.com/how-to-annotate-pdfs-and-scanned-images-for-nlp-applications-f7b7b1db5c4a),
+    we will attempt to fine-tune the recently released Microsoft’s [Layout LM model](https://github.com/microsoft/unilm/tree/master/layoutlm)
+    on an annotated custom dataset that includes French and English invoices. While
+    the previous tutorials focused on using the publicly available [FUNSD dataset](https://guillaumejaume.github.io/FUNSD/)
+    to fine-tune the model, here we will show the entire process starting from annotation
+    and pre-processing to training and inference.
+  prefs: []
+  type: TYPE_NORMAL
+- en: LayoutLM Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The LayoutLM model is based on BERT architecture but with two additional types
+    of input embeddings. The first is a 2-D position embedding that denotes the relative
+    position of a token within a document, and the second is an image embedding for
+    scanned token images within a document. This model achieved new state-of-the-art
+    results in several downstream tasks, including form understanding (from 70.72
+    to 79.27), receipt understanding (from 94.02 to 95.24), and document image classification
+    (from 93.07 to 94.42). For more information, refer to the [original article](https://arxiv.org/abs/1912.13318).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thankfully, the model was open sourced and made available in huggingface library.
+    Thanks, Microsoft!
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this tutorial, we will clone the model directly from the huggingface library
+    and fine-tune it on our own dataset. But first, we need to create the training
+    data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Invoice Annotation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Using the [UBIAI text annotation tool](https://ubiai.tools/), I have annotated
+    around 50 personal invoices. I am interested to extract both the keys and values
+    of the entities; for example in the following text “Date: 06/12/2021” we would
+    annotate “Date” as DATE_ID and “06/12/2021” as DATE. Extracting both the keys
+    and values will help us correlate the numerical values to their attributes. Here
+    are all the entities that have been annotated:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`DATE_ID, DATE, INVOICE_ID, INVOICE_NUMBER,SELLER_ID, SELLER, MONTANT_HT_ID,
+    MONTANT_HT, TVA_ID, TVA, TTC_ID, TTC`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here are a few entity definitions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`MONTANT_HT`: Total price pre-tax'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`TTC`: Total price with tax'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`TVA`: Tax amount'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Below is an example of an annotated invoice using [UBIAI](https://ubiai.tools/):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3e4f6a78e483720e4c57e014d09a4e86.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Invoice Annotation in UBIAI
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After annotation, we export the train and test files from UBIAI directly in
+    the correct format without any [pre-processing step](https://colab.research.google.com/github/NielsRogge/Transformers-Tutorials/blob/master/LayoutLM/Fine_tuning_LayoutLMForTokenClassification_on_FUNSD.ipynb).
+    The export will include three files for each training and test datasets and one
+    text file containing all the labels named labels.txt:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Train/Test_box.txt (contain bounding box for each token):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Train/Test_image.txt (contain bounding box, document size, and name):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'labels.txt:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Fine-Tuning LayoutLM Model:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here, we use google colab with GPU to fine — tune the model. The code below
+    is based on the [original layoutLM paper](https://github.com/microsoft/unilm/tree/master/layoutlm)
+    and [this tutorial ](https://colab.research.google.com/github/NielsRogge/Transformers-Tutorials/blob/master/LayoutLM/Fine_tuning_LayoutLMForTokenClassification_on_FUNSD.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, install the layoutLM package…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '…as well as the transformer package from where the model will be downloaded:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Next, create a list containing the unique labels from labels.txt:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then, create a pytorch dataset and dataloader:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Load the model from huggingface. This will be fine-tuned on the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Finally, start the training:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: You should be able to see the training progress and the loss getting getting
+    updated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5f7edf6f1f21ad58ecd42d5ca57bb657.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Layout LM training in progress
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After training, evaluate the model performance with the following function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'With only 50 documents, we get the following scores:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/502e7dc4d3cf4980404707d92117a61c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Evaluation score after training
+  prefs: []
+  type: TYPE_NORMAL
+- en: With more annotations, we should certainly get higher scores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally, save the model for future prediction:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Inference:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now comes the fun part, let’s upload an invoice, OCR it, and extract relevant
+    entities. For this test, we are using an invoice that was not in the training
+    or test dataset. To parse the text from the invoice, we use the open source Tesseract
+    package. Let’s install the package:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Before running predictions, we need to parse the text from the image and pre-process
+    the tokens and bounding boxes into features. To do so, I have created a preprocess
+    python file [layoutLM_preprocess.py](https://github.com/UBIAI/layout_lm_tutorial.git)
+    that will make it easier to preprocess the image:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Next, load the model and get word predictions with their bounding boxes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Finally, display the image with the predicted entities and bounding boxes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Et voila:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/0626ffc346644832631cd9c7b7534b66.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Invoice entity extraction using LayoutLM
+  prefs: []
+  type: TYPE_NORMAL
+- en: The model was able to extract the seller, invoice number, date, and TTC correctly
+    but made a mistake by assigning the TTC label to a purchased item. The results
+    are impressive and very promising given the low number of annotated documents
+    (only 50)! With more annotated invoices, we will be able to reach higher F scores
+    and more accurate predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Conclusion:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Overall, the results from the LayoutLM model are very promising and demonstrate
+    the usefulness of transformers in analyzing semi-structured text. The model can
+    be fine-tuned on any other semi-structured documents such as driver licences,
+    contracts, government documents, financial documents, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have any question, don’t hesitate to ask below or send us an email at
+    admin@ubiai.tools.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you liked this article, please clap, like, and share!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)**
+    is the Founder of UBIAI, an annotation tool for NLP applications, and holds a
+    PhD in Physics.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Building a Knowledge Graph for Job Search Using BERT](/2021/06/knowledge-graph-job-search-bert.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Fine-Tune BERT Transformer with spaCy 3](/2021/06/fine-tune-bert-transformer-spacy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best Way to Learn Practical NLP?](/2021/06/best-way-learn-practical-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[RAG vs Finetuning: Which Is the Best Tool to Boost Your LLM Application?](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Evolution of Speech Recognition Metrics](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 IT Jobs That Are High in Demand But Don’t Get Enough Recognition](https://www.kdnuggets.com/5-it-jobs-that-are-high-in-demand-but-dont-get-enough-recognition)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[LSTMs Rise Again: Extended-LSTM Models Challenge the Transformer…](https://www.kdnuggets.com/lstms-rise-again-extended-lstm-models-challenge-the-transformer-superiority)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

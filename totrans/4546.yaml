@@ -1,0 +1,296 @@
+- en: Content-based Recommender Using Natural Language Processing (NLP)
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/11/content-based-recommender-using-natural-language-processing-nlp.html](https://www.kdnuggets.com/2019/11/content-based-recommender-using-natural-language-processing-nlp.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [James Ng](https://www.linkedin.com/in/jnyh/), Data Science, Project Management**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/7f8e754ee66d96b7400675d994e0621d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Screen capture from Netflix
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When we provide ratings for products and services on the internet, all the preferences
+    we express and data we share (explicitly or not), are used to generate recommendations
+    by recommender systems. The most common examples are that of Amazon, Google and
+    Netflix.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are 2 types of recommender systems:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**collaborative** filters — based on user rating and consumption to group similar
+    users together, then to recommend products/services to users'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**content-based** filters — to make recommendations based on similar products/services
+    according to their attributes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/2dcdb2ad2ab5c8169026821cdf25dc26.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In this article, I have combined movie attributes such as genre, plot, director
+    and main actors to calculate its cosine similarity with another movie. The dataset
+    is IMDB top 250 English movies downloaded from [data.world](https://data.world/studentoflife/imdb-top-250-lists-and-5000-or-so-data-records).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 1: import Python libraries and dataset, perform EDA**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Ensure that the [Rapid Automatic Keyword Extraction](https://pypi.org/project/rake-nltk/) (RAKE)
+    library has been installed (or pip install rake_nltk).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Exploring the dataset, there are 250 movies (rows) and 38 attributes (columns).
+    However, only 5 attributes are useful: ‘Title’, ’Director’, ’Actors’, ’Plot’,
+    and ’Genre’. Below shows a list of 10 popular directors.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/143eada4ced3d015d1a321b93796f356.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Top 10 popular directors amongst the 250 movies
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 2: data pre-processing **to remove stop words, punctuation, white space,
+    and convert all words to lower case'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Firstly the data has to be pre-processed using NLP to obtain only one column
+    that contains all the attributes (in words) of each movie. After that, this information
+    is converted into numbers by vectorization, where scores are assigned to each
+    word. Subsequently cosine similarities can be calculated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I used the Rake function to extract the most relevant words from whole sentences
+    in the ‘Plot’ column. In order to do this, I applied this function to each row
+    under the ‘Plot’ column and assigned the list of key words to a new column ‘Key_words’.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/bcdf4a2340589736a2acc2c23f0548f2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Rake function to extract key words
+  prefs: []
+  type: TYPE_NORMAL
+- en: The names of actors and directors are transformed into unique identity values.
+    This is done by merging all first and last names into one word, so that Chris
+    Evans and Chris Hemsworth will appear different (if not, they will be 50% similar
+    because they both have ‘Chris’). Every word needs to be converted to lowercase
+    to avoid duplications.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/b8795a8fae02d7d719a9cbe33210019e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: All names are transformed into unique identity values
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 3: create word representation by combining column attributes to Bag_of_words**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After data pre-processing, these 4 columns ‘Genre’, ‘Director’, ‘Actors’ and
+    ‘Key_words’ are combined into a new column ‘Bag_of_words’. The final DataFrame
+    has only 2 columns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/91daeda133caf11fa48dc92452cf647b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Final word representation is the new column ‘Bag_of_words’
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 4: create vector representation for Bag_of_words, and create the similarity
+    matrix**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The recommender model can only read and compare a vector (matrix) with another,
+    so we need to convert the ‘Bag_of_words’ into vector representation using **CountVectorizer**,
+    which is a simple frequency counter for each word in the ‘Bag_of_words’ column.
+    Once I have the matrix containing the count for all words, I can apply the cosine_similarity
+    function to compare similarities between movies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b0f86d764647679bc9d67f18e2fa7d1d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Cosine Similarity formula to calculate values in Similarity Matrix
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/1d1df8bd478bfd856cc8ae17e8f9f435.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Similarity Matrix (250 rows x 250 columns)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next is to create a Series of movie titles, so that the series index can match
+    the row and column index of the similarity matrix.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Step 5: run and test the recommender model**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The final step is to create a function that takes in a movie title as input,
+    and returns the top 10 similar movies. This function will match the input movie
+    title with the corresponding index of the Similarity Matrix, and extract the row
+    of similarity values in descending order. The top 10 similar movies can be found
+    by extracting the top 11 values and subsequently discarding the first index (which
+    is the input movie itself).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now I am ready to test the model. Let’s input my favourite movie “The Avengers”
+    and see the recommendations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/2a87a4521728f581560f69a88a9a7a1f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Top 10 movies similar to “The Avengers”
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The model has recommended very similar movies. From my “domain knowledge”, I
+    can see some similarities mainly based on directors and plot. I have already watched
+    most of these recommended movies, and am looking forward to watch those few unseen
+    ones.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Python** codes with inline comments are available on my [GitHub](https://github.com/JNYH),
+    do feel free to refer to them.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**JNYH/movie_recommender**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Content-based recommender using Natural Language Processing (NLP). A guide to
+    build a content-based movie recommender...](https://github.com/JNYH/movie_recommender?source=post_page-----159d0925a649----------------------)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thank you for reading!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [James Ng](https://www.linkedin.com/in/jnyh/)** has a deep interest
+    in uncovering insights from data, excited about combining hands-on data science,
+    strong business domain knowledge and agile methodologies to create exponential
+    values for business and society. Passionate about improving data fluency and making
+    data easily understood, so that business can make data-driven decisions.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/content-based-recommender-using-natural-language-processing-nlp-159d0925a649).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How YouTube is Recommending Your Next Video](/2019/10/youtube-recommending-next-video.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Topics Extraction and Classification of Online Chats](/2019/11/topics-extraction-classification-online-chats.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Text Encoding: A Review](/2019/11/text-encoding-review.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[N-gram Language Modeling in Natural Language Processing](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Start Using Natural Language Processing With PyTorch](https://www.kdnuggets.com/2022/04/start-natural-language-processing-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing Key Terms, Explained](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Representation for Natural Language Processing Tasks](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Gentle Introduction to Natural Language Processing](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

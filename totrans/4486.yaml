@@ -1,0 +1,485 @@
+- en: Coronavirus COVID-19 Genome Analysis using Biopython
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/04/coronavirus-covid-19-genome-analysis-biopython.html](https://www.kdnuggets.com/2020/04/coronavirus-covid-19-genome-analysis-biopython.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/0517607ccfc500033765e6a56834403d.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Pic Credit](https://www.intelligentcio.com/eu/2020/03/19/qumulo-offers-free-software-to-help-medical-and-healthcare-research-organisations-fight-covid-19/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The emerging global infectious COVID-19 coronavirus disease by novel **Severe
+    Acute Respiratory Syndrome Coronavirus 2 (SARS-CoV-2)** presents critical fulminations
+    to global public health and the economy since it was identified in late December
+    2019 in China.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Coronaviruses are a large family of viruses that can cause illnesses ranging
+    widely in severity. The first known severe illness caused by a coronavirus appeared
+    with the 2003 Severe Acute Respiratory Syndrome (**SARS**) epidemic in China.
+    A second outbreak of severe illness originated in 2012 in Saudi Arabia with the
+    Middle East Respiratory Syndrome (**MERS**). And now the ongoing outbreak of COVID-19.
+  prefs: []
+  type: TYPE_NORMAL
+- en: “By comparing the available genome sequence data for known coronavirus strains,
+    we can firmly determine that COVID-19 originated through natural processes,” said
+    Kristian Andersen, Ph.D., an associate professor of immunology and microbiology
+    at Scripps Research and corresponding author on the paper.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So in this article, we will interpret, analyze the COVID-19 DNA sequence data
+    and try to get as many insights regarding the proteins that made it up. Later
+    will compare COVID-19 DNA with MERS and SARS and we’ll understand the relationship
+    among them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you are new to genomics, I would recommend you should check [**Demystify
+    DNA Sequencing with Machine Learning and Python**](https://medium.com/analytics-vidhya/demystify-dna-sequencing-with-machine-learning-and-python-bdbaeb177f56)before
+    moving ahead to get a basic understanding of DNA data analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b2664cb674434ed8fa593d5defc443fa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Electron microscope images of deadly coronavirus strain](https://www.fox5ny.com/news/electron-microscope-images-of-deadly-coronavirus-strain)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The coronaviruses are members of a family of enveloped viruses that replicate
+    in the cytoplasm of animal host cells. They are identified by the presence of
+    a single-stranded plus-sense RNA genome(*(+)ssRNA classification of viruses*)
+    about 30 kb in length that has a 5′ cap structure and 3′ polyadenylation tract.
+    (Larget known virus).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let us play with the COVID2–19 DNA sequence data using python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To start with, install Python packages like [Biopython](https://biopython.org/) and [squiggle](https://squiggle.readthedocs.io/en/latest/index.html) will
+    help you when dealing with biological sequence data in Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Load the basic libraries:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The dataset can be downloaded from [Kaggle](https://www.kaggle.com/paultimothymooney/coronavirus-genome-sequence).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will use `Bio.SeqIO` from Biopython for parsing DNA sequence data(fasta).
+    It provides a simple uniform interface to input and output assorted sequence file
+    formats.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: So it produces the sequence and length of the sequence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Loading Complementary DNA Sequence into an alignable file
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`SeqIO.read()` will produce will that basic information regarding the sequence.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/38f355316729e4273fa0b680adf9886e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[DNA vs RNA](https://scholarsark.com/question/i-need-insights-into-rna-vs-dna-comparison-functions-structure-reactivity-and-key-differences/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Since input sequence is FASTA (DNA), and Coronavirus is RNA type of virus,
+    we need to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Transcribe DNA to RNA (ATTAAAGGTT… => AUUAAAGGUU…)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Translate RNA to Amino acid sequence (AUUAAAGGUU… => IKGLYLPR*Q…)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In the current scenario, the .fna file starts with ATTAAAGGTT, then we call
+    transcribe() so T (thymine) is replaced with U (uracil), so we get the RNA sequence
+    which starts with AUUAAAGGUU.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The transcribe() will convert the DNA to mRNA.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: The difference between the DNA and the mRNA is just that the **bases T (for
+    Thymine) are replaced with U (for Uracil).**
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, we need to translate the mRNA sequence to amino-acid sequence using translate()
+    method, we get something like IKGLYLPR*Q ( is so-called STOP codon, effectively
+    is a separator for proteins).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: In the below output Amino acids are separated by *.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In our scenario, the sequence looks like this: `IKGLYLPR*QTNQLSISCRSVL*TNFKICVAVTRLHA`,
+    where:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`IKGLYLPR` encodes the first protein (every letter encodes single amino-acid) `QTNQLSISCRSVL` encodes
+    the second protein, and so on.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that there are fewer sequences in the protein than the mRNA that is because
+    3 mRNA’s are used to produce a single subunit of a protein, known as an amino
+    acid, using the codon table shown below. The * is used to denote a stop codon,
+    in these regions the protein has finished its full length. Many of these occur
+    frequently and result in short lengths of protein, more likely than not these
+    play a little biological role and will be excluded in further analyses.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Okay, first understand what are Genetic code and DNA codon?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The **Genetic code** is the set of rules used by living cells to translate information
+    encoded within genetic material (DNA or mRNA sequences of nucleotide triplets,
+    or **codons**) into proteins.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The standard genetic code is traditionally represented as an RNA codon table
+    because, when proteins are made in a cell by ribosomes, it is mRNA that directs
+    protein synthesis. The mRNA sequence is determined by the sequence of genomic
+    DNA. Here are some features of codons:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most codons specify an amino acid
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Three “stop” codons mark the end of a protein
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: One “start” codon, AUG, marks the beginning of a protein and also encodes the
+    amino acid methionine.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/99e3dc6ccf3e8d6e088daf8fca37fdf1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A series of codons in part of a messenger RNA (mRNA) molecule. Each codon consists
+    of three nucleotides, usually corresponding to a single [amino acid](https://en.wikipedia.org/wiki/Amino_acid).
+    The nucleotides are abbreviated with the letters A, U, G, and C. This is mRNA,
+    which uses U ([uracil](https://en.wikipedia.org/wiki/Uracil)). DNA uses T ([thymine](https://en.wikipedia.org/wiki/Thymine))
+    instead. This mRNA molecule will instruct a [ribosome](https://en.wikipedia.org/wiki/Ribosome) to
+    synthesize a protein according to this code. [Source](https://en.wikipedia.org/wiki/Genetic_code)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/d42d2afb58614ac0bb973f3616a55215.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: RNA codon table
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s now identify all the Proteins (chains of amino acids), basically separating
+    at the stop codon, marked by *. Then let’s remove any sequence less than 20 amino
+    acids long, as this is the smallest known functional protein (if curious).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/05a555b4c986909eea33743e5eaa219a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Protein Analysis With The Protparam Module In Biopython using ProtParam.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Available Tools in ProtParam:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`count_amino_acids`: Simply count the number times an amino acid is repeated
+    in the protein sequence.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`get_amino_acids_percent`: The same as only returns the number in the percentage
+    of the entire sequence.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`molecular_weight`: Calculates the molecular weight of a protein.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`aromaticity`: Calculates the aromaticity value of a protein according to Lobry
+    & Gautier (1994, [Nucleic Acids Res., 22, 3174-3180](https://dx.doi.org/10.1093/nar/22.15.3174)).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`flexibility`: Implementation of the flexibility method of Vihinen *et al.* (1994, [Proteins,
+    19, 141-149](https://dx.doi.org/10.1002/prot.340190207)).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`isoelectric_point`: This method uses the module `IsoelectricPoint `to calculate
+    the pI of a protein.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`secondary_structure_fraction`: This method returns a list of the fraction
+    of amino acids that tend to be in helix, turn, or sheet.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Amino acids in Helix: V, I, Y, F, W, L.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Amino acids in Turn: N, P, G, S.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Amino acids in Sheet: E, M, A, L.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The list contains 3 values: [Helix, Turn, Sheet].'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/d45a889fee4a9c1639246bb4b8c1c956.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Plot the results:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/fa047c3645dfe9ae1e1a43cbe750d54c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Looks like the number of `[**Lysines(L)**](https://www.sciencedirect.com/topics/medicine-and-dentistry/lysine)` and `[**Valines(V)**](https://pubchem.ncbi.nlm.nih.gov/compound/Valine)` are
+    high in this protein which indicates a good number of Alpha-Helices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/1b311994dcdc8974529bca7e1e575c69.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Source](https://alevelnotes.com/notes/biology/biological-molecules/biological-molecules/protein-structure)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let us compare the similarity among COVID-19/COV2, MERS, and SARS.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Load the DNA sequence file (FASTA) each of SARS, MERS, and COVID-19.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '#Sequence Lengths: SARS: 29751, COV2: 29903, MERS: 30119'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before comparing the similarity let us visualize the DNA each of COV2, SARS,
+    and MERS respectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/83b8c95bdaf06dcd959fe614bc8e3e57.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: DNA visualization each of COV2, SARS, and MERS respectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we can observe the DNA structure of COV2 and SARS are almost identical, while
+    that of MERS is a little different than the two.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let us use the Sequence alignment technique to compare the similarity among
+    all the DNA sequences.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Sequence alignment** is the process of arranging two or more sequences (of
+    DNA, RNA, or protein sequences) in a specific order to identify the region of
+    similarity between them.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Identifying the similar region enables us to infer a lot of information like
+    what traits are conserved between species, how close different species genetically
+    are, how species evolve, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Pairwise sequence alignment** compares only two sequences at a time and provides
+    the best possible sequence alignments. **Pairwise** is easy to understand and
+    exceptional to infer from the resulting sequence alignment.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Biopython provides a special module, **Bio.pairwise2** to identify the alignment
+    sequence using the pairwise method. Biopython applies the best algorithm to find
+    the alignment sequence and it is par with other software.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/c04b818d9356c0ba308ca47c3d3e7cc2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Comparison results
+  prefs: []
+  type: TYPE_NORMAL
+- en: Phylogenetic analysis of the complete viral genome (29,903 nucleotides) revealed
+    that the COVID-19 virus was most closely related (83.3% nucleotide similarity)
+    to a group of [SARS-like coronaviruses](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5287300/) (genus
+    Betacoronavirus, subgenus Sarbecovirus) that had previously been found in bats
+    in China.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Plot the results:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/d27ca543c40462d662b24e788f0e163b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[You can get the code here in this GitHub repo](https://github.com/nageshsinghc4/COVID-19-coronavirus).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So we have seen how we can interpret, analyze the COVID-19 DNA sequence data,
+    and tried to get as many insights regarding the proteins that made it up. In our
+    result, we got the number of `[**Leucine(L**](https://www.sciencedirect.com/topics/medicine-and-dentistry/lysine)**)**` and `[**Valines(V)**](https://pubchem.ncbi.nlm.nih.gov/compound/Valine)` high
+    in this protein which indicates a good number of Alpha-Helices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Later we compared the COVID-19 DNA with MERS and SARS. And we saw that COVID-19
+    is closely related to SARS.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That is all for this article. I hope you guys have enjoyed reading it, please
+    share your suggestions/views/questions in the comment section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for Reading !!!
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Bio: [Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)**
+    is a Data Science enthusiast. Interested in Big Data, Python, Machine Learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/analytics-vidhya/coronavirus-covid-19-genome-analysis-using-biopython-8b8cb1f4a041).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Explore the world of Bioinformatics with Machine Learning](/2019/09/explore-world-bioinformatics-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How AI Can Help Manage Infectious Diseases](/2020/04/ai-manage-infectious-diseases.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Data Scientists Can Train and Updates Models to Prepare for COVID-19 Recovery](/2020/04/data-scientists-train-models-covid-19-recovery.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

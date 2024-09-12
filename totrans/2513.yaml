@@ -1,0 +1,486 @@
+- en: How to calculate confidence intervals for performance metrics in Machine Learning
+    using an automatic bootstrap method
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/10/calculate-confidence-intervals-performance-metrics-machine-learning.html](https://www.kdnuggets.com/2021/10/calculate-confidence-intervals-performance-metrics-machine-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [David B Rosen (PhD)](http://linkedin.com/in/rosen1), Lead Data Scientist
+    for Automated Credit Approval at IBM Global Financing**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c6c5f7248330c5ca16fac26349bbd195.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The orange line shows 89.7% as the lower bound of the Balanced Accuracy confidence
+    interval, green for the original observed Balanced Accuracy=92.4% (point estimate),
+    and red for upper bound of 94.7%. (This and all images are by the author unless
+    otherwise noted.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: If you report your classifier’s performance as having Accuracy=94.8% and F1=92.3%
+    on a test set, this doesn’t mean much without knowing something about the size
+    and composition of the test set. The margin of error of those performance measurements
+    will vary a lot depending on the size of the test set, or, for an imbalanced dataset,
+    primarily depending on how many independent instances of the *minority *class
+    it contains (more copies of the same instances from oversampling doesn’t help
+    for this purpose).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you were able to collect another, independent test set of similar origin,
+    the Accuracy and F1 of your model on this dataset are unlikely to be the same,
+    but how much different might they plausibly be? A question similar to this is
+    answered in statistics as the **confidence interval **of the measurement.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we were to draw many independent sample datasets from the underlying population,
+    then for 95% of those datasets, the true underlying population value of the metric
+    would be within the 95% confidence interval that we would calculate for that particular
+    sample dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article we will show you how to calculate confidence intervals for any
+    number of Machine Learning performance metrics at once, with a bootstrap method
+    that *automatically *determines how many boot sample datasets to generate by default.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you just want to see how to invoke this code to calculate confidence intervals,
+    skip to the section “**Calculate the results!**” down below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The bootstrap methodology
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: If we were able to draw additional test datasets from the true distribution
+    underlying the data, we would be able to see the distribution of the performance
+    metric(s) of interest across those datasets. (When drawing those datasets we would
+    not do anything to prevent drawing an identical or similar instance multiple times,
+    although this might only happen rarely.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since we can’t do that, the next best thing is to draw additional datasets from
+    the *empirical distribution* of this test dataset, which means sampling, with
+    replacement, from its instances to generate new bootstrap sample datasets. Sampling
+    with replacement means once we draw a particular instance, we put it back in so
+    that we might draw it again for the same sample dataset. Therefore, each such
+    dataset generally has multiple copies of some of the instances, and does not include
+    all of the instances that are in the base test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we sampled *without *replacement, then we would simply get an identical copy
+    of the original dataset every time, shuffled in a different random order, which
+    would not be of any use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The *percentile* bootstrap methodology for estimating the confidence interval
+    is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generate `*nboots*`“bootstrap sample” datasets, each the same size as the original
+    test set. Each sample dataset is obtained by drawing instances at random from
+    the test set with replacement.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: On each of the sample datasets, calculate the metric and save it.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The 95% confidence interval is given by the 2.5*th* to the 97.5*th* percentile
+    among the `*nboots*`calculated values of the metric. If `*nboots*`=1001 and you
+    sorted the values in a series/array/list *X* of length 1001, the 0*th* percentile
+    is *X*[0] and the 100*th* percentile is *X*[1000], so the confidence interval
+    would be given by *X*[25] to *X*[975].
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Of course you can calculate as many metrics as you like for each sample dataset
+    in step 2, but in step 3 you would find the percentiles for each metric separately.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Example Dataset and Confidence Interval Results
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We will use results from this prior article as an example: [**How To Deal With
+    Imbalanced Classification, Without Re-balancing the Data**: *Before considering
+    oversampling your skewed data, try adjusting your classification decision threshold*](/2021/09/imbalanced-classification-without-re-balancing-data.html)*.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: In that article we used the *highly*-imbalanced two-class Kaggle [credit card
+    fraud identification data set](https://www.kaggle.com/mlg-ulb/creditcardfraud).
+    We chose to use a classification threshold quite different from the default 0.5
+    threshold that is implicit in using the predict() method, making it unnecessary
+    to balance the data. This approach is sometimes termed *threshold moving*, in
+    which our classifier assigns the class by applying the chosen threshold to the
+    predicted class probability provided by the predict**_proba**() method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We will limit the scope of this article (and code) to binary classification:
+    classes 0 and 1, with class 1 by convention being the “positive” class and specifically
+    the minority class for imbalanced data, although the code should work for regression
+    (single continuous target) as well.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generating one boot sample dataset
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Although our confidence interval code can handle various numbers of data arguments
+    to be passed to the metric functions, we will focus on sklearn-style metrics,
+    which always accept two data arguments, y_true and y_pred, where y_pred will be
+    either binary class predictions (0 or 1), or continuous class-probability or decision
+    function predictions, or even continuous regression predictions if y_true is continuous
+    as well. The following function generates a single boot sample dataset. It accepts
+    any data_args but in our case these arguments will be `ytest`(our actual/true
+    test set target values in the [prior article](/2021/09/imbalanced-classification-without-re-balancing-data.html))
+    and `hardpredtst_tuned_thresh` (the predicted class). Both contain zeros and ones
+    to indicate the true or predicted class for each instance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Custom metric specificity_score() and utility functions
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'We will define a custom metric function for Specificity, which is just another
+    name for the Recall of the *negative* class (class 0). Also a calc_metrics function
+    which which applies a sequence of metrics of interest to our data, and a couple
+    of utility functions for it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here we make our list of metrics and apply them to the data. We did not consider
+    Accuracy to be a relevant metric because a false negative (misclassifying a true
+    fraud as legit) is much more costly to the business than a false positive (misclassifying
+    a true legit as a fraud), whereas Accuracy treats both types of misclassification
+    are equally bad and therefore favors correctly-classifying those whose true class
+    is the majority class because these occur much more often and so contribute much
+    more to the overall Accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/f3ca98e5c535788006b5ccfba07c388b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Making each boot sample dataset and calculating metrics for it
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'In raw_metric_samples() we will actually generate multiple sample datasets
+    one by one and save the metrics of each:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You give raw_metric_samples() a list of metrics (or just one metric) of interest
+    as well as the true and predicted class data, and it obtains nboots sample datasets
+    and returns a dataframe with just the metrics’ values calculated from each dataset.
+    Through _boot_generator() it invokes one_boot() one at a time in a generator expression
+    rather than storing all the datasets at once as a potentially-*huge *list.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Look at metrics on 7 boot sample datasets
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We make our list of metric functions and invoke raw_metric_samples() to get
+    the results for just 7 sample datasets. We are invoking raw_metric_samples() here
+    for understanding — it is not necessary in order to get confidence intervals using
+    ci_auto() below, although specifying a list of metrics (or just one metric) for
+    ci_auto() *is* necessary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/c846c20dfd1b1fbd5427e5982c455172.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Each column above contains the metrics calculated from one boot sample dataset
+    (numbered 0 to 6), so the calculated metric values vary due to the random sampling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Number of boot datasets, with calculated default
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In our implementation, by default the number of boot datasets `nboots` will
+    be calculated automatically from the desired confidence level (e.g. 95%) so as
+    to meet the recommendation by [North, Curtis, and Sham](https://www.google.com/search?q=Am+J+Hum+Genet.+2002+Aug%3B+71%282%29%3A+439%E2%80%93441.+doi%3A+10.1086%2F341527+A+Note+on+the+Calculation+of+Empirical+P+Values+from+Monte+Carlo+Procedures+B.+V.+North+D.+Curtis+P.+C.+Sham&btnI) to
+    have a minimum number of boot results in each tail of the distribution. (Actually
+    this recommendation applies to *p*-values and thus hypothesis test *acceptance
+    regions*, but *confidence intervals* are similar enough to those to use this as
+    a rule of thumb.) Although those authors recommend a minimum of 10 boot results
+    in the tail, [*Davidson & MacKinnon*](http://hdl.handle.net/10419/67820) recommend
+    at least 399 boots for 95% confidence, which requires 11 boots in the tail, so
+    we use this more-conservative recommendation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We specify alpha which is 1 - confidence level. E.g. 95% confidence becomes
+    0.95 and alpha=0.05\. If you specify an explicit number of boots (perhaps a smaller `nboots` because
+    you want faster results) but it is not enough for your requested alpha, a higher
+    alpha will be chosen automatically in order to get an accurate confidence interval
+    for that number of boots. A minimum of 51 boots will be used because any less
+    can only accurately calculate bizarrely-small confidence levels (such as 40% confidence
+    which gives an interval from the 30*th* percentile to the 70*th* percentile, which
+    has 40% inside the interval but 60% outside it) and it is not clear that the minimum-boots
+    recommendation even contemplated such a case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The function get_alpha_nboots() sets the default nboots or modifies the requested
+    alpha and nboots per above:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s show the default nboots for various values of alpha:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/7cbe0c18e8b8170e1285b23a43dfeb0a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Here’s what happens if we request an explicit nboots:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/7a2070ccbc3e6f4df16f4b2ea3248dc6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Small nboots values increased alpha to 0.05 and 0.40, and nboots=2 gets changed
+    to the minimum of 51.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Histogram of bootstrap sample datasets showing confidence interval just for
+    Balanced Accuracy
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Again we don’t need to do this in order to get the confidence intervals below
+    by invoking ci_auto().
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/28956ddfbee463dff63b60b602fb2671.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The orange line shows 89.7% as the lower bound of the Balanced Accuracy confidence
+    interval, green for the original observed Balanced Accuracy=92.4% (point estimate),
+    and red for upper bound of 94.7%. (Same image appears at the top of this article.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to calculate all the confidence intervals for list of metrics
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Here is the main function that invokes the above and calculates the confidence
+    intervals from the percentiles of the metric results, and inserts the point estimates
+    as the first column of its output dataframe of results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Calculate the results!
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'This is all we really needed to do: invoke ci_auto() as follows with a list
+    of metrics (`met` assigned above) to get their confidence intervals. The percentage
+    formatting is optional:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/c939ced030c244587387abaa1149ead5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Discussion of resulting confidence intervals
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Here’s the confusion matrix from the [original article](/2021/09/imbalanced-classification-without-re-balancing-data.html).
+    Class 0 is the negatives (majority class) and Class 1 is the positives (very rare
+    class)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0e24bf1a73e647c875c0149f33d4e377.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The Recall (True Positive Rate) of 134/(134+14) has the widest confidence interval
+    because this is a binomial proportion involving small counts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Specificity (True Negative Rate) is 80,388/(80,388+4,907), which involves *much *larger
+    counts, so it has an extremely narrow confidence interval of just [94.11% to 94.40%].
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since the Balanced Accuracy is calculated as simply an average of the Recall
+    and the Specificity, the width of its confidence interval is intermediate between
+    theirs’.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Metric measurement imprecision due to variations in test data, vs. variations
+    in train data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Here we have not considered the variability in the *model* based on the randomness
+    of our *training *data (although that can also be of interest for some purposes,
+    e.g. if you have automated repeated re-training and want to know how much the
+    performance of future models might vary), but rather only the variability in the
+    measurement of the performance of this *particular *model (created from some particular
+    training data) due to the randomness of our *test* data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we had enough independent test data, we could measure the performance of
+    this particular model on the underlying population very precisely, and we would
+    know how it will perform if this model is deployed, irrespective of how we built
+    the model and of whether we might obtain a better or worse model with a different
+    training sample dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Independence of individual instances
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The bootstrap method assumes that each of your instances (cases, observations)
+    is drawn independently from an underlying population. If your test set has groups
+    of rows that are not independent of each other, for example repeated observations
+    of the same entity that are likely to be correlated with one another, or instances
+    that are oversampled/replicated/generated-from other instances in your test set,
+    the results might not be valid. You might need to use *grouped* sampling, where
+    you draw entire groups together at random rather than individual rows, while avoiding
+    breaking up any group or just using part of it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also you want to make sure you don’t have groups that were split across the
+    training and test set, because then the test set is not necessarily independent
+    and you might get undetected overfitting. For example if you use oversampling
+    you should generally only do only **after **it has been split from the test set,
+    not before. And normally you would oversample the training set but not the test
+    set, since the test set must remain representative of instances the model will
+    see upon future deployment. And for cross-validation you would want to use scikit-learn’s `model_selection.GroupKFold()`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: You can always calculate confidence intervals for your evaluation metric(s)
+    to see how precisely your test data enables you to measure your model’s performance.
+    I’m planning another article to demonstrate confidence intervals for metrics that
+    evaluate probability predictions (or confidence scores — no relation to statistical
+    confidence), i.e. soft classification, such as Log Loss or ROC AUC, rather than
+    the metrics we used here which evaluate the discrete choice of class by the model
+    (hard classification). The same code works for both, as well as for regression
+    (predicting a continuous target variable) — you just have to pass it a different
+    kind of prediction (and different kind of true targets in the case of regression).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*This jupyter notebook is available in github: *[*bootConfIntAutoV1o_standalone.ipynb*](https://github.com/DavidRosen/conf-intervals-auto/blob/main/bootConfIntAutoV1o_standalone.ipynb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Was this article informative and/or useful? Please post a comment below if
+    you have any comments or questions about this article or about confidence intervals,
+    the bootstrap, number of boots, this implementation, dataset, model, threshold
+    moving, or results.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition to the aforementioned [prior article](https://towardsdatascience.com/how-to-deal-with-imbalanced-classification-without-re-balancing-the-data-8a3c02353fe3),
+    you might also be interested in my [**How to Auto-Detect the Date/Datetime Columns
+    and Set Their Datatype When Reading a CSV File in Pandas**](https://towardsdatascience.com/auto-detect-and-set-the-date-datetime-datatypes-when-reading-csv-into-pandas-261746095361),
+    though it’s not directly related to the present article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Some rights reserved](https://creativecommons.org/licenses/by-sa/4.0/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [David B Rosen (PhD)](http://linkedin.com/in/rosen1)** is Lead Data
+    Scientist for Automated Credit Approval at IBM Global Financing. Find more of
+    David''s writing at [dabruro.medium.com](https://dabruro.medium.com/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/get-confidence-intervals-for-any-model-performance-metrics-in-machine-learning-f9e72a3becb2?source=user_profile---------0----------------------------).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to do “Limitless” Math in Python](/2021/10/limitless-math-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Advanced Statistical Concepts in Data Science](/2021/09/advanced-statistical-concepts-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Determine the Best Fitting Data Distribution Using Python](/2021/09/determine-best-fitting-data-distribution-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Working with Confidence Intervals](https://www.kdnuggets.com/2023/04/working-confidence-intervals.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Ace Data Science Assessment Test by Using Automatic EDA Tools](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How I Did Automatic Image Labeling Using Grounding DINO](https://www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using the apply() Method with Pandas Dataframes](https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Quest for Model Confidence: Can You Trust a Black Box?](https://www.kdnuggets.com/the-quest-for-model-confidence-can-you-trust-a-black-box)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[More Performance Evaluation Metrics for Classification Problems You…](https://www.kdnuggets.com/2020/04/performance-evaluation-metrics-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

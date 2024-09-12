@@ -1,0 +1,226 @@
+- en: Easy Image Dataset Augmentation with TensorFlow
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/02/easy-image-dataset-augmentation-tensorflow.html](https://www.kdnuggets.com/2020/02/easy-image-dataset-augmentation-tensorflow.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/75da29ec9b82fa9d10c4cef5605e5a59.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Image source: [Nanonets](https://nanonets.com/blog/data-augmentation-how-to-use-deep-learning-when-you-have-limited-data-part-2/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The success of image classification is driven, at least significantly, by large
+    amounts of available training data. Putting aside concerns such as overfitting
+    for a moment, the more image data you train with, the better chances you have
+    of building an effective model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But what can we do when we don't have a substantial amount of training data?
+    A few broad approaches to this particular problem come to mind right away, notably
+    transfer learning and data augmentation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Transfer learning** is the process of applying existing machine learning
+    models to scenarios for which they were not originally intended. This leveraging
+    can save training time and extend the usefulness of existing machine learning
+    models, models which may have had the available data and computation to have been
+    trained for very long periods of time on very large datasets. If we train a model
+    on a large set of data, we can then refine the result to be effective on our smaller
+    amount of data. At least, that''s the idea.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data augmentation** is the increase of an existing training dataset''s size
+    and diversity without the requirement of manually collecting any new data. This
+    augmented data is acquired by performing a series of preprocessing transformations
+    to existing data, transformations which can include horizontal and vertical flipping,
+    skewing, cropping, rotating, and more in the case of image data. Collectively,
+    this augmented data is able to simulate a variety of subtly different data points,
+    as opposed to just duplicating the same data. The subtle differences of these
+    "additional" images should hopefully be enough to help train a more robust model.
+    Again, that''s the idea.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The practical implementation of this second approach to mitigating the problem
+    of small amounts of image training data — data augmentation — in TensorFlow is
+    the focus of this article, while a similar practical treatment of transfer learning
+    will be treated at a later time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How Image Augmentation Helps
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As convolutional neural networks learn image features, we want to ensure that
+    these features appear at a variety of orientations, in order for a trained model
+    to be able to recognize that a human's legs can appear in images both vertically
+    and horizontally, for example. Augmentation, aside from increasing the raw numbers
+    of data points, is able to help us in this regard by employing a transformation
+    such as image rotation in this case. As another example, we could also employ
+    horizontal flip to help a model train to recognize that a cat is a cat whether
+    it is upright or it has been photographed upside down.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data augmentation is not a panacea; we shouold not expect it to solve all of
+    our small data problems, but it can be effective in numerous situations, and its
+    use can be extended by employing it as one part of a comprehensive model training
+    approach, perhaps alongside another dataset expansion technique such as transfer
+    learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Image Augmentation in TensorFlow
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In TensorFlow, data augmentation is accomplished using the [ImageDataGenerator](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/ImageDataGenerator)
+    class. It is exceedingly simple to understand and to use. The entire dataset is
+    looped over in each epoch, and the images in the dataset are transformed as per
+    the options and values selected. These transformations are performed in-memory,
+    and so no additional storage is required (though the `save_to_dir` parameter can
+    be used to save augmented images to disk, if desired).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you are using TensorFlow, you might already be employing an `ImageDataGenerator`
+    simply to scale your existing images, without any additional augmentation. This
+    might look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0] train_datagen = ImageDataGenerator(rescale=1./255) [PRE1]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'An updated `ImageDataGenerator` which performs augmentation might look like
+    this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2] train_datagen = ImageDataGenerator(        rotation_range=20,        width_shift_range=0.2,        height_shift_range=0.2,        shear_range=0.2,        zoom_range=0.2,        horizontal_flip=True,        vertical_flip=True,        fill_mode=''nearest'')
+    [PRE3]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What does it all mean?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`**rotation_range**` - degree range for random rotations; 20 degrees, in the
+    above example'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`**width_shift_range**` - fraction of total width (if value < 1, as in this
+    case) to randomly translate images horizontally; 0.2 in above example'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`**height_shift_range**` - fraction of total height (if value < 1, as in this
+    case) to randomly translate images vertically; 0.2 in above example'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`**shear_range**` - shear angle in counter-clockwise direction in degrees,
+    for shear transformations; 0.2 in the above example'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`**zoom_range**` - range for random zoom; 0.2 in the above example'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`**horizontal_flip**` - Boolean value for randomly flipping images horizontally;
+    True in the above example'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`**vertical_flip**` - Boolean value for randomly flipping images vertically;
+    True in the above example'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`**fill_mode**` - points outside the boundaries of input are filled according
+    to either "constant", "nearest", "reflect" or "wrap"; nearest in above example'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'You can then specify where training (and optionally validation, if you were
+    to create a validation generator) data are located, using the `ImageDataGenerator`
+    `flow_from_directory` option, for example, and then train your model using `fit_generator`
+    with these augmented images being flowed to your network during training. A sample
+    of just such code is shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4] train_generator = train_datagen.flow_from_directory(          ''data/train'',          target_size=(150,
+    150),          batch_size=32,          class_mode=''binary'')    # assuming model
+    already defined...    history = model.fit_generator(        train_generator,        steps_per_epoch=100,        epochs=100,        verbose=2)
+    [PRE5]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: And there you have it. An intro to easy image dataset augmentation in TensorFlow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[4 Tips for Advanced Feature Engineering and Preprocessing](/2019/08/4-tips-advanced-feature-engineering-preprocessing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Great New Features in Latest Scikit-learn Release](/2019/12/5-features-scikit-learn-release-highlights.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Pedestrian Detection Using Non Maximum Suppression Algorithm](/2019/12/pedestrian-detection-non-maximum-suppression-algorithm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[IT Staff Augmentation: How AI Is Changing the Software Development Industry](https://www.kdnuggets.com/2023/05/staff-augmentation-ai-changing-software-development-industry.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Correctly Select a Sample From a Huge Dataset in Machine Learning](https://www.kdnuggets.com/2019/05/sample-huge-dataset-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Choosing the Right Clustering Algorithm for Your Dataset](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Create a Dataset for Machine Learning](https://www.kdnuggets.com/2022/02/create-dataset-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

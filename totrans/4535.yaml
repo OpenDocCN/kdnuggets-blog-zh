@@ -1,0 +1,622 @@
+- en: Fighting Overfitting in Deep Learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/12/fighting-overfitting-deep-learning.html](https://www.kdnuggets.com/2019/12/fighting-overfitting-deep-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [ActiveWizards](https://activewizards.com/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ed0cde5a50a91862ae85dce52e2095cb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: While training the model, we want to get the best possible result according
+    to the chosen metric. And at the same time we want to keep a similar result on
+    the new data. The cruel truth is that we can’t get 100% accuracy. And even if
+    we did, the result is still not without errors. There are simply too few test
+    situations to find them. You may ask, what is the matter?
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are 2 types of errors: reducible and irreducible. Irreducible errors arise
+    due to a lack of data. For example, not only the genre, duration, actors but also
+    the mood of the person and the atmosphere while watching the film affects the
+    rating. But we can't predict the mood of the person in the future. The other reason
+    is the quality of the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our goal is to reduce the reducible errors, which in turn are divided into Bias and Variance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bias
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Bias arises when we try to describe a complex process with a simple model, and
+    as a result an error occurs. For example, it is impossible to describe a nonlinear
+    interaction by a linear function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Variance
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Variance describes the robust of the forecast or how much the forecast will
+    change when the data changes. Ideally, with small changes in the data, the forecast
+    also changes slightly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/78746f1bfe3c49494312fdd94c8060d0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The effect of Bias and Variance on the prediction
+  prefs: []
+  type: TYPE_NORMAL
+- en: These errors are interrelated so that a decrease in one leads to an increase
+    in the other. This issue is known as the Bias-Variance tradeoff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The more complex (flexible) is the model (better explains the variance of the
+    target variable), the less Bias is. But, nevertheless, the more complex is the
+    model, the better it adapts to the training data, increasing Variance. At some
+    point, the model will begin to find random patterns that are not repeated on new
+    data, thereby reducing the ability of the model to generalize and increasing the
+    error on the test data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is an image, describing Bias-Variance tradeoff. The red line is loss function
+    (e.g. MSE - mean square error). The blue line is Bias and orange is Variance.
+    As you can see, the best solution will be placed somewhere in the lines cross.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8ad6f1fff405cfe68a39b0b9affbc63b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Decomposition of the error function
+  prefs: []
+  type: TYPE_NORMAL
+- en: You also can recognize that the moment when loss begins to grow is the moment
+    when the model is overfitted.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As a result: we need to control error, to prevent not only overfitting but
+    also underfitting.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How can we fix this?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Regularization is a technique that discourages learning a more complex or flexible
+    model, so as to avoid the risk of overfitting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The problem is that model with the best accuracy in train data does not provide
+    any guarantees, that the same model will be the best in the test data. As a result,
+    we can choose hyperparameters with cross-validation.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Regularization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ef95db2d8a50a5a51c548cc02b25523c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Or, in  other words:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Cost function = Loss + Regularization term*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Where Loss function is usually a function defined on a data point, prediction,
+    and label, and measures the penalty. The Cost function is usually more general.
+    It might be a sum of loss functions over your training set plus some model complexity
+    penalty (regularization term)****.****
+  prefs: []
+  type: TYPE_NORMAL
+- en: Often an overfitted model has large weights with different signs. So that in
+    total they level each other getting the result. The way we can improve the score
+    is to reduce weight.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each neuron can be represented as
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f215f4ce311ca65ee2e1082564e19b21.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: where f is an activation function, *w* is weight and X is data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The “length” of the coefficient vector can be described by such a concept as
+    the norm of the vector. And to control how much we will reduce the length of the
+    coefficients (penalty the model for complexity and thereby prevent it from overfitting
+    or adjusting too much to the data), we will weigh the norm by multiplying it by λ.
+    There are no analytical methods on how to choose λ, so you can choose it by grid-search.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****L2 norm (L2 regularization, Ridge)****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b70e3f5187a63ae32403856a7e04deed.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If the loss is MSE, then cost function with L2 norm can be solved analytically
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8ce8dbe63c2dc8a7af0dd7f41e0957ef.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: There you can see that we just add an eye matrix (ridge) multiplied by λ in
+    order to obtain a non-singular matrix and increase the convergence of the problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/efacff284bf0087323f5a99baa0c62c2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Turning multicollinear XTX matrix to nonsingular one by adding an eye-matrix.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In other words, we need to minimize the cost function, so we minimize losses
+    and the vector rate (in this case, this is the sum of the squared weights). So,
+    the weights will be closer to zero.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s calculate:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The w^T is a vector-row of weights.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Before regularization:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c84979bf97f86f93cd5d251224df7aa9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Little change in data
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/2fbbd8f9fe43ab51fcc9e8a90c7f91c0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: After regularization, we will have the same result on test data,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6ac186edf099c845a012f3abf9282217.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: But, little change in data will cause little change in result
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/92881580f84db5d3409f297884f479b7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '****Example****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '****L1 norm (L1 regularization, Lasso)****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: L1 norm means that we use absolute values of weights but not squared. There
+    is no analytical approach to solve this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/950fc3ae7822523377aaded861a145f0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This type of regression equates some weights to zero. It is very useful when
+    we are trying to compress our model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Example****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s take a simple loss function with 2 arguments (B1 and B2) and draw a 3d
+    plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/343a9fd77c2c8aea5d0077dd1c9cb24d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Gradient descent in 3-dim with contour representation | [Credits](https://towardsdatascience.com/regularization-in-machine-learning-connecting-the-dots-c6e030bfaddd)
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see, loss function can have the same values with different arguments.
+    Let’s project this on arguments surface, where each point on the same curve will
+    have the same function value. This line called the level line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s take a Lambda = 1\. L2 regularization for 2 arguments function is B12 +
+    B22 that is a circle on the plot. L2 regularization is |B1|+ |B2|, which is diamond
+    on the plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/66b2320cd4352efa1a1178346deb522b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: L1 and L2 norms with different cost functions | [Credits](https://towardsdatascience.com/regularization-in-machine-learning-connecting-the-dots-c6e030bfaddd)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, let’s draw different loss functions and a blue diamond (L1) and black circle
+    (L2) regularization terms (where Lambda = 1). The truth is that the cost function
+    will be minimum in the interception point of the red circle and the black regularization
+    curve for L2 and in the interception of blue diamond with the level curve for
+    L1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dropouts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Imagine a simple network. For example, the development team at the hackathon.
+    There are more experienced or smarter developers who pull the whole development
+    on themselves, while others only help a little. If all this continues, experienced
+    developers will become more experienced, and the rest will hardly be trained.
+    So it is with neurons.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e9dc1415db6283be40232cec7c534fbb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fully Connected Network
+  prefs: []
+  type: TYPE_NORMAL
+- en: But imagine that we randomly disconnect some part of the developers at each
+    iteration of product development. Then the rest have to turn on more and everyone
+    learns much better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3dfdcfb6d929ddbb227c06b64bce4db6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Network with randomly dropped nodes
+  prefs: []
+  type: TYPE_NORMAL
+- en: What could go wrong? If you turn off too many neurons, then remaining neurons
+    simply will not be able to cope with their work and the result will only get worse.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It can also be thought of as an ensemble technique in machine learning. Remember,
+    that the ensemble of strong-learners performs better than a single model as they
+    capture more randomness and less prone to overfitting. But ensemble of weak-learners
+    more prone to retraining than the original model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a result, dropout takes place only with huge neural networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Example ****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Data augmentation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The simplest way to reduce overfitting is to increase the size of the training
+    data. In machine learning, it is hard to increase the data amount because of the
+    high cost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But, what about image processing? In this case, there are a few ways of increasing
+    the size of the training data – rotating the image, flipping, scaling, shifting,
+    etc. We also could add images without the target class to learn the network how
+    to differentiate target from noise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Example****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '****Original image:****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/9c61094028e19f432db482e6933ff0a5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '****Augmented images:****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8249bc4d5b185a0dda76243edf1b8859.png)![Figure](../Images/01dee9199a92378367caad7d25114b0a.png)![Figure](../Images/01dee9199a92378367caad7d25114b0a.png)![Figure](../Images/a3420c9ad50b4452112de6744f1d936e.png)![Figure](../Images/10a73410076a8d297c4f20f864d92a40.png)![Figure](../Images/2202c647c9cf80fbd279a67fadafc005.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Early stopping
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Early stopping is a kind of cross-validation strategy where we keep one part
+    of the training set as the validation set. When we see that the performance on
+    the validation set is getting worse, we immediately stop the training on the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Example****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: That is all we need for the simplest form of early stopping. Training will stop
+    when the chosen performance measure stops improving. To discover the training
+    epoch on which training was stopped, the “verbose” argument can be set to 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Often, the first sign of no further improvement may not be the best time to
+    stop training. This is because the model may coast into a plateau of no improvement
+    or even get slightly worse before getting much better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can account for this by adding a delay to the trigger in terms of the number
+    of epochs on which we would like to see no improvement. This can be done by setting
+    the “patience” argument.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: The exact amount of patience will vary between models and problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By default, any change in the performance measure, no matter how fractional,
+    will be considered an improvement. You may want to consider an improvement that
+    is a specific increment, such as 1 unit for mean squared error or 1% for accuracy.
+    This can be specified via the “min_delta” argument.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: EarlyStopping callback can be applied with other callbacks, such as tensorboard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Learn more: [here](https://keras.io/callbacks/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is also possible to attach Tensorboard and monitor changes manually.  Every
+    5 minutes model will be saved into logs dir, so you can always check out to a
+    better version.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Neural network architecture
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It is well-known that large enough networks of depth 2 can already approximate
+    any continuous target function on [0,1]d to arbitrary accuracy (Cybenko,1989;
+    Hornik, 1991). On the other hand, it has long been evident that deeper networks
+    tend to perform better than shallow ones.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The [recent analysis](http://proceedings.mlr.press/v49/eldan16.pdf) showed that
+    “depth – even if increased by 1 – can be exponentially more valuable than width
+    for standard feedforward neural networks”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can think that each new layer extracts a new feature, so that increases
+    a non-linearity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Remember that, increasing the depth means your model is more complex and the
+    optimization function may not be able to find the optimal set of weights.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Image, that you have a neural network with 2 hidden layers of 5 neurons on
+    each layer. Height = 2, width = 5\. Let’s add one neuron per layer and calc a
+    number of connections: (5+1)*(5+1) = 36 connections. Now, let’s add a new layer
+    to the original network and calc connections: 5*5*5 = 125 connections. So, each
+    layer will significantly increase the number of connections and execution time.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: But, at the same time, this comes with the cost of increasing the chance of
+    overfitting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Very wide neural networks are good at memorizing data, so you shouldn't build
+    very wide networks too. Try to build as small network, as possible, to solve your
+    problem. Remember that the larger and complex the network is, the higher is a
+    chance of overfitting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can find more [here](https://pdfs.semanticscholar.org/69b4/68459daa2b2e5c096c0cf6da8735dba26a4a.pdf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Transfer learning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Why should we always start from scratch? Let’s take pre-trained models' weights
+    and just optimize them for our task. The problem is that we haven’t a model pre-trained
+    on our data. But we can use a network, pre-trained on a really huge amount of
+    data. Then, we use our relatively small data to fine-tune the pre-trained model.
+    The common practice is to freeze all layers except the last few from training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The main advantage of transfer learning is that it mitigates the problem of
+    insufficient training data. As you can remember, this is one of the reasons for
+    overfitting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Transfer learning only works in deep learning if the model features learned
+    from the first task are general. It’s very popular to use a pre-trained model
+    for image processing ([here](https://github.com/BVLC/caffe/wiki/Model-Zoo)) and
+    text processing, e.g. [google word2vec](https://code.google.com/archive/p/word2vec/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Another benefit is that transfer learning increases productivity and reduce
+    training time:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/86a67d6d2409c24bb3985ea500815371.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Metrics function
+  prefs: []
+  type: TYPE_NORMAL
+- en: Batch normalization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Batch normalization ](https://arxiv.org/abs/1502.03167?context=cs)allows us
+    to not only work as a regularizer but also reduce training time by increasing
+    a learning rate. The problem is that during a training process the distribution
+    on each layer is changed. So we need to reduce the learning rate that slows our
+    gradient descent optimization. But, if we will apply a normalization for each
+    training mini-batch, then we can increase the learning rate and find a minimum
+    faster.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Example****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Other
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'There are some other less popular methods of fighting the overfitting in deep
+    neural networks. It is not necessary that they will work. But if you have tried
+    all other approaches and want to experiment with something else, you can read
+    more about them here: small [batch size](https://arxiv.org/pdf/1705.08741.pdf), [noise
+    in weights](https://www.semanticscholar.org/paper/On-Weight-Noise-Injection-Training-Ho-Leung/1023043d2a5a76a07388c3e17c1284018937dbfc).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Overfitting appears when we have a too complicated model. Our model begins to
+    recognize noisy or random relations, that will never appear again in the new data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the characteristics of this condition is large weights of different signs
+    in neurons. There is a direct solution to this issue known as L1 and L2 regularization
+    that can be applied to each layer separately.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The other way is to apply dropouts to the large neural network or to increase
+    a data amount for example by data augmentation. You can also configure an early
+    stopping callback, that will detect a moment when the model becomes overfitted.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, try to build such a small neural network, as possible. Choose depth and
+    width carefully.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Don't forget that you can always use a pre-trained model and increase model
+    productivity. At least, you can apply batch normalization to increase the learning
+    rate and decrease overfitting at the same time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Different combinations of these methods will give you a result and allow to
+    solve your task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[ActiveWizards](https://activewizards.com/)** is a team of data scientists
+    and engineers, focused exclusively on data projects (big data, data science, machine
+    learning, data visualizations). Areas of core expertise include data science (research,
+    machine learning algorithms, visualizations and engineering), data visualizations
+    ( d3.js, Tableau and other), big data engineering (Hadoop, Spark, Kafka, Cassandra,
+    HBase, MongoDB and other), and data intensive web applications development (RESTful
+    APIs, Flask, Django, Meteor).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://activewizards.com/blog/fighting-overfitting-in-deep-learning/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Enabling the Deep Learning Revolution](/2019/12/enabling-deep-learning-revolution.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deep Learning for Image Classification with Less Data](/2019/11/deep-learning-image-classification-less-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Popular Deep Learning Courses of 2019](/2019/12/deep-learning-courses.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Fighting AI with AI Fraud Monitoring for Deepfake Applications](https://www.kdnuggets.com/2023/05/fighting-ai-ai-fraud-monitoring-deepfake-applications.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Avoid Overfitting](https://www.kdnuggets.com/2022/08/avoid-overfitting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, August 24: Implementing DBSCAN in Python • How to…](https://www.kdnuggets.com/2022/n34.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI, Analytics, Machine Learning, Data Science, Deep Learning…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[15 Free Machine Learning and Deep Learning Books](https://www.kdnuggets.com/2022/10/15-free-machine-learning-deep-learning-books.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

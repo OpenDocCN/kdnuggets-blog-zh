@@ -1,0 +1,237 @@
+- en: K-Means 8x faster, 27x lower error than Scikit-learn in 25 lines
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/01/k-means-faster-lower-error-scikit-learn.html](https://www.kdnuggets.com/2021/01/k-means-faster-lower-error-scikit-learn.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Jakub Adamczyk](https://github.com/j-adamczyk), Computer science student,
+    Python and Machine Learning enthusiast.**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a2f968618e10547fcf2c6c6a6bbac309.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In [my last article on the faiss library](https://towardsdatascience.com/make-knn-300-times-faster-than-scikit-learns-in-20-lines-5e29d74e76bb), I
+    showed how to make kNN up to 300 times faster than Scikit-learn’s in 20 lines
+    using [Facebook’s faiss library](https://github.com/facebookresearch/faiss). But
+    we can do much more with it, including both faster and more accurate K-Means clustering,
+    in just 25 lines!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'K-Means is an iterative algorithm, which clusters the data points into *k*
+    clusters, each represented with a mean/center point (a centroid). Training starts
+    with some initial guesses and then alternates between two steps: assignment and
+    update.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the assignment phase, we assign each point to the nearest cluster (using
+    Euclidean distance between point and centroids). In the update step, we recalculate
+    each centroid by calculating a mean point from all points assigned to that cluster
+    in the current step.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The final quality of clustering is calculated as a sum of in-cluster distances,
+    where for each cluster, we calculate a sum of Euclidean distances between points
+    in that cluster and its centroid. This is also called inertia.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For prediction, we perform a 1-nearest neighbor search (kNN with *k* = 1) between
+    new points and centroids.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Scikit-learn vs faiss
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In both libraries, we have to specify algorithm hyperparameters: number of
+    clusters, number of restarts (each starting with other initial guesses), and maximal
+    number of iterations.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we can see from the example, the core of the algorithm is searching for the
+    nearest neighbors, specifically the nearest centroids, both for training and prediction.
+    And that’s where faiss is orders of magnitude faster than Scikit-learn! It leverages
+    great C++ implementation, concurrency wherever possible, and even the GPU, if
+    you want.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Implementing K-Means clustering with faiss
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A great feature of faiss is that it has both installation and build instructions
+    and excellent documentation with examples. After the installation, we can write
+    the actual clustering. The code is quite simple because we just mimic the Scikit-learn
+    API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Important elements:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: faiss has a built-in *Kmeans* class specifically for this task, but its arguments
+    have different names than in Scikit-learn (see [the docs](https://github.com/facebookresearch/faiss/wiki/Faiss-building-blocks:-clustering,-PCA,-quantization))
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: we have to make sure we use *np.float32* type, as faiss only works with this
+    type
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*kmeans.obj* returns a list of errors through the training, so to get only
+    the final one, like in Scikit-learn, we use the [-1] index'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: prediction is done with the *Index* data structure, which is the basic building
+    block of faiss, and is used in all nearest neighbor searches
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: in prediction, we perform the kNN search with *k* = 1, returning indices of
+    nearest centroids from *self.cluster_centers_* (index [1], because *index.search()* returns
+    distances and indices)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Time and accuracy comparison
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I’ve chosen a few popular datasets available in Scikit-learn for comparison.
+    The train and predict times are compared. For easier reading, I’ve explicitly
+    written how many times faster is the faiss-based clustering than Scikit-learn’s.
+    For error comparison, I’ve just written how many times lower error the faiss-based
+    clustering achieves (because numbers are large and not very informative).
+  prefs: []
+  type: TYPE_NORMAL
+- en: All of these times have been measured with the *time.process_time()* function
+    that measures process time instead of wall clock time, for more accurate results.
+    Results are averages of 100 runs, except for MNIST, where it took too long for
+    Scikit-learn, and I had to do 5 runs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c5ed1c5e3c332b11b91dc3e0e19051d7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Train times (image by author).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/325ecf334311ed067d590720ead00ade.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Predict times (image by author).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c00dfc80bbbc4290db07ab33415e23d9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Training errors (image by author).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we can see, for K-Means clustering for small datasets (first 4 datasets)
+    faiss-based version is slower for training and has a larger error. For prediction,
+    it works universally faster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For the larger MNIST dataset, faiss is a clear winner. Training 20.5 times faster
+    is huge, especially because it reduces time from almost 3 minutes to less than
+    8 seconds! A 1.5 times faster prediction is also nice. The true achievement, however,
+    is a spectacular 27.5 times lower error. This means that for a larger, real-world
+    dataset, the faiss-based version is vastly more accurate. And this takes only
+    25 lines of code!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So based on this: if you have a large (at least a few thousand samples) real-world
+    dataset, the faiss-based version is just plain better. For a small toy dataset,
+    Scikit-learn is a better choice; however, if you have a GPU, the GPU-accelerated
+    faiss version may turn out faster (I haven’t checked it for fair CPU comparison).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With 25 lines of code, we can get a huge speed and accuracy boost for K-Means
+    clustering for reasonably sized datasets with the faiss library. If you need,
+    you can get even better with a GPU, multiple GPUs, and more, which is nicely explained
+    in the faiss docs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/k-means-8x-faster-27x-lower-error-than-scikit-learns-in-25-lines-eaedc7a3a0c8).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Key Data Science Algorithms Explained: From k-means to k-medoids clustering](https://www.kdnuggets.com/2020/12/algorithms-explained-k-means-k-medoids-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A complete guide to K-means clustering algorithm](https://www.kdnuggets.com/2019/05/guide-k-means-clustering-algorithm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Most Popular Distance Metrics Used in KNN and When to Use Them](https://www.kdnuggets.com/2020/11/most-popular-distance-metrics-knn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Multi-modal deep learning in less than 15 lines of code](https://www.kdnuggets.com/2023/01/predibase-multi-modal-deep-learning-less-15-lines-code.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

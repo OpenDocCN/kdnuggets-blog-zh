@@ -1,0 +1,385 @@
+- en: 'ELMo: Contextual Language Embedding'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/01/elmo-contextual-language-embedding.html](https://www.kdnuggets.com/2019/01/elmo-contextual-language-embedding.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Josh Taylor](https://www.linkedin.com/in/josh-taylor-24806975/), Advanced
+    Analytics Specialist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/a74f9c9205ba620c8eb635c5ce9a34be.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Semantic sentence similarity using the state-of-the-art ELMo natural language
+    model
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article will explore the latest in natural language modelling; deep contextualised
+    word embeddings. The focus is more practical than theoretical with a worked example
+    of how you can use the state-of-the-art ELMo model to review sentence similarity
+    in a given document as well as creating a simple semantic search engine. The full
+    code can be viewed in the Colab notebook [here](https://colab.research.google.com/drive/13f6dKakC-0yO6_DxqSqo0Kl41KMHT8A1).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The importance of context in NLP**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'As we know, language is complex. Context can completely change the meaning
+    of the individual words in a sentence. For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: He kicked the **bucket.**
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: I have yet to cross-off all the items on my **bucket** list.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The **bucket** was filled with water.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In these sentences, whilst the word ‘bucket’ is always the same, it’s meaning
+    is very different.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ab68e5ad764de2c7ec2ad19eca2d8a9f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Words can have different meanings depending on context
+  prefs: []
+  type: TYPE_NORMAL
+- en: Whilst we can easily decipher these complexities in language, creating a model
+    which can understand the different nuances of the meaning of words given the surrounding
+    text is difficult.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is for this reason that traditional word embeddings (word2vec, GloVe, fastText)
+    fall short. They only have one representation per word, therefore they cannot
+    capture how the meaning of each word can change based on surrounding context.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Introducing ELMo; Deep Contextualised Word Representations**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Enter ELMo. Developed in 2018 by AllenNLP, it goes beyond traditional embedding
+    techniques. It uses a deep, bi-directional LSTM model to create word representations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Rather than a dictionary of words and their corresponding vectors, ELMo analyses
+    words within the context that they are used. It is also character based, allowing
+    the model to form representations of out-of-vocabulary words.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This therefore means that the way ELMo is used is quite different to word2vec
+    or fastText. Rather than having a dictionary ‘look-up’ of words and their corresponding
+    vectors, ELMo instead creates vectors on-the-fly by passing text through the deep
+    learning model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**A worked example, a practical use for ELMo in less than 5 minutes**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Lets get started! I will add the main snippets of code here but if you want
+    to review the full set of code (or indeed want the strange satisfaction that comes
+    with clicking through each of the cells in a notebook), please see the corresponding [Colab
+    output here](https://colab.research.google.com/drive/13f6dKakC-0yO6_DxqSqo0Kl41KMHT8A1).
+  prefs: []
+  type: TYPE_NORMAL
+- en: As per my last few posts, the data we will be using is based on Modern Slavery
+    returns. These are mandatory statements by companies to communicate how they are
+    addressing Modern Slavery both internally, and within their supply chains. We
+    will be deep-diving into ASOS’s return in this article (a British, online fashion
+    retailer).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you are interested in seeing other posts in what is fast becoming a mini-series
+    of NLP experiments performed on this dataset, I have included links to these at
+    the end of this article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. Get the text data, clean and tokenize**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'It is amazing how simple this is to do using Python string functions and spaCy.
+    Here we do some basic text cleaning by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: a) removing line breaks, tabs and excess whitespace as well as the mysterious
+    ‘xa0’ character;
+  prefs: []
+  type: TYPE_NORMAL
+- en: b) splitting the text into sentences using spaCy’s ‘.sents’ iterator.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ELMo can receive either a list of sentence strings or a list of lists (sentences
+    and words). Here we have gone for the former. We know that ELMo is character based,
+    therefore tokenizing words should not have any impact on performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**2\. Get the ELMo model using TensorFlow Hub:**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you have not yet come across TensorFlow Hub, it is a massive time saver in
+    serving-up a large number of pre-trained models for use in TensorFlow. Luckily
+    for us, one of these models is ELMo. We can load in a fully trained model in just
+    two few lines of code. How satisfying…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To then use this model in anger we just need a few more lines of code to point
+    it in the direction of our text document and create sentence vectors:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**3\. Use visualisation to sense-check outputs**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It is amazing how often visualisation is overlooked as a way of gaining greater
+    understanding of data. Pictures speak a thousand words and we are going to create
+    a chart *of *a thousand words to prove this point (actually it is 8,511 words).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here we will use PCA and t-SNE to reduce the 1,024 dimensions which are output
+    from ELMo down to 2 so that we can review the outputs from the model. I have included
+    further reading on how this is achieved at the end of the article if you want
+    to find out more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Using the amazing Plotly library, we can create a beautiful, interactive plot
+    in no time at all. The below code shows how to render the results of our dimensionality
+    reduction and join this back up to the sentence text. Colour has also been added
+    based on the sentence length. As we are using Colab, the last line of code downloads
+    the HTML file. This can be found below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Sentence encode**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Interactive sentence embedding* drive.google.com](https://drive.google.com/open?id=17gseqOhQl9c1iPTfzxGcCfB6TOTvSU_i)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The code to create this is below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Exploring this visualisation, we can see ELMo has done sterling work in grouping
+    sentences by their semantic similarity. In fact it is quite incredible how effective
+    the model is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/037e9b1b847b7fdcf675ce65cecca0d8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Download the HTML for yourself (link above) to see ELMo in action
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**4\. Create a semantic search engine:**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that we are confident that our language model is working well, lets put
+    it to work in a semantic search engine. The idea is that this will allow us to
+    search through the text not by keywords but by semantic closeness to our search
+    query.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is actually really simple to implement:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: First we take a search query and run ELMo over it;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We then use cosine similarity to compare this against the vectors in our text
+    document;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We can then return the ’n’ closest matches to the search query from the document.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Google Colab has some great features to create form inputs which are perfect
+    for this use case. For example, creating an input is as simple as adding ***#@param ***after
+    a variable. The below shows this for a string input:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: In addition to using Colab form inputs, I have used ‘IPython.display.HTML’ to
+    beautify the output text and some basic string matching to highlight common words
+    between the search query and the results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Lets put it to the test. Let us see what ASOS are doing with regards to a code
+    of ethics in their Modern Slavery return:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/12eb9c43b35ea7f42e9db71d586de9f0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A fully interactive semantic search engine in just a few minutes!
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is magical! The matches go beyond keywords, the search engine clearly knows
+    that ‘ethics’ and ethical are closely related. We find hits for both a code of
+    integrity and also ethical standards and policies. Both relevant to our search
+    query but not directly linked based on key words.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I hope you enjoyed the post. Please do leave comments if you have any questions
+    or suggestions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Further reading:***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Below are my other posts in what is now becoming a mini series on NLP and exploration
+    of companies Modern Slavery returns:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Clean your data with unsupervised machine learning**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Cleaning data does not have to be painful! This post is a quick example of
+    how to use unsupervised machine learning to…* towardsdatascience.com](https://towardsdatascience.com/clean-your-data-with-unsupervised-machine-learning-8491af733595)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Supercharging word vectors**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*A simple technique to boost fastText and other word vectors in your NLP projects*
+    towardsdatascience.com](https://towardsdatascience.com/supercharging-word-vectors-be80ee5513d)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To find out more on the dimensionality reduction process used, I recommend
+    the below post:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Visualising high-dimensional datasets using PCA and t-SNE in Python**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*The first step around any data related challenge is to start by exploring
+    the data itself. This could be by looking at…* medium.com](https://medium.com/@luckylwk/visualising-high-dimensional-datasets-using-pca-and-t-sne-in-python-8ef87e7915b)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally, for more information on state of the art language models, the below
+    is a good read:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[http://jalammar.github.io/illustrated-bert/](http://jalammar.github.io/illustrated-bert/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Josh Taylor](https://www.linkedin.com/in/josh-taylor-24806975/)** (**[@josh_taylor_01](https://twitter.com/josh_taylor_01)**)
+    is a specialist in producing insights through advanced analytics, machine learning
+    and visualisation, currently working for Her Majesty''s Government. All opinions
+    are my own.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/elmo-contextual-language-embedding-335de2268604).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Word Embeddings & Self-Supervised Learning, Explained](/2019/01/burkov-self-supervised-learning-word-embeddings.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Representation for Natural Language Processing Tasks](/2018/11/data-representation-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 20 Python Libraries for Data Science in 2018](/2018/06/top-20-python-libraries-data-science-2018.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[The Ultimate Guide To Different Word Embedding Techniques In NLP](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[N-gram Language Modeling in Natural Language Processing](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python: The programming language of machine learning](https://www.kdnuggets.com/2022/06/mlm-python-programming-language-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing Key Terms, Explained](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Representation for Natural Language Processing Tasks](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

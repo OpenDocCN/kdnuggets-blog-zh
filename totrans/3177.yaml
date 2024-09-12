@@ -1,0 +1,722 @@
+- en: Learning Curves for Machine Learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/01/learning-curves-machine-learning.html/2](https://www.kdnuggets.com/2018/01/learning-curves-machine-learning.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/01/learning-curves-machine-learning.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: The learning_curve() function from scikit-learn
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We'll use the `learning_curve()` [function](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.learning_curve.html) from
+    the scikit-learn library to generate a learning curve for a regression model.
+    There's no need on our part to put aside a validation set because `learning_curve()` will
+    take care of that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the code cell below, we:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Do the required imports from `sklearn`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Declare the features and the target.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Use `learning_curve()` to generate the data needed to plot a learning curve.
+    The function returns a tuple containing three elements: the training set sizes,
+    and the error scores on both the validation sets and the training sets. Inside
+    the function, we use the following parameters:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`estimator` — indicates the learning algorithm we use to estimate the true
+    model;'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`X` — the data containing the features;'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`y` — the data containing the target;'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`train_sizes` — specifies the training set sizes to be used;'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`cv` — determines the cross-validation splitting strategy (we''ll discuss this
+    immediately);'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`scoring` — indicates the error metric to use; the intention is to use the
+    mean squared error (MSE) metric, but that''s not a possible parameter for `scoring`;
+    we''ll use the nearest proxy, negative MSE, and we''ll just have to flip signs
+    later on.'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We already know what''s in `train_sizes`. Let''s inspect the other two variables
+    to see what `learning_curve()` returned:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Since we specified six training set sizes, you might have expected six values
+    for each kind of score. Instead, we got six rows for each, and every row has five
+    error scores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This happens because `learning_curve()` runs a `k`-fold cross-validation under
+    the hood, where the value of `k` is given by what we specify for the `cv` parameter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In our case, `cv = 5`, so there will be five splits. For each split, an estimator
+    is trained for every training set size specified. Each column in the two arrays
+    above designates a split, and each row corresponds to a test size. Below is a
+    table for the training error scores to help you understand the process better:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| TRAINING SET SIZE (INDEX) | SPLIT1 | SPLIT2 | SPLIT3 | SPLIT4 | SPLIT5 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| :-- | :-- | :-- | :-- | :-- | :-- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 0 | 0 | 0 | 0 | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 100 | -19.71230701 | -18.31492642 | -18.31492642 | -18.31492642 | -18.31492642
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 500 | -18.14420459 | -19.63885072 | -19.63885072 | -19.63885072 | -19.63885072
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | -21.53603444 | -20.18568787 | -19.98317419 | -19.98317419 | -19.98317419
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 5000 | -20.47708899 | -19.93364211 | -20.56091569 | -20.4150839 | -20.4150839
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 7654 | -20.98565335 | -20.63006094 | -21.04384703 | -20.63526811 | -20.52955609
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: To plot the learning curves, we need only a single error score per training
+    set size, not 5\. For this reason, in the next code cell we take the mean value
+    of each row and also flip the signs of the error scores (as discussed above).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now we have all the data we need to plot the learning curves.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before doing the plotting, however, we need to stop and make an important observation.
+    You might have noticed that some error scores on the *training* sets are the same.
+    For the row corresponding to training set size of 1, this is expected, but what
+    about other rows? With the exception of the last row, we have a lot of identical
+    values. For instance, take the second row where we have identical values from
+    the second split onward. Why is that so?
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is caused by not randomizing the *training* data for each split. Let's
+    walk through a single example with the aid of the diagram below. When the training
+    size is 500 the first 500 instances in the training set are selected. For the
+    first split, these 500 instances will be taken from the second chunk. From the
+    second split onward, these 500 instances will be taken from the first chunk. Because
+    we don't randomize the training set, the 500 instances used for training are the
+    same for the second split onward. This explains the identical values from the
+    second split onward for the 500 training instances case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An identical reasoning applies to the 100 instances case, and a similar reasoning
+    applies to the other cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![splits](../Images/edfe52b4e23dc00451643d1c2c6ac0a8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'To stop this behavior, we need to set the `shuffle` parameter to `True` in
+    the `learning_curve()` function. This will randomize the indices for the *training* data
+    for each split. We haven''t randomized above for two reasons:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data comes pre-shuffled five times (as mentioned in the [documentation](https://archive.ics.uci.edu/ml/datasets/Combined+Cycle+Power+Plant))
+    so there's no need to randomize anymore.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: I wanted to make you aware about this quirk in case you stumble upon it in practice.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Finally, let's do the plotting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Learning curves - high bias and low variance
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We plot the learning curves using a regular matplotlib workflow:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Learning_curves_12_1](../Images/d08412056c4965911fcf9e9506f74f34.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: There's a lot of information we can extract from this plot. Let's proceed granularly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When the training set size is 1, we can see that the MSE for the training set
+    is 0\. This is normal behavior, since the model has no problem fitting perfectly
+    a single data point. So when tested upon the same data point, the prediction is
+    perfect.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But when tested on the validation set (which has 1914 instances), the MSE rockets
+    up to roughly 423.4\. This relatively high value is the reason we restrict the
+    y-axis range between 0 and 40\. This enables us to read most MSE values with precision.
+    Such a high value is expected, since it's extremely unlikely that a model trained
+    on a single data point can generalize accurately to 1914 new instances it hasn't
+    seen in training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When the training set size increases to 100, the training MSE increases sharply,
+    while the validation MSE decreases likewise. The linear regression model doesn't
+    predict all 100 training points perfectly, so the training MSE is greater than
+    0\. However, the model performs much better now on the validation set because
+    it's estimated with more data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'From 500 training data points onward, the validation MSE stays roughly the
+    same. This tells us something extremely important: adding more training data points
+    won''t lead to significantly better models. So instead of wasting time (and possibly
+    money) with collecting more data, we need to try something else, like switching
+    to an algorithm that can build more complex models.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![add_data](../Images/a32f9b2090fa9861adde627057f852a2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: To avoid a misconception here, it's important to notice that what really won't
+    help is adding more *instances* (rows) to the training data. Adding more features,
+    however, is a different thing and is very likely to help because it will increase
+    the complexity of our current model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's now move to diagnosing bias and variance. The main indicator of a bias
+    problem is a high validation error. In our case, the validation MSE stagnates
+    at a value of approximately 20\. But how good is that? We'd benefit from some
+    domain knowledge (perhaps physics or engineering in this case) to answer this,
+    but let's give it a try.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Technically, that value of 20 has MW22 (megawatts squared) as units (the units
+    get squared as well [when we compute the MSE](https://en.wikipedia.org/wiki/Mean_squared_error#Predictor)).
+    But the values in our target column are in MW (according to the [documentation](https://archive.ics.uci.edu/ml/datasets/Combined+Cycle+Power+Plant)).
+    Taking the square root of 20 MW22 results in approximately 4.5 MW. Each target
+    value represents net *hourly* electrical energy output. So for each hour our model
+    is off by 4.5 MW on average. According to [this Quora answer](https://www.quora.com/How-can-I-get-an-intuitive-understanding-of-what-a-Kw-Mw-Gw-of-electricity-equates-to-in-real-life-terms),
+    4.5 MW is equivalent to the heat power produced by 4500 handheld hair dryers.
+    And this would add up if we tried to predict the total energy output for one day
+    or a longer period.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can conclude that the an MSE of 20 MW22 is quite large. So our model has
+    a bias problem. But is it a *low* bias problem or a *high* bias problem?
+  prefs: []
+  type: TYPE_NORMAL
+- en: To find the answer, we need to look at the training error. If the training error
+    is very low, it means that the training data is fitted very well by the estimated
+    model. If the model fits the training data very well, it means it has *low* bias
+    with respect to that set of data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the training error is high, it means that the training data is not fitted
+    well enough by the estimated model. If the model fails to fit the training data
+    well, it means it has *high* bias with respect to that set of data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![low_high_bias](../Images/2b7be8d34b94b5b41f0bd0156ff9d9a1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In our particular case, the training MSE plateaus at a value of roughly 20 MW22\.
+    As we've already established, this is a high error score. Because the validation
+    MSE is high, and the training MSE is high as well, our model has a high bias problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now let''s move with diagnosing eventual variance problems. Estimating variance
+    can be done in at least two ways:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: By examining the gap between the validation learning curve and training learning
+    curve.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'By examining the training error: its value and its evolution as the training
+    set sizes increase.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![lc_regression](../Images/6a3d18a5b15c8d34fd28790435933b1a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'A narrow gap indicates low variance. Generally, the more narrow the gap, the
+    lower the variance. The opposite is also true: the wider the gap, the greater
+    the variance. Let''s now explain why this is the case.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we've discussed earlier, if the variance is high, then the model fits training
+    data too well. When training data is fitted too well, the model will have trouble
+    generalizing on data that hasn't seen in training. When such a model is tested
+    on its training set, and then on a validation set, the training error will be
+    low and the validation error will generally be high. As we change training set
+    sizes, this pattern continues, and the differences between training and validation
+    errors will determine that gap between the two learning curves.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The relationship between the training and validation error, and the gap can
+    be summarized this way:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: gap=validation error−training errorgap=validation error−training error
+  prefs: []
+  type: TYPE_NORMAL
+- en: So the bigger the difference between the two errors, the bigger the gap. The
+    bigger the gap, the bigger the variance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our case, the gap is very narrow, so we can safely conclude that the variance
+    is low.
+  prefs: []
+  type: TYPE_NORMAL
+- en: High *training* MSE scores are also a quick way to detect low variance. If the
+    variance of a learning algorithm is low, then the algorithm will come up with
+    simplistic and similar models as we change the training sets. Because the models
+    are overly simplified, they cannot even fit the training data well (they *underfit* the
+    data). So we should expect high training MSEs. Hence, high training MSEs can be
+    used as indicators of low variance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![low_high_var](../Images/31c509512a7d66c68d59887ac5c7830a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In our case, the training MSE plateaus at around 20, and we've already concluded
+    that's a high value. So besides the narrow gap, we now have another confirmation
+    that we have a low variance problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So far, we can conclude that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our learning algorithm suffers from high bias and low variance, underfitting
+    the training data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Adding more instances (rows) to the training data is hugely unlikely to lead
+    to better models under the current learning algorithm.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: One solution at this point is to change to a more complex learning algorithm.
+    This should decrease the bias and increase the variance. A mistake would be to
+    try to increase the number of training instances.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Generally, these other two fixes also work when dealing with a high bias and
+    low variance problem:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training the current learning algorithm on more features (to avoid *collecting* new
+    data, you can generate easily [polynomial features](http://scikit-learn.org/stable/modules/preprocessing.html)).
+    This should lower the bias by increasing the model's complexity.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Decreasing the [regularization](https://www.quora.com/What-is-regularization-in-machine-learning) of
+    the current learning algorithm, if that's the case. In a nutshell, regularization
+    prevents the algorithm from fitting the training data too well. If we decrease
+    regularization, the model will fit training data better, and, as a consequence,
+    the variance will increase and the bias will decrease.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Learning curves - low bias and high variance
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let's see how an unregularized Random Forest regressor fares here. We'll generate
+    the learning curves using the same workflow as above. This time we'll bundle everything
+    into a function so we can use it for later. For comparison, we'll also display
+    the learning curves for the linear regression model above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Learning_curves_15_0](../Images/543485dfb23baba95c68632d5c624a0a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now let's try to apply what we've just learned. It'd be a good idea to pause
+    reading at this point and try to interpret the new learning curves yourself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Looking at the validation curve, we can see that we've managed to decrease bias.
+    There still is some significant bias, but not that much as before. Looking at
+    the training curve, we can deduce that this time there's a *low* bias problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The new gap between the two learning curves suggests a substantial increase
+    in variance. The low training MSEs corroborate this diagnosis of high variance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The large gap and the low training error also indicates an overfitting problem.
+    Overfitting happens when the model performs well on the training set, but far
+    poorer on the test (or validation) set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One more important observation we can make here is that *adding new training
+    instances* is very likely to lead to better models. The validation curve doesn't
+    plateau at the maximum training set size used. It still has potential to decrease
+    and converge toward the training curve, similar to the convergence we see in the
+    linear regression case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So far, we can conclude that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our learning algorithm (random forests) suffers from high variance and quite
+    a low bias, overfitting the training data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Adding more training instances is very likely to lead to better models under
+    the current learning algorithm.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'At this point, here are a couple of things we could do to improve our model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adding more training instances.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Increase the regularization for our current learning algorithm. This should
+    decrease the variance and increase the bias.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reducing the numbers of features in the training data we currently use. The
+    algorithm will still fit the training data very well, but due to the decreased
+    number of features, it will build less complex models. This should increase the
+    bias and decrease the variance.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In our case, we don't have any other readily available data. We could go into
+    the power plant and take some measurements, but we'll save this for another post
+    (just kidding).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's rather try to regularize our random forests algorithm. One way to do that
+    is to adjust the maximum number of leaf nodes in each decision tree. This can
+    be done by using the `max_leaf_nodes` parameter of `RandomForestRegressor()`.
+    It's not necessarily for you to understand this regularization technique. For
+    our purpose here, what you need to focus on is the effect of this regularization
+    on the learning curves.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Learning_curves_17_0](../Images/e2668882d10fe739e9a86d9f5d803409.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Not bad! The gap is now more narrow, so there's less variance. The bias seems
+    to have increased just a bit, which is what we wanted.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But our work is far from over! The validation MSE still shows a lot of potential
+    to decrease. Some steps you can take toward this goal include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adding more training instances.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Adding more features.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Feature selection.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Hyperparameter optimization.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The ideal learning curves and the irreducible error
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Learning curves constitute a great tool to do a quick check on our models at
+    every point in our machine learning workflow. But how do we know when to stop?
+    How do we recognize the perfect learning curves?
+  prefs: []
+  type: TYPE_NORMAL
+- en: For our regression case before, you might think that the perfect scenario is
+    when both curves converge toward an MSE of 0\. That's a perfect scenario, indeed,
+    but, unfortunately, it's not possible. Neither in practice, neither in theory.
+    And this is because of something called *irreducible error*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When we build a model to map the relationship between the features ***X*** and
+    the target ***Y***, we assume that there is such a relationship in the first place.
+    Provided the assumption is true, there is a true model ![Equation](../Images/0124e78268c96059dbff35809fb67ffe.png) that
+    describes perfectly the relationship between ***X*** and ***Y***, like so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/0617d3c146a95ad60f2d2561bd93af9b.png)     (1)'
+  prefs: []
+  type: TYPE_IMG
+- en: But why is there an error?! Haven't we just said that ![Equation](../Images/0124e78268c96059dbff35809fb67ffe.png) describes
+    the relationship between X and Y perfectly?!
+  prefs: []
+  type: TYPE_NORMAL
+- en: There's an error there because ***Y*** is not only a function of our limited
+    number of features ***X***. There could be many other features that influence
+    the value of ***Y***. Features we don't have. It might also be the case that ***X*** contains
+    measurement errors. So, besides ***X***, ***Y*** is also a function of *irreducible error*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now let''s explain why this error is *irreducible*. When we estimate ***f(X)*** with
+    a model ![Equation](../Images/e95a915c8e775f7ecfcf46075ea77dec.png), we introduce
+    another kind of error, called *reducible* error:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/d87907e57e1aca8903ee05fe75b060c0.png)     (2)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Replacing ***f(X)*** in (1) we get:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/f4958e321c98d383fbf90c05a31e2410.png)     (3)'
+  prefs: []
+  type: TYPE_IMG
+- en: Error that is reducible can be reduced by building better models. Looking at
+    equation (2) we can see that if the reducible errorreducible error is 0, our estimated
+    model ![Equation](../Images/e95a915c8e775f7ecfcf46075ea77dec.png) is equal to
+    the true model ***f(X)***. However, from (3) we can see that *irreducible error* remains
+    in the equation even if *reducible error* is 0\. From here we deduce that no matter
+    how good our model estimate is, generally there still is some error we cannot
+    reduce. And that's why this error is considered *irreducible*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This tells us that that in practice the best possible learning curves we can
+    see are those which converge to the value of some irreducible error, not toward
+    some ideal error value (for MSE, the ideal error score is 0; we'll see immediately
+    that other error metrics have different ideal error values).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![irr_error](../Images/511282f6512b6f0ce0e5e0d5af5d4a23.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'In practice, the exact value of the irreducible error is almost always unknown.
+    We also assume that the irreducible error is independent of ***X***. This means
+    that we cannot use ***X*** to find the true irreducible error. Expressing the
+    same thing in the more precise language of mathematics, there''s no function ***g*** to
+    map ***X*** to the true value of the irreducible error:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*irreducible error ≠ g(X)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So there's no way to know the true value of the irreducible error based on the
+    data we have. In practice, a good workaround is to try to lower the error score
+    as much as possible, while keeping in mind that the limit is given by some irreducible
+    error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What about classification?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'So far, we''ve learned about learning curves in a regression setting. For classification
+    tasks, the workflow is almost identical. The main difference is that we''ll have
+    to choose another error metric - one that is suitable for evaluating the performance
+    of a classifier. Let''s see an example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![classification](../Images/f0f1d038900ad67bb1b9b5c16f88d42a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source: [scikit-learn documentation](http://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unlike what we've seen so far, notice that the learning curve for the training
+    error is above the one for the validation error. This is because the score used, *accuracy*,
+    describes how good the model is. The higher the accuracy, the better. The MSE,
+    on the other side, describes how bad a model is. The lower the MSE, the better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This has implications for the irreducible error as well. For error metrics
+    that describe how bad a model is, the irreducible error gives a lower bound: you
+    cannot get lower than that. For error metrics that describe how good a model is,
+    the irreducible error gives an upper bound: you cannot get higher than that.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a side note here, in more technical writings the term [*Bayes error rate*](https://en.wikipedia.org/wiki/Bayes_error_rate) is
+    what's usually used to refer to the best possible error score of a classifier.
+    The concept is analogous to the irreducible error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next steps
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Learning curves constitute a great tool to diagnose bias and variance in any
+    supervised learning algorithm. We've learned how to generate them using scikit-learn
+    and matplotlib, and how to use them to diagnose bias and variance in our models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To reinforce what you''ve learned, these are some next steps to consider:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generate learning curves for a regression task using a different data set.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Generate learning curves for a classification task.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Generate learning curves for a supervised learning task by coding everything
+    from scratch (don't use `learning_curve()` from scikit-learn). Using cross-validation
+    is optional.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Compare learning curves obtained without cross-validating with curves obtained
+    using cross-validation. The two kinds of curves should be for the same learning
+    algorithm.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Alex Olteanu](https://www.dataquest.io/blog/author/alex-olteanu/)**
+    is a Student Success Specialist at Dataquest.io. He enjoys learning and sharing
+    knowledge, and is getting ready for the new AI revolution.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.dataquest.io/blog/learning-curves-machine-learning/?utm_source=kdnuggets&utm_medium=blog).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Regularization in Machine Learning](/2018/01/regularization-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Generate FiveThirtyEight Graphs in Python](/2017/12/generate-fivethirtyeight-graphs-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Training Sets, Test Sets, and 10-fold Cross-validation](/2018/01/training-test-sets-cross-validation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI, Analytics, Machine Learning, Data Science, Deep Learning…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Breaking the Data Barrier: How Zero-Shot, One-Shot, and Few-Shot…](https://www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Federated Learning: Collaborative Machine Learning with a Tutorial…](https://www.kdnuggets.com/2021/12/federated-learning-collaborative-machine-learning-tutorial-get-started.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

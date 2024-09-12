@@ -1,0 +1,263 @@
+- en: Dask DataFrame is not Pandas
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/11/dask-dataframe-not-pandas.html](https://www.kdnuggets.com/2021/11/dask-dataframe-not-pandas.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Hugo Shi](https://www.linkedin.com/in/hugo-shi/), Founder of Saturn Cloud**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Allure
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: You start with medium-sized data sets. Pandas does quite well. Then the data
+    sets get larger, and so you scale up to a larger machine. But eventually, you
+    run out of memory on that machine, or you need to find a way to leverage more
+    cores because your code is running slowly. At that point, you replace your Pandas
+    DataFrame object with a Dask DataFrame.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unfortunately, this doesn’t usually go well, and results in a good amount of
+    pain. Either some of the methods you rely on in Pandas, are not implemented in
+    Dask DataFrame (I’m looking at you, MultiIndex), the behavior of the methods is
+    slightly different, or the corresponding Dask operation fails, runs out of memory
+    and crashes (I thought it wasn’t supposed to do that!)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandas is a library designed for a single Python process. Distributed algorithms
+    and data structures are fundamentally different. There is work that can be done
+    on the Dask DataFrame side to make this better, but single processes, and clusters
+    of machines, will always have very different performance characteristics. You
+    should not try to fight this fundamental truth.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Dask is a great way to scale up your Pandas code. Naively converting your
+    Pandas DataFrame into a Dask DataFrame is not the right way to do it.** The fundamental
+    shift should not be to replace Pandas with Dask, but to re-use the algorithms,
+    code, and methods you wrote for a single Python process. That’s the meat of this
+    article. Once you reframe your thinking, the rest isn’t rocket science.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**There are 3 main ways to leverage your Pandas code with Dask**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Break up your big problem into many small problems
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use group by and aggregations
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use dask dataframes as a container for other distributed algorithms.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Break up your big problem into many small problems
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/79cba8868646230a4c12f31222c81a79.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A Dask DataFrame is made up of many Pandas DataFrames. It’s really good at moving
+    rows from those Pandas DataFrames around, so that you can use them in your own
+    functions. The general approach here is to express your problem in a split-apply-combine
+    pattern.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Split your big dataset (Dask DataFrame) into smaller datasets (Pandas DataFrame)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Apply a function (a Pandas function, not a Dask function) to those smaller datasets
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Combine the results back into a big dataset (Dask DataFrame)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'There are 2 main approaches to splitting your data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`set_index` will make one column of the Dask DataFrame the index, and sort
+    the data according to that index. It will by default estimate the data distribution
+    of that column so that you end up with evenly sized partitions (Pandas DataFrames).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`shuffle` will group rows together, so that rows with the same values for shuffle
+    columns are in the same partition. This is different than set_index in that there
+    are no sorting guarantees on the result, but you can group by multiple columns.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once your data has been split up, `map_partitions` is a good way to apply a
+    function to each Pandas DataFrame, and combine the results back into a Dask DataFrame.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**But I have more than one DataFrame**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: No problem! As long as you can split all the Dask DataFrames used in your computation
+    the same way, you’re good to go.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A concrete example
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I’m not going to go into code here. The objective is to put a concrete example
+    on top of this theoretical description to gain some intuition for what this looks
+    like. Imagine that I have one Dask DataFrame of stock prices, and another Dask
+    DataFrame of analyst estimates for the same stocks, and I want to figure out if
+    the analysts were right.
+  prefs: []
+  type: TYPE_NORMAL
+- en: write a function that takes prices for a single stock, and analyst estimates
+    for that same stock and figures out if they were right.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: call `set_index` on stock prices, to sort them by ticker. The `index` of your
+    resulting DataFrame will have a `divisions` attribute which describes which tickers
+    are in which partitions. (Everything before B is in the first parittion, everything
+    between B and D in the second partition, etc..). Call `set_index` on the Dask
+    DataFrame of analyst estimates using the stock price `divisions`.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: use `map_partitions` to apply a function to the partitions of both Dask DataFrames.
+    That function will look at the tickers within each dataframe, and then apply your
+    function.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Use Group By Aggregations
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![simple-gb-split-every](../Images/41a6dc52d77c34b5260975aaac758b31.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Dask has an excellent implementation of Pandas [GroupBy Aggregation algorithms](https://saturncloud.io/docs/reference/dask_groupby_aggregations/).
+    The actual algorithm is pretty complicated, but we have a detailed write up in
+    our [docs](https://saturncloud.io/docs/reference/dask_groupby_aggregations/).
+    If your problem fits this pattern, you are in good hands. Dask uses a tree reduction
+    in the implementation of the GroupBy Aggregation. There are 2 parameters you may
+    need to tune, `split_out` controls how many partitions your results end up in,
+    and `split_every` helps dask compute how many layers there are in the tree. Both
+    parameters can be tuned based on the size of your data to ensure that you don’t
+    run out of memory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use Dask as a container for other algorithms
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![containers](../Images/9aa4eac21b6dc0d007c35f68b7520b29.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Many libraries have Dask integrations built-in. `dask-ml` integrates with `scikit-learn`. `cuML` has
+    multi-node multi-GPU implementations of many common ML algorithms. `tsfresh` for
+    timeseries. `scanpy` for single cell analysis. `xgboost` and `lightgbm` all have
+    parallel algorithms that are Dask enabled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusions
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Dask is a great way to scale up your Pandas code. Naively converting your Pandas
+    DataFrame into a Dask DataFrame is not the right way to do it. But Dask makes
+    it easy for you to break your big dataset into smaller parts, and leverage your
+    existing Pandas code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Try Saturn Cloud Now](https://accounts.community.saturnenterprise.io/register?trackid=17d2e7598417f6-08ec90c572b54a-14241209-1fa400-17d2e75984292e)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Hugo Shi](https://www.linkedin.com/in/hugo-shi/)** is Founder of Saturn
+    Cloud, the go-to cloud workspace to scale Python, collaborate, deploy jobs, and
+    more.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://saturncloud.io/blog/dask-is-not-pandas/). Reposted with
+    permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Pandas not enough? Here are a few good alternatives to processing larger and
+    faster data in Python](/2021/07/pandas-alternatives-processing-larger-faster-data-python.html)*   [If
+    You Can Write Functions, You Can Use Dask](/2021/09/write-functions-use-dask.html)*   [Setting
+    Up Your Data Science & Machine Learning Capability in Python](/2020/08/data-science-machine-learning-capability-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_IND
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Pandas vs. Polars: A Comparative Analysis of Python''s Dataframe Libraries](https://www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Convert JSON Data into a DataFrame with Pandas](https://www.kdnuggets.com/how-to-convert-json-data-into-a-dataframe-with-pandas)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Process a DataFrame with Millions of Rows in Seconds](https://www.kdnuggets.com/2022/01/process-dataframe-millions-rows-seconds.html)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Pandas Plotting Functions You Might Not Know](https://www.kdnuggets.com/2023/02/5-pandas-plotting-functions-might-know.html)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine learning does not produce value for my business. Why?](https://www.kdnuggets.com/2021/12/machine-learning-produce-value-business.html)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Not-so-Sexy SQL Concepts to Make You Stand Out](https://www.kdnuggets.com/2022/02/not-so-sexy-sql-concepts-stand-out.html)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL

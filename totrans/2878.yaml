@@ -1,0 +1,348 @@
+- en: Automate Hyperparameter Tuning for Your Models
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/09/automate-hyperparameter-tuning-models.html](https://www.kdnuggets.com/2019/09/automate-hyperparameter-tuning-models.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/200b7b1476e3bfd5eb1b787f0bf77e0c.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Photo by [Marcin Nowak](https://unsplash.com/@marcin?utm_source=medium&utm_medium=referral)
+    on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: When we create our machine learning models, a common task that falls on us is
+    how to tune them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: People end up taking different manual approaches. Some of them work, and some
+    don’t, and a lot of time is spent in anticipation and running the code again and
+    again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***So that brings us to the quintessential question: Can we automate this process?***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A while back, I was working on an in-class competition from the [**“How to win
+    a data science competition”**](https://www.coursera.org/specializations/aml?siteID=lVarvwc5BD0-BShznKdc3CUauhfsM7_8xw&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0) Coursera
+    course. Learned a lot of new things, one among them being Hyperopt — A bayesian
+    Parameter Tuning Framework.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And I was amazed. I left my Mac with hyperopt in the night. And in the morning
+    I had my results. It was awesome, and I did avoid a lot of hit and trial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***This post is about automating hyperparameter tuning because our time is
+    more important than the machine.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, What is Hyperopt?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/07b5068358f10c44c9bb605f14d5de08.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'From the Hyperopt site:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Hyperopt is a Python library for serial and parallel optimization over awkward
+    search spaces, which may include real-valued, discrete, and conditional dimensions*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '***In simple terms, this means that we get an optimizer that could minimize/maximize
+    any function for us.*** For example, we can use this to minimize the log loss
+    or maximize accuracy.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: All of us know how grid search or random-grid search works.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A grid search goes through the parameters one by one, while a random search
+    goes through the parameters randomly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Hyperopt takes as an input space of hyperparameters in which it will search
+    and moves according to the result of past trials.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thus, Hyperopt aims to search the parameter space in an informed way.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: I won’t go in the details. But if you want to know more about how it works,
+    take a look at this [**paper**](https://conference.scipy.org/proceedings/scipy2013/pdfs/bergstra_hyperopt.pdf) by
+    J Bergstra. Here is the [**documentation**](https://github.com/hyperopt/hyperopt/wiki/FMin) from
+    Github.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To explain how hyperopt works, I will be working on the [heart dataset](https://www.kaggle.com/ronitf/heart-disease-uci) from
+    UCI precisely because it is a simple dataset. And why not do some good using Data
+    Science apart from just generating profits?
+  prefs: []
+  type: TYPE_NORMAL
+- en: This dataset predicts the presence of a heart disease given some variables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is a snapshot of the dataset :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/057cd48bf889d086004ebb786b499a86.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'This is how the target distribution looks like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6f1c997ab22f29cc5774fceb761f2579.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Hyperopt Step by Step
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/ab215cfc8f835d6a47aca674397034eb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'So, while trying to run hyperopt, we will need to create two Python objects:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***An Objective function: ***The objective function takes the hyperparameter
+    space as the input and returns the loss. Here we call our objective function `objective`'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '***A dictionary of hyperparams:*** We will define a hyperparam space by using
+    the variable `space` which is actually just a dictionary. We could choose different
+    distributions for different hyperparameter values.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In the end, we will use the `fmin` function from the hyperopt package to minimize
+    our `objective` through the `space`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can follow along with the code in this [Kaggle Kernel](https://www.kaggle.com/mlwhiz/how-to-use-hyperopt?scriptVersionId=20362799).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Create the objective function
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Here we create an objective function which takes as input a hyperparameter
+    space:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We first define a classifier, in this case, XGBoost. Just try to see how we
+    access the parameters from the space. For example `space[‘max_depth’]`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We fit the classifier to the train data and then predict on the cross-validation
+    set.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We calculate the required metric we want to maximize or minimize.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Since we only minimize using `fmin` in hyperopt, if we want to minimize `logloss` we
+    just send our metric as is. If we want to maximize accuracy we will try to minimize `-accuracy`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 2\. Create the Space for your classifier
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/b52692275b5b808df484cd14136ac7f2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, we ***create the search space for hyperparameters*** for our classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To do this, we end up using many of hyperopt built-in functions which define
+    various distributions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see in the code below, we use uniform distribution between 0.7 and
+    1 for our `subsample` hyperparameter. We also give a label for the subsample parameter`x_subsample`.
+    You need to provide different labels for each hyperparam you define. I generally
+    add a `x_` before my parameter name to create this label.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can also define a lot of other distributions too. Some of the most useful
+    stochastic expressions currently recognized by hyperopt’s optimization algorithms
+    are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`hp.choice(label, options)` — Returns one of the options, which should be a
+    list or tuple.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`hp.randint(label, upper)` — Returns a random integer in the range [0, upper).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`hp.uniform(label, low, high)` — Returns a value uniformly between `low` and `high`.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`hp.quniform(label, low, high, q)` — Returns a value like round(uniform(low,
+    high) / q) * q'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`hp.normal(label, mu, sigma)` — Returns a real value that’s normally-distributed
+    with mean mu and standard deviation sigma.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: There are a lot of other distributions. You can check them out [here](https://github.com/hyperopt/hyperopt/wiki/FMin).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. And finally, Run Hyperopt
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/55ef6dc9486792af8b3673d1003e49ec.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Once we run this, we get the best parameters for our model. Turns out we achieved
+    an accuracy of 90% by just doing this on the problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![](../Images/5abf6661a5d63b7b4a5ec8d44a2669cd.png)](https://miro.medium.com/max/2544/1*1cYghbkmt3-pBqv8LNcwhQ.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Now we can retrain our XGboost algorithm with these best params, and we
+    are done.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Running the above gives us pretty good hyperparams for our learning algorithm.
+    And that saves me a lot of time to think about various other hypotheses and testing
+    them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I tend to use this a lot while tuning my models. ***From my experience, the
+    most crucial part in this whole procedure is setting up the hyperparameter space,
+    and that comes by experience as well as knowledge about the models.***
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, Hyperopt is an awesome tool to have in your repository but never neglect
+    to understand what your models does. It will be very helpful in the long run.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can get the full code in this [Kaggle Kernel](https://www.kaggle.com/mlwhiz/how-to-use-hyperopt?scriptVersionId=20362799).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Continue Learning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you want to learn more about practical data science, do take a look at the [**“How
+    to win a data science competition”**](https://www.coursera.org/specializations/aml?siteID=lVarvwc5BD0-BShznKdc3CUauhfsM7_8xw&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0) Coursera
+    course. Learned a lot of new things from this course taught by one of the most
+    prolific Kaggler.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for the read. I am going to be writing more beginner-friendly posts in
+    the future too. Follow me up at [**Medium**](https://medium.com/@rahul_agarwal?source=post_page---------------------------) or
+    Subscribe to my [**blog**](http://eepurl.com/dbQnuX?source=post_page---------------------------) to
+    be informed about them. As always, I welcome feedback and constructive criticism
+    and can be reached on Twitter [@mlwhiz](https://twitter.com/MLWhiz?source=post_page---------------------------).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, a small disclaimer - There might be some affiliate links in this post
+    to relevant resources as sharing knowledge is never a bad idea.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Rahul Agarwal](https://www.linkedin.com/in/rahulagwl/)** is a Data
+    Scientist at Walmart Labs.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/automate-hyperparameter-tuning-for-your-models-71b18f819604).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to Automate Hyperparameter Optimization](/2019/06/automate-hyperparameter-optimization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Keras Hyperparameter Tuning in Google Colab Using Hyperas](/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automated Machine Learning: Just How Much?](/2019/09/automated-machine-learning-just-how-much.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automate Your Codebase with Promptr and GPT](https://www.kdnuggets.com/2023/04/automate-codebase-promptr-gpt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Tasks To Automate With Python](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automate Microsoft Excel and Word Using Python](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automate the Boring Stuff with GPT-4 and Python](https://www.kdnuggets.com/2023/03/automate-boring-stuff-chatgpt-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

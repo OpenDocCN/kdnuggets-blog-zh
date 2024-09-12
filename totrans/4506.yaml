@@ -1,0 +1,329 @@
+- en: Tokenization and Text Data Preparation with TensorFlow & Keras
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/03/tensorflow-keras-tokenization-text-data-prep.html](https://www.kdnuggets.com/2020/03/tensorflow-keras-tokenization-text-data-prep.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/012ff6cfe934b8ef10fb2581555d178f.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Image by [Willi Heidelbach](https://pixabay.com/users/wilhei-883152/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=705667)
+    from [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=705667)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the past we have had a look at a [general approach to preprocessing text
+    data](/2017/12/general-approach-preprocessing-text-data.html), which focused on
+    tokenization, normalization, and noise removal. We then followed that up with
+    an overview of [text data preprocessing using Python](/2018/03/text-data-preprocessing-walkthrough-python.html)
+    for NLP projects, which is essentially a practical implementation of the framework
+    outlined in the former article, and which encompasses a mainly manual approach
+    to text data preprocessing. We have also had a look at what goes into building
+    an elementary [text data vocabulary using Python](/2019/11/create-vocabulary-nlp-tasks-python.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are numerous tools available for automating much of this preprocessing
+    and text data preparation, however. These tools existed prior to the publication
+    of those articles for certain, but there has been an explosion in their proliferation
+    since. Since much NLP work is now accomplished using neural networks, it makes
+    sense that neural network implementation libraries such as TensorFlow — and also,
+    yet simultaneously, Keras — would include methods for achieving these preparation
+    tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article will look at tokenizing and further preparing text data for feeding
+    into a neural network using TensorFlow and Keras preprocessing tools. While the
+    additional concept of creating and padding sequences of encoded data for neural
+    network consumption were not treated in these previous articles, it will be added
+    herein. Conversely, while noise removal was covered in the previous articles,
+    it will not be here. What constitutes noise in text data can be a task-specific
+    undertaking, and the previous treatment of this topic is still relevant as it
+    is.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For what we will accomplish today, we will make use of 2 Keras preprocessing
+    tools: the [`Tokenizer`](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/text/Tokenizer)
+    class, and the [`pad_sequences`](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/sequence/pad_sequences)
+    module.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead of using a real dataset, either a TensorFlow inclusion or something
+    from the real world, we use a few toy sentences as stand-ins while we get the
+    coding down. Next time we can extend our code to both use a real dataset and perform
+    some interesting tasks, such as classification or something similar. Once this
+    process is understood, extending it to larger datasets is trivial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's start with the necessary imports and some "data" for demonstration.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, some hyperparameters for performing tokenization and preparing the standardized
+    data representation, with explanations below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`num_words = 1000`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This will be the maximum number of words from our resulting tokenized data vocabulary
+    which are to be used, truncated after the 1000 most common words in our case.
+    This will not be an issue in our small dataset, but is being shown for demonstration
+    purposes.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`oov_token = <UNK>`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is the token which will be used for out of vocabulary tokens encountered
+    during the tokenizing and encoding of test data sequences, created using the word
+    index built during tokenization of our training data.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`pad_type = ''post''`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When we are encoding our numeric sequence representations of the text data,
+    our sentences (or arbitrary text chunk) lengths will not be uniform, and so we
+    will need to select a maximum length for sentences and pad unused sentence positions
+    in shorter sentences with a padding character. In our case, our maximum sentence
+    length will be determined by searching our sentences for the one of maximum length,
+    and padding characters will be '0'.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`trunc_type = ''post''`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As in the above, when we are encoding our numeric sequence representations of
+    the text data, our sentences (or arbitrary text chunk) lengths will not be uniform,
+    and so we will need to select a maximum length for sentences and pad unused sentence
+    positions in shorter sentences with a padding character. Whether we pre-pad or
+    post-pad sentences is our decision to make, and we have selected 'post', meaning
+    that our sentence sequence numeric representations corresponding to word index
+    entries will appear at the left-most positions of our resulting sentence vectors,
+    while the padding characters ('0') will appear after our actual data at the right-most
+    positions of our resulting sentence vectors.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/14bc65aceee6b704b80532b634ab2b2b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: [Manning](https://freecontent.manning.com/deep-learning-for-text/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let's perform the tokenization, sequence encoding, and sequence padding.
+    We will walk through this code chunk by chunk below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here''s what''s happening chunk by chunk:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`# Tokenize our training data`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is straightforward; we are using the TensorFlow (Keras) [`Tokenizer`](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/text/Tokenizer)
+    class to automate the tokenization of our training data. First we create the `Tokenizer`
+    object, providing the maximum number of words to keep in our vocabulary after
+    tokenization, as well as an out of vocabulary token to use for encoding test data
+    words we have not come across in our training, without which these previously-unseen
+    words would simply be dropped from our vocabulary and mysteriously unaccounted
+    for. To learn more about other arguments for the TensorFlow tokenizer, check out
+    the [documentation](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/text/Tokenizer).
+    After the `Tokenizer` has been created, we then fit it on the training data (we
+    will use it later to fit the testing data as well).
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`# Get our training data word index`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A byproduct of the tokenization process is the creation of a word index, which
+    maps words in our vocabulary to their numeric representation, a mapping which
+    will be essential for encoding our sequences. Since we will reference this later
+    to print out, we assign it a variable here to simplify a bit.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`# Encode training data sentences into sequences`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now that we have tokenized our data and have a word to numeric representation
+    mapping of our vocabulary, let's use it to encode our sequences. Here, we are
+    converting our text sentences from something like "My name is Matthew," to something
+    like "6 8 2 19," where each of those numbers match up in the index to the corresponding
+    words. Since neural networks work by performing computation on numbers, passing
+    in a bunch of words won't work. Hence, sequences. And remember that this is only
+    the training data we are working on right now; testing data is necessarily tokenized
+    and encoded afterwards, below.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`# Get max training sequence length`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Remember when we said we needed to have a maximum sequence length for padding
+    our encoded sentences? We could set this limit ourselves, but in our case we will
+    simply find the longest encoded sequence and use that as our maximum sequence
+    length. There would certainly be reasons you would not want to do this in practice,
+    but there would also be times it would be appropriate. The `maxlen` variable is
+    then used below in the actual training sequence padding.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`# Pad the training sequences`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As mentioned above, we need our encoded sequences to be of the same length.
+    We just found out the length of the longest sequence, and will use that to pad
+    all other sequences with extra '0's at the end ('post') and will also truncate
+    any sequences longer than maximum length from the end ('post') as well. Here we
+    use the TensorFlow (Keras) [`pad_sequences`](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/sequence/pad_sequences)
+    module to accomplish this. You can look at the documentation for additional padding
+    options.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`# Output the results of our work`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now let's see what we've done. We would expect to note the longest sequence
+    and the padding of those which are shorter. Also note that when padded, our sequences
+    are converted from Python lists to Numpy arrays, which is helpful since that is
+    what we will ultimately feed into our neural network. The shape of our training
+    sequences matrix is the number of sentences (sequences) in our training set (4)
+    by the length of our longest sequence (`maxlen`, or 12).
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now let's use our tokenizer to tokenize the test data, and then similarly encode
+    our sequences. This is all quite similar to the above. Note that we are using
+    the same tokenizer we created for training in order to facilitate simpatico between
+    the 2 datasets, using the same vocabulary. We also pad to the same length and
+    specifications as the training sequences.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Can you see, for instance, how having different lengths of padded sequences
+    between training and testing sets would cause a problem?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, let's check out are encoded test data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that, since we are encoding some words in the test data which were not
+    seen in the training data, we now have some out of vocabulary tokens which we
+    encoded as <UNK> (specifically 'want', for example).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we have padded sequences, and more importantly know how to get them
+    again with different data, we are ready to do something with them. Next time,
+    we will replace the toy data we were using this time with actual data, and with
+    very little change to our code (save the possible necessity of classification
+    labels for our train and test data), we will move forward with an NLP task of
+    some sort, most likely classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[10 Python String Processing Tips & Tricks](/2020/01/python-string-processing-primer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with Automated Text Summarization](/2019/11/getting-started-automated-text-summarization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Create a Vocabulary for NLP Tasks in Python](/2019/11/create-vocabulary-nlp-tasks-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Preparation and Raw Data in Machine Learning](https://www.kdnuggets.com/2022/07/data-preparation-raw-data-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Preparation with SQL Cheatsheet](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Preparation in R Cheatsheet](https://www.kdnuggets.com/2021/10/data-preparation-r-dplyr-cheat-sheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Keras 3.0: Everything You Need To Know](https://www.kdnuggets.com/2023/07/keras-30-everything-need-know.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

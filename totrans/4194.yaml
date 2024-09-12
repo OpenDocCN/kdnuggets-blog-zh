@@ -1,0 +1,721 @@
+- en: 'Serving ML Models in Production: Common Patterns'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/10/serving-ml-models-production-common-patterns.html](https://www.kdnuggets.com/2021/10/serving-ml-models-production-common-patterns.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Simon Mo](https://www.anyscale.com/blog?author=simon-mo), [Edward Oakes](https://www.anyscale.com/blog?author=edward-oakes)
+    and [Michael Galarnyk](https://www.anyscale.com/blog?author=michael-galarnyk)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This post is based on Simon Mo’s “Patterns of Machine Learning in Production” [talk](https://www.youtube.com/watch?v=mM4hJLelzSw) from
+    Ray Summit 2021.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Over the past couple years, we''ve listened to ML practitioners across many
+    different industries to learn and improve the tooling around ML production use
+    cases. Through this, we''ve seen 4 common patterns of machine learning in production:
+    pipeline, ensemble, business logic, and online learning. In the ML serving space,
+    implementing these patterns typically involves a tradeoff between ease of development
+    and production readiness. [Ray Serve](https://docs.ray.io/en/latest/serve/index.html) was
+    built to support these patterns by being both easy to develop and production ready.
+    It is a scalable and programmable serving framework built on top of [Ray](https://www.ray.io/) to
+    help you scale your microservices and ML models in production.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This post goes over:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Ray Serve
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Where Ray Serve fits in the ML Serving Space
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some common patterns of ML in production
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to implement these patterns using Ray Serve
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: What is Ray Serve?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![Ray Ecosystem Serving ML Models in Production: Common Patterns](../Images/4bf023c751a82dcc888c87fd498e4ab9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Ray Serve is built on top of the Ray distributed computing platform, allowing
+    it to easily scale to many machines, both in your datacenter and in the cloud.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Ray Serve is an easy-to-use scalable model serving library built on Ray. Some
+    advantages of the library include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Scalability: Horizontally scale across hundreds of processes or machines, while
+    keeping the overhead in single-digit milliseconds'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Multi-model composition: Easily compose multiple models, mix model serving
+    with business logic, and independently scale components, without complex microservices.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Batching](https://docs.ray.io/en/latest/serve/tutorials/batch.html): Native
+    support for batching requests to better utilize hardware and improve throughput.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[FastAPI Integration](https://docs.ray.io/en/latest/serve/http-servehandle.html#serve-fastapi-http): Scale
+    an existing FastAPI server easily or define an HTTP interface for your model using
+    its simple, elegant API.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Framework-agnostic: Use a single toolkit to serve everything from deep learning
+    models built with frameworks like [PyTorch](https://docs.ray.io/en/master/serve/tutorials/pytorch.html), [Tensorflow
+    and Keras](https://docs.ray.io/en/latest/serve/tutorials/tensorflow.html), to [Scikit-Learn
+    models](https://docs.ray.io/en/latest/serve/tutorials/sklearn.html), to [arbitrary
+    Python business logic](https://www.anyscale.com/blog/how-ikigai-labs-serves-interactive-ai-workflows-at-scale-using-ray-serve).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can get started with Ray Serve by checking out the [Ray Serve Quickstart.](https://docs.ray.io/en/latest/serve/index.html)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Where Ray Serve fits in the ML Serving Space
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![WhereRayServeFitsIn](../Images/b4eed5d580a6125b7245a30168ed04ba.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The image above shows that In the ML serving space, there is typically a tradeoff
+    between ease of development and production readiness.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Web Frameworks**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To deploy a ML service, people typically start with the simplest systems out
+    of the box like Flask or FastAPI. However, even though they can deliver a single
+    prediction well and work well in proofs of concept, they cannot achieve high performance
+    and scaling up is often costly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Custom Tooling**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If web frameworks fail, teams typically transition to some sort of custom tooling
+    by gluing together several tools to make the system ready for production. However,
+    these custom toolings are typically hard to develop, deploy, and manage.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Specialized Systems**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is a group of specialized systems for deploying and managing ML models
+    in production. While these systems are great at managing and serving ML models,
+    they often have less flexibility than web frameworks and often have a high learning
+    curve.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Ray Serve**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ray Serve is a web framework specialized for ML model serving. It aspires to
+    be easy to use, easy to deploy, and production ready.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What makes Ray Serve Different?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Many Tools Run 1 Model Well](../Images/4b40ac8b5d230e62b6a366aa3861b83a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'There are so many tools for training and serving one model. These tools help
+    you run and deploy one model very well. The problem is that machine learning in
+    real life is usually not that simple. In a production setting, you can encounter
+    problems like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrangling with infrastructure to scale beyond one copy of a model.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Having to work through complex YAML configuration files, learn custom tooling,
+    and develop MLOps expertise.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Hit scalability or performance issues, unable to deliver business SLA objectives.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Many tools are very costly and can often lead to underutilization of resources.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Scaling out a single model is hard enough. For many ML in production use cases,
+    we observed that complex workloads require composing many different models together.
+    Ray Serve is natively built for this kind of use case involving many models spanning
+    multiple nodes. You can check out [this part of the talk](https://youtu.be/mM4hJLelzSw?t=651) where
+    we go in depth about Ray Serve’s architectural components.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Patterns of ML Models in Production
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![13PatternsMLProduction](../Images/5373302cc6c845b5e4c850313e950697.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'A significant portion of ML applications in production follow 4 model patterns:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: pipeline
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ensemble
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: business logic
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: online learning
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This section will describe each of these patterns, show how they are used, go
+    over how existing tools typically implement them, and show how Ray Serve can solve
+    these challenges.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pipeline Pattern
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/54548db95bd65dc4919d3abfdede19df.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A typical computer vision pipeline
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The image above shows a typical computer vision pipeline that uses multiple
+    deep learning models to caption the object in the picture. This pipeline consists
+    of the following steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1) The raw image goes through common preprocessing like image decoding, augmentation
+    and clipping.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2) A detection classifier model is used to identify the bounding box and the
+    category. It's a cat.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3) The image is passed into a keypoint detection model to identify the posture
+    of the object. For the cat image, the model could identify key points like paws,
+    neck, and head.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4) Lastly, an NLP synthesis model generates a category of what the picture shows.
+    In this case, a standing cat.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A typical pipeline rarely consists of just one model. To tackle real-life issues,
+    ML applications often use many different models to perform even simple tasks.
+    In general, pipelines break a specific task into many steps, where each step is
+    conquered by a machine learning algorithm or some procedure. Let’s now go over
+    a couple pipelines you might already be familiar with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Scikit-Learn Pipeline**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Pipeline([(‘scaler’, StandardScaler()), (‘svc’, SVC())])`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[scikit-learn’s pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html) can
+    be used to combine multiple “models” and “processing objects” together.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Recommendation Systems**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`[EmbeddingLookup(), FeatureInteraction(), NearestNeighbors(), Ranking()]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are common pipeline patterns in recommendation systems. Item and video
+    recommendations like those that you might see at [Amazon](https://www.amazon.science/publications/two-decades-of-recommender-systems-at-amazon-com) and [YouTube](https://research.google/pubs/pub45530/),
+    respectively,  typically go through multiple stages like embedding lookup, feature
+    interaction, nearest neighbor models, and ranking models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Common Preprocessing**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`[HeavyWeightMLMegaModel(), DecisionTree()/BoostingModel()]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are some very common use cases where some massive ML models are used to
+    take care of common processing for text or images. For example, at Facebook, groups
+    of ML researchers at [FAIR](https://ai.facebook.com/) create state of the art
+    heavyweight models for vision and text. Then different product groups create downstream
+    models to tackle their business use case (e.g. [suicide prevention](https://ai.facebook.com/blog/under-the-hood-suicide-prevention-tools-powered-by-ai/))
+    by implementing smaller models using random forest. The shared common preprocessing
+    step oftentimes are materialized into a [feature store pipeline](https://www.tecton.ai/blog/what-is-a-feature-store/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: General Pipeline Implementation Options
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![17PipelineImplementation](../Images/79bbb459ea0883039df1a9aef463ae8a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Before Ray Serve, implementing pipelines generally meant you had to choose between
+    wrapping your models in a web server or using many specialized microservices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In general, there are two approaches to implement a pipeline: wrap your models
+    in a web server or use many specialized microservices.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Wrap Models in a Web Server**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The left side of the image above shows models that get run in a for loop during
+    the web handling path. Whenever a request comes in, models get loaded (they can
+    also be cached) and run through the pipeline. While this is simple and easy to
+    implement, a major flaw is that this is hard to scale and not performant because
+    each request gets handled sequentially.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Many Specialized Microservices**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The right side of the image above shows many specialized microservices where
+    you essentially build and deploy one microservice per model. These microservices
+    can be native ML platforms, [Kubeflow](https://www.kubeflow.org/), or even hosted
+    services like AWS [SageMaker](https://aws.amazon.com/sagemaker/). However, as
+    the number of models grow, the complexity and operational cost drastically increases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Implementing Pipelines in Ray Serve
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Pseudocode showing how Ray Serve allows deployments to call other deployments
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Ray Serve, you can directly call other deployments within your deployment. 
+    In this code above, there are three deployments. `Featurizer` and `Predictor`
+    are just regular deployments containing the models. The `Orchestrator` receives
+    the web input, passes it to the featurizer process via the featurizer handle,
+    and then passes the computed feature to the predictor process. The interface is
+    just Python and you don’t need to learn any new framework or domain-specific language.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ray Serve achieves this with a mechanism called ServeHandle which gives you
+    a similar flexibility to embed everything in the web server, without sacrificing
+    performance or scalability. It allows you to directly call other deployments that
+    live in other processes on other nodes. This allows you to scale out each deployment
+    individually and load balance calls across the replicas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you would like to get a deeper understanding of how this works, [check out
+    this section of Simon Mo’s talk](https://youtu.be/mM4hJLelzSw?t=650) to learn
+    about Ray Serve’s architecture. If you would like an example of a computer vision
+    pipeline in production, [check out how Robovision used 5 ML models for vehicle
+    detection](https://www.anyscale.com/blog/the-third-generation-of-production-ml-architectures#:~:text=A%20Tool%20for%20High%20Performance%20ML%20Systems).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ensemble Pattern
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![Ensemble Pattern](../Images/16434d4cd2a985d8583f19809d92c256.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In a lot of production use cases, a pipeline is appropriate. However, one limitation
+    of pipelines is that there can often be many upstream models for a given downstream
+    model. This is where ensembles are useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3322debd6651907f43438df2050ec8ac.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Ensemble Use Cases
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ensemble patterns involve mixing output from one or more models. They are also
+    called model stacking in some cases. Below are three use cases of ensemble patterns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Model Update**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: New models are developed and trained over time. This means there will always
+    be new versions of the model in production. The question becomes, how do you make
+    sure the new models are valid and performant in live online traffic scenarios?
+    One way to do this is by putting some portion of the traffic through the new model.
+    You still select the output from the known good model, but you are also collecting
+    live output from the newer version of the models in order to validate it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Aggregation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The most widely known use case is for aggregation. For regression models, outputs
+    from multiple models are averaged. For classification models, the output will
+    be a voted version of multiple models’ output. For example, if two models vote
+    for cat and one model votes for dog, then the aggregated output will be cat. Aggregation
+    helps combat inaccuracy in individual models and generally makes the output more
+    accurate and “safer”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Dynamic Selection**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another use case for ensemble models is to dynamically perform model selection
+    given input attributes. For example, if the input contains a cat, model A will
+    be used because it is specialized for cats.  If the input contains a dog, model
+    B will be used because it is specialized for dogs. Note that this dynamic selection
+    doesn’t necessarily mean the pipeline itself has to be static. It could also be
+    selecting models given user feedback.
+  prefs: []
+  type: TYPE_NORMAL
+- en: General Ensemble Implementation Options
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![General Ensemble Implementation](../Images/1749b4e53b9e59fc2b20a77e30ca3589.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Before Ray Serve, implementing ensembles generally meant you had to choose between
+    wrapping your models in a web server or using many specialized microservices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ensemble implementations suffer the same sort of issues as pipelines. It is
+    simple to wrap models in a web server, but it is not performant. When you use
+    specialized microservices, you end up having a lot of operational overhead as
+    the number of microservices scale with the number of models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/cef1f239a6ce6e2c866380f7578463f6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Ensemble example from the [2020 Anyscale demo](https://youtu.be/8GTd8Y_JGTQ)
+  prefs: []
+  type: TYPE_NORMAL
+- en: With Ray Serve, the kind of pattern is incredibly simple. You can look at the [2020
+    Anyscale demo](https://youtu.be/8GTd8Y_JGTQ) to see how to utilize Ray Serve’s
+    handle mechanism to perform dynamic model selection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another example of using Ray Serve for ensembling is Wildlife Studios combining
+    output of many classifiers for a single prediction. You can check out how they
+    were able to [serve in-game offers 3x faster with Ray Serve](https://www.anyscale.com/blog/wildlife-studios-serves-in-game-offers-3x-faster-at-1-10th-the-cost-with-ray).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Business Logic Pattern
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Productionizing machine learning will always involve business logic. No models
+    can stand-alone and serve requests by themselves. Business logic patterns involve
+    everything that’s involved in a common ML task that is not ML model inference.
+    This includes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Database lookups for relational records
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Web API calls for external services
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Feature store lookup for pre-compute feature vectors
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Feature transformations like data validation, encoding, and decoding.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: General Business Logic Implementation Options
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![General Business Logic Implementation Options](../Images/0563870ba1f93676e64c2abf3153cea3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The pseudocode for the web handler above does the following things:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It loads the model (let’s say from S3)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Validates the input from the database
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Looks up some pre-computed features from the feature store.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Only after the web handler completes these business logic steps are the inputs
+    passed through to ML models. The problem is that the requirements of model inference
+    and business logic lead to the server being *both network bounded and compute
+    bounded*. This is due to the model loading step, database lookup, and feature
+    store lookups being network bounded and I/O heavy as well as the model inference
+    being compute bound and memory hungry. The combination of these factors lead to
+    an inefficient utilization of resources. Scaling will be expensive.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/0f770ce2d44b93326cd3be5d2f05d86d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Web handler approach (left) and microservices approach (right)
+  prefs: []
+  type: TYPE_NORMAL
+- en: A common way to increase utilization is to split models out into model servers
+    or microservices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The web app is purely network bounded while the model servers are compute bounded.
+    However, a common problem is the interface between the two. If you put too much
+    business logic into the model server, then the model servers become a mix of network
+    bounded and compute bounded calls.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you let the model servers be pure model servers, then you have the “**tensor-in,
+    tensor-out**” interface problem. The input types for model servers are typically
+    very constrained to just tensors or some alternate form of it. This makes it hard
+    to keep the pre-processing, post-processing, and business logic in sync with the
+    model itself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It becomes hard to reason about the interaction between the processing logic
+    and the model itself because during training, the processing logic and models
+    are tightly coupled, but when serving, they are split across two servers and two
+    implementations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Neither the web handler approach nor the microservices approach is satisfactory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Implementing Business Logic in Ray Serve
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/d89c6e5d4fea7fa9ed2e67228e990351.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Business Logic in Ray Serve
+  prefs: []
+  type: TYPE_NORMAL
+- en: With Ray Serve, you just have to make some simple changes to the old web server
+    to alleviate the issues described above. Instead of loading the model directly,
+    you can retrieve a ServeHandle that wraps the model, and offload the computation
+    to another deployment. All the data types are preserved and there is no need to
+    write “tensor-in, tensor-out” API calls--you can just pass in regular Python types.
+    Additionally, the model deployment class can stay in the same file, and be deployed
+    together with the prediction handler. This makes it easy to understand and debug
+    the code. `model.remote` looks like just a function and you can easily trace it
+    to the model deployment class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this way, Ray Serve helps you split up the business logic and inference into
+    two separation components, one I/O heavy and the other compute heavy. This allows
+    you to scale each piece individually, without losing the ease of deployment. Additionally,
+    because `model.remote` is just a function call, it’s a lot easier to test and
+    debug than separate external services.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ray Serve FastAPI Integration
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8595ad1b26ebf6e48945fe49e0c55bab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Ray Serve: Ingress with FastAPI'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An important part of implementing business logic and other patterns is authentication
+    and input validation. [Ray Serve natively integrates with FastAPI](https://docs.ray.io/en/latest/serve/http-servehandle.html#serve-fastapi-http),
+    which is a type safe and ergonomic web framework. [FastAPI](https://fastapi.tiangolo.com/) has
+    features like automatic dependency injection, type checking and validation, and
+    OpenAPI doc generation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With Ray Serve, you can directly pass the FastAPI app object into it with `@serve.ingress`.
+    This decorator makes sure that all existing FastAPI routes still work and that
+    you can attach new routes with the deployment class so states like loaded models,
+    and networked database connections can easily be managed. Architecturally, we
+    just made sure that your FastAPI app is correctly embedded into the replica actor
+    and the FastAPI app can scale out across many Ray nodes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Online Learning
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Online learning is an emerging pattern that’s become more and more widely used.
+    It refers to a model running in production that is constantly being updated, trained,
+    validated and deployed. Below are three use cases of online learning patterns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Dynamically Learn Model Weights**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are use cases for dynamically learning model weights online. As users
+    interact with your services, these updated model weights can contribute to a personalized
+    model for each user or group.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f7f04df0e61fb914656ea0ffd641fc7f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Online Learning example at Ant Group](https://www.anyscale.com/blog/online-resource-allocation-with-ray-at-ant-group) (image
+    courtesy of Ant Group)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One case study of online learning consists of an online resource allocation
+    business solution at Ant Group. The model is trained from offline data, then combined
+    with real time streaming data source, and then served live traffic. One thing
+    to note is that online learning systems are drastically more complex than their
+    static serving counterparts. In this case, putting models in the web server, or
+    even splitting it up into multiple microservices, would not help with the implementation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Dynamically Learn Parameters to Orchestrate Models**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are also use cases for learning parameters to orchestrate or compose models,
+    for example, [learning which model a user prefers](https://dl.acm.org/doi/fullHtml/10.1145/3383313.3411550).
+    This manifests often in model selection scenarios or contextual bandit algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Reinforcement Learning**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reinforcement learning is the branch of machine learning that trains agents
+    to interact with the environment. The environment can be the physical world or
+    a simulated environment. You can learn about reinforcement learning [here](https://www.anyscale.com/blog/an-introduction-to-reinforcement-learning-with-openai-gym-rllib-and-google) and
+    see how you can deploy a RL model using Ray Serve [here](https://docs.ray.io/en/latest/serve/tutorials/rllib.html#serve-rllib-tutorial).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/2f8011f22aa2376f8e75a951ce194e89.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Ray Serve is easy to develop and production ready.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This post went over 4 main patterns of machine learning in production, how Ray
+    Serve can help you natively scale and work with complex architectures, and how
+    ML in production often means many models in production. Ray Serve is built with
+    all of this in mind on top of the distributed runtime Ray. If you’re interested
+    in learning more about Ray, you can check out the [documentation](https://ray.io/),
+    join us on [Discourse](https://discuss.ray.io/), and check out the [whitepaper](https://tinyurl.com/ray-white-paper)!
+    If you're interested in working with us to make it easier to leverage Ray, we're [hiring](https://jobs.lever.co/anyscale)!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.anyscale.com/blog/serving-ml-models-in-production-common-patterns).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Getting Started with Distributed Machine Learning with PyTorch and Ray](/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Speed up Scikit-Learn Model Training](/2021/02/speed-up-scikit-learn-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Build a Data Science Portfolio](/2018/07/build-data-science-portfolio.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Top 7 Model Deployment and Serving Tools](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Prioritizing Data Science Models for Production](https://www.kdnuggets.com/2022/04/prioritizing-data-science-models-production.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2023: Practical Strategies for Deploying ML…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Design Patterns in Machine Learning for MLOps](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unveiling Hidden Patterns: An Introduction to Hierarchical Clustering](https://www.kdnuggets.com/unveiling-hidden-patterns-an-introduction-to-hierarchical-clustering)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Full End-to-End Deployment of a Machine Learning Algorithm into a…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

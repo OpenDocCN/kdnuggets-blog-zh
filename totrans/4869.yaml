@@ -1,0 +1,282 @@
+- en: Using Tensorflow Object Detection to do Pixel Wise Classification
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/03/tensorflow-object-detection-pixel-wise-classification.html](https://www.kdnuggets.com/2018/03/tensorflow-object-detection-pixel-wise-classification.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Priyanka Kochhar](https://github.com/priya-dwivedi), Deep Learning Consultant**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the past I have used Tensorflow Object Detection API to implement object
+    detection with the output being bounding boxes around different objects of interest
+    in the image. For more please look at my [article](https://towardsdatascience.com/is-google-tensorflow-object-detection-api-the-easiest-way-to-implement-image-recognition-a8bd1f500ea0).
+    Tensorflow recently added new functionality and now we can extend the API to determine
+    pixel by pixel location of objects of interest. See example below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8ada5265389d313a808b67abc2756e52.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Tensorflow Object Detection Mask RCNN
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code is on my [Github](https://github.com/priya-dwivedi/Deep-Learning/blob/master/Mask_RCNN/Mask_RCNN_Videos.ipynb) .
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Instance Segmentation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instance segmentation is an extension of object detection, where a binary mask
+    (i.e. object vs. background) is associated with every bounding box. This allows
+    for more fine-grained information about the extent of the object within the box.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So when would we need this extra granularity? Some examples that come to mind
+    are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: i) Self Driving Cars — May need to know exactly where another car is on the
+    road or the location of a human crossing the road
+  prefs: []
+  type: TYPE_NORMAL
+- en: ii) Robotic systems — Robots that say join two parts together will perform better
+    if they know the exact locations of the two parts
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are several algorithms that implement instance segmentation but the one
+    used by Tensorflow Object Detection API is Mask RCNN.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Mask RCNN**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lets start with a gentle introduction to Mask RCNN.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/806d8ced7ec61ac42c409220b5910737.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Mask RCNN Architecture
+  prefs: []
+  type: TYPE_NORMAL
+- en: Faster RCNN is a very good algorithm that is used for object detection. Faster
+    R-CNN consists of two stages. The first stage, called a Region Proposal Network
+    (RPN), proposes candidate object bounding boxes. The second stage, which is in
+    essence Fast R-CNN, extracts features using RoIPool from each candidate box and
+    performs classification and bounding-box regression. The features used by both
+    stages can be shared for faster inference.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Mask R-CNN is conceptually simple: Faster R-CNN has two outputs for each candidate
+    object, a class label and a bounding-box offset; to this we add a third branch
+    that outputs the object mask — which is a binary mask that indicates the pixels
+    where the object is in the bounding box. But the additional mask output is distinct
+    from the class and box outputs, requiring extraction of much finer spatial layout
+    of an object. To do this Mask RCNN uses the [Fully Convolution Network](https://people.eecs.berkeley.edu/~jonlong/long_shelhamer_fcn.pdf)Mask
+    RCNN Paper (FCN) described below.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c695f8b73516faad893949d212fd42ed.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fully Convolutional Network Architecture
+  prefs: []
+  type: TYPE_NORMAL
+- en: FCN is a popular algorithm for doing semantic segmentation. This model uses
+    various blocks of convolution and max pool layers to first decompress an image
+    to 1/32th of its original size. It then makes a class prediction at this level
+    of granularity. Finally it uses up sampling and deconvolution layers to resize
+    the image to its original dimensions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So in short we can say that Mask RCNN combines the two networks — Faster RCNN
+    and FCN in one mega architecture. The loss function for the model is the total
+    loss in doing classification, generating bounding box and generating the mask.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Mask RCNN has a couple of additional improvements that make it much more accurate
+    than FCN. You can read more about them in their [paper](https://arxiv.org/pdf/1703.06870.pdf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Implementation****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Testing on images*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To test this model on images, you can leverage the [code](https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb) shared
+    on the tensorflow website. I tested their most lightweight model — [mask_rcnn_inception_v2_coco](http://download.tensorflow.org/models/object_detection/mask_rcnn_inception_v2_coco_2018_01_28.tar.gz).
+    Just download the model and upgrade to tensorflow 1.5 (this is important!). See
+    sample result below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5ee142c3cc54af6d658a858a20600741.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Mask RCNN on Kites Image
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Testing on videos*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For me the more interesting exercise was to run the model on sample videos from
+    you tube. I used keepvid to download a few videos from you tube. And I love the
+    library moviepy for manipulating video files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The main steps are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use the VideoFileClip function to extract each frame from the video
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The fl_image function is an awesome function that can take an image and replace
+    it with a modified image. I used this to run object detection on every image extracted
+    from the video
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Finally all the modified clip images were combined into a new video
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can find the full code on my [Github](https://github.com/priya-dwivedi/Deep-Learning/blob/master/Mask_RCNN/Mask_RCNN_Videos.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Next Steps****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Couple of additional ideas for further exploration of this API:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try the more accurate but high overhead models and see how much of a difference
+    they make
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use the API to train Mask RCNN on a custom dataset. This is next on my to do
+    list.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Give me a ❤️ if you liked this post:) Hope you pull the code and try it yourself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Other writings**:[ https://medium.com/@priya.dwivedi/](https://medium.com/@priya.dwivedi/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'PS: I have my own deep learning consultancy and love to build interesting deep
+    learning models. I have helped several startups deploy innovative AI based solutions.
+    If you have a project that we can collaborate on, then please contact me at priya.toronto3@gmail.com'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**References:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Mask RCNN Paper](https://arxiv.org/abs/1703.06870)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Google Tensorflow Object Detection Github](https://github.com/tensorflow/models/tree/master/research/object_detection)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[COCO dataset](http://mscoco.org/home/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understand difference b/w instance segmentation and semantic segmentation](https://stackoverflow.com/questions/33947823/what-is-semantic-segmentation-compared-to-segmentation-and-scene-labeling)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Very good [explanation](https://www.youtube.com/watch?v=UdZnhZrM2vQ&t=111s) of
+    Mask RCNN
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Priyanka Kochhar](https://github.com/priya-dwivedi)** has been a data
+    scientist for 10+ years. She now has her own deep learning consultancy and loves
+    to work on interesting problems. She has helped several startups deploy innovative
+    AI based solutions. If you have a project that she can collaborate on then please
+    contact her at [priya.toronto3@gmail.com](mailto:priya.toronto3@gmail.com).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/using-tensorflow-object-detection-to-do-pixel-wise-classification-702bf2605182).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Is Google Tensorflow Object Detection API the Easiest Way to Implement Image
+    Recognition?](/2018/03/google-tensorflow-object-detection-api-the-easiest-way-implement-image-recognition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Toy Detector with Tensorflow Object Detection API](/2018/02/building-toy-detector-tensorflow-object-detection-api.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Training and Visualising Word Vectors](/2018/01/training-visualising-word-vectors.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n09, Mar 2: Telling a Great Data Story: A…](https://www.kdnuggets.com/2022/n09.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Is the Difference Between SQL and Object-Relational Mapping (ORM)?](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Perform Motion Detection Using Python](https://www.kdnuggets.com/2022/08/perform-motion-detection-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Hugging Face Transformers for Emotion Detection in Text](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, August 17: How to Perform Motion Detection Using…](https://www.kdnuggets.com/2022/n33.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

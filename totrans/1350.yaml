@@ -1,0 +1,664 @@
+- en: 'Data Science Meets Devops: MLOps with Jupyter, Git, and Kubernetes'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/08/data-science-meets-devops-mlops-jupyter-git-kubernetes.html](https://www.kdnuggets.com/2020/08/data-science-meets-devops-mlops-jupyter-git-kubernetes.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Jeremy Lewi](https://www.linkedin.com/in/jeremy-lewi-600aaa8/), Software
+    Engineer at Google & [Hamel Husain](https://hamel.dev/), Staff Machine Learning
+    Engineer at GitHub**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Kubeflow](https://www.kubeflow.org/) is a fast-growing open source project
+    that makes it easy to deploy and manage machine learning on Kubernetes.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Due to Kubeflow’s explosive popularity, we receive a large influx of GitHub
+    issues that must be triaged and routed to the appropriate subject matter expert.
+    The below chart illustrates the number of new issues opened for the past year:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ca21ec3fd9d9af4779955e596f179893.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Figure 1:** Number of Kubeflow Issues'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To keep up with this influx, we started investing in a Github App called [Issue
+    Label Bot](https://github.com/marketplace/issue-label-bot) that used machine learning
+    to auto label issues. Our [first model](https://github.com/marketplace/issue-label-bot) was
+    trained using a collection of popular public repositories on GitHub and only predicted
+    generic labels. Subsequently, we started using [Google AutoML](https://cloud.google.com/automl/docs) to
+    train a Kubeflow specific model. The new model was able to predict Kubeflow specific
+    labels with average precision of 72% and average recall of 50%. This significantly
+    reduced the toil associated with issue management for Kubeflow maintainers. The
+    table below contains evaluation metrics for Kubeflow specific labels on a holdout
+    set. The [precision and recall](https://en.wikipedia.org/wiki/Precision_and_recall) below
+    coincide with prediction thresholds that we calibrated to suit our needs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Label | Precision | Recall |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-backend | 0.6 | 0.4 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-bootstrap | 0.3 | 0.1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-centraldashboard | 0.6 | 0.6 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-components | 0.5 | 0.3 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-docs | 0.8 | 0.7 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-engprod | 0.8 | 0.5 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-front-end | 0.7 | 0.5 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-frontend | 0.7 | 0.4 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-inference | 0.9 | 0.5 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-jupyter | 0.9 | 0.7 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-katib | 0.8 | 1.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-kfctl | 0.8 | 0.7 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-kustomize | 0.3 | 0.1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-operator | 0.8 | 0.7 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-pipelines | 0.7 | 0.4 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-samples | 0.5 | 0.5 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-sdk | 0.7 | 0.4 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-sdk-dsl | 0.6 | 0.4 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-sdk-dsl-compiler | 0.6 | 0.4 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-testing | 0.7 | 0.7 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| area-tfjob | 0.4 | 0.4 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| platform-aws | 0.8 | 0.5 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| platform-gcp | 0.8 | 0.6 |'
+  prefs: []
+  type: TYPE_TB
+- en: '**Table 1:** Evaluation metrics for various Kubeflow labels.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given the rate at which new issues are arriving, retraining our model periodically
+    became a priority. We believe continuously retraining and deploying our model
+    to leverage this new data is critical to maintaining the efficacy of our models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Our CI/CD solution is illustrated in [Figure 2](https://blog.kubeflow.org/mlops/#fig2).
+    We don’t explicitly create a directed acyclic graph (DAG) to connect the steps
+    in an ML workflow (e.g. preprocessing, training, validation, deployment, etc…).
+    Rather, we use a set of independent controllers. Each controller declaratively
+    describes the desired state of the world and takes actions necessary to make the
+    actual state of the world match. This independence makes it easy for us to use
+    whatever tools make the most sense for each step. More specifically we use
+  prefs: []
+  type: TYPE_NORMAL
+- en: Jupyter notebooks for developing models.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: GitOps for continuous integration and deployment.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Kubernetes and managed cloud services for underlying infrastructure.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/931ec07d5c7eb19b1e7c4ea2d126b568.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Figure 2:** illustrates how we do CI/CD. Our pipeline today consists of two
+    independently operating controllers. We configure the Trainer (left hand side)
+    by describing what models we want to exist; i.e. what it means for our models
+    to be “fresh”. The Trainer periodically checks whether the set of trained models
+    are sufficiently fresh and if not trains a new model. We likewise configure the
+    Deployer (right hand side) to define what it means for the deployed model to be
+    in sync with the set of trained models. If the correct model is not deployed it
+    will deploy a new model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For more details on model training and deployment refer to the [Actuation section
+    below](https://blog.kubeflow.org/mlops/#actuation).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Background
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Building Resilient Systems With Reconcilers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A reconciler is a control pattern that has proven to be immensely useful for
+    building resilient systems. The reconcile pattern is [at the heart of how Kubernetes
+    works](https://book.kubebuilder.io/cronjob-tutorial/controller-overview.html).
+    Figure 3 illustrates how a reconciler works. A reconciler works by first observing
+    the state of the world; e.g. what model is currently deployed. The reconciler
+    then compares this against the desired state of the world and computes the diff;
+    e.g the model with label “version=20200724” should be deployed, but the model
+    currently deployed has label “version=20200700”. The reconciler then takes the
+    action necessary to drive the world to the desired state; e.g. open a pull request
+    to change the deployed model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/d8e6c56c244863ca835a1cfa7e1ad079.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Figure 3.** Illustration of the reconciler pattern as applied by our deployer.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reconcilers have proven immensely useful for building resilient systems because
+    a well implemented reconciler provides a high degree of confidence that no matter
+    how a system is perturbed it will eventually return to the desired state.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is no DAG
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The declarative nature of controllers means data can flow through a series
+    of controllers without needing to explicitly create a DAG. In lieu of a DAG, a
+    series of data processing steps can instead be expressed as a set of desired states,
+    as illustrated in Figure 4 below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/1c53e020082053494462bff18c544df7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Figure 4:** illustrates how pipelines can emerge from independent controllers
+    without explicitly encoding a DAG. Here we have two completely independent controllers.
+    The first controller ensures that for every element a[i] there should be an element
+    b[i]. The second controller ensures that for every element b[i] there should be
+    an element c[i].'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This reconciler-based paradigm offers the following benefits over many traditional
+    DAG-based workflows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Resilience against failures**: the system continuously seeks to achieve and
+    maintain the desired state.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Increased autonomy of engineering teams:** each team is free to choose the
+    tools and infrastructure that suit their needs. The reconciler framework only
+    requires a minimal amount of coupling between controllers while still allowing
+    one to write expressive workflows.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Battle tested patterns and tools**: This reconciler based framework does
+    not invent something new. Kubernetes has a rich ecosystem of tools that aim to
+    make it easy to build controllers. The popularity of Kubernetes means there is
+    a large and growing community familiar with this pattern and supporting tools.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'GitOps: Operation By Pull Request'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: GitOps, Figure 5, is a pattern for managing infrastructure. The core idea of
+    GitOps is that source control (doesn’t have to be git) should be the source of
+    truth for configuration files describing your infrastructure. Controllers can
+    then monitor source control and automatically update your infrastructure as your
+    config changes. This means to make a change (or undo a change) you just open a
+    pull request.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/adfb35bbfe035929d945819692faca86.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Figure 5:** To push a new model for Label Bot we create a PR updating the
+    config map storing the id of the Auto ML model we want to use. When the PR is
+    merged, [Anthos Config Management(ACM](https://cloud.google.com/anthos-config-management/docs))
+    automatically rolls out those changes to our GKE cluster. As a result, subsequent
+    predictions are made using the new model. (Image courtesy of [Weaveworks](https://www.weave.works/blog/automate-kubernetes-with-gitops))'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Putting It Together: Reconciler + GitOps = CI/CD for ML'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With that background out of the way, let’s dive into how we built CI/CD for
+    ML by combining the Reconciler and GitOps patterns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There were three problems we needed to solve:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How do we compute the diff between the desired and actual state of the world?
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: How do we affect the changes needed to make the actual state match the desired
+    state?
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: How do we build a control loop to continuously run 1 & 2?
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Computing Diffs
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To compute the diffs we just write lambdas that do exactly what we want. So
+    in this case we wrote two lambdas:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The [first lambda](https://github.com/kubeflow/code-intelligence/blob/faeb65757214ac93259f417b81e9e2fedafaebda/Label_Microservice/go/cmd/automl/pkg/server/server.go#L109) determines
+    whether we need to retrain based on the age of the most recent model.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The [second lambda](https://github.com/kubeflow/code-intelligence/blob/faeb65757214ac93259f417b81e9e2fedafaebda/Label_Microservice/go/cmd/automl/pkg/server/server.go#L49) determines
+    whether the model needs to be updated by comparing the most recently trained model
+    to the model listed in a config map checked into source control.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: We wrap these lambdas in a simple web server and deploy on Kubernetes. One reason
+    we chose this approach is because we wanted to rely on Kubernetes’ [git-sync](https://github.com/kubernetes/git-sync) to
+    mirror our repository to a pod volume. This makes our lambdas super simple because
+    all the git management is taken care of by a side-car running [git-sync](https://github.com/kubernetes/git-sync).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Actuation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To apply the changes necessary, we use Tekton to glue together various CLIs
+    that we use to perform the various steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model Training
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To train our model we have a [Tekton task ](https://github.com/kubeflow/code-intelligence/blob/faeb65757214ac93259f417b81e9e2fedafaebda/tekton/tasks/run-notebook-task.yaml#L34)that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Runs our notebook using [papermill](https://github.com/nteract/papermill).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Converts the notebook to html using [nbconvert](https://nbconvert.readthedocs.io/en/latest/).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Uploads the `.ipynb` and `.html` files to GCS using [gsutil](https://cloud.google.com/storage/docs/gsutil)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This notebook fetches GitHub Issues data [from BigQuery](https://medium.com/google-cloud/analyzing-github-issues-and-comments-with-bigquery-c41410d3308) and
+    generates CSV files on GCS suitable for import into [Google AutoML](https://cloud.google.com/automl).
+    The notebook then launches an [AutoML](https://cloud.google.com/automl) job to
+    train a model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We chose AutoML because we wanted to focus on building a complete end to end
+    solution rather than iterating on the model. AutoML provides a competitive baseline
+    that we may try to improve upon in the future.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To easily view the executed notebook we convert it to html and upload it to [GCS
+    which makes it easy to serve public, static content](https://cloud.google.com/storage/docs/hosting-static-website).
+    This allows us to use notebooks to generate rich visualizations to evaluate our
+    model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model Deployment
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To deploy our model we have a [Tekton task](https://github.com/kubeflow/code-intelligence/blob/faeb65757214ac93259f417b81e9e2fedafaebda/tekton/tasks/update-model-pr-task.yaml#L68) that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Uses kpt to update our configmap with the desired value.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Runs git to push our changes to a branch.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Uses a wrapper around the [GitHub CLI](https://github.com/cli/cli) (gh) to create
+    a PR.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The controller ensures there is only one Tekton pipeline running at a time.
+    We configure our pipelines to always push to the same branch. This ensures we
+    only ever open one PR to update the model because GitHub doesn’t allow multiple
+    PRs to be created from the same branch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once the PR is merged [Anthos Config Mesh](https://cloud.google.com/anthos/config-management) automatically
+    applies the Kubernetes manifests to our Kubernetes cluster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Tekton
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We picked Tekton because the primary challenge we faced was sequentially running
+    a series of CLIs in various containers. Tekton is perfect for this. Importantly,
+    all the steps in a Tekton task run on the same pod which allows data to be shared
+    between steps using a pod volume.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Furthermore, since Tekton resources are Kubernetes resources we can adopt the
+    same GitOps pattern and tooling to update our pipeline definitions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Control Loop
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Finally, we needed to build a control loop that would periodically invoke our
+    lambdas and launch our Tekton pipelines as needed. We used kubebuilder to create
+    a [simple custom controller](https://github.com/kubeflow/code-intelligence/tree/master/Label_Microservice/go).
+    Our controller’s reconcile loop will call our lambda to determines whether a sync
+    is needed and if so with what parameters. If a sync is needed the controller fires
+    off a Tekton pipeline to perform the actual update. An example of our [custom
+    resource](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) is
+    illustrated below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The custom resource specifies the endpoint, **needsSyncUrl**, for the lambda
+    that computes whether a sync is needed and a Tekton PipelineRun, **pipelineRunTemplate**,
+    describing the pipeline run to create when a sync is needed. The controller takes
+    care of the details; e.g. ensuring only 1 pipeline per resource is running at
+    a time, garbage collecting old runs, etc… All of the heavy lifting is taken care
+    of for us by Kubernetes and kubebuilder.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note, for historical reasons the kind, **ModelSync**, and apiVersion **automl.cloudai.kubeflow.org** are
+    not reflective of what the controller actually does. We plan on fixing this in
+    the future.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Build Your Own CI/CD pipelines
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Our code base is a long way from being polished, easily reusable tooling. Nonetheless
+    it is all public and could be a useful starting point for trying to build your
+    own pipelines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here are some pointers to get you started:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use the Dockerfile to build your own [ModelSync controller](https://github.com/kubeflow/code-intelligence/blob/master/Label_Microservice/go/Dockerfile)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Modify the kustomize package](https://github.com/kubeflow/code-intelligence/tree/master/Label_Microservice/go/config/default) to
+    use your image and deploy the controller'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Define one or more lambdas as needed for your use cases
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: You can use our [Lambda server](https://github.com/kubeflow/code-intelligence/blob/master/Label_Microservice/go/cmd/automl/pkg/server/server.go) as
+    an example
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We wrote ours in go but you can use any language and web framework you like
+    (e.g. flask)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Define Tekton pipelines suitable for your use cases; our pipelines(linked below)
+    might be a useful starting point
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Notebook Tekton task ](https://github.com/kubeflow/code-intelligence/blob/master/tekton/tasks/run-notebook-task.yaml)-
+    Run notebook with papermill and upload to GCS'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PR Tekton Task](https://github.com/kubeflow/code-intelligence/blob/master/tekton/tasks/update-model-pr-task.yaml) -
+    Tekton task to open GitHub PRs'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Define ModelSync resources for your use case; you can refer to ours as an example
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[ModelSync Deploy Spec](https://github.com/kubeflow/code-intelligence/blob/master/Label_Microservice/auto-update/prod/modelsync.yaml) -
+    YAML to continuously deploy label bot'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[ModelSync Train Spec](https://github.com/kubeflow/code-intelligence/blob/master/Label_Microservice/auto-update/prod/retrain-model.yaml) -
+    YAML to continuously train our model'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If you’d like to see us clean it up and include it in a future Kubeflow release
+    please chime in on issue [kubeflow/kubeflow#5167](https://github.com/kubeflow/kubeflow/issues/5167).
+  prefs: []
+  type: TYPE_NORMAL
+- en: What’s Next
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Lineage Tracking
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Since we do not have an explicit DAG representing the sequence of steps in our
+    CI/CD pipeline understanding the lineage of our models can be challenging. Fortunately,
+    Kubeflow Metadata solves this by making it easy for each step to record information
+    about what outputs it produced using what code and inputs. Kubeflow metadata can
+    easily recover and plot the lineage graph. The figure below shows an example of
+    the lineage graph from our [xgboost example](https://github.com/kubeflow/examples/blob/master/xgboost_synthetic/build-train-deploy.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f326e5bb68979f485160afc1ff4f5995.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Figure 6:** screenshot of the lineage tracking UI for our [xgboost example](https://github.com/kubeflow/examples/blob/master/xgboost_synthetic/build-train-deploy.ipynb).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our plan is to have our controller automatically write lineage tracking information
+    to the metadata server so we can easily understand the lineage of what’s in production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![alt_text](../Images/5fbf922ac3998192a63305b57198a28c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Building ML products is a team effort. In order to move a model from a proof
+    of concept to a shipped product, data scientists and devops engineers need to
+    collaborate. To foster this collaboration, we believe it is important to allow
+    data scientists and devops engineers to use their preferred tools. Concretely,
+    we wanted to support the following tools for Data Scientists, Devops Engineers,
+    and [SRE](https://en.wikipedia.org/wiki/Site_Reliability_Engineering)s:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Jupyter notebooks for developing models.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: GitOps for continuous integration and deployment.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Kubernetes and managed cloud services for underlying infrastructure.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To maximize each team’s autonomy and reduce dependencies on tools, our CI/CD
+    process follows a decentralized approach. Rather than explicitly define a DAG
+    that connects the steps, our approach relies on a series of controllers that can
+    be defined and administered independently. We think this maps naturally to enterprises
+    where responsibilities might be split across teams; a data engineering team might
+    be responsible for turning weblogs into features, a modeling team might be responsible
+    for producing models from the features, and a deployments team might be responsible
+    for rolling those models into production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Further Reading
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you’d like to learn more about GitOps we suggest this [guide](https://www.weave.works/technologies/gitops/) from
+    Weaveworks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To learn how to build your own Kubernetes controllers the [kubebuilder book](https://book.kubebuilder.io/) walks
+    through an E2E example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Jeremy Lewi](https://www.linkedin.com/in/jeremy-lewi-600aaa8/)** is a Software
+    Engineer at Google.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Hamel Husain](https://hamel.dev/)** is a Staff Machine Learning Engineer
+    @ GitHub.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://blog.kubeflow.org/mlops/). Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[What I learned from looking at 200 machine learning tools](/2020/07/200-machine-learning-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Implementing MLOps on an Edge Device](/2020/08/implementing-mlops-edge-device.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Tour of End-to-End Machine Learning Platforms](/2020/07/tour-end-to-end-machine-learning-platforms.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Kubernetes In Action: Second Edition](https://www.kdnuggets.com/2022/03/manning-kubernetes-action-second-edition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[High Availability SQL Server Docker Containers in Kubernetes](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Git for Data Science Cheatsheet](https://www.kdnuggets.com/2022/11/git-data-science-cheatsheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unlock Your Potential with This FREE DevOps Crash Course](https://www.kdnuggets.com/2023/03/corise-unlock-potential-with-this-free-devops-crash-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Essential DevOps Tools Every Beginner Should Learn](https://www.kdnuggets.com/10-essential-devops-tools-every-beginner-should-learn)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[14 Essential Git Commands for Data Scientists](https://www.kdnuggets.com/2022/06/14-essential-git-commands-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

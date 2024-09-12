@@ -1,0 +1,270 @@
+- en: 'Keras Tutorial: Recognizing Tic-Tac-Toe Winners with Neural Networks'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/09/neural-networks-tic-tac-toe-keras.html](https://www.kdnuggets.com/2017/09/neural-networks-tic-tac-toe-keras.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/5e1ed30c3d61b549dfd96fbf8532b433.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '"[Tic-Tac-Toe Endgame](https://archive.ics.uci.edu/ml/datasets/Tic-Tac-Toe+Endgame)"
+    was the very first dataset I used to build a neural network some years ago. I
+    didn''t really know what I was doing at the time, and so things didn''t go so
+    well. As I have been spending a lot of time with Keras recently, I thought I would
+    take another stab at this dataset in order to demonstrate building a simple neural
+    network with Keras.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The dataset, [available here](https://archive.ics.uci.edu/ml/datasets/Tic-Tac-Toe+Endgame),
+    is a collection of 958 possible tac-tac-toe end-of-game board configurations,
+    with 9 variables representing the 9 squares of a tic-tac-toe board, and a tenth
+    class variable which designates if the described board configuration is a winning
+    (positive) or not (negative) ending configuration for player X. In short, does
+    a particular collection of Xs and Os on a board mean a win for X? Incidentally,
+    [there are 255,168 possible ways](https://www.jesperjuul.net/ludologist/2003/12/28/255168-ways-of-playing-tic-tac-toe/)
+    of playing a game of tic-tac-toe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is a more formal description of the data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0] 1\. top-left-square: {x,o,b}   2\. top-middle-square: {x,o,b}   3\.
+    top-right-square: {x,o,b}   4\. middle-left-square: {x,o,b}   5\. middle-middle-square:
+    {x,o,b}   6\. middle-right-square: {x,o,b}   7\. bottom-left-square: {x,o,b}   8\.
+    bottom-middle-square: {x,o,b}   9\. bottom-right-square: {x,o,b}   10\. Class:
+    {positive,negative} [PRE1]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As is visible, each square can be designated as marked with an X, an O, or left
+    blank (b) at game's end. The mapping of variables to physical squares is shown
+    in Figure 1\. Remember, the outcomes are positive or negative based on X winning.
+    Figure 2 portrays a example board endgame layout, followed by its dataset representation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure 1](../Images/eb04755fbb421e5ae6462b6610ca36df.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Figure 1.** Mapping of variables to physical tic-tac-toe board locations.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure 2](../Images/64f44c2162bea194789641b3244a3673.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Figure 2.** Example board endgame layout.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]   b,x,o,x,x,b,o,x,o,positive [PRE3]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Preparation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In order to use the dataset to construct a neural network, some data preparation
+    and transformations will be necessary. These are outlined below, as well as further
+    commented upon in the code further down.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Encode categorical variables as numeric** - Each square is represented as
+    a single variable in the original dataset. This is unacceptable for our purposes,
+    however, as neural networks require variables with continuous values. We must
+    first convert {x, o, b} to {0, 1, 2} for each variable. The [LabelEncoder class](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html)
+    of Scikit-learn [preprocessing module](http://scikit-learn.org/stable/modules/classes.html#module-sklearn.preprocessing)
+    will be used to accomplish this.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**One-hot encode all independent categorical variables** - Once categorical
+    variables are encoded to numeric, they required further processing. As the variables
+    are unordered (X is not greater than O, for example), these variables must be
+    represented as a series of bit equivalents. This is accomplished using one-hot
+    encoding. As there are 3 possibilities for each square, 2 bits will be required
+    for encoding. This will be accomplished with the [OneHotEncoder class](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html)
+    from Scikit-learn.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Remove every third column to avoid dummy variable trap** - As the one-hot
+    encoding process in Scikit-learn creates as many columns for each variables as
+    there are possible options (as per the dataset), one column needs to be removed
+    in order to avoid what is referred to as the dummy variable trap. This is so to
+    avoid redundant data which could bias results. In our case, each square has 3
+    possible options (27 columns), which can be expressed with 2 ''bit'' columns (I
+    leave this to you to confirm), and so we remove every third column from the newly
+    formed dataset (leaving us with 18).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Encode target categorical variable** - Similarly to the independent variables,
+    the target categorical variable must be changed from {positive, negative} to {0,
+    1}.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Train/test split** - This should be understandable to all. We set our test
+    set to 20% of the dataset. We will use Scikit-learn''s [train/test split functionality](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)
+    to achieve this.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The Network
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Next, we need to construct the neural network, which we will do using [Keras](https://keras.io/).
+    Let's keep in mind that our processed dataset has 18 variables to use as input,
+    and that we are making binary class predictions as output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Input neurons** - We have 18 independent variables; therefore, we need 18
+    input neurons.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Hidden layers** - A simple (perhaps overly so) -- and possibly totally nonsensical
+    -- starting point to determining the number of neurons per hidden layer is the
+    rule of thumb: add the number of independent variables and the number of output
+    variables and divide by 2\. If we decide to round down, this gives us 9\. What
+    about the number of hidden layers? Best idea is to start with a low number (of
+    hidden layers) and add them until network accuracy does not improve. We will create
+    our network with 2 hidden layers.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Activation functions** - Hidden and output layer neurons require activation
+    functions. [General rules dictate](/2017/09/neural-network-foundations-explained-activation-function.html):
+    hidden layer neurons get the ReLU function by default, while binary classification
+    output layer neurons get the sigmoid function. We will follow convention.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Optimizer** - We will use the [Adam optimizer](https://medium.com/@nishantnikhil/adam-optimizer-notes-ddac4fd7218)
+    in our network'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Loss function** - We will use the [cross-entropy loss function](http://neuralnetworksanddeeplearning.com/chap3.html#the_cross-entropy_cost_function)
+    in our network.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Weight initialization** - We will randomly set the initial random weights
+    of our network layer neurons.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Below is what our network will ultimately look like.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure 3](../Images/c89f18b0a046cdbbb7e3c8aea3472051.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Figure 3.** Visualization of network layers.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here is the code which does everything outlined above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Results
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The maximum accuracy of the trained network reached 98.69%. On the unseen test
+    set, the neural network correctly predicted the class of 180 of the 186 instances.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By changing the random state of the train/test split (which changes which particular
+    20% of dataset instances are used to test the resultant network with), we were
+    able to increase this to 184 out of 186 instances. This is not necessarily a true
+    metric improvement, however. An independent verification set could possibly shed
+    light on this... if we had one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By using different optimizers (as opposed to Adam), a well as changing the number
+    of hidden layers and the number of neurons per hidden layer, the resulting trained
+    networks did not result in better loss, accuracy, or correctly classified test
+    instances beyond what is reported above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I hope this has been a useful introduction to constructing neural networks with
+    Keras. The next such tutorial will attack convolutional neural network construction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deep Learning with R + Keras](/2017/06/deep-learning-r-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Understanding Deep Learning](/2016/01/seven-steps-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[An Intuitive Guide to Deep Network Architectures](/2017/08/intuitive-guide-deep-network-architectures.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Use Python and Machine Learning to Predict Football Match Winners](https://www.kdnuggets.com/2023/01/python-machine-learning-predict-football-match-winners.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Simple Things to Try Before Neural Networks](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Interpretable Neural Networks with PyTorch](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deep Neural Networks Don''t Lead Us Towards AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

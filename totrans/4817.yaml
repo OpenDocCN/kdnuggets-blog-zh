@@ -1,0 +1,288 @@
+- en: Analyze a Soccer (Football) Game Using Tensorflow Object Detection and OpenCV
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/07/analyze-soccer-game-using-tensorflow-object-detection-opencv.html](https://www.kdnuggets.com/2018/07/analyze-soccer-game-using-tensorflow-object-detection-opencv.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Priyanka Kochhar](https://github.com/priya-dwivedi), Deep Learning Consultant**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Introduction**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The World Cup season is here and off to an interesting start. Who ever thought
+    the reining champions Germany would be eliminated in the group stage :(
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For the data scientist within you let's use this opportunity to do some analysis
+    on soccer clips. With the use of deep learning and opencv we can extract interesting
+    insights from video clips. See example gif below of the game b/w Australia and
+    Peru played where we can identify all the players + referees, the soccer ball
+    and also predict which team the player is based on the color of their jersey.
+    And all of this can be done real time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/07b25fd30b67c19bdd28661a485b9554.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Player detection and team prediction
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can find the code I used on my [Github repo](https://github.com/priya-dwivedi/Deep-Learning/blob/master/soccer_team_prediction/soccer_realtime.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Overview of the steps**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Tensorflow Object Detection API is a very powerful source for quickly building
+    object detection models. If you are not familiar with this API, please see the
+    following blogs from me that introduce the API and teach you how to build a custom
+    model using the API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Introduction to Tensorflow Object Detection API](http://deeplearninganalytics.org/blog/introduction-to-tensorflow-object-detection-api)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Building a custom model using Tensorflow Object Detection API](http://deeplearninganalytics.org/blog/building-toy-detector-with-object-detection-api)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The API provides pre-trained object detection models that have been trained
+    on the COCO dataset. COCO dataset is a set of 90 commonly found objects. See image
+    below of objects that are part of COCO dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fd31605da1c1f2ce10a9e0b9985f8da3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: coco object categories
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case we care about classes — persons and soccer ball which are both
+    part of COCO dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The API also has a big set of models it supports. See table below for reference.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/35568105aa26885446c3b973afee2ec8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Small subset of models supported by the API
+  prefs: []
+  type: TYPE_NORMAL
+- en: The models have a trade off between speed and accuracy. Since I was interested
+    in real time analysis, I chose SSDLite mobilenet v2.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once we identify the players using the object detection API, to predict which
+    team they are in we can use OpenCV which is powerful library for image processing.
+    If you are new to OpenCV please see the tutorial below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[OpenCV Tutorial](http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_tutorials.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: OpenCV allows us to identify masks of specific colours and we can use that to
+    identify red players and yellow players. See example below of how OpenCV masking
+    works to detect red colour in the image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9da890317f9dbabcd95094c08c7161be.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Prediction of red areas in an image
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Deep Dive into the main steps**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now lets go into the code in detail.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you are using the Tensorflow Object Detection API for the first time, please
+    download the GitHub from this [link](https://github.com/tensorflow/models/tree/master/research/object_detection).
+    And install all the dependencies using these [instructions](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you don’t have OpenCV setup, please build it from source using this [tutorial](https://docs.opencv.org/3.4.1/d2/de6/tutorial_py_setup_in_ubuntu.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The main steps I followed are (please follow along in the jupyter notebook
+    on my [Github](https://github.com/priya-dwivedi/Deep-Learning/blob/master/soccer_team_prediction/soccer_realtime.ipynb)):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Load the SSDLite mobilenet model into a graph and load the list of classes that
+    are part of COCO dataset
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Open the video using cv2.VideoCapture(filename) and read each frame one by one
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For each frame perform object detection using the loaded graph
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The result that comes back from the SSDLite is each identified class along with
+    its confidence score and bounding box prediction. So now identify all persons
+    identified with confidence > 0.6 and crop them out.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now you have each player extracted out. We need to read the color of their jersey
+    to predict if they are an Australian player or a Peru player. This is done by
+    the code block detect team. We first define the color ranges for red and blue
+    colors. Then we use cv2.inRange and cv2.bitwise to create a mask of that color.
+    To detect team, I count how many red pixels and yellow pixels were detected and
+    what is the percent of that compared to total num of pixels in the cropped image.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Finally all the code pieces are combined to run everything at the same time
+    and display results using cv2.imshow
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Conclusion and References**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Awesome. So now you can see how simple combination of deep learning and OpenCV
+    can produce interesting results. Now that you have this data, there are many ways
+    to draw additional insights from it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: With the camera angle at the Australian goal area you can calculate how many
+    Peru players are in the zone vs Australian players
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: You can draw a heat map of each teams’ footprint — Example what are the areas
+    which saw high occupancy from Peru team
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: You can draw out the path of the goalkeeper
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The Object Detection API also offers other models that are more accurate but
+    slower. You can try those as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Give me a ❤️ if you liked this post:) Hope you pull the code and try it yourself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Other writings**: [http://deeplearninganalytics.org/blog](http://deeplearninganalytics.org/blog)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'PS: I have my own deep learning consultancy and love to work on interesting
+    problems. I have helped several startups deploy innovative AI based solutions.
+    Check us out at — [http://deeplearninganalytics.org/](http://deeplearninganalytics.org/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have a project that we can collaborate on, then please contact me through
+    my website or at priya.toronto3@gmail.com
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**References**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Tensorflow Object Detection API](https://github.com/tensorflow/models/tree/master/research/object_detection)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Good [tutorial](https://www.pyimagesearch.com/2014/08/04/opencv-python-color-detection/) on
+    Detecting colours using OpenCV
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Priyanka Kochhar](https://github.com/priya-dwivedi)** has been a data
+    scientist for 10+ years. She now has her own deep learning consultancy and loves
+    to work on interesting problems. She has helped several startups deploy innovative
+    AI based solutions. If you have a project that she can collaborate on then please
+    contact her at [priya.toronto3@gmail.com](mailto:priya.toronto3@gmail.com).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/analyse-a-soccer-game-using-tensorflow-object-detection-and-opencv-e321c230e8f2).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Is Google Tensorflow Object Detection API the Easiest Way to Implement Image
+    Recognition?](/2018/03/google-tensorflow-object-detection-api-the-easiest-way-implement-image-recognition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Toy Detector with Tensorflow Object Detection API](/2018/02/building-toy-detector-tensorflow-object-detection-api.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Training and Visualising Word Vectors](/2018/01/training-visualising-word-vectors.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Use Graph Theory to Scout Soccer](https://www.kdnuggets.com/2022/11/graph-theory-scout-soccer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

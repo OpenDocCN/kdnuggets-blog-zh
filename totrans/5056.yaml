@@ -1,0 +1,228 @@
+- en: 'Python Data Science with Pandas vs Spark DataFrame: Key Differences'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/01/python-data-science-pandas-spark-dataframe-differences.html](https://www.kdnuggets.com/2016/01/python-data-science-pandas-spark-dataframe-differences.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Christophe Bourguignat**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Editor''s note: click images of code to enlarge.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: With 1.4 version improvements, [Spark DataFrames](https://databricks.com/blog/2015/02/17/introducing-dataframes-in-spark-for-large-scale-data-science.html)
+    could become the new Pandas, making *ancestral* [RDDs look like Bytecode](https://ogirardot.wordpress.com/2015/05/29/rdds-are-the-new-bytecode-of-apache-spark/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I use heavily Pandas (and Scikit-learn) for Kaggle competitions. **Nobody won
+    a Kaggle challenge with Spark yet**, but I’m convinced it will happen. That’s
+    why it’s time to prepare the future, and start using it. Spark DataFrames are
+    available in the [pyspark.sql](http://spark.apache.org/docs/latest/api/python/pyspark.sql.html)
+    package (strange, and historical name: it’s no more only about SQL!).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’m not a Spark specialist at all, but here are a few things I noticed when
+    I had a first try. On my GitHub, you can find the [IPython Notebook companion](https://github.com/christophebourguignat/notebooks/blob/master/Spark-Pandas-Differences.ipynb)
+    of this post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Reading**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: With Pandas, you easily read CSV files with *read_csv()*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Out of the box, Spark DataFrame supports reading data from popular *professional*
+    formats, like JSON files, Parquet files, Hive table — be it from local file systems,
+    distributed file systems (HDFS), cloud storage (S3), or external relational database
+    systems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Formats supported by Spark DataFrames](../Images/6c9e9ab0c93a7312d3ef5c50a3713940.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'But **CSV is not supported natively by Spark**. You have to use a separate
+    library: [spark-csv](https://github.com/databricks/spark-csv).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Counting**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*sparkDF.count()* and *pandasDF.count()* are not the exactly the same.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first one returns the **number of rows**, and the second one returns the
+    **number of non NA/null** observations for each column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Not that Spark doesn’t support *.shape* yet — very often used in Pandas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Spark and Pandas dataframe count() in action](../Images/e395afc8765755f63b48ded44e65a0ae.png)](https://cdn-images-1.medium.com/max/1200/1*WP-g74PW3FLVYBMBtIaB6g.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Viewing**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Pandas, to have a tabular view of the content of a DataFrame, you typically
+    use *pandasDF.head(5)*, or *pandasDF.tail(5)*. In IPython Notebooks, it displays
+    a nice array with continuous borders.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Spark, you have *sparkDF.head(5)*, but it has an **ugly output**. You should
+    prefer *sparkDF.show(5)*. Note that you cannot view the last lines (*.tail()*
+    does no exist yet, because long to do in distributed environment).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Spark and Pandas dataframe head() in action](../Images/e1513d3549808d9d2c44b18718d49ab5.png)](https://cdn-images-1.medium.com/max/1200/1*12a6Jv_11QXHA2F96KkE2A.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Inferring Types**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With Pandas, you rarely have to bother with types: they are **inferred for
+    you**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: With Spark DataFrames loaded from CSV files, **default types are assumed to
+    be “strings”**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'EDIT: in spark-csv, there is a ‘inferSchema’ option (disabled by default),
+    but I didn’t manage to make it work. [It doesn’t seem to be functional](https://github.com/databricks/spark-csv/issues/110)
+    in the 1.1.0 version.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Spark and Pandas dataframe schema and dtypes comparison](../Images/6bc0a19ca0e12158c40509f70d5018ab.png)](https://cdn-images-1.medium.com/max/1200/1*PPjnVL7LfKI_afvJ8T-kJQ.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To change types with Spark, you can use the *.cast()* method, or equivalently
+    *.astype()*, which is [an alias gently created for those like me](https://issues.apache.org/jira/browse/SPARK-7394)
+    coming from the Pandas world ;). Note that you must **create a new column, and
+    drop the old one** ([some improvements exist to allow “in place”-like changes](https://issues.apache.org/jira/browse/SPARK-6635),
+    but it is not yet available with the Python API).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Spark dataframe types](../Images/57c2c0df13aa50204958b910903fd0ff.png)](https://cdn-images-1.medium.com/max/1200/1*YZpC9yRc3_56iJF5aIdcSg.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Describing**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In Pandas and Spark, *.describe()* generate various summary statistics. They
+    give slightly different results for two reasons:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Pandas, NaN values are excluded. In Spark, NaN values make that computation
+    of mean and standard deviation fail
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: standard deviation is not computed in the same way. **Unbiased (or corrected)
+    standard deviation** by default in Pandas, and **uncorrected standard** deviation
+    in Spark. The difference is the [use of N-1 instead of N](https://en.wikipedia.org/wiki/Standard_deviation)
+    on the denominator
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[![Dataframe describe() and show() in action](../Images/b0d1d6d67f33a8469787a9db4b253b91.png)](https://cdn-images-1.medium.com/max/1200/1*9zY5V2IiTQSvHEH2tkammw.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Wrangling**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Machine Learning, it is usual to create new columns resulting from a calculus
+    on already existing columns (features engineering).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Pandas, you can use the ‘[ ]’ operator. In Spark you can’t — DataFrames are
+    immutable. You should use *.withColumn()*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Dataframe new columns](../Images/bee41a012ab249fa30a143e8a852af67.png)](https://cdn-images-1.medium.com/max/1200/1*sF5vRhyvFi0jGjDWqoyYRg.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Concluding**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spark and Pandas DataFrames are very similar. Still, **Pandas API remains more
+    convenient and powerful**  -  but the gap is **shrinking quickly**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Despite its intrinsic design constraints (immutability, distributed computation,
+    lazy evaluation, ...), **Spark wants to mimic Pandas** as much as possible (up
+    to the method names). My guess is that this goal will be achieved soon.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And with [Spark.ml](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html),
+    mimicking scikit-learn, Spark may become **the perfect one-stop-shop tool for
+    industrialized Data Science**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks to [Olivier Girardot](https://ogirardot.wordpress.com/) for helping to
+    improve this post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'EDIT 1: Olivier just released a new post giving more insights: [From Pandas
+    To Apache Spark Dataframes](https://ogirardot.wordpress.com/2015/07/31/from-pandas-to-apache-sparks-dataframe/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'EDIT 2: Here is another post on the same topic: [Pandarize Your Spark Dataframes](https://lab.getbase.com/pandarize-spark-dataframes/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Christophe Bourguignat](https://twitter.com/chris_bour)** is a data
+    fan, Kaggle master, blogger, and AXA Data Innovation Lab alumni.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/@chris_bour/6-differences-between-pandas-and-spark-dataframes-1380cec394d2).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Spark 2015 Year In Review](/2016/01/spark-2015-year-in-review.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beginners Guide: Apache Spark Machine Learning with Large Data](/2015/11/petrov-apache-spark-machine-learning-large-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Machine Learning With Python](/2015/11/seven-steps-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Random Forest vs Decision Tree: Key Differences](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[ChatGPT vs Google Bard: A Comparison of the Technical Differences](https://www.kdnuggets.com/2023/03/chatgpt-google-bard-comparison-technical-differences.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Pandas vs. Polars: A Comparative Analysis of Python''s Dataframe Libraries](https://www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Convert JSON Data into a DataFrame with Pandas](https://www.kdnuggets.com/how-to-convert-json-data-into-a-dataframe-with-pandas)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Process a DataFrame with Millions of Rows in Seconds](https://www.kdnuggets.com/2022/01/process-dataframe-millions-rows-seconds.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unlocking Data Insights: Key Pandas Functions for Effective Analysis](https://www.kdnuggets.com/unlocking-data-insights-key-pandas-functions-for-effective-analysis)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

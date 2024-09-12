@@ -1,0 +1,299 @@
+- en: Machine Learning in Dask
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/06/machine-learning-dask.html](https://www.kdnuggets.com/2020/06/machine-learning-dask.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Processing a couple of gigabytes of data on one's laptop is usually an uphill
+    task, unless the laptop has high RAM and a whole lot of compute power.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That notwithstanding, data scientists still have to look for alternative solutions
+    to deal with this problem. Some of the hacks involve tweaking Pandas to enable
+    it to process huge datasets, buying a GPU machine, or purchasing compute power
+    on the cloud. In this piece, we’ll see how we can use [Dask](https://dask.org/) to
+    work with large datasets on our local machines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dask and Python
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Dask is a flexible library for parallel computing in Python. It’s built to integrate
+    nicely with other open-source projects such as NumPy, Pandas, and scikit-learn.
+    In Dask, [Dask arrays](https://docs.dask.org/en/latest/array.html) are the equivalent
+    of NumPy Arrays, [Dask DataFrames](https://docs.dask.org/en/latest/dataframe.html) the
+    equivalent of Pandas DataFrames, and [Dask-ML](https://ml.dask.org/) the equivalent
+    of scikit-learn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These similarities make it very easy to adopt Dask into your workflow. The advantage
+    of using Dask is that you can scale computations to multiple cores on your computer.
+    This enables you to work on large datasets that don’t fit into memory. It also
+    aids in speeding up computations that would ordinarily take a long time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e812ece84005237a2818fcfe66918ac8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[source](https://dask.org/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dask DataFrames
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When loading in huge data, Dask will usually read in a sample of the data in
+    order to infer the data types. This will mostly lead to issues if a given column
+    has different data types. In order to avoid type errors, it’s usually good practice
+    to declare the data types beforehand. Dask is able to load huge files by cutting
+    it up into chunks, as defined by the `blocksize` parameter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/5742054bfc128a1492d8afc31c6a87ec.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[source](https://dask.org/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Commands in a Dask DataFrame are mostly similar to the ones in Pandas. For
+    example, getting the `head` and `tail` is similar:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Functions on the DataFrame are run lazily. This means that they aren’t computed
+    until the `compute` function is called.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Since the data is loaded in partitions, some Pandas functions such as `sort_values()` will
+    fail. The workaround is to use the `nlargest()` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dask Clusters
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Parallel computation is key in Dask, as it allows one to run computations on
+    multiple cores. Dask provides a machine scheduler that works on a single machine.
+    It does not scale. It also offers a distributed scheduler that can scale to multiple
+    machines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using `dask.distributed` requires that you set up a `Client`. This should be
+    the first thing you do if you intend to use `dask.distributed` in your analysis.
+    It offers low latency, data locality, data sharing between the workers, and is
+    easy to set up.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/5c70485c72f6d940cbc7583df741811a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Using `dask.distributed` is advantageous even on a single machine, because it
+    offers some diagnostic features via a dashboard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Failure to declare a `Client` will leave you using the single machine scheduler
+    by default. It provides parallelism on a single computer by using processes or
+    threads.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dask ML
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Dask also enables you to perform machine learning training and prediction in
+    a parallel manner. The goal of `dask-ml` is to offer machine learning that’s scalable.
+    When you declare `n_jobs = -1` in scikit-learn, you can run your computations
+    in parallel. Dask utilizes this capability in order to enable you to distribute
+    this compute in a cluster. This is done with the help of [joblib](https://joblib.readthedocs.io/en/latest/),
+    a package that allows for parallelism and pipelining in Python. Using Dask ML,
+    you can implement scikit-learn models as well as other libraries such as XGboost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is what a simple implementation would look like.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First import `train_test_split` as usual for splitting your data into training
+    and testing sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, import the model you’d like to use and instantiate it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: You then have to import `joblib` to enable parallel computation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, run your training and prediction using the parallel backend.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Machine learning is rapidly moving closer to where data is collected — edge
+    devices. [Subscribe to the Fritz AI Newsletter to learn more about this transition
+    and how it can help scale your business.](https://www.fritz.ai/newsletter?utm_campaign=fritzai-newsletter-scale6&utm_source=heartbeat)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Limitations and Memory Usage
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Individual tasks in Dask can’t run in parallel. The workers are Python processes
+    that inherit all the advantages and disadvantages of Python computations. Care
+    should also be taken when working in a distributed environment to ensure data
+    security and privacy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dask has a central scheduler that tracks data on worker nodes and on the cluster.
+    This scheduler also controls the freeing of data from the cluster. Once a task
+    is completed it clears it from the memory in order to free up memory for other
+    tasks. If something is needed by a certain `client`, or if it’s important for
+    ongoing computations, it’s held in memory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another Dask limitation is that it doesn’t implement all functions in Pandas.
+    The Pandas interface is large, so Dask doesn’t implement it in its entirety. This
+    means that trying some of these operations on Dask can be an uphill climb. Also,
+    the operations that are slow on Pandas are also slow on Dask.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When you wouldn’t need a Dask DataFrame
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In the following situations, you may not need Dask:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When there are Pandas functions you need that haven’t been implemented in Dask.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When your data fits perfectly into your computer’s memory.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When your data isn’t in tabular form. In this case, try [dask.bag](https://docs.dask.org/en/latest/bag.html) or [dask.array](https://docs.dask.org/en/latest/array.html).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Final Thoughts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, we have seen how we can use Dask to work with a huge dataset
+    on our local machine or in a distributed manner. We’ve seen that we can use Dask
+    because of its familiar syntax and ability to scale. It has the ability to scale
+    to thousands of cores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We’ve also seen that we can use it in machine learning for training and running
+    predictions. You can learn more by checking out these presentations in the official
+    documentation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Presentations On Dask - Dask 2.15.0 documentation**](https://docs.dask.org/en/latest/presentations.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Derrick Mwiti](https://derrickmwiti.com/)** is a data analyst, a writer,
+    and a mentor. He is driven by delivering great results in every task, and is a
+    mentor at Lapid Leaders Africa.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://heartbeat.fritz.ai/machine-learning-in-dask-e234c98ef07).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Why and How to Use Dask with Big Data](/2020/04/dask-big-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Five Interesting Data Engineering Projects](/2020/03/data-engineering-projects.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automated Machine Learning in Python](/2019/01/automated-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI, Analytics, Machine Learning, Data Science, Deep Learning…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Breaking the Data Barrier: How Zero-Shot, One-Shot, and Few-Shot…](https://www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Federated Learning: Collaborative Machine Learning with a Tutorial…](https://www.kdnuggets.com/2021/12/federated-learning-collaborative-machine-learning-tutorial-get-started.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

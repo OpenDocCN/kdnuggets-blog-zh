@@ -1,0 +1,312 @@
+- en: Why you should NOT use MS MARCO to evaluate semantic search
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/04/ms-marco-evaluate-semantic-search.html](https://www.kdnuggets.com/2020/04/ms-marco-evaluate-semantic-search.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Thiago Guerrera Martins](https://www.linkedin.com/in/thiago-g-martins/),
+    Principal Data Scientist @ Verizon Media**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3430bb2e788348cd2f8680aebc0e12fc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Free To Use Sounds](https://unsplash.com/@freetousesoundscom?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/doing-it-wrong?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[MS MARCO](https://microsoft.github.io/msmarco/) is a collection of large scale
+    datasets released by Microsoft with the intent of helping the advance of deep
+    learning research related to search. It was our first choice when we decided to
+    create a [tutorial](https://docs.vespa.ai/documentation/tutorials/text-search.html) showing
+    how to setup a text search application with [Vespa](https://vespa.ai/). It was
+    getting a lot of attention from the community, in great part due to the intense
+    competition around leaderboards. Besides, being a large and challenging annotated
+    corpus of documents, it checked all the boxes at the time.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We followed up the first basic search tutorial with a [blog post](https://medium.com/vespa/learning-to-rank-with-vespa-9928bbda98bf) and
+    a [tutorial](https://docs.vespa.ai/documentation/tutorials/text-search-ml.html) on
+    how to use ML in Vespa to improve the text search application. So far so good.
+    Our first issue came when we were writing the [third tutorial](https://docs.vespa.ai/documentation/tutorials/text-search-semantic.html) on
+    how to use (pre-trained) semantic embeddings and approximate nearest neighbor
+    search to improve the application. At this point we started to realize that maybe
+    the full-text ranking MS MARCO dataset was not the best way to go.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After looking more closely at the data, we started to realize that the dataset
+    was highly biased towards term-matching signals. And by that I mean, much more
+    than we expected.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But we know it is biased …
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Before we go on to the data, we must say that we expected bias in the dataset.
+    According to [the MS MARCO dataset paper](https://arxiv.org/abs/1611.09268), they
+    built the dataset by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sampling queries from Bing’s search logs.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Filtering out non question queries.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Retrieve relevant documents for each question using Bing from its large-scale
+    web index.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Automatically extract relevant passages from those documents
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Human editors then annotate passages that contain useful and necessary information
+    for answering the questions
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Looking at steps 3 and 4 (and maybe 5), it is not surprising to find bias in
+    the dataset. And to be fair, I think the bias is recognized as an issue in the
+    literature. The surprise was the degree of the bias that we observed and how this
+    might affect experiments involving semantic search.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Semantic embeddings setup
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Our main goal was to illustrate how we can create out-of-the-box semantic aware
+    text search applications by using term-matching and semantic signals. This combined
+    with Vespa’s ability to perform [Approximate Nearest Neighbor search](https://docs.vespa.ai/documentation/tutorials/text-search-semantic.html#approximate-nearest-neighbor-ann-operator) would
+    allow users to build such applications at scale.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the results presented next we use [BM25 scores](https://docs.vespa.ai/documentation/reference/bm25.html) as
+    our term-matching signal and the [sentence BERT model](https://github.com/UKPLab/sentence-transformers#getting-started) to
+    generate embeddings to represent the semantic signal. Similar results were obtained
+    with simpler term-matching signals and other semantic models like Universal Sentence
+    Encoder. More details and [code](https://github.com/vespa-engine/sample-apps/tree/master/text-search) can
+    be found in the [tutorial](https://docs.vespa.ai/documentation/tutorials/text-search-semantic.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Combining signals
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We started with a reasonable baseline involving only term-matching signals.
+    Next, we got promising results when we used only semantic signals in the application,
+    just to sanity check the setup and to confirm that there was indeed relevant information
+    contained in the embeddings. After that, the obvious follow up was to combine
+    both signals.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Vespa offers a lot of possibilities here as we can combine term-matching and
+    semantic signals, both in the match phase and in the ranking phase. In the match
+    phase, we can use the `nearestNeighbor` operator for the semantic vectors and
+    the multitude of operators usually used for term-matching such as the usuals `AND` and `OR` grammar
+    to combine query tokens or [useful approximations](https://docs.vespa.ai/documentation/using-wand-with-vespa.html) like `weakAND`.
+    In the ranking phase, we can use well known ranking features such as BM25 and
+    the [Vespa tensor evaluation framework](https://docs.vespa.ai/documentation/tensor-user-guide.html) to
+    do whatever we want with input signals such as the semantic embeddings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It was when we started to experiment with all these possibilities that we began
+    to question the usefulness of the MS MARCO dataset for this type of experiment.
+    The main point was that, although the semantic signals were doing a decent job
+    in isolation, the improvements would disappear when term-matching signals were
+    taken into account.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We were expecting a significant intersection between term-matching and semantic
+    signals since both should contain information about query document relevance. *However,
+    the semantic signals need to complement the term-matching signals for it to be
+    valuable, given that they are more expensive to store and compute. This means
+    that they should match relevant documents that would not otherwise be matched
+    by term-matching signals.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, this was not the case, as far as we could see it. So, we decided to
+    look more closely at the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Term-matching bias
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To better investigate what was going on, we collected query-document data from
+    Vespa about both relevant and random documents. For example, the next graph shows
+    the empirical distribution of the sum of dot-products between the query and title
+    embeddings and between the query and body embeddings. The blue histogram shows
+    the distribution for random (and therefore likely non-relevant to the queries)
+    documents. The red histogram shows the same information but now conditioned on
+    the fact that the documents are relevant to the queries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/86dccc0b2b1c378f18c369947db85d3c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Empirical distribution of embedding’s dot-product scores. Given a set of queries,
+    blue represents random (non-relevant) documents and red represents relevant documents.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As expected, we got much higher scores on average for relevant documents. Great.
+    Now, let’s look at a similar graph for the BM25 scores. The results are similar
+    but much more extreme in this case. Relevant documents have much higher BM25 scores,
+    to the point where almost no relevant document has low enough signal to be excluded
+    from being retrieved by term-matching signals. This means that, after accounting
+    for term-matching, there are almost no relevant documents left to be matched by
+    semantic signals. This is true even if the semantic embeddings are informative.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/7e70f99335a82ad6b253bb6b1c422d25.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Empirical distribution of BM25 scores. Given a set of queries, blue represents
+    random (non-relevant) documents and red represents relevant documents.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In such a scenario, the best we can hope for is that both signals are positively
+    correlated for relevant documents, showing that both carry information about query-document
+    relevance. This seems indeed to be the case in the scatter plot below that visually
+    shows a much stronger correlation between BM25 scores and embedding scores for
+    the relevant documents (red) than between the scores of the general population
+    (black).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/a03f3d305c6f5a259f226322443ebfe7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Scatter plot of embedding’s dot-product scores versus BM25 scores. Given a set
+    of queries, black represents random (non-relevant) documents and red represents
+    relevant documents.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Remarks and conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'At this point, a reasonable observation would be that we are talking about
+    pre-trained embeddings and that we could get better results if we fine-tuned the
+    embeddings to the specific application at hand. This might very well be the case
+    but there are at least two important considerations to be taken into account:
+    cost and overfitting. The resource/cost consideration is important but more obvious
+    to be recognized. You either have the money to pursue it or not. If you do, you
+    still should check to see if the improvement you get is worth the cost.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The main issue, in this case, relates to overfitting. It is not easy to avoid
+    overfitting when using big and complex models such as Universal Sentence Encoder
+    and sentence BERT. Even if we use the entire MS MARCO dataset, which is considered
+    a big and important recent developments to help advance the research around NLP
+    tasks, we only have around 3 million documents and 300 thousand labeled queries
+    to work with. This is not necessarily big relative to such massive models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another important observation is that BERT-related architectures have dominated [the
+    MSMARCO leaderboards](https://microsoft.github.io/msmarco/) for quite some time.
+    Anna Rogers [wrote a good piece](https://hackingsemantics.xyz/2019/leaderboards/) about
+    some of the challenges involved on the current trend of using leaderboards to
+    measure model performance in NLP tasks. The big takeaway is that we should be
+    careful when interpreting those results as it becomes hard to understand if the
+    performance comes from architecture innovation or excessive resources (read overfitting)
+    being deployed to solve the task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But despite all those remarks, *the most important point here is that if we
+    want to investigate the power and limitations of semantic vectors (pre-trained
+    or not), we should ideally prioritize datasets that are less biased towards term-matching
+    signals*. This might be an obvious conclusion, but what is not obvious to us at
+    this moment is where to find those datasets since the bias reported here are likely
+    present in many other datasets due to similar data collection designs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks to Lester Solbakken and Jon Bratseth.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Thiago Guerrera Martins](https://www.linkedin.com/in/thiago-g-martins/)**
+    ([**@Thiagogm**](https://twitter.com/thiagogm)) is a Principal Data Scientist
+    @ Verizon Media and works on the open-sourced search engine [vespa.ai](https://vespa.ai/).
+    He has a PhD in Statistics.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/why-you-should-not-use-ms-marco-to-evaluate-semantic-search-20affc993f0b).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How To Build Your Own Feedback Analysis Solution](/2020/03/build-feedback-analysis-solution.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A simple and interpretable performance measure for a binary classifier](/2020/03/interpretable-performance-measure-binary-classifier.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tokenization and Text Data Preparation with TensorFlow & Keras](/2020/03/tensorflow-keras-tokenization-text-data-prep.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A (Much) Better Approach to Evaluate Your Machine Learning Model](https://www.kdnuggets.com/2022/01/much-better-approach-evaluate-machine-learning-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Better Way To Evaluate LLMs](https://www.kdnuggets.com/a-better-way-to-evaluate-llms)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why You Should Not Overuse List Comprehensions in Python](https://www.kdnuggets.com/why-you-should-not-overuse-list-comprehensions-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Semantic Vector Search Transforms Customer Support Interactions](https://www.kdnuggets.com/how-semantic-vector-search-transforms-customer-support-interactions)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Semantic Search with Vector Databases](https://www.kdnuggets.com/semantic-search-with-vector-databases)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Reasons Why You Should Use Linear Regression Models Instead of…](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

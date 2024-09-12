@@ -1,0 +1,1959 @@
+- en: 'Nothing but NumPy: Understanding & Creating Neural Networks with Computational
+    Graphs from Scratch'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/08/numpy-neural-networks-computational-graphs.html](https://www.kdnuggets.com/2019/08/numpy-neural-networks-computational-graphs.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Rafay Khan](https://medium.com/@rafayak)**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understanding new concepts can be hard, especially these days when there is
+    an avalanche of resources with only cursory explanations for complex concepts.
+    This blog is the result of a dearth of detailed walkthroughs on how to create
+    neural networks in the form of computational graphs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this blog posts, I consolidate all that I have learned as a way to give back
+    to the community and help new entrants. I will be creating common forms of neural
+    networks all with the help of nothing but [NumPy](https://www.numpy.org/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*This blog post is divided into two parts, the first part will be understanding
+    the basics of a neural network and the second part will comprise the code for
+    implementing everything learned from the first part.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Part Ⅰ: Understanding a Neural Network'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s dig in
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Neural networks are a model inspired by how the brain works. Similar to neurons
+    in the brain, our ‘mathematical neurons’ are also, intuitively, connected to each
+    other; they take inputs(dendrites), do some simple computation on them and produce
+    outputs(axons).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The best way to learn something is to build it. Let’s start with a simple neural
+    network and hand-solve it. This will give us an idea of how the computations flow
+    through a neural network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/38d47b6a2b5326a19ecc47497a93cc63.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 1\. Simple input-output only neural network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As in the figure above, most of the time you will see a neural network depicted
+    in a similar way. But this succinct and simple looking picture hides a bit of
+    the complexity. Let’s expand it out.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4afeb3863fb437416d94ef2a87e66b6b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 2\. Expanded neural network
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, let’s go over each node in our graph and see what it represents.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/023769593ccc84ae6e7517d53f365ecb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 3\. Inputs nodes ***x₁*** and ***x₂***
+  prefs: []
+  type: TYPE_NORMAL
+- en: These nodes represent our inputs for our first and second features, ***x₁*** and ***x₂, ***that
+    define a single example we feed to the neural network*, *thus called ***“Input
+    Layer”***
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/029034be43e0b85ee3dab729317e95fc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 4\. Weights
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***w₁*** and ***w₂*** represent our weight vectors (in some neural network
+    literature it is denoted with the *theta* symbol,** *θ***). Intuitively, these
+    dictate how much influence each of the input features should have in computing
+    the next node. If you are new to this, think of them as playing a similar role
+    to the ‘slope’ or ‘gradient’ constant in a linear equation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Weights are the main values our neural network has to “learn”*. So initially,
+    we will set them to ***random values* **and let the “*learning algorithm”* of
+    our neural network decide the best weights that result in the correct outputs.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why random initialization? More on this later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e7548706766137f30f4cf5f3cf7cc364.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 5\. Linear operation
+  prefs: []
+  type: TYPE_NORMAL
+- en: This node represents a linear function. Simply, *it takes all the inputs coming
+    to it and creates a linear equation/combination out of them*. ( *By convention,
+    it is understood that a linear combination of weights and inputs is part of each
+    node, except for the input nodes in the input layer, thus this node is often omitted
+    in figures, like in Fig.1. *In this example, I’ll leave it in)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/68cddc88577301e08686f2628a05c51b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 6\. output node
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This ***σ*** node takes the input and passes it through the following function,
+    called the **sigmoid function**(because of its S-shaped curve), also known as
+    the **logistic function**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bed80c69422c9e4f61a41364a8a65f7a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 7\. Sigmoid(Logistic) function
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sigmoid is one of the many “activations functions” used in neural networks.
+    The job of an activation function is to change the input to a different range.
+    For example, if *z > 2* then, *σ(z) ≈ 1* and similarly, if *z < -2 then, σ(z)
+    ≈ 0\. S*o, the sigmoid function squashes the output range to (0, 1)* (this ‘()’
+    notation implies exclusive boundaries; never completely outputs 0 or 1 as the
+    function asymptotes, but reaches very close to boundary values)*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**In our above neural network since it is the last node, it performs the function
+    of output**. The predicted output is denoted by ***ŷ. ***(*Note: in some neural
+    network literature this is denoted by ‘****h(θ)’****, where ‘h’ is called the
+    hypothesis i.e. this is the hypothesis of the neural network, a.k.a the output
+    prediction, given parameter θ; where θ are weights of the neural networks)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we know what each and everything represents let’s flex our muscles
+    by computing each node by hand on some dummy data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2ed4a064215733af4f22ae297cfbe5be.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 8\. OR gate
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data above represents an **OR** gate(output 1 if any input is 1). Each row
+    of the table represents an *‘example’* we want our neural network to learn from.
+    After learning from the given examples we want our neural network to perform the
+    function of an OR gate; given the input features, ***x₁*** and ***x₂****,*try
+    to output the corresponding*** y(also called ‘label’)****. *I have also plotted
+    the points on a 2-D plane so that it is easy to visualize(green crosses represent
+    points where the output(***y)*** is ***1*** and the red dot represents the point
+    where the output is ***0***).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This OR-gate data is particularly interesting, as it is ***linearly separable*** i.e.
+    we can draw a straight line to separate the green cross from the red dot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7f867752ccff54507e611dedba287184.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 9\. Showing that the OR gate data is linearly separable
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll shortly see how our simple neural network performs this task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data flows from left-to-right in our neural network. In technical terms, this
+    process is called** ‘forward propagation’**; the computations from each node are
+    forwarded to the next node, it is connected to.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s go through all the computations our neural network will perform on given
+    the first example, ***x₁=0***, and*** x₂=0***. Also, we’ll initialize weights** *w₁***and ***w₂*** to ***w₁=0.1*** and ***w₂=0.6 ****(recall,
+    these weights a have been randomly selected)*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/43bd23a4aa27407e55a73fa12979bc68.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 10\. Forward propagation of the first example from OR table data
+  prefs: []
+  type: TYPE_NORMAL
+- en: With our current weights, ***w₁= 0.1*** and ***w₂ = 0.6***,ournetwork’s output
+    is a bit far from where we’d like it to be. The predicted output, ***ŷ,*** should
+    be*** ŷ≈0***for*** x₁=0 ***and ***x₂=0***, right now its ***ŷ=0.5***.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, how does one tell a neural network how far it is from our desired output?
+    In comes the ***Loss Function*** to the rescue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loss Function
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*The ****Loss Function ****is a simple equation that tells us how far our neural
+    network’s predicted output(****ŷ****) is from our desired output(****y****), ****for
+    ONE example, only.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*The**** derivative ****of the loss function dictates whether to increase or
+    decrease weights. A positive derivative would mean decrease the weights and negative
+    would mean increase the weights. ****The steeper the slope the more incorrect
+    the prediction was.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/efff273455748309f30a97bb3e5a2a62.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 11\. Loss function visualized
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*The Loss function curve depicted in Figure 11 is an ideal version. In real-world
+    cases, the Loss function may not be so smooth, with some bumps and saddles points
+    along the way to the minimum.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are many different kinds of loss functions***each essentially calculating
+    the error between predicted output and desired output***. Here we’ll use one of
+    the simplest loss functions, the ***squared-error Loss function. ***Defined as
+    follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2793060333d3b5ab830c6a93baa0832f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 12\. Loss Function. Calculating error for a single example
+  prefs: []
+  type: TYPE_NORMAL
+- en: Taking the **square keeps everything nice and positive** and the **fraction
+    (1/2) is there so that it cancels out when taking the derivative of the squared** **term** *(it
+    is common among some machine learning practitioners to leave the fraction out)*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Intuitively, the Squared Error Loss function helps us in minimizing the vertical
+    distance between our predictor line(blue line) and actual data(green dot). Behind
+    the scenes, this predictor line is our ***z***(linear function)node.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ce732454b37cd559449ffcd308da0a7e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 13\. Visualization of the effect of the Loss function
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we know the purpose of a Loss function let’s calculate the error in
+    our current prediction ***ŷ=0.5, ***given*** y=0***
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c3f6de91a81e4ccdeaac590db88d93a6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 14\. Loss calculated for 1ˢᵗ example
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we can see the Loss is ***0.125***. Given this, *we can now use the derivative
+    of the Loss function to check whether we need to increase or decrease our weights.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: This process is called ***backpropagation, ***as we’ll be doing the opposite
+    of the *forward* phase. Instead of going from input to output we’ll track backward
+    from output to input. Simply, backpropagation allows us to figure out how much
+    of the Loss each part of the neural network was responsible for.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To perform backpropagation we’ll employ the following technique: *at each node,
+    we only have our local gradient computed(partial derivatives of that node), then
+    during backpropagation, as we are receiving numerical values of gradients from
+    upstream, we take these and multiply with local gradients to pass them on to their
+    respective connected nodes.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/97edd425f04f3ee5d639a7e8944eeaed.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 15\. Gradient Flow
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*This is a generalization of the ****chain rule**** from calculus.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since ***ŷ***(predicted label) dictates our*** Loss ***and*** y***(actual label)is
+    constant, for a single example, *we will take the partial derivative of Loss with
+    respect to ****ŷ***
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/93c77d3279ab1144e161a82ea3ba66c4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 16\. The partial derivative of Loss w.r.t *ŷ*
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Since the backpropagation steps can seem a bit complicated I’ll go over them
+    step by step:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/717944c968df7e55dca1ebfcadce6002.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 17.a. Backpropagation
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For the next calculation, we’ll need the derivative of the sigmoid function,
+    since it forms the local gradient of the red node. Let’s derive that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/403208547ced862d639a5c26249ef199.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/382027c4b501f3bd8aa2f0794ade600e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/79d315fd88c9b1a19b60f2a13581c435.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig18\. The derivative of the Sigmoid function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s use this in the next backward calculation
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1018c6b9fced743b807c08e992675308.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 17.b. Backpropagation
+  prefs: []
+  type: TYPE_NORMAL
+- en: The backward computations should not propagate all the way to inputs as we don’t
+    want to change our input data(i.e. red arrows should not go to green nodes). We
+    only want to change the weights associated with inputs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/23e4187fc6e49256c8005f32d0279946.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 17.c. Backpropagation
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice something weird? *The derivatives to the Loss with respect to the weights,w₁
+    & w₂, are ZERO*! We can’t increase or decrease the weights if their derivatives
+    are zero. So then, how do we get our desired output in this instance if we can’t
+    figure out how to adjust the weights? *The key thing to note here is that the
+    local gradients (***∂z/∂w₁*** and ***∂z/∂w₂***) are ****x₁**** and ****x₂, ***both
+    of which, in this example, happens to be zero (i.e. provide no information)
+  prefs: []
+  type: TYPE_NORMAL
+- en: This brings us to the concept of ***bias.***
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bias
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Recall equation of a line from your high school days.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5ac67f0badcdaab47b419ffc80816bf0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 19\. Equation of a Line
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here ***b ***is the bias term. Intuitively, the bias tells us that all outputs
+    computed with ***x****(independent variable) *should have an additive bias of ***b.***So,
+    when*** x=0***(no information coming from the *independent variable) the output
+    should be biased to just ****b.***
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Note that without the bias term a line can only pass through the origin(0,
+    0) and the only differentiating factor between lines would then be the gradient ****m.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cfc5b09e3addf09b814a92dc3f4320fa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 20\. Lines from origin
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, using this new information let’s add another node to a neural network; the
+    bias node. (*In neural network literature, every layer, except the input layer,
+    is assumed to have a bias node, just like the linear node, so this node is also
+    often omitted in figures.*)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c4dc4ff39a753b93f82c714606b25683.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 21\. Expanded neural network with a bias node
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let’s do a forward propagation with the same example, ***x₁=0, x₂=0, y=0 ***and
+    let’s set bias, ***b=0**** (initial bias is always set to zero, rather than a
+    random number)*, and let the backpropagation of Loss figure out the bias.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/16e04c8a5382ca0d7b8a2868d8f3b1c2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 22\. Forward propagation of the first example from OR table data with a
+    bias unit
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, the forward propagation with a bias of “***b=0***” didn’t change our output
+    at all, but let’s do the backward propagation before we make our final judgment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As before let’s go through backpropagation in a step by step manner.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7515f10dd654c6210465773d54941712.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 23.a. Backpropagation with bias
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/45a8ade6b9000b2927727bdaca34554c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 23.b. Backpropagation with bias
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e0e060d94e0e1c45d10d2b07f729aea2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 23.c. Backpropagation with bias
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hurrah! we just figured out how much to adjust the bias. Since the derivative
+    of bias(**∂L/∂b**) is positive 0.125, we will need to adjust the bias by moving
+    in the negative direction of the gradient(recall the curve of the Loss function
+    from before). This is technically called ***gradient descent***, as we are “descending”
+    away from the sloping region to a flat region using the direction of the gradient.
+    Let’s do that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c8a67c5a5ed306eb876dc50be31c278d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 24\. Calculated new bias using gradient descent
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, that we’ve slightly adjusted the bias to ***b=-0.125, ***let’s test if
+    we’ve done the right thing by doing a **forward propagation **and** checking the
+    new Loss*.***
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/78ffcea1a6a45702ab2ed34f709d6ee3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 25\. Forward propagation with newly calculated bias
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/177d386128f5a51220ae6b4a640d08ca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 26\. Loss after newly calculated bias
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now our predicted outputis*** ŷ≈0.469****(rounded to 3 decimal places)****, ***that’s
+    a slight improvement from the previous 0.5 and Loss is down from 0.125 to around ***0.109***.
+    This slight correction is something that the neural network has ‘learned’ just
+    by comparing its predicted output with the desired output, ***y***, and then moving
+    in the direction opposite of the gradient***. ***Pretty cool, right?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now you may be wondering, this is only a small improvement from the previous
+    result and how do we get to the minimum Loss. Two things come into play: ***a)* how
+    many iterations of ‘training’ we perform** (each training cycle is forward propagation
+    followed by backward propagation and updating the weights through gradient descent). ***b)* the
+    learning rate.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: Learning rate??? What’s that? Let’s talk about it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Learning Rate
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Recall, how we calculated the new bias, above, by moving in the direction opposite
+    of the gradient(i.e. ***gradient descent***).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0c6d22ebf234d7114a08eaf5f0c4cbf3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 27\. The equation for updating bias
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice that when we updated the bias we moved ***1 step in the opposite direction
+    of the gradient.***
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6a556088c35b09bcaeb4660c99ebdbaf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 28\. The equation for updating bias showing “step”
+  prefs: []
+  type: TYPE_NORMAL
+- en: We could have moved 0.5, 0.9, 2, 3 or whatever fraction of steps we desired
+    in the opposite direction of the gradient. This ‘*number of steps’ is what we
+    define as the ****learning rate***, often denoted with*** α***(alpha)***.***
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d08027c5693ca75a43e04fae80925afb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 29\. The general equation for gradient descent
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Learning rate defines how quickly we reach the minimum loss. Let’s visualize
+    below what the learning rate is doing:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9978262f5b2b35ab7e5b5145bea544bc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 30\. Visualizing the effect of learning rate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see with a lower learning rate(α=0.5) our descent along the curve
+    is slower and we take many steps to reach the minimum point. On the other hand,
+    with a higher learning rate(α=5) we take much bigger steps and reach the minimum
+    point much faster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*The keen-eyed may have noticed that gradient descent steps(green arrows) keep
+    getting smaller as we get closer and closer to the minimum, why is that? Recall,
+    that the learning rate is being multiplied by the gradient at that point along
+    the curve; as we descend away from sloping regions to flatter regions of the u-shaped
+    curve, near the minimum point, the gradient keeps getting smaller and smaller,
+    thus the steps also get smaller. Therefore, changing the learning rate during
+    training is not necessary(some variations of gradient descent start with a high
+    learning rate to descend quickly down the slope and then reduce it gradually,
+    this is called “annealing the learning rate”)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So what’s the takeaway? Just set the learning rate as high possible and reach
+    the optimum loss quickly. NO. Learning rate can be a double-edged sword. Too high
+    a learning rate and the parameters(weights/biases) don’t reach the optimum instead
+    start to diverge away from the optimum. To small a learning rate and the parameters
+    take too long to converge to the optimum.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/702552bdc0f0bceec920fbc5d1125490.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 31\. Visualizing the effect of very low vs. very high learning rate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Small learning rate(α=5*10⁻¹⁰) resulting is numerous steps to reach the minimum
+    point is self-explanatory; multiply gradient with a small number(α) results in
+    a proportionally small step.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Large learning rate(α=50) causing gradient descent to diverge may be confounding,
+    but the answer is quite simple; note that at each step gradient descent approximates
+    its path downward by moving in straight lines(green arrows in the figures), in
+    short, it estimates its path downwards. When the learning rate is too high we
+    force gradient descent to take larger steps. Larger steps tend to overestimate
+    the path downwards and shoot past the minimum point, then to correct the bad estimate
+    gradient descent tries to move towards the minimum point but again overshoots
+    past the minimum due to the large learning rate. This cycle of continuous overestimates
+    eventually cause the results to diverge(Loss after each training cycle increase,
+    instead of decrease).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Learning rate is what’s called a ***hyper-parameter***. Hyper-parameters are
+    parameters that the neural network can’t essentially learn through backpropagation
+    of gradients, they have to be hand-tuned according to the problem and its dataset,
+    by the creator of the neural network model. *(The choice of the Loss function,
+    above, is also hyper-parameter)*
+  prefs: []
+  type: TYPE_NORMAL
+- en: In short, the goal is not the find the “perfect learning rate ” but instead
+    a learning rate large enough so that the neural network trains successfully and
+    efficiently without diverging.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, far we’ve only used one example(***x₁=0 ***and ***x₂=0***) to adjust our
+    weights and bias(*actually, only our bias up till now*????) and that reduced the
+    loss on one example from our entire dataset(OR gate table). But we have more than
+    one example to learn from and we want to reduce our loss across all of them. **Ideally,
+    in one training iteration, we would like to reduce our loss across all the training
+    examples**. This is called **Batch Gradient Descent**(or full batch gradient descent),
+    as we use the entire batch of training examples per training iteration to improve
+    our weights and biases. *(Others forms are ****mini-batch gradient descent****,
+    where we use a subset of the data set in each iteration and ****stochastic gradient
+    descent****, where we only use one example per training iteration as we’ve done
+    so far).*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*A training iteration where the neural network goes through all the training
+    examples is called an ****Epoch***. *If using mini-batches than an epoch would
+    be complete after the neural network goes through all the mini-batches, similarly
+    for stochastic gradient descent where a batch is just one example.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before we proceed further we need to define something called a ***Cost Function***.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cost Function
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When we perform “*batch gradient descent”* we need to slightly change our Loss
+    function to accommodate not just one example but all the examples in the batch.
+    This adjusted Loss function is called the** Cost Function**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Also, note that the curve of the Cost Function is similar to the curve of
+    the Loss function(same U-Shape).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Instead of calculating the Loss on one example the cost function calculates
+    average Loss across ALL the examples.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a63cf35d9719b84702bce97dc51f9783.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 32\. Cost function
+  prefs: []
+  type: TYPE_NORMAL
+- en: Intuitively, the Cost function is expanding out the capability of the Loss function.
+    Recall, how the Loss function was helping to minimize the vertical distance between
+    a *single* data point and the predictor line(***z***). **The Cost function is
+    helping to minimize the vertical distance(Squared Error Loss) between multiple
+    data points, concurrently.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9b4944591e0a5470a81aceddbfbe1b79.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 33\. Visualization of the effect of the Cost function
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**During batch gradient descent we’ll use the derivative of the Cost function**,
+    instead of the Loss function, to guide our path to minimum cost across all examples. *(In
+    some neural network literature, the Cost Function is at times also represented
+    with the letter ****‘J’****.)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s take a look at how the derivative equation of the Cost function differs
+    from the plain derivative of the Loss function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The derivative of Cost Function
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/69a4e27a045a3ac65e0a5082d5575600.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 34\. Cost function showing it takes input vectors
+  prefs: []
+  type: TYPE_NORMAL
+- en: Taking the derivative of this Cost function, which takes vectors as inputs and
+    sums them, can be a bit dicey. So, let’s start out on a simple example before
+    we generalize the derivative.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6a306e0e6fc713cf705a11ea6e765fa4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 35\. Calculation of Cost on a simple vectorized example
+  prefs: []
+  type: TYPE_NORMAL
+- en: Nothing new here in the calculation of the Cost. Just as expected the Cost,
+    in the end, is the average of the Loss, but the implementation is now vectorized*(we
+    performed vectorized subtraction followed by element-wise exponentiation, called
+    Hadamard exponentiation)*. Let’s derive the partial derivatives.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c790a78b2ecfa56eeebbbe35cfe60a66.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 36\. Calculation of Jacobian on the simple example
+  prefs: []
+  type: TYPE_NORMAL
+- en: From this, we can generalize the partial derivative equation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/14f124e6a048dbaedb1fd6b6c7621eca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 37\. Generalized partial derivative equation
+  prefs: []
+  type: TYPE_NORMAL
+- en: Right now we should take a moment to note how the derivative of the Loss is
+    different for the derivative of the Cost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/01ac009233539fc95582270413eb2394.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 38\. Comparison between the partial derivative of Loss and Cost with respect
+    to(w.r.t)** ŷ⁽ⁱ⁾**
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll later see how this small change manifests itself in the calculation of
+    the gradient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Back to batch gradient descent.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are two ways to perform batch gradient descent:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1.** For each training iteration create separate temporary variables(capital
+    deltas, Δ) that will accumulate the gradients(small deltas, δ) for the weights
+    and biases from each of the **“*m”*** examples in our training set, then at the
+    end of the iteration update the weights using the average of the accumulated gradients.
+    This is a slow method. *(for those familiar time complexity analysis you may notice
+    that as the training data set grows this becomes a polynomial-time algorithm,
+    O(n²))*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bc1b1d8d36765092165165673e16983a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 39\. Batch Gradient Descent slow method
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2.** The quicker method is similar to above but instead uses vectorized computations
+    to calculate all the gradients for all the training examples in one go, so the
+    inner loop is removed. Vectorized computations run much quicker on computers.
+    This is the method employed by all the popular neural network frameworks and the
+    one we’ll follow for the rest of this blog.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For vectorized computations, we’ll make an adjustment to the “Z” node of the
+    neural network computation graph and use the Cost function instead of the Loss
+    function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9f3f404b2d73fbec45e13317d1af019d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 40\. Vectorized implementation of Z node
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that in the figure above we take** dot-product **between ***W*** and ***X*** which
+    can be either an appropriate size matrix or vector. The bias, ***b***, is still
+    a single number*(a scalar quantity) *here and will be added to the output of the
+    dot product in an element-wise fashion. The predicted output will not be just
+    a number, but instead a vector, ***Ŷ***, where each element is the predicted
+    output of their respective example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s set up out data(***X, W, b & Y***) before doing forward and backward propagation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2698ecc7113248159932ca490724a885.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 41\. Setup data for vectorized computations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are now finally ready to perform forward and backward propagation using **Xₜᵣₐᵢₙ**, **Yₜᵣₐᵢₙ**, **W, **and **b**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*(NOTE: All the results below are rounded to 3 decimal points, just for brevity)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f3f0e2fba102a97c7a69e3b6a3220353.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/cab5b9ab80aff5ae8267b23b1d54aa5b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 42\. Vectorized Forward Propagation on OR gate dataset
+  prefs: []
+  type: TYPE_NORMAL
+- en: How cool is that we calculated all the forward propagation steps for all the
+    examples in our data set in one go, just by vectorizing our computations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can now calculate the **Cost** on these output predictions. *(We’ll go over
+    the calculation in detail, to make sure there is no confusion)*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f31fd4809131a60cffac6142821f3ae7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 43\. Calculation of Cost on the OR gate data
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our **Cost** with our current weights, **W**, turns out to be **0.089**. Our
+    Goal now is to reduce this cost using backpropagation and gradient descent. As
+    before we’ll go through backpropagation in a step by step manner
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/46ab62def1554b11bdae1cba38936c65.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/fb4ded4c8ce55315bc03d78d50355f21.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 44.a. Vectorized Backward on OR gate data
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/33106e9650262758d95994d0dd2c1956.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/190f1d46ed4e3ede41133aac1267a916.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 44.b. Vectorized Backward on OR gate data
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/aad459efad7adcd029ab0e86be507ab0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/56021e5b24647574d7187f87d9ef715f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 44.c. Vectorized Backward on OR gate data
+  prefs: []
+  type: TYPE_NORMAL
+- en: Voila, we used a vectorized implementation of *batch gradient descent* to calculate
+    all the gradients in one go.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*(Those with a keen eye may be wondering how are the local gradients and the
+    final gradients are being calculated in this last step. Don’t worry, I’ll explain
+    the derivation of the gradients in this last step, shortly. For now, its suffice
+    to say that the gradients defined in this last step are an optimization over the
+    naive way of calculating ∂Cost/∂W and ∂Cost/∂b)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s update the weights and bias, keeping learning rate same as the non-vectorized
+    implementation from before i.e.*** α=1.***
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5903701887957891f4058d2391c88c23.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 45\. Calculated new Weights and Bias
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we have updated the weights and bias lets do a **forward propagation** and **calculate
+    the new Cost **to check if we’ve done the right thing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2bee1b78390d1acd7c08a05747df7eb6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/fe4a61bdccc85e9820c2d58535801909.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 46\. Vectorized Forward Propagation with updated weights and bias
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ee999ac41dff78361b8bff2aaf0f42d7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 47\. New Cost after updated parameters
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, we *reduced our Cost(Average Loss across all examples) *from an initial
+    Cost of around ***0.089*** to **0.084**. We will need to do multiple training
+    iterations before we can converge to a lowCost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At this point, I would recommend that you perform backpropagation step yourself.
+    The result of that should be (rounded to 3 decimal places): ***∂Cost/∂W = [-0.044,
+    -0.035] ***and*** ∂Cost/∂b = [-0.031].***
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recall, before we trained the neural network, how we predicted the neural network
+    can separate the two classes in Figure 9, well after about 5000 Epochs(full batch
+    training iterations) Cost steadily decreases to about ***0.0005 ***and we get
+    the following decision boundary ***:***
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c0c6aa0aaba78c35222aa192d5ba770e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/f954a6afbccf2c035b477196d8c52b40.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 48\. Cost curve and Decision boundary after 5000 epochs
+  prefs: []
+  type: TYPE_NORMAL
+- en: The **Cost curve** is basically the value of Cost plotted after a certain number
+    of iterations(epochs). Notice that the Cost curve flattens after about 3000 epochs
+    this means that the weights and bias of the neural network have converged, so
+    further training will only slightly improve our weights and bias. Why? Recall
+    the u-shaped Loss curve, as we descend closer and closer the minimum point(flat
+    region) the gradients become smaller and smaller thus the steps gradient descent
+    takes are very small.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The **Decision Boundary** shows at the line along which the decision of the
+    neural network changes from one output to the other. We can better visualize this
+    by coloring the area below and above the decision boundary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f526b1f2f789d1b35b11cd80ef80ae3b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 49\. Decision boundary visualized after 5000 epochs
+  prefs: []
+  type: TYPE_NORMAL
+- en: This makes it much clearer. The red shaded area is the area below the decision
+    boundary and everything below the decision boundary has an output( **ŷ**) of **0**.
+    Similarly, everything above the decision boundary, shaded green, has an output
+    of **1**. In conclusion, our simple neural network has learned a decision boundary
+    by looking at the training data and figuring out how to separate its two output
+    classes(**y=1** and **y=0**)????. Now the output neuron fires up????(produces
+    1) whenever*** x₁*** or***x₂*** or both are 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now would be a good time to see how the “**1/m**” (“**m**” is the total number
+    of examples in the training dataset) in the Cost function manifested in the final
+    calculation of the gradients.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8727ddab6c2df2ca60a066c1dd9de775.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 50\. Comparing the effect of derivative w.r.t Cost and Loss on parameters
+    of the neural network
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**From this, the most important point to know is that the gradient that is
+    used to update our weights, using the Cost function, is the average of all the
+    gradients calculated during a training iteration;** **same applies to bias**.
+    You may want to confirm this yourself by checking the vectorized calculations
+    yourself.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Taking the average of all the gradients has some benefits. Firstly, it gives
+    us a less noisy estimate of the gradient. Second, the resultant learning curve
+    is smooth helping us easily determine if the neural network is learning or not.
+    Both of these features come in very handy when training neural networks on much
+    trickier datasets, such as those with wrongly labeled examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is great and all but how did you calculate the gradients ∂Cost/∂W and ∂Cost/∂b
+    ?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Neural network guides and blog posts I learned from often omitted complex details
+    or gave very vague explanations for them. Not in this blog we’ll go over everything
+    leaving no stone unturned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we’ll tackle ∂Cost/∂b. Why did we sum the gradients?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To explain this I employ our computational graph technique on three very simple
+    equations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ba93a16a525267c8eb05ff55d85e204c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 51\. Computational graph of simple equations
+  prefs: []
+  type: TYPE_NORMAL
+- en: I am particularly interested in the ***b*** node, so let’s do backpropagation
+    on this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/310412ccb897e75ac75ba19d109fb45a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 52\. Backpropagation on the computational graph of simple equations
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that the** *b*** node is receiving gradients from** two** other nodes.
+    So the total of the gradients flowing into node ***b ***is the *sum* of the two
+    gradients flowing in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fcafc547ff8e5a1baec35827e100a3ad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 53\. Sum of gradients flowing into node **b**
+  prefs: []
+  type: TYPE_NORMAL
+- en: From this example, we can generalize the following rule: ***Sum all the incoming
+    gradients to a node, from all the possible paths.***
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s visualize how this rule is used in the calculation of the **bias**. *Our
+    neural network can be seen as doing ****independent ****calculations for each
+    of our examples* but using shared parameters for weights and bias, during a training
+    iteration. Below bias(***b***) is visualized as a shared parameter for all individual
+    calculations our neural network performs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/938f2f0a65faa58e28ddfa94baf65860.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 54\. Visualizing bias parameter being shared across a training epoch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Following the general rule defined above, we will sum all the incoming gradients
+    from all the possible paths to the bias node, **b**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/de35a0603dfe77880a95dac4a40deb9d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 55\. Visualizing all possible backpropagation paths to shared bias parameter
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since the ∂Z/∂b (local gradient at the Z node) is equal to **1**, the total
+    gradient at ***b ***is the sum of gradients from each example with respect to
+    the Cost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/654d7510b7a998344d5f2421fee571c8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 56\. Proof that ∂Cost/∂b is the sum of upstream gradients
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we’ve got derivative of the bias figured out let’s move on to derivative
+    of weights, and more importantly the local gradient with respect to weights.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How is the local gradient(∂Z/∂W) equal to transpose of the input training data(X_train)?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This can be answered in a similar way to the above calculation for bias, but
+    the main complication here is the calculating the derivative of the dot product
+    between the weight matrix(***W***) and the data matrix(***Xₜᵣₐᵢₙ***), which forms
+    our local gradient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bfe8446f97b19fcd2602045e3aa79dbe.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 57.a. Figuring out the derivative of the dot product.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This derivative of the dot product is a bit complicated as** we are no longer
+    working with scalar quantities,** instead, both ***W*** and ***X*** are matrices
+    and the result of ***W⋅ X*** is also a matrix. Let’s dive a bit deeper using a
+    simple example first and then generalizing from it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c00981a2928b6f68525909f7bb5e0fae.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 57.b. Figuring out the derivative of the dot product.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s calculate the derivative of the ***A*** with respect to ***W***.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/94ce04a47d424911277686871094d999.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 57.c. Figuring out the derivative of the dot product.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us visualize this in case of a training iteration where multiple examples
+    are being processed at the same time. *(Note that input examples are column vectors.)*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a9647ad2b684893d618f12d0e06914c9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 58\. Visualizing weights being shared across a training epoch
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Just as the bias (**b**) was being shared across each calculation in a training
+    iteration, weights (***W***) are also being shared. We can also visualize the
+    gradient flowing back to the weights, as follows*(note that the local derivative
+    of each example w.r.t to ****W ****results in a row vector of the input example
+    i.e. transpose of input)*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e1518b3b7f4e309d19aeb2ba39d8bd6a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 59\. Visualizing all possible backpropagation paths to shared weights parameter
+  prefs: []
+  type: TYPE_NORMAL
+- en: Again, following the general rule defined above, we will sum all the incoming
+    gradients from all the possible paths to the weights node, **W**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ff71e199e45fe47013bf1fe5686ec166.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 60\. Derivation of ∂Cost/∂W after visualization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Up till now what we’ve done to calculate, ***∂Cost/∂W***, though is correct
+    and serves as a good explanation however, it is not an optimized calculation.
+    We can vectorize this calculation, too. Let’s do that next
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0e59bf051638419d8cbc920212d006a5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 61\. Proof that ∂Cost/∂W is the dot product between the Upstream gradient
+    and the transpose of ***Xₜᵣₐᵢₙ***
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is there an easier way of figuring this out, without the math?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Yes! Use ***dimension analysis***.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our OR gate example we know that the gradient flowing into node ***Z ***isa
+    (1 × 4) matrix, Xₜᵣₐᵢₙ is a (2 × 4) matrix and the derivative of Cost with respect
+    to the ***W*** needs to be of the same size as ***W***, which is (1 × 2). So,
+    the only way to generate a (1 × 2) matrix would be to take the dot product of
+    between ***Z*** and transpose of ***Xₜᵣₐᵢₙ***.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/96ed900bf6311dbf4c3bfee86385e9f7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Similarly, knowing that bias, ***b***, is a simple (1 × 1) matrix and the gradient
+    flowing into node Z is (1 × 4), using dimension analysis we can be sure that the
+    gradient of Cost w.r.t ***b***, also needs to be a (1 × 1) matrix. The only way
+    we can achieve this, given the local gradient(***∂Z/∂b***) is just equal to ***1***,
+    is by summing up the upstream gradient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*On a final note when deriving derivative expressions work on small examples
+    and then generalize from there. For example here, while calculating the derivative
+    of the dot product w.r.t to ****W, ****we used a single column vector as a test
+    case and generalized from there, if we would have used the entire data matrix
+    then the derivative would have resulted in a (4 × 1 × 2) tensor (multidimensional
+    matrix), calculation on which can get a bit hairy.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before concluding this section lets go over a slightly more complicated example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/64065f8540feb91ff554f42e2e7939e9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 62\. XOR gate data
+  prefs: []
+  type: TYPE_NORMAL
+- en: Figure 62, above, represents an XOR gate data. Looking at it note that the label, ***y***,
+    is equal to ***1*** only when one of the values ***x₁*** or ***x₂*** is equal
+    to ***1***, *not both*. This makes it a particularly challenging dataset as the
+    data is not linearly separable, i.e. there is no single straight line decision
+    boundary that can successfully separate the two classes(***y=1*** and ***y=0***)
+    in the data. XOR used to be the bane of earlier forms of artificial neural networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a06444048f1fde781bc3ebc3fa4bc71c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 63\. Some linear decision boundaries that are wrong
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recall that our current neural network was successful only because it could
+    figure out the straight line decision boundary that could successfully separate
+    the two classes of the OR gate dataset. A straight line won’t cut it here. So,
+    how do we get a neural network to figure this one out?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Well, we can do two things:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Amend the data itself, so that in addition to features*** x₁*** and*** x₂*** a
+    third feature provides some additional information to help the neural network
+    decide on a good decision boundary. This process is called ***feature engineering***.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Change the architecture of the neural network, making it deeper.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Let’s go over both and see which one is better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature Engineering
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s look at a dataset similar looking to the XOR data that will help us in
+    making an important realization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/635edfae8a2c7de2cc6292f2ceb40b9c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 64\. XOR-like data in different quadrants
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data in Figure 64 is exactly like the XOR data except each data point is
+    spread out in different quadrants. Notice that in the **1ˢᵗ and 3ʳᵈ quadrant all
+    the values are positive** and in the **2ⁿᵈ and 4ᵗʰ all the values are negative.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d27d06a875988f132609e8298e0e4886.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 65\. Positive and negative quadrants
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why is that? In the **1ˢᵗ** and **3ʳᵈ** quadrants** the signs of values are
+    being squared, **while in the **2ⁿᵈ** and **4ᵗʰ **quadrants **the values are a
+    simple product between a negative and positive number resulting in a negative
+    number.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5540a678601712a408f4b8e4edc99b98.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 66\. Result of the product of features
+  prefs: []
+  type: TYPE_NORMAL
+- en: So this gives us a pattern to work with using the product of two features. We
+    can even see a similar pattern in the XOR data, where each quadrant can be identified
+    in a similar way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f277c2b7259d9348c8acd4d52b6ca340.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 67\. Quadrant-pattern in XOR data plot
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Therefore, a good third feature, x₃, would be the product of features x₁
+    and x₂(i.e. x₁*x₂).***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Product of features is called a ***feature cross*** and results in a new ***synthetic
+    feature***. *Feature crosses can be either the feature itself(eg. ****x₁², x₁³,…****),
+    a product of two or more features(eg. ****x₁*x₂, x₁*x₂*x₃, …****) or even a combination
+    of both(eg. ****x₁²*x₂****). For example, in a housing dataset where the input
+    features are the width and length of houses in yards and label is the location
+    of the house on the map, a better predictor for this location could be the feature
+    cross between width and length of houses, giving us a new feature of “size of
+    house in square yards”.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s add the new synthetic feature to our training data, Xₜᵣₐᵢₙ.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/50cf66e2d7b3e29d6af0847c359a5290.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 68\. New training data
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using this feature cross we can now successfully learn a decision boundary without
+    changing the architecture of the neural network significantly. We only need to
+    add an input node for ***x₃*** and a corresponding weight(*randomly set to 0.2*)
+    to the input layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/98b3a17563b92bb6de9767e8e20a0e88.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 69\. Neural Network with feature cross(x₃) as input
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0a259b679bc4c0d0e90625d4b317bdf0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 70\. Expanded neural network with feature cross(x₃) as input
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given below is the *first* training iteration of the neural network, you may
+    go through the computations yourself and confirm them as they make for a good
+    exercise. Since we are already familiar with this neural network architecture,
+    I will not go through all the computations in a step-by-step by step manner, as
+    before.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*(All calculations below are rounded to 3 decimal places)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/69bfbcc8807a7466c64cb30fd8627efc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 71\. Forward Propagation in the first training iteration
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8839fec0ae0526cd5d58823ae821f5e2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 72\. Backpropagation in the first training iteration
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e16ee6904c1afe318c1240e70ee0ee7f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 73\. Gradient descent update for new weights and bias, in the first training
+    iteration
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After 5000 epochs, the learning curve, and the decision boundary look as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e275274508dde46fefef9936d1cbf64c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/b5bd0cccf0e11d9445be51a153042e74.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 74\. Learning Curve and Decision Boundary of the neural net with a feature
+    cross
+  prefs: []
+  type: TYPE_NORMAL
+- en: As before, to visualize better we can shade the regions where the decision of
+    the neural network changes from one to the other.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/279295d074f3bfcf257c014d501e3be0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 75\. Shaded Decision Boundary for better visualization
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Note that feature engineering allowed us to create a decision boundary that
+    is nonlinear. ***How did it do that? We just need to take a look at what function
+    the ***Z*** node is computing.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ca46fd040be1ec5896b8b44504a51752.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 76\. Node **Z** is computing a polynomial after adding a feature cross
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thus, feature cross helped us to create complex non-linear decision boundary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***This is a very powerful idea!***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Changing Neural Network Architecture
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This is the more interesting approach as it allows us to bypass the feature
+    engineering ourselves and ***lets the neural network figure out the feature crosses
+    itself!***
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s take a look at the following neural network:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1fcc7c30e7ea9947f8b4dc2c6dfa853c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 77\. Neural network with one hidden layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So we’ve added a bunch of new nodes in the middle of our neural network architecture
+    from the OR gate example, keeping the input layer and the output layer the same.
+    This column of new nodes in the middle is called a ***hidden layer. ****Why hidden
+    layer? Because after defining it we don’t have any direct control over how the
+    neurons in the hidden layers learn, unlike the input and output layer which we
+    can change by changing the data; also since the hidden layers neither constitute
+    as the output or the input of the neural network they are in essence hidden from
+    the user.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***We can have an arbitrary number of hidden layers with an arbitrary number
+    of neurons in each layer***. This structure needs to be defined by the creator
+    of the neural network. *Thus, the ****number of hidden layers and the number of
+    neurons in each of the layers are also hyper-parameters. The more hidden layers
+    we add the deeper our neural network architecture becomes and the more neurons
+    we add in the hidden layers the wider the network architecture becomes. The depth
+    of a neural net model is where the term “Deep learning” comes from.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*The architecture in Figure 77 with one hidden layer of three sigmoid neurons,
+    was selected after some experimentation.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since this is a new architecture I’ll go over the computations step-by-step.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, let’s expand out the neural network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/63d21782d0b1f535f231e7782b27246b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 78\. Expanded neural network with one hidden layer
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let’s perform a ***forward propagation:***
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ad65ad088abcf8cc140f502ded6dfa11.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/3568ac2e69c6c5ec7c7528b23974dfa1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 79.a. Forward propagation on the neural net with a hidden layer
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/90ac6bc3e0d426af6d92312c6bc90ab8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/c27bcd6cf3fb99591f209d6b9817c729.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 79.b. Forward propagation on the neural net with a hidden layer
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can now calculate the Cost:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/859dfdcb41bfadc4a8d5aaff151010b1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 80\. Cost of the neural net with one hidden layer after **first** forward
+    propagation
+  prefs: []
+  type: TYPE_NORMAL
+- en: After the calculation of Cost, we can now do our backpropagation and improve
+    the weights and biases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b610343527aa353738cb68ee8db1c82c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/d93f76748b6d69b135d49bfcf559d499.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 81.a. Backpropagation on the neural net with a hidden layer
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/147cf4c01da456b7bc593d1da42b2c63.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/9ba31b68f1c846bfead99ce764460c03.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 81.b. Backpropagation on the neural net with a hidden layer
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8bb0cbdac9fc2d7482c6557da289bf4b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/b16141db80d5e3c8819b4e9819f6ab1e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 81.c. Backpropagation on the neural net with a hidden layer
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f574b72ef79225256780a10a8eb17596.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/75befb7db0b4d3191cbc2f0deb5a0802.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 81.d. Backpropagation on the neural net with a hidden layer
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/05d6a8575f65c1fb540401e3aacbd0a2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/ae28aad3dded0fb41f8bc2d56b54ead0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 81.e. Backpropagation on the neural net with a hidden layer
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Whew! That was a lot, but it did a great deal to improve our understanding.
+    Let’s perform the gradient descent update:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/eddfbe78b66025d677353096a9e7f1c5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 82\. Gradient descent update for the neural net with a hidden layer
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'At this point, I would encourage all readers to perform one training iteration
+    themselves. The resultant gradients should be approximately(rounded to 3 decimal
+    places):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8b5a11e2cac0f26b40e913840e629a2b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 83\. Derivatives computed during 2ⁿᵈ training iteration
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After 5000 epochs the Cost steadily decreases to about ***0.0009*** and we
+    get the following Learning Curve and Decision Boundary:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/30711eac7c5a27a733d7c04903d6bf71.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/9a839008edaa1803b2156de5041342ef.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 84\. Learning Curve and Decision boundary of the neural net with one hidden
+    layer
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s also visualize where the decision of the neural network changes from
+    0(red) to 1(green):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1dba431b0fe2e533c2806161756ffbd5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 85\. Shaded decision boundary of the neural net with one hidden layer
+  prefs: []
+  type: TYPE_NORMAL
+- en: This shows that the neural network has in fact learned where to fire-up(output
+    1) and where to lay dormant(output 0).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we add another hidden layer with maybe 2 or 3 sigmoid neurons we can get
+    an even more complex decision boundary that may fit our data even more tightly,
+    but let’s leave that for the coding section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Before we conclude this section I want to answer some remaining questions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1- So, which one is better Feature Engineering or a Deep Neural Network?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Well, the answer depends on many factors. Generally, if we have a lot of training
+    data we can just use a deep neural net to achieve acceptable accuracy, but if
+    data is limited we may need to perform some feature engineering to extract more
+    performance out of our neural network. As you saw in the feature engineering example
+    above, to make good feature crosses one needs to have intimate knowledge of the
+    dataset they are working with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Feature engineering along with a deep neural network is a powerful combination.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2- How to count the number of layers in a Neural Network?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: By convention, we don’t count layers without tunable weights and bias. Therefore,
+    though the input layer is a separate “layer” we don’t count it when specifying
+    the depth of a neural network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, our last example was a “*2 layer neural network*” (one hidden + output layer)
+    and all the examples before it just a “*1 layer neural network*” (output layer,
+    only).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3- Why use Activation Functions?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '***Activation functions are nonlinear functions and add nonlinearity to the
+    neurons. The feature crosses are a result of stacking the activation functions
+    in hidden layers***. The combination of a bunch of activation functions thus results
+    in a complex non-linear decision boundary. In this blog, we used the sigmoid/logistic
+    activation function, but there are many other types of activation functions(*ReLU
+    being a popular choice for hidden layers*) each providing a certain benefit. ***The
+    choice of the activation function is also a hyper-parameter when creating neural
+    networks.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Without activations functions to add nonlinearity, no matter how many linear
+    functions we stack up the result of them will still be linear.***Consider the
+    following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d1af6e9dc3063f1684fc29b5cf51c2b1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 86\. Showing that stacking linear layers/functions results in a linear layer/function
+  prefs: []
+  type: TYPE_NORMAL
+- en: You may use any nonlinear function as an activation function. Some researchers
+    have used even*** cos ***and**sin **functions. Preferably the activation function
+    should be a continuous i.e. no breaks in the domain of the function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4- Why Random Initialization of Weights?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This question is much easier to answer now. Note that if we had set all the
+    weights in a layer to the same value than the gradient that passes through each
+    node would be the same. In short, all the nodes in the layer would learn the same
+    feature about the data. Setting the weights to ***random values helps in breaking
+    the symmetry of weights*** so that each node in a layer has the opportunity to
+    learn a unique aspect of the training data
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are many ways to set weights randomly in neural networks. For small neural
+    networks, it is ok to set the weights to small random values. For larger networks,
+    we tend to use “Xavier” or “He” initialization methods(*will be in the coding
+    section*). Both these methods still set weights to random values but control their
+    variance. *For now, its suffice to say use these methods when the network does
+    not seem to converge and the Cost becomes static or reduces very slowly when using
+    the “plain” method of setting weights to small random values.* Weight initialization
+    is an active research area and will be a topic for a future “Nothing but Numpy”
+    blog.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Biases can be randomly initialized, too. But in practice, it does not seem to
+    have much of an effect on the performance of a neural network. Perhaps this is
+    because the number of bias terms in a neural network is much fewer than the weights.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The type of neural network we created here is called a “***fully-connected feedforward
+    network***” or simply a “***feedforward network***”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This concludes Part Ⅰ.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Part Ⅱ: Coding a Modular Neural Network'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The implementation in this part follows OOP principals.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s first see the **Linear Layer** class. The constructor takes as arguments:
+    the shape of the data coming in(`input_shape`), the number of neurons the layer
+    outputs(`n_out`) and what type of random weight initialization need to be performed(`ini_type=”plain”`,
+    default is “plain” which is just small random gaussian numbers).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `initialize_parameters` is a helper function used to define weights and
+    bias. We’ll look at it separately, later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Linear Layer implements the following functions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`forward(A_prev)` : This function allows the linear layer to take in activations
+    from the previous layer(the input data can be seen as activations from the input
+    layer) and performs the linear operation on them.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`backward(upstream_grad)`: This function computes the derivative of Cost w.r.t
+    weights, bias, and activations from the previous layer(`dW`, `db`&`dA_prev`, respectively)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`update_params(learning_rate=0.1)` : This function performs the gradient descent
+    update on weights and bias using the derivatives computed in the `backward` function.
+    The default learning rate(α) is 0.1'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Fig 87\. Linear Layer Class
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let’s see the** Sigmoid Layer** class, its constructor takes in as an argument
+    the shape of data coming in(`input_shape`) from a Linear Layer preceding it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Sigmoid Layer implements the following functions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`forward(Z)` : This function allows the sigmoid layer to take in the linear
+    computations(`Z`) from the previous layer and perform the sigmoid activation on
+    them.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`backward(upstream_grad)`: This function computes the derivative of Cost w.r.t ***Z***(`dZ`).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Fig 88\. Sigmoid Activation Layer class
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `initialize_parameters` function is used only in the Linear Layer to set
+    weights and biases. Using the size of input(`n_in`) and output(`n_out`) it defines
+    the shape the weight matrix and bias vector need to be in. This helper function
+    then returns both the weight(W) and bias(b) in a python dictionary to the respective
+    Linear Layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Fig 89\. Helper function to set weights and bias
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, the Cost function` compute_cost(Y, Y_hat)` takes as argument the activations
+    from the last layer(`Y_hat`) and the true labels(`Y`) and computes and returns
+    the Squared Error Cost(`cost`) and its derivative(`dY_hat`).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Fig 90\. Function to compute Squared Error Cost and derivative.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*At this point, you should open the*[*** 2_layer_toy_network_XOR***](https://github.com/RafayAK/NothingButNumPy/blob/master/2_layer_toy_network_XOR.ipynb)* Jupyter
+    notebook from this*[***repository***](https://github.com/RafayAK/NothingButNumPy)* in
+    a separate window and go over this blog and the notebook side-by-side.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we are ready to create our neural network. Let’s use the architecture defined
+    in *Figure 77* for XOR data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Fig 91\. Defining the layers and training parameters
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now we can start the main training loop:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Fig 92\. The training loop
+  prefs: []
+  type: TYPE_NORMAL
+- en: Running the loop in the notebook we see that the Cost decreases to about 0.0009
+    after 4900 epochs
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The Learning curve and Decision Boundaries look as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b4c1d9e602d4b505c87ac9c5c37c862f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/5a10d5e180d873aabf0595227a700465.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/c8a68ecafe69da5b5e82123483ecd10f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 93\. The Learning Curve, Decision Boundary, and Shaded Decision Boundary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The predictions our trained neural network produces are accurate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Make sure to check out the other notebooks in the [***repository***](https://github.com/RafayAK/NothingButNumPy).
+    We’ll be building upon the things we learned in this blog in future Nothing but
+    NumPy blogs, therefore, it would behoove you to create the layer classes from
+    memory as an exercise and try recreating the OR gate example from ***Part******Ⅰ****.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: This concludes the blog. I hope you enjoyed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For any questions feel free to reach out to me on [twitter](https://twitter.com/RafayAK) [**@**RafayAK](https://twitter.com/RafayAK)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**This blog would not have been possible without following resources and people:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Andrej Karpathy’s ([**@**karpathy](https://twitter.com/karpathy)) Stanford [course](http://cs231n.stanford.edu/)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Christopher Olah’s ([**@**ch402](https://twitter.com/ch402)) [blog](https://colah.github.io/)s
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Andrew Trask’s ([**@**iamtrask](https://twitter.com/iamtrask)) [blogs](https://iamtrask.github.io/)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Andrew Ng ([@AndrewYNg](https://twitter.com/AndrewYNg)) and his Coursera courses
+    on [deep learning](https://www.coursera.org/specializations/deep-learning)and [machine
+    learning](https://www.coursera.org/learn/machine-learning)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Terence Parr](http://parrt.cs.usfca.edu/) ([**@**the_antlr_guy](https://twitter.com/the_antlr_guy))
+    and [Jeremy Howard](http://www.fast.ai/about/#jeremy) ([**@**jeremyphoward](https://twitter.com/jeremyphoward))([https://explained.ai/matrix-calculus/index.html](https://explained.ai/matrix-calculus/index.html))'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Ian Goodfellow ([**@**goodfellow_ian](https://twitter.com/goodfellow_ian)) and
+    his amazing [book](https://www.deeplearningbook.org/)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Finally, Hassan-uz-Zaman ([**@**OKidAmnesiac](https://twitter.com/OKidAmnesiac))
+    and Hassan Tauqeer for invaluable feedback.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/towards-artificial-intelligence/nothing-but-numpy-understanding-creating-neural-networks-with-computational-graphs-from-scratch-6299901091b0).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Neural Networks with Numpy for Absolute Beginners: Introduction](https://www.kdnuggets.com/2019/03/neural-networks-numpy-absolute-beginners-introduction.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building Convolutional Neural Network using NumPy from Scratch](https://www.kdnuggets.com/2018/04/building-convolutional-neural-network-numpy-scratch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Artificial Neural Network Implementation using NumPy and Image Classification](https://www.kdnuggets.com/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

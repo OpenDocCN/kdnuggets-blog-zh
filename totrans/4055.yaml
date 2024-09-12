@@ -1,0 +1,343 @@
+- en: Profiling Python Code Using timeit and cProfile
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/profiling-python-code-using-timeit-and-cprofile](https://www.kdnuggets.com/profiling-python-code-using-timeit-and-cprofile)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Profiling Python Code Using timeit and cProfile](../Images/fa9801a9e924ea0b2e0312ae54e644a0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a software developer, you’ll have likely heard the quote [“Premature optimization
+    is the root of all evil”](https://ubiquity.acm.org/article.cfm?id=1513451#:~:text=The%20second%20thing%20to%20note,you%20get%20with%20micro%2Doptimization))—more
+    than once—in your career. While optimization may not be super helpful (or absolutely
+    necessary) for small projects, profiling is often helpful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After you’ve finished coding a module, it’s a good practice to profile your
+    code to measure how long each of the sections takes to execute. This can help
+    identify code smells and guide optimizations to improve code quality. So always
+    profile your code before optimizing!
+  prefs: []
+  type: TYPE_NORMAL
+- en: To take the first steps, this guide will help you get started with profiling
+    in Python—using the built-in [timeit](https://docs.python.org/3/library/timeit.html)
+    and [cProfile](https://docs.python.org/3/library/profile.html#module-cProfile)
+    modules. You’ll learn to use both the command-line interface and the equivalent
+    callables inside Python scripts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How To Profile Python Code Using timeit
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The timeit module is part of the Python standard library and offers a few convenience
+    functions that can be used to time short snippets of code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s take a simple example of reversing a Python list. We’ll measure the
+    execution times of obtaining a reversed copy of the list using:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: the `reversed()` function, and
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: list slicing.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Running timeit at the Command Line
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'You can run `timeit` at the command line using the syntax:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: You’re required to provide the statement `stmt` whose execution time is to be
+    measured.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can specify the `setup` code when needed—using the short option -s or the
+    long option --setup. The setup code will be run only once.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `number` of times to run the statement: short option -n or the long option
+    --number is optional. And the number of times to repeat this cycle: short option
+    -r or the long option --repeat is optional, too.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s see the above in action for our example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here creating the list is the `setup` code and reversing the list is the statement
+    to be timed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: When you don’t specify values for `repeat`, the default value of 5 is used.
+    And when you don’t specify `number`, the code is run as many times as needed so
+    as to reach a total time of [at least 0.2 seconds](https://docs.python.org/3/library/timeit.html#cmdoption-timeit-n).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This example explicitly sets the number of times to execute the statement:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The default value of `repeat` is 5, but we can set it to any suitable value:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s also time the list slicing approach:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: The list slicing approach seems to be faster (all examples are in Python 3.10
+    on Ubuntu 22.04).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Running timeit in a Python Script
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Here’s the equivalent of running timeit inside the Python script:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The `timeit()` callable returns the execution time of `stmt` for `number` of
+    times. Notice that we can explicitly mention the number of times to run, or make
+    `number` take the default value of 1000000.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This runs the statement—without repeating the timer function—for the specified
+    `number` of times and returns the execution time. It is also quite common to use
+    `time.repeat()` and take the minimum time as shown:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: This will repeat the process of running the code `number` of times `repeat`
+    number of times and returns the minimum execution time. Here we have 5 repetitions
+    of 100000 times each.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: How To Profile a Python Script Using cProfile
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We have seen how timeit can be used to measure the execution times of short
+    code snippets. However, in practice, it's more helpful to profile an entire Python
+    script.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This will give us the execution times of all the functions and method calls—including
+    built-in functions and methods. So we can get a better idea of the more expensive
+    function calls and identify opportunities for optimization. For example: there
+    might be an API call that''s too slow. Or a function may have a loop that can
+    be replaced by a more Pythonic comprehension expression.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s learn how to profile Python scripts using the cProfile module (also part
+    of the Python standard library).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Consider the following Python script:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here we have three functions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`func()` that loops through a range of numbers and prints them out.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`another func()` that contains a call to the `sleep()` function.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`useful_func()` that returns the index of a target number in list (if the target
+    is present in the list).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The above-listed functions will be called each time you run the main.py script.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Running cProfile at the Command Line
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Run cProfile at the command line using:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here we’ve named the file main.py:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Running this should give you the following output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And the following profile:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Profiling Python Code Using timeit and cProfile](../Images/25aca12ae8639e7c2b0a59e3d1e3f1a9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here, `ncalls` refers to the number of calls to the function and `percall` refers
+    to the time per function call. If the value of `ncalls` is greater than one, then
+    `percall` is the average time across all calls.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The execution time of script is dominated by `another_func` that uses the built-in
+    `sleep` function call (sleeps for 20 seconds). We see that `print` function calls
+    are quite expensive too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using cProfile in the Python Script
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: While running cProfile at the command line works fine, you can also add the
+    profiling functionality to the Python script. You can use cProfile coupled with
+    the [pstats module](https://docs.python.org/3/library/profile.html) for profiling
+    and accessing statistics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As a best practice to handle resource setup and teardown better, use the with
+    statement and create a profile object that’s used as a context manager:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s take a closer look at the output profile generated:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Profiling Python Code Using timeit and cProfile](../Images/cb3d21db14288a67207a1a122de8946e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'When you’re profiling a large script, it’ll be helpful to *sort the results
+    by execution time*. To do so you can call `sort_stats` on the profile object and
+    sort based on the execution time:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'When you now run the script, you should be able to see the results sorted by
+    time:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Profiling Python Code Using timeit and cProfile](../Images/ae9bde6a1312f616cb0873602633ea6f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: I hope this guide helps you get started with profiling in Python. Always remember,
+    optimizations should never come at the cost of readability. If you’re interested
+    in learning about other profilers, including third-party Python packages, check
+    out this [article on Python profilers](/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** is a developer
+    and technical writer from India. She likes working at the intersection of math,
+    programming, data science, and content creation. Her areas of interest and expertise
+    include DevOps, data science, and natural language processing. She enjoys reading,
+    writing, coding, and coffee! Currently, she''s working on learning and sharing
+    her knowledge with the developer community by authoring tutorials, how-to guides,
+    opinion pieces, and more.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Introduction to Memory Profiling in Python](https://www.kdnuggets.com/introduction-to-memory-profiling-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Tools to Track and Visualize the Execution of Your Python Code](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n01, Jan 5: 3 Tools to Track and Visualize…](https://www.kdnuggets.com/2022/n01.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mastering Python: 7 Strategies for Writing Clear, Organized, and…](https://www.kdnuggets.com/mastering-python-7-strategies-for-writing-clear-organized-and-efficient-code)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,270 @@
+- en: Introduction to Deep Learning with Keras
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/10/introduction-deep-learning-keras.html](https://www.kdnuggets.com/2018/10/introduction-deep-learning-keras.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/10/introduction-deep-learning-keras.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Image](../Images/c89d61f18b1ba7aa60ff9422437fb38d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In this article, we’ll build a simple neural network using [Keras](http://keras.io/).
+    We’ll assume you have prior knowledge of machine learning packages such as [scikit-learn](http://scikit-learn.org/stable/)and
+    other scientific packages such as [Pandas](https://pandas.pydata.org/) and [Numpy](http://www.numpy.org/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Training an Artificial Neural Network**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Training an artificial neural network involves the following steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Weights are randomly initialized to numbers that are near zero but not zero.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Feed the observations of your dataset to the input layer.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Forward propagation (from left to right): neurons are activated and the predicted
+    values are obtained.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Compare predicted results to actual values and measure the error.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Backward propagation (from right to left): weights are adjusted.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Repeat steps 1–5
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: One epoch is achieved when the whole training set has gone through the neural
+    network.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Business Problem**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now let’s proceed to solve a real business problem. An insurance company has
+    approached you with a dataset of previous claims of their clients. The insurance
+    company wants you to develop a model to help them predict which claims look fraudulent.
+    By doing so you hope to save the company millions of dollars annually. This is
+    a classification problem. These are the columns in our dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/67889150c551e63f6b6a280479b46b8a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/63f722c7a0d93149d31786aa4c177a2b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/b0148e763fd945baa2c9f0f7cbb1bc81.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '****Data Preprocessing****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As in many business problems, the data provided will not be processed for us.
+    We therefore have to prepare it in a way that our algorithm will accept it. We
+    see from the dataset that we have some categorical columns. We need to convert
+    these to zeros and ones so that our deep learning model will be able to understand
+    them. Another thing to note is that we have to feed our dataset to the model as
+    numpy arrays. Below we import the necessary packages and then load in our dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: We then to convert the categorical columns to dummy variables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case we use drop_first=True to avoid the dummy variable trap. For example,
+    if you have a, b, c, d as categories then you can drop d as a dummy variable.
+    This is because if something does not fall into either a, b, or c then it’s definitely
+    in d. This is referred to as multicollinearity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We use [sklearn’s](http://scikit-learn.org/) train_test_split to split the data
+    into a training set and a test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next we make sure to drop the column we’re predicting to prevent it from leaking
+    into the training set and the test set. We must avoid using the same dataset to
+    train and test the model. We set **.values** at the end of the dataset in order
+    to get the numpy arrays. This is the way our deep learning model will accept the
+    data. This step is important because our machine learning model expects the data
+    in form of arrays.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We then split the data into a training and test set. We use 0.7 of the data
+    for training and 0.3 for testing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next we have to scale our dataset using Sklearn’s *StandardScaler. *Due to the
+    massive amounts of computations taking place in deep learning, feature scaling
+    is compulsory. Feature scaling standardizes the range of our independent variables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '****Building the Artificial Neural Network(ANN)****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first thing we need to do is import Keras. By default, Keras will use TensorFlow
+    as its backend.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next we need to import a few modules from Keras. The Sequential module is required
+    to initialize the ANN, and the Dense module is required to build the layers of
+    our ANN.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next we need to initialize our ANN by creating an instance of Sequential. The
+    Sequential function initializes a linear stack of layers. This allows us to add
+    more layers later using the Dense module.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Adding input layer (First Hidden Layer)**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We use the add method to add different layers to our ANN. The first parameter
+    is the number of nodes you want to add to this layer. There is no rule of thumb
+    as to how many nodes you should add. However a common strategy is to choose the
+    number of nodes as the average of nodes in the input layer and the number of nodes
+    in the output layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Say for example you had five independent variables and one output. Then you
+    would take the sum of that and divide by two, which is three. You can also decide
+    to experiment with a technique called parameter tuning. The second parameter, *kernel_initializer*,is
+    the function that will be used to initialize the weights. In this case, it will
+    use a uniform distribution to make sure that the weights are small numbers close
+    to zero. The next parameter is the activation function. We use the Rectifier function,
+    shortened as relu. We mostly use this function for the hidden layer in ANN. The
+    final parameter is input_dim, which is the number of nodes in the input layer.
+    It represents the number of independent variables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '****Adding Second Hidden Layer****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Adding the second hidden layer is similar to adding the first hidden layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: We don’t need to specify the input_dim parameter because we have already specified
+    it in the first hidden layer. In the first hidden layer we specified this in order
+    to let the layer know how many input nodes to expect. In the second hidden layer
+    the ANN already knows how many input nodes to expect so we don’t need to repeat
+    ourselves.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Adding the output layer****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: We change the first parameter because in our output node we expect one node.
+    This is because we are only interested in knowing whether a claim was fraudulent
+    or not. We change the activation function because we want to get the probabilities
+    that a claim is fraudulent. We do this by using the Sigmoid activation function.
+    In case you’re dealing with a classification problem that has more than two classes
+    (i.e. classifying cats, dogs, and monkeys) we’d need to change two things. We
+    ‘d change the first parameter to 3 and change the activation function to softmax.
+    Softmax is a sigmoid function applied to an independent variable with more than
+    two categories.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Keras 3.0: Everything You Need To Know](https://www.kdnuggets.com/2023/07/keras-30-everything-need-know.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Deep Learning Libraries: PyTorch and Lightning AI](https://www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, April 27: A Brief Introduction to Papers With Code;…](https://www.kdnuggets.com/2022/n17.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Statistical Learning, Python Edition: Free Book](https://www.kdnuggets.com/2023/07/introduction-statistical-learning-python-edition-free-book.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

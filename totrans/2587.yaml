@@ -1,0 +1,488 @@
+- en: 'XGBoost Explained: DIY XGBoost Library in Less Than 200 Lines of Python'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/05/xgboost-explained-diy-xgboost-library-200-lines-python.html](https://www.kdnuggets.com/2021/05/xgboost-explained-diy-xgboost-library-200-lines-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Guillaume Saupin](https://www.linkedin.com/in/guillaume-saupin-5802aa31/),
+    CTO at Verteego**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2af80546d15b24dbb95b3e7f06ad2b1d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Jens Lelie](https://unsplash.com/@madebyjens?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: XGBoost is probably one of the most widely used libraries in data science. Many
+    data scientists around the world are using it. It’s a very versatile algorithm
+    that can be use to perform classification, regression as well as confidence intervals
+    as shown in this [article](https://towardsdatascience.com/confidence-intervals-for-xgboost-cac2955a8fde).
+    But how many really understand its underlying principles?
+  prefs: []
+  type: TYPE_NORMAL
+- en: You might think that a Machine Learning algorithm that performs as well as XGBoost
+    might be using very complex and advanced mathematics. You probably imagine that
+    it’s a masterpiece of software engineering.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And you’re partly right. The XGBoost library is a pretty complex one, but if
+    you consider only the mathematical formulation of gradient boosting applied to
+    decision trees, it’s not that complicated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You will see below in detail how to train decision trees for **regression** using
+    the gradient boosting method with less than 200 lines of code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Decision Tree
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Before getting into the mathematical details, let’s refresh our memory regarding
+    decision trees. The principle is fairly simple: associate a value to a given set
+    of features traversing a binary tree. Each node of the binary tree is attached
+    to a condition; leaves contain values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the condition is true, we continue the traversal using the left node, if
+    not, we use the right one. Once a leaf is reached, we have our prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As often, a picture is worth a thousand words:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f681ccf5b863618aa3ba615f5f7ed042.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A three-level decision tree. Image by the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The condition attached to a node can be regarded as a decision, hence the name **Decision
+    Tree**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This kind of structure is pretty old in the history of computer science and
+    has been used for decades with success. A basic implementation is given by the
+    following lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Stacking multiple trees
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Even though Decision Trees have been used with some success in a number of applications,
+    like expert systems (before the AI winter) it remains a very basic model that
+    cannot handle the complexity usually encountered in real-world data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We usually refer to this kind of estimators as ***weak models***.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To overcome this limitation, the idea emerged in the nineties to combine multiple *weak
+    models* to create a *strong model: ****ensemble learning****.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: This method can be applied to any kind of model, but as Decision Trees are simple,
+    fast, generic and easily interpretable models, they are commonly used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Various strategies can be deployed to combine models. We can for instance use
+    a weighted sum of each model prediction. Or even better, use a Bayesian approach
+    to combine them based on learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'XGBoost and all **boosting** methods use another approach: each new model tries
+    to compensate for the errors of the previous one.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Optimizing decision trees
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'As we have seen above, making predictions using a decision tree is straightforward.
+    The job is hardly more complicated when using *ensemble learning*: all we have
+    to do is sum contributions of each model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What’s really complicated is building the tree itself! How can we find the best
+    condition to apply at each node of our training dataset? This is where math helps
+    us. A full derivation can be found in the [XGBoost documentation](https://xgboost.readthedocs.io/en/latest/tutorials/model.html).
+    Here, we will focus only on the formulas of interest for this article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As always in machine learning, we want to set our model parameters so that
+    our model’s predictions on the training set minimize a given objective:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1c6ea3b60063b729682ac9a687e59dd2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Objective formula. Formula by the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Please note that this objective is made of two terms:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One to measure the error made by the prediction. It’s the famous loss function *l(y,
+    y_hat)*.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The other, *omega*, to control model complexity.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'As stated in the XGBoost [documentation](https://xgboost.readthedocs.io/en/latest/tutorials/model.html),
+    complexity is a very important part of the objective that allows us to tune the
+    bias/variance trade-off. Many different functions can be used to define this regularization
+    term. XGBoost use:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0ce54f0ee55300ffbfdaa119f4139291.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Regularization term. Formula by the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here* T* is the total number of leaves, whereas *w_j* are the weights attached
+    to each leaf. This means that a large weight and a large number of leaves will
+    be penalized.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As the error is often a complex, non-linear function, we linearized it using
+    second-order Taylor expansion:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/30f9a52c0856023e980b2ed196a90f7a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Second-order expansion of the loss. Formula by the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'where:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d15672d7944ba013a374896777a30f45.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Gaussian and hessian formulas. Formula by the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The linearization is computed with respect to the prediction term, as we want
+    to estimate how the error changes when the prediction changes. Linearization is
+    essential, as it will ease the minimization of the error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Whatwe want to achieve with gradient boosting, is to find the optimal *delta_y_i *that
+    will minimize the loss function, i.e. we want to find how to modify the existing
+    tree so that the modification improves the prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When dealing with tree models, there are two kinds of parameters to consider:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The ones defining the tree in itself: the condition for each node, the depth
+    of the tree'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The values attached to each leaf of the tree. These values are the predictions
+    themselves.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Exploring every tree configurations would be too complex, therefore gradient
+    tree boosting methods only consider splitting one node into two leaves. This means
+    that we have to optimize three parameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The splitting value: on which condition do we split data'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The value attached to the left leaf
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The value attached to the right leaf
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In the XGBoost documentation, the best value for a leaf *j* with respect to
+    the objective is given by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/30ba452986e0c2f8e110335381fe9963.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Optimal leaf value with respect to objective. Formula by the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: where *G_j *is the sum of the gradient of the training points attached to the
+    node *j*, and *H_j* is the sum of the hessian of the training points attached
+    to the node *j.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The reduction in the objective function obtained with this optimal param is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/92074bf0fd43651aab5b4918039c0764.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Objective improvement when using optimal weight. Formula by the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Choosing the right split value is done using brut force: we compute the improvement
+    for each split value, and we keep the best one.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We now have all the required mathematical information to boost an initial tree
+    performance with respect to a given objective by adding new leaves.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before doing it concretely, let’s take some time to understand what these formulas
+    mean.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Grokking gradient boosting
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s try to get some insight on how weight is computed, and what *G_j* and *H_i* equal
+    to. As they are respectively the gradient and hessian of the loss function with
+    respect to the prediction, we have to pick a loss function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We will focus on the squared error, which is commonly used and is the default
+    objective for XGBoost:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bd91ae15b1e00e8ed1dd2fc927f73301.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Squared error loss function. Formula by the author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It’s a pretty simple formula, whose gradient is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9941cb63747e203b1bc9de0f40549606.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The gradient of the loss function. Formula by the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'and hessian:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4821077093599e50bb41001008817d81.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Hessian of the loss function. Formula by the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Hence, if we remember the formulas for the optimal weight that maximize error
+    reduction:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/30ba452986e0c2f8e110335381fe9963.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Optimal leaf value with respect to the objective. Formula by the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We realize that the optimal weight, *i.e. *the value that we add to the previous
+    prediction is the opposite of the average error between the previous prediction
+    and the real value (when regularization is disabled, i.e. *lambda = 0*). Using
+    the squared loss to train Decision Trees with gradient boosting just boils down
+    to updating the prediction with the average error in each new node.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We also see that *lambda* has the expected effect, that is ensuring that weights
+    are not too large, as weight is inversely proportional to *lambda*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training decision trees
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now comes the easy part. Let’s say that we have an existing decision tree that
+    ensures predictions with a given error. We want to reduce the error and improve
+    the attached objective by splitting one node.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The algorithm to do so is pretty straightforward:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pick a feature of interest
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Order data points attached to the current node using values of the selected
+    feature
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: pick a possible split value
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Put data points below this split value in the right node, and the one above
+    in the left node
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: compute objective reduction for the parent node, the right node and the left
+    one
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the sum of the objective reduction for left and right nodes is greater than
+    the one of the parent node, keep the split value as the best one
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Iterate for each split value
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use the best split value if any, and add the two new nodes
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If no splitting improved the objective, don’t add child nodes.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The resulting code creates a DecisionTree class, that is configured by an objective,
+    a number of estimators, i.e. the number of trees, and a max depth.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As promised the code takes less than 200 lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The core of the training is coded in the function *_find_best_split*. It essentially
+    follows the steps detailed above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that to support any kind of objective, without the pain of manually calculating
+    the gradient and the hessian, we use automatic differentiation and the [jax](https://jax.readthedocs.io/en/latest/index.html) library
+    to automate computations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Initially, we start with a tree with only one node whose leaf value leaf is
+    zero. As we have mimic XGBoost, we also use a base score, that we set to be the
+    mean of the value to predict.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, note that at line 126 we stop tree building if we reach the max depth
+    defined when initializing the tree. We could have used other conditions like a
+    minimum number of sample for each leaf or a minimum value for the new weight.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another very important point is the choice of the feature used for the splitting.
+    Here, for the sake of simplicity, features are selected randomly, but we could
+    have been using smarter strategies, like using the feature having the greatest
+    variance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, we have seen how gradient boosting works to train decision
+    trees. To further improve our understanding, we have written the minimal set of
+    lines required to train an ensemble of decision trees and use them for prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Having a deep understanding of the algorithms we use for machine learning is
+    absolutely critical. It not only helps us building better models but more importantly
+    allows us to bend these models to our needs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For instance, in the case of gradient boosting, playing with loss functions
+    is an excellent way to increase precision when predicting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Guillaume Saupin](https://www.linkedin.com/in/guillaume-saupin-5802aa31/)**
+    is CTO at Verteego.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/diy-xgboost-library-in-less-than-200-lines-of-python-69b6bf25e7d9).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Gradient Boosted Decision Trees – A Conceptual Explanation](/2021/04/gradient-boosted-trees-conceptual-explanation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[XGBoost: What it is, and when to use it](/2020/12/xgboost-what-when.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Many Heads Are Better Than One: The Case For Ensemble Learning](/2019/09/ensemble-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Multi-modal deep learning in less than 15 lines of code](https://www.kdnuggets.com/2023/01/predibase-multi-modal-deep-learning-less-15-lines-code.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, July 20: Machine Learning Algorithms Explained in…](https://www.kdnuggets.com/2022/n29.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Algorithms Explained in Less Than 1 Minute Each](https://www.kdnuggets.com/2022/07/machine-learning-algorithms-explained-less-1-minute.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Become a Business Intelligence Analyst in Less Than 6 Months](https://www.kdnuggets.com/become-a-business-intelligence-analyst-in-less-than-6-months)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DIY Automated Machine Learning with Streamlit](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Black Friday Deal - Master Machine Learning for Less with DataCamp](https://www.kdnuggets.com/2022/11/datacamp-black-friday-deal-master-machine-learning-less-datacamp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

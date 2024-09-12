@@ -1,0 +1,236 @@
+- en: Sharing your machine learning models through a common API
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/02/sharing-machine-learning-models-common-api.html](https://www.kdnuggets.com/2020/02/sharing-machine-learning-models-common-api.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Álvaro López García](https://alvarolopez.github.io/), Spanish National
+    Research Council (CSIC)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8a404df0196b49ebc2f6e08719d438ee.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data scientists building machine learning models do not have an easy and common
+    way to share their developed applications with their colleagues or with anybody
+    interested in using them. The whole model (i.e. the code and any configuration
+    assets needed) can be shared, but this requires that the receptors of the model
+    need to have enough knowledge to execute it. In most cases we just want to share
+    the model to show its functionality (to other colleagues or to a company interested
+    in our predictive model), therefore there is no need to share the whole experiment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As already [shown in KDnuggets](/2019/01/build-api-machine-learning-model-using-flask.html),
+    the most straightforward way of doing so, in the connected world where we all
+    work, is to expose the model through an HTTP endpoint, so that potential users
+    can access it remotely through the network. This might sound simple, but developing
+    a proper and correct REST API is not an easy task. Data scientists need to have
+    knowledge on API programming, networking, REST semantics, security, etc. Moreover,
+    if every scientists comes up with an implementation, we would end up with a myriad
+    of different and non-interoperable APIs leading doing more or less the same job,
+    leading to a fragmented ecosystem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Enter [DEEPaaS API](https://deepaas.readthedocs.io/): a machine learning, deep
+    learning and artificial intelligence REST API framework built using [aiohttp](https://docs.aiohttp.org/).
+    DEEPaaS is an software component that allows to expose the functionality of a
+    Python model (implemented with the framework of your choice) through an HTTP endpoint.
+    It requires no modification to the original code, and has methods to customize
+    it to the scientist''s choice (input parameters, expected output, etc.)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The DEEPaaS API follows the [OpenAPI Specification (OAS)](https://www.openapis.org/),
+    therefore it allows humans and computers to discover and understand the capabilities
+    of the underlying model, its input parameters and output values, without inspecting
+    the model's source code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lets see how it works with a walk-through example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Plugging a model into DEEPaaS
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In order to better illustrate how to integrate a model with DEEPaaS we will
+    use one of the most known examples from [scikit-learn](https://scikit-learn.org/):
+    a [Support Vector Machine](https://scikit-learn.org/stable/modules/svm.html) trained
+    against the [IRIS dataset](https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html#sphx-glr-auto-examples-datasets-plot-iris-dataset-py).
+    In this naīve example we are defining two different functions, one for training
+    and one for performing a prediction, as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As you can see, the training function persists into disk the trained model,
+    following the [scikit-learn''s tutorial](https://scikit-learn.org/stable/tutorial/basic/tutorial.html#model-persistence).
+    The next action is to define the input parameters for your train and predict calls.
+    Since this example is quite simple, we are only defining input parameters for
+    the prediction call. Normally you would need to make it in a different file, so
+    that it does not interfere with your code, but for the sake of simplicity we are
+    adding this special function alongside our IRIS SVM:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The last step in order to integrate it with DEEPaaS API you need to make it
+    installable (you should be doing so) and define an entry point using [Python''s
+    setuptools](https://docs.python.org/3.8/distutils/setupscript.html). This entry
+    point will be used by DEEPaaS to know that to load and how to plug the different
+    functions to the defined endpoints. We are currently using the `deepaas.model.v2` entry
+    point namespace, therefore we can create the `setup.py` file as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Installing and running DEEPaaS
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Once you have your code ready, you simply need to install both your module
+    and the DEEPaaS API so that it detects it and exposes its functionality through
+    the API. In order to do so in an easy way, lets create a virtualenv and install
+    everything inside:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Accessing the API and making trainings and predictions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If everything was OK now you should be able to point your browser to the URL
+    printed in the console (`http://127.0.0.1:5000/ui`) and get a nice looking [Swagger
+    UI](https://swagger.io/tools/swagger-ui/) that will allow you to interact with
+    your model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Since this was a simple example, we have not shipped a trained model, so the
+    first thing to do is to perform a training. This will call the `train()` function
+    and save the trained SVM for later use. You can do it from the UI, or from a command
+    line with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The training will be done asynchronously, so that the API does not block. You
+    can check its status from the UI, or with the following call:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now that the model is trained, we can perform a prediction. The IRIS dataset
+    consists of 3 different types of irises'' (Setosa, Versicolour, and Virginica)
+    petal and sepal length. The samples have four columns that correspond to the Sepal
+    Length, Sepal Width, Petal Length and Petal Width. In our example lets try to
+    get the results for the `[5.1\. 3.5, 1.4, 0.2]` observation, and get the results.
+    Once again, you can make it from the UI or from the command line as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you can see, the results contains the prediction that our SVM performed.
+    In this case, the label for the input data was `0`, that is, indeed, the correct
+    one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this simple example we have shown how a machine learning practitioner can
+    expose any Python-based model through a REST API relying on the DEEPaaS API, rather
+    than developing their own home-brew API. By doing so, data scientist can focus
+    on their work, without worrying about writing and developing complex REST applications.
+    Moreover, by using a common API, different modules will share the same interface,
+    making it easier to be deployed in production and utilized by different programmers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Álvaro López García](https://alvarolopez.github.io/)** ([@Alvaretas](https://www.twitter.com/Alvaretas))
+    is a researcher at the Advanced Computing and e-Science group of the [Spanish
+    National Research Council (CSIC)](http://www.csic.es), working on distributed
+    computing. He is the project coordinator of the [DEEP-Hybrid-DataCloud](https://deep-hybrid-datacloud.eu/)
+    H2020 project, building a platform for machine learning and deep learning over
+    distributed e-Infrastructures in Europe.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to build an API for a machine learning model in 5 minutes using Flask](/2019/01/build-api-machine-learning-model-using-flask.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Flask API to Automatically Extract Named Entities Using SpaCy](/2019/04/building-flask-api-automatically-extract-named-entities-spacy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Open Source Projects by Google, Uber and Facebook for Data Science and AI](/2019/11/open-source-projects-google-uber-facebook-data-science-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[New Ways of Sharing Code Blocks for Data Scientists](https://www.kdnuggets.com/2022/03/new-ways-sharing-code-blocks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Key Components of a Data Sharing Platform](https://www.kdnuggets.com/2022/05/5-key-components-data-sharing-platform.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[HuggingChat Python API: Your No-Cost Alternative](https://www.kdnuggets.com/2023/05/huggingchat-python-api-alternative.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[OpenAI API for Beginners: Your Easy-to-Follow Starter Guide](https://www.kdnuggets.com/openai-api-for-beginners-your-easy-to-follow-starter-guide)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Tackle 3 Common Machine Learning Challenges](https://www.kdnuggets.com/2022/09/comet-tackle-3-common-machine-learning-challenges.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Exploring Tree of Thought Prompting: How AI Can Learn to Reason…](https://www.kdnuggets.com/2023/07/exploring-tree-of-thought-prompting-ai-learn-reason-through-search.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

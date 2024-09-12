@@ -1,0 +1,345 @@
+- en: Add A New Dimension To Your Photos Using Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/06/new-dimension-photos-python.html](https://www.kdnuggets.com/2021/06/new-dimension-photos-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Dylan Roy](https://www.linkedin.com/in/dylan-roy/), Engineer & Side Project
+    Junkie**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/67f89996c2603924b4aad7dd48bbe35e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some Backstory
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After looking through some photos from a recent camping trip that I had taken
+    a couple of weeks ago. I decided to take some of my old vacation photos, and turn
+    them into a slideshow with some Python. Don’t worry I undertook this endeavor
+    with the understanding that Google Photos, and the Apple equivalent do this really
+    well already. This was really just intended to feed my addiction to building out
+    side projects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When looking through the available options I stumbled across a paper with some
+    code that would take your photos, and add a transition that applies a 3D Ken Burns
+    Effect to your photos. The Ken Burns Effect gets the 3D aspect for free with video
+    obviously, but is less compelling with photos due to that missing dimension. So
+    in the following write up I am hoping to set you up to be able to try, and add
+    this extra dimension to your photos as I was able to.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Concepts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here are some concepts that are worth knowing due to their relevance in what
+    we are looking to achieve. Though we don’t need to be aware of this the AI models
+    are applying the 3D dimension to our Ken Burns effect by adding perspective through
+    correctly scaling the size of the objects in the photo through estimating their
+    depth. As the effect moves through the photo the model is required to reconstruct
+    the missing objects, and textures that don’t appear in the 2D image through inpainting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Ken Burns Effect**](https://en.wikipedia.org/wiki/Ken_Burns_effect)—A zooming
+    and panning across photographs gives the feeling of motion. It’s named after an
+    American documentarian who often used this effect. The writers of this paper have
+    added the third dimension to this that would normally be missing from photos.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/925c4cc9d840fd5054ae322ebe790980.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/), via Wikimedia
+    Commons'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Depth Estimation** — Describes the method for obtaining a measure of the
+    distance of the objects in a scene. Doing this effectively will result in a convincing
+    transition that will scale each object with the parallax.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Inpainting**](https://en.wikipedia.org/wiki/Inpainting) — This describes
+    the method for reconstructing the part of the image that doesn’t exist due to
+    the changing perspective of this transition. In images, and videos this technique
+    also refers to repairing damaged, deteriorating, or missing parts of an artwork
+    are filled in to present a complete image.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: DIY
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Luckily the authors of this paper, [Simon Niklaus](https://arxiv.org/search/cs?searchtype=author&query=Niklaus%2C+S), [Long
+    Mai](https://arxiv.org/search/cs?searchtype=author&query=Mai%2C+L), [Jimei Yang](https://arxiv.org/search/cs?searchtype=author&query=Yang%2C+J), [Feng
+    Liu](https://arxiv.org/search/cs?searchtype=author&query=Liu%2C+F), have provided
+    us with a [codebase](https://github.com/sniklaus/3d-ken-burns) that allows us
+    to apply this effect to our photos with some pre-trained models. I have noticed
+    that they don’t work well for photos with lots of sharp edges in the foreground,
+    but yield pretty impressive results on a number of the photos that I have tested
+    it with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I won’t get into the details into how this is achieved as the authors do this
+    in their paper, Github Repo, and Youtube video which all have been provided at
+    the end in the resources section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I am going to step you through the approach that we take to create these 3D
+    scenes, but if you want to just blindly try it yourself at the end of this section
+    I added all of the code that we will be going through to a Google Colab that you
+    can copy, and use immediately.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before stepping through this yourself I suggest opening a new Google Colab,
+    because in the code samples I go through I use some Colab specific functionality
+    to help with ease of use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Setup Environment and Install Requirements
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first step to get this working yourself is to import their repository that
+    contains this implementation, and pre-tained models. So what happens below is
+    we clone the repo, navigate to it, make our output directory, and install the
+    required libraries. The Google Colab has a lot of the requirements already preloaded
+    when you start a new runtime so there was just two that were missing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Upload Photos
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: At this stage all that you need to do is have an easy way to upload photos to
+    your source/image directory. You don’t really need to include this in your notebook
+    to move forward, as you could just drag your files into their corresponding folders
+    with the Colab interface, but it’s a pretty nice connivence cell.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Convert Your Photos
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So if we didn’t want to convert all of our photos that we provide to the two
+    directories, and easy one liner would be as follows which just uses the `autozoom.py` interface
+    to convert one photo.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Though since we want to automate what we can, we can take advantage of bash,
+    and iterate through the directory then execute on each photo.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: View Your Video
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Once your photos are converted you may want to view the output first we use
+    IPython’s functionality to build the function to view the video, and then provide
+    a selector for us to choose which video to view amongst those in the directory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Convert Mp4 to Animated GIF
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I added this step as a result of wanting to upload, and embed the output of
+    this applied effect in this post, so as with all of my efforts, please take advantage
+    of this knowledge, and convert your mp4’s to animated gif’s as you please. As
+    a bonus we have already imported `imageio` as a dependency so there’s no need
+    to install it. Below we use this function, and iterate through the destination
+    directory looking for mp4’s to convert.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Download All Videos
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you don’t want to use the file explorer to download your output. The last
+    step is to iterate through the destination folder, and download each video. This
+    could also be done as we did previously when using bash to iterate, and apply
+    the effect.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: If all has gone well then your photos have been properly converted as one of
+    mine I took here when enjoying Bolonga when times we different.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bafacc669741b9d9af0a9c7c6af8e929.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: For those that want to skip putting a Colab notebook together themselves **[here
+    is the complete implementation for you to make a copy of](https://colab.research.google.com/drive/1UE_rOouFODxoxQbrm9Ms_OTHhSfyKe89)**,
+    and start converting your photo albums.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Key Takeaways
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Standing on the shoulders of giants we live in an age where we can take advantage
+    of cutting edge AI techniques to help us do things that normally would require
+    someone with specific knowledge. In this instance we can use the AI techniques
+    developed by Simon Niklaus and team instead of needing to learn sophisticated
+    editing skills.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Other Posts By Dylan
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[**Create Beautiful Architecture Diagrams with Python**](https://towardsdatascience.com/create-beautiful-architecture-diagrams-with-python-7792a1485f97)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Stop spending time manually tweaking misaligned arrows
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Deploy To Google Cloud Run Using Github Actions**](https://towardsdatascience.com/deploy-to-google-cloud-run-using-github-actions-590ecf957af0)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A CI/CD Solution That Scales To Zero With Actions And Cloud Run
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Auto-Updating Your Github Profile With Python**](https://towardsdatascience.com/auto-updating-your-github-profile-with-python-cde87b638168)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Showcase Your Skills Through Automating Your Readme Profile
+  prefs: []
+  type: TYPE_NORMAL
+- en: Resources
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Video Description](https://www.youtube.com/watch?v=WrajxHHfRBA)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Research Paper](https://arxiv.org/abs/1909.05483)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Github Repo](https://github.com/sniklaus/3d-ken-burns)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Gist for MP4 To GIF Conversion](https://gist.github.com/michaelosthege/cd3e0c3c556b70a79deba6855deb2cc8)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Other Google Colabs Leveraging Paper from [Arnaldo Gabriel](https://colab.research.google.com/github/agmm/colab-3d-ken-burns/blob/master/automatic-3d-ken-burns.ipynb),
+    one from [Vlad Alex](https://colab.research.google.com/drive/1hxx4iSuAOyeI2gCL54vQkpEuBVrIv1hY),
+    and one from [Ahmed Harmouche](https://github.com/wpmed92/3d-ken-burns-colab).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Dylan Roy](https://www.linkedin.com/in/dylan-roy/)** is an Engineer
+    & Side Project Junkie sharing what he is working on so readers like you can benefit
+    from his experiences. Subscribe here for even more ([**dylanroy.com**](http://dylanroy.com))'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/robotacademy/add-a-new-dimension-to-your-photos-using-python-4baf7a0a607a).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Extraction of Objects In Images and Videos Using 5 Lines of Code](/2021/03/extraction-objects-images-videos-5-lines-code.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Tasks To Automate With Python](/2021/06/5-tasks-automate-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Which Face is Real? Applying StyleGAN to Create Fake People](/2020/05/which-face-real-stylegan-create-fake-people.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

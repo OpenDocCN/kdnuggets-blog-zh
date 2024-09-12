@@ -1,0 +1,812 @@
+- en: 'Hands-on Reinforcement Learning Course Part 3: SARSA'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/30748c058f5a536beb5706b08cffa316.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Welcome to my reinforcement learning course ❤️**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is part 3 of my hands-on course on reinforcement learning, which takes
+    you from zero to HERO ????‍♂️. Today we will learn about SARSA, a powerful RL
+    algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are still at the beginning of the journey, solving relatively easy problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In [**part 2**](http://datamachines.xyz/2021/12/06/hands-on-reinforcement-learning-course-part-2/)
+    we implemented discrete Q-learning to train an agent in the `Taxi-v3` environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Today, we are going one step further to solve the `MountainCar` environment
+    ???? using SARSA algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s help this poor car win the battle against gravity!
+  prefs: []
+  type: TYPE_NORMAL
+- en: All the code for this lesson is in [**this Github repo**](https://github.com/Paulescu/hands-on-rl)**.**
+    Git clone it to follow along with today’s problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/5a7273317f4e2bc8225fd4e3f167146b.png)](https://github.com/Paulescu/hands-on-rl)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. The Mountain car problem ????
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The Mountain Car problem is an environment where gravity exists (what a surprise)
+    and the goal is to help a poor car win the battle against it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The car needs to escape the valley where it got stuck. The car’s engine is not
+    powerful enough to climb up the mountain in a single pass, so the only way to
+    make it is to drive back and forth and build sufficient momentum.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s see it in action:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sarsa Agent in action!
+  prefs: []
+  type: TYPE_NORMAL
+- en: The video you just saw corresponds to the `SarsaAgent` we will build today.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fun, isn’t it?
+  prefs: []
+  type: TYPE_NORMAL
+- en: You might be wondering.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*This looks cool, but why did you choose this problem in the first place?*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Why this problem?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The philosophy of this course is to progressively add complexity. Step-by-step.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Today’s environment represents a small but relevant increase in complexity when
+    compared to the`Taxi-v3` environment from part 2.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But, *what exactly is harder here?*
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we saw in **[part 2](http://datamachines.xyz/2021/12/06/hands-on-reinforcement-learning-course-part-2/)**,
+    the difficulty of a reinforcement learning problem is directly related to the
+    size of
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'the action space: *how many actions can the agent choose from at each step?*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'the state space: *in how many different environment configurations can the
+    agent find itself?*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For *small environments* with a finite (and small) number of actions and states,
+    we have strong guarantees that algorithms like Q-learning will work well. These
+    are called **tabular or discrete environments**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Q-functions are essentially matrices with as many rows as states and columns
+    as actions. In these *small* worlds, our agents can easily explore the states
+    and build effective policies. As the state space and (especially) the action space
+    becomes larger, the RL problem becomes harder to solve.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Today’s environment is **NOT** tabular. However, we will use a discretization
+    “trick” to transform it into a tabular one, and then solve it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s first get familiar with the environment!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Environment, actions, states, rewards
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**[???????? notebooks/00_environment.ipynb](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/notebooks/00_environment.ipynb)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s load the environment:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/b83d04fba09a39066cf90d2b622b248b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'And plot one frame:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/e13755e2f902e1032dea4b03b8415391.png)![Hands-on
+    Reinforcement Learning Course Part 3: SARSA](../Images/07c85dba5cf0d6bd13e8798117845c00.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Two numbers determine the **state** of the car:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Its position, which ranges from **-1.2** to **0.6**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Its speed, which ranges from **-0.07** to **0.07**.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/22fe4c7604415a9d20c8db6f4196a93a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The state is given by 2 continuous numbers. This is a remarkable difference
+    with respect to the `Taxi-v3` environment from [part 2](https://towardsdatascience.com/hands-on-reinforcement-learning-course-part-2-1b0828a1046b).
+    We will later see how to handle this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What are the **actions**?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are 3 possible actions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`0` Accelerate to the left'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`1` Do nothing'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`2` Accelerate to the right'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/c2f912ce54c18b93315418e9a0f8594b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And the **rewards**?
+  prefs: []
+  type: TYPE_NORMAL
+- en: A reward of -1 is awarded if the position of the car is less than 0.5.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The episode ends once the car’s position is above 0.5, or the max number of
+    steps has been reached: `n_steps >= env._max_episode_steps`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A default negative reward of -1 encourages the car to escape the valley as fast
+    as possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In general, I recommend you check [Open AI Gym environments’](https://github.com/openai/gym/tree/master/gym/envs)
+    implementations directly in Github to understand states, actions, and rewards.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code is well documented and can help you quickly understand everything you
+    need to start working on your RL agents. `MountainCar` ‘s implementation is [here](https://github.com/openai/gym/blob/master/gym/envs/classic_control/mountain_car.py),
+    for example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Good. We got familiar with the environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s build a baseline agent for this problem!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Random agent baseline ????????
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**[???????? notebooks/01_random_agent_baseline.ipynb](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/notebooks/01_random_agent_baseline.ipynb)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reinforcement learning problems can grow in complexity pretty easily. Well-structured
+    code is your best ally to keep complexity under control.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Today we are going to level up our Python skills and use a `BaseAgent` class
+    for all our agents. From this `BaseAgent` class, we will derive our `RandomAgent`
+    and `SarsaAgent` classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/97f7073609a002ece390eef9d20f5aff.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '`BaseAgent` is an **abstract class** we define in `[src/base_agent.py](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/src/base_agent.py)`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It has 4 methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Two of its methods are abstract, which means we are forced to implement them
+    when we derived our `RandomAgent` and `SarsaAgent` from the `BaseAgent:`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`get_action(self, state)` → returns the action to perform, depending on the
+    state.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`update_parameters(self, state, action, reward, next_state)` → adjusts agent
+    parameters using experience. Here we will implement the SARSA formula.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The other two methods let us save/load the trained agent to/from the disk.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`save_to_disk(self, path)`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`load_from_disk(cls, path)`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As we start implementing more complex models and training times increase, it
+    is going to be a great idea to save checkpoints during training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is the complete code for our `BaseAgent` class:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/121260f614782f3b0541ffec3920a03b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'From this `BaseAgent` class, we can define the `RandomAgent` as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/724e1d2baf07028b161c42a4c63ce38e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Let’s evaluate this `RandomAgent` over `n_episodes = 100` to see how well it
+    fares:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/46caf646c57a884bd3d0aa4a8c3a3939.png)![Hands-on
+    Reinforcement Learning Course Part 3: SARSA](../Images/f5e247010acc481fa782c1b72fdc6bc5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And the success rate of our `RandomAgent`is…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/c5c2451995329a41fb26bb883b16244d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 0% ????…
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can see how far the agent got in each episode with the following histogram:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/ff47391459ccea26e6f14f03e335fb59.png)![Hands-on
+    Reinforcement Learning Course Part 3: SARSA](../Images/35f6ba7e5565b8feaf6567872decc31b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In these `100` runs our `RandomAgent`did not cross the **0.5** mark. Not a single
+    time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*When you run this code on your local machine you will get slightly different
+    results, but the percentage of completed episodes above 0.5 will be very far from
+    100% in any case.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can watch our miserable `RandomAgent` in action using the nice `show_video`
+    function in `[**src/viz.py**](https://github.com/Paulescu/hands-on-rl/blob/37fbac23d580a44d46d4187525191b324afa5722/02_mountain_car/src/viz.py#L52-L61)`
+  prefs: []
+  type: TYPE_NORMAL
+- en: A random agent is not enough to solve this environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s try something smarter ????…
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. SARSA agent ????????
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**[???????? notebooks/02_sarsa_agent.ipynb](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/notebooks/02_sarsa_agent.ipynb)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**SARSA**](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.17.2539&rep=rep1&type=pdf)
+    (by Rummery and Niranjan) is an algorithm to train reinforcement learning agents
+    by learning the optimal q-value function.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It was published in 1994, two years after [**Q-learning**](https://www.gatsby.ucl.ac.uk/~dayan/papers/cjch.pdf)
+    (by Chris Walkins and Peter Dayan).
+  prefs: []
+  type: TYPE_NORMAL
+- en: SARSA stands for **S**tate **A**ction **R**eward **S**tate **A**ction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Both SARSA and Q-learning exploit the Bellman equation to iteratively find better
+    approximations to the optimal q-value function **Q*(s, a)**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/2eab3dbcb1f4e5f188efee35f0a488a2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If you remember from part 2, the update formula for Q-learning is
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/8ea0dd53fcb0b32c31128e0c1319bbf8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This formula is a way to compute a new estimate of the q-value that is closer
+    to
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/10c9f1d1a6ca78e20fc96351401cf53c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This quantity is a *target* ???? we want to correct our old estimate towards.
+    It’s an *estimation* of the optimal q-value we should aim at, that changes as
+    we train the agent and our q-value matrix gets updated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reinforcement learning problems often look like supervised ML problems with
+    ***moving* targets** ???? ????
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: SARSA has a similar update formula but with a different *target*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/4b749da798bc061e5706df3750558c37.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: SARSA’s target
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/3610db26defe49e792b600720dcf46de.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: depends also on the action **a’** the agent will take in the next state **s’.**
+    This is the final **A** in SARS**A’**s name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you explore enough the state space and update your q-matrices with SARSA
+    you will get to an optimal policy. Great!
+  prefs: []
+  type: TYPE_NORMAL
+- en: You might be thinking…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Q-learning and SARSA look almost identical to me. What are the differences?*
+    ????**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: On-policy vs Off-policy algorithms
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There is one key difference between SARSA and Q-learning:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? SARSA’s update depends on the next action **a’,** and hence on the current
+    policy. As you train and the q-value (and associated policy) get updated the new
+    policy might produce a different next action **a’’** for the same state **s’**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You cannot use past experiences **(s, a, r, s’, a’)** to improve your estimates.
+    Instead, you use each experience once to update the q-values and then throw it
+    away.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because of this, SARSA is called an **on-policy** method
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? In Q-learning, the update formula does not depend on the next action **a’,**
+    but only on **(s, a, r, s’).** You can reuse past experiences **(s, a, r, s’),**
+    collected with an old version of the policy, to improve the q-values of the current
+    policy.Q-learning is an **off-policy** method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Off-policy methods need less experience to learn than on-policy methods because
+    you can re-use past experiences several times to improve your estimates. They
+    are more **sample efficient**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, off-policy methods have issues converging to the optimal q-value function
+    Q*(s, a) when the state, action spaces grow. They can be tricky and **unstable**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will encounter these trade-offs later in the course when we enter the Deep
+    RL territory ????.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Going back to our problem…
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the `MountainCar` environment, the state is not discrete, but a pair of continuous
+    values (position `s1`, velocity `s2`).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Continuous* essentially means *infinite possible values* in this context.
+    If there are infinite possible states, it is impossible to visit them all to guarantee
+    that SARSA will converge.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To fix that we can use a trick.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s discretize the state vector into a finite set of values. Essentially,
+    we are not changing the environment, but the representation of the state the agent
+    uses to choose its actions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our `SarsaAgent` discretizes the state `(s1, s2)` from continuous to discrete,
+    by rounding the position `[-1.2 … 0.6]`to the closest `0.1` mark, and the velocity
+    `[-0.07 ...0.07]` to the closest `0.01` mark.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This function does exactly that, translate continuous into discrete states:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/0fda14d9637f91b534e2d1ad2493d6b6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Once the agent uses a discretized state, we can use the SARSA update formula
+    from above, and as we keep on iterating we will get closer to an optimal q-value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is the whole implementation of the `SarsaAgent`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/5115d60823b807644f2be72a5a485eaf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Note ???? that the q-value function is a matrix with 3 dimensions: 2 for the
+    state (position, velocity) and 1 for the action.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s choose sensible hyper-parameters and train this`SarsaAgent` for `n_episodes
+    = 10,000`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/30d4886cfc816b5449c7ce86ce34f678.png)![Hands-on
+    Reinforcement Learning Course Part 3: SARSA](../Images/1be80c6b85e074e60a1f949506d3ada1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let’s plot `rewards` and `max_positions` (blue lines) with their 50-episode
+    moving averages (orange lines)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/d2701bf7bf100ca95a5276ef8d013642.png)![Hands-on
+    Reinforcement Learning Course Part 3: SARSA](../Images/05874c4c72e14310237e160a9eceb2a9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Super! It looks like our `SarsaAgent` is learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here you can see it in action:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you observe the `max_position` chart above you will realize that the car
+    occasionally fails to climb the mountain.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'How often does that happen? Let’s evaluate the agent on `1,000` random episodes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/5c690f4e9a6f9e4d1f5d7287c1313493.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'And compute the success rate:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/51dbbd94b417b19993f904d9a00795c6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**95.2%** is pretty good. Still, not perfect. Put a pin on this, we will come
+    back later in the course.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** When you run this code on your end you will get slightly different
+    results, but I bet you won’t get a 100% performance.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Great job! We implemented a `SarsaAgent` that learns ????
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is a good moment to take a pause…
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5\. Take a pause and breath ⏸????
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**[???????? notebooks/03_momentum_agent_baseline.ipynb](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/notebooks/03_momentum_agent_baseline.ipynb)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What if I told you that the `MountainCar` environment has a much simpler solution…
+  prefs: []
+  type: TYPE_NORMAL
+- en: that works 100% of the time? ????
+  prefs: []
+  type: TYPE_NORMAL
+- en: The best policy to follow is simple.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Just follow the momentum*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: accelerate right, when the car is moving to the right `velocity > 0`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: accelerate left, when the car is moving to the left `velocity <= 0`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Visually this policy looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/26889061f1c4db0ed1802e70bcfd8797.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'This is how you write this `MomentumAgent` in Python:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/593d3214eeec9f93aa99bb76f46d4c7f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can double-check it completes every single episode. 100% success rate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/f31f46328e106eceb1c181f8e963f3a0.png)![Hands-on
+    Reinforcement Learning Course Part 3: SARSA](../Images/6ecc1050677bbc69346f4dd8e3b48152.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'If you plot the trained`SarsaAgent` ‘s policy, on the other hand, you will
+    see something like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/f99251db39d0582f83b48560483d751f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Which has a 50% overlap with the perfect `MomentumAgent` policy
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/673958d367ba2427a0d8c059a3acf000.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This means our `SarsaAgent` is right *only* 50% of the time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is interesting…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Why is the `SarsaAgent` wrong so often but still achieves good performance?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is because the `MountainCar` is still a small environment, so taking wrong
+    decisions 50% of the time is not so critical. For larger problems, being wrong
+    so often is not enough to build intelligent agents.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Would you buy a self-driving car that is right 95% of the time? ????*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Also, do you remember the *discretization trick* we used to apply SARSA? That
+    was a trick that helped us a lot but also introduced an error/bias to our solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Why don’t we increase the resolution of the discretization for the state
+    and velocity, to get a better solution?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The problem of doing this is the exponential growth in the number of states,
+    also called the **curse of dimensionality**. As you increase the resolution of
+    each state component, the total number of states grows exponentially. The state-space
+    grows too fast for the SARSA agent to converge to the optimal policy in a reasonable
+    amount of time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Ok, but are there any other RL algorithms that can solve this problem perfectly?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Yes, there are. And we will cover them in upcoming lectures. In general, there
+    is no one-size-fits-all when it comes to RL algorithms, so you need to try several
+    of them for your problem to see what works best.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the `MountainCar` environment, the perfect policy looks so simple that we
+    can try to learn it directly, without the need to compute complicated q-value
+    matrices. A **policy optimization** method will probably work best.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But we are not going to do this today. If you want to solve this environment
+    perfectly using RL, follow along with the course.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Enjoy what you’ve accomplished today.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-on Reinforcement Learning Course Part 3: SARSA](../Images/210f53a985969df08d72258294b59fb3.png)Who
+    is having fun?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 6\. Recap ✨
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Wow! We covered a lot of things today.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'These are the 5 takeaways:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: SARSA is an on-policy algorithm you can use in tabular environments.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Small continuous environments can be treated as tabular, using a discretization
+    of the state, and then solved with tabular SARSA or tabular Q-learning.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Larger environments cannot be discretized and solved because of the curse of
+    dimensionality.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For more complex environments than `MountainCar`we will need more advanced RL
+    solutions.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Sometimes RL is not the best solution**. Keep that in mind when you try to
+    solve the problems you care about. Do not marry your tools (in this case RL),
+    instead focus on finding a good solution. Do not miss the forest for the trees
+    ????????????.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 7\. Homework ????
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[**???????? notebooks/04_homework.ipynb**](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/notebooks/04_homework.ipynb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is what I want you to do:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Git clone**](https://github.com/Paulescu/hands-on-rl) the repo to your local
+    machine.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[**Setup**](https://github.com/Paulescu/hands-on-rl/tree/main/02_mountain_car#quick-setup)
+    the environment for this lesson `02_mountain_car`'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Open `[02_mountain_car/notebooks/04_homework.ipynb](http://02_mountain_car/notebooks/04_homework.ipynb)`and
+    try completing the 2 challenges.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In the first challenge, I ask you to tune the SARSA hyper-parameters `alpha`
+    (learning rate) and `gamma` (discount factor) to speed up training. You can get
+    inspiration from [part 2](https://towardsdatascience.com/hands-on-reinforcement-learning-course-part-2-1b0828a1046b).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the second challenge, try to increase the resolution of the discretization
+    and learn the q-value function with tabular SARSA. As we did today.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let me know if you build an agent that achieves 99% performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 8\. What’s next? ❤️
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the next lesson, we are going to enter a territory where Reinforcement Learning
+    and Supervised Machine Learning intersect ????.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is going to be pretty cool, I promise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Until then,
+  prefs: []
+  type: TYPE_NORMAL
+- en: Enjoy one more day on this amazing planet called Earth ????
+  prefs: []
+  type: TYPE_NORMAL
+- en: Love ❤️
+  prefs: []
+  type: TYPE_NORMAL
+- en: And keep on learning ????
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you like the course, please share it with friends and colleagues.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can reach me under `plabartabajo@gmail.com` . I would love to connect.
+  prefs: []
+  type: TYPE_NORMAL
+- en: See you soon!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Pau Labarta Bajo](https://www.linkedin.com/in/pau-labarta-bajo-4432074b/)**
+    ([**@paulabartabajo_**](https://twitter.com/paulabartabajo_)) is a mathematician
+    and AI/ML freelancer and speaker, with over 10 years of experience crunching numbers
+    and models for different problems, including financial trading, mobile gaming,
+    online shopping, and healthcare.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://datamachines.xyz/2021/12/17/hands-on-reinforcement-learning-course-part-3-sarsa/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Hands-On Reinforcement Learning Course, Part 1](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On Reinforcement Learning Course, Part 2](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[HuggingFace Has Launched a Free Deep Reinforcement Learning Course](https://www.kdnuggets.com/2022/05/huggingface-launched-free-deep-reinforcement-learning-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On with Supervised Learning: Linear Regression](https://www.kdnuggets.com/handson-with-supervised-learning-linear-regression)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On with Unsupervised Learning: K-Means Clustering](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generative AI with Large Language Models: Hands-On Training](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

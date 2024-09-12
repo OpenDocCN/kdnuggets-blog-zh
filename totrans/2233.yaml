@@ -1,0 +1,371 @@
+- en: Linear Regression from Scratch with NumPy
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/linear-regression-from-scratch-with-numpy](https://www.kdnuggets.com/linear-regression-from-scratch-with-numpy)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Linear Regression from Scratch with NumPy](../Images/1951ea4b9d9ce604ed154efff3629c4f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Motivation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Linear Regression is one of the most fundamental tools in machine learning.
+    It is used to find a straight line that fits our data well. Even though it only
+    works with simple straight-line patterns, understanding the math behind it helps
+    us understand Gradient Descent and Loss Minimization methods. These are important
+    for more complicated models used in all machine learning and deep learning tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we'll roll up our sleeves and build Linear Regression from
+    scratch using NumPy. Instead of using abstract implementations such as those provided
+    by Scikit-Learn, we will start from the basics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dataset
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We generate a dummy dataset using Scikit-Learn methods. We only use a single
+    variable for now, but the implementation will be general that can train on any
+    number of features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The make_regression method provided by Scikit-Learn generates random linear
+    regression datasets, with added Gaussian noise to add some randomness.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: We generate 500 random values, each with 1 single feature. Therefore, X has
+    shape (500, 1) and each of the 500 independent X values, has a corresponding y
+    value. So, y also has shape (500, ).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Visualized, the dataset looks as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Linear Regression from Scratch with NumPy](../Images/a1f435f09880ff61db42c639fa6d2b15.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**We aim to find a best-fit line that passes through the center of this data,
+    minimizing the average difference between the predicted and original y values.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Intuition
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'The general equation for a linear line is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: y = m*X + b
+  prefs: []
+  type: TYPE_NORMAL
+- en: X is numeric, single-valued. Here m and b represent the gradient and y-intercept
+    (or bias). These are unknowns, and varying values of these can generate different
+    lines. In machine learning, X is dependent on the data, and so are the y values.
+    **We only have control over m and b, that act as our model parameters.** We aim
+    to find optimal values of these two parameters, that generate a line that minimizes
+    the difference between predicted and actual y values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This extends to the scenario where X is multi-dimensional. In that case, the
+    number of m values will equal the number of dimensions in our data. For example,
+    if our data has three different features, we will have three different m values,
+    called **weights**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The equation will now become:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: y = w1*X1 + w2*X2 + w3*X3 + b
+  prefs: []
+  type: TYPE_NORMAL
+- en: This can then extend to any number of features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But how do we know the optimal values of our bias and weight values? Well, we
+    don’t. But we can iteratively find it out using Gradient Descent. We start with
+    random values and change them slightly for multiple steps until we get close to
+    the optimal values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, let us initialize Linear Regression, and we will go over the optimization
+    process in greater detail later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Initialize Linear Regression Class
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: We use a learning rate and number of iterations hyperparameters, that will be
+    explained later. The weights and biases are set to None because the number of
+    weight parameters depends on the input features within the data. We do not have
+    access to the data yet, so we initialize them to None for now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Fit Method
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In the fit method, we are provided with data and their associated values. We
+    can now use these, to initialize our weights, and then train the model to find
+    optimal weights.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: The independent feature X will be a NumPy array of shape (num_samples, num_features).
+    In our case, the shape of X is (500, 1). Each row in our data will have an associated
+    target value, so y is also of shape (500,) or (num_samples).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We extract this and randomly initialize the weights given the number of input
+    features. So now our weights are also a NumPy array of size (num_features, ).
+    Bias is a single value initialized to zero.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Predicting Y Values
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We use the line equation discussed above to calculate predicted y values. However,
+    instead of an iterative approach to sum all values, we can follow a vectorized
+    approach for faster computation. Given that the weights and X values are NumPy
+    arrays, we can use matrix multiplication to get predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: X has shape (num_samples, num_features) and weights have shape (num_features,
+    ). We want the predictions to be of shape (num_samples, ) matching the original
+    y values. Therefore we can multiply X with weights, or (num_samples, num_features)
+    x (num_features, ) to obtain predictions of shape (num_samples, ).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The bias value is added at the end of each prediction. This can simply be implemented
+    in a single line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: However, are these predictions correct? Obviously not. We are using randomly
+    initialized values for the weights and bias, so the predictions will also be random.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How do we get the optimal values? **Gradient Descent.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loss Function and Gradient Descent
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Now that we have both predicted and target y values, we can find the difference
+    between both values. Mean Square Error (MSE) is used to compare real-valued numbers.
+    The equation is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Linear Regression from Scratch with NumPy](../Images/d5f03ab0e7f212765a705a6189468d4d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We only care about the absolute difference between our values. A prediction
+    higher than the original value is as bad as a lower prediction. So we square the
+    difference between our target value and predictions, to convert negative differences
+    to positive. Moreover, this penalizes a larger difference between targets and
+    predictions, as higher differences squared will contribute more to the final loss.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For our predictions to be as close to original targets as possible, we now try
+    to minimize this function. The loss function will be minimum, where the gradient
+    is zero. As we can only optimize our weights and bias values, we take the partial
+    derivates of the MSE function with respect to weights and bias values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Linear Regression from Scratch with NumPy](../Images/83e89da79a360a5709bf54902e4a76cb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We then optimize our weights given the gradient values, using Gradient Descent.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Linear Regression from Scratch with NumPy](../Images/19a05045d5c5faa8874379aad3328eda.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image from [Sebasitan Raschka](https://sebastianraschka.com/faq/docs/gradient-optimization.html)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We take the gradient with respect to each weight value and then move them to
+    the opposite of the gradient. This pushes the the loss towards minimum. As per
+    the image, the gradient is positive, so we decrease the weight. This pushes the
+    J(W) or loss towards the minimum value. Therefore, the optimization equations
+    look as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Linear Regression from Scratch with NumPy](../Images/87a11aefee51baeef82929e742c74a05.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The learning rate (or alpha) controls the incremental steps shown in the image.
+    We only make a small change in the value, for stable movement towards the minimum.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Implementation
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: If we simplify the derivate equation using basic algebraic manipulation, this
+    becomes very simple to implement.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Linear Regression from Scratch with NumPy](../Images/d05edcda87c786e8fe178a475a1d8375.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'For the derivate, we implement this using two lines of code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: dw is again of shape (num_features, ) So we have a separate derivate value for
+    each weight. We optimize them separately. db has a single value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To optimize the values now, we move the values in the opposite direction of
+    the gradient using basic subtraction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Again, this is only a single step. We only make a small change to the randomly
+    initialized values. We now repeatedly perform the same steps, to converge towards
+    a minimum.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The complete loop is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Prediction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We predict the same way as we did during training. However, now we have the
+    optimal set of weights and biases. The predicted values should now be close to
+    the original values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Results
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'With randomly initialized weights and bias, our predictions were as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Linear Regression from Scratch with NumPy](../Images/30983147e20a744358c6845a763a3492.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Weight and bias were initialized very close to 0, so we obtain a horizontal
+    line. After training the model for 1000 iterations, we get this:![Linear Regression
+    from Scratch with NumPy](../Images/ff5eda8a6ccf432c7b79a8a6d371f38d.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: The predicted line passes right through the center of our data and seems to
+    be the best-fit line possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: You have now implemented Linear Regression from scratch. The complete code is
+    also available on [GitHub](https://github.com/MuhammadArham-43/ML_Algos).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**[Muhammad Arham](https://www.linkedin.com/in/muhammad-arham-a5b1b1237/)**
+    is a Deep Learning Engineer working in Computer Vision and Natural Language Processing.
+    He has worked on the deployment and optimizations of several generative AI applications
+    that reached the global top charts at Vyro.AI. He is interested in building and
+    optimizing machine learning models for intelligent systems and believes in continual
+    improvement.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Comparing Linear and Logistic Regression](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Reasons Why You Should Use Linear Regression Models Instead of…](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Linear vs Logistic Regression: A Succinct Explanation](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News 22:n12, March 23: Best Data Science Books for…](https://www.kdnuggets.com/2022/n12.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Linear Regression for Data Science](https://www.kdnuggets.com/2022/07/linear-regression-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Making Predictions: A Beginner''s Guide to Linear Regression in Python](https://www.kdnuggets.com/2023/06/making-predictions-beginner-guide-linear-regression-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

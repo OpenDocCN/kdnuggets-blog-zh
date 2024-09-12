@@ -1,0 +1,425 @@
+- en: Why and How to Use Dask with Big Data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/04/dask-big-data.html](https://www.kdnuggets.com/2020/04/dask-big-data.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Admond Lee](https://twitter.com/admond1994), Data Scientist, MicronTech.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9bcb01535e3669de38aa8ba44b95a5a3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*[Dask](https://dask.org/)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Being a data scientist, [Pandas](https://pandas.pydata.org/) is one of the best
+    tools for data cleaning and analysis used in Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s *seriously *a game-changer when it comes to cleaning, transforming, manipulating,
+    and analyzing data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: No doubt about it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In fact, I’ve even created my own [toolbox for data cleaning](https://towardsdatascience.com/the-simple-yet-practical-data-cleaning-codes-ad27c4ce0a38) using
+    Pandas. The toolbox is nothing but a compilation of common tricks to deal with
+    messy data with Pandas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: My Love-Hate Relationship with Pandas
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Don’t get me wrong.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandas is great. It’s powerful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4e8836a0083d05b8bfd63f01eb32c32a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*[Stack Overflow Traffic to Questions about Selected Python Packages](https://www.kdnuggets.com/2019/11/speed-up-pandas-4x.html)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s still one of the most popular data science tools for data cleaning and
+    analytics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, after being in the data science field for some time, the data volume
+    that I’m dealing with increases from 10MB, 10GB, 100GB, to 500GB, or sometimes
+    even more than that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: My PC either suffered** low performance or long runtime** due to the inefficient
+    local memory usage for data that was larger than 100GB.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That was the time when I realized Pandas wasn’t initially designed for data
+    at large scales.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That was the time when I realized the **stark difference between large data
+    and big data**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A famous joke by Prof. Dan Ariely:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d1a834ce43eb362e3546f3cac276832b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*[(Source)](https://www.facebook.com/dan.ariely/posts/904383595868)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The word large and big are in themselves “relative,” and in my humble opinion,
+    large data is data sets that are less than 100GB.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, Pandas is very efficient with small data (usually from 100MB up to 1GB),
+    and performance is rarely a concern.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But when you have more data that’s way larger than your local [RAM](https://en.wikipedia.org/wiki/Random-access_memory) (say
+    100GB), you can either still use [Pandas to handle data with some tricks](https://towardsdatascience.com/why-and-how-to-use-pandas-with-large-data-9594dda2ea4c) to
+    a certain extent or choose a better tool — in this case, Dask.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This time, I chose the latter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Dask works like MAGIC
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To some of us, [Dask](https://dask.org/) might be something that you’re already
+    familiar with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But to most aspiring data scientists or people who just got started in data
+    science, Dask might sound a little bit foreign.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And this is perfectly fine.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In fact, I didn’t get to know Dask until I faced the real limitation of Pandas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Keep in mind that Dask is ****not a necessity**** if your data volume is sufficiently
+    low and can fit into your PC’s memory space.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: So the question now is…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*What’s Dask, and why Dask is better than Pandas to handle big data?*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Dask is popularly known as a Python parallel computing library**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Through its parallel computing features, [Dask](https://docs.dask.org/en/latest/why.html) allows
+    for rapid and efficient scaling of computation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It provides an easy way to **handle large and big data** in Python with minimal
+    extra effort beyond the regular Pandas workflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In other words, Dask allows us to easily **scale out to clusters** to handle
+    big data or **scale down to single computers** to handle large data through harnessing
+    the full power of CPU/GPU, all beautifully integrated with Python code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cool, isn’t it?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Think of Dask as an extension of Pandas in terms of **performance and scalability**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What’s even cooler is that you can switch between a Dask dataframe and Pandas
+    dataframe to do any data transformation and operation on demand.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to use Dask with Big Data?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Okay, enough of theory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s time to get our hands dirty.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can [install Dask](https://docs.dask.org/en/latest/install.html) and try
+    that in your local PC to use your CPU/GPU.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*But we’re talking about **big data** here, so let’s do something **different**.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Let’s go **BIG**.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead of taming the “beast” by scaling down to single computers, let’s discover
+    the full power of the “beast” by **scaling out to clusters**, for **FREE**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: YES, I mean it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understanding that setting up a cluster (AWS, for example) and connecting Jupyter
+    notebook to the cloud can be a pain to some data scientists, especially for beginners
+    in cloud computing, let’s use [Saturn Cloud](https://www.saturncloud.io/s/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a new platform that I’ve been trying out recently.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Saturn Cloud is a managed data science and machine learning platform that automates
+    DevOps and ML infrastructure engineering.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To my surprise, it uses **Jupyter** and **Dask** to **scale Python for big data** using
+    the libraries we know and love (Numpy, Pandas, Scikit-Learn, etc.). It also leverages [Docker](https://www.docker.com/) and [Kubernetes](https://kubernetes.io/) so
+    that your data science work is reproducible, shareable, and ready for production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are three main types of Dask user interfaces, namely Array, Bag, and Dataframe.
+    We’ll focus mainly on **Dask Dataframe** in the code snippets below, as this is
+    what we mostly would be using for data cleaning and analytics as a data scientist.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. Read CSV files to Dask dataframe**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Dask dataframe is no different from Pandas dataframe in terms of normal files
+    reading and data transformation, which makes it so attractive to data scientists,
+    as you’ll see later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here we just read a single CSV file stored in [S3](https://aws.amazon.com/s3/).
+    Since we just want to test out Dask dataframe, the file size is quite small, with
+    541909 rows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1ffbd600222b84f6a498fe17fa75daf5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Dask dataframe after reading CSV file.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**NOTE:** We can also [read multiple files](http://docs.saturncloud.io/en/articles/3760116-read-public-data-from-s3-in-saturn) to
+    the Dask dataframe in one line of code, regardless of the file size.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When we load up our data from the CSV, Dask will create a DataFrame that is [row-wise
+    partitioned](https://docs.dask.org/en/latest/dataframe.html#design)  i.e. rows
+    are grouped by an index value. That’s how Dask is able to load the data into memory
+    on-demand and process it super fast —** it goes by partition**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0f4bc26f2f57535791451f615dd0f0bc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*[Partitioning done by Dask](https://www.saturncloud.io/s/practical-guide-to-dask/).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our case, we see that the Dask dataframe has 2 partitions (this is because
+    of the *blocksize* specified when reading CSV) with 8 tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**“Partitions”** here simply mean the number of Pandas dataframes split within
+    the Dask dataframe.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The more partitions we have, the more tasks we will need for each computation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/827cbad9e15a7841d1d4732d0c15ea78.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Dask dataframe structure.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2\. Use *compute() *to execute the operation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we’ve read the CSV file to Dask dataframe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is important to remember that, while Dask dataframe is very similar to Pandas
+    dataframe, some differences do exist.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The main difference that I notice is this *compute* method in Dask dataframe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Most Dask user interfaces are ***lazy***, meaning that **they don’t evaluate
+    until you explicitly ask for a result **using the *compute *method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is how we calculate the mean of the *UnitPrice *by adding *compute* method
+    right after the *mean *method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3\. Check number of missing values for each column**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Similarly, if we want to check the number of missing values for each column,
+    we need to add *compute *method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**4\. Filter rows based on conditions**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: During the data cleaning or Exploratory Data Analysis (EDA) process, we often
+    need to filter rows based on certain conditions to understand the “story” behind
+    the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can do the exact operation as what we do in Pandas by just adding *compute *method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And BOOM! We get the results!
+  prefs: []
+  type: TYPE_NORMAL
+- en: DEMO to create a Dask cluster & run Jupyter at scale with Python
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that we’ve understood how to use Dask in general, it’s time to see how to [create
+    a Dask cluster on Saturn Cloud](http://docs.saturncloud.io/en/articles/3652101-spin-up-dask-on-saturn) and
+    run Python code in Jupyter at scale.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I recorded a short video to show you exactly how to do the setup and run Python
+    code in a Dask cluster in minutes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*How to create a Dask cluster and run Jupyter Notebook on Saturn Cloud*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Final Thoughts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Thank you for reading.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In terms of functionalities, Pandas still wins.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In terms of performance and scalability, Dask is ahead of Pandas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In my opinion, if you have data that’s larger than a few GB (comparable to your
+    RAM), go with Dask for the purpose of performance and scalability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to create a Dask cluster in minutes and run your Python code at
+    scale, I highly recommend you to get the [community edition of Saturn Cloud here
+    for FREE](http://bit.ly/saturn-cloud-community-edition).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/why-and-how-to-use-dask-with-big-data-746e34dac7c3).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Admond Lee](https://www.admondlee.com/) is now in the mission of
+    making data science accessible to everyone. He is helping companies and digital
+    marketing agencies achieve marketing ROI with actionable insights through innovative
+    data-driven approaches. With his expertise in advanced social analytics and machine
+    learning, Admond aims to bridge the gaps between digital marketing and data science.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[K-means Clustering with Dask: Image Filters for Cat Pictures](https://www.kdnuggets.com/2019/06/k-means-clustering-dask-image-filters.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Five Interesting Data Engineering Projects](https://www.kdnuggets.com/2020/03/data-engineering-projects.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Data Science Puzzle — 2020 Edition](https://www.kdnuggets.com/2020/02/data-science-puzzle-2020-edition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[3 Reasons Why Data Scientists Should Use LightGBM](https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Reasons Why You Should Use Linear Regression Models Instead of…](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Reasons Why You Shouldn’t Use Machine Learning](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why Use k-fold Cross Validation?](https://www.kdnuggets.com/2022/07/kfold-cross-validation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why the Newest LLMs use a MoE (Mixture of Experts) Architecture](https://www.kdnuggets.com/why-the-newest-llms-use-a-moe-mixture-of-experts-architecture)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Big Data Analytics: Why Is It So Crucial For Business Intelligence?](https://www.kdnuggets.com/2023/06/big-data-analytics-crucial-business-intelligence.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

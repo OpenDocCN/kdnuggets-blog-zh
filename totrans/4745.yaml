@@ -1,0 +1,277 @@
+- en: Word Morphing – an original idea
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/11/word-morphing-original-idea.html](https://www.kdnuggets.com/2018/11/word-morphing-original-idea.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/cd297b34131042afd6e7c13b51c5d6c5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Smooth image transition (morphing) from a tiger to a human (image courtesy:
+    Google Images)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In order to perform word morphing, we’ll define a graph *G* where the set of
+    nodes *N* represent words, and there’s some non negative weight function *f*:*N*×*N*→ℝ.
+    Given a start word *S* and an end word *E*, our goal is to find a path within
+    the graph which minimizes the sum of weights induced by *f*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b5e754c708acf0ba033ea289c94eecea.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Fig. 1\. Optimal path with minimal cost induced by f**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Usually when people talk about word morphing they mean searching for a path
+    between *S* and *E* where there’s an edge only between words such that one can
+    be achieved from the other by changing one letter, as can be seen [here](http://wordmorph.sarangconsulting.com/faq.php#1.2).
+    In this case, *f*(*n*₁,*n*₂) is 1 when such a change exists, and ∞ otherwise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this post I’ll show you how to morph between semantically similar words,
+    i.e. *f *will be related to semantics. Here’s an example to illustrate the difference
+    between the two approaches: given *S*=*tooth*, *E*=*light*, the approach of changing
+    one character at a time [can result](http://wordmorph.sarangconsulting.com/?source=tooth&target=light&submit=MORPH+WORDS) in'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: while the semantics approach which will be defined in this post results in
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can find the entire code [here](https://github.com/yoel-zeldes/yoel-zeldes.github.io/blob/source/content/word%20morph/word-morph.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Word Semantics
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In order to capture word semantics we’ll use pre-trained word2vec embeddings
+    [1]. To those of you who are not familiar with the algorithm, here’s an excerpt
+    from [Wikipedia](https://en.wikipedia.org/wiki/Word2vec):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Word2vec takes as its input a large corpus of text and produces a vector space,
+    typically of several hundred dimensions, with each unique word in the corpus being
+    assigned a corresponding vector in the space. Word vectors are positioned in the
+    vector space such that words that share common contexts in the corpus are located
+    in close proximity to one another in the space.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: It means every node in the graph can be associated with some vector in high
+    dimensionality space (300 in our case). Therefore, we can naturally define a distance
+    function between every two nodes. We’ll use cosine similarity, since this is the
+    metric usually used when one wants to semantically compare between word embeddings.
+    From now on, I’ll overload a node symbol *n* to be its associated word’s embedding
+    vector.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To use the word2vec embeddings, we’ll download Google’s pre-trained embeddings
+    from [here](https://drive.google.com/uc?id=0B7XkCwpI5KDYNlNUTTlSS21pQmM&export=download),
+    and use gensim package to access them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Choosing the Weight Function
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Given the cosine similarity distance function, we can define our *f* function
+    to be
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7e5a1b6ec3fde71bcafae3c9aab28ff2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Eq. 1\. Definition of weight function using cosine similarity**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'However, using this approach we’ll face a problem: the best path might include
+    edges with high weight, which will result in successive words that aren’t semantically
+    similar.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To tackle this, we can change *f* to be
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/622a2118ff10d8ce666ebffe4d32857d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Eq. 2\. Definition of weight function using cosine similarity limited to
+    nearest neighbors**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: where *neighbors*(*n*₁) denotes the nearest nodes in the graph to *n*₁ in terms
+    of cosine similarity. The number of neighbors is configurable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A* Search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that we have our graph defined, we’ll use a well known search algorithm
+    called A* [2].
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this algorithm, every node has a cost composed of two terms - *g*(*n*)+*h*(*n*).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*g*(*n*) is the cost of the shortest path from *S* to *n*, and *h*(*n*) is
+    a heuristic estimating the cost of the shortest path from *n* to *E*. In our case,
+    the heuristic function will be *f*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The search algorithm maintains a data structure called *the open set*. Initially
+    this set contains *S*, and at each iteration of the algorithm we pop out the node
+    in the open set with the minimal cost *g*(*n*)+*h*(*n*), and add its neighbors
+    to the open set. The algorithm stops when the node with the minimal cost is *E*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This algorithm works with whatever heuristic function we choose. But in order
+    to actually find the optimal path, the heuristic function must be admissible,
+    meaning it can’t overestimate the true cost. Unfortunately, *f* is not admissible.
+    However, we’ll use the [observation](https://en.wikipedia.org/wiki/Cosine_similarity#Properties) that
+    if the vectors have length 1, then the cosine similarity can be obtained using
+    a monotonic transformation over the euclidean distance. It means the two are interchangeable
+    in terms of ranking words by similarity. The euclidean distance is admissible
+    (you can prove it using the [triangle inequality](https://en.wikipedia.org/wiki/Triangle_inequality)),
+    so we can use that instead, by defining
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/68bdd4f48324c0afc88eb1f153e958a4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Eq. 3\. Definition of weight function using euclidean distance**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So to sum up, we’ll normalize the word embeddings, use the euclidean distance
+    as a mean to find semantically similar words, and the same euclidean distance
+    to direct A* search process in order to find the optimal path.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I chose *neighbors*(*n*) to include its 1000 nearest nodes. However, in order
+    to make the search more efficient, we can dilute these using dilute_factor of
+    10: we pick the nearest neighbor, the 10''th nearest neighbor, the 20''th, and
+    so on - until we have 100 nodes. The intuition behind it is that the best path
+    from some intermediate node to *E* might pass through its nearest neighbor. If
+    it doesn''t, it might be the case that it won''t pass through the second neighbor
+    neither, since the first and second neighbors might be almost the same. So to
+    save some computations, we just skip some of the nearest neighbors.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And here comes the fun part:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The results:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Final thoughts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Implementing the word morphing project was fun, but not as fun as playing around
+    and trying this tool on whatever pair of words I could have thought of. I encourage
+    you to go ahead and [play with it](https://github.com/yoel-zeldes/yoel-zeldes.github.io/blob/source/content/word%20morph/word-morph.ipynb) yourself.
+    Let me know in the comments what interesting and surprising morphings you have
+    found :)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*This post was originally posted at *[*www.anotherdatum.com*](http://www.anotherdatum.com/)*.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: References
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[1] [https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality](https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[2] [https://www.cs.auckland.ac.nz/courses/compsci709s2c/resources/Mike.d/astarNilsson.pdf](https://www.cs.auckland.ac.nz/courses/compsci709s2c/resources/Mike.d/astarNilsson.pdf)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio**: [Yoel Zeldes](https://medium.com/@yoelzeldes) is a Algorithms Engineer
+    at Taboola and is also a Machine Learning enthusiast, who especially enjoys the
+    insights of Deep Learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/word-morphing-9f87ee577775). Reposted
+    with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Resources:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[on-line and web-based: Analytics, Data Mining, Data Science, Machine Learning
+    education](https://www.kdnuggets.com/education/online.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Software for Analytics, Data Science, Data Mining, and Machine Learning](https://www.kdnuggets.com/software/index.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Sorry I didn’t get that! How to understand what your users want](https://www.kdnuggets.com/2018/11/sorry-understand-what-users-want.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Multi-Class Text Classification with Doc2Vec & Logistic Regression](https://www.kdnuggets.com/2018/11/multi-class-text-classification-doc2vec-logistic-regression.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Free Must-See Courses for Machine Learning and Data Science](https://www.kdnuggets.com/2018/11/10-free-must-see-courses-machine-learning-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Automate Microsoft Excel and Word Using Python](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Ultimate Guide To Different Word Embedding Techniques In NLP](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

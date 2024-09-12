@@ -1,0 +1,170 @@
+- en: Data preprocessing for deep learning with nuts-ml
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/05/data-pre-processing-deep-learning-nuts-ml.html](https://www.kdnuggets.com/2017/05/data-pre-processing-deep-learning-nuts-ml.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Stefan Maetschke, PhD.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data preprocessing is a fundamental part of any machine learning project and
+    often more time is spent on the data preparation than on the actual machine learning.
+    While some preprocessing tasks are problem specific many others such as partitioning
+    data into training and test folds, stratifying samples or building mini-batches
+    are generic. The following *Canonical Pipeline* shows the processing steps common
+    for deep-learning in vision.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2b264a4fa4eb7d575994203692befe3c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A **Reader** reads sample data stored in text files, Excel or Pandas tables.
+    The **Splitter** then partitions data into training, validation and test folds
+    and performs stratification if needed. Usually not all image data can be loaded
+    into memory and a **Loader** loads images on demand. These images are often processed
+    by a **Transformer**, for resizing, cropping or other adjustments. Furthermore,
+    to increase the training set additional images are synthesized by randomly augmenting
+    (flipping, rotating, …) images using an **Augmenter**. Efficient, GPU-based machine
+    learning demands that image and label data are grouped in mini-batches via a **Batcher**
+    before passed on to the **Network** for training or inference. Finally, to keep
+    track of the training progress, usually a **Logger** is employed to write training
+    losses or accuracies to a log file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some machine learning frameworks such as [Keras](https://keras.io/) provide
+    (some of) these preprocessing components hidden behind an API that considerably
+    simplify network training if it fits the task at hand. See the following excerpt
+    of a [Keras example](https://github.com/fchollet/keras/blob/master/examples/cifar10_cnn.py)
+    to train a model with augmentation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: However, what if an image format, augmentation or other preprocessing capability
+    is needed that is not provided by the API? Extending a library such as Keras or
+    others is not trivial and the common approach is to (re)implement the required
+    functionality – often in a quick-and-dirty fashion. But implementing a robust
+    data pipeline that loads, transforms, augments and processes images on demand
+    is challenging and time consuming.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[nuts-ml](https://maet3608.github.io/nuts-ml/index.html) is a Python library
+    that provides common preprocessing functions as so called *nuts*, which can be
+    freely arranged and easily extended to construct efficient data processing pipelines.
+    The following excerpt from a [nuts-ml example](https://github.com/maet3608/nuts-ml/blob/master/nutsml/examples/cifar/cnn_train.py)
+    shows a pipeline for network training, where the `>>`operator defines the flow
+    of data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: In the example above training images are augmented, pixel values re-ranged,
+    and the samples shuffled before building batches for network training. Finally,
+    the mean over the batch-wise training losses is computed and printed. The nuts
+    this data flow is composed of can be defined as follows
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: where rerange is an image transformation that converts pixel values in range
+    [0, 255] to range [0, 1], augment generates additional images for training by
+    randomly flipping horizontally and changing the image brightness, build_batch
+    constructs batches composed of images and one-hot encoded class labels, and network
+    wraps an existing Keras model in a nut that can be plugged into the pipeline.
+    The complete code for this example can be found here
+  prefs: []
+  type: TYPE_NORMAL
+- en: nuts-ml helps to build data preprocessing pipelines for deep-learning more quickly.
+    The resulting code is more readable and can readily be modified to experiment
+    with different preprocessing schemes. Task-specific functions can easily be implement
+    as nuts and added to the data flow. For instance, here a simple nut to adjust
+    the brightness of an image
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: nuts-ml does not perform network training itself but uses existing libraries
+    such as Keras or Theano for this purpose. Any machine learning library that accepts
+    mini-batches of Numpy arrays for training or inference is compatible. For more
+    information about nuts-ml see the Introduction and have a look at the Tutorial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Stefan Maetschke (PhD)](http://researcher.ibm.com/researcher/view.php?person=au1-stefanrm)**
+    is a research scientist at IBM Research Australia where he develops machine learning
+    infrastructure and models for medical image analysis.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Medical Image Analysis with Deep Learning , Part 2](/2017/04/medical-image-analysis-deep-learning-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Medical Image Analysis with Deep Learning ](/2017/03/medical-image-analysis-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Negative Results on Negative Images: Major Flaw in Deep Learning?](/2017/04/negative-results-images-flaw-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Learn Data Cleaning and Preprocessing for Data Science with This Free eBook](https://www.kdnuggets.com/2023/08/learn-data-cleaning-preprocessing-data-science-free-ebook.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Easy Guide To Data Preprocessing In Python](https://www.kdnuggets.com/2020/07/easy-guide-data-preprocessing-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Data Cleaning and Preprocessing Techniques](https://www.kdnuggets.com/2023/08/7-steps-mastering-data-cleaning-preprocessing-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Harnessing ChatGPT for Automated Data Cleaning and Preprocessing](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Cleaning and Preprocessing Text Data in Pandas for NLP Tasks](https://www.kdnuggets.com/cleaning-and-preprocessing-text-data-in-pandas-for-nlp-tasks)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

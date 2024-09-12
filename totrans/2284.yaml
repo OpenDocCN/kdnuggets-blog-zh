@@ -1,0 +1,464 @@
+- en: Gaussian Naive Bayes, Explained
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/03/gaussian-naive-bayes-explained.html](https://www.kdnuggets.com/2023/03/gaussian-naive-bayes-explained.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Gaussian Naive Bayes, Explained](../Images/ee88ec80ea1eb5937228a0c928c54194.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The decision region of a Gaussian naive Bayes classifier. Image by the Author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I think this is a classic at the beginning of each data science career: the *Naive
+    Bayes Classifier*. Or I should rather say the *family* of naive Bayes classifiers,
+    as they come in many flavors. For example, there is a multinomial naive Bayes,
+    a Bernoulli naive Bayes, and also a Gaussian naive Bayes classifier, each different
+    in only one small detail, as we will find out. The naive Bayes algorithms are
+    quite simple in design but proved useful in many complex real-world situations.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, you can learn
+  prefs: []
+  type: TYPE_NORMAL
+- en: how the naive Bayes classifiers work,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: why it makes sense to define them the way they are and
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: how to implement them in Python using NumPy.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can find the code on [my Github](https://github.com/Garve/TDS/blob/main/TDS%20-%20Gaussian%20Naive%20Bayes.ipynb).
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: It might help a bit to check out my primer on Bayesian statistics [A gentle
+    Introduction to Bayesian Inference](https://towardsdatascience.com/a-gentle-introduction-to-bayesian-inference-6a7552e313cb) to
+    get used to the Bayes formula. As we will implement the classifier in a scikit
+    learn-conform way, it’s also worthwhile to check out my article [Build your own
+    custom scikit-learn Regression](https://towardsdatascience.com/build-your-own-custom-scikit-learn-regression-5d0d718f289).
+    However, the scikit-learn overhead is quite small and you should be able to follow
+    along anyway.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will start exploring the astonishingly simple theory of naive Bayes classification
+    and then turn to the implementation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Theory
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'What are we really interested in when classifying? What are we actually doing,
+    what is the input and the output? The answer is simple:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given a data point x, what is the probability of x belonging to some class c?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: That’s all we want to answer with **any** classification. You can directly model
+    this statement as a conditional probability: *p*(*c*|*x*).
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, if there are
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3 classes *c₁*, *c₂*, *c₃*, and
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*x *consists of 2 features *x₁*, *x₂*,'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the result of a classifier could be something like *p*(*c₁*|*x₁*, *x₂*)=0.3,
+    *p*(*c₂*|*x₁*, *x₂*)=0.5 and *p*(*c₃*|*x₁*, *x₂*)=0.2\. If we care for a single
+    label as the output, we would choose the one with the highest probability, i.e. *c₂*
+    with a probability of 50% here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The naive Bayes classifier tries to compute these probabilities directly.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Naive Bayes
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Ok, so given a data point *x*, we want to compute *p*(*c*|*x*) for all classes *c *and
+    then output the* c* with the highest probability. In formulas you often see this
+    as
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Gaussian Naive Bayes, Explained](../Images/a52355ef1a080e26c5fd8aa72c7256cf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by the Author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** max *p*(*c*|*x*) returns the maximum probability while argmax *p*(*c*|*x*)
+    returns the *c* with this highest probability.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But before we can optimize *p*(*c*|*x*), we have to be able to compute it.
+    For this, we use [Bayes’ theorem](https://en.wikipedia.org/wiki/Bayes%27_theorem):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Gaussian Naive Bayes, Explained](../Images/06709efebc3ddc7d032db27c132ad470.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Bayes theorem. Image by the Author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is the Bayes part of naive Bayes. But now, we have the following problem:
+    What are *p*(*x*|*c*) and *p*(*c*)?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**This is what the training of a naive Bayes classifier is all about.**'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The Training
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To illustrate everything, let us use a toy dataset with **two real features** *x₁*, *x₂*,
+    and **three classes** *c₁*, *c₂*, *c₃* in the following.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Gaussian Naive Bayes, Explained](../Images/480de29d9f4a217537ee3d8085c70468.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The data, visualized. Image by the Author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can create this exact dataset via
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let us start with the **class probability** *p*(*c*), the probability that some
+    class *c* is observed in the labeled dataset. The simplest way to estimate this
+    is to just compute the relative frequencies of the classes and use them as the
+    probabilities. We can use our dataset to see what this means exactly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are 7 out of 20 points labeled class *c₁* (blue) in the dataset, therefore
+    we say *p*(*c₁*)=7/20\. We have 7 points for class *c₂* (red) as well, therefore
+    we set *p*(*c₂*)=7/20\. The last class *c₃* (yellow) has only 6 points, hence *p*(*c₃*)=6/20.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This simple calculation of the class probabilities resembles a maximum likelihood
+    approach. You can, however, also use another *prior* distribution, if you like.
+    For example, if you know that this dataset is not representative of the true population
+    because class *c₃* should appear in 50% of the cases, then you set *p*(*c₁*)=0.25, *p*(*c₂*)=0.25
+    and *p*(*c₃*)=0.5\. Whatever helps you improving the performance on the test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We now turn to the **likelihood** *p*(*x*|*c*)=*p*(*x₁*, *x₂*|*c*). One approach
+    to calculate this likelihood is to filter the dataset for samples with label *c *and
+    then try to find a distribution (e.g. a 2-dimensional Gaussian) that captures
+    the features *x₁*, *x₂*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unfortunately, usually, we don’t have enough samples per class to do a proper
+    estimation of the likelihood.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: To be able to build a more robust model, we make the **naive assumption **that
+    the features *x₁*, *x₂* are *stochastically independent*, given *c*. This is just
+    a fancy way of making the math easier via
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Gaussian Naive Bayes, Explained](../Images/9fb96ba70552e0566460c7be1094fbfb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by the Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**for every class *c***. This is where the **naive** part of naive Bayes comes
+    from because this equation does not hold in general. Still, even then the naive
+    Bayes yields good, sometimes outstanding results in practice. Especially for NLP
+    problems with bag-of-words features, the multinomial naive Bayes shines.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The arguments given above are the same for any naive Bayes classifier you can
+    find. Now it just depends on how you model *p(x₁|c₁), p(x₂|c₁), p(x₁|c₂), p(x₂|c₂),
+    p(x₁|c₃)* and *p(x₂|c₃)*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If your features are 0 and 1 only, you could use a [Bernoulli distribution](https://en.wikipedia.org/wiki/Bernoulli_distribution).
+    If they are integers, a [Multinomial distribution](https://en.wikipedia.org/wiki/Multinomial_distribution).
+    However, we have real feature values and decide for a **Gaussian** distribution,
+    hence the name Gaussian naive Bayes. We assume the following form
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Gaussian Naive Bayes, Explained](../Images/43e5b16b9a6b3eee4aba7934c23ede00.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by the Author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: where *μᵢ,ⱼ *is the mean and* σᵢ,ⱼ *is the standard deviation that we have to
+    estimate from the data. This means that we get one mean for each feature *i* coupled
+    with a class *cⱼ**,* in our case 2*3=6 means. The same goes for the standard deviations. **This
+    calls for an example.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let us try to estimate *μ₂,₁* and *σ₂,₁*. Because *j*=1, we are only interested
+    in class *c₁*, let us only keep samples with this label. The following samples
+    remain:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now, because of *i*=2 we only have to consider the second column. *μ₂*,₁ is
+    the mean and *σ₂*,₁ the standard deviation for this column, i.e. *μ₂*,₁ = 0.49985176
+    and *σ₂*,₁ = 0.9789976.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These numbers make sense if you look at the scatter plot from above again. The
+    features *x₂* of the samples from class *c₁* are around 0.5, as you can see from
+    the picture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We compute this now for the other five combinations and we are done!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In Python, you can do it like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: We receive
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is the result of the training of a Gaussian naive Bayes classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Making Predictions
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The complete prediction formula is
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Gaussian Naive Bayes, Explained](../Images/4c2d5e28f9547e0dd95f9cb5c9a048eb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by the Author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s assume a new data point *x*=*(-2, 5) comes in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Gaussian Naive Bayes, Explained](../Images/90959460a8c559b07e93067527e10527.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by the Author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To see which class it belongs to, let us compute *p*(*c*|*x**) for all classes.
+    From the picture, it should belong to class *c₃* = 2, but let’s see. Let us ignore
+    the denominator *p*(*x*) for a second. Using the following loop computed the nominators
+    for *j* = 1, 2, 3.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: We receive
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Of course, these *probabilities* (we shouldn’t call them that way) don’t add
+    up to one since we ignored the denominator. However, this is no problem since
+    we can just take these unnormalized probabilities and divide them by their sum,
+    then they will add up to one. So, dividing these three values by their sum of
+    about 0.00032569, we get
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Gaussian Naive Bayes, Explained](../Images/e0a6e1d05ebe55271551267e08ace5e1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by the Author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A clear winner, as we expected. Now, let us implement it!
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Complete Implementation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: This implementation is by far not efficient, not numerically stable, it only
+    serves an educational purpose. We have discussed most of the things, so it should
+    be easy to follow along now. You can ignore all the `check` functions, or read
+    my article [Build your own custom scikit-learn](https://towardsdatascience.com/build-your-own-custom-scikit-learn-regression-5d0d718f289) if
+    you are interested in what they exactly do.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Just note that I implemented a `predict_proba` method first to compute probabilities.
+    The method `predict` just calls this method and returns the index (=class) with
+    the highest probability using an argmax function (there it is again!). The class
+    awaits classes from 0 to *k*-1, where *k* is the number of classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Testing the Implementation
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: While the code is quite short it is still too long to be completely sure that
+    we didn’t do any mistakes. So, let us check how it fares against the [scikit-learn
+    GaussianNB classifier](https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: outputs
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: The predictions using the `predict` method are
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now, let us use scikit-learn. Throwing in some code
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: yields
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: The numbers look kind of similar to the ones of our classifier, but they are
+    a little bit off in the last few displayed digits. Did we do anything wrong? **No. **The
+    scikit-learn version just merely uses another hyperparameter `var_smoothing=1e-09` .
+    If we set this one to **zero**, we get exactly our numbers. Perfect!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Have a look at the decision regions of our classifier. I also marked the three
+    points we used for testing. That one point close to the border has only a 56.9%
+    chance to belong to the red class, as you can see from the `predict_proba` outputs.
+    The other two points are classified with much higher confidence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Gaussian Naive Bayes, Explained](../Images/8aecf2b50a46459e9453ce1b0dcc4844.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The decision regions with the 3 new points. Image by the Author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'In this article, we have learned how the Gaussian naive Bayes classifier works
+    and gave an intuition on why it was designed that way — it is a direct approach
+    to model the probability of interest. Compare this with Logistic regression: there,
+    the probability is modeled using a linear function with a sigmoid function applied
+    on top of it. It’s still an easy model, but it does not feel as natural as a naive
+    Bayes classifier.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We continued by calculating a few examples and collecting some useful pieces
+    of code on the way. Finally, we have implemented a complete Gaussian naive Bayes
+    classifier in a way that works well with scikit-learn. That means you can use
+    it in pipelines or grid search, for example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the end, we did a small sanity check by importing scikit-learns own Gaussian
+    naive Bayes classifier and testing if both, our and scikit-learn’s classifier
+    yield the same result. This test was successful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Dr. Robert Kübler](https://www.linkedin.com/in/robert-kuebler/)** is a Data
+    Scientist at METRO.digital and Author at Towards Data Science.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/learning-by-implementing-gaussian-naive-bayes-3f0e3d2c01b2).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Naïve Bayes Algorithm: Everything You Need to Know](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, April 13: Python Libraries Data Scientists Should…](https://www.kdnuggets.com/2022/n15.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Ways Understanding Bayes Theorem Will Improve Your Data Science](https://www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Database Key Terms, Explained](https://www.kdnuggets.com/2016/07/database-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Descriptive Statistics Key Terms, Explained](https://www.kdnuggets.com/2017/05/descriptive-statistics-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Decision Tree Algorithm, Explained](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

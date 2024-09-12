@@ -1,0 +1,270 @@
+- en: 'Accelerating Algorithms: Considerations in Design, Algorithm Choice and Implementation'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/12/accelerating-algorithms-design-choice-implementation.html](https://www.kdnuggets.com/2017/12/accelerating-algorithms-design-choice-implementation.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2017/12/accelerating-algorithms-design-choice-implementation.html/#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/546d443636f0c7cf6486c8f12e2311d8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Tom Radcliffe](https://www.activestate.com/blog/authors/tomr)**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The pursuit of speed is one of the few constants in computing, and it is driven
+    by two things: ever-increasing amounts of data, and limited hardware resources.
+    Today in the era of Big Data and the Internet of Things we are getting pinched
+    in both directions. Fortunately we are getting much better at distributed and
+    parallel computing, but the need for raw speed at the algorithmic level is never
+    going to go away. If we can make our algorithms inherently faster we will get
+    more out of our expensive hardware, and that is always going to be a good thing.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are many approaches to faster algorithms. Some are sensitively dependent
+    on context, some are generic. I’ll look at overall design choices, algorithm choice,
+    and implementation details. My background and experience is primarily in optimization
+    problems and numerical algorithms, so that will be the general area of focus.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It’s traditional to start any discussion of optimization with an imprecation
+    to be cautious. Knuth’s First Law of Optimization is: “Don’t do it” and his second
+    is like unto it: “Don’t do it yet.” We are also told that “premature optimization
+    is the root of all evil”, but what constitutes “premature”? When is too soon?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'My own law of optimization is intended to answer that question: “No optimization
+    without quantification.” We should never try to accelerate an algorithm without
+    first both measuring its current performance and profiling it to determine where
+    it is using the most time. It is very difficult to correctly infer where an algorithm
+    is spending most of its time.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, an optical Monte Carlo simulation I wrote turned out to be using
+    a full quarter of its runtime taking square roots of numbers very close to 1\.
+    This was due to the process of renormalizing direction vectors after scattering
+    events. By writing some highly optimized code for this special case I was able
+    to avoid the slow general implementation in the math co-processor and gain about
+    20% in overall performance, which is not a small thing when runs take many days.
+    There is no way I could have found this time-sink without profiling the code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The cProfile and profile modules in Python (both of which are part of the [ActivePython
+    distribution](https://www.activestate.com/activepython "Download and install Python
+    with ActivePython") provide deterministic profiling, which makes the results reasonably
+    easy to interpret. Other languages may support profiling based on program counter
+    sampling, which can vary from run to run due to statistical effects. Even with
+    deterministic profiling, some parts of the program may have variations in performance
+    due to resource constraints or the use of random numbers within the code itself.
+    I/O and communications are both areas where external dependencies can affect performance,
+    so it is best to profile these separately if possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This assumes we have code in place to profile, but algorithmic acceleration
+    can take place at several different levels in the development process: design,
+    algorithm choice, and implementation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**DESIGN**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Design for optimization is a huge topic that I’ll only just touch on here. Depending
+    on the application area there are many different approaches to efficient design.
+    One of the most important is to look out for proxy calculations that can stand
+    in for the final result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is particularly useful when working on optimization problems. One frequently
+    sees code like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: X = sqrt(some complicated expression)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Taking the square root--an unreasonably expensive operation even in these days
+    of fast math hardware--adds nothing to the calculation, except possibly in the
+    end-game of the optimization, where the curvature of the surface near the minimum
+    can become critically important to the efficiency of the algorithm. This is true
+    of any monotonic function wrapping your final result: it can often be dispensed
+    with.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Another quite general design approach is to sample the data rather than slavishly
+    using every available data point. This was the trick behind [pseudo-correlation](https://www.ncbi.nlm.nih.gov/pubmed/7935212
+    "https://www.ncbi.nlm.nih.gov/pubmed/7935212"), which is an ultra-fast image registration
+    algorithm: by using a small sub-set of pixels to estimate a cross-correlation
+    integral it was possible to speed up registration by orders of magnitude. A similar
+    approach was used in the mutual information algorithm several years later.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The overarching design question should be: “Do I really need to compute that?”
+    There may be something that is strongly correlated with the result you care about,
+    but which can be computed much more quickly.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ALGORITHM CHOICE**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The order of an algorithm gets a lot of academic attention but is surprisingly
+    unimportant. The reasons for this are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Problems often come with a given scale, so the scaling behaviour of the algorithm
+    is irrelevant. If something runs well on ten million datapoints, its performance
+    on a hundred million is irrelevant if we never see datasets that large.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Leading factors matter: an O(N**2) algorithm may have a much smaller leading
+    factor than an equivalent O(N*log(N)) algorithm due to lower complexity.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Speaking of complexity, algorithms with better big-O performance are often more
+    complex, making them more fragile, difficult to debug, and difficult to maintain.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The most famous case of fragility is probably quicksort, which degrades from
+    O(N*log(N)) to O(N**2) when the input is already sorted. This is a fortunately
+    easy case to spot, but more complex algorithms with good average performance can
+    still fail badly on special cases, and debugging this behaviour can be complex
+    and time-consuming. Because such failures are typically rare, it is also not uncommon
+    to encounter them after deployment, and be faced with a weird situation where
+    “sometimes things run slowly” for no readily apparent reason.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In algorithm choice it is best to implement the simplest thing first, then quantify
+    its performance on realistic datasets and decide if more complex algorithms are
+    required. More often than not they won’t be. I once worked on some mesh registration
+    code that used KD trees to match points, and found that because the datasets were
+    reasonably small a simple linear search with a few easily understood heuristics
+    would comfortably out-perform the nominally much-better KD tree implementation,
+    which was a fragile and complex mess whose unmaintainability prompted me to fall
+    back on something simpler so I could understand what was going on with it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**IMPLEMENTATION DETAILS**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An algorithm is not its implementation. Even relatively simple and efficient
+    algorithms can be badly implemented, which may result in slower performance. Unnecessary
+    function calls are one common case. Use of recursion rather than loops can impact
+    speed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In many cases, high-performance code is written in a relatively low-level language
+    like C, C++ or even Fortran, and called from a high-level language. How these
+    calls are ordered and organized can make a big difference to performance: in general
+    calling across language boundaries is an expensive operation, so using interfaces
+    in such a way as to minimize this is recommended.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: High level languages often include tricks that speed things up. For example,
+    Python’s sum() and map() functions are both much faster on arrays than loops.
+    Looping over 100,000,000 integers and summing them up takes 4.4 seconds on my
+    desktop machine, but 0.63 seconds if I use sum() on the array. Furthermore, generators
+    in loops (xrange rather than range in Python 2, range() in Python 3) are generally
+    faster than non-lazy list creation functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The map() function is much faster than looping: looping over an array of 100,000,000
+    integers and taking the square root takes 10 seconds on my desktop, but the same
+    process using `map(math.sqrt, lstData)` takes half that time.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**LOWER LEVEL APPROACHES**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are even more powerful techniques available in Python, such as using [NumPy](https://ipython-books.github.io/featured-01/
+    "Getting the Best Performance out of NumPy") and [Cython](https://cython.org/
+    "https://cython.org/") and Intel's Math Kernel Library (MKL), which is available
+    in ActiveState’s [ActivePython](https://www.activestate.com/activepython "Download
+    and install Python with ActivePython"). There may be constraints that prevent
+    the use of one or more of these techniques for a given problem, but they are worth
+    keeping in mind as part of your “efficiency arsenal”. Just be sure to quantify
+    your algorithm’s performance first!
+  prefs: []
+  type: TYPE_NORMAL
+- en: To learn more about accelerating algorithms and get more insights into Intel’s
+    MKL optimizations, watch my webinar, ["Accelerating Your Algorithms in Production
+    with Python and Intel MKL"](https://www.activestate.com/webinars/accelerating-your-algorithms-production-python-and-intel-mkl
+    "Webinar - Accelerating Your Algorithms with Python and Intel MKL"), co-hosted
+    with Sergey Maidanov, Software Engineering Manager from Intel.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.activestate.com/blog/2017/11/accelerating-your-algorithms-considerations-design-algorithm-choice-and-implementation).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Robust Algorithms for Machine Learning**](https://www.kdnuggets.com/2017/12/robust-algorithms-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**7 Super Simple Steps From Idea To Successful Data Science Project**](https://www.kdnuggets.com/2017/11/7-super-simple-steps-idea-successful-data-science-project.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Top Data Science and Machine Learning Methods Used in 2017**](https://www.kdnuggets.com/2017/12/top-data-science-machine-learning-methods.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[When Would Ensemble Techniques be a Good Choice?](https://www.kdnuggets.com/2022/07/would-ensemble-techniques-good-choice.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Role of Open Source Tools in Accelerating Data Science Progress](https://www.kdnuggets.com/2023/05/role-open-source-tools-accelerating-data-science-progress.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Cutting Down Implementation Time by Integrating Jupyter and KNIME](https://www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[First Open Source Implementation of DeepMind’s AlphaTensor](https://www.kdnuggets.com/2023/03/first-open-source-implementation-deepmind-alphatensor.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn how to design, measure and implement trustworthy A/B tests…](https://www.kdnuggets.com/2023/01/sphere-design-measure-implement-trustworthy-ab-tests-ronny-kohavi.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Leveraging AI to Design Fair and Equitable EV Charging Grids](https://www.kdnuggets.com/leveraging-ai-to-design-fair-and-equitable-ev-charging-grids)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

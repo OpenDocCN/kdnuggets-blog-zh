@@ -1,0 +1,327 @@
+- en: Machine Learning Security
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/01/machine-learning-security.html](https://www.kdnuggets.com/2019/01/machine-learning-security.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Zak Jost](https://blog.zakjost.com), Research Scientist at Amazon Web
+    Services**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*As more and more systems leverage ML models in their decision-making processes,
+    it will become increasingly important to consider how malicious actors might exploit
+    these models, and how to design defenses against those attacks. The purpose of
+    this post is to share some of my recent learnings on this topic.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ML Everywhere
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*The explosion of available data, processing power, and innovation in the ML
+    space have resulted in ML ubiquity. It’s actually quiet easy to build these models
+    given the proliferation of open source frameworks and data ([this tutorial](https://machinelearningmastery.com/machine-learning-in-python-step-by-step/)
+    takes someone from zero ML/programming knowledge to 6 ML models in about 5-10
+    minutes). Further, the ongoing trend from cloud providers to offer ML as a service
+    is enabling customers to build solutions without needing to ever write code or
+    understand how it works under the hood.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alexa can purchase on our behalf using voice commands. Models identify pornography
+    and help make internet platforms safer for our kids. They’re driving cars on our
+    roadways and protecting us from scammers and malware. They monitor our credit
+    card transactions and internet usage to look for suspicious anomalies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: “Alexa, buy my cat guacamole”
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*The benefit of ML is clear–it just isn’t possible to have a human manually
+    review every credit card transaction, every Facebook image, every YouTube video…etc.
+    What about the risks?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It doesn’t take much imagination to understand the possible harm of an ML algorithm
+    making mistakes when navigating a driverless car. The common argument is often,
+    “as long as it makes fewer mistakes than humans, it’s a net benefit”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But what about cases where malicious actors are *actively trying to deceive
+    models*? Labsix, a student group from MIT, 3D printed a turtle that’s reliably
+    classified as “rifle” by Google’s InceptionV3 image classifier for any camera
+    angle^([1](#fn:1)). For speech-to-text systems, Carlini and Wagner found^([2](#fn:2)):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given any audio waveform, we can produce another that is over 99.9% similar,
+    but transcribes as any phrase we choose….Our attack works with 100% success, regardless
+    of the desired transcription or initial source audio sample.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Papernot, et al. showed that adding a single line of code to malware in a targeted
+    way could trick state-of-the-art malware detection models in >60% of the cases^([3](#fn:3)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'By using fairly simple techniques, a bad actor can make even the most performant
+    and impressive models wrong in pretty much any way they desire. This image, for
+    instance, fools the Google model into deciding with almost 100% confidence that
+    it’s a picture of guacamole^([1](#fn:1)):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Cat or Guacamole?](../Images/13da1e4c597e08e1adf446dd299c65bf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'This is an image of a real-life stop sign that was manipulated so that computer
+    vision models were tricked 100% of the time in drive-by experiments into thinking
+    it was a “Speed Limit 45 MPH” sign^([4](#fn:4)):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Adversarial Stop Sign](../Images/1a4f4bf5719865394091eb9d6b92b2cc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: How so good, but *so bad*?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*In all of these examples, the basic idea is to perturb an input in a way that
+    maximizes the change to the model’s output. These are known as “adversarial examples”.
+    With this framework, you can figure out how to most efficiently tweak the cat
+    image so that the model thinks it’s guacamole. This is sort of like getting all
+    the little errors to line up and point in the same direction, so that snowflakes
+    turn into an avalanche. Technically, this reduces to finding the gradient of the
+    output with respect to the input–something ML practitioners are well-equipped
+    to do!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s worth stressing that these changes are mostly imperceptible. For instance,
+    listen to [these audio samples](https://nicholas.carlini.com/code/audio_adversarial_examples/).
+    Despite sounding identical to my ears, one translates to “without the dataset
+    the article is useless” and the other to “okay google, browse to evil.com”. It’s
+    further worth stressing that real malicious users are not always constrained to
+    making imperceptible changes, so we should assume this is a lower-bound estimate
+    on security vulnerability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But do *I* have to worry?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*OK, so there’s a problem with the robustness of these models that makes them
+    fairly easy to exploit. But unless you’re Google or Facebook, you’re probably
+    not building huge neural networks in production systems, so you don’t have to
+    worry…right? *Right!?*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrong. This problem is not unique to neural networks. In fact, adversarial examples
+    found to fool one model often fool other models, even if they were trained using
+    a different architecture, dataset, or even algorithm. This means that even if
+    you were to ensemble models of different types, you’re *still not safe*^([5](#fn:5)).
+    If you’re exposing a model to the world, even indirectly, where someone can send
+    an input to it and get a response, you’re at risk. The history of this field started
+    with exposing the vulnerability of *linear models* and was only later re-kindled
+    in the context of deep networks^([6](#fn:6)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: How do we stop it?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*There’s a continual arms race between attacks and defenses. This recent [“best
+    paper” of ICML 2018](https://nicholas.carlini.com/papers/2018_icml_obfuscatedgradients.pdf)
+    “broke” 7 of the 9 defenses presented in the same year’s conference papers. It’s
+    not likely that this trend will stop any time soon.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So what’s an average ML practitioner to do, who likely doesn’t have time to
+    stay on the very cutting of ML security literature, much less endlessly incorporate
+    new defenses to all outward-facing production models? In my judgment, the only
+    sane approach is to design systems that have multiple sources of intelligence,
+    such that a single point of failure does not destroy the efficacy of the entire
+    system. This means that you assume an individual model can be broken, and you
+    design your systems to be robust against that scenario.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For instance, it’s likely a very dangerous idea to have driverless cars entirely
+    navigated by computer vision ML systems (for more reasons than just security).
+    Redundant measurements of the environment that use orthogonal information like
+    LIDAR, GPS, and historic records might help refute an adversarial vision result.
+    This naturally presumes the system is designed to integrate these signals to make
+    a final judgment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The larger point is that we need to recognize that model security is a substantial
+    and pervasive risk that will only increase with time as ML is incorporated more
+    and more into our lives. As such, we will need to build the muscle as ML practitioners
+    to think about these risks and design systems robust against them. In the same
+    way that we take precautions in our web apps to protect our systems against malicious
+    users, we should also be proactive with model security risk. Just as institutions
+    have Application Security Review groups that do e.g. penetration testing of software,
+    we will need to build Model Security Review groups that serve a similar function.
+    One thing is for sure: this problem won’t be going away any time soon, and will
+    likely grow in relevance.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***If you’d like to learn more about this topic, Biggio and Roli’s paper gives
+    a wonderful review and history of the field, including totally different attack
+    methods not mentioned here (e.g. data poisoning).^([6](#fn:6))***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: References
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*1.  “Fooling Neural Networks in the Physical World.” Labsix, 31 Oct. 2017,
+    [www.labsix.org/physical-objects-that-fool-neural-nets](https://www.labsix.org/physical-objects-that-fool-neural-nets/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[^([return])](#fnref:1)'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'N. Carlini, D. Wagner. “Audio Adversarial Examples: Targeted Attacks on Speech-to-Text.”
+    arXiv preprint [arXiv:1801.01944](https://arxiv.org/abs/1801.01944), 2018.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[^([return])](#fnref:2)'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'K. Grosse, N. Papernot, P. Manoharan, M. Backes, P. McDaniel (2017) [Adversarial
+    Examples for Malware Detection](http://www.patrickmcdaniel.org/pubs/esorics17.pdf).
+    In: Foley S., Gollmann D., Snekkenes E. (eds) Computer Security – ESORICS 2017\.
+    ESORICS 2017\. Lecture Notes in Computer Science, vol 10493\. Springer, Cham.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[^([return])](#fnref:3)'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: K. Eykhold, I. Evtimov, et al. “Robust Physical-World Attacks on Deep Learning
+    Visual Classification”. arXiv preprint [arXiv:1707.08945](https://arxiv.org/abs/1707.08945),
+    2017.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[^([return])](#fnref:4)'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'N. Papernot, P. McDaniel, I.J. Goodfellow. “Transferability in Machine Learning:
+    from Phenomena to Black-Box Attacks using Adversarial Samples”. arXiv preprint
+    [arXiv:1605.07277](https://arxiv.org/abs/1605.07277), 2016.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[^([return])](#fnref:5)'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'B. Biggio, F. Roli. “Wild Patterns: Ten Years After the Rise of Adversarial
+    Machine Learning.” arXiv preprint [arXiv:1712.03141](https://arxiv.org/abs/1712.03141),
+    2018.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[^([return])](#fnref:6)'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[Original](https://blog.zakjost.com/post/model-security/). Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio**: [Zak Jost](https://blog.zakjost.com) is a builder and Machine Learning
+    Scientist.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Resources:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[On-line and web-based: Analytics, Data Mining, Data Science, Machine Learning
+    education](https://www.kdnuggets.com/education/online.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Software for Analytics, Data Science, Data Mining, and Machine Learning](https://www.kdnuggets.com/software/index.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How To Fine Tune Your Machine Learning Models To Improve Forecasting Accuracy](https://www.kdnuggets.com/2019/01/fine-tune-machine-learning-models-forecasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What were the most significant machine learning/AI advances in 2018?](https://www.kdnuggets.com/2019/01/machine-learning-ai-advances-2018.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Monitor Machine Learning Models in Real-Time](https://www.kdnuggets.com/2019/01/monitor-machine-learning-real-time.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How Metadata Improves Security, Quality, and Transparency](https://www.kdnuggets.com/2022/04/metadata-improves-security-quality-transparency.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The World Needs More Cyber Security Analysts!](https://www.kdnuggets.com/the-world-needs-more-cyber-security-analysts)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, November 2: The Current State of Data Science…](https://www.kdnuggets.com/2022/n43.html)*******'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

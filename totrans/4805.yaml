@@ -1,0 +1,370 @@
+- en: WTF is TF-IDF?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/08/wtf-tf-idf.html](https://www.kdnuggets.com/2018/08/wtf-tf-idf.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Enrique Fueyo](https://building.lang.ai/), CTO & Co-founder @ Lang.ai**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Header image](../Images/2f5a5174939f3768c1014d2a47999bf7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Frame from “The Incredibles” (2004) movie
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: TF-IDF, which stands for **term frequency — inverse document frequency,** is
+    a scoring measure widely used in information retrieval (IR) or summarization.
+    TF-IDF is intended to reflect **how relevant a term is in a given document.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: The intuition behind it is that if a word occurs *multiple times in a document*,
+    we should boost its relevance as it should be more meaningful than other words
+    that appear fewer times (TF). At the same time, if a word occurs many times in
+    a document but also *along many other documents*, maybe it is because this word
+    is just a frequent word; not because it was relevant or meaningful (IDF).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Defining what a “relevant word” means**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can come up with a more or less subjective definition driven by our intuition:
+    a word’s relevance is proportional to the amount of information that it gives
+    about its context (a sentence, a document or a full dataset). That is, the most
+    relevant words are those that would help us, as humans, to better understand a
+    whole document without reading it all.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As pointed out, **relevant words are not necessarily the most frequent words** since
+    stopwords like “the”, “of” or “a” tend to occur very often in many documents.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There is another caveat: if we want to summarize a document compared to a whole
+    dataset about an specific topic (let’s say, movie reviews), there will be words
+    (other than stopwords, like *character* or *plot*), that could occur many times
+    in the document as well as in many other documents. These words are not useful
+    to summarize a document because they convey little discriminating power; they
+    say very little about what the document contains compared to the other documents.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s go through some examples to better illustrate how TF-IDF works.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Search engine example
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s suppose we have a database with thousands of cats descriptions and** a
+    user wants to search for furry cats**, so she/he issues the query *“the furry
+    cat”*. As a search engine, we have to decide which documents should be returned
+    from our database.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If we have documents that match the exact query, there is no doubt but… what
+    if we have to decide between partial matches? For simplicity, let’s say we have
+    to choose between these two descriptions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: “the lovely cat”
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: “a furry kitten”
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The first description contains **2 out of 3 words from the query** and the second
+    one matches** just 1 out of 3**, then we would pick the first description. How
+    can TF-IDF help us to choose the second description instead of the first one?
+  prefs: []
+  type: TYPE_NORMAL
+- en: The TF is the same for each word, no difference here. However, we could expect
+    that **the terms “cat” and “kitten” would appear in many documents **(large document
+    frequency implies low IDF), while **the term “furry” will appear in fewer documents** (larger
+    IDF). So the TF-IDF for cat & kitten has a low value whereas the TF-IDF is larger
+    for “furry”, i.e. in our database **the word “furry” has more discriminative power
+    than “cat” or “kitten”.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Conclusion**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we use the TF-IDF to weight the different words that matched the query, “furry”
+    would be more relevant than “cat” and so we could eventually choose “the furry
+    kitten” as the best match.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summarization example
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now, imagine we would like to **automatically summarize some movies using their
+    wikipedia pages**. We plan to create a tagcloud that will help us to understand
+    what each movie is about, so our task is to decide what words to put in it (and
+    their sizes).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given that a month ago my family adopted a new dog called *Mawi* (named after
+    Moana’s character Maui), we will use [Moana’s wikipedia page](https://en.wikipedia.org/wiki/Moana_%282016_film%29) for
+    this example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/eec30c32b77cd6e2b15e0d235e6c58c1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'My dogs: Cala & Mawi'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The first idea would be to make a list with the most frequent words:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Moana**'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Most frequent:** [‘film’, ‘moana’, ‘the’, ‘million’, ‘disney’, ‘maui’, ‘day’,
+    ‘release’, ‘te’, ‘animation’, ‘weekend’, ‘heart’, ‘ocean’, ‘it’, ‘story’, ‘island’,
+    ‘fiti’, ‘version’, ‘in’, ‘animate’]'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'We can see that some words could be useful to grasp a little bit of the film’s
+    plot: moana, maui, ocean, island… **but** **they still provide very little information. **Moreover,
+    they are mixed with other words that are irrelevant and just add noise (like film,
+    million, day, release or weekend).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If we run the same experiment with other movies, we can see that the results
+    are somehow similar regarding irrelevant and noisy words. Wikipedia pages include
+    information that is shared or have a similar structure among all them: They are *animated* *films* that
+    made *millions *of dollars since the first *day* of their *release*… but this
+    is something we already knew or, at least, it is not relevant for us in order
+    to understand the plot.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Overcoming the problem**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To eliminate what is shared among all movies and extract **what individually
+    identifies each one**, TF-IDF should be a very handy tool. With the most frequent
+    words (TF) we got a first approximation, but IDF should help us to refine the
+    previous list and get better results. Taking into account the document frequency,
+    we can try to penalize generic words (these that appeared in many wikipedia pages)
+    reducing their relevance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Moana**'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**TF-IDF:** [‘maui’, ‘te’, ‘moana’, ‘fiti’, ‘cravalho’, ‘goddess’, ‘tui’, ‘polynesian’,
+    ‘tala’, ‘kā’, ‘māori’, ‘auliʻi’, ‘clement’, ‘fishhook’, ‘tamatoa’, ‘jemaine’,
+    ‘tattoo’, ‘dubbing’, ‘musker’, ‘clements’]'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Thanks to TF-IDF words like *film, million *or* release* have disappeared from
+    the top of the list and we got some new more meaningful words like *polynesian* or *tattoo.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can also run the same analysis with the other reviews and get the following
+    results where, again, the generic words have disappeared in favor of more movie-specific
+    words:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/23063f60af8a617c8f0fd99fedf528a4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Most relevant VS TF-IDF comparison
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For reference, these are the sorted lists with more words:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Moana**'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Most frequent***: *[‘film’, ‘moana’, ‘the’, ‘million’, ‘disney’, ‘maui’,
+    ‘day’, ‘release’, ‘te’, ‘animation’, ‘weekend’, ‘heart’, ‘ocean’, ‘it’, ‘story’,
+    ‘island’, ‘fiti’, ‘version’, ‘in’, ‘animate’]'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**TF-IDF:** [‘maui’, ‘te’, ‘moana’, ‘fiti’, ‘cravalho’, ‘goddess’, ‘tui’, ‘polynesian’,
+    ‘tala’, ‘kā’, ‘māori’, ‘auliʻi’, ‘clement’, ‘fishhook’, ‘tamatoa’, ‘jemaine’,
+    ‘tattoo’, ‘dubbing’, ‘musker’, ‘clements’]'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: —
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The Incredibles**'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Most frequent:** [‘film’, ‘the’, ‘incredibles’, ‘bird’, ‘pixar’, ‘release’,
+    ‘bob’, ‘jack’, ‘i’, ‘award’, ‘good’, ‘animate’, ‘feature’, ‘it’, ‘syndrome’, ‘character’,
+    ‘family’, ‘work’, ‘superhero’, ‘animation’]'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**TF-IDF: **[‘parrs’, ‘syndrome’, ‘violet’, ‘omnidroid’, ‘parr’, ‘mirage’,
+    ‘nomanisan’, ‘helen’, ‘bird’, ‘edna’, ‘superhero’, ‘frozone’, ‘underminer’, ‘iron’,
+    ‘wallin’, ‘suburban’, ‘metroville’, ‘dash’, ‘incredibles’, ‘incredible’]'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: —
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Monsters, Inc**'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Most frequent:** [‘film’, ‘sulley’, ‘monsters’, ‘the’, ‘mike’, ‘monster’,
+    ‘pixar’, ‘story’, ‘child’, ‘randall’, ‘boo’, ‘disney’, ‘character’, ‘work’, ‘good’,
+    ‘in’, ‘release’, ‘he’, ‘docter’, ‘fur’]'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**TF-IDF:** [‘sulley’, ‘waternoose’, ‘boo’, ‘cda’, ‘randall’, ‘scarer’, ‘fizt’,
+    ‘celia’, ‘kahrs’, ‘sullivan’, ‘fur’, ‘factory’, ‘scare’, ‘monster’, ‘wazowski’,
+    ‘mike’, ‘tentacle’, ‘madrid’, ‘pidgeon’, ‘laughter’]'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: How we did it
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Here it is the code we have used to obtain the relevant words lists used in
+    this article:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next steps
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For the base set of documents we have used a collection of 65 hand-picked movies.
+    This was only for demo purposes but, to get better results with the TF-IDF, we
+    should use a much larger document base.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some other experiments we could easily try while using this code as a starting
+    point are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: a) Try different weighting scores for either term-frequency or document-frequency.
+    How do they affect the list?
+  prefs: []
+  type: TYPE_NORMAL
+- en: b) Use a different document base. What would have happened if we had chosen
+    any movies instead of focusing on a single genre?
+  prefs: []
+  type: TYPE_NORMAL
+- en: c) How are the results if we try a different domain like music bands?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Check the other articles in our *[*Building Lang.ai*](http://building.lang.ai/)* publication.
+    We write about *[*Machine Learning*](https://building.lang.ai/tagged/machine-learning)*, *[*Software
+    Development*](https://building.lang.ai/tagged/development)*, and our *[*Company
+    Culture*](https://building.lang.ai/tagged/company-culture)*.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Enrique Fueyo](https://building.lang.ai/)** is CTO and co-founder at
+    Lang.ai, working on unsupervised AI for language understanding to build products
+    and services that help both companies and developers who have to deal with unstructured
+    text data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://building.lang.ai/wtf-is-tf-idf-5c5b86ee7331). Reposted with
+    permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Understanding What is Behind Sentiment Analysis – Part 1](/2018/04/understanding-behind-sentiment-analysis-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understanding What is Behind Sentiment Analysis – Part 2](/2018/04/understanding-behind-sentiment-analysis-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A General Approach to Preprocessing Text Data](/2017/12/general-approach-preprocessing-text-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[WTF is a Tensor?!?](https://www.kdnuggets.com/2018/05/wtf-tensor.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[WTF is the Difference Between GBM and XGBoost?](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[WTF is Regularization and What is it For?](https://www.kdnuggets.com/wtf-is-regularization-and-what-is-it-for)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,271 @@
+- en: 'Ensemble Methods for Machine Learning: AdaBoost'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/09/ensemble-methods-machine-learning-adaboost.html](https://www.kdnuggets.com/2019/09/ensemble-methods-machine-learning-adaboost.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Valentina Alto](https://www.linkedin.com/in/valentina-alto-6a0590148/),
+    MSc in Data Science and Business Analytics**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/26b9379c1fabe60e9ebe05ecbb777c55.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In statistics and machine learning, ensemble methods use multiple learning algorithms
+    to obtain better predictive performance than could not be obtained from any of
+    the constituent learning algorithms alone.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The idea of combining multiple algorithms was first developed by computer scientist
+    and Professor Michael Kerns, who was wondering whether* “weakly learnability is
+    equivalent to strong learnability* “. The goal was turning a weak algorithm, barely
+    better than random guessing, into a strong learning algorithm. It turned out that,
+    if we ask the weak algorithm to create a whole bunch of classifiers (all weak
+    for definition), and then combine them all, what may figure out is a stronger
+    classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**AdaBoost**, which stays for ‘Adaptive Boosting’, is a machine learning meta-algorithm
+    which can be used in conjunction with many other types of learning algorithms
+    to improve performance.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, I’m going to provide an idea of the maths behind Adaboost,
+    plus I’ll provide an implementation in Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Intuition and Maths behind AdaBoost
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Imagine we have our sample, divided into a training set and test set, and a
+    bunch of classifiers. Each of them is trained on a random subset of the training
+    set (note that those subsets can actually overlap-it is not the same as, for example,
+    cross-validation). Then, for each observation in each subset, AdaBoost assigns
+    a weight, which determines the probability that this observation will appear in
+    the training set. Observations with higher weights are more likely to be included
+    in the training set. Hence, AdaBoost tends to assign higher weights to those observations
+    which have been misclassified, so that they will represent a larger part of the
+    next classifiers training set, with the aim that, this time, the next classifier
+    trained will perform better on them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Considering a simple binary classification problem, whose targets are represented
+    by the signs ‘positive’ or ‘negative’ (expressed as 1 and -1), the equation of
+    the final classifier looks like that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c03f7c3b8451945e633f3a7f3cf98e2e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Basically, the output of the final classifier for observation x is equal to
+    sign of the weighted sum of the outputs h_t(x) of T weak classifiers, with weights
+    equal to α_t.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'More specifically, α_t is the weight assigned to the output of classifier t
+    (note that this weight is different from that which will be assigned to observations,
+    which will be discussed later on). It is computed as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/41d5e1430758a1697ef0c4497fdf9154.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Where ε_t is the error term of classifier t (misclassified observations/total
+    observations). Of course, classifiers with low error will be prioritized in the
+    sum, hence their weight will be higher. Indeed, if we look at the alpha corresponding
+    to different errors:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/43ba9afe4690ce8223532df31f52ab79.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As you can see, the classifier’s weight grows exponentially as the error approaches
+    0, while it grows exponentially negative as the error approaches 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The value of alpha is then used to compute the other type of weights, those
+    that will be attributed to the observations of the subset. For the first classifier,
+    the weights are equally initialized, so that each observation has a weight=1/n
+    (where n=size of the subset). From the second classifier, each weight is recursively
+    computed as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cac8c965366dafdd076e5fa69a729af6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Where y_t is the target value (either 1 or -1) and the variable w_t is a vector
+    of weights, with one weight for each training example in the training set. ‘i’
+    is the training example number. This equation shows you how to update the weight
+    for the ith training example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can look at w_t as a distribution: it is consistent with what we said at
+    the beginning, that is, weights represent the probability that training example
+    will be selected as part of the training set.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To make it a distribution, all of these probabilities should add up to 1\. To
+    ensure this, we normalize the weights by dividing each of them by the sum of all
+    the weights, Z_t.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s interpret this formula. Since we are dealing with binary classification
+    (-1 vs 1), the product y_t*h_t(x_i) will be positive if both the actual and fitted
+    values have the same sign (well-classified), negative if they have different signs
+    (misclassified). Hence:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: if the product is positive and alpha is greater than zero (strong classifier),
+    the weight attributed to the ith observation will be small
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: if the product is positive and alpha is less than zero (weak classifier), the
+    weight attributed to the ith observation will be high
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: if the product is negative and alpha is greater than zero (strong classifier),
+    the weight attributed to the ith observation will be high
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: if the product is negative and alpha is less than zero (weak classifier), the
+    weight attributed to the ith observation will be small
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Note: when I say ‘small’ and ‘high’ I’m mean, if we consider the exponential
+    before normalization, respectively less than 1 and greater than 1\. Indeed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2905ba18f9999d808b571fddea1c10b5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now that we have an idea of how AdaBoost works, let’s see its implementation
+    in Python using the well-known Iris Dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Implementation with Python
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let’s first import our data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The default algorithm in AdaBoost is decision tree, but you can decide to manually
+    set a different classifier. Here, I’m going to use the Support Vector Machine
+    classifier (you can read more about SVM [here](https://medium.com/swlh/support-vector-machine-from-scratch-ce095a47dc5c)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you can see, almost 98% of our observations have been correctly classified.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: AdaBoost is a technique easy to implement. It iteratively corrects the mistakes
+    of the weak classifier improving accuracy. However, it is not free from *caveats*.
+    Indeed, since it looks for a reduction in the training error, it is particularly
+    sensitive to outliers, with the risk of producing an overfitted model which won’t
+    fit new, unlabeled data well, since it lacks of generalization (you can read more
+    about overfitting [here](https://towardsdatascience.com/preventing-overfitting-regularization-5eda7d5753bc)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Originally published at *[*http://datasciencechalktalk.com*](https://datasciencechalktalk.com/2019/09/07/ensemble-methods-for-machine-learning-adaboost/)* on
+    September 7, 2019.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Valentina Alto](https://www.linkedin.com/in/valentina-alto-6a0590148/)**
+    is a Machine Learning and Statistics enthusiast, currently pursuing a MSc in Data
+    Science at Bocconi University.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/@valentinaalto/ensemble-methods-for-machine-learning-adaboost-2ff70d5518f3).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Intuitive Ensemble Learning Guide with Gradient Boosting](/2018/07/intuitive-ensemble-learning-guide-gradient-boosting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning: 5 Main Approaches](/2019/01/ensemble-learning-5-main-approaches.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understanding Gradient Boosting Machines](/2019/02/understanding-gradient-boosting-machines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Implementing Adaboost in Scikit-learn](https://www.kdnuggets.com/2022/10/implementing-adaboost-scikitlearn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning with Examples](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[When Would Ensemble Techniques be a Good Choice?](https://www.kdnuggets.com/2022/07/would-ensemble-techniques-good-choice.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

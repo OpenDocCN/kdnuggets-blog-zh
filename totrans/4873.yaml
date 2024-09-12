@@ -1,0 +1,367 @@
+- en: 'Web Scraping with Python: Illustration with CIA World Factbook'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/03/web-scraping-python-cia-world-factbook.html](https://www.kdnuggets.com/2018/03/web-scraping-python-cia-world-factbook.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Header image](../Images/c4416a7cb71936d981cf6bfc60ccf10a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In a data science project, almost always the most time consuming and messy part
+    is the data gathering and cleaning. Everyone likes to build a cool deep neural
+    network (or XGboost) model or two and show off one’s skills with cool 3D interactive
+    plots. But the models need raw data to start with and they don’t come easy and
+    clean.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Life, after all, is not Kaggle where a zip file full of data is waiting for
+    you to be unpacked and modeled :-)**'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**But why gather data or build model anyway**? The fundamental motivation is
+    to answer a business or scientific or social question. *Is there a trend*? *Is
+    this thing related to that*? *Can the measurement of this entity predict the outcome
+    for that phenomena*? It is because answering this question will validate a hypothesis
+    you have as a scientist/practitioner of the field. You are just using data (as
+    opposed to test tubes like a chemist or magnets like a physicist) to test your
+    hypothesis and prove/disprove it scientifically. **That is the ‘science’ part
+    of the data science. Nothing more, nothing less…**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Trust me, it is not that hard to come up with a good quality question which
+    requires a bit of application of data science techniques to answer. Each such
+    question then becomes a small little project of your which you can code up and
+    showcase on a open-source platform like Github to show to your friends. Even if
+    you are not a data scientist by profession, nobody can stop you writing cool program
+    to answer a good data question. That showcases you as a person who is comfortable
+    around data and one who can tell a story with data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s tackle one such question today…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Is there any relationship between the GDP (in terms of purchasing power parity)
+    of a country and the percentage of its Internet users? And is this trend similar
+    for low-income/middle-income/high-income countries?**'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Now, there can be any number of sources you can think of to gather data for
+    answering this question. I found that an website from CIA (Yes, the ‘AGENCY’),
+    which hosts basic factual information about all countries around the world, is
+    a good place to scrape the data from.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, we will use following Python modules to build our database and visualizations,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Pandas**, **Numpy, matplotlib/seaborn**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Python **urllib** (for sending the HTTP requests)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**BeautifulSoup** (for HTML parsing)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Regular expression module **(for finding the exact matching text to search
+    for)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Let’s talk about the program structure to answer this data science question.
+    The [entire boiler plate code is available here](https://github.com/tirthajyoti/Web-Database-Analytics-Python/blob/master/CIA-Factbook-Analytics2.ipynb) in
+    my [Github repository](https://github.com/tirthajyoti/Web-Database-Analytics-Python).
+    Please feel free to fork and star if you like it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Reading the front HTML page and passing on to BeautifulSoup**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is how the [front page of the CIA World Factbook](https://www.cia.gov/library/publications/the-world-factbook/) looks
+    like,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/22915ed2c9976abdc65e383474499133.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig: CIA World Factbook front page'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We use a simple urllib request with a SSL error ignore context to retrieve this
+    page and then pass it on to the magical BeautifulSoup, which parses the HTML for
+    us and produce a pretty text dump. For those, who are not familiar with the BeautifulSoup
+    library, they can watch the following video or read this [great informative article
+    on Medium](https://medium.freecodecamp.org/how-to-scrape-websites-with-python-and-beautifulsoup-5946935d93fe).
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, here is the code snippet for reading the front page HTML,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here is how we pass it on to BeautifulSoup and use the `find_all` method to
+    find all the country names and codes embedded in the HTML. Basically, the idea
+    is to **find the HTML tags named ‘option’**. The text in that tag is the country
+    name and the char 5 and 6 of the tag value represent the 2-character country code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, you may ask how would you know that you need to extract 5th and 6th character
+    only? The simple answer is that **you have to examine the soup text i.e. parsed
+    HTML text yourself and determine those indices**. There is no universal method
+    to determine this. Each HTML page and the underlying structure is unique.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Crawling: Download all the text data of all countries into a dictionary by
+    scraping each page individually**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This step is the essential scraping or crawling as they say. To do this, **the
+    key thing to identify is how the URL of each countries information page is structured**.
+    Now, in general case, this is may be hard to get. In this particular case, quick
+    examination shows a very simple and regular structure to follow. Here is the screenshot
+    of Australia for example,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a73eaa4c4c6033315122e3fef1c36433.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: That means there is a fixed URL to which you have to append the 2-character
+    country code and you get to the URL of that country’s page. So, we can just iterate
+    over the country codes’ list and use BeautifulSoup to extract all the text and
+    store in our local dictionary. Here is the code snippet,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Store in a Pickle dump if you like**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For good measure, I prefer to serialize and **store this data in a **[**Python
+    pickle object**](https://pythontips.com/2013/08/02/what-is-pickle-in-python/)anyway.
+    That way I can just read the data directly next time I open the Jupyter notebook
+    without repeating the web crawling steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Using regular expression to extract the GDP/capita data from the text dump**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is the core text analytics part of the program, where we take help of [***regular
+    expression*** module](https://docs.python.org/3/howto/regex.html) to find what
+    we are looking for in the huge text string and extract the relevant numerical
+    data. Now, regular expression is a rich resource in Python (or in virtually every
+    high level programming language). It allows searching/matching particular pattern
+    of strings within a large corpus of text. Here, we use very simple methods of
+    regular expression for matching the exact words like “*GDP — per capita (PPP):*”
+    and then read few characters after that, extract the positions of certain symbols
+    like $ and parentheses to eventually extract the numerical value of GDP/capita.
+    Here is the idea illustrated with a figure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7fd03b238605dbf2e7f7d7bd351fe3af.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig: Illustration of the text analytics'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are other regular expression tricks used in this notebook, for example
+    to extract the total GDP properly regardless whether the figure is given in billions
+    or trillions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here is the example code snippet. **Notice the multiple error-handling checks
+    placed in the code**. This is necessary because of the supremely unpredictable
+    nature of HTML pages. Not all country may have the GDP data, not all pages may
+    have the exact same wordings for the data, not all numbers may look same, not
+    all strings may have $ and () placed similarly. Any number of things can go wrong.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is almost impossible to plan and write code for all scenarios but at least
+    you have to have code to handle the exception if they occur so that your program
+    does not come to a halt and can gracefully move on to the next page for processing.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Don’t forget to use pandas inner/left join method**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One thing to remember is that all these text analytics will produce dataframes
+    with slightly different set of countries as different types of data may be unavailable
+    for different countries. One could use a [**Pandas left join**](https://pandas.pydata.org/pandas-docs/stable/merging.html) to
+    create a dataframe with intersection of all common countries for which all the
+    pieces of data is available/could be extracted.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Ah the cool stuff now, Modeling…but wait! Let’s do filtering first!**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After all the hard work of HTML parsing, page crawling, and text mining, now
+    you are ready to reap the benefits — eager to run the regression algorithms and
+    cool visualization scripts! But wait, often you need to clean up your data (particularly
+    for this kind of socio-economic problems) a wee bit more before generating those
+    plots. Basically, you want to filter out the outliers e.g. very small countries
+    (like island nations) who may have extremely skewed values of the parameters you
+    want to plot but does not follow the main underlying dynamics you want to investigate.
+    A few lines of code is good for those filters. There may be more *Pythonic* way
+    to implement them but I tried to keep it extremely simple and easy to follow.
+    The following code, for example, creates filters to keep out small countries with
+    < 50 billion of total GDP and low and high income boundaries of $5,000 and $25,000
+    respectively (GDP/capita).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Finally, the visualization**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We use [**seaborn regplot** function](https://seaborn.pydata.org/generated/seaborn.regplot.html) to
+    create the scatter plots (Internet users % vs. GDP/capita) with linear regression
+    fit and 95% confidence interval bands shown. They look like following. One can
+    interpret the result as
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is a strong positive correlation between Internet users % and GDP/capita
+    for a country. Moreover, the strength of correlation is significantly higher for
+    low-income/low-GDP countries than the high-GDP, advanced nations. **That could
+    mean access to internet helps the lower income countries to grow faster and improve
+    the average condition of their citizens more than it does for the advanced nations**.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/b8cef33d49e1aa46fc0e38ede954c667.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Summary**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article goes over a demo Python notebook to illustrate how to crawl webpages
+    for downloading raw information by HTML parsing using BeautifulSoup. Thereafter,
+    it also illustrates the use of Regular Expression module to search and extract
+    important pieces of information what the user demands.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Above all, it demonstrates how or why there can be no simple, universal rule
+    or program structure while mining messy HTML parsed texts. One has to examine
+    the text structure and put in place appropriate error-handling checks to gracefully
+    handle all the situations to maintain the flow of the program (and not crash)
+    even if it cannot extract data for all those scenarios.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: I hope readers can benefit from the provided Notebook file and build upon it
+    as per their own requirement and imagination. For more web data analytics notebooks, [**please
+    see my repository.**](https://github.com/tirthajyoti/Web-Database-Analytics-Python)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ifyou have any questions or ideas to share, please contact the author at [**tirthajyoti[AT]gmail.com**](mailto:tirthajyoti@gmail.com).
+    Also you can check author’s [**GitHub repositories**](https://github.com/tirthajyoti?tab=repositories) for
+    other fun code snippets in Python, R, or MATLAB and machine learning resources.
+    If you are, like me, passionate about machine learning/data science, please feel
+    free to [add me on LinkedIn](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) or [follow
+    me on Twitter.](https://twitter.com/tirthajyotiS)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Tirthajyoti Sarkar](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)**
+    is a semiconductor technologist, machine learning/data science zealot, Ph.D. in
+    EE, blogger and writer.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/data-analytics-with-python-by-web-scraping-illustration-with-cia-world-factbook-abbdaa687a84).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Web Scraping Tutorial with Python: Tips and Tricks](/2018/02/web-scraping-tutorial-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why You Should Forget ‘for-loop’ for Data Science Code and Embrace Vectorization](/2017/11/forget-for-loop-data-science-code-vectorization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Much Mathematics Does an IT Engineer Need to Learn to Get Into Data Science](/2017/12/mathematics-needed-learn-data-science-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Beginner’s Guide to Web Scraping Using Python](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Step-by-Step Guide to Web Scraping with Python and Beautiful Soup](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mastering Web Scraping with BeautifulSoup](https://www.kdnuggets.com/mastering-web-scraping-with-beautifulsoup)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Octoparse 8.5: Empowering Local Scraping and More](https://www.kdnuggets.com/2022/02/octoparse-85-empowering-local-scraping.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build a Web Scraper with Python in 5 Minutes](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

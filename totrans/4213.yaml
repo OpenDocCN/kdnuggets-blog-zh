@@ -1,0 +1,565 @@
+- en: The Prefect Way to Automate & Orchestrate Data Pipelines
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/09/prefect-way-automate-orchestrate-data-pipelines.html](https://www.kdnuggets.com/2021/09/prefect-way-automate-orchestrate-data-pipelines.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Murallie Thuwarakesh](https://www.linkedin.com/in/thuwarakesh/), Data
+    Scientist at Stax, Inc.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/69cc42fcb364c7c8c0cbc7f68d6d0684.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Illustration from [Undraw](https://undraw.co/illustrations)
+  prefs: []
+  type: TYPE_NORMAL
+- en: I was a big fan of Apache Airflow. Even today, I don’t have many complaints
+    about it. But the new technology Prefect amazed me in many ways, and I can’t help
+    but migrating everything to it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prefect (and Airflow) is a workflow automation tool. You can orchestrate individual
+    tasks to do more complex work. You could manage task dependencies, retry tasks
+    when they fail, schedule them, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I trust workflow management is the backbone of every data science project. Even
+    small projects can have remarkable benefits with a tool like Prefect. It eliminates
+    a significant part of repetitive tasks. Not to mention, it also removes the mental
+    clutter in a complex project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article covers some of the frequent questions about Prefect. It includes,
+  prefs: []
+  type: TYPE_NORMAL
+- en: a short intro to Prefect’s core concepts;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: why I decided to migrate from Airflow;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Prefect’s incredible features and integration with other technologies, and;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: how to decide between its cloud vs. on-premise deployment options.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Quickstart Prefect.
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Prefect is both a minimal and complete workflow management tool. It’s unbelievably
+    simple to set up. Yet it can do everything tools such as Airflow can and more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can use PyPI, Conda, or Pipenv to install it, and it’s ready to rock. More
+    on this in comparison with the Airflow section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before we dive into use Prefect, let’s first see an unmanaged workflow. It makes
+    understanding the role of Prefect in workflow management easy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The below script queries an API (Extract — E), picks the relevant fields from
+    it (Transform — T), and appends them to a file (Load — L). It contains three functions
+    that perform each of the tasks mentioned. It’s a straightforward yet everyday
+    use case of workflow management tools — ETL.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by [the Author](https://thuwarakesh.medium.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This script downloads weather data from the OpenWeatherMap API and stores the
+    windspeed value in a file. ETL applications in real life could be complex. But
+    this example application covers the fundamental aspects very well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note: Please replace the API key with a real one. You can get one from [https://openweathermap.org/api](https://openweathermap.org/api).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can run this script with the command `python app.py`where app.py is the
+    name of your script file. This will create a new file called windspeed.txt in
+    the current directory with one value. It’s the windspeed at Boston, MA, at the
+    time you reach the API. If you rerun the script, it’ll append another value to
+    the same file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your first Prefect ETL workflow.
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The above script works well. Yet, it lacks some critical features of a complete
+    ETL, such as retrying and scheduling. Also, as mentioned earlier, a real-life
+    ETL may have hundreds of tasks in a single workflow. Some of them can be run in
+    parallel, whereas some depend on one or more other tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imagine if there is a temporary network issue that prevents you from calling
+    the API. The script would fail immediately with no further attempt. In live applications,
+    such downtimes aren’t a miracle. They happen for several reasons — server downtime,
+    network downtime, server query limit exceeds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, you have to manually execute the above script every time to update your
+    windspeed.txt file. Yet, scheduling the workflow to run at a specific time in
+    a predefined interval is common in ETL workflows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is where tools such as Prefect and Airflow come to the rescue. Here’s how
+    you could tweak the above code to make it a Prefect workflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by [the Author](https://thuwarakesh.medium.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `@task` decorator converts a regular python function into a Prefect task.
+    The optional arguments allow you to specify its retry behavior. We’ve configured
+    the function to attempt three times before it fails in the above example. We’ve
+    also configured it to delay each retry by three minutes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With this new setup, our ETL is resilient to network issues we discussed earlier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To test its functioning, disconnect your computer from the network and run the
+    script with `python app.py`. You’ll see a message that the first attempt failed,
+    and the next one will begin in the next 3 minutes. Within three minutes, connect
+    your computer back to the internet. The already running script will now finish
+    without any errors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Scheduling workflows with Prefect.
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Retrying is only part of the ETL story. Another challenge for many workflow
+    applications is to run them in scheduled intervals. Prefect’s scheduling API is
+    straightforward for any Python programmer. Here’s how it works.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by [the Author](https://thuwarakesh.medium.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ve created an IntervalSchedule object that starts five seconds from the execution
+    of the script. We’ve also configured it to run in a one-minute interval.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you run the script with `python app.py` and monitor the windspeed.txt file,
+    you will see new values in it every minute.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition to this simple scheduling, Prefect’s schedule API offers more control
+    over it. You can schedule workflows in a cron-like method, use clock time with
+    timezones, or do more fun stuff like executing workflow only on weekends. I haven’t
+    covered them all here, but Prefect's official [docs](https://docs.prefect.io/core/concepts/schedules.html#clocks) about
+    this are perfect.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Prefect UI.
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Like Airflow (and many others,) Prefect too ships with a server with a beautiful
+    UI. It allows you to control and visualize your workflow executions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ddd8676fce6a1b9429b402f51ac70153.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Illustration by [the Author](https://thuwarakesh.medium.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: To run this, you need to have docker and docker-compose installed on your computer.
+    But starting it is surprisingly a single command.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/b5c02b84f51a3d5e2e98b33338181f95.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Illustration by [the Author](https://thuwarakesh.medium.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This command will start the prefect server, and you can access it through your
+    web browser: `[http://localhost:8080/](http://localhost:8080/)`[.](http://localhost:8080/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, the Prefect server alone could not execute your workflows. Its role
+    is only enabling a control pannel to all your Prefect activities. Because this
+    dashboard is decoupled from the rest of the application, you can use the Prefect
+    cloud to do the same. We’ll discuss this in detail later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To execute tasks, we need a few more things. The good news is, they, too, aren’t
+    complicated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because servers are only a control panel, we need an agent to execute the workflow.
+    The below command will start a local agent. Instead of a local agent, you can
+    choose a docker agent or a Kubernetes one if your project needs them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/534ec6d177c19b7a01220df8515db045.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Illustration by [the Author](https://thuwarakesh.medium.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once the server and the agent are running, you’ll have to create a project and
+    register your workflow with that project. To do this, change the line that executes
+    the flow to the following.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by [the Author](https://thuwarakesh.medium.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now in the terminal, you can create a project with the `prefect create project
+    <project name>` command. Then rerunning the script will register it to the project
+    instead of running it immediately.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/22763187f237d00dfafed1c5e4e7f193.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Illustration by [the Author](https://thuwarakesh.medium.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the web UI, you can see the new Project ‘Tutorial’ is in the dropdown, and
+    our windspeed tracker is in the list of flows. The flow is already scheduled and
+    running. If you prefer, you can run them manually as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bf943e7a6d1a57976712d9c428b30771.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Illustration by [the Author](https://thuwarakesh.medium.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Running workflows with parameters.
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The workflow we created in the previous exercise is rigid. It queries only for
+    Boston, MA, and we can not change it. This is where we can use parameters. Here’s
+    how we tweak our code to accept a parameter at the run time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by [the Author](https://thuwarakesh.medium.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ve changed the function to accept the city argument and set it dynamically
+    in the API query. Inside the Flow, we create a parameter object with the default
+    value ‘Boston’ and pass it to the Extract task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you run the windspeed tracker workflow manually in the UI, you’ll see a section
+    called input. Here you can set the value of the city for every execution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c2ff3cfc4e99ae12ebde80a0a0006942.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Illustration by [the Author](https://thuwarakesh.medium.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a convenient way to run workflows. In many cases, ETLs and any other
+    workflow come with run-time parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why did I decide to migrate from Airflow to Prefect?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Airflow is a fantastic platform for workflow management. It saved me a ton of
+    time on many projects. Yet, we need to appreciate new technologies taking over
+    the old ones. That’s the case with Airflow and Prefect.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Airflow got many things right, but its core assumptions never anticipated the
+    rich variety of data applications that have emerged.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: — Prefect Documentation.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: What I describe here aren’t dead-ends if you’re preferring Airflow. We have
+    workarounds for most problems. Yet, it’s convenient in Prefect because the tool
+    natively supports them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prefect’s **installation** is exceptionally straightforward compared to Airflow.
+    For trained eyes, it may not be a problem. Yet, for whoever wants to start on
+    workflow orchestration and automation, it’s a hassle.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Airflow needs a **server** running in the backend to perform any task. Yet,
+    in Prefect, a server is optional. This is a massive benefit of using Prefect.
+    I have many pet projects running on my computer as services. Earlier, I had to
+    have an Airflow server commencing at the startup. Because Prefect could run standalone,
+    I don’t have to turn on this additional server anymore.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Airflow doesn’t have the flexibility to run workflows (or DAGs) with **parameters**.
+    The workaround I use to have is to let the application read them from a database.
+    This isn’t an excellent programming technique for such a simple task. Prefect’s
+    parameter concept is exceptional on this front.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prefect allows having different **versions** of the same workflow. Every time
+    you register a workflow to the project, it creates a new version. If you need
+    to run a previous version, you can easily select it in a dropdown. This isn’t
+    possible with Airflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prefect also allows us to create teams and role-based access controls. Each
+    team could manage its configuration. **Authorization** is a critical part of every
+    modern application, and Prefect handles it in the best way possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lastly, I find Prefect’s **UI** more intuitive and appealing. Airflow’s UI,
+    especially its task execution visualization, was difficult at first to understand.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prefect’s ecosystem and integration with other technologies.
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Prefect has inbuilt integration with many other technologies. It eliminates
+    a ton of overhead and makes working with them super easy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Live projects often have to deal with several technologies. For example, when
+    your ETL fails, you may want to send an email or a Slack notification to the maintainer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Prefect, sending such notifications is effortless. You can use the EmailTask
+    from the Prefect’s task library, set the credentials, and start sending emails.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can learn more about Prefect’s rich ecosystem in their [official documentation](https://docs.prefect.io/core/task_library/overview.html#task-library-in-action).
+    In this article, we’ll see how to send email notifications.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To send emails, we need to make the credentials accessible to the Prefect agent.
+    You can do that by creating the below file in `$HOME/.prefect/config.toml`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by [the Author](https://thuwarakesh.medium.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your app is now ready to send emails. Here’s how we send a notification when
+    we successfully captured a windspeed measure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code by [the Author](https://thuwarakesh.medium.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the above code, we’ve created an instance of the EmailTask class. We’ve used
+    all the static elements of our email configurations during initiating. Then inside
+    the Flow, we’ve used it with passing variable content.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This configuration above will send an email with the captured windspeed measurement.
+    But its subject will always remain ‘A new windspeed captured.’
+  prefs: []
+  type: TYPE_NORMAL
+- en: Perfect Cloud vs. On-Premis Server Deployments.
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We’ve already looked into how we can start an on-premise server. Because this
+    server is only a control panel, you could easily use the cloud version instead.
+    To do this, we have few additional steps to follow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a [Prefect cloud](https://cloud.prefect.io/) account.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Generate a key from the [API Key Page](https://cloud.prefect.io/user/keys).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In your terminal, set the backend to cloud: `prefect backend cloud`.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Also login with the generated key: `prefect auth login --key YOUR_API_KEY`.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Now, start the agent as usual. `prefect agent local start`.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In the cloud dashboard, you can manage everything you did on the local server
+    before.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A big question when choosing between cloud and server versions is **security**.
+    According to Prefect‘s docs, the server only stores workflow execution-related
+    data and voluntary information provided by the user. Since the agent in your local
+    computer executes the logic, you can control where you store your data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The cloud option is suitable for **performance** reasons too. With one cloud
+    server, you can manage more than one agent. Thus, you can scale your app effortlessly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Final Thoughts
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Airflow was my ultimate choice for building ETLs and other workflow management
+    applications. Yet, Prefect changed my mind, and now I’m migrating everything from
+    Airflow to Prefect.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prefect is a straightforward tool that is flexible to extend beyond what Airflow
+    can do. You can run it even inside a Jupyter notebook. Also, you can host it as
+    a complete task management solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition to the central problem of workflow management, Prefect solves several
+    other issues you may frequently encounter in a live system. Managing teams with
+    authorization controls, sending notifications are some of them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we’ve discussed how to create an ETL that
+  prefs: []
+  type: TYPE_NORMAL
+- en: retries some tasks as configured;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: run workflows in a schedule;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: accepts run-time parameters, and;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: sends an email notification when it’s done.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We’ve only scratched the surface of Prefects capabilities. I recommend reading
+    the official [documentation](https://docs.prefect.io/core/) for more information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for reading, friend! It seems you, and I have lots of common interests.
+    I’d love to connect with you on [LinkedIn](https://www.linkedin.com/in/thuwarakesh/), [Twitter](https://twitter.com/Thuwarakesh),
+    and [Medium](https://thuwarakesh.medium.com/).
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Not a Medium member yet? Please use this link to [**become a member**](https://thuwarakesh.medium.com/membership).
+    You can enjoy thousands of insightful articles and support me as I earn a small
+    commission for referring you.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Murallie Thuwarakesh](https://www.linkedin.com/in/thuwarakesh/)** (**[@Thuwarakesh](https://twitter.com/Thuwarakesh)**)
+    is a Data Scientist at Stax, Inc., and a top writer on Medium for Analytics. Murallie
+    shares what he explores in data science every day.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/the-prefect-way-to-automate-orchestrate-data-pipelines-d4465638bac2).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Prefect: How to Write and Schedule Your First ETL Pipeline with Python](/2021/08/prefect-write-schedule-etl-pipeline-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build a synthetic data pipeline using Gretel and Apache Airflow](/2021/09/build-synthetic-data-pipeline-gretel-apache-airflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Development & Testing of ETL Pipelines for AWS Locally](/2021/08/development-testing-etl-pipelines-aws-locally.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Orchestrate a Data Science Project in Python With Prefect](https://www.kdnuggets.com/2022/02/orchestrate-data-science-project-python-prefect.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building Data Pipeline with Prefect](https://www.kdnuggets.com/building-data-pipeline-with-prefect)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Simple Steps to Automate Data Cleaning with Python](https://www.kdnuggets.com/5-simple-steps-to-automate-data-cleaning-with-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Tasks To Automate With Python](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automate Microsoft Excel and Word Using Python](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automate the Boring Stuff with GPT-4 and Python](https://www.kdnuggets.com/2023/03/automate-boring-stuff-chatgpt-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

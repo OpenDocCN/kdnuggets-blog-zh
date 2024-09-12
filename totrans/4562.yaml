@@ -1,0 +1,357 @@
+- en: How to Create a Vocabulary for NLP Tasks in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/11/create-vocabulary-nlp-tasks-python.html](https://www.kdnuggets.com/2019/11/create-vocabulary-nlp-tasks-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/38cd18ae0fa365efd5e4fa3ce7d05c1c.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When performing a [natural language processing task](/2017/11/framework-approaching-textual-data-tasks.html),
+    our text data transformation proceeds more or less in this manner:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**raw text corpus → processed text → tokenized text → corpus vocabulary → text
+    representation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keep in mind that this all happens prior to the actual NLP task even beginning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The corpus vocabulary is a holding area for processed text before it is transformed
+    into some [representation](/2018/11/data-representation-natural-language-processing.html)
+    for the [impending task](/2018/10/main-approaches-natural-language-processing-tasks.html),
+    be it classification, or language modeling, or something else.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The vocabulary serves a few primary purposes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: help in the preprocessing of the corpus text
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: serve as storage location in memory for processed text corpus
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: collect and store metadata about the corpus
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: allow for pre-task munging, exploration, and experimentation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The vocabulary serves a few related purposes and can be thought of in a few
+    different ways, but the main takeaway is that, once a corpus has made its way
+    to the vocabulary, the text has been processed and any relevant metadata should
+    be collected and stored.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This post will take a step by step look at a Python implementation of a useful
+    vocabulary class, showing what is happening in the code, why we are doing what
+    we are doing, and some sample usage. We will start with some code from [this PyTorch
+    tutorial](https://pytorch.org/tutorials/beginner/chatbot_tutorial.html), and will
+    make a few modifications as we go. Though this won't be terribly programming heavy,
+    if you are wholly unfamiliar with Python object oriented programming, [I recommend
+    you first look here](https://realpython.com/python3-object-oriented-programming/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first thing to do is to create values for our start of sentence, end of
+    sentence, and sentence padding special tokens. When we tokenize text (split text
+    into its atomic constituent pieces), we need special tokens to delineate both
+    the beginning and end of a sentence, as well as to pad sentence (or some other
+    text chunk) storage structures when sentences are shorter then the maximum allowable
+    space. More on this later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: What the above states is that our stat of sentence token (literally 'SOS', below)
+    will take index spot '1' in our token lookup table once we make it. Likewise,
+    end of sentence ('EOS') will take index spot '2', while the sentence padding token
+    ('PAD') will take index spot '0'.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The next thing we will do is create a constructor for our Vocabulary class:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The first line is our `__init__()` declaration, which requires 'self' as its
+    first parameter (again, [see this link](https://realpython.com/python3-object-oriented-programming/)),
+    and takes a Vocabulary 'name' as its second.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Line by line, here's what the object variable initializations are doing
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`self.name = name` → this is instantiated to the name passed to the constructor,
+    as something by which to refer to our Vocabulary object'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`self.word2index = {}` → a dictionary to hold word token to corresponding word
+    index values, eventually in the form of `''the'': 7`, for example'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`self.word2count = {}` → a dictionary to hold individual word counts (tokens,
+    actually) in the corpus'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`self.index2word = {PAD_token: "PAD", SOS_token: "SOS", EOS_token: "EOS"}`
+    → a dictionary holding the reverse of `word2index` (word index keys to word token
+    values); special tokens added right away'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`self.num_words = 3` → this will be a count of the number of words (tokens,
+    actually) in the corpus'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`self.num_sentences = 0` → this will be a count of the number of sentences
+    (text chunks of any indiscriminate length, actually) in the corpus'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`self.longest_sentence = 0` → this will be the length of the longest corpus
+    sentence by number of tokens'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: From the above, you should be able to see what metadata about our corpus we
+    are concerned with at this point. Try and think of some additional corpus-related
+    data you might want to keep track of, which we are not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since we have defined that metadata which we are interested in collecting and
+    storing, we can move on to performing the work to do so. A basic unit of work
+    we will need to do to fill up our vocabulary is to add words to it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you can see, there are 2 scenarios we can encounter when trying to add a
+    word token to our vocabulary; either it does not already exists in the vocabulary
+    (`if word not in self.word2index:`) or it does (`else:`). If the word does not
+    exist in our vocabulary, we want to add it to our `word2index` dict, instantiate
+    our count of that word to 1, add the index of the word (the next available number
+    in the counter) to the `index2word` dict, and increment our overall word count
+    by 1\. On the other hand, if the word already exists in the vocabulary, simply
+    increment the counter for that word by 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How are we going to add words to the vocabulary? We will do so by feeding sentences
+    in and tokenizing them as well go, processing the resulting tokens one by one.
+    Note, again, that these need not be sentences, and naming these 2 functions `add_token`
+    and `add_chunk` may be more appropriate than `add_word` and `add_sentence`, respectively.
+    We will leave the renaming for another day.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: This function takes a chunk of text, a single string, and splits it on whitespace
+    for tokenization purposes. This is not robust tokenization, and is not good practice,
+    but will suffice for our purposes at the moment. We will revisit this in a follow-up
+    post and build a better approach to tokenization into our vocabulary class. In
+    the meantime, you can read more on text data preprocessing [here](/2017/12/general-approach-preprocessing-text-data.html)
+    and [here](/2018/03/text-data-preprocessing-walkthrough-python.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: After splitting our sentence on whitespace, we then increment our sentence length
+    counter by one for each word we pass to the `add_word` function for processing
+    and addition to our vocabulary (see above). We then check to see if this sentence
+    is longer than other sentences we have processed; if it is, we make note. We also
+    increment our count of corpus sentences we have added to the vocabulary thus far.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We will then add a pair of helper functions to help us more easily access 2
+    of our most important lookup tables:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: The first of these functions performs the index to word lookup in the appropriate
+    dictionary for a given index; the other performs the reverse lookup for a given
+    word. This is essential functionality, as once we get our processed text into
+    the vocabulary object, we will want to get it back out at some point, as well
+    as perform lookups and reference metadata. These 2 functions will be handy for
+    much of this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Putting this all together, we get the following.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s see how this works. First, let''s create an empty vocabulary object:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: <__main__.Vocabulary object at 0x7f80a071c470>
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Then we create a simple corpus:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let''s loop through the sentences in our corpus and add the words in each to
+    our vocabulary. Remember that `add_sentence` makes calls to `add_word`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now let''s test what we''ve done:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is the output, which seems to work well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Since our corpus is so small, let's print out the entire vocabulary of tokens.
+    Note that since we have not yet implemented any sort of useful tokenization beyond
+    splitting on white space, we have some tokens with capitlized first letters, and
+    others with trailing punctuation. Again, we will deal with this more appropriately
+    in a follow-up.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let's create and print out lists of corresponding tokens and indexes of a particular
+    sentence. Note this time that we have not yet trimmed the vocabulary, nor have
+    we added padding or used the SOS or EOS tokens. We add this to the list of items
+    to take care of next time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: And there you go. It seems that, even with our numerous noted shortcomings,
+    we have a vocabulary that might end up being useful, given that it exhibits much
+    of the core necessary functionality which would make it eventually useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A review of the items we must take care of next time include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: perform normalization of our text data (force all to lowercase, deal with punctuation,
+    etc.)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: properly tokenize chunks of text
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: make use of SOS, EOS, and PAD tokens
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: trim our vocabulary (minimum number of token occurrences before stored permanently
+    in our vocabulary)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Next time we will implement this functionality, and test our Python vocabulary
+    implementation on a more robust corpus. We will then move data from our vocabulary
+    object into a useful data representation for NLP tasks. Finally, we will get to
+    performing an NLP task on the data we have gone to the trouble of so aptly preparing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data Representation for Natural Language Processing Tasks](/2018/11/data-representation-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Main Approaches to Natural Language Processing Tasks](/2018/10/main-approaches-natural-language-processing-tasks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Framework for Approaching Textual Data Science Tasks](/2017/11/framework-approaching-textual-data-tasks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Cleaning and Preprocessing Text Data in Pandas for NLP Tasks](https://www.kdnuggets.com/cleaning-and-preprocessing-text-data-in-pandas-for-nlp-tasks)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Tasks To Automate With Python](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Representation for Natural Language Processing Tasks](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[HuggingGPT: The Secret Weapon to Solve Complex AI Tasks](https://www.kdnuggets.com/2023/05/hugginggpt-secret-weapon-solve-complex-ai-tasks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Coding Tasks ChatGPT Can''t Do](https://www.kdnuggets.com/5-coding-tasks-chatgpt-cant-do)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Create a Dashboard Using Python and Dash](https://www.kdnuggets.com/2023/08/create-dashboard-python-dash.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,320 @@
+- en: Approaching (Almost) Any Machine Learning Problem
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/08/approaching-almost-any-machine-learning-problem.html](https://www.kdnuggets.com/2016/08/approaching-almost-any-machine-learning-problem.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Abhishek Thakur, Senior Data Scientist @ Searchmetrics Inc.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An average data scientist deals with loads of data daily. Some say over 60-70%
+    time is spent in data cleaning, munging and bringing data to a suitable format
+    such that machine learning models can be applied on that data. This post focuses
+    on the second part, i.e., applying machine learning models, including the preprocessing
+    steps. The pipelines discussed in this post come as a result of over a hundred
+    machine learning competitions that I’ve taken part in. It must be noted that the
+    discussion here is very general but very useful and there can also be very complicated
+    methods which exist and are practised by professionals.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will be using python!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before applying the machine learning models, the data must be converted to a
+    tabular form. This whole process is the most time consuming and difficult process
+    and is depicted in the figure below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ef6687bb8240699f296448972864d37d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The machine learning models are then applied to the tabular data. Tabular data
+    is most common way of representing data in machine learning or data mining. We
+    have a data table, rows with different samples of the data or X and labels, y.
+    The labels can be single column or multi-column, depending on the type of problem.
+    We will denote data by X and labels by y.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Types of labels
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The labels define the problem and can be of different types, such as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Single column, binary values (classification problem, one sample belongs to
+    one class only and there are only two classes)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Single column, real values (regression problem, prediction of only one value)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Multiple column, binary values (classification problem, one sample belongs to
+    one class, but there are more than two classes)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Multiple column, real values (regression problem, prediction of multiple values)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And multilabel (classification problem, one sample can belong to several classes)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Evaluation Metrics
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For any kind of machine learning problem, we must know how we are going to evaluate
+    our results, or what the evaluation metric or objective is. For example in case
+    of a skewed binary classification problem we generally choose area under the receiver
+    operating characteristic curve (ROC AUC or simply AUC). In case of multi-label
+    or multi-class classification problems, we generally choose categorical cross-entropy
+    or multiclass log loss and mean squared error in case of regression problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I won’t go into details of the different evaluation metrics as we can have many
+    different types, depending on the problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Libraries
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To start with the machine learning libraries, install the basic and most important
+    ones first, for example, numpy and scipy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To see and do operations on data: pandas ([http://pandas.pydata.org/](http://pandas.pydata.org/))'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'For all kinds of machine learning models: scikit-learn ([http://scikit-learn.org/stable/](http://scikit-learn.org/stable/))'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The best gradient boosting library: xgboost ([https://github.com/dmlc/xgboost](https://github.com/dmlc/xgboost))'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'For neural networks: keras ([http://keras.io/](http://keras.io/))'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'For plotting data: matplotlib ([http://matplotlib.org/](http://matplotlib.org/))'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'To monitor progress: tqdm ([https://pypi.python.org/pypi/tqdm](https://pypi.python.org/pypi/tqdm))'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: I don’t use Anaconda ([https://www.continuum.io/downloads](https://www.continuum.io/downloads)).
+    It’s easy and does everything for you, but I want more freedom. The choice is
+    yours. :)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Machine Learning Framework
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In 2015, I came up with a framework for automatic machine learning which is
+    still under development and will be released soon. For this post, the same framework
+    will be the basis. The framework is shown in the figure below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![](../Images/67917490fbdb01f12e1d3d52ba80e0a9.png)](https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAeqAAAAJDVkYTViYjM5LTZjOWMtNGVhYS1iYjljLWZhOWMyNzJkZGU1MQ.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Figure from: A. Thakur and A. Krohn-Grimberghe, AutoCompete: A Framework for
+    Machine Learning Competitions, AutoML Workshop, International Conference on Machine
+    Learning 2015*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the framework shown above, the pink lines represent the most common paths
+    followed. After we have extracted and reduced the data to a tabular format, we
+    can go ahead with building machine learning models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The very first step is identification of the problem. This can be done by looking
+    at the labels. One must know if the problem is a binary classification, a multi-class
+    or multi-label classification or a regression problem. After we have identified
+    the problem, we split the data into two different parts, a training set and a
+    validation set as depicted in the figure below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a3ddcff4ccc903bce6eb8996747d0e84.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The splitting of data into training and validation sets “must” be done according
+    to labels. In case of any kind of classification problem, use stratified splitting.
+    In python, you can do this using scikit-learn very easily.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2afb7eca83a58c0dc890d549a98527ed.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In case of regression task, a simple K-Fold splitting should suffice. There
+    are, however, some complex methods which tend to keep the distribution of labels
+    same for both training and validation set and this is left as an exercise for
+    the reader.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/152dbbee815ca5077eee782730c1be65.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: I have chosen the eval_size or the size of the validation set as 10% of the
+    full data in the examples above, but one can choose this value according to the
+    size of the data they have.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After the splitting of the data is done, leave this data out and don’t touch
+    it. Any operations that are applied on training set must be saved and then applied
+    to the validation set. Validation set, in any case, should not be joined with
+    the training set. Doing so will result in very good evaluation scores and make
+    the user happy but instead he/she will be building a useless model with very high
+    overfitting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next step is identification of different variables in the data. There are usually
+    three types of variables we deal with. Namely, numerical variables, categorical
+    variables and variables with text inside them. Let’s take example of the popular
+    Titanic dataset ([https://www.kaggle.com/c/titanic/data](https://www.kaggle.com/c/titanic/data)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d2f1e23d36e48c6037e583baac8946fa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here, survival is the label. We have already separated labels from the training
+    data in the previous step. Then, we have pclass, sex, embarked. These variables
+    have different levels and thus they are categorical variables. Variables like
+    age, sibsp, parch, etc are numerical variables. Name is a variable with text data
+    but I don’t think it’s a useful variable to predict survival.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Separate out the numerical variables first. These variables don’t need any kind
+    of processing and thus we can start applying normalization and machine learning
+    models to these variables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are two ways in which we can handle categorical data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Convert the categorical data to labels
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/a396bfd14528ff13740905abdaf37f3a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Convert the labels to binary variables (one-hot encoding)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/6a38c90b9fe8de52a5bc78e3abdfe04e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Please remember to convert categories to numbers first using LabelEncoder before
+    applying OneHotEncoder on it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since, the Titanic data doesn’t have good example of text variables, let’s formulate
+    a general rule on handling text variables. We can combine all the text variables
+    into one and then use some algorithms which work on text data and convert it to
+    numbers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The text variables can be joined as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![](../Images/2f45bd10b152be923a2f5cdbd88a6a64.png)](https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAdhAAAAJDQ4ZGU0YTRkLTI2ZjctNDc3My05YjVjLWIzZGY3Y2Y1NzI5ZQ.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can then use CountVectorizer or TfidfVectorizer on it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5a7b509c6e6740ab905d9840682b5374.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: or
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bfe12de70d35cb15eb03108be0fdfcef.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The TfidfVectorizer performs better than the counts most of the time and I have
+    seen that the following parameters for TfidfVectorizer work almost all the time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/56d69dd6ad0339e02ebbc2d8f79dd197.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If you are applying these vectorizers only on the training set, make sure to
+    dump it to hard drive so that you can use it later on the validation set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/317e9a15abba9a733f02b5396e3e01d7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Introduction to NExT-GPT: Any-to-Any Multimodal Large Language Model](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Frameworks for Approaching the Machine Learning Process](https://www.kdnuggets.com/2018/05/general-approaches-machine-learning-process.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SHAP: Explain Any Machine Learning Model in Python](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Get Your First Job in Data Science without Any Work Experience](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Read This Before You Take Any Free Data Science Course](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Range of NLP Applications in the Real World: A Different…](https://www.kdnuggets.com/2022/03/different-solution-problem-range-nlp-applications-real-world.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

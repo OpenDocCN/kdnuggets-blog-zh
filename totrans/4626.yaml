@@ -1,0 +1,412 @@
+- en: XGBoost and Random Forest® with Bayesian Optimisation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/07/xgboost-random-forest-bayesian-optimisation.html](https://www.kdnuggets.com/2019/07/xgboost-random-forest-bayesian-optimisation.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Edwin Lisowski](https://addepto.com), CTO at Addepto**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead of only comparing XGBoost and Random Forest in this post we will try
+    to explain how to use those two very popular approaches with Bayesian Optimisation
+    and that are those models main pros and cons. XGBoost (XGB) and Random Forest
+    (RF) both are ensemble learning methods and predict (classification or regression)
+    by combining the outputs from individual decision trees (we assume tree-based
+    XGB or RF).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Let’s dive deeper into comparison – XGBoost vs Random Forest**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**XGBoost or Gradient Boosting**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: XGBoost build decision tree one each time. Each new tree corrects errors which
+    were made by previously trained decision tree.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Example of XGBoost application**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: At Addepto we use XGBoost models to solve anomaly detection problems e.g. in
+    supervised learning approach. In this case XGB is very helpful because data sets
+    are often highly imbalanced. Examples of such data sets are user/consumer transactions,
+    energy consumption or user behaviour in mobile app.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Pros**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since boosted trees are derived by optimizing an objective function, basically
+    XGB can be used to solve almost all objective function that we can write gradient
+    out. This including things like ranking and poisson regression, which RF is harder
+    to achieve.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Cons**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'XGB model is more sensitive to overfitting if the data is noisy. Training generally
+    takes longer because of the fact that trees are built sequentially. GBMs are harder
+    to tune than RF. There are typically three parameters: number of trees, depth
+    of trees and learning rate, and the each tree built is generally shallow.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Random Forest**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Random Forest (RF) trains each tree independently, using a random sample of
+    the data. This randomness helps to make the model more robust than a single decision
+    tree. Thanks to that RF is less likely to overfit on the training data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Example of Random Forest application**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The random forest dissimilarity has been used in a variety of applications,
+    e.g. to find clusters of patients based on tissue marker data.[1] Random Forest
+    model is very attractive for this kind of applications in the following two cases:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our goal is to have high predictive accuracy for a high-dimensional problem
+    with strongly correlated features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our data set is very noisy and contains a lot of missing values e.g., some of
+    the attributes are categorical or semi-continuous.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Pros**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The model tuning in Random Forest is much easier than in case of XGBoost. In
+    RF we have two main parameters: number of features to be selected at each node
+    and number of decision trees. RF are harder to overfit than XGB.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Cons**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The main limitation of the Random Forest algorithm is that a large number of
+    trees can make the algorithm slow for real-time prediction. For data including
+    categorical variables with different number of levels, random forests are biased
+    in favor of those attributes with more levels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bayesian optimization is a technique to optimise function that is expensive
+    to evaluate.[2] It builds posterior distribution for the objective function and
+    calculate the uncertainty in that distribution using Gaussian process regression,
+    and then uses an acquisition function to decide where to sample. Bayesian optimization
+    focuses on solving the problem:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*max[x∈A] f(x)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The dimension of hyperparameters (*x∈R^d*) is often d < 20 in most successful
+    applications.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Typically set A i a hyper-rectangle (*x∈R^d:a[i] ≤ x[i] ≤ b[i]*). The objective
+    function is continuous which is required to model using Gaussian process regression.
+    It also lacks special structure like concavity or linearity which make futile
+    using techniques that leverage such structure to improve efficiency. Bayesian
+    optimization consists of two main components: a Bayesian statistical model for
+    modeling the objective function and an acquisition function for deciding where
+    to sample next.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After evaluating the objective according to an initial space-filling experimental
+    design they are used iteratively to allocate the remainder of a budget of N evaluations,
+    as shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Observe at initial points
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: While *n ≤ N* do
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Update the posterior probability distribution using all available data
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Let *x[n]* be a maximizer of the acquisition function
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Observe *y[n] = f(x[n])*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Increment *n*
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: end while
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Return a solution: the point evaluated with the largest'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: We can summarize this problem by saying that Bayesian optimization is designed
+    for black-box derivative-free global optimization. It has become extremely popular
+    for tuning hyperparameters in machine learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Below is a graphical summary of the whole optimization: Gaussian Process with
+    posterior distribution along with observations and confidence interval, and Utility
+    Function where the maximum value indicates the next sample point.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Header image](../Images/64f78d024a06df3028dee165a9ce09ba.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Thanks to utility function bayesian optimization is much more efficient in tuning
+    parameters of machine learning algorithms than grid or random search techniques.
+    It can effectively balance “exploration” and “exploitation” in finding global
+    optimum.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To present Bayesian optimization in action we use [BayesianOptimization](https://github.com/fmfn/BayesianOptimization)
+    [3] library written in Python to tune hyperparameters of Random Forest and XGBoost
+    classification algorithms. We need to install it via pip:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pip install bayesian-optimization`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now let’s train our model. First we import required libraries:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We define a function to run Bayesian optimization given data, function to optimize
+    and its hyperparameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We define function to optimize which is Random Forest Classifier and its hyperparameters
+    n_estimators, max_depth and min_samples_split. Additionally we use the mean of
+    cross validation score on given dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Analogically we define a function and hyperparameters for XGBoost classifier:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now based on chosen classifier we can optimize it and train the model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As an example data we use a view [dbo].[vTargetMail] from AdventureWorksDW2017
+    SQL Server database where based on personal data we need to predict whether person
+    buy a bike. As a result of Bayesian optimization we present consecutive function
+    sampling:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **iter** | **AUC** | **max_depth** | **min_samples_split** | **n_estimators**
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 0.8549 | 45.88 | 6.099 | 34.82 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | 0.8606 | 15.85 | 2.217 | 114.3 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | 0.8612 | 47.42 | 8.694 | 306.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | 0.8416 | 10.09 | 5.987 | 563.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 5 | 0.7188 | 4.538 | 7.332 | 766.7 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 6 | 0.8436 | 100.0 | 2.0 | 448.6 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 7 | 0.6529 | 1.012 | 2.213 | 315.6 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 8 | 0.8621 | 100.0 | 10.0 | 1e+03 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 9 | 0.8431 | 100.0 | 2.0 | 154.1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 10 | 0.653 | 1.0 | 2.0 | 1e+03 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 11 | 0.8621 | 100.0 | 10.0 | 668.3 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 12 | 0.8437 | 100.0 | 2.0 | 867.3 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 13 | 0.637 | 1.0 | 10.0 | 10.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 14 | 0.8518 | 100.0 | 10.0 | 10.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 15 | 0.8435 | 100.0 | 2.0 | 317.6 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 16 | 0.8621 | 100.0 | 10.0 | 559.7 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 17 | 0.8612 | 89.86 | 10.0 | 82.96 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 18 | 0.8616 | 49.89 | 10.0 | 212.0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 19 | 0.8622 | 100.0 | 10.0 | 771.7 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 20 | 0.8622 | 38.33 | 10.0 | 469.2 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 21 | 0.8621 | 39.43 | 10.0 | 638.6 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 22 | 0.8622 | 83.73 | 10.0 | 384.9 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 23 | 0.8621 | 100.0 | 10.0 | 936.1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 24 | 0.8428 | 54.2 | 2.259 | 122.4 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 25 | 0.8617 | 99.62 | 9.856 | 254.8 |'
+  prefs: []
+  type: TYPE_TB
+- en: 'As we can see Bayesian optimization found the best parameters in 23rd step
+    which gives 0.8622 AUC score on test dataset. Probably this result can be higher
+    if given more samples to check. Our optimized Random Forest model has ROC AUC
+    curve presented below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Header image](../Images/b1f879df44071f5727ccb0964725db6a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We presented a simple way of tuning hyperparameters in machine learning [4]
+    using Bayesian optimization which is a faster method in finding optimal values
+    and more sophisticated one than Grid or Random Search methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://www.researchgate.net/publication/225175169](https://www.researchgate.net/publication/225175169_Random_Multiclass_Classification_Generalizing_Random_Forests_to_Random_MNL_and_Random_NB)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://en.wikipedia.org/wiki/Bayesian_optimization](https://en.wikipedia.org/wiki/Bayesian_optimization)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://github.com/fmfn/BayesianOptimization](https://github.com/fmfn/BayesianOptimization)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://addepto.com/automated-machine-learning-tasks-can-be-improved/](https://addepto.com/automated-machine-learning-tasks-can-be-improved/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Bio: [Edwin Lisowski](https://addepto.com)** is CTO at Addepto. He is an
+    experienced advanced analytics consultant with a demonstrated history of working
+    in the information technology and services industry. He is skilled in Predictive
+    Modeling, Big Data, Cloud Computing and Advanced Analytics.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to Automate Hyperparameter Optimization](/2019/06/automate-hyperparameter-optimization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Intro to XGBoost: Predicting Life Expectancy with Supervised Learning](/2019/05/intro-xgboost-predicting-life-expectancy-supervised-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Random Forests vs Neural Networks: Which is Better, and When?](/2019/06/random-forest-vs-neural-network.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Random Forest vs Decision Tree: Key Differences](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Does the Random Forest Algorithm Need Normalization?](https://www.kdnuggets.com/2022/07/random-forest-algorithm-need-normalization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tuning Random Forest Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-random-forest-hyperparameters.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[WTF is the Difference Between GBM and XGBoost?](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tuning XGBoost Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

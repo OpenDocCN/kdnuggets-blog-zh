@@ -1,0 +1,218 @@
+- en: Integrating Python and R into a Data Analysis Pipeline, Part 1
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2015/10/integrating-python-r-data-analysis-part1.html](https://www.kdnuggets.com/2015/10/integrating-python-r-data-analysis-part1.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Chris Musselle and Kate Ross-Smith,** ([Mango Solutions](http://www.mango-solutions.com))'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**For a conference in the R language, EARL London 2015 saw a surprising number
+    of discussions about Python. I like to think that at least some of this was to
+    do with the fact that the day before the conference, we ran a 3-hour workshop
+    outlining various strategies for integrating Python and R.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**This is the first in a series of three blog posts that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: outline the basic strategy for integrating Python and R;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: run through the different steps involved in this process; and
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: give a real example of how and why you would want to do this.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This post kicks everything off by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: covering the reasons why you may want to include both languages in a pipeline;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: introducing ways of running R and Python from the command line; and
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: showing how you can accept inputs as arguments and write outputs to various
+    file formats.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![python-r](../Images/cdbbdc8a1252db0dcf768a5e6fd70ecc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Why “And” not “Or”?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'From a quick internet search for articles about “R Python”, of the top 10 results,
+    only 2 discuss the merits of using both R and Python rather than pitting them
+    against each other. This is understandable; from their inception, both have had
+    very distinctive strengths and weaknesses. Historically, though, the split has
+    been one of educational background: statisticians have preferred the approach
+    that R takes, whereas programmers have made Python their language of choice. However,
+    with the growing breed of data scientists, this distinction blurs:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Data Scientist (n.): Person who is better at statistics than any software engineer
+    and better at software engineering than any statistician. — [twitter @josh_wills](https://twitter.com/josh_wills/status/198093512149958656)'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'With the wealth of distinct library resources provided by each language, there
+    is a growing need for data scientists to be able to leverage their relative strengths.
+    For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Python tends to outperform R in such areas as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Web scraping and crawling**: though *rvest* has simplified web scraping and
+    crawling within R, Python’s *beautifulsoup* and *Scrapy* are more mature and deliver
+    more functionality.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Database connections**: though R has a large number of options for connecting
+    to databases, Python’s *sqlachemy* offers this in a single package and is widely
+    used in production environments.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Whereas R outperforms Python in such areas as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Statistical analysis options**: though Python’s combination of *Scipy*, *Pandas*
+    and *statsmodels* offer a great set of statistical analysis tools, R is built
+    specifically around statistical analysis applications and so provides a much larger
+    collection of such tools.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Interactive graphics/dashboards**: *bokeh*, *plotly* and *intuitics* have
+    all recently extended the use of Python graphics onto web browsers, but getting
+    an example up and running using *shiny* and *shiny dashboard* in R is faster,
+    and often requires less code.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Further, as data science teams now have a relatively wide range of skills, the
+    language of choice for any application may come down to prior knowledge and experience.
+    For some applications – especially in prototyping and development – it is faster
+    for people to use the tool that they already know.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Flat File “Air Gap” Strategy
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this series of posts we are going to consider the simplest strategy for integrating
+    the two languages, and step though it with some examples. Using a flat file as
+    an air gap between the two languages requires you to do the following steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Refactor your R and Python scripts to be executable from the command line and
+    accept command line arguments.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Output the shared data to a common file format.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Execute one language from the other, passing in arguments as required.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Pros**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Simplest method, so commonly the quickest
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Can view the intermediate outputs easily
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Parsers already exist for many common file formats: CSV, JSON, YAML'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Cons**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Need to agree upfront on a common schema or file format
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Can become cumbersome to manage intermediate outputs and paths if the pipeline
+    grows.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reading and writing to disk can become a bottleneck if data becomes large.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Integrating ChatGPT Into Data Science Workflows: Tips and Best Practices](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Cutting Down Implementation Time by Integrating Jupyter and KNIME](https://www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Data Analytics: Integrating GitHub Copilot in Databricks](https://www.kdnuggets.com/optimizing-data-analytics-integrating-github-copilot-in-databricks)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Integrating Generative AI in Content Creation](https://www.kdnuggets.com/integrating-generative-ai-in-content-creation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Monitor Model Performance in the MLOps Pipeline with Python](https://www.kdnuggets.com/2023/05/monitor-model-performance-mlops-pipeline-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](https://www.kdnuggets.com/building-a-formula-1-streaming-data-pipeline-with-kafka-and-risingwave)**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

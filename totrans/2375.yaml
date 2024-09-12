@@ -1,0 +1,1044 @@
+- en: Machine Learning Metadata Store
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/08/machine-learning-metadata-store.html](https://www.kdnuggets.com/2022/08/machine-learning-metadata-store.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Machine Learning Metadata Store](../Images/9b61054c90f90f731ac5245ff6e0298a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Manuel Geissinger](https://www.pexels.com/photo/black-server-racks-on-a-room-325229/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Machine learning is predominantly data-driven, involving large amounts of raw
+    and intermediate data. The goal is usually to create and deploy a model in production
+    to be used by others for the greater good. To understand the model, it is necessary
+    to retrieve and analyze the output of our ML model at various stages and the datasets
+    used for its creation. Data about these data are called **Metadata**. [Metadata](https://en.wikipedia.org/wiki/Metadata)
+    is simply data about data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**In this article, we will learn about:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: metadata stores,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the components of the metadata store,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the need for a metadata store
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the selection criteria for a metadata store
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: metadata management,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: architecture and components of metadata management
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Declarative metadata management
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Popular Metadata Stores and their features
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: There is a TL;DR of these stores in the form of a comparison table at the end
+    of the article.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Why do we need a Metadata Store?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The process of building machine learning models is vaguely similar to conducting
+    a science experiment from theory. You start with a hypothesis, design a model
+    to test your hypothesis, test and improve your design to suit your hypothesis,
+    and then pick the best method according to your data. With ML, you start with
+    a hypothesis about which input data might produce desired results, train models,
+    and tune the hyperparameters until you build the model which produces the results
+    that you need.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine Learning Metadata Store](../Images/7af1b7e74dbcce96745a8554024e5072.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig: machine learning Development Lifecycle. [[Source](https://www.jeremyjordan.me/ml-projects-guide/)]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Storing these experimental data helps with **comparability** and **reproducibility.**
+    The iterative model building process will be in vain if the experimental models’
+    parameters aren’t comparable. Reproducibility is also essential if there is a
+    need to reproduce previous results. Given the dynamic and stochastic nature of
+    ML experiments, achieving reproducibility is complicated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Storing the metadata would help in retraining the same model and get the same
+    results. With so much experimental data flowing through the pipeline, it’s essential
+    to segregate the metadata of each experimental model from input data. Hence, the
+    need to have a **metadata store**, i.e., a database with metadata.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Types of Metadata
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Now that we have discussed why storing metadata is important, let’s look at
+    the different types of metadata.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Data used for model training and evaluation play a dominant role in comparability
+    and reproducibility. Other than data, you can store the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pointer to data’s location
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Name and version of the dataset
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Column names and types of data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Statistics of dataset
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The experiment is usually to lock down on a model fitted to our business needs.
+    Until the end of the experiment, it’s hard to put a pin on which model to proceed
+    with. So, it is useful and saves a lot of time if all the experimental models
+    are reproducible. It should be noted that we are focused on the models to be reproducible
+    rather than retrievable. To retrieve a model, one has to store all the models
+    taking up too much space. This is avoidable as the following parameters help one
+    reproduce a model when needed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature preprocessing steps
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The raw data has already been accounted for and saved to be retrieved. But this
+    raw data is not always fed to the model for training. In most cases, the crucial
+    information which the model needs, i.e., the features, are picked from the raw
+    data and become the model’s input.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, since we aim for reproducibility, we need to guarantee consistency in the
+    way the selected features are processed, and hence, the feature preprocessing
+    steps need to be saved. Some examples of the preprocessing steps are feature augmentation,
+    dealing with missing values, transforming it into a different format that the
+    model requires, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model type
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To recreate the model, store the type of model used like [AlexNet](https://papers.nips.cc/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf),
+    [YoloV4](https://github.com/AlexeyAB/darknet), [Random Forest](https://towardsdatascience.com/understanding-random-forest-58381e0602d2),
+    [SVM](https://youtu.be/efR1C6CvhmE), [etc](https://github.com/onnx/models)., with
+    their versions and frameworks like [PyTorch](https://pytorch.org/), [Tensorflow](https://www.tensorflow.org/),
+    and  [Scikit-learn](https://scikit-learn.org/stable/). This ensures there is no
+    ambiguity in the selection of the model when reproducing it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hyperparameters
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The ML model usually has a loss or cost function. To create a robust and efficient
+    model, we aim to minimize the loss function. The weights and biases of the model
+    where the loss function is minimized are the hyperparameters that need to be stored
+    to reproduce the efficient model created earlier. This saves processing time in
+    finding the right hyperparameters to tune the model and speeds the model selection
+    process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Metrics
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The results from the model evaluation are important in understanding how well
+    you have built your model. They help in figuring out :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: if the model is overfitting to the training set,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: how different hyperparameters affect the output, and the evaluation metrics
+    or
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: perform thorough error analysis.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Storing these data helps in performing model evaluation at any given point in
+    time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Context
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Model context is information about the environment of an ML experiment that
+    may or may not affect the experiment’s output but could be a factor of change
+    in it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Model context includes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Source code
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Dependencies like any packages and their versions
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Programming language and their versions
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Host information like environment variables, system packages, etc.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use case of Metadata Stores
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Now, we know about metadata, the need for it, and what comprises a metadata
+    store. Let’s look at some of the use cases of metadata stores and how you can
+    use them in your ML workflow:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Search and discovery.** Data search and data discovery involve collecting
+    and evaluating data from various sources. It is often used to understand trends
+    and patterns in the metadata. You get information regarding data schemas, fields,
+    tags, and usage.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Access control** ensures that all team members can access the same metadata
+    and prove vital in team collaboration. It makes sure the metadata is accessed
+    by control groups and adheres to the organization’s policies.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Data lineage** is a map of the data journey, which includes its origin, each
+    stop along the way, and an explanation on how and why the data has moved over
+    time. It helps track pipeline executions, queries, API logs, and API schemas.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Data compliance** is the practice of ensuring that the organization follows
+    a set of regulations to protect [sensitive data](https://cloud.google.com/architecture/sensitive-data-and-ml-datasets)
+    against misuse. It states what type of data should be protected, how it should
+    be protected, and what penalties would be charged if one fails to achieve it.
+    Having the metadata organized, stored, and managed in one place helps govern the
+    data under these regulations.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Data management.** A metadata store helps to configure data sources, ingestion,
+    and retention. It helps in following data purge policies and data export policies.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**ML explainability and reproducibility.** The ideal metadata store has all
+    the information one would need to reproduce the ML model. This information can
+    be used to justify the purpose the model serves as per business needs.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**DataOps.** DataOps is a practice that brings speed and agility to end-to-end
+    data pipelines, from collection to delivery. Since a metadata store has all the
+    necessary information about the data flowing in the workflow, it proves instrumental
+    when practicing DataOps.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Data quality.** As the name suggests, having the meta of all the data helps
+    assess the data quality and ensures data quality which is crucial for any successful
+    ML model development.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Why do we need Metadata Management?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Just storing the metadata without any management is like keeping thousands of
+    books unorganized. We are storing these data for boosting our model building.
+    Without any management, it’s harder to retrieve the data and compromises its reproducibility.
+    Metadata management ensures data governance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is a comprehensive list of why metadata management is necessary:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unify and tame data from diverse models and systems.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Observe data compliance and ensure that data is managed according to Regulations
+    like [SR-11](https://www.federalreserve.gov/supervisionreg/srletters/sr1107a1.pdf),
+    [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation), and
+    the [California Privacy Rights Act](https://iapp.org/resources/article/the-california-privacy-rights-act-of-2020/)
+    necessary to control and secure data efficiently at scale.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Managed information about the whole ML workflow helps significantly in debugging
+    and root cause analysis.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Data governance at scale requires a level of automation, especially when different
+    tools are used.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Data discovery is essential for productivity. Finding the right data at the
+    time of need saves a lot of time.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Metadata management architecture
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: A podcast on [Rise of Meta management](https://thedataexchange.media/the-rise-of-metadata-management-systems/)
+    by Assaf Araki and Ben Lorica beautifully explains the three building blocks of
+    metadata management systems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine Learning Metadata Store](../Images/26bcbf67263dc5ceb13c15acf2325485.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig: Metadata Stack. [[Source](https://thedataexchange.media/the-rise-of-metadata-management-systems/)]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unified schema
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The metadata needs to be collected from all systems. The three components in
+    this layer do this job:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Extract, load, transform -** ELT is the process of extracting data from one
+    or multiple sources and loading it to data warehouses. It is an alternative to
+    the traditional ETL (extract, transform, load).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Since it takes advantage of the processing capability already built into a data
+    storage infrastructure, ELT reduces the time data spends in transit and boosts
+    efficiency.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Refinement and storage** - refining and storing in a format help in easy
+    retrieval of data.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Access** - APIs or domain-specific languages for extracting data from metadata
+    systems are used to build the subsequent layers.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Data Catalog
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now that we have collected the data in the previous layer, the data needs to
+    be categorized into a catalog to make it informative and reliable. Its four components
+    help in achieving this task:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data description** - A detailed description with summaries of all data elements.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Data lineage** -  a record of the journey data takes from creation through
+    its transformations over time. It''s a process of understanding, recording, and
+    visualizing data as it flows.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Machine Learning Metadata Store](../Images/69d6da1b094023d9d9975feed4ce36a4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig: Data Lineage process [[Source](https://www.imperva.com/learn/data-security/data-lineage/)]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Version Control** - Version control for data ensures tracking of the changes
+    in the datasets over time.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Data Usage** tracks data consumption by users or applications, or systems.
+    It helps in observing the flow of data and helps in building cost-management solutions.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Governance
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: As the name suggests, this layer collectively works to govern the data and ensure
+    that the data is consistent and secure. It is the process organizations use to
+    manage, utilize and protect data in enterprise systems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine Learning Metadata Store](../Images/f9b32fb2f011e82e6fe32a8234173b76.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig: Pillars of Data Governance.[[Source](https://searchdatamanagement.techtarget.com/definition/data-governance)]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Learn more about [Data Governance Guide](https://learn.layer.co/data-governance-and-observability/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Coming to the components that ensure data governance:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data discovery** detects sensitive data across all platforms, saving time
+    and limiting the risk of manual errors.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Data protection** reduces the exposure and unnecessary spread of sensitive
+    data while maintaining usability.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Data access management** ensures the data adheres to organizational policy
+    and regulations.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Data quality** helps assess the quality of the data and ensures accuracy,
+    completeness, consistency, and relevance.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Declarative Metadata Management
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Declarative metadata management is a lightweight system that tracks the lineage
+    of the artifacts produced during your ML workflow.  It automatically extracts
+    metadata such as hyperparameters of models, schemas of datasets, and architecture
+    of deep neural networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A Declarative metadata system can be used to enable a variety of functionalities
+    like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**regular automated comparisons** of models to older ones,'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**quantifying accuracy improvements** that teams achieve over time towards
+    a specific goal, e.g., by **storing and comparing the output of their model**
+    and'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: showing the difference in the leaderboard.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Here, the experimental metadata and ML pipelines that comprise a way to define
+    complex feature transformation chains are automatically extracted, easing its
+    metadata tracking system. It is achieved by a [schema](https://github.com/awslabs/ml-experiments-schema)
+    designed to store the lineage information and ML-specific attributes. The figure
+    below shows the important principles of declarative metadata management.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine Learning Metadata Store](../Images/385c04c2575c4b473048248527a0466b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig: Important principles of Declarative Metadata Management. Source: Graphical
+    representation of principles discussed in [DMM](https://mlsys.org/Conferences/doc/2018/23.pdf)
+    - Image created by the author'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The systems employ a three-layered architecture to use the above-discussed principles.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Layer 1** is a document database store that stores the actual experimental
+    data.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Layer 2** is a centralized data store exposed to the outside world, allowing
+    users to store metadata for particular artifacts explicitly and queries the existing
+    data.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Layer 3:** This uppermost layer, also called the high-level clients, is engineered
+    towards popular ML libraries like [SparkML](https://spark.apache.org/docs/1.2.2/ml-guide.html),
+    S[cikit-learn](https://scikit-learn.org/stable/), [MXNet](https://mxnet.apache.org/versions/1.8.0/).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The high-level clients in level 3 enable **automated metadata extraction** from
+    internal data structures of popular ML frameworks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s take examples from some of these frameworks to get a clearer understanding.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**SparkML**](https://spark.apache.org/docs/1.2.2/ml-guide.htm)**:**  the ML
+    workloads in SparkML contain DataFrames. The architecture of SparkML pipeline
+    allows the DMM system to automatically **track all the schema transformations**
+    (like reading, adding, removing columns) each pipeline conducts and parameterization
+    of the operators.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**MXNet**](https://arxiv.org/abs/1512.01274)**:**  The MXNet framework furnishes
+    a fine-grained abstraction to declaratively define the models by combining mathematical
+    operators (like convolutions, activation functions) into the network’s layout
+    to learn. The 3rd layer extracts and stores the resulting computational graph,
+    parameterization, and dimensionality of the operators and corresponding hyperparameters.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How Declarative Metadata Management Proves to be Useful
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Now that we have a brief understanding of declarative metadata management,
+    let’s see how these properties improve your ML workflow:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Automated regressive testing:** Instead of storing arbitrary key-value tags,
+    the ML code, or the actual data, the DMM stores the pointers to the actual data.
+    This imposes strict decoupling of the parameters from the workflow. Furthermore,
+    it gives us the privilege to automate querying, interpretation, and analysis of
+    the metadata and lineage. This automated analysis enables regressive testing of
+    the models.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Automated metadata extraction:** The DMM schema enforces the storage of artifacts
+    and pointers to ML-specific attributes and lineage information. Since it strictly
+    focuses on metadata, the querying or metadata extraction supports the automation
+    of the process.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Accelerated experimentation:** The automated comparison of models to the
+    other models during experimentation provides the team''s ease of quantifying improvements
+    and hence accelerates the experimentation process.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Increase automation:**  The goal of the entire model building is to make
+    it scalable and production-ready. The automation of many steps in the workflow
+    eases and helps in avoiding errors at such a large scale. The automation of testing
+    and metadata extraction decreases manual labor and reduces the burden on the team.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Suppose one wishes to take the Declarative Metadata Management to the next level
+    instead of automatically extracting metadata. In that case, one could enable [meta
+    learning](https://lilianweng.github.io/lil-log/2018/11/30/meta-learning.html)
+    which would recommend features, algorithms, or hyperparameters settings for new
+    datasets. This again requires implementing the automated computation of [meta
+    features](https://cran.r-project.org/web/packages/mfe/vignettes/mfe-vignette.html)
+    for contained datasets and similarity queries to find the most similar datasets
+    for new data based on these meta-features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Selection Criteria for your Metadata Store
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Before going into more detail about metadata stores, let’s look at important
+    features that would help you select the right metadata store.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***   **Easy Integration** - Since you are using it to ease and speed up your
+    ML development, you should consider its ease of integration into your current
+    pipeline and the tools.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data lineage management -** Data lineage keeps track of the data flow. If
+    you deal with various data flowing during experiments,  you should consider data
+    lineage management capabilities.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Allows data wrangling -** If you expect a lot of variety in types of data
+    then, [data wrangling](https://en.wikipedia.org/wiki/Data_wrangling) will clean
+    and structure the metadata for easy access and analysis. This assures quality
+    data. Another thing to keep in mind here is it allows an intuitive query interface
+    too.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Tracking features -** If the platform allows data tracking, code versioning,
+    notebook versioning, environment versioning, it would give you access to a wider
+    range of metadata and ensure easy reproducibility.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Scalability -** If you are building your ML model to take it to production,
+    scalability of the metadata store becomes a factor to consider.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Team Collaboration** **-** If you will work in a large team, having this
+    feature would prove necessary.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**UI -** Lastly, having a user-friendly UI ensures clear management of experiments
+    and is adopted by all the team members seamlessly.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: List of Metadata Stores
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Metadata needs to be stored for comparability and reproducibility of the experimental
+    ML models. The common metadata stored are the hyperparameters, feature preprocessing
+    steps, model information, and the context of the model. The data needs to be managed
+    as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Previously, we also looked into the qualities one might consider for choosing
+    the right metadata store. With all of these in mind, let’s have a look at some
+    of the widely used metadata stores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Layer Data Catalog
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[Layer](http://layer.co) provides a central repository for datasets and features
+    to be systematically built, monitored and evaluated. Layer is unique from other
+    metadata stores for being a **declarative tool that empowers** it to provide automated
+    entity extraction and automated pipelines . In addition, it provides data management,
+    monitoring and search tools, etc.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some of its features are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data discovery**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Layer provides a powerful search for easy discovery of data while adhering to
+    authorization and governance rules. There are two central repositories, one for
+    data and the other for models. The **data catalog** manages and versions the data
+    and features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The **model catalog** has all the ML models organized and versioned in centralized
+    storage space, making it accessible to recall a model used in experimentation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Auto versioning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With datasets, schemas changing, files being deleted, and pipelines breaking,
+    auto versioning helps create **reproducible ML pipelines**. This automatic tracking
+    of lineage between entities streamlines your ML workflow and helps in reproducing
+    the experiments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature store
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The feature store is unique to Layer. The features are grouped into `featuresets`
+    which make features more accessible. These `featuresets` can be **dynamically**
+    created, deleted, passed as value, or stored. You can simply build features, and
+    Layer gives you the privilege to serve them online or offline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data quality testing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Layer](http://layer.co) ensures good quality data by executing automated tests.
+    It assists you in **creating responsive or automated pipelines** with Declarative
+    Metadata Management (discussed earlier) to automatically build, test and deploy
+    the data and ML models. This ensures not only quality testing of data but also
+    continuous delivery and deployment.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data lineage
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The data is religiously tracked and managed by Layer. The tracking is done automatically
+    between versioned and immutable entities(data, model, feature, etc.). As at any
+    given point, one could reproduce the experiments. Layer also gives a better understanding
+    of the previous experiments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Scalability
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Most of the properties of the Layer Data Catalog work hand in hand with automation.
+    The datasets, featureset, and ML models are also **first-class entities** that
+    make it easy to manage their lifecycle at scale. Layer also has infra agnostic
+    pipelines which support resources for scalability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Easy collaboration
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Along with empowering the data teams with its features during experimentation,
+    it can also be used to monitor the lifecycle of the entities post-production.
+    Its extensive UI supports tracking drift, monitoring changes, version diffing,
+    etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Amundsen
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[Amundsen](https://github.com/amundsen-io/amundsen) is a metadata and data
+    discovery engine. Some of its  features are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Discover trusted data - Searching for data within the organization is simple.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Automated and curated metadata - build trust in data with automated and curated
+    metadata. Preview of the data is also permitted.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Easy integration and **automation of metadata.**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Easy triage by linking the ETL job and code that generated the data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Team collaboration - you can share context with co-workers easily and see what
+    data they follow frequently or own or find common queries.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Tensorflow Extended ML Metadata
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[ML Metadata](https://www.tensorflow.org/tfx/guide/mlmd) or MLMD is a library
+    whose sole purpose is to serve as a Metadata Store. It stores and documents the
+    metadata and, when called, retrieves it from the storage backend with the help
+    of APIs.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some of its features are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data lineage management - the lineage information associated with pipeline components
+    is stored and can be traced when needed.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Along with the usual storage of metadata about artifacts generated during the
+    pipeline, it also stores metadata about executions of the pipeline.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It can easily be integrated into your ML workflow.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Kubeflow
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[Kubeflow](https://github.com/kubeflow/kubeflow) not only offers a Metadata
+    store but a solution for the entire lifecycle of your enterprise ML workflow.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The one we are interested in now is KubeFlow Metadata. Some of its features
+    are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Easy scalability** - with Kubeflow being a solution for enterprise ML, scalability
+    plays an important role.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Versioning** - All metadata and other artifacts are version controlled.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It has inbuilt Jupyter notebook servers, which help in **data wrangling.**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It can easily be integrated into your ML workflow.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: One can [record metadata on a notebook](https://blog.kubeflow.org/jupyter/2020/10/01/lineage.html)
+    with lineage tracking.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Apache Atlas
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[Apache Atlas’s](https://atlas.apache.org/) metadata store provides features
+    that allow organizations to manage and govern the metadata. Some of its features
+    are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data Discovery** - an intuitive UI to search entities by type, classification,
+    attribute value, or plain text.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**View lineage** of data as it moves through components in the pipeline.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can **dynamically create classifications** like SENSITIVE_DATA, EXPIRES_ON,
+    etc., and propagate this via lineage. It automatically ensures that the classification
+    follows the data as it passes through components.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Fine grained **security for metadata** access, enabling controls to entity instances.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sagemaker
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[Amazon SageMaker](https://aws.amazon.com/sagemaker/feature-store/) feature
+    store is a fully managed repository to store, update, retrieve and share machine
+    learning features. It keeps track of the metadata of the stored features.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So if you are keen on storing metadata of features and not of the whole pipeline,
+    the Sagemaker feature store is the right choice for you. Here are some of its
+    other features:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Ingest data from many sources** - You can either create data using data preparation
+    tools like [Amazon SageMaker Data Wrangler](https://aws.amazon.com/sagemaker/data-wrangler/)
+    or use streaming data sources like [Amazon Kinesis Data Firehose](https://aws.amazon.com/kinesis/data-firehose/).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Data discovery** - It tags and indexes metadata for easy discovery through
+    the visual interface in [SageMaker Studio](https://aws.amazon.com/sagemaker/studio/).
+    It also allows browsing the data catalog.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Ensure feature consistency** - It allows models to access the same set of
+    metadata and features for training runs done offline and in batches and for real-time
+    inference.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Standardization** eliminates confusion across teams by storing metadata definitions
+    in a single repository, making it clear how each metadata is defined. Having well-defined
+    data makes it easier to reuse metadata for different applications.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: MLflow
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The metadata store in [MLflow](https://www.mlflow.org) goes by the name [MLflow
+    Tracking](https://www.mlflow.org/docs/latest/tracking.html). It records and queries
+    the code, data, configurations, and results from the experiments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'MLflow logs parameters, code versions, metrics, key-value input parameters,
+    etc., when running machine learning code and later the API and UI helping in visualizing
+    the results too. Some of its features are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It lets you log and query experiments in many languages like [Python](https://www.mlflow.org/docs/latest/python_api/index.html#python-api),
+    [REST](https://www.mlflow.org/docs/latest/rest-api.html#rest-api), [R API](https://www.mlflow.org/docs/latest/R-api.html#r-api),
+    and [Java API](https://www.mlflow.org/docs/latest/java_api/index.html#java-api).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The output files can be saved in any format. For example, you can record images(PNGs),
+    models(pickled sci-kit-learn model), and data files(Parquet file) as artifacts.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It can organize and record runs into experiments, which group together runs
+    for a specific task.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can choose where your runs are recorded. It can either be logged locally(default),
+    a database, and an [HTTP server](https://www.mlflow.org/docs/latest/tracking.html#tracking-server).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: MLflow provides automatic logging. This feature eases logging the metadata such
+    as metrics, parameters, and models by not relying on explicit log statements.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Final Thoughts
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: One cannot deny the importance of data in the field of machine learning. A metadata
+    store that has all the essential data about the data is undeniably important.
+    According to different business needs, the right metadata store could vary from
+    organization to organization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have accumulated and summarized the seven metadata stores we discussed earlier.
+    I hope this would give you an overview of some famous metadata stores and nudge
+    you into finding the right one. This conclusion is based purely on the information
+    found in the documentation in the metadata stores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine Learning Metadata Store](../Images/65d9efa8fbd817f2ea6ad701bb6e6351.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Further, read
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[Walkthrough of ML metadata with Tensorflow](https://towardsdatascience.com/a-comprehensive-ml-metadata-walkthrough-for-tensorflow-extended-953230770867)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Kubeflow for machine learning](https://www.oreilly.com/library/view/kubeflow-for-machine/9781492050117/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[From Data to Metadata for machine learning Platforms](https://insidebigdata.com/2020/05/15/from-data-to-metadata-for-machine-learning-platforms/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[ML Metadata: Version control for ML](https://blog.tensorflow.org/2021/01/ml-metadata-version-control-for-ml.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Video on the need for ML metadata](https://youtu.be/cc1-eocgm1E)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Big picture of metadata management for data governance](https://www.youtube.com/watch?v=Zg9BNGV_DAg)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Lecture on metadata lifecycle](https://www.coursera.org/lecture/machine-learning-data-lifecycle-in-production/introduction-to-ml-metadata-Zd6fp)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**[Akruti Acharya](https://www.linkedin.com/in/akruti-acharya/)** is a technical
+    content writer and graduate student at University of Birmingham'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Metadata Store for Production ML!](https://www.kdnuggets.com/2022/05/layer-metadata-store-production-ml.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Metadata Improves Security, Quality, and Transparency](https://www.kdnuggets.com/2022/04/metadata-improves-security-quality-transparency.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2023: Practical Strategies for Deploying ML…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

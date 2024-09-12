@@ -1,0 +1,579 @@
+- en: A Full End-to-End Deployment of a Machine Learning Algorithm into a Live Production
+    Environment
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/128d7ad5f8e3664b5782ae9a622a497e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Fotis Fotopoulos](https://unsplash.com/@ffstop?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/python?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In October 2021 I authored an article on “Deploying Machine Learning and Data
+    Science Projects as Public Web Applications” (see [https://towardsdatascience.com/deploying-machine-learning-and-data-science-projects-as-public-web-applications-3abc91088c11](https://towardsdatascience.com/deploying-machine-learning-and-data-science-projects-as-public-web-applications-3abc91088c11)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article I explored how to deploy Jupyter Notebooks as publicly available
+    web apps using Voila, GitHub and mybinder.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After the article was published I received feedback from readers who were interested
+    in how to push production deployment further to explore how a machine learning
+    algorithm could be fully deployed into a live production environment so that it
+    could be “consumed” in a platform-agnostic way and that led to the idea for this
+    article …
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 1: Develop a Machine Learning Algorithm'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The first step is to develop the machine learning algorithm that we want to
+    deploy. In the real world this could involve many weeks or months of development
+    time and lots of iteration across the steps of the data science pipeline but for
+    this example I will develop a basic ML algorithm as the main purpose of this article
+    is to find a way to deploy an algorithm for use by “consumers”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I selected a dataset from kaggle ([https://www.kaggle.com/prathamtripathi/drug-classification](https://www.kaggle.com/prathamtripathi/drug-classification))
+    that has been created by the author with a “CC0: Public Domain” license which
+    means that it has no copyright and that it may be used in other work with no restrictions
+    (see [https://creativecommons.org/publicdomain/zero/1.0/](https://creativecommons.org/publicdomain/zero/1.0/) for
+    details).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Python code to develop a predictive machine learning algorithm to classify
+    drug prescriptions given a range of patient criteria is as follows -
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: At this point we can see that we have a machine learning algorithm trained to
+    predict drug presriptions and that cross validation (i.e. folding the data) has
+    been used to evaluate the model accuracy at 99%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So far, so good ...
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are going to deploy this model into a production environment and although
+    it is a simple example we would not want to have to retrain our model in the live
+    environment every time a user wanted to predict a drug presription, hence our
+    next step is to preserve the state of our trained model using `pickle` ...
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now whenever we want to use the trained model, we simply need to reload its
+    state from the `model.pkl` file rather than re-executing the training step.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 2: Make an Individual Prediction from the Trained Model'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: I am going to make a couple of assumptions in step 2 -
+  prefs: []
+  type: TYPE_NORMAL
+- en: Consumers of the machine learning algorithm have a requirements to make predictions
+    for individual patients rather than a batch of patients.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Those consumers wish to communicate with the algorithm using text-like values
+    for the parameters (for example blood pressure = “NORMAL” or “HIGH” rather than
+    their label encoded equivalents like 0 and 1.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Therefore, we will start by reviewing what the values are for all of the label
+    encoded categorical features used as an input to the algorithm …
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: And there we have it, a list of each categorical feature with the unique values
+    that appear in the data and the corresponding numerical values as transformed
+    by the `LabelEncoder()`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Armed with this knowledge we can provide a set of dictionaries that map the
+    text-like values (e.g. “HIGH”, “LOW” etc.) into their encoded equivalents and
+    then develop a simple function to make an individual predictions as follows …
+  prefs: []
+  type: TYPE_NORMAL
+- en: This implementation can then be verified by invoking the function to make some
+    predictions based on values from the original data so that we know what the outputs
+    should be …
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that our `predict_drug` function does not need to train the model, rather
+    it "rehydrates" the model that previously had its state saved by `pickle` into
+    the `model.pkl` file and we can see from the output that the predictions for drug
+    recommendation are correct.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 3: Develop a Web Service Wrapper'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Everything is looking good so far but here is the major problem: clients or
+    consumers of our machine learning algorithm must be written in the Python programming
+    language and not only that, we must have the capability of changing and modifying
+    the application.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What if a 3rd party application wants to use and consume our algorithm and what
+    if this 3rd party application is not written in Python? Perhaps it is written
+    in Java, C#, JavaScript or some other non-Python language.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is where web services come in. A web service is a “wrapper” that receives
+    requests from clients and consumers using http GET and http PUT commands, invokes
+    the Python code and returns the result as an HTML response.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This means that the clients and callers only need to be able to formulate HTTP
+    requests and nearly all programming languages and environments will have a way
+    of doing this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the Python world there are several different approaches available but the
+    one I have selected is to use `flask` to construct our web service wrapper.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code is not very complicated but it can be challenging to get VS Code configured
+    to enable developers to debug a flask application. If you need a tutorial for
+    this step please check out my article titled “How to Debug Flask Applications
+    in VS Code” which can be found here — [https://towardsdatascience.com/how-to-debug-flask-applications-in-vs-code-c65c9bdbef21](https://towardsdatascience.com/how-to-debug-flask-applications-in-vs-code-c65c9bdbef21).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is the wrapper code for the web service …
+  prefs: []
+  type: TYPE_NORMAL
+- en: Start the VS Code IDE from the Anaconda Navigator page (or by starting and Anaconda
+    Command Prompt and typing `code`). This will start VS Code with the conda base
+    environment which is required to run and debug the flask application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The web service can be started from inside VS Code by clicking on “Run and Debug”
+    and then selecting “Flask Launch and debug a Flask web application” -
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/996b565b247c8c94255815795a53f8be.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: If everything has gone to plan the last message in the TERMINAL window should
+    be `Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)` which indicates
+    that your flask web application is up and running.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You should now test you web service using one of these methods -
+  prefs: []
+  type: TYPE_NORMAL
+- en: Open a web browser and enter: [http://127.0.0.1:5000/drug?Age=60&Sex=F&BP=LOW&Cholesterol=HIGH&Na_to_K=20](http://127.0.0.1:5000/drug?Age=60&Sex=F&BP=LOW&Cholesterol=HIGH&Na_to_K=20)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Open an anaconda command prompt and enter: `curl -X GET "http://127.0.0.1:5000/drug?Age=60&Sex=F&BP=LOW&Cholesterol=HIGH&Na_to_K=20"`
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![](../Images/cd1f7c0d6b463172e182083c84035586.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to find out more about developing `flask` applications and web services,
+    these articles are a great place to start -
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask](https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://code.visualstudio.com/docs/python/tutorial-flask](https://code.visualstudio.com/docs/python/tutorial-flask)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Step 4: Deploy the Web Service to Microsoft Azure'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We now have a predictive machine learning algorithm that can predict drug prescriptions
+    with 99% accuracy, we have a helper function that can make individual predictions
+    and we have a web service wrapper that enables these components to be called from
+    a browser or command line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However all of this is still only callable from the development environment.
+    The next stage is to deploy everything into the cloud so that clients can “consume”
+    the web service over the public Internet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are many different public services available for web app deployment including
+    -
+  prefs: []
+  type: TYPE_NORMAL
+- en: Google — [https://cloud.google.com/appengine/docs/standard/python3/building-app/writing-web-service](https://cloud.google.com/appengine/docs/standard/python3/building-app/writing-web-service)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Amazon Web Services — [https://medium.com/@rodkey/deploying-a-flask-application-on-aws-a72daba6bb80](https://medium.com/@rodkey/deploying-a-flask-application-on-aws-a72daba6bb80)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Microsoft Azure — [https://medium.com/@nikovrdoljak/deploy-your-flask-app-on-azure-in-3-easy-steps-b2fe388a589e](https://medium.com/@nikovrdoljak/deploy-your-flask-app-on-azure-in-3-easy-steps-b2fe388a589e)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: I have chosen Azure because it is free (for an entry level account), easy-to-use,
+    quick and fully integrated with VS Code which is my favourite development environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 4.1: Add the Azure App Service Extension to VS Code'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Switch tasks into VS Code, go to “Extensions” (Ctrl+Shft_X) and add in the “Azure
+    App Service” extension. Once the extension is added you will see a new Azure icon
+    in the Activity Bar -
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/80c2bd9c142d71a0e2634af868fc9abd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 4.1: Create an Azure Account'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You must have an account to begin deployments into the Azure cloud and you must
+    provide credit card details during the registration process. However you will
+    not be charged unless you specifically opt to move away from the free license.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can follow the instructions on this page — [https://azure.microsoft.com/en-gb/free/](https://azure.microsoft.com/en-gb/free/) to
+    create your free Azure account via a browser, but the easiest way is to click
+    on the new Azure icon in the Activity Bar and choose “Create a Free Azure Account”
+    (or “Sign in to Azure” if you already have one) -
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/71950cb1d3f6718a7cf4561c2010929e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 4.3: Create an Azure Web App'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The next step is to create an Azure web app to host your application by clicking
+    on the “+” sign in the “APP SERVICE” window. You will be prompted for a name for
+    the app. The name will be used in the final URL and it must be unique but other
+    than that the name is not particularly important.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When prompted for a license type choose “Free Trial” — your web app will now
+    be created and you are ready to deploy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c8c58d7388e1b88c86365cbe7f260215.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 4.4 Create a “requirements.txt” deployment file
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before you can deploy the app to Azure you must create a “requirements.txt”
+    file in the same folder as your Flask web app that contains a list of all of the
+    dependencies and libraries that Azure must install in order to run your application.
+    This step is vital as if the libraries are not in the deployed environment the
+    app will crash.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The contents of `requirements.txt` for our app are as follows -
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ee9a13c2ca197fb9eb3b68c16a259110.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some points to note -
+  prefs: []
+  type: TYPE_NORMAL
+- en: The library names must match exactly to what you would type if you were installing
+    using pip, for example `pip install Flask`.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Note that `Flask` has an upper case "F". This is because Flask is unusual in
+    being capitalised this way, usually libraries are all lower case.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '`sklearn` is required to execute the rehydrated `model.pkl`. Although sklearn
+    and `DecisionTreeClassifier` are not referenced explicitly in the code, they are
+    needed for `model.fit` so if `sklearn` is omitted the app will crash.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: A reference to `pickle` is not required because this library is a part of the
+    core Python installation. If you do include `pickle` the deployment will crash
+    because you cannot execute `pip install pickle`.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If you stick to these rules your deployment will work and any error messages
+    are usually informative enough to enable the issues to be resolved with a bit
+    of Internet research.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 4.5 Deply Your App to Azure
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you have been following the steps so far you now have a Flask app inside
+    VS Code. Your app code file will be called `app.py` and the application name is `app`.
+    The Flask app has been tested on a local development web server.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You have installed the VS Code Azure App Extension and used it to create a Microsoft
+    Azure free account and also to create an Azure web application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You should have your Flask application open in VS Code and you have everything
+    in place to deploy your application into the cloud.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is achieved by simply clicking on the web app name next to the blue circle
+    icon, then clicking on the cloud icon next to the “+” sign.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When prompted, choose the following -
+  prefs: []
+  type: TYPE_NORMAL
+- en: Select the default folder to deploy
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Select the “Free Trial” subscription
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Select the web app name you have created
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If prompted to overwrite, select “Deploy”
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When asked to “Always deploy …” select “Skip for now”
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When the deployment starts click on “output window”
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now sit back and make a coffee whilst the app deploys -
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/86b70d20bccef4ca382a22b42c5a429c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: When the deployment is complete, click on “Browse Website” and you will be taken
+    to the correct URL which will run `app.route("/")` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Simply add in the same URL parameters that we used to test the local deployment
+    and you will see the output from a fully deployed web app! -
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://graham-harrison68-web03.azurewebsites.net/drug?Age=60&Sex=F&BP=LOW&Cholesterol=HIGH&Na_to_K=20](https://graham-harrison68-web03.azurewebsites.net/drug?Age=60&Sex=F&BP=LOW&Cholesterol=HIGH&Na_to_K=20)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/055a1d456700ef8e3a689fca1b51a690.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A point to note: after a while the azure app goes to sleep and the first call
+    after this takes a very long time.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you choose to upgrade to a paid-for Azure subscription there is an option
+    to keep the app refreshed and “awake” but in the free subscription the sleep-related
+    delay cannot be avoided as this subscription is intended for testing purposes
+    and as such has a few limitations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 5: Building a Client Application to Consume the Azure-deployed Web Service'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: At this point any programming language or environment that can invoke web requests
+    can call the deployed web service with just a few lines of code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We did start by saying that non-Python environments like C#, JavaScript etc.
+    can all be used but I will finish off this example by writing some code to call
+    the deployed app from a Python client using `ipywidgets` -
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/adc1b12ee500aa695ebed31699d08f88.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you click “Prescribe” with the default values, the recommendation should
+    be for “drugC”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Change the Age to 60 and Na to K to 20 and “DrugY” should be prescribed. Put
+    the Age back to 47, Na to K back to 14 and change BP to “HIGH” and drugA should
+    be prescribed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These simple tests prove that the Azure-hosted web service using a decision
+    tree based predictive machine learning algorithm is fully deployed to the public
+    cloud, can be called by any development environment capable of executing a `http
+    GET` command and is fully working end-to-end.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: There are quite a few steps involved, but using readily available libraries
+    and free tools including scikit-learn, pickle, flask, Microsoft Azure and ipywidgets
+    we have constructed a fully working, publicly available cloud deployment of a
+    machine learning algorithm and a fully functioning client to call and consume
+    the web service and display the results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thank you for reading!
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you enjoyed reading this article, why not check out my other articles at [https://grahamharrison-86487.medium.com/](https://grahamharrison-86487.medium.com/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, I would love to hear from you to get your thoughts on this piece, any
+    of my other articles or anything else related to data science and data analytics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you would like to get in touch to discuss any of these topics please look
+    me up on LinkedIn — [https://www.linkedin.com/in/grahamharrison1](https://www.linkedin.com/in/grahamharrison1) or
+    feel free to e-mail me at [GHarrison@lincolncollege.ac.uk](mailto:GHarrison@lincolncollege.ac.uk).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you would like to support the author and 1000’s of others who contribute
+    to article writing world-wide by subscribing, please use this link — [https://grahamharrison-86487.medium.com/membership](https://grahamharrison-86487.medium.com/membership).
+    Note: the author will receive a proportion of the fees if you sign up using this
+    link.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Graham Harrison](https://www.linkedin.com/in/grahamharrison1/?originalSubdomain=uk)**
+    is Group Director of IT, Information Management & Projects for the Lincoln College
+    Group where he has responsibility for all of the data and technology capabilities
+    in the UK, Saudi Arabia and China. Graham is also the MD and founder of a data
+    science consultancy called The Knowledge Ladder, committee member of the Lincolnshire
+    Cyber Security Forum and Digital Ambassador for the Greater Lincolnshire and Rutland
+    Branch of the Institute of Directors. Graham has recently completed academic research
+    into the democratisation of data science and is passionate about delivering accessible,
+    affordable and agile data science to all organisations regardless of size, sector
+    or previous experience. Visit [https://www.theknowledgeladder.co.uk/](https://www.theknowledgeladder.co.uk/)
+    and [https://www.youtube.com/watch?v=cFt03rny07Y](https://www.youtube.com/watch?v=cFt03rny07Y)
+    for details.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/a-full-end-to-end-deployment-of-a-machine-learning-algorithm-into-a-live-production-environment-3d9971ade188).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Beginner''s Guide to End to End Machine Learning](https://www.kdnuggets.com/2021/12/beginner-guide-end-end-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understanding Agent Environment in AI](https://www.kdnuggets.com/2022/05/understanding-agent-environment-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Best End-to-End Open Source MLOps Tools](https://www.kdnuggets.com/5-best-end-to-end-open-source-mlops-tools)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Simple to Implement End-to-End Project with HuggingFace](https://www.kdnuggets.com/a-simple-to-implement-end-to-end-project-with-huggingface)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 End-to-End MLOps Platforms You Must Try in 2024](https://www.kdnuggets.com/7-end-to-end-mlops-platforms-you-must-try-in-2024)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[From Data Collection to Model Deployment: 6 Stages of a Data…](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

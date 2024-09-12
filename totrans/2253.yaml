@@ -1,0 +1,356 @@
+- en: Overcoming Imbalanced Data Challenges in Real-World Scenarios
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/07/overcoming-imbalanced-data-challenges-realworld-scenarios.html](https://www.kdnuggets.com/2023/07/overcoming-imbalanced-data-challenges-realworld-scenarios.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[Benchmarking the performance](https://medium.com/toloka/choosing-the-best-architecture-for-your-text-classification-task-aee30ecc7870)
+    of popular NLP architectures is an important step in building an understanding
+    of available options when approaching the text classification task. Here we’ll
+    go deeper into the meat of it and explore one of the most common challenges associated
+    with the classification — data imbalance. And if you ever applied ML to a real-world
+    classification dataset, you’re most likely familiar with it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understanding Imbalance in Data Classification
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In data classification, we're often concerned with the distribution of data
+    points across classes. A balanced dataset has roughly the same number of points
+    in all classes, making it easier to work with. However, real-world datasets are
+    often imbalanced.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imbalanced data can cause problems because a model might learn to label everything
+    with the most frequent class, ignoring the actual input. This can happen if the
+    dominant class is so prevalent that the model isn't penalized much for misclassifying
+    the minority class. Additionally, underrepresented classes may not have enough
+    data for the model to learn meaningful patterns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is imbalance something that needs to be corrected? Imbalance is a feature of
+    data, and a good question to start with is whether we want to do anything about
+    it at all. There are tricks to make the training process easier for a model. Optionally,
+    we might manipulate the training process or the data itself to let the model know
+    which classes are especially important for us but it should be justified by a
+    business need or domain knowledge. Further, we’ll discuss these tricks and manipulations
+    in more detail.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To illustrate the effect of different techniques addressing data imbalance we’ll
+    use the [sms-spam dataset](https://huggingface.co/datasets/sms_spam), which contains
+    747 spam and 4827 ham (legitimate) texts. Though there are only two classes, the
+    task will be treated as a multiclass classification problem for better generalization.
+    We’ll use a roberta-base model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keep in mind that these techniques may produce different results with other
+    data. It's essential to test them on your specific dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When training a classification model without any adjustments, we get the following
+    classification report:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Overcoming Imbalanced Data Challenges in Real-World Scenarios](../Images/79020d6580675475b1916c21e334e3ee.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: “Safe” tricks
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Bias Initialization
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Our first technique is to let the model know about data distribution from the
+    beginning. We could propagate this knowledge by initializing the bias of the final
+    classification layer accordingly. This trick, shared by Andrej Karpathy in his
+    [Recipe for Training Neural Networks](http://karpathy.github.io/2019/04/25/recipe/#2-set-up-the-end-to-end-trainingevaluation-skeleton--get-dumb-baselines:~:text=Huber%20losses%2C%20etc.-,init%20well.,-Initialize%20the%20final),
+    helps the model start with an informed perspective. In our case of multiclass
+    classification, we use softmax as the final activation, and we want the model''s
+    output at initialization to reflect the data distribution. To achieve this, we
+    solve the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Overcoming Imbalanced Data Challenges in Real-World Scenarios](../Images/047441b41d2b1e96d5543b45cadaddd1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As a reminder,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Overcoming Imbalanced Data Challenges in Real-World Scenarios](../Images/0394c3ffea500602567116e3d9a4de22.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Then,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Overcoming Imbalanced Data Challenges in Real-World Scenarios](../Images/4f386998077203fee0b782e6c6e87439.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here b0 and b1 are biases of negative and positive classes correspondingly,
+    neg and pos are the number of elements in negative and positive classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With this initialization, all metrics simply improve!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Overcoming Imbalanced Data Challenges in Real-World Scenarios](../Images/3f32a9519358882e24e8e8e1f58228d2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In Bayesian terms, this means manually setting a prior and allowing the model
+    to learn the posterior during training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Downsampling and Upweighting/Upsampling and Downweighting
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: These techniques also address class imbalance effectively. Both share a similar
+    concept but differ in execution. Downsampling and upweighting involves reducing
+    the size of the dominant class to balance the distribution, while assigning larger
+    weights to examples from this class during training. The upweighting ensures that
+    output probabilities still represent the observed data distribution. Conversely,
+    upsampling and downweighting entails increasing the size of underrepresented classes
+    and proportionally reducing their weights.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Downsampling and upweighting outcome:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Overcoming Imbalanced Data Challenges in Real-World Scenarios](../Images/f89a3ccfad21b66f32e349bdd7e26b2a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Upsampling and downweighting outcome:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Overcoming Imbalanced Data Challenges in Real-World Scenarios](../Images/b9ddea52726eab417d23743750d7b76f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In both scenarios, the “spam” recall decreased, likely because the "ham" weight
+    was twice that of the “spam” weight.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Focal Loss
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[Focal loss](https://arxiv.org/abs/1708.02002), referred to by the authors
+    as a “dynamically scaled cross entropy loss”, was introduced to address training
+    on imbalanced data . It''s applicable to binary cases only, and luckily, our problem
+    involves just two classes. Check out the equation below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Overcoming Imbalanced Data Challenges in Real-World Scenarios](../Images/f541faebe8f65f1d0245d0de3b4d179c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the equation, p is the probability of a true class, ɑ is a weighting factor,
+    and ???? controls how much we penalize loss depending on confidence (probability).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The design ensures that examples with lower probability receive exponentially
+    greater weight, pushing the model to learn about more challenging examples. The
+    alpha parameter allows for different weighting between class examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By tuning the alpha and gamma combination, you can find the optimal configuration.
+    To remove explicit class preference, set alpha to 0.5; however, authors have noted
+    minor improvements with this balancing factor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is the best result we obtained with focal loss:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Overcoming Imbalanced Data Challenges in Real-World Scenarios](../Images/4f827a4571b5948bc548fafb379766eb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: All metrics outperform the baseline, but it required some parameter adjustments.
+    Keep in mind, it might not always work out this smoothly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: “Not-so-safe” Tricks
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: There exist well-known methods that intentionally alter the output probability
+    distribution to give underrepresented classes an advantage. By using these techniques,
+    we explicitly signal to the model that certain classes are crucial and shouldn’t
+    be overlooked. This is often driven by a business need, like detecting financial
+    fraud or offensive comments, which is more important than accidentally mislabeling
+    good examples. Apply these techniques when the goal is to boost recall for specific
+    classes, even if it means sacrificing other metrics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Weighting
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Weighting involves assigning unique weights to loss values for samples from
+    different classes. This is an effective and adaptable method because it lets you
+    indicate the significance of each class to the model. Here’s the formula for a
+    multiclass weighted cross-entropy loss for a single training example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Overcoming Imbalanced Data Challenges in Real-World Scenarios](../Images/26904682178d588a75974c820dd6ea0f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: ','
+  prefs: []
+  type: TYPE_NORMAL
+- en: where pytrue represents the probability of the true class and wytrue is the
+    weight of that class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A good default method for determining weights is the inverse class frequency:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Overcoming Imbalanced Data Challenges in Real-World Scenarios](../Images/d68b23447b3c0049ce9d936597099229.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: where N is the dataset's total items, c is the class count, and ni is the ith
+    class's element count
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The weights were calculated as follows: {''ham'': 0.576, ''spam'': 3.784}'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Below are the metrics obtained using these weights:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Overcoming Imbalanced Data Challenges in Real-World Scenarios](../Images/1624abdd000c9df45a5630adf55edfe3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The metrics surpass the baseline scenario. While this may occur, it's not always
+    the case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'However, if avoiding missed positives from a specific class is vital, consider
+    increasing the class weight, which could likely boost the class recall. Let’s
+    try the weights {"ham": 0.576, "spam": 10.0} to see the outcome.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Results are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Overcoming Imbalanced Data Challenges in Real-World Scenarios](../Images/f709fec76da64b7700183f80cee337f2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As anticipated, the “spam” recall increased, though precision declined. The
+    F1 score worsened compared to using inverse class frequency weights. This demonstrates
+    the potential of basic loss weighting. Weighting may be beneficial even for balanced
+    data to recall crucial classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Upsampling and downsampling.
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: While similar to the methods discussed earlier, they don't include the weighting
+    step. Downsampling may result in data loss, while upsampling can lead to overfitting
+    the upsampled class. Though they can help, weighting is often a more efficient
+    and transparent option.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Comparing the Probabilities
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'We’ll assess the confidence of various model versions using an obvious spam-looking
+    example: "*Call to claim your prize!*" See the table below for results.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Overcoming Imbalanced Data Challenges in Real-World Scenarios](../Images/51f6239982928f5fbaa4023bad1d6c66.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As anticipated, the weighted model shows overconfidence, while the “downsampling
+    + upweighting” model is underconfident (due to upweighted “ham”) compared to the
+    baseline. Notably, bias initialization increases and focal loss decreases the
+    model’s confidence in the “spam” category.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In conclusion, addressing data imbalance is possible when necessary. Keep in
+    mind that some techniques intentionally alter the distribution and should only
+    be applied when required. Imbalance is a feature, not a bug!
+  prefs: []
+  type: TYPE_NORMAL
+- en: While we discussed probabilities, the ultimate performance metric is the one
+    most important to the business. If offline tests show a model adds value, go ahead
+    and test it in production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In my experiments, I used the [Toloka ML](https://tolokamodels.tech) platform.
+    It offers a range of ready-to-use models that can give a head start to an ML project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Overall, considering data distributions for training ML models is crucial. The
+    training data must represent the real-world distribution for the model to work
+    effectively. If the data is inherently imbalanced, the model should account for
+    it to perform well in real-life scenarios.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Sergei Petrov](https://www.linkedin.com/in/sergei-petrov-12589210b/)** is
+    a Data Scientist working with a range of Deep Learning applications. His interests
+    are around building efficient and scalable Machine Learning solutions beneficial
+    for businesses and society.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Overcoming Barriers in Multi-lingual Voice Technology: Top 5…](https://www.kdnuggets.com/2023/08/overcoming-barriers-multilingual-voice-technology-top-5-challenges-innovative-solutions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL Group By and Partition By Scenarios: When and How to Combine…](https://www.kdnuggets.com/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Exploring the Potential of Transfer Learning in Small Data Scenarios](https://www.kdnuggets.com/exploring-the-potential-of-transfer-learning-in-small-data-scenarios)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, August 31: The Complete Data Science Study Roadmap…](https://www.kdnuggets.com/2022/n35.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Techniques to Handle Imbalanced Data](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unsupervised Disentangled Representation Learning in Class…](https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

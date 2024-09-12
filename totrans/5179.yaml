@@ -1,0 +1,163 @@
+- en: Build a synthetic data pipeline using Gretel and Apache Airflow
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/09/build-synthetic-data-pipeline-gretel-apache-airflow.html](https://www.kdnuggets.com/2021/09/build-synthetic-data-pipeline-gretel-apache-airflow.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Drew Newberry](https://www.linkedin.com/in/drew-newberry/), Software
+    Engineer at Gretel.ai**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Build a synthetic data pipeline using Gretel and Apache Airflow](../Images/29acd8e3a97b7f0238c65040f5ef4354.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Hey folks, my name is Drew, and I'm a software engineer here at Gretel. I've
+    recently been thinking about patterns for integrating Gretel APIs into existing
+    tools so that it's easy to build data pipelines where security and customer privacy
+    are first-class features, not just an afterthought or box to check.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One data engineering tool that is popular amongst Gretel engineers and customers
+    is Apache Airflow. It also happens to work great with Gretel. In this blog post,
+    we'll show you how to build a synthetic data pipeline using Airflow, Gretel and
+    PostgreSQL. Let's jump in!
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Airflow
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[Airflow](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/index.html) is
+    a workflow automation tool commonly used to build data pipelines. It enables data
+    engineers or data scientists to programmatically define and deploy these pipelines
+    using Python and other familiar constructs. At the core of Airflow is the concept
+    of a DAG, or directed acyclic graph. An Airflow DAG provides a model and set of
+    APIs for defining pipeline components, their dependencies and execution order.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You might find Airflow pipelines replicating data from a product database into
+    a data warehouse. Other pipelines might execute queries that join normalized data
+    into a single dataset suitable for analytics or modeling. Yet another pipeline
+    might publish a daily report aggregating key business metrics. A common theme
+    shared amongst these use cases: coordinating the movement of data across systems.
+    This is where Airflow shines.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Leveraging Airflow and its rich ecosystem of [integrations](https://registry.astronomer.io/),
+    data engineers and scientists can orchestrate any number of disparate tools or
+    services into a single unified pipeline that is easy to maintain and operate.
+    With an understanding of these integration capabilities, we’ll now start talking
+    about how Gretel might be integrated into an Airflow pipeline to improve common
+    data ops workflows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How does Gretel fit in?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: At Gretel, our mission is to make data easier and safer to work with. Talking
+    to customers, one pain point we often hear about is the time and effort required
+    to get data scientists access to sensitive data. Using[ Gretel Synthetics](https://gretel.ai/synthetics),
+    we can reduce the risk of working with sensitive data by generating a synthetic
+    copy of the dataset. By integrating Gretel with Airflow, it’s possible to create
+    self-serve pipelines that make it easy for data scientists to quickly get the
+    data they need without requiring a data engineer for every new data request.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To demonstrate these capabilities, we’ll build an ETL pipeline that extracts
+    user activity features from a database, generates a synthetic version of the dataset,
+    and saves the dataset to S3\. With the synthetic dataset saved in S3, it can then
+    be used by data scientists for downstream modeling or analysis without compromising
+    customer privacy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To kick things off, let’s first take a bird’s eye view of the pipeline. Each
+    node in this diagram represents a pipeline step, or “task” in Airflow terms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9776c937553639c4bd8886936d454f38.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Example Gretel synthetics pipeline on Airflow.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can break the pipeline up into 3 stages, similar to what you might find
+    in an ETL pipeline:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Extract** - The extract_features task will query a database, and transform
+    the data into a set of features that can be used by data scientists for building
+    models.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Synthesize** - generate_synthetic_features will take the extracted features
+    as input, train a synthetic model, and then generate a synthetic set of features
+    using Gretel APIs and cloud services.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ‍**Load** - upload_synthetic_features saves the synthetic set of features to
+    S3 where it can be ingested into any downstream model or analysis.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the next few sections we’ll dive into each of these three steps in greater
+    detail. If you wish to follow along with each code sample, you can head over to [gretelai/gretel-airflow-pipelines](https://github.com/gretelai/gretel-airflow-pipelines) and
+    download all the code used in this blog post. The repo also contains instructions
+    you can follow to start an Airflow instance and run the pipeline end to end.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Additionally, it may be helpful to view the Airflow pipeline in its entirety,
+    before we dissect each component, [dags/airbnb_user_bookings.py](https://github.com/gretelai/gretel-airflow-pipelines/blob/main/dags/airbnb_user_bookings.py).
+    The code snippets in the following sections are extracted from the linked user
+    booking pipeline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Extract Features
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The first task, extract_features is responsible for extracting raw data from
+    the source database and transforming it into a set of features. This is a common [feature
+    engineering](https://en.wikipedia.org/wiki/Feature_engineering) problem you might
+    find in any machine learning or analytics pipeline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our example pipeline we will provision a PostgreSQL database and load it
+    with booking data from an [Airbnb Kaggle Competition](https://www.kaggle.com/c/airbnb-recruiting-new-user-bookings).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This dataset contains two tables, Users and Sessions. Sessions contains a foreign
+    key reference, user_id. Using this relationship, we’ll create a set of features
+    containing various booking metrics aggregated by user. The following figure represents
+    the SQL query used to build the features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0] WITH session_features_by_user AS (    SELECT      user_id,      count(*)
+    AS number_of_actions_taken,      count(DISTINCT action_type) AS number_of_unique_actions,      round(avg(secs_elapsed))
+    AS avg_session_time_seconds,      round(max(secs_elapsed)) AS max_session_time_seconds,      round(min(secs_elapsed))
+    AS min_session_time_seconds,      (        SELECT          count(*)        FROM          sessions
+    s        WHERE          s.user_id = user_id          AND s.action_type = ''booking_request'')
+    AS total_bookings      FROM        sessions      GROUP BY        user_id  )  SELECT    u.id
+    AS user_id,    u.gender,    u.age,    u.language,    u.signup_method,    u.date_account_created,    s.number_of_actions_taken,    s.number_of_unique_actions,    s.avg_session_time_seconds,    s.min_session_time_seconds,    s.max_session_time_seconds  FROM    session_features_by_user
+    s    LEFT JOIN users u ON u.id = s.user_id  LIMIT 5000 [PRE1] @task()  def extract_features(sql_file:
+    str) -> str:      context = get_current_context()      sql_query = Path(sql_file).read_text()      key
+    = f"{context[''dag_run''].run_id}_booking_features.csv"      with NamedTemporaryFile(mode="r+",
+    suffix=".csv") as tmp_csv:          postgres.copy_expert(              f"copy
+    ({sql_query}) to stdout with csv header", tmp_csv.name          )          s3.load_file(              filename=tmp_csv.name,              key=key,          )      return
+    key [PRE2] from hooks.gretel import GretelHook     gretel = GretelHook()  project
+    = gretel.get_project() [PRE3] @task()  def generate_synthetic_features(data_source:
+    str) -> str:      project = gretel.get_project()      model = project.create_model_obj(          model_config="synthetics/default",           data_source=s3.download_file(data_source)      )      model.submit_cloud()      poll(model)      return
+    model.get_artifact_link("data_preview") [PRE4] @task()  def upload_synthetic_features(data_set:
+    str):      context = get_current_context()      with open(data_set, "rb") as synth_features:          s3.load_file_obj(              file_obj=synth_features,              key=f"{..._booking_features_synthetic.csv",          )
+    [PRE5] feature_path = extract_features(  "/opt/airflow/dags/sql/session_rollups__by_user.sql"      )  synthetic_data
+    = generate_synthetic_features(feature_path)  upload_synthetic_features(synthetic_data)
+    [PRE6]`'
+  prefs: []
+  type: TYPE_NORMAL

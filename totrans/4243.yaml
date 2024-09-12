@@ -1,0 +1,197 @@
+- en: Date Processing and Feature Engineering in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/07/date-pre-processing-feature-engineering-python.html](https://www.kdnuggets.com/2021/07/date-pre-processing-feature-engineering-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/02425d80b59385202558ada22d460b29.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Sonja Langford](https://unsplash.com/@sonjalangford?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+    on [Unsplash](https://unsplash.com/s/photos/time?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Maybe, like me, you deal with dates a lot when processing data in Python. Maybe,
+    also like me, you get frustrated with dealing with dates in Python, and find you
+    consult the documentation far too often to do the same things over and over again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Like anyone who codes and finds themselves doing the same thing more than a
+    handful of times, I wanted to make my life easier by automating some common date
+    processing tasks, as well as some simple and frequent feature engineering, so
+    that my common date parsing and processing tasks for a given date could be done
+    with a single function call. I could then select which features I was interested
+    in extracting at a given time afterwards.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This date processing is accomplished via the use of a single Python function,
+    which accepts only a single date string formatted as '`YYYY-MM-DD`' (because that's
+    how dates are formatted), and which returns a dictionary consisting of (currently)
+    18 key/value feature pairs. Some of these keys are very straightforward (e.g.
+    the parsed four 4 date year) while others are engineered (e.g. whether or not
+    the date is a public holiday). If you find this code at all useful, you should
+    be able to figure out how to alter or extend it to suit your needs. For some ideas
+    on additional date/time related features you may want to code the generation of,
+    [check out this article](https://www.kdnuggets.com/2021/04/feature-engineering-datetime-variables-data-science-machine-learning.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most of the functionality is accomplished using the Python [`datetime`](https://docs.python.org/3/library/datetime.html)
+    module, much of which relies on the [`strftime()`](https://docs.python.org/3/library/datetime.html#strftime-strptime-behavior)
+    method. The real benefit, however, is that there is a standard, automated approach
+    to the same repetitive queries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The only non-standard library used is [`holidays`](https://pypi.org/project/holidays/),
+    a "fast, efficient Python library for generating country, province and state specific
+    sets of holidays on the fly." While the library can accommodate a whole host of
+    national and sub-national holiodays, I have used the US national holidays for
+    this example. With a quick glance at the project's documentation and the code
+    below, you will very easily determine how to change this if needed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, let's first take a look at `process_date()` function. The comments should
+    provide insight into what is going on, should you need it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'A few points to note:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: By default, Python treats days of the week as starting on Sunday (0) and ending
+    on Saturday (6); For me, and my processing, weeks start on Monday, and end on
+    Sunday — and I don't need a day 0 (as opposed to starting the week on day 1) —
+    and so this needed to be changed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A weekday/weekend feature was easy to create
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Holiday-related features were easy to engineer using the `holidays` library,
+    and performing simple date addition and subtraction; again, substituting other
+    national or sub-national holidays (or adding to the existing) would be easy to
+    do
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A `days_from_today` feature was created with another line or 2 of simple date
+    math; negative numbers are the number of days a given dates was *before* today,
+    while positive numbers are days from today *until* the given date
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: I don't personally need, for example, a `is_end_of_month` feature, but you should
+    be able to see how this could be added to the above code with relative ease at
+    this point. Give some customization a try for yourself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let's test it out. We will process one date and print out what is returned,
+    the full dictionary of key-value feature pairs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here you can see the full list of feature keys, and corresponding values. Now,
+    in a normal situation I won't need to print out the entire dictionary, but instead
+    get the values of a particular key or set of keys.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can demonstrate how this might work practically with the below code. We will
+    create a list of dates, and then process this list of dates one by one, ultimately
+    creating a Pandas data frame of a selection of processed date features, printing
+    it out to screen.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: And this data frame hopefully gives you a better idea of how this functionality
+    could be useful in practice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Good luck, and happy data processing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[5 Python Data Processing Tips & Code Snippets](/2021/07/python-tips-snippets-data-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Engineering of DateTime Variables for Data Science, Machine Learning](/2021/04/feature-engineering-datetime-variables-data-science-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Working With Time Series Using SQL](/2021/04/time-series-using-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tick-Tock: Using Pendulum For Easy Date And Time Management In Python](https://www.kdnuggets.com/tick-tock-using-pendulum-for-easy-date-and-time-management-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Engineer Date Features in Python](https://www.kdnuggets.com/2021/08/engineer-date-features-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using NumPy to Perform Date and Time Calculations](https://www.kdnuggets.com/using-numpy-to-perform-date-and-time-calculations)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Tractable, Feature Engineering Pipeline for Multivariate…](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using RAPIDS cuDF to Leverage GPU in Feature Engineering](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

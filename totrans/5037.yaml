@@ -1,0 +1,272 @@
+- en: 'Mining Twitter Data with Python Part 5: Data Visualisation Basics'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-5.html](https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-5.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Marco Bonzanini, Independent Data Science Consultant**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A picture is worth a thousand tweets: more often than not, designing a good [visual
+    representation](https://en.wikipedia.org/wiki/Data_visualization) of our data,
+    can help us make sense of them and highlight interesting insights. After collecting
+    and analysing Twitter data, the tutorial continues with some notions on data visualisation
+    with Python.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Twitter](../Images/3da5b4dea824ea453ca3ae25f3548634.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: From Python to Javascript with Vincent
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: While there are some options to create plots in Python using libraries like
+    matplotlib or ggplot, one of the coolest libraries for data visualisation is probably [D3.js](http://d3js.org/) which
+    is, as the name suggests, based on Javascript. D3 plays well with web standards
+    like CSS and SVG, and allows to create some wonderful interactive visualisations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Vincent](https://github.com/wrobstory/vincent) bridges the gap between a Python
+    back-end and a front-end that supports D3.js visualisation, allowing us to benefit
+    from both sides. The tagline of Vincent is in fact “The data capabilities of Python.
+    The visualization capabilities of JavaScript”. Vincent, a Python library, takes
+    our data in Python format and translates them into [Vega](https://github.com/trifacta/vega),
+    a JSON-based visualisation grammar that will be used on top of D3\. It sounds
+    quite complicated, but it’s fairly simple and *pythonic*. You don’t have to write
+    a line in Javascript/D3 if you don’t want to.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Firstly, let’s install Vincent:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Secondly, let’s create our first plot. Using the [list of most frequent terms](https://marcobonzanini.com/2015/03/17/mining-twitter-data-with-python-part-3-term-frequencies/)(without
+    hashtags) from our [rugby data set](https://marcobonzanini.com/2015/03/23/mining-twitter-data-with-python-part-4-rugby-and-term-co-occurrences/),
+    we want to plot their frequencies:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'At this point, the file `term_freq.json` will contain a description of the
+    plot that can be handed over to D3.js and Vega. A simple template (taken from
+    Vincent resources) to visualise the plot:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Save the above HTML page as `chart.html` and run the simple Python web server:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now you can open your browser at **http://localhost:8888/chart.html** and observe
+    the result:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Term Frequencies](../Images/b1f3356aba782317f239a457ff539d1d.png)](https://marcobonzanini.files.wordpress.com/2015/04/term_freq.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Click to enlarge.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Notice: you could save the HTML template directly from Python with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: but, at least in Python 3, the output is not a well formed HTML and you’d need
+    to manually strip some characters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With this procedure, we can plot many different types of charts with Vincent.
+    Let’s take a moment to [browse the docs](http://vincent.readthedocs.org/en/latest/) and
+    see its capabilities.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Time Series Visualisation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Another interesting aspect of analysing data from Twitter is the possibility
+    to observe the distribution of tweets over time. In other words, if we organise
+    the frequencies into temporal buckets, we could observe how Twitter users react
+    to real-time events.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of my favourite tools for data analysis with Python is [Pandas](http://pandas.pydata.org/),
+    which also has a fairly decent support for time series. As an example, let’s track
+    the hashtag `#ITAvWAL` to observe what happened during the first match.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Firstly, if we haven’t done it yet, we need to install Pandas:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In the main loop which reads all the tweets, we simply track the occurrences
+    of the hashtag, i.e. we can refactor the code [from the previous episodes](https://marcobonzanini.com/2015/03/23/mining-twitter-data-with-python-part-4-rugby-and-term-co-occurrences/) into
+    something similar to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The last line is what allows us to track the frequencies over time. The series
+    is re-sampled with intervals of 1 minute. This means all the tweets falling within
+    a particular minute will be aggregated, more precisely they will be summed up,
+    given `how='sum'`. The time index will not keep track of the seconds anymore.
+    If there is no tweet in a particular minute, the `fillna()` function will fill
+    the blanks with zeros.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To put the time series in a plot with Vincent:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Once you embed the `time_chart.json` file into the HTML template discussed
+    above, you’ll see this output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Time Series](../Images/c07ddda13c75deb1b47a79f071bb8cb6.png)](https://marcobonzanini.files.wordpress.com/2015/04/time1.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Click to enlarge.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The interesting moments of the match are observable from the spikes in the series.
+    The first spike just before 1pm corresponds to the first Italian try. All the
+    other spikes between 1:30 and 2:30pm correspond to Welsh tries and show the Welsh
+    dominance during the second half. The match was over by 2:30, so after that Twitter
+    went quiet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Rather than just observing one sequence at a time, we could compare different
+    series to observe how the matches has evolved. So let’s refactor the code for
+    the time series, keeping track of the three different hashtags`#ITAvWAL`, `#SCOvIRE` and `#ENGvFRA` into
+    the corresponding `pandas.Series`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And the output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![time2](../Images/68b37061e2635500f804fbd18f407310.png)](https://marcobonzanini.files.wordpress.com/2015/04/time2.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Click to enlarge.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can immediately observe when the different matches took place (approx 12:30-2:30,
+    2:30-4:30 and 5-7) and we can see how the last match had the all the attentions,
+    especially in the end when the winner was revealed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Data visualisation is an important discipline in the bigger context of data
+    analysis. By supporting visual representations of our data, we can provide interesting
+    insights. We have discussed a relatively simple option to support data visualisation
+    with Python using Vincent. In particular, we have seen how we can easily bridge
+    the gap between Python and a language like Javascript that offers a great tool
+    like D3.js, one of the most important libraries for interactive visualisation.
+    Overall, we have just scratched the surface of data visualisation, but as a starting
+    point this should be enough to get some nice ideas going. The nature of Twitter
+    as a medium has also encouraged a quick look into the topic of time series analysis,
+    allowing us to mention `pandas` as a great Python tool.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Marco Bonzanini](https://twitter.com/marcobonzanini)** is a Data Scientist
+    based in London, UK. Active in the PyData community, he enjoys working in text
+    analytics and data mining applications. He''s the author of "[Mastering Social
+    Media Mining with Python](https://www.amazon.com/Mastering-Social-Media-Mining-Python-ebook/dp/B01BFD2Z2Q)"
+    (Packt Publishing, July 2016).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://marcobonzanini.com/2015/04/01/mining-twitter-data-with-python-part-5-data-visualisation-basics/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Mining Twitter Data with Python Part 2: Text Pre-processing](/2016/06/mining-twitter-data-python-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mining Twitter Data with Python Part 3: Term Frequencies](/2016/06/mining-twitter-data-python-part-3.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mining Twitter Data with Python Part 4: Rugby and Term Co-occurrences](/2016/06/mining-twitter-data-python-part-4.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Back To Basics, Part Dos: Gradient Descent](https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Basics: Syntax, Data Types, and Control Structures](https://www.kdnuggets.com/python-basics-syntax-data-types-and-control-structures)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Back to Basics Week 1: Python Programming & Data Science Foundations](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mastering Python for Data Science: Beyond the Basics](https://www.kdnuggets.com/mastering-python-for-data-science-beyond-the-basics)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Learn Python Basics With ChatGPT](https://www.kdnuggets.com/how-to-learn-python-basics-with-chatgpt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Back to Basics Week 2: Database, SQL, Data Management and…](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

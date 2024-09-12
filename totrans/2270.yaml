@@ -1,0 +1,358 @@
+- en: Principal Component Analysis (PCA) with Scikit-Learn
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/05/principal-component-analysis-pca-scikitlearn.html](https://www.kdnuggets.com/2023/05/principal-component-analysis-pca-scikitlearn.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Principal Component Analysis (PCA) with Scikit-Learn](../Images/6ada0542366997aba9e0f4fd17cb4e29.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you’re familiar with the unsupervised learning paradigm, you’d have come
+    across dimensionality reduction and the algorithms used for dimensionality reduction
+    such as the **principal component analysis** (PCA). Datasets for machine learning
+    typically contain a large number of features, but such high-dimensional feature
+    spaces are not always helpful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In general, all the features are *not* equally important and there are certain
+    features that account for a large percentage of variance in the dataset. Dimensionality
+    reduction algorithms aim to reduce the dimension of the feature space to a fraction
+    of the original number of dimensions. In doing so, the features with high variance
+    are still retained—but are in the transformed feature space. And principal component
+    analysis (PCA) is one of the most popular dimensionality reduction algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this tutorial, we’ll learn how principal component analysis (PCA) works and
+    how to implement it using the scikit-learn library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How Does Principal Component Analysis (PCA) Work?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Before we go ahead and implement principal component analysis (PCA) in  scikit-learn,
+    it’s helpful to understand how PCA works.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As mentioned, principal component analysis is a dimensionality reduction algorithm.
+    Meaning it reduces the dimensionality of the feature space. But how does it achieve
+    this reduction?
+  prefs: []
+  type: TYPE_NORMAL
+- en: The motivation behind the algorithm is that there are certain features that
+    capture a large percentage of variance in the original dataset. So it's important
+    to find the **directions of maximum variance** in the dataset. These directions
+    are called **principal components**. And PCA is essentially a projection of the
+    dataset onto the principal components.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So how do we find the principal components?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Suppose the data matrix X is of dimensions **num_observations x num_features**,
+    we perform [eigenvalue decomposition](https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix)
+    on the [covariance matrix](https://en.wikipedia.org/wiki/Covariance_matrix) of
+    X.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the features are all zero mean, then the covariance matrix is given by X.T
+    X. Here, X.T is the transpose of the matrix X. If the features are not all zero
+    mean initially, we can subtract the mean of column i from each entry in that column
+    and compute the covariance matrix. It’s simple to see that the covariance matrix
+    is a square matrix of order **num_features**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Principal Component Analysis (PCA) with Scikit-Learn](../Images/b0e66c9e00d376e00349327e28a9a6da.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first k principal components are the *eigenvectors* corresponding to the
+    *k largest eigenvalues*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So the steps in PCA can be summarized as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Principal Component Analysis (PCA) with Scikit-Learn](../Images/f35220082c4d4abe69a4f216416d5acf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Because the covariance matrix is a symmetric and positive semi-definite, the
+    eigendecomposition takes the following form:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: X.T X = D Λ D.T
+  prefs: []
+  type: TYPE_NORMAL
+- en: Where, D is the matrix of eigenvectors and Λ is a diagonal matrix of eigenvalues.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Principal Components Using SVD
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Another matrix factorization technique that can be used to compute principal
+    components is singular value decomposition or SVD.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Singular value decomposition (SVD) is defined for all matrices. Given a matrix
+    X, SVD of X gives: X = U Σ V.T. Here, U, Σ, and V are the matrices of left singular
+    vectors, singular values, and right singular vectors, respectively. V.T. is the
+    transpose of V.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So the SVD of the covariance matrix of X is given by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Principal Component Analysis (PCA) with Scikit-Learn](../Images/7dc90d17b68d09a19669fea36b87f4b8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Comparing the equivalence of the two matrix decompositions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Principal Component Analysis (PCA) with Scikit-Learn](../Images/51544d8bf32a2031dd8b91a03f1625b2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'We have the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Principal Component Analysis (PCA) with Scikit-Learn](../Images/85586a8362860c0358432f10e3217dba.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: There are computationally efficient algorithms for calculating the SVD of a
+    matrix. The scikit-learn implementation of PCA also uses SVD under the hood to
+    compute the principal components.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Performing Principal Component Analysis (PCA) with Scikit-Learn
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Now that we’ve learned the basics of principal component analysis, let’s proceed
+    with the scikit-learn implementation of the same.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 1 – Load the Dataset
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To understand how to implement principal component analysis, let’s use a simple
+    dataset. In this tutorial, we’ll use the wine dataset available as part of scikit-learn's
+    **datasets** module.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s start by loading and preprocessing the dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: It has 13 features and 178 records in all.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Step 2 – Preprocess the Dataset
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'As a next step, let''s preprocess the dataset. The features are all on different
+    scales. To bring them all to a common scale, we’ll use the `StandardScaler` that
+    transforms the features to have zero mean and unit variance:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Step 3 – Perform PCA on the Preprocessed Dataset
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To find the principal components, we can use the PCA class from scikit-learn’s
+    **decomposition** module.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s instantiate a PCA object by passing in the number of principal components
+    `n_components` to the constructor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The number of principal components is the number of dimensions that you’d like
+    to reduce the feature space to. Here, we set the number of components to 3.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Instead of calling the `fit_transform()` method, you can also call `fit()` followed
+    by the `transform()` method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice how the steps in principal component analysis such as computing the covariance
+    matrix, performing eigendecomposition or singular value decomposition on the covariance
+    matrix to get the principal components have all been abstracted away when we use
+    scikit-learn’s implementation of PCA.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 4 – Examining Some Useful Attributes of the PCA Object
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The PCA instance `pca` that we created has several useful attributes that help
+    us understand what is going on under the hood.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The attribute `components_` stores the directions of maximum variance (the principal
+    components).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: We mentioned that the principal components are directions of maximum variance
+    in the dataset. But how do we measure *how much of the total variance* is captured
+    in the number of principal components we just chose?
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `explained_variance_ratio_` attribute captures the ratio of the total variance
+    each principal component captures. Sowe can sum up the ratios to get the total
+    variance in the chosen number of components.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here, we see that three principal components capture over 66.5% of total variance
+    in the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 5 – Analyzing the Change in Explained Variance Ratio
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We can try running principal component analysis by varying the number of components
+    `n_components`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To visualize the `explained_variance_ratio_` for the number of components,
+    let’s plot the two quantities as shown:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: When we use all the 13 components, the `explained_variance_ratio_` is 1.0 indicating
+    that we’ve captured 100% of the variance in the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this example, we see that with 6 principal components, we'll be able to capture
+    more than 80% of variance in the input dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Principal Component Analysis (PCA) with Scikit-Learn](../Images/42f9e084065da5c276ff87857d172689.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: I hope you’ve learned how to perform principal component analysis using built-in
+    functionality in the scikit-learn library. Next, you can try to implement PCA
+    on a dataset of your choice. If you’re looking for good datasets to work with,
+    check out this list of [websites to find datasets for your data science projects](/2023/04/10-websites-get-amazing-data-data-science-projects.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Further Reading
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[1] [Computational Linear Algebra](https://github.com/fastai/numerical-linear-algebra/blob/master/README.md),
+    fast.ai'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** is a developer
+    and technical writer from India. She likes working at the intersection of math,
+    programming, data science, and content creation. Her areas of interest and expertise
+    include DevOps, data science, and natural language processing. She enjoys reading,
+    writing, coding, and coffee! Currently, she''s working on learning and sharing
+    her knowledge with the developer community by authoring tutorials, how-to guides,
+    opinion pieces, and more.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Essential Math for Data Science: Eigenvectors and Application to PCA](https://www.kdnuggets.com/2022/06/essential-math-data-science-eigenvectors-application-pca.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Market Data and News: A Time Series Analysis](https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best Python Courses: An Analysis Summary](https://www.kdnuggets.com/2022/01/best-python-courses-analysis-summary.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning’s Sweet Spot: Pure Approaches in NLP and Document Analysis](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Codeless Time Series Analysis with KNIME](https://www.kdnuggets.com/2022/10/packt-codeless-time-series-analysis-knime.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Collect Data For Customer Sentiment Analysis](https://www.kdnuggets.com/2022/12/collect-data-customer-sentiment-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

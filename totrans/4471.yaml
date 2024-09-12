@@ -1,0 +1,259 @@
+- en: Dataset Splitting Best Practices in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/05/dataset-splitting-best-practices-python.html](https://www.kdnuggets.com/2020/05/dataset-splitting-best-practices-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So you have a monolithic dataset and need to split it into training and testing
+    data. Perhaps you are doing so for supervised machine learning and perhaps you
+    are using Python to do so.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a discussion of three particular considerations to take into account
+    when splitting your dataset, the manner in which to deal with these considerations,
+    and how to practically implement these considerations using Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/922becb2b4f738b82d06e86e5aed0c65.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: [Adi Bronshtein](https://towardsdatascience.com/train-test-split-and-cross-validation-in-python-80b61beca4b6)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For our examples we will use Scikit-learn's [`train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)
+    module, which is useful for splitting your datasets whether or not you will be
+    using Scikit-learn to perform your machine learning tasks. You could manually
+    perform these splits some other way (using solely Numpy, perhaps), but the Scikit-learn
+    module includes some useful functionality to make this a bit easier. But pay attention;
+    perhaps you have been using this module to perform your data splits in the past
+    but have not taken certain of these considerations into account while doing so.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Randomly shuffling instances
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The first consideration is: are your instances shuffled? So long as there is
+    no reason for *not* shuffling our data (your data is time series, for example),
+    we want to make certain that our instances are not just sequentially split as
+    they are encountered in the dataset, as our instances may have been added in such
+    a way that will introduce some unwanted bias into our model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example, look at how the version of the iris dataset included with Scikit-learn
+    has its instances arranged upon loading:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you were to split your dataset with 3 classes of equal numbers of instances
+    as 2/3 for training and 1/3 for testing, your newly separated datasets would have
+    zero label crossover. That's obviously a problem when trying to learn features
+    to predict class labels. Thankfully, the `train_test_split` module automatically
+    shuffles data first by default (you can override this by setting the `shuffle`
+    parameter to `False`).
+  prefs: []
+  type: TYPE_NORMAL
+- en: To do so, both the `feature` and `target` vectors (`X` and `y`) must be passed
+    to the module. You should set a `random_state` for reproducibility. Either `train_size`
+    or `test_size` needs to be set, but both are not necessary. If you do explicitly
+    set both, they must add up to 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can see that we now have our instances shuffled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Stratifying classes
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The next consideration is this: are the class counts of our newly-split training
+    and testing datasets evenly distributed?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is not an even split. This relates to the idea of whether our algorithm
+    gets equal opportunity to learn the features of each of the dataset's classes,
+    and subsequently test what it has learned on the same number of instances of each
+    class. This is of particular interest in smaller datasets, but should be a persistent
+    concern.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can force the class proportion across train and test splits with `train_test_split`'s
+    `stratify` option, noting that we will stratify with respect to the class distribution
+    in `y`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: This looks better now, and the raw numbers tell us that this is the most optimally
+    stratified split possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Splitting the splits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The third consideration relates to our testing data: is our modeling task content
+    having only a single testing dataset, made up of previously-unseen data, or should
+    we be using two such sets — one for validating our model during its fine-tuning,
+    and perhaps multiple models, and another as a final holdout set for model comparison
+    and selection.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ac02dfdbbfffb5b5dc458a3431a91328.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: [Stack Exchange](https://datascience.stackexchange.com/questions/61467/clarification-on-train-test-and-val-and-how-to-use-implement-it)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we chose 2 such sets, this would mean that there would be one set of data
+    that is held out until all assumptions have been tested, all hyperparameters tuned,
+    and all models trained to their best performance, which is then only seen once
+    by the models as the final step in our experiments. There is a body of work you
+    can consult on testing versus validation sets; I won't go any further into the
+    reasoning and arguments here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Assuming, however, that you conclude you *do* want to use testing and validation
+    sets (and you should conclude this), crafting them using `train_test_split` is
+    easy; we split the entire dataset once, separating the training from the remaining
+    data, and then again to split the remaining data into testing and validation sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below, using the digits dataset, we split 70% for the training dataset, and
+    temporarily assign the remainder to the testing set. We continue to enforce the
+    best practices covered above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note the stratified classes across the training and temporary testing sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We then re-split the testing set in the same way — this time modifying the output
+    variable names, the input variable names, and being careful to change the `stratify`
+    class vector reference — using a 50/50 split for the testing and validation sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note, again, the class stratification across all datasets, which is optimal
+    and ideal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You are now ready to train, validate, and test as many machine learning models
+    as you see fit with your data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Another consideration: you might want to think about using cross-validation
+    instead of a simple train/test or train/validate/test strategy. We will cover
+    cross-stratification considerations next time.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Sparse Matrix Representation in Python](/2020/05/sparse-matrix-representation-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Great New Features in Scikit-learn 0.23](/2020/05/5-great-new-features-scikit-learn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Most Useful Techniques to Handle Imbalanced Datasets](/2020/01/5-most-useful-techniques-handle-imbalanced-datasets.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Python Best Practices for Data Science](https://www.kdnuggets.com/5-python-best-practices-for-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[MLOps: The Best Practices and How To Apply Them](https://www.kdnuggets.com/2022/04/mlops-best-practices-apply.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Best Practices for Creating Domain-Specific AI Models](https://www.kdnuggets.com/2022/07/best-practices-creating-domainspecific-ai-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Integrating ChatGPT Into Data Science Workflows: Tips and Best Practices](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Warehousing and ETL Best Practices](https://www.kdnuggets.com/2023/02/data-warehousing-etl-best-practices.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[11 Best Practices of Cloud and Data Migration to AWS Cloud](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

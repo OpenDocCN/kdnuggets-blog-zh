@@ -1,0 +1,413 @@
+- en: Genetic Algorithm Implementation in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/07/genetic-algorithm-implementation-python.html](https://www.kdnuggets.com/2018/07/genetic-algorithm-implementation-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Image](../Images/ab1f8e899e0f7dc04c652ffc0278bfbc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This tutorial will implement the genetic algorithm optimization technique in
+    Python based on a simple example in which we are trying to maximize the output
+    of an equation. The tutorial uses the decimal representation for genes, one point
+    crossover, and uniform mutation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Flowchart of the genetic algorithm (GA) is shown in figure 1\. Each step involved
+    in the GA has some variations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 1**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f7a61e594c8da119374bac0446628488.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'For example, there are different types of representations for genes such as
+    binary, decimal, integer, and others. Each type is treated differently. There
+    are different types of mutation such as bit flip, swap, inverse, uniform, non-uniform,
+    Gaussian, shrink, and others. Also, crossover has different types such as blend,
+    one point, two points, uniform, and others. This tutorial will not implement all
+    of them but just implements one type of each step involved in GA. The tutorial
+    uses the decimal representation for genes, one point crossover, and uniform mutation.
+    The Reader should have an understanding of how GA works. If not, please read this
+    article titled “Introduction to Optimization with Genetic Algorithm” found in
+    these links:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: LinkedIn: [https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/](https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: KDnuggets: [https://www.kdnuggets.com/2018/03/introduction-optimization-with-genetic-algorithm.html](/2018/03/introduction-optimization-with-genetic-algorithm.html)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: TowardsDataScience: [https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b](https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: SlideShare: [https://www.slideshare.net/AhmedGadFCIT/introduction-to-optimization-with-genetic-algorithm-ga](https://www.slideshare.net/AhmedGadFCIT/introduction-to-optimization-with-genetic-algorithm-ga)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The tutorial starts by presenting the equation that we are going to implement.
+    The equation is shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Y = w1x1 + w2x2 + w3x3 + w4x4 + w5x5 + w6x6**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The equation has 6 inputs (x1 to x6) and 6 weights (w1 to w6) as shown and inputs
+    values are (x1,x2,x3,x4,x5,x6)=(4,-2,7,5,11,1). We are looking to find the parameters
+    (weights) that maximize such equation. The idea of maximizing such equation seems
+    simple. The positive input is to be multiplied by the largest possible positive
+    number and the negative number is to be multiplied by the smallest possible negative
+    number. But the idea we are looking to implement is how to make GA do that its
+    own in order to know that it is better to use positive weight with positive inputs
+    and negative weights with negative inputs. Let us start implementing GA.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'At first, let us create a list of the 6 inputs and a variable to hold the number
+    of weights as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The next step is to define the initial population. Based on the number of weights,
+    each chromosome (solution or individual) in the population will definitely have
+    6 genes, one gene for each weight. But the question is how many solutions per
+    the population? There is no fixed value for that and we can select the value that
+    fits well with our problem. But we could leave it generic so that it can be changed
+    in the code. Next, we create a variable that holds the number of solutions per
+    population, another to hold the size of the population, and finally, a variable
+    that holds the actual initial population:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After importing the numpy library, we are able to create the initial population
+    randomly using the numpy.random.uniform function. According to the selected parameters,
+    it will be of shape (8, 6). That is 8 chromosomes and each one has 6 genes, one
+    for each weight. After running this code, the population is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that it is generated randomly and thus it will definitely change when get
+    run again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After preparing the population, next is to follow the flowchart in figure 1\.
+    Based on the fitness function, we are going to select the best individuals within
+    the current population as parents for mating. Next is to apply the GA variants
+    (crossover and mutation) to produce the offspring of the next generation, creating
+    the new population by appending both parents and offspring, and repeating such
+    steps for a number of iterations/generations. The next code applies these steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The current number of generations is 5\. It is selected to be small for presenting
+    results of all generations within the tutorial. There is a module named GA that
+    holds the implementation of the algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The first step is to find the fitness value of each solution within the population
+    using the GA.cal_pop_fitness function. The implementation of such function inside
+    the GA module is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The fitness function accepts both the equation inputs values (x1 to x6) in
+    addition to the population. The fitness value is calculated as the sum of product
+    (SOP) between each input and its corresponding gene (weight) according to our
+    function. According to the number of solutions per population, there will be a
+    number of SOPs. As we previously set the number of solutions to 8 in the variable
+    named sol_per_pop, there will be 8 SOPs as shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that the higher the fitness value the better the solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After calculating the fitness values for all solutions, next is to select the
+    best of them as parents in the mating pool according to the next function GA.select_mating_pool.
+    Such function accepts the population, the fitness values, and the number of parents
+    needed. It returns the parents selected. Its implementation inside the GA module
+    is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Based on the number of parents required as defined in the variable num_parents_mating,
+    the function creates an empty array to hold them as in this line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Looping through the current population, the function gets the index of the
+    highest fitness value because it is the best solution to be selected according
+    to this line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This index is used to retrieve the solution that corresponds to such fitness
+    value using this line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To avoid selecting such solution again, its fitness value is set to a very
+    small value that is likely to not be selected again which is **-99999999999**.
+    The **parents** array is returned finally which will be as follows according to
+    our example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that these three parents are the best individuals within the current population
+    based on their fitness values which are 18.24112489, 17.0688537, 15.99527402,
+    and 14.40299221, respectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Next step is to use such selected parents for mating in order to generate the
+    offspring. The mating starts with the crossover operation according to the GA.crossover
+    function. This function accepts the parents and the offspring size. It uses the
+    offspring size to know the number of offspring to produce from such parents. Such
+    a function is implemented as follows inside the GA module:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The function starts by creating an empty array based on the offspring size
+    as in this line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Because we are using single point crossover, we need to specify the point at
+    which crossover takes place. The point is selected to divide the solution into
+    two equal halves according to this line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then we need to select the two parents to crossover. The indices of these parents
+    are selected according to these two lines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: The parents are selected in a way similar to a ring. The first with indices
+    0 and 1 are selected at first to produce two offspring. If there still remaining
+    offspring to produce, then we select the parent 1 with parent 2 to produce another
+    two offspring. If we are in need of more offspring, then we select the next two
+    parents with indices 2 and 3\. By index 3, we reached the last parent. If we need
+    to produce more offspring, then we select parent with index 3 and go back to the
+    parent with index 0, and so on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The solutions after applying the crossover operation to the parents are stored
+    into the offspring variable and they are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Next is to apply the second GA variant, mutation, to the results of the crossover
+    stored in the offspring variable using the mutation function inside the GA module.
+    Such function accepts the crossover offspring and returns them after applying
+    uniform mutation. That function is implemented as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'It loops through each offspring and adds a uniformly generated random number
+    in the range from -1 to 1 according to this line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Such random number is then added to the gene with index 4 of the offspring
+    according to this line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Note that the index could be changed to any other index. The offspring after
+    applying mutation are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: Such results are added to the variable offspring_crossover and got returned
+    by the function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At this point, we successfully produced 4 offspring from the 4 selected parents
+    and we are ready to create the new population of the next generation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note that GA is a random-based optimization technique. It tries to enhance
+    the current solutions by applying some random changes to them. Because such changes
+    are random, we are not sure that they will produce better solutions. For such
+    reason, it is preferred to keep the previous best solutions (parents) in the new
+    population. In the worst case when all the new offspring are worse than such parents,
+    we will continue using such parents. As a result, we guarantee that the new generation
+    will at least preserve the previous good results and will not go worse. The new
+    population will have its first 4 solutions from the previous parents. The last
+    4 solutions come from the offspring created after applying crossover and mutation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'By calculating the fitness of all solutions (parents and offspring) of the
+    first generation, their fitness is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The highest fitness previously was **18.24112489** but now it is **31.7328971158**.
+    That means that the random changes moved towards a better solution. This is GREAT.
+    But such results could be enhanced by going through more generations. Below are
+    the results of each step for another 4 generations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: After the above 5 generations, the best result now has a fitness value equal
+    to **44.8169235189** compared to the best result after the first generation which
+    is **18.24112489**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The best solution has the following weights:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The complete code that implements the GA is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE24]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The GA module is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE25]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Bio: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** received his B.Sc.
+    degree with excellent with honors in information technology from the Faculty of
+    Computers and Information (FCI), Menoufia University, Egypt, in July 2015\. For
+    being ranked first in his faculty, he was recommended to work as a teaching assistant
+    in one of the Egyptian institutes in 2015 and then in 2016 to work as a teaching
+    assistant and a researcher in his faculty. His current research interests include
+    deep learning, machine learning, artificial intelligence, digital signal processing,
+    and computer vision.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Derivation of Convolutional Neural Network from Fully Connected Network Step-By-Step](/2018/04/derivation-convolutional-neural-network-fully-connected-step-by-step.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Is Learning Rate Useful in Artificial Neural Networks?](/2018/01/learning-rate-useful-neural-network.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Avoid Overfitting with Regularization](/2018/02/avoid-overfitting-regularization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

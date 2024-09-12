@@ -1,0 +1,281 @@
+- en: Making Python Programs Blazingly Fast
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/09/making-python-programs-blazingly-fast.html](https://www.kdnuggets.com/2020/09/making-python-programs-blazingly-fast.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Martin Heinz](https://www.linkedin.com/in/heinz-martin/), DevOps Engineer
+    at IBM**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Python* haters always say, that one of the reasons they don’t want to use
+    it, is that it’s *slow*. Well, whether specific program — regardless of the programming
+    language used — is fast or slow is very much dependent on the developer who wrote
+    it and their skill and ability to write *optimized* and *fast* programs.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, let’s prove some people wrong and let’s see how we can improve performance
+    of our *Python* programs and make them really fast!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8e2b22b053bf334d3c9ae781110804fe.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: by [@veri_ivanova](https://unsplash.com/@veri_ivanova) on unsplash
+  prefs: []
+  type: TYPE_NORMAL
+- en: Timing and Profiling
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Before we start optimizing anything, we first need to find out which parts
+    of our code actually slow down the whole program. Sometimes the bottleneck of
+    the program might be obvious, but in case you don’t know where it is, then here
+    are options you have for finding out:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Note: This is the program I will be using for demonstration purposes, it computes *`*e*`* to
+    power of *`*X*`* (taken from Python docs):*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Laziest “Profiling”
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'First off, the simplest and honestly very lazy solution — Unix `time` command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This could work if you just want to time your whole program, which is usually
+    not enough…
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Most Detailed Profiling
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'On the other end of the spectrum is `cProfile`, which will give you *too much* information:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here, we ran the testing script with `cProfile` module and `time` argument,
+    so that lines are ordered by internal time ( `cumtime`). This gives us *a lot* of
+    information, the lines you can see above are about 10% of the actual output. From
+    this, we can see that `exp` function is the culprit ( *surprise, surprise*) and
+    now we can get little more specific with timing and profiling...
+  prefs: []
+  type: TYPE_NORMAL
+- en: Timing Specific Functions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now that we know where to direct our attention, we might want to time the slow
+    function, without measuring the rest of the code. For that we can use simple decorator:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This decorator can be then applied to function under test like so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This gives us output like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One thing to consider is *what kind* of time we actually (want to) measure.
+    Time package provides `time.perf_counter` and `time.process_time`. The difference
+    here is that `perf_counter` returns absolute value, which includes time when your
+    Python program process is not running, therefore it might be impacted by machine
+    load. On the other hand `process_time` returns only *user time* (excluding *system
+    time*), which is only the time of your process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Making It Faster
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now, for the fun part. Let’s make your Python programs run faster. I’m (mostly)
+    not going to show you some hacks, tricks and code snippets that will magically
+    solve your performance issues. This is more about general ideas and strategies,
+    which when used, can make a huge impact on performance, in some cases up to 30%
+    speed-up.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use Built-in Data Types
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This one is pretty obvious. Built-in data types are very fast, especially in
+    comparison to our custom types like trees or linked lists. That’s mainly because
+    the built-ins are implemented in *C*, which we can’t really match in speed when
+    coding in Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Caching/Memoization with lru_cache
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'I have already shown this one in a previous blog post [here](https://martinheinz.dev/blog/4),
+    but I think it’s worth repeating it with simple example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The function above simulates heavy computation using `time.sleep`. When called
+    first time with parameter `1`, it waits for 2 seconds and only then returns the
+    result. When called again, the result is already cached so it skips the body of
+    the function and returns the result immediately. For more *real life* example
+    see previous blog posts [here](https://martinheinz.dev/blog/4).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use Local Variables
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This has to do with the speed of lookup of variables in each scope. I’m writing *each
+    scope*, because it’s not just about using local vs. global variables. There’s
+    actually a difference in speed of lookup even between — let’s say — local variable
+    in function (fastest), class-level attribute (e.g. `self.name` - slower) and global
+    for example imported function like `time.time` (slowest).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can improve performance, by using seemingly unnecessary (straight-up useless)
+    assignments like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use Functions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'This might seem counter-intuitive, as calling function will put more stuff
+    onto the stack and create overhead from function returns, but it relates to the
+    previous point. If you just put your whole code into one file without putting
+    it into function, it will be much slower because of global variables. Therefore
+    you can speed up your code just by wrapping whole code in `main` function and
+    calling it once, like so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Don’t Access Attributes
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Another thing that might slow down your programs is *dot operator* (`.`) which
+    is used when accessing object attributes. This operator triggers dictionary lookup
+    using `__getattribute__`, which creates extra overhead in your code. So, how can
+    we actually avoid (limit) using it?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Beware of Strings
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Operations on strings can get quite slow when ran in loop using for example *modulus* (`%s`)
+    or `.format()`. What better options do we have? Based on recent [tweet from Raymond
+    Hettinger](https://twitter.com/raymondh/status/1205969258800275456), the only
+    thing we should be using is *f-string*, it''s most readable, concise AND the fastest
+    method. So, based on that tweet, this is the list of methods you can use - fastest
+    to slowest:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generators are not inherently faster as they were made to allow for lazy computation,
+    which saves memory rather than time. However, the saved memory can be cause for
+    your program to actually run faster. How? Well, if you have a large dataset and
+    you don’t use generators (iterators), then the data might overflow CPUs *L1 cache*,
+    which will slow down lookup of values in memory significantly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When it comes to performance, it’s very import that CPU can save all the data
+    it’s working on, as close as possible, which is in the cache. You can watch [Raymond
+    Hettingers talk](https://www.youtube.com/watch?v=OSGv2VnC0go&t=8m17s), where he
+    mentions these issues.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first rule of optimization is to *not do it*. But, if you really have to,
+    then I hope these few tips help you with that. However, be mindful when optimizing
+    your code as it might end up making your code hard to read and therefore hard
+    to maintain, which might outweigh benefits of optimization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Note: This was originally posted at *[*martinheinz.dev*](https://martinheinz.dev/blog/13)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Martin Heinz](https://www.linkedin.com/in/heinz-martin/)** is a DevOps
+    Engineer at IBM. A software developer, Martin is passionate about computer security,
+    privacy and cryptography, focused on cloud and serverless computing, and is always
+    ready to take on a new challenge.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/making-python-programs-blazingly-fast-c1cd79bd1b32).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Automating Every Aspect of Your Python Project](/2020/09/automating-every-aspect-python-project.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Free From MIT: Intro to Computer Science and Programming in Python](/2020/09/free-mit-intro-computer-science-programming-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Statistical and Visual Exploratory Data Analysis with One Line of Code](/2020/09/statistical-visual-exploratory-data-analysis-one-line-code.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Thomas Miller, PhD, explores Northwestern University’s Online…](https://www.kdnuggets.com/2024/05/nwu/thomas-miller-phd-explores-northwestern-universitys-online-graduate-programs-in-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Step up your Python game with Fast Python for Data Science!](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Make Python Code Run Incredibly Fast](https://www.kdnuggets.com/2021/06/make-python-code-run-incredibly-fast.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Making Predictions: A Beginner''s Guide to Linear Regression in Python](https://www.kdnuggets.com/2023/06/making-predictions-beginner-guide-linear-regression-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Fast Can BERT Go With Sparsity?](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Speed up Machine Learning with Fast Kriging (FKR)](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

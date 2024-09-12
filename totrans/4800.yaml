@@ -1,0 +1,371 @@
+- en: An Introduction to t-SNE with Python Example
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/08/introduction-t-sne-python.html](https://www.kdnuggets.com/2018/08/introduction-t-sne-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Andre Violante](https://www.linkedin.com/in/andreviolante/), Data Scientist
+    at SAS**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Introduction**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I’ve always had a passion for learning and consider myself a lifelong learner.
+    Being at SAS, as a data scientist, allows me to learn and try out new algorithms
+    and functionalities that we regularly release to our customers. Often times, the
+    algorithms are not technically new, but they’re new to me which makes it a lot
+    of fun.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recently, I had the opportunity to learn more about t-Distributed Stochastic
+    Neighbor Embedding (t-SNE). In this post I’m going to give a high-level overview
+    of the t-SNE algorithm. I’ll also share some example python code where I’ll use
+    t-SNE on both the Digits and MNIST dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**What is t-SNE?**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: t-Distributed Stochastic Neighbor Embedding (t-SNE) is an [unsupervised, non-linear
+    technique](https://blogs.sas.com/content/subconsciousmusings/2017/04/12/machine-learning-algorithm-use/)
+    primarily used for data exploration and visualizing high-dimensional data. In
+    simpler terms, t-SNE gives you a feel or intuition of how the data is arranged
+    in a high-dimensional space. It was developed by Laurens van der Maatens and Geoffrey
+    Hinton in 2008.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**t-SNE vs PCA**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If you’re familiar with [Principal Components Analysis](https://blogs.sas.com/content/iml/2017/08/09/robust-principal-components-sas.html)
+    (PCA), then like me, you’re probably wondering the difference between PCA and
+    t-SNE. The first thing to note is that PCA was developed in 1933 while t-SNE was
+    developed in 2008\. A lot has changed in the world of data science since 1933
+    mainly in the realm of compute and size of data. Second, PCA is a linear dimension
+    reduction technique that seeks to maximize variance and preserves large pairwise
+    distances. In other words, things that are different end up far apart. This can
+    lead to poor visualization especially when dealing with non-linear manifold structures.
+    Think of a manifold structure as any geometric shape like: cylinder, ball, curve,
+    etc.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: t-SNE differs from PCA by preserving only small pairwise distances or local
+    similarities whereas PCA is concerned with preserving large pairwise distances
+    to maximize variance. Laurens illustrates the PCA and t-SNE approach pretty well
+    using the Swiss Roll dataset in Figure 1 [1]. You can see that due to the non-linearity
+    of this toy dataset (manifold) and preserving large distances that PCA would incorrectly
+    preserve the structure of the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Tsne Swiss Roll](../Images/db379c2ed388b99f0f930076f275ac42.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 1 — Swiss Roll Dataset. Preserve small distance with t-SNE (solid line)
+    vs maximizing variance PCA [1]
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**How t-SNE works**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we know why we might use t-SNE over PCA, lets discuss how t-SNE works.
+    The t-SNE algorithm calculates a similarity measure between pairs of instances
+    in the high dimensional space and in the low dimensional space. It then tries
+    to optimize these two similarity measures using a cost function. Let’s break that
+    down into 3 basic steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 1, measure similarities between points in the high dimensional space. Think
+    of a bunch of data points scattered on a 2D space (Figure 2). For each data point
+    (x[i]) we’ll center a Gaussian distribution over that point. Then we measure the
+    density of all points (x[j]) under that Gaussian distribution. Then renormalize
+    for all points. This gives us a set of probabilities (P[ij]) for all points. Those
+    probabilities are proportional to the similarities. All that means is, if data
+    points x1 and x2 have equal values under this Gaussian circle then their proportions
+    and similarities are equal and hence you have local similarities in the structure
+    of this high-dimensional space. The Gaussian distribution or circle can be manipulated
+    using what’s called perplexity, which influences the variance of the distribution
+    (circle size) and essentially the number of nearest neighbors. Normal range for
+    perplexity is between 5 and 50 [2].
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![Tsne Gaussian Centering](../Images/77c425c98dfc989a84e9338fa07c8bf3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 2 — Measuring pairwise similarities in the high-dimensional space
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 2 is similar to step 1, but instead of using a Gaussian distribution you
+    use a Student t-distribution with one degree of freedom, which is also known as
+    the Cauchy distribution (Figure 3). This gives us a second set of probabilities
+    (Q[ij]) in the low dimensional space. As you can see the Student t-distribution
+    has heavier tails than the normal distribution. The heavy tails allow for better
+    modeling of far apart distances.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![Tsne Cauchy Distribution](../Images/b2b7ac0282ffd54212150dd3ea74d726.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 3 — Normal vs Student t-distribution
+  prefs: []
+  type: TYPE_NORMAL
+- en: The last step is that we want these set of probabilities from the low-dimensional
+    space (Q[ij]) to reflect those of the high dimensional space (P[ij]) as best as
+    possible. We want the two map structures to be similar. We measure the difference
+    between the probability distributions of the two-dimensional spaces using Kullback-Liebler
+    divergence (KL). I won’t get too much into KL except that it is an asymmetrical
+    approach that efficiently compares large P[ij] and Q[ij] values. Finally, we use
+    gradient descent to minimize our KL cost function.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Use Case for t-SNE**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that you know how t-SNE works let’s talk quickly about where it is used.
+    Laurens van der Maaten shows a lot of examples in his video presentation [1].
+    He mentions the use of t-SNE in areas like climate research, computer security,
+    bioinformatics, cancer research, etc. t-SNE could be used on high-dimensional
+    data and then the output of those dimensions then become inputs to some other
+    classification model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, t-SNE could be used to investigate, learn, or evaluate segmentation. Often
+    times we select the number of segments prior to modeling or iterate after results.
+    t-SNE can often times show clear separation in the data. This can be used prior
+    to using your segmentation model to select a cluster number or after to evaluate
+    if your segments actually hold up. t-SNE however is not a clustering approach
+    since it does not preserve the inputs like PCA and the values may often change
+    between runs so it’s purely for exploration.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Code Example**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Below is a python code (Figures below with link to GitHub) where you can see
+    the visual comparison between PCA and t-SNE on the Digits and MNIST datasets.
+    I select both of these datasets because of the dimensionality differences and
+    therefore the differences in results. I also show a technique in the code where
+    you can run PCA prior to running t-SNE. This can be done to reduce computation
+    and you’d typically reduce down to ~30 dimensions and then run t-SNE.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I ran this using python and calling the [SAS libraries.](http://go.documentation.sas.com/?cdcId=pgmcdc&cdcVersion=8.11&docsetId=allprodsactions&docsetTarget=actionSetsByName.htm&locale=en)
+    It may appear slightly different than what you’re use to and you can see that
+    in the images below. I used `seaborn` for my visuals which I thought was great,
+    but with t-SNE you may get really compact clusters and need to zoom in. Another
+    visualization tool, like plotly, may be better if you need to zoom in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Check out [the full notebook in GitHub](https://github.com/aviolante/sas-python-work/blob/master/tSneExampleBlogPost.ipynb)
+    so you can see all the steps in between and have the code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Step 1 — Load Python Libraries. Create a connection to the SAS server (Called
+    ‘CAS’, which is a distributed in-memory engine). Load CAS action sets (think of
+    these as libraries). Read in data and see shape.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Tsne Example Code1](../Images/6df09bafad9d0886d40cf471ac51c771.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Step 2 — To this point I’m still working on my local machine. I’m going to
+    load that data into the CAS server I mentioned. This helps me to take advantage
+    of the distributed environment and gain performance efficiency. Then I perform
+    PCA analysis on both Digits and MNIST data.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Tsne Example Code2](../Images/a4cfe303eb2a47c06e8b6bdc423abe0e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Step 3 — Visualize our PCA results for both Digits and MNIST*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Tsne Example Code3](../Images/12820e6dd955b54925e7d6ef092e47f5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Tsne PCA Plot Result Digits](../Images/e3d9a844b4756f26088f3141511a2918.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: PCA actually does a decent job on the Digits dataset and finding structure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Tsne PCA Plot Results Mnist](../Images/f825789c701e9946255fac05ffa32ed9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As you can see PCA on the MNIST dataset has a ‘crowding’ issue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Step 4 — Now let’s try the same steps as above, but using the t-SNE algorithm*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Tsne Example Code 4](../Images/8dc1fa98c23f3a6f5266f615a4b6da54.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Tsne Example Code 6](../Images/3f09e5ac6784b3e8071b7897f71269c1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Tsne Plot Result Digits](../Images/e7d5af8e17ff560abd5bc421baa7324a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*And now for the MNIST dataset…*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Tsne Example Code7](../Images/cb48a1f2d7f64879454cd4222d24c05e.png) ![Tsne
+    Example Code8](../Images/e1a899be00dd4bcdcf77251f0a949898.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Tsne Plot Results Mnist](../Images/6f802ae3c6de85cf84f7146ece03e10f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Conclusion**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I hope you enjoyed this overview and example of the t-SNE algorithm. I found
+    t-SNE to be a very interesting and useful as a visualization tool since almost
+    all the data I’ve ever worked on seemed to be high-dimensional. I’ll post the
+    resources that I found super helpful below. The best resource for me was the YouTube
+    video by Laurens. It’s a little long at almost 1 hour, but well explained and
+    where I found the clearest explanation with detail.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Additional Resources I found Useful:**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'T-SNE vs PCA: [https://www.quora.com/What-advantages-does-the-t-SNE-algorithm-have-over-PCA](https://www.quora.com/What-advantages-does-the-t-SNE-algorithm-have-over-PCA)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Kullback-Liebler Divergence: [https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'T-SNE Wikipedia: [https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'T-SNE Walkthrough: [https://www.analyticsvidhya.com/blog/2017/01/t-sne-implementation-r-python/](https://www.analyticsvidhya.com/blog/2017/01/t-sne-implementation-r-python/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Good hyperparameter Information: [https://distill.pub/2016/misread-tsne/](https://distill.pub/2016/misread-tsne/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Lauren van der Maaten’s GitHub Page: [https://lvdmaaten.github.io/tsne/](https://lvdmaaten.github.io/tsne/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**References**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: YouTube. (2013, November 6). Visualizing Data Using t-SNE [Video File]. Retrieved
+    from [https://www.youtube.com/watch?v=RJVL80Gg3lA](https://www.youtube.com/watch?v=RJVL80Gg3lA)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: L.J.P. van der Maaten and G.E. Hinton. Visualizing High-Dimensional Data Using
+    t-SNE. Journal of Machine Learning Research 9(Nov):2579–2605, 2008.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Bio**: [Andre](https://www.linkedin.com/in/andreviolante/) comes to SAS with
+    over 8 years of digital analytics experience. He has specialized in the retail
+    industry with deep experience in customer analytics. Andre has worked with several
+    different data platforms, both on-premises and cloud, using a variety of open
+    source tools, but primarily R and Python. Andre is naturally curious with passion
+    for problem solving.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Andre has a Bachelor’s in Business Management and a Master’s degree in Analytics.
+    He is also currently enrolled in Georgia Tech working on a second Master’s degree
+    in Computer Science with an emphasis in machine learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Andre loves spending time with his family going on vacations and trying new
+    food spots. He also enjoys the outdoors and being active.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Dimensionality Reduction : Does PCA really improve classification outcome?](https://www.kdnuggets.com/2018/07/dimensionality-reduction-pca-improve-classification-results.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimization 101 for Data Scientists](https://www.kdnuggets.com/2018/08/optimization-101-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ten Machine Learning Algorithms You Should Know to Become a Data Scientist](https://www.kdnuggets.com/2018/04/10-machine-learning-algorithms-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Introduction to Clustering in Python with PyCaret](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Multilabel Classification: An Introduction with Python''s Scikit-Learn](https://www.kdnuggets.com/2023/08/multilabel-classification-introduction-python-scikitlearn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Multithreading and Multiprocessing in Python](https://www.kdnuggets.com/introduction-to-multithreading-and-multiprocessing-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Memory Profiling in Python](https://www.kdnuggets.com/introduction-to-memory-profiling-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Duck, Duck, Code: An Introduction to Python''s Duck Typing](https://www.kdnuggets.com/duck-duck-code-an-introduction-to-pythons-duck-typing)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to __getitem__: A Magic Method in Python](https://www.kdnuggets.com/2023/03/introduction-getitem-magic-method-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

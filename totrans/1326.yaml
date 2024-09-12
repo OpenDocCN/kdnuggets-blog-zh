@@ -1,0 +1,505 @@
+- en: Software Engineering Tips and Best Practices for Data Science
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/10/software-engineering-best-practices-data-science.html](https://www.kdnuggets.com/2020/10/software-engineering-best-practices-data-science.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Ahmed Besbes](https://ahmedbesbes.com), AI Engineer // Blogger // Runner**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/78dbf50aeffb2874715d1afcd7beab53.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you’re into data science, then you’re probably familiar with this workflow:
+    you start a project by firing up a jupyter notebook, then begin writing your python
+    code, running complex analyses, or even training a model. As the notebook file
+    grows in size with all the functions, the classes, the plots, and the logs, you
+    find yourself with an enormous blob of monolithic code sitting up in one place
+    in front of you. If you’re lucky, things can go well. Good for you then!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, jupyter notebooks hide some serious pitfalls that may turn your coding
+    into a living hell. Let’s see how this happens and then discuss coding best practices
+    to prevent it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The problems with Jupyter Notebook
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/c6d5b3b1ae9a15554525c6807fa87a01.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*source: [datascience.foundation](https://datascience.foundation/datatalk/setting-up-a-python-jupyter-notebook-online-working-with-python-on-the-cloud).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Quite often, things may not go the way you intend if you want to take your
+    jupyter prototyping to the next level. Here are some situations I encountered
+    while using this tool, and that should sound familiar to you:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With all the objects (functions or classes) defined and instantiated in one
+    place,**maintainability becomes really hard**: even if you want to make a small
+    change to a function, you have to locate it somewhere in the notebook, fix it
+    and rerun the code all over again. You don’t want that, believe me. Wouldn’t it
+    be simple to have your logic and processing functions separated in external scripts?'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Because of its interactivity and instant feedback, jupyter notebooks push data
+    scientists to declare variables in the global namespace instead of using functions.
+    This is considered [bad practice](https://stackoverflow.com/questions/19158339/why-are-global-variables-evil/19158418#19158418) in
+    python development because it **limits effective code reuse. **It also harms reproducibility
+    because your notebook turns into a large state machine holding all your variables.
+    In this configuration, you’ll have to remember which result is cached and which
+    is not, and you’ll also have to expect other users to follow your cell execution
+    order.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The way notebooks are formatted behind the scenes (JSON objects) makes **code
+    versioning difficult. **This is why I rarely see data scientists using GIT to
+    commit different versions of a notebook or merging branches for specific features.
+    Consequently, team collaboration becomes inefficient and clunky: team members
+    start exchanging code snippets and notebooks via e-mail or Slack, rolling back
+    to a previous version of the code is a nightmare, and the file organization starts
+    to be messy. Here’s what I commonly see in projects after two or three weeks of
+    using a jupyter notebook without proper versioning:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '****analysis.**ipynb** **analysis_COPY(1).ipynb'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: analysis_COPY(2).ipynb
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: analysis_FINAL.ipynb
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: analysis_FINAL_2.ipynb**
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Jupyter notebooks are good for exploration and quick prototyping. They’re certainly not
+    designed for reusability or production-use.If you developed a data processing
+    pipeline using a jupyter notebook, the best you can state is that your code is
+    only working on your laptop or your VM in a linear synchronous fashion following
+    the execution order of the cells. This doesn’t say anything about the way your
+    code would behave in a more complex environment with, for instance, larger input
+    datasets, other asynchronous parallel tasks, or less allocated resources.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Notebooks are, in fact, hard to test since their behavior is sometimes unpredictable.**'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: As someone who spends most of his time on VSCode taking advantage of powerful
+    extensions for code [linting](https://marketplace.visualstudio.com/items?itemName=ms-python.python),
+    style [formatting](https://prettier.io/), code structuring, autocompletion, and
+    codebase search, I can’t help but feel a bit powerless when switching back to
+    jupyter.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Compared to VSCode, jupyter notebook lacks extensions that enforce coding
+    best practices.**'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Ok, folks, enough bashing for now. I honestly love jupyter, and I think it’s
+    great for what’s designed to do. You can definitely use it to bootstrap small
+    projects or quickly prototype ideas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But in order to ship these ideas in an industrial fashion, you have to follow
+    software engineering principles that happen to get lost when data scientists use
+    notebooks. So let’s review some of them together and see why they’re important.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tips to make your code great again
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**These tips have been compiled from different projects, meetups I attended,
+    and discussions with software engineers and architects I’ve worked with in the
+    past. If you have other suggestions and ideas to share, feel free to bring your
+    contributions in the comment section, and I’ll credit your answer in the post.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The following sections assume that we’re writing python scripts. Not notebooks.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1 - Clean your code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/da7e4c6d843c484a8b08c17bfbdc3a2c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Photo by [Florian Olivo](https://unsplash.com/@florianolv?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the most important aspects of code quality is clarity. Clear and readable
+    code is crucial for collaboration and maintainability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here’s what may help you have a cleaner code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Use **meaningful variable names **that are descriptive and imply type. For
+    example, if you’re declaring a boolean variable about an attribute (age, for example)
+    to check whether a person is old, you can make it both descriptive and type-informative
+    by using The same goes for the way you declare your data: make it explanatory.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Avoid abbreviations **that no one but you can understand and **long variable
+    names **that no one can bear.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Don’t hard code “magic numbers” **directly in code. Define them in a variable
+    so that everyone can understand what they refer to.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Follow PEP8 conventions **when naming your objects: for example, functions
+    and methods names are in lowercase and words are separated by an underscore, class
+    names follow the UpperCaseCamelCase convention, constants are fully capitalized,
+    etc.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Learn more about these conventions [here](https://visualgit.readthedocs.io/en/latest/pages/naming_convention.html).
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**Use indentation and whitespaces **to let your code breathe. There are standard
+    conventions such as “using 4 space for each indent”, “separate sections should
+    have additional blank lines”… Since I never remember those, I use a very nice **VSCode
+    extension called **[**prettier**](https://prettier.io/)** that automatically reformat
+    my code** when pressing ctrl+s.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/cc1aada2ec1307d7795092311db43747.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Source: [https://prettier.io/](https://prettier.io/).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2 - Make your code modular
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When you start building something that you feel can be reused in the same or
+    other projects, you’ll have to organize your code into logical functions and modules.
+    This helps for better organization and maintainability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, you’re working on an NLP project, and you may have different processing
+    functions to handle text data (tokenizing, stripping URLs, lemmatizing, etc.).
+    You can put all these units in a python module called text_processing.py and import
+    them from it. Your main program will be way lighter!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'These are some good tips I learned about writing modular code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**DRY: Don’t Repeat Yourself. **Generalize and consolidate your code whenever
+    possible.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Functions should do one thing**. If a function does multiple operations,
+    it becomes more difficult to generalize.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Abstract your logic in functions but ****without over-engineering it: **there’s
+    the slight possibility that you’ll end up with too many modules. Use your judgment,
+    and if you’re inexperienced, have a look at popular GitHub repositories such as [scikit-learn](https://github.com/scikit-learn/scikit-learn) and
+    check out their coding style.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 3 - Refactor your code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Refactoring aims at reorganizing the internal structure of the code without
+    altering its functionalities. It’s usually done on a working (but still not fully
+    organized) version of the code. It helps de-duplicate functions, reorganize the
+    file structure, and add more abstraction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To learn more about python refactoring, this article is a great [resource](https://realpython.com/python-refactoring/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4 - Make your code efficient
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Writing efficient code that executes fast and consumes less memory and storage
+    is another important skill in software development.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Writing efficient code takes years of experience, but here are some quick tips
+    that may help your find out if your code is running slow and how to boost it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before running anything, check the complexity of your algorithm to evaluate
+    its execution time
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Check the possible bottlenecks of your script by inspecting the running time
+    of every operation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Avoid for-loops as much as possible and vectorize your operations, especially
+    if you’re using libraries such as [NumPy](https://numpy.org/) or [pandas](https://pandas.pydata.org/)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Leverage the CPU cores of your machine by using multiprocessing
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 5 - Use GIT or any other version control system
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In my personal experience, using GIT + Github helped me improve my coding skills
+    and better organize my projects. Since I used it while collaborating with friends
+    and/or colleagues, it made me stick to standards I didn’t obey to in the past.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/414a1e5ca6eb074cff85a8e61606fdb3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Source: [freecodecamp](https://www.freecodecamp.org/news/the-beginners-guide-to-git-github/).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are lots of benefits to using a version control system, be it in data
+    science or software development.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keeping track of your changes
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Rolling back to any previous version of the code
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Efficient collaboration between team members via merge and pull requests
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Increase of code quality
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Code review
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Assigning tasks to team members and monitoring their progress over time
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Platforms such as Github or Gitlab go even further and provide, among other
+    things, Continuous Integration and Continuous Delivery hooks to automatically
+    build and deploy your projects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you’re new to Git, then I recommend having a look at this [tutorial](https://nvie.com/posts/a-successful-git-branching-model/).
+    Or you can have a look at this cheat sheet:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/85a170b7c85c43de0628582251eb0eac.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*source: [Atlassian](https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to specifically learn about how to version machine learning models,
+    then have a look at this [article](https://algorithmia.com/blog/how-to-version-control-your-production-machine-learning-models).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 6 - Test your code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you’re building a data pipeline that executes a series of operations, one
+    way to make sure it performs according to what it’s designed to do, is to write **tests **that
+    check an expected behavior.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tests can be as simple as checking an output shape or an expected value returned
+    by a function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/14b4af8b9d46b3df6fa8c98dbc2053b5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*[https://pytest-c-testrunner.readthedocs.io/](https://pytest-c-testrunner.readthedocs.io/)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Writing tests for your functions and modules brings many benefits:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It improves the stability of the code and makes mistakes easier to spot
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It prevents unexpected outputs
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It helps to detect edge cases
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It prevents from pushing broken code to production
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 7 - Use logging
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Once the first version of your code is running, you definitely want to monitor
+    it at every step to understand what happens, track the progress, or spot faulty
+    behavior. Here’s where you can use logging.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here are some tips on efficiently using logging:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use different levels (debug, info, warning) depending on the nature of the message
+    you want to log
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Provide useful information in the logs to help solve the related issues.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/de411838c7bf41eeb639cad1aa115d46.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*source: [realpython](https://realpython.com/python-logging-source-code/).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Long gone are the days when data scientists found their way around by producing
+    reports and jupyter notebooks that didn’t communicate in any way with the company
+    systems and infrastructure. Nowadays, data scientists start producing testable
+    and runnable code that seamlessly integrates with the IT systems. **Following
+    software engineering best practices becomes, therefore, a must.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/swlh/software-engineering-tips-and-best-practices-for-data-science-5d85dbcf87fd).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Ahmed Besbes](https://ahmedbesbes.com)is a data scientist living
+    in France working across many industries, such as financial services, media, and
+    the public sector. Part of Ahmed’s work includes crafting, building, and deploying
+    AI applications to answer business issues. Ahmed also blogs about technical topics,
+    such as deep learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[5 Best Practices for Putting Machine Learning Models Into Production](https://www.kdnuggets.com/2020/10/5-best-practices-machine-learning-models-production.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Software engineering fundamentals for Data Scientists](https://www.kdnuggets.com/2020/06/software-engineering-fundamentals-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Coding habits for data scientists](https://www.kdnuggets.com/2020/05/coding-habits-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

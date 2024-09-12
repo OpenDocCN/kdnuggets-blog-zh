@@ -1,0 +1,500 @@
+- en: Writing Your First Distributed Python Application with Ray
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/08/distributed-python-application-ray.html](https://www.kdnuggets.com/2021/08/distributed-python-application-ray.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/), Data
+    Science Professional**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Ray makes parallel and distributed computing work more like you would hope](../Images/538062b0a78f2d34aef3c6188ad7cecb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Ray makes parallel and distributed computing work more like you would hope ([image
+    source](https://www.reddit.com/r/aww/comments/2oagj8/multithreaded_programming_theory_and_practice/))
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Ray](https://docs.ray.io/en/master/) is a fast, simple distributed execution
+    framework that makes it easy to scale your applications and to leverage state
+    of the art machine learning libraries. Using Ray, you can take Python code that
+    runs sequentially and transform it into a distributed application with minimal
+    code changes.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The goal of this tutorial is to explore the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why should you parallelize and distribute with Ray
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to get started with Ray
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Trade-offs in distributed computing (compute cost, memory, I/O, etc)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Why should you parallelize and distribute with Ray?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'As a [previous post pointed out](https://towardsdatascience.com/modern-parallel-and-distributed-python-a-quick-tutorial-on-ray-99f8d70369b8),
+    parallel and distributed computing are a staple of modern applications. The problem
+    is that taking existing Python code and trying to parallelize or distribute it
+    can mean rewriting existing code, sometimes from scratch. Additionally modern
+    applications have requirements that existing modules like [multiprocessing](https://docs.python.org/3/library/multiprocessing.html) lack.
+    These requirements include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Running the same code on more than one machine
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Building microservices and actors that have state and can communicate
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Graceful handling of machine failures and preemption
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Efficient handling of large objects and numerical data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The Ray library satisfies these requirements and allows you to scale your applications
+    without rewriting them. In order to make parallel & distributed computing simple,
+    Ray takes functions and classes and translates them to the distributed setting
+    as tasks and actors. The rest of this tutorial explores these concepts as well
+    as some important things to consider when building parallel & distributed applications.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Ray Ecosystem](../Images/a219e5df972dc5e1ae9dd250a6ee0a3c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: While this tutorial explores how Ray makes it easy to parallelize plain Python
+    code, it is important to note that Ray and its ecosystem also make it easy to
+    parallelize existing libraries like [scikit-learn](https://medium.com/distributed-computing-with-ray/how-to-speed-up-scikit-learn-model-training-aaf17e2d1e1), [XGBoost](https://www.anyscale.com/blog/distributed-xgboost-training-with-ray), [LightGBM](https://www.anyscale.com/blog/introducing-distributed-lightgbm-training-with-ray), [PyTorch](https://medium.com/pytorch/getting-started-with-distributed-machine-learning-with-pytorch-and-ray-fd83c98fdead),
+    and much more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to get started with Ray
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Turning Python Functions into Remote Functions (Ray Tasks)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Ray can be installed through pip.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s begin our Ray journey by creating a Ray task. This can be done by decorating
+    a normal Python function with @ray.remote. This creates a task which can be scheduled
+    across your laptop's CPU cores (or Ray cluster).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Consider the two functions below which generate Fibonacci sequences (integer
+    sequence characterized by the fact that every number after the first two is the
+    sum of the two preceding ones). The first is a normal python function and the
+    second is a Ray task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: There are a couple of things to note regarding these two functions. First, they
+    are identical except for the @ray.remote decorator on the fibonacci_distributed
+    function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The second thing to note is the small return value. They are not returning the
+    Fibonacci sequences themselves, but the sequence size, which is an integer.  This
+    is important, because it might lessen the value of a distributed function by designing
+    it so that it requires or returns a lot of data (parameters). Engineers often
+    refer to this as the input/output (IO) of a distributed function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Comparing Local vs Remote Performance
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The functions in this section will allow us to compare how long it takes to
+    generate multiple long Fibonacci sequences both locally and in parallel. It is
+    important to note that both functions below utilize os.cpu_count() which returns
+    the number of CPUs in the system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![os cpucount](../Images/e670d8f5a15c37da40e802f8614feb32.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The machine used in this tutorial has eight CPUs which means that each function
+    below will generate 8 Fibonacci sequences.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before getting into how the code for run_local and run_remote work, let's run
+    both of these functions to see how long it takes to generate multiple 100000 number
+    Fibonacci sequences both locally and remotely.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![first distributed run_local run_remote](../Images/9005332b15106e8cb059a1e24ef9f1db.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The run_remote function parallelized the computation across multiple cpus which
+    resulted in a smaller processing time (1.76s vs 4.20s).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Ray API
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In order to better understand why run_remote was faster, let's briefly go over
+    the code and along the way explain how the Ray API works.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![run_remote yellow](../Images/88beaa9a9ad3a237ea935e57ceabfea0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The ray.init() command starts all of the relevant Ray processes. By default,
+    Ray creates one worker process per CPU core. If you would want to run Ray on a
+    cluster, you would need to pass in a cluster address with something like ray.init(address=
+    'InsertAddressHere').
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![run_remote remote fibonacci_distributed.remote](../Images/bda15b087909e40f3071fa0c9c29480d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: fibonacci_distributed.remote(100000)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![fibonacci_distributed.remote(100000)](../Images/79635aab3b742035a45bb27dcd41d70a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Calling fibonacci_distributed.remote(sequence_size) immediately returns a future
+    and not the return value of the function. The actual function execution will take
+    place in the background. Since it returns immediately, each function call can
+    be executed in parallel. This makes generating those multiple 100000 long fibonacci
+    sequences take less time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![ray.get](../Images/946c3b656a4b0cea11163461bf11387c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![ray get results](../Images/98aa587fb84451107d8d06cc0266bef5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: ray.get retrieves the resulting value from the task when it completes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, it is important to note that when the process calling ray.init() terminates,
+    the Ray runtime will also terminate. Note that if you try and run ray.init() more
+    than once you may get a RuntimeError (Maybe you called ray.init twice by accident?).
+    This can be solved by using `ray.shutdown()`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Ray Dashboard
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Ray comes with a dashboard that is available at http://127.0.0.1:8265 after
+    you call the ray.init function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Among [other things](https://docs.ray.io/en/master/ray-dashboard.html#ray-dashboard),
+    the dashboard lets you:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understand Ray memory utilization and debug memory errors.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: See per-actor resource usage, executed tasks, logs, and more.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: View cluster metrics.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Kill actors and profile your Ray jobs.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: See errors and exceptions at a glance.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: View logs across many machines in a single pane.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: See [Ray Tune](https://docs.ray.io/en/master/tune/index.html) jobs and trial
+    information.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The dashboard below shows the resource utilization on a per-node and per-worker
+    basis after running run_remote(200000). Notice how the dashboard shows the function
+    fibonacci_distributed that’s running in each worker. It’s a good idea to observe
+    your distributed functions while they are running. That way, if you see one worker
+    doing all the work, then you may be using the ray.get function incorrectly. Also,
+    if you see your total CPU utilization getting close to 100 percent, you may be
+    doing too much.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![ray dashboard 8 core](../Images/ceb59b8475e95e39799f0d5ec6b35100.png)](https://images.ctfassets.net/xjan103pcp94/7slD3bTCoh7Wsd0LIScROV/29127717361206b65fab68981b56e59d/8CoreMichael.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Trade-offs in distributed computing
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: This tutorial used Fibonacci sequences because they provide several options
+    for tweaking computing and IO. You can alter the amount of computing that each
+    function call requires by increasing and decreasing the sequence size. The greater
+    the sequence size, the more computing you need to generate the sequence, whereas
+    the smaller the sequence size, the less computing you need. If the computation
+    you distribute is too small, the overhead of Ray would dominate the total processing
+    time, and you wouldn’t get any value out of distributing our functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: IO is also essential when distributing functions. If you modified these functions
+    to return the sequences they calculate, the IO would increase as the sequence
+    size increased. At some point, the time needed to transmit the data would dominate
+    the total time required to complete the multiple calls to the distributed function.
+    This is important if you are distributing your functions over a cluster. This
+    would require the use of a network, and network calls are more costly than the
+    interprocess communication used in this tutorial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Therefore, it is recommended that you try to experiment with both the distributed
+    Fibonacci function and the local Fibonacci function. Try to determine the minimum
+    sequence size needed to benefit from a remote function. Once you figure out the
+    computing, play with the IO to see what happens to overall performance. Distributed
+    architectures, regardless of the tool you use, work best when they don’t have
+    to move a lot of data around.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fortunately, a major benefit of Ray is the ability to maintain entire objects
+    remotely. This helps mitigate the IO problem. Let’s look at that next.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Remote Objects as Actors
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Just as Ray translates Python functions to the distributed setting as tasks,
+    Ray translates Python classes to the distributed setting as actors. Ray provides
+    actors to allow you to parallelize an instance of a class. Code wise, all you
+    need to add to a Python class is the @ray.remote decorator to make it an actor.
+    When you make an instance of that class, Ray creates a new actor which is a process
+    that runs in the cluster and holds a copy of the object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since they are remote objects, they can hold data, and their methods can manipulate
+    that data. This helps cut down on interprocess communication. Consider using an
+    actor if you find yourself writing too many tasks that return data, which in turn
+    are sent to other tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s now look at the actor below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code above can be used to load and manipulate data from a public dataset
+    known as the Global Surface Summary of the Day (GSOD). The dataset is managed
+    by the National Oceanic and Atmospheric Administration (NOAA) and it is freely
+    available on their [site](https://www.ncei.noaa.gov/data/global-summary-of-the-day/archive/).
+    NOAA currently maintains data from over 9,000 stations worldwide and the GSOD
+    dataset contains daily summary information from these stations. There is one gzip
+    file for each year from 1929 to 2020\. For this tutorial, you only need to download
+    the files for [1980](https://www.ncei.noaa.gov/data/global-summary-of-the-day/archive/1980.tar.gz) and [2020](https://www.ncei.noaa.gov/data/global-summary-of-the-day/archive/2020.tar.gz).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The goal of this actor experiment is to compute how many readings from 1980
+    and 2020 were 100 degrees or greater and determine if 2020 had more extreme temperatures
+    than 1980\. In order to implement a fair comparison, only stations that existed
+    in both 1980 and 2020 should be considered. So, the logic of this experiment looks
+    like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Load 1980 data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Load 2020 data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Get a list of stations that existed in 1980.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Get a list of stations that existed in 2020.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Determine the intersection of stations.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Get the number of readings that were 100 degrees or greater from the intersection
+    of stations during 1980.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Get the number of readings that were 100 degrees or greater from the intersection
+    of stations during 2020.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Print the results.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The problem is that this logic is completely sequential; one thing only happens
+    after another. With Ray, a lot of this logic can be done in parallel.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The table below shows a more parallelizable logic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Ray Actor Logic](../Images/2cd485e5f4ded37e80278cefebff12fe.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Writing out the logic in this fashion is an excellent way of making sure you
+    are executing everything that you can in a parallelizable way. The code below
+    implements this logic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![compare years](../Images/5776d72c988f49612a47db2d6ea76343.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: There are a couple important things to mention about the code above. First,
+    putting the @ray.remote decorator at the class level enabled all class methods
+    to be called remotely. Second, the code above utilizes two actor processes (gsod_y1
+    and gsod_y2) which can execute methods in parallel (though each actor can only
+    execute one method at a time). This is what enabled the loading and processing
+    of the 1980 and 2020 data at the same time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[Ray](https://github.com/ray-project/ray) is a fast, simple distributed execution
+    framework that makes it easy to scale your applications and to leverage state
+    of the art machine learning libraries.  This tutorial showed how using Ray makes
+    it easy to take your existing Python code that runs sequentially and transform
+    it into a distributed application with minimal code changes. While the experiments
+    here were all performed on the same machine, [Ray also makes it easy to scale
+    your Python code on every major cloud provider](https://towardsdatascience.com/how-to-scale-python-on-every-major-cloud-provider-5e5df3e88274).
+    If you’re interested in learning more about Ray, check out the [Ray project on
+    GitHub](https://github.com/ray-project/ray), follow [@raydistributed on twitter](https://twitter.com/raydistributed),
+    and sign up for the [Ray newsletter](https://anyscale.us5.list-manage.com/subscribe?u=524b25758d03ad7ec4f64105f&id=d94e960a03).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)** is
+    a Data Science Professional, and works in Developer Relations at Anyscale.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.anyscale.com/blog/writing-your-first-distributed-python-application-with-ray).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Advice for a Successful Data Science Career](/2020/03/advice-successful-data-science-career.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Dask and Pandas: No Such Thing as Too Much Data](/2021/03/dask-pandas-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Speeding up Scikit-Learn Model Training](/2021/03/speed-up-scikit-learn-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[8 Ways to Improve Your Search Application this Week](https://www.kdnuggets.com/2022/09/corise-8-ways-improve-search-application-week.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[RAG vs Finetuning: Which Is the Best Tool to Boost Your LLM Application?](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Geospatial Application in Python with Google Earth…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build An AI Application with Python in 10 Easy Steps](https://www.kdnuggets.com/build-an-ai-application-with-python-in-10-easy-steps)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Mesh & Its Distributed Data Architecture](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

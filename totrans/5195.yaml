@@ -1,0 +1,501 @@
+- en: 'Data Observability: Building Data Quality Monitors Using SQL'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/02/data-observability-building-data-quality-monitors-using-sql.html](https://www.kdnuggets.com/2021/02/data-observability-building-data-quality-monitors-using-sql.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Ryan Kearns](https://www.linkedin.com/in/ryanothnielkearns/), Stanford
+    University & [Barr Moses](https://www.linkedin.com/in/barrmoses/), CEO and Co-founder
+    of Monte Carlo**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/7a97509a8e11f2e885c0d1f8ee9db2a3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image courtesy of [faaiq ackmerd](https://www.pexels.com/@faaiq-ackmerd-383634) on [Pexels](http://www.pexels.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*In this article series, we walk through how you can create your own data observability
+    monitors from scratch, mapping to *[*five key pillars of data health*](https://towardsdatascience.com/introducing-the-five-pillars-of-data-observability-e73734b263d5)*.
+    Part 1 of this series was adapted from Barr Moses and Ryan Kearns’ O’Reilly training, *[***Managing
+    Data Downtime: Applying Observability to Your Data Pipelines***](https://www.oreilly.com/live-training/courses/managing-data-downtime/0636920508717/)*,
+    the industry’s first-ever course on data observability. The associated exercises
+    are available *[*here*](https://github.com/monte-carlo-data/data-downtime-challenge)*,
+    and the adapted code shown in this article is available *[*here*](https://github.com/monte-carlo-data/data-observability-in-practice)*.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: From null values and duplicate rows, to modeling errors and schema changes,
+    data can break for many reasons. [Data testing](https://towardsdatascience.com/why-testing-your-data-is-insufficient-6914275a9762) is
+    often our first line of defense against bad data, but what happens if data breaks
+    during its life cycle?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We call this phenomenon data downtime, and it refers to periods of time where
+    data is missing, erroneous, or otherwise inaccurate. [Data downtime](https://towardsdatascience.com/the-rise-of-data-downtime-841650cedfd5) prompts
+    us to ask questions such as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is the data up to date?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Is the data complete?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Are fields within expected ranges?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Is the null rate higher or lower than it should be?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Has the schema changed?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To trigger an alert when data breaks and prevent data downtime, data teams can
+    leverage a tried and true tactic from our friends in software engineering: [**monitoring
+    and observability**](https://observability.workshop.aws/en/anomalydetection.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We define [**data observability**](https://towardsdatascience.com/what-is-data-observability-40b337971e3e) as
+    an organization’s ability to answer these questions and assess the health of their
+    data ecosystem. Reflecting key variables of data health, the five pillars of data
+    observability are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Freshness**: is my data up to date? Are there gaps in time where my data
+    has not been updated?'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Distribution**: how healthy is my data at the field-level? Is my data within
+    expected ranges?'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Volume**: is my data intake meeting expected thresholds?'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Schema**: has the formal structure of my data management system changed?'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Lineage**: if some of my data is down, what is affected upstream and downstream?
+    How do my data sources depend on one another?'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It’s one thing to talk about data observability in this conceptual way, but
+    a complete treatment should pull back the curtain — **what does data observability
+    actually look like, under the hood, in the code?**
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: It’s difficult to answer this question entirely, since the details will depend
+    on one’s choice of data warehouse, data lake, BI tools, preferred languages and
+    frameworks, and so on. Even so, addressing these problems using lightweight tools
+    like SQLite and Jupyter could be useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we walk through an example data ecosystem to create our own
+    data quality monitors in SQL and explore what data observability looks like in
+    practice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s take a look.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Observability in practice
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*This tutorial is based on *[*Exercise 1*](https://github.com/monte-carlo-data/data-downtime-challenge/blob/master/exercise_text/ex1.md)* of
+    our O’Reilly course, *[*Managing Data Downtime*](https://www.oreilly.com/live-training/courses/managing-data-downtime/0636920508717/)*.
+    You’re welcome to try out these exercises on your own using a Jupyter Notebook
+    and SQL. We’ll be going into more detail, including exercises *[*2*](https://github.com/monte-carlo-data/data-downtime-challenge/blob/master/exercise_text/ex2.md)*, *[*3*](https://github.com/monte-carlo-data/data-downtime-challenge/blob/master/exercise_text/ex3.md)* and *[*4*](https://github.com/monte-carlo-data/data-downtime-challenge/blob/master/exercise_text/ex4.md)*,
+    in future articles.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our sample data ecosystem uses [mock astronomical data](https://github.com/monte-carlo-data/data-observability-in-practice/blob/main/EXOPLANETS.db) about
+    habitable exoplanets. For the purpose of this exercise, I generated the dataset
+    with Python, modeling anomalies off of real incidents I’ve come across in production
+    environments. This dataset is entirely free to use, and the [utils folder](https://github.com/monte-carlo-data/data-downtime-challenge/tree/master/data/utils) in
+    the repository contains the code that generated the data, if you’re interested.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’m using **SQLite 3.32.3**, which should make the database accessible from
+    either the command prompt or SQL files with minimal setup. The concepts extend
+    to really any query language, and [these implementations](https://github.com/monte-carlo-data/data-observability-in-practice/tree/main/queries) can
+    be extended to MySQL, Snowflake, and other database environments with minimal
+    changes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'A database entry in `EXOPLANETS` contains the following info:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '0.`_id`: A UUID corresponding to the planet.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '1. `distance`: Distance from Earth, in lightyears.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '2. `g`: Surface gravity as a multiple of *g*, the gravitational force constant.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '3. `orbital_period`: Length of a single orbital cycle in days.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '4. `avg_temp`: Average surface temperature in degrees Kelvin.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '5. `date_added`: The date our system discovered the planet and added it automatically
+    to our databases.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that one or more of `distance`, `g`, `orbital_period`, and `avg_temp` may
+    be `NULL` for a given planet as a result of missing or erroneous data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that this exercise is retroactive — we’re looking at historical data. In
+    a production data environment, data observability is real time and applied at
+    each stage of the data life cycle, and thus will involve a slightly different
+    implementation than what is done here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For the purpose of this exercise, we’ll be building data observability algorithms
+    for freshness and distribution, but in future articles, we’ll address the rest
+    of our five pillars — and more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Freshness
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first pillar of data observability we monitor for is freshness, which can
+    give us a strong indicator of when critical data assets were last updated. If
+    a report that is regularly updated on the hour suddenly looks very stale, this
+    type of anomaly should give us a strong indication that something is off.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, note the `DATE_ADDED` column. SQL doesn’t store metadata on when individual
+    records are added. So, to visualize freshness in this retroactive setting, we
+    need to track that information ourselves.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Grouping by the `DATE_ADDED` column can give us insight into how `EXOPLANETS` updates
+    daily. For example, we can query for the number of new IDs added per day:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can run this yourself with `$ sqlite3 EXOPLANETS.db < queries/freshness/rows-added.sql` in [the
+    repository](https://github.com/monte-carlo-data/data-observability-in-practice).
+    We get the following data back:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Based on this graphical representation of our dataset, it looks like `EXOPLANETS` consistently
+    updates with around 100 new entries each day, though there are gaps where no data
+    comes in for multiple days.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recall that with freshness, we want to ask the question “is my data up to date?”
+    — thus, knowing about those gaps in table updates is essential to understanding
+    the reliability of our data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/4708360fcf924837114dfffe3c26ee0a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Freshness anomalies!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This query operationalizes freshness by introducing a metric for `DAYS_SINCE_LAST_UPDATE`.
+    (Note: since this tutorial uses SQLite3, the SQL syntax for calculating time differences
+    will be different in MySQL, Snowflake, and other environments).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The resulting table says “on date *X*, the most recent data in `EXOPLANETS` was *Y* days
+    old.” This is information not explicitly available from the `DATE_ADDED` column
+    in the table — but applying data observability gives us the tools to uncover it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/87c04146ac53b77a2213732668d24b30.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Now, we have the data we need to detect freshness anomalies. All that’s left
+    to do is to set a **threshold** **parameter** for Y — *how many days old is too
+    many*? A parameter turns a query into a detector, since it decides what counts
+    as anomalous (read: worth alerting) and what doesn’t. (More on setting threshold
+    parameters in a later article!).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Freshness anomalies!
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data returned to us represents dates where freshness incidents occurred.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On 2020–05–14, the most recent data in the table was 8 days old! Such an outage
+    may represent a breakage in our data pipeline, and would be good to know about
+    if we’re using this data for anything worthwhile (and if we’re using this in a
+    production environment, chances are, we are).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/ba65f82e8223e5de336a45d737b2fd1c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note in particular the last line of the query: `DAYS_SINCE_LAST_UPDATE > 1;`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here, 1 is a [**model parameter**](https://en.wikipedia.org/wiki/Parameter)—
+    there’s nothing “correct” about this number, though changing it will impact what
+    dates we consider to be incidents. The smaller the number, the more genuine anomalies
+    we’ll catch (high [recall](https://en.wikipedia.org/wiki/Precision_and_recall)),
+    but chances are, several of these “anomalies” will not reflect real outages. The
+    larger the number, the greater the likelihood all anomalies we catch will reflect
+    true anomalies (high [precision](https://en.wikipedia.org/wiki/Precision_and_recall)),
+    but it’s possible we may miss some.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For the purpose of this example, we could change 1 to 7 and thus only catch
+    the two worst outages on 2020–02–08 and 2020–05–14\. Any choice here will reflect
+    the particular use case and objectives, and is an important balance to strike
+    that comes up again and again when applying data observability at scale to production
+    environments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below, we leverage the same freshness detector, but with `DAYS_SINCE_LAST_UPDATE
+    > 3;` serving as the threshold. Two of the smaller outages now go undetected.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/bbffaed6ea2b218bd21959a885620c44.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note the two undetected outages — these must be fewer than 3-day gaps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we visualize the same freshness detector, but with `DAYS_SINCE_LAST_UPDATE
+    > 7;` now serving as the threshold. All but the two largest outages now go undetected.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/463b75b09950ab92ac408c823deb5688.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Just like planets](https://www.nasa.gov/vision/earth/livingthings/microbes_goldilocks.html),
+    optimal model parameters sit in a “Goldilocks Zone” or “sweet spot” between values
+    considered too low and too high. These data observability concepts (and more!)
+    will be discussed in a later article.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Distribution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Next, we want to assess the field-level, distributional health of our data.
+    Distribution tells us all of the expected values of our data, as well as how frequently
+    each value occurs. One of the simplest questions is, “how often is my data `NULL`”?
+    In many cases, some level of incomplete data is acceptable — but if a 10% null
+    rate turns into 90%, we’ll want to know.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This query returns a lot of data! What’s going on?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The general formula `CAST(SUM(CASE WHEN SOME_METRIC IS NULL THEN 1 ELSE 0 END)
+    AS FLOAT) / COUNT(*)`, when grouped by the `DATE_ADDED` column, is telling us
+    the rate of `NULL` values for `SOME_METRIC` in the daily batches of new data in `EXOPLANETS`.
+    It’s hard to get a sense by looking at the raw output, but a visual can help illuminate
+    this anomaly:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/2a5d024d4be467300eabda1a7df0ebc5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Image for post](../Images/b1fbde7bfae7897f7e892d6c29a69b08.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Image for post](../Images/7edb30280c659015cb209783842ced16.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Image for post](../Images/6100e3e6762b701e5c5aa079a1840d2f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The visuals make it clear that there are null rate “spike” events we should
+    be detecting. Let’s focus on just the last metric, `AVG_TEMP`, for now. We can
+    detect null spikes most basically with a [simple threshold](https://datacadamia.com/data_mining/threshold):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our first distribution anomalies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As detection algorithms go, this approach is something of a blunt instrument.
+    Sometimes, patterns in our data will be simple enough for a threshold like this
+    to do the trick. In other cases, though, data will be noisy or have other complications,
+    like [seasonality](https://en.wikipedia.org/wiki/Seasonality), requiring us to
+    change our approach.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/abcdc70ca369cc2164d31321b1dea6fd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'For example, detecting 2020–06–02, 2020–06–03, and 2020–06–04 seems redundant.
+    We can filter out dates that occur immediately after other alerts:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note that in both of these queries, the key parameter is `0.9`. We’re effectively
+    saying: “any null rate higher than 90% is a problem, and I need to know about
+    it.”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/c40400c69b37aa433d473f1e94531745.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'In this instance, we can (and should) be a bit more intelligent by applying
+    the concept of [rolling average](https://en.wikipedia.org/wiki/Moving_average) with
+    a more intelligent parameter:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'One clarification: notice that on line 28, we filter using the quantity `AVG_TEMP_NULL_RATE
+    — TWO_WEEK_ROLLING_AVG`. In other instances, we might want to take the `ABS()` of
+    this error quantity, but not here — the reason being that a `NULL` rate “spike”
+    is much more alarming if it represents an increase from the previous average.
+    It may not be worthwhile to monitor whenever `NULL`s abruptly decrease in frequency,
+    while the value in detecting a `NULL` rate increase is clear.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/e3e97337d5d99d587bfba608c9610154.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: There are, of course, increasingly sophisticated metrics for anomaly detection
+    like [**Z-scores**](https://en.wikipedia.org/wiki/Standard_score) and [**autoregressive
+    modeling**](https://en.wikipedia.org/wiki/Autoregressive_model) that are out of
+    scope here. This tutorial just provides the basic scaffolding for field-health
+    monitoring in SQL; I hope it can give you ideas for your own data!
+  prefs: []
+  type: TYPE_NORMAL
+- en: What’s next?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This brief tutorial intends to show that “data observability” is not as mystical
+    as the name suggests, and with a holistic approach to understanding your data
+    health, you can ensure high data trust and reliability at every stage of your
+    pipeline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In fact, the core principles of data observability are achievable using plain
+    SQL “detectors,” provided some key information like record timestamps and historical
+    table metadata are kept. It’s also worth noting that key ML-powered parameter
+    tuning is mandatory for end-to-end data observability systems that grow with your
+    production environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Stay tuned for future articles in this series that focus on monitoring anomalies
+    in distribution and schema, the role of lineage and metadata in data observability,
+    and how to monitor these pillars together at scale to achieve more reliable data.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Until then — here’s wishing you no data downtime!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Interested in learning more about how to apply data observability at scale?
+    Reach out to ***[***Ryan***](https://www.linkedin.com/in/ryan-kearns-203686a9)***, ***[***Barr***](https://www.linkedin.com/in/barrmoses/)*** ,
+    and the rest of the ***[***Monte Carlo team***](https://www.montecarlodata.com/)***.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Ryan Kearns](https://www.linkedin.com/in/ryanothnielkearns/)** is a rising
+    senior at Stanford University double majoring in Computer Science and Philosophy.
+    He''s currently an ML engineering intern at Monte Carlo.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Barr Moses](https://www.linkedin.com/in/barrmoses/)** is the CEO and Co-founder
+    of Monte Carlo, a data observability company. Prior, she served as a VP of Operations
+    at Gainsight.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/data-observability-in-practice-using-sql-755dc6421f59).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data Cleaning and Wrangling in SQL](/2021/01/data-cleaning-wrangling-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Principles of Practical Statistical Reasoning](/2020/11/10-principles-practical-statistical-reasoning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science vs Business Intelligence, Explained](/2021/02/data-science-vs-business-intelligence-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Data Quality Dimensions: Assuring Your Data Quality with Great Expectations](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Governance and Observability, Explained](https://www.kdnuggets.com/2022/08/data-governance-observability-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[IMPACT 2022: The Data Observability Summit, on Oct. 25-26](https://www.kdnuggets.com/2022/09/monte-carlo-impact-2022-data-observability-summit.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[IMPACT: The Data Observability Summit is back November 8th and the…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Free 4 Week Data Science Course on AI Quality Management](https://www.kdnuggets.com/2022/02/truera-free-4-week-data-science-course-ai-quality-management.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

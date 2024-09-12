@@ -1,0 +1,417 @@
+- en: Word Embedding Fairness Evaluation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/08/word-embedding-fairness-evaluation.html](https://www.kdnuggets.com/2020/08/word-embedding-fairness-evaluation.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Pablo Badilla](https://github.com/pabloBad) and [Felipe Bravo-Marquez](https://felipebravom.com/).**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: About WEFE
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Word embeddings](https://www.kdnuggets.com/2019/02/word-embeddings-nlp-applications.html) are
+    dense vector representations of words trained from document corpora. They have
+    become a core component of natural language processing (NLP) downstream systems
+    because of their ability to efficiently capture semantic and syntactic relationships
+    between words. A widely reported shortcoming of word embeddings is that they are
+    prone to inherit stereotypical social biases exhibited in the corpora on which
+    they are trained.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The problem of how to quantify the mentioned biases is currently an active area
+    of research, and several different *fairness metrics* have been proposed in the
+    literature in the past few years.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although all metrics have a similar objective, the relationship between them
+    is by no means clear. Two issues that prevent a clean comparison is that they
+    operate with different inputs (pairs of words, sets of words, multiple sets of
+    words, and so on) and that their outputs are incompatible with each other (reals,
+    positive numbers,  range, etc.). This leads to a lack of consistency between them,
+    which causes several problems when trying to compare and validate their results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We propose the [**Word Embedding Fairness Evaluation** (WEFE)](https://felipebravom.com/publications/ijcai2020.pdf) as
+    a framework for measuring fairness in word embeddings, and we released its implementation
+    as an [open-source library](https://wefe.readthedocs.io).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Framework
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We propose an abstract view of a *fairness metric* as a function that receives *queries* as
+    input, with each query formed by a *target* and *attribute* words. The *target
+    words* describe the social groups in which fairness is intended to be measured
+    (e.g., women, white people, Muslims), and the *attribute words* describe traits
+    or attitudes by which a bias towards one of the social groups may be exhibited
+    (e.g., pleasant vs. unpleasant terms). For more details on the framework, you
+    can read our recently accepted paper in *IJCAI-PRICAI* [1].
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'WEFE implements the following metrics:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Word Embedding Association Test (WEAT)](https://science.sciencemag.org/content/356/6334/183)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Relative Norm Distance (RND)](https://www.pnas.org/content/115/16/E3635)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Relative Negative Sentiment Bias (RNSB)](https://www.aclweb.org/anthology/P19-1162/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mean Average Cosine (MAC)](https://arxiv.org/abs/1904.04047)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Standard usage pattern of WEFE
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The standard process for measuring bias using WEFE is shown in the following
+    diagram:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/18c45d588c5ef552585c79cbf5f1c733.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Installation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'There are two different ways to install WEFE:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: or
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Running a Query
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In the following code, we measure the *gender bias* of *word2vec* using:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A query that studies the relationship between male names and career-related
+    words, and female names and family-related words, which we call *"Male names and
+    Female names wrt Career and Family"*. The words used in the query are detailed
+    in the code.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The Word Embedding Association Test (WEAT) metric. Proposed by [Caliskan et
+    al. 2017](https://science.sciencemag.org/content/356/6334/183), WEAT receives
+    two sets ![T_1](../Images/f01b5d6895fd5737e9be0526d9c6ae47.png) and ![T_2](../Images/ad767c6639a21d27fa3ddd0a35d27437.png) of
+    target words, and two sets ![A_1](../Images/d555bfe9ca33a05d4b870b4616a7fd43.png) and ![A_2](../Images/00133e8e7354f7d7e09b1fa458d3fa80.png) of
+    attribute words. Thus, it always expects a query of the form ![Q=({T_1,T_2},{A_1,A_2}](../Images/87bad9406d9016590e9353e89947ed9d.png).
+    Its objective is to quantify the strength of association of both pair of sets
+    through a permutation test.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Given a word embedding ![w](../Images/7a3eede3eb2f17394a728c1e88d0f15e.png),
+    WEAT defines first the measure ![d(w,A_1,A_2) = mean_{x \in A_1}cos(w,x) - mean_{x
+    \in A_2}cos(w,x)](../Images/fb06ef8288166b327cd744d24b34595d.png) where ![cos(w,
+    x)](../Images/76e3a5fe79fe71ec84e79d0168efd124.png) is the cosine similarity of
+    the word embedding vectors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Then for a query ![Q=({T_1,T_2},{A_1,A_2})](../Images/e24ae1da3e7d38f348b19e4c7e1c3756.png) the
+    WEAT metric is defined over the embeddings of the query word sets as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![F_WEAT(M, Q) = sum{w in T_1} d(w, A_1, A_2) - sum(w in T_2) d(w, A_1, A_2)](../Images/1902c0651183c8c50f98ba1694c4b621.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The idea is that the more positive the value given by ![F_WEAT](../Images/43232187d3c1036efba02b4c9cef50d0.png),
+    the more the target ![T_1](../Images/f01b5d6895fd5737e9be0526d9c6ae47.png) will
+    be related to attribute ![A_1](../Images/d555bfe9ca33a05d4b870b4616a7fd43.png) and
+    target ![T_2](../Images/ad767c6639a21d27fa3ddd0a35d27437.png) to attribute ![A_2](../Images/00133e8e7354f7d7e09b1fa458d3fa80.png).
+    On the other hand, the more negative the value, the more target ![T_1](../Images/f01b5d6895fd5737e9be0526d9c6ae47.png) will
+    be related to attribute ![A_2](../Images/00133e8e7354f7d7e09b1fa458d3fa80.png) and
+    target ![T_2](../Images/ad767c6639a21d27fa3ddd0a35d27437.png) to attribute ![A_1](../Images/d555bfe9ca33a05d4b870b4616a7fd43.png).
+    Commonly these values are between ![+-0.5](../Images/a36bb2646a3883fc6697b352bf51d82b.png) and ![+-2](../Images/873856290f1a350d49f45d31c6f4062f.png).
+    The ideal score is ![+-0.5](../Images/9f5253164e33e3aad6d3a176d24706bf.png).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. We first load a word embedding model using the [gensim](https://radimrehurek.com/gensim/) API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 2\. Then, we create the Query object using the target words (*Male names* and *Female
+    names*) and two attribute words sets (*Career* and *Family* terms).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 3\. Finally, we run the Query using WEAT as the metric.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: As we can see, the execution returns a *dict* with the name of the executed
+    query and its score. The score being positive and higher than one indicates that *word2vec* exhibits
+    a moderately strong relationship between men's names and careers and women's names
+    and family.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Running multiple Queries**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In WEFE, we can easily test multiple queries in one single call:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '1\. Create the queries:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '2\. Add the queries to an array:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '3\. Run the queries using WEAT:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that these results are returned as DataFrame objects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **model_name** | **Male names and Female names wrt Career and Family** |
+    **Male names and Female names wrt Math and Arts** | **Male names and Female names
+    wrt Science and Arts** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| word2vec-google-news-300 | 1.25161 | 0.631749 | 0.535707 |'
+  prefs: []
+  type: TYPE_TB
+- en: We can see that in all cases, male names are positively associated with career,
+    science and math words, whereas female names are more associated with family and
+    art terms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While the above results give us an idea of the gender bias that word2vec exhibits,
+    we would also like to know how these biases occur in other Word Embeddings models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We run the same queries on two other embedding models: "glove-wiki" and "glove-twitter".'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '1\. Load glove models and execute the queries again:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| **Model Name** | **Male names and Female names wrt Career and Family** |
+    **Male names and Female names wrt Math and Arts** | **Male names and Female names
+    wrt Science and Arts** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| word2vec-google-news-300 | 1.25161 | 0.631749 | 0.535707 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| glove-wiki-gigaword-300 | 1.31949 | 0.536996 | 0.549819 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| glove-twitter-200 | 0.537437 | 0.445879 | 0.332440 |'
+  prefs: []
+  type: TYPE_TB
+- en: '2\. We can also plot the results:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/9264aa1bdd739c4d9eb262bbebf7fe9e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Aggregating Results
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The execution of run_queries in the previous step gave us various result scores.
+    However, these do not tell us much about the overall fairness of the embedding
+    models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We would like to have some mechanism to aggregate these results into a single
+    score.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To do this, when using run_queries, you can set the add_results parameter to True.
+    This will activate the option to add the results by averaging the absolute values
+    of the results and putting them in the last column of the result table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is also possible to ask the function run_queries to return only the aggregated
+    results by setting the return_only_aggregation parameter to True.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| **model_name** | **WEAT: Gender bias average of abs values score** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| word2vec-google-news-300 | 0.806355 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| glove-wiki-gigaword-300 | 0.802102 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| glove-twitter-200 | 0.438586 |'
+  prefs: []
+  type: TYPE_TB
+- en: The idea of this type of aggregation is to quantify the amount of bias of the
+    embedding model according to various queries. In this case, we can see that glove-twitter
+    has a lower amount of gender bias than the other models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Rank Word Embeddings
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Finally, we would like to rank these embedding models according to the overall
+    amount of bias they contain. This can be done using the create_ranking function,
+    which calculates a fairness ranking from one or more query result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| **model_name** | **WEAT: Gender bias average of abs values score** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| word2vec-google-news-300 | 3 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| glove-wiki-gigaword-300 | 2 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| glove-twitter-200 | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: You can see this tutorial code in this [notebook](https://github.com/dccuchile/wefe/blob/master/examples/KDNuggetsTutorial.ipynb) and
+    the complete reference documentation including a user guide, examples and replication
+    of previous studies at the following [link](https://wefe.readthedocs.io/en/latest/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you like the project, you are more than welcome to "star" it on [Github](https://github.com/dccuchile/wefe).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[1] P. Badilla, F. Bravo-Marquez, and J. Pérez [WEFE: The Word Embeddings Fairness
+    Evaluation Framework](https://www.ijcai20.org/) In *Proceedings of the 29th International
+    Joint Conference on Artificial Intelligence and the 17th Pacific Rim International
+    Conference on Artificial Intelligence (IJCAI-PRICAI 2020)*, Yokohama, Japan.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Bias in AI: A Primer](https://www.kdnuggets.com/2020/06/bias-ai-primer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Ways to Apply Ethics to AI](https://www.kdnuggets.com/2019/12/5-ways-apply-ethics-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Word Embeddings in NLP and its Applications](https://www.kdnuggets.com/2019/02/word-embeddings-nlp-applications.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[The Ultimate Guide To Different Word Embedding Techniques In NLP](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[More Performance Evaluation Metrics for Classification Problems You…](https://www.kdnuggets.com/2020/04/performance-evaluation-metrics-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Evaluation Metrics: Theory and Overview](https://www.kdnuggets.com/machine-learning-evaluation-metrics-theory-and-overview)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Comprehensive Survey on Trustworthy Graph Neural Networks:…](https://www.kdnuggets.com/2022/05/comprehensive-survey-trustworthy-graph-neural-networks-privacy-robustness-fairness-explainability.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Fast and Effective Way to Audit ML for Fairness](https://www.kdnuggets.com/2023/01/fast-effective-way-audit-ml-fairness.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automate Microsoft Excel and Word Using Python](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

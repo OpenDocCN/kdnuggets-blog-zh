@@ -1,0 +1,316 @@
+- en: 'Financial Data Analysis – Data Processing 1: Loan Eligibility Prediction'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/09/financial-data-analysis-loan-eligibility-prediction.html](https://www.kdnuggets.com/2018/09/financial-data-analysis-loan-eligibility-prediction.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Sabber Ahamed](https://www.linkedin.com/in/sabber-ahamed/), Computational
+    Geophysicist and Machine Learning Enthusiast**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/293b4a75c53681e17ad1aebb8977b940.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Financial institutions/companies have been using predictive analytics for quite
+    a long time. Recently, due to the availability of computational resources and
+    tremendous research in machine learning made it possible to better data analysis
+    hence better prediction. In the series of articles, I explain how to create a
+    predictive loan model that identifies a bad applicant who is more likely to be
+    charged off. In step by step processes, I show how to process raw data, clean
+    unnecessary part of it, select relevant features, perform exploratory data analysis,
+    and finally build a model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As an example, I use Lending club loan data dataset. Lending Club is the world’s
+    largest online marketplace connecting borrowers and investors. An inevitable outcome
+    of lending is default by borrowers. The idea of this tutorial is to create a predictive
+    model that identifies applicants who are relatively risky for a loan. In order
+    to accomplish this, I organized the whole series into four parts as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Data processing-1**](https://medium.com/@sabber/financial-data-analysis-80ba39149126):
+    In this first part I show how to clean and remove unnecessary features. Data processing
+    is very time-consuming, but better data would produce a better model. Therefore,
+    careful and very detail examination is required to prepare better data. I show
+    how to identify constant features, duplicate feature, duplicate rows, and features
+    with a high number of missing values.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Data processing-2**](https://medium.com/@sabber/financial-data-analysis-bf4b5e78c45c):
+    In this part, I manually go through each and every features selected from part
+    -1\. This is the most time-consuming part, but worth it for a better model.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**EDA**](https://medium.com/@sabber/financial-data-analysis-2f86b1341e6e):
+    In in this part, I do some exploratory data analysis (EDA) on the features selected
+    in part-1 and 2\. A good EDA is required to get a better knowledge of the domain.
+    We need to spend some quality time to find out the relations between the features.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Create a model**](https://medium.com/@sabber/financial-data-analysis-51e7275d0ae):
+    Finally, In this last but not the last part, I create models. Creating a model
+    is also not an easy task. It’s also an iterative process. I show how to start
+    with a with a simple model, then slowly add complexity for better performance.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Alright, let’s get started with the part-1: data processing, cleaning and feature
+    selections.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data processing-1**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In this project, I used three years of datasets (2014, 2015 and 2017(first-thrid
+    quarter)) and stored in five separate CSV files. Lets read the files first:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Since data are stored in separate files, we have to make sure that we have
+    the same number of features in each file. We can check using the following code
+    snippet:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The above code is self-explanatory, we first extract the column names the stack
+    them together using Numpy ‘dstack’ object. If you look at the Jupyter-notebook
+    on Github, you would see they are same. Which is good for us. We can move on to
+    the next step. It’s time to check the shape of the data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We see that there are approximately one million examples and each of the examples
+    has 151 features including target variable. Let’s look at the feature name to
+    get familiar with the data. It’s imperative to get to know the domain, especially
+    the details of the features relationship with the target variable. It’s not easy
+    to learn overnight, that’s why need to spend some days or maybe a week to get
+    familiar with the data before jumping into further detail analysis. Let’s see
+    the feature names:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Looking at the above features, it may seem scary first. But we will get through
+    every feature and then select the relevant features. Let's start with the target
+    feature “loan_status”
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We see that there are seven types of loan status. However, in this tutorial,
+    we are interested in two classes: 1) Fully paid: those who paid the loan with
+    interests and 2) Charged off: those who could not pay and finally charged off.
+    Therefore, we select the data sets for these two classes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Looking at the shape, we see that we now have half of the data point than original
+    data and the same number of features. Before processing and cleaning manually,
+    let’s do some general data processing steps first:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Remove features associated with >85% missing values
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Remove constant features
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Remove duplicates features
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Remove duplicate rows
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Remove highly collinear features (In part 3 EDA)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Alright, let’s get started with the typical data processing:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. Remove features associated with 90% missing values:** In the code below
+    I first use pandas’ built-in method ‘isnull()’ to find the rows associated with
+    missing values. Then I sum them up to get the count for each feature. Finally,
+    I sort the features according to the number of missing values and create a data
+    frame for further analysis.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the above result, we see that there are 53 features which have 400000 missing
+    values. I use the pandas’ drop method to remove these 53 features. Notice that
+    in this function I set the “inplace” option to True”, which removes these features
+    from original data frame **df** without returning anything.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2\. Remove constant features: **At this step, we remove features that have
+    a single unique value. A feature associated with one unique value does not help
+    the model to generalize well since it’s variance is zero. A tree-based model cannot
+    take advantage of these type of features since the model can not split these features.
+    To identify features with a single unique value is relatively straightforward:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the above code, I create a function “find_constant_features” to identify
+    constant features. The function goes through each feature and sees if it has less
+    than two unique values. If so, the features are added to the constant feature
+    list. We can also find out constant feature looking at the variance or standard
+    deviation. If the feature has zero variance or standard deviation, we are sure
+    that the feature has single unique value. The print statement shows that five
+    features have single unique value. So we remove them using “inplace” option true.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3\. Remove duplicate features:** Duplicate features are those have the same
+    value in multiple features with the same/different name. To find out the duplicate
+    features I borrowed the following code from this [stack overflow link](https://stackoverflow.com/questions/14984119/python-pandas-remove-duplicate-columns):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We see only one feature which seems to be duplicated. I am not going to remove
+    the feature yet rather wait until we do EDA in the next part.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**4\. Remove duplicate rows: **In this step, we remove all the duplicate rows.
+    I use pandas built-in “drop_duplicates(inplace= True)” method to perform this
+    action:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The above four processings are basic which we need to do for any data science
+    project. Let''s see the shape of the data after all of these steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: We see that we have 93 features after performing the above steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the [next part](https://medium.com/@sabber/financial-data-analysis-bf4b5e78c45c) of
+    this tutorial, I will go through each feature, then perform cleaning and remove
+    it if necessary. In the meantime, if you have any question regarding this part,
+    please feel free to write your comment below. You can reach out to me:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Bio: [Sabber Ahamed](https://www.linkedin.com/in/sabber-ahamed/)** is the
+    Founder of [xoolooloo.com](https://www.xoolooloo.com/). Computational Geophysicist
+    and Machine Learning Enthusiast.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/@sabber/financial-data-analysis-80ba39149126).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Text Mining on the Command Line](/2018/07/text-mining-command-line.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three techniques to improve machine learning model performance with imbalanced
+    datasets](/2018/06/three-techniques-improve-machine-learning-model-performance-imbalanced-datasets.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Text Classification & Embeddings Visualization Using LSTMs, CNNs, and Pre-trained
+    Word Vectors](/2018/07/text-classification-lstm-cnn-pre-trained-word-vectors.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How ML Model Explainability Accelerates the AI Adoption Journey for…](https://www.kdnuggets.com/2022/07/ml-model-explainability-accelerates-ai-adoption-journey-financial-services.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Project of Rotten Tomatoes Movie Rating Prediction:…](https://www.kdnuggets.com/2023/06/data-science-project-rotten-tomatoes-movie-rating-prediction-first-approach.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Project of Rotten Tomatoes Movie Rating Prediction:…](https://www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Multivariate Time-Series Prediction with BQML](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[OLAP vs. OLTP: A Comparative Analysis of Data Processing Systems](https://www.kdnuggets.com/2023/08/olap-oltp-comparative-analysis-data-processing-systems.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Representation for Natural Language Processing Tasks](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,549 @@
+- en: Apache Spark Cluster on Docker
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/07/apache-spark-cluster-docker.html](https://www.kdnuggets.com/2020/07/apache-spark-cluster-docker.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [André Perez](https://www.linkedin.com/in/andremarcosperez/), Data Engineer
+    at Experian**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6504ccaf02651d78847df87f699dffe1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sparks by [Jez Timms](https://unsplash.com/@jeztimms) on [Unsplash](https://unsplash.com/photos/r4lM2v9M84Q)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Apache Spark](https://spark.apache.org/) is arguably the most popular big
+    data processing engine. With more than 25k stars on [GitHub](https://github.com/apache/spark),
+    the framework is an excellent starting point to learn parallel computing in distributed
+    systems using Python, Scala and R.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To get started, you can run Apache Spark on your machine by using one of the
+    many great Docker distributions available out there. [Jupyter](https://github.com/jupyter/docker-stacks) offers
+    an excellent *dockerized *Apache Spark with a JupyterLab interface but misses
+    the framework distributed core by running it on a single container. Some GitHub [projects](https://github.com/big-data-europe/docker-spark) offer
+    a distributed cluster experience however lack the JupyterLab interface, undermining
+    the usability provided by the IDE.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I believe a comprehensive environment to learn and practice Apache Spark code
+    must keep its distributed nature while providing an awesome user experience.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article is all about this belief.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the next sections, I will show you how to build your own cluster. By the
+    end, you will have a fully functional Apache Spark cluster built with Docker and
+    shipped with a Spark master node, two Spark worker nodes and a JupyterLab interface.
+    It will also include the Apache Spark Python API (PySpark) and a simulated Hadoop
+    distributed file system (HDFS).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**TL;DR**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This article shows how to build an Apache Spark cluster in [standalone mode](http://spark.apache.org/docs/latest/spark-standalone.html) using
+    Docker as the infrastructure layer. It is shipped with the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Python 3.7 with PySpark 3.0.0 and Java 8;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Apache Spark 3.0.0 with one master and two worker nodes;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: JupyterLab IDE 2.1.5;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Simulated HDFS 2.7.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To make the cluster, we need to create, build and compose the Docker images
+    for JupyterLab and Spark nodes. You can skip the tutorial by using the **out-of-the-box
+    distribution **hosted on my [GitHub](https://github.com/andre-marcos-perez/spark-cluster-on-docker).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Requirements**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Docker** 1.13.0+;*   **Docker Compose** 3.0+.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Table of contents**'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Cluster overview;
+  prefs:
+  - PREF_IND
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Creating the images;
+  prefs:
+  - PREF_IND
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Building the images;
+  prefs:
+  - PREF_IND
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Composing the cluster;
+  prefs:
+  - PREF_IND
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Creating a PySpark application.
+  prefs:
+  - PREF_IND
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 1\. Cluster overview
+  prefs:
+  - PREF_IND
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The cluster is composed of four main components: the JupyterLab IDE, the Spark
+    master node and two Spark workers nodes. The user connects to the master node
+    and submits Spark commands through the nice GUI provided by Jupyter notebooks.
+    The master node processes the input and distributes the computing workload to
+    workers nodes, sending back the results to the IDE. The components are connected
+    using a localhost network and share data among each other via a shared mounted
+    volume that simulates an HDFS.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/37dc76fd9b4537e013b05fa07e2602ab.png)'
+  prefs:
+  - PREF_IND
+  type: TYPE_IMG
+- en: Apache Spark cluster overview
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'As mentioned, we need to create, build and compose the Docker images for JupyterLab
+    and Spark nodes to make the cluster. We will use the following Docker image hierarchy:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/fb19f5b9139a812de78f5788550224b4.png)'
+  prefs:
+  - PREF_IND
+  type: TYPE_IMG
+- en: Docker images hierarchy
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: The cluster base image will download and install common software tools (Java,
+    Python, etc.) and will create the shared directory for the HDFS. On the Spark
+    base image, the Apache Spark application will be downloaded and configured for
+    both the master and worker nodes. The Spark master image will configure the framework
+    to run as a master node. Similarly, the Spark worker node will configure Apache
+    Spark application to run as a worker node. Finally, the JupyterLab image will
+    use the cluster base image to install and configure the IDE and PySpark, Apache
+    Spark’s Python API.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 2\. Creating the images
+  prefs:
+  - PREF_IND
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 2.1\. Cluster base image
+  prefs:
+  - PREF_IND
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For the base image, we will be using a Linux distribution to install Java 8
+    (or 11), [Apache Spark only requirement](https://spark.apache.org/docs/latest/#downloading).
+    We also need to install Python 3 for PySpark support and to create the shared
+    volume to simulate the HDFS.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Dockerfile for the cluster base image
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: First, let’s choose the Linux OS. Apache Spark official GitHub repository has
+    a [Dockerfile](https://github.com/apache/spark/blob/master/resource-managers/kubernetes/docker/src/main/dockerfiles/spark/Dockerfile) for
+    Kubernetes deployment that uses a small Debian image with a built-in Java 8 runtime
+    environment (JRE). By choosing the [same base image](https://hub.docker.com/_/openjdk?tab=tags&page=1&name=8-jre-slim),
+    we solve both the OS choice and the Java installation. Then, we get the [latest
+    Python release](https://packages.debian.org/stable/python/python3) (currently
+    3.7) from Debian official package repository and we create the shared volume.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 2.2\. Spark base image
+  prefs:
+  - PREF_IND
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For the Spark base image, we will get and setup Apache Spark in [standalone
+    mode](http://spark.apache.org/docs/latest/spark-standalone.html), its simplest
+    deploy configuration. In this mode, we will be using its resource manager to setup
+    containers to run either as a master or a worker node. In contrast, resources
+    managers such as [Apache YARN](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html) dynamically
+    allocates containers as master or worker nodes according to the user workload.
+    Furthermore, we will get an Apache Spark version with Apache Hadoop support to
+    allow the cluster to simulate the HDFS using the shared volume created in the
+    base cluster image.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Dockerfile for the Spark base image
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Let’s start by downloading the Apache Spark latest version (currently 3.0.0)
+    with Apache Hadoop support from the official [Apache repository](https://archive.apache.org/dist/spark/).
+    Then, we play a bit with the downloaded package (unpack, move, etc.) and we are
+    ready for the setup stage. Lastly, we configure four Spark variables common to
+    both master and workers nodes:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**SPARK_HOME** is the installed Apache Spark location used by the framework
+    for setting up tasks;'
+  prefs:
+  - PREF_IND
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**SPARK_MASTER_HOST **is the master node **hostname** used by worker nodes
+    to connect;'
+  prefs:
+  - PREF_IND
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**SPARK_MASTER_PORT** is the master node **port** used by worker nodes to connect;'
+  prefs:
+  - PREF_IND
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**PYSPARK_PYTHON** is the installed Python location used by Apache Spark to
+    support its Python API.'
+  prefs:
+  - PREF_IND
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 2.3\. Spark master image
+  prefs:
+  - PREF_IND
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For the Spark master image, we will set up the Apache Spark application to run
+    as a master node. We will configure network ports to allow the network connection
+    with worker nodes and to expose the master web UI, a web page to monitor the master
+    node activities. In the end, we will set up the container startup command for
+    starting the node as a master instance.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Dockerfile for the Spark master image
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: We start by exposing the port configured at **SPARK_MASTER_PORT** environment
+    variable to allow workers to connect to the master node. Then, we expose the **SPARK_MASTER_WEBUI_PORT** port
+    for letting us access the master web UI page. Finally, we set the container startup
+    command to run Spark built-in deploy script with the [master class](https://github.com/apache/spark/blob/master/core/src/main/scala/org/apache/spark/deploy/master/Master.scala) as
+    its argument.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 2.4\. Spark worker image
+  prefs:
+  - PREF_IND
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For the Spark worker image, we will set up the Apache Spark application to run
+    as a worker node. Similar to the master node, we will configure the network port
+    to expose the worker web UI, a web page to monitor the worker node activities,
+    and set up the container startup command for starting the node as a worker instance.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Dockerfile for the Spark worker image
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: First, we expose the **SPARK_WORKER_WEBUI_PORT** port to allow access to the
+    worker web UI page, as we did with the master node. Then, we set the container
+    startup command to run Spark built-in deploy script with the [worker class](https://github.com/apache/spark/blob/master/core/src/main/scala/org/apache/spark/deploy/worker/Worker.scala) and
+    the master network address as its arguments. This will make workers nodes connect
+    to the master node on its startup process.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 2.5\. JupyterLab image
+  prefs:
+  - PREF_IND
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For the JupyterLab image, we go back a bit and start again from the cluster
+    base image. We will install and configure the IDE along with a slightly different
+    Apache Spark distribution from the one installed on Spark nodes.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Dockerfile for the JupyterLab image
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: We start by installing pip, Python’s package manager, and the Python development
+    tools to allow the installation of Python packages during the image building and
+    at the container runtime. Then, let’s get [JupyterLab](https://pypi.org/project/jupyterlab/) and [PySpark](https://pypi.org/project/pyspark/) from
+    the Python Package Index (PyPI). Finally, we expose the default port to allow
+    access to JupyterLab web interface and we set the container startup command to
+    run the IDE application.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 3\. Building the images
+  prefs:
+  - PREF_IND
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The Docker images are ready, let’s build them up. Note that since we used Docker *arg* keyword
+    on Dockerfiles to specify software versions, we can easily change the default
+    Apache Spark and JupyterLab versions for the cluster.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Building the cluster images
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 4\. Composing the cluster
+  prefs:
+  - PREF_IND
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The Docker compose file contains the recipe for our cluster. Here, we will create
+    the JuyterLab and Spark nodes containers, expose their ports for the localhost
+    network and connect them to the simulated HDFS.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Cluster’s Docker compose file
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: We start by creating the Docker volume for the simulated HDFS. Next, we create
+    one container for each cluster component. The *jupyterlab* container exposes the
+    IDE port and binds its shared workspace directory to the HDFS volume. Likewise,
+    the *spark-master* container exposes its web UI port and its *master-worker* connection
+    port and also binds to the HDFS volume.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'We finish by creating two Spark worker containers named *spark-worker-1* and *spark-worker-2*.
+    Each container exposes its web UI port (mapped at 8081 and 8082 respectively)
+    and binds to the HDFS volume. These containers have an environment step that specifies
+    their hardware allocation:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**SPARK_WORKER_CORE** is the number of cores;'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**SPARK_WORKER_MEMORY** is the amount of RAM.'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: By default, we are selecting one core and 512 MB of RAM for each container.
+    Feel free to play with the hardware allocation but make sure to respect your machine
+    limits to avoid memory issues. Also, provide enough resources for your Docker
+    application to handle the selected values.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'To compose the cluster, run the Docker compose file:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Composing the cluster
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Once finished, check out the components web UI:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**JupyterLab** at [localhost:8888](http://localhost:8888/);'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Spark master** at [localhost:8080](http://localhost:8080/);'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Spark worker I** at [localhost:8081](http://localhost:8081/);'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Spark worker II** at [localhost:8082](http://localhost:8082/);'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 5\. Creating a PySpark application
+  prefs:
+  - PREF_IND
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With our cluster up and running, let’s create our first PySpark application.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Creating a PySpark application
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Open the JupyterLab IDE and create a Python Jupyter notebook. Create a PySpark
+    application by connecting to the Spark master node using a Spark session object
+    with the following parameters:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**appName** is the name of our application;'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**master** is the Spark master connection URL, the same used by Spark worker
+    nodes to connect to the Spark master node;'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**config **is a general [Spark configuration for standalone mode](https://spark.apache.org/docs/latest/configuration.html).
+    Here, we are matching the executor memory, that is, a Spark worker JVM process,
+    with the provisioned worker node memory.'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Run the cell and you will be able to see the application listed under “Running
+    Applications” at the Spark master web UI. At last, we install the Python [wget](https://pypi.org/project/wget/) package
+    from PyPI and download the iris data set from [UCI repository](https://archive.ics.uci.edu/ml/datasets/iris) into
+    the simulated HDFS. Then we read and print the data with PySpark.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: That’s all folks. I hope I have helped you to learn a bit more about Apache
+    Spark internals and how distributed applications works. Happy learning!
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**Bio: [André Perez](https://www.linkedin.com/in/andremarcosperez/)** ([**@dekoperez**](https://twitter.com/dekoperez))
+    is a Data Engineer at Experian & MSc. Data Scientist student at University of
+    Sao Paulo.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/apache-spark-cluster-on-docker-ft-a-juyterlab-interface-418383c95445).
+    Reposted with permission.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[The Benefits & Examples of Using Apache Spark with PySpark](/2020/04/benefits-apache-spark-pyspark.html)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Five Interesting Data Engineering Projects](/2020/03/data-engineering-projects.html)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Skills to Build for Data Engineering](/2020/06/skills-build-data-engineering.html)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_IND
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Using Cluster Analysis to Segment Your Data](https://www.kdnuggets.com/using-cluster-analysis-to-segment-your-data)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Evolution of Apache Druid](https://www.kdnuggets.com/2022/07/evolution-apache-druid.html)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Build a Scalable Data Architecture with Apache Kafka](https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Scaling Data Management Through Apache Gobblin](https://www.kdnuggets.com/2023/01/scaling-data-management-apache-gobblin.html)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[High Availability SQL Server Docker Containers in Kubernetes](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[12 Docker Commands Every Data Scientist Should Know](https://www.kdnuggets.com/2023/01/12-docker-commands-every-data-scientist-know.html)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL

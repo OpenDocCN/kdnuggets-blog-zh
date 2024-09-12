@@ -1,0 +1,300 @@
+- en: 'Contest 2nd Place: Automated Data Science and Machine Learning in Digital Advertising'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/08/automated-data-science-digital-advertising.html](https://www.kdnuggets.com/2016/08/automated-data-science-digital-advertising.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Claudia Perlich and Dstillery Data Science Team**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Editor''s note**: This blog post was an entrant in the recent KDnuggets Automated
+    Data Science and Machine Learning [blog contest](/2016/06/kdnuggets-blog-contest-automated-data-science.html),
+    where it tied for second place.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Digital Advertising provides an exciting playground for machine learning in
+    general and automated predictive modeling in particular. An increasing proportion
+    of digital advertising is delivered through real-time bidding ad exchanges. Ad
+    exchanges connect sellers of ad placements (usually websites with ad space to
+    monetize) and buyers (usually technology firms like Dstillery, operating on behalf
+    of consumer brands and agencies).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The goals of the buyers vary. At Dstillery, our goal is to identify the best
+    audience for each of our advertising clients, and deliver ads to this audience.
+    The “best” audience depends on the goals of the advertiser, but we typically optimize
+    toward post-view conversion. The meaning of “conversion” is campaign-specific,
+    but always requires taking some consumer action, such as visiting a site, buying
+    a product, or signing up for a service. The post-view qualifier means the conversion
+    is observed in some interval following an ad exposure, either with or without
+    a click.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We run completely separate targeting models for each brand we represent. As
+    a result, our machine learning system updates and deploys thousands of predictive
+    models daily. Our clients’ diverse performance requirements, along with the need
+    to keep so many models running effectively, pose a number of interesting technical
+    challenges. The remainder of this article describes a combination of strategies
+    we employ at Dstillery for keeping our targeting system running with minimal human
+    intervention.¹
+  prefs: []
+  type: TYPE_NORMAL
+- en: High-level system design
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'There is a great deal of infrastructure supporting our actual predictive modeling
+    engine. Data ingestion, normalization, sampling and cleaning are all done in an
+    automated fashion with one clear goal: building thousands of sparse models daily
+    that are good at classifying brand prospects along a wide variety of products.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Sampling the Event Stream**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dstillery has developed a robust data sampling solution that can sample a real-time
+    event stream based on any properties of the event, performing a customizable set
+    of tasks on each accepted observation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the average day, over 50 billion events pass through our system. These events
+    can be bid requests, impressions, visits to a specific website, uses of a mobile
+    app or thousands of other types of actions from Internet-connected devices. The
+    sampler dynamically chooses among the events that based on sampling rules that
+    we define. This portion of the system is seen in pink in Figure 1, Extensible
+    Rules Engine.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Event Data Augmentation by Sampler**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For each sampled observation, the sampler performs a set of tasks, which can
+    include logging the event to a number of databases or fetching additional data
+    about a device. The User History Augmentation and Scoring System seen in Figure
+    1 includes a wide variety of tasks. Oneexample would be selecting mobile devices
+    identified via GPS coordinates at a place of interest (e.g., a McDonald's or a
+    Pokemon-Go location), and augmenting those events with the historic places the
+    device was seen.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Dstillery Overview](../Images/2ff46d9c7eed8d7f5374e3338c664b65.png)](https://i.imgur.com/TLXVbUm.jpg)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Figure 1\. Dstillery sampling, augmentation and model building engine.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In data domains that only include thousands or even millions of observations,
+    histories can be recreated from scratch by doing full scans of the data. However,
+    with billions of data points, **full scans** are not computationally feasible.
+    That is why the system is designed to augment additional historical data at the
+    time of sampling (center of Figure 1) by accessing these histories in multiple
+    Cassandra-based key-value stores. This enables the learning of models based on
+    long histories of a user’s past actions without having to scan months of full
+    data records.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The processing system defined above is extremely flexible and allows for the
+    sampling of data for specific machine learning tasks, as seen in the Seed Sampler
+    in Figure 1\. Histories, or features, can then be fetched at sampling time during
+    the augmentation process. These data can then be consumed by the machine learning
+    system,² which stores the results of thousands of models a day in the Brand Signal
+    Repository in Figure 1\. An alternative sampling task can be kicked off that determines
+    when a device should be scored for the models. Finally these scores can be used
+    to bid on opportunities in the execution layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Automated learning of robust ranking models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let’s focus now on the specific task of learning one good ranking model for
+    a given campaign automatically. The specific challenges here are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Cold start**. Targeting must perform well from the beginning of a campaign,
+    even though there may be very little outcome data.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Low base rate**. Conversion rates can easily be below 1 in 100,000.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Non-stationarity**. Changes in behavior over time due to natural seasonality
+    and campaign-specific external factors.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Consistency and robustness**. Unique models for each campaign must perform
+    despite disparities in type of product, conversion rate and audience size.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Our current system addresses these issues with a number of different components,
+    drawing from transfer, ensemble learning, adaptive regularization, and streaming
+    updates.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Sampling, Transfer Learning & Stacking**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Both the cold start and the low base rate are addressed by a number of adjustments
+    to the sampling (see above) and definition of ‘positive’. In addition to trying
+    to capitalize on each and every conversion event (purchase of a product, signup
+    for a service) even without an impression, we use additional related events (visiting
+    the homepage) as alternative target variables. These many different models for
+    a given marketer are blended in an ensemble type model layer with much reduced
+    dimensionality.³
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Streaming and Stochastic Gradient Descent**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Streaming model updates (using a last known good model and update based on the
+    training data collected since the last training iteration) provides a great solution
+    for non-stationarity and low data retention. Streaming is most easily implemented
+    in parametric models like logistic/linear regression, using stochastic gradient
+    descent (SGD). Another huge benefit of linear modeling in our context is the simplicity
+    of transitioning models from training to production and high volume scoring. Recent
+    developments in adaptive learning rate schedules and adaptive regularization allow
+    for incremental training of linear models in millions of dimensions without exhaustive
+    hyper-parameter searching. ⁴ Finally, the combination of gradient descent and
+    penalty terms helps to avoid overfitting, provides robustness and avoids feature
+    selection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Hashing of Binary Indicators**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the key challenges in automating both model training and scoring in a
+    dynamic, high-dimensional environment is providing a consistent definition of
+    the feature space. Many of our models are based on web history, and the set of
+    URL’s in our event stream is constantly changing as new ones appear and others
+    lose traffic. By hashing all URL’s into a space of fixed dimensionality, we allow
+    our automated model-builders to operate in a static, consistent feature space
+    even though the semantic meaning of a feature may change over time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SGD Model](../Images/a7ac5f835be2103d105cb21e842ae29f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 2 shows an update of a current model with 360K features (binary indicators,
+    having been updated based on 217 new positive examples and a 2.1K sample of negative
+    examples).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Whenever multiple URL’s are in a line the hash has caused a collision, whenever
+    no URL is presented, the data was pre-hashed for privacy reasons.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Drawing from a number of techniques in machine learning and data engineering,
+    it is possible to automate a full model creation, scoring, and execution framework.
+    The outlined technology is supported by a 13-person data science team and enables
+    the execution of hundreds of digital campaigns with high performance simultaneously.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**References**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '¹ For a more detailed description of the system and the process used for building
+    many models at scale see: Raeder, Troy, et al. "Design principles of massive,
+    robust prediction systems." *Proceedings of the 18th ACM SIGKDD international
+    conference on knowledge discovery and data mining*. ACM, 2012.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ² Details on the machine learning methods are described in the following section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '³ C. Perlich, B. Dalessandro, T. Raeder, O. Stitelman, and F. Provost. Machine
+    learning for targeted display advertising: Transfer learning in action. Machine
+    Learning, pages 1–25, 2013.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ⁴ Brian Dalessandro, Daizhuo Chen, Troy Raeder, Claudia Perlich, Melinda Han
+    Williams, and Foster Provost. 2014\. Scalable hands-free transfer learning for
+    online advertising. In Proceedings of the 20th ACM SIGKDD international conference
+    on Knowledge discovery and data mining (KDD '14)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**About: [Dstillery](http://dstillery.com/)** is a data analytics company that
+    uses machine learning and predictive modeling to provide intelligent solutions
+    for brand marketing and other business challenges. Drawing from a unique 360 degree
+    view of digital, physical and offline activity, we generate insights and predictions
+    about the behaviors of individuals and discrete populations.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data Science Automation: Debunking Misconceptions](/2016/08/data-science-automation-debunking-misconceptions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automating Data Science](/2016/08/automating-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[And the Winner is… Stepwise Regression](/2016/08/winner-stepwise-regression.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Neural Networks and Deep Learning: A Textbook (2nd Edition)](https://www.kdnuggets.com/2023/07/aggarwal-neural-networks-deep-learning-textbook-2nd-edition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Announcing a Blog Writing Contest, Winner Gets an NVIDIA GPU!](https://www.kdnuggets.com/2022/11/blog-writing-contest-nvidia-gpu.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DIY Automated Machine Learning with Streamlit](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automated Machine Learning with Python: A Case Study](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automated Machine Learning with Python: A Comparison of Different…](https://www.kdnuggets.com/2023/03/automated-machine-learning-python-comparison-different-approaches.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Harnessing ChatGPT for Automated Data Cleaning and Preprocessing](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

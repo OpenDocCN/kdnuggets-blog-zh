@@ -1,0 +1,209 @@
+- en: Data Cleaning and Wrangling in SQL
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/01/data-cleaning-wrangling-sql.html](https://www.kdnuggets.com/2021/01/data-cleaning-wrangling-sql.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Antonio Emilio Badia](https://engineering.louisville.edu/faculty/antonio-e-badia/),
+    Assoc. Professor, CSE department, U. of Louisville.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7b90faf67d8c5a9b93c5838add6004a0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Knowing SQL is considered one of the basic skills of a data scientist because
+    a large amount of data exists (and continues to be collected) in relational databases.
+    A typical approach to data analysis is to extract the data from such repositories
+    and carry out the analysis in R or Python, using the powerful packages/libraries
+    available in both environments. In such an approach, SQL is only used for the
+    sub-setting and extraction of data; basic *querying *suffices for this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'However, practitioners know that there is a ([long path](https://hdsr.mitpress.mit.edu/pub/577rq08d/release/3) from
+    raw data to analysis: data must be carefully prepared, a complex task involving
+    several processes usually including labeled *data cleaning*, *data wrangling*,
+    or *data pre-processing*. A question arises as to in which environment to carry
+    out this process. Some analysts prefer to carry out the whole process in R or
+    Python, as they both provide [abundant support](https://r4ds.had.co.nz/) for them
+    and they are (especially R) highly interactive, while SQL lacks the rich packages/libraries
+    that make many operations on data a simple one-liner in R or Python, and its syntax
+    can be quite constraining. On the other hand, there are a few disadvantages to
+    this approach: when dealing with very large datasets, both R and Python can be
+    slow or run into problems, and the multiplicity of packages/libraries (many times
+    with overlapping functionality) creates additional complexity in these environments.
+    Therefore, in some cases, at least, doing some of the data cleaning and wrangling
+    in SQL can be beneficial. As we show here, many common tasks can be accomplished
+    without too much extra burden in SQL. To illustrate this, we provide an example
+    that focuses on the identification and substitution of missing values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Missing values are represented by the NULL marker in SQL, but data may not
+    always be clearly marked. Imagine a dataset containing table *Patients *with information
+    about patients in a medical study. One of the attributes is i*d*, an identifier,
+    and two others are *Height *and *Weight*, representing respectively the height
+    and weight of each patient at the beginning of a study. We note that some weight
+    values are missing, indicated by a -1\. We then ''clean'' the table as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Once this is done, we can use the predicate *IS NULL* to deal with all missing
+    values uniformly: the query'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: will tell us exactly how many values are missing. If only a few values are missing,
+    we may want to drop incomplete data. The SQL command
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: would eliminate rows (observations) where the weight is missing. If the attribute
+    is deemed not important for subsequent analysis, the command
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'would eliminate the attribute from the whole table--that is, from all rows
+    (observations). If we prefer to *impute* the missing values, the command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'would substitute all missing values by the mean of the existing values. A more
+    sophisticated approach would be to impute the value of the missing attribute from
+    a related one. We may wonder if *Height *is related to weight; the query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'will compute the [correlation coefficient](https://en.wikipedia.org/wiki/Correlation_and_dependence) between
+    the two attributes in a system where a built-in correlation function cor exists.
+    Even in systems where it doesn''t, SQL allows us to simply write our own:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'because the mean (*avg*) and standard deviation (*std*) functions are universally
+    present. If we consider the correlation high enough, we can use the [kNN algorithm](https://link.springer.com/book/10.1007/978-3-319-14142-8) to
+    infer appropriate values. In a general case, SQL allows us to compute *distances* between
+    the elements of a dataset using the usual distance functions (like Euclidean or
+    another norm) and sort the result by the computed distances so that the *k* nearest
+    neighbors can be used to extrapolate the desired value. In this particular example,
+    the computation is very simple: we use the absolute value of the difference of
+    heights as our distance, and the average weight of the closest 5 neighbors for
+    our new, imputed weight:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In this query, the subquery in the *FROM *clause computes distances between
+    two *distinct* data points (patients), with one of them having a missing weight;
+    orders the result by this distance (*ORDER BY*) and keeps only the 5 closest results
+    (*LIMIT*); the average of the weights of this 5 neighbors is then used for the
+    imputed value (note: ties are broken arbitrarily). We return a result for each
+    data point with a missing weight, so we provide the *id* of such a point. This
+    result can be used in a second query, similar to the second UPDATE above, to change
+    the data values in *Patient*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: SQL has the added advantage of being a well-established standard for operating
+    rather efficiently on very large datasets (recall that a separate *query optimizer* analyzes
+    all the statements above and determines the most efficient way that the system
+    can execute the SQL command, given current data and resources). Being able to
+    carry out some data cleaning, wrangling, and filtering before extracting the data
+    from the database may make a data pipeline simpler and more efficient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Antonio Badia](https://engineering.louisville.edu/faculty/antonio-e-badia)
+    is an Associate Professor in the Computer Science and Engineering department,
+    University of Louisville. His research in databases has been supported by the
+    NSF (including a CAREER Award) and resulted in over 50 publications. He teaches
+    courses in databases and an introduction to data management and analysis for non-CS
+    majors. He is the author of [SQL for Data Science: Data Cleaning, Wrangling and
+    Analytics with Relational Databases, Springer](https://www.springer.com/gp/book/9783030575915),
+    from which this post is extracted.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[5 Tricky SQL Queries Solved](https://www.kdnuggets.com/2020/11/5-tricky-sql-queries-solved.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learning SQL the Hard Way](https://www.kdnuggets.com/2020/01/learning-sql-hard-way.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Last SQL Guide for Data Analysis You’ll Ever Need](https://www.kdnuggets.com/2019/10/last-sql-guide-data-analysis-ever-need.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Collection of Guides on Mastering SQL, Python, Data Cleaning, Data…](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Data Wrangling with Pandas and Python](https://www.kdnuggets.com/7-steps-to-mastering-data-wrangling-with-pandas-and-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Cleaning in SQL: How To Prepare Messy Data for Analysis](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn Data Cleaning and Preprocessing for Data Science with This Free eBook](https://www.kdnuggets.com/2023/08/learn-data-cleaning-preprocessing-data-science-free-ebook.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Data Cleaning and Preprocessing Techniques](https://www.kdnuggets.com/2023/08/7-steps-mastering-data-cleaning-preprocessing-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Harnessing ChatGPT for Automated Data Cleaning and Preprocessing](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

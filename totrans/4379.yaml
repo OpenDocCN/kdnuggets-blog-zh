@@ -1,0 +1,293 @@
+- en: How to Build a Football Dataset with Web Scraping
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/11/build-football-dataset-web-scraping.html](https://www.kdnuggets.com/2020/11/build-football-dataset-web-scraping.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Otávio Simões Silveira](https://www.linkedin.com/in/otavioss28/), Economist,
+    Aspiring Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/be7c4298589981b19ff9ac0c107a06fe.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Bermix Studio](https://unsplash.com/@bermixstudio?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: When scraping a website with Python using libraries such as *BeautifulSoup*, *requests*,
+    or *urllib *it’s common to have some trouble accessing some parts of the website.
+    That's because these parts are generated on the client-side, using JavaScript,
+    which these libraries can’t handle.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To deal with this problem, using [Selenium](https://selenium-python.readthedocs.io/index.html) can
+    be an interesting option. Selenium works by opening an automated browser and then
+    it’s capable of accessing the entire content and of interacting with the page.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article will cover the scraping of JavaScript rendered content with Selenium
+    using the Premier League website as an example and scraping the stats of every
+    match in the 2019/20 season.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understanding the Website
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The Premier League website makes the scraping of multiples matches pretty simple
+    with its very straight forward URLs. The URL for a match consists basically of
+    “https://www.premierleague.com/match/” followed by a unique match ID.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each ID consists of a number and the IDs for all matches of each season are
+    sequenced. For instance, the entire 2019/20 season goes from 46605 to 46984\.
+    All we need to do then is to loop through this interval and collect the data from
+    each match.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll use Liverpool 5 to 3 win over Chelsea as an example in this article. This
+    game ID is 46968\. You can type this ID after “premierleague.com/match/” to go
+    to the page so you can follow along with the scraping process that will be described
+    in the article. Refer back to the page always that necessary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Scraping…
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To begin with the code, we’ll make our imports and initialize two empty lists,
+    one for dealing with errors, which will be explained later in the article, and
+    the other to store the data of every match we scrape.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Within the loop, the URL will be created using the match ID, the *driver *object
+    will be instantiated, and we’ll set up Selenium. No advanced configurations we’ll
+    be used here. The `option.headless = True` line states that we don’t want to actually
+    see the browser opening and going to the website to collect the data. With that
+    done, we’ll use the *driver *object to get the page.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And we’re now set to begin with the scraping. We’ll first collect the date of
+    the and the teams involved in the match. We’ll also use Datetime to convert the
+    date format from “Wed 22 Jul 2020” to 07/22/2020.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each element is found through its Xpath, but it can also be found by name, class,
+    tag, and more. Check all the selectors [here](https://selenium-python.readthedocs.io/locating-elements.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice that we had to use the *WebDriverWait *and the `expected_conditions` when
+    collecting the match date. That’s because this is one of the parts of the page
+    generated using JavaScript, and so we need to wait for the element to be rendered
+    in order to avoid raising an error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we tried to collect the match date using, let’s say, *requests *and *BeautifulSoup *only,
+    we wouldn’t be able to access this information since *BeautifulSoup *can’t parse
+    JavaScript rendered content.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To scrape the final scores, we first need to get the text from inside what I
+    call the score box, which returns the text “5–3”, and then to assign the home
+    team score and the away team score.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The next step is to get the stats of the game. This data is a table under the
+    stats tab on the page. We could simply read the page source using the Pandas `read_html`function,
+    but this part of the page is only rendered after we click on the tab.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first thing to do then is to find the tab element and click on it with Selenium.
+    After that, we can use the `read_html`function. This function returns a list with
+    all tables on the page stored as DataFrames. We then select the last element in
+    the list, which is the one we are after. The scraping is now done, we can just
+    quit the driver.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Error Handling
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Selenium can be a little unstable sometimes and take too long to load the page.
+    This can raise a couple of errors since we’re scraping hundreds of pages.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To deal with this, we’ll need the try and except clauses. If an error is raised
+    while collecting the data, the code will append the match ID to the errors list
+    and move on to the next match without crashing. When all the scraping is done,
+    you can easily see this list to scrape only the matches that are missing. This
+    is how the code for all this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Manipulating the Stats
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'This is how the stats DataFrame looks right now:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As we need to store all this in a row of a DataFrame, this format is not good.
+    To fix this, we’ll create two dictionaries, one for each team, in which every
+    key will represent a stat. This is the entire process:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Making the Data Consistent
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Notice that we don’t have the red card stats in the stats DataFrame. That’s
+    because there were no red cards in this game. When there are no occurrences of
+    a stat, the website doesn't show that stat.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If this isn’t fixed, some rows will be longer than others the data will be inconsistent.
+    To fix this, we’ll use a list containing all the expected stats and if any of
+    the values in this list is not a key of the stats dictionaries (we only need to
+    check one of them) then this stat we’ll be added as a key to both dictionaries
+    with the value zero.
+  prefs: []
+  type: TYPE_NORMAL
+- en: All that is left now is to create a new list with everything that was scraped
+    for this match and append this list to the *season *list that contains all the
+    matches.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When we’re finishing scraping all matches in the season, we can just transform
+    the season list of lists into a DataFrame and export the data as a *.csv* file.
+    The *stats_check *list was used to create a list used to name the DataFrames columns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can see the complete code [here](https://github.com/otavio-s-s/data_science/tree/master/Premier%20League%20Scraping).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrapping up
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Finally, this is the data scraped:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ef53bd9eafda232575c9ba59d8e9074c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '380 matches. This is the entire Premier League 2019/20 season in a dataset!
+    And you can do even more: if you use the ID 1 you’ll go back to the 1992/93 season.
+    But the IDs aren’t linear from 1992 to today because at some point the IDs began
+    to cover cup matches, youth matches, and women’s matches as well.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, you can find the IDs for almost every Premier League match since the
+    2011/12 season [here](https://github.com/otavio-s-s/data_science/blob/master/Premier%20League%20Scraping/PL_ids.csv) if
+    you want to have a dataset with thousands and thousands of matches.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you’re going for that, make sure to insert more pauses in your code, using
+    the WebDriverWait or even the sleep function to avoid having your IP blocked for
+    making too many requests to the website. Another possibility is to get in touch
+    with a proxy provider, such as [Infatica](https://infatica.io/), as they’ll be
+    able to provide you a better infrastructure of IP addresses to keep your code
+    running.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And to go one step further, you can always scrape more data about each game.
+    With a few more lines of code, you can have in your dataset information such as
+    the referee, the stadium and the city where each match took place, the attendance,
+    the halftime score, the goal scorers, the lineups, and much more!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keep scraping!
+  prefs: []
+  type: TYPE_NORMAL
+- en: I hope you’ve enjoyed this and that it can maybe be useful somehow. If you have
+    a question, a suggestion, or just want to be in touch, feel free to contact through [Twitter](https://twitter.com/_otavioss), [GitHub](https://github.com/otavio-s-s),
+    or [Linkedin](https://www.linkedin.com/in/otavioss28/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Otávio Simões Silveira](https://www.linkedin.com/in/otavioss28/)**
+    is economist and aspiring data scientist.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/evolve-you/how-to-build-a-football-dataset-with-web-scraping-d4deffcaa9ca).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Python, Selenium & Google for Geocoding Automation: Free and Paid](/2019/11/automate-geocoding-free-paid-python-selenium-google.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automate your Python Scripts with Task Scheduler: Windows Task Scheduler to
+    Scrape Alternative Data](/2019/09/automate-python-scripts-task-scheduler.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A step-by-step guide for creating an authentic data science portfolio project](/2020/10/guide-authentic-data-science-portfolio-project.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Beginner’s Guide to Web Scraping Using Python](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Step-by-Step Guide to Web Scraping with Python and Beautiful Soup](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mastering Web Scraping with BeautifulSoup](https://www.kdnuggets.com/mastering-web-scraping-with-beautifulsoup)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Use Python and Machine Learning to Predict Football Match Winners](https://www.kdnuggets.com/2023/01/python-machine-learning-predict-football-match-winners.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build a Machine Learning Web App in 5 Minutes](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build a Web Scraper with Python in 5 Minutes](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

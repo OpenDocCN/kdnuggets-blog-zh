@@ -1,0 +1,380 @@
+- en: Graph Machine Learning in Genomic Prediction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/06/graph-machine-learning-genomic-prediction.html](https://www.kdnuggets.com/2020/06/graph-machine-learning-genomic-prediction.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Thanh Nguyen Mueller](https://www.linkedin.com/in/thanh-nm/?originalSubdomain=au),
+    CSIRO Data61**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/daf5fdc46b374b08cd50206ef48f4fa4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [David Becker](https://unsplash.com/@beckerworks?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/wheat?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In genomic settings, the large volume of individuals and the high complexity
+    of genomic architecture make valuable analytics and insight *difficult*. Deep
+    learning is widely known for its flexibility and the capability to uncover complex
+    patterns in large datasets; with these advantages, instances of [deep learning
+    in the genomics domain](https://pubmed.ncbi.nlm.nih.gov/31330861/) are emerging.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One such application is genomic prediction, where the traits of individuals
+    — like susceptibility to disease or yield-related traits — are predicted using
+    their genomic information. Understanding the correlation of the genetic traits
+    and variations in genomes could have many benefits such as advancing crop breeding
+    processes, and hence improve food security.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we explore how genetic relationships can be exploited alongside
+    genomic information to predict genetic traits, with the aid of [graph machine
+    learning](https://medium.com/stellargraph/knowing-your-neighbours-machine-learning-on-graphs-9b7c3d0d5896?source=friends_link&sk=ac71607f5272aeb68e168453a5ce3edd) algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Deep learning in a genomic prediction context
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In genomic prediction, traditional deep learning would use an individual’s genomic
+    information — like a single nucleotide polymorphism (SNP) — as input features
+    to the neural network. A SNP is essentially a difference that occurs at a specific
+    position in an individual’s genome.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/14f4e518d8497ca8fddcc0f72d90a265.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: By observing individuals’ genomic information, e.g. SNPs, and the observed traits,
+    the neural network will learn to predict the traits for unseen individuals from
+    their genomic information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Taking the below MultiLayer Perceptron (MLP) network as an example, the network
+    contains an input layer holding the SNPs, one or more hidden layers, and an output
+    layer that predicts the trait (quantitative or categorical). We train the network
+    by adjusting its parameters in such a way as to minimise the average error between
+    the predicted and observed traits of each individual in the training set, using
+    one of the flavours of gradient descent optimisation algorithm e.g., stochastic
+    gradient descent.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5247eb73142e5b272ea3388292a753a3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 1: An MLP neural network illustrates the use of SNPs features as input,
+    two hidden (fully connected) layers, and an output layer that predicts the trait
+    value.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alongside this genomic information, individuals also have genetic relationships
+    that can be beneficial for the improvement of trait prediction accuracy. Our question
+    is then; *how can these relationships be leveraged for trait prediction?*
+  prefs: []
+  type: TYPE_NORMAL
+- en: Graph representation for trait prediction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Graph machine learning is a tool that allows us not only to utilise intrinsic
+    information about entities (e.g., SNP features) but also relationships between
+    the entities, to perform a prediction task. It is an extension of deep learning
+    on data that can be modeled as a graph.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A graph of individuals would represent the individuals as nodes, and the relations
+    between them as edges. A pedigree-based kinship matrix is something that can be
+    portrayed as relations between individuals. This *N x N *matrix, where *N* is
+    the number of individuals, contains pedigree-based [relationship coefficients](https://en.wikipedia.org/wiki/Coefficient_of_relationship) that
+    indicate the biological relationships between the individuals, e.g. first-order
+    (parent-child, siblings), second-order (aunts, uncle), third-order (cousins, grandparents)
+    and so on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With pedigree-based relationships, we can construct a graph consisting of nodes
+    with genetic features, e.g. SNPs, and edges representing a certain degree of relatedness
+    between them. This is a natural representation of the data that can be used for
+    trait prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/d324ad2edfd3a4429e7741d2a544226b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 2 illustrates a graph for some of purple straw wheat’s relationships.
+    The graph on the left includes only first-order relationships. In the second graph,
+    both first-order and second-order relationships are considered and the third graph
+    shows the density of the connections when first-order, second-order and third-order
+    relationships are included.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the context of genomics breeding (e.g. wheat), besides the genetic features,
+    growing conditions also have an important effect on individual’s traits. That
+    is, the same species of individuals growing in different environments might share
+    the same SNPs while having additional distinct environmental-related features
+    and traits due to the different growing conditions. Thus, adding this to the graph
+    is useful as we might want to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: observe a plant under **one environmental condition** while predicting the trait
+    of the same plant in another environment
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: observe a plant grown in **all kinds of environmental conditions** and predict
+    traits for completely different plants treated in the same set of environments.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: One possible way to incorporate this information into the graph is by creating
+    replicas of the individuals for each environmental condition and drawing an edge
+    between the replicas, which encodes the fact that these are replicas of the same
+    genome.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/409fddcb7c76620e95769b1943a5c203.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 3: The graph illustrates purple straw’s first-order relationships in
+    long-day and short-day environmental treatment. An edge either represents a pedigree
+    relationship or a connection to its replica.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, the edges that join the individuals’ replicas have a different semantic
+    meaning as the edges of the pedigree relationships. To take this into account,
+    we construct a heterogeneous graph having individuals as a single node type with
+    pedigree and environmental condition as the two distinct edge types.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/856035ddcd95f79585ee23d744b95937.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 4: Purple straw in long-day and short-day environmental treatment with
+    two edge types — “pedigree” represents the first-ordered relationship and “condition”
+    shows a connection to its replica grown in a different environment.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So far, we have represented individuals with their environmental condition and
+    pedigree-based relationships as a graph. Our last question is then; *how can a
+    neural network be applied to such graph-structured data for trait prediction*?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Trait prediction from graph
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: GraphSAGE [1], belonging to a class of Graph Convolutional Neural Networks,
+    is a neural network that when applied to a graph will learn to produce such latent
+    vector representations — also called “embeddings” — for each node that are most
+    suitable for the downstream prediction task (e.g. node classification or regression).
+    It does this by fusing the node features with the aggregated features of the nodes
+    within its neighbourhood.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Applying that to our graph of individuals above, a GraphSAGE layer forms a new
+    embedding vector for each individual, fusing the individual’s features with those
+    from their direct relatives and their replicas in other environments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When stacking *k* GraphSAGE layers we expand each node’s neighbourhood to also
+    fuse the embeddings of neighbours from *k*-hops away. As an example, with two
+    GraphSAGE layers, we would also include the information from relatives of relatives
+    for each individual.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For scalability, rather than fusing features of all neighbours, each GraphSAGE
+    layer only fuses features of a set of randomly selected neighbours. With GraphSAGE,
+    the number of layers and the number of neighbours per layer are user-defined.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, feeding these node embeddings into a stack of hidden layers and the
+    output layer, the neural network learns to adjust the produced node embeddings
+    and the model’s parameters in such a way as to find the embeddings optimal for
+    the trait prediction. As with MLP, the output layer of the neural network contains
+    the predicted trait of the individuals.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e6b19504b14cd4e0a590fbce6d60109a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 5 illustrates an end-to-end graph neural network with an input layer
+    containing the nodes and the edges (adjacency matrix), two GraphSAGE layers, two
+    fully connected layers and an output layer.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: HinSAGE for trait prediction on heterogeneous graph
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The GraphSAGE algorithm only works with homogeneous graphs, thus does not make
+    any distinction between node types and edge types when fusing information from
+    nodes and their “neighbours” in the graph. However, such distinction is desired
+    for the pedigree and environmental conditional relationships as shown in Figure
+    4, as those are semantically different relationships, and the corresponding node
+    neighbourhoods are also different.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[HinSAGE](https://stellargraph.readthedocs.io/en/stable/hinsage.html) (Heterogeneous
+    GraphSAGE) [2] is an extension of the GraphSAGE algorithm that allows us to leverage
+    the heterogeneity of nodes and edges in the graph. HinSAGE follows a neighbourhood
+    aggregation strategy where neighbours are selected and fused together by edge
+    type. As a result, instead of fusing the relatives with the environmental dependent
+    replicas, HinSAGE first fuses features from the relatives, then from the replicas
+    (or vice versa), and only at the end fuses the results with features of the individuals
+    themselves.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similar to the GraphSAGE neural network, our graph neural network’s architecture
+    consists of an input layer, one or more HinSAGE layers, one or more fully connected
+    layers and an output layer. The input layer holds the graph with individuals as
+    nodes, each node having SNPs and environmental features. The pedigree and environmental
+    conditions are represented with edges of different types.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/84e7e45d77b8005b6569bc476695aa16.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 6: an end-to-end graph neural network with an input layer, two HinSAGE
+    layers, two fully connected layers and an output layer. The input layer demonstrates
+    the adjacency matrix with two edge types, pedigree (blue cells) and environmental
+    condition (yellow cells).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A new potential
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Graph machine learning portrays a new potential in the landscape of genomic
+    prediction. Along with the advantages of flexibility and scalability that deep
+    learning offers, graph machine learning lets us exploit the valuable information
+    available in the data for our prediction task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Despite its advantages, graph machine learning faces similar challenges to deep
+    learning — like tuning architecture and hyperparameters for best performance—
+    and requires a large enough dataset for training. Moreover, it needs further exploration
+    in terms of graph representation of genomic data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our work to apply graph machine learning to genomic prediction is a work in
+    progress. Nevertheless, graph machine learning is a promising tool which deserves
+    its place in the genomics prediction toolkit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[StellarGraph](https://github.com/stellargraph/stellargraph) is an open source
+    python library that delivers state of the art graph machine learning algorithms
+    on Tensorflow and Keras. To get started, run `pip install stellargraph`, and follow
+    the one of the GraphSAGE or [HinSAGE](https://stellargraph.readthedocs.io/en/latest/demos/link-prediction/hinsage-link-prediction.html) [demos](https://stellargraph.readthedocs.io/en/latest/demos/index.html).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Thanks to *[*Anna Leontjeva*](https://www.linkedin.com/in/anna-leontjeva-datascientist/)* for
+    her big contribution to this project, and *[*Yuriy Tyshetskiy*](https://www.linkedin.com/in/yuriy-tyshetskiy-b42bb216/)* and *[*Leda
+    Kalleske*](https://www.linkedin.com/in/leda-kalleske-700280a/)* for reviewing
+    the blog post.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*This work is supported by*[* CSIRO’s Data61*](https://www.data61.csiro.au/)*,
+    Australia’s leading digital research network and this research is supported by
+    the Science and Industry Endowment Fund.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5d0bb817223a2dbfc26f1c6538bdca8c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: References
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Inductive Representation Learning on Large Graphs. W.L. Hamilton, R. Ying, and
+    J. Leskovec. Neural Information Processing Systems (NIPS), 2017
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Heterogeneous GraphSAGE ([HinSAGE](https://stellargraph.readthedocs.io/en/latest/demos/link-prediction/hinsage-link-prediction.html)):
+    Data61’s generalisation of GraphSAGE. [StellarGraph Release v0.10.0, 2020](https://github.com/stellargraph/stellargraph/releases/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Bio: [Thanh Nguyen Mueller](https://www.linkedin.com/in/thanh-nm/?originalSubdomain=au)**
+    is a senior software engineer at CSIRO’s Data61, Australia’s leading digital research
+    network.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/stellargraph/graph-machine-learning-in-genomic-prediction-56c93c362556?source=friends_link&sk=92beaa31ccde9c69af9d28e92887fe6c).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Better notebooks through CI: automatically testing documentation for graph
+    machine learning](/2020/04/better-notebooks-through-ci-automatically-testing-documentation-graph-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Faster machine learning on larger graphs with NumPy and Pandas](/2020/05/faster-machine-learning-larger-graphs-numpy-pandas.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Scalable graph machine learning: a mountain we can climb?](/2019/12/scalable-graph-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Data Science Project of Rotten Tomatoes Movie Rating Prediction:…](https://www.kdnuggets.com/2023/06/data-science-project-rotten-tomatoes-movie-rating-prediction-first-approach.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Project of Rotten Tomatoes Movie Rating Prediction:…](https://www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Multivariate Time-Series Prediction with BQML](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Comprehensive Survey on Trustworthy Graph Neural Networks:…](https://www.kdnuggets.com/2022/05/comprehensive-survey-trustworthy-graph-neural-networks-privacy-robustness-fairness-explainability.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Make Amazing Visualizations with Python Graph Gallery](https://www.kdnuggets.com/2022/12/make-amazing-visualizations-python-graph-gallery.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Use Graph Theory to Scout Soccer](https://www.kdnuggets.com/2022/11/graph-theory-scout-soccer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

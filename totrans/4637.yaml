@@ -1,0 +1,251 @@
+- en: 'K-means Clustering with Dask: Image Filters for Cat Pictures'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/06/k-means-clustering-dask-image-filters.html](https://www.kdnuggets.com/2019/06/k-means-clustering-dask-image-filters.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Luciano Strika](http://www.datastuff.tech), MercadoLibre**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Picture of a kitten. It will be compressed using K means clustering.](../Images/d0f4d993a98270043bb07a9e804b179d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Applying filters to images is not a new concept to anyone. We take a picture,
+    make a few changes to it, and now it looks cooler. But where does Artificial Intelligence
+    come in? Let’s try out a fun use case of **Unsupervised Machine Learning** with
+    K Means Clustering in Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’ve written before about **K Means Clustering**, so I will assume that you’re **familiar** with
+    the algorithm. If you’re not, this is the [in-depth introduction that I wrote](http://www.datastuff.tech/machine-learning/k-means-clustering-unsupervised-learning-for-recommender-systems/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Moreover, I also tried my hand at **image compression** (well, reconstruction)
+    with [autoencoders](http://www.datastuff.tech/machine-learning/autoencoder-deep-learning-tensorflow-eager-api-keras/),
+    to varying degrees of success.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, this time, my goal is **not to reconstruct** the best possible image,
+    but just to see the effects of **recreating a picture** with the least possible
+    colors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead of making the picture look as similar to the original as possible, I
+    just want us to look at it and say “neat!”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So how do we do this? I’m glad you asked.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to do image filters with K-means Clustering
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: First of all, it’s always good to remember an **image** is just a **vector of
+    pixels**. Each pixel is a tuple of three integer values between 0 and 255 (an
+    unsigned byte), which represent that pixel’s color’s RGB values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We want to use K-means clustering to find the* k ***colors** that best **characterize
+    an image**. That just means we could treat each **pixel** as a **single data point** (in
+    3-dimensional space), and cluster them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So first, we’ll want to turn an image into a** vector of pixels** in Python.
+    Here’s how we do it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As an aside, I don’t think the *vector_of_pixels* function needs to use a Python
+    list. I’m sure there has to be some way to **flatten a numpy array**, I just couldn’t
+    find any (at least not one that did it in the order I wanted).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you can think of any way, let me know in the comments!
+  prefs: []
+  type: TYPE_NORMAL
+- en: The next step is **fitting** the model to the image, so that it **clusters the
+    pixels** into *k *colors. Then, it’s just a matter of assigning the corresponding
+    cluster color to each position in the image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For instance, maybe our pic has only three colors: two reddish ones and a greenish
+    one. If we fit that to 2 clusters, all the reddish pixels would turn some different
+    shade of red (getting clustered together), and the other ones would turn into
+    some greenish one.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: But enough with the explanations, let’s see the program in action!
+  prefs: []
+  type: TYPE_NORMAL
+- en: As usual, you are free to run it yourself with any pic you want, here’s the [GitHub
+    repository](https://github.com/StrikingLoo/K-means-image-compression) with the
+    code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The results
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We will apply the filter to pictures of kittens, taken from the awesome “Cats
+    vs Dogs” [kaggle dataset](https://www.kaggle.com/c/dogs-vs-cats).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We’ll start with a picture of a cat, and apply the filter with different values
+    for *k*. Here’s the original picture:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Picture of a kitten. It will be compressed using K means clustering.](../Images/02437fb057943adcc789ae8c047b6b57.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: First, let’s check how many colors this picture originally had.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With just one line of *Numpy*, we count the unique values a pixel takes on this
+    picture. This image in particular has **243 different colors**, even though it
+    has a total of **166167 pixels**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, let’s see the result of clustering it to 2, 5 and 10 different colors only.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![cat image](../Images/6abccd2057d9dfedb5424988395cf7d6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: With only two colors, all it’s doing is marking the darkest and lightest areas.
+    This could however be useful if you’re an artist, drawing something in black and
+    white (with ink, for instance) and would like to see what your reference’s outlines
+    look like.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/55971350b7a0f1861ef6c9fc9935b1d4.png)With only 5 different
+    colors, the cat is already recognizable!![This kitten picture was compressed using
+    K means Clustering.](../Images/3ec93a8e54a7b5bb0554d1b33de1e723.png)The 10 colors
+    picture may look a bit trippy, but it represents the original’s content pretty
+    clearly.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Did you notice a trend? Each color we add has diminishing returns. The difference
+    between having 2 colors and having 5, is a lot more than the difference between
+    5 and 10\. However with 10 colors, the flat areas are smaller, and we have more
+    granularity. Moving on to 15 and 24 colors!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Compressed picture of a kitten.](../Images/a048d65e65c7bdbbe0a10aeffb618639.png)![Compressed
+    picture of a kitten.](../Images/3054055891015af45daf4acd7511ce6c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Though it’s clear that the above image is filtered with 24 colors (10% of the
+    original amount), we are representing the cat well enough and to a certain level
+    of detail.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Moving on to a different picture: Here’s the original (256 different colors)
+    and here’s a compressed one (24 colors again).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![wo pictures of the same white kitten side by side. One was compressed using
+    K means Clustering.](../Images/c424ebe8bd42fd56e98c70ef317bcb56.png)256 colors
+    vs 24 colors. Notice any difference?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As an interesting note, the “compressed” image weighs 18KB and the uncompressed
+    one 16KB. I don’t really know why this is, since compressors are pretty complicated
+    beasts, but would love to read your theories in the comments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We were able to make new images with only 10% of the original’s colors, which
+    looked very similar to them. We also got some cool looking filters thanks to K
+    means clustering. Can you think of any other fun application for clustering? Do
+    you think other clustering techniques could have yielded more interesting results?
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to answer any of these questions, feel free to contact me on [Twitter](https://twitter.com/strikingloo), [Medium](https://medium.com/@strikingloo)
+    or [Dev.to](http://www.dev.to/strikingloo).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Luciano Strika](http://www.datastuff.tech)** is a computer science
+    student at Buenos Aires University, and a data scientist at MercadoLibre. He also
+    writes about machine learning and data on [**www.datastuff.tech**](http://www.datastuff.tech).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://www.datastuff.tech/machine-learning/k-means-clustering-with-dask-editing-pictures-of-kittens).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[K-Means Clustering: Unsupervised Learning for Recommender Systems](/2019/04/k-means-clustering-unsupervised-learning-recommender-systems.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Boost Your Image Classification Model](/2019/05/boost-your-image-classification-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introducing Dask-SearchCV: Distributed hyperparameter optimization with Scikit-Learn](/2018/12/solve-image-classification-problem-quickly-easily.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Clustering Unleashed: Understanding K-Means Clustering](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is K-Means Clustering and How Does its Algorithm Work?](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On with Unsupervised Learning: K-Means Clustering](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Brief Introduction to Kalman Filters](https://www.kdnuggets.com/2022/12/brief-introduction-kalman-filters.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Clustering in Python with PyCaret](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

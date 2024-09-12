@@ -1,0 +1,435 @@
+- en: Multi-Class Text Classification with Doc2Vec & Logistic Regression
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/11/multi-class-text-classification-doc2vec-logistic-regression.html](https://www.kdnuggets.com/2018/11/multi-class-text-classification-doc2vec-logistic-regression.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Susan Li](https://www.linkedin.com/in/susanli/), Sr. Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/c6e1000365d1d4cdf2a6c616c7362e9a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Photo credit: Pexels'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Doc2vec](https://cs.stanford.edu/~quocle/paragraph_vector.pdf) is an [NLP](https://en.wikipedia.org/wiki/Natural_language_processing) tool
+    for representing documents as a vector and is a generalizing of the [word2vec](https://en.wikipedia.org/wiki/Word2vec)
+    method.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In order to understand doc2vec, it is advisable to understand word2vec approach.
+    However, the complete mathematical details is out of scope of this article. If
+    you are new to word2vec and doc2vec, the following resources can help you to get
+    start:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Distributed Representations of Words and Phrases and their Compositionality](https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Distributed Representations of Sentences and Documents](https://cs.stanford.edu/~quocle/paragraph_vector.pdf)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A gentle introduction to Doc2Vec](https://medium.com/scaleabout/a-gentle-introduction-to-doc2vec-db3e8c0cce5e)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Gensim Doc2Vec Tutorial on the IMDB Sentiment Dataset](https://github.com/RaRe-Technologies/gensim/blob/3c3506d51a2caf6b890de3b1b32a8b85f7566ca5/docs/notebooks/doc2vec-IMDB.ipynb)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Document classification with word embeddings tutorial](https://github.com/RaRe-Technologies/movie-plots-by-genre/blob/master/ipynb_with_output/Document%20classification%20with%20word%20embeddings%20tutorial%20-%20with%20output.ipynb)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Using the same data set when we did [Multi-Class Text Classification with Scikit-Learn](https://towardsdatascience.com/multi-class-text-classification-with-scikit-learn-12f1e60e0a9f),
+    In this article, we’ll classify complaint narrative by product using doc2vec techniques
+    in [Gensim](https://radimrehurek.com/gensim/models/doc2vec.html). Let’s get started!
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The goal is to classify consumer finance complaints into 12 pre-defined classes.
+    The data can be downloaded from [data.gov](https://catalog.data.gov/dataset/consumer-complaint-database).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/a0e2f4588ff2e456b23dec77eeddb694.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 1
+  prefs: []
+  type: TYPE_NORMAL
+- en: After remove null values in narrative columns, we will need to re-index the
+    data frame.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '***(318718, 2)***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '***63420212***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have over 63 million words, it is a relatively large data set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Exploring
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/3b3413fbe1d726f0312bf26deb0d0cff.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 2
+  prefs: []
+  type: TYPE_NORMAL
+- en: The classes are imbalanced, however, a naive classifier that predicts everything
+    to be Debt collection will only achieve over 20% accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s have a look a few examples of complaint narrative and its associated product.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/26c8a0ee1adfc8728acddb906e566102.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 3
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/b5dc8a3b74a32d321ee2cea0f9029af2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 4
+  prefs: []
+  type: TYPE_NORMAL
+- en: Text Preprocessing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Below we define a function to convert text to lower-case and strip punctuation/symbols
+    from words and so on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The following steps include train/test split of 70/30, remove stop-words and
+    tokenize text using [NLTK tokenizer](https://www.nltk.org/api/nltk.tokenize.html).
+    For our first try we tag every complaint narrative with its product.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is what a training entry looks like — an example complaint narrative tagged
+    by “Credit reporting”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/edba2147c4c6cc20fae5fdc97f372915.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 5
+  prefs: []
+  type: TYPE_NORMAL
+- en: Set-up Doc2Vec Training & Evaluation Models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: First, we instantiate a doc2vec model — Distributed Bag of Words (DBOW). In
+    the word2vec architecture, the two algorithm names are “continuous bag of words”
+    (CBOW) and “skip-gram” (SG); in the doc2vec architecture, the corresponding algorithms
+    are “distributed memory” (DM) and “distributed bag of words” (DBOW).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Distributed Bag of Words (DBOW)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: DBOW is the doc2vec model analogous to Skip-gram model in word2vec. The paragraph
+    vectors are obtained by training a neural network on the task of predicting a
+    probability distribution of words in a paragraph given a randomly-sampled word
+    from the paragraph.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We will vary the following parameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If `dm=0`, distributed bag of words (PV-DBOW) is used; if `dm=1`,‘distributed
+    memory’ (PV-DM) is used.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 300- dimensional feature vectors.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`min_count=2`, ignores all words with total frequency lower than this.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`negative=5` , specifies how many “noise words” should be drawn.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`hs=0` , and negative is non-zero, negative sampling will be used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`sample=0` , the threshold for configuring which higher-frequency words are
+    randomly down sampled.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`workers=cores` , use these many worker threads to train the model (=faster
+    training with multicore machines).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Building a Vocabulary**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/52b897e3f9ff007f1bb5b72ca0340e74.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 6
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training a doc2vec model is rather straight-forward in Gensim, we initialize
+    the model and train for 30 epochs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/d8f61dbc939a64cb44aed9b05c66aa1c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 7
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Building the Final Vector Feature for the Classifier**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Train the Logistic Regression Classifier.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '***Testing accuracy 0.6683609437751004***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Testing F1 score: 0.651646431211616***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Distributed Memory (DM)****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Distributed Memory (DM) acts as a memory that remembers what is missing from
+    the current context — or as the topic of the paragraph. While the word vectors
+    represent the concept of a word, the document vector intends to represent the
+    concept of a document. We again instantiate a Doc2Vec model with a vector size
+    with 300 words and iterating over the training corpus 30 times.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/009bfaf05814cf40458f63da080f08cb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 8
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/5b50b1a8c8a6ac7a9b1a9b7d70281bbe.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 9
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Train the Logistic Regression Classifier**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '***Testing accuracy 0.47498326639892907***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Testing F1 score: 0.4445833078167434***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Model Pairing**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: According to [Gensim doc2vec tutorial on the IMDB sentiment data set](https://github.com/RaRe-Technologies/gensim/blob/3c3506d51a2caf6b890de3b1b32a8b85f7566ca5/docs/notebooks/doc2vec-IMDB.ipynb),
+    combining a paragraph vector from Distributed Bag of Words (DBOW) and Distributed
+    Memory (DM) improves performance. We will follow, pairing the models together
+    for evaluation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we delete temporary training data to free up RAM.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: Concatenate two models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: Building feature vectors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: Train the Logistic Regression
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: '***Testing accuracy 0.6778572623828648***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Testing F1 score: 0.664561533967402***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The result improved by 1%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this article, I used training set to train doc2vec, however, in [Gensim’s
+    tutorial](https://github.com/RaRe-Technologies/gensim/blob/develop/docs/notebooks/doc2vec-IMDB.ipynb),
+    the whole data set was used for training, I tried that approach, using the whole
+    data set to train doc2vec classifier for our consumer complaint classification,
+    I was able to achieve 70% accuracy. You can find that [notebook](https://github.com/susanli2016/NLP-with-Python/blob/master/Doc2Vec%20Consumer%20Complaint.ipynb)here,
+    it is a little different approach.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The [Jupyter notebook](https://github.com/susanli2016/NLP-with-Python/blob/master/Doc2Vec%20Consumer%20Complaint_3.ipynb) for
+    the above analysis can be found on [Github](https://github.com/susanli2016/NLP-with-Python/blob/master/Doc2Vec%20Consumer%20Complaint_3.ipynb).
+    I look forward to hearing any questions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Susan Li](https://www.linkedin.com/in/susanli/)** is changing the world,
+    one article at a time. She is a Sr. Data Scientist, located in Toronto, Canada.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/multi-class-text-classification-with-doc2vec-logistic-regression-9da9947b43f4).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Machine Learning for Text Classification Using SpaCy in Python](/2018/09/machine-learning-text-classification-using-spacy-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Topic Modeling with LSA, PLSA, LDA & lda2Vec](/2018/08/topic-modeling-lsa-plsa-lda-lda2vec.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Multi-Class Text Classification with Scikit-Learn](/2018/08/multi-class-text-classification-scikit-learn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Logistic Regression for Classification](https://www.kdnuggets.com/2022/04/logistic-regression-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Classification Metrics Walkthrough: Logistic Regression with…](https://www.kdnuggets.com/2022/10/classification-metrics-walkthrough-logistic-regression-accuracy-precision-recall-roc.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Comparing Linear and Logistic Regression](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[An Overview of Logistic Regression](https://www.kdnuggets.com/2022/02/overview-logistic-regression.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Linear vs Logistic Regression: A Succinct Explanation](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News 22:n12, March 23: Best Data Science Books for…](https://www.kdnuggets.com/2022/n12.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

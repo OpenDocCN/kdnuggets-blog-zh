@@ -1,0 +1,619 @@
+- en: P-values Explained By Data Scientist
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/07/p-values-explained-data-scientist.html](https://www.kdnuggets.com/2019/07/p-values-explained-data-scientist.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Admond Lee](https://www.linkedin.com/in/admond1994/), Micron Technology
+    / AI Time Journal / Tech in Asia**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I remember when I was having my [first overseas internship at CERN as a summer
+    student](https://towardsdatascience.com/my-journey-from-physics-into-data-science-5d578d0f9aa6?source=post_page---------------------------),
+    most people were still talking about the [discovery of Higgs boson](https://home.cern/science/physics/higgs-boson?source=post_page---------------------------) upon
+    confirming that it met the [“five sigma” threshold](https://blogs.scientificamerican.com/observations/five-sigmawhats-that/?source=post_page---------------------------)** (which
+    means having p-value of 0.0000003).**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Back then I knew nothing about p-value, hypothesis testing or even statistical
+    significance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And you’re right.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I went to google the word — p-value, and what I found on [Wikipedia](https://en.wikipedia.org/wiki/P-value?source=post_page---------------------------) made
+    me even more confused…
+  prefs: []
+  type: TYPE_NORMAL
+- en: In statistical hypothesis testing, the ***p*-value** or **probability value** is,
+    for a given statistical model, the probability that, when the null hypothesis
+    is true, the statistical summary (such as the absolute value of the sample mean
+    difference between two compared groups) would be greater than or equal to the
+    actual observed results.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: — [Wikipedia](https://en.wikipedia.org/wiki/P-value?source=post_page---------------------------)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Well done Wikipedia.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Okay. I ended up not really understanding what p-value really meant.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Until now, after going into data science field, I finally begin to appreciate
+    the meaning of p-value and how it could be used as part of the decision making
+    tools in certain experiments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Therefore, I decided to **explain p-values in this article and how they could
+    be used in hypothesis testings **to hopefully give you a better and intuitive
+    understanding of p-values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While we can’t skip the fundamental understanding of other concepts and the
+    definition of p-value, I promise I’ll make this explanation in an intuitive way
+    without bombarding you with all the technical terms that I faced.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are total four sections in this article to give you a full picture from
+    constructing a hypothesis testing to understanding p-value and using that to guide
+    our decision making process. I strongly encourage you to go through all of them
+    to give you a detailed understanding of p-values:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Hypothesis Testing**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Normal Distribution**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**What is P-value?**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Statistical Significance**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It’ll be fun. ????
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s get started!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Hypothesis Testing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ae12ffbffaab7efb5f59fe5e0396ea4c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Hypothesis Testing
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before we talk about what p-value means, let’s begin by understanding **hypothesis
+    testing** where **p-value** is used to determine the **statistical significance** of
+    our results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our ultimate goal is to determine the statistical significance of our results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And statistical significance is built on these 3 simple ideas:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hypothesis testing
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Normal distribution
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: P-values
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Hypothesis testing**](https://www.statisticshowto.datasciencecentral.com/probability-and-statistics/hypothesis-testing/?source=post_page---------------------------#HTMean) is
+    used to test the validity of a claim *(****null hypothesis****)*that is made about
+    a population using sample data. The ***alternative hypothesis***is the one you
+    would believe if the null hypothesis is concluded to be untrue.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In other words, we’ll make a claim *(null hypothesis) *and use a sample data
+    to check if the claim is valid. If the claim isn’t valid, then we’ll choose our *alternative
+    hypothesis* instead. Simple as that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To know if a claim is valid or not, we’ll use a p-value to weigh the strength
+    of the evidence to see if it’s statistically significant. If the evidence supports
+    the *alternative hypothesis*, then we’ll reject the *null hypothesis* and accept
+    the *alternative hypothesis*. This will be explained further in the later section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s use an example to make this concept clearer and this example will be used
+    throughout this article for other concepts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '???? ???? [**Example**](https://www.dummies.com/education/math/statistics/what-a-p-value-tells-you-about-statistical-data/?source=post_page---------------------------)**: **Suppose
+    a pizza place claims their delivery times are 30 minutes or less on average but
+    you think it’s more than that. So you conduct a hypothesis test and randomly sample
+    some delivery times to test the claim:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Null hypothesis** — The mean delivery time is 30 minutes or less'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Alternative hypothesis** — The mean delivery time is greater than 30 minutes'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The goal here is to determine which claim — the null or alternative — is better
+    supported by the evidence found from our sample data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll use [**one-tailed test**](https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-what-are-the-differences-between-one-tailed-and-two-tailed-tests/?source=post_page---------------------------) in
+    our case since we **only care about if the mean delivery time is greater than
+    30 minutes**. We’ll disregard the possibility in the other direction since the
+    consequences of having a mean delivery time lower or equal to 30 minutes are even
+    more preferable. What we want to test here is to see if there is a chance that
+    the mean delivery time is greater than 30 minutes. In other words, we want to
+    see if the pizza place lied to us somehow.????
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the common ways to do the hypothesis testing is to use [**Z-test**](https://www.analyticsvidhya.com/blog/2015/09/hypothesis-testing-explained/?source=post_page---------------------------).
+    Here we won’t go into details as we want to have a high level understanding of
+    what’s going on on the surface before we dive deeper.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Normal Distribution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/bfb1c66e79a92cbe28a6a516a1034fc0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Normal Distribution with mean μ and standard deviation σ](https://towardsdatascience.com/understanding-the-68-95-99-7-rule-for-a-normal-distribution-b7b7cbf760c2?source=post_page---------------------------)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Normal distribution is a [probability density function](https://towardsdatascience.com/how-to-find-probability-from-probability-density-plots-7c392b218bab?source=post_page---------------------------&sk=086eae07d154a0e263f3bb7bc85ac2c8) used
+    to see the data distribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The normal distribution has two parameters — the **mean (μ)** and **standard
+    deviation, also called sigma (σ).**
+  prefs: []
+  type: TYPE_NORMAL
+- en: The **mean** is the central tendency of the distribution. It defines the location
+    of the peak for normal distributions. The **standard deviation** is a measure
+    of variability. It determines how far away from the mean the values tend to fall.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The normal distribution is commonly associated with the `[**68-95-99.7 rule**](https://en.wikipedia.org/wiki/68%E2%80%9395%E2%80%9399.7_rule?source=post_page---------------------------)`(image
+    above).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 68% of the data is within 1 standard deviation (σ) of the mean (μ)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 95% of the data is within 2 standard deviations (σ) of the mean (μ)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 99.7% of the data is within 3 standard deviations (σ) of the mean (μ)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Remember the [“five sigma” threshold](https://blogs.scientificamerican.com/observations/five-sigmawhats-that/?source=post_page---------------------------) for
+    the discovery of Higgs boson that I talked about in the beginning? 5 sigma is
+    about ***99.9999426696856%*** of the data to hit before scientists confirmed the
+    discovery of Higgs boson. That was the stringent threshold set to avoid any potential
+    false signals.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cool. Now you may be wondering, “How does the normal distribution apply to our
+    previous hypothesis testing?”
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since we used Z-test to conduct our hypothesis testing, we need to calculate [**Z-scores**](https://www.statisticshowto.datasciencecentral.com/probability-and-statistics/z-score/?source=post_page---------------------------) (to
+    be used in our [**test-statistic**](https://www.statisticshowto.datasciencecentral.com/test-statistic/?source=post_page---------------------------))
+    which is the number of standard deviations from the mean a data point is. In our
+    case, **each data point is the pizza delivery time that we collected.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/aef160c7dd05964d17864e627f425875.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Formula to calculate Z-score](https://www.thoughtco.com/z-scores-worksheet-3126534?source=post_page---------------------------) for
+    each data point'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice that when we’ve calculated all the Z-scores for each pizza delivery time
+    and plotted a **standard normal distribution **curve as below, the unit on the
+    X-axis will change from minutes to standard deviation unit since we’ve **standardized
+    the variable by subtracting the mean and dividing by its standard deviation **(see
+    the formula above).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Looking at the standard normal distribution curve is useful because we can compare
+    results from a test to a “normal” population with a standardized unit in standard
+    deviation, especially when we have a variable that comes with different units.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/2aed10885b0d674fdb7567eefe748801.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Standard Normal Distribution for Z-scores](https://mathbitsnotebook.com/Algebra2/Statistics/STzScores.html?source=post_page---------------------------)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Z-score can tell us where the overall data lies compared to the average population.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I like how [Will Koehrsen](https://towardsdatascience.com/u/e2f299e30cb9?source=post_page---------------------------) put
+    it this way — **The higher or lower the Z-score, the more unlikely the result
+    is to happen by chance and the more likely the result is meaningful.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: But how high (or low) is considered as sufficiently convincing to quantify how
+    meaningful our results are?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ????????**Punchline**
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This is where we need the last piece of item to solve the puzzle — **p-value**,
+    and check if our results are statistically significant based on the [**significance
+    level **(also known as *alpha*)](https://blog.minitab.com/blog/adventures-in-statistics-2/understanding-hypothesis-tests-significance-levels-alpha-and-p-values-in-statistics?source=post_page---------------------------) we
+    set *before we began our experiment*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. What is P-value?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: p-value beautifully explained by [Cassie Kozyrkov](https://towardsdatascience.com/u/2fccb851bb5e?source=post_page---------------------------)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally… Here we are talking about p-value!
+  prefs: []
+  type: TYPE_NORMAL
+- en: All the previous explanation is meant to set the stage and lead us to this p-value.
+    We need the previous context and steps for us to make sense of this mysterious
+    (actually not so mysterious) p-value and how it could lead to our decisions for
+    the hypothesis testing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you’ve made it this far, keep reading. Because this section is the most exciting
+    part of all!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead of explaining p-values using the definition given by [Wikipedia](https://en.wikipedia.org/wiki/P-value?source=post_page---------------------------)(sorry
+    Wikipedia), let’s explain that in our context — pizza delivery time!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recall that we randomly sampled some pizza delivery times and the goal is to
+    check if the mean delivery time is greater than 30 minutes. If the final evidence
+    supports the claim by the pizza place (mean delivery time is 30 minutes or less),
+    then we will not reject the null hypothesis. Otherwise, we’ll reject the null
+    hypothesis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The job of p-value therefore here is to answer this question:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**If I’m living in a world where the pizza delivery time is 30 minutes or less
+    (null hypothesis is true), how surprising is my evidence in real life?**'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: P-value answers this question with a number —** probability**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The lower the p-value, the more surprising the evidence is, the more ridiculous
+    our null hypothesis looks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And what do we do when we feel ridiculous with our null hypothesis? We reject
+    that and choose our alternative hypothesis instead.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the p-value is lower than a predetermined** significance level **(people
+    call it *alpha*, I call it *the threshold of being ridiculous — *don’t ask my
+    why, I just find it easier for me to understand), then we reject the null hypothesis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we understand what p-value means. Let’s apply that in our case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? P-value in pizza delivery times ????
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that we’ve collected some sampled delivery times, we perform the calculation
+    and find that the **mean delivery time is longer by 10 minutes with a p-value
+    of 0.03**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What this means is that** in a world** where the pizza delivery time is 30 minutes
+    or less (**null hypothesis is true**), there’s a **3% chance** we would see the
+    mean delivery time is **at least 10 minutes longer due to random noise**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The lower the p-value, the more meaningful the result because it is less likely
+    to be caused by noise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There’s a common misinterpretation of p-value for most people in our case:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The p-value 0.03 means that there’s 3% (probability in percentage) that the
+    result is due to chance — **which is not true**.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: People often want to have a definite answer (including me), and this is how
+    I got myself confused for a long time to interpret p-values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A p-value doesn’t *prove* anything. It’s simply a way to use surprise as a basis
+    for making a reasonable decision.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: — [Cassie Kozyrkov](https://towardsdatascience.com/u/2fccb851bb5e?source=post_page---------------------------)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Here’s how we can use the p-value of 0.03 to help us to make a reasonable
+    decision (IMPORTANT):**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Imagine we live in a world where the mean delivery time is always 30 minutes
+    or less — because we believe in the pizza place (our initial belief)!
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: After analyzing the sample delivery times collected, the p-value of 0.03 is
+    lower than the significance level of 0.05 (assume that we set this before our
+    experiment), and we can say that the result is ***statistically significant***.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Because we’ve always been believing the pizza place that it can fulfil its promise
+    to deliver pizza in 30 minutes or less, we now need to think if this belief still
+    makes sense since the result tells us that the pizza place fails to deliver its
+    promise and the result is ***statistically significant****.*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: So what do we do? At first, we try to think of every possible way to make our
+    initial belief (null hypothesis) valid. **But because the pizza place is slowly
+    getting bad reviews from others and it often gave bad excuses that caused the
+    late delivery, even we ourselves feel ridiculous to justify for the pizza place
+    anymore and hence, we decide to reject the null hypothesis.**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Finally, the subsequent reasonable decision is to choose not to buy any pizza
+    from that place again.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: By now you may have already realized something… Depending on our context, p-values
+    are not used to prove or justify anything.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In my opinion, **p-values are used as a tool to challenge our initial belief
+    (null hypothesis) when the result is *statistically significant***. The moment
+    we feel ridiculous with our own belief (provided the p-value shows the result
+    is statistically significant), we discard our initial belief (reject the null
+    hypothesis) and make a reasonable decision.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. Statistical Significance
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Finally, this is the final stage where we put everything together and test if
+    the result is ***statistically significant.***
+  prefs: []
+  type: TYPE_NORMAL
+- en: Having just the p-value is not enough, we need to set a threshold (aka **significance
+    level — alpha**). The alpha should always be set before an experiment to avoid
+    bias. If the observed p-value is lower than alpha, then we conclude that the result
+    is ***statistically significant.***
+  prefs: []
+  type: TYPE_NORMAL
+- en: The rule of thumb is to set alpha to be either 0.05 or 0.01 (again, the value
+    depends on your problems at hand).
+  prefs: []
+  type: TYPE_NORMAL
+- en: As mentioned before, assume that we set the alpha to be 0.05 before we began
+    the experiment, the result obtained is statistically significant since the p-value
+    of 0.03 is lower than the alpha.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**For reference purposes, below are the **[**basic steps for the whole experiment**](http://g/?source=post_page---------------------------)**:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: State the null hypothesis
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: State the alternative hypothesis
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Determine the value of alpha to be used
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Find the Z-score associated with your alpha level
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Find the test statistic using this formula
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If the value of test statistic is less than the Z-score of alpha level (or p-value
+    is less than alpha value), reject the null hypothesis. Otherwise, don’t reject
+    the null hypothesis.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/67e822b367df37ef15d41a9f2ae905f7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Formula to calculate test statistic for Step 5
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to know more about statistical significance, feel free to check
+    out this article — [Statistical Significance Explained](https://towardsdatascience.com/statistical-significance-hypothesis-testing-the-normal-curve-and-p-values-93274fa32687?source=post_page---------------------------) written
+    by [Will Koehrsen](https://towardsdatascience.com/u/e2f299e30cb9?source=post_page---------------------------).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Final Thoughts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6bc92178e009d265ec545d2ff5e2384b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[(Source)](https://unsplash.com/photos/JfolIjRnveY?source=post_page---------------------------)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thank you for reading.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There’s a lot of stuff to digest here, isn’t it?
+  prefs: []
+  type: TYPE_NORMAL
+- en: I can’t deny that p-values are inherently confusing for many people, and it
+    took me quite a while to really understand and appreciate the meaning of p-values
+    and how they can be applied as part of our decision making process as a data scientist.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But don’t rely too heavily on p-values as they only aid in a small part of the
+    whole decision making process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I hope you’ve found the explanation of p-values intuitive and helpful in your
+    understanding of what p-values really mean and how they can be used in your hypothesis
+    testings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At the end of the day, the calculation of p-values is simple. The hard part
+    comes when we want to interpret the p-values in our hypothesis testings. Hopefully
+    the hard part now becomes at least slightly easier for you.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to learn more about statistics, I highly recommend you to read this
+    book (which I’m reading it now!) — [**Practical Statistics for Data Scientists**](https://amzn.to/2l9vhF1?source=post_page---------------------------)written
+    specially for data scientists to understand the fundamental concepts of statistics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As always, if you have any questions or comments feel free to leave your feedback
+    below or you can always reach me on [LinkedIn](https://www.linkedin.com/in/admond1994/?source=post_page---------------------------).
+    Till then, see you in the next post! ????
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Admond Lee](https://www.linkedin.com/in/admond1994/)** is known as
+    one of the highly sought-after **data scientists and consultants** in helping
+    start-up founders and various companies tackle their problems using data with
+    strong expertise in **data science consulting and industry knowledge**. You can
+    connect with him on [LinkedIn](https://www.linkedin.com/in/admond1994/), [Medium](https://medium.com/@admond1994),
+    [Twitter](https://twitter.com/admond1994), and [Facebook](https://www.facebook.com/admond1994)
+    or [**book a call appointment with him here**](http://bit.ly/request-a-call-with-admond)** if
+    you are looking for data science consulting for your company.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/p-values-explained-by-data-scientist-f40a746cfc8).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Top 10 Data Science Leaders You Should Follow](/2019/07/top-10-data-science-leaders.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Go Into Data Science: Ultimate Q&A for Aspiring Data Scientists with
+    Serious Guides](/2019/04/data-science-ultimate-questions-answers-aspiring-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simple Yet Practical Data Cleaning Codes](/2019/02/simple-yet-practical-data-cleaning-codes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Handling Missing Values in Time-series with SQL](https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using SHAP Values for Model Interpretability in Machine Learning](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Is Not Like Your Brain Part 4: The Neuron’s…](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-4-neuron-limited-ability-represent-precise-values.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Scientist, Data Engineer & Other Data Careers, Explained](https://www.kdnuggets.com/2021/05/data-scientist-data-engineer-data-careers-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Governance and Observability, Explained](https://www.kdnuggets.com/2022/08/data-governance-observability-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Database Key Terms, Explained](https://www.kdnuggets.com/2016/07/database-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,967 @@
+- en: A Practical Guide to Transfer Learning using PyTorch
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Co-authored with [Naresh](https://medium.com/u/1e659a80cffd) and [Gaurav](http://www.gaurav.ai/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article will cover the what, why, and how of transfer learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**What** is transfer learning'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Why** should you use transfer learning'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**How** can you use transfer learning on a real classification task'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Specifically, we’ll be covering the following aspects of transfer learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The motivation behind the idea of transfer learning and its benefits.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Develop an intuition for base model selection. ([notebook](https://github.com/dhruvbird/ml-notebooks/blob/main/Flowers-102-transfer-learning/torchvision-model-exploration.ipynb))
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Discuss different choices and the trade-offs made along the way.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Implementation of an image classification task with PyTorch. ([notebook](https://github.com/dhruvbird/ml-notebooks/blob/main/Flowers-102-transfer-learning/flowers102-classification-using-pre-trained-models.ipynb))
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Performance comparison of various base models.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Resources to learn more about transfer learning and the current state of the
+    art
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Transfer learning is a large and growing field and this article covers just
+    a few of its aspects. However, there are many deep learning online communities
+    which discuss transfer learning. For example, [here is a good article](https://www.learndatasci.com/tutorials/hands-on-transfer-learning-keras/)
+    on how we can leverage transfer learning to reach higher benchmarks than training
+    models from scratch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Intended Audience and Prerequisites
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: You’re familiar with basic machine learning (ML) concepts such as defining and
+    training classification models
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You’re familiar with [PyTorch](https://pytorch.org/) and [torchvision](https://pytorch.org/vision/stable/index.html)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the next section, we'll formally introduce transfer learning and explain
+    it with examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is transfer learning?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: From [this page](https://machinelearningmastery.com/transfer-learning-for-deep-learning/),
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*“Transfer learning is a machine learning method where a model developed for
+    a task is reused as the starting point for a model on a second task.”*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: A deep learning model is a network of weights whose values are optimized using
+    a loss function during the training progress. The weights of the network are typically
+    initialized randomly before the start of the training process. In transfer learning,
+    we use a [pre-trained model](https://pytorch.org/vision/stable/models.html) that
+    has been trained on a related task. This gives us a set of initial weights that
+    are likely to perform better than the randomly initialized weights. We optimize
+    the pre-trained weights further for our specific task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Jeremy Howard (from fast.ai) [says](https://www.fast.ai/posts/2020-01-13-self_supervised.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*“Wherever possible, you should aim to start your neural network training with
+    a pre-trained model and fine-tune it. You really don’t want to be starting with
+    random weights, because that means that you’re starting with a model that doesn’t
+    know how to do anything at all! With pretraining, you can use 1000x less data
+    than starting from scratch.”*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Below, we’ll see how one can think of the concept of transfer learning as it
+    relates to humans.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Human Analogy for Transfer Learning
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '**Model training**: After a child is born, it takes them a while to learn to
+    stand, balance, and walk. During this time, they go through the phase of building
+    physical muscles, and their brain learns to understand and internalize the skills
+    to stand, balance and walk. They go through several attempts, some successful
+    and some failures, to reach a stage where they can stand, balance and walk with
+    some consistency. This is similar to training a deep learning model which takes
+    a lot of time (training epochs) to learn a generic task (such as classifying an
+    image as belonging to one of the 1000 ImageNet classes) when it is trained on
+    that task.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Transfer learning**: A child who has learned to walk finds it far easier
+    to learn related advanced skills such as jumping and running. Transfer Learning
+    is comparable to this aspect of human learning where a pre-trained model that
+    has already learned generic skills is leveraged to efficiently train for other
+    related tasks.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now that we have built an intuitive understanding of transfer learning and an
+    analogy with human learning, let’s take a look at why one would use transfer learning
+    for ML models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why should I use transfer learning?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Many vision AI tasks such as image classification, image segmentation, object
+    localization, or detection differ only in the specific objects they are classifying,
+    segmenting, or detecting. The models trained on these tasks have learned the features
+    of the objects in their training dataset. Hence, they can be easily adapted to
+    related tasks. For example, a model trained to identify the presence of a car
+    in an image could be fine-tuned for identifying a cat or a dog.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The main advantage of transfer learning is the ability to empower you to achieve
+    better accuracy on your tasks. We can break down its advantages as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Training efficiency**: When you start with a pre-trained model that has already
+    learned the general features of the data, you then only need to ***fine-tune***
+    the model to your specific task, which can be done much more quickly (i.e. using
+    fewer training epochs).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Model accuracy**: Using transfer learning can give you a [significant performance
+    boost](https://www.learndatasci.com/tutorials/hands-on-transfer-learning-keras/)
+    compared to training a model from scratch using the same amount of resources.
+    Choosing the right pre-trained model for transfer-learning for your specific task
+    is important though.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Training data size**: Since a pre-trained model would have already learned
+    to identify many of the features that overlap with your task-specific features,
+    you can train the pre-trained model with ***less domain-specific data***. This
+    is useful if you don’t have as much labeled data for your specific task.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: So, how do we go about doing transfer learning in practice? The next section
+    implements transfer learning in PyTorch for a flower classification task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Transfer Learning with PyTorch
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: To perform transfer learning with PyTorch, we first need to select a dataset
+    and a pre-trained vision model for image classification. This article focuses
+    on using torch-vision (a domain library used with PyTorch). Let’s understand where
+    to find such pre-trained models and datasets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Where to find pre-trained vision models for image classification?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'There are lots of websites providing high-quality pre-trained image classification
+    models. For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Torchvision](https://pytorch.org/vision/stable/models.html)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PyTorch Image Models](https://github.com/huggingface/pytorch-image-models)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For the purposes of this article, we will use [pre-trained models from torchvision](https://pytorch.org/vision/stable/models.html).
+    It's worth learning a bit about how these models were trained. Let's explore that
+    question next!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Which datasets are torchvision models pre-trained on?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'For vision-related tasks involving images, torchvision models are usually pre-trained
+    on the [ImageNet dataset](https://www.image-net.org/download.php). The most popular
+    ImageNet subset used by researchers and for model pre-training vision models contains
+    about 1.2M images across 1000 classes. ImageNet classification is used as a pre-training
+    task due to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Its ready **availability** to the research community
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The **breadth** and variety of images it contains
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Its use by various researchers - making it attractive to compare results using
+    a **common denominator** of Imagenet 1k classification
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: You can read more about the history of the ImageNet challenge, historical background,
+    and information about the complete dataset on this [wikipedia page](https://en.wikipedia.org/wiki/ImageNet).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Legality considerations when using pre-trained models**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ImageNet is released for non-commercial research purposes only ([https://image-net.org/download](https://image-net.org/download)).
+    Hence, it’s not clear if one can legally use the weights from a model that was
+    pre-trained on ImageNet for commercial purposes. If you plan to do so, please
+    seek legal advice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we know where we can find the pre-trained models we’ll be using for
+    transfer learning, let’s take a look at where we can procure the dataset we wish
+    to use for our custom classification task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Dataset: Oxford Flowers 102'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We will be using the Flowers 102 dataset to illustrate transfer learning using
+    PyTorch. We will train a model to classify images in the [Flowers 102](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
+    dataset into one of the 102 categories. This is a multi-class (single-label) categorization
+    problem in which predicted classes are mutually exclusive. We’ll be leveraging
+    Torchvision for this task since it already [provides this dataset](https://pytorch.org/vision/stable/generated/torchvision.datasets.Flowers102.html)
+    for us to use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Flowers 102 dataset was obtained from the [Visual Geometry Group at Oxford](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/).
+    Please see the page for licensing terms for the use of the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, let’s take a look at the high-level steps involved in this process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How does transfer learning work?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Transfer learning for image classification tasks can be viewed as a sequence
+    of three steps as shown in Figure 1\. These steps are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Practical Guide to Transfer Learning using PyTorch](../Images/ca3d49ee22f436287775d519acd189ad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 1: Transfer Learning using PyTorch. Source: Author(s)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Replace classifier layer**: In this phase, we identify and replace the last
+    “[classification head](https://doc.arcgis.com/en/allsource/latest/analysis/geoprocessing-tools/geoai/how-text-classification-works.htm)”
+    of our pre-trained model with our own “classification head” that has the right
+    number of output features (102 in this example).'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Feature extraction**: In this phase, we freeze (make those layers non-trainable)
+    all the layers of the model except the newly added classification layer, and train
+    just this newly added layer.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Fine tuning**: In this phase, we unfreeze some subset of the layers in the
+    model  (unfreezing a layer means making it trainable). In this article, we will
+    unfreeze all the layers of the model and train them as we would train any Machine
+    Learning (ML) PyTorch model.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Each of these phases has a lot of additional detail and nuance that we need
+    to know and worry about. We’ll get into those details soon. For now, let’s deep
+    dive into 2 of the key phases, namely feature extraction, and fine-tuning below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature extraction and fine-tuning
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: You can find more information about feature extraction and fine-tuning here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[What is the difference between feature extraction and fine-tuning in transfer
+    learning?](https://ai.stackexchange.com/questions/28138/what-is-the-difference-between-feature-extraction-and-fine-tuning-in-transfer-le)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Learning without forgetting](https://arxiv.org/pdf/1606.09282.pdf)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The diagrams below illustrate feature extraction and fine tuning visually.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Practical Guide to Transfer Learning using PyTorch](../Images/6c3d03dfd4a4c1adcdd479febd32b4d5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 2: Visual explanation of fine tuning (b) and feature extraction (c).
+    Source: [Learning without forgetting](https://arxiv.org/pdf/1606.09282.pdf)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Practical Guide to Transfer Learning using PyTorch](../Images/d372d5f5eccded958b1771c00b2695ce.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 3: Illustration showing which layers are trainable (unfrozen) during
+    the feature-extraction, and fine-tuning stages. Source: Author(s)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we’ve developed a good understanding of the custom classification task,
+    the pre-trained model we’ll be using for this task, and how transfer learning
+    works, let’s look at some concrete code that performs transfer learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Show me the Code
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In this section you will learn concepts like exploratory model analysis, initial
+    model selection, how to define a model, implement transfer learning steps (discussed
+    above), and how to prevent overfitting. We’ll discuss the train/val/test split
+    for this dataset and interpret the results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The complete code for this experiment can be found [here (Flowers102 classification
+    using pre-trained models)](https://github.com/dhruvbird/ml-notebooks/blob/main/Flowers-102-transfer-learning/torchvision-model-exploration.ipynb).
+    The section on exploratory model analysis is in a [separate notebook](https://github.com/dhruvbird/ml-notebooks/blob/main/Flowers-102-transfer-learning/torchvision-model-exploration.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Exploratory model analysis
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Similar to exploratory data analysis in data science, the first step in transfer-learning
+    is exploratory model analysis. In this step, we explore all the pre-trained models
+    available for image classification tasks, and determine how each one is structured.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In general, it’s hard to know which model will perform best for our task, so
+    it’s not uncommon to try out a few models that seem promising or applicable for
+    our situation. In this hypothetical scenario, let’s assume that model size isn’t
+    important (we don’t want to deploy these models on mobile devices or such edge
+    devices). We’ll first look at the list of available pre-trained classification
+    models in torchvision.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Will print
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Wow! That’s a pretty large list of models to choose from! If you’re feeling
+    confused, don’t worry - in the next section, we’ll look at the factors to consider
+    when choosing the initial set of models for performing transfer learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Initial model selection
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Now that we have a list of 80 candidate models to choose from, we need to narrow
+    it down to a handful of models that we can run experiments on. The choice of the
+    pre-trained model backbone is a hyper-parameter, and we can (and should) explore
+    multiple options by running experiments to see which one works best. Running experiments
+    is costly and time consuming, and it’s unlikely that we’ll be able to try all
+    the models, which is why we try to narrow down the list to 3-4 models to begin
+    with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We decided to go with the following pre-trained model backbones to begin with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Vgg16: 135M parameters'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'ResNet50: 23M parameters'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'ResNet152: 58M parameters'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Here’s how/why we chose these 3 to begin with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’re not constrained by model size or inference latency, so we don’t need to
+    find the models that are super efficient. If you want a comparative study of various
+    vision models for mobile devices, please read the paper titled “[Comparison and
+    Benchmarking of AI Models and Frameworks on Mobile Devices](https://arxiv.org/pdf/2005.05085.pdf)”.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The models we choose are fairly popular in the vision ML community and tend
+    to be good go-to choices for classification tasks. You could use the citation
+    count for papers on these models as decent proxies for how effective these models
+    could be. However, please be aware of a potential bias where papers on models
+    such as AlexNet that have been around long will have more citations even though
+    one would not use them for any serious classification task as a default choice.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Even within model architectures, there tend to be many flavours or sizes of
+    models. For example, EfficientNet comes in trims named B0 through B7\. Please
+    refer to the papers on the specific models for details on what these trims mean.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Citation counts of various papers on pre-trained classification models available
+    in torchvision.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Resnet: 165k'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'AlexNet: 132k'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Vgg16: 102k'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'MobileNet: 19k'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Vision Transformers: 16k'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'EfficientNet: 12k'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'ShuffleNet: 6k'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'If you’d like to read more on factors that may affect your choice of pre-trained
+    model, please read the following articles:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[4 Pre-Trained CNN Models to Use for Computer Vision with Transfer Learning](https://towardsdatascience.com/4-pre-trained-cnn-models-to-use-for-computer-vision-with-transfer-learning-885cb1b2dfc)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[How to choose the best pre-trained model for your Convolutional Neural Network?](https://data-science-blog.com/blog/2022/04/11/how-to-choose-the-best-pre-trained-model-for-your-convolutional-neural-network/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Benchmark Analysis of Representative Deep Neural Network Architectures](https://arxiv.org/pdf/1810.00736.pdf)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Let’s check out the classification heads for these models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can find the complete notebook for [exploratory model analysis here](https://github.com/dhruvbird/ml-notebooks/blob/main/Flowers-102-transfer-learning/torchvision-model-exploration.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since we’re going to be running experiments on 3 pre-trained models and performing
+    transfer learning on each one of them separately, let’s define some abstractions
+    and classes that will help us run and track these experiments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Defining a PyTorch model to wrap pre-trained models
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To allow easy exploration, we will define a PyTorch model named Flowers102Classifier,
+    and use that throughout this exercise. We will progressively add functionality
+    to this class till we achieve our final goal. The complete notebook for [transfer
+    learning for Flowers 102 classification can be found here](https://github.com/dhruvbird/ml-notebooks/blob/main/Flowers-102-transfer-learning/flowers102-classification-using-pre-trained-models.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The sections below will dive deeper into each of the mechanical steps needed
+    to perform transfer learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Replacing the old classification head with a new one
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The existing classification head for each of these models that is pre-trained
+    on the ImageNet classification task has 1000 output features. Our custom task
+    for flower classification has 102 output features. Hence, we need to replace the
+    final classification head (layer) with a new one that has 102 output features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The constructor for our class will include code that loads the pre-trained model
+    of interest from torchvision using pre-trained weights, and will replace the classification
+    head with a custom classification head for 102 classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Since we’ll be performing feature-extraction followed by fine-tuning, we’ll
+    save the newly added layers into the self.new_layers list. This will help us set
+    the weights of those layers as trainable or non-tainable depending on what we’re
+    doing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we have replaced the older classification head with a new classification
+    head that has randomly initialized weights, we will need to train those weights
+    so that the model can perform accurate predictions. This includes feature extraction
+    and fine tuning and we’ll take a look at that next.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Transfer Learning (trainable parameters and learning rates)
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Transfer learning involves running feature extraction and fine tuning in that
+    specific order. Let’s take a closer look at why they need to be run in that order
+    and how we can handle trainable parameters for the various transfer learning phases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Feature Extraction**: We set requires_grad to False for weights in all the
+    layers in the model, and set requires_grad to True for only the newly added layers.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We train the new layer(s) for **16 epochs** with a learning rate of 1e-3\. This
+    ensures that the new layer(s) are able to adjust and adapt their weights to the
+    weights in the feature extractor part of the network. It’s important to freeze
+    the rest of the layers in the network and train only the new layer(s) so that
+    we don’t shock the network into forgetting what it has already learned. If we
+    don’t freeze the earlier layers, they will end up getting re-trained on junk weights
+    that were randomly initialized when we added the new classification head.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Fine Tuning**: We set requires_grad to True for weights in all the layers
+    of the model. We train the entire network for **8 epochs**. However, we adopt
+    a differential learning rate strategy in this case. We decay the learning rate
+    (LR) so that the LR decreases as we move toward the input layers (away from the
+    output classification head). We decay the learning rate as we move up the model
+    towards the initial layers of the model because those initial layers have learned
+    basic features about the image, which would be common for most vision AI tasks.
+    Hence, the initial layers are trained with a very low LR to avoid disturbing what
+    they have learned. As we move down the model towards the classification head,
+    the model is learning something task specific, so it makes sense to train those
+    later layers with a higher LR. One can adopt different strategies here, and in
+    our case, we use 2 different strategies to illustrate the effectiveness of both
+    of them.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**VGG16**: For the vgg16 network, we decay the LR **linearly** from LR=1e-4
+    to LR=1e-7 (1000x lower than the LR of the classification layer). Since there
+    are 44 layers in the feature extraction phase, each layer is assigned a LR that
+    is (1e-7 - 1e-4)/44 = 2.3e-6 lower than the previous layer.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**ResNet**: For the ResNet (50/152) network, we decay the LR exponentially
+    starting from LR=1e-4\. We reduce the LR by 3x for every layer we move up.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![A Practical Guide to Transfer Learning using PyTorch](../Images/43ffa221f6003b98afc4a6c4a37b2961.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 4: An example showing the learning rate (LR) decaying exponentially
+    by a factor of 10 as we move up toward the layers closer to the input to the network.
+    Source: Author(s).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code for freezing layers for both feature extraction as well as fine tuning
+    is shown in the function named fine_tune() below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Code snippet: Freezing and unfreezing parameters using requires_grad during
+    the feature-extraction (NEW_LAYERS) and fine-tuning (ALL) phase.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In PyTorch, the way to set differential LRs for each layer is to specify the
+    weights that need that LR to the optimizer that will be used during transfer learning.
+    In our notebook, we use the Adam optimizer. The get_optimizer_params() method
+    below gets the optimizer parameters to pass into the Adam (or other) optimizer
+    we will be using.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Code snippet: Differential learning rates for each layer when fine-tuning the
+    model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once we have the model parameters with their own LRs, we can pass them into
+    the optimizer with a single line of code. A default LR of 1e-8 is used for parameters
+    whose weights are not specified in the dictionary returned by get_optimizer_params().
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Code snippet: Pass in parameters with their own LRs into the Adam optimizer.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we know how to perform transfer learning, let’s take a look at what
+    other considerations we need to keep in mind before we fine tune our model. This
+    includes steps that we need to take to prevent overfitting, and choosing the right
+    train/val/test split.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Preventing overfitting
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In our [notebook](https://github.com/dhruvbird/ml-notebooks/blob/main/Flowers-102-transfer-learning/flowers102-classification-using-pre-trained-models.ipynb),
+    we use the following data augmentation techniques on the training data to prevent
+    overfitting and allow the model to learn the features so that it can perform predictions
+    on unseen data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Color Jitter
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Horizontal Flip
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Rotation
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Shear
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: There is no data augmentation applied to the validation split.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One should also explore [weight decaying](https://towardsdatascience.com/this-thing-called-weight-decay-a7cd4bcfccab),
+    which is a regularization technique to prevent overfitting by reducing the complexity
+    of the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Train/Val/Test split
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The authors of the Flowers 102 dataset recommend a train/val/test split that’s
+    of size 1020/ 1020/6149\. Many authors do things differently. For example,
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the [ResNet strikes back](https://arxiv.org/pdf/2110.00476.pdf) paper, the
+    authors use the train+val (2040 images) split as the train set, and the test set
+    as the test set. It isn’t clear if there’s a validation split.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In this article on [classification on Flowers 102](https://towardsdatascience.com/build-train-and-deploy-a-real-world-flower-classifier-of-102-flower-types-a90f66d2092a),
+    the authors use the test split of size 6149 as the train split.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In this [notebook](https://github.com/bduvenhage/pytorch_challenge/blob/master/Image_Classifier_Project_Colab.ipynb),
+    the author uses a train/val/test split of size 6552, 818, and 819 respectively.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The only way to know which author is doing what is to read the papers or the
+    code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our notebook (in this article), we use the split of size 6149 as the train
+    split and the split of size 2040 as the validation split. We don’t use a test
+    split, since we aren’t really trying to compete here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At this point in time, you should feel empowered to visit [this notebook](https://github.com/dhruvbird/ml-notebooks/blob/main/Flowers-102-transfer-learning/flowers102-classification-using-pre-trained-models.ipynb)
+    that performs all of the steps above and has their results presented for you to
+    view. Please feel free to clone the notebook on Kaggle or Google Colab and run
+    it yourself on a GPU. If you’re using Google Colab, you’ll need to fix up some
+    of the paths where the datasets and pre-trained models are downloaded and where
+    the best weights for the fine-tuned models are stored.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below, we will look at the results of our transfer learning experiments!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Results
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The results have some common themes that we’ll explore below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After the feature extraction step alone, almost all the networks have an accuracy
+    between 91% and 94%
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Almost all networks do really well, achieving an accuracy of 96+% after the
+    fine-tuning step. This shows that the fine tuning step really helps during transfer
+    learning.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: There’s a significant difference in the number of parameters in our network,
+    with vgg16 at 135M parameters, ResNet50 at 23M parameters, and ResNet152 at 58M
+    parameters. This suggests that we can probably find a smaller network with comparable
+    accuracy and performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Practical Guide to Transfer Learning using PyTorch](../Images/f62f4d7b6be49cdb920d90146304b94e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 5: Train/Val Loss and Accuracy over the transfer learning process. Source:
+    Author(s).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The vertical red line indicates the epoch when we switched from feature extraction
+    (16 epochs) to fine-tuning (8 epochs). You can see that when we switched to fine-tuning,
+    all the networks showed an increase in accuracy. This shows that fine-tuning after
+    feature extraction is very effective.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Practical Guide to Transfer Learning using PyTorch](../Images/b87247c2760e4623a9c283252b70b34c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 6: Validation accuracy of all the 3 pre-trained models after transfer
+    learning on the flowers classification task. The validation accuracy after feature
+    extraction at epoch 16 is shown along with the best validation accuracy for each
+    model during the fine tuning phase. Source: author(s).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Article Recap
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Transfer learning is a thrifty and effective way to train your network by starting
+    from a pre-trained network on a similar but unrelated task
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Torchvision provides many models pre-trained on ImageNet for researchers to
+    use during transfer learning
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Be careful when using pre-trained models in production to ensure that you don’t
+    violate any licenses or terms of use for datasets on which models were pre-trained
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Transfer learning includes feature extraction and fine-tune, which must be performed
+    in that specific order
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Want to learn more?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Now that we know how to perform transfer learning for a custom task starting
+    from a model that is pre-trained on a different dataset, wouldn’t it be great
+    if we could avoid using a separate dataset for the pre-training (pretext task)
+    and use our own dataset for this purpose? Turns out, this is becoming feasible!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recently, researchers and practitioners have been using [self-supervised learning](https://www.fast.ai/posts/2020-01-13-self_supervised.html)
+    as a way to perform model pre-training (learning the pretext task) which has a
+    benefit of training the model on a dataset with the same distribution as the target
+    dataset that the model is supposed to be consuming in production. If you are interested
+    in learning more about self-supervised pre-training and hierarchical pretraining,
+    please see this paper from 2021 titled [self-supervised pretraining improves self-supervised
+    pretraining](https://arxiv.org/pdf/2103.12718.pdf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you own the data for your specific task, you can use self-supervised learning
+    for pre-training your model and not worry about using the ImageNet dataset for
+    the pre-training step, thus staying in the clear as far as use of the ImageNet
+    dataset is concerned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Glossary of Terms used
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '**Classification head**: In PyTorch, this is an [nn.Linear](https://pytorch.org/docs/stable/generated/torch.nn.Linear.html)
+    layer that maps numerous input features to a set of output features'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Freeze weights**: Make the weights non-trainable. In PyTorch, this is done
+    by setting requires_grad=False'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Unfreeze (or thaw) weights**: Make the weights trainable. In PyTorch, this
+    is done by setting requires_grad=True'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Self-supervised learning**: A way to train an ML model so that it can be
+    trained on data without any human generated labels. The labels could be automatically
+    or machine generated though'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: References and Further Reading
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[Ideas on how to fine-tune a pre-trained model in PyTorch](https://medium.com/udacity-pytorch-challengers/ideas-on-how-to-fine-tune-a-pre-trained-model-in-pytorch-184c47185a20)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Dive into deep learning: Fine tuning](https://d2l.ai/chapter_computer-vision/fine-tuning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Self-supervised learning and computer vision](https://www.fast.ai/posts/2020-01-13-self_supervised.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Gentle Introduction to Transfer Learning for Deep Learning](https://machinelearningmastery.com/transfer-learning-for-deep-learning/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Notebook: Exploratory model analysis](https://github.com/dhruvbird/ml-notebooks/blob/main/Flowers-102-transfer-learning/torchvision-model-exploration.ipynb)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Notebook: Flowers 102 classification using transfer learning](https://github.com/dhruvbird/ml-notebooks/blob/main/Flowers-102-transfer-learning/flowers102-classification-using-pre-trained-models.ipynb)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**[Dhruv Matani](https://www.linkedin.com/in/dhruvbird/)** is a Machine Learning
+    enthusiast focusing on PyTorch, CNNs, Vision, Speech, and Text AI. He is an expert
+    on on-device AI, model optimization and quantization, ML and Data Infrastructure.
+    Authoring a chapter on Efficient PyTorch in the Efficient Deep Learning Book at
+    https://efficientdlbook.com/. His views are his own, not those of any of his employer(s);
+    past, present, or future.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Naresh](https://www.linkedin.com/in/naresh-singh-15916b17/)** is deeply
+    interested in the "learning" aspect of the Neural Network. His work is focussed
+    on neural network architectures and how simple topological changes enhance their
+    learning capabilities. He has held engineering roles at Microsoft, Amazon, and
+    Citrix in his decade-long professional career. He has been involved in the deep
+    learning field for the last 6-7 years. You can find him on medium at https://medium.com/u/1e659a80cffd.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Gaurav](http://www.gaurav.ai/)** is a Staff Software Engineer at Google
+    Research where he leads research projects geared towards optimizing large machine
+    learning models for efficient training and inference on devices ranging from tiny
+    microcontrollers to Tensor Processing Unit (TPU)-based servers. His work has positively
+    impacted over 1 Billion of active users across YouTube, Cloud, Ads, Chrome, etc.
+    He is also an author of an upcoming book with Manning Publication on Efficient
+    Machine Learning. Before Google, Gaurav worked at Facebook for 4.5 years and has
+    contributed significantly to Facebook’s Search system and large-scale distributed
+    databases. He has an M.S. in Computer Science from Stony Brook University.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Tools Every Data Scientist Should Know: A Practical Guide](https://www.kdnuggets.com/tools-every-data-scientist-should-know-a-practical-guide)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tools Every AI Engineer Should Know: A Practical Guide](https://www.kdnuggets.com/tools-every-ai-engineer-should-know-a-practical-guide)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Transfer Learning to Boost Model Performance](https://www.kdnuggets.com/using-transfer-learning-to-boost-model-performance)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Beginner''s Guide to PyTorch](https://www.kdnuggets.com/a-beginners-guide-to-pytorch)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Start Using Natural Language Processing With PyTorch](https://www.kdnuggets.com/2022/04/start-natural-language-processing-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Practical Deep Learning from fast.ai is Back!](https://www.kdnuggets.com/2022/07/practical-deep-learning-fastai-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

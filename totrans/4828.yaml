@@ -1,0 +1,300 @@
+- en: 'Step Forward Feature Selection: A Practical Example in Python'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/06/step-forward-feature-selection-python.html](https://www.kdnuggets.com/2018/06/step-forward-feature-selection-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Many methods for [feature selection](https://en.wikipedia.org/wiki/Feature_selection)
+    exist, some of which treat the process strictly as an artform, others as a science,
+    while, in reality, some form of domain knowledge along with a disciplined approach
+    are likely your best bet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When it comes to disciplined approaches to feature selection, [wrapper methods](https://en.wikipedia.org/wiki/Feature_selection#Wrapper_method)
+    are those which marry the feature selection process to the type of model being
+    built, evaluating feature subsets in order to detect the model performance between
+    features, and subsequently select the best performing subset. In other words,
+    instead of existing as an independent process taking place *prior* to model building,
+    wrapper methods attempt to optimize feature selection process for a given machine
+    learning algorithm *in tandem* with this algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2 prominent wrapper methods for feature selection are step forward feature selection
+    and step backward features selection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/17075aa097f90c967aa0ef0730e1a2ba.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Image source](https://en.wikipedia.org/wiki/Feature_selection)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step forward feature selection starts with the evaluation of each individual
+    feature, and selects that which results in the best performing selected algorithm
+    model. What's the "best?" That depends entirely on the defined evaluation criteria
+    (AUC, prediction accuracy, RMSE, etc.). Next, all possible combinations of the
+    that selected feature and a subsequent feature are evaluated, and a second feature
+    is selected, and so on, until the required predefined number of features is selected.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step backward feature selection is closely related, and as you may have guessed
+    starts with the entire set of features and works backward from there, removing
+    features to find the optimal subset of a predefined size.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These are both potentially very computationally expensive. Do you have a large,
+    multidimensional dataset? These methods may take too long to be at all useful,
+    or may be totally infeasible. That said, with a dataset of accommodating size
+    and dimensionality, such an approach may well be your best possible approach.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To see how they work, let's take a look at step forward feature selection, specifically.
+    Note that, as discussed, a machine learning algorithm must be defined prior to
+    beginning our symbiotic feature selection process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keep in mind that an optimized set of selected features using a given algorithm
+    may or may not perform equally well with a different algorithm. If we select features
+    using logistic regression, for example, there is no guarantee that these same
+    features will perform optimally if we then tried them out using K-nearest neighbors,
+    or an SVM.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Implementing Feature Selection and Building a Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So, how do we perform step forward feature selection in Python? [Sebastian Raschka's
+    mlxtend library](https://github.com/rasbt/mlxtend) includes an implementation
+    ([Sequential Feature Selector](https://rasbt.github.io/mlxtend/user_guide/feature_selection/SequentialFeatureSelector/)),
+    and so we will use it to demonstrate. It goes without saying that you should have
+    mlxtend installed before moving forward (check the Github repo).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/d13fd31db64ac19a44c703d8cdc720ec.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We will use a Random Forest classifier for feature selection and model building
+    (which, again, are intimately related in the case of step forward feature selection).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We need data to use for demonstration, so let's use the [wine quality dataset](https://archive.ics.uci.edu/ml/datasets/wine+quality).
+    Specifically, I have used the untouched `winequality-white.csv` file as input
+    in the code below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Arbitrarily, we will set the desired number of features to 5 (there are 12 in
+    the dataset). What we are able to do is compare the evaluation scores for each
+    iteration of the feature selection process, and so keep in mind that if we find
+    that a lower number of features has a better score we can alternatively choose
+    that best-performing subset to run with in our "live" model moving forward. Also
+    keep in mind that setting our desired number of features too low could lead to
+    a sub-optimal number and combination of features being decided upon (say, if some
+    combination of 11 features in our case is better than the best combination of
+    <= 10 features we find during the selection process).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since we are more interested in demonstrating how to implement step forward
+    feature selection than we are with the actual results on this particular dataset,
+    we won't be overly concerned with the actual performance of our models, but we
+    will compare the performances anyhow, as to show how it would be done in a meaningful
+    project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we will make our imports, load the dataset, and split it into training
+    and testing sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Next, we will define a classifier, as well as a step forward feature selector,
+    and then perform our feature selection. The feature feature selector in mlxtend
+    has some parameters we can define, so here''s how we will proceed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we pass our classifier, the Random Forest classifier defined above the
+    feature selector
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Next, we define the subset of features we are looking to select (k_features=5)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'We then set floating to False; see the documentation for more info on floating:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The floating algorithms have an additional exclusion or inclusion step to remove
+    features once they were included (or excluded), so that a larger number of feature
+    subset combinations can be sampled.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: We set he desired level of verbosity for mlxtend to report
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Importantly, we set our scoring to accuracy; this is but one metric which could
+    be used to score our resulting models built on the selected features
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: mlxtend feature selector uses cross validation internally, and we set our desired
+    folds to 5 for our demonstration
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The dataset we chose isn't very large, and so the following code should not
+    take long to execute.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Our best performing model, given our scoring metric, is some subset of 5 features,
+    with a score of 0.644 (remember that this is using cross validation, and so will
+    be different than that which is reported on our full models below, using train
+    and test sets). But which subset of 5 features were selected?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: The columns at these indexes are those which were selected. Great! So what now...?
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can now use those features to build a full model using our training and test
+    sets. If we had a much larger set (i.e. many more instances as opposed to many
+    more features), this would be especially beneficial as we could have used the
+    feature selector above on a smaller subset of instances, determined our best performing
+    subset of features, and then applied them to the full dataset for classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code below builds a classifier on **only** the subset of selected features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Don't worry about the actual accuracies; we're concerned here with the process,
+    not the end result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But what if we *were* concerned with the end result, and wanted to know if
+    our feature selection troubles had been worth it? Well, we could compare the resultant
+    accuracies of the full model built using the selected features (immediately above)
+    with the resultant accuracies of another full model using **all** of the features,
+    just as we do below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: And there you have them for comparison. They are both poor and comparable to
+    our model built with the selected features (though I promise this is not always
+    the case!). With very little work, you could see how these selected features perform
+    with a different algorithm, to help scratch that itch as to wondering whether
+    these features selected with one algorithm are equally well performing with another.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Such a feature selection method can be an effective part of a disciplined machine
+    learning pipeline. Keep in mind that step forward (or step backward) methods,
+    specifically, can provide problems when dealing with especially large or highly-dimensional
+    datasets. There are ways of getting around (or **trying** to get around) these
+    sticking points, such as sampling from the data to find the feature subset which
+    works best, and then using these features for the modeling process on the full
+    dataset. Of course, these are not the only disciplined approaches to feature selection
+    either, and so checking out alternatives may be warranted when dealing with these
+    larger datasets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Quick Feature Engineering with Dates Using fast.ai](/2018/03/feature-engineering-dates-fastai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generating Text with RNNs in 4 Lines of Code](/2018/06/generating-text-rnn-4-lines-code.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Multi-objective Optimization for Feature Selection](/2017/12/rapidminer-multi-objective-optimization-feature-selection.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Unveiling Midjourney 5.2: A Leap Forward in AI Image Generation](https://www.kdnuggets.com/2023/06/unveiling-midjourney-52-leap-forward.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unveiling the Power of Meta''s Llama 2: A Leap Forward in Generative AI?](https://www.kdnuggets.com/2023/07/unveiling-power-metas-llama-2-leap-forward-generative-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Selection: Where Science Meets Art](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Advanced Feature Selection Techniques for Machine Learning Models](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Practical Approach To Feature Engineering In Machine Learning](https://www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

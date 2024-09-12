@@ -1,0 +1,384 @@
+- en: Create and Deploy Dashboards using Voila and Saturn Cloud
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/06/create-deploy-dashboards-voila-saturn-cloud.html](https://www.kdnuggets.com/2021/06/create-deploy-dashboards-voila-saturn-cloud.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Dhrumil Patel](http://linkedin.com/in/dhrumilcse), Performance Analyst
+    Intern at NVIDIA**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Filter and Visualize Bank Transactions Data****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Working with and training large datasets, maintaining them all in one place,
+    and deploying them to production is a challenging job. But what if I tell you
+    there is a way to handle all of these with just a few clicks?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s understand how we can do that easily. Throughout this article we will
+    create a dashboard (using Python and Voila) which runs a machine learning model
+    to remove fraudulent transactions and displays remaining data with visualization,
+    and publish it to Saturn Cloud’s production server for easier access. Here is
+    an outline of the article, feel free to jump a section or two if you are aware
+    of the details.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is [Saturn Cloud](https://www.saturncloud.io/s/freehosted/?utm_source=Dhrumil%3A%20Deploy%20Dashboards%20using%20Voila&utm_medium=try%20saturn)?
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Create the Dashboard ( With Data Filtering and Visualization)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Deploy Dashboard (Local and Production)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: End-notes
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**What is Saturn Cloud**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Saturn cloud is a machine learning platform that automates DevOps and ML infrastructure.
+    On top of that, they use jupyter and dash to scale python for enormous amounts
+    of data. Here are a few more features Saturn Cloud offers:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can use [Dask](https://www.saturncloud.io/s/aboutdask/?utm_source=Dhrumil%3A%20Deploy%20Dashboards%20using%20Voila&utm_medium=dask)
+    to run your code in parallel over as many machines as you need
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can run your code on GPU without any hassle
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can deploy your work without relying on a separate team
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is built entirely on open source tools
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It can also run in your AWS account. Also, Saturn Cloud connects to your existing
+    data, you don’t have to move it. Add the required credentials and you’re good
+    to go.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can connect to Dask from Google Colab. You could also connect to any GCP
+    service that can host Python.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Isn’t that cool? Let’s learn how we can create a dashboard and publish it to
+    production using Saturn in a few easy steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Creating a Dashboard**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '****Voila 101****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Before deploying the dashboard, first, let us create a basic dashboard using
+    Python and [Voila](https://voila.readthedocs.io/en/stable/using.html). There are
+    three major components to creating dashboards using Voila, which are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Define widgets (Button click or search field for interaction)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: A logic (event handler) for your for the interactive field we created in step
+    1(either class based or function based)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: An Output widget (where your result would show up)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Taking [fake transactions data](https://github.com/Dhrumilcse/fradulent-transaction/tree/main/data),
+    let’s build a dashboard which gives you filtered data after removing fraudulent
+    transactions and gives a visual of how diverse (with respect to currencies) the
+    transactions are. Let’s presume that you have a machine learning model that identifies
+    fraudulent transactions. For the simplicity of this article we will simply use
+    an if statement, but don’t worry, I’ll show you how to import your own model,
+    if you have one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****A Basic Dashboard****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: First things first, you want to define a widget. For our use-case, we want users
+    to upload data and give them filtered data and a chart after removing fraudulent
+    transactions. We will start by defining the upload button.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/19f777c4060441a3b64c55bcd45ead58.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here we have two buttons —  One for uploading file (upload_file) and another
+    (upload_btn) to let our event handler (upload_btn_eventhandler) to know when to
+    perform action. I know, you must be wondering but where is our event handler?
+    We will define it next. But before that, input_widgets just combine both buttons
+    and with help of our output widget (upload_btn_output) we will display the buttons.
+    Let’s write an event handler first.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/6e7538c21a32528d976edd818aa67416.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As soon as we hit the upload button, our event handler will take the file and
+    convert it to a pandas dataframe to work on data easily. I split the file name
+    by fullstop to find the extension of the file and then store the data if it is
+    Excel or CSV. Now the final part, output widget. If you remember, we already wrote
+    out an output widget to be named upload_btn_output, so we will do just that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/e5ac6929d289c10cd4c9980fe524c131.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now if you haven’t already, you have to install voila if you want this to run
+    locally, for which you can find instructions [here](https://voila.readthedocs.io/en/stable/using.html).
+    But I am going to show you an easy way to do it using Saturn Cloud. Create an
+    account and login, on their dashboard, you will see “deploy dashboards”, click
+    that, and start the jupyter lab. Now, upload the notebook that we just created
+    to the jupyter lab on saturn cloud. You can find the entire jupyter notebook on
+    my github [here](https://github.com/Dhrumilcse/fradulent-transaction). Also, you
+    can choose from other accelerated data science libraries and pipelines that Saturn
+    Cloud has to offer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/c47f263cfbeb3c9898197d66b41612a8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Done? Perfect. Now copy the URL, paste into the new tab, and replace …./your-username/dashboard/….
+    with /your-username/dashboard/voila and then navigate to projects>examples>dashboard.ipynb
+    and run it. You should be able to see our upload buttons.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you hit any bumps, or want to learn more about creating a dashboard with
+    Voila on Saturn Cloud, refer to this [guide](https://www.saturncloud.io/docs/examples/dashboards/voila_dash/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/839ab729adeaeb4de9d9070bbbe63f28.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '****Fraudulent Transactions****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we don’t have any filtered data just yet, we are just uploading a file and
+    storing its content. Let’s write some more code to handle fraudulent transactions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/37002e3ab75a015e6c17a05793236ada.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: I have generated a csv from fake data which you can find here, feel free to
+    use the same. Here, I’ll just remove the values considering them fraudulent if
+    they exceed a certain threshold. Let’s say all transactions with an amount > 1000
+    are fraud. Simply we can achieve that by writing the following in our upload_btn_eventhandler.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have your data on a cloud such as AWS, that’s no worry at all. All you
+    need to do is acquire your credentials and you are good to go. One way you can
+    do that easily is by using **s3fs** library which is a Python library for accessing
+    your AWS file system. You can read more about that in the [documentation](https://s3fs.readthedocs.io/en/latest/)
+    here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Using Pre-trained model (extra)****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have a pre-trained model that you want to use, you can import it like
+    I did below, but if you just want to know how things work around voila and are
+    not interested in importing machine learning models, you can skip the next code.
+    We are basically using joblib to load count vectorizer and model and then predicting
+    the values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/caaa442c6517a07ed32ef50ed432aba2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Filter Data**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Awesome, now we have clean data without fraudulent transactions. How about
+    we add a little functionality to filter transactions based on the currency? We
+    can achieve that by simply creating another logic just like we created for the
+    upload button. Instead of taking data from the user, now we just pass the clean
+    dataframe that we created. Let’s take a look at the code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/45dd2e7bb33a83f44dccf50f4a4c4121.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We will follow the same pattern here as well. First, we create a dropdown for
+    all unique values in the currency column. Then we create an event handler which
+    will call another function common_filtering which will basically match the currency
+    and give us only those values where our currency matches, in other words, filtering.
+    And we then display it to an output widget that we just created. If you are using
+    the same data file I added, it should look something like this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/f44c7193b27ca45fc05cc04b6ef141f0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '****Visualization****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s move on to visualize the filtered data that we have. We will make a line
+    chart for the count of currencies in our data to see how transactions took place
+    over several of them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/315f96b9e8825cddfe97a4b4df08a044.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: First, we create a new column count and we count the occurrence of each currency.
+    And we pass that as our plot_data where on the X-axis we keep currency and on
+    Y-axis we keep the count. We are using plotly here —  import plotly as px — and
+    keeping a separate helper function that we call for the plot. You can see the
+    bar chart like this on the dashboard if everything runs successfully.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/8c9ef764c2e2cb21af8b025bd8a74ad6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And voila (pun intended), you have a working dashboard. Now we can publish it
+    to production using Saturn Cloud and it is as easy as clicking a few clicks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Publish to Production****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To create a deployment, go to a project page and click the “Create a deployment
+    button”
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/0b656065f74037c9d74839db2cde035b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Create Deployment**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You will be prompted with the configuration page. As you can see below, you
+    only have to set a name and command, and you will be ready to go. However; there
+    are plenty of options to explore on Saturn Cloud, which you can find [here](https://www.saturncloud.io/docs/using-saturn-cloud/jobs_and_deployments/#deployments).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/6906f9964e2c6443c3de54292d00edd7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Configuration**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that configuration is ready, you will be able to see the dashboard, hit
+    the little play button next to the URL and as soon as it is active, visit the
+    URL to access your dashboard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Endnotes****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, we covered what Saturn Cloud is and how it can speed up your
+    end-to-end pipeline, how to create dashboards using Voila and Python and publish
+    to production using Saturn Cloud in just a few easy steps. Having the right tools
+    helps you a lot and Saturn Cloud is one of them if you are into accelerating your
+    processing or data science pipeline. If you have any questions, feel free to reach
+    out to me via [twitter](https://twitter.com/dhrumilcse) or [Linkedin](https://linkedin.com/in/dhrumilcse),
+    or just drop by to say hello.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Dhrumil Patel](http://linkedin.com/in/dhrumilcse)** ([@Dhrumilcse](https://twitter.com/Dhrumilcse))
+    is a Performance Analyst Intern at NVIDIA. His interest lies in working with data
+    on a large scale and web application development using modern frameworks such
+    as Django. He also posses hands-on exposure to NLP while handling enormous social
+    media data. Apart from work, he enjoys reading books and doing origami.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Super Charge Python with Pandas on GPUs Using Saturn Cloud](/2021/05/super-charge-python-pandas-gpus-saturn-cloud.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Scientists, You Need to Know How to Code](/2021/06/data-scientists-need-know-code.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[When good data analyses fail to deliver the results you expect](/2020/11/good-data-analyses-fail.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Prepare Your Data for Effective Tableau & Power BI Dashboards](https://www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Successfully Deploy Data Science Projects](https://www.kdnuggets.com/2022/01/successfully-deploy-data-science-projects.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn How to Design & Deploy Responsible AI Systems](https://www.kdnuggets.com/2023/10/teradata-design-deploy-responsible-ai-systems-whitepaper)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn How to Design & Deploy Responsible AI Systems](https://www.kdnuggets.com/2023/11/teradata-design-deploy-responsible-ai-systems-whitepaper)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Survey: Machine Learning Projects Still Routinely Fail to Deploy](https://www.kdnuggets.com/survey-machine-learning-projects-still-routinely-fail-to-deploy)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploy a Machine Learning Web App with Heroku](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

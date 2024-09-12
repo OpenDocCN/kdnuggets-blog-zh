@@ -1,0 +1,337 @@
+- en: Using SHAP Values for Model Interpretability in Machine Learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Using SHAP Values for Model Interpretability in Machine Learning](../Images/969360458439bb37b2f15a58cf70887a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Machine Learning Interpretability
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Machine learning interpretability refers to techniques for explaining and understanding
+    how machine learning models make predictions. As models become more complex, it
+    becomes increasingly important to explain their internal logic and gain insights
+    into their behavior.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is important because machine learning models are often used to make decisions
+    that have real-world consequences, such as in healthcare, finance, and criminal
+    justice. Without interpretability, it can be difficult to know whether a machine
+    learning model is making good decisions or if it is biased.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When it comes to machine learning interpretability, there are various techniques
+    to consider. One popular method is to determine feature importance scores, which
+    reveal the features that have the greatest impact on the model's predictions.
+    SKlearn models offer feature importance scores by default, but you can also utilize
+    tools like [SHAP](https://shap.readthedocs.io/en/latest/index.html), [Lime](https://github.com/marcotcr/lime),
+    and [Yellowbrick](https://www.scikit-yb.org/en/latest/index.html) for better visualization
+    and understanding of your machine learning results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This tutorial will cover SHAP values and how to interpret machine learning results
+    with the SHAP Python package.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What are SHAP Values?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[SHAP](https://shap.readthedocs.io/en/latest/index.html) values are based on
+    Shapley values from game theory. In game theory, Shapley values help determine
+    how much each player in a collaborative game has contributed to the total payout.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For a machine learning model, each feature is considered a "player". The Shapley
+    value for a feature represents the average magnitude of that feature's contribution
+    across all possible combinations of features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Specifically, SHAP values are calculated by comparing a model's predictions
+    with and without a particular feature present. This is done iteratively for each
+    feature and each sample in the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By assigning each feature an importance value for every prediction, SHAP values
+    provide a local, consistent explanation of how the model behaves. They reveal
+    which features have the most impact on a specific prediction, whether positively
+    or negatively. This is valuable for understanding the reasoning behind complex
+    machine learning models such as deep neural networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting Started with SHAP Values
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In this section, we will use the [Mobile Price Classification](https://www.kaggle.com/datasets/iabhishekofficial/mobile-price-classification?select=train.csv)
+    dataset from Kaggle to build and analyze multi classification models. We will
+    be classifying mobile phone prices based on the features, such as ram, size, etc.
+    The target variable is <code>price_range</code> with values of 0(low cost), 1(medium
+    cost), 2(high cost) and 3(very high cost).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** Code source with outputs is available at [Deepnote workspace](https://deepnote.com/@abid/Getting-Started-with-SHAP-Values-3e9de750-8212-4ff3-979c-e14a916ac919).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Installing SHAP
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: It is quite simple to install <code>shap</code> on your system using <code>pip</code>
+    or <code>conda</code> commands.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: or
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Loading the data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The dataset is clean and well-organized, with categories converted to numerical
+    using label encoders.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Using SHAP Values for Model Interpretability in Machine Learning](../Images/49fad221b0b4f1f112defd1c31efc06a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Preparing the data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To begin, we will identify the dependent and independent variables and then
+    split them into separate training and testing sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Training and evaluating the model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: After that, we will train our Random Forest classifier model using the training
+    set and evaluate its performance on the testing set. We have obtained an accuracy
+    of 87%, which is quite good, and our model is well-balanced overall.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Calculating SHAP Value
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In this part, we will create an SHAP tree explainer and use it to calculate
+    SHAP values of the testing set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Summary Plot
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The summary plot is a graphical representation of the feature importance of
+    each feature in the model. It is a useful tool for understanding how the model
+    makes predictions and for identifying the most important features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our case, it shows feature importance per target class. It turns out the
+    “ram”, “battery_power”, and size of the phone play an important role in determining
+    the price range.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Using SHAP Values for Model Interpretability in Machine Learning](../Images/18b7e1943dbb6982df53fe96e02cff9e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We will now visualize the future importance of the class “0”. We can clearly
+    see that, ram, battery, and size of the phone have negative effects for predicting
+    low cost mobile phones.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Using SHAP Values for Model Interpretability in Machine Learning](../Images/bfe7ebf53acef36e8be6cae7ae40c858.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Dependence Plot
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: A dependence plot is a type of scatter plot that displays how a model's predictions
+    are affected by a specific feature. In this example, the feature is “battery_power”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The x-axis of the plot shows the values of “battery_power”, and the y-axis shows
+    the shap value. When the battery power exceeds 1200, it begins to negatively affect
+    the classification of lower-end mobile phone models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Using SHAP Values for Model Interpretability in Machine Learning](../Images/8ddc41c1521e375458100f103c12722f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Force Plot
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Let's narrow our focus to a single sample. Specifically, we'll take a closer
+    look at the 12th sample to see which features contributed to the "0" result. To
+    accomplish this, we'll use a force plot and input the expected value, SHAP value,
+    and testing sample.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It turns out ram, phone size, and clock speed have a higher influence on models.
+    We have also noticed that the model will not predict “0” class as the f(x) is
+    lower.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Using SHAP Values for Model Interpretability in Machine Learning](../Images/2f189a2fd381ccef299ce8a9d5de8a8e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We will now visualize the force plot for the class ”1”, and we can see that
+    it is the right class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Using SHAP Values for Model Interpretability in Machine Learning](../Images/5b054b62d4145293be7daf78992a2b31.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can confirm our prediction by checking the 12th record of the testing set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Decision Plot
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Decision plots can be a useful tool for understanding the decision-making process
+    of a machine learning model. They can help us to identify the features that are
+    most important to the model's predictions and to identify potential biases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To better understand the factors that influenced the model's prediction of class
+    "1", we will examine the decision plot. Based on this plot, it appears that phone
+    height had a negative impact on the model, while RAM had a positive impact.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Using SHAP Values for Model Interpretability in Machine Learning](../Images/79405cb5163a11dca4365a497e8192b6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In this blog post, we have introduced SHAP values, a method for explaining the
+    output of machine learning models. We have shown how SHAP values can be used to
+    explain individual predictions and the overall performance of a model. We have
+    also provided examples of how SHAP values can be used in practice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As machine learning expands into sensitive domains like healthcare, finance,
+    and autonomous vehicles, interpretability and explainability will only grow in
+    importance. SHAP values offer a flexible, consistent approach to explaining predictions
+    and model behavior. It can be used to gain insights into how the models make predictions,
+    identify potential biases, and improve the models' performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan/))
+    is a certified data scientist professional who loves building machine learning
+    models. Currently, he is focusing on content creation and writing technical blogs
+    on machine learning and data science technologies. Abid holds a Master''s degree
+    in Technology Management and a bachelor''s degree in Telecommunication Engineering.
+    His vision is to build an AI product using a graph neural network for students
+    struggling with mental illness.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[SHAP: Explain Any Machine Learning Model in Python](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Is Not Like Your Brain Part 4: The Neuron’s…](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-4-neuron-limited-ability-represent-precise-values.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simplifying Decision Tree Interpretability with Python & Scikit-learn](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Handling Missing Values in Time-series with SQL](https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Segment Anything Model: Foundation Model for Image Segmentation](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Transfer Learning to Boost Model Performance](https://www.kdnuggets.com/using-transfer-learning-to-boost-model-performance)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

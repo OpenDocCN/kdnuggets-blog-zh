@@ -1,0 +1,246 @@
+- en: 'Mining Twitter Data with Python Part 6: Sentiment Analysis Basics'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/07/mining-twitter-data-python-part-6.html](https://www.kdnuggets.com/2016/07/mining-twitter-data-python-part-6.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Marco Bonzanini, Independent Data Science Consultant.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Sentiment Analysis](https://www.kdnuggets.com/2018/08/emotion-sentiment-analysis-practitioners-guide-nlp-5.html) is
+    one of the interesting applications of text analytics. Although the term is often
+    associated with [sentiment classification of documents](https://marcobonzanini.com/2015/01/19/sentiment-analysis-with-python-and-scikit-learn/),
+    broadly speaking it refers to the use of text analytics approaches applied to
+    the set of problems related to identifying and extracting subjective material
+    in text sources.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article continues the series on mining Twitter data with Python, describing
+    a simple approach for Sentiment Analysis and applying it to the rubgy data set
+    (see [Part 4](/2016/06/mining-twitter-data-python-part-4.html)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Twitter](../Images/3da5b4dea824ea453ca3ae25f3548634.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A Simple Approach for Sentiment Analysis
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The technique we’re discussing in this post has been elaborated from the traditional
+    approach proposed by Peter Turney in his paper [Thumbs Up or Thumbs Down? Semantic
+    Orientation Applied to Unsupervised Classification of Reviews](http://arxiv.org/abs/cs/0212032).
+    A lot of work has been done in Sentiment Analysis since then, but the approach
+    has still an interesting educational value. In particular, it is intuitive, simple
+    to understand and to test, and most of all *unsupervised*, so it doesn’t require
+    any labelled data for training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Firstly, we define the *Semantic Orientation* (SO) of a word as the difference
+    between its associations with positive and negative words. In practice, we want
+    to calculate “how close” a word is with terms like *good*and *bad*. The chosen
+    measure of “closeness” is [Pointwise Mutual Information](https://en.wikipedia.org/wiki/Pointwise_mutual_information) (PMI),
+    calculated as follows (t1 and t2 are terms):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![\mbox{PMI}(t_1, t_2) = \log\Bigl(\frac{P(t_1 \wedge t_2)}{P(t_1) \cdot P(t_2)}\Bigr)](../Images/4b5806b73498d21668aae5f9870f1753.png
+    "\mbox{PMI}(t_1, t_2) = \log\Bigl(\frac{P(t_1 \wedge t_2)}{P(t_1) \cdot P(t_2)}\Bigr)")'
+  prefs: []
+  type: TYPE_IMG
+- en: 'In Turney’s paper, the SO of a word was calculated against *excellent* and*poor*,
+    but of course we can extend the vocabulary of positive and negative terms. Using ![V^{+}](../Images/5d73d28023648a59b0827977675a774b.png
+    "V^{+}") and a vocabulary of positive terms and ![V^{-}](../Images/b1377e15ce49e6e88b8a5cdc726db776.png
+    "V^{-}") for the negative ones, the Semantic Orientation of a term t is hence
+    defined as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![\mbox{SO}(t) = \sum_{t'' \in V^{+}}\mbox{PMI}(t, t'') - \sum_{t'' \in V^{-}}\mbox{PMI}(t,
+    t'')](../Images/55ff1a1560049e0cc9b5a92fb25cb747.png "\mbox{SO}(t) = \sum_{t''
+    \in V^{+}}\mbox{PMI}(t, t'') - \sum_{t'' \in V^{-}}\mbox{PMI}(t, t'')")'
+  prefs: []
+  type: TYPE_IMG
+- en: We can build our own list of positive and negative terms, or we can use one
+    of the many resources available on-line, for example the [opinion lexicon](http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html#lexicon) by
+    Bing Liu.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Computing Term Probabilities
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In order to compute ![P(t)](../Images/ef9b353a1581215b6822443259cf8940.png
+    "P(t)") (the probability of observing the term *t*) and ![P(t_1 \wedge t_2)](../Images/40bb2f6634e787e1e47bc734e8ed60f0.png
+    "P(t_1 \wedge t_2)") (the probability of observing the terms *t1* and *t2* occurring
+    together) we can re-use some previous code to calculate [term frequencies](https://marcobonzanini.com/2015/03/17/mining-twitter-data-with-python-part-3-term-frequencies/) and [term
+    co-occurrences](https://marcobonzanini.com/2015/03/23/mining-twitter-data-with-python-part-4-rugby-and-term-co-occurrences/).
+    Given the set of documents (tweets) *D*, we define the Document Frequency (DF)
+    of a term as the number of documents where the term occurs. The same definition
+    can be applied to co-occurrent terms. Hence, we can define our probabilities as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![P(t) = \frac{\mbox{DF}(t)}{|D|}\\ P(t_1 \wedge t_2) = \frac{\mbox{DF}(t_1
+    \wedge t_2)}{|D|}](../Images/15d47c3e5ea6bc467548a7f0810267b1.png "P(t) = \frac{\mbox{DF}(t)}{|D|}\\
+    P(t_1 \wedge t_2) = \frac{\mbox{DF}(t_1 \wedge t_2)}{|D|}")'
+  prefs: []
+  type: TYPE_IMG
+- en: In the previous articles, the document frequency for single terms was stored
+    in the dictionaries `count_single` and `count_stop_single` (the latter doesn’t
+    store stop-words), while the document frequency for the co-occurrencies was stored
+    in the co-occurrence matrix `com`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is how we can compute the probabilities:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Computing the Semantic Orientation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Given two vocabularies for positive and negative terms:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can compute the PMI of each pair of terms, and then compute the Semantic
+    Orientation as described above:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: The Semantic Orientation of a term will have a positive (negative) value if
+    the term is often associated with terms in the positive (negative) vocabulary.
+    The value will be zero for neutral terms, e.g. the PMI’s for positive and negative
+    balance out, or more likely a term is never observed together with other terms
+    in the positive/negative vocabularies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can print out the semantic orientation for some terms:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Different vocabularies will produce different scores. Using the [opinion lexicon
+    from Bing Liu](http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html#lexicon),
+    this is what we can observed on the [Rugby data-set](/2016/06/mining-twitter-data-python-part-4.html):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Some Limitations
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The PMI-based approach has been introduced as simple and intuitive, but of course
+    it has some limitations. The semantic scores are calculated on terms, meaning
+    that there is no notion of “entity” or “concept” or “event”. For example, it would
+    be nice to aggregate and normalise all the references to the team names, e.g. *#ita*, *Italy* and *Italia* should
+    all contribute to the semantic orientation of the same entity. Moreover, do the
+    opinions on the individual teams also contribute to the overall opinion on a match?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some aspects of natural language are also not captured by this approach, more
+    notably modifiers and negation: how do we deal with phrases like*not bad* (this
+    is the opposite of just *bad*) or *very good* (this is stronger than just *good*)?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This article has continued the tutorial on mining Twitter data with Python introducing
+    a simple approach for Sentiment Analysis, based on the computation of a semantic
+    orientation score which tells us whether a term is more closely related to a positive
+    or negative vocabulary. The intuition behind this approach is fairly simple, and
+    it can be implemented using Pointwise Mutual Information as a measure of association.
+    The approach has of course some limitations, but it’s a good starting point to
+    get familiar with Sentiment Analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Marco Bonzanini](https://twitter.com/marcobonzanini)** is a Data Scientist
+    based in London, UK. Active in the PyData community, he enjoys working in text
+    analytics and data mining applications. He''s the author of "[Mastering Social
+    Media Mining with Python](https://www.amazon.com/Mastering-Social-Media-Mining-Python-ebook/dp/B01BFD2Z2Q)"
+    (Packt Publishing, July 2016).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://marcobonzanini.com/2015/05/17/mining-twitter-data-with-python-part-6-sentiment-analysis-basics/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Mining Twitter Data with Python Part 3: Term Frequencies](/2016/06/mining-twitter-data-python-part-3.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mining Twitter Data with Python Part 4: Rugby and Term Co-occurrences](/2016/06/mining-twitter-data-python-part-4.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mining Twitter Data with Python Part 5: Data Visualisation Basics](/2016/06/mining-twitter-data-python-part-5.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Back To Basics, Part Dos: Gradient Descent](https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sentiment Analysis in Python: Going Beyond Bag of Words](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Collect Data For Customer Sentiment Analysis](https://www.kdnuggets.com/2022/12/collect-data-customer-sentiment-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sentiment Analysis on Encrypted Data with Homomorphic Encryption](https://www.kdnuggets.com/2022/12/zama-sentiment-analysis-encrypted-data-homomorphic-encryption.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Fine-Tune BERT for Sentiment Analysis with Hugging Face Transformers](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Basics: Syntax, Data Types, and Control Structures](https://www.kdnuggets.com/python-basics-syntax-data-types-and-control-structures)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

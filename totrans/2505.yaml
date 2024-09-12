@@ -1,0 +1,262 @@
+- en: Design Patterns for Machine Learning Pipelines
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/11/design-patterns-machine-learning-pipelines.html](https://www.kdnuggets.com/2021/11/design-patterns-machine-learning-pipelines.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Davit Buniatyan](https://www.linkedin.com/in/davidbuniatyan/), CEO of
+    Activeloop, a Y-Combinator alum startup**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Design Patterns Ml Pipelines](../Images/ef7e6722925ec2460275b149d19f7894.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Design patterns for ML pipelines have evolved several times in the past decade.
+    These changes are usually driven by imbalances between memory and CPU performance.
+    They are also distinct from traditional data processing pipelines (something like
+    map reduce) as they need to support the execution of long-running, stateful tasks
+    associated with deep learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As growth in dataset sizes outpace memory availability, we have seen more ETL
+    pipelines designed with distributed training and distributed storage as first-class
+    principles. Not only can these pipelines train models in a parallel fashion using
+    multiple accelerators, but they can also replace traditional distributed file
+    systems with cloud object stores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Along with our partners from the [AI Infrastructure Alliance](https://ai-infrastructure.org/),
+    we at Activeloop are actively building tools to help researchers train arbitrarily
+    large models over arbitrarily large datasets, [like the open-source dataset format
+    for AI](https://github.com/activeloopai/Hub), for instance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Single machine + Single GPUs
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Pre-2012, training ML models was a relatively straightforward exercise. Datasets
+    like ImageNet and KITTI were stored on a single machine and accessed by a single
+    GPU. For the most part, researchers could get decent GPU utilization without prefetching.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Life was easier in this era: there was little need to think about gradient
+    sharing, parameter servers, resource scheduling, or synchronization between multiple
+    GPUs. As long as jobs were GPU-bound rather than IO-bound, this simplicity meant
+    first-generation deep learning frameworks like Caffe running on a single machine
+    were often good enough for most ML projects.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although it wasn't uncommon to spend weeks training a model, [researchers](https://papers.nips.cc/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf)
+    started exploring the use of multiple GPUs to parallelize training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Single machine + Multiple GPUs
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: By 2012, larger datasets like COCO, larger model architectures, and [empirical
+    results](https://papers.nips.cc/paper/2011/hash/218a0aefd1d1a4be65601cc6ddc1520e-Abstract.html)
+    justified the effort required for configuring multi-GPU infrastructure^([1]).
+    Consequently, we saw the emergence of frameworks like TensorFlow and PyTorch,
+    along with dedicated [hardware rigs](https://www.nvidia.com/en-us/data-center/dgx-systems/)
+    with multiple GPUs that could handle distributed training with minimal code overhead.^([2])
+  prefs: []
+  type: TYPE_NORMAL
+- en: Behind the seemingly simple requirements of data parallelism (parameter sharing
+    followed by all-reduce operation) were non-trivial problems associated with parallel
+    computing, such as fault tolerance and synchronization. As a result, an entirely
+    new set of design patterns and best practices from the high-performance computing
+    (HPC) world (such as [MPI](https://www.mpi-forum.org/)) had to be internalized
+    by the community before multi-GPU training could be reliably put into practice,
+    as we saw with frameworks like [Horovod](https://github.com/horovod/horovod).
+  prefs: []
+  type: TYPE_NORMAL
+- en: During this period, a popular strategy for multi-GPU training was copying and
+    placing data locally with GPUs. Modules such as [tf.data](https://www.tensorflow.org/guide/data)
+    excelled at maximizing GPU utilization by combining prefetching with highly efficient
+    data formats while maintaining flexibility for on-the-fly data augmentation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, as datasets increased in size (with datasets like [Youtube8M](https://research.google.com/youtube8m/workshop2019/index.html),
+    which weighed in at 300 TB+ with more complicated data types) and therefore required
+    cloud-scale storage with random access patterns, distributed file system formats
+    for unstructured, multi-dimensional data like HDF became less useful over time.^([3])
+  prefs: []
+  type: TYPE_NORMAL
+- en: Not only were those formats not designed with cloud object stores in mind, but
+    they also were not optimized for data access patterns unique to model training
+    (shuffle followed by sequential traversal) or read types (multi-dimensional data
+    accessed as blocks or chunks without reading the entire file).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This gap between a need for cloud storage to store large datasets and a need
+    to maximize GPU utilization meant the ML pipeline had to be redesigned again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Object storage + Multiple GPUs
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In 2018, we started seeing more distributed training with cloud object stores
+    with libraries like [s3fs](https://github.com/dask/s3fs) and [AIStore](https://github.com/NVIDIA/AIStore),
+    as well as services like AWS SageMaker’s Pipe Mode^([4]). We also saw the emergence
+    of HDF-inspired data storage formats with cloud storage in mind, such as [Zarr](https://zarr.readthedocs.io/en/stable/).
+    Perhaps most interesting, we noticed a number of industry ML teams (usually working
+    with 100TB+) developing in-house solutions to stream data from S3 to models onto
+    VMs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Even though the problem of transfer speed remained (reading from cloud object
+    storage could be orders of magnitude slower than reading from SSD), this design
+    pattern is widely considered as the most feasible technique for working with petascale
+    datasets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'While current techniques of sharding over EBS volumes or [piping data](https://aws.amazon.com/blogs/machine-learning/using-pipe-input-mode-for-amazon-sagemaker-algorithms/)
+    directly to models, along with clever workarounds like [WebDataset](https://github.com/webdataset/webdataset),
+    are sufficient, the fundamental problem of throughput mismatch remains: cloud
+    object stores can push ~30MB/sec per request while GPUs reads can hit 140GB/sec,
+    which meant costly accelerators are often underutilized.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Accordingly, there are several key considerations that need to be addressed
+    by any new data storage format designed for large-scale ML:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Dataset Size**: datasets often exceed the capacity of node-local disk storage,
+    requiring distributed storage systems and efficient network access.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Number of Files**: datasets often consist of billions of files with uniformly
+    random access patterns, something that often overwhelms both local and network
+    file systems. Reading from a dataset containing a large number of small files
+    takes a long time.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Data Rates**: training jobs on large datasets often use many GPUs, requiring
+    aggregate I/O bandwidths to the dataset of many GBytes/s; these can only be satisfied
+    by massively parallel I/O systems.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Shuffling and Augmentation**: training data needs to be shuffled and augmented
+    prior to training. Repeatedly reading a dataset of files in shuffled order is
+    inefficient when the dataset is too large to be cached in memory.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Scalability**: users often want to develop and test on small datasets and
+    then rapidly scale up to large datasets.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the current regime of petascale datasets, researchers should be able to train
+    arbitrarily large models on arbitrarily large datasets in the cloud. Just like
+    distributed training separated model architectures from computing resources, cloud
+    object storage has the potential to make ML training independent of dataset sizes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ^([1]) Installing and configuring [NCCL](https://developer.nvidia.com/nccl)
+    or MPI are not for the faint of heart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ^([2]) A particularly well designed API is PyTorch’s [DistributedDataParallel](https://pytorch.org/docs/stable/nn.html#torch.nn.parallel.DistributedDataParallel).
+  prefs: []
+  type: TYPE_NORMAL
+- en: ^([3]) There were innovations such as Parquet, but those primarily dealt with
+    structured tabular data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ^([4]) AWS’ Pipe Mode also helpfully optimizes lower level details such as ENA
+    and multipart downloading.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Davit Buniatyan](https://www.linkedin.com/in/davidbuniatyan/) ([@DBuniatyan](https://twitter.com/DBuniatyan))
+    started his Ph.D. at Princeton University at 20\. His research involved reconstructing
+    the connectome of the mouse brain under the supervision of Sebastian Seung. Trying
+    to solve hurdles he faced analyzing large datasets in the neuroscience lab, David
+    became the founding CEO of [Activeloop](https://www.activeloop.ai/), a Y-Combinator
+    alum startup. He is also a recipient of the Gordon Wu Fellowship and AWS Machine
+    Learning Research Award.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[The Prefect Way to Automate & Orchestrate Data Pipelines](https://www.kdnuggets.com/2021/09/prefect-way-automate-orchestrate-data-pipelines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Vaex: Pandas but 1000x faster](https://www.kdnuggets.com/2021/05/vaex-pandas-1000x-faster.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build Pipelines with Pandas Using pdpipe](https://www.kdnuggets.com/2019/12/build-pipelines-pandas-pdpipe.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,236 @@
+- en: Lift Analysis – A Data Scientist’s Secret Weapon
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/03/lift-analysis-data-scientist-secret-weapon.html](https://www.kdnuggets.com/2016/03/lift-analysis-data-scientist-secret-weapon.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Andy Goldschmidt, Akanoo**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Whenever I read articles about data science I feel like there is some important
+    aspect missing: evaluating the performance and quality of a machine learning model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There is always a neat problem at hand that gets solved and the process of
+    data acquisition, handling and model creation is discussed, but the evaluation
+    aspect too often is very brief. But I truly believe it''s the most important fact,
+    when building a new model. Consequently, the first post on this blog will deal
+    with a pretty useful evaluation technique: lift analysis.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Machine learning covers a wide variety of problems like regression and clustering.
+    Lift analysis, however, is used for classification tasks. Therefore, the remainder
+    of this article will concentrate on these kind of models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Reason Behind Lift Charts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When evaluating machine learning models there is a plethora of possible metrics
+    to assess performance. There are things like accuracy, precision-recall, ROC curve
+    and so on. All of them can be useful, but they can also be misleading or don't
+    answer the question at hand very well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Accuracy [1] for example might be a useful metric for balanced classes (that
+    is, each label has about the same number of occurrences), but it''s totally misleading
+    for imbalanced classes. Problem is: data scientists have to deal with imbalanced
+    classes all the time, e.g. when predicting if a user will buy something in an
+    online shop. If only 2 out of 100 customers buy anyway, it''s easy for the model
+    to predict everyone as not buying and it still would achieve an accuracy of 98%!
+    That''s absolutely not useful, when trying to assess the model''s quality.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Of course, other metrics like precision and recall give you important information
+    about your model as well. But I want to dig a bit deeper into another valuable
+    evaluation technique, generally referred to as lift analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To illustrate the idea, we''ll consider a simple churn model: we want to predict
+    if a customer of an online service will cancel its subscription or not. This is
+    a binary classification problem: the user either cancels the subscription (*churn=1*)
+    or keeps it (*churn=0*).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The basic idea of lift analysis is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'group data based on the predicted churn probability (value between 0.0 and
+    1.0). Typically, you look at deciles, so you''d have 10 groups: 0.0 - 0.1, 0.1
+    - 0.2, ..., 0.9 - 1.0'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: calculate the true churn rate per group. That is, you count how many people
+    in each group churned and divide this by the total number of customers per group.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Why is This Useful?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The purpose of our model is to estimate how likely it is that a customer will
+    cancel its subscription. This means our predicted (churn) probability should be
+    directly proportional to the true churn probability, i.e. a high predicted score
+    should correlate with a high actual churn rate. Vice versa, if the model predicts
+    that a customer won't churn, then we want to be sure that it's *really unlikely*
+    that this customer will churn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But as always, a picture is worth thousand words. So let''s see how an ideal
+    lift chart would look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Churn rates](../Images/ea57a7bbeaa49ca9859cf9839420d98f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here you can see that the churn rate in the rightmost bucket is highest, just
+    as expected. For scores below 0.5, the actual churn rate in the buckets is almost
+    zero. You can use this lift chart to verify that your model is doing what you
+    expect from it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's say there would be a spike in the lower scored groups; then you know right
+    away that your model has some flaw, it doesn't reflect the reality properly. Because
+    if it would, then the true churn rate can only decrease with decreasing score.
+    Of course, lift analysis can help you only that far. It's up to you to identify
+    the cause of this problem and to fix it, if necessary [2]. After improving the
+    model, you just can come back to the lift chart and see if the quality improved.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Additionally, I drew a black line for the hypothetical average churn rate (20%).
+    This is useful to define a targeting threshold: scores below the threshold will
+    be set to 0, scores above to 1\. In our example, you might want to try to keep
+    customers from cancelling their subscription by giving them a discount. Then you
+    would target all users with a score between 0.8 and 1.0, because this is the range
+    where the churn rates are *higher than the average churn rate*. You don''t want
+    to pour money down the drain for customers, who have a below-average churn probability.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: But What is Lift Exactly?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Until now, we only looked at nice charts. But usually you''re interested in
+    the **lift score** as well. The definition is pretty simple:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`lift = ( predicted rate / average rate )`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*rate* in our situation refers to the churn rate, but might as well be a conversion
+    rate, response rate etc.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Looking back at our example chart, the highest group would have a lift of 0.97
+    / 0.2 = 4.85 and the second highest group of 1.8\. That means, if you only target
+    users with a score higher than 0.9, you can expect to catch nearly five times
+    more churning users than you would by targeting the same number of people randomly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Just like every other evaluation metric lift charts aren't an one-off solution.
+    But they help you get a better picture of the overall performance of your model.
+    You can quickly spot flaws, if the slope of the lift chart is not monotonic. Additionally,
+    it helps you to set a threshold, which users are worth targeting. Last but not
+    least, you have a estimate how much better you can target users compared to random
+    targeting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I hope this first blog post gave you some new insights or you enjoyed it as
+    a refresher. If you have any questions or feedback, just leave a comment or [shoot
+    me a tweet](https://twitter.com/datenheini).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*[1] Ratio of correctly labeled observations to total number of observations.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[2] There might be cases where this does not matter, e.g. when your main goal
+    is to target everyone who churns, but it doesn''t matter, if you also target some
+    people who won''t churn.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Andy Goldschmidt](https://twitter.com/datenheini)** is a data scientist
+    from Hamburg, Germany. He currently works for Akanoo, an onsite targeting startup.
+    Previously he worked in the data team of a DIY website builder.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://blog.datalifebalance.com/lift-charts-a-data-scientists-secret-weapon).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Which Big Data, Data Mining, and Data Science Tools go together?](/2015/06/data-mining-data-science-tools-associations.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Statistics Denial Myth: Repackaging Statistics With Straddling Terms](/2015/07/statistics-denial-myth-repackaging-statistics-straddling-terms.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 Data Mining Algorithms, Explained](/2015/05/top-10-data-mining-algorithms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[HuggingGPT: The Secret Weapon to Solve Complex AI Tasks](https://www.kdnuggets.com/2023/05/hugginggpt-secret-weapon-solve-complex-ai-tasks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GPT-4: 8 Models in One; The Secret is Out](https://www.kdnuggets.com/2023/08/gpt4-8-models-one-secret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with LLMOps: The Secret Sauce Behind Seamless Interactions](https://www.kdnuggets.com/getting-started-with-llmops-the-secret-sauce-behind-seamless-interactions)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Data Scientist’s Essential Guide to Exploratory Data Analysis](https://www.kdnuggets.com/2023/06/data-scientist-essential-guide-exploratory-data-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Scientist Job Salaries Analysis](https://www.kdnuggets.com/2023/04/data-scientist-job-salaries-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Collection of Guides on Mastering SQL, Python, Data Cleaning, Data…](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

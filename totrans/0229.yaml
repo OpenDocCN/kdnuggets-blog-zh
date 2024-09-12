@@ -1,0 +1,155 @@
+- en: 'Machine Learning Is Not Like Your Brain Part 5: Biological Neurons Can’t Do
+    Summation of Inputs'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/07/machine-learning-like-brain-part-5-biological-neurons-cant-summation-inputs.html](https://www.kdnuggets.com/2022/07/machine-learning-like-brain-part-5-biological-neurons-cant-summation-inputs.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Fundamental to all ML systems is the idea that the artificial neuron, the perceptron,
+    sums the weighted signals from the various input synapses. Admittedly, there are
+    a few cases where this appears to work in a biological neuron model. For the majority
+    of cases, though, it doesn’t.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The biological neuron has a membrane potential or voltage which I’ll call its
+    “charge.” The neuron accumulates charge from its input synapses and the various
+    synapses have “weights” corresponding to the amount of charge they contribute.
+    The synapse weight may be positive or negative. When the charge exceeds a threshold,
+    the neuron will fire, sending a neural spike to all the neurons to which it is
+    connected and resetting the internal charge. For convenience, we’ll call the resting
+    charge 0 and the threshold level 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are three characteristics of biological neurons which make signal summation
+    difficult or impossible:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After a neuron fires, it cannot fire again for about 4ms, the “refractory period.”
+    During the refractory period, all incoming signals are ignored.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: No matter the level of incoming signals, the neuron can never fire faster than
+    its maximum rate.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The internal charge cannot go below 0\. If the internal charge is 0, incoming
+    negative-weight signals will be ignored. You can see that ignoring any incoming
+    signals will upset the accuracy of the summation.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The internal charge cannot go above 1\. If the charge ever reaches 1, the neuron
+    will fire, so additional incoming signals (either positive or negative) will be
+    ignored during the refractory period. This and the above means that an overall
+    summation can’t be performed properly if any partial sum would go below 0 or above
+    1.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Consider a simple example. Imagine that our neurons represent a value from 0-1
+    in a 40ms period, represented by the number of neural spikes emitted in the period.
+    To represent a value of .6, we’d have 6 spikes which might be evenly distributed
+    but, more likely, are randomly distributed in the 40ms time segment. Let’s assign
+    our signal with a value of .6 to “In1” in the figure and assign another with a
+    value of .1 to “In2”. For the summation to be accurate, we’d like “Out” to spike
+    7 times in the time segment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Looking just at the value of 6, during the 40ms time segment, Out will be in
+    its refractory period for 24ms so there is a 60% probability that our signal from
+    In2 will arrive during a refractory period and be ignored. If the 6 spikes are
+    evenly distributed, they occur every 6.7ms so if our in2 spike happens to sneak
+    in, the following spike from In1 will arrive during the refractory period and
+    be ignored. Therefore, if spikes are evenly distributed, there is no possibility
+    that 6 spikes + 1 spike will ever equal anything but 6 spikes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the spikes are randomly distributed, there is some possibility that a neuron
+    might compute that 6+1=7, but the probability is remote and related to the distribution
+    of the spikes. You *could* get a better summation with neurons if the signal values
+    were always small relative to the time segment. To do this, you need to further
+    reduce the number of allowed values and/or make the time segment longer. With
+    a 400ms time segment you can get reasonable summations of small values like 6+1,
+    but this is too slow and too limited to be useful for Machine Learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Considering the 3rd and 4th points above, perceptrons start with a similar limitation,
+    which is why there is a function, usually a sigmoid, which maps the summed inputs
+    back to the 0-1 range (or -1,1). The problem is that biological neurons “clip”
+    the incoming signals *before* the summation is complete, so there is no way to
+    clean up with the equivalent of the sigmoid function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While the neuron cannot perform the most basic ML function, it is much better
+    at recognizing which of several signals arrived first. This is how you can recognize
+    the direction of sound from signals which arrive at your two ears only a fraction
+    of a millisecond apart. Neurons are also very good at determining which of two
+    input signals is spiking faster. This functionality is used by neurons which recognize
+    boundaries in your visual field where neurons on one side of the boundary are
+    firing at a different rate than those on the other. Machine learning algorithms
+    tupically ignore these capabilities of the biological neuron.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the same way that neurons have a limited range of values as was discussed
+    in the previous article in this series, synapses are even more limited. And that
+    is the topic of the next article in our nine-part series on why ML is not like
+    your brain.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine Learning Is Not Like Your Brain Part 5: Biological Neurons Can’t
+    Do Summation of Inputs](../Images/8c8a2cb72bbb23eac911ec8d84ed2eff.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 6+1=6, showing that spiking neurons don’t really perform the summation the way
+    artificial perceptrons do. The neuron “timing” is just a marker firing every 40ms.
+    “In1” is slightly randomized and produces 6 spikes in each time period, while
+    “In2” fires only once per period. Both are connected to “Out” with synapses of
+    weight 1\. By observing Out, you can see which spike lands in the refractory period
+    of Out and is lost. In the left case, the spike from In2 arrives during the refractory
+    period. In the right-hand case, the spike from In2 causes Out to fire, but the
+    next spike from In1 arrives in the refractory period. In either case, the summation
+    clearly does not work properly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can [learn more about this topic in this video](https://www.youtube.com/watch?v=dIa85rxo8AU).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Charles Simon](https://futureai.guru/Founder.aspx)** is a nationally recognized
+    entrepreneur and software developer, and the CEO of FutureAI. Simon is the author
+    of Will the Computers Revolt?: Preparing for the Future of Artificial Intelligence,
+    and the developer of Brain Simulator II, an AGI research software platform. For
+    more information, [visit here](https://futureai.guru/Founder.aspx).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Machine Learning Is Not Like Your Brain Part One: Neurons Are Slow,…](https://www.kdnuggets.com/2022/04/machine-learning-like-brain-part-one-neurons-slow-slow-slow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Is Not Like Your Brain Part Two: Perceptrons vs Neurons](https://www.kdnuggets.com/2022/05/machine-learning-like-brain-part-two-perceptrons-neurons.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning is Not Like Your Brain Part Seven: What Neurons…](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-seven-neurons-good.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Efficiency Spells the Difference Between Biological Neurons and…](https://www.kdnuggets.com/2022/11/efficiency-spells-difference-biological-neurons-artificial-counterparts.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Is Not Like Your Brain Part 3: Fundamental Architecture](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-3-fundamental-architecture.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Is Not Like Your Brain Part 4: The Neuron’s…](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-4-neuron-limited-ability-represent-precise-values.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

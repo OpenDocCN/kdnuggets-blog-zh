@@ -1,0 +1,362 @@
+- en: 5 Tips for Writing Clean R Code
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/08/5-tips-writing-clean-r-code.html](https://www.kdnuggets.com/2021/08/5-tips-writing-clean-r-code.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Marcin Dubel](https://appsilon.com/author/marcin/), Appsilon**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/978a8b58e3a2eed28f54c8122f234d6e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Clean R Code Is Critical
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Over many years of experience delivering successful projects, I’ve found one
+    common element in each implementation. A clean, readable, and concise codebase
+    is the key to effective collaboration and provides the highest quality value to
+    the client.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code review is a crucial part of maintaining a high-quality code process. It
+    is also a great way to share best practices and distribute knowledge among team
+    members. At Appsilon, we treat code review as a must for every project. Read more
+    about how we organize our work in [Olga’s blog post](https://appsilon.com/remote-data-science-team-best-practices-scrum-github-and-docker/) on
+    best practices recommended for all data science teams.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Having a well-established code review process does not change the fact that
+    the developer is responsible for writing good, clean code! Pointing out all of
+    the code’s basic mistakes is painful, time-consuming, and distracts reviewers
+    from going deep into code logic or improving the code’s effectiveness.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Poorly written code can also harm team morale – code reviewers are frustrated
+    while code creators might feel offended by a huge number of comments. That is
+    why before sending the code to review, developers need to make sure that the code
+    is as clean as possible. Also, note that there is not always a code reviewer that
+    can come to the rescue. Sometimes you are on your own in a project. Even though
+    you think the code is ok for you now, consider rereading it in a few months –
+    you want it to be clear to avoid wasting your own time later on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, I summarize the most common mistakes to avoid and outline best
+    practices to follow in programming in general. Follow these tips to speed up the
+    code review iteration process and be a rockstar developer in your reviewer’s eyes!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Avoid Comments with Comments
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Adding comments to the code is a crucial developer skill. However, a more critical
+    and harder to master skill is knowing when *not* to add comments. Writing good
+    comments is more of an art than a science. It requires a lot of experience, and
+    you can write entire book chapters about it (e.g., [here](https://books.google.pl/books/about/Clean_Code.html?id=hjEFCAAAQBAJ)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are few simple rules that you should follow, to, well, avoid comments
+    about your comments:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The comments should add external knowledge to the reader: if they’re explaining
+    what is happening in the code itself, it is a red flag that the code is not clean
+    and needs to be refactored. If some hack was used, then comments might be used
+    to explain what is going on. Comment required business logic or exceptions added
+    on purpose. Try to think of what can be surprising to the future reader and preempt
+    their confusion.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Write only crucial comments! Your comments should not be a dictionary of easily
+    searchable information. In general, comments are distracting and do not explain
+    logic as well as the code does. For example, recently, I recently saw a comment
+    like this in the code: `trimws(.) # this function trims leading/trailing white
+    spaces` – which is redundant. If the reader does not know what function `trimws` is
+    doing, it can be easily checked. A more robust comment here can be helpful, e.g.: `trimws(.)
+    # TODO(Marcin Dubel): Trimming white spaces is crucial here due to database entries
+    inconsistency; data needs to be cleaned.`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When writing functions in R, I recommend [using {roxygen2} comments](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html) even
+    if you are not writing a package. It is an excellent tool for organizing the knowledge
+    about the function goal, parameters, and output.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Only write comments (as well as all parts of code) in English. Making it understandable
+    to all readers might save you encoding issues that can appear if you use special
+    characters from your native language.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In case some code needs to be refactored/modified in the future, mark it with
+    the `# TODO` comment. Also, add some information to identify you as the author
+    of this comment (to contact in case details are needed) and a brief explanation
+    of why the following code is marked as TODO and not modified right away.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Never leave commented-out code un-commented! It is ok to keep some parts for
+    the future or turn them off for a while, but always mark the reason for this action.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Remember that the comments will stay in the code. If there is something that
+    you would like to tell your reviewer, but only once, add a comment to Pull (Merge)
+    Request and not to the code itself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Example**: I recently saw removing part of the code with a comment like:
+    “Removed as the logic changed.” Ok, good to know, but later that comment in the
+    code looks odd and is redundant, as the reader no longer sees the removed code.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Strings
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'A common problem related to texts is the readability of string concatenations.
+    What I encounter a lot is an overuse of the `paste` function. Don’t get me wrong;
+    it is a great function when your string is simple, e.g. `paste("My name is", my_name)`,
+    but for more complicated forms, it is hard to read:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`paste("My name is", my_name, "and I live in", my_city, "developing in", language,
+    "for over", years_of_coding)`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A better solution is to use `sprintf` functions or `glue`, e.g.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`glue(“My name is {my_name} and I live in {my_city} developing in {language}
+    for over {years_of_coding}”)`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Isn’t it clearer without all those commas and quotation marks?
+  prefs: []
+  type: TYPE_NORMAL
+- en: When dealing with many code blocks, it would be great to extract them to separate
+    locations, e.g., to a **.yml file**. It makes both code and text blocks easier
+    to read and maintain.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The last tip related to texts: one of the debugging techniques, often used
+    in Shiny applications, is adding `print()` statements. Double-check whether the
+    prints are not left in the code – this can be quite embarrassing during code review!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loops
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Loops are one of the programming building blocks and are a very powerful tool.
+    Nevertheless, they can be computationally heavy and thus need to be used carefully.
+    The rule of thumb that you should follow is: always double-check if looping is
+    a good option. It is hardly a case that you need to loop over rows in `data.frame`:
+    there should be a `{dplyr}` function to deal with the problem more efficiently.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another common source of issues is looping over elements using the length of
+    the object, e.g. `for(i in 1:length(x)) ...`. But what if the length of x is zero!
+    Yes, the loop will go another way for iterator values 1, 0\. That is probably
+    not your plan. Using `seq_along` or `seq_len` functions are much safer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, remember about the `apply` family of functions for looping. They are great
+    (not to mention `{purrr}` solutions)! Note that using `sapply` might be commented
+    by the reviewer as not stable – because this function chooses the type of the
+    output itself! So sometimes it will be a list, sometimes a vector. Using `vapply` is
+    safer, as the programmer defines the expected output class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code Sharing
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Even if you are working alone, you probably would like your program to run correctly
+    on other machines. And how crucial it is when you are sharing the code with the
+    team! To achieve this, never use absolute paths in your code, e.g. “/home/marcin/my_files/old_projects/september/project_name/file.txt”.
+    It won’t be accessible for others. Note that any violation of folder structure
+    will crash the code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you should already have a project for all coding work, you need to use paths
+    related to the particular project – in this case; it will be “./file.txt”. What
+    is more, I would suggest keeping all the paths as variables in a single place
+    – so that renaming a file requires one change in code, not, e.g., twenty in six
+    different files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sometimes your software needs to use some credentials or tokens, e.g., to a
+    database or private repositories. You should never commit such secrets to the
+    repository! Even if the entries are the same among the team. Usually, the good
+    practice is to keep such values in `.Renviron` file as environmental variables
+    that are loaded on start and the file itself is ignored in the repo. You can read
+    more about it [here](http://www.dartistics.com/renviron.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Good Programming Practices
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Finally, let’s focus on how you can improve your code. First of all, your code
+    should be easily understandable and clean – even if you are working alone, when
+    you come back to code after a while, it will make your life easier!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use specific variable names, even if they seem to be lengthy – the rule of thumb
+    is that you should be able to guess what is inside just by reading the name, so `table_cases_per_country`is
+    ok, but `tbl1` is not. Avoid abbreviations. Lengthy is preferable to vague. Keep
+    consistent style for object names (like camelCase or snake_case) agreed among
+    the team members.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Do NOT abbreviate logical values `T` for `TRUE` and `F` for `FALSE` – the code
+    will work, but `T` and `F` are regular objects that can be overwritten while `TRUE` and `FALSE` are
+    special values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Do not compare logical values using equations, like `if(my_logical == TRUE)`.
+    If you can compare to `TRUE`, it means your value is already logical, so `if(my_logical)` is
+    enough! If you want to double-check that the value is `TRUE` indeed (and not,
+    e.g., `NA`), you can use the `isTRUE()` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Make sure that your logic statements are correct. Check if you understand the
+    difference in R between [single and double logical operators](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Logic.html)!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Good spacing is crucial for readability. Make sure that the rules are the same
+    and agreed upon in the team. It will make it easier to follow each other’s code.
+    The simplest solution is to stand on the shoulders of giants and follow the [tidyverse
+    style guide](https://style.tidyverse.org/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'However, checking the style in every line during the review is quite inefficient,
+    so make sure to introduce **linter** and **styler** in your development workflow,
+    as presented in [Olga’s blog post](https://appsilon.com/remote-data-science-team-best-practices-scrum-github-and-docker/).
+    This can be lifesaving! Recently we found an error in some legacy code that would
+    have been automatically recognized by linter:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: This does not return the sum of the elements as the author was expecting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Speaking of variable names – this is known to be one of the hardest things
+    in programming. Thus avoid it when it is unnecessary. Note that R functions return
+    by default the last created element, so you can easily replace that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'With something shorter (and simpler, you don’t need to think about names):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: On the other hand, please DO use additional variables anytime you repeat some
+    function call or calculation! It will make it computationally more effective and
+    easier to be modified in the future. Remember to keep your code [DRY – don’t repeat
+    yourself](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself). If you copy-paste
+    some code, think twice whether it shouldn’t be saved to a variable, done in a
+    loop, or moved to a function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: And there you have it – five strategies to write clean R code and leave your
+    code reviewer commentless. These five alone will ensure you’re writing great-quality
+    code that is easy to understand, even years down the road. Happy coding!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Marcin Dubel](https://appsilon.com/author/marcin/)** is an Engineer
+    at Appsilon.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://appsilon.com/write-clean-r-code/). Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Support Vector Machine for Hand Written Alphabet Recognition in R](/2021/01/support-vector-machine-hand-written-alphabet-r.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Programming Languages and Their Uses](/2021/05/top-programming-languages.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide On How To Become A Data Scientist (Step By Step Approach)](/2021/05/guide-become-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mastering Python: 7 Strategies for Writing Clear, Organized, and…](https://www.kdnuggets.com/mastering-python-7-strategies-for-writing-clear-organized-and-efficient-code)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Tips for Writing Better Python Functions](https://www.kdnuggets.com/5-tips-for-writing-better-python-functions)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Data Science to Make Clean Energy More Equitable](https://www.kdnuggets.com/2022/03/data-science-make-clean-energy-equitable.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Announcing a Blog Writing Contest, Winner Gets an NVIDIA GPU!](https://www.kdnuggets.com/2022/11/blog-writing-contest-nvidia-gpu.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Tips To Produce Readable Data Science Code](https://www.kdnuggets.com/2022/11/7-tips-produce-readable-data-science-code.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,391 @@
+- en: Machine Learning Finds “Fake News” with 88% Accuracy
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/04/machine-learning-fake-news-accuracy.html](https://www.kdnuggets.com/2017/04/machine-learning-fake-news-accuracy.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By George McIntire, Contributing Data Science Writer, ODSC**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Donald Trump](../Images/c4c806c5213c7410a605b76b4daa4706.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: “A lie gets halfway around the world before the truth has a chance to get its
+    pants on.”
+  prefs:
+  - PREF_BQ
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_BQ
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: – Winston Churchill
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Since the 2016 presidential election, one topic dominating political discourse
+    is the issue of “Fake News”. A number of political pundits claim that the rise
+    of significantly biased and/or untrue news influenced the election, though a [study
+    by researchers](http://thehill.com/homenews/media/317646-fake-news-did-not-change-result-of-2016-election-study)
+    from Stanford and New York University concluded otherwise. Nonetheless, fake news
+    posts have exploited Facebook users’ feeds to propagate throughout the internet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****“What is fake news?”****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Obviously, a deliberately misleading story is “fake news” but lately blathering
+    social media discourse,  is changing its definition. Some now use the term to
+    dismiss facts counter to their preferred viewpoints, the most prominent example
+    being [President Trump](https://twitter.com/search?q=fake%20news%20from%3Arealdonaldtrump&src=typd).
+    Such a vaguely-defined term is ripe for a cynical manipulation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The data science community has responded by [taking action to fight the problem](https://qz.com/843110/can-artificial-intelligence-solve-facebooks-fake-news-problem/).
+    There’s a Kaggle-style competition called the “[Fake News Challenge](http://www.fakenewschallenge.org/)” and
+    [Facebook is employing AI](https://techcrunch.com/2016/11/14/facebook-fake-news/) to
+    filter fake news stories out of users’ feeds. Combating fake news is a classic
+    text classification project with a straight-forward proposition: ***Can you build
+    a model that can differentiate between “Real” news vs “Fake” news.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: And that’s exactly what I attempted to do for this project. I assembled a dataset
+    of fake and real news and employed a [Naive Bayes](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)
+    classifier in order to create a model to classify an article as fake or real based
+    on its words and phrases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Gather/Wrangling
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There were two parts to the data acquisition process, getting the “fake news”
+    and getting the real news. The first part was quick, Kaggle released a [fake news
+    dataset](https://www.kaggle.com/mrisdal/fake-news) comprising of 13,000 articles
+    published during the 2016 election cycle.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The second part was… a lot more difficult.  To acquire the real news side of
+    the dataset, I turned to [All Sides](http://www.allsides.com/), a website dedicated
+    to hosting news and opinion articles from across the political spectrum. Articles
+    on the website are categorized by topic (environment, economy, abortion, etc…)
+    and by political leaning (left, center, and right). I used All Sides because it
+    was the best way to web scrape thousands of articles from numerous media outlets
+    of differing biases. Plus, it allowed to me download the full text of an article,
+    something you cannot do with the New York Times and NPR APIs. After a long and
+    arduous process I ended up scraping a total of **5279 articles**. The articles
+    in my real news dataset came from media organizations such as the New York Times,
+    WSJ, Bloomberg, NPR, and the Guardian and were published in 2015 or 2016.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I decided to construct my full dataset with equal parts fake and real articles,
+    thus making my model’s null accuracy 50%. I randomly selected 5279 articles from
+    my fake news dataset to use in my complete dataset and left the remaining articles
+    to be used as a testing set when my model was complete.
+  prefs: []
+  type: TYPE_NORMAL
+- en: My finalized dataset was comprised of 10558 total articles with their headlines
+    and full body text and their labels (real vs fake). The data is located here in
+    this [github repo](https://github.com/GeorgeMcIntire/fake_real_news_dataset).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Purpose and Expectations
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When I first started this project, I conceded that this would not be the perfect
+    project. The purpose of this project was to see how far I could get in creating
+    a fake news classification and what insights could be drawn from that, then used
+    towards a better model. My game plan was to treat this project the same way as
+    a routine spam detection project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Building a model based on a count vectorizer (using word tallies) or a tfidf
+    matrix (word tallies relative to how often they’re used in other articles in your
+    dataset) can only get you so far. These methods do not consider important qualities like
+    the word ordering and context. It’s very possible for two articles that are similar
+    in their word counts to be totally different in their meaning. I did not expect
+    my model to be adept at handling fake and real articles whose words and phrases
+    overlap. Nonetheless, I expect some valuable insights to come from this project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Modeling
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Since this is a text classification project, I only used a Naive Bayes classifier
+    as is standard for text-based data science projects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The real work in formulating a model was the text transformation (count vectorizer
+    vs tfidf vectorizer) and choosing which type of text to use (headlines vs full
+    text). This gave me four pairs of reconfigured datasets to work with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The next step was to determine the most optimal parameters for either a countvectorizer
+    or tfidf-vectorizer. For those of you who are unfamiliar with text machine learning,
+    this means using a n-number of the most common words, using words and/or phrases,
+    lower casing or not, removing stop words (common words such as the, when, and
+    there) and only using words that appear at least a given number of times in a text
+    corpus (a term for a text dataset or a collection of texts).
+  prefs: []
+  type: TYPE_NORMAL
+- en: To test the performance of multiple parameters and their numerous combinations,
+    I utilized the Sci-kit Learn’s GridSearch functionality to efficiently execute
+    this task. To learn more about how to perfect your algorithm parameters, please
+    review [this tutorial](http://machinelearningmastery.com/how-to-tune-algorithm-parameters-with-scikit-learn/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: After the grid search cross validation process, I found that my model worked
+    best with a count vectorizer instead of a tfidf and produced higher scores when trained
+    on the full text of articles instead of their headlines. The optimal parameters
+    for count vectorizer are no lowercasing, two-word phrases not single words, and to
+    only use words that appear at least three times in the corpus.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given my expectations that I outlined earlier in this post, I was surprised
+    and almost baffled at the high scores my model produced. My model’s cross-validated
+    accuracy score is 91.7%, recall (true positive rate) score is 92.6%, and its AUC
+    score is 95%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is the ROC Curve for my model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![ROC Curve](../Images/b0c30a0271a9fcb5833e5eb51493fb96.png)](https://opendatascience.com/wp-content/uploads/2017/02/roccurve.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If I were to decide on a threshold for a model based on this graph, I would
+    choose one that produces a FPR at around 0.08 and a TPR at around 0.90, because
+    at that point in the graph the trade off between false positives and true positives
+    is equal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Results & Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The true test of my model’s quality would be to see how fake news articles in
+    the test set (those not used in the creation of my model) it could accurately
+    classify.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Out of the 5234 articles left in the other fake news datasets, my model was
+    able to correctly identify 88.2% of them as fake.** This is 3.5 percentage points
+    lower than my cross-validated accuracy score, but in my opinion it is pretty decent
+    evaluation of my model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It turns out that my hypothesis predicting that model would struggle at classifying
+    news articles was quite wrong. I thought that an accuracy score in the upper 60s
+    or lower 70s would be excellent and I managed to surpass that by a significant
+    margin.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Even though I created what appears to be a pretty good model given the complexity
+    of the task, I am not entirely convinced that it is as good as it appears to be
+    and here’s why.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To be better understand why this might have happened, let’s take a look at the
+    “fakest” and “realest” words in the data—I’ll explain what I mean by that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using a technique I borrowed from Kevin Markham of Data School, here’s how I
+    derived the “fakest” and “realest” words in the corpus. First I started off with
+    a table two columns wide and 10558 rows long (that’s how many words there are
+    in the corpus). The first column represented how many times a given word appeared
+    in articles classified as “FAKE” and the second column was how many times a word appeared
+    in a “REAL” article.  Then I divided the fake column by the total number of fake
+    articles my model classified and so on for the real column. Next, I added the
+    number one to every value in the data because I created a new column of “Fake:Real”
+    ratios and didn’t want to get an error by dividing zero. This “Fake:Real” is a
+    pretty good but by no means perfect metric of just how “fake” or “real a certain
+    word. The logic is pretty simple, if a word shows up a bunch in “fake” articles
+    and rarely in “real” articles then its fake to real ratio score will be pretty
+    high.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here are the top 20 “fakest” and “realest” words in my dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Fakest](../Images/b612bacbe492de1d0b4462ef3be8c9eb.png)](https://opendatascience.com/wp-content/uploads/2017/02/fakestwords.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Realest](../Images/d2c2c7786cb06420a522ead6632c9b0d.png)](https://opendatascience.com/wp-content/uploads/2017/02/realwords.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: These two graphics exhibit some baffling results. The words in the “fake” chart
+    are a mixed bag that includes some typical internet terminology such as PLEASE,
+    Share, Posted, html, and Widget and words that aren’t even words such as tzrwu. However
+    I was not surprised to see infowars mentioned nor terms like “Sheeple” or “UFO”
+    make it in the top 20 “fakest” words. Infowars is a right-wing conspiracy-laden
+    outlet led by Alex Jones that promotes conspiracy theories about chemtrails and
+    9/11.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The “real” chart is dominated by names and politicians and words frequently
+    used in political articles, comprising 60% of the bars in the chart. Seven of
+    the twenty terms, including four of the top six, are politician names. This begs
+    the question, are articles about politicians more likely to be true? No of course
+    not, if anything you’d expect there to be numerous fake news articles spreading
+    falsehoods about politicians. I would be committing a huge error if I came to
+    the conclusion that articles mentioning politicians are more likely to be to factual.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One big assumption underlying this project is that there is considerable overlap
+    in the topics covered by each class of article. As we witnessed above, just because
+    a certain word shows up more often in “real” news than “fake” news it doesn’t
+    mean that articles with those terms are guaranteed to be “real”, but instead could
+    just mean that those words are used in topics more common in the real news dataset
+    and vice versa for the fake news dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I and another party had a considerable amount of influence in shaping this dataset.
+    I made the decision on which articles to use for the “real” dataset. The articles
+    in the “fake” dataset were determined by a [chrome extension called “BS Detector”](https://github.com/selfagency/bs-detector) made
+    by Daniel Sieradski. There is a significantly high amount of subjectivity going
+    into determining what is and what isn’t “fake news”. The reason why politician
+    names are rated as “real” so highly is most likely because that half of the corpura disproportionately
+    comes from political news. In addition, I did find a couple of articles from what
+    I find to be reputable sources of news. One such article came from The Intercept,
+    a news organization with high journalism standards. And yes, my model did indeed
+    flag this supposed “fake news” article as real.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To make matters even more complicated, we have to decide how to set the threshold
+    probability for our model. If I was a data scientist at Facebook tasked with implementing
+    a model that sorts out real and fake news in users’ feeds, I’d be faced with the
+    dilemma between choosing a model that blocks all or most fake news and some real
+    news or a model that allows all or most real news and some fake news. But before
+    I make that decision, I need to figure what is the cost of failing to prevent
+    fake news vs the cost of blocking real news? How does one attempt to answer such
+    an abstract question? Unless we can train a model with a 100% true positive rate
+    and 0% false positive rate, we’ll be stuck with this quandary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In conclusion, while I think that a standard Naive Bayes text classification
+    model can provide insight into addressing this issue, a more powerful deep-learning
+    tool should be employed to combat fake news in a professional setting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Classifying “fake news” provides a novel challenge to the data science community.
+     In many machine learning projects, the distinction between the different classes
+    you want to predict is clear, whereas it’s a lot murkier in this case. This project
+    validates the notion in data science that intuition and intimacy with your data
+    is just as or more important than any model or tool at your disposal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [George McIntire](https://opendatascience.com/author/george-mcintire/)**
+    is a journalist turned data scientist/journalist hybrid. Looking for opportunities
+    in data science and/or journalism. Impossibly curious and passionate about learning
+    new things. Before completing the Metis Data Science Bootcamp, he worked as a
+    freelance journalist in San Francisco for Vice, Salon, SF Weekly, San Francisco
+    Magazine, and more.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://opendatascience.com/blog/how-to-build-a-fake-news-classification-model/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[It’s Getting Hot In Here: Data Science vs Fake News](/2017/03/getting-hot-here-data-science-vs-fake-news.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Happened Last Night in Sweden: Data Science vs Fake News](/2017/03/last-night-sweden-data-science-vs-fake-news.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beware of Two Data Obfuscation Tactics](/2017/04/beware-two-data-obfuscation-tactics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Fake It Till You Make It: Generating Realistic Synthetic Customer Datasets](https://www.kdnuggets.com/2022/01/fake-realistic-synthetic-customer-datasets-projects.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[20 Questions (with Answers) to Detect Fake Data Scientists: ChatGPT…](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[20 Questions (with Answers) to Detect Fake Data Scientists: ChatGPT…](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Which Metric Should I Use? Accuracy vs. AUC](https://www.kdnuggets.com/2022/10/metric-accuracy-auc.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Classification Metrics Walkthrough: Logistic Regression with…](https://www.kdnuggets.com/2022/10/classification-metrics-walkthrough-logistic-regression-accuracy-precision-recall-roc.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sky''s the Limit: Learn how JetBlue uses Monte Carlo and Snowflake…](https://www.kdnuggets.com/2022/12/monte-carlo-jetblue-snowflake-build-trust-improve-model-accuracy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,328 @@
+- en: Getting Started with spaCy for Natural Language Processing
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/05/getting-started-spacy-natural-language-processing.html](https://www.kdnuggets.com/2018/05/getting-started-spacy-natural-language-processing.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: In a series of previous posts, we have looked at some general ideas related
+    to textual data science tasks, be they natural language processing, text mining,
+    or something different yet closely related. In [the most recent of these posts](/2018/03/text-data-preprocessing-walkthrough-python.html),
+    we covered a text data preprocessing walkthrough using Python. More specifically,
+    we looked at a text preprocessing walkthrough using Python *and NLTK*. While we
+    did not go any further than data preprocessing with NLTK, the toolkit could, theoretically,
+    be used for further analysis tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While NLTK is a great natural language... well, toolkit (hence the name), it
+    is not optimized for building production systems. This may or may not be of consequence
+    if using NLTK only to preprocess your data, but if you are planning an end-to-end
+    NLP solution and are selecting an appropriate tool to build said system, it may
+    make sense to preprocess your data with the same.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f259bf6da4be96051a36006ff848f1cc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: While NLTK was built with *learning* NLP in mind, [spaCy](https://spacy.io/)
+    is specifically designed with the goal of being a useful library for implementing
+    production-ready systems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: spaCy is designed to help you do real work — to build real products, or gather
+    real insights. The library respects your time, and tries to avoid wasting it.
+    It's easy to install, and its API is simple and productive. We like to think of
+    spaCy as the Ruby on Rails of Natural Language Processing.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: spaCy is opinionated, in that it does not allow for as much mixing and matching
+    of what could be considered NLP pipeline modules, the argument being that particular
+    lemmatizers, for example, are not optimized to play well with particular tokenizers.
+    While the tradeoff is less flexibility in **some** aspects of your NLP pipeline,
+    the result should be increased performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can get a quick overview of spaCy and some of its design philosophy and
+    choices [in this video](https://www.youtube.com/watch?v=jB1-NukGZm0), a talk given
+    by spaCy developers [Matthew Honnibal](https://twitter.com/honnibal) and [Ines
+    Montani](https://twitter.com/_inesmontani), from a SF Machine Learning meetup
+    co-hosted with the Data Institute at USF.
+  prefs: []
+  type: TYPE_NORMAL
+- en: spaCy bills itself as "the best way to prepare text for deep learning." Since
+    much of the [previous walkthrough](/2018/03/text-data-preprocessing-walkthrough-python.html)
+    did not use NLTK (the task-dependent noise removal as well as a few steps in the
+    normalization process), we won't repeat the entire post here using spaCy instead
+    of NLTK in particular spots, since that would be a waste of everyone's time. Instead,
+    we will investigate how **some** of that same functionality we employed NLTK for
+    could be accomplished with spaCy, and then move on to some additional tasks which
+    **could** be considered preprocessing, depending on your end goal, but which may
+    also bleed into the subsequent steps of [textual data science tasks](/2017/11/framework-approaching-textual-data-tasks.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting Started
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before doing anything, you need to have spaCy installed, as well as its English
+    language model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We need a sample of text to use:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now let's import spaCy, along with displaCy (for visualizing some of spaCy's
+    modeling) and a list of English stop words (we'll use them below). We also load
+    the English language model as a `Language` object (we will call it 'nlp' out of
+    spaCy convention), and then call the nlp object on our sample text, which returns
+    a processed `Doc` object (which we cleverly call 'doc').
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And there you have it. From the [spaCy documentation](https://spacy.io/usage/spacy-101):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Even though a `Doc` is processed – e.g. split into individual words and annotated
+    – it still holds **all information of the original text**, like whitespace characters.
+    You can always get the offset of a token into the original string, or reconstruct
+    the original by joining the tokens and their trailing whitespace. This way, you'll
+    never lose any information when processing text with spaCy.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This is core to spaCy's design philosophy; I encourage you to watch [this video](https://www.youtube.com/watch?v=jB1-NukGZm0).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let's try a few things. Note how little code is required to perform said
+    things.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tokenization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Printing out tokens of our sample is straightforward:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Recall from above that a `Doc` object is processed as it is passed to the `Language`
+    object, and so tokenization has already been completed at this point; we are just
+    accessing those existing tokens. From the [documentation](https://spacy.io/api/doc):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Doc is a sequence of `Token` objects. Access sentences and named entities,
+    export annotations to numpy arrays, losslessly serialize to compressed binary
+    strings. The `Doc` object holds an array of `TokenC` structs. The Python-level
+    `Token` and `Span` objects are views of this array, i.e. they don't own the data
+    themselves.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: We didn't discuss the specifics of spaCy's implementation, but getting to know
+    what its underlying code looks like -- specifically how it was written (and why)
+    -- gives you the insight needed to understand why it's so very fast. For a third
+    time, I encourage you to watch [this video](https://www.youtube.com/watch?v=jB1-NukGZm0).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Though it is not necessary, given differences in design, if you want to pull
+    these tokens out into a list of their own (similar to how we did in the NLTK walkthrough):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Identifying Stop Words
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let''s identify stop words. We imported the word list above, so it''s just
+    a matter of iterating through the tokens stored in the `Doc` object and performing
+    a comparison:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that we did not touch the tokens list created above, and rely only on the
+    pre-processed `Doc` object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Part-of-speech Tagging
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A `Doc` object holds `Token` objects, and you can read the `Token` [documentation](https://spacy.io/api/token)
+    for an idea of what data each token already possesses before we even ask for it,
+    and for specific info on what is being shown below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'While this is a lot of info as is, and could be useful in all sorts of ways
+    for a given NLP goal, let''s simply visualize it using [displaCy](https://spacy.io/usage/visualizers)
+    for a more concise view:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[![POS visualized](../Images/121e0dc7f6e5229b9afaab8f83a11158.png)](https://image.ibb.co/haQoeS/spacy_pos_visualized.jpg)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Named Entity Recognition
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'A `Doc` object has already processed named entities as well. Access them with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: As can be determined from the code above, first the named entity is output,
+    followed by its starting character index in the document, then its ending character
+    index, and finally its entity type (label).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'displaCy''s visualization is handy again, here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![NER visualized](../Images/e67a700939e14859796d357891c1e984.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'I reiterate: scroll back over this post and look at how little code was required
+    to accomplish the tasks we undertook.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This only scratches the surface of what we may want to accomplish with NLP or
+    a tool as powerful as spaCy. As should be obvious, NLP preprocessing tasks, as
+    well as those of other data forms (along with text and string manipulation), can
+    often be accomplished with a variety of strategies, tools, and libraries. In my
+    view, spaCy excels due to its ease of use and API simplicity. I encourage anyone
+    who has been following these NLP-related posts I have been writing to check spaCy
+    out if they are serious about natural language processing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To gain more of an introduction to spaCy, I recommend these resources:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[spaCy 101: Everything you need to know](https://spacy.io/usage/spacy-101)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Language Processing Pipelines](https://spacy.io/usage/processing-pipelines)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Increasing data science productivity; founders of spaCy & Prodigy](https://www.youtube.com/watch?v=jB1-NukGZm0)
+    (SF Machine Learning meetup talk)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Matthew Honnibal - Designing spaCy: Industrial-strength NLP](https://www.youtube.com/watch?v=gJJQs47aUQ0)
+    (PyData Berlin 2016 talk)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Text Data Preprocessing: A Walkthrough in Python](/2018/03/text-data-preprocessing-walkthrough-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Framework for Approaching Textual Data Science Tasks](/2017/11/framework-approaching-textual-data-tasks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A General Approach to Preprocessing Text Data](/2017/12/general-approach-preprocessing-text-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing with spaCy](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with spaCy for NLP](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[N-gram Language Modeling in Natural Language Processing](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing Key Terms, Explained](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Representation for Natural Language Processing Tasks](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,531 @@
+- en: Understanding Decision Trees for Classification in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/08/understanding-decision-trees-classification-python.html](https://www.kdnuggets.com/2019/08/understanding-decision-trees-classification-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/), Data
+    Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/1279716ceb53cae5f0ee4c396b8bdbf3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This tutorial goes into extreme detail about how decision trees work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Decision trees are a popular supervised learning method for a variety of reasons.
+    Benefits of decision trees include that they can be used for both regression and
+    classification, they are easy to interpret and they don’t require feature scaling.
+    They have several flaws including being prone to overfitting. This tutorial covers
+    decision trees for classification also known as classification trees.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Additionally, this tutorial will cover:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The anatomy of classification trees (depth of a tree, root nodes, decision nodes,
+    leaf nodes/terminal nodes).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How classification trees make predictions
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to use scikit-learn (Python) to make classification trees
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Hyperparameter tuning
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As always, the code used in this tutorial is available on my [github](https://github.com/mGalarnyk/Python_Tutorials/blob/master/Statistics/boxplot/box_plot.ipynb) ([anatomy](https://github.com/mGalarnyk/Python_Tutorials/blob/master/Sklearn/CART/Dt_Classification/ClassificationTreeAnatomy.ipynb), [predictions](https://github.com/mGalarnyk/Python_Tutorials/blob/master/Sklearn/CART/Dt_Classification/ClassificationTreesUsingPython.ipynb)).
+    With that, let’s get started!
+  prefs: []
+  type: TYPE_NORMAL
+- en: What are Classification Trees?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**C**lassification **a**nd **R**egression **T**rees (CART) is a term introduced
+    by Leo Breiman to refer to the Decision Tree algorithm that can be learned for
+    classification or regression predictive modeling problems. This post covers classification
+    trees.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Classification Trees
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Classification trees are essentially a series of questions designed to assign
+    a classification. The image below is a classification tree trained on the IRIS
+    dataset (flower species). Root (brown) and decision (blue) nodes contain questions
+    which split into subnodes. The root node is just the topmost decision node. In
+    other words, it is where you start traversing the classification tree. The leaf
+    nodes (green), also called terminal nodes, are nodes that don’t split into more
+    nodes. Leaf nodes are where classes are assigned by majority vote.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/65a3459e504df08826b476c86386cd7f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Classification tree to classification one of three flower species (IRIS Dataset)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**How to use a Classification Tree**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To use a classification tree, start at the root node (brown), and traverse the
+    tree until you reach a leaf (terminal) node. Using the classification tree in
+    the the image below, imagine you had a flower with a petal length of 4.5 cm and
+    you wanted to classify it. Starting at the root node, you would first ask “Is
+    the petal length (cm) ≤ 2.45”? The length is greater than 2.45 so that question
+    is False. Proceed to the next decision node and ask, “Is the petal length (cm)
+    ≤ 4.95”? This is True so you could predict the flower species as versicolor. This
+    is just one example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1279716ceb53cae5f0ee4c396b8bdbf3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**How are Classification Trees Grown? (Non Math Version)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A classification tree learns a sequence of if then questions with each question
+    involving one feature and one split point. Look at the partial tree below (A),
+    the question, “petal length (cm) ≤ 2.45” splits the data into two branches based
+    on some value (2.45 in this case). The value between the nodes is called a split
+    point. A good value (one that results in largest information gain) for a split
+    point is one that does a good job of separating one class from the others. Looking
+    at part B of the figure below, all the points to the left of the split point are
+    classified as setosa while all the points to the right of the split point are
+    classified as versicolor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d3c64db5d8c0282bacb3b24928fa1ad4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The figure shows that setosa was correctly classified for all 38 points. It
+    is a pure node. Classification trees don’t split on pure nodes. It would result
+    in no further information gain. However, impure nodes can split further. Notice
+    the rightside of figure B shows that many points are misclassified as versicolor.
+    In other words, it contains points that are of two different classes (virginica
+    and versicolor). Classification trees are a greedy algorithm which means by default
+    it will continue to split until it has a pure node. Again, the algorithm chooses
+    the best split point (we will get into mathematical methods in the next section)
+    for the impure node.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/80f24154f01eb353c78f83d847b112c7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the image above, the tree has a maximum depth of 2\. Tree depth is a measure
+    of how many splits a tree can make before coming to a prediction. This process
+    could be continued further with more splitting until the tree is as pure as possible.
+    The problem with many repetitions of this process is that this can lead to a very
+    deep classification tree with many nodes. This often leads to overfitting on the
+    training dataset. Luckily, most classification tree implementations allow you
+    to control for the maximum depth of a tree which reduces overfitting. For example,
+    Python’s scikit-learn allows you to preprune decision trees. In other words, you
+    can set the maximum depth to stop the growth of the decision tree past a certain
+    depth. For a visual understanding of maximum depth, you can look at the image
+    below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c15dd3aa17a5097083f415558381cd2b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Classification trees of different depths fit on the IRIS dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Selection Criterion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/0f29aac1bae7f47ec6e8e678787e5e36.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This section answers how information gain and two criterion gini and entropy
+    are calculated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This section is really about understanding what is a good split point for root/decision
+    nodes on classification trees. Decision trees split on the feature and corresponding
+    split point that results in the largest information gain (IG) for a given criterion
+    (gini or entropy in this example). Loosely, we can define information gain as
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: For a clearer understanding of parent and children, look at the decision tree
+    below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/10124ea94f8e023bed0fe6a75d155971.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A more proper formula for information gain formula is below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6a295347c0ad85b49c81d1feed0af966.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Since classification trees have binary splits, the formula can be simplified
+    into the formula below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/08e00b983acb7d02e836bad0651867a6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Two common criterion `I`, used to measure the impurity of a node are Gini index
+    and entropy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/aed1afe2dbc527a99c2c1a89d7946119.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: For the sake of understanding these formulas a bit better, the image below shows
+    how information gain was calculated for a decision tree with Gini criterion.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8d6d9a72ce75262c2c562dc2029a8bdc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The image below shows how information gain was calculated for a decision tree
+    with entropy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/717e47477f736322937f65a4002364b2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: I am not going to go into more detail on this as it should be noted that different
+    impurity measures (Gini index and entropy) [usually yield similar results](https://www.unine.ch/files/live/sites/imi/files/shared/documents/papers/Gini_index_fulltext.pdf).
+    The graph below shows that Gini index and entropy are very similar impurity criterion.
+    I am guessing one of the reasons why Gini is the default value in scikit-learn
+    is that entropy might be a little slower to compute (because it makes use of a
+    logarithm).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/2b36fd282c42280a9cc175015eb65141.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Different impurity measures (Gini index and entropy) [usually yield similar
+    results](https://www.unine.ch/files/live/sites/imi/files/shared/documents/papers/Gini_index_fulltext.pdf).
+    Thanks to [Data Science StackExchange](https://datascience.stackexchange.com/questions/10228/gini-impurity-vs-entropy) and [Sebastian
+    Raschka](https://twitter.com/rasbt) for the inspiration for this graph.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before finishing this section, I should note that are various decision tree
+    algorithms that differ from each other. Some of the more popular algorithms are
+    ID3, C4.5, and CART. Scikit-learn uses an [optimized version of the CART algorithm](http://scikit-learn.org/stable/modules/tree.html#tree-algorithms-id3-c4-5-c5-0-and-cart).
+    You can learn about it’s time complexity [here](http://scikit-learn.org/stable/modules/tree.html#complexity).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Classification Trees using Python
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The previous sections went over the theory of classification trees. One of the
+    reasons why it is good to learn how to make decision trees in a programming language
+    is that working with data can help in understanding the algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Load the Dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The Iris dataset is one of datasets scikit-learn comes with that do not require
+    the downloading of any file from some external website. The code below loads the
+    iris dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/8f7cea2bde50ecfe1af75c5983f582d5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Original Pandas df (features + target)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Splitting Data into Training and Test Sets
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The code below puts 75% of the data into a training set and 25% of the data
+    into a test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/7d3764ca625fb8c22e62cdca6532a91c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The colors in the image indicate which variable (X_train, X_test, Y_train, Y_test)
+    the data from the dataframe df went to for this particular train test split.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note, one of the benefits of Decision Trees is that you don’t have to standardize
+    your data unlike [PCA](https://towardsdatascience.com/pca-using-python-scikit-learn-e653f8989e60) and
+    logistic regression which are [sensitive to effects of not standardizing your
+    data](http://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html#sphx-glr-auto-examples-preprocessing-plot-scaling-importance-py).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Scikit-learn 4-Step Modeling Pattern
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Step 1:** Import the model you want to use'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In scikit-learn, all machine learning models are implemented as Python classes
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Step 2:** Make an instance of the Model'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the code below, I set the `max_depth = 2` to preprune my tree to make sure
+    it doesn’t have a depth greater than 2\. I should note the next section of the
+    tutorial will go over how to choose an optimal `max_depth` for your tree.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also note that in my code below, I made `random_state = 0` so that you can get
+    the same results as me.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Step 3:** Train the model on the data'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The model is learning the relationship between X(sepal length, sepal width,
+    petal length, and petal width) and Y(species of iris)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Step 4:** Predict labels of unseen (test) data'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Remember, a prediction is just the majority class of the instances in a leaf
+    node.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Measuring Model Performance
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: While there are other ways of measuring model performance (precision, recall,
+    F1 Score, [ROC Curve](https://towardsdatascience.com/receiver-operating-characteristic-curves-demystified-in-python-bd531a4364d0),
+    etc), we are going to keep this simple and use accuracy as our metric.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Accuracy is defined as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '(fraction of correct predictions): correct predictions / total number of data
+    points'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Tuning the Depth of a Tree
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Finding the optimal value for`max_depth` is one way way to tune your model.
+    The code below outputs the accuracy for decision trees with different values for `max_depth`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Since the graph below shows that the best accuracy for the model is when the
+    parameter `max_depth` is greater than or equal to 3, it might be best to choose
+    the least complicated model with `max_depth = 3`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6b374458fabce5b952a6e233f7e6a67e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: I choose max_depth =3 as it it seems to be an accurate model and not the most
+    complicated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is important to keep in mind that `max_depth` is not the same thing as depth
+    of a decision tree. `max_depth` is a way to preprune a decision tree. In other
+    words, if a tree is already as pure as possible at a depth, it will not continue
+    to split. The image below shows decision trees with `max_depth` values of 3, 4,
+    and 5\. Notice that the trees with a `max_depth` of 4 and 5 are identical. They
+    both have a depth of 4.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/911049a033b2de4b61830401eb81b236.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Notice how we have we have two of the exact same trees.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you ever wonder what the depth of your trained decision tree is, you can
+    use the `get_depth` method. Additionally, you can get the number of leaf nodes
+    for a trained decision tree by using the `get_n_leaves` method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While this tutorial has covered changing selection criterion (Gini index, entropy,
+    etc) and `max_depth` of a tree, keep in mind that you can also tune minimum samples
+    for a node to split (`min_samples_leaf`), max number of leaf nodes (`max_leaf_nodes`),
+    and more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature Importance
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: One advantage of classification trees is that they are relatively easy to interpret.
+    Classification trees in scikit-learn allow you to calculate feature importance
+    which is the total amount that gini index or entropy decrease due to splits over
+    a given feature. Scikit-learn outputs a number between 0 and 1 for each feature.
+    All feature importances are normalized to sum to 1\. The code below shows feature
+    importances for each feature in a decision tree model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/f2d0662304902618333fa4e671964ef5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the example above (for a particular train test split of iris), the petal
+    width has the highest feature importance weight. We can confirm by looking at
+    the corresponding decision tree.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3f8f902adbb1d014e099e449f749cf78.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The only two features this decision tree splits on are petal width (cm) and
+    petal length (cm),
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keep in mind that if a feature has a low feature importance value, it doesn’t
+    necessarily mean that the feature isn’t important for prediction, it just means
+    that the particular feature wasn’t chosen at a particularly early level of the
+    tree. It could also be that the feature could be identical or highly correlated
+    with another informative feature. Feature importance values also don’t tell you
+    which class they are very predictive for or relationships between features which
+    may influence prediction. It is important to note that when performing cross validation
+    or similar, you can use an average of the feature importance values from multiple
+    train test splits.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Concluding Remarks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: While this post only went over decision trees for classification, feel free
+    to see my other post Decision Trees for Regression (Python). **C**lassification
+    **a**nd **R**egression **T**rees (CART) are a relatively old technique (1984)
+    that is the basis for more sophisticated techniques. One of the primary weaknesses
+    of decision trees is that they usually aren’t the most accurate algorithm. This
+    is partially because decision trees are a high variance algorithm, meaning that
+    different splits in the training data can lead to very different trees. If you
+    have any questions or thoughts on the tutorial, feel free to reach out in the
+    comments below or through [Twitter](https://twitter.com/GalarnykMichael).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)** is
+    a Data Scientist and Corporate Trainer. He currently works at Scripps Translational
+    Research Institute. You can find him on Twitter (https://twitter.com/GalarnykMichael),
+    Medium (https://medium.com/@GalarnykMichael), and GitHub (https://github.com/mGalarnyk).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/understanding-decision-trees-for-classification-python-9663d683c952).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Decision Trees — An Intuitive Introduction](/2019/02/decision-trees-introduction.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Build a Data Science Portfolio](/2018/07/build-data-science-portfolio.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Random Forests vs Neural Networks: Which is Better, and When?](/2019/06/random-forest-vs-neural-network.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Machine Learning from Scratch: Decision Trees](https://www.kdnuggets.com/2022/11/machine-learning-scratch-decision-trees.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Decision Trees vs Random Forests, Explained](https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Demystifying Decision Trees for the Real World](https://www.kdnuggets.com/demystifying-decision-trees-for-the-real-world)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understanding Classification Metrics: Your Guide to Assessing Model…](https://www.kdnuggets.com/understanding-classification-metrics-your-guide-to-assessing-model-accuracy)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understanding by Implementing: Decision Tree](https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

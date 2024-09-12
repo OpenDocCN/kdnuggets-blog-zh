@@ -1,0 +1,300 @@
+- en: 'TensorFlow 2.0 Tutorial: Optimizing Training Time Performance'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/03/tensorflow-optimizing-training-time-performance.html](https://www.kdnuggets.com/2020/03/tensorflow-optimizing-training-time-performance.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Raphael Meudec](https://www.linkedin.com/in/raphaelmeudec), Data Scientist
+    @ Sicara**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This tutorial explores how you can improve training time performance of your
+    TensorFlow 2.0 model around:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: tf.data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Mixed Precision Training
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Multi-GPU Training Strategy
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I adapted all these tricks to a custom project on image deblurring, and the
+    result is astonishing. You can get a 2–10x training time speed-up depending on
+    your current pipeline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Usecase: Improving TensorFlow training time of an image deblurring CNN'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 2 years ago, I published a blog post on [Image Deblurring with GANs in Keras](https://www.sicara.ai/blog/2018-03-20-GAN-with-Keras-application-to-image-deblurring).
+    I thought it would be a nice transition to pass the repository in TF2.0 to understand
+    what has changed and what are the implications on my code. In this article, I’ll
+    train a simpler version of the model (the cnn part only).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/50a21fb77e4806d6f4fb2d744b36ff6e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The model is a convolutional net which takes the (256, 256, 3) blurred patch
+    and predicts the (256, 256, 3) corresponding sharp patch. It is based on the ResNet
+    architecture and is fully convolutional.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 1: Identify bottlenecks'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To optimize training speed, you want your GPUs to be running at 100% speed.
+    `nvidia-smi` is nice to make sure your process is running on the GPU, but when
+    it comes to GPU monitoring, there are smarter tools out there. Hence, the first
+    step of this TensorFlow tutorial is to explore these better options.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**nvtop**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you’re using an Nvidia card, the simplest solution to monitor GPU utilization
+    over time might probably be `nvtop`. Visualization is friendlier than `nvidia-smi`,
+    and you can track metrics over time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ac443b80856e4640f006573093ec785c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**TensorBoard Profiler**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/1ffa437da5694cca705a5445555771e8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: By simply setting `profile_batch={BATCH_INDEX_TO_MONITOR}` inside the TensorBoard
+    callback, TF adds a full report on operations performed by either the CPU or GPU
+    for the given batch. This can help identify if your GPU is stalled at some point
+    for lack of data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[RAPIDS NVDashboard](https://github.com/rapidsai/jupyterlab-nvdashboard)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a Jupyterlab extension which gives access to various metrics. Along
+    with your GPU, you can also monitor elements from your motherboard (CPU, Disks, ..).
+    The advantage is you don’t have to monitor a specific batch, but rather have a
+    look on performance over the whole training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c6697d35de27b724c15fdea6a8351c99.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here, we can easily spot that GPU is at 40% speed most of the time. I have activated
+    only 1 of the 2 GPUs on the computer, so total utilization is around 20%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 2: Optimize your tf.data pipeline'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first objective is to make the GPU busy 100% of the time. To do so, we want
+    to reduce the data loading bottleneck. If you are using a Python generator or
+    a Keras Sequence, your data loading is probably sub-optimal. Even if you’re using
+    tf.data, data loading can still be an issue. In my article, I initially used Keras
+    Sequences to load the images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/78d5d1936c5c60c8dd2c3ff576965df8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can easily spot this phenomenom using the TensorBoard profiling. GPUs will
+    tend to have free time while CPUs are performing multiple operations related to
+    data loading.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Making the switch from the original Keras sequences to tf.data was fairly easy.
+    Most operations for data loading are pretty well supported, the only tricky part
+    is to take the same patch on the blurred image and the real one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Just switching from a Keras Sequence to tf.data can lead to a training time
+    improvement. From there, we add some little tricks that you can also find in [TensorFlow''s
+    documentation](https://www.tensorflow.org/guide/data_performance#optimize_performance):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'parallelization: Make all the `.map()` calls parallelized by adding the `num_parallel_calls=tf.data.experimental.AUTOTUNE`
+    argument'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'cache: Keep loaded images in memory by caching datasets before the patch selection'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'prefetching: Start fetching elements before previous batch has ended'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The dataset creation now looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Those small changes make a 5 epochs training time fall from 1000 sec (on an
+    RTX2080) to 616s (full graph is below) .
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 3: Mixed Precision Training'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'By default, all variables used in our neural network training are stored on
+    float32\. This means every element has to be encoded on 32 bits. The core concept
+    of [Mixed Precision Training](https://arxiv.org/abs/1710.03740) is to say: we
+    don''t need so much precision at all time, let''s use 16 bits sometimes.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: During the Mixed Precision Training process, you keep a float32 version of the
+    weights, but perform forward and backward passes on float16 versions of the weights.
+    All the expensive operations to obtain the gradients are performed using float16
+    elements. In the end, you use the float16 gradients to update the float32 weights.
+    A loss scaling is used in the process to keep training stability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6092e3598357ea1f80183095fb010725.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: By keeping float32 weights, this process does not lower the accuracy of your
+    models. On the contrary, they claim some performance improvements on various tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: TensorFlow makes it easy to implement from version 2.1.0, by adding different
+    `Policy.` Mixed Precision Training can be activated by using these two lines before
+    model instantiation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With this method, we can reduce the 5 epochs training time to 480 sec.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 4: Multi-GPU Strategies'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Last topic concerns how to perform multi-GPU training with TF2.0\. If you don't
+    adjust your code for multi-GPU, you won't reduce your TensorFlow training time
+    because they won't be efficiently used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The easiest way to perform multi-GPU training is to use the `MirroredStrategy`.
+    It instantiates your model on each GPU. At each step, different batches are sent
+    to the GPUs which run the backward pass. Then, gradients are aggregated to perform
+    weights update, and the updated values are propagated to each model instantiated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The distribution strategy is again fairly easy with TensorFlow 2.0\. You should
+    only think of multiplying the usual batch size by the number of available GPUs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you use TPUs, you might consider taking a deeper look at the official [Tensorflow
+    tutorial from documentation](https://www.tensorflow.org/api_docs/python/tf/distribute)
+    on training distribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrap-up on tips to improve your TensorFlow training time
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: All those steps lead to a massive reduction of your model training time. This
+    graph traces the 5 epochs training time after each improvement of the training
+    pipeline. I hope you enjoy this TensorFlow tutorial on training time performance.
+    You can ping me on Twitter (@raphaelmeudec) if you have any feedback!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/2c96d07baa79ec897336a36174bb3e3e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Impacts of tf.data, MPT and GPU Strategy on training time
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Raphael Meudec](https://www.linkedin.com/in/raphaelmeudec)** ([**@raphaelmeudec**](https://twitter.com/raphaelmeudec))
+    is a Data Scientist at Sicara.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.sicara.ai/blog/tensorflow-tutorial-training-time). Reposted
+    with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Hands on Hyperparameter Tuning with Keras Tuner](/2020/02/hyperparameter-tuning-keras-tuner.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Easy Image Dataset Augmentation with TensorFlow](/2020/02/easy-image-dataset-augmentation-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Transfer Learning Made Easy: Coding a Powerful Technique](/2019/11/transfer-learning-coding.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Your LLM for Performance and Scalability](https://www.kdnuggets.com/optimizing-your-llm-for-performance-and-scalability)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Strategies for Optimizing Performance and Costs When Using Large…](https://www.kdnuggets.com/strategies-for-optimizing-performance-and-costs-when-using-large-language-models-in-the-cloud)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Genes with a Genetic Algorithm](https://www.kdnuggets.com/2022/04/optimizing-genes-genetic-algorithm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Data Storage: Exploring Data Types and Normalization in SQL](https://www.kdnuggets.com/optimizing-data-storage-exploring-data-types-and-normalization-in-sql)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

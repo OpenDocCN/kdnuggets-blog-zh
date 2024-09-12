@@ -1,0 +1,188 @@
+- en: 'Process Mining with R: Introduction'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/11/process-mining-r-introduction.html](https://www.kdnuggets.com/2017/11/process-mining-r-introduction.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Seppe vanden Broucke, KU Leuven**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Today’s organizations employ a wide range of information support systems to
+    support their business processes. Such support systems record and log an abundance
+    of data, containing a variety of *events* that can be linked back to the occurrence
+    of a task in an originating business process. The field of [*process mining*](http://www.dataminingapps.com/dma_research/process-analytics/) starts
+    from these event logs as the cornerstone of analysis and aims to derive knowledge
+    to model, improve and extend operational processes “as they happen” in the organization. As
+    such, process mining can be situated at the intersection of the fields of Business
+    Process Management (BPM) and data mining.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The most well-known task within the area of process mining is called *process
+    discovery* (sometimes also called process identification), where analysts aim
+    to derive an as-is process model, starting from the data as it is recorded in
+    process-aware information support systems, instead of starting from a to-be descriptive
+    model and trying to align the actual data to this model. Process mining builds
+    upon existing approaches, though the particular setting and requirements that
+    come with event data has led to the creation of various specific tools and algorithms.
+    Compared to traditional data mining, where an analyst works (most frequently)
+    with a flat table of instances, process mining starts from a *hierarchical and
+    intrinsically ordered* data set. Hierarchical as an event log is composed out
+    of multiple trails recording the execution of one process instance, which in itself
+    is composed out of multiple events. These events are ordered based on their order
+    of execution. A prime use case in process mining is hence to abstract this complex
+    data set to a visual representation, a process model, highlighting frequent behavior,
+    bottlenecks, or any other data dimension that might be of interest to the end
+    user.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Traditional data mining tooling like R, SAS, or Python are powerful to filter,
+    query, and analyze flat tables, but are not yet widely used by the process mining
+    community to achieve the aforementioned tasks, due to the atypical nature of event
+    logs. Instead, an ecosystem of separate tools has appeared, including, among others:
+    Disco, Minit, ProcessGold, Celonis Discovery, ProM, and others. In this article,
+    we want to provide a quick whirlwind tour on how to create rich process maps using
+    a more traditional data science programming language: R. This can come in helpful
+    in cases where the tools listed above might not be available, but also provides
+    hints on how typical process mining tasks can be enhanced by or more easily combined
+    with other more data mining related tasks that are performed in this setting.
+    In addition, the direct hands-on approach of working with data will show that
+    getting started with process discovery is very approachable. We pick R here as
+    our “working language” as the fluidity of modern R (i.e. the “tidyverse” packages,
+    with especially “dplyr“) makes for a relatively readable and concise approach,
+    though there is no reason why other tools such as Python wouldn’t work just as
+    well.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We’re going to use the “[example event log](http://www.dataminingapps.com/dma_research/process-analytics/)”
+    provided by Disco as a running example. First, we load in some libraries we’ll
+    need and define a few helper functions and load in the event log:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Next up is the key step of the analysis process: for every event line in the
+    event log, we want to figure out (i) the preceding activity, i.e. the activity
+    that stopped most recently before the start of this activity in the same case
+    and (ii) the following activity, i.e. the activity that started most quickly after
+    the completion of this activity in the same case. To do so, we’ll first assign
+    an increasing row number to each event and use that to construct two new columns
+    to refer to the following and previous event in the event log:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Using this prepared event log data set, we can already obtain a lot of interesting
+    descriptive statistics and insights. For instance, the following block of code
+    provides an overview of the different variants (pathways) in the event log:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As is the case with many processes, there are a few variants making up the
+    largest part of the process instances, followed by a “long tail” of behavior:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e8a0c33bdf2881846042dc9a1b798f31.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Next, we construct two data frames containing only the columns we’ll need to
+    visualize our process maps, for the activities and edges respectively. We’ll also
+    calculate the event durations in this step:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: This latter requires some considerate thinking. Even although a distinct list
+    of (ActivityA-ActivityB)-pairs is sufficient to construct the process map, we
+    do need to take into account the correct number of times an arc appears in order
+    to calculate frequency and other metrics. We hence first merge the (Case Identifier,
+    RowNum, NextNum) listing with (Case Identifier, PrevNum, RowNum) and filter out
+    all entries where an endpoint of the arc equals NA. We then apply the “distinct”
+    operator to make sure we get a unique listing, albeit at the row number level,
+    and not at the activity name level. This makes sure our frequency counts remain
+    correct. We can then figure out the endpoints per arc at the activity level by
+    joining the event log on itself on both endpoints. We then select, for each arc,
+    the case identifier, endpoint row numbers (“a” and “b”), the activity names of
+    the endpoints, the activity start and completion times of the endpoints, and the
+    duration of the arc based on the endpoints, i.e. the waiting time of the arc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is all the information we need to start constructing process maps. We’ll
+    use the excellent “igraph” package to visualize the process maps. Plotting it
+    directly in R, however, gives non-appealing results by default. Sadly, igraph,
+    like most graphing tools, is built with the assumption that graphs can be very
+    unstructured (think social network graphs), so that the layout for process oriented
+    graphs does not look very appealing. Luckily, igraph comes with powerful export
+    capabilities that we can use to our benefit. Here, we’ll export our graphs to
+    the dot file format and use “Graphviz” to perform the actual layout and generation
+    of a resulting image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s try this out by creating a process map annotated with median duration
+    times for the activities and arcs. First, we’ll define two color gradients for
+    the activities and edges respectively, as well as another small helper function,
+    and then construct two new activity and edges data frames with the duration information:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Process a DataFrame with Millions of Rows in Seconds](https://www.kdnuggets.com/2022/01/process-dataframe-millions-rows-seconds.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Frameworks for Approaching the Machine Learning Process](https://www.kdnuggets.com/2018/05/general-approaches-machine-learning-process.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Ways to Process CSV Files in Python](https://www.kdnuggets.com/2022/10/3-ways-process-csv-files-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Gentle Introduction to Natural Language Processing](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[An Introduction to Hill Climbing Algorithm in AI](https://www.kdnuggets.com/2022/07/introduction-hill-climbing-algorithm-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[An Introduction to SMOTE](https://www.kdnuggets.com/2022/11/introduction-smote.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

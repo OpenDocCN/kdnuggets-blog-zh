@@ -1,0 +1,243 @@
+- en: Why You Should Start Using .npy Files More Often
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/04/start-using-npy-files-more-often.html](https://www.kdnuggets.com/2018/04/start-using-npy-files-more-often.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Header image](../Images/3d3475ba8989fc5051c17ec4d1fa447f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Introduction**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Numpy, short for [Numerical Python](http://numpy.org/), is the fundamental package
+    required for high performance scientific computing and data analysis in Python
+    ecosystem. It is the foundation on which nearly all of the higher-level tools
+    such as [Pandas](https://pandas.pydata.org/) and [scikit-learn](http://scikit-learn.org/) are
+    built. [TensorFlow](https://www.tensorflow.org/) uses NumPy arrays as the fundamental
+    building block on top of which they built their Tensor objects and graphflow for
+    deep learning tasks (which makes heavy use of linear algebra operations on a long
+    list/vector/matrix of numbers).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Many articles have been written demonstrating the advantage of Numpy array over
+    plain vanilla Python lists. You will often come across this assertion in the data
+    science, machine learning, and Python community that Numpy is much faster due
+    to its vectorized implementation and due to the fact that many of its core routines
+    are written in C (based on [CPython framework](https://en.wikipedia.org/wiki/CPython)).
+    And it is indeed true ([this article is a beautiful demonstration](http://notes-on-cython.readthedocs.io/en/latest/std_dev.html) of
+    various options that one can work with Numpy, even writing bare-bone C routines
+    with Numpy APIs). Numpy arrays are densely packed arrays of homogeneous type.
+    Python lists, by contrast, are arrays of pointers to objects, even when all of
+    them are of the same type. You get the benefits of [locality of reference](https://en.wikipedia.org/wiki/Locality_of_reference).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[***In one of my highly cited articles on Towards Data Science platform***](https://towardsdatascience.com/why-you-should-forget-for-loop-for-data-science-code-and-embrace-vectorization-696632622d5f),
+    I demonstrated the advantage of using Numpy vectorized operations over traditional
+    programming constructs like *for-loop*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, what is less appreciated is the fact, when it comes to repeated reading
+    of the same data from a local (or networked) disk storage, **Numpy offers another
+    gem called .npy file format**. This file format makes** incredibly fast reading
+    speed enhancement** over reading from plain text or CSV files.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The catch is — of course you have to read the data in traditional manner for
+    the first time and create a in-memory NumPy `ndarray` object. But if you use the
+    same CSV file for repeated reading of the same numerical data set, it makes perfect
+    sense to store the `ndarray` in a `npy` file instead of reading it over and over
+    from the original CSV.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**What is this .NPY file?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is a standard binary file format for persisting a single arbitrary NumPy
+    array on disk. The format stores all of the shape and data type information necessary
+    to reconstruct the array correctly even on another machine with a different architecture.
+    The format is designed to be as simple as possible while achieving its limited
+    goals. The implementation is intended to be pure Python and distributed as part
+    of the main numpy package.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The format MUST be able to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Represent all NumPy arrays including nested record arrays and object arrays.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Represent the data in its native binary form.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Be contained in a single file.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Store all of the necessary information to reconstruct the array including shape
+    and data type on a machine of a different architecture. Both little-endian and
+    big-endian arrays must be supported and a file with little-endian numbers will
+    yield a little-endian array on any machine reading the file. The types must be
+    described in terms of their actual sizes. For example, if a machine with a 64-bit
+    C “long int” writes out an array with “long ints”, a reading machine with 32-bit
+    C “long ints” will yield an array with 64-bit integers.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Be reverse engineered. Datasets often live longer than the programs that created
+    them. A competent developer should be able to create a solution in his preferred
+    programming language to read most NPY files that he has been given without much
+    documentation.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Allow memory-mapping of the data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Demo using simple code**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As always, you can download the [boiler plate code Notebook](https://github.com/tirthajyoti/PythonMachineLearning/blob/master/Pandas%20and%20Numpy/Numpy_Reading.ipynb) from
+    my [Github repository](https://github.com/tirthajyoti/PythonMachineLearning).
+    Here I am showing the basic code snippet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, the usual method of reading the CSV file in a list and converting that
+    to an ndarray.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: So this was the first time read, which you have to do anyway. *But if you are
+    likely to use the same dataset many more times*, then, after your data science
+    process is finished, don’t forget to save the ndarray object in **.npy** **format**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`**np.save(''fnumpy.npy'', array_lst)**`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because if you do so, the next time, reading from the disk will be blazing fast!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: It does not matter if you want to load the data in some other shape,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: It turns out that at least in this particular case, the file size on disk is
+    also smaller for the .npy format.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9af6aef9fe0c1305cdeb03a5ee5f6e39.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Summary**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we demonstrate the utility of using native NumPy file format .npy
+    over CSV for reading large numerical data set. It may be an useful trick if the
+    same CSV data file needs to be read many times.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Read more [details about this file format here](https://docs.scipy.org/doc/numpy/neps/npy-format.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have any questions or ideas to share, please contact the author at [**tirthajyoti[AT]gmail.com**](mailto:tirthajyoti@gmail.com).
+    Also you can check author’s [**GitHub repositories**](https://github.com/tirthajyoti?tab=repositories) for
+    other fun code snippets in Python, R, or MATLAB and machine learning resources.
+    If you are, like me, passionate about machine learning/data science, please feel
+    free to [add me on LinkedIn](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) or [follow
+    me on Twitter.](https://twitter.com/tirthajyotiS)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Tirthajyoti Sarkar](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)**
+    is a semiconductor technologist, machine learning/data science zealot, Ph.D. in
+    EE, blogger and writer.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/why-you-should-start-using-npy-file-more-often-df2a13cc0161).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Why You Should Forget ‘for-loop’ for Data Science Code and Embrace Vectorization](/2017/11/forget-for-loop-data-science-code-vectorization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Working With Numpy Matrices: A Handy First Reference](/2017/03/working-numpy-matrices.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with Python for Data Analysis](/2017/07/getting-started-python-data-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Top 4 tricks for competing on Kaggle and why you should start](https://www.kdnuggets.com/2022/05/packt-top-4-tricks-competing-kaggle-start.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why You Need To Learn More Than One Programming Language!](https://www.kdnuggets.com/2022/06/need-learn-one-programming-language.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[More Performance Evaluation Metrics for Classification Problems You…](https://www.kdnuggets.com/2020/04/performance-evaluation-metrics-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why are More Developers Using Python for Their Machine Learning Projects?](https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Minimum: 10 Essential Skills You Need to Know to Start…](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Start Using Natural Language Processing With PyTorch](https://www.kdnuggets.com/2022/04/start-natural-language-processing-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,264 @@
+- en: How Retrieval Augment Generation Makes LLMs Smarter
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/how-retrieval-augment-generation-makes-llms-smarter](https://www.kdnuggets.com/how-retrieval-augment-generation-makes-llms-smarter)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![How Retrieval Augment Generation Makes LLMs Smarter Than Before](../Images/ab38ea2eabccfbf98ef8e8a9dc26f39b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Ideal Generative AI vs. Reality
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Foundational LLMs have read every byte of text they could find and their chatbot
+    counterparts can be prompted to have intelligent conversations and be asked to
+    perform specific tasks. Access to comprehensive information is democratized; No
+    more figuring out the right keywords to search or picking sites to read from.
+    However, LLMs are prone to rambling and generally respond with the statistically
+    most probable response you’d want to hear ([sycophancy](https://arxiv.org/abs/2310.13548))
+    an inherent result of the transformer model. Extracting 100% accurate information
+    out of an LLM’s knowledge base doesn’t always yield trustworthy results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Chat LLMs are infamous for making up citations to scientific papers or court
+    cases that don’t exist. [Lawyers filing a suit against an airline ](https://www.theguardian.com/technology/2023/jun/23/two-us-lawyers-fined-submitting-fake-court-citations-chatgpt)included
+    citations to court cases that never actually happened. [A 2023 study reported](https://arxiv.org/abs/2309.09401),
+    that when ChatGPT is prompted to include citations, it had only provided references
+    that exist only 14% of the time. Falsifying sources, rambling, and delivering
+    inaccuracies to appease the prompt are dubbed hallucination, a huge obstacle to
+    overcome before AI is fully adopted and trusted by the masses.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One counter to LLMs making up bogus sources or coming up with inaccuracies is
+    retrieval-augmented generation or RAG. Not only can RAG decrease the tendency
+    of LLMs to hallucinate but several other advantages as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These advantages include access to an updated knowledge base, specialization
+    (*e.g.* by providing private data sources), empowering models with information
+    beyond what is stored in the parametric memory (allowing for smaller models),
+    and the potential to follow up with more data from legitimate references.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is RAG (Retrieval Augmented Generation)?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Retrieval-Augmented Generation (RAG) is a deep learning architecture implemented
+    in LLMs and transformer networks that retrieves relevant documents or other snippets
+    and adds them to the context window to provide additional information, aiding
+    an LLM to generate useful responses. A typical RAG system would have two main
+    modules: retrieval and generation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![retrieval augmented generation architecture - RAG](../Images/d69cffca46379cd698dcd2203c816120.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The main reference for RAG is a [paper by Lewis et al.](https://arxiv.org/abs/2005.11401) from
+    Facebook. In the paper, the authors use a pair of BERT-based document encoders
+    to transform queries and documents by embedding the text in a vector format. These
+    embeddings are then used to identify the top-*k* (typically 5 or 10) documents
+    via a maximum inner product search (MIPS). As the name suggests, MIPS is based
+    on the inner (or dot) product of the encoded vector representations of the query
+    and those in a vector database pre-computed for the documents used as external,
+    non-parametric memory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As described in the piece by Lewis *et al.*, RAG was designed to make LLMs better
+    at knowledge-intensive tasks which “humans could not reasonably be expected to
+    perform without access to an external knowledge source”. Consider taking an open
+    book and non-open book exam and you’ll have a good indication of how RAG might
+    supplement LLM-based systems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: RAG with the Hugging Face 🤗 Library
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Lewis *et al.* open-sourced their RAG models on the Hugging Face Hub, thus we
+    can experiment with the same models used in the paper. A new Python 3.8 virtual
+    environment with virtualenv is recommended.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After activating the environment, we can install dependencies using pip: transformers
+    and datasets from Hugging Face, the FAISS library from Facebook that RAG uses
+    for vector search, and PyTorch for use as a backend.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Lewis *et al.* implemented two different versions of RAG: rag-sequence and
+    rag-token. Rag-sequence uses the same retrieved document to augment the generation
+    of an entire sequence whereas rag-token can use different snippets for each token.
+    Both versions use the same Hugging Face classes for tokenization and retrieval,
+    and the API is much the same, but each version has a unique class for generation.
+    These classes are imported from the transformers library.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: The first time the RagRetriever model with the default “wiki_dpr” dataset is
+    instantiated it will initiate a substantial download (about 300 GB). If you have
+    a large data drive and want Hugging Face to use it (instead of the default cache
+    folder in your home drive), you can set a shell variable, HF_DATASETS_CACHE.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Ensure the code is working before downloading the full wiki_dpr dataset. To
+    avoid the big download until you’re ready, you can pass use_dummy_dataset=True
+    when instantiating the retriever. You’ll also instantiate a tokenizer to convert
+    strings to integer indices (corresponding to tokens in a vocabulary) and vice-versa.
+    Sequence and token versions of RAG use the same tokenizer. RAG sequence (rag-sequence)
+    and RAG token (rag-token) each have fine-tuned (*e.g. *rag-token-nq) and base
+    versions (*e.g.* rag-token-base).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Once your models are instantiated, you can provide a query, tokenize it, and
+    pass it to the “generate” function of the model. We’ll compare results from rag-sequence,
+    rag-token, and RAG using a retriever with the dummy version of the wiki_dpr dataset. Note
+    that these rag-models are case-insensitive
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: In general, rag-token is correct more often than rag-sequence, (though both
+    are often correct), and rag-sequence is more often right than RAG using a retriever
+    with a dummy dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: “What sort of context does the retriever provide?” You may wonder. To find out,
+    we can deconstruct the generation process. Using the seq_retriever and seq_model
+    instantiated as above, we query “What is the name of the oldest tree on Earth”
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can code our model to print the variable “best context” to see what was captured
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'based on the retrieved context:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can also print the answer by calling the `generated_string` variable. The
+    rag-sequence-nq answers 'what is the name of the oldest tree on Earth?' with 'Prometheus'.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What Can You Do with RAG?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In the last year and a half, there has been a veritable explosion in LLMs and
+    LLM tools. The BART base model used in Lewis *et al.* was only 400 million parameters,
+    a far cry from the current crop of LLMs, which typically start in the billion
+    parameter range for “lite” variants. Also, many models being trained, merged,
+    and fine-tuned today are multimodal, combining text inputs and outputs with images
+    or other tokenized data sources. Combining RAG with other tools can build complex
+    capabilities, but the underlying models won’t be immune to common LLM shortcomings.
+    The problems of sycophancy, hallucination, and reliability in LLMs all remain
+    and run the risk of growing just as LLM use grows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The most obvious applications for RAG are variations on conversational semantic
+    search, but perhaps they also include incorporating multimodal inputs or image
+    generation as part of the output. For example, RAG in LLMs with domain knowledge
+    can make software documentation you can chat with. Or RAG could be used to keep
+    interactive notes in a literature review for a research project or thesis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Incorporating a ‘chain-of-thought’ reasoning capability, you could take a more
+    agentic approach to empower your models to query RAG system and assemble more
+    complex lines of inquiry or reasoning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is also very important to keep in mind that RAG does not solve the common
+    LLM pitfalls (hallucination, sycophancy, etc.) and serves only as a means to alleviate
+    or guide your LLM to a more niche response. The endpoints that ultimately matter,
+    are specific to your use case, the information you feed your model, and how the
+    model is finetuned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Kevin Vu](https://blog.exxactcorp.com/)** manages [Exxact Corp blog](https://blog.exxactcorp.com/)
+    and works with many of its talented authors who write about different aspects
+    of Deep Learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Retrieval Augmented Generation: Where Information Retrieval Meets…](https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Making Intelligent Document Processing Smarter: Part 1](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Optimize SQL Queries for Faster Data Retrieval](https://www.kdnuggets.com/2023/06/optimize-sql-queries-faster-data-retrieval.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bark: The Ultimate Audio Generation Model](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Future of AI: Exploring the Next Generation of Generative Models](https://www.kdnuggets.com/2023/05/future-ai-exploring-next-generation-generative-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unveiling Midjourney 5.2: A Leap Forward in AI Image Generation](https://www.kdnuggets.com/2023/06/unveiling-midjourney-52-leap-forward.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

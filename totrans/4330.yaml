@@ -1,0 +1,498 @@
+- en: Mastering TensorFlow Variables in 5 Easy Steps
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/01/mastering-tensorflow-variables-5-easy-steps.html](https://www.kdnuggets.com/2021/01/mastering-tensorflow-variables-5-easy-steps.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Orhan G. Yalçın](https://www.linkedin.com/in/orhangaziyalcin/), AI Researcher**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**WARNING:** Do not confuse this article with “[Mastering TensorFlow Tensors
+    in 5 Easy Steps](https://towardsdatascience.com/mastering-tensorflow-tensors-in-5-easy-steps-35f21998bb86)”!'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '*If you are reading this article, I am sure that we share similar interests
+    and are/will be in similar industries. So let’s connect via *[*Linkedin*](https://linkedin.com/in/orhangaziyalcin/)*!
+    Please do not hesitate to send a contact request! *[*Orhan G. Yalçın — Linkedin*](https://linkedin.com/in/orhangaziyalcin/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/0b30af06d3c609c0bfe7ea3abd49626c.png)Figure 1\. Photo by [Crissy
+    Jarvis](https://unsplash.com/@crissyjarvis?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'In this tutorial, we will focus on [TensorFlow Variables](https://www.tensorflow.org/api_docs/python/tf/Variable).
+    After the tutorial, you will be able to create, update, and manage [TensorFlow
+    Variables](https://www.tensorflow.org/api_docs/python/tf/Variable) effectively.
+    As usual, our tutorial will deliver code examples with detailed explanations as
+    well as conceptual explanations. We will master [TensorFlow Variables](https://www.tensorflow.org/api_docs/python/tf/Variable) in
+    5 easy steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 1: Definition of Variables** →A Brief Introduction, Comparison with
+    [Tensors](https://www.kdnuggets.com/2018/05/wtf-tensor.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Step 2: Creation of Variables** → Instantiating tf.Variable Objects'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Step 3:** **Qualifications of Variables** → Characteristics and Features'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Step 4: Operations with Variables** → Basic Tensor Operations, Indexing,
+    Shape Manipulation, and Broadcasting'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Step 5: Hardware Selection for Variables** → GPUs, CPUs, TPUs'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Fasten your belts, and let’s start!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Definition of Variables**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this step, we will briefly cover what Variables are and understand the difference
+    between plain Tensor objects and Variable objects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Brief Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A TensorFlow Variable is the preferred object type representing a shared and
+    persistent state that you can manipulate with any operation, including TensorFlow
+    models. Manipulation refers to any value or parameter update. This characteristic
+    is the most distinguishing feature of Variables compared to `tf.Tensor` objects.
+    TensorFlow Variables are recorded as `tf.Variable` objects. Let’s make a brief
+    comparison between `tf.Tensor` and `tf.Variable` objects to understand their similarities
+    and differences.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6a0d228ab955f80d9f173da4fd88cb10.png)Figure 2\. Variable
+    Values can be Updated (Figure by Author)'
+  prefs: []
+  type: TYPE_IMG
+- en: Comparison with Tensors
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So, the most important difference between Variables and Tensors is **mutability**.
+    The values in a Variable object can be updated (*e.g., with the *`*assign()*`* function*)
+    as opposed to Tensors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*“The values of tensor objects cannot be updated, and you can only create
+    a new Tensor object with the new values.*](https://towardsdatascience.com/mastering-tensorflow-tensors-in-5-easy-steps-35f21998bb86)*”*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Variable objects are mainly used to store model parameters, and since these
+    values are constantly updated during training, using Variables, instead of Tensors,
+    is a necessity rather than a choice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The shape of a Variable object can be updated with the `reshape()` instance
+    function just like the shape of a Tensor object. Since Variable objects are built
+    on top of Tensor objects, they have common attributes such as `.shape` and `.dtype`.
+    But, Variables also have unique attributes such as `.trainable`,`.device`, and `.name` attributes
+    that the Tensors do not have.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/088534bdd4c7f38938cabedef685c6b9.png)Figure 3\. A Tensorflow
+    Variable is actually a wrapper around a TensorFlow Tensor with additional features
+    (Figure by Author)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let’s see how we can create `tf.Variable` objects!
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Creation of Variables**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We can instantiate (*i.e., create*) `tf.Variable`objects with the `tf.Variable()` function.
+    The `tf.Variable()` function accepts different data types as parameter such as
+    integers, floats, strings, lists, and `tf.Constant` objects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Before showing different Variable object examples with these different data
+    types, I want you to [start a new Google Colab notebook](https://colab.research.google.com/) and
+    import TensorFlow library with the following code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, we can start creating `tf.Variable` objects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '1 — We can pass a `tf.constant()` object as the `initial_value`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '2 — We can pass a single integer as the `initial_value`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '3 — We can pass a list of integers or floats as the `initial_value`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '4 — We can pass a single string as the `initial_value`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '5 — We can pass a list of strings as the `initial_value`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see, there are several data types that th e`tf.Variable()` function
+    accepts as the `initial_value` argument. Now let’s take a look at the characteristics
+    and features of variables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Qualifications of Variables**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Every Variable must have some properties such as value, name, uniform data type,
+    shape, rank, size, and more. In this section, we will see what these properties
+    are and how we can view these properties in a Colab notebook.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Value
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Every Variable must specify an `initial_value`. Otherwise, TensorFlow raises
+    an error and says that `Value Error: initial_value must be specified.` Therefore,
+    make sure that you pass on an `initial_value`argument when creating Variable objects.
+    To be able to view a Variable’s values, we can use the `.value()` function as
+    well as the `.numpy()` function. See the example below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Name
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Name is a Variable attribute which helps developers to track the updates on
+    a particular variable. You can pass a `name` argument while creating the Variable
+    object. If you don’t specify a name, TensorFlow assigns a default name, as shown
+    below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Dtype
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Each Variable must have a uniform data type that it stores. Since there is
+    a single type of data stored for every Variable, you can also view this type with
+    the `.dtype` attribute. See the example below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Shape, Rank, and Size
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The shape property shows the size of each dimension in the form of a list.
+    We can view the shape of the Variable object with the `.shape` attribute. Then,
+    we can view the number of dimensions that a Variable object has with the `tf.size()` function.
+    Finally, Size corresponds to the total number of elements a Variable has. We need
+    to use the `tf.size()` function to count the number of elements in a Variable.
+    See the code below for all three properties:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Operations with Variables**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are several basic operations you can easily conduct with math operators
+    and TensorFlow functions. On top of what we covered in [Part 2 of this tutorial
+    series](https://towardsdatascience.com/mastering-tensorflow-tensors-in-5-easy-steps-35f21998bb86),
+    you may also use the following math operators for Variable operations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basic Tensor Operations
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/37ea09ca244c102f63cb5272a5a60050.png)Figure 4\. You May
+    Benefit from Basic Math Operators (Figure by Author)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Addition and Subtraction: **We can conduct addition and subtraction with `+` and `—` signs.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Multiplication and Division:** We can conduct multiplication and division
+    with `*` and `/` signs.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Matmul and Modulo Operations: Finally, you can also do matmul and modulo
+    operations with `@` and `%` signs:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: These are elementary examples, but they can be extended into complex calculations,
+    which creates the algorithms that we use for deep learning applications.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Assignment, Indexing, Broadcasting, and Shape Manipulation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Assignment
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'With the `tf.assign()` function, you may assign new values to a Variable object
+    without creating a new object. Being able to assign new values is one of the advantages
+    of Variables, where value reassignment is required. Here is an example of reassignment
+    of values:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Indexing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Just as in Tensors, you may easily access particular elements using index values,
+    as shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Broadcasting
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Just as with Tensor objects, when we try to do combined operations using multiple
+    Variable objects, the smaller Variables can stretch out automatically to fit larger
+    Variables, just as NumPy arrays can. For example, when you attempt to multiply
+    a scalar Variable with a 2-dimensional Variable, the scalar is stretched to multiply
+    every 2-dimensional Variable element. See the example below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Shape Manipulation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Just as in Tensor objects, you can reshape Variable objects as well. For the
+    reshape operation, we can use the `tf.reshape()` function. Let''s use the `tf.reshape()` function
+    in code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Hardware Selection for Variables**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'As you will see in the upcoming Parts, we will accelerate our model training
+    with GPUs and TPUs. To be able to see what type of device (i.e., processor) our
+    variable is processed with, we can use `.device` attribute:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can also set which device should process a particular calculation with the `tf.device()` function
+    by passing the device name as an argument. See the example below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Even though you will not have to set this manually while training a model, there
+    might be circumstances where you have to choose a device for a particular calculation
+    or data processing work. So, beware of this option.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Congratulations
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We have successfully covered the basics of TensorFlow’s Variable objects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Give yourself a pat on the back!*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This should give you a lot of confidence since you are now much more informed
+    about the main mutable Variable object type used for all kinds of operations in
+    TensorFlow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If this is your first post, consider starting from [Part 1 of this tutorial
+    series](https://towardsdatascience.com/beginners-guide-to-tensorflow-2-x-for-deep-learning-applications-c7ebd0dcfbee):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Beginner’s Guide to TensorFlow 2.x for Deep Learning Applications**](https://towardsdatascience.com/beginners-guide-to-tensorflow-2-x-for-deep-learning-applications-c7ebd0dcfbee)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understanding the TensorFlow Platform and What it has to Offer to a Machine
+    Learning Expert
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'or [check out Part 2](https://towardsdatascience.com/mastering-tensorflow-tensors-in-5-easy-steps-35f21998bb86):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Mastering TensorFlow Tensors in 5 Easy Steps**](https://towardsdatascience.com/mastering-tensorflow-tensors-in-5-easy-steps-35f21998bb86)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Discover how the building blocks of TensorFlow works at the lower level and
+    learn how to make the most of Tensor…
+  prefs: []
+  type: TYPE_NORMAL
+- en: Subscribe to the Mailing List for the Full Code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If you would like to have access to full code on Google Colab and the rest
+    of my latest content, consider subscribing to the mailing list:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Slide to SubscribeFinally, if you are interested in more advanced applied deep
+    learning tutorials, check out some of my other articles:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Image Classification in 10 Minutes with MNIST Dataset**](https://towardsdatascience.com/image-classification-in-10-minutes-with-mnist-dataset-54c35b77a38d)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using Convolutional Neural Networks to Classify Handwritten Digits with TensorFlow
+    and Keras | Supervised Deep Learning
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Image Noise Reduction in 10 Minutes with Convolutional Autoencoders**](https://towardsdatascience.com/image-noise-reduction-in-10-minutes-with-convolutional-autoencoders-d16219d2956a)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using Deep Convolutional Autoencoders to Clean (or Denoise) Noisy Images with
+    the help of Fashion MNIST | Unsupervised…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Image Generation in 10 Minutes with Generative Adversarial Networks**](https://towardsdatascience.com/image-generation-in-10-minutes-with-generative-adversarial-networks-c2afc56bfa3b)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using Unsupervised Deep Learning to Generate Handwritten Digits with Deep Convolutional
+    GANs using TensorFlow and the…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Fast Neural Style Transfer in 5 Minutes with TensorFlow Hub & Magenta**](https://towardsdatascience.com/fast-neural-style-transfer-in-5-minutes-with-tensorflow-hub-magenta-110b60431dcc)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Transferring the van Gogh’s Unique Style to Photos with Magenta’s Arbitrary
+    Image Stylization Network and Deep Learning
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Orhan G. Yalçın](https://www.linkedin.com/in/orhangaziyalcin/)** is
+    an AI Researcher in the legal domain. He is a qualified lawyer with business development
+    and data science skills, and has previously worked as a legal trainee for Allen
+    & Overy on capital markets, competition, and corporate law matters.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/mastering-tensorflow-variables-in-5-easy-step-5ba8062a1756).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Mastering TensorFlow Tensors in 5 Easy Steps](/2020/11/mastering-tensorflow-tensors-5-easy-steps.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploying Trained Models to Production with TensorFlow Serving](/2020/11/serving-tensorflow-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Pruning Machine Learning Models in TensorFlow](/2020/12/pruning-machine-learning-models-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build An AI Application with Python in 10 Easy Steps](https://www.kdnuggets.com/build-an-ai-application-with-python-in-10-easy-steps)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build a Command-Line App with Python in 7 Easy Steps](https://www.kdnuggets.com/build-a-command-line-app-with-python-in-7-easy-steps)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Containerize Python Apps with Docker in 5 Easy Steps](https://www.kdnuggets.com/containerize-python-apps-with-docker-in-5-easy-steps)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Machine Learning with Python in 2022](https://www.kdnuggets.com/2022/02/7-steps-mastering-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n05, Feb 2: 7 Steps to Mastering Machine…](https://www.kdnuggets.com/2022/n05.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

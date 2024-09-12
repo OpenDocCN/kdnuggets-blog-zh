@@ -1,0 +1,296 @@
+- en: Fine-Tuning BERT for Tweets Classification with HuggingFace
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Fine-Tuning BERT for Tweets Classification ft. HuggingFace](../Images/224338a7a594756eb34ef183d9c25857.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Bidirectional Encoder Representations from Transformers (BERT) is a state of
+    the art model based on transformers developed by google. It can be pre-trained
+    and later fine-tuned for a specific task. we will see fine-tuning in action in
+    this post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will fine-tune BERT on a classification task. The task is to classify the
+    sentiment of COVID related tweets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here we are using the HuggingFace library to fine-tune the model. HuggingFace
+    makes the whole process easy from text preprocessing to training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: BERT
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: BERT was pre-trained on the BooksCorpus dataset and English Wikipedia. It obtained
+    state-of-the-art results on eleven natural language processing tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: BERT was trained on two tasks simultaneously
+  prefs: []
+  type: TYPE_NORMAL
+- en: Masked language modelling (MLM) — 15% of the tokens were masked and was trained
+    to predict the masked word
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Next Sentence Prediction(NSP) — Given two sentences A and B, predict whether
+    B follows A
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: BERT is designed to pre-train deep bidirectional representations from an unlabeled
+    text by jointly conditioning on both left and right context in all layers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a result, the pre-trained BERT model can be finetuned with just one additional
+    output layer to create state-of-the-art models for a wide range of tasks, such
+    as question answering and language inference, without substantial task-specific
+    architecture modifications.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dataset
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We are using the Coronavirus tweets NLP — Text Classification dataset available
+    on [Kaggle](https://www.kaggle.com/datatattle/covid-19-nlp-text-classification).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The dataset has two files Corona_NLP_test.csv(40k entries) and Corona_NLP_test.csv
+    (4k entries).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'These are the first five entries of training data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Fine-Tuning BERT for Tweets Classification ft. HuggingFace](../Images/b8b81d6ecd8191ec1fcf6b2468cfe7b2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'As you can see we have 5 **features **in our data: UserName, ScreenName Location,
+    TweetAt, OriginalTweet, Sentiment, but we are only interested in 2 i.e **OriginalTweet **contains
+    the actual tweet and **Sentiment **which are labels for our Tweet.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: These tweets are classified into 5 categories — ‘Neutral’, ‘Positive’, ‘Extremely
+    Negative’, ‘Negative’, ‘Extremely Positive’. Hence the number of **labels **is
+    5.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loading Data and Preprocessing
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'We will be using the HuggingFace library for this project. we need to install
+    the two modules:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'transformers: HuggingFace implementation of transformers. We can download a
+    wide range of pre-trained models'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'datasets: Loading the dataset and also different datasets can be downloaded
+    that are available of HuggingFace hub'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here we are using `load_dataset` from datasets library. `load_dataset` can be
+    used to download datasets from the HuggingFace hub or we can load our custom dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We specified the datatype as CSV, passing file names as dictionaries to `data_files`.
+    we are loading our train and test files into the dataset variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is the output if we print the `dataset` variable:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Preprocessing Data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We will keep it simple and only do 2 pre-processing steps i.e tokenization and
+    converting labels into integers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: HuggingFace `AutoTokenizer`takes care of the tokenization part. we can download
+    the tokenizer corresponding to our model, which is BERT in this case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: BERT tokenizer automatically convert sentences into tokens, numbers and attention_masks
+    in the form which the BERT model expects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'e.g: here is an example sentence that is passed through a tokenizer'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now as part of the preprocessing steps, we will perform two steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Convert Sentiment into an integer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Tokenize the tweets
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We will be using `map` function of the dataset which is similar to apply function
+    of the pandas data frame. It takes a function as an argument and applies to the
+    entire dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the above code, we defined a method to convert labels into integers and tokenized
+    the tweets also dropped the unwanted columns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we are all set for the training part.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: There are two ways to train the data, either we write our own training loop
+    or we can use trainer from the HuggingFace library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case, we will use trainer from the library. To use trainer, first we
+    need to define the training arguments like name, num_epochs, batch_size etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s download the BERT model now, which is very simple using the `AutoModelForSequenceClassificatio`
+    class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The classification model downloaded also expects an argument `num_labels` which
+    is the number of classes in our data. A linear layer is attached at the end of
+    the BERT model to give output equal to the number of classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The above linear layer is automatically added as the last layer. Since the BERT
+    output size is 768 and our data has 5 classes so a linear layer with in_features=768
+    and out_features as 5 is added.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before starting the training, we will split our training data into train and
+    evaluation sets. We have 40k in training and 1k in eval set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we are using a HuggingFace trainer we need to import the module `Trainer `and
+    pass model, dataset and training arguments to it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That’s it, now we are all set to start the training. We need to call `train `method
+    on trainer and training will start
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Training will run for 3 epochs which can be adjusted from the training arguments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once training is done we can run `trainer.evalute()` to check the accuracy,
+    but before that, we need to import metrics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The datasets library offers a wide range of metrics. We are using accuracy here.
+    On our data, we got an accuracy of 83% by training for only 3 epochs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Accuracy can be further increased by training for some more time or doing some
+    more pre-processing of data like removing mentions from tweets and unwanted clutter,
+    but that’s for some other time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for reading.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[My Linkedin](https://www.linkedin.com/in/codistro/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Colab Notebook](https://github.com/codistro/Articles/blob/main/covid_tweet_classification.ipynb)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[HuggingFace](https://huggingface.co/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**[Rajan Choudhary](https://www.linkedin.com/in/codistro/)** is a QA Engineer
+    at Mcafee with 2+ years experience.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[RAG vs Finetuning: Which Is the Best Tool to Boost Your LLM Application?](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Answering Questions with HuggingFace Pipelines and Streamlit](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simple NLP Pipelines with HuggingFace Transformers](https://www.kdnuggets.com/2023/02/simple-nlp-pipelines-huggingface-transformers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Simple to Implement End-to-End Project with HuggingFace](https://www.kdnuggets.com/a-simple-to-implement-end-to-end-project-with-huggingface)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[HuggingFace Has Launched a Free Deep Reinforcement Learning Course](https://www.kdnuggets.com/2022/05/huggingface-launched-free-deep-reinforcement-learning-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

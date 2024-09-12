@@ -1,0 +1,571 @@
+- en: A Tour of End-to-End Machine Learning Platforms
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/07/tour-end-to-end-machine-learning-platforms.html](https://www.kdnuggets.com/2020/07/tour-end-to-end-machine-learning-platforms.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Ian Hellström](https://databaseline.tech/), Machine Learning Engineer**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Machine Learning (ML) is known as [the high-interest credit card of technical
+    debt](https://research.google/pubs/pub43146/). It is relatively easy to get started
+    with a model that is good enough for a particular business problem, but to make
+    that model work in a production environment that scales and can deal with messy,
+    changing data semantics and relationships, and evolving schemas in an automated
+    and reliable fashion, that is another matter altogether. If you’re interested
+    in learning more about a few well-known ML platforms, you’ve come to the right
+    place!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As little as 5% of the actual code for machine learning production systems is
+    the model itself. What turns a collection of machine learning solutions into an
+    end-to-end machine learning platform is an architecture that embraces technologies
+    designed to speed up modelling, automate the deployment, and ensure scalability
+    and reliability in production. I talked about [lean D/MLOps](https://databaseline.tech/lean-dml-operations/),
+    data and machine learning operations, before, because machine learning operations
+    without data is pointless, so an end-to-end machine learning platform needs a
+    holistic approach.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The CI/CD Foundation launched an [MLOps Special Interest Group (SIG)](https://cd.foundation/blog/2020/02/11/announcing-the-cd-foundation-mlops-sig/).
+    The steps they have identified for an end-to-end machine learning platform are
+    shown in the next image:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![CI/CD Foundation MLOps](../Images/7aa2ad97dc6bb2a1e398566a2c13e7b1.png)](https://databaseline.tech/images/2020-02-21-ml-cicd-mlops-sig.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It camouflages a few not-quite-insignificant details, though. For instance,
+    serving may require different technologies depending on whether it’s done in real-time
+    or not. Scalable solutions typically have the model inside a container that runs
+    on many machines in a serving cluster that’s behind a load balancer. So, a single
+    box in the aforementioned diagram does not imply a single step, container, or
+    component of an actual platform. That’s not a critique of the picture, but a warning:
+    what looks simple may not be quite as easy in practice yet.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model (configuration) management is absent from the chart. You can think of
+    things such as versioning, experiment management, run-time statistics, data lineage
+    tracking for training, test, and validation data sets, the capability to retrain
+    a model, either from scratch or incrementally from, say, a snapshot of the model,
+    hyperparameter values, accuracy metrics, and so on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A crucial aspect that is not listed either is the ability to check the model
+    for bias by, for example, slicing the model’s key performance metrics by different
+    dimensions. Many companies need the ability to hot-swap a model or run multiple
+    in parallel, too. The former is important lest a user’s request go into the void
+    as it hits the server while the model is updated in the background. And the latter
+    is crucial for A/B testing or model validation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another perspective from CI/CD is available [here](https://martinfowler.com/articles/cd4ml.html).
+    It mentions the need for versioning data as well as code, which is often overlooked.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Google: TFX'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The main motivation behind Google’s development of [TensorFlow eXtended (TFX)](https://databaseline.tech/a-tour-of-end-to-end-ml-platforms/(https://www.kdd.org/kdd2017/papers/view/tfx-a-tensorflow-based-production-scale-machine-learning-platform)) was
+    to reduce the time to productionize a machine learning model from months to weeks.
+    Their engineers and scientists struggled because ‘the actual workflow becomes
+    more complex when machine learning needs to be deployed in production.’
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![TensorFlow eXtended (TFX)](../Images/384435a75222fc795560a084c10898e8.png)](https://databaseline.tech/images/2020-02-21-ml-tfx.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: TensorFlow and [TFX](https://www.tensorflow.org/tfx/) are available freely,
+    although the latter is not as mature as the former, having been released only
+    in 2019, two years after Google presented their ML infrastructure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model performance metrics are used to deploy safe-to-serve models. So, if a
+    newer model does not perform as well as an existing one, it is not pushed to production.
+    In TFX parlance, the model does not receive a ‘blessing’. With TFX that whole
+    process is automatic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is a quick overview of open-source TFX components:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[ExampleGen](https://github.com/tensorflow/tfx/blob/master/docs/guide/examplegen.md) ingests
+    and splits the input dataset.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[StatisticsGen](https://github.com/tensorflow/tfx/blob/master/docs/guide/statsgen.md) calculates
+    statistics for the dataset.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SchemaGen](https://github.com/tensorflow/tfx/blob/master/docs/guide/schemagen.md) examines
+    the statistics and creates a data schema.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[ExampleValidator](https://github.com/tensorflow/tfx/blob/master/docs/guide/exampleval.md) looks
+    for anomalies and missing values in the dataset.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Transform](https://github.com/tensorflow/tfx/blob/master/docs/guide/transform.md) performs
+    feature engineering on the dataset.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Trainer](https://github.com/tensorflow/tfx/blob/master/docs/guide/trainer.md) trains
+    the model using TensorFlow.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Evaluator](https://github.com/tensorflow/tfx/blob/master/docs/guide/evaluator.md) analyses
+    the training results.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[ModelValidator](https://github.com/tensorflow/tfx/blob/master/docs/guide/modelval.md) ensures
+    that the model is safe to serve.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Pusher](https://github.com/tensorflow/tfx/blob/master/docs/guide/pusher.md) deploys
+    the model to a serving infrastructure.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[TensorFlow Serving](https://www.tensorflow.org/serving) is a C++ backend that
+    serves a TensorFlow [SavedModel](https://www.tensorflow.org/guide/saved_model#save_and_restore_models) file.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To minimize training/serving skew, TensorFlow Transform ‘freezes’ values in
+    the computation graph, so that the same values found during training are used
+    when serving. What may be several operations in the DAG when training will be
+    a single fixed value at serving time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Uber: Michelangelo'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Around 2015, Uber’s ML engineers noticed the [hidden technical debt in machine
+    learning systems](https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems),
+    or the ML equivalent of ‘But it works on my machine…’ Uber had built custom, one-off
+    systems that integrated with ML models, which was not very scalable in a large
+    engineering organization. [In their own words](https://eng.uber.com/michelangelo/),
+  prefs: []
+  type: TYPE_NORMAL
+- en: there were no systems in place to build reliable, uniform, and reproducible
+    pipelines for creating and managing training and prediction data at scale.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: That’s why they built Michelangelo. It relies on Uber’s data lake of transactional
+    and logged data, and it supports both offline (batch) and online (streaming) predictions.
+    For offline predictions containerized Spark jobs generate batch predictions, whereas
+    for online deployments the model is served in a prediction service cluster, which
+    typically consists of hundreds of machines behind a load balancer, to which clients
+    send individual or batched prediction requests as RPCs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Metadata relevant to model management (e.g. run-time statistics of the trainer,
+    model configuration, lineage, distribution and relative importance of features,
+    model evaluation metrics, standard evaluation charts, learned parameter values,
+    and summary statistics) are stored for each experiment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Michelangelo can deploy multiple models in the same serving container, which
+    allows for safe transitions from old to new model versions and side-by-side A/B
+    testing of models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Uber''s Michelangelo: online vs offline](../Images/dc66920d446d06b5a08ba07f79c78628.png)](https://databaseline.tech/images/2020-02-21-ml-michelangelo-v1.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The original incarnation of Michelangelo did not support deep learning’s need
+    to train on GPUs, but that the team addressed that omission in the meantime. The [current
+    platform](https://eng.uber.com/michelangelo-model-representation/) uses Spark’s
+    ML pipeline serialization but with an additional interface for online serving
+    that adds a single-example (online) scoring method that is both lightweight and
+    capable of handling tight SLAs, for instance, for fraud detection and prevention.
+    It does so by bypassing the overhead of Spark SQL’s Catalyst optimizer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Uber''s Michelangelo: training vs serving](../Images/f5d95859749ca800973a084799abdbaf.png)](https://databaseline.tech/images/2020-02-21-ml-michelangelo-v2.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Noteworthy is that both Google and Uber built in-house protocol buffer parsers
+    and representations for serving, avoiding bottlenecks present in the default implementation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Airbnb: Bighead'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Airbnb established their own ML infrastructure team in 2016/2017 for similar
+    reasons. First, they only had a few models in production, but building each model
+    could take up to three months. Second, there was no consistency among models.
+    And third, there were large differences between online and offline predictions. [Bighead](https://www.slideshare.net/databricks/bighead-airbnbs-endtoend-machine-learning-platform-with-krishna-puttaswamy-and-andrew-hoh) is
+    the culmination of their efforts:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Airbnb''s Bighead](../Images/7ab8003ae8a7ebcfe1ca27697597d3ae.png)](https://databaseline.tech/images/2020-02-21-ml-bighead.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data management is handled by the in-house tool Zipline. Redspot is a hosted,
+    containerized, multi-tenant Jupyter notebook service. The Bighead library is for
+    data transformations and pipeline abstractions, and it holds wrappers for common
+    model frameworks. It preserves metadata through transformations, so it is used
+    to track lineage.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Deep Thought is a REST API for online predictions. Kubernetes orchestrates the
+    services. For offline predictions, Airbnb use their own Automator.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Netflix: Metaflow'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Netflix faced, rather unsurprisingly, similar issues as the aforementioned companies.
+    Their solution was [Metaflow](https://netflixtechblog.com/open-sourcing-metaflow-a-human-centric-framework-for-data-science-fa72e04a5d9),
+    a Python library for data scientists that deals with [data management and model
+    training, and not so much prediction serving](https://blog.valohai.com/three-ways-to-categorize-machine-learning-platforms).
+    As such it is *not* an end-to-end platform for machine learning, and perhaps more
+    geared towards company-internal instead of user-facing use cases. It can of course
+    be turned into a fully-fledged solution with [Seldon](https://www.seldon.io/),
+    which is backed by Kubernetes, or [AWS SageMaker](https://aws.amazon.com/sagemaker/).
+    A list of further serving tools is available [here](https://github.com/EthicalML/awesome-production-machine-learning#model-deployment-and-orchestration-frameworks).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Netflix'' Metaflow](../Images/596f35c7ad288860e2252c986a5fa308.png)](https://databaseline.tech/images/2020-02-21-ml-metaflow.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data scientists write their workflow as DAG steps, much like data engineers
+    when they use Airflow. And like Airflow, you can use any data science library
+    because to Metaflow it’s only Python code that’s executed. Metaflow distributes
+    processing and training in the background. All code and data is automatically
+    snapshotted to S3 to ensure there is a version history of each model and experiment.
+    Pickle is the default model serialization format.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The [open-source edition](https://docs.metaflow.org/) does not yet have a built-in [scheduler](https://docs.metaflow.org/introduction/what-is-metaflow).
+    It also encourages users to ‘primarily rely on vertical scalability’, although
+    they can use AWS SageMaker for horizontal scalability. It is tightly coupled to
+    AWS.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Lyft: Flyte'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Lyft have open-sourced their cloud-native platform called [Flyte](https://flyte.org/),
+    where data and machine learning operations [converge](https://static.sched.com/hosted_files/kccncna19/7f/Flyte%20Kubecon.pdf).
+    This is in line with my [D/MLOps philosophy](https://databaseline.tech/lean-dml-operations/)—Data(Ops)
+    is to MLOps as fuel is to a rocket: without it, ain’t nothin’ happenin’.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is built on top of Kubernetes. Since it is used internally by Lyft, it scales
+    to at least 7,000 unique workflows with over 100,000 executions every month, 1
+    million tasks, and 10 million containers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: All entities in Flyte are immutable, so it is possible to track data lineage,
+    reproduce of experiments, and roll back deployments. Repeated tasks can leverage
+    the task cache to save time and money. Currently supported tasks include [Python,
+    Hive, Presto, and Spark](https://lyft.github.io/flyte/user/tasktypes/index.html) as
+    well as [sidecars](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/).
+    From looking at the source code it seems EKS is
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Lyft''s Flyte](../Images/1c7dd71ceb912bc09c0e0ef0565b8d13.png)](https://databaseline.tech/images/2020-02-21-ml-flyte.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Theirs is also [Amundsen](https://github.com/lyft/amundsen), a data catalogue
+    that is not unlike Spotify’s [Lexikon](https://labs.spotify.com/2020/02/27/how-we-improved-data-discovery-for-data-scientists-at-spotify/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: AWS, Azure, GCP, and Co.
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: All major players in the [public cloud](https://cloud.google.com/gartner-cloud-infrastructure-as-a-service/) space
+    have their own offerings for machine learning platforms, save for Oracle who only
+    offer [canned ML-based models](https://www.oracle.com/artificial-intelligence/products.html) for
+    certain use cases and industries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**AWS [SageMaker](https://aws.amazon.com/sagemaker/)** is a full-stack solution
+    for machine learning that supports TensorFlow, Keras, PyTorch, and MXNet. With [SageMaker
+    Neo](https://aws.amazon.com/sagemaker/neo/) it’s possible to deploy models both
+    in the cloud and on the edge. It has a built-in feature for labelling through
+    Amazon Mechanical Turk for data stored in S3.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![AWS SageMaker](../Images/b1311ad9d1502bf934a5199251ab3728.png)](https://databaseline.tech/images/2020-02-21-ml-sagemaker.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Google does not have a managed platform, but with [TFX, Kubeflow, and **AI Platform**](https://cloud.google.com/ai-platform/) it’s
+    possible to stitch together all the components needed to run models on CPUs, GPUs
+    and TPUs, tune hyperparameters, and automatically deploy to production. [Spotify](https://labs.spotify.com/2019/12/13/the-winding-road-to-better-machine-learning-infrastructure-through-tensorflow-extended-and-kubeflow/) has
+    even opted for the TFX/Kubeflow-on-GCP option.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Beyond TensorFlow, there is support for [scikit-learn and XGBoost](https://cloud.google.com/ai-platform/training/docs?hl=en).
+    Custom containers allow you to use any framework, such as [PyTorch](https://cloud.google.com/ai-platform/training/docs/custom-containers-training?hl=en).
+    A [labelling service](https://cloud.google.com/ai-platform/data-labeling/docs/) à
+    la SageMaker Ground Truth is at the moment in beta.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![GCP AI Platform](../Images/93293af80aba9458cd660633ed54da87.png)](https://databaseline.tech/images/2020-02-21-ml-gcp.svg)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Azure Machine Learning](https://azure.microsoft.com/en-us/services/machine-learning/)** supports
+    a fair number of [frameworks](https://azure.microsoft.com/en-us/services/machine-learning/#product-overview),
+    such as scikit-learn, Keras, PyTorch, XGBoost, TensorFlow, and MXNet. It has its
+    own [D/MLOps](https://azure.microsoft.com/en-us/services/machine-learning/mlops/#key-phases) suite
+    with plenty of graphs. A drag-and-drop interface for model development is available
+    to those who prefer it, but that comes with various [caveats](https://databaseline.tech/the-problems-with-visual-programming-languages-in-data-engineering/).
+    Model and experiment management is done, as expected from Microsoft, with a registry.
+    For production deployments, the [Azure Kubernetes Service](https://docs.microsoft.com/en-gb/azure/machine-learning/how-to-deploy-and-where#deploy-to-target) is
+    used. Controlled roll-outs are [possible](https://docs.microsoft.com/en-gb/azure/machine-learning/how-to-deploy-azure-kubernetes-service#deploy-models-to-aks-using-controlled-rollout-preview) too.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[IBM Watson ML](https://www.ibm.com/cloud/machine-learning)** comes with
+    both point-and-click machine learning options (SPSS) and support for a bunch of
+    common [frameworks](https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/pm_service_supported_frameworks.html).
+    As the other major players, models are trained on either CPUs or GPUs. [Hyperparameter
+    tuning](https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/ml_dlaas_hpo.html?linkInPage=true) is
+    included in the box too. The platform does not have many details on data and model
+    validation, as these are available in other IBM products.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although **Alibaba’s [ML Platform for AI](https://www.alibabacloud.com/product/machine-learning)** flaunts
+    two buzzwords in one name, it does not improve the documentation; the section
+    on [best practices](https://www.alibabacloud.com/help/doc-detail/67395.htm?spm=a2c63.p38356.b99.39.62bb4809Vl31Cw) has
+    use cases rather than recommendations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Anyway, it is heavy on [dragging and dropping](https://www.alibabacloud.com/help/doc-detail/126312.htm),
+    especially in data management and modelling, which may not be very conducive to
+    an automated end-to-end ML platform. The platform supports frameworks such as [TensorFlow,
+    MXNet, and Caffe](https://www.alibabacloud.com/help/doc-detail/75093.htm), but
+    it also sports a plethora of [traditional algorithms](https://www.alibabacloud.com/help/doc-detail/69688.htm).
+    It includes a hyperparameter tuner, as can be expected.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model serialization is done with [PMML, TensorFlow’s SavedModel format, or Caffe’s
+    format](https://www.alibabacloud.com/help/doc-detail/126313.htm). Please note
+    that a scoring engine that takes a [PMML, ONNX](https://medium.com/analytics-and-data/overview-of-the-different-approaches-to-putting-machinelearning-ml-models-in-production-c699b34abf86),
+    or [PFA file](http://dmg.org/pfa/) may enable quick deployments, but it risks
+    introducing training/serving skew, since the served model is loaded from a different
+    format.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Honourable Mention
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**[H2O](https://www.h2o.ai/products/h2o/#overview)** offers a platform with
+    data manipulation, various algorithms, cross-validation, grid search for hyperparameter
+    tuning, feature ranking, and model serialization with [POJO or MOJO](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/productionizing.html#about-pojo-mojo).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![H2O.ai](../Images/e40354fba75e394968b47280930201b3.png)](https://databaseline.tech/images/2020-02-21-ml-h2o.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Valohai](https://valohai.com/product/)**—Finnish for light shark. Really!—
+    is a managed machine learning platform. It can run on private, public, hybrid,
+    or multi-cloud setups.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Valohai](../Images/1a813d3633a3373e19b7e920386b3a65.png)](https://databaseline.tech/images/2020-02-21-ml-valohai.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each operation (or [execution](https://docs.valohai.com/core-concepts/executions/))
+    runs a command against a Docker image, so it’s very similar to [Kubeflow](https://www.kubeflow.org/).
+    The main difference is that Valohai manages the Kubernetes deployment cluster
+    for you, whereas Kubeflow requires you to do that. However, Kubeflow and TFX are
+    opinionated in that they provide some TensorFlow-related tools out of the box.
+    With Valohai you’re expected to re-use existing Docker images or roll your own,
+    which means you can use any machine learning framework, but that freedom has to
+    be weighed against maintainability concerns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is therefore possible to distribute training by relying on [Spark](https://spark.apache.org/docs/latest/ml-guide.html), [Horovod](https://eng.uber.com/horovod/), [TensorFlow](https://www.tensorflow.org/guide/distributed_training),
+    or whatever suits your needs and infrastructure best, but it’s in your hands to
+    fill in the blanks. It also means you’re responsible for ensuring compatibility
+    in data transformations to avoid training/serving skew. Note that it currently
+    only supports [object storages](https://docs.valohai.com/core-concepts/data-stores/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Iguazio](https://www.iguazio.com/platform/)** mentions the capability to [deploy
+    in seconds from a notebook or IDE](https://www.iguazio.com/platform/), although
+    that seems to miss the most common scenario: a CI/CD pipeline or even the platform
+    itself as with TFX’s [Pusher](https://www.tensorflow.org/tfx/guide/pusher) component.
+    It uses Kubeflow for workflow orchestration.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Iguazio](../Images/77a3e52aa3681a5ce0a14d3a1ac05315.png)](https://databaseline.tech/images/2020-02-21-ml-iguazio.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Iguazio does offer a feature store with unified APIs for key-value pairs and
+    time series. Many available products do not come with their own features stores,
+    although most large tech companies have these. A feature store is a central place
+    with ready-to-reuse features that can be shared across models to accelerate model
+    development. It can automate feature engineering on an enterprise scale. From
+    a timestamp, for instance, you can extract many features: year, season, month,
+    day of week, time of day, whether it’s a local holiday, elapsed time since last
+    relevant event (recency), how often a certain event happened in a fixed window
+    (frequency), and so on.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[SwiftStack AI](https://www.swiftstack.com/solutions/ai)** is geared towards
+    high-throughput deep learning on NVIDIA GPUs with the [RAPIDS](https://www.developer.nvidia.com/rapids) suite.
+    RAPIDS offers libraries, such as [cuML](https://github.com/rapidsai/cuml), which
+    allows people to use the familiar scikit-learn API but benefit from GPU acceleration
+    for supported algorithms, and [cuGraph](https://github.com/rapidsai/cugraph) for
+    GPU-powered graph analytics.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![SwiftStack AI](../Images/d1e2f10cef9d510fbd15830b0cef3f06.png)](https://databaseline.tech/images/2020-02-21-ml-swiftstack.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[AI Layer](https://algorithmia.com/serverless-ai-layer)** is an [API for
+    D/MLOps](https://www.linkedin.com/pulse/ai-layer-diego-oppenheimer/). It has built-in
+    support for multiple data sources, programming languages, and machine learning
+    frameworks.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Algorithmia''s AI Layer](../Images/d043542d81bd1ef6ee760721a157c0ee.png)](https://databaseline.tech/images/2020-02-21-ml-ai-layer.jpg)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[MLflow](https://mlflow.org/)** is backed by Databricks, which explains the
+    tight integration with Spark. It offers a [limited set of options for deployments](https://mlflow.org/docs/latest/models.html#built-in-deployment-tools).
+    For example, the ability to export a model as a [vectorized UDF](https://spark.apache.org/docs/2.4.0/sql-pyspark-pandas-with-arrow.html) in
+    PySpark is not the most sensible for real-time systems, since Python UDFs come
+    with the communication overhead between the Python runtime environment and the
+    JVM. The overhead is not as large as with standard PySpark UDFs because Apache
+    Arrow, an in-memory columnar format, is used in the transfer between Python and
+    the JVM, but it’s [not insignificant](https://medium.com/@QuantumBlack/spark-udf-deep-insights-in-performance-f0a95a4d8c62).
+    With Spark Streaming as the default data ingestion solution, sub-second latency
+    with Spark’s micro-batch model may be tricky to achieve anyway.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Support for logging, which is essential for D/MLOps, [is still experimental](https://mlflow.org/docs/latest/tracking.html#automatic-logging).
+    From the documentation it follows that MLflow is not focused on data and model
+    validation, at least not as a standard part of the platform itself. There is a
+    managed version of MLflow available (on AWS and Azure) that offers [more features](https://databricks.com/product/managed-mlflow).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**D2iQ’s [KUDO for Kubeflow](https://d2iq.com/solutions/ksphere/kudo-kubeflow)** is
+    a Kubeflow-based platform geared towards enterprise customers. Unlike the open-source
+    Kubeflow, it comes with Spark and [Horovod](https://github.com/horovod/horovod) as
+    well as pre-built and fully tested CPU/GPU images for the major frameworks: TensorFlow,
+    PyTorch, and MXNet. Data scientists can deploy form within notebooks without the
+    need to switch contexts. By default it supports multi-tenancy. [Istio](https://istio.io/) and [Dex](https://github.com/dexidp/dex) are
+    integrated for additional security and authentication. KUDO for Kubeflow sits
+    atop Konvoy, D2iQ’s managed Kubernetes platform. It can run in the cloud, on-prem,
+    a hybrid, or on the edge. Support for air-gapped clusters is also available.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Kubernetes-speak, KUDO for Kubeflow is a collection of operators defined
+    with [KUDO](https://kudo.dev/), a declarative toolkit to create Kubernetes operators
+    using YAML instead of Go. Kubernetes Unified Declarative Operators (KUDOs) for
+    Cassandra, Elastic, Flink, Kafka, Redis, and so on are all [open source](https://github.com/kudobuilder/operators) and
+    can be integrated with the platform. More details are described in an [introductory
+    article by yours truly](https://d2iq.com/blog/kudo-for-kubeflow-the-enterprise-machine-learning-platform).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to see yet more options, including visual workbenches, have a look [here](https://heartbeat.fritz.ai/ai-and-machine-learning-landscape-part-4-end-to-end-ml-platforms-5adeac675d13) or
+    check out [Gartner’s magic quadrant for data science and machine learning platforms](https://www.analyticsvidhya.com/blog/2020/02/gartners-2020-magic-quadrant-for-data-science-and-machine-learning-tools-check-out-the-new-leaders/).
+    Facebook have also published details of their platform [FBLearner Flow](https://engineering.fb.com/core-data/introducing-fblearner-flow-facebook-s-ai-backbone/) (2016),
+    as well as [LinkedIn](https://engineering.linkedin.com/blog/2018/10/an-introduction-to-ai-at-linkedin) (2018)
+    and [eBay](https://tech.ebayinc.com/engineering/ebays-transformation-to-a-modern-ai-platform/) (2019).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Ian Hellström](https://databaseline.tech/)** has been a data and machine
+    learning engineer at various companies, including D2iQ, Spotify, Bosch and Sievo.
+    He is the product manager for D2iQ’s enterprise machine learning platform KUDO
+    for Kubeflow. He currently resides in Hamburg, Germany.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://databaseline.tech/a-tour-of-end-to-end-ml-platforms/). Reposted
+    with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to Extend Scikit-learn and Bring Sanity to Your Machine Learning Workflow](/2019/10/extend-scikit-learn-bring-sanity-machine-learning-workflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Layman’s Guide to Data Science. Part 3: Data Science Workflow](/2020/07/laymans-guide-data-science-workflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploy a Machine Learning Pipeline to the Cloud Using a Docker Container](/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[7 End-to-End MLOps Platforms You Must Try in 2024](https://www.kdnuggets.com/7-end-to-end-mlops-platforms-you-must-try-in-2024)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Beginner''s Guide to End to End Machine Learning](https://www.kdnuggets.com/2021/12/beginner-guide-end-end-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Full End-to-End Deployment of a Machine Learning Algorithm into a…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Tour of Python NLP Libraries](https://www.kdnuggets.com/a-tour-of-python-nlp-libraries)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Best End-to-End Open Source MLOps Tools](https://www.kdnuggets.com/5-best-end-to-end-open-source-mlops-tools)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Simple to Implement End-to-End Project with HuggingFace](https://www.kdnuggets.com/a-simple-to-implement-end-to-end-project-with-huggingface)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

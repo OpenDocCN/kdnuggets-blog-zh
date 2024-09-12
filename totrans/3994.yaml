@@ -1,0 +1,224 @@
+- en: How To Speed Up Python Code with Caching
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/how-to-speed-up-python-code-with-caching](https://www.kdnuggets.com/how-to-speed-up-python-code-with-caching)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![python-cache-fimg](../Images/106568a22d2fe62fa49f991f5e3224e6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Python, you can use caching to store the results of expensive function calls
+    and reuse them when the function is called with the same arguments again. This
+    makes your code more performant.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Python provides built-in support for caching through the `functools` module:
+    the  decorators `@cache` and `@lru_cache`. And we''ll learn how to cache function
+    calls in this tutorial.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Is Caching Helpful?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Caching function calls can significantly improve the performance of your code.
+    Here are some reasons why caching function calls can be beneficial:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Performance improvement**: When a function is called with the same arguments
+    multiple times, caching the result can eliminate redundant computations. Instead
+    of recalculating the result every time, the cached value can be returned, leading
+    to faster execution.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Reduction of resource usage**: Some function calls may be computationally
+    intensive or require significant resources (such as database queries or network
+    requests). Caching the results reduces the need to repeat these operations.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Improved responsiveness**: In applications where responsiveness is crucial,
+    such as web servers or GUI applications, caching can help reduce latency by avoiding
+    repeated calculations or I/O operations.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now let’s get to coding.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Caching with the @cache Decorator
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Let’s code a function that computes the n-th Fibonacci number. Here''s the
+    recursive implementation of the Fibonacci sequence:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Without caching, the recursive calls result in redundant computations. If the
+    values are cached, it'd be much more efficient to look up the cached values. And
+    for this, you can use the `@cache` decorator.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `@cache` decorator from the `functools` module in Python 3.9+ is used to
+    cache the results of a function. It works by storing the results of expensive
+    function calls and reusing them when the function is called with the same arguments.
+    Now let’s wrap the function with the `@cache` decorator:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: We’ll get to performance comparison later. Now let’s see another way to cache
+    return values from functions using the `@lru_cache` decorator.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Caching with the @lru_cache Decorator
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: You can use the built-in `functools.lru_cache` decorator for caching as well.
+    This uses the **Least Recently Used (LRU) caching mechanism** for function calls.
+    In LRU caching, when the cache is full and a new item needs to be added, the least
+    recently used item in the cache is removed to make room for the new item. This
+    ensures that the most frequently used items are retained in the cache, while less
+    frequently used items are discarded.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `@lru_cache` decorator is similar to `@cache` but allows you to specify
+    the maximum size—as the `maxsize` argument—of the cache. Once the cache reaches
+    this size, the least recently used items are discarded. This is useful if you
+    want to limit memory usage.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here, the `fibonacci` function caches up to 7 most recently computed values:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here, the `fibonacci` function is decorated with `@lru_cache(maxsize=7)`, specifying
+    that it should cache up to 7 most recent results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When `fibonacci(5)` is called, the results for `fibonacci(4)`, `fibonacci(3)`,
+    and `fibonacci(2)` are cached. When `fibonacci(3)` is called subsequently, `fibonacci(3)`
+    is retrieved from the cache since it was one of the seven most recently computed
+    values, avoiding redundant computation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Timing Function Calls for Comparison
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Now let’s compare the execution times of the functions with and without caching.
+    For this example, we don''t set an explicit value for `maxsize`. So `maxsize`
+    will be set to the default value of 128:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To compare the execution times, we’ll use the `timeit` function from the `timeit`
+    module:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Running the above code should give a similar output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: We see a significant difference in the execution times. The function call without
+    caching takes much longer to execute, especially for larger values of `n`. While
+    the cached versions (both `@cache` and `@lru_cache`) execute much faster and have
+    comparable execution times.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrapping Up
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: By using the `@cache` and `@lru_cache` decorators, you can significantly speed
+    up the execution of functions that involve expensive computations or recursive
+    calls. You can find the complete code [on GitHub](https://github.com/balapriyac/python-basics/tree/main/caching).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you’re looking for a comprehensive guide on best practices for using Python
+    for data science, read [5 Python Best Practices for Data Science](https://www.kdnuggets.com/5-python-best-practices-for-data-science).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)****
+    is a developer and technical writer from India. She likes working at the intersection
+    of math, programming, data science, and content creation. Her areas of interest
+    and expertise include DevOps, data science, and natural language processing. She
+    enjoys reading, writing, coding, and coffee! Currently, she''s working on learning
+    and sharing her knowledge with the developer community by authoring tutorials,
+    how-to guides, opinion pieces, and more. Bala also creates engaging resource overviews
+    and coding tutorials.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[3 Simple Ways to Speed Up Your Python Code](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Speed Up SQL Queries Using Indexes [Python Edition]](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Speed Up Python Pandas by Over 300x](https://www.kdnuggets.com/how-to-speed-up-python-pandas-by-over-300x)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Python Tips for Data Efficiency and Speed](https://www.kdnuggets.com/5-python-tips-for-data-efficiency-and-speed)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Speed up Machine Learning with Fast Kriging (FKR)](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

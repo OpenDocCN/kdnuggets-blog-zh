@@ -1,0 +1,213 @@
+- en: Machine Learning-driven Firewall
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/02/machine-learning-driven-firewall.html](https://www.kdnuggets.com/2017/02/machine-learning-driven-firewall.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By Faizan Ahmad, CEO Fsecurify**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lately, I have been thinking of ways of applying machine learning to a security
+    project that I can do and share with all of you. A few days ago, I happened to
+    come across a website called [ZENEDGE](https://www.zenedge.com/) which is offering
+    **AI driven web application firewall**. I liked the concept and thought of making
+    something similar and sharing it with the community. So, lets make one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: fWaf – Machine learning driven Web Application Firewall
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Dataset:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first thing to do was to find labelled data but the data I could find was
+    quite old (2010). There is a website called [**SecRepo**](http://secrepo.com/)
+    that has a lot of security related datasets. One of them was of http logs containing
+    millions of queries. That was the dataset I wanted but it was not labelled. I
+    used some heuristics and my previous knowledge of security to label the data set
+    by writing a few scripts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After pruning the data, I wanted to collect some more malicious queries. Therefore,
+    I went on for [payloads](https://github.com/foospidy/payloads) and found some
+    famous GitHub repositories containing Xss, SQL and other attack payloads and used
+    all of them in my malicious queries dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, we had two files; one containing clean web queries(1000000) and another
+    one containing malicious web queries(50000). That’s all the data we need to train
+    our classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Training:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For training, I used **logistic regression** since it is fast and I wanted something
+    fast. We can use SVM or Neural networks but they take a little more time than
+    logistic regression. Our problem is a **binary classification problem** since
+    we have to predict whether a query is malicious or not. We’ll  be using **ngrams**
+    as our tokens. I read some research papers and using ngrams was a good idea for
+    this sort of project. For this project, I used **n=3.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lets dive right into the code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lets define our tokenizer function which will give 3 grams.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Lets load the queries dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now that we have the dataset loaded into good queries and bad queries. Lets
+    try to visualize them. I used [**Principal component analysis**](https://en.wikipedia.org/wiki/Principal_component_analysis)
+    to visualize the dataset. The read are the bad query ngrams and the blue are the
+    good query ngrams.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8ee8424c78c60945e537f716ece59318.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can see that bad points and good points are indeed on coming out on different
+    positions. Lets proceed further.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Lets now use **Tfidvectorizer** to convert the data into **tfidf values** and
+    then use our classifier. We are using tfidf values since we want to assign weights
+    to our ngrams e.g the ngram ‘<img’ should have large weight since a query containing
+    this ngram is most likely to be malicious. You can read more about tfidf in this
+    [link.](http://www.tfidf.com/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now that we have everything set up, lets apply logistic regression.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: That’s it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Here’s the part everyone waits for**, you must be wanting to see the accuracy,
+    right? The accuracy comes out to be **99%**. That’s pretty amazing right? But
+    you won’t believe it until you see some proof. So, lets check some queries and
+    see if the model detects them as malicious or not. Here are the results.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Looks good, doesn’t it? It can detect the malicious queries very well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**What next?** This is a weekend project and there is a lot that can be done
+    or added in it. We can do multi class classification to detect whether a malicious
+    query is SQL Injection or Cross site scripting or any other injection. We can
+    have a larger dataset with all types of malicious queries and train the model
+    on it thus expanding the type of malicious queries it can detect. One can also
+    save this model and use it with a web server. Let me know if you do any of the
+    above.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data and script:** [https://github.com/faizann24/F<wbr>waf-Machine-Learning-driven-We<wbr>b-Application-Firewall](https://github.com/faizann24/Fwaf-Machine-Learning-driven-Web-Application-Firewall)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I hope you liked the post. We believe in providing security resources for free
+    to the community. Let me know about your comments and critique.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fsecurify
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [**Faizan Ahmad**](https://www.linkedin.com/in/faizan-ahmad-015964118)**
+    is Fulbright undergraduate currently studying in NUCES FAST, Lahore.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Machine Learning and Cyber Security Resources](/2017/01/machine-learning-cyber-security.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Machine Learning to Detect Malicious URLs](/2016/10/machine-learning-detect-malicious-urls.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Achieving End-to-end Security for Apache Spark with Databricks](/2016/06/achieving-security-apache-spark-databricks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 38 Python Libraries for Data Science, Data Visualization &…](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Pipeline Optimization with TPOT](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Deal with Categorical Data for Machine Learning](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Google Recommends You do Before Taking Their Machine Learning…](https://www.kdnuggets.com/2021/10/google-recommends-before-machine-learning-data-science-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

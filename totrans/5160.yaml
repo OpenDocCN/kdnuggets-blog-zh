@@ -1,0 +1,213 @@
+- en: The Definitive Guide to Solving the Phantom Read in MySQL
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/06/definitive-guide-solving-phantom-read-mysql.html](https://www.kdnuggets.com/2022/06/definitive-guide-solving-phantom-read-mysql.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![The Definitive Guide to Solving the Phantom Read in MySQL](../Images/3278c7a60acba0db970ee57e95209464.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by [storyset](https://www.freepik.com/author/stories)
+  prefs: []
+  type: TYPE_NORMAL
+- en: When most people think of relational databases, MySQL typically comes to mind
+    first. MySQL uses InnoDB as its storage engine, and the *Repeatable Read* isolation
+    level, which sees data before a transaction begins, is the most common.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unlike PostgreSQL, though, the [*Repeatable Read* isolation level](https://www.ibm.com/docs/en/wxs/8.6.1?topic=overview-transaction-isolation)
+    in InnoDB is unable to handle certain issues smoothly. Namely, problems such as
+    lost updates and phantom reads can't be handled at the InnoDB *Repeatable Read*
+    isolation level, whereas you don't need additional hacks to solve lost updates
+    in PostgreSQL. There are, however, a few tricks you can use to perform phantom
+    reads like range types and other mechanisms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: MySQL developers should understand possible pitfalls and be able to tackle them
+    appropriately to avoid issues like lost updates and phantom reads. This article
+    will cover how [MySQL developers](/2022/01/developers-python-machine-learning-projects.html)
+    can troubleshoot the "write" skew that phantom reads can cause.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Scenarios That Result in Phantom Reads
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: There are different scenarios that can lead to phantom reads. Generally speaking,
+    however, these scenarios all follow a similar pattern. They initially will search
+    a specific range in a MySQL database and then CREATE, UPDATE, or DELETE depending
+    on the results of the range that has been searched. Afterward, the executed operation
+    directly impacts the results taken from the range that's been searched.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's assume, for example, that the action taken after a specific range has
+    been searched is an UPDATE or DELETE. In this case, MySQL developers can use an
+    exclusive lock to avoid a "write" skew. Developers may then use a FOR UPDATE at
+    the start of their SELECT, after which they can force two simultaneous transactions
+    to follow one after the other. Therefore, these two simultaneous transactions,
+    during the [race condition](/2020/05/complex-logic-breakneck-speed-julia-data-science.html),
+    circumvent a "write" skew.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If we''re assuming that the action taken according to a specific range''s search
+    results is CREATE, though, the above solution is incomplete: no corresponding
+    row exists that allows a developer to lock in SELECT, which means a row is formed
+    later on.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solving Phantom Reads When Using CREATE
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We'll introduce a practical scenario to better understand the issue that a phantom
+    read causes when using CREATE. Once we describe this example, we'll then cover
+    the corresponding solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imagine a system that allows people to book a meeting room; after someone has
+    reserved a room using this system, new data is added to a table. This system lets
+    users know that a room is available for use depending on the time slot they want
+    to reserve it for. Once someone creates a new reservation entry, all other users
+    can avoid time conflicts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Issues arise, however, when two people need to reserve a room at the same time
+    concurrently. Both users are able to get past the initial SELECT validation, which
+    means that on paper, they both have a reservation for the same time, resulting
+    in a time conflict. This issue can be compounded if, for instance, there are multiple
+    users [with a VPN connection](https://thebestvpn.com/reviews/surfshark/) to a
+    remote SQL server who need to use this reservation system. This issue isn't avoidable
+    even if a MySQL developer adds an exclusive lock since they can't lock a row at
+    the starting SELECT validation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solving With Unique Constraint Indexes
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: MySQL developers cannot turn a concurrent operation into one that is sequential
+    by using exclusive locks. Therefore, they'll need to let one operation fail by
+    adding unique constraints to their table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Developers can target the room reservation table's columns corresponding to
+    room numbers and meeting start times with unique constraint indexes. This solution
+    prevents someone from reserving a time slot that someone else has already reserved,
+    and developers can make it so no one can reserve a room for more than one hour.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, this solution also prevents a unique constraint from being effective
+    if two users have meetings with overlapping times. To correctly solve the issue,
+    developers must instead materialize conflicts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solving By Materializing Conflicts
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The correct way to solve the phantom reads we're discussing is by uncovering
+    conflicts that a table hides. Developers can pre-fill a brand new table with [sets
+    of data](/2021/09/springboard-unique-data-sets-data-science-skills.html) that
+    coordinate concurrent operations. If we use our meeting room system as an example,
+    we can imagine creating a new table that dictates time slots and displays all
+    available slots of time in advance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With this new table, developers would now execute a SELECT on the column that
+    dictates available time slots and include a FOR UPDATE since the data already
+    exists. Developers would need to run this SELECT FOR UPDATE before the initial
+    SELECT.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By materializing conflicts in the above example, developers can block any two
+    reserved slots of time that overlap with each other with an exclusive lock, therefore
+    forcing one time slot to come before or after the other. Whichever slot of time
+    comes later immediately fails due to the completion of the first time slot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Although materializing conflicts is a tough and unintuitive solution to pull
+    off, it's necessary to avoid sacrificing any significant level of performance
+    when using a MySQL database. MySQL's InnoDB isolation level is unfortunately not
+    serializable, so developers need to sacrifice some level of complexity for acceptable
+    performance levels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Anyone using a database must [understand that database's capabilities](https://www.itprotoday.com/analytics-and-reporting/5-questions-evaluating-dbms-features-and-capabilities)
+    as well as its hard-to-solve solutions. Otherwise, it would be impossible to anticipate
+    which behaviors of that database may potentially compromise database design and
+    development efforts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Additionally, understanding how to appropriately tackle potential risks is equally
+    important. While the use case we've described in this article via our time reservation
+    system isn't identical to other use cases, the patterns it exhibits are similar
+    enough that understanding how to solve them can make handling other situations
+    easier down the road.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Nahla Davies](http://nahlawrites.com/)** is a software developer and tech
+    writer. Before devoting her work full time to technical writing, she managed —
+    among other intriguing things — to serve as a lead programmer at an Inc. 5,000
+    experiential branding organization whose clients include Samsung, Time Warner,
+    Netflix, and Sony.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[The Definitive Guide To Switching Your Career Into Data Science](https://www.kdnuggets.com/2022/05/definitive-guide-switching-career-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Function Arguments: A Definitive Guide](https://www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Solving 5 Complex SQL Problems: Tricky Queries Explained](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Graph of Thoughts: A New Paradigm for Elaborate Problem-Solving in…](https://www.kdnuggets.com/graph-of-thoughts-a-new-paradigm-for-elaborate-problem-solving-in-large-language-models)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generative Agent Research Papers You Should Read](https://www.kdnuggets.com/generative-agent-research-papers-you-should-read)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Read This Before Making a Career Switch to Data Science](https://www.kdnuggets.com/read-this-before-making-a-career-switch-to-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

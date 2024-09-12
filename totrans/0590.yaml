@@ -1,0 +1,239 @@
+- en: An Overview of Hugging Face Diffusers
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/an-overview-of-hugging-face-diffusers](https://www.kdnuggets.com/an-overview-of-hugging-face-diffusers)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![An Overview of Hugging Face Diffusers](../Images/f6108832a80f1123ece521a4c494e821.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Diffusers is a Python library developed and maintained by HuggingFace. It simplifies
+    the development and inference of Diffusion models for generating images from user-defined
+    prompts. The code is openly available on [GitHub](https://github.com/huggingface/diffusers)
+    with 22.4k stars on the repository. HuggingFace also maintains a wide variety
+    of Stable DIffusion and various other diffusion models can be easily used with
+    their library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Installation and Setup
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: It is good to start with a fresh Python environment to avoid clashes between
+    library versions and dependencies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To set up a fresh Python environment, run the following commands:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Installing the Diffusers library is straightforward. It is provided as an official
+    pip package and internally uses the PyTorch library. In addition, a lot of diffusion
+    models are based on the Transformers architecture so loading a model will require
+    the transformers pip package as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Using Diffusers for AI-Generated Images
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The diffuser library makes it extremely easy to generate images from a prompt
+    using stable diffusion models. Here, we will go through a simple code line by
+    line to see different parts of the Diffusers library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imports
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: The torch package will be required for the general setup and configuration of
+    the diffuser pipeline. The AutoPipelineForText2Image is a class that automatically
+    identifies the model that is being loaded, for example, StableDiffusion1-5, StableDiffusion2.1,
+    or SDXL, and loads the appropriate classes and modules internally. This saves
+    us from the hassle of changing the pipeline whenever we want to load a new model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loading the Models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A diffusion model is composed of multiple components, including but not limited
+    to Text Encoder, UNet, Schedulers, and Variational AutoEncoder. We can separately
+    load the modules but the diffusers library provides a builder method that can
+    load a pre-trained model given a structured checkpoint directory. For a beginner,
+    it may be difficult to know which pipeline to use, so AutoPipeline makes it easier
+    to load a model for a specific task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this example, we will load an SDXL model that is openly available on [HuggingFace](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0),
+    trained by Stability AI. The files in the directory are structured according to
+    their names and each directory has its own safetensors file. The directory structure
+    for the SDXL model looks as below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![directory structure for the SDXL model](../Images/13b6b0b3589de3e35e8729d6e8c7f19c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: To load the model in our code, we use the AutoPipelineForText2Image class and
+    call the from_pretrained function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: We provide the model path as the first argument. It can be the HuggingFace model
+    card name as above or a local directory where you have the model downloaded beforehand.
+    Moreover, we define the model weights precisions as a keyword argument. We normally
+    use 32-bit floating-point precision when we have to run the model on a CPU. However,
+    running a diffusion model is computationally expensive, and running an inference
+    on a CPU device will take hours! For GPU, we either use 16-bit or 32-bit data
+    types but 16-bit is preferable as it utilizes lower GPU memory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The above command will download the model from HuggingFace and it can take time
+    depending on your internet connection. Model sizes can vary from 1GB to over 10GBs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once a model is loaded, we will need to move the model to the appropriate hardware
+    device. Use the following code to move the model to CPU or GPU. Note, for Apple
+    Silicon chips, move the model to an MPS device to leverage the GPU on MacOS devices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Inference
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now, we are ready to generate images from textual prompts using the loaded
+    diffusion model. We can run an inference using the below code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can use the pipeline object and call it with multiple keyword arguments to
+    control the generated images. We define a prompt as a string parameter describing
+    the image we want to generate. Also, we can define the height and width of the
+    generated image but it should be in multiples of 8 or 16 due to the underlying
+    transformer architecture. In addition, the total inference steps can be tuned
+    to control the final image quality. More denoising steps result in higher-quality
+    images but take longer to generate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, the pipeline returns a list of generated images. We can access the
+    first image from the array and can manipulate it as a Pillow image to either save
+    or show the image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Generated Image](../Images/d66a9e1aa7d812723bc97cbab89a52d4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Generated Image
+  prefs: []
+  type: TYPE_NORMAL
+- en: Advance Uses
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The text-2-image example is just a basic tutorial to highlight the underlying
+    usage of the Diffusers library. It also provides multiple other functionalities
+    including Image-2-image generation, inpainting, outpainting, and control-nets.
+    In addition, they provide fine control over each module in the diffusion model.
+    They can be used as small building blocks that can be seamlessly integrated to
+    create your custom diffusion pipelines. Moreover, they also provide additional
+    functionality to train diffusion models on your own datasets and use cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrapping Up
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In this article, we went over the basics of the Diffusers library and how to
+    make a simple inference using a Diffusion model. It is one of the most used Generative
+    AI pipelines in which features and modifications are made every day. There are
+    a lot of different use cases and features you can try and the [HuggingFace documentation](https://huggingface.co/docs/diffusers/en/index)
+    and [GitHub code](https://github.com/huggingface/diffusers) is the best place
+    for you to get started.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)****
+    Kanwal is a machine learning engineer and a technical writer with a profound passion
+    for data science and the intersection of AI with medicine. She co-authored the
+    ebook "Maximizing Productivity with ChatGPT". As a Google Generation Scholar 2022
+    for APAC, she champions diversity and academic excellence. She''s also recognized
+    as a Teradata Diversity in Tech Scholar, Mitacs Globalink Research Scholar, and
+    Harvard WeCode Scholar. Kanwal is an ardent advocate for change, having founded
+    FEMCodes to empower women in STEM fields.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Top 10 Machine Learning Demos: Hugging Face Spaces Edition](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A community developing a Hugging Face for customer data modeling](https://www.kdnuggets.com/2022/08/objectiv-community-developing-hugging-face-customer-data-modeling.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build AI Chatbot in 5 Minutes with Hugging Face and Gradio](https://www.kdnuggets.com/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Use Hugging Face AutoTrain to Fine-tune LLMs](https://www.kdnuggets.com/how-to-use-hugging-face-autotrain-to-finetune-llms)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Finetune Mistral AI 7B LLM with Hugging Face AutoTrain](https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mistral 7B-V0.2: Fine-Tuning Mistral’s New Open-Source LLM with…](https://www.kdnuggets.com/mistral-7b-v02-fine-tuning-mistral-new-open-source-llm-with-hugging-face)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

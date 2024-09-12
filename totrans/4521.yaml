@@ -1,0 +1,520 @@
+- en: Intent Recognition with BERT using Keras and TensorFlow 2
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/02/intent-recognition-bert-keras-tensorflow.html](https://www.kdnuggets.com/2020/02/intent-recognition-bert-keras-tensorflow.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Venelin Valkov](https://www.linkedin.com/in/venelin-valkov/), Machine
+    Learning Engineer**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recognizing intent (IR) from text is very useful these days. Usually, you get
+    a short text (sentence or two) and have to classify it into one (or multiple)
+    categories.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Multiple product support systems (help centers) use IR to reduce the need for
+    a large number of employees that copy-and-paste boring responses to frequently
+    asked questions. Chatbots, automated email responders, answer recommenders (from
+    a knowledge base with questions and answers) strive to not let you take the time
+    of a real person.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This guide will show you how to use a pre-trained NLP model that might solve
+    the (technical) support problem that many business owners have. I mean, BERT is
+    freaky good! It is really easy to use, too!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Run the complete notebook in your browser**](https://colab.research.google.com/drive/1WQY_XxdiCVFzjMXnDdNfUjDFi0CN5hkT)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**The complete project on GitHub**](https://github.com/curiousily/Deep-Learning-For-Hackers)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The data contains various user queries categorized into seven intents. It is
+    hosted on [GitHub](https://github.com/snipsco/nlu-benchmark/tree/master/2017-06-custom-intent-engines) and
+    is first presented in [this paper](https://arxiv.org/abs/1805.10190).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here are the intents:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: SearchCreativeWork (e.g. Find me the I, Robot television show)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: GetWeather (e.g. Is it windy in Boston, MA right now?)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: BookRestaurant (e.g. I want to book a highly rated restaurant for me and my
+    boyfriend tomorrow night)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: PlayMusic (e.g. Play the last track from Beyoncé off Spotify)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: AddToPlaylist (e.g. Add Diamonds to my roadtrip playlist)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: RateBook (e.g. Give 6 stars to Of Mice and Men)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: SearchScreeningEvent (e.g. Check the showtimes for Wonder Woman in Paris)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'I’ve done a bit of preprocessing and converted the JSON files into easy to
+    use/load CSVs. Let’s download them:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We’ll load the data into data frames and expand the training data by merging
+    the training and validation intents:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We have `13,784` training examples and two columns - `text` and `intent`. Let’s
+    have a look at the number of texts per intent:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a7450a08fc0d97efd88b1912b26faed7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The amount of texts per intent is quite balanced, so we’ll not be needing any
+    imbalanced modeling techniques.
+  prefs: []
+  type: TYPE_NORMAL
+- en: BERT
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The BERT (Bidirectional Encoder Representations from Transformers) model, introduced
+    in the [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805) paper,
+    made possible achieving State-of-the-art results in a variety of NLP tasks, for
+    the regular ML practitioner. And you can do it without having a large dataset!
+    But how is this possible?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: BERT is a pre-trained Transformer Encoder stack. It is trained on Wikipedia
+    and the [Book Corpus](https://arxiv.org/pdf/1506.06724.pdf) dataset. It has two
+    versions - Base (12 encoders) and Large (24 encoders).
+  prefs: []
+  type: TYPE_NORMAL
+- en: BERT is built on top of multiple clever ideas by the NLP community. Some examples
+    are [ELMo](https://arxiv.org/abs/1802.05365), [The Transformer](https://arxiv.org/abs/1706.03762),
+    and the [OpenAI Transformer](https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: ELMo introduced contextual word embeddings (one word can have a different meaning
+    based on the words around it). The Transformer uses attention mechanisms to understand
+    the context in which the word is being used. That context is then encoded into
+    a vector representation. In practice, it does a better job with long-term dependencies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: BERT is a bidirectional model (looks both forward and backward). And the best
+    of all, BERT can be easily used as a feature extractor or fine-tuned with small
+    amounts of data. How good is it at recognizing intent from text?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Intent Recognition with BERT
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Luckily, the authors of the BERT paper [open-sourced their work](https://github.com/google-research/bert) along
+    with multiple pre-trained models. The original implementation is in TensorFlow,
+    but there are [very good PyTorch implementations](https://github.com/huggingface/transformers) too!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s start by downloading one of the simpler pre-trained models and unzip
+    it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: This will unzip a checkpoint, config, and vocabulary, along with other files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unfortunately, the original implementation is not compatible with TensorFlow
+    2\. The [bert-for-tf2](https://github.com/kpe/bert-for-tf2) package solves this
+    issue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Preprocessing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We need to convert the raw texts into vectors that we can feed into our model.
+    We’ll go through 3 steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tokenize the text
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Convert the sequence of tokens into numbers
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pad the sequences so each one has the same length
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Let’s start by creating the BERT tokenizer:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s take it for a spin:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The tokens are in lowercase and the punctuation is available. Next, we’ll convert
+    the tokens to numbers. The tokenizer can do this too:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: We’ll do the padding part ourselves. You can also use the Keras padding utils
+    for that part.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We’ll package the preprocessing into a class that is heavily based on the one
+    from [this notebook](https://github.com/kpe/bert-for-tf2/blob/master/examples/gpu_movie_reviews.ipynb):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We figure out the padding length by taking the minimum between the longest
+    text and the max sequence length parameter. We also surround the tokens for each
+    text with two special tokens: start with `[CLS]` and end with `[SEP]`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fine-tuning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let’s make BERT usable for text classification! We’ll load the model and attach
+    a couple of layers on it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: We’re fine-tuning the pre-trained BERT model using our inputs (text and intent).
+    We also flatten the output and add Dropout with two Fully-Connected layers. The
+    last layer has a softmax activation function. The number of outputs is equal to
+    the number of intents we have - seven.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can now use BERT to recognize intents!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'It is time to put everything together. We’ll start by creating the data object:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can now create the model using the maximum sequence length:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Looking at the model summary:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: You’ll notice that even this “slim” BERT has almost 110 million parameters.
+    Indeed, your model is HUGE (that’s what she said).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Fine-tuning models like BERT is both art and doing tons of failed experiments.
+    Fortunately, the authors made some recommendations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Batch size: 16, 32'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Learning rate (Adam): 5e-5, 3e-5, 2e-5'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Number of epochs: 2, 3, 4'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: We’ll use Adam with a slightly different learning rate (cause we’re badasses)
+    and use sparse categorical crossentropy, so we don’t have to one-hot encode our
+    labels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s fit the model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We store the training logs, so you can explore the training process in [Tensorboard](https://www.tensorflow.org/tensorboard).
+    Let’s have a look:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/880f4ce53de05f06386b7e08afbde3db.png)![](../Images/b1e36a67c88c06cd6e88ac96ad8b327f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Evaluation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'I got to be honest with you. I was impressed with the results. Training using
+    only 12.5k samples we got:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Impressive, right? Let’s have a look at the confusion matrix:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a37bea84a0725c75db91a07cf296851c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Finally, let’s use the model to detect intent from some custom sentences:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: Man, that’s (clearly) gangsta! Ok, the examples might not be as diverse as real
+    queries might be. But hey, go ahead and try it on your own!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You now know how to fine-tune a BERT model for text classification. You probably
+    already know that you can use it for a variety of other tasks, too! You just have
+    to fiddle with the layers. EASY!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Run the complete notebook in your browser**](https://colab.research.google.com/drive/1WQY_XxdiCVFzjMXnDdNfUjDFi0CN5hkT)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**The complete project on GitHub**](https://github.com/curiousily/Deep-Learning-For-Hackers)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Doing AI/ML feels a lot like having superpowers, right? Thanks to the wonderful
+    NLP community, you can have superpowers, too! What will you use them for?
+  prefs: []
+  type: TYPE_NORMAL
+- en: References
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[BERT Fine-Tuning Tutorial with PyTorch](https://mccormickml.com/2019/07/22/BERT-fine-tuning/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SNIPS dataset](https://github.com/snipsco/nlu-benchmark/tree/master/2017-06-custom-intent-engines)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Illustrated BERT, ELMo, and co.](https://jalammar.github.io/illustrated-bert/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[BERT for dummies — Step by Step Tutorial](https://towardsdatascience.com/bert-for-dummies-step-by-step-tutorial-fb90890ffe03)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Multi-label Text Classification using BERT – The Mighty Transformer](https://medium.com/huggingface/multi-label-text-classification-using-bert-the-mighty-transformer-69714fa3fb3d)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deep Learning](https://www.curiousily.com/tag/deep-learning/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Keras](https://www.curiousily.com/tag/keras/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[NLP](https://www.curiousily.com/tag/nlp/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Text Classification](https://www.curiousily.com/tag/text-classification/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python](https://www.curiousily.com/tag/python/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Continue Your Machine Learning Journey:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[![](../Images/c7f0e800e0a4fe82a04944c026cdf6bd.png)](http://bit.ly/Hackers-Guide-to-Machine-Learning-with-Python)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Hacker''s Guide to Machine Learning with Python***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A hands-on guide to solving real-world Machine Learning problems with Scikit-Learn,
+    TensorFlow 2, and Keras
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[BUY THE BOOK](http://bit.ly/Hackers-Guide-to-Machine-Learning-with-Python)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![](../Images/c5323a2dc7769caab61657e19077dc2f.png)](http://bit.ly/hands-on-machine-learning-from-scratch)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Hands-On Machine Learning from Scratch***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Develop a deeper understanding of Machine Learning models, tools and concepts
+    by building them from scratch with Python
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[BUY THE BOOK](http://bit.ly/hands-on-machine-learning-from-scratch)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![](../Images/ad6654296ab3297e4e122de002cc6519.png)](http://bit.ly/deep-learning-for-javascript-hackers)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Deep Learning for JavaScript Hackers***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Beginners guide to understanding Machine Learning in the browser with TensorFlow.js
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[BUY THE BOOK](http://bit.ly/deep-learning-for-javascript-hackers)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Venelin Valkov](https://www.linkedin.com/in/venelin-valkov/)** (**[GitHub](https://github.com/curiousily)**)
+    is a Machine Learning Engineer working on document data extraction using Deep
+    Learning. In his free time, he likes to write, work on side projects, ride his
+    bike, and do deadlifts!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.curiousily.com/posts/intent-recognition-with-bert-using-keras-and-tensorflow-2/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[BERT is changing the NLP landscape](/2019/09/bert-changing-nlp-landscape.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Lit BERT: NLP Transfer Learning In 3 Steps](/2019/11/lit-bert-nlp-transfer-learning-3-steps.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[BERT, RoBERTa, DistilBERT, XLNet: Which one to use?](/2019/09/bert-roberta-distilbert-xlnet-one-use.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Extractive Summarization with LLM using BERT](https://www.kdnuggets.com/extractive-summarization-with-llm-using-bert)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Evolution of Speech Recognition Metrics](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 IT Jobs That Are High in Demand But Don’t Get Enough Recognition](https://www.kdnuggets.com/5-it-jobs-that-are-high-in-demand-but-dont-get-enough-recognition)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

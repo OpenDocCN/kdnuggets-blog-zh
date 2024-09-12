@@ -1,0 +1,210 @@
+- en: 'Stable Diffusion: Basic Intuition Behind Generative AI'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/06/stable-diffusion-basic-intuition-behind-generative-ai.html](https://www.kdnuggets.com/2023/06/stable-diffusion-basic-intuition-behind-generative-ai.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Stable Diffusion: Basic Intuition Behind Generative AI](../Images/b12ef6f99e4bb18b488bc1b882e2f991.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image generated using [Stable Diffusion](https://huggingface.co/spaces/stabilityai/stable-diffusion)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The world of AI has shifted dramatically towards generative modeling over the
+    past years, both in Computer Vision and Natural Language Processing. Dalle-2 and
+    Midjourney have caught people's attention, leading them to recognize the exceptional
+    work being accomplished in the field of Generative AI.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most of the AI-generated images currently produced rely on Diffusion Models
+    as their foundation. The objective of this article is to clarify some of the concepts
+    surrounding Stable Diffusion and offer a fundamental understanding of the methodology
+    employed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Simplified Architecture
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: This flowchart shows the simplified version of a Stable Diffusion architecture.
+    We will go through it piece by piece to build a better understanding of the internal
+    workings. We will elaborate on the training process for better understanding,
+    with the inference having only a few subtle changes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Stable Diffusion: Basic Intuition Behind Generative AI](../Images/28393ca4661a8aef89a52c4467bf3b0d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Inputs
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The Stable Diffusion models are trained on Image Captioning datasets where each
+    image has an associated caption or prompt that describes the image. There are
+    therefore two inputs to the model; a textual prompt in natural language and an
+    image of size (3,512,512) having 3 color channels and dimensions of size 512.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Additive Noise
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The image is converted to complete noise by adding Gaussian noise to the original
+    image. This is done in consequent steps, for example, a small amount is noise
+    is added to the image for 50 consecutive steps until the image is completely noisy.
+    The diffusion process will aim to remove this noise and reproduce the original
+    image. How this is done will be explained further.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Image Encoder
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The Image encoder functions as a component of a Variational AutoEncoder, converting
+    the image into a 'latent space' and resizing it to smaller dimensions, such as
+    (4, 64, 64), while also including an additional batch dimension. This process
+    reduces computational requirements and enhances performance. Unlike the original
+    diffusion models, Stable Diffusion incorporates the encoding step into the latent
+    dimension, resulting in reduced computation, as well as decreased training and
+    inference time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Text Encoder
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The natural language prompt is transformed into a vectorized embedding by the
+    text encoder. This process employs a Transformer Language model, such as BERT
+    or GPT-based CLIP Text models. Enhanced text encoder models significantly enhance
+    the quality of the generated images. The resulting output of the text encoder
+    consists of an array of 768-dimensional embedding vectors for each word. In order
+    to control the prompt length, a maximum limit of 77 is set. As a result, the text
+    encoder produces a tensor with dimensions of (77, 768).
+  prefs: []
+  type: TYPE_NORMAL
+- en: UNet
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: This is the most computationally expensive part of the architecture and main
+    diffusion processing occurs here. It receives text encoding and noisy latent image
+    as input. This module aims to reproduce the original image from the noisy image
+    it receives. It does this through several inference steps which can be set as
+    a hyperparameter. Normally 50 inference steps are sufficient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Consider a simple scenario where an input image undergoes a transformation into
+    noise by gradually introducing small amounts of noise in 50 consecutive steps.
+    This cumulative addition of noise eventually transforms the original image into
+    complete noise. The objective of the UNet is to reverse this process by predicting
+    the noise added at the previous timestep. During the denoising process, the UNet
+    begins by predicting the noise added at the 50th timestep for the initial timestep.
+    It then subtracts this predicted noise from the input image and repeats the process.
+    In each subsequent timestep, the UNet predicts the noise added at the previous
+    timestep, gradually restoring the original input image from complete noise. Throughout
+    this process, the UNet internally relies on the textual embedding vector as a
+    conditioning factor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The UNet outputs a tensor of size (4, 64, 64) that is passed to the decoder
+    part of the Variational AutoEncoder.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Decoder
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The decoder reverses the latent representation conversion done by the encoder.
+    It takes a latent representation and converts it back to image space. Therefore,
+    it outputs a (3,512,512) image, the same size as the original input space. During
+    training, we aim to minimize the loss between the original image and generated
+    image. Given that, given a textual prompt, we can generate an image related to
+    the prompt from a completely noisy image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bringing It All Together
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: During inference, we have no input image. We work only in text-to-image mode.
+    We remove the Additive Noise part and instead use a randomly generated tensor
+    of the required size. The rest of the architecture remains the same.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The UNet has undergone training to generate an image from complete noise, leveraging
+    text prompt embedding. This specific input is used during the inference stage,
+    enabling us to successfully generate synthetic images from the noise. This general
+    concept serves as the fundamental intuition behind all generative computer vision
+    models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Muhammad Arham](https://www.linkedin.com/in/muhammad-arham-a5b1b1237/)**
+    is a Deep Learning Engineer working in Computer Vision and Natural Language Processing.
+    He has worked on the deployment and optimizations of several generative AI applications
+    that reached the global top charts at Vyro.AI. He is interested in building and
+    optimizing machine learning models for intelligent systems and believes in continual
+    improvement.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Generative AI Playground: Text-to-Image Stable Diffusion with…](https://www.kdnuggets.com/2024/02/intel-generative-ai-playground-text-to-image-stable-diffusion)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Become an AI Artist Using Phraser and Stable Diffusion](https://www.kdnuggets.com/2022/09/become-ai-artist-phraser-stable-diffusion.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Ways to Generate Hyper-Realistic Faces Using Stable Diffusion](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Diffusion and Denoising: Explaining Text-to-Image Generative AI](https://www.kdnuggets.com/diffusion-and-denoising-explaining-text-to-image-generative-ai)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 7 Diffusion-Based Applications with Demos](https://www.kdnuggets.com/2022/10/top-7-diffusionbased-applications-demos.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How ChatGPT Works: The Model Behind The Bot](https://www.kdnuggets.com/2023/04/chatgpt-works-model-behind-bot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

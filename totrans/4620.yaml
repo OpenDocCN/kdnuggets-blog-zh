@@ -1,0 +1,417 @@
+- en: Dealing with categorical features in machine learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/07/categorical-features-machine-learning.html](https://www.kdnuggets.com/2019/07/categorical-features-machine-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Hugo Ferreira](https://www.linkedin.com/in/hugo-ferreira8), Data Scientist
+    | Machine Learning Enthusiast | Physicist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to easily implement one-hot encoding in Python
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/dc204dce3ab7ebd72a010b66b8188048.png)Photo by [Max
+    Nelson](https://unsplash.com/@maxcodes?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Categorical data are commonplace in many Data Science and Machine Learning problems
+    but are usually more challenging to deal with than numerical data. In particular,
+    many machine learning algorithms require that their input is numerical and therefore
+    categorical features must be transformed into numerical features before we can
+    use any of these algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the most common ways to make this transformation is to **one-hot encode** the
+    categorical features, especially when there does not exist a natural ordering
+    between the categories (e.g. a feature ‘City’ with names of cities such as ‘London’,
+    ‘Lisbon’, ‘Berlin’, etc.). For each unique value of a feature (say, ‘London’)
+    one column is created (say, ‘City_London’) where the value is 1 if for that instance
+    the original feature takes that value and 0 otherwise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Even though this type of encoding is used very frequently, it can be frustrating
+    to try to implement it using scikit-learn in Python, as there isn’t currently
+    a simple transformer to apply, especially if you want to use it as a step of your
+    machine learning pipeline. In this post, I’m going to describe how you can still
+    implement it using only scikit-learn and pandas (but with a bit of effort). But,
+    after that, I’ll also show you how you can use the [category encoders library](http://contrib.scikit-learn.org/categorical-encoding/index.html) to
+    achieve the same thing in a much easier fashion.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To illustrate the whole process, I’m going to use the [Breast Cancer Data Set](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer)from
+    the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/index.html),
+    which has many categorical features on which to implement the one-hot encoding.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Load the data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The data we’re going to use is the [Breast Cancer Data Set](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer) from
+    the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/index.html).
+    This data set is small and contains several categorical features, which will allow
+    us to quickly explore a few ways to implement the one-hot encoding using Python,
+    pandas and scikit-learn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After downloading the data from the repository, we read it into a pandas dataframe `df`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This data set has 286 instances with 9 features and one target (‘Class’). The
+    target and features are described in the data set description as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: We’ll take all columns to be of ‘object’ type and split the training and test
+    sets using the `train_test_split` of scikit-learn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: One-hot encoding
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are several ways to encode categorical features (see, for example, [here](http://psych.colorado.edu/~carey/courses/psyc5741/handouts/Coding%20Categorical%20Variables%202006-03-03.pdf)).
+    In this post, we will focus on one of the most common and useful ones, **one-hot
+    encoding**. After the transformation, each column of the resulting data set corresponds
+    to one unique value of each original feature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, suppose we have the following categorical feature with three different
+    unique values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After one-hot encoding, the data set looks like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: We want to implement the one-hot encoding to the breast cancer data set, in
+    such a way that the resulting sets are suitable to use in machine learning algorithms.
+    Note that for many of the features of this data set there is a natural ordering
+    between the categories (e.g. the tumour size) and, therefore, other types of encoding
+    might be more appropriate, but for concreteness we will focus only on one-hot
+    encoding in this post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using scikit-learn
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s see how we would implement one-hot encoding using scikit-learn. There
+    is a [transformer](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html) conveniently
+    named `OneHotEncoder` which, at first glance, seems to be exactly what we’re looking
+    for.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'If we try to apply the above code, we obtain an `ValueError`, as `OneHotEncoder` requires
+    that all values are integers, and not strings as we have. This means we first
+    have to encode all the possible values as integers: for a given feature, if it
+    has *n* possible values (given by *n* different strings), we encode them with
+    integers between 0 and *n*-1\. Thankfully, there is another [transformer](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html) in
+    scikit-learn, called `LabelEncoder`, which does just that!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: And… we obtain another `ValueError`! In reality, `LabelEncoder` is only intended
+    to be used for the target vector, and as such it doesn’t work with more than one
+    column. Unfortunately, in version 0.19 of scikit-learn, there is no transformer
+    which can deal with several columns (there is some [hope for version 0.20](http://scikit-learn.org/dev/modules/generated/sklearn.preprocessing.OneHotEncoder.html#sklearn.preprocessing.OneHotEncoder)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: One solution is to make our own transformer, which we creatively call `MultiColumnLabelEncoder`,
+    which applies the `LabelEncoder` in each of the features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Will this work this time?
+  prefs: []
+  type: TYPE_NORMAL
+- en: It worked! To better understand what happened, let’s check the original training
+    set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We see, for instance, that the age group 30–39 was given the label 0, 40–49
+    was given the label 1, etc, and analogously for the other features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After applying the `MultiColumnLabelEncoder`, we can (finally!) use the `OneHotEncoder` to
+    implement the one-hot encoding to both the training and test sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some comments:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `OneHotEncoder` is fitted to the training set, which means that for each
+    unique value *present in the training set*, for each feature, a new column is
+    created. We have 39 columns after the encoding.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The output is a numpy array (when the option `sparse=False` is used), which
+    has the disadvantage of losing all the information about the original column names
+    and values.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When we try to transform the test set, after having fitted the encoder to the
+    training set, we obtain (again!) a `ValueError`. This is because the there are *new,
+    previously unseen* unique values in the test set and the encoder doesn’t know
+    how to handle these values. In order to use both the transformed training and
+    test sets in machine learning algorithms, we need them to have the same number
+    of columns.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This last problem can be solved by using the option `handle_unknown='ignore'` of
+    the `OneHotEncoder`, which, as the name suggests, will ignore previously unseen
+    values when transforming the test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And that’s it! Both the training and test sets have 39 columns and are now in
+    a suitable form to be used in machine learning algorithms which require numerical
+    data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, the procedure shown above is quite inelegant and we lose the dataframe
+    format for the data. Is there an easier way to implement all of this?
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using category encoders
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[**Category Encoders**](http://contrib.scikit-learn.org/categorical-encoding/index.html) is
+    a library of scikit-learn-compatible categorical variable encoders, such as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ordinal
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: One-Hot
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Binary
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Helmert Contrast
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sum Contrast
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Polynomial Contrast
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Backward Difference Contrast
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Hashing
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: BaseN
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: LeaveOneOut
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Target Encoding
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The Ordinal, One-Hot and Hashing encoders are improved versions of the ones
+    present in scikit-learn with the following advantages:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Support for pandas dataframes as an input and, optionally, as output;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Can explicitly configure which columns in the data are encoded by name or index,
+    or infer non-numeric columns regardless of input type;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Compatibility with scikit-learn pipelines.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For our purposes, we’re going to use the improved `OneHotEncoder` and see how
+    much we can simplify the workflow. First, we import the category encoders library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Then, let’s try to apply the `OneHotEncoder` directly to both the training and
+    test sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It worked immediately! No need to use `LabelEncoder` first!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some observations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The outputs are dataframes, which allows us to more easily check how the several
+    features were transformed. As before, each transformed set has 39 columns and
+    it can be checked that the matrices of 0’s and 1’s are identical to the ones obtained
+    previously.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: I used the option `use_cat_names=True` so that the possible values of each feature
+    are added to the feature name in each new column (e.g. `age_60-69`). This was
+    done for clarity, but by default it simply adds an index (e.g. `age_1`, `age_2`,
+    etc).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We can now more easily understand why we previously obtained an error when we
+    didn’t require that unseen values in the test set were ignored. Below, we show
+    all the columns of the test set after one-hot encoding, when the encoder is fitted
+    to the training set (first) and when is fitted to the test set (second). We see
+    that, in the second case, there are now 42 columns, as 3 new columns were created: `age_20-29`, `tumor-size_5-9` and `breast-quad_unknown`.
+    These corresponds to three values in the test set (20–29 in `age`, 5–9 in `tumor-size`and
+    unknown in `breast-quad`) that *are not present* in the training set.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Comparing the two approaches above, it’s clear that we should use the`OneHotEncoder` from
+    the category encoders library if we intend to one-hot encode the categorical features
+    in our data set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As remarked in the beginning, one-hot encoding is not the only possible way
+    to encode categorical features and the category encoders library has [several
+    encoders](http://contrib.scikit-learn.org/categorical-encoding/index.html) which
+    you should explore, as others might be more appropriate for different categorical
+    features and machine learning problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can find my LinkedIn in:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Hugo Ferreira - Researcher - Instituto Superior Técnico | LinkedIn'
+  prefs: []
+  type: TYPE_NORMAL
+- en: View Hugo Ferreira's profile on LinkedIn, the world's largest professional community.
+    Hugo has 3 jobs listed on their…](https://www.linkedin.com/in/hugo-ferreira8)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Hugo Ferreira](https://medium.com/@hugorcf)** is a Data Scientist with
+    a background in Mathematics and Physics and spent several years doing research
+    in the framework and computational tools to analyse previously unexplored complex
+    systems of interest to Astrophysics and Quantum Physics.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/hugo-ferreiras-blog/dealing-with-categorical-features-in-machine-learning-1bb70f07262d).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[The Hitchhiker’s Guide to Feature Extraction](/2019/06/hitchhikers-guide-feature-extraction.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Data Preparation for Machine Learning with Python — 2019
+    Edition](/2019/06/7-steps-mastering-data-preparation-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Quick Guide to Feature Engineering](/2019/02/quick-guide-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

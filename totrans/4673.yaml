@@ -1,0 +1,403 @@
+- en: Modeling Price with Regularized Linear Model & XGBoost
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/05/modeling-price-regularized-linear-model-xgboost.html](https://www.kdnuggets.com/2019/05/modeling-price-regularized-linear-model-xgboost.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Susan Li](https://www.linkedin.com/in/susanli/), Sr. Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We would like to model the price of a house, we know that the price depends
+    on the location of the house, square footage of a house, year built, year renovated,
+    number of bedrooms, number of garages, etc. So those factors contribute to the
+    pattern — premium location would typically lead to a higher price. However, all
+    houses within the same area and have same square footage do not have the exact
+    same price. The variation in price is the noise. Our goal in price modeling is
+    to model the pattern and ignore the noise. The same concepts apply to modeling
+    hotel room prices too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Therefore, to start, we are going to implement regularization techniques for
+    linear regression of house pricing data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There is an excellent house prices data set can be found [here](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/400ca1990b116f3a2bfe48c0a7c8f3e1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 1
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/1830468153937fb58fc289aef89975cc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 2
+  prefs: []
+  type: TYPE_NORMAL
+- en: The good news is that we have many features to play with (81), the bad news
+    is that 19 features have missing values, and 4 of them have over 80% missing values.
+    For any feature, if it is missing 80% of values, it can’t be that important, therefore,
+    I decided to remove these 4 features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Explore Features
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Target feature distribution**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/23a0ee26011f1de8cc74c911d430a5fa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 3
+  prefs: []
+  type: TYPE_NORMAL
+- en: The target feature - SalePrice is right skewed. As linear models like normally
+    distributed data , we will transform SalePrice and make it more normally distributed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/2c04a4ee0f8aa68125e2988ac87e3145.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 4
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Correlation between numeric features****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/adaa4910f1cd52b6cb2a19f917ff4874.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 5
+  prefs: []
+  type: TYPE_NORMAL
+- en: There exists strong correlations between some of the features. For example,
+    GarageYrBlt and YearBuilt, TotRmsAbvGrd and GrLivArea, GarageArea and GarageCars
+    are strongly correlated. They actually express more or less the same thing. I
+    will let [***ElasticNetCV***](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNetCV.html) to
+    help reduce redundancy later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Correlation between SalePrice and the other numeric features****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/9ccdde1368609efc06eebb128b05b154.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 6
+  prefs: []
+  type: TYPE_NORMAL
+- en: The correlation of SalePrice with OverallQual is the greatest (around 0.8).
+    Also GrLivArea presents a correlation of over 0.7, and GarageCars presents a correlation
+    of over 0.6\. Let’s look at these 4 features in more detail.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/806f7fed1c21eae6cc20f99891cce867.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 7
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature Engineering
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Log transform features that have a highly skewed distribution (skew > 0.75)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Dummy coding categorical features
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Fill NaN with the mean of the column.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Train and test sets split.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: feature_engineering_price.py
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ElasticNet**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Ridge** and **Lasso** regression are regularized linear regression models.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**ElasticNe**t is essentially a **Lasso/Ridge** hybrid, that entails the minimization
+    of an objective function that includes both **L1** (Lasso) and **L2**(Ridge) norms.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**ElasticNet** is useful when there are multiple features which are correlated
+    with one another.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The class **ElasticNetCV** can be used to set the parameters `alpha` (α) and `l1_ratio` (ρ)
+    by cross-validation.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**ElasticNetCV**: **ElasticNet **model with best model selection by cross-validation.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Let’s see what **ElasticNetCV** is going to select for us.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ElasticNetCV.py
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/369d93d5ff7928d74aa7423c9e017608.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 8
+  prefs: []
+  type: TYPE_NORMAL
+- en: 0< The optimal l1_ratio <1 , indicating the penalty is a combination of L1 and
+    L2, that is, the combination of **Lasso** and **Ridge**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Model Evaluation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ElasticNetCV_evaluation.py
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f455d4f7238efad312b8d52742416b95.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 9
+  prefs: []
+  type: TYPE_NORMAL
+- en: The **RMSE** here is actually **RMSLE** ( Root Mean Squared Logarithmic Error).
+    Because we have taken the log of the actual values. Here is [a nice write up explaining
+    the differences between RMSE and RMSLE](https://www.quora.com/What-is-the-difference-between-an-RMSE-and-RMSLE-logarithmic-error-and-does-a-high-RMSE-imply-low-RMSLE).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Feature Importance**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/80e32f97e3f1dc425d779972f73c45c8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 10
+  prefs: []
+  type: TYPE_NORMAL
+- en: A reduction of 58.91% features looks productive. The top 4 most important features
+    selected by ElasticNetCV are **Condition2_PosN**, **MSZoning_C(all)**, **Exterior1st_BrkComm** & **GrLivArea**.
+    We are going to see how these features compare with those selected by Xgboost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Xgboost
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first Xgboost model, we start from default parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: xgb_model1.py
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/a0d49964d20588bfccfb278f5c327ac7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 11
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is already way better an the model selected by ElasticNetCV!
+  prefs: []
+  type: TYPE_NORMAL
+- en: The second Xgboost model, we gradually add a few parameters that suppose to
+    add model’s accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: xgb_model2.py
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/17d6fe7f32772f7c31d43d5e0f818578.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 12
+  prefs: []
+  type: TYPE_NORMAL
+- en: There was again an improvement!
+  prefs: []
+  type: TYPE_NORMAL
+- en: The third Xgboost model, we add a learning rate, hopefully it will yield a more
+    accurate model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: xgb_model3.py
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/fefc8fc0a347a500146fefb068ceb5ab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 13
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unfortunately, there was no improvement. I concluded that xgb_model2 is the
+    best model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Feature Importance**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/b1ad2d60c6c9805201c37dd33e3985af.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 14
+  prefs: []
+  type: TYPE_NORMAL
+- en: The top 4 most important features selected by Xgboost are **LotArea**, **GrLivArea**, **OverallQual** & **TotalBsmtSF**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is only one feature **GrLivArea** was selected by both ElasticNetCV and
+    Xgboost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So now we are going to select some relevant features and fit the Xgboost again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: xgb_model5.py
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b8d35c6db82deef0ea04c51bc55b8ca8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 15
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another small improvement!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Jupyter notebook](https://github.com/susanli2016/Machine-Learning-with-Python/blob/master/Modeling%20House%20Price%20with%20Regularized%20Linear%20Model%20%26%20Xgboost.ipynb) can
+    be found on [Github](https://github.com/susanli2016/Machine-Learning-with-Python/blob/master/Modeling%20House%20Price%20with%20Regularized%20Linear%20Model%20%26%20Xgboost.ipynb).
+    Enjoy the rest of the week!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Susan Li](https://www.linkedin.com/in/susanli/)** is changing the world,
+    one article at a time. She is a Sr. Data Scientist, located in Toronto, Canada.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/modeling-price-with-regularized-linear-model-xgboost-55e59eae4482).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Unveiling Mathematics Behind XGBoost](/2018/08/unveiling-mathematics-behind-xgboost.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Multi-Class Text Classification with Scikit-Learn](/2018/08/multi-class-text-classification-scikit-learn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[An Introduction on Time Series Forecasting with Simple Neural Networks & LSTM](/2019/04/introduction-time-series-forecasting-simple-neural-networks-lstm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What are the Assumptions of XGBoost?](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tuning XGBoost Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Leveraging XGBoost for Time-Series Forecasting](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[WTF is the Difference Between GBM and XGBoost?](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Linear Regression Model Selection: Balancing Simplicity and Complexity](https://www.kdnuggets.com/2023/02/linear-regression-model-selection-balancing-simplicity-complexity.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

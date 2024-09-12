@@ -1,0 +1,404 @@
+- en: Mastering Fast Gradient Boosting on Google Colaboratory with free GPU
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/03/mastering-fast-gradient-boosting-google-colaboratory-free-gpu.html](https://www.kdnuggets.com/2019/03/mastering-fast-gradient-boosting-google-colaboratory-free-gpu.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Anna Veronika Dorogush](https://www.linkedin.com/in/anna-veronika-dorogush-08739637/
+    ), CatBoost Team Lead**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Mastering Gradient Boosting Figure 1](../Images/62dab8909af11b3717938905d64a8f7c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**NVIDIA K80 GPU, [https://www.nvidia.com/ru-ru/data-center/tesla-k80/](https://www.nvidia.com/ru-ru/data-center/tesla-k80/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Gradient Boosting on Decision Trees** (GBDT) is a state-of-the-art Machine
+    Learning tool for working with heterogeneous or structured data. When working
+    with data, the ideal algorithm depends highly on the type of data. For homogeneous
+    data, like images, sound or text, the best solution is neural networks. And for
+    structured data, for example for credit scoring, recommendations or any other
+    tabled data the best solution is GBDT.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this reason, a large number of winning solutions for [Kaggle](https://www.kaggle.com/)
+    competitions are based on GBDT. GBDT is also heavily used in the production of
+    different recommendation systems, in search engines, and in many financial structures.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Many people think that GBDT cannot be efficiently accelerated by a GPU, but
+    this is actually not the case.  In this post, I explain how a GPU can be used
+    to speed up GBDT.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For the GBDT implementation, I’ll use **CatBoost**, a library well known for
+    its categorical features support and efficient GPU implementation.  It not only
+    works with categorical data, but with any data, and in many cases, it outperforms
+    other GBDT libraries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The library was developed for production needs at the leading Russian tech company,
+    [Yandex](https://yandex.com), and was later open sourced under the [Apache 2 license](https://en.wikipedia.org/wiki/Apache_License)
+    about a year and a half ago.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Mastering Gradient Boosting Figure 2](../Images/9bb20a26e6a3b27261e83e1bc0a2c29f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The test environment for my demonstration will be **Google Colaboratory**. This
+    is a research tool for machine learning with free access to GPU runtime.  It’s
+    a Jupyter notebook environment that requires no setup to use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Google Colaboratory offers pretty old GPUs for free - a Tesla K80 GPU with about
+    11GB memory.  With newer GPUs, the speed increase will be much more significant. 
+    But even with this old GPU, you will see an impressive speed difference. If we
+    are talking about CPU, it’s 2x Intel Xeon E5-2600v3 per instance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below you will find several simple steps to set up CatBoost inside Colab, download
+    a dataset, train the model on a CPU and a GPU, and compare execution times.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create notebook
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Navigate to [Colaboratory](https://colab.research.google.com) and create a new
+    Python 3 notebook.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Mastering Gradient Boosting Figure 3](../Images/4be7e2cb46334ca9eb4ecd65f18c0d9a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Set GPU as hardware accelerator
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'There are two simple steps to select GPU as the hardware accelerator:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 1\. Navigate to the 'Runtime' menu and select 'Change runtime type'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Mastering Gradient Boosting Figure 4](../Images/691557beda28be1fc217785b2b258ccd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Step 2\. Select “GPU” as the hardware accelerator.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Mastering Gradient Boosting Figure 5](../Images/bcb8c4599e6ea3a34d6a2b89d152f19e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Importing CatBoost
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The next step is to import CatBoost inside the environment. Colaboratory has
+    built in libraries installed and most libraries can be installed quickly with
+    a simple *!pip install* command.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Please ignore the warning message about already imported enum package. Furthermore
+    take note that you need to re-import the library every time you start a new session
+    of Colab.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*!pip install catboost*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Mastering Gradient Boosting Figure 6](../Images/3ec24905d856d4a3bede106e32662599.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The CatBoost library that you install from pypi has GPU support, so you can
+    use it straight away.  You only need to have a NVIDIA driver installed on your
+    machine, and everything else will work out-of-the-box.  This is also true for
+    Windows, making it easier for  Windows users who want to train their models on
+    GPUs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Download and prepare dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It’s time to code!  Once we’ve configured our environment, the next step is
+    to download and prepare the dataset.  For GPU training, the bigger the dataset
+    is, the bigger the speedup will be.  It doesn’t make a lot of sense to use GPU
+    training for objects of one thousand or less, but starting from around 10,000
+    you will get a good acceleration.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We require a large dataset to  demonstrate the power of GPUs for GBDT tasks.
+    We will use Epsilon, which has 500,000 documents and 2,000 features, and is included
+    in catboost.datasets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code below does this task in approximately 10-15 minutes. Please be patient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training on CPU
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To   the myth about GBDT not showing large speed gains on GPU, I would like
+    to compare GBDT training time on CPU and GPU.  Let’s start with CPU. The code
+    below creates a model, trains it, and measures the execution time of the training. 
+    It uses default parameters as they provide a fairly good baseline in many cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will first train all our models for 100 iterations (because it takes a really
+    long time to train it on CPUs).
+  prefs: []
+  type: TYPE_NORMAL
+- en: After you run this code, you can change it to a default of 1000 or more iterations
+    to get better quality results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: CatBoost will require around 15 minutes to train on CPUs for 100 iterations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: you want to show there can be feed speed ups, correct?
+  prefs: []
+  type: TYPE_NORMAL
+- en: if feed = training, yes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Time to fit model on CPU: 862 sec'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training on GPUs
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: All previous code execution has been done on a CPU. It's time to use a GPU now!
+  prefs: []
+  type: TYPE_NORMAL
+- en: To enable the GPU training you need to use *task_type='GPU'* parameter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s rerun the experiment on GPU and see what will be the resulting time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If Colab will show you the warning “GPU memory usage is close to the limit”,
+    just press “Ignore”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Mastering Gradient Boosting Figure 7](../Images/2b65f3aa59ac6d9a48ce75e0fdbb633f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Time to fit model on GPU: 195 sec'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'GPU speedup over CPU: 4x'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see, the GPU is **4x times** faster than the CPU. It takes just 3-4
+    minutes vs 14-15 with a CPU to fit the model.  Moreover, the learning process
+    is complete in just 30 seconds vs 12 minutes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When we train 100 iterations, the bottleneck is preprocessing and not the training
+    itself.  But for thousands of iterations that are necessary to get the best quality
+    on huge datasets, this bottleneck will be invisible. You can try training for
+    5,000 iterations on a CPU and a GPU and compare once again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: All the code above you can find as a [tutorial](https://colab.research.google.com/github/catboost/tutorials/blob/master/tools/google_colaboratory_cpu_vs_gpu_tutorial.ipynb)
+    for Google Colaboratory at CatBoost repository.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alternative GBDT libraries
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To be fair there are at least two more popular open source GBDT libraries:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[XGBoost](https://github.com/dmlc/xgboost/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[LightGBM](https://github.com/Microsoft/LightGBM)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Both are available as pre-installed libraries on Colaboratory. Let’s train
+    both of them on CPU / GPU and compare times. Spoiler: We had no luck at receiving
+    results from them. Details are below.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: XGBoost
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For the start let’s try the CPU version of XGBoost. Need to stress that training
+    parameters is the same as for CatBoost library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code is quite simple, but once we’ve run it with Epsilon dataset Colaboratory
+    session has crashed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Mastering Gradient Boosting Figure 8](../Images/95585dac0f80bdc1a163fc298f4a43cc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Unfortunately the same error occurs with the GPU version. Kernel dies after
+    you start the simple code above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: LightGBM
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: CPU version of LightGBM results in the same error message “Your session crashed
+    after using all available RAM.” error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Colaboratory pre-installed version of LightGBM doesn’t contain GPU out of the
+    box. And the  [installation guide](https://github.com/Microsoft/LightGBM/tree/master/python-package)
+    for GPU version unfortunately doesn’t work. See details below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*!pip install -U lightgbm --install-option=--gpu*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Mastering Gradient Boosting Figure 9](../Images/57c772f59ed4bf65e1531d1f68b2d360.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It’s a pity, but we couldn’t compare CPU vs GPU execution times for other libraries,
+    except CatBoost’s. Possibly it’ll work with smaller dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: GBDT algorithm works efficiently on a GPU.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: CatBoost is a fast implementation of GBDT with GPU support out-of-the-box.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: XGBoost and LightGBM don’t always work on Colaboratory with large datasets.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Google Colaboratory is useful tool with free GPU support.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Further reading
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[1] V. Ershov, [CatBoost Enables Fast Gradient Boosting on Decision Trees Using
+    GPUs](https://devblogs.nvidia.com/catboost-fast-gradient-boosting-decision-trees/),
+    NVIDIA blog post'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[2] R. Mitchell, [Gradient Boosting, Decision Trees and XGBoost with CUDA](https://devblogs.nvidia.com/gradient-boosting-decision-trees-xgboost-cuda/),
+    NVIDIA blog post'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[3] [LightGBM GPU Tutorial](https://lightgbm.readthedocs.io/en/latest/GPU-Tutorial.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[4] [CatBoost GitHub](https://github.com/catboost)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio**: [Anna Veronika Dorogush](https://www.linkedin.com/in/anna-veronika-dorogush-08739637/
+    ) is the Head of Machine Learning Systems at Yandex.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Resources:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[On-line and web-based: Analytics, Data Mining, Data Science, Machine Learning
+    education](https://www.kdnuggets.com/education/online.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Software for Analytics, Data Science, Data Mining, and Machine Learning](https://www.kdnuggets.com/software/index.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Understanding Gradient Boosting Machines](https://www.kdnuggets.com/2019/02/understanding-gradient-boosting-machines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 More Google Colab Environment Management Tips](https://www.kdnuggets.com/2019/01/more-google-colab-environment-management-tips.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Creating a simple text classifier using Google CoLaboratory](https://www.kdnuggets.com/2018/03/simple-text-classifier-google-colaboratory.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a GPU Machine vs. Using the GPU Cloud](https://www.kdnuggets.com/building-a-gpu-machine-vs-using-the-gpu-cloud)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Ultimate Guide to Mastering Seasonality and Boosting Business Results](https://www.kdnuggets.com/2023/08/media-mix-modeling-ultimate-guide-mastering-seasonality-boosting-business-results.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mastering GPUs: A Beginner''s Guide to GPU-Accelerated DataFrames in Python](https://www.kdnuggets.com/2023/07/mastering-gpus-beginners-guide-gpu-accelerated-dataframes-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Boosting Machine Learning Algorithms: An Overview](https://www.kdnuggets.com/2022/07/boosting-machine-learning-algorithms-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Announcing a Blog Writing Contest, Winner Gets an NVIDIA GPU!](https://www.kdnuggets.com/2022/11/blog-writing-contest-nvidia-gpu.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using RAPIDS cuDF to Leverage GPU in Feature Engineering](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

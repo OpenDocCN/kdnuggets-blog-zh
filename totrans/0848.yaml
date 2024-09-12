@@ -1,0 +1,1018 @@
+- en: Using RAPIDS cuDF to Leverage GPU in Feature Engineering
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Editor''s note**: This was the runner-up in our recent NVIDIA + KDnuggets
+    GPU-themed blog writing contest. Congratulations to Hasan on the accomplishment!'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The fact that particular methods succeeded in solving a problem may not lead
+    to the same outcome on a different scale. When distances change, shoes need to
+    change too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In machine learning, data, and data processing are crucial in ensuring the model’s
+    success, and feature engineering is part of that process. When the data is small,
+    the classical Pandas library can easily handle any processing task on the CPU.
+    However, Pandas can be too slow in processing big data. One solution to improving
+    speed and efficiency in data processing and feature engineering is RAPIDS.
+  prefs: []
+  type: TYPE_NORMAL
+- en: “*RAPIDS is a suite of open-source software libraries for executing end-to-end
+    data science and analytics pipelines entirely on graphics processing units (GPUs).
+    RAPIDS accelerates data science pipelines to create more productive workflows.*[1]”
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/c05d7dfe959c3948ba5fcfb9a9f0cc7d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by [brgfx](https://www.freepik.com/free-vector/opposite-adjectives-fast-slow_1172856.htm#query=running%20fast&position=6&from_view=search&track=ais)
+    on Freepik
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'One tool by RAPIDS to efficiently manipulate tabular data in feature engineering
+    and data preprocessing is *cuDF*. RAPIDS *cuDF* enables the creation of GPU data
+    frames and the performance of several *Pandas* operations such as indexing, groupby,
+    merging, and string handling. As the RAPIDS website defines:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: “*cuDF is a Python GPU DataFrame library (built on the Apache Arrow columnar
+    memory format) for loading, joining, aggregating, filtering, and otherwise manipulating
+    tabular data using a DataFrame style API in the style of pandas.*[2]”
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This article tries to explain how to create and manipulate data frames and apply
+    feature engineering with *cuDF* on GPU using a real dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our [dataset](https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/data)
+    belongs to Optiver Realized Volatility Prediction of Kaggle. It contains stock
+    market data relevant to the practical execution of trades in the financial markets
+    and includes order book snapshots and executed trades[3].
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll discover more about the data in the following section. Then, we will integrate
+    Google Colab with Kaggle and RAPIDS. In the third section, we will see how to
+    accomplish feature engineering on this dataset using *Pandas* and *cuDF*. That
+    will provide us with a comparative performance review of both libraries. In the
+    last section, we will plot and evaluate the results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'The data we are going to use consists of two sets of files[3]:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'book_[train/test].parquet: A parquet file, which is partitioned by stock_id,
+    provides order book data on the most competitive buy and sell orders entered into
+    the market. This file contains passive buy/sell intention updates.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Feature columns in book_[train/test].parquet:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: stock_id - ID code for the stock. Parquet coerces this column to the categorical
+    data type when loaded.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: time_id - ID code for the time bucket. Time IDs are not necessarily sequential
+    but are consistent across all stocks.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: seconds_in_bucket - Number of seconds from the start of the bucket, always starting
+    from 0.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: bid_price[1/2] - Normalized prices of the most/second most competitive buy level.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ask_price[1/2] - Normalized prices of the most/second most competitive sell
+    level.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: bid_size[1/2] - The number of shares on the most/second most competitive buy
+    level.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ask_size[1/2] - The number of shares on the most/second most competitive sell
+    level.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/d5ea073b919da625e4421b8bce8c968b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-1: Description of book_[train/test].parquet (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This file is 5.6 GB and contains more than 167 million entries. There are 112
+    stocks and 3830 10-minute time windows (time_id). Each time window (bucket) has
+    a maximum of 600 seconds. As one transaction intention can occur per second in
+    each time window for each stock, the multiplication of the mentioned numbers can
+    explain why we have millions of entries. A caveat is that not every second a transaction
+    intention occurs, meaning that some seconds in a particular time window are missing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'trade_[train/test].parquet: A parquet file, which is partitioned by stock_id,
+    contains data on trades that are actually executed.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Feature columns in trade_[train/test].parquet:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: stock_id - Same as above.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: time_id - Same as above.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: seconds_in_bucket - Same as above. Note that since trade and book data are taken
+    from the same time window and trade data is more sparse in general, this field
+    is not necessarily starting from 0.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: price - The average price of executed transactions happening in one second.
+    Prices have been normalized and the average has been weighted by the number of
+    shares traded in each transaction.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: size - The total number of shares traded.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: order_count - The number of unique trade orders taking place.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/86d85c6851c2d26fb8a88c06311ff4cd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-2: Description of trade_[train/test].parquet (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The trade_[train/test].parquet file is much less than book_[train/test].parquet.
+    The former is 512.5 MB and has more than 38 million entries. Since actual transactions
+    don’t have to match intentions, trade data is more sparse and hence fewer entries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The goal is to predict the realized stock price volatility computed over the
+    next 10-minute window from the feature data under the same stock_id/time_id. This
+    project involves a great deal of feature engineering that should be performed
+    on a large dataset. Developing new features will also increase the size of the
+    data and the computational complexity. One remedy is to use *cuDF* instead of
+    the *Pandas* library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this blog, we will see a few feature engineering tasks and data frame manipulations
+    trying both *Pandas* and *cuDF* to compare their performances. However, we won’t
+    use all the data but only a single stock’s records to see an exemplary implementation.
+    One may check out the [notebook](https://www.kaggle.com/code/hserdaraltan/optiver-train-feature-engineering-lgbm-cv-gpu)
+    to see all feature engineering work done on the entire data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since we execute the code on Google Colab, we should first configure our notebook
+    to integrate Kaggle and RAPIDS.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Configuration of Google Colab Notebook
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'There are a few steps to configure the Colab notebook:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create an API token on the Kaggle account to authenticate the notebook with
+    Kaggle services.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/80069e40e84a7975eea7b6d87cca5576.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-3: Creating An API Token On The Kaggle Account (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Go to Settings and click on “Create New Token.” A file named “kaggle.json” will
+    be downloaded which contains the username and the API key.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Start a new notebook on Google Colab and upload the kaggle.json file.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/b6749068334098d8b6acfabc72c1a812.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-4: Uploading The kaggle.json File In Google Colab (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Upload the kaggle.json file in Google Colab by clicking on the “Upload to session
+    storage” icon.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Click the “Runtime” dropdown at the top of the page, then “Change Runtime Type”
+    and confirm the instance type is *GPU*.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Execute the below command and check the output to ensure you have been allocated
+    a Tesla T4, P4, or P100.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Get RAPIDS-Colab install-files and check your GPU:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Ensure that your Colab Instance is RAPIDS compatible in the output of this cell.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/4209f98d2eb0124501d10babcd488dc8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-5: Checking If The Colab Instance Is RAPIDS Compatible (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Check if RAPIDS libraries are installed correctly:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: We are all set with the Google Colab configuration if the setup renders no error.
+    Now, we can upload the Kaggle dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Importing and Uploading the Kaggle Dataset
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We need to make a few arrangements in our Colab instance to import the dataset
+    from Kaggle.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Install the Kaggle library:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Make a directory named “.kaggle”:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Copy the “kaggle.json” into this new directory:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Allocate the required permission for this file:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Download the dataset from Kaggle:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Create a directory for unzipped data:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Unzip data in the new directory:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Import all other libraries we need:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Set *Pandas* options:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Define parameters:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Get files:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now, our notebook is ready to run all data frame tasks and perform feature engineering.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature Engineering
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: This section will discuss 13 typical engineering operations on *Pandas* data
+    frame and *cuDF*. We will see how long these operations take and how much memory
+    they use. Let us start by loading the data first.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Loading data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: When dframe=0, data will be loaded as a *Pandas* data frame, otherwise *cuDF*.
+    For example,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Pandas:*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This will return the first five records of the Order Book (book_[train/test].parquet):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/e2fd9dc3ad2f24f45656359185d54d94.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-6: Loading The Data As Pandas Dataframe (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*cuDF:*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/9f3a498b7929dee8abe46c070a6195e6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-7: Loading The Data As cuDF (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let us get information about the Order Book data from the *Pandas* version:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/cd8ee13064a40ea54bdab9feec1cce94.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-8: Information About The First Stock’s Order Book Data (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The above image tells us that the first stock has around 1.4 million entries
+    and holds 47.8 MB of memory space. To reduce the space and increase the speed,
+    we should convert data types to lesser formats, which we’ll do later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In a similar fashion, we load the Trade Book (trade_[train/test].parquet) data
+    in both data frame libraries as we did for the Order Book data. The data and its
+    information will look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/6f9405078f82d66ac8395c91488d52e5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-9: The First Stock’s Trade Book Data And Data Info (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The trading data for the first stock is 3.7 MB and has over 276 thousand records.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In both files (Order Book and Trade Book), not every time window has 600 points
+    of seconds. In other words, a particular time bucket may have transactions or
+    bids only on some seconds in the 10-minute interval. That makes us face sparse
+    data in both files where some seconds are missing. We should fix it by forward-filling
+    all columns for the missing seconds. While *Pandas* allows us to forward fill,
+    *cuDF* doesn’t have that feature. Thus, we will do forward-filling in *Pandas*
+    and re-create the *cuDF* from the forward-filled *Pandas* data frame. We feel
+    remorse about this as the central goal of this blog is to show how *cuDF* outperforms
+    *Pandas*. I checked into the matter multiple times in the past, but to the best
+    knowledge, I couldn’t come across the method in *cuDF* as implemented in *Pandas*.
+    Thus, we can do forward-filling as follows[4]:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s take the order data as an example and how it is processed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/31bd00bd59ce67d1132a29cc6dee8fba.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-10: Forward Filling The Order Data (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unlike the data in Exhibit 7, the forward-filled data in Exhibit 10 has all
+    600 seconds in the time bucket “5” as from 0 to 599, inclusive. We do the same
+    operation on the trade data as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Merging Data Frames
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We have two datasets, order and trade, and both are forward-filled. Both datasets
+    are represented in *Pandas* and *cuDF* frameworks. Next, we will merge order and
+    trade datasets on time_id and seconds_in_buckets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*cuDF* will execute the following command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'expanded_df_cudf_trade is the forward-filled trade data and is obtained the
+    same way as expanded_df_pd_order or expanded_df_cudf_order. Merge operation will
+    create a combined data frame as shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/7bcbf12ea281c2a9a75a86e8c331c52c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-11: Merging Data Frames (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: All columns of the two datasets are combined into one. Merging operation is
+    repeated for the *Pandas* data frames too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/fc670d7abbb9527f1293059695db54bc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by [pikisuperstar](https://www.freepik.com/free-vector/hand-drawn-flat-design-gathering-data-business-concept_20547395.htm#page=3&query=data%20engineering&position=36&from_view=search&track=ais)
+    on Freepik
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Changing Dtype
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We want to change the data type of some columns to reduce memory space and increase
+    computation speed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: When we execute the below command,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'we get the following output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/53ea716fd59ad9e762b7eb77e0c9531d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-12: Changing Dtype (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data in Exhibit 12 would use more memory space if no data type conversion
+    took place. It still has 78.9 MB but, that was after the forward-fill and merge
+    operations, which resulted in 13 columns and 2.3 million entries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We fulfill every feature engineering task for both *Pandas* DF and *cuDF*. Here,
+    we just showed the one for *cuDF* as an example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. Getting Unique Time Ids
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We will use the unique method to extract the time_ids in this section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE24]'
+  prefs: []
+  type: TYPE_PRE
+- en: The above code will get the unique time_ids from *Pandas* DF and *cuDF*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE25]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output of the *cuDF* looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/21f81b24a5d7a1430277af76a62755a6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-13: Getting Unique Time Ids (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5\. Checking Null Values
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Then, we will check the null values in data frames.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE26]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Checking null values example in *cuDF*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE27]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And the output is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/e2324cc152e7c4f88bc9c0150ee3d2d7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-14: Checking Null Values (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 6\. Adding a Column
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We want to create more features, so add a few columns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE28]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'That will create new features such as weighted average price (wap1 and wap2),
+    order volume, and volume imbalance. In total, eight columns will be added to the
+    data frames by executing the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE29]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'It will hence give us:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/770508f193efac43d90735758027aa50.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-15: Adding Columns And Features (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 7\. Dropping a Column
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'We decide to get rid of two features, wap1 and wap2, by dropping their columns:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE30]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Implementation of dropping columns is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE31]'
+  prefs: []
+  type: TYPE_PRE
+- en: That leaves us with the data frames that wap1, and wap2 columns are gone!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 8\. Calculating Statistics by Group
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Next, we calculate the mean, median, maximum, minimum, standard deviation, and
+    the sum of some features by time_id. For this, we will use groupby and agg methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE32]'
+  prefs: []
+  type: TYPE_PRE
+- en: We create a list named features_list to specify the features that the mathematical
+    calculations will be performed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE33]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In return, we get the following output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/cbd5b9d523799fc2d5a0d64ff2fa07cf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-16: Calculating Statistics (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The returned table is a new data frame. We should merge it with the original
+    one (df_cudf). We will accomplish it through *Pandas*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE34]'
+  prefs: []
+  type: TYPE_PRE
+- en: The above snippet will put df_pd_stats and df_pd in one data frame and save
+    it as df_cudf.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As usual, we repeat the same task for *Pandas*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The next step is to calculate the correlation between two columns:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE35]'
+  prefs: []
+  type: TYPE_PRE
+- en: This code
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE36]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'will return the following output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/fa6260b50af6b0c2a71dec56d16f1c88.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-17: Calculating Correlation Between Two Features (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 9\. Renaming Columns
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To remove any confusion, we should rename two of our columns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE37]'
+  prefs: []
+  type: TYPE_PRE
+- en: Columns imbalance and volume_imbalance will be renamed as volume_imbalance and
+    trade_volume_imbalance, respectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 10\. Binning a Column
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Another data manipulation we want to make is to bin the bid1_volume and store
+    the bins in a new column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE38]'
+  prefs: []
+  type: TYPE_PRE
+- en: By running the lines
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE39]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'we’ll get a data frame as the output, which we may see a part of it as shown
+    below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/b66202f08a1609adfdee7e2e9712baf4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-18: Binning A Column (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 11\. Displaying Data Frames
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'After feature engineering steps are completed, we can present the data frames.
+    This section contains three operations: displaying the data frame, getting information
+    about it, and describing it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE40]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The following code will finalize these three tasks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE41]'
+  prefs: []
+  type: TYPE_PRE
+- en: We are done with feature engineering.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Single-Run Execution
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'In summary, our feature engineering efforts have focused on the following tasks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loading data frames
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Merging data frames
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Changing data type
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Getting unique time_ids.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Checking null values
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Adding columns
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Dropping columns
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Calculating statistics
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Calculating a correlation
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Renaming columns
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Binning a column
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Displaying data frames
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Displaying data information
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Describing data frames
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'It was all 13 tasks, but we mentioned “Calculating a correlation” as a separate
+    entity here. Now, we want to run these tasks sequentially in a single run, as
+    shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE42]'
+  prefs: []
+  type: TYPE_PRE
+- en: The run_and_report function will give the same outputs as before but in a full
+    report by a single execution command. It will execute the 14 tasks on both *Pandas*
+    and *cuDF* and record the times they take for both data frames.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE43]'
+  prefs: []
+  type: TYPE_PRE
+- en: We may have to run multiple cycles to see the relative performance of both data
+    libraries more boldly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Final Evaluation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'If we run the run_and_report multiple times, such as in rounds, we can get
+    a better sense of the difference in performance between *Pandas* and *cuDF*. So,
+    we set rounds as 30\. Then, we record all time durations for every operation,
+    round, and data library and finally evaluate the results:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE44]'
+  prefs: []
+  type: TYPE_PRE
+- en: The calc_exec_times function executes a few tasks. It first calls get_statistics
+    to get the “average and total time durations by operation” for each data library
+    over 30 rounds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE45]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, it computes the “total duration by round” for each data framework.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE46]'
+  prefs: []
+  type: TYPE_PRE
+- en: Lastly, it plots the results. Here, the first plot is for the “average time
+    duration by operation” for both libraries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE47]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/ef0c8925e9ea614f7769b660b9cd396d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-19: Average Duration By Operation For Pandas Data Frame And cuDF (Image
+    by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The second plot is for the “total duration by operation,” which shows the total
+    time each task took over all 30 rounds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE48]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/96c7fe7e93201c3be8e5fc378dbe7fad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-20: Total Duration By Operation Over 30 Rounds For Pandas Data Frame
+    And cuDF (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The final plot is “total duration by round,” which shows the total time all
+    operations took together for each round.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE49]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Using RAPIDS cuDF to Leverage GPU in Feature Engineering](../Images/c35eafa8531b6c370b7aea871744251c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Exhibit-21: Total Duration Of All Operations For Each Round For Pandas Data
+    Frame And cuDF (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Even though we haven’t covered every feature engineering task fulfilled on the
+    dataset, they are the same as or similar to the ones we showed here. By explaining
+    14 operations individually, we tried to document the relative performance of *Pandas*
+    data frame and *cuDF*, and enable reproducibility.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In all cases except for correlation calculation and data frame display, *cuDF*
+    surpasses *Pandas*. This performance lead becomes more remarkable in complex tasks
+    such as groupby, merge, agg, and describe. Another point is *Pandas* DF gets tired
+    over time when more rounds come over, while *cuDF* follows a more stable pattern.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recall that we have reviewed only one stock as an example. If we process all
+    112 stocks, we may expect a larger performance gap in favor of *cuDF*. If the
+    stock's population goes up to the hundreds, *cuDF*’s performance can even be more
+    dramatic. In the case of big data, where the execution of parallel tasks is possible,
+    a distributed framework such as *Dask-cuDF*, which extends parallel computing
+    to *cuDF* GPU DataFrames, can be the right tool.
+  prefs: []
+  type: TYPE_NORMAL
+- en: References
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[1] RAPIDS Definition, [https://www.heavy.ai/technical-glossary/rapids](https://www.heavy.ai/technical-glossary/rapids)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[2] 10 Minutes to cuDF and Dask-cuDF, [https://docs.rapids.ai/api/cudf/stable/user_guide/10min/](https://docs.rapids.ai/api/cudf/stable/user_guide/10min/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[3] Optiver Realized Volatility Prediction, [https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/data](https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/data)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[4] Forward filling book data, [https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/discussion/251277](https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/discussion/251277)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Hasan Serdar Altan](https://twitter.com/HSerdarAltan)** is Data scientist
+    and AWS Cloud Architect Associate.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[RAPIDS cuDF Cheat Sheet](https://www.kdnuggets.com/2023/05/cudf-data-science-cheat-sheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[RAPIDS cuDF to Speed up Your Next Data Science Workflow](https://www.kdnuggets.com/2023/04/rapids-cudf-speed-next-data-science-workflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[RAPIDS cuDF for Accelerated Data Science on Google Colab](https://www.kdnuggets.com/2023/01/rapids-cudf-accelerated-data-science-google-colab.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a GPU Machine vs. Using the GPU Cloud](https://www.kdnuggets.com/building-a-gpu-machine-vs-using-the-gpu-cloud)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[There and Back Again… a RAPIDS Tale](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

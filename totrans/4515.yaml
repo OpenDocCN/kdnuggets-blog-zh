@@ -1,0 +1,503 @@
+- en: Using the Fitbit Web API with Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/02/using-fitbit-web-api-python.html](https://www.kdnuggets.com/2020/02/using-fitbit-web-api-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/), Data
+    Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/12cb0f35adee20ec48a85dceef1e0e44.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The graph above was made from Fitbit data, just not through the API. I just
+    figured I would share my colleagues work. [https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0227709](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0227709)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fitbit provides a Web API for accessing data from Fitbit activity trackers,
+    Aria & Aria 2 scales, and manually entered logs. So if you have been using a Fitbit,
+    you can use the [Fitbit API](https://dev.fitbit.com/build/reference/web-api/basics/)
+    ([https://dev.fitbit.com/build/reference/web-api/basics/](https://dev.fitbit.com/build/reference/web-api/basics/))
+    to get your own data. Apart from the convenience of using the API to get the data
+    you can also get on the online app, you can use the API to get intraday (minute
+    by minute) data which is not available on the online app. While this tutorial
+    is initially similar to [Stephen Hsu’s](https://towardsdatascience.com/@shsu14) amazing [tutorial](https://towardsdatascience.com/collect-your-own-fitbit-data-with-python-ff145fa10873),
+    I figured I would update the process a little, address a couple errors you could
+    get, and show a bit of how you could go about graphing data. As always, the code
+    used in this tutorial is available on my [GitHub](https://github.com/mGalarnyk/Python_Tutorials/blob/master/Apis/Fitbit/Fitbit_API.ipynb).
+    With that, let’s get started!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1.) Create a Fitbit account
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can create a Fitbit account by clicking [here](https://www.fitbit.com/signup).
+    It will take you to a page similar to the one below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/49501ab814fd1eaa538692c8e96e0579.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You don’t need to check the “Keep me updated” box like I did. Also fakeuser@gmail
+    is not the email I used for my account.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2.) Set up your account and create the app
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Go to [dev.fitbit.com](https://dev.fitbit.com/getting-started/). Hover on “Manage”
+    and click on “Register An App”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0bbe00ce8758bbf6eefe83ed77c3be39.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A page should appear that looks similar to the one below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e3b1617cbcb247869432a20d8e52847a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: (**A**) You need to specify Personal to be able more easily ask to download
+    intraday data (If you don’t or get an error, you can always request it [here](https://dev.fitbit.com/build/reference/web-api/intraday-requests/)).
+    (**B**) The callback URL is http://127.0.0.1:8080 because the Python API we will
+    use has it as the default redirect URL.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For each of the fields in the image, here is some advice of what you can put
+    in the registration page.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Application Name:** Can be anything.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Description:** Can be anything.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Application Website:** Can be anything.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Organization: **Can be anything.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Organization Website:** Since I am using it for personal use (to look at
+    personal fitbit data), this may not apply.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Terms of Service Url:** I put in the Fitbit terms of service: [https://dev.fitbit.com/legal/platform-terms-of-service/](https://dev.fitbit.com/legal/platform-terms-of-service/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Privacy Policy Url:** I put in the Fitbit privacy policy: [https://www.fitbit.com/legal/privacy-policy](https://www.fitbit.com/legal/privacy-policy)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**OAuth 2.0 Application Type:** OAuth 2.0 Application Type should be “Personal”
+    if you want to download your intraday data. By the way, if you don’t know what
+    OAuth is, [here is an explanation](https://www.varonis.com/blog/what-is-oauth/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Callback Url:** Make sure the Callback URL is http://127.0.0.1:8080/ in order
+    to get our Fitbit API to connect properly. This is due to the library we will
+    use that requires this as you can see below.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/88b7255a6602ccaa74594331dbd1cfde.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Finally, click on the agreement box and click on register. A page that looks
+    similar to the one below should appear.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/1dec7c838f6608b801d0e68f30d8bd9a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Keep note of your OAuth 2.0 Client ID and Client Secret.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The parts we will need from this page are the OAuth 2.0 Client ID and the Client
+    Secret. You will need the client ID and client secret for later so take note of
+    them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 3.) Installing the Python Library
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The next step is to use a [Fitbit unofficial API](https://github.com/orcasgit/python-fitbit).
+    After clicking on the link, click the green button. Next, click on Download Zip
+    and proceed to unzip the file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b27d3483e359adf3a208a3eda835db44.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Download the zip file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After that, open up a terminal/command line to change directories to the unzipped
+    folder and run the command below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/3c7410fca134baea83e97bb3a150543c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Go inside the directory of the folder and type **python setup.py install **in
+    your terminal/command line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4.) API Authorization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before starting this section, I should note two things. First, the code used
+    in this tutorial is available on my [GitHub](https://github.com/mGalarnyk/Python_Tutorials/blob/master/Apis/Fitbit/Fitbit_API.ipynb). **Second,
+    if you have errors, I have a potential errors section later in the blog post.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code below imports various libraries and assigns your CLIENT_ID and CLIENT_SECRET
+    from step 2 to variables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code below enables the authorization process to take place
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/59c899dd7d69bc7cb6e9df48ee4224cd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When you run the code above (shown in A), the cell shows that is still running
+    until you sign into your fitbit account (B) and click on allow access to various
+    data in your Fitbit account.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What the page should look like after authorization and signing in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5c90e42e48789052e7e68f7e56f89919.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This window should be what you get.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5a.) Get One Day of Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8a5e2cc1320e007ab0f7f1389c75f171.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You will be using the intraday_time_series method to get data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I will first start by getting one day of data so that the next section will
+    be easier to understand.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/0ab5ac3a7c0d5d3e353f99d6b018227c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can put this data into a pandas DataFrame if you want.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fc830e186c1aaa38469dc75dd9c07c75.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Of course, you can always export your data to a csv or excel file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 5b.) Get Multiple Days of Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The code below gets all the days of data you have starting from the `startTime` variable
+    (called `oneDate` in the code below).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d00c0b640b562d6534adeaf24734853a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can of course export `final_df` to a csv file (I would recommend not trying
+    to export to excel as the there can be too many rows to easily export to excel).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 6.) Try to Graph Intraday Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This is a section I would highly advise you look at the [GitHub](https://github.com/mGalarnyk/Python_Tutorials/blob/master/Apis/Fitbit/Fitbit_API.ipynb) code
+    for with your own data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The end goal of this section is to get a particular time on a particular day
+    graphed appropriately (date to also have the time of the day included). I should
+    note that I am not making my code efficient partially due to my laziness. If you
+    don’t understand what is going on, don’t worry. You can scroll down and see the
+    end result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: The next step for me will be looking at 3 days of data rather than bunch of
+    days.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Keep in mind that you can also try to graph by grouping by date and hour (or
+    even seconds if you want) and taking the mean of the heart rate. The code also
+    tries to make the graph look a bit better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: With all this work, maybe this is not a good avenue for me to go down as the
+    current data doesn’t give enough context to know it was during rest or moving
+    around.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 7.) Resting Heart Rate
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are studies that talk about how [resting heart rate](https://www.health.harvard.edu/blog/resting-heart-rate-can-reflect-current-future-health-201606179806) can
+    reflect your current and future health. There was actually a [research paper that
+    showed the Inter- and intraindividual variability in daily resting heart rate
+    and its associations with age, sex, sleep, BMI, and time of year for 92,447 adults](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0227709) who
+    wore a Fitbit consistently. Below is an image from the paper (with text added
+    for clarity).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/12cb0f35adee20ec48a85dceef1e0e44.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0227709](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0227709)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The api call we have been using also returns resting heart rate so the code
+    below isn’t too different than earlier steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Try and graph your data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 8.) Get Sleep Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Without going into too much detail, the code below gets sleep data per minute
+    (`final_df`) and sleep summary information `final_stages_df` of how much overall
+    time in minutes a Fitbit user spends in deep, light, rem, and wake stages of sleep.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1c75055fb718eb7345f22bbcc1ac6da0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '`final_stages_df` is a pandas DataFrame which shows how much of each stages
+    a Fitbit user slept in a given night (wake, deep, light, rem) for a given date
+    as well as total time in bed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fc771311539e79accd8e91530619af00.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '`final_df` is a pandas DataFrame which gives a dateTime, date, and a value.
+    A 1 in value column is “asleep”, **2** is awake, and **3** is really awake.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/61f9c423167d904fe0b8a6e7c83e5a6b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Potential Errors
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No module named gather_keys_oauth2
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This is for the case where you get an error similar to the one below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/3561aaeacba4842cedfa67196546248c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: To solve this, you can put the gather_keys_oauth2.py file into the same directory
+    where you have python file or jupyter notebook. You can see how my project directory
+    is arranged below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/044b46290eb04fc7fc85b79dfdfc3985.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Notice that gather_keys_oauth2.py is in the same directory as my jupyter notebook.
+    This is a file contained in python-fitbit-master we downloaded in step 3.
+  prefs: []
+  type: TYPE_NORMAL
+- en: CherryPy Not Recognized, No module named cherrypy
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you get an error similar to the one below, first close your jupyter notebook
+    or python file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/71f6dc17a055457e70f677b78f7118ab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can solve the problem by using the following command.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/6467ac8a0b6929fd531a3e3f0f2acab4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Https vs Http Error
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The following error was from step 2 when I once tried to make the callback url
+    be https instead of http.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d750a43c28d005aa71e09049810e9e5a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'HTTPTooManyRequests: Too Many Requests'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/c36f10826d885e3e28d287ee84b9f209.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The [fitbit community forum](https://community.fitbit.com/t5/Web-API-Development/Too-many-request/td-p/1644362) has
+    an answer for this question. With the API, you can do up to 150 requests per user/fitbit
+    per hour. This means that if you have over 150 days of data and you use the code
+    from step 5b in this tutorial, you might need to wait a bit to get the rest of
+    your data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Concluding Remarks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This post went over how to get data from an individual Fitbit. While I covered
+    quite a bit, there are still things I didn’t cover over like how the [Fitbit api
+    can get your step counts](https://python-fitbit.readthedocs.io/en/latest/). The
+    Fitbit API is something I am still learning so if you have contributions, please
+    let me know. If you have any questions or thoughts on the tutorial, feel free
+    to reach out in the comments below or through [Twitter](https://twitter.com/GalarnykMichael).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)** is
+    a Data Scientist and Corporate Trainer. He currently works at Scripps Translational
+    Research Institute. You can find him on Twitter (https://twitter.com/GalarnykMichael),
+    Medium (https://medium.com/@GalarnykMichael), and GitHub (https://github.com/mGalarnyk).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/using-the-fitbit-web-api-with-python-f29f119621ea).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Understanding Decision Trees for Classification in Python](/2019/08/understanding-decision-trees-classification-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Lists and List Manipulation](/2019/11/python-lists-list-manipulation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Tuples and Tuple Methods](/2019/11/python-tuples-methods.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Beginner’s Guide to Web Scraping Using Python](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[HuggingChat Python API: Your No-Cost Alternative](https://www.kdnuggets.com/2023/05/huggingchat-python-api-alternative.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Exploring the OpenAI API with Python](https://www.kdnuggets.com/exploring-the-openai-api-with-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build a Web Scraper with Python in 5 Minutes](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Step-by-Step Guide to Web Scraping with Python and Beautiful Soup](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

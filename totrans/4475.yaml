@@ -1,0 +1,460 @@
+- en: Dimensionality Reduction with Principal Component Analysis (PCA)
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/05/dimensionality-reduction-principal-component-analysis.html](https://www.kdnuggets.com/2020/05/dimensionality-reduction-principal-component-analysis.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/794e2a70f5ae4d67b0e90c08f32dd767.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Credits](https://medium.com/datadriveninvestor/principal-components-analysis-pca-71cc9d43d9fb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With the availability of high-performance CPUs and GPUs, it is pretty much possible
+    to solve every regression, classification, clustering, and other related problems
+    using machine learning and deep learning models. However, there are still various
+    portions that cause performance bottlenecks while developing such models. A large
+    number of features in the dataset are one of the major factors that affect both
+    the training time as well as the accuracy of machine learning models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Curse of Dimensionality
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In machine learning, “dimensionality” simply refers to the number of features
+    (i.e. input variables) in your dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While the performance of any machine learning model increases if we add additional
+    features/dimensions, at some point a further insertion leads to performance degradation
+    that is when the number of features is very large commensurate with the number
+    of observations in your dataset, several linear algorithms strive hard to train
+    efficient models. This is called the “**Curse of Dimensionality”.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Dimensionality reduction** is a set of techniques that studies how to shrivel
+    the size of data while preserving the most important information and further eliminating
+    the curse of dimensionality. It plays an important role in the performance of
+    classification and clustering problems.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/7d40c39e40111d5c0194acdbebff0f1a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[The figure illustrates a 3-D feature space is split into two 1-D feature spaces,
+    and later, if found to be correlated, the number of features can be reduced even
+    further.](https://www.geeksforgeeks.org/dimensionality-reduction/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The various techniques used for dimensionality reduction include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Principal Component Analysis (PCA)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Linear Discriminant Analysis (LDA)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Generalized Discriminant Analysis (GDA)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Multi-Dimension Scaling (MDS)](https://blog.paperspace.com/dimension-reduction-with-multi-dimension-scaling/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: LLE
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: IsoMap
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Autoencoders
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This article is focused on the design principals of PCA and its implementation
+    in python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Principal Component Analysis(PCA)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Principal Component Analysis(PCA) is one of the most popular linear dimension
+    reduction algorithms. It is a projection based method that transforms the data
+    by projecting it onto a set of orthogonal(perpendicular) axes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: “PCA works on a condition that while the data in a higher-dimensional space
+    is mapped to data in a lower dimension space, the variance or spread of the data
+    in the lower dimensional space should be maximum.”
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In the below figure the data has maximum variance along the red line in two-dimensional
+    space.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ee73debf16c2275f7e1c520259589717.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Intuition
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s develop an intuitive understanding of PCA. Suppose, you wish to distinguish
+    between different food items based on their nutritional content. Which variable
+    will be a good choice to differentiate food items? If you choose a variable that
+    varies a lot from one food item to another, you will be able to detach them properly.
+    Your job will be much harder if the chosen variable is almost in the same quantity
+    in food items. What if data doesn’t have a variable that segregates food items
+    properly? We can create an artificial variable through a linear combination of
+    original variables like
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`New_Var = 4*Var1 - 4*Var2 + 5*Var3`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is what essentially PCA does, it finds the best linear combinations of
+    the original variables so that the variance or spread along the new variable is
+    maximum.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Suppose we have to transform a 2-dimensional representation of data points to
+    a one-dimensional representation. So we will try to find a straight line and project
+    data points on them. (A straight line is one dimensional). There are many possibilities
+    to select a straight line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/529937a1420cac8bde037badbfafa5ba.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Dataset](https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues)![Figure](../Images/f5d5bc755632bf9f9d2ce18dd2988a39.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PCA in action](https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Say the magenta line will be our new dimension.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you see the red lines (connecting the projection of blue points on a magenta
+    line) i.e. the perpendicular distance of each data point from the straight line
+    is the projection error. The sum of the error of all data points will be the total
+    projection error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our new data points will be the projections (red points) of those original blue
+    data points. As we can see we have transformed 2-dimensional data points to one-dimensional
+    data points by projection them on 1-dimensional space i.e. a straight line. That
+    magenta straight line is called the** principal axis***. *Since we are projecting
+    to a single dimension, we have only one principal axis. We apply the same procedure
+    to find the next principal axis from the residual variance. Apart from being the
+    direction of maximum variance, the next principal axis must be orthogonal(perpendicular
+    or Uncorrelated to each other,) to the other principal axes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once, we get all the principal axes, the dataset is projected onto these axes.
+    The columns in the projected or transformed dataset are called **principal components**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The principal components are essentially the linear combinations of the original
+    variables, the weights vector in this combination is actually the eigenvector
+    found which in turn satisfies the principle of least squares.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Luckily, thanks to linear algebra we don’t have to sweat much for PCA. Eigenvalue
+    Decomposition and Singular Value Decomposition(SVD) from linear algebra are the
+    two main procedures used in PCA to reduce dimensionality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Eigenvalue Decomposition
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Matrix Decomposition **is a process in which a matrix is reduced to its constituent
+    parts to simplify a range of more complex operations. **Eigenvalue Decomposition** is
+    the most used matrix decomposition method which involves decomposing a square
+    matrix(**n*n**) into a set of eigenvectors and eigenvalues.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Eigenvectors** are unit vectors, which means that their length or magnitude
+    is equal to 1.0\. They are often referred to as right vectors, which simply means
+    a column vector (as opposed to a row vector or a left vector).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Eigenvalues** are coefficients applied to eigenvectors that give the vectors
+    their length or magnitude. For example, a negative eigenvalue may reverse the
+    direction of the eigenvector as part of scaling it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Mathematically, A vector is an eigenvector of a matrix any n*n square matrix `**A**` if
+    it satisfies the following equation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`**A . v = **???? **. v**`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is called the eigenvalue equation, where `**A**` is an n*n parent square
+    matrix that we are decomposing, `**v**` is the eigenvector of the matrix, and `???? `represents
+    the eigenvalue scalar.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In simpler words, the linear transformation of a vector `**v**` by `**A**`has
+    the same effect of scaling the vector by factor `????`. Note that for `**m*n**` non-square
+    matrix **A** with m ≠ n, `**A.v**` an m-D vector but `????.v`is an n-D vector,
+    i.e., no eigenvalues and eigenvectors are defined. If you wanna diver deeper into
+    mathematics [check this out](http://fourier.eng.hmc.edu/e176/lectures/algebra/node9.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/92eb12576988649be276033fd927146e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Eigenvalue decomposition](https://guzintamath.com/textsavvy/2019/02/02/eigenvalue-decomposition/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Multiplying these constituent matrices together, or combining the transformations
+    represented by the matrices will result in the original matrix.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A decomposition operation does not result in a compression of the matrix; instead,
+    it breaks it down into constituent parts to make certain operations on the matrix
+    easier to perform. Like other matrix decomposition methods, Eigendecomposition
+    is used as an element to simplify the calculation of other more complex matrix
+    operations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Singular Value Decomposition (SVD)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Singular value decomposition is a method of decomposing a matrix into three
+    other matrices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/d36700e54ef763f98ee3b1cbad9a8c36.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[SVD](https://blog.paperspace.com/dimension-reduction-with-principal-component-analysis/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Mathematically Singular value decomposition is given by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7fae8befbd0ec05bf24083e0017af212.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Where:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*A* is an *m* × *n* matrix'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*U* is an *m* × *n* *orthogonal* matrix'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*S* is an *n* × *n* *diagonal matrix*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*V* is an *n* × *n* orthogonal matrix'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As shown, SVD produces three matrices U, S & V. U and V orthogonal matrices
+    whose columns represent eigenvectors of AAT and ATA respectively. The matrix S
+    is a diagonal matrix and diagonal values are called singular values. Each singular
+    value is the square-root of the corresponding eigenvalue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**How does dimension reduction fit into these mathematical equations?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, once you have calculated eigenvalues and eigenvectors choose the important
+    eigenvectors to form a set of principal axes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Selection of EigenVectors
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The importance of an eigenvector is measured by the percentage of total variance
+    explained by the corresponding eigenvalue. Suppose `V1` & `V2` are two eigenvectors
+    with `40%` & `10%` of total variance along with their directions respectively.
+    If asked to pick one from these two eigenvectors, our choice would be `V1` because
+    it gives us more information about data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: All eigenvectors are arranged according to their eigenvalues in descending order.
+    Now, we have to decide how many eigenvectors to retain and for that we need to
+    discuss two methods **Total variance explained** and **Scree Plot** for that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Total Variance Explained
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Total Explained variance** is used to measure the discrepancy between a model
+    and actual data. It is the part of the model’s total variance that is explained
+    by factors that are present.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Suppose, we have a vector of `n` eigenvalues(e0,..., en) sorted in descending
+    order. Take the cumulative sum of eigenvalues at every index until the sum is
+    greater than `95%` of the total variance. Reject all eigenvalues and eigenvectors
+    after that index.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Scree Plot
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: From the scree plot, we can read off the percentage of the variance in the data
+    explained as we add principal components.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It shows the eigenvalues on the y-axis and the number of factors on the x-axis.
+    It always displays a downward curve. The point where the slope of the curve is
+    leveling off (the “elbow) indicates the number of factors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/dead94de468da0f20315d549a33a011b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Scree plot](https://www.stata.com/features/overview/principal-components/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example in the scree plot shown above the sharp bend(elbow) is at 4\. So,
+    the number of principal axes should be 4.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Principal Component Analysis(PCA) in python from scratch
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The example below defines a small 3×2 matrix, centers the data in the matrix,
+    calculates the covariance matrix of the centered data, and then the eigenvalue
+    decomposition of the covariance matrix. The eigenvectors and eigenvalues are taken
+    as the principal components and singular values which are finally used to project
+    the original data on the new axes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With all the effectiveness PCA provides, but if the number of variables is large,
+    it becomes hard to interpret the principal components. PCA is most suitable when
+    variables have a linear relationship among them. Also, PCA is susceptible to big
+    outliers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: PCA is an old method and has been well researched. There are many extensions
+    of basic PCA which address its shortcomings like robust PCA, kernel PCA, incremental
+    PCA. Through this article, we developed a basic and intuitive understanding of
+    PCA. We discussed a few important concepts related to its implementation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, that’s all for this article hope you guys have enjoyed reading it and
+    I’ll be glad if it is of any help. Feel free to share your comments/thoughts/feedback
+    in the comment section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for reading!!!????
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Bio: [Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)**
+    is a Data Science enthusiast. Interested in Big Data, Python, Machine Learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://levelup.gitconnected.com/dimensionality-reduction-principal-component-analysis-pca-d59bc1fed3dd).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Sparse Matrix Representation in Python](/2020/05/sparse-matrix-representation-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Optimization for Machine Learning Models](/2020/05/hyperparameter-optimization-machine-learning-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Intermediate Machine Learning with Python — 2019 Edition](/2019/06/7-steps-mastering-intermediate-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Principal Component Analysis (PCA) with Scikit-Learn](https://www.kdnuggets.com/2023/05/principal-component-analysis-pca-scikitlearn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Dimensionality Reduction Techniques in Data Science](https://www.kdnuggets.com/2022/09/dimensionality-reduction-techniques-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Essential Math for Data Science: Eigenvectors and Application to PCA](https://www.kdnuggets.com/2022/06/essential-math-data-science-eigenvectors-application-pca.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Market Data and News: A Time Series Analysis](https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best Python Courses: An Analysis Summary](https://www.kdnuggets.com/2022/01/best-python-courses-analysis-summary.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning’s Sweet Spot: Pure Approaches in NLP and Document Analysis](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

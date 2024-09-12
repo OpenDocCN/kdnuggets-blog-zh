@@ -1,0 +1,337 @@
+- en: 'Database Optimization: Exploring Indexes in SQL'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Database Optimization: Exploring Indexes in SQL](../Images/8f24e8e8ded8676df58f2a7ab39f3311.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: While searching for a particular topic in a book, we will first visit the index
+    page (which is present at the start of that book) and find which page number contains
+    our topic of interest. Now, imagine how inconvenient it is to find a particular
+    topic in a book without the index page. For this, we have to search every page
+    in the book, which is very time-consuming and frustrating.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A similar issue also occurs in SQL Server when it retrieves data from the database.
+    To overcome this, SQL server also uses indexing which speeds up the data retrieval
+    process, and in this article, we will cover that part. We will cover why indexing
+    is needed and how we can effectively create and delete indexes. The prerequisite
+    of this tutorial is the basic knowledge of SQL commands.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Indexing?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Indexing is a schema object that uses a pointer to retrieve data from the rows,
+    which reduces the I/O(Input/Output) time to locate the data. Indexing can be applied
+    to one or more columns we want to search. They store the column in a separate
+    data structure called [**B-Tree**](https://en.wikipedia.org/wiki/B-tree#:~:text=A%20B%2Dtree%20index%20creates,pages%20at%20the%20lowest%20level.).
+    One of the main advantages of B-Tree is that it stores the data in sorted order.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you are wondering why the data can be retrieved faster if it is sorted, then
+    you must read about [Linear Search vs Binary Search](https://www.javatpoint.com/ds-linear-search-vs-binary-search).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Indexing is one of the most famous methods to improve the performance of SQL
+    queries. They are small, fast and remarkably optimized for relational tables.
+    When we want to search a row without indexing, the SQL performs a full-table scan
+    linearly. In other words, SQL has to scan every row to find the matching conditions,
+    which is very time-consuming. On the other hand, indexing keeps the data sorted,
+    as discussed above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But we should also be careful, indexing creates a separate data structure which
+    requires extra space, and that can become problematic when the database is large.
+    For good practice, indexing is effective only on frequently used columns and can
+    be avoided on rarely used columns. Below are some scenarios in which indexing
+    might be helpful,
+  prefs: []
+  type: TYPE_NORMAL
+- en: Number of rows must be (>10000).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The required column contains a large number of values.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The required column must not contain a large number of NULL values.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It is helpful if we frequently sort or group data based on particular columns.
+    Indexing quickly retrieves the sorted data rather than performing a full scan.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: And indexing can be avoided when,
+  prefs: []
+  type: TYPE_NORMAL
+- en: The table is small.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Or when the values of the column are rarely used.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Or when the values of the columns are frequently changing.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: There may also be a chance when the optimizer detects that a full-table scan
+    takes less time than the indexed table, then the indexing may not be used, even
+    if it exists. This can happen when the table is small, or the column is frequently
+    updated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating Sample Database
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Before starting, you must set up MySQL Workbench on your PC to easily follow
+    the tutorial. You can refer to [this](https://www.youtube.com/watch?v=GwHpIl0vqY4&ab_channel=AmitThinks)
+    youtube video for setting up your workbench.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After setting up your workbench, we will create some random data from which
+    we can execute our queries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Creating Table:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Inserting Data:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: It will create a table named `employee_info` having attributes like name, age
+    and email.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Show the Data:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Database Optimization: Exploring Indexes in SQL](../Images/23f9cc00fa11f0261497c54e161cf30b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig. 1 Sample Database | Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating and Deleting an Index
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: For creating an index, we can use the CREATE command like that,
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Syntax:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: In the above query, `index_name` is the name of the index, `table_name` is the
+    name of the table and the `column_name` is the name of the column on which we
+    want to apply indexing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ex-
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can also create indexes for multiple columns in the same table,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Unique Index:** We can also create a unique index for a particular column
+    that doesn’t allow duplicate values to be stored in that column. This maintains
+    the integrity of the data and also further improves the performance.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Note:** Indexes can be automatically created for PRIMARY_KEY and UNIQUE columns.
+    We don''t have to create them manually.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Deleting an Index:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can use the DROP command to delete a particular index from the table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: We need to specify the index and table names to delete the index.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Show Indexes:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can also see all the indexes present in your table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Syntax:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Ex-
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Database Optimization: Exploring Indexes in SQL](../Images/cf61de5a41b2b6660af55c2f95f35b27.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Updating an Index
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The below command creates a new index in the existing table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Syntax:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Note:** The ALTER is not a standard command of ANSI SQL. So it may vary among
+    other databases.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For ex-
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Database Optimization: Exploring Indexes in SQL](../Images/c82b61b7132d7ee034165739dbaaa2d4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the above example, we have created a new index in the existing table. But
+    we cannot modify an existing index. For this, we must first drop the old index
+    and then create a new modified one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For ex-
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Database Optimization: Exploring Indexes in SQL](../Images/3686af726168caf139980d8578c871dc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Wrapping it Up
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In this article, we have covered a basic understanding of SQL Indexing. It is
+    also advised to keep indexing narrow, i.e., limited to a few columns, because
+    more indexing can negatively impact performance. Indexing speeds us the SELECT
+    queries and WHERE clause but slows down the insert and update statements. Therefore,
+    applying indexing only on the frequently used columns is a good practice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Until then, keep reading and keep learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Aryan Garg](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)** is a B.Tech.
+    Electrical Engineering student, currently in the final year of his undergrad.
+    His interest lies in the field of Web Development and Machine Learning. He have
+    pursued this interest and am eager to work more in these directions.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How To Speed Up SQL Queries Using Indexes [Python Edition]](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Vector Databases and Vector Indexes: Architecting LLM Apps](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Free SQL and Database Course](https://www.kdnuggets.com/2022/09/free-sql-database-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[In-Database Analytics: Leveraging SQL''s Analytic Functions](https://www.kdnuggets.com/2023/07/indatabase-analytics-leveraging-sql-analytic-functions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, September 21: 7 Machine Learning Portfolio Projects…](https://www.kdnuggets.com/2022/n37.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

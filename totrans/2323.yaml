@@ -1,0 +1,279 @@
+- en: Tuning Adam Optimizer Parameters in PyTorch
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/12/tuning-adam-optimizer-parameters-pytorch.html](https://www.kdnuggets.com/2022/12/tuning-adam-optimizer-parameters-pytorch.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: With the rapidly expanding data universe and the ability of artificial neural
+    networks to deliver high performance, the world is moving towards solving complex
+    problems never tackled before. But wait, there is a catch -  building a robust
+    neural network architecture is not a trivial task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Choosing the right optimizer to minimize the loss between the predictions and
+    the ground truth is one of the crucial elements of designing neural networks.
+    This loss minimization is performed in batches of the training data leading to
+    slow convergence of the parameters' value. The optimizers dampen the sideways
+    movement in the parameter space that speeds up the model convergence and in turn
+    lead to faster deployment. This is the reason a lot of emphasis has been put on
+    developing high-performance optimizer algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The article will explain how Adam optimizer, one of the commonly used optimizers,
+    works and demonstrate how to tune it using the PyTorch framework.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Adam Optimizer
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Adaptive Moment Estimation aka Adam optimizer is an optimization technique and
+    a derivative of the gradient descent algorithm. When working with large data and
+    dense neural network architecture, ADAM proves to be more efficient as compared
+    to Stochastic Gradient descent or momentum-based algorithms. It is essentially
+    the best of the ‘gradient descent with momentum’ algorithm and the ‘RMSProp’ algorithm.
+    Let us first understand these two optimizers to build a natural progression to
+    the Adam optimizer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Gradient Descent with Momentum
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: This algorithm accelerates convergence by factoring in the exponentially weighted
+    average of the gradients in the last n steps. Mathematically,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Tuning Adam Optimizer Parameters in PyTorch](../Images/c4012901373cbbec0fef27cb7953c706.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note that smaller? means small steps towards minima and large? means large
+    steps. Similar to weight updation, bias is updated as shown in the equations below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Tuning Adam Optimizer Parameters in PyTorch](../Images/24eb07ea57acc20aab01b78318b7d0a2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Momentum not only speeds up convergence but also has the ability to skip over
+    local minimas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The figure below illustrates that the blue path (gradient descent with momentum)
+    has less oscillations as compared to the red path (gradient descent only) thus
+    converging faster towards the minima.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/471040238fb6a2b40596c4598d9b64ea.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: [Gradient Descent Explained](https://towardsdatascience.com/gradient-descent-explained-9b953fc0d2c)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: RMSProp
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Root mean square propagation aka RMSprop is an adaptive learning algorithm that
+    adjusts the oscillations according to the gradient magnitude. Unlike the momentum
+    approach, it reduces the step size when the gradient increases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A small value of epsilon is added to avoid dividing by zero error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Tuning Adam Optimizer Parameters in PyTorch](../Images/12009e7722f2a1e04a55fa01b7bdd878.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adam optimizer combines “gradient descent with momentum” and “RMSprop” algorithms.
+    It gets the speed from “momentum” (gradient descent with momentum) and the ability
+    to adapt gradients in different directions from RMSProp. The combination of the
+    two makes it powerful. As shown in the below figure, the ADAM optimizer (yellow)
+    converges faster than momentum (green) and RMSProp (purple) but combines the power
+    of both.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Tuning Adam Optimizer Parameters in PyTorch](../Images/624e3086bbbe4afb71672c2e8f0a68ab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: [Paperspaceblog](https://blog.paperspace.com/intro-to-optimization-momentum-rmsprop-adam/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that you have understood how an Adam optimizer works, let’s dive into the
+    tuning of Adam hyperparameters using PyTorch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tuning Adam Optimizer in PyTorch
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: ADAM optimizer has three parameters to tune to get the optimized values i.e.
+    ? or learning rate, ? of momentum term and rmsprop term, and learning rate decay.
+    Let us understand each one of them and discuss their impact on the convergence
+    of the loss function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Learning Rate (alpha or Lr)
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Learning Rate, also referred to as the step size, is the ratio of parameter
+    update to gradient/momentum/velocity depending on the optimization algorithm used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Tuning Adam Optimizer Parameters in PyTorch](../Images/42f469d3e2a6807217d1116aa507182f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: [CS231n Convolutional Neural Networks for Visual Recognition](https://cs231n.github.io/neural-networks-3/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A small learning rate would mean slower model training i.e. it would require
+    many updates to the parameters to reach the point of minima. On the other hand,
+    a large learning rate would mean large steps or drastic updates to the parameters
+    thus often tends to divergence instead of  convergence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An optimal learning rate value (default value 0.001) means that the optimizer
+    would update the parameters just right to reach the local minima. Varying learning
+    rate between 0.0001 and 0.01 is considered optimal in most of the cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Tuning Adam Optimizer Parameters in PyTorch](../Images/f547d02cdeaf58fdbe70acfd749a422b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: [Setting the learning rate of your neural network](https://www.jeremyjordan.me/nn-learning-rate/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Betas
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: β1 is the exponential decay rate for the momentum term also called first moment
+    estimates. It’s default value in PyTorch is 0.9\. The impact of different beta
+    values on the momentum value is displayed in the image below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Tuning Adam Optimizer Parameters in PyTorch](../Images/3faa14a14add03cf90096d26e2caaa05.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: [Stochastic Gradient Descent with momentum](https://towardsdatascience.com/stochastic-gradient-descent-with-momentum-a84097641a5d)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: β2 is the exponential decay rate for velocity term also called the second-moment
+    estimates. The default value is 0.999 in the PyTorch implementation. This value
+    should be set as close to 1.0 as possible on the issues pertaining to sparse gradient,
+    especially in image-related problems. As there is little to no change in pixel
+    density and colors in most of the high-resolution images, it gives rise to a tiny
+    gradient (even smaller square of gradient) leading to slow convergence. A high
+    weightage to velocity term avoids this situation by moving in the general direction
+    of minimizing a loss function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Learning Rate Decay
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Learning rate decay decreases ? as the parameter values reach closer to the
+    global optimal solution. This avoids overshooting the minima often resulting in
+    faster convergence of the loss function. The PyTorch implementation refers to
+    this as weight_decay with default value being zero.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Epsilon
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Although not a tuning hyperparameter, it is a very tiny number to avoid any
+    division by zero error in the implementation. The default value is 1e-08.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The PyTorch code to initialize the optimizer with all the hyperparameters is
+    shown below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The remaining hyperparameters such as maximize, amsgrad, etc can be referred
+    to in the [official documentation](https://pytorch.org/docs/stable/generated/torch.optim.Adam.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In this article you learned the importance of optimizers, three different optimizers,
+    and how Adam optimizer combines the best of momentum and RMSProp optimizer to
+    lead the optimizer chart in performance. The post followed up on the internal
+    working of the Adam optimizer and explained the various tunable hyperparameters
+    and their impact on the speed of convergence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** is an AI strategist and
+    a digital transformation leader working at the intersection of product, sciences,
+    and engineering to build scalable machine learning systems. She is an award-winning
+    innovation leader, an author, and an international speaker. She is on a mission
+    to democratize machine learning and break the jargon for everyone to be a part
+    of this transformation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Interpretable Neural Networks with PyTorch](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Complete Free PyTorch Course for Deep Learning](https://www.kdnuggets.com/2022/10/complete-free-pytorch-course-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[YOLOv5 PyTorch Tutorial](https://www.kdnuggets.com/2022/12/yolov5-pytorch-tutorial.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Practical Guide to Transfer Learning using PyTorch](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyTorch Tips to Boost Your Productivity](https://www.kdnuggets.com/2023/08/pytorch-tips-boost-productivity.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

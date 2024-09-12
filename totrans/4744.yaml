@@ -1,0 +1,336 @@
+- en: Sales Forecasting Using Facebook’s Prophet
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/11/sales-forecasting-using-prophet.html](https://www.kdnuggets.com/2018/11/sales-forecasting-using-prophet.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sales forecasting is one the most common tasks in many sales driven organizations.
+    This activity enables organizations to adequately plan for the future with a degree
+    of confidence. In this tutorial we’ll use [Prophet](https://medium.com/r/?url=https%3A%2F%2Fresearch.fb.com%2Fprophet-forecasting-at-scale%2F),
+    a package developed by [Facebook](https://medium.com/r/?url=https%3A%2F%2Fresearch.fb.com%2Fprophet-forecasting-at-scale%2F) to
+    show how one can achieve this. This package is available in both [Python](https://medium.com/r/?url=https%3A%2F%2Fpypi.org%2Fproject%2Ffbprophet%2F) and [R](https://medium.com/r/?url=https%3A%2F%2Fcran.r-project.org%2Fpackage%3Dprophet).
+    We assume that the reader has basic understanding of handling [time series ](https://medium.com/r/?url=https%3A%2F%2Ftowardsdatascience.com%2Fanalyzing-time-series-data-in-pandas-be3887fdd621)data
+    in Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Plan of Attack
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Introduction and Installation
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Model Fitting
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Making Future Predictions
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Obtaining the Forecasts
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Plotting the Forecasts
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Plotting the Forecast Components
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Cross Validation
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Obtaining the Performance Metrics
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Visualizing Performance Metrics
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Introduction and Installation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'There are very many open source forecastings tools, however none of these would
+    be fit to solve all forecasting problems. [Prophet](https://medium.com/r/?url=https%3A%2F%2Fgithub.com%2Ffacebook%2Fprophet) works
+    best with hourly, and weekly data that is several months. When working with Prophet
+    yearly data is most prefered. According to Facebook Research:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'At its core, the Prophet procedure is an [additive regression model](https://medium.com/r/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAdditive_model) with
+    four main components:'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 1\. A piecewise linear or logistic growth curve trend. Prophet automatically
+    detects changes in trends by selecting changepoints from the data.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 2\. A yearly seasonal component modeled using [Fourier series.](https://medium.com/r/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FFourier_series)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 3\. A weekly seasonal component using dummy variables.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 4\. A user-provided list of important holidays.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Prophet can be installed using pip in Python as shown below. Prophet depends
+    on a Python module called `pystan.` This module will be installed automatically
+    as we install Prophet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The dataset we’ve used for this tutorial is available [here](https://medium.com/r/?url=https%3A%2F%2Fdatamarket.com%2Fdata%2Fset%2F235d%2Fmean-daily-temperature-fisher-river-near-dallas-jan-01-1988-to-dec-31-1991%23!ds%3D235d%26display%3Dline).
+    Once you download the dataset make sure to delete some unnecessary rows towards
+    the end of the file because they might interfere with the analysis. For this [univariate
+    analysis](https://medium.com/r/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FUnivariate)Prophet
+    expects the dataset to have two columns named as *ds* and *y*. *ds* is the date
+    column while *y* is the column that we are forecasting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s get the ball rolling by importing Pandas for data manipulation and Prophet
+    for forecasting. Next we load in our dataset and check its head.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a8bb0bb5c5f8a89701ab19d413f19630.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Model Fitting
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Since we’ve worked with [Scikit-learn](https://medium.com/r/?url=https%3A%2F%2Fscikit-learn.org%2F) before,working
+    with Prophet will be a walk in the park for us. This is because the API implementation
+    for Prophet and Scikit-learn are very similar as we’ll see below. We start by
+    creating an instance of the Prophet class and then fit it to our dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Making Future Predictions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The next step is to prepare our model to make future predictions. This is achieved
+    using the *Prophet.make_future_dataframe *method and passing the number of days
+    we’d like to predict in the future. We use the *periods* attribute to specify
+    this. This also include the historical dates. We’ll use these historical dates
+    to compare the predictions with the actual values in the *ds* column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/73e6e0d67ebd1a4ce5cc0bbfe1ba9bde.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Obtaining the Forecasts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We use the *predict* method to make future predictions. This will generate a
+    dataframe with a *yhat *column that will contain the predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we check the *head* for our forecast dataframe we’ll notice that it has very
+    many columns. However, we are mainly interested in ***ds, yhat, yhat_lower ***and** *yhat_upper.
+    yhat ***is our predicted forecast, ***yhat_lower ***is the lower bound for our
+    predictions and ***yhat_upper*** is the upper bound for our predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9611e5d094b1b70f52590abf5917cd02.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let’s proceed to check the tail and head of the forecast’s dataframe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1eb594eb646016567b3b1905b20692dc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Plotting the Forecasts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Prophet has an inbuilt feature that enables us to plot the forecasts we just
+    generated. This is achieved using *mode.plot() *and passing in our forecasts as
+    the argument. The blue line in the graph represents the predicted values while
+    the black dots represents the data in our dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5e8321f5aa1266894a1c30d11b557c36.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Plotting the Forecast Components
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The *plot_components *method plots the trend, yearly and weekly seasonality
+    of the time series data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c57f0df60f7021d68d76c0115b382199.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Cross Validation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Next let’s measure the forecast error using the historical data. We’ll do this
+    by comparing the predicted values with the actual values. In order to perform
+    this operation we select cut of points in the history of the data and fit the
+    model with data upto that cut off point. Afterwards we compare the actual values
+    to the predicted values. The *cross_validation *method allows us to do this in
+    Prophet. This method take the following parameters as explained below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*horizon *the forecast horizon'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '*initial *the size of the initial training period'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '*period *the spacing between cutoff dates'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The output of the *cross_validation *method is a dataframe containing *y* the
+    true values and *yhat* the predicted values. We’ll use this dataframe to compute
+    the prediction errors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/90de0b7c64702b4ab65fe3c99a072cb4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Obtaining the Performance Metrics
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We use the *performance_metrics* utility to compute the Mean Squared Error(MSE),
+    Root Mean Squared Error(RMSE),Mean Absolute Error(MAE), Mean Absolute Percentage
+    Error(MAPE) and the coverage of the the `yhat_lower` and `yhat_upper` estimates.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/712e69f483eb285945db01796056aeb1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Visualizing Performance Metrics**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The performance Metrics can be visualized using the *plot_cross_validation_metric* utility.
+    Let’s visualize the RMSE below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bf30e4505691c8f74fb932ec9b19ea7a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As we have seen Prophet is very powerful and effective in time series forecasting.
+    However, as we mentioned earlier there are a few other forecasting tools. Choice
+    of tool is on a case by case basis depending on the nature of the dataset. One
+    can always compare these tools and use the one that gives the best predictions
+    with the least amount of errors. Some of these methods include [ARIMA](https://medium.com/r/?url=https%3A%2F%2Fwww.statsmodels.org%2Fdev%2Fgenerated%2Fstatsmodels.tsa.arima_model.ARIMA.html), [Holt-Winters’
+    Method](https://medium.com/r/?url=https%3A%2F%2Fotexts.org%2Ffpp2%2Fholt-winters.html), [Holt’s
+    linear trend](https://medium.com/r/?url=https%3A%2F%2Fotexts.org%2Ffpp2%2Fholt.html),[ Simple
+    exponential smoothing](https://medium.com/r/?url=https%3A%2F%2Fotexts.org%2Ffpp2%2Fses.html) and [Moving
+    Averages](https://medium.com/r/?url=https%3A%2F%2Fwww.babypips.com%2Flearn%2Fforex%2Fusing-moving-averages) among
+    others. You can learn more about Prophet from the [official docs](https://medium.com/r/?url=https%3A%2F%2Ffacebook.github.io%2Fprophet%2F) or
+    by reading [Prophet’s Paper](https://medium.com/r/?url=https%3A%2F%2Fpeerj.com%2Fpreprints%2F3190.pdf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Derrick Mwiti](https://derrickmwiti.com/)** is a data analyst, a writer,
+    and a mentor. He is driven by delivering great results in every task, and is a
+    mentor at Lapid Leaders Africa.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Using a Keras Long Short-Term Memory (LSTM) Model to Predict Stock Prices](/2018/11/keras-long-short-term-memory-lstm-model-predict-stock-prices.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Deep Learning with Keras](/2018/10/introduction-deep-learning-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to PyTorch for Deep Learning](/2018/11/introduction-pytorch-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Time Series Forecasting with statsmodels and Prophet](https://www.kdnuggets.com/2023/03/time-series-forecasting-statsmodels-prophet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Time Series Forecasting with Ploomber, Arima, Python, and Slurm](https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn modern forecasting techniques to help predict future business…](https://www.kdnuggets.com/2022/12/sphere-learn-modern-forecasting-techniques-help-predict-future-business-outcomes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Forecasting Future Events: The Capabilities and Limitations of AI and ML](https://www.kdnuggets.com/2023/06/forecasting-future-events-capabilities-limitations-ai-ml.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Leveraging XGBoost for Time-Series Forecasting](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

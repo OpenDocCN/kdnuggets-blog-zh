@@ -1,0 +1,529 @@
+- en: 'From Good to Great Data Science, Part 1: Correlations and Confidence'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/02/good-great-data-science-correlations-confidence.html](https://www.kdnuggets.com/2019/02/good-great-data-science-correlations-confidence.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Brian Joseph](https://www.linkedin.com/in/brian-joseph-429028118/), Data
+    Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Header image](../Images/499c86aa8800fc0cddc175a2f6b79053.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'As a data scientist you''ll spend a lot of time answering questions with data.
+    I currently work as a data scientist in the healthcare industry, providing metrics
+    and building models for hospitals and healthcare related organizations. In my
+    practice most of my time is spent doing two things:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Translating qualitative business questions into rigorous solutions that can
+    be generated with data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Implementing these solutions programmatically
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'I''m going to walk you through two questions that I''ve actually been asked
+    on the job:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Should my hospital focus more on improving its mortality rate?
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Which pharmacists are handing out too many opioids?
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: What they both have in common is that there's a right way and a wrong way to
+    do them. Further, it's very easy to answer these questions the wrong way and have
+    your mistakes go unnoticed. As you'll see, the difference between great and average
+    answers to these questions is a having a little bit of a mathematical background.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Jupyter notebook and data for this article** [**on GitHub**](https://github.com/LearnDataSci/article-resources/tree/master/From%20Good%20to%20Great%20Data%20Science%2C%20Part%201%20Correlations%20and%20Confidence)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Problem Statement 1
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The Centers for Medicare & Medicaid Services (CMS) is responsible for rating
+    hospitals based off of quality and performance metrics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: They provide various metrics to estimate hospital performance and one overarching
+    metric known as the `quality_rating`. Another less important rating is the `mortality_rate`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Suppose you''re tasked with investigating the relationship between a hospital''s `quality_rating` and
+    its `mortality_rate` to answer the first question I mentioned above. How much
+    does a hospital''s mortality rate affect its overall `quality_rating`? Assume
+    the following about your data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`quality_rating`: A numerical value in the range (1, 2, 3, 4, 5)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`mortality_rate`: One of the following values:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*above_average*'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*average*'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*below_average*'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'And assume you''re given the data below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Table](../Images/1cbc408406e449ea462fded949ca076b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As you can see, each row represents a hospital. Each hospital has a mortality
+    rate and quality score. The premise is to *compare* `mortality_rate` and `quality_rating` so
+    a key statistical tool should be jumping to your head. **Correlation**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is the first step of reducing our *qualitative* question into *quantitative* terms.
+    I urge you to take a stab at the problem at this point — or at least flesh out
+    a complete plan to answering the question:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***What''s the correlation between these two metrics?***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Did you arrive at a solution? Lets walk through this together.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Encoding mortality rate****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are arguably two steps remaining in this problem. First, we should note
+    that our `mortality_rate`column contains ordinal data. We can only perform correlation
+    on numerical data so we'll have to do something about this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's encode our data in some way that preserves its ordinal relationship. In
+    other words, we want to our encoding for ***below average*** `mortality_rate` to
+    be numerically superior to our encoding for ***above average*** `mortality_rate` (Note
+    that a hospital having a **lower** mortality rate is better).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'How did you tackle encoding your data? There''s an infinite amount of options:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For instance:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'or:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'or maybe:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you made the decision to encode your data, what option did you settle on?
+    Which one is correct? The correct answer is *none* of them — or *all* of them
+    I guess...
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I''ll explain why in a bit. But for now, let’s just continue with mapping to
+    last option: mapping to the set: (-1, 0, 1).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Table](../Images/900abd06c00dd8bccd36b05eddbe24cf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The last step to this problem is (deceptively) the simplest. Now we just need
+    to correlate our two columns right?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Table](../Images/f9de80477ad35170ee45b8272d11a545.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Not quite. We've made a huge assumption about our data. We've assumed that our
+    data was anything *more* than ordinal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Non-parametric correlation****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a data scientist, you should be familiar with the concept of [parametric](https://en.wikipedia.org/wiki/Parametric_statistics) and [non-parametric](https://en.wikipedia.org/wiki/Nonparametric_statistics)statistics.
+    Most statistical correlations will default to a parametric correlation method
+    known as `pearson`. In our case, we need to use a non-parametric correlation known
+    as `spearman`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This non-parametric method assumes that our data is nothing more than ordinal.
+    In other words, no matter what mapping we make, the spearman correlation will
+    return the same result — so long as the order is preserved after mapping.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If we specify that we need to use the spearman correlation method, then we
+    notice a drastic change in results:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Table](../Images/7ebe3e458e6464dd573547d47cc01e8e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We've just dropped the correlation by about **10%**. That's a drastic difference!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Had you reported this correlation using pearson as opposed to spearman, you
+    might have seriously mislead a customer or coworker.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This goes to show that having a **strong statistical background is essential
+    for the data science role**. Such a deceptively simple problem had a key mathematical
+    step that's often overlooked.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Problem Statement 2
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You have millions of pharmaceutical records for the past 5 years in Massachusetts,
+    a state well known for its opioid abuse problem. For this reason, it would be
+    very useful if you could identify pharmacists who are prescribing too many opioids.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Rate of opioid related overdose deaths in MA](../Images/e138fba1d4644e7da839c6d7f77e0cf4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source: [National Institute on Drug Abuse](https://www.drugabuse.gov/drugs-abuse/opioids/opioid-summaries-by-state/massachusetts-opioid-summary)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You''re tasked with the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Generate a list of pharmacists who are overprescribing opioids*****.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Seems simple enough. Suppose you have the following dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Table](../Images/ea70c7ff48d81a3f86985e98882c09ca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Each row represents a days worth of prescriptions
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And we have the following columns:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`prescriber_id`: A random code that identifies pharmacists'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`num_opioid_prescriptions`: The number of opioid prescriptions prescribed on
+    a given day'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`num_prescriptions`: The number of *total* prescriptions prescribed on a given
+    day'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Grouping prescribers**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first thing we should note is that `prescriber_id` does not contain unique
+    values as prescribers may have prescribed drugs over multiple days. Since this
+    metric is on a prescriber level — not a daily level — we should fix that with
+    a pandas `groupby`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Table](../Images/6585b77ff3707d13c96d545983c5f681.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Much better. Now the task at hand is to rank prescribers on the basis of how
+    many opioids they prescribe. But prescribers prescribe different amounts of drugs.
+    This hints that we should now take each prescriber's opioid prescription ratio.
+    Let's do just that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Opioid prescription ratio**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Pandas made that extremely easy. So we're done right? Just sort the prescribers
+    by `opioid_ratio` and tie this task off?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Table](../Images/1044e8e1654f3acc9e2e749bed888c13.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Not quite. This data should raise some red flags for you.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Does it really make sense to rank a pharmacist as an abuser for prescribing
+    1 opioid out of 1 of their total prescriptions? Try to put into words exactly
+    what''s wrong with this situation. Why do we not want to report these prescribers
+    as the worst offenders? Hopefully the answer you arrive at is something along
+    the lines of:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Because we don''t have enough information to judge them.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imagine you were sitting in a pharmacy watching a pharmacist (let's call them
+    "Bill") perform their job. Suppose you want to report Bill if he prescribes too
+    many opioids.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A customer walks in and Bill prescribes them *hydrocodone* (a common opioid).
+    It'd be silly to report Bill immediately for this. You'd want to wait and see
+    more of Bill's actions before you judged him because you're not confident in your
+    findings yet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Confidence** is a key word here as we''ll soon find out.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Building confidence**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So how do we fix this issue?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Statistically speaking, prescribing an opioid or not can be though of as a [Bernouli
+    parameter](https://en.wikipedia.org/wiki/Bernoulli_distribution) (a fancy term
+    for something that's binary in value — either true or false). And given the number
+    of observations of a bernoulli parameter, we want to predict this parameter's
+    true value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By "true value" I mean the actual value that prescriber's `opioid_prescription_ratio` would
+    converge to if we had enough observations. The "true value" in our example with
+    Bill would be equivalent to Bill's `opioid_prescription_ratio` if we were able
+    to watch and record his actions for a very long time — like a year.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you've taken a statistics or [good data science course](https://www.learndatasci.com/best-data-science-online-courses-2018/) you're
+    probably familiar with the concept of confidence intervals. If not, in simplest
+    terms, a confidence interval is just a measure of mathematical confidence attached
+    to a range that you believe an unknown value exists within.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![95 percent confidence interval.jpeg](../Images/57f67c957f13e1c0839c038799f4f755.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source: [Who needs backup dancers when you can have confidence intervals?](https://medium.com/design-ibm/who-needs-backup-dancers-when-you-can-have-confidence-intervals-485f9464c06f)
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, I could be 95% confident that tomorrow's temperature will fall
+    between 40 Fahrenheit and 70 Fahrenheit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In 1927 mathematician Edwin Wilson applied the concept of confidence intervals
+    to Bernoulli parameters. This means we can guess the *true* value of a pharmacists `opioid_prescription_ratio` given
+    the amount of data we have on them!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here''s the formula:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Wilson Confidence Interval Lower Bound:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Formula](../Images/00d83421f12adf17726a45493055cf80.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The formula looks intimidating but it's intuitive if you take the time to walk
+    through it. Explaining the mathematics behind why this formula works is worth
+    an entire discussion itself and is thus out of scope. So we'll just focus on applying
+    it below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let's apply this formula to our dataframe with 95% confidence, creating a new
+    column
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Table](../Images/8df13327a847e5edcb5d8baf2eeaa6ed.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Amazing! Now these are the results we would want to report.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While there are plenty of prescribers with 1/1 or 2/2 opioid prescriptions,
+    they now appear at the bottom of our rankings – which is intuitive. While our
+    highest ranking prescribers have a lower `opioid_prescription_ratio` than some
+    other prescribers, the rankings now take into account a notion of mathematical
+    confidence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Both approaches to this problem — with or without using confidence intervals
+    — are *technically* acceptable. However, it's easy to see that approaching the
+    problem with a mathematical background yielded much more valuable results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Conclusion...
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A large part of the data science job is translating open and interpretable questions
+    into quantitative, rigorous terms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As both of these examples have demonstrated, sometimes it’s not such an easy
+    task and many data scientists often fall short in this regard. It’s very easy
+    to fall into the trap of using parametric correlation in a non-parametric scenario.
+    And it’s very easy to naively sort a list of Bernoulli trials without taking into
+    account the number of observations for each trial. In fact, it happens more often
+    than you’d think in practice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Part of what separates a good data scientist from a great data scientist is
+    having the mathematical background and intuition to identify and act upon situations
+    like this. Often times what can make the difference between a solution and a great
+    solution in data science is leveraging the right mathematical tools in the right
+    context.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Brian Joseph](https://www.linkedin.com/in/brian-joseph-429028118/)**
+    studied mathematics at Northeastern University, with a research focus in combinatorics
+    and linear algebra. Currently working as a data scientist for a start-up in the
+    greater Boston area with a passion for mathematics, data science, formal verification,
+    and algorithm design.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.learndatasci.com/tutorials/good-great-data-science-correlations-and-confidence/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Introduction to Statistics for Data Science](/2018/12/introduction-statistics-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Basic Machine Learning with Python — 2019 Edition](/2019/01/7-steps-mastering-basic-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Exploring Python Basics](/2019/01/exploring-python-basics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Working with Confidence Intervals](https://www.kdnuggets.com/2023/04/working-confidence-intervals.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Quest for Model Confidence: Can You Trust a Black Box?](https://www.kdnuggets.com/the-quest-for-model-confidence-can-you-trust-a-black-box)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning is Not Like Your Brain Part Seven: What Neurons…](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-seven-neurons-good.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Quality Dimensions: Assuring Your Data Quality with Great Expectations](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Quality: The Good, The Bad, and The Ugly](https://www.kdnuggets.com/2022/01/data-quality-good-bad-ugly.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Rules For Good Data Science Project Documentation](https://www.kdnuggets.com/2022/12/5-rules-good-data-science-project-documentation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

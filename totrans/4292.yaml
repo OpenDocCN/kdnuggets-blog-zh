@@ -1,0 +1,455 @@
+- en: Automated Text Classification with EvalML
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/04/automated-text-classification-evalml.html](https://www.kdnuggets.com/2021/04/automated-text-classification-evalml.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Angela Lin](https://www.linkedin.com/in/angela97lin/), EvalML Software
+    Engineer**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Using Text Data in EvalML with Woodwork](../Images/e89a509092d49574c49cce4627da571e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Text can be a rich and informative type of data. It can be used in a variety
+    of tasks, including sentiment analysis, topic extraction, and spam detection.
+    However, raw text cannot be fed directly to machine learning algorithms, because
+    most models can only understand numeric values. Thus, to utilize text as data
+    in machine learning, it must first be processed and transformed to numeric values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post, we will learn how we can use [EvalML](https://github.com/alteryx/evalml) to
+    detect spam text messages by framing it as a binary classification problem using
+    text data. EvalML is an AutoML library written in Python that uses [Woodwork](https://github.com/alteryx/woodwork) to
+    detect and specify how data should be treated, and the [nlp-primitives library](https://github.com/alteryx/nlp_primitives) to
+    create meaningful numeric features from raw text data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spam Dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The dataset we will be using in this demo consists of SMS text messages in English,
+    some of which are tagged as legitimate (“ham”), and others which are tagged as
+    spam. For this demo, we have modified the [original dataset from Kaggle ](https://www.kaggle.com/uciml/sms-spam-collection-dataset)by
+    joining all of the input text columns and downsampling the majority class (“ham”)
+    so that the “ham” to “spam” ratio is 3:1\. The following references to the data
+    we will be inspecting will always refer to our modified and smaller dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s load in our data and display a few rows to understand what our text messages
+    look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image.png](../Images/29b8bef53c129cfbbd31f9ff9cfeec62.png)A sample of our
+    input data'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can plot the frequency of our target values to verify that the ratio of “ham”
+    to “spam” in our modified dataset is approximately 3:1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image.png](../Images/be802f439a9d168738f3bdf50987f7d5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The ratio of "ham" to "spam" is approximately 3:1
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because the ratio of “ham” to “spam” is 3:1, we can create a trivial model that
+    always classifies a message as the majority “ham” class to obtain a model that
+    has a 75% [accuracy](https://en.wikipedia.org/wiki/Accuracy_and_precision#In_binary_classification).
+    This model would also have a [recall](https://en.wikipedia.org/wiki/Precision_and_recall#Recall) score
+    of 0%, since it is unable to classify any of the minority “spam” class samples
+    correctly, and a balanced accuracy score of 50%. This means that a machine learning
+    model should have an accuracy score greater than 75%, a recall score greater than
+    0%, and a balanced accuracy score greater than 50% to be useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '|  | Baseline model (always guesses majority class) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Accuracy | 75% |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Balanced Accuracy | 50% |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Recall | 0% |'
+  prefs: []
+  type: TYPE_TB
+- en: Let’s generate a model using EvalML and see if we can do better than this trivial
+    model!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introducing Woodwork
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Before feeding our data into EvalML, we have a more fundamental issue to address:
+    How can we specify that our data should be treated as *text* data? Using `pandas` alone,
+    we can''t distinguish between text data and non-text data (such as categorical
+    data) because pandas uses the same `object` data type to store both. How we can
+    make sure that our models correctly treat our text messages as text data, and
+    not as hundreds of different unique categories?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image.png](../Images/61138c555915e5f58e40b326c4b34cd1.png)pandas treats “Message”
+    as an “object” data type by default'
+  prefs: []
+  type: TYPE_NORMAL
+- en: EvalML utilizes the open-source [Woodwork](https://github.com/alteryx/woodwork) library
+    to detect and specify how each feature should be treated, independent of its underlying
+    physical data type. This means we can treat columns with the same physical data
+    type differently. For example, we can specify that we want some columns that contain
+    text to be treated as categorical columns, while we treat other columns with text
+    as natural language columns, even if these columns have the same underlying `object` datatype.
+    This differentiation allows us to clear up the ambiguity between features that
+    may have the same underlying datatype in `pandas`, but ultimately represent different
+    types of data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here, we initialize a Woodwork `DataTable` with our feature. Our single `Message` feature
+    is automatically detected as a natural language or text column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image.png](../Images/5c7233abeb5a9c4466ae536095a832ad.png)Our "Message" feature
+    is automatically detected as a natural language (text) column'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can also initialize a Woodwork `DataColumn` for our target.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Our target is automatically detected as a categorical column. This makes sense,
+    since we have a binary classification problem with two categories of text messages:
+    spam and ham.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![image.png](../Images/f6e775f22086b30e5978afb53c300658.png)Our target ("y")
+    is automatically detected as a categorical column'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Running AutoMLSearch
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now, let’s feed our data to `[AutoMLSearch](https://evalml.alteryx.com/en/stable/user_guide/automl.html)` to
+    see if we can produce a nontrivial machine learning model to detect spam. AutoML
+    is the process of automating the construction, training, and evaluation of machine
+    learning models. `AutoMLSearch` is EvalML’s interface for AutoML.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we will split our data into training and test data sets. We will use
+    the training data set to train and find the best model, and then validate our
+    model’s performance on the test data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: EvalML offers a utility method that makes this easy. All we need to do is specify
+    that we have a binary classification problem, and that we want to reserve 20%
+    of our data as test data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Next, we can set up `AutoMLSearch` by specifying the problem type and passing
+    in our training data. Again, we have a binary classification problem because we
+    are trying to classify our messages as one of two categories: ham or spam.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Calling the constructor initializes an `AutoMLSearch` object that is configured
+    for our data. Now, we can call `automl.search()` to start the AutoML process.
+    This will automatically generate pipelines for our data, and then train a collection
+    of various models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/899148ef52aac57406cb1ac8e2206992.png)EvalML''s AutoML search
+    has trained and evaluated nine different models.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To understand the type of pipelines `AutoMLSearch` has built, we can grab the
+    best performing pipeline and examine it in greater detail. We can call `automl.describe_pipeline(id)` to
+    see detailed information about the pipeline’s components and performance, or `automl.graph(pipeline)` to
+    see a visual representation of our pipeline as a flow of components.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image.png](../Images/ad194eb3c16553e78aec6b682fe396b6.png)Description of
+    our best pipeline'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image.png](../Images/007fb6912a5ce713496ccd2acd828f3e.png)Graphical representation
+    of our best pipeline'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'By examining the best performing pipeline, we can better understand what `AutoMLSearch` is
+    doing, and what pipelines it built with our text data. The best pipeline consists
+    of an `Imputer`, a `Text Featurization Component` and a `Random Forest Classifier` component.
+    Let’s break this down and understand how this pipeline was constructed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`AutoMLSearch` always adds an `Imputer` to each generated pipeline to handle
+    missing values. By default, the `Imputer` will fill the missing values in numeric
+    columns with the mean of each column, and fill the missing values in categorical
+    columns with the most frequent category of each column. Because we don’t have
+    any categorical or numeric columns in our input, the `Imputer` does not transform
+    our data.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Since `AutoMLSearch` identified a text column (our `Message` feature), it appended
+    a `Text Featurization Component` to each pipeline. This component first cleans
+    the text input by removing all non-alphanumerical characters (except spaces) and
+    converting the text input to lowercase. The component then processes the cleaned
+    text features by replacing each text feature with representative numeric features
+    using [LSA](https://en.wikipedia.org/wiki/Latent_semantic_analysis) and the [nlp-primitives
+    package](https://github.com/alteryx/nlp_primitives). This component is necessary
+    if we want to handle text features in machine learning, because most machine learning
+    models are not able to handle text data natively. Thus, we need this component
+    to help extract useful information from the raw text input and convert it to numeric
+    values that the models can understand.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Finally, each pipeline has an estimator (a model) which is fitted on our transformed
+    training data and is used to make predictions. Our best pipeline has a [Random
+    Forest classifier](https://en.wikipedia.org/wiki/Random_forest). If we took a
+    look at some other pipelines, we would also see other pipelines constructed with
+    a LightGBM classifier, Decision Tree classifier, XGBoost classifier, etc.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Best Pipeline Performance
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now, let’s see how well our best pipeline performed on various metrics and if
+    we could beat the baseline trivial model by scoring the pipeline on test data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Our best pipeline performs much better than the baseline
+  prefs: []
+  type: TYPE_NORMAL
+- en: '|  | Baseline model (always guesses majority class) | Pipeline with Text Featurization
+    Component |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Accuracy | 75% | 97.32% |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Balanced Accuracy | 50% | 95.53% |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Recall | 0% | 91.95% |'
+  prefs: []
+  type: TYPE_TB
+- en: We have significantly outperformed the baseline model in the three metrics (accuracy,
+    balanced accuracy, and recall) we were focused on! With EvalML, we were able to
+    build a model that is able to detect spam fairly well with just a few lines of
+    code, and even before doing any tuning of the binary classification decision threshold.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Importance of Text
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We previously discussed that Woodwork had automatically detected that our `Messages` column
+    was a natural language feature. We now understand that `AutoMLSearch` was able
+    to create a `Text Featurization Component` because it identified this natural
+    language column. To explain why this was useful, we can manually set our `Messages` feature
+    as a categorical feature, run the same steps, and compare our scores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: If we score the best pipeline found this time, we get an accuracy score of 75.2%,
+    a balanced accuracy score of 50.3%, and a recall score of 0.6%. These scores are
+    only marginally better than the scores for our baseline model!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: The scores for our best pipeline here are not much better than our baseline
+    scores
+  prefs: []
+  type: TYPE_NORMAL
+- en: '|  | Baseline model (always guesses majority class) | Pipeline with Text Featurization
+    Component | Pipeline without Text Featurization Component |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Accuracy | 75% | 97.32% | 75.25% |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Balanced Accuracy | 50% | 95.53% | 50.34% |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Recall | 0% | 91.95% | 0.67% |'
+  prefs: []
+  type: TYPE_TB
+- en: This means that unlike the previous best model found, this model is not much
+    better than the trivial baseline model, and is no better than always guessing
+    the majority “ham” class. By observing the components that make up this pipeline,
+    we can better understand why.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![image.png](../Images/fb140746c116973a873f4c69fa3f95a9.png)Graph of our best
+    pipeline if we treat "Message" as a categorical feature'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because `AutoMLSearch` was told to treat “Message” as a categorical feature
+    this time, each pipeline included a one-hot encoder (rather than a text featurization
+    component). The one-hot encoder encoded the top 10 most frequent “categories”
+    of these texts; however, because each text is unique, this means that 10 unique
+    text messages were encoded while the rest of the messages were dropped. Doing
+    this removed almost all of the information from our data, so our best pipeline
+    could not do much better than our trivial baseline model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What’s Next?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this post, we covered how EvalML can be used to classify text messages as
+    spam or ham (non-spam), and we learned how EvalML can detect and automatically
+    handle text features with the help of Woodwork and the nlp-primitives library.
+    You can learn more about Woodwork and nlp-primitives through their documentation,
+    linked in the resources below. Finally, be sure to check out a [blog post](https://innovation.alteryx.com/natural-language-processing-featuretools/) our
+    former intern Clara Duffy wrote to learn more about nlp-primitives.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Special thanks to Becca McBrayer for writing [the demo](https://evalml.alteryx.com/en/stable/demos/text_input.html) which
+    this blog post is based on!
+  prefs: []
+  type: TYPE_NORMAL
+- en: More Resources
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Using Text Data in EvalML demo](https://evalml.alteryx.com/en/stable/demos/text_input.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Blog post about nlp-primitives](https://innovation.alteryx.com/natural-language-processing-featuretools/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[nlp-primitives GitHub repo](https://github.com/alteryx/nlp_primitives)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Woodwork documentation](https://woodwork.alteryx.com/en/stable/index.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Angela Lin](https://www.linkedin.com/in/angela97lin/)** is a software
+    engineer on the team building the open-source EvalML automated machine learning
+    package in Python.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://innovation.alteryx.com/using-text-data-in-evalml-with-woodwork/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Getting Started with 5 Essential Natural Language Processing Libraries](/2021/02/getting-started-5-essential-nlp-libraries.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing Pipelines, Explained](/2021/03/natural-language-processing-pipelines-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Clean Text Data at the Command Line](/2020/12/clean-text-data-command-line.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Getting Started with Automated Text Summarization](https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is Text Classification?](https://www.kdnuggets.com/2022/07/text-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Best Architecture for Your Text Classification Task: Benchmarking…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DIY Automated Machine Learning with Streamlit](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automated Machine Learning with Python: A Case Study](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Harnessing ChatGPT for Automated Data Cleaning and Preprocessing](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

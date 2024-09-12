@@ -1,0 +1,499 @@
+- en: 'Solving 5 Complex SQL Problems: Tricky Queries Explained'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![The 5 Hardest Things to do in SQL](../Images/fa67cdf461a14281ea03e090313dda28.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Editor
+  prefs: []
+  type: TYPE_NORMAL
+- en: Many of us have experienced the core power of speed and efficiency delivered
+    by centralizing compute within the Cloud Data Warehouse. While this is true, many
+    of us have also realized that, like with anything, this value comes with its own
+    set of downsides.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the primary drawbacks of this approach is that you must learn and execute
+    queries in different languages, specifically SQL. While writing SQL is faster
+    and less expensive than standing up a secondary infrastructure to run python (on
+    your laptop or in-office servers), it comes with many different complexities depending
+    on what information the data analyst wants to extract from the cloud warehouse.
+    The switch over to cloud data warehouses increases the utility of complex SQL
+    versus python. Having been through this experience myself, I decided to record
+    the specific transformations that are the most painful to learn and perform in
+    SQL and provide the actual SQL needed to alleviate some of this pain for my readers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To aid in your workflow, you’ll notice that I provide examples of the data structure
+    before and after the transform is executed, so you can follow along and validate
+    your work. I have also provided the actual SQL needed to perform each of the 5
+    hardest transformations. You’ll need new SQL to perform the transformation across
+    multiple projects as your data changes. We’ve provided links to dynamic SQL for
+    each transformation so you can continue to capture the SQL needed for your analysis
+    on an as needed basis!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Date Spines
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: It is not clear where the term date spine originated, but even those who don’t
+    know the term are probably familiar with what it is.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Imagine you are analyzing your daily sales data, and it looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| sales_date | product | sales |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-14 | A | 46 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-14 | B | 409 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-15 | A | 17 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-15 | B | 480 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-18 | A | 65 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-19 | A | 45 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-19 | B | 411 |'
+  prefs: []
+  type: TYPE_TB
+- en: No sales happened on the 16th and 17th, so the rows are completely missing.
+    If we were trying to calculate *average daily sales*, or build a time series forecast
+    model, this format would be a major problem. What we need to do is insert rows
+    for the missing days.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is the basic concept:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generate or select unique dates
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Generate or select unique products
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Cross Join (cartesian product) all combinations of 1&2
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Outer Join #3 to your original data'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Customizable SQL for Datespine](https://app.rasgoml.com/sql?transformName=%22datespine_groups%22&tableState=%7B%22tables%22%3A%5B%7B%22name%22%3A%22My_First_Table%22%2C%22columns%22%3A%5B%7B%22name%22%3A%22sales_date%22%2C%22dataType%22%3A%22date%22%7D%2C%7B%22name%22%3A%22product%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22sales%22%2C%22dataType%22%3A%22number%22%7D%5D%7D%5D%2C%22baseTableName%22%3A%22My_First_Table%22%2C%22ddl%22%3A%22%22%7D&formState=%7B%22arguments%22%3A%7B%22group_by%22%3A%7B%22argType%22%3A%22column_list%22%2C%22cols%22%3A%5B%7B%22id%22%3A1%2C%22columnName%22%3A%22product%22%2C%22displayName%22%3A%22product%22%2C%22dataType%22%3A%22string%22%2C%22dwColumnId%22%3A1%7D%5D%7D%2C%22date_col%22%3A%7B%22argType%22%3A%22column%22%2C%22col%22%3A%7B%22id%22%3A0%2C%22columnName%22%3A%22sales_date%22%2C%22displayName%22%3A%22sales_date%22%2C%22dataType%22%3A%22date%22%2C%22dwColumnId%22%3A0%7D%7D%2C%22start_timestamp%22%3A%7B%22argType%22%3A%22timestamp%22%2C%22value%22%3A%222020-01-01T00%3A00%22%7D%2C%22end_timestamp%22%3A%7B%22argType%22%3A%22timestamp%22%2C%22value%22%3A%222023-01-01T00%3A00%22%7D%2C%22interval_type%22%3A%7B%22argType%22%3A%22date_part%22%2C%22value%22%3A%22day%22%7D%2C%22group_bounds%22%3A%7B%22argType%22%3A%22value%22%2C%22value%22%3A%22mixed%22%7D%7D%2C%22transformName%22%3A%22datespine_groups%22%7D)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The end result will look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| sales_date | product | sales |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-14 | A | 46 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-14 | B | 409 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-15 | A | 17 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-15 | B | 480 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-16 | A | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-16 | B | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-17 | A | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-17 | B | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-18 | A | 65 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-18 | B | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-19 | A | 45 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2022-04-19 | B | 411 |'
+  prefs: []
+  type: TYPE_TB
+- en: Pivot / Unpivot
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Sometimes, when doing an analysis, you want to restructure the table. For instance,
+    we might have a list of students, subjects, and grades, but we want to break out
+    subjects into each column. We all know and love Excel because of its pivot tables.
+    But have you ever tried to do it in SQL? Not only does every database have annoying
+    differences in how PIVOT is supported, but the syntax is unintuitive and easily
+    forgettable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Before:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Student | Subject | Grade |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Jared | Mathematics | 61 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Jared | Geography | 94 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Jared | Phys Ed | 98 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Patrick | Mathematics | 99 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Patrick | Geography | 93 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Patrick | Phys Ed | 4 |'
+  prefs: []
+  type: TYPE_TB
+- en: '[Customizable SQL for Pivot](https://app.rasgoml.com/sql?transformName=%22pivot%22&tableState=%7B%22tables%22%3A%5B%7B%22name%22%3A%22My_First_Table%22%2C%22columns%22%3A%5B%7B%22name%22%3A%22Student%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22Subject%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22Grade%22%2C%22dataType%22%3A%22number%22%7D%5D%7D%5D%2C%22baseTableName%22%3A%22My_First_Table%22%2C%22ddl%22%3A%22%22%7D&formState=%7B%22arguments%22%3A%7B%22dimensions%22%3A%7B%22argType%22%3A%22column_list%22%2C%22cols%22%3A%5B%7B%22id%22%3A0%2C%22columnName%22%3A%22Student%22%2C%22displayName%22%3A%22Student%22%2C%22dataType%22%3A%22string%22%2C%22dwColumnId%22%3A0%7D%5D%7D%2C%22pivot_column%22%3A%7B%22argType%22%3A%22column%22%2C%22col%22%3A%7B%22id%22%3A2%2C%22columnName%22%3A%22Grade%22%2C%22displayName%22%3A%22Grade%22%2C%22dataType%22%3A%22number%22%2C%22dwColumnId%22%3A2%7D%7D%2C%22value_column%22%3A%7B%22argType%22%3A%22column%22%2C%22col%22%3A%7B%22id%22%3A1%2C%22columnName%22%3A%22Subject%22%2C%22displayName%22%3A%22Subject%22%2C%22dataType%22%3A%22string%22%2C%22dwColumnId%22%3A1%7D%7D%2C%22agg_method%22%3A%7B%22argType%22%3A%22agg%22%2C%22value%22%3A%22AVG%22%7D%2C%22list_of_vals%22%3A%7B%22argType%22%3A%22string_list%22%2C%22values%22%3A%5B%22Mathematics%22%2C%22Geography%22%2C%22Phys%20Ed%22%5D%7D%7D%2C%22transformName%22%3A%22pivot%22%7D)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Result:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Student | Mathematics | Geography | Phys Ed |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Jared | 61 | 94 | 98 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Patrick | 99 | 93 | 4 |'
+  prefs: []
+  type: TYPE_TB
+- en: One-hot Encoding
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: This one isn’t necessarily difficult but is time-consuming. Most data scientists
+    don’t consider doing one-hot-encoding in SQL. Although the syntax is simple, they
+    would rather transfer the data out of the data warehouse than the tedious task
+    of writing a 26-line CASE statement. We don’t blame them!
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, we recommend taking advantage of your data warehouse and its processing
+    power. Here is an example using STATE as a column to one-hot-encode.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Before:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Babyname | State | Qty |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Alice | AL | 156 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Alice | AK | 146 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Alice | PA | 654 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| … | … | … |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Zelda | NY | 417 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Zelda | AL | 261 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Zelda | CO | 321 |'
+  prefs: []
+  type: TYPE_TB
+- en: '[Customizable SQL for One-Hot Encode](https://app.rasgoml.com/sql?transformName=%22one_hot_encode%22&tableState=%7B%22tables%22%3A%5B%7B%22name%22%3A%22My_First_Table%22%2C%22columns%22%3A%5B%7B%22name%22%3A%22BABYNAME%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22STATE%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22Qty%22%2C%22dataType%22%3A%22number%22%7D%5D%7D%5D%2C%22baseTableName%22%3A%22My_First_Table%22%2C%22ddl%22%3A%22%22%7D&formState=%7B%22arguments%22%3A%7B%22column%22%3A%7B%22argType%22%3A%22column%22%2C%22col%22%3A%7B%22id%22%3A1%2C%22columnName%22%3A%22STATE%22%2C%22displayName%22%3A%22STATE%22%2C%22dataType%22%3A%22string%22%2C%22dwColumnId%22%3A1%7D%7D%2C%22list_of_vals%22%3A%7B%22argType%22%3A%22string_list%22%2C%22values%22%3A%5B%22AL%22%2C%22AK%22%2C%22AZ%22%2C%22AR%22%2C%22CA%22%2C%22CO%22%2C%22CT%22%2C%22DE%22%2C%22FL%22%2C%22GA%22%2C%22HI%22%2C%22ID%22%2C%22IL%22%2C%22IN%22%2C%22IA%22%2C%22KS%22%2C%22KY%22%2C%22LA%22%2C%22ME%22%2C%22MD%22%2C%22MA%22%2C%22MI%22%2C%22MN%22%2C%22MS%22%2C%22MO%22%2C%22MT%22%2C%22NE%22%2C%22NV%22%2C%22NH%22%2C%22NJ%22%2C%22NM%22%2C%22NY%22%2C%22NC%22%2C%22ND%22%2C%22OH%22%2C%22OK%22%2C%22OR%22%2C%22PA%22%2C%22RI%22%2C%22SC%22%2C%22SD%22%2C%22TN%22%2C%22TX%22%2C%22UT%22%2C%22VT%22%2C%22VA%22%2C%22WA%22%2C%22WV%22%2C%22WI%22%2C%22WY%22%5D%7D%7D%2C%22transformName%22%3A%22one_hot_encode%22%7D)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Result:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Babyname | State | State_AL | State_AK | … | State_CO | Qty |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Alice | AL | 1 | 0 | … | 0 | 156 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Alice | AK | 0 | 1 | … | 0 | 146 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Alice | PA | 0 | 0 | … | 0 | 654 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| … | … |  |  | … |  | … |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Zelda | NY | 0 | 0 | … | 0 | 417 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Zelda | AL | 1 | 0 | … | 0 | 261 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Zelda | CO | 0 | 0 | … | 1 | 321 |'
+  prefs: []
+  type: TYPE_TB
+- en: Market Basket Analysis
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: When doing a market basket analysis or mining for association rules, the first
+    step is often formatting the data to aggregate each transaction into a single
+    record. This can be challenging for your laptop, but your data warehouse is designed
+    to crunch this data efficiently.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Typical transaction data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| SALESORDERNUMBER | CUSTOMERKEY | ENGLISHPRODUCTNAME | LISTPRICE | WEIGHT
+    | ORDERDATE |'
+  prefs: []
+  type: TYPE_TB
+- en: '| SO51247 | 11249 | Mountain-200 Black | 2294.99 | 23.77 | 1/1/2013 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| SO51247 | 11249 | Water Bottle - 30 oz. | 4.99 |  | 1/1/2013 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| SO51247 | 11249 | Mountain Bottle Cage | 9.99 |  | 1/1/2013 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| SO51246 | 25625 | Sport-100 Helmet | 34.99 |  | 12/31/2012 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| SO51246 | 25625 | Water Bottle - 30 oz. | 4.99 |  | 12/31/2012 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| SO51246 | 25625 | Road Bottle Cage | 8.99 |  | 12/31/2012 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| SO51246 | 25625 | Touring-1000 Blue | 2384.07 | 25.42 | 12/31/2012 |'
+  prefs: []
+  type: TYPE_TB
+- en: '[Customizable SQL for Market Basket](https://app.rasgoml.com/sql?transformName=%22market_basket%22&tableState=%7B%22tables%22%3A%5B%7B%22name%22%3A%22My_First_Table%22%2C%22columns%22%3A%5B%7B%22name%22%3A%22SALESORDERNUMBER%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22CUSTOMERKEY%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22ENGLISHPRODUCTNAME%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22LISTPRICE%22%2C%22dataType%22%3A%22float%22%7D%2C%7B%22name%22%3A%22WEIGHT%22%2C%22dataType%22%3A%22float%22%7D%2C%7B%22name%22%3A%22ORDERDATE%22%2C%22dataType%22%3A%22date%22%7D%5D%7D%5D%2C%22baseTableName%22%3A%22My_First_Table%22%2C%22ddl%22%3A%22%22%7D&formState=%7B%22arguments%22%3A%7B%22transaction_id%22%3A%7B%22argType%22%3A%22column%22%2C%22col%22%3A%7B%22id%22%3A0%2C%22columnName%22%3A%22SALESORDERNUMBER%22%2C%22displayName%22%3A%22SALESORDERNUMBER%22%2C%22dataType%22%3A%22string%22%2C%22dwColumnId%22%3A0%7D%7D%2C%22sep%22%3A%7B%22argType%22%3A%22value%22%2C%22value%22%3A%22%2C%20%22%7D%2C%22agg_column%22%3A%7B%22argType%22%3A%22column%22%2C%22col%22%3A%7B%22id%22%3A2%2C%22columnName%22%3A%22ENGLISHPRODUCTNAME%22%2C%22displayName%22%3A%22ENGLISHPRODUCTNAME%22%2C%22dataType%22%3A%22string%22%2C%22dwColumnId%22%3A2%7D%7D%7D%2C%22transformName%22%3A%22market_basket%22%7D)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Result:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| NUMTRANSACTIONS | ENGLISHPRODUCTNAME_LISTAGG |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 207 | Mountain Bottle Cage, Water Bottle - 30 oz. |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 200 | Mountain Tire Tube, Patch Kit/8 Patches |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 142 | LL Road Tire, Patch Kit/8 Patches |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 137 | Patch Kit/8 Patches, Road Tire Tube |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 135 | Patch Kit/8 Patches, Touring Tire Tube |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 132 | HL Mountain Tire, Mountain Tire Tube, Patch Kit/8 Patches |'
+  prefs: []
+  type: TYPE_TB
+- en: Time-Series Aggregations
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Time series aggregations are not only used by data scientists but they’re used
+    for analytics as well. What makes them difficult is that window functions require
+    the data to be formatted correctly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example, if you want to calculate the average sales amount in the past
+    14 days, window functions require you to have all sales data broken up into one
+    row per day. Unfortunately, anyone who has worked with sales data before knows
+    that it is usually stored at the transaction level. This is where time-series
+    aggregation comes in handy. You can create aggregated, historical metrics without
+    reformatting the entire dataset. It also comes in handy if we want to add multiple
+    metrics at one time:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Average sales in the past 14 days
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Biggest purchase in last 6 months
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Count Distinct product types in last 90 days
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If you wanted to use window functions, each metric would need to be built independently
+    with several steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A better way to handle this, is to use common table expressions (CTEs) to define
+    each of the historical windows, pre-aggregated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Transaction ID | Customer ID | Product Type | Purchase Amt | Transaction
+    Date |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 65432 | 101 | Grocery | 101.14 | 2022-03-01 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 65493 | 101 | Grocery | 98.45 | 2022-04-30 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 65494 | 101 | Automotive | 239.98 | 2022-05-01 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 66789 | 101 | Grocery | 86.55 | 2022-05-22 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 66981 | 101 | Pharmacy | 14 | 2022-06-15 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 67145 | 101 | Grocery | 93.12 | 2022-06-22 |'
+  prefs: []
+  type: TYPE_TB
+- en: '[Customizable SQL for Time Series Aggregate SQL](https://app.rasgoml.com/sql?transformName=%22timeseries_agg%22&tableState=%7B%22tables%22%3A%5B%7B%22name%22%3A%22My_First_Table%22%2C%22columns%22%3A%5B%7B%22name%22%3A%22Transaction_ID%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22Customer_ID%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22Product_Type%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22Purchase_Amt%22%2C%22dataType%22%3A%22float%22%7D%2C%7B%22name%22%3A%22Transaction_Date%22%2C%22dataType%22%3A%22date%22%7D%5D%7D%5D%2C%22baseTableName%22%3A%22My_First_Table%22%2C%22ddl%22%3A%22%22%7D&formState=%7B%22arguments%22%3A%7B%22aggregations%22%3A%7B%22argType%22%3A%22agg_dict%22%2C%22aggDict%22%3A%7B%22Purchase_Amt%22%3A%7B%22AVG%22%3Atrue%2C%22MAX%22%3Atrue%7D%2C%22Transaction_ID%22%3A%7B%22COUNT%20DISTINCT%22%3Atrue%7D%7D%7D%2C%22date%22%3A%7B%22argType%22%3A%22column%22%2C%22col%22%3A%7B%22id%22%3A4%2C%22columnName%22%3A%22Transaction_Date%22%2C%22displayName%22%3A%22Transaction_Date%22%2C%22dataType%22%3A%22date%22%2C%22dwColumnId%22%3A4%7D%7D%2C%22offsets%22%3A%7B%22argType%22%3A%22int_list%22%2C%22values%22%3A%5B14%2C90%2C180%5D%7D%2C%22date_part%22%3A%7B%22argType%22%3A%22date_part%22%2C%22value%22%3A%22day%22%7D%2C%22group_by%22%3A%7B%22argType%22%3A%22column_list%22%2C%22cols%22%3A%5B%7B%22id%22%3A1%2C%22columnName%22%3A%22Customer_ID%22%2C%22displayName%22%3A%22Customer_ID%22%2C%22dataType%22%3A%22string%22%2C%22dwColumnId%22%3A1%7D%5D%7D%7D%2C%22transformName%22%3A%22timeseries_agg%22%7D)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Result:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Transaction ID | Customer ID | Product Type | Purchase Amt | Transaction
+    Date | Avg Sales Past 14 Days | Max Purchase Past 6 months | Count Distinct Product
+    Type last 90 days |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 65432 | 101 | Grocery | 101.14 | 2022-03-01 | 101.14 | 101.14 | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 65493 | 101 | Grocery | 98.45 | 2022-04-30 | 98.45 | 101.14 | 2 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 65494 | 101 | Automotive | 239.98 | 2022-05-01 | 169.21 | 239.98 | 2 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 66789 | 101 | Grocery | 86.55 | 2022-05-22 | 86.55 | 239.98 | 2 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 66981 | 101 | Pharmacy | 14 | 2022-06-15 | 14 | 239.98 | 3 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 67145 | 101 | Grocery | 93.12 | 2022-06-22 | 53.56 | 239.98 | 3 |'
+  prefs: []
+  type: TYPE_TB
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: I hope this piece helps shed some light on the different troubles that a data
+    practitioner will encounter when operating within the modern data stack. SQL is
+    a double-edged sword when it comes to querying the cloud warehouse. While centralizing
+    the compute in the cloud data warehouse increases speed, it sometimes requires
+    some extra SQL skills. I hope that this piece has helped answer questions and
+    provides the syntax and background needed to tackle these problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Josh Berry](https://www.linkedin.com/in/joshberry022/)** ([**@Twitter**](https://mobile.twitter.com/itsamejoshabee))
+    leads Customer Facing Data Science at Rasgo and has been in the data and analytics
+    profession since 2008\. Josh spent 10 years at Comcast where he built the data
+    science team and was a key owner of the internally developed Comcast feature store
+    - one of the first feature stores to hit the market. Following Comcast, Josh was
+    a critical leader in building out Customer Facing Data Science at DataRobot. In
+    his spare time Josh performs complex analysis on interesting topics such as baseball,
+    F1 racing, housing market predictions, and more.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Tricky SQL Queries Solved](https://www.kdnuggets.com/2020/11/5-tricky-sql-queries-solved.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Definitive Guide to Solving the Phantom Read in MySQL](https://www.kdnuggets.com/2022/06/definitive-guide-solving-phantom-read-mysql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Graph of Thoughts: A New Paradigm for Elaborate Problem-Solving in…](https://www.kdnuggets.com/graph-of-thoughts-a-new-paradigm-for-elaborate-problem-solving-in-large-language-models)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Useful Intermediate SQL Queries for Data Science](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, December 7: Top 10 Data Science Myths Busted • 4…](https://www.kdnuggets.com/2022/n47.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Optimize SQL Queries for Faster Data Retrieval](https://www.kdnuggets.com/2023/06/optimize-sql-queries-faster-data-retrieval.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

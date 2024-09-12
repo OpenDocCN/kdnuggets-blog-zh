@@ -1,0 +1,283 @@
+- en: Variational Autoencoders Explained in Detail
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/11/variational-autoencoders-explained.html](https://www.kdnuggets.com/2018/11/variational-autoencoders-explained.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/1286eca0c2755dee82f0ae1831d7ab32.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the [previous post](http://anotherdatum.com/vae.html) of this series I introduced
+    the Variational Autoencoder (VAE) framework, and explained the theory behind it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post I’ll explain the VAE in more detail, or in other words — I’ll provide
+    some code :)
+  prefs: []
+  type: TYPE_NORMAL
+- en: After reading this post, you’ll understand the technical details needed to implement
+    VAE.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a bonus point, I’ll show you how by imposing a special role to some of the
+    latent vector’s dimensions, the model can generate images conditioned on the digit
+    type.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The model will be trained on [MNIST](https://en.wikipedia.org/wiki/MNIST_database) — handwritten
+    digits dataset. The input is an image in ℝ[28∙28].
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next we’ll define the hyperparameters we’re going to use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feel free to play with different values to get a feeling of how the model is
+    affected. The notebook can be found [here](https://github.com/yoel-zeldes/yoel-zeldes.github.io/blob/source/content/vae2/vae2.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/3b3da4fde243cf4db3f55e8861f5a65a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The model is composed of three sub-networks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given *x*(image), encode it into a distribution over the latent space — referred
+    to as *Q*(*z*|*x*) in the previous post.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Given *z*in latent space (code representation of an image), decode it into the
+    image it represents — referred to as *f*(*z*) in the previous post.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Given *x*, classify its digit by mapping it to a layer of size 10 where the
+    i’th value contains the probability of the i’th digit.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The first two sub-networks are the vanilla VAE framework.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The third one is used as an [auxiliary task](http://ruder.io/multi-task/index.html),
+    which will enforce some of the latent dimensions to encode the digit found in
+    an image. Let me explain the motivation: in the previous post I explained that
+    we don’t care what information each dimension of the latent space holds. The model
+    can learn to encode whatever information it finds valuable for its task. Since
+    we’re familiar with the dataset, we know the digit type should be important. We
+    want to help the model by providing it with this information. Moreover, we’ll
+    use this information to generate images conditioned on the digit type, as I’ll
+    explain later.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given the digit type, we’ll encode it using one hot encoding, that is, a vector
+    of size 10\. These 10 numbers will be concatenated into the latent vector, so
+    when decoding that vector into an image, the model will make use of the digit
+    information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are two ways to provide the model with a one hot encoding vector:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Add it as an input to the model.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Add it as a label so the model will have to predict it by itself: we’ll add
+    another sub-network that predicts a vector of size 10 where the loss is the cross
+    entropy with the expected one hot vector.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'We’ll go with the second option. Why? Well, in test time we can use the model
+    in two ways:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Provide an image as input, and infer a latent vector.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Provide a latent vector as input, and generate an image.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Since we want to support the first option too, we can’t provide the model with
+    the digit as input, since we won’t know it in test time. Hence, the model must
+    learn to predict it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we understand all the sub-networks composing the model, we can code
+    them. The mathematical details behind the encoder and decoder can be found in
+    the previous post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/d94560854f9b4a91929db09f7f3861cd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We’ll train the model to optimize the two losses — the VAE loss and the classification
+    loss — using [SGD](https://en.wikipedia.org/wiki/Stochastic_gradient_descent).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'At the end of every epoch we’ll sample latent vectors and decode them into
+    images, so we can visualize how the generative power of the model improves over
+    the epochs. The sampling method is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Deterministically set the dimensions which are used for digit classification
+    according to the digit we want to generate an image for. If for example we want
+    to generate an image of the digit 2, these dimensions will be set to [0010000000].
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Randomly sample the other dimensions according to the prior — a multivariate
+    Gaussian. We’ll use these sampled values for all the different digits we generate
+    in a given epoch. This way we can have a feeling of what is encoded in the other
+    dimensions, for example stroke style.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The intuition behind step 1 is that after convergence the model should be able
+    to classify the digit in an input image using these dimensions. On the other hand,
+    these dimensions are also used in the decoding step to generate the image. It
+    means the decoder sub-network learns that when these dimensions have the values
+    corresponding to the digit 2, it should generate an image of that digit. Therefore,
+    if we manually set these dimensions to contain the information of the digit 2,
+    we’ll get a generated image of that digit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s verify both losses look good, that is — decreasing:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0548475d920b2aa89d6e12cc74b9364d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Additionally, let’s plot the generated images to see if indeed the model was
+    able to generate images of digits:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/53f3601c848327e3e915709f0c622828.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Final thoughts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It’s nice to see that using a simple feed forward network (no fancy convolutions)
+    we’re able to generate nice looking images after merely 20 epochs. The model learned
+    to use the special digit dimensions quite fast — at epoch 9 we already see the
+    sequence of digits we were trying to generate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Every epoch used different random values for the other dimensions, so we can
+    see how the style differs between epochs, and is similar inside every epoch — at
+    least for some of the epochs. At epoch 18 for instance all the digits are bolder
+    compared to epoch 20.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I invite you to open [this notebook](https://github.com/yoel-zeldes/yoel-zeldes.github.io/blob/source/content/vae2/vae2.ipynb) and
+    play around with the VAE. The hyperparameter values for instance have a great
+    effect over the generated images. Have fun :)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio**: [Yoel Zeldes](https://medium.com/@yoelzeldes) is a Algorithms Engineer
+    at Taboola and is also a Machine Learning enthusiast, who especially enjoys the
+    insights of Deep Learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/variational-autoencoders-explained-in-detail-d585327c660a).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Resources:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[on-line and web-based: Analytics, Data Mining, Data Science, Machine Learning
+    education](https://www.kdnuggets.com/education/online.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Software for Analytics, Data Science, Data Mining, and Machine Learning](https://www.kdnuggets.com/software/index.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deep Learning Performance Cheat Sheet](https://www.kdnuggets.com/2018/11/deep-learning-performance-cheat-sheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Engineer Your Way Out of Slow Models](https://www.kdnuggets.com/2018/11/engineer-slow-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deep Learning Cheat Sheets](https://www.kdnuggets.com/2018/11/deep-learning-cheat-sheets.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Database Key Terms, Explained](https://www.kdnuggets.com/2016/07/database-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Descriptive Statistics Key Terms, Explained](https://www.kdnuggets.com/2017/05/descriptive-statistics-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Decision Tree Algorithm, Explained](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Key-Value Databases, Explained](https://www.kdnuggets.com/2021/04/nosql-explained-understanding-key-value-databases.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Micro, Macro & Weighted Averages of F1 Score, Clearly Explained](https://www.kdnuggets.com/2023/01/micro-macro-weighted-averages-f1-score-clearly-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Gaussian Naive Bayes, Explained](https://www.kdnuggets.com/2023/03/gaussian-naive-bayes-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

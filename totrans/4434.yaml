@@ -1,0 +1,384 @@
+- en: Building a Content-Based Book Recommendation Engine
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/07/building-content-based-book-recommendation-engine.html](https://www.kdnuggets.com/2020/07/building-content-based-book-recommendation-engine.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Dhilip Subramanian](https://medium.com/@sdhilip), Data Scientist and
+    AI Enthusiast**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we plan to buy any new product, we normally ask our friends, research the
+    product features, compare the product with similar products, read the product
+    reviews on the internet and then we make our decision. How convenient if all this
+    process was taken care of automatically and recommend the product efficiently?
+    A recommendation engine or recommender system is the answer to this question.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Content-based filtering and collaborative-based filtering are the two popular
+    recommendation systems. In this blog, we will see how we can build a simple content-based
+    recommender system using Goodreads.com data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Content-based recommendation system
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Content-based recommendation systems recommend items to a user by using the
+    similarity of items. This recommender system recommends products or items based
+    on their description or features. It identifies the similarity between the products
+    based on their descriptions. It also considers the user's previous history in
+    order to recommend a similar product.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Example: If a user likes the novel “Tell Me Your Dreams” by Sidney Sheldon,
+    then the recommender system recommends the user to read other Sidney Sheldon novels,
+    or it recommends a novel with the genre “non-fiction”. (Sidney Sheldon novels
+    belong to the non-fiction genre).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As I mentioned above, we are using goodreads.com data and don’t have user reading
+    history. Hence, we have used a simple content-based recommendation system. We
+    are going to build two recommendation systems by using a book title and book description.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We need to find similar books to a given book and then recommend those similar
+    books to the user. How do we find whether the given book is similar or dissimilar?
+    A similarity measure was used to find this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/d4ac434e81dfa10cdd22a92397dbebc9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source: [dataaspirant](https://dataaspirant.com/2015/04/11/five-most-popular-similarity-measures-implementation-in-python/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are different similarity measures are available. Cosine Similarity was
+    used in our recommender system to recommend the books. For more details on the
+    similarity measure, please refer to this [article](https://dataaspirant.com/2015/04/11/five-most-popular-similarity-measures-implementation-in-python/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I scraped book details from goodreads.com pertaining to business, non-fiction
+    and cooking genres.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/ddec50f7f1209f3f2c56cd61c7528b90.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Total 3592 books details available in our dataset. It has six columns:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: title -> Book Name
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Rating -> Book rating given by the user
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Genre -> Category(Type of book). I have taken only three genres like business,
+    non-fiction and cooking for this problem
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Author -> Book Author
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Desc -> Book description
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: url -> Book cover image link
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Exploratory Data Analysis
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Genre distribution**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/08c3acb3df5d1becc63bfdadec90f35c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Printing the book title and description randomly
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/58612e4d2583eefabf11c04387f32585.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/aa860c0340825eded7f783c234f48e2a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Book description — Word count distribution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/e2cc22ec3681f7952a250011d6585dd8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We don’t have many lengthy book description. It is clear that goodreads.com
+    provides short descriptions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The distribution of top part-of-speech tags in the book descriptions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/508a944e4ddae3b0f0f81ab77cb46e0d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Bigram distribution for the book description
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/6f107e8b51b78f8976e6d828dfc77284.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Trigram distribution for the book description
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/7af1da3c6b7cd9e93b1a40f0b93dd450.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Text Preprocessing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Cleaning the book descriptions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Recommendation engine
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We are going to build two recommendation engines using the book titles and descriptions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Convert each book title and description into vectors using TF-IDF and bigram.
+    See here for more details on [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: We are building two recommendation engines, one with a book title and another
+    one with a book description. The model recommends a similar book based on title
+    and description.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Calculate the similarity between all the books using cosine similarity.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Define a function that takes the book title and genre as input and returns the
+    top five similar recommended books based on the title and description.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Recommendation based on book title
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s recommend based on the book title “Steve Jobs” and genre “Business”:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Output**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/fbf6bc20b35054daf268541a355d5697.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Image for post](../Images/1117e577b04f0cb6191e344f925b288a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We have given the book "Steve Jobs" as input and the model recommends other
+    Steve Jobs books based on the similarity existing in the book title.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recommendation based on book description
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We are using the same above function by converting book description into vectors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s recommend based on the book “Harry Potter and the Prisoner of Azkaban”
+    and the genre “Non-Fiction”:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Output**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/1011bbc0e3af2aa45e5bbab79a71fc31.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Image for post](../Images/5bde603c84c068b15c3a8644c99c5fff.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We provided “Harry Potter and the Prisoner of Azkaban” and “Non-Fiction” as
+    inputs, and the model recommends five other Harry Potter books which are similar
+    to our input.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s get one more recommendation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/c4c7f3d3a661f7c089ef762f5dca85d4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Image for post](../Images/d3e633a343be134fbaf63e5a95a7ad71.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The above model recommends five books similar to Norwegian Wood based on the
+    description.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is just a simple basic level recommender system. Real-world recommendation
+    systems are more robust and advanced. We can further improve the above by adding
+    other metadata like author and genre.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, we can do text-based semantic recommendation using Word2Vec. I have used
+    Word2Vec and built a recommendation engine. Please check [here](https://medium.com/towards-artificial-intelligence/content-based-recommendation-system-using-word-embeddings-c1c15de1ef95).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for reading. If you have anything to add, please feel free to leave a
+    comment!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Dhilip Subramanian](https://medium.com/@sdhilip)** is a Mechanical
+    Engineer and has completed his Master''s in Analytics. He has 9 years of experience
+    with specialization in various domains related to data including IT, marketing,
+    banking, power, and manufacturing. He is passionate about NLP and machine learning.
+    He is a contributor to the [SAS community](https://communities.sas.com/t5/user/viewprofilepage/user-id/271305)
+    and loves to write technical articles on various aspects of data science on the
+    Medium platform.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/building-a-content-based-book-recommendation-engine-9fd4d57a4da).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Exploring the Real World of Data Science](/2020/06/exploring-real-world-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Five Cool Python Libraries for Data Science](2020/04/five-cool-python-libraries-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Easy Speech-to-Text with Python](/2020/06/easy-speech-text-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Build a Real-Time Recommendation Engine Using Graph Databases](https://www.kdnuggets.com/2023/08/build-realtime-recommendation-engine-graph-databases.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Recommendation System with Hugging Face Transformers](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Geospatial Application in Python with Google Earth…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ten Key Lessons of Implementing Recommendation Systems in Business](https://www.kdnuggets.com/2022/07/ten-key-lessons-implementing-recommendation-systems-business.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

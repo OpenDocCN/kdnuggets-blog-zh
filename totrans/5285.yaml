@@ -1,0 +1,434 @@
+- en: Spark SQL for Real-Time Analytics
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2015/09/spark-sql-real-time-analytics.html](https://www.kdnuggets.com/2015/09/spark-sql-real-time-analytics.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Sumit Pal and Ajit Jaokar, **(FutureText).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article is part of the forthcoming **Data Science for Internet of Things
+    Practitioner course** in London. If you want to be a Data Scientist for the Internet
+    of Things, this intensive course is ideal for you. We cover complex areas like
+    Sensor fusion, Time Series, Deep Learning and others. We work with Apache Spark,
+    R language and leading IoT platforms. Please contact [info@futuretext.com](mailto:info@futuretext.com) for
+    more details
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Overview**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is the 1^(st) part of a series of 3 part article which discusses SQL with
+    Spark for Real Time Analytics for IOT. Part One discusses the technological foundations
+    of SQL with Spark. Part two discusses Real Time Analytics with Spark SQL. Finally,
+    Part Three discusses an IoT use case for Real Time Analytics with Spark SQL.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Introduction**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Part One, we discuss Spark SQL and why it is the preferred method for Real
+    Time Analytics. Spark SQL is a module in Apache Spark that integrates relational
+    processing with Spark’s functional programming API. Spark SQL has been part of
+    Spark Core since version 1.0\. It runs HiveQL/SQL alongside or replacing existing
+    hive deployments. It can connect to existing BI Tools. It has bindings in Python,
+    Scala and Java. It makes two vital additions to the framework. Firstly, it offers
+    a tight integration between relational and procedural processing, with declarative
+    DataFrame API that integrates with procedural Spark API. Secondly, it includes
+    an extensible optimizer, built with Scala, leveraging its strong pattern matching
+    capabilities, which makes it easy to add compos-able rules, control code generation
+    and deﬁne extensions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Objectives and Goals of Spark SQL**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: While the relational approach has been applied to solving big data problems,
+    it is in-sufficient for many big data applications. Relational and procedural
+    approaches have until recently remained disjoint, forcing developers to choose
+    one paradigm or other. The Spark SQL framework combines both models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As they say, “The fastest way to read data is NOT to read it” at all.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spark SQL supports relational processing both within Spark programs (viaRDDs)
+    and on external data sources. It can easily support new data sources, including
+    semi-structured data and external databases amenable to query federation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spark SQL helps this philosophy by
+  prefs: []
+  type: TYPE_NORMAL
+- en: Converting data to more efficient formats (from storage, network and IO perspective)
+    by using various columnar formats
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Using data partitioning
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Skipping data reads using Data statistics
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pushing predicates to Storage System
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Optimization as late as possible when all the information about data pipelines
+    is available
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Internally, Spark SQL and DataFrame take advantage of the Catalyst query optimizer
+    to intelligently plan the execution of queries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Spark SQL **'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spark SQL can support Batch or Streaming SQL. With RDDs the core Spark Framework
+    supports batch workloads. RDDs can point to static data sets and Sparks’s rich
+    API can be used to manipulate the RDDs working on batch data sets in memory with
+    lazy evaluation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Streaming + SQL and DataFrames**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us quickly look into what is an RDD in spark core framework and what is
+    a DStream which are the basic building blocks for further discussions in the article
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spark operates on RDDs – resilient distributed dataset – which is an in-memory
+    data structure. Each RDD represents a chunk of the data which is partitioned across
+    the data nodes in the cluster. RDDs are immutable and a new one is created when
+    transformations are applied. RDDs are operated in parallel using transformations/actions
+    like mapping, filtering. These operations are performed simultaneously on all
+    the partitions in parallel. RDDs are resilient, if a partition is lost due to
+    a node crash, it can be reconstructed from the original sources.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![spark-rdd](../Images/76981d00d9f9634e21074e9cdd8f42fc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Spark Streaming provides as abstraction called DStream (discrete streams) which
+    is a continuous stream of data. DStreams are created from input data stream or
+    from sources such as Kafka, Flume or by applying operations on other DStreams.
+    A DStream is essentially a sequence of RDDs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![real-time-rdd](../Images/58e5b962f873f68db85bccce6b212219.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: RDDs generated by DStreams can be converted to DataFrames and queried using
+    SQL. The stream can be exposed to any external application that talks SQL using
+    Spark’s JDBC driver. Batches of streaming data are stored in the Spark’s worker
+    memory and this can be interactively queried on demand using SQL or Spark’s API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'StreamSQL is a Spark component that combines Catalyst and Spark Streaming to
+    perform SQL queries on DStreams. StreamSQL extends SQL to support streams with
+    operations like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: SELECT against a stream to calculate functions or filter unwanted data (using
+    a WHERE clause)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: JOIN a stream with 1 or more data sets to produce a new stream.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Windowing and Aggregation – Stream can be limited to create finite data sets.
+    Windowing allows complex message selection based on field values. Once a finite
+    batch is created analytics can be applied.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Spark SQL has the following components
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Components**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spark SQL Core
+  prefs: []
+  type: TYPE_NORMAL
+- en: Execution of queries as RDDs
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reading data sets in multiple file formats Parquet, JSON, Avro etc.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reading data sources both SQL and NOSQL Data sources
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Hive Support
+  prefs: []
+  type: TYPE_NORMAL
+- en: HQL, MetaStore, SerDes, UDFs
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Catalyst Optimizer
+  prefs: []
+  type: TYPE_NORMAL
+- en: it optimizes the Relational algebra + expressions
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: it does Query optimization
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Problems Spark SQL solves**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spark SQL provides a unified framework with no movement of data outside the
+    cluster. No extra modules need to be installed or integrated. It provides a unified
+    load/save interface irrespective of the data source and the programming language.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The example below shows how easy it is to both load data from avro and convert
+    it into parquet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`val df = sqlContext.load("mydata.avro", "com.databricks.spark.avro") df.save("mydata.parquet",
+    "parquet")`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spark SQL has a unified framework to solve the same analytics problem both for
+    batch & streaming, which has been the Holy Grail in data processing. Frameworks
+    have been built which do either one of them and do it well in terms of scalability,
+    performance and feature set, but having a unified framework for doing both batch
+    and streaming was never feasible, before Spark / Spark SQL led the way. With Spark
+    framework the same code (logic) can work either with batch data – RDDs or with
+    Streaming Data Sets (DStreams – Discretized Streams). DStream is just a series
+    of RDDs. This representation allows batch and streaming workloads to work seamlessly.
+    This vastly reduces code maintenance overheads and training developers with 2
+    different skill sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Reading from JDBC Data Sources**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data source for reading from JDBC has been added as built-in source for Spark
+    SQL. Spark SQL can extract data from any existing relational databases that supports
+    JDBC.  Examples include mysql, postgres, H2, and more.  Reading data from one
+    of these systems is as simple as creating virtual table that points to the external
+    table.  Data from this table can then be easily read in and joined with any of
+    the other sources that Spark SQL supports.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Spark SQL with Data Frames**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Frames are distributed collection of rows organized into named columns,
+    an abstraction for selecting, filtering, aggregating and plotting, structured
+    data – it was previously used to be called SchemaRDD.
+  prefs: []
+  type: TYPE_NORMAL
+- en: DataFrame API can perform relational operations on both external data sources
+    and Spark’s built-in distributed collections.
+  prefs: []
+  type: TYPE_NORMAL
+- en: DataFrame offers rich relational/procedural integration within Spark programs.
+    DataFrames are collections of structured records that can be manipulated using
+    Spark’s procedural API, or using new relational APIs that allow richer optimizations.
+    They can be created directly from Spark’s built-in distributed collections of
+    objects, enabling relational processing in existing Spark.
+  prefs: []
+  type: TYPE_NORMAL
+- en: DataFrames are more convenient and more efﬁcient than Spark’s procedural API.
+    They make it easy to compute multiple aggregates in one pass using a SQL statement,
+    something that is difﬁcult to express in traditional functional APIs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unlike RDDs, DataFrames keep track of their schema and support various relational
+    operations that lead to more optimized execution. They infer the schema using
+    reflection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spark DataFrames are lazy in that each DataFrame object represents a logical
+    plan to compute a dataset, but no execution occurs until the user calls a special
+    “output operation” such as save. This enables rich optimization across all operations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: DataFrames evolve Spark’s RDD model, making it faster and easier for Spark developers
+    to work with structured data by providing simplified methods for filtering, aggregating,
+    and projecting over large datasets. DataFrames are available in Spark’s Java,
+    Scala, and Python API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spark SQL’s data source API can read and write DataFrames from a wide variety
+    of data sources and data formats – Avro, parquet, ORC, JSON, H2.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Example of how writing less code– using plain RDDs and using DataFrame APIs
+    for SQL*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The scala example below shows equivalent code – one using Sparks RDD APIs and
+    other one using Spark’s DataFrame API. Let us have an object – People – firstname,
+    lastname, age being the attributes and the objective is to get the basic stats
+    on age – People – grouped by firstname.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`case class People(firstname: String, lastname: String, age: Intger) val people
+    = rdd.map(p => (people.firstname, people.age)).cache()`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`// RDD Code val minAgeByFN = people.reduceByKey( scala.math.min(_, _) ) val
+    maxAgeByFN = people.reduceByKey( scala.math.max(_, _) ) val avgAgeByFN = people.mapValues(x
+    => (x, 1)) .reduceByKey((x, y) => (x._1 + y._1, x._2 + y._2)) val countByFN = 
+    people.mapValues(x => 1).reduceByKey(_ + _)`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`// Data Frame Code df = people.toDF people = df.groupBy("firstname").agg(
+    min("age"), max("age"), avg("age"), count("*"))`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Frames are faster than using the plain RDDs due to the catalyst optimizer.
+    DataFrames provide the same operations as relational query languages like SQL
+    and Pig.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Approach to solving Streaming Analytics with Spark SQL**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The diagram below shows thinking behind our approach of using Spark SQL for
+    doing Real Time Analytics. This follows the well know pattern of Lambda Architecture
+    for building Real Time Analytic systems for big streaming data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Shortcomings of Spark SQL**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![lambda-architecture-spark-sql](../Images/f34f18a8fb3c7c2708686cefbea49f34.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Same as any tool running on a Hadoop cluster – the SLAs do not depend on how
+    fast the engine is – but depends on how many other concurrent users are running
+    on the system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Spark SQL code is sometimes too pithy for a first user to comprehend what
+    is being done. It takes some experience and practice to get used to the coding
+    style and implicitness of spark SQL code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Conclusion**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spark SQL as an important evolution of the core Spark API. While Spark’s original
+    functional programming API was quite general, it offered only limited opportunities
+    for automatic optimization. Spark SQL simultaneously makes Spark accessible to
+    more users.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article was an effort to prepare the fundamentals for the next set of articles
+    where spark sql is used for doing real time analytics in IOT space.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**References:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: StreamSQL – [https://en.wikipedia.org/wiki/StreamSQL](https://en.wikipedia.org/wiki/StreamSQL)
+  prefs: []
+  type: TYPE_NORMAL
+- en: StreamSQL – [https://github.com/thunderain-project/StreamSQL](https://github.com/thunderain-project/StreamSQL)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** **[Sumit Pal](https://www.linkedin.com/profile/view?id=AAIAAADShS4B8ypiJ59lZDz0YeioS2qlAuFkKtI&trk)** is
+    a big data, visualisation and data science consultant. He is also a software architect
+    and big data enthusiast and builds end-to-end data-driven analytic systems. Sumit
+    has worked for Microsoft (SQL server development team), Oracle (OLAP development
+    team) and Verizon (Big Data analytics team) in a career spanning 22 years. Currently,
+    he works for multiple clients advising them on their data architectures and big
+    data solutions and does hands on coding with Spark, Scala, Java and Python. Sumit
+    blogs at  [sumitpal.wordpress.com/](https://sumitpal.wordpress.com/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Ajit Jaokar](https://www.linkedin.com/in/ajitjaokar) ([@AjitJaokar](https://twitter.com/ajitjaokar))**
+    does research and consulting for Data Science and the Internet of Things. His
+    work is based on his teaching at Oxford University and UPM (Technical University
+    of Madrid) and covers IoT, Data Science, Smart cities and Telecoms.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Introduction to Big Data with Apache Spark](/2015/06/introduction-big-data-apache-spark.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[50+ Data Science and Machine Learning Cheat Sheets](/2015/07/good-data-science-machine-learning-cheat-sheets.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Big ‘Big Data’ Question: Hadoop or Spark?](/2015/08/big-data-question-hadoop-spark.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[In-Database Analytics: Leveraging SQL''s Analytic Functions](https://www.kdnuggets.com/2023/07/indatabase-analytics-leveraging-sql-analytic-functions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Query Your Pandas DataFrames with SQL](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Preparation with SQL Cheatsheet](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with SQL Cheatsheet](https://www.kdnuggets.com/2022/08/getting-started-sql-cheatsheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Handling Missing Values in Time-series with SQL](https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Useful Intermediate SQL Queries for Data Science](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

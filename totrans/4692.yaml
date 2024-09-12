@@ -1,0 +1,466 @@
+- en: 'Data Pipelines, Luigi, Airflow: Everything you need to know'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/03/data-pipelines-luigi-airflow-everything-need-know.html](https://www.kdnuggets.com/2019/03/data-pipelines-luigi-airflow-everything-need-know.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Lorenzo Peppoloni](https://www.linkedin.com/in/lorenzo-peppoloni/), Lyft**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/aeac3093429c504079d98150e17d2689.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Gerrie van der Walt](https://unsplash.com/photos/m3TYLFI_mDo) on [Unsplash](https://unsplash.com/search/photos/pipeline)
+  prefs: []
+  type: TYPE_NORMAL
+- en: This post is based on a talk I recently gave to my colleagues about Airflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In particular, the focus of the talk was: what’s Airflow, what can you do with
+    it and how it differs from Luigi.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why do you need a WMS
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It’s really common in a company to have to move and transform data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, you have plenty of logs stored somewhere on S3, and you want to
+    periodically take that data, extract and aggregate meaningful information and
+    then store them in an analytics DB (e.g., Redshift).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Usually, this kind of tasks are first performed manually, then, as things need
+    to scale up, the process is automated and for example, triggered with cron. Ultimately,
+    you reach a point where the good old cron is not able to guarantee a stable and
+    robust performance. It’s simply not enough anymore.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That’s when you need a workflow management system (WMS).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Airflow
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Airflow was developed at Airbnb in 2014 and it was later open-sourced. In 2016
+    it joined the Apache Software Foundation’s incubation program.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When asked “What makes Airflow different in the WMS landscape?”, Maxime Beauchemin
+    (creator or Airflow) answered:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A key differentiator is the fact that Airflow pipelines are defined as code
+    and that tasks are instantiated dynamically.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Hopefully, at the end of this post, you will be able to understand and, more
+    importantly, to agree (or disagree) with this statement.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s first define the main concepts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Workflows as DAGs
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In Airflow, a workflow is defined as a collection of tasks with directional
+    dependencies, basically a directed acyclic graph (DAG).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each node in the graph is a task, and edges define dependencies among the tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Tasks belong to two categories:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Operators**: they execute some operation'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Sensors**: they check for the state of a process or a data structure'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Real-life workflows can go from just one task per workflow (you don’t always
+    have to be fancy) to very complicated DAGs, almost impossible to visualise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Main components**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The main components of Airflow are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: a **Metadata Database**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: a **Scheduler**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: an **Executor**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5d50f2047d09246177836cbcdca064ea.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Airflow architecture
+  prefs: []
+  type: TYPE_NORMAL
+- en: The metadata database stores the state of tasks and workflows. The scheduler
+    uses the DAGs definitions, together with the state of tasks in the metadata database,
+    and decides what needs to be executed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The executor is a message queuing process (usually [Celery](http://www.celeryproject.org/]%28http://www.celeryproject.org/))
+    which decides which worker will execute each task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With the Celery executor, it is possible to manage the distributed execution
+    of tasks. An alternative is to run the scheduler and executor on the same machine.
+    In that case, the parallelism will be managed using multiple processes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Airflow provides also a very powerful UI. The user is able to monitor DAGs and
+    tasks execution and directly interact with them through a web UI.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is common to read that Airflow follows a *“set it and forget it”* approach,
+    but what does that mean?
+  prefs: []
+  type: TYPE_NORMAL
+- en: It means that once a DAG is set, the scheduler will automatically schedule it
+    to run according to the specified scheduling interval.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Luigi
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The easiest way to understand Airflow is probably to compare it to Luigi.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Luigi is a python package to build complex pipelines and it was developed at
+    Spotify.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Luigi, as in Airflow, you can specify workflows as tasks and dependencies
+    between them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The two building blocks of Luigi are **Tasks** and **Targets**. A target is
+    a file usually outputted by a task, a task performs computations and consumes
+    targets generated by other tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/0e6b19ba7f5f2673c8507fa2232e1dbc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Luigi pipeline structure
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can think about it as an actual pipeline. A task does its job and generates
+    a target as a result, a second task takes the target file in input, performs some
+    operations and output a second target file and so on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ae0083e7ca72412d3d52d851497d7423.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Coffee break (Photo by [rawpixel](https://unsplash.com/photos/qbrmH8y1jHY) on [Unsplash](https://unsplash.com/search/photos/break))
+  prefs: []
+  type: TYPE_NORMAL
+- en: A simple workflow
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s see how we can implement a simple pipeline composed of two tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first task generate a .txt file with a word (“pipeline” in this case), a
+    second task reads the file and decorate the line adding “My”. The new line is
+    written on a new file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Luigi simple pipeline
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each task is specified as a class derived from `luigi.Task`, the method `output()` specifies
+    the output thus the target, `run()`specifies the actual computations performed
+    by the task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The method `requires()` specifies the dependencies between the tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: From the code, it’s pretty straightforward to see that the input of a task is
+    the output of the other and so on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s see how we can do the same thing in Airflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Airflow simple DAG
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we define and initialise the DAG, then we add two operators to the DAG.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first one is a `BashOperator` which can basically run every bash command
+    or script, the second one is a `PythonOperator` executing python code (I used
+    two different operators here for the sake of presentation).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As you can see, there are no concepts of input and output. No information is
+    shared between the two operators. There are ways to share information between
+    operators (you basically share a string), but as a general rule: if two operators
+    need to share information, then they should be probably combined into a single
+    one.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A more complex workflow
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s now consider the case where we want to process more files at the same
+    time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Luigi we can do it in multiple ways, none of which is really straightforward.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Luigi a pipeline managing multiple files
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case, we have two tasks, each one of them processes all the files. The
+    dependent task (`t2`) has to wait until `t1` has processed all the files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We used an empty file as a target to flag when each task finished its job.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We could add some parallelisation writing parallel for loops.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The problem with this solution is that `t2` could start to process files gradually
+    as soon as `t1` started to produce its output, actually `t2` does not have to
+    wait until all the files are created by `t1`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A common pattern in Luigi to do this is to create a wrapper task and use multiple
+    workers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is the code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Luigi a pipeline using multiple workers
+  prefs: []
+  type: TYPE_NORMAL
+- en: To run the task with multiple workers we can specify `— workers number_of_workers` when
+    running the task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A very common approach that you see in real life is to delegate the parallelisation.
+    Basically, you use the first approach presented and you use Spark for example,
+    inside the `run()` function, to actually do the processing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s do it with Airflow
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Do you remember that in the initial quote it was written that DAGs are instantiated
+    dynamically with code?
+  prefs: []
+  type: TYPE_NORMAL
+- en: But what does that mean exactly?
+  prefs: []
+  type: TYPE_NORMAL
+- en: It means that with Airflow you can do this
+  prefs: []
+  type: TYPE_NORMAL
+- en: Airflow a parallel DAG with multiple files
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tasks (and dependencies) can be added programmatically (e.g. in a for loop).
+    The corresponding DAG looks like this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6c81e7e1b879cc3a2261322ddba3d115.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Parallel DAG
+  prefs: []
+  type: TYPE_NORMAL
+- en: At this point, you don’t have to worry about parallelisation. The Airflow executor
+    knows from the DAG definition, that each branch can be run in parallel and that’s
+    what it does!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Final Considerations
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We touched a lot of points in this post, we spoke about workflows, about Luigi,
+    about Airflow and how they differ.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s make a quick recap.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Luigi**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s generally based on pipelines, tasks input and output share information
+    and is connected together
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Target-based approach
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: UI is minimal, there is no user interaction with running processes
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Does not have it’s own triggering
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Luigi does not support distributed execution
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Airflow**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Based on DAGs representation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In general, no information is shared between tasks, we want to parallelise as
+    much as possible
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: No powerful mechanism to communicate between tasks
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It has an executor, which manages distributed execution (you need to set it
+    up)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The approach is “set it and forget it“ since it has its own scheduler
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Powerful UI, you can see executions and interact with running tasks.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Conclusions: In the article we had a look at Airflow and Luigi and how the
+    two differs in the landscape of workflow management systems. We had a look at
+    some very simple examples of pipelines and how they can implement with both the
+    tools. Finally we summed up the main differences between Luigi and Airflow.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you enjoy the article and you found it useful feel free to ???? or share.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cheers
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Lorenzo Peppoloni](https://www.linkedin.com/in/lorenzo-peppoloni/)**
+    is a tech enthusiast, life-long learner, with a PhD in Robotics. He writes about
+    his day to day experience in Software and Data Engineering.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/data-pipelines-luigi-airflow-everything-you-need-to-know-18dc741449b7).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Beginner’s Guide to the Data Science Pipeline](/2018/05/beginners-guide-data-science-pipeline.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How A Data Scientist Can Improve Productivity](/2017/05/data-scientist-improve-productivity.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Manage your Machine Learning Lifecycle with MLflow  –  Part 1](/2018/07/manage-machine-learning-lifecycle-mlflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, April 13: Python Libraries Data Scientists Should…](https://www.kdnuggets.com/2022/n15.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Airflow Alternatives for Data Orchestration](https://www.kdnuggets.com/5-airflow-alternatives-for-data-orchestration)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Everything You Need to Know About Data Lakehouses](https://www.kdnuggets.com/2022/09/everything-need-know-data-lakehouses.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Naïve Bayes Algorithm: Everything You Need to Know](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Everything You Need to Know About Tensors](https://www.kdnuggets.com/2022/05/everything-need-know-tensors.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Everything You Need to Know About MLOps: A KDnuggets Tech Brief](https://www.kdnuggets.com/tech-brief-everything-you-need-to-know-about-mlops)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

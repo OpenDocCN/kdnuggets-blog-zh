@@ -1,0 +1,362 @@
+- en: Packaging and Distributing Your Python Project to PyPI for Installation Using
+    pip
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/06/packaging-distributing-python-project-pypi-pip.html/2](https://www.kdnuggets.com/2018/06/packaging-distributing-python-project-pypi-pip.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/06/packaging-distributing-python-project-pypi-pip.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: 5\. Preparing the Package and its Files (__init__.py and setup.py)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first step is to structure the package and its files. The structure of the
+    package will be as shown in figure 7.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 7**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/3e79a16b2a55e626e64e60ccef3729e0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: There is a root directory holding all files and directories of the package.
+    Inside that root directory, there is another directory named “**printmsg**” that
+    holds the actual module. Such module is what holds the Python code of our project
+    to be imported later after being installed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For our simple example, the minimal files required will be used which are **__init__.py** and **setup.py** in
+    addition to the actual project file **print_msg_file.py**. Next is to prepare
+    these files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5.1 __init__.py
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first file to prepare is the **__init__.py** file. The main use of this
+    file is to allow Python treat the directory as a package. When the package has
+    the **__init__.py** file, the package can be imported as a regular library after
+    being installed by either installer. Just its existence is enough even if empty.
+    You might wonder why it is now required despite being not required when the library
+    installed manually in step 3\. The answer is that the installer will not know
+    that the directory is a package without the **__init__.py** file. That is why
+    it will not fetch the library Python files (**print_msg_file.py**).
+  prefs: []
+  type: TYPE_NORMAL
+- en: After installing the library in Windows while using the **__init__.py** file,
+    there are two folders generated in the site-packages directory (“**printmsg-1.4.dist-info**”
+    and “**printmsg**”) as in figure 8\. The “**printmsg**” folder is what holds the
+    Python files to be imported later. If the **__init__.py** file is not used, then
+    the “**printmsg**” folder will not be found. As a result, it will become impossible
+    to use the Python code because it will missing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 8**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/09de1c6684d0a3656ec1a6c3c7ee0ffd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Besides telling Python that the directory is a Python package, the **__init__.py** file
+    is the first file to be loaded when the module is imported and thus can do initializations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5.2 setup.py
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After marking the directory as a package using the **__init__.py** file, next
+    is to add more details about the package. This is why the **setup.py** file is
+    used. The **setup.py** script is what gives details about your project such as
+    what dependencies required to make your project running. This script uses the
+    **setuptools** distribution tool for building the distribution files to be uploaded
+    later to PyPI. Here is the content of the setup.py file in order to distribute
+    the project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: That file contains a number of fields that holds details such as **name** of
+    the package, **version**, **author**, **author_email**, short **description**
+    to appear on PyPI, and others. There are many other fields that could be used
+    based on your needs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that the package name is used currently in two positions. One time for
+    the module directory and another here in the setup.py file. Is they must be equivalent?
+    Answer is NO. Each one has its own job but there is no dependency between them.
+    The name used in the **setup.py** file is the name to be used when installing
+    the package. The name of the directory is the name used to import the module.
+    If they are different, then the package will be installed by a name and imported
+    by a different name. There should be consistency between these two names to avoid
+    confusing package users.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 6\. Distributing the Package
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'After preparing the package, we are ready to distribute it. Before actual distribution,
+    we should make sure that the dependencies required are already existing. To distribute
+    the project, **setuptools** and **wheel** projects are required to be installed.
+    **wheel** project is used to generate **wheel** distribution format. Make sure
+    they are installed and updated as in figure 9 according to this command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ahmed-gad@ubuntu:~/Desktop/root $ pip install –upgrade setuptools wheel**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 9**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/82d567d217c3377c430e585379a82780.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Then we can distribute the package by running the **setup.py** file as in figure
+    10\. After opening the terminal, make the root of the package the current directory
+    then execute the **setup.py** file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ahmed-gad@ubuntu:~/Desktop/root$ python3 setup.py sdist bdist_wheel**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**sdist** is used to generate a source distribution format while **bdist_wheel** generates
+    wheel built distribution format. Both of such distributions are provided for compatibility
+    with different users.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 10**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/28b0d772ae72811552b8c7e342a1583d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: After executing the **setup.py** file, it is expected to get some new directories
+    inside the root of the package. The files and directories inside the root are
+    shown in figure 11.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 11**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d83914df550d91fff07408e0a3dcdd82.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The most important folder is the **dist** folder because it contains the distribution
+    files which will be uploaded to PyPI. Its content are presented in figure 12\.
+    It contains the **.whl** file which is the build distribution and also the source
+    distribution **.tar.gz** file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 12**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/997fe96ea11c4ffd0be1a1b6fa13562b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: After preparing the distribution files, next is to upload them to PyPI.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 7\. Uploading the Distribution Files Online to Test PyPI
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are two Python package repositories to use. One of them for testing and
+    experimentation which is Test PyPI (**test.pypi.org**) and another for real index
+    which is PyPI (**pypi.org**). Their use is similar but we can start using Test
+    PyPI.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before uploading to Test PyPI, you should register yourself to get a username
+    and password for uploading your packages. Just register by your active e-mail
+    address where a confirmation will be received to activate your account. Registration
+    link is [https://test.pypi.org/account/register/](https://test.pypi.org/account/register/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After registration is complete, we can use **twine** utility for uploading
+    package distributions to Test PyPI. You should make sure it is installed and upgraded
+    according to the following command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ahmed-gad@ubuntu:~/Desktop/root $ pip install –upgrade twine**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once it is installed, you can upload packages to Test PyPI. Open the terminal
+    and make sure you are currently on the root of the package and issue the following
+    command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ahmed-gad@ubuntu:~/Desktop/root $ twine upload --repository-url https://test.pypi.org/legacy/
+    dist/***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You will be asked to enter your Test PyPI username and password. Once you are
+    verified, upload will start. The result is shown in figure 13.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 13**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ca438b42e923857b0d7a2cfcbc96212a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: After uploading the files successfully, you can open your profile at Test PyPI
+    to see your uploaded projects. Figure 14 shows that the **printmsg** project is
+    successfully become live. Note that the value used for the description field inside **setup.py** file
+    is now appearing on the repository.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 14**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ce3ef373268516ee3cb3b23eb00c9b42.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 8\. Installing the Distributed Package from Test PyPI
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Reaching this point, you have successfully packaged and distributed your Python
+    project. It is available now for download by any user connected to the Internet.
+    To install the project using pip, just issue the following command. The result
+    is shown in figure 15.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ahmed-gad@ubuntu:~/Desktop/root $ pip install --index-url https://test.pypi.org/simple/
+    printmsg**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 15**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/75bbac3dfdbeb91499cedca421c42ffd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 9\. Importing and Using the Installed Package
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After installing the project, it can be imported. The following two lines entered
+    previously can be now executed. The difference is using the package installed
+    from Test PyPI not manually installed. The result is identical to what shown in
+    figure 4.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 10\. Using PyPI rather than Test PyPI
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you decided to put your project in the real PyPI, then you will just repeat
+    the previous steps with little changes. At first you have to register in [https://pypi.org/](https://pypi.org/) and
+    get a username and a password. I do not want to say you have to register **AGAIN** because
+    registration in Test PyPI is different from registration in PyPI.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The first change is not using the **--repository-url** option with **twine** because
+    PyPI is the default repository for uploading packages. So, the command required
+    will be as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ahmed-gad@ubuntu:~/Desktop/root $ twine upload dist/***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similarly, the second change is omitting the **--index-url** option with **pip** for
+    the same reason (PyPI is the default repository when installing a package).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ahmed-gad@ubuntu:~/Desktop/root $ pip install printmsg**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** received his B.Sc.
+    degree with excellent with honors in information technology from the Faculty of
+    Computers and Information (FCI), Menoufia University, Egypt, in July 2015\. For
+    being ranked first in his faculty, he was recommended to work as a teaching assistant
+    in one of the Egyptian institutes in 2015 and then in 2016 to work as a teaching
+    assistant and a researcher in his faculty. His current research interests include
+    deep learning, machine learning, artificial intelligence, digital signal processing,
+    and computer vision.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.linkedin.com/pulse/packaging-distributing-your-python-project-pypi-installation-gad/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Complete Guide to Build ConvNet HTTP-Based Application using TensorFlow and
+    Flask RESTful Python API](/2018/05/complete-guide-convnet-tensorflow-flask-restful-python-api.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building Convolutional Neural Network using NumPy from Scratch](/2018/04/building-convolutional-neural-network-numpy-scratch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Optimization with Genetic Algorithm](/2018/03/introduction-optimization-with-genetic-algorithm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Pip Install YOU: A Beginner''s Guide to Creating Your Python Library](https://www.kdnuggets.com/pip-install-you-a-beginners-guide-to-creating-your-python-library)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Forget PIP, Conda, and requirements.txt! Use Poetry Instead And…](https://www.kdnuggets.com/2023/07/forget-pip-conda-requirementstxt-poetry-instead-thank-later.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Managing Python Dependencies with Poetry vs Conda & Pip](https://www.kdnuggets.com/managing-python-dependencies-with-poetry-vs-conda-pip)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Create a Sampling Plan for Your Data Project](https://www.kdnuggets.com/2022/11/create-sampling-plan-data-project.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Orchestrate a Data Science Project in Python With Prefect](https://www.kdnuggets.com/2022/02/orchestrate-data-science-project-python-prefect.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Free Python Project Coding Course](https://www.kdnuggets.com/2022/08/free-python-project-coding-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

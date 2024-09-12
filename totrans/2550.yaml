@@ -1,0 +1,239 @@
+- en: Design patterns in machine learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/07/design-patterns-machine-learning.html](https://www.kdnuggets.com/2021/07/design-patterns-machine-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Ágoston Török](https://www.linkedin.com/in/agoston-torok/), Director
+    Data Science, AGT International**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'According to its [definition](https://en.wikipedia.org/wiki/Software_design_pattern),
+    a design pattern is a reusable solution to a commonly occurring problem. In software
+    engineering, the concept dates back to [1987](http://c2.com/doc/oopsla87.html) when
+    Beck and Cunningham started to apply it to programming. By the 2000s, design patterns
+    — especially the SOLID design principles for OOP — were considered common knowledge
+    to programmers. Fast forward 15 years and we arrive at the era of [Software 2.0](https://karpathy.medium.com/software-2-0-a64152b37c35):
+    machine learning models start to replace classical functions in more and more
+    places of code. Today, we look at software as a fusion of traditional code, machine
+    learning models and the underlying data. This fusion requires a seamless integration
+    of these components, which is often far from trivial given the fields’ often disparate
+    history and evolution.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Today, we look at software as a fusion of traditional code, machine learning
+    models and the underlying data.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Design patterns, however, have not been extended yet to deal with the challenges
+    of this new era. In Software 2.0 common challenges do not appear only at the code
+    level but at the level of problem definition, data representation, training methods,
+    scaling, and on the ethical aspects of the design of AI-enabled systems. This
+    creates a fertile ground for the practice of machine learning *antipatterns*.
+    Unfortunately, today even blogposts and conferences feature sometimes antipatterns:
+    practices that believed to improve things but in reality they make things worse.
+    Since antipatterns also require skills, they are often not recognized as such
+    by their practitioners. Therefore in the following, I will give two examples of
+    common ML challenges but, instead of starting with the design pattern, I will
+    introduce first their solution antipatterns.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The model shows bad performance on the evaluation metrics
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the common scenario, after collecting, cleaning, and preparing the data the
+    engineer trains a first model and finds that it shows bad performance on the test
+    data. A common antipattern is to replace the first model with a more complex one
+    (e.g. often gradient boosted trees) and improve the performance by this. A variation
+    of this antipattern may follow this step by combining several models by e.g. model
+    averaging.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![](../Images/1c3bdb1c6477244edad8338aec17a007.png)](https://i.ibb.co/60JgGn1/1-C2-Xo0-Cyun-Fmcf-C6k-BGOmw.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Donald Knuth famous quote “premature optimization is the root of all evil” is
+    almost 50 years old and is still true. Image with permission from [tddcomics](https://www.instagram.com/tddcomics/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The problem with these methods is that they look only at part of the problem,
+    i.e. the model, and choose to resolve it by increasing the complexity of the model.
+    This steps forces us to accept the high risk of overfitting and to trade explainability
+    for additional predictive power. While there are efficient practices to mitigate
+    the side effects of this choice (e.g. LIME), we cannot fully eliminate them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The design pattern is error analysis. This in practice means looking at where
+    our model made errors, either by assessing the model fit on different test sets
+    or by even looking at individual cases where our model was wrong. Although, we
+    all heard the saying “garbage in, garbage out”, still very few people appreciates
+    how much this is true even for little inconsistencies in the data. Maybe the labels
+    are coming from different raters, each having their own, slightly different interpretation
+    of the labelling guidelines. Maybe the way of collecting the data has changed
+    over time. The effect of error analysis is especially strong for small data problems.
+    However, we should also keep in mind that in a significant proportion of big data
+    situations we also deal with long tail events (e.g. identify rare talents from
+    an admission exam).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The true power of error analysis comes from the fact that we do not trade either
+    explainability or risk of overfitting by applying it, in fact solely applying
+    it yields critical knowledge about the distribution of the data. Error analysis,
+    furthermore, enables us to choose both model-centric (e.g. more complex model)
+    and a data-centric (e.g. further cleaning steps) solutions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Performance degradation over time on a deployed model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The model goes through extensive validation and is deployed to production. The
+    users are happy and give positive feedback. Then, a month/quarter/year later,
+    reports are coming in that tell about flaws in prediction. This is usually a manifestation
+    of concept drift, the connection that your model learned between input and output
+    has changed over time. There are places where such concept drift is commonly known
+    (word semantics, spam detectors) but ‘concept’ drift can happen in any field.
+    For instance, masks and social distancing regulations challenged many previously
+    deployed computer vision models too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![](../Images/410662702e7d045dd21bc5e9cc6101cd.png)](https://i.ibb.co/xzZfH6B/1-L-k-Qqpm-VBd5-Qe-Fuv-En-Tg-Jg.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ML systems without retraining assume no change in the learned relationship between
+    input and output. Image with permission from [tddcomics](https://www.facebook.com/tddcomics).
+  prefs: []
+  type: TYPE_NORMAL
+- en: A common antipattern is to attribute these examples to noise and expect the
+    situation to stabilize with time. This means not only a lack of action but a false
+    attribution too, which should be generally discouraged in a data-driven business.
+    A slightly better antipattern is to react to the reports with quick retraining
+    and deployment of a new model. This is an antipattern even in the case when the
+    team assumes they follow agile software development principles and therefore choose
+    to be quick in reaction to change. The problem is that this solution addresses
+    the symptom but not the flaw in the design of the system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The design patterns are a continuous evaluation of performance, which means
+    you expect drifts to happen and, hence, design the system to notice it as soon
+    as possible. This is a completely different approach as the focus is not on the
+    speed of reaction but on the speed of *detection*. This puts the entire system
+    in a much more controlled course giving more room for prioritization of any reaction.
+    Continuous evaluation means establishing processes and tools to continuously generate
+    ground truth for a fraction of the new data. In most cases this involves manual
+    label, often using crowdsourced services. In some instances, though, we can use
+    other more sophisticated but in the deployment setting not feasible models and
+    devices to generate ground truth labels. For example, in the development of self-driving
+    cars the input from one sensor (e.g. LiDAR) can be used to generate the ground
+    truth for another sensor (e.g. camera).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The SOLID design principles of machine learning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The reason I’m writing about design patterns is that this field has reached
+    the level of maturity where we should not only share our best practices but we
+    should be able to abstract them to real design patterns. Luckily, this work has
+    been started by multiple groups already. In fact, two books have been published
+    recently on the topic [[1](https://www.oreilly.com/library/view/machine-learning-design/9781098115777/)],
+    [[2](https://www.manning.com/books/deep-learning-design-patterns)]. I enjoyed
+    reading them but I was still left with a feeling that although we are going in
+    the right direction we are still few steps away from formulating the SOLID design
+    principles for ML practitioners. I believe that while the underlying knowledge
+    is already available and is used to build the AI-enabled products of today, work
+    on design patterns and antipatterns is an important step towards the era of Software
+    2.0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![](../Images/075e0ee3fd10aefc8311e6cd6e35ec47.png)](https://i.ibb.co/mFZj5Jk/1-l3d-Ype-C9z-S5tkkls-ZMOaq-Q.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Design patterns are the foundation of the craftsmanship of machine learning.
+    Image with permission from [tddcomics](https://twitter.com/tddcomics).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Ágoston Török](https://www.linkedin.com/in/agoston-torok/)** is Director
+    of Data Science at AGT International.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/design-patterns-in-machine-learning-b73eea4882cd).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[When to Retrain an Machine Learning Model? Run these 5 checks to decide on
+    the schedule](/2021/07/retrain-machine-learning-model-5-checks-decide-schedule.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 6 Data Science Online Courses in 2021](/2021/07/top-6-data-science-online-courses.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Much Memory is your Machine Learning Code Consuming?](/2021/07/memory-machine-learning-code-consuming.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

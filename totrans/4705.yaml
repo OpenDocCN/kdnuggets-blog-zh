@@ -1,0 +1,507 @@
+- en: Building NLP Classifiers Cheaply With Transfer Learning and Weak Supervision
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html/2](https://www.kdnuggets.com/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '****Second Step: Building a Training Set With Snorkel****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Building our Labeling Functions is a pretty hands-on stage, but it will pay
+    off! I expect that if you already have domain knowledge, this should take about
+    a day (and if you don’t then it might take a couple days.) Also, **this section
+    is a mix of what I did for my project specifically and some general advice** of
+    how to use Snorkel that you can apply to your own projects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since most people haven’t used Weak Supervision with Snorkel before, I’ll try
+    to explain the approach I took in as much detail as possible. This [tutorial](https://github.com/HazyResearch/metal/blob/master/tutorials/Basics.ipynb) is
+    a good way to understand the main ideas, but reading through my workflow will
+    hopefully save you a lot of time of trial and error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below is an example of a LF that returns **Positive **if the tweet has one of
+    the common insults against jew. Otherwise, it abstains.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here’s an example of a LF that returns **Negative** if the tweet’s author mentions
+    he or she is Jewish, which commonly means the tweet is not anti-semitic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: When designing LFs it’s important to keep in mind that **we are prioritizing
+    high precision over recall**. Our hope is that the classifier will pick up more
+    patterns, increasing recall. But, don’t worry if LFs don’t have super high precision
+    or high recall, Snorkel will take care of it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once you have some LFs, you just need to build a matrix with a tweet in each
+    row and the LF values in the columns. Snorkel Metal has a very handy util function
+    to display a summary of your LFs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: I have a total of 24 LFs, but here’s how the LF summary looks like for a sample
+    of my LFs. Below the table you can find what each column means.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/61cbdc47a245bcd4a768cf0151c13ee0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: LF Summary
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Column meanings:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Emp. Accuracy: **fractionof correct LF predictions. You should make sure
+    this is at least 0.5 for all LFs.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Coverage:** % of samples for which at least one LF votes positive or negative.
+    You want to maximize this, while keeping a good accuracy.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Polarity:** tells you what values the LF returns.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Overlaps & Conflicts: **this tells you how an LF overlaps and conflicts with
+    other LFs. Don’t worry about it too much, the Label Model will actually use this
+    to estimate the accuracy for each LF.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Let’s check out our coverage:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: That’s pretty good!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, as a baseline for our weak supervision, we’ll evaluate our LFs by using
+    a Majority Label Voter model to predict the classes in our LF set. This just assigns
+    a positive label if most of the LFs are positive, so it’s basically assuming that
+    all LFs have the same accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/d2ae2e4485ec439f323acc6f507f227b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Classification Report for Majority Voter Baseline
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can see that we get an F1-score of 0.61 for the positive class (“1”). To
+    improve this, I made a spreadsheet where each row has a tweet, its true label,
+    its assigned label based on each LF. The goal is to find where an LF disagrees
+    with the true label, and fix the LF accordingly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/4c9dd3dfd4e27c6de09cd16e169f6f34.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Google Sheet I used for tuning my LFs
+  prefs: []
+  type: TYPE_NORMAL
+- en: After my LFs had about 60% precision and 60% recall, I went ahead and trained
+    the Label Model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now to test the Label Model, I validated it against my test set and plotted
+    a Precision-Recall curve. We can see that we are able to get about 80% precision
+    and 20% recall, which is pretty good. A big advantage of using the Label Model
+    is that we can now tune the prediction probability threshold to get better precision.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/44c2019443a72a3723541b05f77eaf72.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Precision-Recall Curve for Label Model
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I also validated my Label Model was working by checking the top 100 most anti-semitic
+    tweets in my train set according to the Label Model and making sure it made sense.
+    Now that we are happy with our Label Model, we produce our training labels:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'So, here’s a summary of my WS workflow:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Go through the examples in the LF set and identify a new potential LF.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Add it to the Label Matrix and check that its accuracy is at least 50%. Try
+    to get the highest accuracy possible, while keeping a good coverage. I grouped
+    different LFs together if they relate to the same topic.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Every once in a while you’ll want to use the baseline Majority Vote model (provided
+    in Snorkel Metal) to label your LF set. Update your LFs accordingly to get a pretty
+    good score just with the Majority Vote model.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If your Majority Vote model isn’t good enough, then you can fix your LFs or
+    go back to step 1 and repeat.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Once your Majority Vote model works, then run your LFs over your Train set.
+    You should have at least 60% coverage.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Once this is done, train your Label Model!
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: To validate the Label Model, I ran the Label Model over my Training set and
+    printed the top 100 most anti-semitic tweets and 100 least anti-semitic tweets
+    to make sure it was working correctly.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Now that we have our Label Model, we can compute probabilistic labels for **25
+    thousand of tweets and use them as a training set**. Now, let’s go ahead and train
+    our classification model!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'General Tips for Snorkel:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'On LF accuracy: In the WS step, we’re going for high precision. All of your
+    LFs should have at least 50% accuracy on the LF set. If you can get 75% or more
+    that’s even better.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'On LF coverage: You want to have at least one LF voting positive/negative for
+    at least 65% of our training set. This is called LF Coverage by Snorkel.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If you’re not a domain expert to start, you’ll get ideas for new LFs as you
+    label your 600 initial data points.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Third Step: Build **Classification Model****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The last step is to train our classifier to generalize beyond our noisy hand-made
+    rules.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Baselines**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll start by setting some baselines**. **I tried to build the best model possible
+    without deep learning. I tried Tf-idf featurization coupled with logistic regression
+    from sklearn, XGBoost, and Feed Forward Neural Networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below are the results. To get these numbers I plotted a Precision-Recall curve
+    against the Development set, and then picked my preferable classification threshold
+    (trying to get a minimum of 90% precision if possible with recall as high as possible).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ebc7de5adec8e85b81bdad411fd25e76.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Baselines
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Trying ULMFiT**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once we download the ULM trained on Wikipedia, we need to tune it to tweets
+    since they have a pretty different language. I followed all the steps and code
+    in [this awesome blog](https://towardsdatascience.com/transfer-learning-in-nlp-for-tweet-stance-classification-8ab014da8dde),
+    and I also used the [Twitter Sentiment140 dataset](https://www.kaggle.com/kazanova/sentiment140)from
+    Kaggle to fine-tune the LM.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We sample 1 million tweets from that dataset randomly, and fine-tune the LM
+    on those tweets. This way, the LM will learn be able to generalize in the twitter
+    domain.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code below loads the tweets and trains the LM. I used a GPU from Paperspace
+    using the fastai public image, this worked wonders. You can follow [these steps ](https://github.com/reshamas/fastai_deeplearn_part1/blob/master/tools/paperspace.md)to
+    set it up.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We unfreeze all the layers in the LM:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: We let it run for 20 cycles. I put the cycles in a for loop so that I could
+    save the model after every iteration. I didn’t find a way to do this easily with
+    fastai.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then we should test the LM to make sure it’s making at least a little bit of
+    sense:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: The weird tokens like “xxmaj” are some special tokens that fastai adds that
+    help with text understanding. For example, they add special tokens for capital
+    letters, beginning of a sentence, repeated words, etc. The LM is not really making
+    that much sense, but that’s fine.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now we’ll train our classifier:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Using fastai’s method for finding a good learning rate:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/085c485797cd64642a08e461f5295ae2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'We’ll fine-tune the classifier with gradual unfreezing:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/60007d60c67b4d38edde397b5a420512.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A few training epochs
+  prefs: []
+  type: TYPE_NORMAL
+- en: After fine-tuning, let’s plot our Precision-Recall curve! It was very nice to
+    see this after the first try.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/905e709274b4cbfaba8028d2682a822e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Precision-Recall curve of ULMFiT with Weak Supervision
+  prefs: []
+  type: TYPE_NORMAL
+- en: I picked probability threshold of 0.63, which gives us **95% precision and 39%
+    recall. **This is a very large boost mainly in recall but also in precision.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8d2c36dbb72e91604057d120b11e3b54.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Classification Report for ULMFiT Model
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Having Fun With Our Model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below is a pretty cool example of how the model catches that “doesn’t” changes
+    the tweet’s meaning!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here are some insults against jews:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here is a person calling out anti-semitic tweets:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And here are other non anti-semitic tweets:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '****Does Weak Supervision Actually Help?****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I was curious if WS was necessary to obtain this performance, so I ran a little
+    experiment. I ran the same process as before, but without the WS labels, and got
+    this Precision-Recall curve:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/887a4d2d3e0a53f16609374ca2f158e2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Precision-Recall curve of ULMFiT without Weak Supervision
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can see a big drop in recall (we only get about **10% recall** for a 90%
+    precision) and ROC-AUC **(-0.15)**, compared to the previous Precision-Recall
+    curve in which we used our WS labels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Conclusions**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Weak supervision + ULMFiT helped us hit 95% precision and 39% recall. That was
+    much better than all the baselines, so that was very exciting. I was not expecting
+    that at all.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This model is very easy to keep up-to-date. There’s no need for relabeling,
+    we just update the LFs and rerun the WS + ULMFiT pipeline.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Weak supervision makes a big difference by allowing ULMFiT to generalize better.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '****Next Steps****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I believe we can get the most gains by putting some more effort into my LFs
+    to improve the Weak Supervision model. I would first include LFs based on external
+    knowledge bases like [Hatebase’s](https://hatebase.org/) repository of hate speech
+    patterns. Then, I would write new LFs based on Spacy’s dependency tree parsing.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We didn’t do any hyperparameter tuning but that could likely help improve both
+    the Label Model and ULMFiT performance.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We can try different classification models such as fine-tuning BERT or OpenAI’s
+    Transformer.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Abraham Starosta](https://www.linkedin.com/in/abraham-starosta-ba662764/)**
+    (**[starosta@stanford.edu](mailto:starosta@stanford.edu)**) is originally from
+    Venezuela and is now finishing his Master''s in Computer Science at Stanford University,
+    focusing in AI and NLP. Prior to starting his Master''s at Stanford, he was a
+    Data Scientist at Primer AI, a startup building text understanding and summarization
+    technologies. He was a co-founder of Nav Talent, a technical recruiting agency
+    for top startups that started at Stanford. Over the years, he also had the opportunity
+    to be a software engineer at other top startups like Livongo, Zugata and Splunk.
+    In his spare time he enjoys playing soccer and ping pong.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/a-technique-for-building-nlp-classifiers-efficiently-with-transfer-learning-and-weak-supervision-a8e2f21ca9c8).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to solve 90% of NLP problems: a step-by-step guide](/2019/01/solve-90-nlp-problems-step-by-step-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[OpenAI’s GPT-2: the model, the hype, and the controversy](/2019/03/openai-gpt-2-model-hype-controversy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[More Effective Transfer Learning for NLP](/2018/10/more-effective-transfer-learning-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Weak Supervision Modeling, Explained](https://www.kdnuggets.com/2022/05/weak-supervision-modeling-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is Transfer Learning?](https://www.kdnuggets.com/2022/01/transfer-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Practical Guide to Transfer Learning using PyTorch](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Exploring the Potential of Transfer Learning in Small Data Scenarios](https://www.kdnuggets.com/exploring-the-potential-of-transfer-learning-in-small-data-scenarios)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

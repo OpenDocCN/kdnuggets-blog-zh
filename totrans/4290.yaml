@@ -1,0 +1,412 @@
+- en: How to Apply Transformers to Any Length of Text
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/04/apply-transformers-any-length-text.html](https://www.kdnuggets.com/2021/04/apply-transformers-any-length-text.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [James Briggs](https://youtube.com/c/JamesBriggs), Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The de-facto standard in many natural language processing (NLP) tasks nowadays
+    is to use a transformer. Text generation? *Transformer*. Question-and-answering? *Transformer*.
+    Language classification? *Transformer*!
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, one of the problems with many of these models (a problem that is not
+    just restricted to transformer models) is that we **cannot **process long pieces
+    of text.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Almost every article I write on Medium contains 1000+ words, which, when tokenized
+    for a transformer model like BERT, will produce 1000+ tokens. BERT (and many other
+    transformer models) will consume **512 tokens max** — truncating anything beyond
+    this length.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although I think you may struggle to find value in processing my Medium articles,
+    the same applies to many useful data sources — like news articles or Reddit posts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We will take a look at how we can work around this limitation. In this article,
+    we will find the sentiment for long posts from the */r/investing* subreddit. This
+    article will cover:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'If you prefer video, I cover everything here too:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: High-Level Approach
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The logic behind calculating the sentiment for longer pieces of text is, in
+    reality, very simple.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will be taking our text (say 1361 tokens) and breaking it into chunks containing
+    no more than 512 tokens each.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/14b47a652ba55c759d07ea03746fb0c7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A tensor containing 1361 tokens can be split into three smaller tensors. The
+    first two would contain 512 tokens each, with the final tensor containing the
+    remaining 337 tokens.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once we have our chunks and transformed them so that they are ready to be consumed
+    by BERT (more on that soon) — we pass them through our model and retrieve the
+    sentiment scores for each chunk.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, an average is taken for each sentiment class — providing us with an
+    overall sentiment prediction for the entire piece of text (all 1361 tokens).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, explaining the high-level approach is one-thing. Writing it out is another.
+    So let’s start work through an example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting Started
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'First, we need some data to process. I found this rather long post on /r/investing:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: We will use this for our example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Initialization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The next thing we need to do is initialize our model and tokenizer. We’re going
+    to be using PyTorch and the HuggingFace transformers library for everything.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Fortunately, initialization with the transformers library is incredibly easy.
+    We’re going to be using a BERT model for sequence classification and the corresponding
+    BERT tokenizer, so we write:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because we’re working with finance-heavy language, we have loaded the `ProsusAI/finbert` model
+    — a more finance savvy BERT [1]. You can find the model details [here](https://huggingface.co/ProsusAI/finbert).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tokenization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Tokenization is the process of converting a string of text into a list of tokens
+    (individual words/punctuation) and/or token IDs (integers that map a word to a
+    vector representation of that word in an embedding array).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With the transformers library and BERT, this typically looks like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here we are using the tokenizers `encode_plus` method to create our tokens from
+    the `txt` string.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`add_special_tokens=True` adds special BERT tokens like *[CLS]*,* [SEP]*, and *[PAD]* to
+    our new ‘tokenized’ encodings.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`max_length=512` tells the encoder the target length of our encodings.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`truncation=True` ensures we cut any sequences that are longer than the specified `max_length`.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`padding="max_length"` tells the encoder to pad any sequences that are shorter
+    than the `max_length` with padding tokens.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: These parameters make up the typical approach to tokenization. Still, as you
+    can see, they’re simply not compatible when we are aiming to split a longer sequence
+    into multiple shorter chunks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For that, we modify the `encode_plus` method to not perform any truncation or
+    padding.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Additionally, the special tokens *[CLS]* and *[SEP]* are expected at the start
+    and end of a sequence, respectively. As we will be creating these sequences separately,
+    we must also add these tokens separately too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The new `encode_plus` method looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Which will return a dictionary containing three key-value pairs, `input_ids`, `token_type_ids`,
+    and `attention_mask`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have *also *added `return_tensors='pt'` to return PyTorch tensors from the
+    tokenizer (rather than Python lists).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Preparing The Chunks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now we have our tokenized tensor; we need to break it into chunks of no more
+    than **510** tokens. We choose 510 rather than 512 to leave two places spare to
+    add our *[CLS]* and *[SEP]* tokens.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Split
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We apply the `split` method to both our input IDs and attention mask tensors
+    (we don’t need the token type IDs and can discard them).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we have three chunks for each tensor set. Note that we will need to add
+    padding to the final chunk as it will not satisfy the tensor size of 512 required
+    by BERT.
+  prefs: []
+  type: TYPE_NORMAL
+- en: CLS and SEP
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Next, we add the start of sequence *[CLS]* and separator *[SEP]* tokens. For
+    this, we can use the `torch.cat` function, which con**cat**enates a list of tensors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our tokens are already in token ID format, so we can refer to the special tokens
+    table above to create the token ID versions of our *[CLS]* and *[SEP]* tokens.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because we are doing this for multiple tensors, we place the `torch.cat` function
+    into a for-loop and perform the concatenation for each of our chunks individually.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Additionally, our attention mask chunks are concatenated with **1**s rather
+    than **101** and **102**. We do this because the attention mask does not contain *token
+    IDs* but instead a set of **1**s and **0**s.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Zeros in the attention mask represent the location of padding tokens (which
+    we will add next), and as *[CLS]* and *[SEP]* are not padding tokens, they are
+    represented with **1**s.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Padding
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We need to add padding to our tensor chunks to ensure they satisfy the 512 tensor
+    length required by BERT.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our first two chunks don’t require any padding as they already satisfy this
+    length requirement, but the final chunks do.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To check if a chunk requires padding, we add an if-statement that checks the
+    tensor length. If the tensor is shorter than 512 tokens, we add padding using
+    the `torch.cat` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We should add this statement to the same for-loop where we add our *[CLS]* and *[SEP]* tokens
+    — if you need help with this, I’ve included the full scripts at the end of the
+    article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reshaping For BERT
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We have our chunks, but we now need to reshape them into single tensors and
+    add them to an input dictionary for BERT.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Stacking all of the tensors together is done using the `torch.stack` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We then format these into an input dictionary and change the input IDs tensor
+    datatype to `long`, and the attention mask tensor datatype to `int` — as required
+    by BERT.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That is our data ready for passing into BERT!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Making Predictions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Making our predictions is the easy part. We pass our `input_dict` as a `**kwargs` argument
+    to our `model` — ***kwargs* allows the model to match `input_ids` and `attention_mask` keywords
+    to variables within the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: From here, we can see that we get a set of three activation values for each
+    chunk. These activation values are not our output probabilities yet. To transform
+    these into output probabilities, we must apply a softmax function to the output
+    tensor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, we take the `mean` of the values in each class (or column) to get our
+    final positive, negative, or neutral sentiment probability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you’d like to extract the winning class, we can add an `argmax` function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There we have our sentiment predictions for longer pieces of text!
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ve taken a long piece of text containing 1000s of tokens, broke it down into
+    chunks, manually added special tokens, and calculated the average sentiment across
+    all chunks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: More often than not, looking at the full-length of a text is absolutely required
+    to understand the sentiment of the topic being discussed. We have built a method
+    to make that possible and allow us to work around typical text size limitations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you’d like to see the code in full — you can find it in the references below
+    (there are two notebooks, but number **two **contains the exact code used here).
+  prefs: []
+  type: TYPE_NORMAL
+- en: I hope you’ve enjoyed the article. Let me know if you have any questions or
+    suggestions via [Twitter](https://twitter.com/jamescalam) or in the comments below!
+    If you’re interested in more content like this, I post on [YouTube](https://www.youtube.com/c/jamesbriggs) too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for reading!
+  prefs: []
+  type: TYPE_NORMAL
+- en: References
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[1] D. Araci, [FinBERT: Financial Sentiment Analysis with Pre-trained Language
+    Models](https://arxiv.org/abs/1908.10063) (2019)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Jupyter Notebook 1](https://github.com/jamescalam/transformers/blob/main/course/language_classification/03_long_text_sentiment.ipynb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Jupyter Notebook 2](https://github.com/jamescalam/transformers/blob/main/course/language_classification/04_window_method_in_pytorch.ipynb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you’d like to learn more about sentiment analysis with transformers (this
+    time with TensorFlow), check out my article on language classification here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Build a Natural Language Classifier With Bert and Tensorflow**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Apply cutting-edge transformer models to your language problems](https://betterprogramming.pub/build-a-natural-language-classifier-with-bert-and-tensorflow-4770d4442d41)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [James Briggs](https://youtube.com/c/JamesBriggs)** is a data scientist
+    specializing in natural language processing and working in the finance sector,
+    based in London, UK. He is also a freelance mentor, writer, and content creator.
+    You can reach the author via email ([jamescalam94@gmail.com](mailto:jamescalam94@gmail.com)).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/how-to-apply-transformers-to-any-length-of-text-a5601410af7f).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Hugging Face Transformers Package – What Is It and How To Use It](/2021/02/hugging-face-transformer-basics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Speech to Text with Wav2Vec 2.0](/2021/03/speech-text-wav2vec.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Topic Modeling with BERT](/2020/11/topic-modeling-bert.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Introduction to NExT-GPT: Any-to-Any Multimodal Large Language Model](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Streaming-LLM: LLMs for Infinite-Length Inputs](https://www.kdnuggets.com/introduction-to-streaming-llm-llms-for-infinite-length-inputs)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SHAP: Explain Any Machine Learning Model in Python](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Get Your First Job in Data Science without Any Work Experience](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Read This Before You Take Any Free Data Science Course](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Hugging Face Transformers for Emotion Detection in Text](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

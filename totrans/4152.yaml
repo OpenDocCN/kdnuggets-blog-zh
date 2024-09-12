@@ -1,0 +1,424 @@
+- en: Building a Geospatial Application in Python with Google Earth Engine and Greppo
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Building a Geospatial Application in Python with Google Earth Engine and
+    Greppo](../Images/5664095a43f9f5f9138ecffae1bbe32b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The final web-app using Greppo and GEE. Image by author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Google Earth Engine is an amazing tool in a data scientists toolbox for working
+    with geospatial data. However, building a web-app with the GEE code editor requires
+    a steep learning curve. The JavaScript based app-creator requires a large investment
+    of time for data scientists who are solely Python developers
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Greppo is the perfect tool to bridge this gap.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this blog post I will be building a web-application with Greppo with a a
+    popular GEE use-case with DEM (Digital Elevation Model). I will walk you through
+    understanding the basics of GEE, the client-server model, how the API works and
+    the GEE data model. With that background, the post will use Greppo to create an
+    app using GEE’s Python interface and highlight Greppo’s mental model and easy
+    to use interface.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note**: All the code here is in Python. They are ported from the GEE’s sample
+    JavaScript code in the [**documentation**](https://developers.google.com/earth-engine/guides?hl=en)**.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Getting started**'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Before we get started, you need to get access to Google Earth Engine. Follow
+    the instruction [here to signup](https://earthengine.google.com/signup/) and get
+    access.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is a quick tutorial on Greppo and how to use it: [**Build a geospatial
+    dashboard in Python using Greppo**](https://towardsdatascience.com/build-a-geospatial-dashboard-in-python-using-greppo-60aff44ba6c9)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, let’s setup our Python environment to install the dependencies. To understand
+    what Python environments are and how to set it up, [read this](https://krishadi.com/zettelkasten/python.html).
+    Install the following packages into the Python environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code for the web-app will go into **app.py,** and the app is served and
+    run through the command line using the command greppo serve app.py.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note: To run the `greppo` command in the command line, you need to activate
+    the python environment where greppo is installed. The file app.py can be renamed
+    to anything, but be sure to be in the folder when you run the command `greppo
+    serve app.py` or in a relative folder structure `greppo serve /demo/folder/app.py`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Greppo’s GitHub repository: [https://github.com/greppo-io/greppo](https://github.com/greppo-io/greppo)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For any issues reach out to us on [GitHub](https://github.com/greppo-io/greppo)
+    using ‘issues’ or in the [Discord channel here](https://discord.gg/RNJBjgh8gz).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****GEE Authentication and Initialisation****'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To be able to use Google Earth Engine, you need to create a service account
+    and get an access-key-file associated with that account. This will only take a
+    few minutes, but make sure to follow the instructions properly. Follow the instructions
+    [here](https://developers.google.com/earth-engine/guides/service_account?hl=en).
+    To use the service account and the key-file, use the following code to initialise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note: Make sure to keep the key-file.json in another location, preferably safely
+    in the root folder of your computer and not commit it into a public repository.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Understanding GEE’s client-server model**'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: As the developer docs of GEE puts it, Earth Engine is not like any GIS or geospatial
+    tool you’ve used before. GEE is primarily a cloud-platform, and all the processing
+    is done in the cloud and not on your machine. The interactions with GEE that you
+    will do are merely instructions that are translated and sent to GEE’s cloud platform.
+    To understand this better, we would have to go through GEE’s Client vs. Server
+    and its lazy computational model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[**Client vs. Server**](https://developers.google.com/earth-engine/guides/client_server)**'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Let’s start with what I mentioned before, **GEE is primarily a cloud-platform**.
+    It lets you do all the processing in the cloud. So, how do you access this processing-functions?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is where the `earthengine-api` library comes to use. The Python package
+    `earthengine-api` provides objects to the client (which is you) that act as proxy
+    to the server objects which is passed and processed in the cloud.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To understand the client-server model better, let’s take an example of a String
+    variable in the client and a String variable in the server. On creating a String
+    in the client and printing its type, we get the Python `class str` object to represent
+    a string. If we want to send a string to the server for use or manipulation in
+    the cloud, we would use the `ee.String` to wrap up the data in a proxy container
+    which can be read in the server. To be more specific, the `ee. objects` are an
+    `ee.computedObject` which is the parent class to the proxy objects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '>> # Client side string'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '>> client_string = ''I am a Python String object'''
+  prefs: []
+  type: TYPE_NORMAL
+- en: '>> print(type(client_string))'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '>> # Server side string'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '>> server_string = ee.String(''I am proxy ee String object!'');'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '>> print(type(server_string))'
+  prefs: []
+  type: TYPE_NORMAL
+- en: <class></class>
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: The proxy objects do not contain any actual data or processing functions/algorithms.
+    They are just handles for the objects on the server (cloud-platform), to merely
+    convey the instructions that are to be executed in the server. Think of it as
+    a way to communicate to the server using code, and to do that you need to wrap
+    the data and instruction in a `ee.computedObject` container of the specific type.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This understanding becomes even more relevant when performing loops or using
+    conditional statements on the data. To perform these, the instructions are to
+    be sent to the server to execute them. To understand how these are implemented
+    [check this page out](https://developers.google.com/earth-engine/guides/client_server)
+    for more details.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[**Lazy computational model (Deferred execution)**](https://developers.google.com/earth-engine/guides/deferred_execution)**'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: So, from the above we know that the earthengine-api package is merely to send
+    instructions to the server. So, how and when does the execution happen?
+  prefs: []
+  type: TYPE_NORMAL
+- en: The client side library earthengine-api compiles all the instructions into a
+    JSON object and is sent to the server. However, this is not executed immediately.
+    The execution is deferred until there is a request for the result. The request
+    for the result can be a `print` statement, or the `image` object to be displayed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This on-demand computation as affects what is return to the client (you the
+    user). The result from the earthengine-api is a url to the GEE tile server where
+    the data is to be fetched. So, the images that are within the mentioned area of
+    interest are selectively processed. The area of interest is determined by the
+    zoom level and the center location of the map in the client display. And, as you
+    move and zoom, the images are processed and sent to the client to be viewed. The
+    images are thus computed lazily.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Using Greppo with GEE**'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Using Greppo to display and visualise Earth Engine image objects are fairly
+    straight forward, all you need to use is: `app.ee_layer()`. The basic data types
+    where geospatial data is stored in GEE is in,'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Image` : fundamental raster data type in Earth Engine.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`ImageCollection` : stack or time-series of images.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Geometry` : fundamental vector data type in Earth Engine.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`Feature` : a Geometry with attributes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`FeatureCollection` : a set of Feature.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: After understanding the client-server and lazy computational model of GEE, we
+    can extrapolate that these data types are processed on demand, upon the request
+    for its visualisation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****So, How to Use Greppo with GEE?****'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: It is best explained with an example. Let’s start with the scaffolding of the
+    `app`. You would first have to import the app object from `greppo` as this will
+    be your entry point to communicate with the frontend. You would then have to `import
+    ee`, authenticate yourself to Earth Engine and initialise your session with the
+    credentials from your service account mentioned above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, let’s start with selecting the dataset from the catalog. Here, we are
+    using the **USGS/SRTMGL1_003** to get the Digital Elevation map. We need to first
+    get a land mask for all the values in the DEM image data greater than 0, for which
+    we use `dem.get(0)`. Next, we need to apply the mask on our DEM to only visualise
+    the land, for which we use `dem.updateMask(dem.gt(0))` and we assign the result
+    as our `ee_dem` to be visualised. Since all the data is stored as int16 (matrix
+    of values between 32767 and -32768), we would have to visualise the matrix using
+    a palette.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To add a palette we create a visualisation parameter object containing the
+    instruction for producing an RGM or greyscale image. Here we use a palette containing
+    the Hex values: `[‘006633’, ‘E5FFCC’, ‘662A00’, ‘D8D8D8’, ‘F5F5F5’]` and map it
+    linearly to the values corresponding to the `min -> #006633and max -> #F5F5F5`
+    specified.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note: The data stored in the DEM is a raster, represented as a matrix and each
+    cell contains the elevation in meters of the point representing the cell.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To then visualise this map in the web-application using Greppo, all you need
+    to use is app.ee_layer(). The `ee_object` is the earth engine image object, `vis_param`
+    is the visualisation parameter dictionary, name corresponds to the unique identifier
+    which will be used in the web-app frontend, and a `description` is optional to
+    provide additional direction to the app user. More on this can be found in the
+    documentation [**here**](https://docs.greppo.io/map-components/ee-layer.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Geospatial Application in Python with Google Earth Engine and
+    Greppo](../Images/779e70a54ff2b5f2543b1c82524fed60.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: View of the web-app from the above step. Image by author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**End-to-end Communication: Complete Web App**'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: So far we’ve seen how to only visualise the earth engine object in Greppo. However,
+    Greppo is capable of complex interaction between the frontend and backend. Let’s
+    use an example of finding the elevation of a point specified by the user. We’ll
+    be using three of Greppo’s API features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`app.display()` : To display a text or markdown in the frontend.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`app.number()` : A number input feature in the frontend for the user to enter
+    a value. The variable to which it is bound in the backend will be updated to the
+    value specified by the user.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`app.text()` : A text input feature in the frontend for the user to enter a
+    value. The variable to which it is bound in the backend will be updated to the
+    value specified by the user.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Refer to the [**documentation here**](https://docs.greppo.io/index.html) for
+    more details.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s start with using the `app.display` (`name` is the unique identifier and
+    the value is the text displayed which can be a multiline string) to display some
+    text for guiding the web-app user. After which lets create two number inputs one
+    each for the longitude and latitude of the point using `app.number()`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`app.number()` takes in name, the identifier displayed on the frontend, and
+    value, which is the default value for this element. Next let’s also create a text
+    input for getting the name of the point using `app.text()` with `name` and `value`
+    as mentioned for `app.number()`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Using the latitude and longitude of the point, we can now create an earth engine
+    Geometry object for the point with the visualisation parameters `color: ‘red’`.
+    We can now display this using the `app.ee_layer()` as mentioned above.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To find the elevation of the point, we make use of the earth engine method `sample`
+    on the DEM object. We sample the point in the DEM to get the properties from the
+    DEM. We take the first point from the output and use the `.get` method to find
+    the value associated with the property elevation. And, finally we compose a multiline
+    string to display the output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note: To center the map to a point and at a zoom level on the initial load,
+    make use of `app.map(center=[lat, lon], zoom=level)`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Geospatial Application in Python with Google Earth Engine and
+    Greppo](../Images/fb4df010040335931e2d2978fbf16a1e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: View of the web-app with the interaction feature. Image by author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Conclusion**'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Our goal was to create a web-app completely in Python, using the data and computation
+    feature of google earth engine and Greppo’s web-app development library. We went
+    through understanding the working of GEE, understood how to integrate Greppo with
+    GEE. Learned to use `app.ee_layer(), app.display(), app.number() and app.text()`
+    to create a complete web-app that communicates end-to-end with the frontend and
+    backend.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'All the files for the demo can be found here: [https://github.com/greppo-io/greppo-demo/tree/main/ee-demo](https://github.com/greppo-io/greppo-demo/tree/main/ee-demo)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Check out the [**GitHub repository: here**](https://github.com/greppo-io/greppo)
+    to be updated on the latest on Greppo. In case of bugs, issues or feature requests
+    for your use-case reach out on the [Discord channel](https://discord.gg/RNJBjgh8gz)
+    or open an issue on GitHub. Built something with Greppo? Post it GitHub.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'GitHub repository: [https://github.com/greppo-io/greppo](https://github.com/greppo-io/greppo)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Documentation: [https://docs.greppo.io/](https://docs.greppo.io/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Website: [https://greppo.io/](https://greppo.io/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**[Adithya Krishnan](https://www.linkedin.com/in/adithyakrishnan/)** ([@krish_adi_](https://twitter.com/krish_adi_))
+    is a scientist, developer, founder and climber. Interested in building web-applications,
+    cloud-utility, data-science and AI/ML projects. [Find out more here](https://krishadi.com/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Python Packages For Geospatial Data Analysis](https://www.kdnuggets.com/2023/08/5-python-packages-geospatial-data-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Leveraging Geospatial Data in Python with GeoPandas](https://www.kdnuggets.com/leveraging-geospatial-data-in-python-with-geopandas)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Geospatial Data Analysis with Geemap](https://www.kdnuggets.com/geospatial-data-analysis-with-geemap)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

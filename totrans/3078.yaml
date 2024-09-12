@@ -1,0 +1,522 @@
+- en: How to Make Your Machine Learning Models Robust to Outliers
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/08/make-machine-learning-models-robust-outliers.html](https://www.kdnuggets.com/2018/08/make-machine-learning-models-robust-outliers.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Alvira Swalin](https://www.linkedin.com/in/alvira-swalin), University
+    of San Francisco**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*“So unexpected was the hole that for several years computers analyzing ozone
+    data had systematically thrown out the readings that should have pointed to its
+    growth.” — New Scientist 31st March 1988*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ca8bc703d91679f1bf69ba9a882e35e8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: According to Wikipedia, an **outlier** is an observation point that is distant
+    from other observations. This definition is vague because it doesn’t quantify
+    the word “distant”. In this blog, we’ll try to understand the different interpretations
+    of this “distant” notion. We will also look into the outlier detection and treatment
+    techniques while seeing their impact on different types of machine learning models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Outliers arise due to changes in system behavior, fraudulent behavior, human
+    error, instrument error, or simply through natural deviations in populations.
+    A sample may have been contaminated with elements from outside the population
+    being examined.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Many machine learning models, like linear & logistic regression, are easily
+    impacted by the outliers in the training data. Models like AdaBoost increase the
+    weights of misclassified points on every iteration and therefore might put high
+    weights on these outliers as they tend to be often misclassified. This can become
+    an issue if that outlier is an error of some type, or if we want our model to
+    generalize well and not care for extreme values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To overcome this issue, we can either change the model or metric, or we can
+    make some changes in the data and use the same models. For the analysis, we will
+    look into [House Prices Kaggle Data](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data).
+    All the codes for plots and implementation can be found on this [Github Repository](https://github.com/aswalin/Outlier-Impact-Treatment).
+  prefs: []
+  type: TYPE_NORMAL
+- en: What do we mean by outliers?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Extreme values can be present in both dependent & independent variables, in
+    the case of supervised learning methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These extreme values need not necessarily impact the model performance or accuracy,
+    but when they do they are called **“Influential”** points.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Extreme Values in Independent Variables**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: These are called points of **“high leverage**”. With a single predictor, an
+    extreme value is simply one that is particularly high or low. With multiple predictors,
+    extreme values may be particularly high or low for one or more predictors ***(univariate
+    analysis — analysis of one variable at a time)*** or may be “unusual” combinations
+    of predictor values ***(multivariate analysis)***
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the following figure, all the points on the right-hand side of the orange
+    line are leverage points.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bbae8ec73abd7b973af9ee6fbb6a0530.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Extreme Values in Target Variables**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Regression — these extreme values are termed as **“outliers”**. They may or
+    may not be influential points, which we will see later. In the following figure,
+    all the points above the orange line can be classified as outliers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c961bfd28e0dcc433ac9aae8652589a4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Classification: Here, we have two types of extreme values:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. Outliers:** For example, in an image classification problem in which
+    we’re trying to identify dogs/cats, one of the images in the training set has
+    a gorilla (or any other category not part of the goal of the problem) by mistake.
+    Here, the gorilla image is clearly noise. Detecting outliers here does not make
+    sense because we already know which categories we want to focus on and which to
+    discard'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2\. Novelties:** Many times we’re dealing with novelties, and the problem
+    is often called **supervised anomaly detection**. In this case, the goal is not
+    to remove outliers or reduce their impact, but we are interested in detecting
+    anomalies in new observations. Therefore we won’t be discussing it in this post.
+    It is especially used for fraud detection in credit-card transactions, fake calls,
+    etc.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: All the points we have discussed above, including influential points, will become
+    very clear once we visualize the following figure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/14108c138f5fba84c8c2a082b76127f5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Inference***'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '*- Points in Q1: Outliers'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '- Points in Q3: Leverage Points'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '- Points in Q2: Both outliers & leverage but non-influential points'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '- Circled points: Example of Influential Points. There can be more but these
+    are the prominent ones*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Our major focus will be outliers (extreme values in **target variable** for
+    further investigation and treatment). We’ll see the impact of these extreme values
+    on the model’s performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Common Methods for Detecting Outliers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When detecting outliers, we are either doing univariate analysis or multivariate
+    analysis. When your linear model has a single predictor, then you can use univariate
+    analysis. However, it can give misleading results if you use it for multiple predictors.
+    One common way of performing outlier detection is **to assume that the regular
+    data come from a known distribution** (e.g. data are Gaussian distributed). This
+    assumption is discussed in the Z-Score method section below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Box-Plot**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The quickest and easiest way to identify outliers is by visualizing them using
+    plots. If your dataset is not huge (approx. up to 10k observations & 100 features),
+    I would highly recommend you build scatter plots & box-plots of variables. If
+    there aren’t outliers, you’ll definitely gain some other insights like correlations,
+    variability, or external factors like the impact of world war/recession on economic
+    factors. However, this method is not recommended for high dimensional data where
+    the power of visualization fails.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/904c4cc6a14a732e8bc0c880b86e4eb1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The box plot uses inter-quartile range to detect outliers. Here, we first determine
+    the quartiles *Q*1 and *Q*3.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Interquartile range is given by, IQR = Q3 — Q1
+  prefs: []
+  type: TYPE_NORMAL
+- en: Upper limit = Q3+1.5*IQR
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lower limit = Q1–1.5*IQR
+  prefs: []
+  type: TYPE_NORMAL
+- en: Anything below the lower limit and above the upper limit is considered an outlier
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Cook’s Distance**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a multivariate approach for finding influential points. These points
+    may or may not be outliers as explained above, but they have the power to influence
+    the regression model. We will see their impact in the later part of the blog.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This method is used only for linear regression and therefore has a limited application. [Cook’s
+    distance](https://en.wikipedia.org/wiki/Cook%27s_distance) measures the effect
+    of deleting a given observation. It’s represents the sum of all the changes in
+    the regression model when observation **“i”** is removed from it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/94ec5a5de878c7c218c2559f4c373b87.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here, p is the number of predictors and s² is the mean squared error of the
+    regression model. There are different views regarding the cut-off values to use
+    for spotting highly influential points. A rule of thumb is that D(i) > 4/n, can
+    be good cut off for influential points.
+  prefs: []
+  type: TYPE_NORMAL
+- en: R has the [car](http://cran.r-project.org/web/packages/car/index.html) (Companion
+    to Applied Regression) package where you can directly find outliers using Cook’s
+    distance. Implementation is provided in this [R-Tutorial](https://www.statmethods.net/stats/rdiagnostics.html).
+    Another similar approach is **DFFITS**, which you can see details of [here](https://newonlinecourses.science.psu.edu/stat501/node/340/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Z-Score**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This method assumes that the variable has a Gaussian distribution. It represents
+    the number of standard deviations an observation is away from the mean:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ad6a2aa9b983c21b2338ac776f387956.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here, we normally define outliers as points whose modulus of z-score is greater
+    than a threshold value. This threshold value is usually greater than 2 (3 is a
+    common value).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ba1d948b9d61a31c9a51d38584223a55.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Reference: [http://slideplayer.com/slide/6394283/](http://slideplayer.com/slide/6394283/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'All the above methods are good for initial analysis of data, but they don’t
+    have much value in multivariate settings or with high dimensional data. For such
+    datasets, we have to use advanced methods like **PCA, LOF (Local Outlier Factor)
+    & HiCS: High Contrast Subspaces for Density-Based Outlier Ranking**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We won’t be discussing these methods in this blog, as they are beyond its scope.
+    Our focus here is to see how various outlier treatment techniques affect the performance
+    of models. You can read [this blog](https://www.datasciencecentral.com/profiles/blogs/introduction-to-outlier-detection-methods) for
+    details on these methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Impact & Treatment of Outliers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The impact of outliers can be seen not only in predictive modeling but also
+    in statistical tests where it reduces the power of tests. Most parametric statistics,
+    like means, standard deviations, and correlations, and every statistic based on
+    these, are highly sensitive to outliers. But in this post, we are focusing only
+    on the impact of outliers in predictive modeling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**To Drop or Not to Drop**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I believe dropping data is always a harsh step and should be taken only in extreme
+    conditions when we’re very sure that the **outlier is a measurement error**, which
+    we generally do not know. The data collection process is rarely provided. When
+    we drop data, we lose information in terms of the variability in data. When we
+    have too many observations and **outliers are few**, then we can think of dropping
+    these observations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the following example we can see that the slope of the regression line changes
+    a lot in the presence of the extreme values at the top. Hence, it is reasonable
+    to drop them and get a better fit & more general solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4b438ba5062992edf7fec92efa705863.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source: [https://www.r-bloggers.com/outlier-detection-and-treatment-with-r/](https://www.r-bloggers.com/outlier-detection-and-treatment-with-r/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Other Data-Based Methods**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Winsorizing:** This method involves setting the extreme values of an attribute
+    to some specified value. For example, for a 90% Winsorization, the bottom 5% of
+    values are set equal to the minimum value in the 5th percentile, while the upper
+    5% of values are set equal to the maximum value in the 95th percentile. This is
+    more advanced than trimming where we just exclude the extreme values.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Log-Scale Transformation:** This method is often used to reduce the variability
+    of data including outlying observation. Here, the y value is changed to log(y).
+    It’s often preferred when the response variable follows **exponential distribution
+    or is right-skewed**.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: However, it’s a controversial step and **does not necessarily reduce** the variance.
+    For example, this [answer](https://stats.stackexchange.com/questions/130262/why-not-log-transform-all-variables-that-are-not-of-main-interest) beautifully
+    captures all those cases.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Poor example of transformation -
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/e2468faf6084a5caa01132b1362535f7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: An initially left skewed distribution becomes more skewed after log-transform
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Binning:** This refers to dividing a list of continuous variables into groups.
+    We do this to discover sets of patterns in continuous variables, which are difficult
+    to analyze otherwise. But, it also leads to **loss of information** and loss of
+    power.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Model-Based Methods**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Use a different model: Instead of linear models, we can use tree-based methods
+    like Random Forests and Gradient Boosting techniques, which are less impacted
+    by outliers. This [answer](https://www.quora.com/Why-are-tree-based-models-robust-to-outliers) clearly
+    explains why tree based methods are robust to outliers.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Metrics: Use MAE instead of RMSE as a loss function. We can also use truncated
+    loss:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/a8cea1cdbc0e7c7c64ad00737262313b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/4861c12aa4071584356511d58534e65b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source: [https://eranraviv.com/outliers-and-loss-functions/](https://eranraviv.com/outliers-and-loss-functions/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Case Study Comparison**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this comparison, I chose only four important predictors (Overall Quality,
+    MSubClass, Total Basement Area, Ground living area) out of total 80 predictors
+    and tried to predict Sales Price using these predictors. The idea is to see how
+    outliers affect linear & tree-based methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d5bfc8c5458b0fd7a6fcd3e12f3f4647.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**End Notes**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since there are only 1400 total observation in the dataset, the impact of outliers
+    is considerable on a linear regression model, as we can see from the RMSE scores
+    of “**With outliers**” (0.93) and “**Without outliers**” (0.18) — a significant
+    drop.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For this dataset, the target variable is right skewed. Because of this, log-transformation
+    works better than removing outliers. Hence we should always try to transform the
+    data first rather than remove it. However, winsorizing is not as effective as
+    compared to outlier removal. It might be because, by hard replacement, we are
+    somehow introducing inaccuracies into the data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Clearly, Random Forest is not affected by outliers because after removing the
+    outliers, RMSE increased. This might be the reason why changing the criteria from
+    MSE to MAE did not help much (from 0.188 to 0.186). Even for this case, log-transformation
+    turned out to be the winner: the reason being, the skewed nature of the target
+    variable. After transformation, the data are becoming uniform and splitting is
+    becoming better in the Random Forest.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: From the above results, we can conclude that transformation techniques generally
+    works better than dropping for improving the predictive accuracy of both linear
+    & tree-based models. It is very important to treat outliers by either dropping
+    or transforming them if you are using linear regression model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If I have missed any important techniques for outliers treatment, I would love
+    to hear about them in comments. Thank you for reading.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**About Me:** Graduated with Masters in Data Science at USF. Interested in
+    working with cross-functional groups to derive insights from data, and apply Machine
+    Learning knowledge to solve complicated data science problems. [https://alviraswalin.wixsite.com/alvira](https://alviraswalin.wixsite.com/alvira)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Check out my other blogs [here](https://medium.com/@aswalin)!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**LinkedIn: **[**www.linkedin.com/in/alvira-swalin**](http://www.linkedin.com/in/alvira-swalin)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**References:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The treatment methods have been taught by [Yannet Interian at USF](https://www.usfca.edu/faculty/yannet-interian)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Github Repo for Codes](https://github.com/aswalin/Outlier-Impact-Treatment)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Data For House Price Analysis](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Lesson on Distinction Between Outliers and High Leverage Observations](https://newonlinecourses.science.psu.edu/stat462/node/170/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Introduction to Outlier Detection Methods](https://www.datasciencecentral.com/profiles/blogs/introduction-to-outlier-detection-methods)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[A Comprehensive Guide to Data Exploration](https://www.analyticsvidhya.com/blog/2016/01/guide-data-exploration/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Cook’s D Implementation in R](https://www.statmethods.net/stats/rdiagnostics.html)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Discuss this post on **[**Hacker News**](https://news.ycombinator.com/item?id=17197027)**.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Alvira Swalin](https://www.linkedin.com/in/alvira-swalin)** ([**Medium**](https://medium.com/@aswalin))
+    is currently pursuing Master''s in Data Science at USF, and is particularly interested
+    in Machine Learning & Predictive Modeling. She is a Data Science Intern at Price
+    (Fx).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://heartbeat.fritz.ai/how-to-make-your-machine-learning-models-robust-to-outliers-44d404067d07).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[CatBoost vs. Light GBM vs. XGBoost](/2018/03/catboost-vs-light-gbm-vs-xgboost.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Choosing the Right Metric for Evaluating Machine Learning Models  –  Part
+    1](/2018/04/right-metric-evaluating-machine-learning-models-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Choosing the Right Metric for Evaluating Machine Learning Models – Part 2](/2018/06/right-metric-evaluating-machine-learning-models-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Removing Outliers Using Standard Deviation in Python](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Handle Outliers in Dataset with Pandas](https://www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Make Large Language Models Play Nice with Your Software…](https://www.kdnuggets.com/how-to-make-large-language-models-play-nice-with-your-software-using-langchain)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 5 Advantages That CatBoost ML Brings to Your Data to Make it Purr](https://www.kdnuggets.com/2023/02/top-5-advantages-catboost-ml-brings-data-make-purr.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Make Quantum Leaps in Your Data Science Journey](https://www.kdnuggets.com/2023/02/make-quantum-leaps-data-science-journey.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Make Your Own GPTs with ChatGPT''s GPTs!](https://www.kdnuggets.com/make-your-own-gpts-with-chatgpts-gpts)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

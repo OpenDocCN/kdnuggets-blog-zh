@@ -1,0 +1,279 @@
+- en: Stop Hurting Your Pandas!
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/04/stop-hurting-pandas.html](https://www.kdnuggets.com/2020/04/stop-hurting-pandas.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Pawel Rzeszucinski](https://www.linkedin.com/in/pawelrzeszucinski/),
+    [Codewise](http://www.codewise.com/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/47801c4858e2d8ce22b79bb7b046ad4b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: Wikimedia Commons'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandas is the king of data wrangling for virtually all data related tasks performed
+    in Python.It's been around for 12 years now, although we've only just seen the
+    release of the version 1.0 back in January of 2020\. Manipulation, slicing and
+    updating data with Pandas is very intuitive which is probably why the package
+    has been a success from day one. Nevertheless, despite the simple and coherent
+    syntax, there are situations where extra care should be taken to do exactly what
+    is intended. This post will address the issues that can arise when Pandas slicing
+    is used improperly. If you see the warning that reads "*A value is trying to be
+    set on a copy of a slice from a DataFrame*", this post is for you.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandas provides clear rules how to properly slice DataFrames and a good overview
+    can be found [here](/2019/06/select-rows-columns-pandas.html). However, we don't
+    always follow best practice as doing so requires both acquiring necessary knowledge
+    and maintaining certain levels of self-rigor. Apart from the options outlined
+    in guidelines, Pandas allows us to access elements of Dataframes in many different
+    ways. This may create a temptation to also try and perform data assignments in
+    ways that may turn out to be inappropriate, resulting in some unexpected effects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s start off by defining out a simple test dataframe:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: "[PRE0] df = pd.DataFrame({'x':[1,5,4,3,4,5],  \t\t\t\t   'y':[.1,.5,.4,.3,.4,.5],\
+    \  \t\t\t\t   'w':[11,15,14,13,14,15]})       x    y   w  0  1  0.1  11  1  5\
+    \  0.5  15  2  4  0.4  14  3  3  0.3  13  4  4  0.4  14  5  5  0.5  15 [PRE1]`"
+  prefs: []
+  type: TYPE_NORMAL
+- en: Say we wanted to find all the DataFrame elements that correspond to 'x' column
+    being larger than 3, and based on this change all the corresponding 'y' values
+    to 50.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'How to perform this correctly, according to Pandas best practice? By using
+    the `.loc` method in this case:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2] df.loc[df[''x'']>3,''y'']=50 [PRE3]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We locate the row elements that meet our initial criterion (first argument),
+    and the column which we want to update (second argument), all evaluated in a single
+    call to the DataFrame.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The result is as expected.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]    x     y   w  0  1   0.1  11  1  5  50.0  15  2  4  50.0  14  3  3   0.3  13  4  4  50.0  14  5  5  50.0  15
+    [PRE5]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As mentioned a moment ago, Pandas provides a number of different ways of accessing
+    (but not necessarily modifying!) the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Not sticking to the script (guidelines) may lead us into trouble. For instance
+    it may be more natural for some people to write the same operation as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6] df[df[''x'']>3][''y'']=50 [PRE7]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: That's pretty clear, isn't it? Take the subset of the `df` that corresponds
+    to `'x'>3`, and subsequently change the values in column 'y' to be equal to 50.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s do that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]    x    y   w  0  1  0.1  11  1  5  0.5  15  2  4  0.4  14  3  3  0.3  13  4  4  0.4  14  5  5  0.5  15
+    [PRE9]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I probably did a typo or something, let me run this once again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10] df[df[''x'']>3][''y'']=50       x    y   w  0  1  0.1  11  1  5  0.5  15  2  4  0.4  14  3  3  0.3  13  4  4  0.4  14  5  5  0.5  15
+    [PRE11]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: No change whatsoever! Why?
+  prefs: []
+  type: TYPE_NORMAL
+- en: We've encountered a so called 'chained indexing' effect, where essentially two
+    indexers are used one after another e.g. `df[][]`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s decompose our command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`df[df[''x'']>3]` results in Pandas creating a separate copy of the original
+    DataFrame'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`df[df[''x'']>3][''y''] = 50` assigns the new values to the column ''y'' but
+    on this temporarily created copy, not our original DataFrame.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A way of observing this explicitly is to use [the base 'id' function](https://docs.python.org/3/library/functions.html#id)
+    which returns the address of the given object in the memory of the machine.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12] id(df)  2838845867680    id(df[df[''x'']>3])  2838845989832    id(id)
+    == id(df[df[''x'']>3])  False [PRE13]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Interestingly, when we invert the order of the slice in our command i.e. call
+    the columns first and then the criterion we want to satisfy, we get the expected
+    result:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14] df[''y''][df[''x'']>3]=50       x     y   w  0  1   0.1  11  1  5  50.0  15  2  4  50.0  14  3  3   0.3  13  4  4  50.0  14  5  5  50.0  15
+    [PRE15]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: That's down to a fact, that when we select only one column from the DataFrame,
+    Pandas creates a view, not a copy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What's a view? It's essentially a proxy for the same object i.e. no new objects
+    are created in the process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16] z = df[''y''] #z being a view of df[''y'']  id(df[''y'']) == id(z)  True
+    [PRE17]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Even though we''ve achieved our goal, some side effects might have been triggered:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's look at this sequence of commands.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18] df # original dataframe     x    y   w  0  1  0.1  11  1  5  0.5  15  2  4  0.4  14  3  3  0.3  13  4  4  0.4  14  5  5  0.5  15    z
+    = df[''y''] # view of column ''y''  z[z>=0.5] = 30    z  0     0.1  1    30.0  2     0.4  3     0.3  4     0.4  5    30.0    df     x     y   w  0  1   0.1  11  1  5  30.0  15  2  4   0.4  14  3  3   0.3  13  4  4   0.4  14  5  5  30.0  15
+    [PRE19]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Whoa! We though we created a separate object, called 'z' that is independent
+    from `df` and the values of `df` are safe when we manipulate 'z'. Nope.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We've only created a view. The good thing is that Pandas will display the good
+    ol' warning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandas is doing this because it doesn't know if we want to change just the 'y'
+    series (via proxy 'z'), or the value of the original `df`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: OK, so what if we wanted to extract 'z' as an independent object? The Pandas
+    method `.copy()` serves exactly this purpose.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When we update our command to the one shown below, we will create a completely
+    new object with its own address in the memory, and any updated on 'z' will leave
+    `df` unaffected.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20] z = df[''y''].copy()  id(df[''y'']) == id(z)  False [PRE21]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are really two takeaways that will keep us guarded from any unwanted
+    effects when working with slices and data manipulations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'avoid chained indexing. Always go for the `.loc`/`.iloc` (or `.at`/`.iat`)
+    option:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '`copy()` your variables to create independent objects and safeguard original
+    sources from being unwillingly manipulated.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Bio: [Dr Pawel Rzeszucinski](https://www.linkedin.com/in/pawelrzeszucinski/)**
+    is the author of over 30 publications and patents in the field of broadly defined
+    data analytics. He obtained a master''s degree in computer science from Cranfield
+    University, after which he moved to the University of Manchester, where he obtained
+    a PhD for the project for QinetiQ related to analytical solutions for the diagnosis
+    of helicopter gearboxes. After returning to Poland, he worked as Senior Scientist
+    at ABB Corporate Research Center and Senior Risk Modeler at Strategic Analytics
+    for HSBC. He is currently working as a Chief Data Scientist at Codewise, an AdTech
+    company. Dr Pawel Rzeszucinski is a member of the Forbes Technology Council.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to select rows and columns in Pandas using [ ], .loc, iloc, .at and .iat](/2019/06/select-rows-columns-pandas.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python for data analysis… is it really that simple?!?](/2020/04/python-data-analysis-really-that-simple.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build Pipelines with Pandas Using pdpipe](/2019/12/build-pipelines-pandas-pdpipe.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

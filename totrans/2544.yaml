@@ -1,0 +1,622 @@
+- en: Mastering Clustering with a Segmentation Problem
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/08/mastering-clustering-segmentation-problem.html](https://www.kdnuggets.com/2021/08/mastering-clustering-segmentation-problem.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Indraneel Dutta Baruah](https://indraneeldb1993ds.medium.com/), AI Driven
+    Solutions Developer**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/62dfc3ee20b01cdf165d6a7406f9fb4a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Mel Poole](https://unsplash.com/@melipoole) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the current age, the availability of granular data for a large pool of customers/products
+    and technological capability to handle petabytes of data efficiently is growing
+    rapidly. Due to this, it’s now possible to come up with very strategic and meaningful
+    clusters for effective targeting. And identifying the target segments requires
+    a robust segmentation exercise. In this blog, we will be discussing the most popular
+    algorithms for unsupervised clustering algorithms and how to implement them in
+    python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this blog, we will be working with clickstream [data](https://archive.ics.uci.edu/ml/datasets/clickstream+data+for+online+shopping) from
+    an online store offering clothing for pregnant women. It includes variables like
+    product category, location of the photo on the webpage, country of origin of the
+    IP address and product price in US dollars. It has data from April 2008 to August
+    2008.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*The first step is to prepare the data for segmentation. I encourage you to
+    check out the article below for an in-depth explanation of different steps for
+    preparing data for segmentation before proceeding further:*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*One Hot Encoding, Standardization, PCA: Data preparation for segmentation
+    in python*](https://towardsdatascience.com/one-hot-encoding-standardization-pca-data-preparation-steps-for-segmentation-in-python-24d07671cf0b)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Selecting the optimal number of clusters is another key concept one should
+    be aware of while dealing with a segmentation problem. It will be helpful if you
+    read the article below for understanding a comprehensive list of popular metrics
+    for selecting clusters:*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Cheatsheet for implementing 7 methods for selecting the optimal number of
+    clusters in Python*](https://towardsdatascience.com/cheat-sheet-to-implementing-7-methods-for-selecting-optimal-number-of-clusters-in-python-898241e1d6ad)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We will be talking about 4 categories of models in this blog:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: K-means
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Agglomerative clustering
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Density-based spatial clustering (DBSCAN)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Gaussian Mixture Modelling (GMM)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**K-means**'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The K-means algorithm is an iterative process with three critical stages:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. Pick initial cluster centroids**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The algorithm starts by picking initial k cluster centers which are known as
+    centroids. Determining the optimal number of clusters i.e k as well as proper
+    selection of the initial clusters is extremely important for the performance of
+    the model. The number of clusters should always be dependent on the nature of
+    the dataset while poor selection of the initial cluster can lead to the problem
+    of local convergence. Thankfully, we have solutions for both.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For further details on selecting the optimal number of clusters please refer
+    to this detailed [blog](https://towardsdatascience.com/cheat-sheet-to-implementing-7-methods-for-selecting-optimal-number-of-clusters-in-python-898241e1d6ad).
+    For selection of initial clusters, we can either run multiple iterations of the
+    model with various initializations to pick the most stable one or use the “k-means++”
+    algorithm which has the following steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Randomly select the first centroid from the dataset*'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '*Compute distance of all points in the dataset from the selected centroid*'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '*Pick a point as the new centroid that has maximum probability proportional
+    to this distance*'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '*Repeat steps 2 and 3 until k centroids have been sampled*'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The algorithm initializes the centroids to be distant from each other leading
+    to more stable results than random initialization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2\. Cluster assignment**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: K-means then assigns the data points to the closest cluster centroids based
+    on euclidean distance between the point and all centroids.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3\. Move centroid**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The model finally calculates the average of all the points in a cluster and
+    moves the centroid to that average location.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 2 and 3 are repeated until there is no change in the clusters or possibly
+    some other stopping condition is met (like maximum number of iterations).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For implementing the model in python we need to do specify the number of clusters
+    first. We have used the elbow method, Gap Statistic, Silhouette score, Calinski
+    Harabasz score and Davies Bouldin score. For each of these methods the optimal
+    number of clusters are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Elbow method: 8'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Gap statistic: 29'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Silhouette score: 4'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Calinski Harabasz score: 2'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Davies Bouldin score: 4'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: As seen above, 2 out of 5 methods suggest that we should use 4 clusters. If
+    each model suggests a different number of clusters we can either take an average
+    or median. The codes for finding the optimal number of k can be found [here ](https://github.com/IDB-FOR-DATASCIENCE/Segmentation-Modelling.git)and
+    further details on each method can be found in this [blog](https://towardsdatascience.com/cheat-sheet-to-implementing-7-methods-for-selecting-optimal-number-of-clusters-in-python-898241e1d6ad).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once we have the optimal number of clusters, we can fit the model and get the
+    performance of the model using Silhouette score, Calinski Harabasz score and Davies
+    Bouldin score.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/9bf021dc8b01897827e7f184d2b3bf7e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig 1: Cluster Validation Metrics for K-Means (Image by author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can also check the relative size and distribution of the clusters using an
+    inter-cluster distance map.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/ce591a9f71ff69a8c6b217c8bfce364e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig 2: Inter Cluster Distance Map: K-Means (Image by author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As seen in the figure above, two clusters are quite large compared to the others
+    and they seem to have decent separation between them. However, if two clusters
+    overlap in the 2D space, it does not imply that they overlap in the original feature
+    space. Further details on the model can be found [here](https://projecteuclid.org/euclid.bsmsp/1200512992).
+    Finally, other variants of K-Means like Mini Batch K-means, K-Medoids will be
+    discussed in a separate blog.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Agglomerative clustering
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Agglomerative clustering is a general family of clustering algorithms that
+    build nested clusters by merging data points successively. This hierarchy of clusters
+    can be represented as a tree diagram known as dendrogram. The top of the tree
+    is a single cluster with all data points while the bottom contains individual
+    points. There are multiple options for linking data points in a successive manner:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Single linkage: **Itminimizes the distance between the closest observations
+    of pairs of clusters'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Complete or Maximum linkage: **Tries tominimize the maximum distance between
+    observations of pairs of clusters'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Average linkage: **It minimizes the average of the distances between all
+    observations of pairs of clusters'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Ward: **Similar to the k-means as it minimizes the sum of squared differences
+    within all clusters but with a hierarchical approach. We will be using this option
+    in our exercise.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The ideal option can be picked by checking which linkage method performs best
+    based on cluster validation metrics (Silhouette score, Calinski Harabasz score
+    and Davies Bouldin score). And similar to K-means, we will have to specify the
+    number of clusters in this model and the dendrogram can help us do that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/7e54da967a2addfb47f66bb546d18f76.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig 3: Dendrogram (Image by author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'From figure 3, we can see that we can choose either 4 or 8 clusters. We also
+    use the elbow method, Silhouette score and Calinski Harabasz score to find the
+    optimal number of clusters and get the following results:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Elbow method: 10'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Davies Bouldin score : 8'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Silhouette score: 3'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Calinski Harabasz score: 2'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: We will go ahead with 8 as both the Davies Bouldin score and dendrogram suggest
+    so. If the metrics give us different number of cluster we can either go ahead
+    with the one suggested by the dendrogram (as it is based on this specific model)
+    or take average/median of all the metrics. The codes for finding the optimal number
+    of clusters can be found [here ](https://github.com/IDB-FOR-DATASCIENCE/Segmentation-Modelling.git)and
+    further details on each method can be found in this [blog](https://towardsdatascience.com/cheat-sheet-to-implementing-7-methods-for-selecting-optimal-number-of-clusters-in-python-898241e1d6ad).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similar to k means, we can fit the model with the optimal number of clusters
+    as well as linkage type and test its performance using the three metrics used
+    in K-means.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/64426e74f015697c664b606bccc02b83.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig 4: Cluster Validation metrics: Agglomerative Clustering (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Comparing figure 1 and 4, we can see that K-means outperforms agglomerative
+    clustering based on all cluster validation metrics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Density-based spatial clustering (DBSCAN)
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'DBSCAN groups together points that are closely packed together while marking
+    others as outliers which lie alone in low-density regions. There are two key parameters
+    in the model needed to define ‘density’: minimum number of points required to
+    form a dense region `min_samples` and distance to define a neighborhood `eps`.
+    Higher `min_samples` or lower `eps` demands greater density to form a cluster.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Based on these parameters, DBSCAN starts with an arbitrary point x and identifies
+    points that are within neighbourhood of x based on `eps` and classifies x as one
+    of the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Core point**: If the number of points in the neighbourhood is at least equal
+    to the `min_samples` parameter then it called a core point and a cluster is formed
+    around x.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Border point**: x is considered a border point if it is part of a cluster
+    with a different core point but number of points in it’s neighbourhood is less
+    than the `min_samples` parameter. Intuitively, these points are on the fringes
+    of a cluster.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Outlier or noise**: If x is not a core point and distance from any core sample
+    is at least equal to or greater than`eps` , it is considered an outlier or noise.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For tuning the parameters of the model, we first identify the optimal `eps` value
+    by finding the distance among a point’s neighbors and plotting the minimum distance.
+    This gives us the elbow curve to find density of the data points and optimal `eps` value
+    can be found at the inflection point. We use the `NearestNeighbours` function
+    to get the minimum distance and the `KneeLocator` function to identify the inflection
+    point.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/81e88c69f8a685abf4e6ab76b5cddffb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 5: Optimal value for eps (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As seen above, the optimal value for `eps` is 1.9335816413107338\. We use this
+    value for the parameter going forward and try to find the optimal value of `min_samples` parameter
+    based on Silhouette score, Calinski Harabasz score and Davies Bouldin score. For
+    each of these methods the optimal number of clusters are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Silhouette score: 18'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Calinski Harabasz score: 29'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Davies Bouldin score: 2'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The codes for finding the optimal number of `min_samples` can be found [here ](https://github.com/IDB-FOR-DATASCIENCE/Segmentation-Modelling.git)and
+    further details on each method can be found in this [blog](https://towardsdatascience.com/cheat-sheet-to-implementing-7-methods-for-selecting-optimal-number-of-clusters-in-python-898241e1d6ad).
+    We go ahead with the median suggestion which is 18 by Silhouette score.In case
+    we don’t have time to run a grid search over these metrics, one quick rule of
+    thumb is to set `min_samples` parameter as twice the number of features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/09e270403b04b681ea3e8e4022a15c4d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 6: Cluster Validation metrics: DBSCAN (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Comparing figure 1 and 6, we can see that DBSCAN performs better than K-means
+    on Silhouette score. The model is described in the paper:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Density-Based Algorithm for Discovering Clusters in Large Spatial Databases
+    with Noise](https://www.osti.gov/biblio/421283), 1996.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In a separate blog, we will be discussing a more advanced version of DBSCAN
+    called Hierarchical Density-Based Spatial Clustering (HDBSCAN).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Gaussian Mixture Modelling (GMM)
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'A Gaussian mixture model is a distance based probabilistic model that assumes
+    all the data points are generated from a linear combination of multivariate Gaussian
+    distributions with unknown parameters. Like K-means it takes into account centers
+    of the latent Gaussian distributions but unlike K-means, the covariance structure
+    of the distributions is also taken into account. The algorithm implements the
+    expectation-maximization (EM) algorithm to iteratively find the distribution parameters
+    that maximize a model quality measure called log likelihood. The key steps performed
+    in this model are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Initialize k gaussian distributions
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Calculate probabilities of each point’s association with each of the distributions
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Recalculate distribution parameters based on each point’s probabilities associated
+    with the the distributions
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Repeat process till log-likelihood is maximized
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'There are 4 options for calculating covariances in GMM:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Full: **Each distribution has its own general covariance matrix'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Tied: **All distributions share general covariance matrix'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Diag: **Each distribution has its own diagonal covariance matrix'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Spherical: **Each distribution has its own single variance'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Apart from selecting the covariance type, we need to select the optimal number
+    of clusters in the model as well. We use BIC score, Silhouette score, Calinski
+    Harabasz score and Davies Bouldin score for selecting both parameters using grid
+    search. For each of these methods the optimal number of clusters are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'BIC Score: Covariance- ‘full’ and cluster number- 26'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Silhouette score: Covariance- ‘tied’ and cluster number- 2'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Calinski Harabasz score: Covariance- ‘spherical’ and cluster number- 4'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Davies Bouldin score: Covariance- ‘full’ and cluster number- 8'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The codes for finding the optimal parameter values can be found [here ](https://github.com/IDB-FOR-DATASCIENCE/Segmentation-Modelling.git)and
+    further details on each method can be found in this [blog](https://towardsdatascience.com/cheat-sheet-to-implementing-7-methods-for-selecting-optimal-number-of-clusters-in-python-898241e1d6ad).
+    We chose covariance as “full” and the number of clusters as 26 based on the BIC
+    score as it is based on this specific model. If we have similar configurations
+    from multiple metrics, we can take average/median/mode of all the metrics. We
+    can now fit the model and check model performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/cf524dd0d37296f34ff67da98bda4d13.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 7: Cluster Validation metrics: GMM (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Comparing figure 1 and 7, we can see that K-means outperforms GMM based on all
+    cluster validation metrics. In a separate blog, we will be discussing a more advanced
+    version of GMM called Variational Bayesian Gaussian Mixture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The aim of this blog is to help the readers understand how 4 popular clustering
+    models work as well as their detailed implementation in python. As shown below,
+    each model has its own pros and cons:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/735adf0c7dcc5d605f72470873d97465.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig 8: Pros and Cons of clustering algorithms (Image by Author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, it is important to understand that these models are just a means to
+    find logical and easily understandable customer/product segments which can be
+    targeted effectively. So in most practical cases, we will end up trying multiple
+    models and creating customer/product profiles from each iteration till we find
+    segments that make the most business sense.Thus, segmentation is both an art and
+    science.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Do you have any questions or suggestions about this blog? Please feel free to
+    drop in a note.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Thank you for reading!**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you, like me, are passionate about AI, Data Science, or Economics, please
+    feel free to add/follow me on [LinkedIn](http://www.linkedin.com/in/indraneel-dutta-baruah-ds), [Github](https://github.com/IDB-FOR-DATASCIENCE) and [Medium](https://medium.com/@indraneeldb1993ds).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**References**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Ester, M, Kriegel, H P, Sander, J, and Xiaowei, Xu. *A density-based algorithm
+    for discovering clusters in large spatial databases with noise*. United States:
+    N. p., 1996\. Web.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'MacQueen, J. Some methods for classification and analysis of multivariate observations.
+    Proceedings of the Fifth Berkeley Symposium on Mathematical Statistics and Probability,
+    Volume 1: Statistics, 281–297, University of California Press, Berkeley, Calif.,
+    1967. [https://projecteuclid.org/euclid.bsmsp/1200512992](https://projecteuclid.org/euclid.bsmsp/1200512992)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Scikit-learn: Machine Learning in Python](http://jmlr.csail.mit.edu/papers/v12/pedregosa11a.html),
+    Pedregosa *et al.*, JMLR 12, pp. 2825–2830, 2011.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Bio: [Indraneel Dutta Baruah](https://indraneeldb1993ds.medium.com/)** is
+    striving for excellence in solving business problems using AI!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/k-means-dbscan-gmm-agglomerative-clustering-mastering-the-popular-models-in-a-segmentation-c891a3818e29).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Centroid Initialization Methods for k-means Clustering](/2020/06/centroid-initialization-k-means-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Key Data Science Algorithms Explained: From k-means to k-medoids clustering](/2020/12/algorithms-explained-k-means-k-medoids-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Customer Segmentation Using K Means Clustering](/2019/11/customer-segmentation-using-k-means-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Clustering Unleashed: Understanding K-Means Clustering](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Clustering in Python with PyCaret](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Choosing the Right Clustering Algorithm for Your Dataset](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DBSCAN Clustering Algorithm in Machine Learning](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is K-Means Clustering and How Does its Algorithm Work?](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

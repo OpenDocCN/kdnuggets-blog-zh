@@ -1,0 +1,367 @@
+- en: 'Many Heads Are Better Than One: The Case For Ensemble Learning'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/09/ensemble-learning.html](https://www.kdnuggets.com/2019/09/ensemble-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Jay Budzik](https://www.linkedin.com/in/jaybudzik/), ZestFinance**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: “The interests of truth require a diversity of opinions.” —J. S. Mill
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Banks and lenders are increasingly turning to AI and machine learning to automate
+    their core functions and make more accurate predictions in credit underwriting
+    and fraud detection. ML practitioners can take advantage of a growing number of
+    modeling algorithms, such as simple decision trees, random forests, gradient boosting
+    machines, deep neural networks, and support vector machines. Each method has its
+    strengths and weaknesses, which is why it often makes sense to combine ML algorithms
+    to provide even greater predictive performance than any single ML method could
+    provide on its own. (This is our standard practice at ZestFinance in every project.)
+    This method of combining algorithms is known as ensembling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ensembles improve generalization performance in many scenarios, including classification,
+    regression, and class probability estimation. Ensemble methods have set numerous
+    world records on challenging datasets. An ensemble model won [the Netflix Prize](https://www.netflixprize.com/assets/GrandPrize2009_BPC_BellKor.pdf)
+    and [international data science competitions](https://mlwave.com/kaggle-ensembling-guide/)
+    in almost every domain, including predicting [credit risk](https://nycdatascience.com/blog/student-works/kaggle-predict-consumer-credit-default/)
+    and [classifying videos](https://www.kaggle.com/c/youtube8m-2018/discussion/62781).
+    While ensembles are generally understood to perform better than single-model predictive
+    functions, they are notoriously hard to set up, operate, and explain. These challenges
+    are falling away with the invention of better modeling, explainability and monitoring
+    tools, which we will touch on at the end of this post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How ensemble models achieve better performance
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Just as diversity in nature contributes to more robust biological systems, ensembles
+    of ML models produce stronger results by combining the strengths (and compensating
+    for the weaknesses) of multiple submodels. Neural networks require explicit handling
+    of missing values prior to modeling, but gradient boosted trees handle them automatically.
+    Modelers can introduce bias and errors in the act of making choices about how
+    to handle missing data for neural networks. Error and bias can also enter in from
+    the choices the modeling method makes in the case of gradient boosted trees. Combining
+    different methods (for instance, by averaging or blending the scores) can improve
+    predictions. More specifically, ensembles reduce bias and variance by incorporating
+    different estimators with different patterns of error, diminishing the impact
+    of a single source of error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are countless ways to apply ensemble techniques. Submodels can work on
+    different raw input data, and you can even use submodels to generate features
+    for another model to consume. For example, you could train a model on each segment
+    of the data, such as different income levels, and combine the results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Types of ensembles and how they work
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'There are four major flavors of ensemble learning:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In **bagging**, we use [bootstrap sampling](https://en.wikipedia.org/wiki/Bootstrapping_(statistics))
+    to obtain subsets of data for training a set of base models. Bootstrap sampling
+    is the process of using increasingly large random samples until you achieve diminishing
+    returns in predictive accuracy. Each sample is used to train a separate decision
+    tree, and the results of each model are aggregated. For classification tasks,
+    each model votes on an outcome. In regression tasks, the model result is averaged.
+    Base models with low bias but high variance are well-suited for bagging. [Random
+    forests](https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf), which are
+    bagged combinations of decision trees, are the canonical example of this approach.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/e9e7fadf6c3c4ac89ad29189f35eb079.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In **boosting**, we improve performance by concentrating modeling efforts on
+    the data that results in more errors (i.e., focus on the hard stuff). We train
+    a sequence of models where more weight is given to examples that were misclassified
+    by earlier iterations. As with bagging, classification tasks are solved through
+    a weighted majority vote, and regression tasks are solved with a weighted sum
+    to produce the final prediction. Base models with a low variance but high bias
+    are well-adapted for boosting. [Gradient boosting](https://www.kdd.org/kdd2016/papers/files/rfp0697-chenAemb.pdf)
+    is a famous example of this approach.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/095036a5951d8ca57b5d4fb86307e42e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In **stacking**, we create an ensemble function that combines the outputs from
+    multiple base models into a single score. The base-level models are trained based
+    on a complete dataset, and then their outputs are used as input features to train
+    an ensemble function. Usually, the ensemble function is a simple linear combination
+    of the base model scores.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/db8f766123f78a6b59bb8d51927afefd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: At ZestFinance, we prefer an even more powerful approach called **deep stacking**,
+    which uses stacked ensembles with nonlinear ensemble functions that take both
+    model scores as inputs and the input data itself. These are useful in uncovering
+    the deeper relationships between submodels and produce greater accuracy than simple
+    linear stacked ensembles by learning when to apply each submodel based on its
+    strengths. Deep stacking allows the model to select the right submodel weights
+    based on specific input variables (like a product segment, income band, or marketing
+    channel) to boost performance even further.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/346c03a047c218c3521c41cbdb0c29a1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Results on a real-world credit risk model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To demonstrate the superior performance of ensemble learning, we built a series
+    of binary classification models to predict defaults from a database of auto loans
+    made over three recent years. The loan data included more than 100,000 borrowers
+    and more than 1,100 features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The competition was between six base machine learning models: four XGBoost
+    models and two neural network models built using features from different sets
+    of credit bureau data, and a combined ensemble model stacking these six base models
+    using a neural network.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To evaluate the accuracy of the models, we measured their [AUC](https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve)
+    and [KS](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test) scores
+    on the validation data. AUC (area under the receiver operating curve) is used
+    to measure a model’s false positive and false negative rates, while KS (short
+    for Kolmogorov–Smirnov test) is used to compare data distributions. Higher numbers
+    correlate to better business results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below are the results of how each model performs in predictive accuracy and
+    dollars saved through lower losses compared to [a logistic regression baseline
+    model](https://www.celent.com/system/media_documents/documents/794/651/760/original/557191332.pdf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **Model Type** | **AUC** | **KS** | **Est. Dollars Saved** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **Ensemble** | 0.803 | 0.446 | $21M |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **XGB 1** | 0.791 (2%) | 0.420 (6%) | $18M (14%) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **XGB 2** | 0.791 (2%) | 0.428 (4%) | $18M (12%) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **XGB 3** | 0.781 (3%) | 0.411 (9%) | $17M (16%) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **XGB 4** | 0.782 (3%) | 0.413 (8%) | $17M (16%) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **ANN 1** | 0.750 (7%) | 0.376 (19%) | $16M (19%) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **ANN 2** | 0.786 (2%) | 0.430 (4%) | $18M (13%) |'
+  prefs: []
+  type: TYPE_TB
+- en: Our ensemble model produces the highest AUC (0.803), which means that 80% of
+    the time our ensemble ranks a random good applicant more highly than a random
+    bad one. The ensemble’s AUC was 2% better than the best XGBoost and neural network
+    models, which might not sound like much, but AUC is in log scale, so even small
+    increases are more impactful than they appear (similar to the Richter scale for
+    earthquakes). This $500 million-dollar loan business would save $3 million more
+    per year by using the ensemble compared to a single XGBoost or neural network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The advantages of ensembling extend beyond predictive accuracy. They also benefit
+    the business by improving stability over time. To verify that, using the validation
+    set, we computed the daily AUC score over six months for the ensemble and the
+    submodels on their own. The ensemble model has a 3% lower AUC variance across
+    that time period than the best-performing neural network model and a 21% lower
+    AUC variance than the best-performing XGBoost model. Better stability leads to
+    more predictable results for the business over time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Challenges with ensembles
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We’ve seen above that ensembles produce better economics and better stability
+    in a real-world credit risk modeling problem. However, using complex ensembles
+    in production can be tricky.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Engineering complexity***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The  we mentioned above? [It was too complex for even Netflix to put into production.](https://www.wired.com/2012/04/netflix-prize-costs/)
+    Technical dependencies, runtime performance, and model verification are all practical
+    challenges associated with using these kinds of models in production. We designed
+    ZAML software tools from the ground up to manage these engineering complexities
+    and we are proud to have many customers with world-class ensembles operating in
+    production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Producing accurate explanations for the results of ensemble models is particularly
+    challenging. Many explainability methods are model-dependent and do not [make
+    problematic assumptions.](https://www.zestfinance.com/blog/part-deux-why-not-just-use-shap)
+    Deeply stacked ensembles exacerbate the situation, as each model may be continuous
+    or discrete, and the combination of these two distinct types of functions is challenging
+    for even the most advanced analysis techniques.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In prior posts, we showed how commonly used techniques like [LOCO, PI, and LIME
+    generate inaccurate explanations](https://www.zestfinance.com/snake-oil-explainability)
+    even for simple toy models. They are inaccurate and slow to run on simple models
+    and, as expected, the situation gets worse with more complex models. [Integrated
+    Gradients (IG)](https://arxiv.org/abs/1703.01365), an explainer technique based
+    on the [Aumann-Shapley value](https://en.wikipedia.org/wiki/Shapley_value#Aumann%E2%80%93Shapley_value),
+    works on neural networks and other continuous functions. But, you can’t combine
+    a neural network with a tree-based model like [XGBoost](https://xgboost.readthedocs.io/en/latest/).
+    If you do, IG is rendered useless.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[SHAP](https://github.com/slundberg/shap) TreeExplainer works only on decision
+    trees, not neural networks. And while some ML engineers have started to use [SHAP](https://github.com/slundberg/shap)
+    KernelExplainer, which claims to work on any model, it makes some problematic
+    assumptions about variable independence and whether averages can be substituted
+    for missing values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What’s more, you’re often not just trying to understand what drives a model’s
+    score.  Instead, you’re trying to understand a model-based decision. Understanding
+    a model-based decision means taking into account how a model’s score is applied. 
+    Before a decision is made based on a model, the model’s score usually goes through
+    some transformations, like putting it on a 0-1 scale and making scores greater
+    than 90% correspond to the lowest decile of the model score. These kinds of transformations
+    must be carefully considered when generating an explanation. Unfortunately, this
+    is where many open source tools, and even the smartest data scientists, can run
+    into challenges.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ZAML customers benefit from an explainability method that does not suffer from
+    such limitations. It can provide accurate explanations for virtually any possible
+    ensemble of machine learning functions. ZAML makes this better kind of model safe
+    to use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Compliance***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unlike movie recommendation systems, credit risk models must undergo intensive
+    analysis and scrutiny to comply with consumer lending laws and regulations. An
+    ensemble credit underwriting model using thousands of variables adds additional
+    complexity to the task of verifying that the model will perform as expected under
+    a broad variety of conditions. Having the right explainability math is only part
+    of the solution. It is also important to document the model build and analysis
+    so that it is possible for another practitioner to reproduce the work, produce
+    intelligible reasons why an applicant was denied (adverse action), perform fair
+    lending analysis, search for less biased models, and provide adequate monitoring
+    so you know when your model needs to be refreshed. All of these tasks become more
+    complex when you have ensembles of multiple submodels, each using a different
+    feature space and model target. Fortunately, ZAML tools automate large swaths
+    of this process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We have seen above how ensembling produces more accurate and stable predictions,
+    which translates into more profitable business results. Those benefits come with
+    additional complexity, but lenders seeking the very best predictive accuracy and
+    stability now have tools like ZAML to help manage the task. ZAML-powered ensemble
+    models have been helping U.S. lenders beat their competition for years. Diversity
+    is a powerful tool in evolution and political debate — and makes for far better
+    underwriting results, too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: ****[Jay Budzik](https://www.linkedin.com/in/jaybudzik/) **is the CTO
+    of ZestFinance with track record of driving revenue growth by applying AI and
+    ML to create new products and services that gain market share. As a computer scientist
+    earning a Ph.D. from Northwestern with a background in AI, ML, big data, and NLP,
+    Jay has been an inventor and entrepreneur with experience in finance and web-scale
+    media and advertising: by developing and deploying successful products and building
+    and cultivating the great teams behind them.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning: 5 Main Approaches](https://www.kdnuggets.com/2019/01/ensemble-learning-5-main-approaches.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Intuitive Ensemble Learning Guide with Gradient Boosting](https://www.kdnuggets.com/2018/07/intuitive-ensemble-learning-guide-gradient-boosting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is the difference between Bagging and Boosting?](https://www.kdnuggets.com/2017/11/difference-bagging-boosting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Why You Need To Learn More Than One Programming Language!](https://www.kdnuggets.com/2022/06/need-learn-one-programming-language.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[IMPACT: The Data Observability Summit is back November 8th and the…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning with Examples](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[When Would Ensemble Techniques be a Good Choice?](https://www.kdnuggets.com/2022/07/would-ensemble-techniques-good-choice.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automated Machine Learning with Python: A Case Study](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

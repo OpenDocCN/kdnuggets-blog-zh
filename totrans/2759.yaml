@@ -1,0 +1,324 @@
+- en: Faster machine learning on larger graphs with NumPy and Pandas
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/05/faster-machine-learning-larger-graphs-numpy-pandas.html](https://www.kdnuggets.com/2020/05/faster-machine-learning-larger-graphs-numpy-pandas.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Huon Wilson](https://www.linkedin.com/in/huon-wilson/), CSIRO Data61**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8343010b59fe5f31170c9880fdf0aceb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Hassan Amra](https://unsplash.com/@hassan02?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/cheetah?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: This week, [StellarGraph released a new version](https://medium.com/stellargraph/stellargraph-1-0-taking-graph-machine-learning-to-a-new-level-2bd6a04fbc77) of
+    its open source library for machine learning on graphs. One of the most exciting
+    features of [StellarGraph 1.0](https://github.com/stellargraph/stellargraph/releases/) is
+    a new graph data structure — built using NumPy and Pandas — that results in significantly
+    lower memory usage and faster construction times.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Consider that [a graph created from Reddit](http://snap.stanford.edu/graphsage/),
+    with more than 200 thousand nodes and 11 million edges, required almost 7GB of
+    memory with previous iterations of the library’s graph data structure. It also
+    took 2.5 minutes to construct.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the new StellarGraph class’s minimal form, that same Reddit graph now uses
+    approximately 174MB. And this isn’t even a classic ‘memory versus time’ balance:
+    the new form takes only 0.9 seconds to construct.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: That is, the new StellarGraph class is **40 times smaller** to store and **hundreds
+    of times faster** to construct than the old StellarGraph.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we’ll explore how a careful focus on *what works best *for
+    graph machine learning — in this case replacing StellarGraph’s graph data structure
+    from one built on NetworkX to one built using NumPy and Pandas — led to big performance
+    enhancements in the StellarGraph class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A class above
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The StellarGraph library is an open source, user-friendly library for graph
+    machine learning. A [graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)) is
+    a collection of nodes and the edges between them, where the edges represent some
+    connection or relationship between the nodes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The core abstraction in the library is [the StellarGraph class](https://stellargraph.readthedocs.io/en/stable/api.html#stellargraph.StellarGraph),
+    which is a graph data structure that manages all the information about the graph
+    or graphs being used for machine learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Previous versions of the StellarGraph class were backed by [NetworkX](https://networkx.github.io/),
+    which allowed for quick and effective development of many graph machine learning
+    algorithms because of its convenient and flexible API, built using nested dictionaries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'However, this flexibility meant it wasn’t optimised for graph machine learning:
+    NetworkX has different trade-offs than those best for machine learning, the most
+    notable being the amount of memory required to store a graph.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, over the releases leading up to 1.0, the NetworkX-backed graph data structure
+    was replaced with a new one built using NumPy and Pandas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How does it work?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'There are three key parts to the new StellarGraph class:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Efficient storage of edges
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Keeping node features available for quick indexing
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Support for arbitrary node IDs.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Efficient storage of edges
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The new StellarGraph class stores most of its data using NumPy arrays.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/4ecbc88a336032dfbdc848e744997c23.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*A NumPy array can consist of a single chunk of memory with values stored inline.
+    A Python list stores pointers to other Python objects, and each of these has extra
+    metadata overhead, dramatically increasing the cost over NumPy.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: These arrays [lay data out contiguously in memory](https://docs.scipy.org/doc/numpy-1.13.0/reference/arrays.ndarray.html#internal-memory-layout-of-an-ndarray),
+    so that an array of four byte integers (like the *numpy.int32* type) requires
+    only four bytes per element. This is different to a Python list of the same integers,
+    which requires ten times more memory, at 43 bytes per element.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The edges of the graph are conceptually pairs of a source node ID and a target
+    node ID, representing the connection between the two nodes. In the new StellarGraph
+    class, the edges are stored as NumPy arrays containing the source and targets
+    in a [“structure of arrays”](https://en.wikipedia.org/wiki/AoS_and_SoA) style.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This explains a significant fraction of the reduction in memory use for the
+    Reddit graph. The edge information can be placed contiguously in memory with no
+    overhead from Python objects. By using NumPy natively, we also get to easily leverage
+    the efficient [sparse matrix](https://docs.scipy.org/doc/scipy/reference/sparse.html) and [graph
+    algorithms](https://docs.scipy.org/doc/scipy/reference/sparse.csgraph.html) provided
+    by [the SciPy library](https://www.scipy.org/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keeping node features available for quick indexing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: NumPy arrays are also used for node features. StellarGraph is optimised for
+    machine learning, which typically means working with vectors of “features”, or
+    lists of numbers that encode information about each entity. Any StellarGraph graph
+    can have nodes of multiple types, with a different number of features associated
+    with every node of each type.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/78dc086f6273cd69cdf766ea0170ad41.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*The graph on the left has two node types; “white background” and “black background”,
+    along with some feature vectors of numbers for each. These get transformed into
+    2D NumPy arrays on the right, matching the order of the nodes.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The new StellarGraph class stores the node features by having a large rectangular
+    2D NumPy array for each node type: for a particular node type, the first row of
+    the array represents the features for the first node of that type, similarly for
+    the second row, and so on.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This encoding is very memory efficient, since numeric features can be all laid
+    out with no overhead from Python objects, just like edges. It is also fast, because
+    queries about the features of nodes at given locations in the array can be answered
+    by slicing out rows from the array, which is implemented as native C code in the
+    NumPy library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Support for arbitrary node IDs
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Querying this data structure requires some tricks. It is great for storage,
+    but actually getting the features of a node requires knowing its location; whether
+    it’s the first or tenth or hundredth node of its type.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One approach is to just require that all node IDs are sequential integers, starting
+    from 0, so all graphs with three nodes have IDs 0, 1, 2\. However, this makes
+    the library hard to use with real world datasets where the IDs might be [UUIDs](https://en.wikipedia.org/wiki/Universally_unique_identifier),
+    random values, or some other non-trivial encoding. It quickly gets more complicated
+    in heterogeneous graphs, with more than one type of node.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b30aa01484b452b355d5ea92abcf912a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Nodes can be keyed with any ID values, by using a pandas.Index as a translation
+    layer into numeric IDs, or ilocs. These ilocs can then be used in the NumPy arrays
+    above.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thus, the final key piece of the new StellarGraph class is using the [pandas.Index](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Index.html) types
+    to provide a translation between convenient and conventional node IDs and the
+    sequential integers so that any node ID values can work, and the users of the
+    class don’t have to think about doing their own translation or management.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Pandas Index types are being used as a time- and memory-efficient dictionary,
+    mapping IDs to sequential integers (which both StellarGraph and Pandas call “ilocs”,
+    meaning integer locations). It leverages Pandas’ optimised C and [Cython](https://cython.org/) native
+    code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These ilocs are used as part of the edge storage discussed above. The ilocs
+    are small integers, and so the contiguous layout of a NumPy array ensures our
+    edges are always stored efficiently. Many of StellarGraph’s algorithms work directly
+    with these ilocs, and so see no overhead due to the “fancy” IDs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*There are some additional details here. For example, the nodes are actually
+    numbered globally in the index, not per type, so the graph above would have A
+    → 2, B → 3, …, but most of these are shielded from the user.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In summary —
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: StellarGraph is easy to install and easy to use because it builds on the shoulders
+    of giants.By using NumPy and Pandas we get most of the benefits of optimised native
+    code without having to write the low-level code ourselves — which would require
+    careful optimisation and risk serious memory-corruption bugs — or be concerned
+    with having to carefully distribute it for every platform.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The new StellarGraph class delivered in 1.0 uses NumPy and Pandas to reduce
+    memory use and improve speed through careful selection of the moving parts, and
+    by focusing on *just what is required* for graph machine learning. Building on
+    existing libraries gives us the benefits of native code without the problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To get started with graph machine learning with the new StellarGraph class in [the
+    StellarGraph library](https://github.com/stellargraph/stellargraph), *pip install
+    stellargraph*, and then create a new optimised graph object with your data with *StellarGraph(nodes,
+    edges)*. There are [demos with all the details](https://stellargraph.readthedocs.io/en/v1.0.0/demos/basics/loading-pandas.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*This work involved major contributions, research and code from *[*Andrew Docherty*](https://github.com/adocherty)*, *[*Geoff
+    Jarrad*](https://github.com/geoffj-d61), [*Huon Wilson*](https://github.com/huonw)* and *[*Kieran
+    Ricardo*](https://github.com/kieranricardo)*. We’re working on even more improvements
+    top of this optimised base, that should improve memory use and speed even further,
+    such as *[*#718*](https://github.com/stellargraph/stellargraph/issues/718)*.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*This work is supported by CSIRO’s Data61, Australia’s leading digital research
+    network.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Huon Wilson](https://www.linkedin.com/in/huon-wilson/)** is a software
+    engineer with a strong background in mathematics and statistics, with significant
+    experience in low-level systems programming fields like compilers, and languages
+    like C++, C as well as more exotic ones like Rust. At a higher level, he has experience
+    with numerical programming in R and Python, and with most language paradigms and
+    many other areas of software engineering.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/stellargraph/faster-machine-learning-on-larger-graphs-how-numpy-and-pandas-slashed-memory-and-time-in-79b6c63870ef).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Graph Neural Network model calibration for trusted predictions](/2020/03/graph-neural-network-model-calibration-trusted-predictions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Scalable graph machine learning: a mountain we can climb?](/2019/12/scalable-graph-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Graph Machine Learning Meets UX: An uncharted love affair](/2020/01/graph-machine-learning-ux.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[SQL for Data Visualization: How to Prepare Data for Charts and Graphs](https://www.kdnuggets.com/sql-for-data-visualization-how-to-prepare-data-for-charts-and-graphs)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beyond Pipelines: Graphs as Scikit-Learn Metaestimators](https://www.kdnuggets.com/2022/09/graphs-scikitlearn-metaestimators.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Graphs: The natural way to understand data](https://www.kdnuggets.com/2022/10/manning-graphs-natural-way-understand-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn Machine Learning 4X Faster by Participating in Competitions](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Ways ChatGPT Makes You Code Better and Faster](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Optimize SQL Queries for Faster Data Retrieval](https://www.kdnuggets.com/2023/06/optimize-sql-queries-faster-data-retrieval.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

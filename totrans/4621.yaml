@@ -1,0 +1,621 @@
+- en: Training a Neural Network to Write Like Lovecraft
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/07/training-neural-network-write-like-lovecraft.html](https://www.kdnuggets.com/2019/07/training-neural-network-write-like-lovecraft.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Header image](../Images/8a5bd5048297de93e1bdb25f52dbc3d9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: LSTM Neural Networks have seen a lot of use in the recent years, both for text
+    and music generation, and for Time Series Forecasting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Today, I’ll teach you how to train a LSTM Neural Network for text generation,
+    so that it can write with H. P. Lovecraft’s style.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to train this LSTM, we’ll be using TensorFlow’s Keras API for Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I learned about this subject from this awesome [LSTM Neural Networks tutorial](http://colah.github.io/posts/2015-08-Understanding-LSTMs/).
+    My code follows this [Text Generation tutorial](https://chunml.github.io/ChunML.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/)‘s
+    closely.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’ll show you my Python examples and results as usual, but first, let’s do some
+    explaining.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What are LSTM Neural Networks?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The most vanilla, run-of-the-mill Neural Network, called a Multi-Layer-Perceptron,
+    is just a composition of fully connected layers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In these models, the input is a vector of features, and each subsequent layer
+    is a set of “neurons”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each neuron performs an affine (linear) transformation to the previous layer’s
+    output, and then applies some non-linear function to that result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The output of a layer’s neurons, a new vector, is fed to the next layer, and
+    so on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5f5762b2af5557ca5580f784a15daba8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Source](https://www.researchgate.net/figure/A-hypothetical-example-of-Multilayer-Perceptron-Network_fig4_303875065)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A LSTM (Long Short-term Memory) Neural Network is just another kind of [Artificial
+    Neural Network](http://www.datastuff.tech/machine-learning/autoencoder-deep-learning-tensorflow-eager-api-keras/),
+    which falls in the category of Recurrent Neural Networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What makes LSTM Neural Networks different from regular Neural Networks is, they
+    have LSTM cells as neurons in some of their layers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Much like [Convolutional Layers](http://www.datastuff.tech/machine-learning/convolutional-neural-networks-an-introduction-tensorflow-eager/) help
+    a Neural Network learn about image features, LSTM cells help the Network learn
+    about temporal data, something which other Machine Learning models traditionally
+    struggled with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How do LSTM cells work? I’ll explain it now, though I highly recommend you give
+    those tutorials a chance too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How do LSTM cells work?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: An LSTM layer will contain many LSTM cells.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each LSTM cell in our Neural Network will only look at a single column of its
+    inputs, and also at the previous column’s LSTM cell’s output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Normally, we feed our LSTM Neural Network a whole matrix as its input, where
+    each column corresponds to something that “comes before” the next column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This way, each LSTM cell will have **two different input vectors**: the previous
+    LSTM cell’s output (which gives it some information about the previous input column)
+    and its own input column.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'LSTM Cells in action: an intuitive example.'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For instance, if we were training an LSTM Neural Network to predict stock exchange
+    values, we could feed it a vector with a stock’s closing price in the last three
+    days.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first LSTM cell, in that case, would use the first day as input, and send
+    some extracted features to the next cell.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That second cell would look at the second day’s price, and also at whatever
+    the previous cell learned from yesterday, before generating new inputs for the
+    next cell.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After doing this for each cell, the last one will actually have a lot of temporal
+    information. It will receive, from the previous one, what it learned from yesterday’s
+    closing price, and from the previous two (through the other cells’ extracted information).
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can experiment with different time windows, and also change how many units
+    (neurons) will look at each day’s data, but this is the general idea.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'How LSTM Cells work: the Math.'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The actual math behind what each cell extracts from the previous one is a bit
+    more involved.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Forget Gate**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The “forget gate” is a sigmoid layer, that regulates how much the previous cell’s
+    outputs will influence this one’s.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It takes as input both the previous cell’s “hidden state” (another output vector),
+    and the actual inputs from the previous layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Since it is a sigmoid, it will return a vector of “probabilities”: values between
+    0 and 1.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: They will **multiply the previous cell’s outputs** to regulate how much influence
+    they hold, creating this cell’s state.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For instance, in a drastic case, the sigmoid may return a vector of zeroes,
+    and the whole state would be multiplied by 0 and thus discarded.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This may happen if this layer sees a very big change in the inputs distribution,
+    for example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Input Gate**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unlike the forget gate, the input gate’s output is added to the previous cell’s
+    outputs (after they’ve been multiplied by the forget gate’s output).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The input gate is the dot product of two different layers’ outputs, though
+    they both take the same input as the forget gate (previous cell’s hidden state,
+    and previous layer’s outputs):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A **sigmoid unit**, regulating how much the new information will impact this
+    cell’s output.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A **tanh unit**, which actually extracts the new information. Notice tanh takes
+    values between -1 and 1.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The **product of these two units** (which could, again, be 0, or be exactly
+    equal to the tanh output, or anything in between) is added to this neuron’s cell
+    state.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The LSTM cell’s outputs**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The cell’s state is what the next LSTM cell will receive as input, along with
+    this cell’s hidden state.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The hidden state will be **another tanh unit** applied to this neuron’s state,
+    multiplied by another **sigmoid unit** that takes the previous layer’s and cell’s
+    outputs (just like the forget gate).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here’s a visualization of what each LSTM cell looks like, borrowed from the
+    tutorial I just linked:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/eda83ef89ac424ffec6707be8f329176.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source: [Text Generating LSTMs](https://chunml.github.io/ChunML.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we’ve covered the theory, let’s move on to some practical uses!
+  prefs: []
+  type: TYPE_NORMAL
+- en: As usual, all of the code is [available on GitHub](https://github.com/StrikingLoo/LoveCraftLSTM) if
+    you want to try it out, or you can just follow along and see the gists.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training LSTM Neural Networks with TensorFlow Keras
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For this task, I used this [dataset containing 60 Lovecraft tales](https://github.com/vilmibm/lovecraftcorpus).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since he wrote most of his work in the 20s, and he died in 1937, it’s now mostly
+    in the public domain, so it wasn’t that hard to get.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I thought training a Neural Network to write like him would be an interesting
+    challenge.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is because, on the one hand, he had a very distinct style (with abundant
+    purple prose: using weird words and elaborate language), but on the other he used
+    a very complex vocabulary, and a Network may have trouble understanding it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For instance, here’s a random sentence from the first tale in the dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: At night the subtle stirring of the black city outside, the sinister scurrying
+    of rats in the wormy partitions, and the creaking of hidden timbers in the centuried
+    house, were enough to give him a sense of strident pandemonium
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: If I can get a Neural Network to write “pandemonium”, then I’ll be impressed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Preprocessing our data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In order to train an LSTM Neural Network to generate text, we must first preprocess
+    our text data so that it can be consumed by the network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case, since a Neural Network takes vectors as input, we need a way to
+    convert the text into vectors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For these examples, I decided to train my LSTM Neural Networks to predict the
+    next M characters in a string, taking as input the previous N ones.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To be able to feed it the N characters, I did a one-hot encoding of each one
+    of them, so that the network’s input is a matrix of CxN elements, where C is the
+    total number of different characters on my dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we read the text files and concatenate all of their contents.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We limit our characters to be alphanumerical, plus a few punctuation marks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can then proceed to one-hot encode the strings into matrices, where every
+    element of the *j*-th column is a 0 except for the one corresponding to the *j*-th
+    character in the corpus.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to do this, we first define a dictionary that assigns an index to each
+    character.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice how, if we wished to sample our data, we could just make the variable *slices*smaller.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I also chose a value for *SEQ_LENGTH* of 50, making the network receive 50 characters
+    and try to predict the next 50.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training our LSTM Neural Network
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In order to train the Neural Network, we must first define it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Python code creates an LSTM Neural Network with two LSTM layers, each with
+    100 units.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Remember each unit has one cell for each character in the input sequence, thus
+    50.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here *VOCAB_SIZE* is just the amount of characters we’ll use, and *TimeDistributed*is
+    a way of applying a given layer to each different cell, maintaining temporal ordering.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this model, I actually tried many different learning rates to test convergence
+    speed vs overfitting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here’s the code for training:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What you are seeing is what had the best performance in terms of loss minimization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, with a binary_cross_entropy of 0.0244 in the final epoch (after 500
+    epochs), here’s what the model’s output looked like.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: There are many **good things** about this output, and **many bad ones** as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The way the spacing is set up, with words mostly between 2 and 5 characters
+    long with some longer outliers, is pretty similar to the actual word length distribution
+    in the corpus.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I also noticed the **letters** ‘T’, ‘E’ and ‘I’ were **appearing very commonly**,
+    whereas ‘y’ or ‘x’ were **less frequent**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When I looked at **letter relative frequencies** in the sampled output versus
+    the corpus, they were pretty similar. It’s the **ordering** that’s **completely
+    off**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is also something to be said about how **capital letters only appear after
+    spaces**, as is usually the case in English.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To generate these outputs, I simply asked the model to predict the next 50 characters
+    for different 50 character subsets in the corpus. If it’s this bad with training
+    data, I figured testing or random data wouldn’t be worth checking.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The nonsense actually reminded me of one of H. P. Lovecraft’s most famous tales,
+    “Call of Cthulhu”, where people start having hallucinations about this cosmic,
+    eldritch being, and they say things like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ph’nglui mglw’nafh *Cthulhu R’lyeh* wgah’nagl fhtagn.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Sadly the model wasn’t overfitting that either, it was clearly **underfitting**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So I tried to make its task smaller, and the model bigger: 125 units, predicting
+    only 30 characters.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bigger model, smaller problem. Any results?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With this smaller model, after another 500 epochs, some patterns began to emerge.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Even though the loss function wasn’t that much smaller (at 210), the character’s
+    frequency remained similar to the corpus’.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The ordering of characters improved a lot though: here’s a random sample from
+    its output, see if you can spot some words.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Tech, the, and, was… **small words** are where it’s at! It also realized many
+    words ended with **common suffixes** like -ing, -ed, and -tion.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Out of 10000 words, 740 were “*the*“, 37 ended in “*tion*” (whereas only 3 contained
+    without ending in it), and 115 ended in –*ing*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Other common words were “than” and “that”, though the model was clearly still
+    unable to produce English sentences.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Even bigger model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This gave me hopes. The Neural Network was clearly learning *something*, just
+    not enough.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So I did what you do when your model underfits: I tried an even bigger Neural
+    Network.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Take into account, I’m running this on my laptop.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With a modest 16GB of RAM and an i7 processor, these models take hours to learn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So I set the amount of units to 150, and tried my hand again at 50 characters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I figured maybe giving it a smaller time window was making things harder for
+    the Network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here’s what the model’s output was like, after a few hours of training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Pure nonsense, except a lot of “the” and “and”s.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It was actually saying “the” more often than the previous one, but it hadn’t
+    learned about gerunds yet (no -ing).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Interestingly, many words here ended with “-ed” which means it was kinda grasping
+    the idea of the **past tense**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I let it go at it a few hundred more epochs (to a total of 750).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The output didn’t change too much, still a lot of “the”, “a” and “an”, and
+    still no bigger structure. Here’s another sample:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: An interesting thing that emerged here though, was the use of prepositions and
+    pronouns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The network wrote “I”, “you”, “she”, “we”, “of” and other similar words a few
+    times. All in all, **prepositions and pronouns** amounted to about **10% of the
+    total sampled words**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This was an improvement, as the Network was clearly learning low-entropy words.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, it was still far from generating coherent English texts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I let it train 100 more epochs, and then killed it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here’s its last output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: I knew it was doing its best, but it wasn’t really going anywhere, at least
+    not quickly enough.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I thought of accelerating convergence speed with **Batch Normalization**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, I read on StackOverflow that BatchNorm is not supposed to be used with
+    LSTM Neural Networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If any of you is more experienced with LSTM nets, please let me know if that’s
+    right in the comments!
+  prefs: []
+  type: TYPE_NORMAL
+- en: At last, I tried this same task with 10 characters as input and 10 as output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I guess the model wasn’t getting enough context to predict things well enough
+    though: the results were awful.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I considered the experiment finished for now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: While it is clear, looking at other people’s work, that an LSTM Neural Network *could*learn
+    to write like Lovecraft, I don’t think my PC is powerful enough to train a big
+    enough model in a reasonable time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Or maybe it just needs more data than I had.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the future, I’d like to repeat this experiment with a word-based approach
+    instead of a character-based one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I checked, and about 10% of the words in the corpus appear only once.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is there any good practice I should follow if I removed them before training?
+    Like replacing all nouns with the same one, sampling from [clusters](http://www.datastuff.tech/machine-learning/k-means-clustering-unsupervised-learning-for-recommender-systems/),
+    or something? Please let me know! I’m sure many of you are more experienced with
+    LSTM neural networks than I.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Do you think this would have worked better with a different architecture? Something
+    I should have handled differently? Please also let me know, I want to learn more
+    about this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Did you find any rookie mistakes on my code? Do you think I’m an idiot for not
+    trying XYZ? Or did you actually find my experiment enjoyable, or maybe you even
+    learned something from this article?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Contact me on [Twitter](https://www.twitter.com/strikingloo), [LinkedIn](http://linkedin.com/in/luciano-strika), [Medium](https://medium.com/@strikingloo) or [Dev.to](http://www.dev.to/strikingloo) if
+    you want to discuss that, or any related topic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*If you want to become a Data scientist, or learn something new, check out
+    my [Machine Learning Reading List](http://www.datastuff.tech/data-science/3-machine-learning-books-that-helped-me-level-up-as-a-data-scientist/)!*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Luciano Strika](http://www.datastuff.tech/author/strikingloo/)** is
+    a computer science student at Buenos Aires University, and a data scientist at
+    MercadoLibre. He also writes about machine learning and data on [www.datastuff.tech](http://www.datastuff.tech/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://www.datastuff.tech/machine-learning/lstm-how-to-train-neural-networks-to-write-like-lovecraft).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Autoencoders: Deep Learning with TensorFlow’s Eager Execution](/2019/05/autoencoders-deep-learning-with-tensorflows-eager-execution.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Machine Learning Books that Helped me Level Up as a Data Scientist](/2019/05/3-machine-learning-books-helped-level-up-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understanding Backpropagation as Applied to LSTM](/2019/05/understanding-backpropagation-applied-lstm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

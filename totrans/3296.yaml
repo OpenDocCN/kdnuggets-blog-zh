@@ -1,0 +1,390 @@
+- en: 'Machine Learning Workflows in Python from Scratch Part 2: k-means Clustering'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/06/machine-learning-workflows-python-scratch-part-2.html](https://www.kdnuggets.com/2017/06/machine-learning-workflows-python-scratch-part-2.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In the first part of this series, we started off rather slowly but deliberately.
+    [The previous post](/2017/05/machine-learning-workflows-python-scratch-part-1.html)
+    laid out our goals, and started off with some basic building blocks for our machine
+    learning workflows and pipelines we will eventually get to. If you have not yet
+    read the first installment in this series, I suggest that you do so before moving
+    on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This time around we pick up steam, and will be doing so with an implementation
+    of the k-means clustering algorithm. We will discuss specific aspects of k-means
+    as they come up while coding, but if you are interested in a superficial overview
+    of what the algorithm is about, as well as how it relates to other clustering
+    methods, you could [check this out](/2016/09/comparing-clustering-techniques-concise-technical-overview.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![ML workflows header](../Images/decb4017351d3ef6e708866e8c04fed4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The k-means clustering algorithm in Python. From scratch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The only real prerequisites moving forward are the [dataset.py](https://gist.github.com/mmmayo13/9859a457760db10ec4842be3aa1a2334)
+    module we created in the first post, along with the original [iris.csv](https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv)
+    file, so make sure you have both of those handy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The k-means Clustering Algorithm
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: k-means is a simple, yet often effective, approach to clustering. k points are
+    randomly chosen as cluster centers, or centroids, and all training instances are
+    plotted and added to the closest cluster. After all instances have been added
+    to clusters, the centroids, representing the mean of the instances of each cluster
+    are re-calculated, with these re-calculated centroids becoming the new centers
+    of their respective clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At this point, all cluster membership is reset, and all instances of the training
+    set are re-plotted and -added to their closest, possibly re-centered, cluster.
+    This iterative process continues until there is no change to the centroids or
+    their membership, and the clusters are considered settled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As far as approaches to clustering go, k-means is about as simple as they come
+    -- its conceptual simplicity is elegant, almost poetic. It's also a proven workhorse,
+    lending to its staying power, often producing useful results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What were going to do, in a nutshell, is code up a simple k-means implementation
+    that will group similar things together and keep dissimilar things apart, at least
+    theoretically. Simple enough. Keep in mind that "similar" here is reduced to meaning
+    "relatively closely co-located in Euclidean space," or something very non-philosophical
+    like that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We will need a few functions here. Thinking about the steps involved in the
+    algorithm can help us solidify what those might be:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Set initial centroids
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Measure distances between data instances and centroids
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Add data instances as members of closest centroid
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Re-calculate centroids
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If necessary, re-measure, re-cluster, re-calculate
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: That's the algorithm in a nutshell. But before we get there, a (temporary) step
+    backward.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Preparation... Again
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: While writing this post, it eventually occurred to me that an important part
+    of our data preparation workflow was missing. Before we convert our pandas DataFrame
+    to a numpy ndarray (matrix), we will want to make sure our numeric values are
+    *actually* numeric values, and not strings masquerading as numeric values. Since
+    we read our data from a CSV file last time, even our numeric values were being
+    stored as strings (apparent at the bottom of the previous post by the fact that
+    the numbers are surrounded by single quotes -- e.g. '5.7').
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So, the best way to deal with this is to create another function and add it
+    to our dataset.py file, which will convert strings to their numeric value representations
+    (we already have a function for converting class names to numeric values, and
+    keeping track of these changes). The function went through 3 specific iterations
+    as I played with it, namely those which accepted: 1) a dataset and the name of
+    a single attribute, the corresponding column of which all values should be converted
+    from strings to floats; 2) a dataset and a list of attribute names...; and 3)
+    a dataset and either a single attribute as a string, or a list of attributes as
+    a **gasp** list.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The final iteration (the third, more flexible, option) is the one shown below.
+    Let's add it to the dataset.py module from last time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: OK, with that out of the way, we will be able to load a dataset, clean it, and
+    create a (fully numeric) matrix representation, which can then be fed into our
+    k-means clustering algorithm, once we have one. Speaking of which...
+  prefs: []
+  type: TYPE_NORMAL
+- en: Initializing Centroids
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The first thing our algorithm needs to do is to create a set of k initial centroids.
+    There are a variety of ways to approach this, but we will start with the most
+    basic: random initialization. We need a function that accepts a dataset and an
+    integer k, and which will return an ndarray of that number of randomly-generated
+    centroids.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You may have already imagined how random initialization could go awry. As a
+    quick example, think about 5 distinct, tightly clustered classes in 2 dimensional
+    space, with a poorly initialized set of centroids, as shown below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Poor initialization](../Images/a358cc3edb5802c92183f5a3e01fc170.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Obviously non-optimal centroid initialization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Even without the mathematics to support the intuition, it's clear that these
+    centroids are not optimally placed. However, one of k-means' strong attributes
+    is its ability to recover from such initialization, with successive rounds of
+    clustering moving toward optimal placement by minimizing the mean distance between
+    cluster instance members and cluster centroids.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While this can happen remarkably quickly, poor initialization with sufficient
+    amounts of high-dimensionality data can lead to a greater number of clustering
+    iterations. The initial data space survey for random placement can also, itself,
+    become lengthy. And so alternative methods for centroid initialization are available,
+    some of which we may look at in the future.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A quick note about testing our code: doing so as we go with heavily contrived
+    scenarios seems more trouble than it''s worth, so we will hold out until the end
+    to see how we did in total.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Measuring Distances
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With a dataset in hand and a collection of initialized centroids, we will eventually
+    have to perform a lot of measurement calculations. In fact, for each clustering
+    iteration we will have to measure from each data point to each centroid, in order
+    to know which cluster an instance belongs to (perhaps temporarily). So let's write
+    a measurement function for Euclidean space. We will use [Scipy](https://www.scipy.org/)
+    here for the heavy lifting; while coding a distance measurement is not very difficult,
+    [Scipy includes a function](https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.spatial.distance.euclidean.html)
+    optimized for such calculations on vectors, which, conveniently, is exactly what
+    we will be doing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's wrap this functionality in our own function, in case we want to later
+    change or experiment with how we calculate distance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With the ability to initialize centroids and to make our measurements, we can
+    now write a function to control the logic of our clustering algorithm, and perform
+    the few additional required steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Clustering Instances
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before we look at the code, here is a simple overview of the process our algorithm
+    will be following, taking into account the few functions from above, as well as
+    below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![k-means diagram](../Images/5d017022938992c978fc2e1c85279b66.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Our k-means clustering algorithm process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code below is well-commented, but let's walk through a few of the main points.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First, our function accepts a dataset as a numpy ndarray, as well as the number
+    of clusters we want to use in the clustering process. It returns several things:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: the resulting centroids after clustering is finished
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the cluster assignments after clustering
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the number of iterations which were required by clustering algorithm
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the original centroids
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An ndarray to store instance cluster assignments and their errors are created,
+    and then centroids are initialized, with a copy held to return later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A while loop then continues until there has been no change to cluster assignments,
+    meaning that convergence has been reached -- note that no additional mechanism
+    to limit the number of iterations exists at this point. Instances to centroid
+    distances are calculated, with the minimum distance tracked, which is used to
+    determine cluster assignment. The closest centroid is then recorded, along with
+    the actual distance between the 2 entities (the error), and a check is performed
+    to see if the cluster assignment for the particular instances has changed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After this has been performed for each instance, the centroid locations are
+    updated, simply by using the mean values of the member instances as centroid coordinates.
+    The number of iterations are also recorded. A check as to whether convergence
+    has been reached kicks control out of the while loop once appropriate, and the
+    items outlined above are returned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I want to point out that some of this code, as well as additional inspiration,
+    comes from the book "[Machine Learning in Action](https://www.amazon.com/Machine-Learning-Action-Peter-Harrington/dp/1617290181/)"
+    (MLIA), by Peter Harrington. I bought this book when it was first released, and
+    it has proven invaluable for reasons related to the criticism the book often receives,
+    most of which focuses on either not enough theory and/or issues with code. In
+    my humble opinion, however, these are both assets. If you are like me, in that
+    you came to the book with theoretical understanding, and are willing and able
+    to fight through code which may need tuning, or which is simply enough that you
+    can provide your own changes, MLIA can be a useful resource to anyone looking
+    to make their first foray into coding machine learning algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Testing Our k-means Clustering Algorithm
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are a few typical tasks which we are going to forego for this post and
+    will revisit later, but I wanted to point them out here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, when clustering, especially with attributes of varying scales, it is
+    generally a good idea to at least consider the idea of scaling or otherwise normalizing
+    the data, to ensure that a single attribute (or collection of attributes) of a
+    vastly greater scale then the others does not end up accounting for more than
+    it should. If we have 3 attributes, with the first 2 in the range [0, 1] and the
+    third in the range [0, 100], it's easy to see that the third variable will dominate
+    the measurements and subsequent cluster membership allocations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Second, when clustering (as with much of machine learning), we can split a dataset
+    into training and testing sets, allowing us to train a model on one subset of
+    data, and then test the model on the other (separate) set of data. While this
+    is not always part of the goal of a given clustering task, as we may simply want
+    to build a clustering model and not be concerned with using it to classify subsequent
+    instances, it often can be. We will proceed with our test code below without taking
+    either of these into consideration at this point, but may double back in a subsequent
+    post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before moving ahead, make sure you have added the dataset-related function outlined
+    further above to the existing [dataset.py](https://gist.github.com/mmmayo13/935684dd226ef05f7d291e8cf5ed873a)
+    module, and have created a [kmeans.py](https://gist.github.com/mmmayo13/956937ec1fc695163b8e052b55c09208)
+    module to house all of the relevant functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s try our code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Looks good! This particular test of our code resulted in the above, but you
+    will find that subsequent iterations return different results -- at least, different
+    numbers of iterations and sets of original centroids.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Looking Ahead
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Though we have not yet evaluated our clustering results, we will stop here for
+    now... but, on that note, I bet you can guess what is in store for the next post.
+    Next time we will focus on a few more clustering-related activities. We have an
+    algorithm which we can use to build models, but there needs to be some mechanisms
+    for evaluating and visualizing their results. This is what we will get to next.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thinking further ahead, I then plan to turn our attention to classification
+    using the k-nearest neighbors algorithm, as well a number of classification-related
+    tasks. Once again, I hope you have found this helpful enough to check the next
+    installment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Machine Learning Workflows in Python from Scratch Part 1: Data Preparation](/2017/05/machine-learning-workflows-python-scratch-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Toward Increased k-means Clustering Efficiency with the Naive Sharding Centroid
+    Initialization Method](/2017/03/naive-sharding-centroid-initialization-method.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[K-Means & Other Clustering Algorithms: A Quick Intro with Python](/2017/03/k-means-clustering-algorithms-intro-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Clustering Unleashed: Understanding K-Means Clustering](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On with Unsupervised Learning: K-Means Clustering](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is K-Means Clustering and How Does its Algorithm Work?](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DBSCAN Clustering Algorithm in Machine Learning](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Clustering in Python with PyCaret](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

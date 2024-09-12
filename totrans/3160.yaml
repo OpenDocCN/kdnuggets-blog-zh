@@ -1,0 +1,352 @@
+- en: 'Deep Feature Synthesis: How Automated Feature Engineering Works'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/02/deep-feature-synthesis-automated-feature-engineering.html](https://www.kdnuggets.com/2018/02/deep-feature-synthesis-automated-feature-engineering.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By Max Kanter, CEO at [Feature Labs](https://www.featurelabs.com/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The artificial intelligence market is fueled by the potential to use data to
+    change the world. While many organizations have already successfully adapted to
+    this paradigm, applying machine learning to new problems is still challenging.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The single biggest technical hurdle that machine learning algorithms must overcome
+    is their need for processed data in order to work — they can only make predictions
+    from numeric data. This data is composed of relevant variables, known as “features.”
+    If the calculated features don’t clearly expose the predictive signals, no amount
+    of tuning can take a model to the next level. The process for extracting these
+    numeric features is called “[feature engineering](https://www.kdnuggets.com/2018/12/feature-engineering-explained.html).”
+  prefs: []
+  type: TYPE_NORMAL
+- en: Automating feature engineering optimizes the process of building and deploying
+    accurate machine learning models by handling necessary but tedious tasks so data
+    scientists can focus more on other important steps. Below are the basic concepts
+    behind an automated feature engineering method called Deep Feature Synthesis (DFS),
+    which generates many of the same features that a human data scientist would create.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Invented at MIT CSAIL
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I started developing DFS in MIT’s Computer Science and Artificial Intelligence
+    Lab alongside Kalyan Veeramachaneni in 2014\. We used it to create the “Data Science
+    Machine” to automatically build predictive models for complex, multi-table datasets
+    and to compete in online data science competitions where we [beat 615 out of 906
+    human teams](http://news.mit.edu/2015/automating-big-data-analysis-1016).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/c0c96f74b35619c20948902e61b9b897.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We first shared this work in [a peer-reviewed paper](http://featurelabs1.wpengine.com/wp-content/uploads/2017/12/DSAA_DSM_2015-1.pdf)
+    during IEEE’s International Conference on Data Science and Advanced Analytics
+    in 2015\. Since then, it has now matured to not only power [Feature Labs](https://www.featurelabs.com/)’
+    products, but also motivate & enable researchers around the world, including those
+    at [Berkeley](https://people.eecs.berkeley.edu/~dawnsong/papers/icdm-2016.pdf)
+    and [IBM](https://arxiv.org/pdf/1706.00327.pdf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understanding Deep Feature Synthesis
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'There are three key concepts in understanding Deep Feature Synthesis:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***1\. Features are derived from relationships between the data points in a
+    dataset.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'DFS performs feature engineering for multi-table and transactional datasets
+    commonly found in databases or log files. It focuses on this type of data because
+    it is the most common type of enterprise data used today: a [survey](https://www.kaggle.com/surveys/2017)
+    of 16,000 data scientists on Kaggle found that they spent 65% of their time using
+    relational datasets.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***2\. Across datasets, many features are derived by using similar mathematical
+    operations.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To understand this, let’s consider a dataset of customers and all of their purchases.
+    For each customer, we may want to calculate a feature representing their most
+    expensive purchase. To do this, we would collect all the transactions related
+    to a customer and find the Maximum of the purchase amount field. However, imagine
+    a user wanted to extract “the longest flight delay” from a dataset of airplane
+    flights to predict future delays. She would would use the same Maximum function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/02921072b6475e779140cd20c3835098.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Even though the natural language descriptions differ completely, the underlying
+    math remains the same. In both of these cases, we applied the same operation to
+    a list of numeric values to produce a new numeric feature that was specific to
+    the dataset. These dataset-agnostic operations are called “primitives.”
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***3\. New features are often composed from utilizing previously derived features.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Primitives are the building blocks of DFS. Because primitives define their input
+    and output types, we can stack them to construct complex features that mimic the
+    ones that humans create today.
+  prefs: []
+  type: TYPE_NORMAL
+- en: DFS can apply primitives across relationships between entities, so features
+    can be created from datasets with many tables. We can control the complexity of
+    the features we create by setting a maximum depth for our search.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/fa59ce074d6d8f21249929bc54f646ed.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Consider a feature which is often calculated by data scientists for transactional
+    or event log data: “the average time between events.” This feature is valuable
+    in predicting either fraudulent behavior or future customer engagement. DFS achieves
+    the same feature by stacking two primitives, **Time Since** and **Mean**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/1a7b4b5e738f8ff325ebd5bade015f28.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This example highlights a second advantage of primitives, which is that they
+    can be used to quickly enumerate many interesting features in a parameterized
+    fashion. So instead of **Mean**, we could use **Maximum**, **Minimum**, **Standard
+    Deviation**, or **Median** to automatically generate several different ways of
+    summarizing the time since the previous event. If we were to add a new primitive
+    to DFS — like the distance between two locations — it would automatically combine
+    with the existing primitives without any effort needed from the user.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Constantly Improving
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Back in September, Feature Labs [announced](https://www.featurelabs.com/blog/open-sourcing-featuretools/)
+    that we were open-sourcing an implementation of DFS for both veteran and aspiring
+    data scientists to try out. In the three months since then, [Featuretools](https://github.com/featuretools/featuretools/)
+    has been taught to nearly [1000 people](https://www.featurelabs.com/blog/learn-feature-eng-mit/)
+    in MIT’s online Data Science and Big Data Analytics course and has become the
+    most popular library for feature engineering on [Github](https://github.com/search?q=feature+engineering).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This means that a community of people can join together to contribute primitives
+    from which everyone can benefit. Since primitives are defined independently of
+    a specific dataset, any new primitive added to Featuretools can be incorporated
+    into any other dataset that contains the same variable data types. In some cases,
+    this might be a dataset in the same domain, but it could also be for a completely
+    different use case. As an example, here is [a contribution](https://github.com/Featuretools/featuretools/pull/51)
+    of 2 primitives to handle free text fields.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Handling Time
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'It’s easy to accidentally leak information about what you’re trying to predict
+    into a model. One of our previous retail enterprise customer’s applications is
+    a great example: production models didn’t match the company’s development results.
+    They were trying to predict who would become a customer, and the most important
+    feature in their model was the number of emails that their prospects had opened.
+    It showed high accuracy during training but unfortunately didn’t work when it
+    was deployed into production.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In retrospect, the reason for this is readily apparent — these prospects only
+    started reading emails after becoming customers. The company’s **manual feature
+    engineering** step wasn’t properly filtering out the data they had received after
+    the outcome they were predicting had already come true.
+  prefs: []
+  type: TYPE_NORMAL
+- en: DFS in Featuretools can automatically calculate the features for each training
+    example at the specific time associated with the example by using “[cutoff times](https://docs.featuretools.com/automated_feature_engineering/handling_time.html?__hstc=204809999.c69edb3ec9a2475f3b57eaf04def8d5a.1516118145596.1516118145596.1516118145596.1&__hssc=204809999.15.1516118145597&__hsfp=4010712198).”
+    It accomplishes this by simulating what the raw data looked like at a past point
+    in time in order to perform feature engineering on the valid data. This leads
+    to fewer label leakage problems, which helps data scientists become more confident
+    about the results they are deploying into production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Augmenting the Human Touch with Automation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: DFS can be used to develop baseline models with little human intervention. We
+    have shown how this is possible in [public demos](https://www.featuretools.com/demos?__hstc=204809999.c69edb3ec9a2475f3b57eaf04def8d5a.1516118145596.1516118145596.1516118145596.1&__hssc=204809999.15.1516118145597&__hsfp=4010712198)
+    using Featuretools. However, the automation of feature engineering should be thought
+    of as a complement to critical human expertise — it enables data scientists to
+    be more precise and productive.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For many problems, a baseline score is enough for a human to decide if an approach
+    is valid. In one case, we ran an experiment against 1,257 human competitors on
+    Kaggle. We produced feature matrices using DFS and then utilized a regressor in
+    order to create a machine learning model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/a86c2432a0dd19b73d6dca292747890e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*The machine learning score (RSME) vs. the percentile on the leaderboard. As
+    the score goes down, the place on the leaderboard goes up. The colored vertical
+    lines represent the leaderboard position of different experiments using Featuretools.*We
+    found that with almost no human input, DFS outperforms both baseline models in
+    this prediction problem. In a real-world setting, this is valuable supporting
+    evidence for leveraging machine learning in this use case. Next, we showed how
+    adding custom primitives can be used to outperform more than 80% of our competitors
+    and get close to the best overall score.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Applying Deep Feature Synthesis
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Ben Schreck, Chief Data Scientist at Feature Labs, recently wrote about how
+    automated feature engineering was used to increase revenue for a global bank’s
+    [fraud detection model](https://www.featurelabs.com/blog/predicting-credit-card-fraud/).
+    In that case, we were predicting if an individual transaction was fraudulent,
+    but we created features based on historical behaviors of the customer who made
+    the transaction. DFS created features such as “the time since the last transaction,”
+    “the average time between transactions,” and “the last country in which this card
+    was used.” All of these features depend on the relationships between the various
+    data points and required using cutoff time to make sure only behavior from before
+    the fraudulent event was used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a result, the number of false positives dropped by 54% compared to the bank’s
+    existing software solution, thereby shrinking the number of customers affected
+    by incorrectly blocked transactions. The financial impact of the new model was
+    estimated to be €190,000 per 2 million transactions evaluated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Deep Feature Synthesis vs. Deep Learning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Deep Learning automates feature engineering for images, text, and audio where
+    a large training set is typically required, whereas DFS targets **the structured
+    transactional and relational datasets** that companies work with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The features that DFS generates are more explainable to humans because they
+    are based on combinations of primitives that are easily described in natural language.
+    The transformations in deep learning must be possible through matrix multiplication,
+    while the primitives in DFS can be mapped to any function that a domain expert
+    can describe. This increases the accessibility of the technology and offers more
+    opportunities for those who are not experienced machine learning professionals
+    to contribute their own expertise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Additionally, while deep learning often requires many training examples to train
+    the complex architectures it needs to work, DFS can start creating potential features
+    based only on the schema of a dataset. For many enterprise use cases, enough training
+    examples for deep learning are not available. DFS offers a way to begin creating
+    interpretable features for smaller datasets that humans can manually validate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Better Future with Feature Engineering
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Automating feature engineering offers the potential to accelerate the process
+    of applying machine learning to the valuable datasets collected by data science
+    teams today. It will help data scientists to quickly address new problems as they
+    arise and, more importantly, make it easier for those new to data science to develop
+    the skills necessary to apply their own domain expertise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Renowned machine learning professor [Pedros Domingos](https://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf)
+    once said, “One of the holy grails of machine learning is to automate more and
+    more of the feature engineering process.” I agree wholeheartedly, and I couldn’t
+    be more excited to work at the forefront of this field!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Max Kanter](https://www.linkedin.com/in/jmaxkanter)** ([**@maxk**](https://twitter.com/maxk))
+    is the CEO and co-founder of [Feature Labs](https://www.featurelabs.com/), a company
+    that builds tools and APIs for data science automation. Max is an engineer who
+    is passionate about creating new technology for data science. Before starting
+    Feature Labs, he was a machine learning researcher at MIT where he created the
+    Data Science Machine and previously a software engineer at Twitter, Fitbit, and
+    the New York Times.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.linkedin.com/pulse/deep-feature-synthesis-how-engineering-automation-works-max-kanter/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[The Data Science Machine, or ‘How To Engineer Feature Engineering’](/2015/10/data-science-machine.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Current State of Automated Machine Learning](/2017/01/current-state-automated-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using AutoML to Generate Machine Learning Pipelines with TPOT](/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-4.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Enter your data synthesis innovations to reform policing, win cash](https://www.kdnuggets.com/2023/06/nij-enter-data-synthesis-innovations-reform-policing-win-cash.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How ChatGPT Works: The Model Behind The Bot](https://www.kdnuggets.com/2023/04/chatgpt-works-model-behind-bot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Burtch Works 2023 Data Science & AI Professionals Salary Report…](https://www.kdnuggets.com/2023/08/burtch-works-2023-data-science-ai-professionals-salary-report.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Tractable, Feature Engineering Pipeline for Multivariate…](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using RAPIDS cuDF to Leverage GPU in Feature Engineering](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

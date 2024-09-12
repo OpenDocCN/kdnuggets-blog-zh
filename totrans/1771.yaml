@@ -1,0 +1,342 @@
+- en: Anonymization and the Future of Data Science
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/04/anonymization-future-data-science.html](https://www.kdnuggets.com/2017/04/anonymization-future-data-science.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By Steve Touw, CTO and Co-founder of [Immuta](https://www.immuta.com/).**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Managing data privacy is becoming an increasingly difficult challenge for massive
+    corporations littered with data silos. New data regulations--from the [EU](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation)
+    to the [US](https://www.fcc.gov/document/fcc-adopts-broadband-consumer-privacy-rules)
+    to [China](https://www.dowjones.com/insights/examining-chinas-new-cybersecurity-law-china-recently-passed-new-cybersecurity-law-takes-effect-june-1-mean-companies-business/)--
+    illustrate that this challenge is really just beginning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This trend underscores the importance of anonymization – one of the most important
+    tools in a data scientist’s “privacy toolbox.” Data anonymization is a technique
+    that can be used to protect private information in your data while preserving,
+    to varying degrees, the utility of that data; however, as we’ll see, this tool
+    is only best put to use in combination with others, and not as a standalone strategy
+    to protect your data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What’s this thesis based upon? In a few words, the very real limits to anonymization.
+    And, of course, Judd Apatow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Anonymization, Utility, and Judd Apatow
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To start with, think of anonymization as a technique to remove an individual’s
+    identifying information from a dataset so that the remaining data cannot be linked
+    to that individual. But that’s not the end of the game: the remaining data needs
+    to actually be useful as well. This is what I call the “privacy vs. utility tradeoff.”
+    If a dataset is perfectly anonymized, there is no risk in identifying an individual
+    from that data, but that data also might (and probably will) be useless.  In the
+    cybersecurity world, there’s a saying that the safest computer is one that won’t
+    function. And here the same point applies: ensuring anonymity usually requires
+    sacrificing utility.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In many cases, anonymization techniques can be “fragile,” which is to say that
+    even once you believe the utility vs. privacy tradeoff is balanced, the security
+    of anonymized datasets can be dependent upon a variety of external factors that
+    are hard to control. To illustrate this, I’m going to walk you through an example
+    of what’s called a “linkage attack,” whereby an adversary uses knowledge external
+    to the anonymized data to crack it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This particular attack began when an analyst acquired all New York City taxi
+    [data](http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml) for a given
+    period of time using New York’s freedom of information act. This data included
+    pickup and dropoff locations, pickup and dropoff times, fares, and tip amounts.
+    At first glance, the data didn’t raise too many privacy flags on its own, which
+    is why New York released the data in the first place. But then a Northwestern
+    University graduate student used timestamped photos of celebrities getting into
+    cabs in New York City to find specific cab rides within the released data. This
+    meant he could determine how much a certain celebrity tipped the driver, making
+    what was thought to be anonymous data suddenly newsworthy material.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Gawker picked up the story and published an [article](http://gawker.com/the-public-nyc-taxicab-database-that-accidentally-track-1646724546)
+    that exposed the tipping habits of Judd Apatow and a number of other celebrities.
+    I’ve reproduced this linkage attack below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The below picture of Judd Apatow and his wife, actress Leslie Mann, and the
+    accompanying map of their trip both, appeared in the original Gawker [exposé](http://gawker.com/the-public-nyc-taxicab-database-that-accidentally-track-1646724546):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Apatow](../Images/2d92967f0b361c27a3b697936523d910.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Photo credit: Gawker'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can easily find this trip in the publically available data by querying the
+    timestamp and location of the pickup:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Which results in a single entry, Judd’s trip:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **pickup_datetime** | **dropoff_datetime** | **tip_amount** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 6/21/13 11:28 | 6/21/13 11:35 | $2.10 |'
+  prefs: []
+  type: TYPE_TB
+- en: There are other ways to implement a similar link attack. If you had a taxi receipt,
+    for example, you could use the cost of the ride and dropoff date/time based on
+    when the receipt was created to discover the trip. For what it’s worth, New York
+    did try to anonymize the data by hashing (a technique to mask data) the taxi medallion
+    number (though even that attempt was crackable through a [rainbow table](https://en.wikipedia.org/wiki/Rainbow_table)).
+    Note, however, that we didn’t even need to crack the masked medallion number to
+    successfully perform the link attack above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: From Cardinality to Anonymity
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The achilles heel of anonymization is in the columns that contain the most unique
+    values, or what’s called high cardinality columns. Notice in the successful link
+    attacks perpetrated with the NYC taxi data, the timestamp and location data was
+    leveraged; because these columns have very high cardinality, only a small set
+    of pickups and dropoffs occur simultaneously with the photograph, so one can easily
+    isolate to a single result at the same date/time *and* location.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What should NYC have done differently to protect Judd’s tipping habits?
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition to masking the taxi medallions, the city could have applied further
+    anonymization to this dataset. If they generalized the pickup/dropoff to the nearest
+    hour, then the link attack would fail. The same query I used above would return
+    zero results because no entry would exist between those two minutes, since every
+    entry would be rounded to the hour - *my query is too specific for the data*.
+    This is a technique called k-anonymization. In k-anonymization, high cardinality
+    values are generalized, or “blurred”, to try to prevent link attacks. In fact,
+    you can think of k-anonymization as giving you *more* results because in this
+    case I can no longer query for specifics within that hour - the data is coarser.
+    Here, we’re not just protecting sensitive values; we’re forced to protect columns
+    that simply have many unique values, what are sometimes termed quasi-identifiers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unfortunately, k-anonymization is by no means foolproof. Even if we round the
+    pickup/dropoff date/time in the data to prevent from this attack, the adversary
+    could still break NYC’s efforts to preserve the anonymity of the dataset. If the
+    adversary knew the location of the pickup *and* the dropoff, for example, and
+    both data points together were unique, likely even within the hour, this would
+    again break the attempts at anonymization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is because the pickup/dropoff *locations* also have high cardinality. The
+    location coordinates could also be k-anonymized (generalize the latitude and longitude)
+    to preserve anonymity, but that’s where the privacy vs utility tradeoff rears
+    its head. Are we taking the privacy preserving measures so far that the data is
+    now becoming useless? To prevent potential attacks, are we also preventing useful
+    analysis? Do we also need to k-anonymize the cost of the ride? That’s fairly high
+    cardinality as well… . . . you get the idea.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![k-Anonymization](../Images/0346681f1decfb5cd89978215f4a7ce6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: There is a different technique termed differential privacy, which does have
+    mathematical guarantees on privacy. You are limited to understanding aggregate
+    trends in your data, and have limits on how many queries you can actually make.
+    This is extremely powerful because of the privacy *guarantees*; unlike k-anonymization,
+    however, there remains a significant utility tradeoff due to the types of queries
+    and limits on those queries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Who Really Cares? The Europeans.
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So who cares about all of this? At the very top of the list is the Europeans,
+    who implemented the [General Data Protection Regulation](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation)
+    (GDPR) to protect data subjects’ private information. A violation can result in
+    a fine equal to four percent of a company's global revenue. Which makes the GDPR
+    the most serious data regulation on the planet, and it applies to *any* business
+    using European data, so if you’re a data scientist working with global data, chances
+    are that the GDPR will apply to you.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When it comes to anonymization, the GDPR has some very blurred guidelines (no
+    pun intended). Let’s delve into some legalese. The recitals section of the GDPR
+    is where the lawmakers comment on the text of the laws themselves. In recital
+    26, they state that the GDPR does “not apply to anonymous information,” which
+    is defined as information that “does not relate to an identified or identifiable
+    natural person or to personal data rendered anonymous in such a manner that the
+    data subject is not or no longer identifiable.” Anonymization, then, seems to
+    be a potential “get out of jail free card,” meaning that if a dataset is truly
+    anonymized, the GDPR wouldn’t apply.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Elsewhere in the GDPR, this concept of anonymization is distinguished from pseudonymisation,
+    which is defined as “the processing of personal data in such a manner that the
+    personal data can no longer be attributed to a specific data subject without the
+    use of additional information, provided that such additional information is kept
+    separately and is subject to technical and organisational measures to ensure that
+    the personal data are not attributed to an identified or identifiable natural
+    person.” This is essentially what NYC attempted to do when they masked the taxi
+    medallions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Under the GDPR, anonymized data is data that is “no longer identifiable,” and
+    that data isn’t regulated by the GDPR. Pseudonymized data, on the other hand,
+    requires additional data to identify the data subject… which begs the question:
+    is there such a thing as data that can’t be identified given additional information?
+    New York certainly thought so, but the answers are far from certain. At worst,
+    there might be no acceptable form of anonymization under the GDPR.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Making Anonymization Work for You
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Given the inherent risks, anonymization has to be just one piece of the privacy
+    puzzle. Anonymization techniques need to take place within a larger information
+    governance framework that can provide both anonymization capabilities and the
+    ability to dynamically control data “states” based on the user’s attributes and
+    purpose at that time. That includes providing an environment for executing analyses,
+    rather than dumping data to third parties and losing visibility on how that data
+    is being acted upon, which is what some are tempted to do using “anonymized” data
+    sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So what does this really mean in practice? It means that anonymization without
+    context isn’t going to cut it. More precisely, a dynamic data abstraction layer
+    is key.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A dynamic data abstraction layer is a thin layer that sits on top of all your
+    data, making decisions based on your policies and how data is presented to consumers.
+    This allows organizations to restrict access based on certain purposes (analytical
+    context), or certain attributes of a user. It also allows organizations to audit
+    all actions against the data through a unified view, enabling report generation
+    and a complete, real-time understanding of what policies are being enforced when
+    and by whom. Most importantly, it actually enables better data science because
+    this abstraction layer provides a consistent and unified view of the data, which
+    makes sharing analysis easier, as the data comes from the same place for everyone.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s return to our taxi example to see what an abstraction layer would look
+    like in practice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the New York could have exposed their data through a data abstraction layer,
+    they would have had the ability to link purposes, user attributes, and context
+    to how the data is protected. Through that abstraction layer, for example, they
+    could mandate that users only access their data for certain purposes. And if a
+    user acknowledged his or her purpose as finding aggregate trends in the data,
+    the taxi data could be dynamically protected through differential privacy for
+    that purpose at that time. If the analyst then wished to analyze individual routes
+    from a specific location, locations could be kept accurate, but k-anonymization
+    could be applied to the pickup and dropoff times (again, dynamically, for that
+    purpose at that time). Not only would finding Judd’s tip break the acknowledgement
+    of purpose set forth at time of access; the dynamic anonymization, plus audit,
+    can guarantee this won’t happen.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Anonymisation techniques can provide privacy guarantees, but only when they
+    are engineered appropriately. Balancing the privacy vs utility tradeoff is all
+    about context, and an abstraction layer is what allows for that context. If New
+    York had taken advantage of these additional tools, celebrity journalists might
+    not have been happy. But for those who care about the privacy and security of
+    our data, it would represent a win, and Judd’s tipping habits would have been
+    protected.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Steve Touw](https://www.linkedin.com/in/steventouw/)** is co-founder
+    and CTO of [Immuta](https://www.immuta.com/). Steve has a long history of designing
+    large-scale geo-temporal analytics across the US Intelligence community, to include
+    some of the very first Hadoop analytics, and frameworks to manage complex multi-tenant
+    data policy controls. This experience drove he and his co-founders at Immuta to
+    build a software product that frees data science teams to access and work with
+    high-value data. Prior to Immuta, Steve was the CTO of 42six solutions where he
+    led a large big data services engineering team which was acquired by Computer
+    Sciences Corporation. Steve holds a BS in Geography from the University of Maryland.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Machine Learning Meets Humans – Insights from HUML 2016](/2017/01/machine-learning-humans-huml-2016.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Google Got a Lot of Data About You](/2017/03/google-data-about-you.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Privacy, Security and Ethics in Process Mining](/2016/12/privacy-security-ethics-process-mining.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Forecasting Future Events: The Capabilities and Limitations of AI and ML](https://www.kdnuggets.com/2023/06/forecasting-future-events-capabilities-limitations-ai-ml.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Rise and Fall of Prompt Engineering: Fad or Future?](https://www.kdnuggets.com/the-rise-and-fall-of-prompt-engineering-fad-or-future)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[History and Future of LLMs](https://www.kdnuggets.com/history-and-future-of-llms)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Future-Proof Your Data Game: Top Skills Every Data Scientist Needs in 2023](https://www.kdnuggets.com/futureproof-your-data-game-top-skills-every-data-scientist-needs-in-2023)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI vs Data Analysts: Top 6 Limitations Impacting the Future of Analytics](https://www.kdnuggets.com/ai-vs-data-analysts-top-6-limitations-impacting-the-future-of-analytics)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Chatbot Transformation: From Failure to the Future](https://www.kdnuggets.com/2021/12/chatbot-transformation-failure-future.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

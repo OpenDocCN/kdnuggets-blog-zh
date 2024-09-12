@@ -1,0 +1,310 @@
+- en: 'Optimal Estimation Algorithms: Kalman and Particle Filters'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/02/optimal-estimation-algorithms-kalman-particle-filters.html](https://www.kdnuggets.com/2020/02/optimal-estimation-algorithms-kalman-particle-filters.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/8ae2004fa40ce0a4f9822d071de4611c.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Photo by [Daniel Jerez](https://unsplash.com/@danieljerez?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Optimal Estimation Algorithms
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Optimal Estimation Algorithms plays a really important role in our everyday
+    life. Today, I will introduce you to two of them (Kalman and Particle Filters)
+    using some practical examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s imagine we are driving in a driverless car, and we are about to go through
+    a long tunnel. In this example, our car makes use different sensors such as GPS
+    estimation, accelerometers and cameras in order to keep track of its position
+    in a map and of its interaction with other vehicles or pedestrian. Although, when
+    travelling in a tunnel (especially in a really long one) our GPS signal becomes
+    weaker because of interferences. Therefore, it might become more difficult for
+    our car to estimate its position. What could we do in order to solve this problem?
+  prefs: []
+  type: TYPE_NORMAL
+- en: One simple solution could be to use our accelerometer sensor data in combination
+    with our weak GPS signal. In fact, taking a double integral of our acceleration
+    we can be able to calculate our car position. Although, this simple measurement
+    will contain some drift and will therefore not be totally accurate as our measurement
+    errors will propagate through time (Figure 1). In order to solve this problem,
+    we can use either a Kalman Filter or a Particle Filter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b7ea8f09063ca914a5612a8543a38579.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 1: Autonomous car position estimation against time'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Kalman Filter
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Kalman Filters have common applications in Robotics (eg. [SLAM Systems](https://ieeexplore.ieee.org/document/8321612))
+    and Reinforcement Learning. Kalman Filters can be used in Robotis in order to
+    keep track of the movements of a swarm of robots in an environment and in Reinforcement
+    Learning in order to keep track of different Software Agents.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Kalman Filter is an iterative mathematical process which uses a set of equations
+    and consecutive data inputs in order to estimate the true position, velocity,
+    etc… of an object when the measured values contain uncertainties or errors. [1]
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Kalman FIlters can, therefore, be simplistically compared to Machine Learning
+    models. They take some input data, perform some calculations in order to make
+    an estimate, calculate its estimation error and iteratively repeat this process
+    in order to reduce the final loss. The iterative process performed by a Kalmar
+    Filter can be summarised in 3 main steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Kalman Gain Calculation**: is computed by using the error in the input data
+    and in the estimation.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Current Estimate Calculation**: is computed using the raw input data, our
+    previous estimate and the Kalman Gain.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Estimation Error Calculation**: is finally calculated using the Kalman Gain
+    and our Current Estimate.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This process is briefly summarised in Figure 2.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/63317cfae456002885b066daef264ebf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 2: Kalman Filter WorkFlow (Adapted from [1])'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There exist different varieties of Kalman Filters, some examples are: linear
+    Kalmar Filter, Extended Kalman filter and Unscented Kalman Filter. If you are
+    interested in a more detailed mathematical explanation of Kalman Filters, [this ](http://web.mit.edu/kirtley/kirtley/binlustuff/literature/control/Kalman%20filter.pdf)tutorial
+    by MIT Tony Lacey is a great place where to start [2].'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the main problems of Kalman Filters is that they can only be used in
+    order to model situations which can be described in terms of Gaussian Noises.
+    Although, many non-gaussian processes can be either approximated in gaussian terms
+    or transformed in Gaussian distributions through some form of transformation (eg.
+    logarithmic, square root, etc..).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In order to overcome this type of limitation, an alternative method can be
+    used: Particle Filters.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Particle Filter
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Particle FIlters can be used in order to solve non-gaussian noises problems,
+    but are generally more computationally expensive than Kalman Filters. That’s because
+    Particle Filters uses simulation methods instead of analytical equations in order
+    to solve estimation tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Particle Filters are commonly used in:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Financial Markets Analysis (especially in [stochastic processes analysis](https://towardsdatascience.com/stochastic-processes-analysis-f0a116999e4))
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reinforcement Learning
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Robots Localization (eg. direct global policy search)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Particle Filters are based on [Monte Carlo Methods](https://en.wikipedia.org/wiki/Monte_Carlo_method) and
+    manage to handle not gaussian problems by discretizing the original data into
+    particles (each of them representing a different state). The greater the number
+    of particles and the better our Particle Filter would be able to handle any possible
+    type of distribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Like Kalman Filters, Particle Filters also make use of an iterative process
+    in order to produce its estimations. Each iteration can be broken down into three
+    main steps [3]:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Take multiple samples (***particles***) from an original distribution.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Weight all the sampled particles in order of importance (the more particles
+    fall in a given interval and the higher is their probability density).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Resampling by replacing more unlikely particles with more likely ones (like
+    in evolutionary algorithms, only the fittest elements of a population survive).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This process is summed up in Figure 3\. As we can see from the figure below,
+    in this example, our Particle Filter is able just after one iteration to understand
+    in which range is more likely to be our object. Repeating iteratively this process,
+    our filter would then be able to restrict even more its dispersion range.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/82793d41a5afe78a2f3898015e83249f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 3: Single Particle Filter Iteration'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you are interested in implementing optimal estimation algorithms in Python,
+    the [FilterPy](https://filterpy.readthedocs.io/en/latest/) or [Pyro](http://docs.pyro.ai/en/stable/) libraries
+    are two great solutions. In particular, Pyro is a universal probabilistic programming
+    language developed by Uber which can be used for various Bayesian analysis using
+    PyTorch as backend.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*I hope you enjoyed this article, thank you for reading!*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Contacts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If you want to keep updated with my latest articles and projects [follow me
+    on Medium](https://medium.com/@pierpaoloippolito28?source=post_page---------------------------) and
+    subscribe to my [mailing list](http://eepurl.com/gwO-Dr?source=post_page---------------------------).
+    These are some of my contacts details:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Linkedin](https://uk.linkedin.com/in/pier-paolo-ippolito-202917146?source=post_page---------------------------)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Personal Blog](https://pierpaolo28.github.io/blog/?source=post_page---------------------------)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Personal Website](https://pierpaolo28.github.io/?source=post_page---------------------------)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Medium Profile](https://towardsdatascience.com/@pierpaoloippolito28?source=post_page---------------------------)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GitHub](https://github.com/pierpaolo28?source=post_page---------------------------)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Kaggle](https://www.kaggle.com/pierpaolo28?source=post_page---------------------------)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Bibliography
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[1] Special Topics — The Kalman Filter (2 of 55) Flowchart of a Simple Example
+    (Single Measured Value), Michel van Biezen. Accessed at: [https://www.youtube.com/watch?v=CaCcOwJPytQ](https://www.youtube.com/watch?v=CaCcOwJPytQ)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[2] Chapter 11\. Tutorial: The Kalman Filter, Tony Lacey. Accessed at: [http://web.mit.edu/kirtley/kirtley/binlustuff/literature/control/Kalman%20filter.pdf](http://web.mit.edu/kirtley/kirtley/binlustuff/literature/control/Kalman%20filter.pdf)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[3] Short Introduction to Particle Filters and Monte Carlo Localization, Cyrill
+    Stachniss. Accessed at: [http://ais.informatik.uni-freiburg.de/teaching/ws12/mapping/pdf/slam09-particle-filter-4.pdf](http://ais.informatik.uni-freiburg.de/teaching/ws12/mapping/pdf/slam09-particle-filter-4.pdf)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/)** is
+    a Data Scientist and MSc in Artificial Intelligence graduate from the University
+    of Southampton. He has a strong interest in AI advancements and machine learning
+    applications (such as finance and medicine). Connect with him on [Linkedin](https://www.linkedin.com/in/pierpaolo28/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/optimal-estimation-algorithms-kalman-and-particle-filters-be62dcb5e83).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data Science of IoT: Sensor fusion and Kalman filters, Part 1](/2015/10/data-science-iot-sensor-fusion-kalman-filters-part1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Optimize Your Jupyter Notebook](/2020/01/optimize-jupyter-notebook.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GPU Accelerated Data Analytics & Machine Learning](/2019/08/gpu-accelerated-data-analytics-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Brief Introduction to Kalman Filters](https://www.kdnuggets.com/2022/12/brief-introduction-kalman-filters.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Optimal Way to Input Missing Data with Pandas fillna()](https://www.kdnuggets.com/2023/02/optimal-way-input-missing-data-pandas-fillna.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Reinforcement Learning: Teaching Computers to Make Optimal Decisions](https://www.kdnuggets.com/2023/07/reinforcement-learning-teaching-computers-make-optimal-decisions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tackle computer science problems using both fundamental and modern…](https://www.kdnuggets.com/2023/11/packt-tackle-computer-science-problems-fundamental-modern-algorithms-machine-learning)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Algorithms - What, Why, and How?](https://www.kdnuggets.com/2022/09/machine-learning-algorithms.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,262 @@
+- en: PyTorch Tips to Boost Your Productivity
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/08/pytorch-tips-boost-productivity.html](https://www.kdnuggets.com/2023/08/pytorch-tips-boost-productivity.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![PyTorch Tips to Boost Your Productivity](../Images/8c8e68e22a2d3366038e409b423555d4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Have you ever spent hours debugging a machine learning model but can’t seem
+    to find a reason the accuracy does not improve? Have you ever felt everything
+    should work perfectly but for some mysterious reason you are not getting exemplary
+    results?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well no more. Exploring PyTorch as a beginner can be daunting. In this article,
+    you explore tried and tested workflows that will surely improve your results and
+    boost your model’s performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Overfit a Single Batch
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Ever trained a model for hours on a large dataset just to find the loss isn’t
+    decreasing and the accuracy just flattens? Well, do a sanity check first.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It can be time-consuming to train and evaluate on a large dataset, and it is
+    easier to first debug models on a small subset of the data. Once we are sure the
+    model is working, we can then easily scale training to the complete dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead of training on the whole dataset, **always train on a single batch for
+    a sanity check**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Consider the above code snippet. Assume we already have a training data loader
+    and a model. Instead of iterating over the complete dataset, we can easily fetch
+    the first batch of the dataset. We can then train on the single batch to check
+    if the model can learn the patterns and variance within this small portion of
+    the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If the loss decreases to a very small value, we know the model can overfit
+    this data and can be sure it is learning in a short time. We can then train this
+    on the complete dataset by simply changing a single line as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: If the model can overfit a single batch, it should be able to learn the patterns
+    in the complete dataset. This overfitting batch method enables easier debugging.
+    If the model can not even overfit a single batch, we can be sure there is a problem
+    with the model implementation and not the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Normalize and Shuffle Data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '*For datasets where the sequence of data is not important, it is helpful to
+    shuffle the data*. For example, for the image classification tasks, the model
+    will fit the data better if it is fed images of different classes within a single
+    batch. **Passing data in the same sequence, we risk the model learning the patterns
+    based on the sequence of data passed, instead of learning the intrinsic variance
+    within the data.** Therefore, it is better to pass shuffled data. For this, we
+    can simply use the DataLoader object provided by PyTorch and set shuffle to True.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Moreover, it is important to normalize data when using machine learning models.
+    It is essential when there is a large variance in our data, and a particular parameter
+    has higher values than all the other attributes in the dataset. This can cause
+    one of the parameters to dominate all the others, resulting in lower accuracy.
+    **We want all input parameters to fall within the same range, and it is better
+    to have 0 mean and 1.0 variance.** For this, we have to transform our dataset.
+    Knowing the mean and variance of the dataset, we can simply use the torchvision.transforms.Normalize
+    function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can pass our per-channel mean and standard deviation in the transforms.Normalize
+    function, and it will automatically convert the data having 0 mean and a standard
+    deviation of 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Gradient Clipping
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Exploding gradient is a known problem in RNNs and LSTMs. However, it is not
+    only limited to these architectures. Any model with deep layers can suffer from
+    exploding gradients. Backpropagation on high gradients can lead to divergence
+    instead of a gradual decrease in loss.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Consider the below code snippet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: To solve the exploding gradient problem, we use the gradient clipping technique
+    that clips gradient values within a specified range. For example, if we use 1
+    as our clipping or norm value as above, all gradients will be clipped in the [-1,
+    1] range. If we have an exploding gradient value of 50, it will be clipped to
+    1\. Thus, **gradient clipping resolves the exploding gradient problem allowing
+    a slow optimization of the model toward convergence.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. Toggle Train / Eval Mode
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: This single line of code will surely increase your model’s test accuracy. Almost
+    always, a deep learning model will use dropout and normalization layers. These
+    are only required for stable training and ensuring the model does not either overfit
+    or diverge because of variance in data. Layers such as BatchNorm and Dropout offer
+    regularization for model parameters during training. However, once trained they
+    are not required. **Changing a model to evaluation mode disables layers only required
+    for training and the complete model parameters are used for prediction.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: For a better understanding, consider this code snippet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: When evaluating, we do not need to make any optimization of model parameters.
+    We do not compute any gradients during validation steps. For a better evaluation,
+    we can then omit the Dropout and other normalization layers. For example, it will
+    enable all model parameters instead of only a subset of weights like in the Dropout
+    layer. This will substantially increase the model’s accuracy as you will be able
+    to use the complete model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5\. Use Module and ModuleList
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'PyTorch model usually inherits from the torch.nn.Module base class. As per
+    the documentation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Submodules assigned in this way will be registered and will have their parameters
+    converted too when you call* [*to()*](https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module.to)*,
+    etc.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What the module base class allows is registering each layer within the model.
+    We can then use model.to() and similar functions such as model.train() and model.eval()
+    and they will be applied to each layer within the model. Failing to do so, will
+    not change the device or training mode for each layer contained within the model.
+    You will have to do it manually. **The Module base class will automatically make
+    the conversions for you once you use a function simply on the model object.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: Moreover, some models contain similar sequential layers that can be easily initialized
+    using a for loop and contained within a list. This simplifies the code. However,
+    it causes the same problem as above, as the modules within a simple Python List
+    are not registered automatically within the model. **We should use a ModuleList
+    for containing similar sequential layers within a model.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The above code snippet shows the proper way of creating the model and sublayers
+    with the model. Th use of Module and ModuleList helps avoid unexpected errors
+    when training and evaluating the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The above mentioned methods are the best practices for the PyTorch machine learning
+    framework. They are widely used and are recommended by the PyTorch documentation.
+    Using such methods should be the primary way of a machine learning code flow,
+    and will surely improve your results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Muhammad Arham](https://www.linkedin.com/in/muhammad-arham-a5b1b1237/)**
+    is a Deep Learning Engineer working in Computer Vision and Natural Language Processing.
+    He has worked on the deployment and optimizations of several generative AI applications
+    that reached the global top charts at Vyro.AI. He is interested in building and
+    optimizing machine learning models for intelligent systems and believes in continual
+    improvement.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[From Zero to Hero: Create Your First ML Model with PyTorch](https://www.kdnuggets.com/from-zero-to-hero-create-your-first-ml-model-with-pytorch)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Maximize Your Productivity as a Data Scientist by Organizing](https://www.kdnuggets.com/2022/03/maximize-productivity-data-scientist-organizing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 6 Tools to Improve Your Productivity on Snowflake](https://www.kdnuggets.com/2023/08/top-6-tools-improve-productivity-snowflake.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 ChatGPT Prompts to Enhance your Productivity at Work](https://www.kdnuggets.com/6-chatgpt-prompts-to-enhance-your-productivity-at-work)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Boost your machine learning model performance!](https://www.kdnuggets.com/2023/04/manning-boost-machine-learning-model-performance.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 ChatGPT Features to Boost your Daily Work](https://www.kdnuggets.com/2023/05/5-chatgpt-features-boost-daily-work.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

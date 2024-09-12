@@ -1,0 +1,357 @@
+- en: 'Looking Inside The Blackbox: How To Trick A Neural Network'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/09/inside-blackbox-trick-neural-network.html](https://www.kdnuggets.com/2020/09/inside-blackbox-trick-neural-network.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [William Falcon](https://www.linkedin.com/in/wfalcon/), Founder PyTorch
+    Lightning**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/6ddc83afb3793567dba0feeb3ab56ae5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Using gradient ascent to figure out how to change an input to be classified
+    as a 5\. (All images are the author’s own with all rights reserved).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Neural networks get a bad reputation for being black boxes. And while it certainly
+    takes creativity to understand their decision making, they are really not as opaque
+    as people would have you believe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this tutorial, I’ll show you how to use backpropagation to change the input
+    as to classify it as whatever you would like.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Follow along using this [colab](https://colab.research.google.com/drive/16HVAJHdCkyj7W43Q3ZChnxZ7DOwx6K5i?usp=sharing).
+  prefs: []
+  type: TYPE_NORMAL
+- en: (This work was co-written with [Alfredo Canziani](https://twitter.com/alfcnz) ahead
+    of an upcoming video)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Humans as black boxes
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let’s consider the case of humans. If I show you the following input:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/03c7d3f8e8c802c6935b4453d30397a0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: there’s a good chance you have no idea whether this is a 5 or a 6\. In fact,
+    I believe that I could even make a case for convincing you that this *might* also
+    be an 8.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, if you asked a human what they would have to do to make something more
+    into a 5 you might visually do something like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/87315b2a5e7a928f9050c800c32aed84.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'And if I wanted you to make this more into an 8, you might do something like
+    this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/8f1abfd0624d81fdb93fb26bcac3bb7b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, the answer to this question is not easy to explain in a few if statements
+    or by looking at a few coefficients (yes, I’m looking at you regression). Unfortunately,
+    with certain types of inputs (images, sound, video, etc…) explainability certainly
+    becomes much harder **but not impossible**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Asking the neural network
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: How would a neural network answer the same questions I posed above? Well, to
+    answer that, we can use gradient ascent to do exactly that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here’s how the neural network thinks we would need to modify the input to make
+    it more into a 5.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/853d48279ee53c804e71b9b6dd02bb10.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: There are two interesting results from this. First, the black areas are where
+    the network things we need to remove pixel density from. Second, the yellow areas
+    are where it thinks we need to add more pixel density.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can take a step in that gradient direction by adding the gradients to the
+    original image. We could of course repeat this procedure over and over again to
+    eventually morph the input into the prediction we are hoping for.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/502f67373e4db5cc3c222c7f4fe1d9ec.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can see that the black patch at the bottom left of the image is **very similar **to
+    what a human might think to do as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/01456796f6f2dab3ad9a0c48c06503b5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Human adds black on the left corner. Network suggests the same
+  prefs: []
+  type: TYPE_NORMAL
+- en: What about making the input look more like an 8? Here’s how the network thinks
+    you would have to change the input.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/dbcd6e19fecf7925c7f4590d40726455.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The notable things, here again, are that there is a black mass at the bottom
+    left and a bright mass around the middle. If we add this with the input we get
+    the following result:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/b7ff288901f3e6c9deb2adfa8bcb1b8f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In this case, I’m not particularly convinced that we’ve turned this 5 into an
+    8\. However, we’ve made less of a 5, and the argument to convince you this is
+    an 8 would certainly be easier to win using the image on the right instead of
+    the image on the left.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Gradients are your guides
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In regression analysis, we look at coefficients to tell us about what we’ve
+    learned. In a random forest, we can look at decision nodes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In neural networks, it comes down to how **creative** we are at using gradients.
+    To classify this digit, we generated a distribution over possible predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is what we call the *forward pass.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8708a9e4f509d04cd35f4e5fe7f75603.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: During the forward pass we calculate a probability distribution over outputs
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In code it looks like this ([follow along using this colab](https://colab.research.google.com/drive/16HVAJHdCkyj7W43Q3ZChnxZ7DOwx6K5i?usp=sharing)):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/fc6670de2f2882aba6eed014289fde55.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now imagine that we wanted to trick the network into predicting “5” for the
+    input x. Then the way to do this is to give it an image (x), calculate the predictions
+    for the image and then **maximize** the probablitity of predicting the label “5”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To do this we can use gradient ascent to calculate the gradients of a prediction
+    at the 6th index (ie: label = 5) (**p**) with respect to the input **x**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/cf08bc766b5787508fe1093b6ad3af00.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'To do this in code we feed the input x as a parameter to the neural network,
+    pick the 6th prediction (because we have labels: 0, 1, 2, 3, 4 , 5, …) and the
+    6th index means label “5”.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Visually this looks like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6ddc83afb3793567dba0feeb3ab56ae5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Gradient of the prediction of a “5” with respect to the input.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And in code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/ad172a3ec602c6a3842d0753fa8a24e2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When we call .backward() the process that happens can be visualized by the previous
+    animation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now that we calculated the gradients, we can visualize and plot them:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/7c1a1a81b0d0422c3eb204d15f80a3b0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Image for post](../Images/1d98a6aa283b8478938ded66d0feeaf8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The above gradient looks like random noise because the network has not yet
+    been trained… However, once we do train the network, the gradients will be more
+    informative:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/9442f2f7ebc4fa0dd2e4ca9d3d836fba.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Automating this via Callbacks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This is a hugely helpful tool in helping illuminate what happens inside your
+    network as it trains. In this case, we would want to automate this process so
+    that it happens automatically in training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For this, we’ll use PyTorch Lightning to implement our neural network:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The complicated code to automatically plot what we described here, can be abstracted
+    out into a Callback in Lightning. A callback is a small program that is called
+    at the parts of training you might care about.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case, when a training batch is processed, we want to generate these
+    images in case some of the inputs are confused.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But... we’ve made it even easier with pytorch-lightning-bolts which you can
+    simply install
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: and import the callback into your training code
+  prefs: []
+  type: TYPE_NORMAL
+- en: Putting it all together
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Finally we can train our model and automatically generate images when logits
+    are “confused”
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'and tensorboard will automatically generate images that look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/049f207dacc0e2290f9703fb9462af63.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Image for post](../Images/606f77a46517b30e651038992c4c54db.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/b84ae810c072e5fa7cd9a55a4847b2d3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'In summary: You learned how to look inside the blackbox using PyTorch, learned
+    the intuition, wrote a callback in PyTorch Lightning and automatically got your
+    Tensorboard instance to plot questionable predictions'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try it yourself with [PyTorch Lightning](https://github.com/PyTorchLightning/pytorch-lightning) and [PyTorch
+    Lightning Bolts](https://github.com/PyTorchLightning/pytorch-lightning-bolts).
+  prefs: []
+  type: TYPE_NORMAL
+- en: (This article was written ahead of an upcoming video where me (William) and [Alfredo
+    Canzian](https://twitter.com/alfcnz)i show you how to code this from scratch).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [William Falcon](https://www.linkedin.com/in/wfalcon/)** is an AI Researcher,
+    and Founder at PyTorch Lightning. He is trying to understand the brain, build
+    AI and use it at scale.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/peering-inside-the-blackbox-how-to-trick-a-neural-network-757c90a88a73).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PyTorch Multi-GPU Metrics Library and More in New PyTorch Lightning Release](/2020/07/pytorch-multi-gpu-metrics-library-pytorch-lightning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Pytorch Lightning vs PyTorch Ignite vs Fast.ai](/2019/08/pytorch-lightning-vs-pytorch-ignite-vs-fast-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Lit BERT: NLP Transfer Learning In 3 Steps](/2019/11/lit-bert-nlp-transfer-learning-3-steps.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Qualities Hiring Managers Are Looking For in Data Scientists](https://www.kdnuggets.com/2022/04/qualities-hiring-managers-looking-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Inside DeepMind’s New Efforts to Use Deep Learning to Advance Mathematics](https://www.kdnuggets.com/2021/12/inside-deepmind-new-efforts-deep-learning-advance-mathematics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Neural Network Optimization with AIMET](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn Deep Learning by Building 15 Neural Network Projects in 2022](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Importance of Permutation in Neural Network Predictions](https://www.kdnuggets.com/2022/12/importance-permutation-neural-network-predictions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

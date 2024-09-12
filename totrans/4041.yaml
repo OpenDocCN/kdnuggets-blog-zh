@@ -1,0 +1,259 @@
+- en: Undersampling Techniques Using Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/undersampling-techniques-using-python](https://www.kdnuggets.com/undersampling-techniques-using-python)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: With the evolving digital landscape, a wealth of data is being generated and
+    captured from diverse sources. While immensely valuable, this vast universe of
+    information often reflects the imbalanced distribution of real-world phenomena.
+    The problem of imbalanced data is not merely a statistical challenge; it has far-reaching
+    implications for the accuracy and reliability of the data-driven models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Take, for example, the ever-growing and prevalent concern of fraud detection
+    in the financial industry. As much as we want to avoid fraud due to its highly
+    damaging nature, machines (and even humans) inevitably need to learn from the
+    examples of fraudulent transactions (albeit rare) to distinguish them from the
+    number of daily legitimate transactions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This imbalance in data distribution between fraudulent and non-fraudulent transactions
+    poses significant challenges for the machine-learning models aimed at detecting
+    such anomalous activities. Without appropriate handling of the data imbalance,
+    these models risk becoming biased toward predicting transactions as legitimate,
+    potentially overlooking the rare instances of fraud.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Healthcare is another field where machine learning models are leveraged to predict
+    imbalanced outcomes, such as diseases like cancer or rare genetic disorders. Such
+    outcomes occur far less frequently than their benign counterparts. Hence, the
+    models trained on such imbalanced data are more susceptible to incorrect predictions
+    and diagnoses. Such missed health alert defeats the purpose of the model in the
+    first place, i.e., to detect early disease.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These are just a few instances highlighting the profound impact of data imbalance,
+    i.e., where one class significantly outnumbers the other. Oversampling and Undersampling
+    are two standard data preprocessing techniques to balance the dataset, of which
+    we will focus on undersampling in this article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us discuss some popular methods for undersampling a given distribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understanding the Downside of Imbalance
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Let's start with an illustrative example to grasp the significance of under-sampling
+    techniques better. The following visualization demonstrates the impact of the
+    relative quantity of points per class, as executed by a [Support Vector Machine](https://en.wikipedia.org/wiki/Support_vector_machine)
+    with a linear kernel. The below code and plots are referred from the [Kaggle notebook](https://www.kaggle.com/code/residentmario/undersampling-and-oversampling-imbalanced-data).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code above generates plots for four different distributions starting from
+    a highly imbalanced dataset with one class dominating 97% of the instances. The
+    second and third plots have 93% and 69% of the instances from a single class,
+    respectively, while the last plot has a perfectly balanced distribution, i.e.,
+    all three classes contribute a third of the instances. Plots of the datasets from
+    the most imbalanced to the least are displayed below. Upon fitting SVM over this
+    data, the hyperplane in the first plot (highly imbalanced) is pushed to a side
+    of the chart, mainly because the algorithm treats each instance equally, irrespective
+    of the class, and tries to separate the classes with maximum margin. Hence, a
+    majority yellow population near the center pushes the hyperplane to the corner,
+    making the algorithm misclassify the minority classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Undersampling Techniques Using Python](../Images/bec1e1e84da0b88c706b1ca6945c2ec3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The algorithm successfully classifies all interest classes as we move towards
+    a more balanced distribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In summary, when a dataset is dominated by one or a few classes, the resulting
+    solution often results in a model with higher misclassifications. However, the
+    classifier exhibits diminishing bias as the distribution of observations per class
+    approaches an even split.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case, undersampling the yellow points presents the simplest solution
+    to address model errors originating from the problem of rare classes. It's worth
+    noting that not all datasets encounter this issue, but for those that do, rectifying
+    this imbalance forms a crucial preliminary step in modeling the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imbalanced-Learn Library
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'We''ll use the Imbalanced-Learn Python library (imbalanced-learn or imblearn).
+    We can install it using pip:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Hands-On!
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Let us discuss and experiment with some of the most popular undersampling techniques.
+    Suppose you have a binary classification dataset where class '0' significantly
+    outnumbers class '1'.
+  prefs: []
+  type: TYPE_NORMAL
+- en: NearMiss Undersampling
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'NearMiss is an undersampling technique that reduces the number of majority
+    samples closer to the minority class. This would facilitate clean classification
+    by any algorithm using space separation or splitting the dimensional space between
+    the two classes. There are three versions of NearMiss:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**NearMiss-1**: Majority class samples with a minimum average distance to the
+    three closest minority class samples.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**NearMiss-2**: Majority class samples with a minimum average distance to three
+    furthest minority class samples.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**NearMiss-3**: Majority class samples with minimum distance to each minority
+    class sample.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s demonstrate the NearMiss-1 undersampling algorithm through a code example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Undersampling Techniques Using Python](../Images/9a4af1e161350ba9bc196e2540919101.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Change version=1 to version=2 or version=3 in the NearMiss() class to use the
+    NearMiss-2 or NearMiss-3 undersampling algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Undersampling Techniques Using Python](../Images/f8c8917c39a65cace83b0d697f67d9b2.png)![Undersampling
+    Techniques Using Python](../Images/b90b8b6b5c296ec65b4a1c384e6bae09.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: NearMiss-2 selects instances at the core of the overlap region between the two
+    classes. With the NeverMiss-3 algorithm, we observe that every instance in the
+    minority class, which overlaps with the majority class region, has up to three
+    neighbors from the majority class. The attribute n_neighbors in the code sample
+    above defines this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Condensed Nearest Neighbor (CNN) Rule
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: This method starts by considering a subset of the majority class as noise. Then,
+    it uses a 1-Nearest Neighbor algorithm to classify instances. If an instance from
+    the majority class is misclassified, it's included in the subset. The process
+    continues until no more instances are included in the subset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Tomek Links Undersampling
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Tomek Links are closely located pairs of opposite-class instances. Removing
+    the instances of the majority class of each pair increases the space between the
+    two classes, facilitating the classification process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'With this, we have delved into the essential aspects of undersampling techniques
+    in Python, covering three prominent methods: Near Miss Undersampling, Condensed
+    Nearest Neighbour, and Tomek Links Undersampling.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Undersampling is a crucial data processing step to address class imbalance problems
+    in machine learning and also helps improve the model performance and fairness.
+    Each of these techniques offers unique advantages and can be tailored to specific
+    datasets and the goals of machine learning projects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article provides a comprehensive understanding of the undersampling methods
+    and their application in Python. I hope it enables you to make informed decisions
+    on tackling class imbalance challenges in your machine-learning projects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[](https://vidhi-chugh.medium.com/)**[Vidhi Chugh](https://vidhi-chugh.medium.com/)****
+    is an AI strategist and a digital transformation leader working at the intersection
+    of product, sciences, and engineering to build scalable machine learning systems.
+    She is an award-winning innovation leader, an author, and an international speaker.
+    She is on a mission to democratize machine learning and break the jargon for everyone
+    to be a part of this transformation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Deal with Missing Data Using Interpolation Techniques in Pandas](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Exploring Data Cleaning Techniques With Python](https://www.kdnuggets.com/2023/04/exploring-data-cleaning-techniques-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Techniques to Handle Imbalanced Data](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Ultimate Guide To Different Word Embedding Techniques In NLP](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn modern forecasting techniques to help predict future business…](https://www.kdnuggets.com/2022/12/sphere-learn-modern-forecasting-techniques-help-predict-future-business-outcomes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

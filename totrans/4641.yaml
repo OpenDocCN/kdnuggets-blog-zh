@@ -1,0 +1,363 @@
+- en: Become a Pro at Pandas, Python’s Data Manipulation Library
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/06/pro-pandas-python-library.html](https://www.kdnuggets.com/2019/06/pro-pandas-python-library.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Julien Kervizic,](https://www.linkedin.com/in/julienkervizic/) Senior
+    Enterprise Data Architect at GrandVision NV**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Pandas library is the most popular data manipulation library for Python.
+    It provides an easy way to manipulate data through its data-frame api, inspired
+    from R’s data-frames.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/73e3a95f3d1080b63b095ed1c8a7ae81.png)Photo by [Damian Patkowski](https://unsplash.com/@damianpatkowski?utm_source=medium&utm_medium=referral)
+    on [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)'
+  prefs: []
+  type: TYPE_IMG
+- en: Understanding the Pandas library
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: One of the keys to getting a good understanding of Pandas is to understand that
+    Pandas is mostly a wrapper around a series of other Python libraries. The main
+    ones being Numpy, SQLAlchemy, Matplotlib and openpyxl.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The core internal model of the data-frame is a series of numpy arrays, and Pandas
+    functions such as the now deprecated “as_matrix” return results in that [internal
+    representation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.as_matrix.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandas leverages other libraries to get data in and out of data-frames, SQLAlchemy,
+    for instance, is used through the read_sql and to_sql functions. And openpyxl
+    and xlsx writer are used for read_excel and to_excel functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Matplotlib and Seaborn are instead used to provide an easy interface to plot
+    information available within a data frame, using command such as df.plot().
+  prefs: []
+  type: TYPE_NORMAL
+- en: Numpy’s Pandas — Efficient Pandas
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: One of the complain that you often hear is that Python is slow or that it is
+    difficult to handle large amount of data. Most often than not, this is due to
+    poor efficiency of the code being written. It is true that native Python code
+    tends to be slower than compiled code, but libraries like Pandas effectively provides
+    an interface in Python code to compiled code. Knowing how to properly interface
+    with it, let us get the best out of Pandas/Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**APPLY VECTORIZED OPERATIONS**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandas, like its underlying library Numpy, performs vectorized operations more
+    efficiently than performing loops. These efficiencies are due to vectorized operations
+    being performed through C compiled code, rather than native Python code and on
+    the ability of vectorized operations to operate on entire datasets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The apply interface allows to gain some of the efficiency by using a CPython
+    interfaces to do the looping:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: But most of the performance gain would be obtained from the use of vectorized
+    operations themselves, be it directly in Pandas or by calling its internal Numpy
+    arrays directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/3c9be232f2b5ca462463b089f4509c23.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'As you can see from the picture above the difference in performance can be
+    drastic, between processing it with a vectorized operation (3.53ms) and looping
+    with Apply to do an addition (27.8s). Additional efficiencies can be obtained
+    by directly invoking the numpy’s arrays and API, eg:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e1dd6e05293f2014c3a4a6e11a84edfb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Swifter:*** Swifter is a Python library that makes it easy to vectorize
+    different types of operations on dataframe, its API is fairly similar to that
+    of the Apply function.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**EFFICIENT DATA STORING THROUGH DTYPES**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When loading a data-frame into memory, be it through read_csv, or read_excel
+    or some other data-frame read function, SQL makes type inference which might prove
+    to be inefficient. These APIs allow you to specify the types of each columns explicitly.
+    This allows for a more efficient storage of data in memory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Dtypes are native object from [Numpy](https://docs.scipy.org/doc/numpy/reference/arrays.dtypes.html),
+    which allows you to define the exact type and number of bits used to store certain
+    informations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Numpy’s dtype `np.dtype(''int32'')` would for instance represent a 32 bits
+    long integer. Pandas default to 64 bits integer, we could save half the space
+    by using 32 bits:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/46631fef435c478ae884ed86433f6d70.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: memory_usage() shows the number of bytes used by each of the columns, since
+    there is only one entry (row) per column, the size of each int64 column is 8 bytes
+    and of int32 4 bytes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandas also introduces the categorical dtype, that allows for efficient memory
+    utilization for frequently occurring values. In the example below, we can see
+    a 28x decrease in memory utilization for the field posting_date when we converted
+    it to a categorical value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/62ebd44ecf864e7bdcdfee1279cbb88a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'In our example, the overall size of the data-frame drops by more than 3X by
+    just changing this data type:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b72d530479acbb713a57679d26728ca8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Not only using the right dtypes allows you to handle larger datasets in memory,
+    it also makes some computations become more effective. In the example below, we
+    can see that using categorical type brought a 3X speed improvement for the groupby/sum
+    operation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f3fefdc673f8c61cb4e5c7bd636b5806.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Within Pandas, you can define the dtypes during the data load (read_ ) or as
+    a type conversion (astype).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***CyberPandas:*** [CyberPandas](https://www.anaconda.com/cyberpandas-extending-pandas-with-richer-types/)
+    is one of the different library extensions that enables a richer variety of datatypes
+    by supporting ipv4 and ipv6 data types and storing them efficiently.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**HANDLING LARGE DATASETS WITH CHUNKS**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandas allows for the loading of data in a data-frame by chunks, it is therefore
+    possible to process data-frames as iterators and be able to handle data-frames
+    larger than the available memory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cef1c6aae090dae3a12db27756c65cd4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The combination of defining a chunksize when reading a data source and the
+    get_chunk method, allows Pandas to process data as an [iterator](https://www.w3schools.com/python/python_iterators.asp).
+    For instance, in the example shown above, the data frame is read 2 rows at the
+    time. These chunks can then be iterated through:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: The output of which can then be fed to a csv file, pickled, exported to a database,
+    etc…
+  prefs: []
+  type: TYPE_NORMAL
+- en: setting up a operator by chunks also allows certain operations to be performed
+    through [multi-processing](https://docs.python.org/2/library/multiprocessing.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Dask:*** It is a framework built on top of Pandas and built with multi-processing
+    and distributed processing in mind. It makes use of collections of chunks of Pandas
+    data-frames both in memory and on disk.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: SQL Alchemy’s Pandas — Database Pandas
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Pandas also is built up on top of SQLAlchemy to interface with databases, as
+    such it is able to download datasets from diverse SQL type of databases as well
+    as push records to it. Using the SQLAlchemy interface ( rather than using the
+    Pandas API) directly allows us to do certain operations not natively supported
+    within Pandas such as transactions or upserts:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**SQL TRANSACTIONS**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandas can also make use of SQL transactions, handling commits and rollbacks.
+    Pedro Capelastegui, explained in one of his [blog posts](https://capelastegui.wordpress.com/2018/05/21/commit-and-rollback-with-pandas-dataframe-to_sql/),
+    how Pandas could take advantage of transactions through a SQLAlchemy context manager.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The advantage of using a SQL transaction, is the fact that the transaction would
+    roll back, if the data load fail.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**SQL Extension**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***PandaSQL***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandas has a few SQL extension such as [pandasql](https://pypi.org/project/pandasql/)
+    a library that allows to perform SQL queries on top of data-frames. Through pandasql
+    the data-frame object can be queried directly as if they were database tables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6be752d989ff587a20fab8e397687efd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***SQL UPSERTs***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandas doesn’t natively support upsert exports to SQL on databases supporting
+    this function. [Patches to Pandas](https://github.com/ryanbaumann/Pandas-to_sql-upsert)
+    exists to allow this feature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: MatplotLib/Seaborn — Visual Pandas
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Matplotlib and Seaborn visualization are already integrated in some of the dataframe
+    APIs such as through the .plot command. There is a fairly comprehensive documentation
+    as how the interface works, on [Pandas website](https://pandas.pydata.org/pandas-docs/version/0.22/visualization.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Extensions:** Different extensions exists such as Bokeh and plotly to provide
+    interactive visualization within Jupyter notebooks, while it is also possible
+    to extend matplotlib to handle [3D graph](https://pythonprogramming.net/3d-graphing-pandas-matplotlib/)s.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Other Extensions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Quite a few other extensions for Pandas exists, which are there to handle no-core
+    functionalities. One of them is tqdm, which provides a progress bar functionality
+    for certain operations, another is pretty Pandas which allows to format dataframes
+    and add summary informations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***tqdm***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'tqdm is a progress bar extension in Python that interacts with Pandas, it allows
+    user to see the progress of maps and apply operations on Pandas dataframe when
+    using the relevant function (progress_map and progress_apply):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f0fd3706d7d79e11c99e728aa4dee228.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***PrettyPandas***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PrettyPandas](https://github.com/HHammond/PrettyPandas) is a library that
+    provides an easy way to format data-frames and to add table summaries to them:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/70e929ab46a99eaee395d8067e2f2abf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Bio: [Julien Kervizic](https://www.linkedin.com/in/julienkervizic/)** is
+    a Senior Enterprise Data Architect at GrandVision NV.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/analytics-and-data/become-a-pro-at-pandas-pythons-data-manipulation-library-264351b586b1).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Pandas DataFrame Indexing](/2019/04/pandas-dataframe-indexing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beginner Data Visualization & Exploration Using Pandas](/2018/10/beginner-data-visualization-exploration-using-pandas-beginner.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Data Preparation Case Files: Group-based Imputation](/2017/09/python-data-preparation-case-files-group-based-imputation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Testing Like a Pro: A Step-by-Step Guide to Python''s Mock Library](https://www.kdnuggets.com/testing-like-a-pro-a-step-by-step-guide-to-pythons-mock-library)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Free Python Resources That Can Help You Become a Pro](https://www.kdnuggets.com/free-python-resources-that-can-help-you-become-a-pro)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Pandas One Liners for Data Access, Manipulation, and Management](https://www.kdnuggets.com/2023/01/pandas-one-liners-data-access-manipulation-management.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Essential Python Libraries for Data Manipulation](https://www.kdnuggets.com/essential-python-libraries-for-data-manipulation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[8 Best Python Image Manipulation Tools](https://www.kdnuggets.com/2022/11/8-best-python-image-manipulation-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Pandas AI: The Generative AI Python Library](https://www.kdnuggets.com/2023/05/pandas-ai-generative-ai-python-library.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

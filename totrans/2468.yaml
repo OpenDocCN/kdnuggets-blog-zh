@@ -1,0 +1,608 @@
+- en: Effective Testing for Machine Learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/01/effective-testing-machine-learning.html](https://www.kdnuggets.com/2022/01/effective-testing-machine-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: We presented a shorter version of this blog series at [PyData Global 2021](https://www.youtube.com/watch?v=Oc5x0qrB0FA).
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_BQ
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[Click here for Part II](https://ploomber.io/blog/ml-testing-ii), [here for
+    Part III](https://ploomber.io/blog/ml-testing-iii).'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Effective Testing for Machine Learning](../Images/dc6875e133c8813b839b431613eab46a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This blog post series describes a strategy I’ve developed over the last couple
+    of years to test Machine Learning projects effectively. Given how uncertain ML
+    projects are, this is an incremental strategy that you can adopt as your project
+    matures; it includes test examples to provide a clear idea of how these tests
+    look in practice, and a complete project implementation is [available on GitHub](https://github.com/edublancas/ml-testing).
+    By the end of the post, you’ll be able to develop more robust ML pipelines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Challenges when testing ML projects
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Testing Machine Learning projects is challenging. Training a model is a long-running
+    task that may take hours to run and has a non-deterministic output, which is the
+    opposite we need to test software: quick and deterministic procedures. One year
+    ago, I published a [post](https://ploomber.io/posts/ci-for-ds/) on testing data-intensive
+    projects to make Continuous Integration feasible. I later turned that blog post
+    into a talk and presented it at [PyData 2020](https://www.youtube.com/watch?v=zvnjOzvsvXw).
+    But such previous work only covered generic aspects of testing data pipelines
+    and left out testing ML models.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s important to clarify that *testing and monitoring are two different things*.
+    Testing is an offline process that allows us to evaluate whether our code does
+    what it’s supposed to do (i.e., produce a high-quality model). In contrast, monitoring
+    involves inspecting a *deployed* model to ensure it works correctly. Thus, *testing
+    happens before deployment; monitoring occurs after deployment.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: I use the terms *pipeline* and *task* throughout the post. A task is a unit
+    of work (usually a function or a script); for example, one task can be a script
+    that downloads the raw data, and another could clean such data. On the other hand,
+    a pipeline is just a series of tasks executed in a pre-defined order. The motivation
+    for building pipelines made of small tasks is to make our code more maintainable
+    and easier to test; that lines up with the goal of our [open-source framework](https://github.com/ploomber/ploomber) to
+    help data scientists build more maintainable projects using Jupyter. In the following
+    sections, you’ll see some sample Python code; we use [pytest](https://pytest.org/),
+    pandas, and [Ploomber](https://github.com/ploomber/ploomber).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Parts of a Machine Learning pipeline
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Before we describe the testing strategy, let’s analyze how a typical ML pipeline
+    looks. By analyzing each part separately, we can clearly state its role in the
+    project and design a testing strategy accordingly. A standard ML pipeline has
+    the following components:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Feature generation pipeline.** A series of computations to process *raw data* and
+    map each data point to a feature vector. Note that we use this component at training
+    and serving time.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Training task.** Takes a training set and produces a model file.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Model file.** The output from the training task. It’s a single file that
+    contains a model with learned parameters. In addition, it may include pre-processors
+    such as scaling or one-hot encoding.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Training pipeline.** Encapsulates the training logic: get raw data, generate
+    features, and train models.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Serving pipeline.** (also known as inference pipeline) Encapsulates the serving
+    logic: gets a new observation, generates features, passes features through the
+    model, and returns a prediction.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![Effective Testing for Machine Learning](../Images/e20b64e84f020e07a8eaf02fdb14ec45.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: What can go wrong?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To motivate our testing strategy, let’s enumerate what could go wrong with
+    each part:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature generation pipeline
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Cannot run the pipeline (e.g., setup problems, broken code).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Cannot reproduce a previously generated training set.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Pipeline produces low-quality training data.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Training task
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Cannot train a model (e.g., missing dependencies, broken code).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Running the training task with high-quality data produces low-quality models.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Model file
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The generated model has a lower quality than our current model in production.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The model file does not integrate correctly with the serving pipeline.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Serving pipeline
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Cannot serve predictions (e.g., missing dependencies, broken code).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Mismatch between preprocessing at training and serving time (aka [training-serving
+    skew](https://ploomber.io/blog/train-serve-skew/)).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Outputs a prediction when passing invalid raw data.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Crashes when passed valid data.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Note that this isn’t an exhaustive list, but it covers the most common problems.
+    Depending on your use case, you may have other potential issues, and it’s vital
+    to list them to customize your testing strategy accordingly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Testing strategy
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'When developing ML models, the faster we iterate, the higher the chance of
+    success. Unlike traditional software engineering projects where it’s clear what
+    we should build (e.g., a sign-up form), ML projects have a lot of uncertainty:
+    Which datasets to use? What features to try? What models to use? Since we don’t
+    know the answer to those questions in advance, we must try a few experiments and
+    evaluate whether they yield better results. Because of this uncertainty, we have
+    to balance iteration speed with testing quality. If we iterate *too fast*, we
+    risk writing sloppy code; if we spend too much time thoroughly testing every line
+    of code, we won’t improve our models fast enough.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This framework steadily increases the quality of your tests. The strategy consists
+    of five levels; when reaching the last level, you have robust enough testing that
+    allows you to push new model versions to production confidently.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Testing levels
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Smoke testing.** We ensure our code works by running it on each `git push`.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Integration testing and unit testing.** Test task’s output and data transformations.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Distribution changes and serving pipeline.** Test changes in data distributions
+    and test we can load a model file and predict.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Training-serving skew.** Test that the training and serving logic is consistent.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Model quality.** Test model quality.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Quick introduction to testing in with `pytest`
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*If you’ve used `pytest` before, you may skip this section.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Tests are short programs that check whether our code is working. For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'A test is a function that runs some code, and *asserts* its output. For example,
+    the previous file has two tests: `test_add` and `test_substract`, organized in
+    a file called `test_math.py`; it’s usual to have one file per module (e.g., `test_math.py` tests
+    all functions in a `math.py` module). Testing files usually go under a `tests/` directory:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Testing frameworks such as [pytest](https://pytest.org/) allow you to collect
+    all your tests, execute them and report which ones fail and which ones succeed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'A typical project structure looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`src/` contains your project’s pipeline’s tasks and other utility functions. `exploratory/` includes
+    exploratory notebooks and your tests go into the `tests/` directory. The code
+    in `src/` must be importable from the other two directories. The easiest way to
+    achieve this is to [package your project](https://ploomber.io/posts/packaging/).
+    Otherwise, you have to fiddle with `sys.path` or `PYTHONPATH`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to navigate the sample code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Sample code is available [here](https://github.com/edublancas/ml-testing). The
+    repository has five branches, each implementing the testing levels I’ll describe
+    in upcoming sections. Since this is a progressive strategy, you can see the evolution
+    of the project by starting from the [first branch](https://github.com/edublancas/ml-testing/tree/1-smoke-testing) and
+    moving up to the following branches.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The project implements the pipeline using [Ploomber, our open-source framework](https://github.com/ploomber/ploomber).
+    Hence, you can see the pipeline specification in the `pipeline.yaml` file. To
+    see which commands we’re using to test the pipeline, open [`.github/workflows/ci.yml`](https://github.com/edublancas/ml-testing/blob/1-smoke-testing/.github/workflows/ci.yml),
+    this is a GitHub actions configuration file that tells GitHub to run certain commands
+    on each `git push`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While not strictly necessary, you may want to check out our [Ploomber introductory
+    tutorial](https://docs.ploomber.io/en/latest/get-started/spec-api-python.html) to
+    understand the basic concepts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that the code snippets displayed in this blog post are generic (they don’t
+    use any specific pipeline framework) because we want to explain the concept in
+    general terms; however, the sample code in the [repository](https://github.com/edublancas/ml-testing) uses
+    Ploomber.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Level 1: Smoke testing'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**[Sample code available here.](https://github.com/edublancas/ml-testing/tree/1-smoke-testing)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Smoke testing is the most basic level of testing and should be implemented as
+    soon as you start a project. Smoke testing does not check the output of your code
+    but only ensures that it runs. While it may seem too simplistic, it’s much better
+    than not having tests at all.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Documenting dependencies
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Listing external dependencies is step zero when starting any software project,
+    so ensure you document all the dependencies needed to run your project when creating
+    your [virtual environment](https://ploomber.io/posts/python-envs/). For example,
+    if using `pip`, your `requirements.txt` file may look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After creating your virtual environment, create another file (`requirements.lock.txt`)
+    to register installed versions of all dependencies. You can do so with the `pip
+    freeze > requirements.lock.txt` command (execute it after running `pip install
+    -r requirements.txt`), which generates something like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Recording specific dependency versions ensures that changes from any of those
+    packages do not break your project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another important consideration is to keep your list of dependencies as short
+    as possible. There’s usually a set of dependencies you need at development time
+    but not in production. For example, you may use `matplotlib` for model evaluation
+    plots, but you don’t need it to make predictions. Splitting your development and
+    deployment dependencies is highly recommended. Projects with a lot of dependencies
+    increase the risk of running into version conflicts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Testing feature generation pipelines
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'One of the first milestones in your project must be to get an end-to-end feature
+    generation pipeline. Write some code to get the raw data, perform some basic cleaning,
+    and generate some features. Once you have an end-to-end process working, you must
+    ensure that it is reproducible: delete the raw data and check that you can re-run
+    the process and get the same training data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once you have this, it’s time to implement our first test; run the pipeline
+    with a sample of the raw data (say, 1%). The objective is to make this test run
+    fast (no more than a few minutes). Your test would look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that this is a basic test; we’re not checking the output of the pipeline!
+    However, this simple test allows us to check whether the code runs. It’s essential
+    to run this test whenever we execute `git push`. If you’re using GitHub, you can
+    do so with [GitHub Actions](https://github.com/features/actions), other git platforms
+    have similar features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Testing the training task
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'After generating features, you train a model. The training task takes a training
+    set as an input and outputs a model file. Testing the model training procedure
+    is challenging because we cannot easily define an expected output (model file)
+    given some input (training set) – mainly because our training set changes rapidly
+    (i.e., add, remove features). So, at this stage, our first test only checks whether
+    the task runs. Since we disregard the output (for now), we can train a model with
+    a sample of the data; remember that this smoke test must execute on every push.
+    So let’s extend our previous example to cover feature generation *and* model training:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**In the sample repository, we are using Ploomber, so we test the feature pipeline
+    and training task by calling [`ploomber build`](https://github.com/edublancas/ml-testing/blob/1-smoke-testing/.github/workflows/ci.yml#L20),
+    which executes all tasks in our pipeline.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Level 2: Integration testing and unit testing'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**[Sample code available here.](https://github.com/edublancas/ml-testing/tree/2-integration-and-unit)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It’s essential to modularize the pipeline in small tasks to allow us to test
+    outputs separately. After implementing this second testing level, you achieve
+    two things:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ensure that the data used to train the model meets a minimum quality level.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Separately test the portions of your code that have a precisely defined behavior.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Let’s discuss the first objective.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Integration testing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Testing data processing code is complicated because its goal is subjective.
+    For example, imagine I ask you to test a function that takes a data frame and *cleans
+    it*. How would you test it? The idea of data cleaning is to improve data quality.
+    However, such a concept depends on the specifics of the data and your project.
+    Hence, it’s up to you to define the *clean data* concept and translate that into *integration
+    tests*, although in this case, we can use the term *data quality tests* to be
+    more precise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The idea of integration testing applies to all stages in your pipeline: from
+    downloading data to generating features: it’s up to you to define the expectations
+    at each stage. We can see a graphical representation of integration testing in
+    the following diagram:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Effective Testing for Machine Learning](../Images/a310c41357c27f8145b89ad4e2c73dbe.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'For example, to add integration tests to a data cleaning function (let’s call
+    it `clean`), we run a few checks at the end of the function’s body to verify its
+    output quality. Common checks include no empty values, numerical columns within
+    expected ranges or categorical values within a pre-defined set of values:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: This form of testing is different than the one we introduced in the first section. *Unit
+    tests exist in the `tests/` folder and can run independently, but integration
+    tests run when you execute your training pipeline.* Failing tests mean your data
+    assumptions do not hold, and data assumptions must be re-defined (which implies
+    updating your tests accordingly), or your cleaning procedure should change to
+    ensure your tests pass.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can write integration tests without any extra framework by adding assert
+    statements at the end of each task. However, some libraries can help. For example, [Ploomber](https://github.com/ploomber/ploomber) supports
+    running a function when a task finishes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Here’s the implementation](https://github.com/edublancas/ml-testing/blob/2-integration-and-unit/tests/quality.py) of
+    an integration test in our sample repository.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unit testing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Within each task in your pipeline (e.g., inside `clean`), you’ll likely have
+    smaller routines; such parts of your code should be written as separate functions
+    and unit tested (i.e., add tests in the `tests/` directory).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A good candidate for writing unit tests is when applying transformations to
+    individual values in a column. For example, say that you’re using the [heart disease](https://archive.ics.uci.edu/ml/datasets/heart+disease) dataset
+    and create a function to map the `chest_pain_type` categorical column from integers
+    to their corresponding human-readable values. Your `clean` function may look like
+    this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Unlike the general `clean` procedure, `transform.chest_pain_type` has an explicit,
+    objectively defined behavior: it should map integers to the corresponding human-readable
+    values. We can translate this into a unit test by specifying the inputs and the
+    expected outputs.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Unit testing must be a continuous stream of work on all upcoming testing levels.
+    Therefore, whenever you encounter a piece of logic with a precise objective, abstract
+    it into a function and test it separately.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Here’s an implementation](https://github.com/edublancas/ml-testing/blob/2-integration-and-unit/tests/test_transform.py) of
+    a unit test in the sample repository.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Up next
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'So far, we’ve implemented a basic strategy that ensures that our feature generation
+    pipeline produces data with a minimum level of quality (integration tests or data
+    quality tests) and verifies the correctness of our data transformations (unit
+    tests). In the next part of this series, we’ll add more robust tests: test for
+    distribution changes, ensure that our training and serving logic is consistent,
+    and check that our pipeline produces high-quality models.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you’d like to know when the second part is out, subscribe to our [newsletter](https://www.getrevue.co/profile/ploomber),
+    follow us on [Twitter](https://twitter.com/ploomber) or [LinkedIn](https://https//linkedin.com/company/ploomber/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Eduardo Blancas](https://www.linkedin.com/in/edublancas/)** is one of the
+    Ploomber co-founders. Ploomber is a Y Combinator-backed company that helps data
+    scientists build data pipelines FAST. We do that by allowing them to develop modular
+    pipelines and deploy them anywhere. Before that, he was a Data Scientist at Fidelity
+    Investments, where he deployed the first customer-facing Machine Learning model
+    for asset management. Eduardo holds an M.S. in Data Science from Columbia University
+    and a B.S. in Mechatronics Engineering from Tecnológico de Monterrey.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://ploomber.io/blog/ml-testing-i/). Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Hypothesis Testing and A/B Testing](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Difference Between Training and Testing Data in Machine Learning](https://www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beginner’s Guide to Machine Learning Testing With DeepChecks](https://www.kdnuggets.com/beginners-guide-to-machine-learning-testing-with-deepchecks)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A/B Testing: A Comprehensive Guide](https://www.kdnuggets.com/ab-testing-a-comprehensive-guide)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Testing Like a Pro: A Step-by-Step Guide to Python''s Mock Library](https://www.kdnuggets.com/testing-like-a-pro-a-step-by-step-guide-to-pythons-mock-library)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hypothesis Testing Explained](https://www.kdnuggets.com/2021/09/hypothesis-testing-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

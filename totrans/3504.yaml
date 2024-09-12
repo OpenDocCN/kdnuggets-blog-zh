@@ -1,0 +1,397 @@
+- en: Detecting In-App Purchase Fraud with Machine Learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2015/11/detecting-app-purchase-fraud-machine-learning.html](https://www.kdnuggets.com/2015/11/detecting-app-purchase-fraud-machine-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2015/11/detecting-app-purchase-fraud-machine-learning.html/2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By Ella Gati, [Soomla](http://soom.la/)**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![detecting-fraud](../Images/ab29ff4938f17b9d142fb4fed194168d.png)Hacking applications
+    such as [Freedom](http://onhax.net/freedom-iap-apk), [iAP Cracker](http://www.cydiainsider.com/iap-cracker),
+    [iAPFree](http://www.cydiainsider.com/iapfree), etc. allow users to make in-app
+    purchases for free. With these kinds of hacks the player receives the coins, gems,
+    levels or lives they purchased without paying any money. If the game developer
+    did not implement any validation process on the in-app purchases, such as [SOOMLA’s
+    fraud protection](http://know.soom.la/unity/grow/grow_fraudprotection), the purchases
+    are recorded as real purchases in his system. As a result, the reported revenue
+    may differ greatly from the real revenue (especially in popular games with lots
+    of fraud).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We would like to make reports as accurate as possible, and to be able to communicate
+    to the game developers the real state of their game. We use machine learning and
+    statistical modeling techniques for our solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With help from a few big games in the GROW data network we were able to build
+    a model that classifies each purchase as real or fraud, with a very high level
+    of accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In-app purchase model features
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The model uses a variety of purchase, user and item features.  The following
+    table details a partial list of the features we computed:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **Purchase** | **User** | **Item** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Date of purchase | Total number of purchases | Total number of purchases
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Time of purchase | Total revenue | Total revenue |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Country from which the purchase was made | Average revenue per day | Average
+    number of purchases per day |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Currency in which the purchase was made | Number of games the user played
+    | Average revenue per day |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Whether the phone locale matches the country | Number of games in which the
+    user purchased | Maximum number of purchases per day |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Whether the currency of the purchase matches the currency in the country
+    | Whether the user was ever blocked by receipt verification | Maximum revenue
+    per day |'
+  prefs: []
+  type: TYPE_TB
+- en: '| … | … | … |'
+  prefs: []
+  type: TYPE_TB
+- en: Decision trees to the rescue
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Decision trees, as their name suggests, are trees that help decision making.
+    Each internal node of the tree tests the value of one feature, and leaf nodes
+    are target classes. Given a new observation, the tree can be used to decide what
+    class should be assigned to it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In our case the tree can have two kinds of leaf nodes (classes): fraud or no-fraud,
+    and the features are the ones detailed above. Examples for internal nodes can
+    be “Total number of purchases > 100” or “currency matches country = true”.  To
+    avoid overfitting the training data, tree-based techniques combine multiple trees
+    to get a final output that is more accurate than each individual tree output.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Tree based classification algorithms have many advantages, to name a few:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Nonlinear relationships between parameters do not affect tree performance.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Decision trees implicitly perform variable screening or feature selection.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Decision trees require relatively little data preparation and are easy to interpret
+    and understand.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We experimented with two tree-based classifiers. A random forest classifier
+    is an ensemble of decision trees trained on subsets of the data, that outputs
+    the class that is the mode of the classes output of the individual trees. Boosted
+    trees combine multiple decision trees using the gradient boosting technique, fitting
+    a weighted additive expansion of simple trees.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another model parameter is the class weights, that have two forms, uniform in
+    which all class get a weight of 1, and by-class that uses the relative size of
+    the class out of the full population as the class weight.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fraud classification performance
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We measure the performance of our model by four measures:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Accuracy: ratio of correct classifications out of all test data.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'False Positive rate (FPR): ratio of valid purchases wrongly classified as fraud
+    out of all valid purchases.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'False Negative rate (FNR): ratio of fraud purchases wrongly classified as non-fraud
+    out of all fraud purchases.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'F1 score: harmonic mean of [precision and recall](https://en.wikipedia.org/wiki/Precision_and_recall),
+    a measure that comes from the information retrieval world, and conveys the balance
+    between the other two measures.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Classifying valid purchases and users as fraud is a much worse mistake than
+    missing a fraud purchase, thus we aim at reducing FPR to minimum, even at a cost
+    of having a slightly higher FNR.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our ground truth data includes purchases from 4 games. For the largest of them
+    we have labels for 145K purchases. For both algorithms parameters were tuned using
+    cross-validation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Per game model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For the first experiment we built a different model for each game. The following
+    table details the performance for different games and model parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **Game** | **Classifier** | **Class weights** | **FPR** | **FNR** | **F1
+    score** | **Accuracy** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | Random forest | uniform | 0.22 | 0.03 | 0.95 | 0.93 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | Random forest | by class | 0.10 | 0.08 | 0.95 | 0.92 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | Boosted trees | uniform | 0.09 | 0.03 | **0.97** | 0.96 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | Boosted trees | by class | **0.05** | 0.05 | 0.96 | 0.95 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | Random forest | uniform | 0.02 | 0.16 | 0.89 | 0.85 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | Random forest | by class | 0.01 | 0.16 | 0.91 | 0.82 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | Boosted trees | uniform | **0.01** | 0.11 | **0.94** | 0.84 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | Boosted trees | by class | 0.05 | 0.05 | 0.90 | 0.85 |'
+  prefs: []
+  type: TYPE_TB
+- en: These results are very impressive! Per game model works very well with as much
+    as 97% F1 score.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The second game has less ground truth data (it is a game with 100 times less
+    purchases per month on average, and we got one month of purchases data from them),
+    which explains the lower performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Boosted trees outperform the random forest algorithm, which is not surprising,
+    since it is an optimization that normally gives you better accuracy with less
+    trees.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using weights tuned by the class size usually results in a lower FPR and higher
+    FNR, with a slightly lower F1 score. As stated before, we care more about our
+    false positive rate, so for following experiments we use boosted trees algorithm
+    with non-uniform weights.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cross-games classification
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We have seen that we can get very good results when we build a model for a specific
+    game. But we have ground truth data only for four games. What about the rest of
+    the games?
+  prefs: []
+  type: TYPE_NORMAL
+- en: To test that, the second experiment was conducted with a train set that contains
+    data from one game and test set from a different game.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![AccuracyHeatMap](../Images/14ce57eb9cb840125ddfdfea237073bb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The above table shows the accuracy for the cross-game experiments. All scores
+    are 79% accurate or higher! This is great news for all of the other games.  As
+    expected, the highest scores are achieved when the train and the test set come
+    from the same game data (70%-30% random split). The lowest scores are when testing
+    on the 4th game, which is the smallest of them (200 purchases).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another interesting result is the FPR scores in this experiment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![FPRHeatMap](../Images/2088015e8df1c497a1723c68cb429a58.png)](http://blog.soom.la/wp-content/uploads/2015/11/FPRHeatMap1.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It also stands out that the model trained on game 4 is generating poor FPR scores.
+    This is due to the small number of purchases, and the relatively low amount of
+    fraud (54% compared to 77%-85% in other games). As game 1 has the largest ground
+    truth data, models trained on the other (and smaller) games have a very high false
+    positive rate, up to 30% of the valid purchases are classified as fraud. When
+    training on other games we get much better results with 1-2% wrongly classified
+    valid purchases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This experiment has proved that data transfer between games works well in most
+    cases, but can be problematic if your game has a very unique user behavior.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Results
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Finally, we trained a model on all of our ground truth data and used it to classify
+    all purchases in our data base. According to the results of of the classifier,
+    55.7% of purchases are fraud, and these purchases constitute 72.9% of the total
+    revenue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Fraud percentage by game size - SOOMLA](../Images/f489742d584de7c49173e9dfb75c3c7c.png)](http://blog.soom.la/wp-content/uploads/2015/11/fraud-percentage-by-game-size.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: These numbers vary between different games. We can see a general trend of highest
+    fraud percentage with bigger games (games with more users), even though we also
+    see relatively small games with up to 89% fraud. The differences can be explained
+    by different economy models, or popularity of the game in different countries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: According to our model results, fraud is most widespread in Slavic countries.
+    Russia, Ukraine and Belarus are on the top of the list, with over 90% of purchases
+    being made fraudulently.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Fraud rate per country - SOOMLA](../Images/6663ecfe3bd727cf726651dcb4c2ed86.png)](http://blog.soom.la/wp-content/uploads/2015/11/fraud-rate-per-country.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The model predicts that only 2% of the users have some valid purchases and some
+    fraud. The other 98% of users are either fraudsters (always commit fraud) or not
+    (all purchases are valid). Out of the 98%, over half are fraudsters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Implications for game developers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Knowing which users are fraudsters enables game developers to adapt game play
+    and take restrictive action to ensure minimum lost revenue.  Some options are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Blocking in-app purchases altogether for a specific user.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Increasing game difficulty as a means of stalling the user’s non-legitimate
+    progression made with hacked in-game coins.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Increasing ad frequency to maximize revenue from abusive users who will never
+    pay.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Bricking the game e.g. disabling all gameplay with a prominent warning message
+    to the user requesting an immediate in-app purchase deposit to unlock the game.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How can we improve?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The more ground truth we have, the better our classification results will be.
+    Game developers and studios can get better reports and help us improve by giving
+    your feedback or sharing your sales reports with us.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Questions? Contact [ella@soom.la](mailto:ella@soom.la).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[This article first appeared on Soomla blog](http://blog.soom.la/2015/11/detecting-app-purchase-fraud-machine-learning.html
+    ).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data Mining Medicare Data – What Can We Find?](/2014/04/data-mining-medicare-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to discover stolen data using Hadoop and Big data?](/2015/11/discover-stolen-data-hadoop-big-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fraud Detection Solutions](/solutions/fraud-detection.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Free Tools For Detecting ChatGPT, GPT3, and GPT2](https://www.kdnuggets.com/2023/02/5-free-tools-detecting-chatgpt-gpt3-gpt2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 Tools for Detecting ChatGPT, GPT-4, Bard, and Claude](https://www.kdnuggets.com/2023/05/top-10-tools-detecting-chatgpt-gpt4-bard-llms.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build a Machine Learning Web App in 5 Minutes](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News March 9, 2022: Build a Machine Learning Web App in 5…](https://www.kdnuggets.com/2022/n10.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploy a Machine Learning Web App with Heroku](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,311 @@
+- en: Fuzzy Joins in Python with d6tjoin
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/07/fuzzy-joins-python-d6tjoin.html](https://www.kdnuggets.com/2020/07/fuzzy-joins-python-d6tjoin.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Norman Niemer](https://www.linkedin.com/in/normanniemer/), Chief Data
+    Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Combining different data sources is a time suck!
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Combining data from different sources can be a big time suck for data scientists. [d6tjoin](https://github.com/d6t/d6tjoin) is
+    a python library that lets you join pandas dataframes quickly and efficiently.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Coauthored with [Haijing Li](https://www.linkedin.com/in/haijing-li-7b50a11b2/),
+    Data Analyst in Financial Services, MS Business Analytics@Columbia University.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Example
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I have made up this example to illustrate what d6tjoin is capable of.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Suppose several companies'' stocks have gained my attention for a while and
+    I have came up with a strategy to score those companies'' performances in a 1-5
+    point scale. Backtesting on history data will help me evaluate if stock price
+    really reflects those scores and find out how I want to trade according to those
+    scores. Information I need for backtesting is contained in the following two datasets:
+    df_price contains historical stock prices of year 2019 and df_score contains scores
+    updated regularly by myself.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![df_price](../Images/67e246648d2e09dbd95e8b4c319ac548.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/df_price.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![df_score](../Images/4d4bcc44740f8afc61d10b767d583622.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/df_score.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To prepare for backtesting, I need to merge "score" column to df_price. Obviously,
+    ticker name and date should be the merge keys. But there are two problems: 1.Values
+    in "ticker" of df_price and of df_valuation are not identical; 2.Scores were recorded
+    on a monthly basis and I want each row in df_price to be assigned with the most
+    recent assuming next score would not be available until next update date.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prejoin Analysis
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: One thing best about d6tjoin is that it provides easy pre join diagnostic. This
+    is particularly useful for detecting potential data problems even if you did't
+    intend to do fuzzy join.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: After this, we know that the two tables are not all matched on merge keys. This
+    would be more useful when you have larger size datasets and messier string identifier
+    that you cannot tell by a glance if the two datasets have different key values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For our case, a more useful method is `Prejoin.match_quality()`.It summarizes
+    the number of matched/unmatched records for each join key. In our case, no ticker
+    name are exactly matched and few dates are matched. This is why we need d6tjoin
+    to help with fuzzy join.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[![match_quality()](../Images/005abbd14b3072355351643592ddf80a.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/match_quality.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Join with Misaligned Ids(names) and Dates
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'd6tjoin does best match joins on strings, dates and numbers. Its `MergeTop1()`
+    object in `d6tjoin.top1` module is very versatile that gives you flexibility to
+    define how you want to merge: exact or fuzzy on multiple keys using default or
+    costumed difference functions. By default, distance of strings are calculated
+    using Levenshtein distance.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our example, both 'ticker' and 'date' are misaligned in the two datasets,
+    so we need to do fuzzy join on both.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Result is stored in dictionary structure which contains two keys: `{''merged'':
+    a pandas dataframe of the merged result; ''top1'': performance statistics and
+    summary for each join key}`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s take a look at the result:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The first line gives back performance summary on key 'ticker'. It shows not
+    only matched key values on right and left but also the calculated difference scores
+    in `_top1diff_` column. By default, each key value in the left table should be
+    matched to one from the right table. Therefore even if "SRPT-US" and "VRTX-US"
+    are not recorded in df_score, they still get matched to some values. We can solve
+    this problem by setting `top_limit=3`, which will make any matching that differs
+    larger than 3 ignored. [![top1](../Images/80503f8e9a5a21da51fbf0e5219ee8a0.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/1attempt_ticker_match_quality.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The second line gives back the merged dataset. [![merged](../Images/39162354e5fc14a7d475ebf3f64428b4.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/1attempt_result.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The original df_price dataset contains only 1536 rows but why after merged it
+    becomes 5209 rows? Well, that's because in the original datasets we parse "date"
+    as strings. d6tjoin use Levenshtein distance to calculate difference for strings
+    by default and so one date from left would be matched with several dates from
+    right. That tells you everytime dealing with date you should check its datatype
+    first.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Change "date" datatype from string to datetime object and set `top_limit=3` for
+    "ticker". Let's check the result again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[![top1](../Images/085c379b8c12262cd5da1d06e70350dd.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/2attempt_ticker_match_qualtiy.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![result](../Images/87d063e99c19987461e639b9776b03c3.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/2attempt_result.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Looks good! All the tickers in left are perfectly matched and dates from left
+    are matched to the closest from the right.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Advanced Usage Option: Passing a Custom Difference Function'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now we have one last problem left. Remember that we want to assume scores would
+    not be available until it was assigned. That means we want each row from df_price
+    to be matched to a previously most recent score. But by default d6tjoin doesn't
+    consider the order of dates but only match with the closest date either before
+    or behind.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To tackle this problem, we need to write a custom difference function: if date
+    from left is previous to that from right, the calculated difference should be
+    made large enough to let the match ignored.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now let’s parse the custom difference function in and see result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[![top1](../Images/7cf175a76b611f90b08070cdb51b7afe.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/3attempt_date_match_quality.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![result](../Images/f96676afd13554d4a4de1cbb5c5cf557.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/3attempt_result.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now we have our final merged dataset: price data without a previously assigned
+    score are ignored and the others are each assigned with a previously most recent
+    score.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'd6tjoin provides features including:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pre join diagnostics to identify mismatched join keys
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Best match joins that finds most similar value of misaligned ids, names and
+    dates
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Ability to customize difference functions, set max difference and other advanced
+    features
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Check out [d6t library](https://github.com/d6t/d6t-python). It provides solutions
+    to common data science problems including:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[d6tflow](https://github.com/d6t/d6tflow): build data science workflow'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[d6tjoin](https://github.com/d6t/d6tjoin): quickly fuzzy joins'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[d6tpipe](https://github.com/d6t/d6tpipe): quickly share and distribute data'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Norman Niemer](https://www.linkedin.com/in/normanniemer/)** is the
+    Chief Data Scientist at a large asset manager where he delivers data-driven investment
+    insights. He holds a MS Financial Engineering from Columbia University and a BS
+    in Banking and Finance from Cass Business School (London).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/Fuzzy%20joins%20in%20python%20with%20d6tjoin.md).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Explaining “Blackbox” Machine Learning Models: Practical Application of SHAP](/2020/05/explaining-blackbox-machine-learning-models-practical-application-shap.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 Coding Mistakes Made by Data Scientists](/2019/04/top-10-coding-mistakes-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 Statistics Mistakes Made by Data Scientists](/2019/06/statistics-mistakes-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[SQL For Data Science: Understanding and Leveraging Joins](https://www.kdnuggets.com/2023/08/sql-data-science-understanding-leveraging-joins.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Step up your Python game with Fast Python for Data Science!](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Enum: How To Build Enumerations in Python](https://www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simplifying Decision Tree Interpretability with Python & Scikit-learn](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sparse Matrix Representation in Python](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

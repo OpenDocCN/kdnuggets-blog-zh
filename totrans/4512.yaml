@@ -1,0 +1,440 @@
+- en: Audio Data Analysis Using Deep Learning with Python (Part 2)
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/02/audio-data-analysis-deep-learning-python-part-2.html](https://www.kdnuggets.com/2020/02/audio-data-analysis-deep-learning-python-part-2.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/986e76f575c13afa96e37e020da7adcd.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Image [Credits](https://deepmind.com/blog/article/wavenet-generative-model-raw-audio)
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the [previous article](https://levelup.gitconnected.com/audio-data-analysis-using-deep-learning-part-1-7f6e08803f60),
+    we started our discussion about audio signals; we saw how we can interpret and
+    visualize them using Librosa python library. We also learned how to extract necessary
+    features from a sound/audio file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We concluded the previous article by building an Artificial Neural Network(ANN)
+    for the music genre classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we are going to build a Convolutional Neural Network for music
+    genre classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Nowadays, deep learning is more and more used for Music Genre Classification:
+    particularly Convolutional Neural Networks (CNN) taking as entry a spectrogram
+    considered as an image on which are sought different types of structure.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Convolutional Neural Networks (CNN) are very similar to ordinary Neural Networks:
+    they are made up of neurons that have learnable weights and biases. Each neuron
+    receives some inputs, performs a dot product and optionally follows it with a
+    non-linearity. The whole network still expresses a single differentiable score
+    function: from the raw image pixels on one end to class scores at the other. And
+    they still have a loss function (e.g. SVM/Softmax) on the last (fully-connected)
+    layer and all the tips/tricks we developed for learning regular Neural Networks
+    still apply.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So what changes? ConvNet architectures make the explicit assumption that the
+    inputs are images, which allows us to encode certain properties into the architecture.
+    These then make the forward function more efficient to implement and vastly reduce
+    the number of parameters in the network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/469d3f480dde1f3b636d300a10db0698.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Source](https://gfycat.com/deadlydeafeningatlanticblackgoby-three-blue-one-brown-machines-learning)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: They are capable of detecting primary features, which are then combined by subsequent
+    layers of the CNN architecture, resulting in the detection of higher-order complex
+    and relevant novel features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The dataset consists of 1000 audio tracks each 30 seconds long. It contains
+    10 genres, each represented by 100 tracks. The tracks are all 22050 Hz monophonic
+    16-bit audio files in .wav format.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The dataset can be download from [marsyas website.](http://marsyas.info/downloads/datasets.html)
+  prefs: []
+  type: TYPE_NORMAL
+- en: It consists of 10 genres i.e
+  prefs: []
+  type: TYPE_NORMAL
+- en: Blues
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Classical
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Country
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Disco
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Hiphop
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Jazz
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Metal
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pop
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reggae
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Rock
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Each genre contains 100 songs. Total dataset: 1000 songs.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before moving ahead, I would recommend using [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb#recent=true) for
+    doing everything related to Neural networks because it is **free** and provides
+    GPUs and TPUs as runtime environments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Convolutional Neural Network implementation**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3288a4fdda639af1348713b356abb6f9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Steps involved in extracting features from an input spectrogram and loading
+    it to a fully connected layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So let us start building a CNN for genre classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To start with load all the required libraries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now convert the audio data files into PNG format images or basically extracting
+    the Spectrogram for every Audio. We will use librosa python library to extract
+    Spectrogram for every audio file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The above code will create a directory **img_data **containing all the images
+    categorized in the genre.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f5994dc14ce093f4b2da8324acef7677.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample spectrograms of Disco, Classical, Blues and Country genre respectively.![](../Images/b481655be7047230b9827541acf2afca.png)   ![](../Images/3d019e569be7f807536726c4e6ca4efa.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Disco and Classical![](../Images/6457a5b7b1e379a7c7c737e1dfc4ad64.png)   ![](../Images/ff0ca088ae695abf50444b7d9676fd37.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Blues and Country
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our next step is to split the data into the train set and test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Install split-folders.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: We will split data by 80% in training and 20% in the test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The above code returns 2 directories for train and test set inside a parent
+    directory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/77666619b51dc0d584efc2df4e18036d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Image Augmentation:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Image Augmentation artificially creates training images through different ways
+    of processing or combination of multiple processing, such as random rotation,
+    shifts, shear and flips, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Perform Image Augmentation instead of training your model with lots of images
+    we can train our model with fewer images and training the model with different
+    angles and modifying the images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/878b74e801a879d7a41d4bfeee18b927.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Image Augmentation](https://towardsdatascience.com/machinex-image-data-augmentation-using-keras-b459ef87cd22)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keras has this **ImageDataGenerator** class which allows the users to perform
+    image augmentation on the fly in a very easy way. You can read about that in Keras’s
+    official [documentation](https://keras.io/preprocessing/image/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: The ImageDataGenerator class has three methods **flow(),** **flow_from_directory()
+    and flow_from_dataframe() **to read the images from a big numpy array and folders
+    containing images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will discuss only flow_from_directory() in this blog post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: flow_from_directory() has the following arguments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**directory: **path where there exists a folder, under which all the test images
+    are present. For example, in this case, the training images are found in ./data/train'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**batch_size: **Set this to some number that divides your total number of images
+    in your test set exactly.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Why this only for test_generator?
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Actually, you should set the “batch_size” in both train and valid generators
+    to some number that divides your total number of images in your train set and
+    valid respectively, but this doesn’t matter before because even if batch_size
+    doesn’t match the number of samples in the train or valid sets and some images
+    gets missed out every time we yield the images from generator, it would be sampled
+    the very next epoch you train.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: But for the test set, you should sample the images exactly once, no less or
+    no more. If Confusing, just set it to 1(but maybe a little bit slower).
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**class_mode:** Set “binary” if you have only two classes to predict, if not
+    set to“categorical”, in case if you’re developing an Autoencoder system, both
+    input and the output would probably be the same image, for this case set to “input”.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**shuffle:** Set this to *False,* because you need to yield the images in “order”,
+    to predict the outputs and match them with their unique ids or filenames.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Create a Convolutional Neural Network:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Compile/train the network using [Stochastic Gradient Descent(SGD)](https://en.wikipedia.org/wiki/Stochastic_gradient_descent).
+    Gradient Descent works fine when we have a convex curve. But if we don’t have
+    a convex curve, Gradient Descent fails. Hence, in Stochastic Gradient Descent,
+    few samples are selected randomly instead of the whole data set for each iteration.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now fit the model with 50 epochs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now since the CNN model is trained, let us evaluate it. `evaluate_generator()` uses
+    both your test input and output. It first predicts output using training input
+    and then evaluates the performance by comparing it against your test output. So
+    it gives out a measure of performance, i.e. accuracy in your case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: So the loss is 1.70 and Accuracy is 33.7%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At last, let your model make some predictions on the test data set. You need
+    to reset the test_set before whenever you call the **predict_generator**. This
+    is important, if you forget to reset the **test_set** you will get outputs in
+    a weird order.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: As of now **predicted_class_indices** has the predicted labels, but you can’t
+    simply tell what the predictions are, because all you can see is numbers like
+    0,1,4,1,0,6… You need to map the predicted labels with their unique ids such as
+    filenames to find out what you predicted for which image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Append ***filenames*** and ***predictions*** to a single pandas dataframe as
+    two separate columns. But before doing that check the size of both, it should
+    be the same.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Finally, save the results to a CSV file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/ec1e5d9256f6889fb24e740fa5805dfe.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have trained the model on 50 epochs(which itself took 1.5 hours to execute
+    on Nvidia K80 GPU). If you wanna increase the accuracy, increase the number of
+    epochs to 1000 or even more while training your CNN model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So it shows that CNN is a viable alternative for automatic feature extraction.
+    Such discovery lends support to our hypothesis that the intrinsic characteristics
+    in the variation of musical data are similar to those of image data. Our CNN model
+    is highly scalable but not robust enough to generalized the training result to
+    unseen musical data. This can be overcome with an enlarged dataset and of course
+    the amount of dataset that can be fed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, this concludes the two-article series on Audio Data Analysis Using Deep
+    Learning with Python. I hope you guys have enjoyed reading it, feel free to share
+    your comments/thoughts/feedback in the comment section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for reading this article!!!
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Bio: [Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)**
+    is a Big data developer at CirrusLabs. He has over 4 years of working experience
+    in various sectors like Telecom, Analytics, Sales, Data Science having specialisation
+    in various Big data components.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://levelup.gitconnected.com/audio-data-analysis-using-deep-learning-with-python-part-2-4a1f40d3708d).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Audio File Processing: ECG Audio Using Python](/2020/02/audio-file-processing-ecg-audio-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Basics of Audio File Processing in R](/2020/02/basics-audio-file-processing-r.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Artificial Intelligence Books to Read in 2020](/2020/01/artificial-intelligence-books-read-2020.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bark: The Ultimate Audio Generation Model](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[WavJourney: A Journey into the World of Audio Storyline Generation](https://www.kdnuggets.com/wavjourney-a-journey-into-the-world-of-audio-storyline-generation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Implement Agentic RAG Using LangChain: Part 1](https://www.kdnuggets.com/how-to-implement-agentic-rag-using-langchain-part-1)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Datawig, an AWS Deep Learning Library for Missing Value Imputation](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-on Reinforcement Learning Course Part 3: SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

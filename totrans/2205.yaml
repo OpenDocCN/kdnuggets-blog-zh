@@ -1,0 +1,451 @@
+- en: 'Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](../Images/97aa1d8c8affaf9e44ae26a81fe8b3ff.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Every machine learning model that you train has a set of parameters or model
+    coefficients. The goal of the machine learning algorithm—formulated as an optimization
+    problem—is to learn the optimal values of these parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition, machine learning models also have a set of hyperparameters. Such
+    as the value of K, the number of neighbors, in the K-Nearest Neighbors algorithm.
+    Or the batch size when training a deep neural network, and more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These hyperparameters are not learned by the model. But rather specified by
+    the developer. They influence model performance and are tunable. So how do you
+    find the best values for these hyperparameters? This process is called **hyperparameter
+    optimization** or **hyperparameter tuning**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The two most common hyperparameter tuning techniques include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Grid search
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Randomized search
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In this guide, we’ll learn how these techniques work and their scikit-learn
+    implementation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training a Baseline SVM Classifier
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Let's start by training a simple [Support Vector Machine (SVM) classifier](/2023/07/gentle-introduction-support-vector-machines.html)
+    on the wine dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First, import the required modules and classes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The wine dataset is part of the built-in datasets in scikit-learn. So let''s
+    read in the features and the target labels as shown:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The wine dataset is a simple dataset with 13 numeric features and three output
+    class labels. It’s a good candidate dataset to learn your way around multi-class
+    classification  problems. You can run `wine.DESCR` to get a description of the
+    dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](../Images/b96d32e12e7d2cdc4fdf54c6d1bbfe48.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output of wine.DESCR
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, split the dataset into train and test sets. Here we’ve used a `test_size`
+    of 0.2\. So 80% of the data goes into the training dataset and 20% to the test
+    dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now instantiate a support vector classifier and fit the model to the training
+    dataset. Then evaluate its performance on the test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Because it is a simple multi-classification problem, we can look at the model’s
+    accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: We see that the accuracy score of this model with the default values for hyperparameters
+    is about 0.78.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here we used a `random_state` of 24\. For a different random state you will
+    get a different training test split, and subsequently different accuracy score.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So we need a better way than a single train-test split to evaluate the model’s
+    performance. Perhaps, train the model on many such splits and consider the average
+    accuracy. While also trying out different combinations of hyperparameters? Yes,
+    that is why we use cross validation in model evaluation and hyperparameter search.
+    We’ll learn more in the following sections.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next let's identify the hyperparameters that we cantune for this support vector
+    machine classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: SVM Hyperparameters to Tune
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'In hyperparameter tuning, we aim to find the best combination of hyperparameter
+    values for our SVM classifier. The commonly tuned hyperparameters for the support
+    vector classifier include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**C**: Regularization parameter, controlling the trade-off between maximizing
+    the margin and minimizing classification error.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**kernel**: Specifies the type of kernel function to use (e.g., ''linear,''
+    ''rbf,'' ''poly'').'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**gamma**: Kernel coefficient for ''rbf'' and ''poly'' kernels.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Understanding the Role of Cross-Validation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '**Cross-validation** helps assess how well the model *generalizes* to unseen
+    data and reduces the risk of overfitting to a single train-test split. The commonly
+    used k-fold cross-validation involves splitting the dataset into **k** equally
+    sized folds. The model is trained **k** times, with each fold serving as the validation
+    set *once* and the remaining folds as the training set. So for each fold, we’ll
+    get a cross-validation accuracy.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When we run the grid and randomized searches for finding the best hyperparameters,
+    we’ll choose the hyperparameters based on the best average cross-validation score.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What Is Grid Search?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '**Grid search** is a hyperparameter tuning technique that performs an **exhaustive
+    search over a specified hyperparameter space** to find the combination of hyperparameters
+    that yields the best model performance.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How Grid Search Works
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We define the hyperparameter search space as a parameter grid. The **parameter
+    grid** is a dictionary where you specify each hyperparameter you want to tune
+    with a list of values to explore.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Grid search then systematically explores every possible combination of hyperparameters
+    from the parameter grid. It fits and evaluates the model for each combination
+    using cross-validation and selects the combination that yields the best performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, let’s implement grid search in scikit-learn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: GridSearchCV in Scikit-Learn
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'First, import the `GridSearchCV` class from scikit-learn’s [model_selection](https://scikit-learn.org/stable/model_selection.html)
+    module:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s define the parameter grid for the SVM classifier:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Grid search then systematically explores every possible combination of hyperparameters
+    from the parameter grid. For this example, it evaluates the model''s performance
+    with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`C` set to 0.1, 1, and 10,'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`kernel` set to ''linear'', ''rbf'', and ''poly'', and'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`gamma` set to 0.1, 1, ''scale'', and ''auto''.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This results in a total of 3 * 3 * 4 = 36 different combinations to evaluate.
+    Grid search fits and evaluates the model for each combination using cross-validation
+    and selects the combination that yields the best performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We then instantiate `GridSearchCV` to tune the hyperparameters of the `baseline_svm`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that we've used 5-fold cross-validation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally, we evaluate the performance of the best model—with the optimal hyperparameters
+    found by grid search—on the test data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As seen, the model achieves an accuracy score of 0.94 for the following hyperparameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Pros and Cons of Grid Search
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Using grid search for hyperparameter tuning has the following advantages:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Grid search explores all specified combinations, ensuring you don't miss the
+    best hyperparameters within the defined search space.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is a good choice for exploring smaller hyperparameter spaces.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'On the flip side, however:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Grid search can be computationally expensive, especially when dealing with a
+    large number of hyperparameters and their values. It may not be feasible for very
+    complex models or extensive hyperparameter searches.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now let’s learn about randomized search.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What Is Randomized Search?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '**Randomized search** is another hyperparameter tuning technique that **explores
+    random combinations of hyperparameters within specified distributions or ranges**.
+    It''s particularly useful when dealing with a large hyperparameter search space.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How Randomized Search Works
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In randomized search, instead of specifying a grid of values, you can define
+    probability distributions or ranges for each hyperparameter. Which becomes a much
+    larger hyperparameter search space.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Randomized search then *randomly samples* a fixed number of combinations of
+    hyperparameters from these distributions. This allows randomized search to explore
+    a diverse set of hyperparameter combinations efficiently.
+  prefs: []
+  type: TYPE_NORMAL
+- en: RandomizedSearchCV in Scikit-Learn
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Now let's tune the parameters of the baseline SVM classifier using randomized
+    search.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We import the `RandomizedSearchCV` class and define `param_dist`, a much larger
+    hyperparameter search space:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Similar to grid search, we instantiate the randomized search model to search
+    for the best hyperparameters. Here, we set `n_iter` to 20; so 20 random hyperparameter
+    combinations will be sampled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We then evaluate model’s performance with the best hyper parameters found through
+    randomized search:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The best accuracy and optimal hyperparameters are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: The parameters found through randomized search are different from those found
+    through grid search. The model with these hyperparameters also achieves an accuracy
+    score of 0.94.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pros and Cons of Randomized Search
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Let’s sum up the advantages of randomized search:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Randomized search is efficient when dealing with a large number of hyperparameters
+    or a wide range of values because it doesn't require an exhaustive search.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It can handle various parameter types, including continuous and discrete values.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Here are some limitations of randomized search:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Due to its random nature, it may not always find the best hyperparameters. But
+    it often finds good ones quickly.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Unlike grid search, it doesn't guarantee that all possible combinations will
+    be explored.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We learned how to perform hyperparameter tuning with `RandomizedSearchCV` and
+    `GridSearchCV` in scikit-learn. We then evaluated our model’s performance with
+    the best hyperparameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In summary, grid search exhaustively searches through all possible combinations
+    in the parameter grid. While randomized search randomly samples hyperparameter
+    combinations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Both these techniques help you identify the optimal hyperparameters for your
+    machine learning model while reducing the risk of overfitting to a specific train-test
+    split.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)****
+    is a developer and technical writer from India. She likes working at the intersection
+    of math, programming, data science, and content creation. Her areas of interest
+    and expertise include DevOps, data science, and natural language processing. She
+    enjoys reading, writing, coding, and coffee! Currently, she''s working on learning
+    and sharing her knowledge with the developer community by authoring tutorials,
+    how-to guides, opinion pieces, and more. Bala also creates engaging resource overviews
+    and coding tutorials.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Governance and Observability, Explained](https://www.kdnuggets.com/2022/08/data-governance-observability-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Confusion Matrix, Precision, and Recall Explained](https://www.kdnuggets.com/2022/11/confusion-matrix-precision-recall-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, November 16: How LinkedIn Uses Machine Learning •…](https://www.kdnuggets.com/2022/n45.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fine-Tuning BERT for Tweets Classification with HuggingFace](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

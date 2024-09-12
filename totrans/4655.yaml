@@ -1,0 +1,322 @@
+- en: 'Who is your Golden Goose?: Cohort Analysis'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/05/golden-goose-cohort-analysis.html/2](https://www.kdnuggets.com/2019/05/golden-goose-cohort-analysis.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: K-Means Clustering
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[**K-Means clustering**](https://en.wikipedia.org/wiki/K-means_clustering)is
+    one type of unsupervised learning algorithms, which makes groups based on the
+    distance between the points. How? There are two concepts of distance in K-Means
+    clustering. **Within Cluster Sums of Squares**(WSS) and **Between Cluster Sums
+    of Squares **(BSS).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Cluster sum of squares](../Images/f07e5d2dd5697a3e33e5548bab01835b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: WSS means the sum of distances between the points and the corresponding centroids
+    for each cluster and BSS means the sum of distances between the centroids and
+    the total sample mean multiplied by the number of points within each cluster.
+    So you can consider WSS as the measure of compactness and BSS as the measure of
+    separation. For clustering to be successful, we need to get the lower WSS and
+    the higher BSS.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By iterating and moving the cluster centroids, K-Means algorithm tries to get
+    the optimized points of the centroid, which minimize the value of WSS and maximize
+    the value of BSS. I won’t go more in-depth with the basic concept, but you can
+    find a further explanation from [video](https://www.youtube.com/watch?v=_aWzGGNrcic).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![How K-means algorithm works](../Images/a23f666f8b4c08edcb9c51565a201632.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo from Wikipedia
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because K-means clustering uses the distance as the similarity factor, we need
+    to scale the data. Suppose we have two different scales of features, say height
+    and weight. Height is over 150cm and weight is below 100kg on average. So If we
+    plot this data, the distance between the points will be highly dominated by height
+    resulting in a biased analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Therefore when it comes to K-means clustering, scaling and normalizing data
+    is a critical step for preprocessing. If we check the distribution of RFM values,
+    you can notice that they are right-skewed. It’s not a good state to use without
+    standardization. Let’s transform the RFM values into log scaled first and then
+    normalize them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: define function for the values below 0
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'def neg_to_zero(x):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'if x <= 0:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: return 1
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'else:'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: return x
+  prefs:
+  - PREF_IND
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: apply the function to Recency and MonetaryValue column
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: rfm['Recency'] = [neg_to_zero(x) for x in rfm.Recency]
+  prefs: []
+  type: TYPE_NORMAL
+- en: rfm['Monetary'] = [neg_to_zero(x) for x in rfm.Monetary]
+  prefs: []
+  type: TYPE_NORMAL
+- en: unskew the data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: rfm_log = rfm[['Recency', 'Frequency', 'Monetary']].apply(np.log, axis = 1).round(3)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: scale the data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: scaler = StandardScaler()
+  prefs: []
+  type: TYPE_NORMAL
+- en: rfm_scaled = scaler.fit_transform(rfm_log)
+  prefs: []
+  type: TYPE_NORMAL
+- en: transform into a dataframe
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: rfm_scaled = pd.DataFrame(rfm_scaled, index = rfm.index, columns = rfm_log.columns)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Using for loop, I built the models for every number of clusters from 1 to 10\.
+    And then collect the WSS values for each model. Look at the plot below. As the
+    number of clusters increases, the value of WSS decreases. There is no surprise
+    cause the more clusters we make, the size of each cluster will decrease so the
+    sum of the distances within each cluster will decrease. Then what is the optimal
+    number?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Elbow method in Kmeans](../Images/99080f4deadcffcee1c97cff37387121.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The answer is at the ‘Elbow’ of this line. Somewhere WSS dramatically decrease
+    but not too much K. My choice here is three. What do you say? Doesn’t it really
+    look like an elbow of the line?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we chose the number of clusters, we can build a model and make actual clusters
+    like below. We can also check the distance between each point and the centroids
+    or the labels of the clusters. Let’s make a new column and assign the labels to
+    each customer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![ RFM quantile groups](../Images/2dae5957861ab24a67ccd13ace500cea.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now we made two kinds of segmentation, RFM quantile groups and K-Means groups.
+    Let’s make visualization and compare the two methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Snake plot and heatmap
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’m going to make two kinds of plot, a line plot and a heat map. We can easily
+    compare the differences of RFM values with these two plots. Firstly, I’ll make
+    columns to assign the two clustering labels. And then reshape the data frame by
+    melting the RFM values into one column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Elbow method in Kmeans](../Images/b85d1164af1d1b2f58a22bbcb67f5ed9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This will make recency, frequency and monetary categories as observations, which
+    allows us to plot the values in one plot. Put `Metrics` at x-axis and `Value` at
+    y-axis and group the values by `RFM_Level.` Repeat the same code which groups
+    the values by `K_Cluster` this time. The outcome would be like below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Snake plot of RFM](../Images/ed077f5713a4379c9ff7a3be96b0c058.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This kind of plots is called ‘Snake plot’ especially in marketing analysis.
+    It seems **Gold **and **Green **groups on the left plot are similar with **1 **and **2**clusters
+    on the right plot. And the **Bronze **and **Silver **groups seem to be merged
+    into group **0**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s try again with a heat map. [Heat maps](https://en.wikipedia.org/wiki/Heat_map) are
+    a graphical representation of data where larger values were colored in darker
+    scales and smaller values in lighter scales. We can compare the variance between
+    the groups quite intuitively by colors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: And then repeat the same code for K-clusters as we did before.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Heat map of RFM and K-Means](../Images/23b61b84fb6390961e07e98ce4dee968.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It could be seen unmatching, especially at the top of the plots. But It’s just
+    because of the different order. The **Green **group on the left will correspond
+    to group **2**. If you see the values inside each box, you can see the difference
+    between the groups become significant for **Gold **and **1 **group. And it could
+    be easily recognized by the darkness of the color.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs: []
+  type: TYPE_NORMAL
+- en: We talked about how to get RFM values from customer purchase data, and we made
+    two kinds of segmentation with RFM quantiles and K-Means clustering methods. With
+    this result, we can now figure out who are our ‘golden’ customers, the most profitable
+    groups. This also tells us on which customer to focus on and to whom give special
+    offers or promotions for fostering loyalty among customers. We can select the
+    best communication channel for each segment and improve new marketing strategies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Resources
+  prefs: []
+  type: TYPE_NORMAL
+- en: A nice article about RFM analysis: [https://clevertap.com/blog/rfm-analysis/](https://clevertap.com/blog/rfm-analysis/)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Another useful explanation for RFM analysis: [https://www.optimove.com/learning-center/rfm-segmentation](https://www.optimove.com/learning-center/rfm-segmentation)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Intuitive explanation on K-means clustering: [https://www.youtube.com/watch?v=_aWzGGNrcic](https://www.youtube.com/watch?v=_aWzGGNrcic)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: **[Jiwon Jeong](https://www.linkedin.com/in/jiwon-jeong/) is a Graduate
+    Research Assistant at Yonsei University.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/who-is-your-golden-goose-cohort-analysis-50c9de5dbd31).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Clustering Using K-means Algorithm](/2018/07/clustering-using-k-means-algorithm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[K-Means & Other Clustering Algorithms: A Quick Intro with Python](/2017/03/k-means-clustering-algorithms-intro-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beginner’s Guide to Customer Segmentation](/2017/03/yhat-beginner-guide-customer-segmentation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Last call: Stefan Krawcyzk’s ''Mastering MLOps'' Live Cohort](https://www.kdnuggets.com/2022/08/sphere-last-call-stefan-krawcyzk-mastering-mlops.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Cluster Analysis to Segment Your Data](https://www.kdnuggets.com/using-cluster-analysis-to-segment-your-data)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Best Architecture for Your Text Classification Task: Benchmarking…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Market Data and News: A Time Series Analysis](https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best Python Courses: An Analysis Summary](https://www.kdnuggets.com/2022/01/best-python-courses-analysis-summary.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning’s Sweet Spot: Pure Approaches in NLP and Document Analysis](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE

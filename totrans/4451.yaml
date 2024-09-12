@@ -1,0 +1,311 @@
+- en: 'Feature Engineering in SQL and Python: A Hybrid Approach'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/07/feature-engineering-sql-python-hybrid-approach.html](https://www.kdnuggets.com/2020/07/feature-engineering-sql-python-hybrid-approach.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Shaw Lu](https://www.linkedin.com/in/shawlu95/), Data Scientist at Coupang**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/387c7c1fb43091b8548d223324b19571.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'I knew SQL long before learning about Pandas, and I was intrigued by the way
+    Pandas faithfully emulates SQL. Stereotypically, SQL is for analysts, who crunch
+    data into informative reports, whereas Python is for data scientists, who use
+    data to build (and overfit) models. Although they are almost functionally equivalent,
+    I’d argue both tools are essential for a data scientist to work efficiently. From
+    my experience with Pandas, I’ve noticed the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I end up with many CSV files when exploring different features.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When I aggregate over a big dataframe, the Jupyter kernel simply dies.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: I have multiple dataframes with confusing (and long) names in my kernel.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: My feature engineering codes look ugly and are scattered over many cells.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Those problems are naturally solved when I began [feature engineering](https://www.kdnuggets.com/2018/12/feature-engineering-explained.html)
+    directly in SQL. So in this post, I’ll share some of my favorite tricks by working
+    through a take-home challenge dataset. If you know a little bit of SQL, it’s time
+    to put it into good use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Installing MySQL
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To start with, you need a SQL server. I’m using MySQL in this post. You can
+    get MySQL server by installing one of the local desktop servers such as MAMP,
+    WAMP or XAMPP. There are many tutorials online, and it’s worth going through the
+    trouble.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After setting up your server, make sure you have three items ready: username,
+    password, port number. Login through Terminal by entering the following command
+    (here we have username “root”, password 1234567).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/93c6c27ef213b648d77301786b19395a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Then create a database called “Shutterfly” in the MySQL console (you can name
+    it whatever you want). The two tables will be loaded into this database.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Install sqlalchemy
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'You’ll need Pandas and sqlalchemy to work with SQL in Python. I bet you already
+    have Pandas. Then install sqlalchemy by activating your desired environment to
+    launch Jupyter notebook, and enter:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: The sqlalchemy module also requires *MySQLdb* and *mysqlclient* modules. Depending
+    on your OS, this can be installed using different [commands](https://stackoverflow.com/questions/454854/no-module-named-mysqldb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Load Dataset into MySQL Server
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this example, we’ll load data from two [CSV files](https://github.com/shawlu95/Data-Science-Toolbox/tree/master/case_study/shutterfly/data),
+    and engineer features directly in MySQL. To load datasets, we need to instantiate
+    an **engine** object using username, password, port number, and database name.
+    Two tables will be created: *Online* and *Order*. A natural index will be created
+    on each table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In MySQL console, you can verify that the tables have been created.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Split Dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This may seem counter-intuitive since we haven’t built any feature yet. But
+    it’s actually very neat because all we need to do is to split **dataset by index**.
+    By design, I also included the label (event 2) which we try to predict. When loading
+    features, we will simply join the index with feature tables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In MySQL console, you can verify that the training and test set are created.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature Engineering
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This is the heavy lifting part. I write SQL code directly in Sublime Text, and
+    debug my code by pasting them into MySQL console. Because this dataset is an event
+    log, we must avoid leaking future information into each data point. As you can
+    imagine, every feature needs to be aggregated over the history!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Joining table is the slowest operation, and so we want to get as many features
+    as possible from each join. In this dataset, I implemented four types of join,
+    resulting in four groups of features. The details are not important, but you can
+    find all my SQL snippets [here](https://github.com/shawlu95/Shutterfly-Take-Home-Challenge/tree/master/features).
+    Each snippet creates a table. **The index is preserved and must match correctly
+    to the response variable in the training set and test set. **Each snippet is structured
+    like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To generate the feature tables, open a new Terminal, navigate to the folder
+    containing the sql files, and enter the following commands and passwords. The
+    first snippet creates some necessary indices that speed up the join operation.
+    The next four snippets create four feature tables. Without the indices, the joining
+    takes forever. With the indices, it takes about 20 minutes (not bad on a local
+    machine).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now you should have the following tables in the database. Note that the derived
+    features are stored separately from the original event logs, which help prevent
+    confusion and disaster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Load Features
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here I wrote a utility function that pulls data from the MySQL server.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The function takes table name “trn_set” (training set) or “tst_set” (test set)
+    as input, and an optional *limit *clause, if you only want a subset of the data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Unique columns, and columns with mostly missing values, are dropped.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Date column is mapped to month, to help capture seasonality effect.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Notice how the feature tables are joined in succession. This is actually efficient
+    because we are always joining index on one-to-one mapping.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Finally, let’s take a look at 5 training examples, and their features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now you have a well-defined dataset and feature set. You can tweak the scale
+    of each feature and missing values to suit your model’s requirement.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For tree-based methods, which are invariant to feature scaling, we can directly
+    apply the model, and simply focus on tuning parameters! See an example of a plain-vanilla
+    gradient boosting machine [here](https://github.com/shawlu95/Data-Science-Toolbox/blob/master/case_study/shutterfly/gbm_benchmark_2.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fa5fb7efe28cb82131c6f0edf7276e40.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It is nice to see that the useful features are all engineered, except for the *category* feature.
+    Our efforts paid off! Also, the most predictive feature of event2 is how many
+    nulls value were observed in event2\. This is an illustrative case **where we
+    cannot replace null values by median or average**, because the fact that they
+    are missing is correlated with the response variable!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'As you can see, we have no intermediate CSV files, a very clean namespace in
+    our notebook, and our feature engineering codes are reduced to a few straightforward
+    SQL statements. There are two situations in which the SQL approach is even more
+    efficient:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If your dataset is deployed on the cloud, you may be able to run distributed
+    query. Most SQL server supports distirbuted query today. In Pandas, you need some
+    extension called *Dask DataFrame.*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If you can afford to pull data real-time, you can create SQL **views** instead
+    of tables. In this way, every time you pull data in Python, **your data will always
+    be up-to-date**.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: One fundamental restriction of this approach is that you must be able to directly
+    connect to your SQL server in Python. If this is not possible, you may have to
+    download the query result as a CSV file and load it in Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I hope you find this post helpful. Though I’m not advocating method over another,
+    it is necessary to understand the advantage and limitation of each method, and
+    have both methods ready in our toolkit. So we can apply whichever method that
+    works best under the constraints.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Shaw Lu](https://www.linkedin.com/in/shawlu95/)** is a Data Scientist
+    at Coupang. He is an engineering graduate seeking to leverage data science to
+    inform business management, supply chain optimization, growth marketing and operation
+    research. Official author in Toward Data Science.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/feature-engineering-in-sql-and-python-a-hybrid-approach-b52347cd2de4).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[4 Tips for Advanced Feature Engineering and Preprocessing](/2019/08/4-tips-advanced-feature-engineering-preprocessing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learning SQL the Hard Way](/2020/01/learning-sql-hard-way.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Intermediate Machine Learning with Python — 2019 Edition](/2019/06/7-steps-mastering-intermediate-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,406 @@
+- en: Machine Learning Over Encrypted Data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/08/machine-learning-encrypted-data.html](https://www.kdnuggets.com/2022/08/machine-learning-encrypted-data.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Machine Learning Over Encrypted Data](../Images/ab000d69b2d278f21817615872dc2a16.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This blog introduces a Privacy-Preserving Machine Learning (PPML) solution to
+    the Titanic challenge found on Kaggle using the [Concrete-ML](https://docs.zama.ai/concrete-ml)
+    open-source toolkit. Its main ambition is to show that [Fully Homomorphic Encryption](https://en.wikipedia.org/wiki/Homomorphic_encryption)
+    (FHE) can be used for protecting data when using a Machine Learning model to predict
+    outcomes without degrading its performance. In this example, an [XGBoost](https://xgboost.readthedocs.io/en/stable/)
+    classifier model will be considered as it achieves near state-of-the-art accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Competition
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[Kaggle](https://www.kaggle.com/) is an online community that lets anyone build
+    and share projects around Machine Learning and Data Science. It offers data sets,
+    courses, examples and competitions for free to any data scientists willing to
+    discover or improve their knowledge of the field. Its simplicity of use makes
+    it one of the most popular platforms amongst the ML community.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Additionally, Kaggle provides several tutorials with different difficulty levels
+    for new beginners to start manipulating basic data science tools on a real-life
+    example. Among those tutorials can be found the [Titanic competition](https://www.kaggle.com/competitions/titanic).
+    It introduces a binary classification problem by using a simple data set of passengers
+    traveling during the tragic Titanic shipwreck.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Jupyter Notebook sent by the Concrete-ML team for this competition can be
+    found [here](https://www.kaggle.com/code/concretemlteam/titanic-with-privacy-preserving-machine-learning).
+    It has been created with the help of several other publicly available notebooks
+    in order to offer clear guidelines along with efficient results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Preparation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Before being able to build the model, some preparation steps are required.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Package requirements
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Concrete-ML is a Python package, the code is therefore made using this programming
+    language. A few additional packages are required, including the [Pandas](https://pandas.pydata.org/)
+    framework used for pre-processing the data as well as some [scikit-learn](https://scikit-learn.org/stable/)
+    cross-validation tools.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Clean the data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Both training and test data sets are given in the Kaggle platform. Once this
+    is done, let’s load the data and extract the target IDs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here’s what the data looks like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine Learning Over Encrypted Data](../Images/240d2ad44fcae3a48bcc2f9452914b07.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Several statements can be made :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- The target variable is the Survived variable.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- Some variables are numerical, such as PassengerID, Pclass, SbSp, Parch or
+    Fare'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '- Some variables are categorical (non-numerical), such as Name, Sex, Ticket,
+    Cabin or Embarked'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A first pre-processing step is to remove the PassengerId and Ticket variables
+    as they seem to be random identifiers that have no impact on their survival. Additionally,
+    we can notice that some values are missing in the Cabin variable. We must therefore
+    further investigate this observation by printing the total amounts of missing
+    values for each variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: This outputs the following results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine Learning Over Encrypted Data](../Images/437589ec739051496df1005ba0be9b92.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'It seems that four variables are incomplete, Cabin, Age, Embarked and Fare.
+    However, the Cabin one seems to be missing quite more data than the others:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Since the Cabin variable misses more than 2/3 of its values, it also might not
+    be appropriate to keep it. We therefore drop those variables from both data sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Regarding the three other variables that witness missing values, removing them
+    could mean losing a lot of relevant information that might help the model predicting
+    the passengers’ survival. This is mostly true for the Age variable since more
+    than 20% of its values are lacking. Alternative techniques can thus be used to
+    fill in these incomplete variables. Since both Age and Fare are numerical, missing
+    values can be replaced by the median of the available ones. For the Embarked variable,
+    which is categorical, we use the most common value as the substitute.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Engineer new features
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Furthermore, we can manually create new variables from already existing ones
+    in order to help the model interpret some behaviors for better predictions. Among
+    all available possibilities, four new features were selected:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**FamilySize**: The size of the family the individual was traveling with, with
+    1 being someone that traveled alone.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**IsAlone**: A boolean variable stating if the individual was traveling alone
+    (1) or not (0). This might help the model to emphasize on this idea of traveling
+    with relatives or not.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Title**: The individual''s title (Mr, Mrs, ...), often indicating a certain
+    social status.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Farebin** and **AgeBin**: Binned version of the Fare and Age variables. It
+    groups values together, generally reducing the impact of minor observation errors.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Let’s create those new variables for both data sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Additionally, printing the different titles found within the data sets shows
+    that only a few of them represent most of the individuals.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Machine Learning Over Encrypted Data](../Images/de3d409f93d540664b5598ee23998ce0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In order to prevent the model from becoming overly specific, all the "uncommon"
+    titles are grouped together into a new “Rare” variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Apply dummification
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Finally, we can "dummify" the remaining categorical variables. Dummification
+    is a common technique of transforming categorical (non-numerical) data into numerical
+    data without having to map values or consider any order between each of them.
+    The idea is to take all the different values found in a variable and create a
+    new associated binary variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, the "Embarked" variable has three categorical values,  "S", "C"
+    and "Q". Dummifying the data will create three new variables, "Embarked_S", "Embarked_C"
+    and "Embarked_Q". Then, the value of "Embarked_S" (resp. "Embarked_C" and "Embarked_Q")
+    is set to 1 for each data point initially labeled with "S" (resp. "C" and "Q")
+    in the "Embarked" variable, and 0 if not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: We then split the target variable from the others, a necessary step before training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Building the model
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Training with XGBoost
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Let's first build a classifier model using XGBoost. Since several parameters
+    have to be fixed beforehand, we use scikit-learn's GridSearchCV method to perform
+    cross validation in order to maximize our chance to find the best ones. The given
+    ranges are voluntarily small in order to keep the FHE execution time per inference
+    relatively low (below 10 seconds). In fact, we found out that, in this particular
+    Titanic example, models with larger numbers of estimators or maximum depth don't
+    score a much better accuracy. We then fit this model using the training sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Training with Concrete-ML
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Now, let's do the same using Concrete-ML's XGBClassifier method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to do so, we need to specify the number of bits over which inputs,
+    outputs and weights will be quantized. This value can influence the precision
+    of the model as well as its inference running time, and therefore can lead the
+    grid-search cross-validation to find a different set of parameters. In our case,
+    setting this value to 2 bits outputs an excellent accuracy score while running
+    faster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: The Concrete-ML API has been thought to be as close as most common Machine Learning
+    and Deep Learning Python libraries in order to make its use as easy as possible.
+    Additionally, it enables any data scientists to use Zama’s technology without
+    the need of any prior knowledge on cryptography. Building and fitting a FHE-compatible
+    model therefore becomes very intuitive and convenient for anyone that is used
+    to common Data Science workflows such as scikit-learn tools. In fact, those observations
+    remain valid regarding the prediction process, with only a few additional steps
+    to consider.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Predicting the Outcomes
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Let’s first compute the predictions in clear using the XGBoost model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: Besides, it is also possible to compute the predictions in clear using the Concrete-ML
+    model. This will essentially execute the library’s XGBoost version of the model
+    considering the quantization process. No FHE related computations are dealt with
+    here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: In order to do the same using FHE, an additional compilation step is needed.
+    By giving it a subset of the input data used for representing the reachable range
+    of values, the compile method builds an appropriate FHE circuit that will then
+    be executed during the prediction. Note that the execute_in_fhe parameter also
+    needs to be set to True.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: Using a machine with 8 11th Gen Intel® Core™ i5-1135G7 processors of 2.40GHz
+    (4 cores, 2 threads each), the average execution time per inference lies between
+    2 and 3 seconds. This does not include the key generation time, which happens
+    only once before all predictions are made and reaches no more than 12 seconds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Additionally, FHE computations are expected to be exact. This means that the
+    model executed in FHE results in the same predictions as the Concrete-ML one,
+    which is executed in clear and only considers quantization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Prediction similarity between both Concrete-ML models (quantized clear and
+    FHE): 100.00%'
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, as seen previously, the grid-search cross-validation was done separately
+    between the XGBoost model and the Concrete-ML one. For this reason, the two models
+    do not share the same set of hyperparameters, making their decision boundaries
+    different.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Comparing how similar their predictions are one by one is thus irrelevant and
+    only the final accuracy score given by the Kaggle platform should be considered
+    to assess their performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Therefore, let’s save the predictions from both XGBoost and Concrete-ML models
+    as csv files. Then, those files can be submitted in the Kaggle platform using
+    this [link](https://www.kaggle.com/competitions/titanic/submit). The FHE model
+    outputs an accuracy of around 78%, which can be seen in the public [leaderboard](https://www.kaggle.com/competitions/titanic/leaderboard?search=concrete).
+    In comparison, the XGBoost clear one scores 77%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In fact, using the given dataset, most of the submitted notebooks do not seem
+    to exceed 79% of accuracy. Therefore, additional pre-processing and feature engineering
+    might help increase our current score but probably not by much.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Thanks for reading! Our main idea here was not only to build a predictive model
+    that answers the question: “what sorts of people were more likely to survive?”
+    but also to do it on encrypted data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This was possible thanks to our Python package: [Concrete-ML](https://github.com/zama-ai/concrete-ml)
+    that aims to simplify the use of fully homomorphic encryption (FHE) for data scientists.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Roman Bredehoft**](https://www.linkedin.com/in/roman-bredehoft/?originalSubdomain=fr)
+    is a Machine Learning Engineer at Zama.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Sentiment Analysis on Encrypted Data with Homomorphic Encryption](https://www.kdnuggets.com/2022/12/zama-sentiment-analysis-encrypted-data-homomorphic-encryption.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Is Academia Obsessing Over Methodology at the Cost of True Insights?](https://www.kdnuggets.com/is-academia-obsessing-over-methodology-at-the-cost-of-true-insights)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Speed Up Python Pandas by Over 300x](https://www.kdnuggets.com/how-to-speed-up-python-pandas-by-over-300x)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,289 @@
+- en: Getting Started with Automated Text Summarization
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html](https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ab8265240781f013c50e69641c7c4132.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: [SFL Scientific](https://sflscientific.com/data-science-blog/2016/11/17/text-summarization-in-natural-language-processing)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Automated text summarization](https://www.kdnuggets.com/2019/01/approaches-text-summarization-overview.html)
+    refers to performing the summarization of a document or documents using some form
+    of heuristics or statistical methods. A summary in this case is a shortened piece
+    of text which accurately captures and conveys the most important and relevant
+    information contained in the document or documents we want summarized.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are 2 categories of summarization techniques: extractive and abstractive.
+    We will focus on the use of extractive methods herein, which function by identifying
+    the important sentences or excerpts from the text and reproducing them verbatim
+    as part of the summary. No new text is generated; only existing text is used in
+    the summarization process. This differs from abstractive methods, which employ
+    more powerful natural language processing techniques to interpret text and generate
+    new summary text.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article will walk through an extractive summarization process, using a
+    simple word frequency approach, implemented in Python. Before we begin, note that
+    we are not spending much energy on data preprocessing, tokenization, normalization,
+    etc. in this article ([similar to last time](/2019/11/create-vocabulary-nlp-tasks-python.html)),
+    nor are we introducing any libraries which are able to easily and effectively
+    perform these tasks. I want to focus on presenting the text summarization steps,
+    mostly glossing over other important concepts. I am planning a number of follow-ups
+    to this piece, and we will add increasing complexity to our NLP tasks as we go.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, and for example, since we are doing some minimal tokenization here, out
+    of necessity, you will get a feel for when it is being performed, and doing so
+    more effectively can optionally be left as an exercise for the reader.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s be clear about what we are going to do here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Take textual input (a short news article)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Perform minimal text preprocessing
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Create a data representation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Perform summarization using this data representation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: There are a number of ways of performing text summarization, as noted above,
+    and we will be using a very basic extractive method to do so which is based on
+    word frequencies within the given article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As we are not leaning on libraries for almost anything, our imports are few:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: We need the `punctuation` and `stop_words` modules in order to identify these
+    when we are scoring our words and, ultimately, sentences for their perceived importance,
+    and we will deem neither punctuation nor stop words "important" for this task.
+    Why so? As opposed to a language modeling task where these would unquestionably
+    be useful, or perhaps a text classification task, it should be obvious that including
+    frequently occurring stop words or repetitive punctuation would lead to biasing
+    towards these tokens, providing no benefit to us. There are all sorts of reasons
+    why we would want to **not** exclude stop words (their arbitrary removal should
+    be avoided), but this does not seem to be one of them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Next, we need some text to test our summarization technique on. I manually
+    copied and pasted this one from CNN, but feel free to find your own:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Did I say we weren''t tokenizing? Well, we are. Poorly. But let''s not focus
+    on that right now. We will need 2 simple tokenizing functions: one for tokenizing
+    sentences into words, and another for tokenizing documents into sentences:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: We need individual words in order to determine their relative frequency in the
+    document, and assign a corresponding score; we need individual sentences to subsequently
+    sum the scores of each word within in order to determine sentence "importance."
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note the we are using "importance" here as a synonym for the relative word frequency
+    in the document; we will divide the number of occurrences of each word by the
+    number of occurrences of the word which occurs most in the document. Does such
+    high frequency equal genuine *importance*? It is naive to assume that it does,
+    but it's also the simplest way to introduce the concept of text summarization.
+    Interested in challenging our assumption of "importance" here? Try something like
+    TF-IDF or word embeddings instead.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Okay, let''s tokenize:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Don't look too closely if you are following along at home, or else you will
+    see where our simple tokenization approach fails. Moving on...
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we need to count the occurrences of each word in the document.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Our poor tokenizing shows up again in the final token above. In the next article,
+    I'll show you replacement tokenizers you can drop in place to help with this.
+    Why not do this from the start? As I said, I want to focus on the text summarization
+    steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now that we have our word counts, we can build a word frequency distribution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And there we go: we divided the occurrence of each word by the frequency of
+    the most occurring word to get our distribution.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next we want to score our sentences by using the frequency distribution we generated.
+    This is simply summing up the scores of each word in a sentence and hanging on
+    to the score. Our function takes a `max_len` argument which sets a maximum length
+    to sentences which are to be considered for use in the summarization. It should
+    be relatively easy to see that, given the way we are scoring our sentences, we
+    could be biasing towards long sentences.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now that we have scored our sentences for their importance, all that's left
+    to do is select (i.e. extract, as in "extractive summarization") the top *k* sentences
+    to represent the summary of the article. This function will take the sentence
+    scores we generated above as well as a value for the top *k* highest scoring sentences
+    to sue for summarization. It will return a string summary of the concatenated
+    top sentences, as well as the sentence scores of the sentences used in the summarization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let's use the function to generate the summary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: And let's check out the summary sentence scores for good measure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: The summary seems reasonable at a quick pass, given the text of the article.
+    Try out this simple method on some other text for further evidence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The next summarization article will build on this simple method in a few key
+    ways, namely:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: proper tokenization approaches
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: improvement to our baseline approach, using TF-IDF weighting instead of simple
+    word frequency
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: use of an actual dataset for our summarization
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: evaluation of our results
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: See you next time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Matthew Mayo**](https://www.linkedin.com/in/mattmayo13/) ([**@mattmayo13**](https://twitter.com/mattmayo13))
+    is a Data Scientist and the Editor-in-Chief of KDnuggets, the seminal online Data
+    Science and Machine Learning resource. His interests lie in natural language processing,
+    algorithm design and optimization, unsupervised learning, neural networks, and
+    automated approaches to machine learning. Matthew holds a Master''s degree in
+    computer science and a graduate diploma in data mining. He can be reached at editor1
+    at kdnuggets[dot]com.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Approaches to Text Summarization: An Overview](https://www.kdnuggets.com/2019/01/approaches-text-summarization-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Text Summarization Development: A Python Tutorial with GPT-3.5](https://www.kdnuggets.com/2023/04/text-summarization-development-python-tutorial-gpt35.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Summarization with GPT-3](https://www.kdnuggets.com/2022/04/packt-summarization-gpt3.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unlocking GPT-4 Summarization with Chain of Density Prompting](https://www.kdnuggets.com/unlocking-gpt-4-summarization-with-chain-of-density-prompting)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Extractive Summarization with LLM using BERT](https://www.kdnuggets.com/extractive-summarization-with-llm-using-bert)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Use the pivot_table Function for Advanced Data Summarization…](https://www.kdnuggets.com/how-to-use-the-pivot_table-function-for-advanced-data-summarization-in-pandas)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

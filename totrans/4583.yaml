@@ -1,0 +1,369 @@
+- en: 5 Step Guide to Scalable Deep Learning Pipelines with d6tflow
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/09/5-step-guide-scalable-deep-learning-pipelines-d6tflow.html](https://www.kdnuggets.com/2019/09/5-step-guide-scalable-deep-learning-pipelines-d6tflow.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Norman Niemer](https://www.linkedin.com/in/normanniemer/), Chief Data
+    Scientist & [Samuel Showalter](https://www.linkedin.com/in/samuelrshowalter/),
+    Technology Consultant**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Introduction: Why bother?'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Building deep learning models typically involves complex data pipelines as well
+    as a lot of trial and error, tweaking model architecture and parameters whose
+    performance needs to be compared. It is often difficult to keep track of all the
+    experiments, leading at best to confusion and at worst wrong conclusions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In [4 reasons why your ML code is bad](https://www.kdnuggets.com/2019/02/4-reasons-machine-learning-code-probably-bad.html) we
+    explored how to organize ML code as DAG workflows to solve that problem. In this
+    guide we will go through a practical case study on turning an existing pytorch
+    script into a scalable deep learning pipeline with [d6tflow](https://github.com/d6t/d6tflow).
+    The starting point is [a pytorch deep recommender model by Facebook](https://github.com/facebookresearch/dlrm) and
+    we will go through the 5 steps of migrating the code into a scalable deep learning
+    pipeline. The steps below are written in partial pseudo code to illustrate concepts,
+    the full code is available also, see instructions at the end of the article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lets get started!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 1: Plan your DAG'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To plan your work and help others understand how your pipeline fits together,
+    you want to start by thinking about the data flow, dependencies between tasks
+    and task parameters. This helps you organize your workflow into logical components.
+    You might want to draw a diagram such as this
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/2189cbf5f8c337089b4f91bc52b9fc1a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Below is the pytorch model training DAG for FB DLRM. It shows the training task
+    `TaskModelTrain` with all its dependencies and how the dependencies relate to
+    each other. If you write functional code it is difficult see how your workflow
+    fits together like this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 2: Write Tasks instead of functions'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Data science code is typically organized in functions which leads to a lot
+    of problems as explained in [4 reasons why your ML code is bad](https://www.kdnuggets.com/2019/02/4-reasons-machine-learning-code-probably-bad.html).
+    Instead you want to write d6tflow tasks. The benefits are that you can:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: chain tasks into a DAG so that required dependencies run automatically
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: easily load task input data from dependencies
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: easily save task output such as preprocessed data and trained models. That way
+    you don’t accidentally rerun long-running training tasks
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: parameterize tasks so they can be intelligently managed (see next step)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: save output to [d6tpipe](https://github.com/d6t/d6tpipe) to separate data from
+    code and easily share the data, see [Top 10 Coding Mistakes Made by Data Scientists](https://www.kdnuggets.com/2019/04/top-10-coding-mistakes-data-scientists.html)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Here is what the before/after looks like for the FB DLRM code after you convert
+    functional code into d6tflow tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Typical pytorch functional code that does not scale well:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Same logic written using scalable d6tflow tasks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 3: Parameterize tasks'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To improve model performance, you will try different models, parameters and
+    preprocessing settings. To keep track of all this, you can add parameters to tasks.
+    That way you can:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: keep track which models have been trained with which parameters
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: intelligently rerun tasks as parameters change
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: help others understand where in workflow parameters are introduced
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Below sets up FB DLRM model training task with parameters. Note how you no longer
+    have to manually specify where to save the trained model and data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Compare trained models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now you can use that parameter to easily compare output from different models.
+    Make sure you run the workflow with that parameter before you load task output
+    (see Step #4).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Inherit parameters
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Often you need to have a parameter cascade downstream through the workflow.
+    If you write functional code, you have to keep repeating the parameter in each
+    function. With d6tflow you can inherit parameters so the terminal task can pass
+    the parameter to upstream tasks as needed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the FB DLRM workflow, `TaskModelTrain` inherits parameters from `TaskGetTrainDataset`.
+    This way you can run `TaskModelTrain(mini_batch_size=2)` and it will pass the
+    parameter to upstream tasks ie `TaskGetTrainDataset` and all other tasks that
+    depend on it. In the actual code, note the use of `self.clone(TaskName)` and `@d6tflow.clone_parent`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 4: Run DAG to process data and train model'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To kick off data processing and model training, you run the DAG. You only need
+    to run the terminal task which automatically runs all dependencies. Before actually
+    running the DAG, you can preview what will be run. This is especially helpful
+    if you have made any changes to code or data because it will only run the tasks
+    that have changed not the full workflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 5: Evaluate model performance'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that the workflow has run and all tasks are complete, you can load predictions
+    and other model output to compare and visualize output. Because the tasks knows
+    where each output it saved, you can directly load output from the task instead
+    of having to remember the file paths or variable names. It also makes your code
+    a lot more readable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Compare models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can easily compare output from different models with different parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Keep iterating
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As you iterate, changing parameters, code and data, you will want to rerun tasks.
+    d6tflow intelligently figures out which tasks need to be rerun which makes iterating
+    very efficient. If you have changed parameters, you don’t need to do anything,
+    it will know what to run automatically. If you have changed code or data, you
+    have to mark the task as incomplete using `.invalidate()` and d6tflow will figure
+    out the rest.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the FB DLRM workflow, say for example you changed training data or made changes
+    to the training preprocessing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Full source code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'All code is provided at [https://github.com/d6tdev/dlrm](https://github.com/d6tdev/dlrm).
+    It is the same as [https://github.com/facebook/dlrm](https://github.com/facebook/dlrm) with
+    d6tflow files added:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'flow_run.py: run flow => run this file'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'flow_task.py: tasks code'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'flow_viz.py: show model output'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'flow_cfg.py: default parameters'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'dlrm_d6t_pytorch.py: dlrm_data_pytorch.py adopted for d6tflow'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Try yourself!
+  prefs: []
+  type: TYPE_NORMAL
+- en: For your next project
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this guide we showed how to build scalable deep learning workflows. We used
+    an existing code base and showed how to turn linear deep learning code into d6tflow
+    DAGs and the benefits of doing so.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For new projects, you can start with a scalable project template from [https://github.com/d6t/d6tflow-template](https://github.com/d6t/d6tflow-template).
+    The structure is very similar:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'run.py: run workflow'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'task.py: task code'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'cfg.py: manage parameters'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**[Norman Niemer](https://www.linkedin.com/in/normanniemer/)** is the Chief
+    Data Scientist at a large asset manager where he delivers data-driven investment
+    insights. He holds a MS Financial Engineering from Columbia University and a BS
+    in Banking and Finance from Cass Business School (London).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Samuel Showalter](https://www.linkedin.com/in/samuelrshowalter/)** is a
+    Technology Consultant. He is a recent graduate passionate about data science,
+    software development, and the value it can add to personal and professional life.
+    He has worked in very different roles, but all of them share a focus of data management
+    and analysis.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://htmlpreview.github.io/?https://github.com/citynorman/blogs-datasci/blob/master/blog-20190813-d6tflow-pytorch.html).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Top 10 Coding Mistakes Made by Data Scientists](/2019/04/top-10-coding-mistakes-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Reasons Why Your Machine Learning Code is Probably Bad](/2019/02/4-reasons-machine-learning-code-probably-bad.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Pipelines, Luigi, Airflow: Everything you need to know](/2019/03/data-pipelines-luigi-airflow-everything-need-know.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Guide On How To Become A Data Scientist (Step By Step Approach)](https://www.kdnuggets.com/2021/05/guide-become-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Structure a Data Science Project: A Step-by-Step Guide](https://www.kdnuggets.com/2022/05/structure-data-science-project-stepbystep-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Step-by-Step Guide to Web Scraping with Python and Beautiful Soup](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Text-2-Video Generation: Step-by-Step Guide](https://www.kdnuggets.com/2023/08/text2video-generation-stepbystep-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Step by Step Guide to Reading and Understanding SQL Queries](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Breaking Down DENSE_RANK(): A Step-by-Step Guide for SQL Enthusiasts](https://www.kdnuggets.com/breaking-down-denserank-a-step-by-step-guide-for-sql-enthusiasts)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

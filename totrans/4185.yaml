@@ -1,0 +1,313 @@
+- en: Advanced PyTorch Lightning with TorchMetrics and Lightning Flash
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/11/advanced-pytorch-lightning-torchmetrics-lightning-flash.html](https://www.kdnuggets.com/2021/11/advanced-pytorch-lightning-torchmetrics-lightning-flash.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![blog-advanced-pytorch-lightning.jpg](../Images/006950f7cf1ddac40699ea278992b451.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Just to recap from our last post on [Getting Started with PyTorch Lightning](https://www.exxactcorp.com/blog/Deep-Learning/getting-started-with-pytorch-lightning),
+    in this tutorial we will be diving deeper into two additional tools you should
+    be using: TorchMetrics and Lightning Flash.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: TorchMetrics unsurprisingly provides a modular approach to define and track
+    useful metrics across batches and devices, while Lightning Flash offers a suite
+    of functionality facilitating more efficient transfer learning and data handling,
+    and a recipe book of state-of-the-art approaches to typical deep learning problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll start by adding a few useful classification metrics to the MNIST example
+    we started with earlier. We’ll also swap out the PyTorch Lightning Trainer object
+    with a Flash Trainer object, which will make it easier to perform transfer learning
+    on a new classification problem. We’ll then train our classifier on a new dataset, [CIFAR10](https://en.wikipedia.org/wiki/CIFAR-10),
+    which we’ll use as the basis for a transfer learning example to[ CIFAR100](https://www.cs.toronto.edu/~kriz/cifar.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**TorchMetrics**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'First things first, and that’s ensuring that we have all needed packages installed.
+    If you already followed the install instructions from the "Getting Started" tutorial
+    and now check your virtual environment contents with `pip freeze`, you’ll notice
+    that you probably already have TorchMetrics installed. If not, install both TorchMetrics
+    and Lightning Flash with the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next we’ll modify our training and validation loops to log the[ F1 score ](https://en.wikipedia.org/wiki/F-score)and [Area
+    Under the Receiver Operator Characteristic Curve (AUROC)](https://en.wikipedia.org/wiki/Auroc) as
+    well as accuracy. We’ll remove the (deprecated) accuracy from `pytorch_lightning.metrics` and
+    the similar sklearn function from the `validation_epoch_end` callback in our model,
+    but first let’s make sure to add the necessary imports at the top.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Next, remove the lines we used previously to calculate accuracy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now, we could just replace what we removed with the equivalent TorchMetrics
+    functional implementation for calculating accuracy and leave it at that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'and:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: However, there are additional advantages to using the class-based, modular versions
+    of metrics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With class-based metrics, we can continuously accumulate data while running
+    training and validation, and compute the result at the end. This is convenient
+    and efficient on a single device, but it really becomes useful with multiple devices
+    as the metrics modules can automatically synchronize between multiple devices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll initialize our metrics in the `__init__` function, and add calls for each
+    metric in the training and validation steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The metrics modules defined in `__init__` will be called during `training_step`
+    and `validation_step`, and we’ll compute them at the end of each training and
+    validation epoch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the step function, we’ll call our metrics objects to accumulate metrics data
+    throughout training and validation epochs. We can either call the “forward” method
+    for each metrics object to accumulate data while also returning the value for
+    the current batch, or we can call the “update” method to silently accumulate metrics
+    data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: We’ll re-write `validation_epoch_end` and overload `training_epoch_end` to compute
+    and report metrics for the entire epoch at once.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: With those few changes, we can take advantage of more than 25 different metrics
+    implemented in TorchMetrics, or sub-class the `torchmetrics.Metrics` class and
+    implement our own. Keep in mind though that there are simpler ways to implement
+    training for common tasks like image classification than sub-classing the LightningModule
+    class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Lightning Flash**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Like a set of Russian nesting dolls of deep learning abstraction libraries,
+    Lightning Flash adds further abstractions and simplification on top of PyTorch
+    Lightning. In fact we can train an image classification task in only 7 lines.
+    We’ll use the CIFAR10 dataset and a classification model based on the ResNet18
+    backbone built into Lightning Flash. Then we’ll show how the model backbone can
+    be repurposed for classifying a new dataset, CIFAR100,
+  prefs: []
+  type: TYPE_NORMAL
+- en: While Lightning Flash is very much still under active development and has plenty
+    of sharp edges, you can already put together certain workflows with very little
+    code, and there’s even a “no-code” capability they call Flash Zero. For our purposes,
+    we can put together a transfer learning workflow with less than 20 lines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we’ll conduct training on the CIFAR10 dataset with 8 lines of code. We
+    take advantage of the `ImageClassifier` class and its built-in backbone architectures,
+    as well as the `ImageClassificationData` class to replace both training and validation
+    dataloaders.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: After that we can train on a new image classification task, the CIFAR100 dataset,
+    which has fewer examples per class, by re-using the feature extraction backbone
+    of our previously trained model and transfer learning using the “freeze” method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This strategy only updates the parameters on the new classification head, while
+    leaving the backbone parameters unchanged.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: This type of parameter re-application to new tasks is at the core of transfer
+    learning and saves time and compute, and the costs associated with both. Given
+    that developer time is even more valuable than compute time, the concise programming
+    style of Lightning Flash can be well worth the investment of learning a few new
+    API patterns to use it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some of the most practical deep learning advice can be boiled down to “[don’t
+    be a hero](https://karpathy.github.io/2019/04/25/recipe/),” *i.e.* don’t reinvent
+    the wheel and ignore all the convenient tools like Flash that can make your life
+    easier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Speaking of easier, there’s one more way to train models with Flash that we’d
+    be remiss not to mention. With **Flash Zero**, you can call Lightning Flash directly
+    from the command line to train common deep learning tasks with built-in SOTA models.
+    Flash Zero also has plenty of sharp edges and if you want to adapt it to your
+    needs, be ready to work on a few pull request contributions to the PyTorch Lightning
+    project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example, the following is a modified example from the[ Flash Zero](https://lightning-flash.readthedocs.io/en/latest/general/flash_zero.html) documentation.
+    If you look at the[ original version](https://lightning-flash.readthedocs.io/en/latest/general/flash_zero.html#using-your-own-data) (as
+    of this writing), you’ll likely notice right away that there is a typo in the
+    command line argument for downloading the hymenoptera dataset: the download output
+    filename is missing its extension. The fixed version below downloads the hymenoptera
+    dataset and then trains a classifier with the ResNet18 backbone for 10 epochs:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: A documentation typo is a pretty minor error (and also a welcome opportunity
+    for you to open your first pull request to the project!), but it is a good sign
+    that things are changing quickly at the PyTorch Lightning and Lightning Flash
+    projects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Expect development to continue at a rapid pace as the project scales. That means
+    it’s probably a good idea to use static version numbers when setting up your dependencies
+    on a new project, to avoid breaking changes as Lightning code is updated. At the
+    same time, this presents an opportunity to shape the future of the project to
+    meet your specific R&D needs, either by pull requests, contributing comments,
+    or opening issues on the project’s [GitHub channel](https://github.com/PyTorchLightning).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In these PyTorch Lightning tutorial posts we’ve seen how PyTorch Lightning can
+    be used to simplify training of common deep learning tasks at multiple levels
+    of complexity. By sub-classing the `LightningModule`, we were able to define an
+    effective image classifier with a model that takes care of training, validation,
+    metrics, and logging, greatly simplifying any need to write an external training
+    loop. The model also used a PyTorch Lightning Trainer object that made switching
+    the entire training flow over to the GPU a breeze. **Building models from Lightning
+    Modules is a great way to gain utility without sacrificing control.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: By using Lightning Flash, we then built a transfer learning workflow in just
+    15 lines of code, excepting imports. For problems with known solutions and an
+    established state-of-the-art, you can save a lot of time by taking advantage of
+    built-in architectures and training infrastructure with Flash!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, we had a glimpse at Flash Zero for no-code training from the command
+    line. No-code is an increasingly popular approach to machine learning, and although
+    begrudged by engineers, no-code has a lot of promise. Currently developing rapidly, **Flash
+    Zero is set to become a powerful way to apply the best-engineered solutions out-of-the-box,
+    so that machine learning and data scientists can focus on the science part of
+    their job title.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Kevin Vu](https://www.kdnuggets.com/author/kevin-vu)** manages Exxact
+    Corp blog and works with many of its talented authors who write about different
+    aspects of Deep Learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.exxactcorp.com/blog/Deep-Learning/advanced-pytorch-lightning-using-torchmetrics-and-lightning-flash).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Introduction to PyTorch Lightning](/2021/10/introduction-pytorch-lightning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to deploy PyTorch Lightning models to production](/2020/11/deploy-pytorch-lightning-models-production.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyTorch Lightning](/2021/10/getting-started-pytorch-lightning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Introduction to Deep Learning Libraries: PyTorch and Lightning AI](https://www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Lightning AI Studio For Free](https://www.kdnuggets.com/using-lightning-ai-studio-for-free)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Complete Free PyTorch Course for Deep Learning](https://www.kdnuggets.com/2022/10/complete-free-pytorch-course-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tuning Adam Optimizer Parameters in PyTorch](https://www.kdnuggets.com/2022/12/tuning-adam-optimizer-parameters-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[YOLOv5 PyTorch Tutorial](https://www.kdnuggets.com/2022/12/yolov5-pytorch-tutorial.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

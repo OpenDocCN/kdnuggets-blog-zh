@@ -1,0 +1,617 @@
+- en: Introduction to Clustering in Python with PyCaret
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Moez Ali](https://www.linkedin.com/in/profile-moez/), Founder & Author
+    of PyCaret**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fc7472016349710a0e02607ac1793c1e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Paola Galimberti](https://unsplash.com/@paolaccia?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Introduction
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PyCaret](https://www.pycaret.org/) is an open-source, low-code machine learning
+    library in Python that automates machine learning workflows. It is an end-to-end
+    machine learning and model management tool that speeds up the experiment cycle
+    exponentially and makes you more productive.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In comparison with the other open-source machine learning libraries, PyCaret
+    is an alternate low-code library that can be used to replace hundreds of lines
+    of code with few lines only. This makes experiments exponentially fast and efficient.
+    PyCaret is essentially a Python wrapper around several machine learning libraries
+    and frameworks such as scikit-learn, XGBoost, LightGBM, CatBoost, spaCy, Optuna,
+    Hyperopt, Ray, and a few more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The design and simplicity of PyCaret are inspired by the emerging role of citizen
+    data scientists, a term first used by Gartner. Citizen Data Scientists are power
+    users who can perform both simple and moderately sophisticated analytical tasks
+    that would previously have required more technical expertise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To learn more about PyCaret, you can check the official [website](https://www.pycaret.org/) or [GitHub](https://www.github.com/pycaret/pycaret).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Tutorial Objective
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'In this tutorial we will learn:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Getting Data:** How to import data from the PyCaret repository.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Set up Environment:** How to set up an experiment in PyCaret’s unsupervised [clustering
+    module](https://pycaret.readthedocs.io/en/latest/api/clustering.html).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Create Model:** How to train unsupervised clustering models and assign cluster
+    labels to the training dataset for further analysis.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Plot Model:** How to analyze model performance using various plots (Elbow,
+    Silhouette, Distribution, etc.).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Predict Model:** How to assign cluster labels to new and unseen datasets
+    based on a trained model.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Save/Load Model:** How to save/load model for future use.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 3\. Installing PyCaret
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Installation is easy and will only take a few minutes. PyCaret’s default installation
+    from pip only installs hard dependencies as listed in the [requirements.txt](https://github.com/pycaret/pycaret/blob/master/requirements.txt) file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To install the full version:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 4\. What is Clustering?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Clustering is the task of grouping a set of objects in such a way that those
+    in the same group (called a cluster) are more similar to each other than to those
+    in other groups. It is an exploratory data mining activity, and a common technique
+    for statistical data analysis used in many fields including machine learning,
+    pattern recognition, image analysis, information retrieval, bioinformatics, data
+    compression, and computer graphics. Some common real-life use cases of clustering
+    are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Customer segmentation based on purchase history or interests to design targeted
+    marketing campaigns.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Cluster documents into multiple categories based on tags, topics, and the content
+    of the document.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Analysis of outcome in social / life science experiments to find natural groupings
+    and patterns in the data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 5\. Overview of Clustering Module in PyCaret
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PyCaret’s clustering module](https://pycaret.readthedocs.io/en/latest/api/clustering.html) (`pycaret.clustering`)
+    is an unsupervised machine learning module that performs the task of grouping
+    a set of objects in such a way that those in the same group (called a cluster)
+    are more similar to each other than to those in other groups.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyCaret’s clustering module provides several pre-processing features that can
+    be configured when initializing the setup through the `setup` function. It has
+    over 8 algorithms and several plots to analyze the results. PyCaret's clustering
+    module also implements a unique function called `tune_model` that allows you to
+    tune the hyperparameters of a clustering model to optimize a supervised learning
+    objective such as `AUC` for classification or `R2` for regression.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 6\. Dataset for the Tutorial
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In this tutorial, we will use a dataset from UCI called [**Mice Protein Expression**](https://archive.ics.uci.edu/ml/datasets/Mice+Protein+Expression).
+    The data set consists of the expression levels of 77 proteins that produced detectable
+    signals in the nuclear fraction of the cortex. The dataset contains a total of
+    1080 measurements per protein. Each measurement can be considered as an independent
+    sample (mouse).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Dataset Citation:'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Higuera C, Gardiner KJ, Cios KJ (2015) Self-Organizing Feature Maps Identify
+    Proteins Critical to Learning in a Mouse Model of Down Syndrome. PLoS ONE 10(6):
+    e0129126\. [Web Link] journal.pone.0129126'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can download the data from the original source [**found here**](https://archive.ics.uci.edu/ml/datasets/Mice+Protein+Expression) and
+    load it using pandas [**(Learn How)**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html) or
+    you can use PyCaret’s data repository to load the data using the `get_data()` function
+    (This will require an internet connection).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/657e29e336d10bd35040234bd05d7f04.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: In order to demonstrate the use of the `predict_model` function on unseen data,
+    a sample of 5% (54 records) has been withheld from the original dataset to be
+    used for predictions at the end of the experiment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 8\. Setting up Environment in PyCaret
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The `setup` function in PyCaret initializes the environment and creates the
+    transformation pipeline for modeling and deployment. `setup` must be called before
+    executing any other function in pycaret. It takes only one mandatory parameter:
+    a pandas dataframe. All other parameters are optional can be used to customize
+    the preprocessing pipeline.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When `setup` is executed, PyCaret's inference algorithm will automatically infer
+    the data types for all features based on certain properties. The data type should
+    be inferred correctly but this is not always the case. To handle this, PyCaret
+    displays a prompt, asking for data types confirmation, once you execute the `setup`.
+    You can press enter if all data types are correct or type `quit` to exit the setup.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ensuring that the data types are correct is really important in PyCaret as it
+    automatically performs multiple type-specific preprocessing tasks which are imperative
+    for machine learning models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alternatively, you can also use `numeric_features` and `categorical_features` parameters
+    in the `setup` to pre-define the data types.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/7bc0d5c1072a1b0f44f936c090029741.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Once the setup has been successfully executed it displays the information grid
+    which contains some important information about the experiment. Most of the information
+    is related to the pre-processing pipeline which is constructed when `setup` is
+    executed. The majority of these features are out of scope for this tutorial, however,
+    a few important things to note are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**session_id:** A pseduo-random number distributed as a seed in all functions
+    for later reproducibility. If no `session_id` is passed, a random number is automatically
+    generated that is distributed to all functions. In this experiment, the `session_id` is
+    set as `123` for later reproducibility.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Missing Values:** When there are missing values in original data this will
+    show as True. Notice that `Missing Values` in the information grid above is `True`as
+    the data contains missing values which are automatically imputed using `mean` for
+    the numeric features and `constant` for the categorical features in the dataset.
+    The method of imputation can be changed using the `numeric_imputation` and `categorical_imputation` parameters
+    in the `setup` function.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Original Data:** Displays the original shape of the dataset. In this experiment
+    (1026, 82) means 1026 samples and 82 features.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Transformed Data:** Displays the shape of the transformed dataset. Notice
+    that the shape of the original dataset (1026, 82) is transformed into (1026, 91).
+    The number of features has increased due to the encoding of categorical features
+    in the dataset.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Numeric Features:** The number of features inferred as numeric. In this dataset,
+    77 out of 82 features are inferred as numeric.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Categorical Features:** The number of features inferred as categorical. In
+    this dataset, 5 out of 82 features are inferred as categorical. Also notice that
+    we have ignored one categorical feature `MouseID` using the `ignore_feature` parameter
+    since it''s a unique identifier for each sample and we don’t want it to be considered
+    during model training.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Notice how a few tasks that are imperative to perform modeling are automatically
+    handled such as missing value imputation, categorical encoding, etc. Most of the
+    parameters in the `setup` function are optional and used for customizing the pre-processing
+    pipeline. These parameters are out of scope for this tutorial but I will write
+    more about them later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 9\. Create a Model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Training a clustering model in PyCaret is simple and similar to how you would
+    create a model in the supervised learning modules of PyCaret. A clustering model
+    is created using the `create_model` function. This function returns a trained
+    model object and a few unsupervised metrics. See an example below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/0b77964131d6a3c070f6e9738cd4632d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: We have trained an unsupervised K-Means model using the `create_model`. Notice
+    the `n_clusters` parameter is set to `4` which is the default when you do not
+    pass a value to the `num_clusters` parameter. In the below example we will create
+    a `kmodes` model with 6 clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/2e3b6fbe455ac28775ce94baddc28e16.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: To see the complete list of models available in the model library, please check
+    the documentation or use the `models` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/6e01069c865b88739d2192d86cf619b9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 10\. Assign a Model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Now that we have trained a model, we can assign the cluster labels to our training
+    dataset (1026 samples) by using the `assign_model` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/8ae2a7a8aab33373255038ff427e28da.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Notice that a new column called `Cluster` has been added to the original dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that the results also include the `MouseID` column that we actually dropped
+    during the `setup`. Don’t worry, it is not used for the model training, rather
+    is only appended to the dataset only when `assign_model` is called.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 11\. Plot a Model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The `plot_model` function is used to analyze clustering models. This function
+    takes a trained model object and returns a plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 11.1 Cluster PCA Plot
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/cce4b8b108eeec3e5996a27d73b7d3db.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The cluster labels are automatically colored and shown in a legend. When you
+    hover over the data points you will see additional features which by default use
+    the first column of the dataset (in this case MouseID). You can change this by
+    passing the `feature` parameter and you may also set `label` to `True` if you
+    want labels to be printed on the plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 11.2 Elbow Plot
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/5633be05572b3a121b43b9a538be838e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The elbow method is a heuristic method of interpretation and validation of consistency
+    within-cluster analysis designed to help find the appropriate number of clusters
+    in a dataset. In this example, the Elbow plot above suggests that `5` is the optimal
+    number of clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Learn More about Elbow Plot**](https://blog.cambridgespark.com/how-to-determine-the-optimal-number-of-clusters-for-k-means-clustering-14f27070048f)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 11.3 Silhouette Plot
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/a7d462fbd371c0368a2c6dbee00ec4b5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Silhouette is a method of interpretation and validation of consistency within
+    clusters of data. The technique provides a succinct graphical representation of
+    how well each object has been classified. In other words, the silhouette value
+    is a measure of how similar an object is to its own cluster (cohesion) compared
+    to other clusters (separation).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Learn More about Silhouette Plot**](https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_silhouette_analysis.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 11.4 Distribution Plot
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/e2832fd87bdf4676423c3e743d8aa70b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The distribution plot shows the size of each cluster. When hovering over the
+    bars you will see the number of samples assigned to each cluster. From the example
+    above, we can observe that cluster 3 has the highest number of samples. We can
+    also use the `distribution` plot to see the distribution of cluster labels in
+    association with any other numeric or categorical feature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/fcbbe1f08dbe3ecaccbf6a02760d2a39.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the above example, we have used the `class` as a feature so each bar represents
+    a `class` which is colored with a cluster label (legend on right). We can observe
+    that class `t-SC-m` and `c-SC-m` are mostly dominated by `Cluster 3`. We can also
+    use the same plot to see the distribution of any continuous feature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/76777e1b2968d80defa8ef750dfb8388.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 12\. Predict on unseen data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The `predict_model` function is used to assign cluster labels to a new unseen
+    dataset. We will now use our trained `kmeans` model to predict the data stored
+    in `data_unseen`. This variable was created at the beginning of the tutorial and
+    contains 54 samples from the original dataset that were never exposed to PyCaret.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/14fa23d37e3c645e04793c92363e0030.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 13\. Saving the model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We have now finished the experiment by using our `kmeans` model to predict labels
+    on unseen data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This brings us to the end of our experiment, but one question is still to be
+    asked: What happens when you have more new data to predict? Do you have to go
+    through the entire experiment again? The answer is no, PyCaret’s inbuilt function `save_model` allows
+    you to save the model along with the entire transformation pipeline for later
+    use.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/3b14666198f4b9c49ae4b1e0f3452094.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: To load a saved model at a future date in the same or an alternative environment,
+    we would use PyCaret’s `load_model` function and then easily apply the saved model
+    on new unseen data for prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/0ce9c1393adb9775cd1b9cfa72d698c8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 14\. Wrap-up / Next Steps?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We have only covered the basics of [PyCaret’s clustering module](https://pycaret.readthedocs.io/en/latest/api/clustering.html).
+    In the following tutorials, we will go deeper into advanced pre-processing techniques
+    that allow you to fully customize your machine learning pipeline and are a must-know
+    for any data scientist.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thank you for reading [????](https://emojipedia.org/folded-hands/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Important Links
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: ⭐ [Tutorials](https://github.com/pycaret/pycaret/tree/master/tutorials) New
+    to PyCaret? Check out our official notebooks!
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? [Example Notebooks](https://github.com/pycaret/pycaret/tree/master/examples) created
+    by the community.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? [Blog](https://github.com/pycaret/pycaret/tree/master/resources) Tutorials
+    and articles by contributors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? [Documentation](https://pycaret.readthedocs.io/en/latest/index.html) The
+    detailed API docs of PyCaret
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? [Video Tutorials](https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g) Our
+    video tutorial from various events.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? [Discussions](https://github.com/pycaret/pycaret/discussions) Have questions?
+    Engage with community and contributors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ????️ [Changelog](https://github.com/pycaret/pycaret/blob/master/CHANGELOG.md) Changes
+    and version history.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? [Roadmap](https://github.com/pycaret/pycaret/issues/1756) PyCaret’s software
+    and community development plan.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Moez Ali](https://www.linkedin.com/in/profile-moez/)** writes about
+    PyCaret and its use-cases in the real world, If you would like to be notified
+    automatically, you can follow Moez on [Medium](https://medium.com/@moez-62905),
+    [LinkedIn](https://www.linkedin.com/in/profile-moez/), and [Twitter](https://twitter.com/moezpycaretorg1).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/introduction-to-clustering-in-python-with-pycaret-5d869b9714a3).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Using PyCaret’s New Time Series Module](/2021/12/pycaret-new-time-series-module.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Binary Classification with PyCaret](/2021/12/introduction-binary-classification-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Beginner’s Guide to End to End Machine Learning](/2021/12/beginner-guide-end-end-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Clustering Unleashed: Understanding K-Means Clustering](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Binary Classification with PyCaret](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unveiling Hidden Patterns: An Introduction to Hierarchical Clustering](https://www.kdnuggets.com/unveiling-hidden-patterns-an-introduction-to-hierarchical-clustering)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Announcing PyCaret 3.0: Open-source, Low-code Machine Learning in Python](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyCaret](https://www.kdnuggets.com/2022/11/getting-started-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

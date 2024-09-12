@@ -1,0 +1,355 @@
+- en: How To Painlessly Analyze Your Time Series
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/03/painlessly-analyze-time-series.html](https://www.kdnuggets.com/2020/03/painlessly-analyze-time-series.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Andrew Van Benschoten](https://www.linkedin.com/in/andrewhvbs/), Co-Founder
+    Matrix Profile Foundation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’re surrounded by time series data. From finance to IoT to marketing, many
+    organizations produce thousands of these metrics and mine them to uncover business-critical
+    insights. A Site Reliability Engineer might monitor hundreds of thousands of time
+    series streams from a server farm, in the hopes of detecting anomalous events
+    and preventing catastrophic failure. Alternatively, a brick and mortar retailer
+    might care about identifying patterns of customer foot traffic and leveraging
+    them to guide inventory decisions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Identifying anomalous events (or “discords”) and repeated patterns (“motifs”)
+    are two fundamental time series tasks. But how does one get started? There are
+    dozens of approaches to both questions, each with unique positives and drawbacks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Furthermore, time series data is notoriously hard to analyze, and the explosive
+    growth of the data science community has led to a need for more “black-box” automated
+    solutions that can be leveraged by developers with a wide range of technical backgrounds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/346db31b632fe4278a72c26744bdae53.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'How to analyze your time series in a single picture (Image Source: Matrix Profile
+    Foundation)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We at the Matrix Profile Foundation believe there’s an easy answer. While it’s
+    true that there’s no such thing as a free lunch, the Matrix Profile (a data structure
+    & set of associated algorithms developed by the [Keogh research group](https://www.cs.ucr.edu/~eamonn/MatrixProfile.html)
+    at UC-Riverside) is a powerful tool to help solve this dual problem of anomaly
+    detection and motif discovery. Matrix Profile is robust, scalable, and largely
+    parameter-free: we’ve seen it work for a wide range of metrics including website
+    user data, order volume and other business-critical applications.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we will detail below, the Matrix Profile Foundation has implemented the Matrix
+    Profile across three of the most common data science languages (Python, R and
+    Golang) as an easy-to-use API that’s relevant for time series novices and experts
+    alike.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So what is the Matrix Profile?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The basics of Matrix Profile are simple: If I take a snippet of my data and
+    slide it along the rest of the time series, how well does it overlap at each new
+    position? More specifically, we can evaluate the Euclidean distance between a
+    subsequence and every possible time series segment of the same length, building
+    up what’s known as the snippet’s “Distance Profile.”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If the subsequence repeats itself in the data, there will be at least one perfect
+    match and the minimum Euclidean distance will be zero (or close to zero in the
+    presence of noise). In contrast, if the subsequence is highly unique (say it contains
+    a significant outlier), matches will be poor and all overlap scores will be high.
+    Note that the type of data is irrelevant: We’re only looking at general pattern
+    conservation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We then slide every possible snippet across the time series, building up a collection
+    of Distance Profiles. By taking the minimum value for each time step across all
+    distance profiles, we can build the final Matrix Profile. Notice that both ends
+    of the Matrix Profile value spectrum are useful. High values indicate uncommon
+    patterns or anomalous events; in contrast, low values highlight repeatable motifs
+    and provide valuable insight into your time series of interest.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/7913adf0d7c793e66eb67d40e2678cc1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Image Source: Matrix Profile Foundation'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For those interested, [this post by one of our co-founders ](https://towardsdatascience.com/introduction-to-matrix-profiles-5568f3375d90)provides
+    a more in-depth discussion of the Matrix Profile.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Although the Matrix Profile can be a game-changer for time series analysis,
+    leveraging it to produce insights is a multi-step computational process, where
+    each step requires some level of domain experience. However, we believe that the
+    most powerful breakthroughs in data science occur when the complex is made accessible.
+    When it comes to the Matrix Profile, there are three facets to accessibility:
+    “out-of-the-box” working implementations, gentle introductions to core concepts
+    that can naturally lead into deeper exploration, and multi-language accessibility.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Today, we’re proud to unveil the Matrix Profile API (MPA), a common codebase
+    written in R, Python and Golang that achieves all three of these goals.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'MPA: how it works'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Using the Matrix Profile consists of three steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First, you Compute the Matrix Profile itself. However, this is not the end:
+    you need to Discover something by leveraging the Matrix Profile that you’ve created.
+    Do you want to find repeated patterns? Or perhaps uncover anomalous events? Finally,
+    it’s critical that you Visualize your findings, as time series analysis greatly
+    benefits from some level of visual inspection.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Normally, you’d need to read through pages of documentation (both academic and
+    technical) to figure out how to execute each of these three steps. This may not
+    be a challenge if you’re an expert with prior knowledge of the Matrix Profile,
+    but we’ve seen that many users simply want to Analyze their data by breaking through
+    the methodology to get to a basic starting point. Can the code simply leverage
+    some reasonable defaults to produce a reasonable output?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To parallel this natural computational flow, MPA consists of three core components:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Compute (computing the Matrix Profile)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Discover (evaluate the MP for motifs, discords, etc)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Visualize (display results through basic plots)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: As Matrix Profile is only a few years old, we anticipate continued development
+    and plan to update this library accordingly; we gladly welcome both community
+    feedback and development assistance! We also desire to educate the data science
+    community about this technique through a growing collection of Jupyter Notebook
+    tutorials. Open-source tools form the backbone of modern analytics, and we hope
+    this implementation serves other users as effectively as it has served us.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These three capabilities are wrapped up into a high-level capability called
+    Analyze. This is a user-friendly interface that enables people who know nothing
+    about the inner workings of Matrix Profile to quickly leverage it for their own
+    data. And as users gain more experience and intuition with MPA, they can easily
+    dive deeper into any of the three core components to make further functional gains.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'MPA: a toy example'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'As an example, we’ll use the [Python flavor of MPA ](https://github.com/matrix-profile-foundation/matrixprofile)to
+    analyze the synthetic time series shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0] from matplotlib import pyplot as plt  import numpy as np  import matrixprofile
+    as mp    %matplotlib inline    data = pd.read_csv(''rawdata.csv'')  vals = data.data.values    fig,ax
+    = plt.subplots(figsize=(20,10))  ax.plot(np.arange(len(vals)),vals, label = ''Test
+    Data'') [PRE1]` ![Figure](../Images/077d379d2c747a12f13d32d204985afa.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Image Source: Matrix Profile Foundation'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Visual inspection reveals that there are both patterns and discords present.
+    However, one immediate problem is that your choice of subsequence length will
+    change both the number and location of your motifs! Are there only two sinusoidal
+    motifs present between indices 0–500, or is each cycle an instance of the pattern?
+    Let’s see how MPA handles this challenge:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2] profile, figures = mp.analyze(vals) [PRE3]` ![Figure](../Images/346db31b632fe4278a72c26744bdae53.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Image Source: Matrix Profile Foundation'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because we haven’t specified any information regarding our subsequence length,
+    `analyze` begins by leveraging a powerful calculation known as the pan-matrix
+    profile (or PMP) to generate insights that will help us evaluate different subsequence
+    lengths. We’ll discuss the details of PMP in a later post (or you can read the
+    associated paper), but in a nutshell, it is a global calculation of all possible
+    subsequence lengths condensed into a single visual summary. The X-axis is the
+    index of the matrix profile, and the Y-axis is the corresponding subsequence length.
+    The darker the shade, the lower the Euclidean distance at that point. We can use
+    the “peaks” of the triangles to find the 6 “big” motifs visually present in the
+    synthetic time series.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The PMP is all well and good, but we promised a simple way of understanding
+    your time series. To facilitate this, `analyze` will combine PMP with an under
+    the hood algorithm to choose sensible motifs and discords from across all possible
+    window sizes. The additional graphs created by `analyze` show the top three motifs
+    and top three discords, along with the corresponding window size and position
+    within the Matrix Profile (and, by extension, your time series).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/86955e87759c0cd37366f19d7341a02d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Image Source: Matrix Profile Foundation![Figure](../Images/2ba3b61bb0ac6e537d74e9707b8dfcf3.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Image Source: Matrix Profile Foundation![Figure](../Images/de8f7a67b135280283a5af0c6e092540.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Image Source: Matrix Profile Foundation![Figure](../Images/9d8450c40c54daf033e1bceaa20777e1.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Image Source: Matrix Profile Foundation![Figure](../Images/45342715c29e4ab33523f1584281561a.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Image Source: Matrix Profile Foundation'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Not surprisingly, this is a lot of information coming out of the default setting.
+    Our goal is that this core function call can serve as a jumping-off point for
+    many of your future analyses. For example, the PMP indicates that there is a conserved
+    motif of length ~175 within our time series. Try calling `analyze` on that subsequence
+    length and see what happens!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4] profile, figures = mp.analyze(vals,windows=175) [PRE5]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrapping Up
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We hope that MPA enables you to more painlessly analyze your time series! For
+    further information, visit our [website](https://matrixprofile.org/), [GitHub
+    repos ](https://github.com/matrix-profile-foundation), or follow us on [Twitter](https://twitter.com/matrixprofile).
+    Please star our GitHub repos if you find the code useful! MPF also operates a
+    Discord channel where you can engage with fellow users of the Matrix Profile and
+    ask questions. Happy time series hunting!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Acknowledgements**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thank you to Tyler Marrs, Frankie Cancino, Francisco Bischoff, Austin Ouyang
+    and Jack Green for reviewing this article and assisting in its creation. And above
+    all, thank you to Eamonn Keogh, Abdullah Mueen and their numerous graduate students
+    for creating the Matrix Profile and continuing to drive its development.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Supplemental**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Matrix Profile research papers can be found on Eamonn Keogh’s UCR web page: [https://www.cs.ucr.edu/~eamonn/MatrixProfile.html](https://www.cs.ucr.edu/~eamonn/MatrixProfile.html)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The Python implementation of Matrix Profile algorithms can be found here: [https://github.com/matrix-profile-foundation/matrixprofile](https://github.com/matrix-profile-foundation/matrixprofile)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The R implementation of Matrix Profile algorithms can be found here: [https://github.com/matrix-profile-foundation/tsmp](https://github.com/matrix-profile-foundation/tsmp)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The Golang implementation of Matrix Profile algorithms can be found here: [https://github.com/matrix-profile-foundation/go-matrixprofile](https://github.com/matrix-profile-foundation/go-matrixprofile)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Bio: [Andrew Van Benschoten](https://www.linkedin.com/in/andrewhvbs/)** is
+    a data science leader with a proven record of leveraging complex information to
+    produce valuable insights. Experienced with both personnel and project management
+    and effective at communicating results to interdisciplinary stakeholders.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://matrixprofile.org/posts/how-to-painlessly-analyze-your-time-series/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Time Series Classification Synthetic vs Real Financial Time Series](/2020/03/time-series-classification-synthetic-real-financial-time-series.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Geographical Time Series Prediction with Crime Data in R,
+    SQL, and Tableau](/2020/02/introduction-geographical-time-series-crime-r-sql-tableau.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Forecasting Stories: Is it seasonality or not?](/2020/03/forecasting-stories-seasonality.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Drag, Drop, Analyze: The Rise of No-Code Data Science](https://www.kdnuggets.com/drag-drop-analyze-the-rise-of-nocode-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Market Data and News: A Time Series Analysis](https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Faster Way to Prepare Time-Series Data with the AI & Analytics Engine](https://www.kdnuggets.com/2021/12/piexchange-faster-way-prepare-timeseries-data-ai-analytics-engine.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Tractable, Feature Engineering Pipeline for Multivariate…](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Time Series Forecasting with Ploomber, Arima, Python, and Slurm](https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generate Synthetic Time-series Data with Open-source Tools](https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

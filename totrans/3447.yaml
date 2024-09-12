@@ -1,0 +1,465 @@
+- en: Bayesian Machine Learning, Explained
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/07/bayesian-machine-learning-explained.html](https://www.kdnuggets.com/2016/07/bayesian-machine-learning-explained.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Zygmunt Zając, [FastML](http://fastml.com/)**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So you know the Bayes rule. How does it relate to machine learning? It can be
+    quite difficult to grasp how the puzzle pieces fit together - we know it took
+    us a while. This article is an introduction we wish we had back then.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*While we have some grasp on the matter, we’re not experts, so the following
+    might contain inaccuracies or even outright errors. Feel free to point them out,
+    either in the comments or privately.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bayesians and Frequentists
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In essence, Bayesian means probabilistic. The specific term exists because there
+    are two approaches to probability. Bayesians think of it as a measure of belief,
+    so that probability is subjective and refers to the future.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Frequentists have a different view: they use probability to refer to past events
+    - in this way it’s objective and doesn’t depend on one’s beliefs. The name comes
+    from the method - for example: we tossed a coin 100 times, it came up heads 53
+    times, so the frequency/probability of heads is 0.53.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For a thorough investigation of this topic and more, refer to Jake VanderPlas’ [Frequentism
+    and Bayesianism](https://jakevdp.github.io/blog/2015/08/07/frequentism-and-bayesianism-5-model-selection/) series
+    of articles.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Priors, updates, and posteriors
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As Bayesians, we start with a belief, called a prior. Then we obtain some data
+    and use it to update our belief. The outcome is called a posterior. Should we
+    obtain even more data, the old posterior becomes a new prior and the cycle repeats.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This process employs the **Bayes rule**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`P( A | B )`, read as “probability of A given B”, indicates a conditional probability:
+    how likely is A if B happens.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Inferring model parameters from data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In Bayesian machine learning we use the Bayes rule to infer model parameters
+    (theta) from data (D):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: All components of this are probability distributions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`P( data )` is something we generally cannot compute, but since it’s just a
+    normalizing constant, it doesn’t matter that much. When comparing models, we’re
+    mainly interested in expressions containing theta, because `P( data )` stays the
+    same for each model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`P( theta )` is a prior, or our belief of what the model parameters might be.
+    Most often our opinion in this matter is rather vague and if we have enough data,
+    we simply don’t care. Inference should converge to probable theta as long as it’s
+    not zero in the prior. One specifies a prior in terms of a parametrized distribution
+    - see [Where priors come from](http://zinkov.com/posts/2015-06-09-where-priors-come-from/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`P( D | theta )` is called likelihood of data given model parameters. The formula
+    for likelihood is model-specific. People often use likelihood for evaluation of
+    models: a model that gives higher likelihood to real data is better.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, `P( theta | D )`, a posterior, is what we’re after. It’s a probability
+    distribution over model parameters obtained from prior beliefs and data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When one uses likelihood to get point estimates of model parameters, it’s called [maximum-likelihood
+    estimation](https://en.wikipedia.org/wiki/Maximum_likelihood), or MLE. If one
+    also takes the prior into account, then it’s [maximum a posteriori estimation](https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation) (MAP).
+    MLE and MAP are the same if the prior is uniform.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that choosing a model can be seen as separate from choosing model (hyper)parameters.
+    In practice, though, they are usually performed together, by validation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model vs inference
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Inference refers to how you learn parameters of your model. A model is separate
+    from how you train it, especially in the Bayesian world.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Consider deep learning: you can train a network using Adam, RMSProp or a number
+    of other optimizers. However, they tend to be rather similar to each other, all
+    being variants of Stochastic Gradient Descent. In contrast, Bayesian methods of
+    inference differ from each other more profoundly.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The two most important methods are [Monte Carlo sampling](https://en.wikipedia.org/wiki/Monte_Carlo_method) and
+    variational inference. Sampling is a gold standard, but slow. The [excerpt from
+    The Master Algorithm](http://fastml.com/an-excerpt-from-the-master-algorithm/) has
+    more on MCMC.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Variational inference is a method designed explicitly to trade some accuracy
+    for speed. It’s drawback is that it’s model-specific, but there’s light at the
+    end of the tunnel - see the [section on software](http://fastml.com/bayesian-machine-learning/#software) below
+    and [Variational Inference: A Review for Statisticians](http://arxiv.org/abs/1601.00670).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Statistical modelling
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the spectrum of Bayesian methods, there are two main flavours. Let’s call
+    the first *statistical modelling* and the second *probabilistic machine learning*.
+    The latter contains the so-called nonparametric approaches.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Modelling happens when data is scarce and precious and hard to obtain, for example
+    in social sciences and other settings where it is difficult to conduct a large-scale
+    controlled experiment. Imagine a statistician meticulously constructing and tweaking
+    a model using what little data he has. In this setting you spare no effort to
+    make the best use of available input.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, with small data it is important to quantify uncertainty and that’s precisely
+    what Bayesian approach is good at.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bayesian methods - specifically MCMC - are usually computationally costly. This
+    again goes hand-in-hand with small data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To get a taste, consider [examples](https://github.com/stan-dev/example-models/wiki/ARM-Models-Sorted-by-Type) for
+    the [Data Analysis Using Regression Analysis and Multilevel/Hierarchical Models](http://www.stat.columbia.edu/~gelman/arm/) book.
+    That’s a whole book on linear models. They start with a bang: a linear model with
+    no predictors, then go through a number of linear models with one predictor, two
+    predictors, six predictors, up to eleven.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This labor-intensive mode goes against a current trend in machine learning to
+    use data for a computer to learn automatically from it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Probabilistic machine learning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s try replacing “Bayesian” with “probabilistic”. From this perspective,
+    it doesn’t differ as much from other methods. As far as classification goes, most
+    classifiers are able to output probabilistic predictions. Even SVMs, which are
+    sort of an antithesis of Bayesian.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By the way, these probabilities are only statements of belief from a classifier.
+    Whether they correspond to real probabilities is another matter completely and
+    it’s called [calibration](http://fastml.com/classifier-calibration-with-platts-scaling-and-isotonic-regression/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: LDA, a generative model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Latent Dirichlet Allocation](https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation) is
+    a method that one throws data at and allows it to sort things out (as opposed
+    to manual modelling). It’s similar to matrix factorization models, especially
+    non-negative MF. You start with a matrix where rows are documents, columns are
+    words and each element is a count of a given word in a given document. LDA “factorizes”
+    this matrix of size *n x d* into two matrices, documents/topics (*n x k*) and
+    topics/words (*k x d*).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The difference from factorization is that you can’t multiply those two matrices
+    to get the original, but since the appropriate rows/columns sum to one, you can
+    “generate” a document. To get the first word, one samples a topic, then a word
+    from this topic (the second matrix). Repeat this for a number of words you want.
+    Notice that this is a bag-of-words representation, not a proper sequence of words.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The above is an example of a **generative** model, meaning that one can sample,
+    or generate examples, from it. Compare with classifiers, which usually model `P(
+    y | x )` to discriminate between classes based on *x*. A generative model is concerned
+    with joint distribution of *y* and *x*, `P( y, x )`. It’s more difficult to estimate
+    that distribution, but it allows sampling and of course one can get `P( y | x
+    )` from `P( y, x )`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bayesian nonparametrics
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: While there’s no exact definition, the name means that the number of parameters
+    in a model can grow as more data become available. This is similar to Support
+    Vector Machines, for example, where the algorithm chooses support vectors from
+    the training points. Nonparametrics include Hierarchical Dirichlet Process version
+    of LDA, where the number of topics chooses itself automatically, and Gaussian
+    Processes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Gaussian Processes
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Gaussian processes are somewhat similar to Support Vector Machines - both use
+    kernels and have similar scalability (which has been vastly improved throughout
+    the years by using approximations). A natural formulation for GP is regression,
+    with classification as an afterthought. For SVM it’s the other way around.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another difference is that GP are probabilistic from the ground up (providing
+    error bars), while SVM are not. You can observe this in regression. Most “normal”
+    methods only provide point estimates. Bayesian counterparts, like Gaussian processes,
+    also output uncertainty estimates.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Homoscedastic noise](../Images/4bbaac39ca24078ff088ace99cc9b745.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Credit: Yarin Gal’s [Heteroscedastic dropout uncertainty](https://github.com/yaringal/HeteroscedasticDropoutUncertainty)
+    and [What my deep model doesn’t know](http://mlg.eng.cam.ac.uk/yarin/blog_3d801aa532c1ce.html)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unfortunately, it’s not the end of the story. Even a sophisticated method like
+    GP normally operates on an assumption of homoscedasticity, that is, uniform noise
+    levels. In reality, noise might differ across input space (be heteroscedastic)
+    - see the image below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Heteroscedastic noise](../Images/c3294dfa86d536a2d6e59cc885422ed8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A relatively popular application of Gaussian Processes is hyperparameter optimization
+    for machine learning algorithms. The data is small, both in dimensionality - usually
+    only a few parameters to tweak, and in the number of examples. Each example represents
+    one run of the target algorithm, which might take hours or days. Therefore we’d
+    like to get to the good stuff with as few examples as possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most of the research on GP seems to happen in Europe. English have done some
+    interesting work on making GP easier to use, culminating in the [automated statistician](http://www.automaticstatistician.com/index/),
+    a project led by Zoubin Ghahramani.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Watch the first 10 minutes of this [video](https://www.youtube.com/watch?v=BS4Wd5rwNwE) for
+    an accessible intro to Gaussian Processes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Software
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The most conspicuous piece of Bayesian software these days is probably [Stan](http://mc-stan.org/).
+    Stan is a probabilistic programming language, meaning that it allows you to specify
+    and train whatever Bayesian models you want. It runs in Python, R and other languages.
+    Stan has a modern sampler called [NUTS](http://andrewgelman.com/2011/11/30/stan-uses-nuts/):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most of the computation [in Stan] is done using Hamiltonian Monte Carlo. HMC
+    requires some tuning, so Matt Hoffman up and wrote a new algorithm, Nuts (the
+    “No-U-Turn Sampler”) which optimizes HMC adaptively. In many settings, Nuts is
+    actually more computationally efficient than the optimal static HMC!
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'One especially interesting thing about Stan is that it has [automatic variational
+    inference](http://arxiv.org/abs/1506.03431):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Variational inference is a scalable technique for approximate Bayesian inference.
+    Deriving variational inference algorithms requires tedious model-specific calculations;
+    this makes it difficult to automate. We propose an automatic variational inference
+    algorithm, automatic differentiation variational inference (ADVI). The user only
+    provides a Bayesian model and a dataset; nothing else.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This technique paves way to applying small-style modelling to at least medium-sized
+    data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Python, the most popular package is [PyMC](https://pymc-devs.github.io/pymc3/).
+    It is not as advanced or polished (the developers seem to be playing catch-up
+    with Stan), but still good. PyMC has NUTS and ADVI - here’s a notebook with a [minibatch
+    ADVI example](https://gist.github.com/taku-y/b4da34be310718a6ea02). The software
+    uses Theano as a backend, so it’s faster than pure Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Infer.NET](http://research.microsoft.com/en-us/um/cambridge/projects/infernet/) is
+    Microsoft’s library for probabilistic programming. It’s mainly available from
+    languages like C# and F#, but apparently can also be called from .NET’s IronPython.
+    Infer.net uses [expectation propagation](http://research.microsoft.com/en-us/um/cambridge/projects/infernet/docs/Working%20with%20different%20inference%20algorithms.aspx) by
+    default.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Besides those, there’s a myriad of packages implementing various flavours of
+    Bayesian computing, from other probabilistic programming languages to specialized
+    LDA implementations. One interesting example is [CrossCat](https://github.com/probcomp/crosscat):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'CrossCat is a domain-general, Bayesian method for analyzing high-dimensional
+    data tables. CrossCat estimates the full joint distribution over the variables
+    in the table from the data, via approximate inference in a hierarchical, nonparametric
+    Bayesian model, and provides efficient samplers for every conditional distribution.
+    CrossCat combines strengths of nonparametric mixture modeling and Bayesian network
+    structure learning: it can model any joint distribution given enough data by positing
+    latent variables, but also discovers independencies between the observable variables.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: and [BayesDB](http://probcomp.csail.mit.edu/bayesdb/)/[Bayeslite](https://github.com/probcomp/bayeslite) from
+    the same people.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Resources
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To solidify your understanding, you might go through Radford Neal’s tutorial
+    on [Bayesian Methods for Machine Learning](http://www.cs.toronto.edu/~radford/ftp/bayes-tut.pdf).
+    It corresponds 1:1 to the subject of this post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We found Kruschke’s [Doing Bayesian Data Analysis](https://sites.google.com/site/doingbayesiandataanalysis/what-s-new-in-2nd-ed),
+    known as the puppy book, most readable. The author goes to great lengths to explain
+    all the ins and outs of modelling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Statistical rethinking](http://xcelab.net/rm/statistical-rethinking/) appears
+    to be the similar kind, but newer. It has examples in R + Stan. The author, Richard
+    McElreath, published a [series of lectures](https://www.youtube.com/playlist?list=PLDcUM9US4XdMdZOhJWJJD4mDBMnbTWw_z) on
+    YouTube.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In terms of machine learning, both books only only go as far as linear models.
+    Likewise, Cam Davidson-Pylon’s [Probabilistic Programming & Bayesian Methods for
+    Hackers](http://camdavidsonpilon.github.io/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/#contents) covers
+    the *Bayesian*part, but not the *machine learning* part.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The same goes to Alex Etz’ series of articles on [understanding Bayes](http://alexanderetz.com/understanding-bayes/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For those mathematically inclined, [Machine Learning: a Probabilistic Perspective](https://www.cs.ubc.ca/~murphyk/MLbook/) by
+    Kevin Murphy might be a good book to check out. You like hardcore? No problemo,
+    Bishop’s [Pattern Recognition and Machine Learning](http://research.microsoft.com/en-us/um/people/cmbishop/prml/) got
+    you covered. One recent [Reddit thread](https://www.reddit.com/r/MachineLearning/comments/4c5gqk/is_pattern_recognition_and_machine_learning_still/) briefly
+    discusses these two.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Bayesian Reasoning and Machine Learning](http://web4.cs.ucl.ac.uk/staff/D.Barber/pmwiki/pmwiki.php?n=Brml.HomePage) by
+    David Barber is also popular, and freely available online, as is [Gaussian Processes
+    for Machine Learning](http://www.gaussianprocess.org/gpml/), the classic book
+    on the matter.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As far as we know, there’s no MOOC on Bayesian machine learning, but *mathematicalmonk*
+    explains [machine learning](https://www.youtube.com/playlist?list=PLD0F06AA0D2E8FFBA) from
+    the Bayesian perspective.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Stan has an extensive [manual](http://mc-stan.org/documentation/), PyMC a [tutorial](https://pymc-devs.github.io/pymc3/getting_started.html) and
+    quite a few examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Zygmunt Zając](http://fastml.com/)** likes fresh air, holding hands,
+    and long walks on the beach. He runs [FastML.com](http://fastml.com), the most
+    popular machine learning blog in the whole wide world. Besides a variety of entertaining
+    articles, FastML now has a [machine learning job board](http://fastml.com/jobs/)
+    and a tool for [visualizing datasets in 3D](http://cubert.fastml.com/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://fastml.com/bayesian-machine-learning/). Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Machine Learning Key Terms, Explained](/2016/05/machine-learning-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 Data Mining Algorithms, Explained](/2015/05/top-10-data-mining-algorithms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Data Science Puzzle, Explained](/2016/03/data-science-puzzle-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

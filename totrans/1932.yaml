@@ -1,0 +1,213 @@
+- en: Using Ensembles in Kaggle Data Science Competitions – Part 2
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2015/06/ensembles-kaggle-data-science-competition-p2.html](https://www.kdnuggets.com/2015/06/ensembles-kaggle-data-science-competition-p2.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2015/06/ensembles-kaggle-data-science-competition-p1.html#comments)**By
+    Henk van Veen**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Stacked Generalization & Blending**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Averaging prediction files is nice and easy, but it’s not the only method that
+    the top Kagglers [Repetition code]( https://www.kaggle.com/users) are using. The
+    serious gains start with stacking and blending. Hold on to your top-hats and petticoats:
+    Here be dragons. With 7 heads. Standing on top of 30 other dragons.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Netflix**[![This image shows netflix leaderboard results with blending hundreds
+    of predictive models](../Images/5430890728ebc281f0fbace948acb835.png)](/wp-content/uploads/compiling-blending-predictive-models-by-netflix-engineers.jpg)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Blending hundreds of predictive models to finally cross the finish line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Netflix organized and popularized the first data science competitions. Competitors
+    in the movie recommendation challenge really pushed the state of the art on ensemble
+    creation, perhaps so much so that Netflix decided not to implement the winning
+    solution in production. That one was simply too complex.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Nevertheless, a number of papers and novel methods resulted from this challenge:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Feature-Weighted Linear Stacking](http://arxiv.org/pdf/0911.0460.pdf)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Combining Predictions for Accurate Recommender Systems](http://elf-project.sourceforge.net/CombiningPredictionsForAccurateRecommenderSystems.pdf
+    )'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The BigChaos Solution to the Netflix Prize](http://www.netflixprize.com/assets/GrandPrize2009_BPC_BigChaos.pdf
+    )'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: All are interesting, accessible and relevant reads when you want to improve
+    your Kaggle game.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Stacked generalization**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Stacked generalization was introduced by Wolpert in a 1992 paper, 2 years before
+    the seminal Breiman paper “Bagging Predictors“. Wolpert is famous for another
+    very popular machine learning theorem:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*“There is no free lunch in search and optimization“.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The basic idea behind stacked generalization is to use a pool of base classifiers,
+    then using another classifier to combine their predictions, with the aim of reducing
+    the generalization error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s say you want to do 2-fold stacking:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Split the train set in 2 parts: train_a and train_b'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Fit a first-stage model on train_a and create predictions for train_b
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Fit the same model on train_b and create predictions for train_a
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Finally fit the model on the entire train set and create predictions for the
+    test set.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now train a second-stage stacker model on the probabilities from the first-stage
+    model(s).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A stacker model gets more information on the problem space by using the first-stage
+    predictions as features, than if it was trained in isolation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Blending**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Blending is a word introduced by the Netflix winners. It is very close to stacked
+    generalization, but a bit simpler and less risk of an information leak. Some researchers
+    use “stacked ensembling” and “blending” interchangeably.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With blending, instead of creating out-of-fold predictions for the train set,
+    you create a small holdout set of say 10% of the train set. The stacker model
+    then trains on this holdout set only.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Blending has a few benefits:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is simpler than stacking.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'It wards against an information leak: The generalizers and stackers use different
+    data.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You do not need to share a seed for stratified folds with your teammates. Anyone
+    can throw models in the ‘blender’ and the blender decides if it wants to keep
+    that model or not.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'However, The cons are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You use less data overall
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The final model may overfit to the holdout set.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Your CV is more solid with stacking (calculated over more folds) than using
+    a single small holdout set.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As for performance, both techniques are able to give similar results, and it
+    seems to be a matter of preference and skill which you prefer. The author prefers
+    stacking.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you can not choose, you can always do both. Create stacked ensembles with
+    stacked generalization and out-of-fold predictions. Then use a holdout set to
+    further combine these models at a third stage which we will explore next.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Using Ensembles in Kaggle Data Science Competitions – Part 1**](/2015/06/ensembles-kaggle-data-science-competition-p1.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Using Ensembles in Kaggle Data Science Competitions – Part 3**](/2015/06/ensembles-kaggle-data-science-competition-p3.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How are you planning to implement what you learned? Share your thoughts!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Original: [**Kaggle Ensembling Guide**](http://mlwave.com/kaggle-ensembling-guide/)
+    by Henk van Veen.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to Lead a Data Science Contest without Reading the Data](/2015/05/data-science-contest-leaderboard-without-reading-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 20 R Machine Learning and Data Science packages](/2015/06/top-20-r-machine-learning-packages.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Netflix: Director – Product Analytics, Data Science and Engineering](/jobs/14/08-11-netflix-director-product-analytics-data-science-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Are Kaggle Competitions Useful for Real World Problems?](https://www.kdnuggets.com/are-kaggle-competitions-useful-for-real-world-problems)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Free Competitions for Aspiring Data Scientists](https://www.kdnuggets.com/5-free-competitions-for-aspiring-data-scientists)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn Machine Learning 4X Faster by Participating in Competitions](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Free Kaggle Micro-Courses for Data Science Beginners](https://www.kdnuggets.com/7-free-kaggle-micro-courses-for-data-science-beginners)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 Kaggle Machine Learning Projects to Become Data Scientist in 2024](https://www.kdnuggets.com/top-10-kaggle-machine-learning-projects-to-become-data-scientist-in-2024)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 4 tricks for competing on Kaggle and why you should start](https://www.kdnuggets.com/2022/05/packt-top-4-tricks-competing-kaggle-start.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

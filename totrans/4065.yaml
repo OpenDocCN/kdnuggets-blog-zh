@@ -1,0 +1,360 @@
+- en: How To Speed Up SQL Queries Using Indexes [Python Edition]
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![How To Speed Up SQL Queries Using Indexes [Python Edition]](../Images/6dd7f74dcf25f10a17a48f0c17ae157a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Suppose you’re sifting through the pages of a book. And you want to find the
+    information that you’re looking for much faster. How’d you do that? Well, you’d
+    probably look up the index of terminologies and then jump to the pages that reference
+    a particular term. **Indexes in SQL** work similarly to the indexes in books.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In most real-world systems, you’ll run queries against a database table with
+    a large number of rows (think millions of rows). Queries that require a full-table
+    scan through all the rows to retrieve the results will be quite slow. If you know
+    that you’ll have to query information based on some of the columns often, you
+    can create database indexes on those columns. This will speed up the query significantly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So what’ll we learn today? We’ll learn to connect to and query a SQLite database
+    in Python—using the sqlite3 module. We’ll also learn how to add indexes and see
+    how it improves performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To code along to this tutorial, you should have Python 3.7+ and SQLite installed
+    in your working environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note**: The examples and sample output in this tutorial are for Python 3.10
+    and SQLite3 (version 3.37.2) on Ubuntu LTS 22.04.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Connecting to a Database in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'We’ll use the [built-in sqlite3 module](https://docs.python.org/3/library/sqlite3.html).
+    Before we start running queries, we need to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: connect to the database
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: create a database cursor to run queries
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'To connect to the database, we’ll use the `connect()` function from sqlite3
+    module. Once we have established a connection, we can call `cursor()` on the connection
+    object to create a database cursor as shown:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here we try to connect to the database `people_db`. If the database doesn’t
+    exist, running the above snippet will create the sqlite database for us.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating a Table and Inserting Records
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Now, we’ll create a table in the database and populate it with records.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s create a table named **people** in the `people_db` database with the
+    following fields:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: name
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: email
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: job
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Synthetic Data Generation with Faker
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'We now have to insert records into the table. To do this, we’ll use the [Faker](https://faker.readthedocs.io/)—a
+    Python package for synthetic data generation—installable through [pip](https://pypi.org/project/pip/):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After installing faker, you can import the `Faker` class into the Python script:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The next step is to generate and insert records into the people table. Just
+    so we know how indexes can speed up queries, let’s insert a large number of records.
+    Here, we’ll insert 100K records; set the `num_records` variable to 100000.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Then, we do the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instantiate a `Faker` object `fake` and set the seed so we get reproducibility.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Get a name string using first and last names—by calling `first_name()` and `last_name()`
+    on the `fake` object.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Generate a fake domain by calling `domain_name()`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use the first and last names and the domain to generate the email field.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Get a job for each individual record using `job()`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'We generate and insert records into the `people` table:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now the main.py file has the following code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Run this script—once—to populate the table with `num_records` number of records.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Querying the Database
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Now that we have the table with 100K records, let’s run a sample query on the
+    `people` table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s run a query to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: get the names and emails of the records where the job title ‘Product manager’,
+    and
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: limit the query results to 10 records.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We’ll use the default timer from the time module to get the approximate execution
+    time for the query.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here’s the output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'You can also invoke the SQLite command-line client by running `sqlite3 db_name`
+    at the command line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To get the list of indexes, you can run `.index`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: As there are no indexes currently, no index will be listed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can also check the query plan like so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here the query plan is to *scan all the rows* which is inefficient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating an Index on a Specific Column
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'To create a database index on a particular column you can use the syntax:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Say we need to frequently look up the records of individuals with a particular
+    job title. It’d help to create an index `people_job_index` on the job column:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Even though creating the index takes this long, it's a one-time operation. You
+    will still get substantial speed-up when running multiple queries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now if you run `.index` at the SQLite command-line client, you’ll get:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Querying the Database with Index
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'If you now look at the query plan, you should be able to see that we now search
+    `people` table using index `people_job_index` on the **job** column:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'You can re-run sample_query.py. Only modify the `print()` statement and see
+    how long it takes for the query to run now:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here’s the output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: We see that the query now takes about 167.179 microseconds to execute.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Performance Improvement
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: For our sample query, querying with index is about 2.68 times faster. And we
+    get a percentage speedup of 62.71% in execution times.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can also try running a few more queries: queries that involve filtering
+    on the job column and see the performance improvement.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Also note: Because we have created an index only on the job column, if you
+    are running queries that involve other columns, the queries *will not* run any
+    faster than without index.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrap-Up and Next Steps
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: I hope this guide helped you understand how creating database indexes—on frequently
+    queried columns—can significantly speed up queries. This is an introduction to
+    database indexes. You can also create multi-column indexes, multiple indexes for
+    the same column, and much more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can find all the code used in this tutorial in [this GitHub repository](https://github.com/balapriyac/sql-index-intro).
+    Happy coding!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** is a developer
+    and technical writer from India. She likes working at the intersection of math,
+    programming, data science, and content creation. Her areas of interest and expertise
+    include DevOps, data science, and natural language processing. She enjoys reading,
+    writing, coding, and coffee! Currently, she''s working on learning and sharing
+    her knowledge with the developer community by authoring tutorials, how-to guides,
+    opinion pieces, and more.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Vector Databases and Vector Indexes: Architecting LLM Apps](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Useful Intermediate SQL Queries for Data Science](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Tricky SQL Queries Solved](https://www.kdnuggets.com/2020/11/5-tricky-sql-queries-solved.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Solving 5 Complex SQL Problems: Tricky Queries Explained](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, December 7: Top 10 Data Science Myths Busted • 4…](https://www.kdnuggets.com/2022/n47.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

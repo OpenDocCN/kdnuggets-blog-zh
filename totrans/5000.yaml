@@ -1,0 +1,381 @@
+- en: Random Forests® in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/12/random-forests-python.html](https://www.kdnuggets.com/2016/12/random-forests-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This post originally appeared on the [Yhat blog](http://blog.yhat.com/). [**Yhat**](https://www.yhat.com/)
+    is a Brooklyn based company whose goal is to make data science applicable for
+    developers, data scientists, and businesses alike. Yhat provides a software platform
+    for deploying and managing predictive algorithms as REST APIs, while eliminating
+    the painful engineering obstacles associated with production environments like
+    testing, versioning, scaling and security.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Random forest](https://en.wikipedia.org/wiki/Random_forest "random forest
+    - wikipedia") is a highly versatile machine learning method with numerous applications
+    ranging from marketing to healthcare and insurance. It can be used to [model the
+    impact of marketing](http://epubl.ltu.se/1653-0187/2008/014/LTU-PB-EX-08014-SE.pdf
+    "Response Rate Modeling - a Data Mining Based Approach for Target Selection") on
+    customer acquisition, retention, and churn or to [predict disease risk and susceptibility](http://www.biomedcentral.com/1472-6947/11/51
+    "Predicting disease risks from highly imbalanced data using random forest") in
+    patients.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Random forest is capable of regression and classification. It can handle a large
+    number of features, and it's helpful for estimating which of your variables are
+    important in the underlying data being modeled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a post about random forests using Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is a Random Forest?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Random forest is solid choice for nearly any prediction problem (even non-linear
+    ones). It's a relatively new machine learning strategy (it came out of Bell Labs
+    in the 90s) and it can be used for just about anything. It belongs to a larger
+    class of machine learning algorithms called ensemble methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Ensemble Learning**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Ensemble learning](https://en.wikipedia.org/wiki/Ensemble_learning) involves
+    the combination of several models to solve a single prediction problem. It works
+    by generating multiple classifiers/models which learn and make predictions independently.
+    Those predictions are then combined into a single (mega) prediction that should
+    be as good or better than the prediction made by any one classifer.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Random forest is a brand of ensemble learning, as it relies on an ensemble of
+    decision trees. More on ensemble learning in Python here: [Scikit-Learn docs](http://scikit-learn.org/dev/modules/ensemble.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Randomized Decision Trees**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So we know that random forest is an aggregation of other models, but what types
+    of models is it aggregating? As you might have guessed from its name, random forest
+    aggregates [Classification (or Regression) Trees](https://en.wikipedia.org/wiki/Decision_tree_learning
+    "decision tree learning - wikipedia"). A decision tree is composed of a series
+    of decisions that can be used to classify an observation in a dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Random* Forest**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The algorithm to induce a random forest will create a bunch of random decision
+    trees automatically. Since the trees are generated at random, most won't be all
+    that meaningful to learning your classification/regression problem (maybe 99.9%
+    of trees).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8b2ffa2eb8e26a731d7ca9f9fbd27da6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If an observation has a length of 45, blue eyes, and 2 legs, it's going to be
+    classified as **red**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Arboreal Voting**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So what good are 10000 (probably) bad models? Well it turns out that they really
+    aren't that helpful. But *what is helpful* are the few really good decision trees
+    that you also generated along with the bad ones.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When you make a prediction, the new observation gets pushed down each decision
+    tree and assigned a predicted value/label. Once each of the trees in the forest
+    have reported its predicted value/label, the predictions are tallied up and the
+    mode vote of all trees is returned as the final prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Simply, the 99.9% of trees that are irrelevant make predictions that are all
+    over the map and cancel each another out. The predictions of the minority of trees
+    that are good top that noise and yield a good prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1089e8b31317d5481c2c9f906914a3d4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Why you should I use it?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**It''s Easy**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Random forest is the [Leatherman](http://www.leatherman.com/product/Super_Tool_300
+    "leatherman super tool") of learning methods. You can throw pretty much anything
+    at it and it'll do a serviceable job. It does a particularly good job of estimating
+    inferred transformations, and, as a result, doesn't require much tuning like SVM
+    (i.e. it's good for folks with tight deadlines).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**An Example Transformation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Random forest is capable of learning without carefully crafted data transformations.
+    Take the the `f(x) = log(x)` function for example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alright let's write some code. We'll be writing our Python code in Yhat's very
+    own interactive environment built for analyzing data, Rodeo. You can download
+    Rodeo for Mac, Windows or Linux [here](https://www.yhat.com/products/rodeo).
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, create some fake data and add a little noise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[Check out the gist here](https://gist.github.com/glamp/5716253)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We'll be doing our Python analysis and visualization in Rodeo, Yhat's open source
+    data science environment. Want to follow along? You can download Yhat's Python
+    IDE for Mac, Windows or Linux [here](https://www.yhat.com/products/rodeo).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Following along in Rodeo? Here's what you should see.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![](../Images/60c88f42a3be91a24868ac8a456551d6.png)](http://blog.yhat.com/static/img/random-forest-1.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's take a closer look at that plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/229d178dff3a906a4900b8e77bfff9a3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If we try and build a basic linear model to predict `y` using `x` we wind up
+    with a straight line that sort of bisects the `log(x)` function. Whereas if we
+    use a random forest, it does a much better job of approximating the `log(x)` curve
+    and we get something that looks much more like the true function.![](../Images/ba71b34f9c50bf4ec9f6ab94eef89633.png)![](../Images/e0f2fd97697a9bdf57bfc60630e0d7aa.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: You could argue that the random forest overfits the `log(x)` function a little
+    bit. Either way, I think this does a nice job of illustrating how the random forest
+    isn't bound by linear constraints.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Uses
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Variable Selection**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the best use cases for random forest is feature selection. One of the
+    byproducts of trying lots of decision tree variations is that you can examine
+    which variables are working best/worst in each tree.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When a certain tree uses one variable and another doesn't, you can compare the
+    value lost or gained from the inclusion/exclusion of that variable. The good random
+    forest implementations are going to do that for you, so all you need to do is
+    know which method or variable to look at.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the following examples, we're trying to figure out which variables are most
+    important for classifying a wine as being red or white.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/35593bee262ea31d7ff57b2424fa7bfd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/1dc88ad49fcdbdee484b7eeba6868983.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Classification**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Random forest is also great for classification. It can be used to make predictions
+    for categories with multiple possible values and it can be calibrated to output
+    probabilities as well. One thing you do need to watch out for is [overfitting](https://en.wikipedia.org/wiki/Overfitting).
+    Random forest can be prone to overfitting, especially when working with relatively
+    small datasets. You should be suspicious if your model is making "too good" of
+    predictions on our test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One way to overfitting is to only use really relevant features in your model.
+    While this isn't always cut and dry, using a feature selection technique (like
+    the one mentioned previously) can make it a lot easier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/51000c974461f8fb2e93691cf81fc5f4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Regression**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Yep. It does regression too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I've found that random forest--unlike other algorithms--does really well learning
+    on categorical variables or a mixture of categorical and real variables. Categorical
+    variables with high cardinality (# of possible values) can be tricky, so having
+    something like this in your back pocket can come in quite useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Short Python Example
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Scikit-Learn is a great way to get started with random forest. The scikit-learn
+    API is extremely consistent across algorithms, so you horse race and switch between
+    models very easily. A lot of times I start with something simple and then move
+    to random forest.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the best features of the random forest implementation in scikit-learn
+    is the `n_jobs` parameter. This will automatically parallelize fitting your random
+    forest based on the number of cores you want to use. [Here's a great presentation](https://vimeo.com/63269736
+    "Vimeo - Scaling Machine Learning in Python") by scikit-learn contributor Olivier
+    Grisel where he talks about training a random forest on a 20 node EC2 cluster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Following along? Here's what you should see(ish). We're using *randomly* selected
+    data, so your exact values will differ each time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| preds | sertosa | versicolor | virginica |'
+  prefs: []
+  type: TYPE_TB
+- en: '| actual |  |  |  |'
+  prefs: []
+  type: TYPE_TB
+- en: '| sertosa | 6 | 0 | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| versicolor | 0 | 16 | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| virginica | 0 | 0 | 12 |'
+  prefs: []
+  type: TYPE_TB
+- en: '[![](../Images/2a2215f7c85231cf599969e6d2a4400d.png)](http://blog.yhat.com/static/img/random-forest-3.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Final Thoughts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Random forests are remarkably easy to use given how advanced they are. As with
+    any modeling, be wary of overfitting. If you're interested in getting started
+    with random forest in `R`, check out the [`randomForest`](http://cran.r-project.org/web/packages/randomForest/randomForest.pdf) package.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Berkley Resources](http://www.stat.berkeley.edu/~breiman/RandomForests/cc_home.htm
+    "random forests - UC Berkley Resources")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Kaggle blogpost](https://www.kaggle.com/wiki/RandomForests "Random Forests
+    Blog Post from Kaggle")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Andy Mueller''s blog (scikit-learn contributor)](http://peekaboo-vision.blogspot.de/
+    "Andy Mueller''s blog")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Random Forest Guide](http://www.stanford.edu/~stephsus/R-randomforest-guide.pdf
+    "Random Forests for Classification - Stephanie Shih")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Olivier Grisel''s website](http://ogrisel.com/ ">Olivier Grisel")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Original](http://blog.yhat.com/posts/python-random-forest.html). Reposted
+    with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: RANDOM FORESTS and RANDOMFORESTS are registered marks of Minitab, LLC.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Random Forest: A Criminal Tutorial](/2016/09/reandom-forest-criminal-tutorial.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[When Does Deep Learning Work Better Than SVMs or Random Forests?](/2016/04/deep-learning-vs-svm-random-forest.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Great Algorithm Tutorial Roundup](/2016/09/great-algorithm-tutorial-roundup.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Decision Trees vs Random Forests, Explained](https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Random Forest vs Decision Tree: Key Differences](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Does the Random Forest Algorithm Need Normalization?](https://www.kdnuggets.com/2022/07/random-forest-algorithm-need-normalization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generating Random Data with NumPy](https://www.kdnuggets.com/generating-random-data-with-numpy)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

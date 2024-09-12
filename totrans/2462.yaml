@@ -1,0 +1,495 @@
+- en: No Brainer AutoML with AutoXGB
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/02/no-brainer-automl-autoxgb.html](https://www.kdnuggets.com/2022/02/no-brainer-automl-autoxgb.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![No Brainer AutoML with AutoXGB](../Images/02ab161ce6b93042832d676525e34fed.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Automated machine learning (AutoML) runs various machine learning processes
+    automatically and optimizes error metrics to generate the best possible model.
+    These processes include: data preprocessing, encoding, scaling, optimizing hyperparameters,
+    model training, generating artifacts, and a list of results. Automating the machine
+    learning process makes it fast to develop AI solutions, provide a user-friendly
+    experience, and often produce accurate results with low code - [TechTarget](https://www.techtarget.com/searchenterpriseai/definition/automated-machine-learning-AutoML).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Popular AutoML Libraries:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[LightAutoML](https://github.com/sberbank-ai-lab/LightAutoML)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[MLJar](https://pypi.org/project/mljar-supervised/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[EvalML](https://github.com/alteryx/evalml)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[FLAML](https://github.com/microsoft/FLAML)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyCaret](https://pycaret.org/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AutoGluon](https://auto.gluon.ai/stable/index.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[H2O 3](https://docs.h2o.ai/h2o/latest-stable/h2o-docs/index.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In this tutorial, we are going to use 1994 census income data to predict whether
+    a person makes over $50K a year or not. This is a classic binary classification
+    problem and we are going to use the Kaggle dataset [Adult Census Income](https://www.kaggle.com/uciml/adult-census-income)
+    under [CC0: Public Domain](https://creativecommons.org/publicdomain/zero/1.0/)
+    license. It was extracted from the [1994 Census bureau database](http://www.census.gov/en.html)
+    by Ronny Kohavi and Barry Becker (Data Mining and Visualization, Silicon Graphics).
+    We won’t be going deep into data analysis or how the model works. Instead, we
+    will build an optimized machine learning model with a few lines of code and access
+    it using the FastAPI server.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: AutoXGB
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[AutoXGB](https://github.com/abhishekkrthakur/autoxgb) is a simple but effective
+    AutoML tool to train model tabular datasets directly from CSV files. The AutoXGB
+    uses [XGBoost](https://xgboost.readthedocs.io/en/stable/) for training the model,
+    [Optuna](https://optuna.org/) for hyperparameters optimization, and [FastAPI](https://fastapi.tiangolo.com/)
+    to provide model inference in the form of API.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s get started by installing autoxgb. If you are facing the error while running
+    the server, then install fastapi and unvicorn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Initializing
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We are going to go deep on the features of the AutoXGB function and how these
+    parameters can be used to improve the results or reduce training time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**train_filename**: path to training data'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**output**: path to the output folder to store artifacts'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**test_filename**: path to test data. If not specified, only OOF predictions
+    will be saved'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**task**: if not specified, the task will be inferred automatically'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: task = "classification"
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: task = "regression"
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**idx**: if not specified, the id column will be generated automatically with
+    the name id'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**targets**: if not specified, the target column be assumed to be named target
+    and the problem will be treated as one of binary classification, multiclass classification,
+    or single column regression'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: targets = ["target"]
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: targets = ["target1", "target2"]
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**features**: if not specified, all columns except id, targets & kfold columns
+    will be used'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: features = ["col1", "col2"]
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**categorical_features**: if not specified, categorical columns will be inferred
+    automatically'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: categorical_features = ["col1", "col2"]
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**use_gpu**: if not specified, GPU is not used'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: use_gpu = True
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: use_gpu = False
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**num_folds**: number of folds to use for cross-validation'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**seed**: random seed for reproducibility'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**num_trials**: number of Optuna trials to run'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: default is 1000
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: num_trials = 1000
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**time_limit**:  time_limit for optuna trials in seconds'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: if not specified, all trials will run
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: time_limit = None
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**fast**: if fast is set to True, the hyperparameter tuning will use only one
+    fold which reduces the optimizing time. After that it will train on the rest of
+    the fold and generate OOF and test predictions.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In our case, we will set most values to default except *train_filename, output,
+    target, num_folds, seed, num_trails,* and *time_limit.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Training & Optimization
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: It's time to define a model using *AutoXGB()* and add previously defined parameters
+    to the model. Finally, we will use *axgb.train()* to start training process. It
+    will run the XGBoost, Optuna, and output artifacts (**model, predication, results,
+    config, params, encoders**).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: It took 10-12 minutes for the training process to finish, and we can see the
+    optimum results below. I think we can improve our **F1** score by increasing the
+    time limit. We can also play with other hyperparameters to improve model performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Training with CLI**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To train the model in the terminal/bash we will be using **autoxgb** **train**.
+    We will just set *train_filename* and *output* folder.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Web API
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: By running **autoxgb serve** in the terminal, we can run the FastAPI server
+    locally.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No Brainer AutoML with AutoXGB](../Images/24954fac438a81a6ff390025c0994129.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: AutoXGB Serve Parameters
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '**model_path** -> Path to model. In our case, it''s the output folder.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**port** -> Port to serve on 8080'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**host** -> Host to serve on, IP address: 0.0.0.0'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**workers** -> Number of workers or number of simultaneous requests.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**debug** -> Display logs of error and success'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Deepnote Public Server
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In order to run the server on the cloud, [Deepnote](https://deepnote.com/) uses
+    **ngrok** to create a public URL. We just need to turn on the option and use port
+    **8080**. If you are running locally you don’t need to follow this step and directly
+    access the API using “http://0.0.0.0:8080”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No Brainer AutoML with AutoXGB](../Images/2aa8fd7dff333dd6014552e3db831a3f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We have provided a **model path**, **host ip**, and **port number** to run the
+    server.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Our API is running smoothly and you can access it using “https://8d3ae411-c6bc-4cad-8a14-732f8e3f13b7.deepnoteproject.com”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Prediction
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We can add random inputs to predict whether the person's income is greater than
+    $50k or not. In this example, we are using the FastAPI **/docs** option to access
+    the user interface.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Input
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We are going to use FastAPI GUI to run predictions on models by adding ***/docs***
+    at the end of the link. For example “172.3.167.43:39118/docs”
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**workclass**: "Private"'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**education**: "HS-grad"'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**marital.status**: "Widowed"'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**occupation**: "Transport-moving"'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**relationship**: "Unmarried"'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**race**: "White"'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**sex**: "Male"'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**native.country**: "United-States"'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**age**: 20'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**fnlwgt**: 313986'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**education.num**: 9'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**capital.gain**: 0'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**capital.loss**: 0'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**hours.per.week**: 40'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![No Brainer AutoML with AutoXGB](../Images/b472bb19afa5e39dda93694edb062195.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Outcome
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The result is **<50k** with confidence of 97.6% and **>50k** with confidence
+    of 2.3%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No Brainer AutoML with AutoXGB](../Images/310b95a9c11395c61f0d017f5303ba78.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Test with Request
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: You can also test the API using **requests** in Python. Just push parameters
+    in the form of a dictionary and get output in the JSON format.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Project
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The code and examples are available at:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deepnote](https://deepnote.com/@abid/AutoXGB-jTrkEca8TK2KFHMvjj8Ttw)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GitHub](https://github.com/kingabzpro/Intro-to-AutoXGB)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DAGsHub](https://dagshub.com/kingabzpro/Intro-to-AutoXGB)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: I use AutoML to get an edge in Kaggle competitions and to develop a model baseline
+    for machine learning projects. You can sometimes get fast and accurate results
+    but, if you want to create the state of the art solutions, you need to experiment
+    with various machine learning processes manually.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this tutorial, we have learned about AutoXGB's various functions. We can
+    use AutoXGB to preprocess the data, train the XGboost model, optimize the model
+    using Optuna, and run a web server using FastAPI. In short, AutoXGB provides an
+    end-to-end solution for your everyday tabular data problems. If you have questions
+    about implementation or using other AutoML that I have mentioned, please write
+    them in the comment session. I would love to answer all of your queries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))
+    is a certified data scientist professional who loves building machine learning
+    models. Currently, he is focusing on content creation and writing technical blogs
+    on machine learning and data science technologies. Abid holds a Master''s degree
+    in Technology Management and a bachelor''s degree in Telecommunication Engineering.
+    His vision is to build an AI product using a graph neural network for students
+    struggling with mental illness.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Nota AI releases beta version of NetPresso Model Search, their…](https://www.kdnuggets.com/2022/04/nota-ai-releases-beta-version-netpresso-model-search-hardwareaware-automl-tool.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Top AutoML Frameworks You Should Consider in 2023](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

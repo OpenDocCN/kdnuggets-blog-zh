@@ -1,0 +1,271 @@
+- en: Linear Regression in the Wild
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/10/linear-regression-wild.html](https://www.kdnuggets.com/2018/10/linear-regression-wild.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/a31f527c56b511703f7c01820284d373.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In one of my job interviews for a data scientist position, I was given a home
+    assignment I’d like to share with you.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The interviewer sent me a CSV file containing samples of measured quantities
+    x and y, where y is a response variable which can be written as an explicit function
+    of x. It is known that the technique used for measuring x is twice as better than
+    that for measuring y in the sense of standard deviation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The task: model y as a function of x.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here are all the imports I’ll need:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/f67bca2fb3b2fa280bc9bf50acbd697d.png)Let’s visualize the data,
+    to see if it’s easy to capture the pattern by eye:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/4301d0eacfea5e24be147a3eefe4632d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'It clearly looks like linear regression case. First I’ll manually remove the
+    outliers:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/98ae66e8e50fe6e2e71fc3bc23e33ccf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'I’ll use **LinearRegression** to fit the best line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/962661b3101777a60f96ef21bdac2017.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: fitting a line through the dataVisually it looks compelling, but I’ll validate
+    linear regression assumptions to be assured I’m using the right model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you’re not familiar with the linear regression assumptions, you can read
+    about it in the article [Going Deeper into Regression Analysis with Assumptions,
+    Plots & Solutions](https://www.analyticsvidhya.com/blog/2016/07/deeper-regression-analysis-assumptions-plots-solutions/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First, we’ll plot the residual errors:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/cfced82716a4b9290b84cdaae8fd6820.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It seems like there’s no autocorrelation in the residuals.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Heteroskedasticity also doesn’t look to be a problem here, since the variance
+    pretty much looks constant (except for the left part of the plot, but there’s
+    not a lot of data, so I’ll ignore that).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Multicollinearity is not relevant here, since there’s only one dependent variable.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Residuals should be normally distributed: I’ll verify that using QQ-plot:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/45dbf02e6803e02e18b49154defb2dca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It looks reasonably normal…
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I’ll conclude that the relationship between x and y assuming linear relationship
+    is best modeled as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: We got a consistent estimator of the parameters required for calculating *y *given *x* (where
+    both have measurement errors), or in other words, the line’s coefficients.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Up until now all I’ve done is plain old linear regression. The interesting thing
+    about this task is that *x* has measurement error (which is typical in real world
+    use cases).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we want to estimate the parameters required for calculating *y* given the
+    exact *x* value (without measurement error), we need to use a different approach.
+    Using simple linear regression without accounting for *x* being random with noise
+    results in line slope slightly smaller than the *true* line slope (the line describing *x* without
+    measurement errors). You can read [this wiki page](https://en.wikipedia.org/wiki/Errors-in-variables_models#Motivational_example) to
+    learn why.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’ll use [Deming regression](https://en.wikipedia.org/wiki/Deming_regression),
+    which is a method that can be used when the errors for the two variables *x* and *y* are
+    assumed to be independent and normally distributed, and the ratio of their variances,
+    denoted *δ*, is known. This approach is a perfect fit for our settings, where
+    we have
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*The technique used for measuring x is twice as better than that for measuring
+    y in the sense of standard deviation.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: So in our settings, *δ* is 2 squared.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using the formulas found in the [wiki page](https://en.wikipedia.org/wiki/Deming_regression#Solution),
+    we get
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Using Deming regression, the relationship between x and y is modeled as
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s plot the two models:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/2b4fb742caaed1a863c8db290fb2204f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'We have fit two models: one is a simple linear regression model, and the other
+    is a linear regression model that accounts for the measurement errors in *x*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The more simple one may be enough if our purpose is to calculate *y* given a
+    new *x* that has measurement error (resulting from the same distribution as the
+    measurement errors used when training the model).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we want to state the true relationship for *y* as a function of *x* in a
+    world without measurement errors, we should go with the second model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This was a great interview question, since I got to learn a new kind of model,
+    which is pretty neat :)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Although this isn’t really an example for *linear regression in the wild* as
+    the title suggests (ok, I lied), this post does demonstrate an important concept
+    many people don’t attend: the dependent variables in many cases are measured in
+    an inaccurate way, which might need to be accounted for (depending on the application).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Regress with care!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/linear-regression-in-the-wild-335723a687e8).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio**: [Yoel Zeldes](https://medium.com/@yoelzeldes) is an Algorithms Engineer
+    at Taboola. Yoel is a a Machine Learning enthusiast, especially enjoying the insights
+    of Deep Learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Linear Regression In Real Life](https://www.kdnuggets.com/2018/08/linear-regression-real-life.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Linear Regression for Predictive Modeling in R](https://www.kdnuggets.com/2018/06/linear-regression-predictive-modeling-r.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Tour of The Top 10 Algorithms for Machine Learning Newbies](https://www.kdnuggets.com/2018/02/tour-top-10-algorithms-machine-learning-newbies.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Getting Deep Learning working in the wild: A Data-Centric Course](https://www.kdnuggets.com/2022/04/corise-deep-learning-wild-data-centric-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Deep Learning working in the wild: A Data-Centric Course](https://www.kdnuggets.com/2022/11/corise-deep-learning-wild-data-centric-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Comparing Linear and Logistic Regression](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Reasons Why You Should Use Linear Regression Models Instead of…](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Linear vs Logistic Regression: A Succinct Explanation](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News 22:n12, March 23: Best Data Science Books for…](https://www.kdnuggets.com/2022/n12.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

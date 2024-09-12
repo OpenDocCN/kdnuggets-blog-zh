@@ -1,0 +1,352 @@
+- en: Evaluating the Business Value of Predictive Models in Python and R
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/10/evaluating-business-value-predictive-models-modelplotpy.html/2](https://www.kdnuggets.com/2018/10/evaluating-business-value-predictive-models-modelplotpy.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**2\. Cumulative lift plot**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The cumulative lift plot, often referred to as lift plot or index plot, helps
+    you answer the question:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***When we apply the model and select the best X deciles, how many times better
+    is that than using no model at all?***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The lift plot helps you in explaining how much better selecting based on your
+    model is compared to taking random selections instead. Especially when models
+    are not yet used within a certain organisation or domain, this really helps business
+    understand what selecting based on models can do for them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The lift plot only has one reference line: the ''random model''. With a random
+    model we mean that each observation gets a random number and all cases are devided
+    into deciles based on these random numbers. The % of actual target category observations
+    in each decile would be equal to the overall % of actual target category observations
+    in the total set. Since the lift is calculated as the ratio of these two numbers,
+    we get a horizontal line at the value of 1\. Your model should however be able
+    to do better, resulting in a high ratio for decile 1\. How high the lift can get,
+    depends on your quality of your model, but also on the % of target class observations
+    in the data: If 50% of your data belongs to the target class of interest, a perfect
+    model would only do twice as good (lift: 2) as a random selection. With a smaller
+    target class value, say 10%, the model can potentially be 10 times better (lift:
+    10) than a random selection. Therefore, no general guideline of a ''good'' lift
+    can be specified. Towards decile 10, since the plot is cumulative, with 100% of
+    cases, we have the whole set again and therefore the cumulative lift will always
+    end up at a value of 1\. It looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![ ](../Images/a53994e8c72b9d7bf1de6d1aee7e58bf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'To generate the cumulative lift plot for our random forest model predicting
+    term deposit buying, we call the function **plot_cumlift()**. Let''s add some
+    highlighting to see how much better a selection based on our model containing
+    deciles 1 and 2 would be, compared to a random selection of 20% of all customers:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image](../Images/652a0a9ba421cff3ae534937947b6535.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: A term deposit campaign targeted at a selection of 20% of all customers based
+    on our random forest model can be expected to have a 4 times higher response (396%)
+    compared to a random sample of customers. Not bad, right? The cumulative lift
+    really helps in getting a positive return on marketing investments. It should
+    be noted, though, that since the cumulative lift plot is relative, it doesn't
+    tell us how high the actual reponse will be on our campaign...
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3\. Response plot**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'One of the easiest to explain evaluation plots is the response plot. It simply
+    plots the percentage of target class observations per decile. It can be used to
+    answer the following business question:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***When we apply the model and select decile X, what is the expected % of target
+    class observations in that decile?***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The plot has one reference line: The % of target class cases in the total set.
+    It looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![ ](../Images/11b8cc32d913b7f8966befeb340dcc83.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A good model starts with a high response value in the first decile(s) and suddenly
+    drops quickly towards 0 for later deciles. This indicates good differentiation
+    between target class members - getting high model scores - and all other cases.
+    An interesting point in the plot is the location where your model's line intersects
+    the random model line. From that decile onwards, the % of target class cases is
+    lower than a random selection of cases would hold.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To generate the response plot for our term deposit model, we can simply call
+    the function **plot_response()**. Let''s immediately highlight the plot to have
+    the interpretation of the response plot at decile 1 added to the plot:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image](../Images/095aeb67a9e7f18f3c69c1c58628a73d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: As the plot shows and the text below the plot states: *When we select decile
+    1 from model random forest in dataset test data the percentage of term deposit
+    cases in the selection is 55%.*. This is quite good, especially when compared
+    to the overall likelihood of 11%. The response in the second decile is much lower,
+    about 28%. From decile 3 onwards, the expected response will be lower than the
+    overall likelihood of 10.4%. However, most of the time, our model will be used
+    to select the highest decile *up until* some decile. That makes it even more relevant
+    to have a look at the cumulative version of the response plot. And guess what,
+    that's our final plot!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**4\. Cumulative response plot**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally, one of the most used plots: The cumulative response plot. It answers
+    the question burning on each business reps lips:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***When we apply the model and select up until decile X, what is the expected
+    % of target class observations in the selection?***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The reference line in this plot is the same as in the response plot: the %
+    of target class cases in the total set.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![ ](../Images/775d60fc6ae97d94309692245d62b05c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Whereas the response plot crosses the reference line, in the cumulative response
+    plot it never crosses it but ends up at the same point for decile 10: Selecting
+    all cases up until decile 10 is the same as selecting all cases, hence the % of
+    target class cases will be exactly the same. This plot is most often used to decide
+    - together with business colleagues - up until what decile to select for a campaign.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Back to our banking business case. To generate the cumulative response plot,
+    we call the function **plot_cumresponse()**. Let''s highlight it at decile 3 to
+    see what the overall expected response will be if we select prospects for a term
+    deposit offer based on our random forest model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image](../Images/7f0eea88e054a3a06b346a6e8cdd6e21.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*When we select deciles 1 until 3 according to model random forest in dataset
+    test data the percentage of term deposit cases in the selection is 33%.* Since
+    the test data is an independent set, not used to train the model, we can expect
+    the response on the term deposit campaign to be 33%.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The cumulative response percentage at a given decile is a number your business
+    colleagues can really work with: Is that response big enough to have a successfull
+    campaign, given costs and other expectations? Will the absolute number of sold
+    term deposits meet the targets? Or do we lose too much of all potential term deposit
+    buyers by only selecting the top 30%? To answer that question, we can go back
+    to the cumulative gains plot. And that''s why there''s no absolute winner among
+    these plots and we advice to use them all. To make that happen, there''s also
+    a function to easily combine all four plots.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**All four plots together**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: With the function call **plot_all** we get all four plots on one grid. We can
+    easily save it to a file to include it in a presentation or share it with colleagues.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image](../Images/d09172aa19fbb0daa33a1bb55e2a6256.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: Neat! With these plots, we are able to talk with business colleagues about the
+    actual value of our predictive model, without having to bore them with technicalities
+    any nitty gritty details. We've translated our model in business terms and visualised
+    it to simplify interpretation and communication. Hopefully, this helps many of
+    you in discussing how to optimally take advantage of your predictive model building
+    efforts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Get more out of modelplotpy: using different scopes'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As we mentioned discussed earlier, the modelplotpy also enables to make interesting
+    comparisons, using the **scope** parameter. Comparisons between different models,
+    between different datasets and (in case of a multiclass target) between different
+    target classes. Curious? Please have a look at the package documentation or read
+    our other posts on modelplot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'However, to give one example, we could compare whether random forest was indeed
+    the best choice to select the top-30% customers for a term deposit offer:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image](../Images/3b081ff497ce74b18a080f3bf747004b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: Seems like the algorithm used will not make a big difference in this case. Hopefully
+    you agree by now that using these plots really can make a difference in explaining
+    the business value of your predictive models!
+  prefs: []
+  type: TYPE_NORMAL
+- en: In case you experience issues when using modelplotpy, please let us know via
+    the [issues section on Github](https://github.com/pbmarcus/modelplotpy/issues).
+    Any other feedback or suggestions, please let us know via [pb.marcus@hotmail.com](mailto:pb.marcus@hotmail.com) or [jurriaan.nagelkerke@gmail.com](mailto:jurriaan.nagelkerke@gmail.com).
+    Happy modelplotting!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![ ](../Images/431c94d8b321882b135e87c1ab929b35.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**[Jurriaan Nagelkerke](https://www.linkedin.com/in/jnagelkerke/)** is a Consultant
+    in Advanced Analytics & Data Science @ Cmotions (Dutch consultancy firm focused
+    on advanced analytics @ Data science).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Pieter Marcus](https://www.linkedin.com/in/pieter-marcus/)** is a Data Scientist
+    @ De Persgroep Nederland (biggest publisher in the Netherlands)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://modelplot.github.io/intro_modelplotpy). Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Lift Analysis – A Data Scientist’s Secret Weapon](/2016/03/lift-analysis-data-scientist-secret-weapon.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Data Science Delusion](/2016/11/data-science-delusion.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science For Business: 3 Reasons You Need To Learn The Expected Value
+    Framework](/2018/07/data-science-business-expected-value-framework.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Beyond Accuracy: Evaluating & Improving a Model with the NLP Test Library](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Evaluating Methods for Calculating Document Similarity](https://www.kdnuggets.com/evaluating-methods-for-calculating-document-similarity)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine learning does not produce value for my business. Why?](https://www.kdnuggets.com/2021/12/machine-learning-produce-value-business.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n01, Jan 5: 3 Tools to Track and Visualize…](https://www.kdnuggets.com/2022/n01.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building Predictive Models: Logistic Regression in Python](https://www.kdnuggets.com/building-predictive-models-logistic-regression-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Combining Data Management and Data Storytelling to Generate Value](https://www.kdnuggets.com/combining-data-management-and-data-storytelling-to-generate-value)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,329 @@
+- en: Building NLP Classifiers Cheaply With Transfer Learning and Weak Supervision
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html](https://www.kdnuggets.com/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Abraham Starosta](https://www.linkedin.com/in/abraham-starosta-ba662764/),
+    Stanford University**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/d212ffd35c6a8cfd800cf7e15607aafb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Text + Intelligence = Gold… But, how can we mine it cheaply?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'There is a catch to training state-of-the-art NLP models: their reliance on
+    massive hand-labeled training sets. That’s why [data labeling is usually the bottleneck](https://arxiv.org/pdf/1812.00417.pdf) in
+    developing NLP applications and keeping them up-to-date. For example, imagine
+    how much it would cost to pay medical specialists to label thousands of electronic
+    health records. In general, having domain experts label thousands of examples
+    is too expensive.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: On top of the initial labeling cost, there is another huge cost in keeping models
+    up-to-date with changing contexts in the real-world. Louise Matsakis on [Wired](https://www.wired.com/story/break-hate-speech-algorithm-try-love/) explains
+    that the main reasons social media platforms find it so hard to detect hate speech
+    are “shifting contexts, changing circumstances, and disagreements between people.”
+    That’s mainly because when context changes, we usually have to label thousands
+    of new examples or relabel a big part of our dataset. Again, this is very expensive.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is an important problem to solve if we want to automate knowledge acquisition
+    from text data, but it’s also very hard to solve. Thankfully, new technologies
+    like transfer learning, multitask learning and weak supervision are pushing NLP
+    forward and might be finally converging to offer solutions. **In this blog, I’ll
+    walk you through a personal project in which I cheaply built a classifier to detect
+    anti-semitic tweets, with no public dataset available, by combining weak supervision
+    and transfer learning. I hope that by the end you’ll be able to follow this approach
+    to build your own classifiers relatively cheaply.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**We have 3 steps:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Collect a small number of labeled examples (~600)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Use weak supervision to build a training set from many unlabeled examples using
+    weak supervision
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Use a large pre-trained language model for transfer learning
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Background
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '****Weak Supervision****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Weak supervision (WS)](https://hazyresearch.github.io/snorkel/blog/ws_blog_post.html) helps
+    us alleviate the **data bottleneck** problem by enabling us to cheaply leverage
+    subject matter expertise to programmatically label millions of data points. More
+    specifically, it’s a framework that helps subject matter experts (SMEs) infuse
+    their knowledge into an AI system in the form of hand-written heuristic rules
+    or distant supervision. As an example of WS adding value in the real-world, Google
+    just published a [paper](https://arxiv.org/abs/1812.00417) in December 2018 describing
+    Snorkel DryBell, an internal tool they built to use WS to build 3 powerful text
+    classifiers in a fraction of the time.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/a91891363f2df9bff6e3b9ef53a6bff6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Overview of the [Data Programming](https://hazyresearch.github.io/snorkel/blog/ws_blog_post.html) Paradigm
+    with Snorkel
+  prefs: []
+  type: TYPE_NORMAL
+- en: Throughout this project, I used the same general approach Google took: [Snorkel](https://arxiv.org/abs/1711.10160) (Ratner
+    et al., 2018.) The Stanford Infolab implements the Snorkel framework in this handy
+    Python package called [Snorkel Metal](https://github.com/HazyResearch/metal).
+    I suggest you go through [this ](https://github.com/HazyResearch/metal/blob/master/tutorials/Basics.ipynb)tutorial
+    to learn the basic workflow and [this](https://github.com/HazyResearch/babble/blob/master/tutorial/Tutorial3_Tradeoffs.ipynb) one
+    to learn how to get the most out of it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In Snorkel, the heuristics are called ***Labeling Functions (LFs).*** Here
+    are some common types of LFs:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Hard-coded heuristics**: usually regular expressions (regexes)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Syntactics:** for instance, [Spacy’s dependency trees](https://explosion.ai/demos/displacy)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Distant supervision:** external knowledge bases'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Noisy manual labels:** crowdsourcing'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**External models: **other models with useful signals'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'After you write your LFs, Snorkel will train a **Label Model** that takes advantage
+    of conflicts between all LFs to estimate their accuracy. Then, when labeling a
+    new data point, each LF will cast a vote: positive, negative, or abstain. Based
+    on those votes and the LF accuracy estimates, the Label Model can programmatically
+    assign **probabilistic labels** to millions of data points. Finally, the goal
+    is to train a classifier that can **generalize beyond our LFs**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, below is the code for an LF I wrote to detect anti-semitic tweets.
+    This LF focuses on catching common conspiracy theories that depict wealthy Jews
+    as controlling the media and politics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Key advantages of Weak Supervision:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Flexibility: **when we want to update our model, all we need to do is update
+    the LFs, rebuild our training set and retrain our classifier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Improvement in recall: **a discriminative model will be able to generalize
+    beyond the rules in our WS model, thus often giving us a bump in recall.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '****Transfer Learning and ULMFiT****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Transfer Learning has greatly impacted computer vision. Using a pre-trained
+    ConvNet on ImageNet as initialization or fine-tuning it to your task at hand has
+    become [very common](http://cs231n.github.io/transfer-learning/). But, that hadn’t
+    translated into NLP until [ULMFiT](http://nlp.fast.ai/classification/2018/05/15/introducting-ulmfit.html)
+    came about.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/4237eb9977df9f002176bf7898485a41.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[ULMFiT](http://nlp.fast.ai/classification/2018/05/15/introducting-ulmfit.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similar to how computer vision engineers use ConvNets pre-trained on ImageNet,
+    Fast.ai provides a Universal Language Model, pre-trained on millions of Wikipedia
+    pages, which we can fine-tune to our specific domain space. Then, we can train
+    a text classification model that leverages the LM’s learned text representations
+    which can learn with very few examples (up to 100x less data).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/314a231817b92b29b71f716dcc97d9c3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Introduction to ULMFiT](http://nlp.fast.ai/classification/2018/05/15/introducting-ulmfit.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ULMFiT consists of 3 stages:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pre-trained an LM on a general purpose corpus (Wikipedia)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Fine-tune the LM for the task at hand with a large corpus of unlabeled data
+    points
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Train a discriminative classifier by fine-tuning it with gradual unfreezing
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Key advantages of ULMFiT:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: With only 100 labels, it can match the performance of training from scratch
+    on 100x more data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Fastai’s API is very easy to use. [This tutorial](https://github.com/fastai/fastai/blob/master/examples/text.ipynb) is
+    very good
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Produces a PyTorch model we can deploy in production
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Step-By-Step Guide for Building an Anti-Semitic Tweet Classifier**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this section, we’ll dive more deeply into the steps I took to build an anti-semitic
+    tweet classifier and I’ll share some more general things I learned throughout
+    this process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****First step: Data Collection and Setting a Target****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Collecting unlabeled data:** The first step is to put together a large set
+    of unlabeled examples (at least 20,000). For the anti-semitic tweet classifier,
+    I downloaded close to 25,000 tweets that mention the word “jew.”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Label 600 examples: **600 isn’t a large number but I consider this is a good
+    place to start for most tasks because we’ll have about 200 examples in each data
+    split. If you already have the labeled examples, then use those! Otherwise, just
+    pick 600 examples at random and label them.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a labeling tool, you can use Google Sheets. Or, if you’re like me and would
+    rather label on your phone, you can use [**Airtable.**](https://airtable.com/)
+    Airtable is free and it has a slick iPhone app. If you’re working in teams, it
+    also lets you easily split the work. I’ll probably write another blog focusing
+    on how to use Airtable for labeling. You can just label as you scroll through
+    examples. If you’re curious about how I set up Airtable for labeling, feel free
+    to reach out to me.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/10dff01b2d2aaa79587d784bf8cdaf21.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: View of Airtable for Text Labeling
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Split data: **for the purpose of this project, we’ll have a train, test and
+    an LF set. The purpose of the LF set is to both help validate our LFs and to get
+    ideas for new LFs. The test set is used to check the performance of your models
+    (we can’t look at it). If you want to do hyperparameter tuning, you would want
+    to label about 200 more samples for a validation set.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have 24,738 unlabeled tweets (train set), 733 labeled tweets for building
+    LFs, and 438 labeled tweets for testing. So I labeled a total of 1,171, but I
+    realized that was probably too many.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Setting our goals: **after labeling a few hundred examples you’ll have a
+    better idea of how hard the task is and you’ll be able to set a goal for yourself.
+    I considered that for anti-semitism classification, it was very important to have
+    high precision so I set myself the goal of getting at least 90% precision and
+    30% recall.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Weak Supervision Modeling, Explained](https://www.kdnuggets.com/2022/05/weak-supervision-modeling-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is Transfer Learning?](https://www.kdnuggets.com/2022/01/transfer-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Practical Guide to Transfer Learning using PyTorch](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Exploring the Potential of Transfer Learning in Small Data Scenarios](https://www.kdnuggets.com/exploring-the-potential-of-transfer-learning-in-small-data-scenarios)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

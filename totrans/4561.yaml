@@ -1,0 +1,321 @@
+- en: Set Operations Applied to Pandas DataFrames
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/11/set-operations-applied-pandas-dataframes.html](https://www.kdnuggets.com/2019/11/set-operations-applied-pandas-dataframes.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Eduardo Corrêa Gonçalves](https://www.researchgate.net/profile/Eduardo_Goncalves17),
+    ENCE/IBGE**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In certain practical situations, it might be interesting to treat a pandas DataFrame
+    as a **mathematical set**. In this case, each row of the DataFrame can be considered
+    as an **element** or **member** of the set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The question then becomes: Why would it be useful? Here’s the answer. As we
+    know, data science problems typically require the analysis of data obtained from
+    multiple sources. At some point in the analysis of data from a study, you may
+    face the problem of having to compare the contents of two or more DataFrames to
+    determine if they have elements (rows) in common. In this tutorial you will learn
+    that set operations are one of the best and most natural techniques you can choose
+    to perform such a task.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Practical Example
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Suppose you have two DataFrames, named P and S, which respectively contain the
+    names and emails from students enrolled in two different courses, SQL and Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/a6a3df6dea2d135e34c3bc8c517f24f0.png)![Figure](../Images/bbf6fee30f92261470e8da08ebd0f29b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Consider that you need answers to the following questions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How many different students are in the two DataFrames?
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Are there students enrolled in both courses, Python and SQL?
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Which students are taking the Python course, but not the SQL course (and vice
+    versa)?
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Answers can be obtained in a straightforward way if you treat the DataFrames
+    as two distinct mathematical sets. Then, all you will have to do is to apply the
+    basic **union**, **intersection**, and **difference** set operations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: P ∪ S, the union of P and S, is the set of elements that are in P or S or both.
+    Note that the element (student) Elizabeth appears only once in the result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f95c23f5e568a2505b219b35f75f905a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: P ∩ S, the intersection of P and S, is the set of elements that are in both
+    P and S. Now, only Elizabeth appears, because she is the only in both sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/bf379304640b60f3bc5dfa4a1f7cba76.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'P − S, the difference of P and S, is the set that includes all elements that
+    are in P but not in S:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/842ac2a9f6a32fc97fdb3e8c2f868293.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Note that S − P is different from P − S:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/af2e6f3d74aed541a4d35629658c4c71.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It is important to remark that the DataFrames on which any of these three operations
+    are applied must have identical attributes (as shown in the example).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Set Operations in Pandas
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Although pandas does not offer specific methods for performing set operations,
+    we can easily mimic them using the below methods:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Union**: concat() + drop_duplicates()'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Intersection**: merge()'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Difference**: isin() + Boolean indexing'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the following program, we demonstrate how to do it. A detailed explanation
+    is given after the code listing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Results are shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here's the complete explanation of the code. Initially, we created two DataFrames,
+    P (Python students) and S (SQL students). Once created, they were submitted the
+    three set operations in the second part of the program.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Union
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To perform the union operation, we applied two methods: **concat()** followed
+    by **drop_duplicates()**. The first accomplishes the concatenation of data, which
+    means to place the rows from one DataFrame below the rows of another DataFrame.
+    Thus, the following statement:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: generates a DataFrame composed of 4 rows (2 rows from P plus 2 from S).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'However, note that there are two rows referring to Elizabeth, since she is
+    the only student who is enrolled in both courses. To keep only one occurrence
+    of this element it is enough to use the drop_duplicates() method:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Intersection
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The versatile **merge()** method was employed to execute the intersection operation.
+    This method can be used to combine or join DataFrames in different ways. However,
+    when used without the specification of any parameter in an operation involving
+    two compatible DataFrames, it yields their intersection:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Difference
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The difference operation has a slightly more complicated code. As we know,
+    the difference between two sets P and S is the operation that aims to determine
+    the elements of P that are not part of S. In pandas, we can implement this operation
+    using the **isin()** method in tandem with **boolean indexing**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To explain this statement, we will break it into two parts. The first is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The above command produces a boolean structure that points out which emails
+    in the DataFrame P are contained in S:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This boolean structure is then used to filter rows from P:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Obtaining the SQL students who are not taking Python is done analogously:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: References/Further Reading
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Pandas documentation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://pandas.pydata.org/pandas-docs/stable/](https://pandas.pydata.org/pandas-docs/stable/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Stanford Encyclopedia of Philosophy - Basic Set Theory**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://plato.stanford.edu/entries/set-theory/basic-set-theory.html](https://plato.stanford.edu/entries/set-theory/basic-set-theory.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Jenifer Widom - Relational algebra 2 part 1**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://www.youtube.com/watch?v=r_h9yBnNh0U](https://www.youtube.com/watch?v=r_h9yBnNh0U)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Eduardo Corrêa Gonçalves](https://www.researchgate.net/profile/Eduardo_Goncalves17)**
+    works as a Database administrator at Brazilian Institute of Geography and Statistics
+    (IBGE) and as an assistant professor at National School of Statistical Sciences
+    (ENCE/IBGE). He has involved in all phases of the database modeling and implementation
+    of different economic and agricultural surveys, such as: "Statistics of the Central
+    Register of Enterprises", "Municipal Livestock", and "Systematic Survey of Agricultural
+    Production". His research, teaching, and professional activities focus on Algorithms,
+    Artificial Intelligence and Databases.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[5 Advanced Features of Pandas and How to Use Them](/2019/10/5-advanced-features-pandas.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Know Your Data: Part 1](/2019/09/know-data-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[25 Tricks for Pandas](/2019/08/25-tricks-pandas.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Query Your Pandas DataFrames with SQL](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using the apply() Method with Pandas Dataframes](https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Combining Pandas DataFrames Made Simple](https://www.kdnuggets.com/2022/09/combining-pandas-dataframes-made-simple.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Merge Pandas DataFrames](https://www.kdnuggets.com/2023/01/merge-pandas-dataframes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Ways to Merge Pandas DataFrames](https://www.kdnuggets.com/2023/03/3-ways-merge-pandas-dataframes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Converting JSONs to Pandas DataFrames: Parsing Them the Right Way](https://www.kdnuggets.com/converting-jsons-to-pandas-dataframes-parsing-them-the-right-way)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

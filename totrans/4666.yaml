@@ -1,0 +1,273 @@
+- en: Linear Programming and Discrete Optimization with Python using PuLP
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/05/linear-programming-discrete-optimization-python-pulp.html](https://www.kdnuggets.com/2019/05/linear-programming-discrete-optimization-python-pulp.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/05/linear-programming-discrete-optimization-python-pulp.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Discrete optimization](https://neos-guide.org/optimization-tree) is a branch
+    of optimization methodology which deals with discrete quantities i.e. non-continuous
+    functions. It is quite ubiquitous in as diverse applications such as [financial
+    investment](https://study.com/academy/lesson/financial-applications-of-linear-programs-for-portfolio-selection-financial-planning-financial-mix-strategy.html),
+    [diet planning](https://neos-guide.org/content/diet-problem), [manufacturing processes](https://www.quora.com/How-do-I-solve-a-manufacturing-problem-in-linear-programming),
+    and [player or schedule selection for professional sports](https://www2.cs.duke.edu/courses/fall10/cps296.1/joe_siyang.pdf).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Linear and (mixed) integer programming** are techniques to solve problems
+    which can be formulated within the framework of discrete optimization.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Knowledge of such optimization techniques is extremely useful for data scientists
+    and machine learning (ML) practitioners as discrete and continuous optimization
+    lie at the heart of modern ML and AI systems as well as [data-driven business
+    analytics processes](https://www.edx.org/course/optimization-methods-business-analytics-mitx-15-053x).
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are many commercial optimizer tools, but having hands-on experience with
+    a programmatic way of doing optimization is invaluable.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: There is a [long and rich history of the theoretical development of robust and
+    efficient solvers](https://www.math.uni-bielefeld.de/documenta/vol-ismp/25_bixby-robert.pdf)
+    for optimization problems. However, focusing on practical applications, we will
+    skip that history and move straight to the part of learning how to use programmatic
+    tools to formulate and solve such optimization problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are many excellent optimization packages in Python. In this article, we
+    will specifically talk about **PuLP**. But before going to the Python library,
+    let us get a sense of the kind of problem we can solve with it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An example problem (or two)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Suppose you are **in charge of the diet plan for high school lunch**. Your job
+    is to make sure that the students get the right balance of nutrition from the
+    chosen food.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/cc1791bd3331a710354cda68b1034bf5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: However, there are some restrictions in terms of budget and the variety of food
+    that needs to be in the diet to make it interesting. The following table shows,
+    in detail, the complete nutritional value for each food item, and their maximum/minimum
+    daily intake.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/80504d2fed858a2034654b5f912068ff.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The discrete optimization problem is simple: **Minimize the cost of the lunch
+    given these constraints** (on total calories but also on each of the nutritional
+    component e.g. cholesterol, vitamin A, calcium, etc.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Essentially, in a casual mathematical language, the problem is,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/b3f4683b5a2bee3460a4f052d1062356.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Notice that the inequality relations are all linear in nature i.e. the variables
+    ***f*** are multiplied by constant coefficients and the resulting terms are bounded
+    by constant limits and that’s what makes this problem solvable by an LP technique.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can imagine that this kind of problem may pop up in **business strategy**
+    extremely frequently. Instead of nutritional values, you will have profits and
+    other types of business yields, and in place of price/serving, you may have project
+    costs in thousands of dollars. As a manager, your job will be to choose the projects,
+    that give maximum return on investment without exceeding a total budget of funding
+    the project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/b158cff8a7351caa31c5d982227b7f36.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Similar optimization problem may crop up in a **factory production plan** too,
+    where maximum production capacity will be functions of the machines used and individual
+    products will have various profit characteristics. As a production engineer, your
+    job could be to assign machine and labor resources carefully to maximize the profit
+    while satisfying all the capacity constraints.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/4526a207f2070ab0d3104d4136f95403.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fundamentally, the commonality between these problems from disparate domains
+    is that they involve maximizing or minimizing a linear ***objective function***,
+    subject to a set of linear ***inequality or equality constraints***.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For the diet problem, the objective function is the total cost which we are
+    trying to minimize. The inequality constraints are given by the minimum and maximum
+    bounds on each of the nutritional components.
+  prefs: []
+  type: TYPE_NORMAL
+- en: PuLP — a Python library for linear optimization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are many libraries in the Python ecosystem for this kind of optimization
+    problems. **PuLP** is an open-source [**linear programming**](https://en.wikipedia.org/wiki/Linear_programming)
+    (LP) package which largely uses Python syntax and comes packaged with many industry-standard
+    solvers. It also integrates nicely with a range of open source and commercial
+    LP solvers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can install it using pip (and also some additional solvers)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[Detailed instructions about installation and testing are here](https://pythonhosted.org/PuLP/index.html).
+    Then, just import everything from the library.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: See a nice video on solving linear programming here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**How to formulate the optimization problem?**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: First, we create a LP problem with the method `**LpProblem**`in PuLP.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Then, we need to create bunches of [Python dictionary](https://www.kdnuggets.com/2019/12/python-dictionary-methods.html)
+    objects with the information we have from the table. The code is shown below,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: For brevity, we did not show the full code here. You can take all the nutrition
+    components and create separate dictionaries for them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then, we create a dictionary of food items variables with **lower bound =0**
+    and **category continuous** i.e. the optimization solution can take any real-numbered
+    value greater than zero.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note the particular importance of the lower bound.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our mind, we cannot think a portion of food anything other than a non-negative,
+    finite quantity but the mathematics does not know this.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Without an explicit declaration of this bound, the solution may be non-sensical
+    as the solver may try to come up with negative quantities of food choice to reduce
+    the total cost while still meeting the nutrition requirement!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, we start building the LP problem by adding the main objective function.
+    Note the use of the`**lpSum**` method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: We further build on this by adding calories constraints,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can pile up all the nutrition constraints. For simplicity, we are just adding
+    four constraints on fat, carbs, fiber, and protein. The code is shown below,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: And we are done with formulating the problem!
+  prefs: []
+  type: TYPE_NORMAL
+- en: In any optimization scenario, the hard part is the formulation of the problem
+    in a structured manner which is presentable to a solver.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: We have done the hard part. Now, it is the relatively easier part of running
+    a solver and examining the solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Linear Programming 101 for Data Scientists](https://www.kdnuggets.com/2023/02/linear-programming-101-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Research-Driven Advanced Prompting Techniques for LLM Efficiency…](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Pipeline Optimization with TPOT](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

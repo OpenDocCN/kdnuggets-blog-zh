@@ -1,0 +1,326 @@
+- en: Ensuring Reliable Few-Shot Prompt Selection for LLMs
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html](https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '***Authors:** Chris Mauck, Jonas Mueller*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we prompt the Davinci Large Language Model from [OpenAI](https://platform.openai.com/docs/models/overview)
+    (the model underpinning GPT-3/ChatGPT) with [few-shot](https://www.promptingguide.ai/techniques/fewshot)
+    prompts in an effort to classify the intent of customer service requests at a
+    large bank. Following typical practice, we source the few-shot examples to include
+    in the prompt template from an available dataset of human-labeled request examples.
+    However, the resulting LLM predictions are *unreliable* — a close inspection reveals
+    this is because real-world data is messy and error-prone. LLM performance in this
+    customer service intent classification task is only marginally boosted by manually
+    modifying the prompt template to mitigate potentially noisy data. The LLM predictions
+    become significantly more accurate if we instead use data-centric AI algorithms
+    like [**Confident Learning**](https://arxiv.org/abs/1911.00068) to ensure *only
+    high-quality* few-shot examples are selected for inclusion in the prompt template.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Ensuring Reliable Few-Shot Prompt Selection for LLMs](../Images/1194feb4d6096b8263a3d472288bc90d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Let’s consider how we can curate high-quality few-shot examples for prompting
+    LLMs to produce the most reliable predictions. The need to ensure high-quality
+    examples in the few-shot prompt may seem obvious, but many engineers don’t know
+    there are algorithms/software to help you do this more systematically (in fact
+    an entire scientific discipline of *Data-Centric AI*). Such algorithmic data curation
+    has many advantages, it is: fully automated, systematic, and broadly applicable
+    to general LLM applications beyond intent classification.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Banking Intent Dataset
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: This article studies a 50-class variant of the [Banking-77 Dataset](https://arxiv.org/abs/2003.04807)
+    which contains online banking queries annotated with their corresponding intents
+    (the **label** shown below). We evaluate models that predict this label using
+    a fixed test dataset containing ~500 phrases, and have a pool of ~1000 labeled
+    phrases which we consider as candidates to include amongst our few-shot examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Ensuring Reliable Few-Shot Prompt Selection for LLMs](../Images/42e34feea9b0995270e4c9f57d382248.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can download the candidate pool of few-shot examples and test set [here](https://s.cleanlab.ai/banking-intent-50/examples-pool.csv)
+    and [here](https://s.cleanlab.ai/banking-intent-50/test.csv). Here’s a [notebook](https://colab.research.google.com/github/cleanlab/cleanlab-tools/blob/master/few_shot_prompt_selection/few_shot_prompt_selection.ipynb)
+    you can run to reproduce the results shown in this article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Few-shot Prompting
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Few-shot prompting (also known as *in-context learning*) is a NLP technique
+    that enables pretrained foundation models to perform complex tasks without any
+    explicit training (i.e. updates to model parameters). In few-shot prompting, we
+    provide a model with a limited number of input-output pairs, as part of a prompt
+    template that is included in the prompt used to instruct the model how to handle
+    a particular input. The additional context provided by the prompt template helps
+    the model better infer what types of outputs are desired. For example, given the
+    input: “*Is San Francisco in California?*”, a LLM will better know what type of
+    output is desired if this prompt is augmented with a fixed template such that
+    the new prompt looks something like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Text: Is Boston in Massachusetts?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Label: Yes'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Text: Is Denver in California?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Label: No'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Text: Is San Fransisco in California?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Label:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Few-shot prompting is particularly useful in text classification scenarios where
+    your classes are *domain-specific* (as is typically the case in customer service
+    applications within different businesses).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Ensuring Reliable Few-Shot Prompt Selection for LLMs](../Images/76596657a9a62bfb41fc93a1de70875d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In our case, we have a dataset with 50 possible classes (intents) to provide
+    context for, such that OpenAI’s pretrained LLM can learn the difference between
+    classes in context. Using [LangChain](https://github.com/hwchase17/langchain),
+    we select one random example from each of the 50 classes (from our pool of labeled
+    candidate examples) and construct a 50-shot prompt template. We also append a
+    string that lists the possible classes before the few-shot examples to ensure
+    the LLM output is a valid class (i.e. intent category).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The above 50-shot prompt is used as input for the LLM to get it to classify
+    each of the examples in the test set (**target text** above is the only part of
+    this input that changes between different test examples). These predictions are
+    compared against the ground truth labels to evaluate the LLM accuracy produced
+    using a selected few-shot prompt template.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Baseline Model Performance
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Running each of the test examples through the LLM with the 50-shot prompt shown
+    above, we achieve an accuracy of 59.6% which not bad for a 50-class problem. But
+    this is not quite satisfactory for our bank’s customer service application, so
+    let’s take a closer look at the dataset (i.e. pool) of candidate examples. When
+    ML performs poorly, the data is often to blame!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Issues in Our Data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Via close inspection of the candidate pool of examples from which our few-shot
+    prompt was drawn, we find mislabeled phrases and outliers lurking in the data.
+    Here are a few examples that were clearly annotated incorrectly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Ensuring Reliable Few-Shot Prompt Selection for LLMs](../Images/208774df2ebe3704d899f90b2e6d65c3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Previous [research](https://labelerrors.com/) has observed many popular datasets
+    contain incorrectly labeled examples because data annotation teams are imperfect.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is also common for customer service datasets to contain out-of-scope examples
+    that were accidentally included. Here we see a few strange-looking examples that
+    do not correspond to valid banking customer service requests.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Ensuring Reliable Few-Shot Prompt Selection for LLMs](../Images/d9b5bc6f85de53b7d669fca790f67634.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Why Do These Issues Matter?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: As the context size for LLMs grows, it is becoming common for prompts to include
+    many examples. As such, it may not be possible to manually validate all of the
+    examples in your few-shot prompt, especially with a large number of classes (or
+    if you lack domain knowledge about them). If the data source of these few-shot
+    examples contains issues like those shown above (as many real-world datasets do),
+    then errant examples may find their way into your prompts. The rest of the article
+    examines the impact of this problem and how we can mitigate it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Can we warn the LLM the examples may be noisy?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: What if we just include a “disclaimer warning” in the prompt telling the LLM
+    that some labels in the provided few-shot examples may be incorrect? Here we consider
+    the following modification to our prompt template, which still includes the same
+    50 few-shot examples as before.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Ensuring Reliable Few-Shot Prompt Selection for LLMs](../Images/d63bcc15df5c67ef916a9a8bc094cedf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Using the above prompt, we achieve an accuracy of 62%. Marginally better, but
+    still not good enough to use the LLM for intent classification in our bank’s customer
+    service system!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Can we remove the noisy examples entirely?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Since we can’t trust the labels in the few-shot examples pool, what if we just
+    remove them entirely from the prompt and only rely on the powerful LLM? Rather
+    than few-shot prompting, we are doing zero-shot prompting in which the only example
+    included in the prompt is the one the LLM is supposed to classify. Zero-shot prompting
+    entirely relies on the LLM’s pretrained knowledge to get the correct outputs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Ensuring Reliable Few-Shot Prompt Selection for LLMs](../Images/2a6236640cf7440403632d4e3ef76348.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: After removing the poor-quality few-shot examples entirely, we achieve an accuracy
+    of 67.4% which is the best that we’ve done so far!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**t seems that noisy few-shot examples can actually** ***harm*** **model performance
+    instead of boosting it as they are supposed to do.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Can we identify and correct the noisy examples?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Instead of modifying the prompt or removing the examples entirely, the smarter
+    (yet more complex) way to improve our dataset would be to find and fix the label
+    issues by hand. This simultaneously removes a noisy data point that is harming
+    the model and adds an accurate one that should improve its performance via few-shot
+    prompting, but making such corrections manually is cumbersome. Here we instead
+    effortlessly correct the data using [Cleanlab Studio](https://cleanlab.ai/studio/),
+    a platform that implements [Confident Learning](https://l7.curtisnorthcutt.com/confident-learning)
+    algorithms to automatically find and fix label issues.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Ensuring Reliable Few-Shot Prompt Selection for LLMs](../Images/8bfe5599114e784f3a76f5e63d13c28e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: After replacing the estimated bad labels with ones estimated to be more suitable
+    via Confident Learning, we re-run the original 50-shot prompt through the LLM
+    with each test example, except this time we use the **auto-corrected label** which
+    ensures we provide the LLM with 50 high-quality examples in its few-shot prompt.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: After doing this, we achieve an accuracy of 72% which is **quite impressive**
+    for the 50-class problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**We’ve now shown that noisy few-shot examples can considerably decrease LLM
+    performance and that it is suboptimal to just manually change the prompt (via
+    adding caveats or removing examples). To achieve the highest performance, you
+    should also try correcting your examples using Data-centric AI techniques like
+    Confident Learning.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Importance of Data-centric AI
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: This article highlights the significance of ensuring reliable few-shot prompt
+    selection for language models, specifically focusing on customer service intent
+    classification in the banking domain. Through the exploration of a large bank's
+    customer service request dataset and the application of few-shot prompting techniques
+    using the Davinci LLM, we encountered challenges stemming from noisy and erroneous
+    few-shot examples. We demonstrated that modifying the prompt or removing examples
+    alone cannot guarantee optimal model performance. Instead, data-centric AI algorithms
+    like Confident Learning implemented in tools like Cleanlab Studio proved to be
+    more effective in identifying and rectifying label issues, resulting in significantly
+    improved accuracy. This study emphasizes the role of algorithmic data curation
+    in obtaining reliable few-shot prompts, and highlights the utility of such techniques
+    in enhancing Language Model performance across various domains.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Chris Mauck](https://www.linkedin.com/in/chris-mauck/)** is Data Scientist
+    at Cleanlab.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Unlocking Reliable Generations through Chain-of-Verification: A…](https://www.kdnuggets.com/unlocking-reliable-generations-through-chain-of-verification)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Masking: The Core of Ensuring GDPR and other Regulatory…](https://www.kdnuggets.com/2023/05/data-masking-core-ensuring-gdpr-regulatory-compliance-strategies.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Design effective & reliable machine learning systems!](https://www.kdnuggets.com/2023/05/manning-design-effective-reliable-machine-learning-systems.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Selection: Where Science Meets Art](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

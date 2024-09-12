@@ -1,0 +1,425 @@
+- en: Building and Training Your First Neural Network with TensorFlow and Keras
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Building and Training Your First Neural Network with TensorFlow and Keras](../Images/9cb7eead0e69b3990b8f32fcef9da07c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: AI has gone so far now, and various state-of-the AI models are evolving that
+    are used in Chatbots, Humanoid Robots, Self-driving cars, etc. It has become the
+    fastest-growing technology, and Object Detection and Object Classification are
+    trendy these days.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this blog post, we will cover the complete steps of building and training
+    an Image Classification model from scratch using Convolutional Neural Network.
+    We will use the publicly available [Cifar-10](https://www.cs.toronto.edu/~kriz/cifar.html)
+    dataset to train the model. This dataset is unique because it contains images
+    of everyday seen objects like cars, aeroplanes, dogs, cats, etc. By training the
+    neural network to these objects, we will develop intelligent systems to classify
+    such things in the real world. It contains more than 60000 images of size 32x32
+    of 10 different types of objects. By the end of this tutorial, you will have a
+    model which can determine the object based on its visual features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building and Training Your First Neural Network with TensorFlow and Keras](../Images/318b7682220fb53e7a4b4b88bc58d4ef.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig. 1 Sample Images of the Dataset | Image by [datasets.activeloop](https://datasets.activeloop.ai/docs/ml/datasets/cifar-10-dataset/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will cover everything from scratch, so if you have yet to learn about the
+    practical implementation of neural networks, it is completely fine. The only prerequisite
+    of this tutorial is your time and the basic knowledge of Python. At the end of
+    this tutorial, I will share the collaboratory file containing the entire code.
+    Let’s get started!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is the complete workflow of this tutorial,
+  prefs: []
+  type: TYPE_NORMAL
+- en: Importing Necessary Libraries
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Loading of the Data
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Preprocessing of the Data
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Building the Model
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Evaluating the Model Performance
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![Building and Training Your First Neural Network with TensorFlow and Keras](../Images/3504fcd934dd9aaa393cfa1477512c69.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig. 2 Complete Model Pipeline | Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Importing Necessary Libraries
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: You have to install some modules to start with the project. I will use Google
+    Colab as it provides free GPU training, and at the end, I will provide you with
+    the collaboratory file containing the complete code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is the command to install the required libraries:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Importing the libraries into a Python file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Numpy:** It is used for efficient array computations of large datasets containing
+    images.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Tensorflow:** It is an open-source machine learning library developed by
+    Google. It provides numerous functions to build large and scalable models.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Keras:** Another high-level neural network API runs on top of TensorFlow.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Matplotlib:** This Python library creates plots and graphs, providing better
+    data visualisation.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Sklearn:** It provides functions for performing data preprocessing and feature
+    extraction tasks for the dataset. It contains inbuilt functions to find the evaluation
+    metrics of a model like accuracy, precision, false positives, false negatives,
+    etc.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Now, let's move to the step of data loading.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loading the Data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: This section will load our dataset and performs the train-test splitting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Loading & Splitting of Data:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: The cifar10 dataset is directly loaded from the Keras datasets library. And
+    this data is also split into training data and testing data. Training data is
+    used to train the model so that it can identify patterns in it. And the testing
+    data remain unseen to the model, and it is used to check its performance, i.e.
+    how many data points are correctly predicted wrt the total data points.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`training_label` contains the corresponding label to the image present in `training_data`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then the training data is again split into the validation data using the built-in
+    sklearn `train_test_split` function. The validation data is used to select and
+    tune the final model. Then finally, all the training, testing and validation data
+    are converted into floating decimals of 32bit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, the loading of our dataset is done. In the next section, we will perform
+    some preprocessing steps to it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pre-processing of Data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Data preprocessing is the first and most crucial step while developing a machine
+    learning model. Let's see how to do it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Output:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: The dataset contains images of 10 classes, and the size of each image is 32x32
+    pixels. Each pixel has a value from 0-255, and we need to normalise it between
+    0-1 to ease the calculation process. And after that, we will convert the categorical
+    labels into the one-hot encoded labels. This is done to convert the categorical
+    data into numerical data so we can apply machine learning algorithms without any
+    problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, move to the building of the CNN model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Building the CNN Model
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The CNN Model works in 3 stages. The first stage consists of convolutional layers
+    that extract relevant features from the images. The second stage consists of pooling
+    layers used to reduce the dimensionality of the images. It also helps to reduce
+    the overfitting of the model. And the third stage consists of dense layers that
+    convert the two-dimensional image to a one-dimensional array. And then finally,
+    this array is fed onto the fully connected layers, which perform the final prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is the code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: We have applied the three sets of layers, each containing two convolutional
+    layers, one max-pooling layer and one dropout layer. The Conv2D layer takes the
+    `input_shape` as (32, 32, 3), which must be the same as the dimensions of the
+    image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each Conv2D layer also takes an activation function, i.e. ‘relu’. Activation
+    functions are used to increase the non-linearity in the system. In simpler terms,
+    it decides whether the neuron needs to be activated or not based on a certain
+    threshold. There are many types of activation functions like ‘ReLu’, ‘Tanh’, ‘Sigmoid’,
+    ‘Softmax’, etc., which use different algorithms to decide the firing of the neuron.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After that, the Flattening Layer and the Fully Connected Layers are added, with
+    several Dropout layers in between them. The dropout layer rejects some of the
+    neurons' contribution towards the net layer randomly. The parameter inside it
+    defines the degree of rejection. It is mainly used to avoid over-fitting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below is a sample image of what a CNN model architecture looks like.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building and Training Your First Neural Network with TensorFlow and Keras](../Images/2e7ac8569ec83f230107a500193881ad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig. 3 Sampe CNN Architecture | Image by [researchgate](https://www.researchgate.net/figure/A-vanilla-Convolutional-Neural-Network-CNN-representation_fig2_339447623)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Compiling the Model
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Now, we will compile and prepare the model for the training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Output:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building and Training Your First Neural Network with TensorFlow and Keras](../Images/84fe154dca81ad2d192933c95c419c42.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig. 4 Model Summary | Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have used the Adam optimizer with a learning rate of 0.0001\. Optimizer decides
+    how the model's behaviour changes in response to the output of the loss function.
+    The Learning Rate is the amount of weights updated during training or the step
+    size. It is a configurable hyperparameter that must not be too small or too large.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fitting the Model
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Now, we will fit the model to our training data and start the training process.
+    But before that, we will use Image Augmentation to increase the number of sample
+    images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Image Augmentation used in Convolutional Neural Networks will increase the training
+    images without requiring new images. It will replicate the images by producing
+    some amount of variation in it. It can be done by rotating the image to some degree,
+    adding noise, flipping it horizontally or vertically, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Output:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building and Training Your First Neural Network with TensorFlow and Keras](../Images/cfe89739896f1c3a0c892de6403495c3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig.5 Accuracy & Loss at each Epoch | Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`ImageDataGenerator()` function is used to create augmented images. The `fit()`
+    is used to fit the model. It takes the training and validation data, Batch Size,
+    and the number of Epochs as input'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Batch Size is the number of samples processed before the model gets updated.
+    A crucial hyperparameter must be greater than equal to one and less than equal
+    to the number of samples. Usually, 32 or 64 are considered the best Batch Sizes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The number of Epochs represents how many times all the samples are processed
+    once individually on both the forward and backward to the network. 100 epochs
+    mean the whole dataset passes through the model 100 times, and the model runs
+    100 times itself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our model is trained, and now we will evaluate its performance on the test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Evaluating Model Performance
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In this section, we will check the accuracy and loss of the model on the test
+    set. Also, we will draw a plot between the Accuracy Vs Epoch and Loss Vs Epoch
+    for training and validation data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Output:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Our model achieved an accuracy of 75.34% with a loss of 0.8554\. This accuracy
+    can be increased as this is not a state-of-the-art model. I used this model to
+    explain the process and flow of building a model. The accuracy of the CNN model
+    depends on many factors like choice of layers, selection of hyperparameters, the
+    type of dataset used, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we will plot the curves to check overfitting in the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building and Training Your First Neural Network with TensorFlow and Keras](../Images/9c6f3061bc69ad9bb4da9b0043d8b60a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig.6 Accuracy and Loss Vs Epoch | Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our model, we can see that the model overfits the test dataset. The (blue)
+    line indicates the training accuracy, and the (orange) line indicates the validation
+    accuracy. The training accuracy continues improving, but the validation error
+    worsens after 20 epochs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Please find the Google Colab link used in this article - [Link](https://colab.research.google.com/drive/1DjicDz2iTqcs3LWiPLUcHGvH6wRNTyTm?usp=sharing)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: This article shows the entire process of building and training a Convolutional
+    Neural Network from scratch.  We got around 75% accuracy. You can play with the
+    hyperparameters and use different sets of convolutional and pooling layers to
+    improve the accuracy. You can also try Transfer Learning, which uses pre-trained
+    models like ResNet or VGGNet and gives very good accuracy in some cases. We can
+    talk more about it in other articles if you want.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Until then, keep reading and keep learning. Feel free to contact me on [Linkedin](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)
+    in case of any questions or suggestions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Aryan Garg](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)** is a B.Tech.
+    Electrical Engineering student, currently in the final year of his undergrad.
+    His interest lies in the field of Web Development and Machine Learning. He have
+    pursued this interest and am eager to work more in these directions.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Learn Deep Learning by Building 15 Neural Network Projects in 2022](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Convolutional Neural Network with PyTorch](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Step-by-Step Tutorial to Building Your First Machine Learning Model](https://www.kdnuggets.com/step-by-step-tutorial-to-building-your-first-machine-learning-model)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building Your First ETL Pipeline with Bash](https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Neural Network Optimization with AIMET](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Importance of Permutation in Neural Network Predictions](https://www.kdnuggets.com/2022/12/importance-permutation-neural-network-predictions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,431 @@
+- en: 'OLAP queries in SQL: A Refresher'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/09/olap-queries-sql-refresher.html](https://www.kdnuggets.com/2018/09/olap-queries-sql-refresher.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Wilfried Lemahieu](https://www.linkedin.com/in/wilfried-lemahieu-458397/),
+    [Seppe vanden Broucke](https://www.linkedin.com/in/seppevandenbroucke/), [Bart
+    Baesens](https://www.linkedin.com/in/bart-baesens-403bb83/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Principles of database management](../Images/947e7a2cdbcea1f2005cffb1cb010457.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The below article is based on our recent book: Principles of Database Management
+    - The Practical Guide to Storing, Managing and Analyzing Big and Small Data (See
+    [www.pdbmbook.com](http://www.pdbmbook.com)).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this article, we zoom in on how OLAP queries can be implemented in SQL.
+    To facilitate the execution of OLAP queries and data aggregation, SQL-99 introduced
+    three extensions to the GROUP BY statement: the CUBE, ROLLUP and GROUPING SETS
+    operator.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The **CUBE** operator computes a union of GROUP BY’s on every subset of the
+    specified attribute types.  Its result set represents a multidimensional cube
+    based upon the source table.  Consider the following SALES TABLE.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **PRODUCT** | **QUARTER** | **REGION** | **SALES** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| A | Q1 | Europe | 10 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| A | Q1 | America | 20 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| A | Q2 | Europe | 20 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| A | Q2 | America | 50 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| A | Q3 | America | 20 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| A | Q4 | Europe | 10 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| A | Q4 | America | 30 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| B | Q1 | Europe | 40 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| B | Q1 | America | 60 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| B | Q2 | Europe | 20 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| B | Q2 | America | 10 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| B | Q3 | America | 20 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| B | Q4 | Europe | 10 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| B | Q4 | America | 40 |'
+  prefs: []
+  type: TYPE_TB
+- en: '*Examples SALESTABLE.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can now formulate the following SQL query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Basically, this query computes the union of 2² = 4 groupings of the SALESTABLE
+    being: {(quarter,region), (quarter), (region), ()}, where () denotes an empty
+    group list representing the total aggregate across the entire SALESTABLE.  In
+    other words, since quarter has 4 values and region 2 values, the resulting multiset
+    will have 4*2+4*1+1*2+1 or 15 tuples as you can see illustrated in Table 1.  NULL
+    values have been added in the dimension columns Quarter and Region to indicate
+    the aggregation that took place.  They can be easily replaced by the more meaningful
+    ‘ALL’ if desired.  More specifically, we can add 2 CASE clauses as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The **grouping()** function returns 1 in case a NULL value is generated during
+    the aggregation and 0 otherwise.  This distinguishes the generated NULLs and the
+    possible real NULLs stemming from the data.  We will not add this to the subsequent
+    OLAP queries so as to not unnecessarily complicate them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, observe the NULL value for Sales in the fifth row.  This represents an
+    attribute combination which is not present in the original SALESTABLE since apparently
+    no products were sold in Q3 in Europe.  Remark that besides SUM() also other SQL
+    aggregator functions such as MIN(), MAX(), COUNT() and AVG() can be used in the
+    SELECT statement.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **QUARTER** | **REGION** | **SALES** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q1 | Europe | 50 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q1 | America | 80 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q2 | Europe | 40 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q2 | America | 60 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q3 | Europe | NULL |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q3 | America | 40 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q4 | Europe | 20 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q4 | America | 80 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q1 | NULL | 130 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q2 | NULL | 100 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q3 | NULL | 40 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q4 | NULL | 90 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| NULL | Europe | 110 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| NULL | America | 250 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| NULL | NULL | 360 |'
+  prefs: []
+  type: TYPE_TB
+- en: '**Table 1: Result from SQL query with Cube operator.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The **ROLLUP** operator computes the union on every prefix of the list of specified
+    attribute types, from the most detailed up to the grand total.  It is especially
+    useful to generate reports containing both subtotals and totals.  The key difference
+    between the ROLLUP and CUBE operator is that the former generates a result set
+    showing the aggregates for a hierarchy of values of the specified attribute types,
+    whereas the latter generates a result set showing the aggregates for all combinations
+    of values of the selected attribute types.  Hence, the order in which the attribute
+    types are mentioned is important for the ROLLUP but not for the CUBE operator. 
+    Consider the following query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: This query generates the union of three groupings {(quarter,region), (quarter},
+    ()} where () again represents the full aggregation.  The resulting multiset will
+    thus have 4*2+4+1 or 13 rows and is displayed in Table 2.  You can see that the
+    region dimension is first rolled up followed by the quarter dimension.  Note the
+    two rows which have been left out when compared to the result of the CUBE operator
+    in Table 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **QUARTER** | **REGION** | **SALES** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q1 | Europe | 50 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q1 | America | 80 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q2 | Europe | 40 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q2 | America | 60 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q3 | Europe | NULL |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q3 | America | 40 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q4 | Europe | 20 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q4 | America | 80 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q1 | NULL | 130 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q2 | NULL | 100 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q3 | NULL | 40 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q4 | NULL | 90 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| NULL | NULL | 360 |'
+  prefs: []
+  type: TYPE_TB
+- en: '**Table 2: Result from SQL query with ROLLUP operator.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Whereas the previous example applied the GROUP BY ROLLUP construct to two completely
+    independent dimensions, it can also be applied to attribute types that represent
+    different aggregation levels (and hence different levels of detail) along the
+    same dimension.  For example, suppose the SALESTABLE tuples represented more detailed
+    sales data at the individual city level and that the table contained three location
+    related columns: City, Country and Region.  We could then formulate the following
+    ROLLUP query, yielding sales totals respectively per city, per country, per region
+    and the grand total:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that in that case the SALESTABLE would include the attribute types City,
+    Country and Region in a single table.  Since the three attribute types represent
+    different levels of detail in the same dimension, they are transitively dependent
+    on one another, illustrating the fact that these data warehouse data are indeed
+    denormalized.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The **GROUPING SETS** operator generates a result set equivalent to that generated
+    by a UNION ALL of multiple simple GROUP BY clauses.  Consider the following example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This query is equivalent to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: The result is given in Table 3.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **QUARTER** | **REGION** | **SALES** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q1 | NULL | 130 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q2 | NULL | 100 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q3 | NULL | 40 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Q4 | NULL | 90 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| NULL | Europe | 110 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| NULL | America | 250 |'
+  prefs: []
+  type: TYPE_TB
+- en: '**Table 3: Result from SQL query with GROUPING SETS operator**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Multiple CUBE, ROLLUP and GROUPING SETS statements can be used in a single
+    SQL query.  Different combinations of CUBE, ROLLUP and GROUPING SETS can generate
+    equivalent result sets.  Consider the following query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This query is equivalent to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Likewise, the following query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'is identical to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Given the amount of data to be aggregated and retrieved, OLAP SQL queries may
+    get very time consuming.  One way to speed up performance is by turning some of
+    these OLAP queries into materialized views.  For example, an SQL query with a
+    CUBE operator can be used to precompute aggregations on a selection of dimensions
+    of which the results can then be stored as a materialized view.  A disadvantage
+    of view materialization is that extra efforts are needed to regularly refresh
+    these materialized views, although it can be noted that usually companies are
+    fine with a close to current version of the data such that the synchronization
+    can be done overnight or at fixed time intervals.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For more information, we are happy to refer to our recent book: [Principles
+    of Database Management - The Practical Guide to Storing, Managing and Analyzing
+    Big and Small Data](http://www.pdbmbook.com).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio**: **[Wilfried Lemahieu](https://www.linkedin.com/in/wilfried-lemahieu-458397/)**
+    is a professor at KU Leuven (Belgium) who''s areas of research include Big data
+    storage, integration and analytics, Data quality and Business process management
+    and service orientation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Seppe vanden Broucke](https://www.linkedin.com/in/seppevandenbroucke/)**
+    received a PhD in Applied Economics at KU Leuven, Belgium in 2014\. Currently,
+    Seppe is working as an assistant professor at the department of Decision Sciences
+    and Information Management at KU Leuven. Seppe''s research interests include business
+    data mining and analytics, machine learning, process management, process mining.
+    His work has been published in well-known international journals and presented
+    at top conferences.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Bart Baesens**](https://www.linkedin.com/in/bart-baesens-403bb83/) is an
+    associate professor at KU Leuven, and a lecturer at the University of Southampton
+    (United Kingdom). He has done extensive research on analytics, customer relationship
+    management, web analytics, fraud detection, and credit risk management. His findings
+    have been published in well-known international journals (e.g. Machine Learning,
+    Management Science, IEEE Transactions on Neural Networks, IEEE Transactions on
+    Knowledge and Data Engineering, IEEE Transactions on Evolutionary Computation,
+    Journal of Machine Learning Research, …) and presented at international top conferences.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[YouTube videos on database management, SQL, Datawarehousing, Business Intelligence,
+    OLAP, Big Data, NoSQL databases, data quality, data governance and Analytics –
+    free](https://www.kdnuggets.com/2018/05/baesens-youtube-videos-database-management-sql-big-data-analytics-free.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Remote Data Science: How to Send R and Python Execution to SQL Server from
+    Jupyter Notebooks](https://www.kdnuggets.com/2018/07/r-python-execution-sql-server-jupyter.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL Cheat Sheet](https://www.kdnuggets.com/2018/07/sql-cheat-sheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Is OLAP Dead?](https://www.kdnuggets.com/2022/10/olap-dead.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[OLAP vs. OLTP: A Comparative Analysis of Data Processing Systems](https://www.kdnuggets.com/2023/08/olap-oltp-comparative-analysis-data-processing-systems.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Useful Intermediate SQL Queries for Data Science](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Tricky SQL Queries Solved](https://www.kdnuggets.com/2020/11/5-tricky-sql-queries-solved.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Solving 5 Complex SQL Problems: Tricky Queries Explained](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, December 7: Top 10 Data Science Myths Busted • 4…](https://www.kdnuggets.com/2022/n47.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

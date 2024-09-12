@@ -1,0 +1,476 @@
+- en: Introduction to Fraud Detection Systems
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/08/introduction-fraud-detection-systems.html](https://www.kdnuggets.com/2018/08/introduction-fraud-detection-systems.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Miguel Gonzalez-Fierro]( https://www.linkedin.com/in/miguelgfierro/),
+    Microsoft**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fraud detection is one of the top priorities for banks and financial institutions,
+    which can be addressed using machine learning. According to [a report published
+    by Nilson](https://nilsonreport.com/upload/content_promo/The_Nilson_Report_Issue_1118.pdf),
+    in 2017 the worldwide losses in card fraud related cases reached 22.8 billion
+    dollars. The problem is forecasted to get worse in the following years, by 2021,
+    the card fraud bill is expected to be 32.96 billion dollars.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this tutorial, we will use the [credit card fraud detection dataset](https://www.kaggle.com/mlg-ulb/creditcardfraud) from
+    Kaggle, to identify fraud cases. We will use a [gradient boosted tree](https://blogs.technet.microsoft.com/machinelearning/2017/07/25/lessons-learned-benchmarking-fast-machine-learning-algorithms/) as
+    a machine learning algorithm. And finally, we will create a simple API to operationalize
+    (o16n) the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will use the gradient boosting library [LightGBM](https://github.com/Microsoft/LightGBM),
+    which has recently became one of the most popular libraries for top participants
+    in [Kaggle competitions](https://github.com/Microsoft/LightGBM/tree/a39c848e6456d473d2043dff3f5159945a36b567/examples).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fraud detection problems are known for being extremely imbalanced. [Boosting](https://en.wikipedia.org/wiki/Boosting_(machine_learning)) is
+    one technique that usually works well with these kind of datasets. It iteratively
+    creates weak classifiers (decision trees) weighting the instances to increase
+    the performance. In the first subset, a weak classifier is trained and tested
+    on all the training data, those instances that have bad performance are weighted
+    to appear more in the next data subset. Finally, all the classifiers are ensembled
+    with a weighted average of their estimates.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In LightGBM, there is a [parameter](https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters.rst#objective-parameters) called `is_unbalanced` that
+    automatically helps you to control this issue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: LigtGBM can be used with or without [GPU](https://lightgbm.readthedocs.io/en/latest/GPU-Performance.html).
+    For small datasets, like the one we are using here, it is faster to use CPU, due
+    to IO overhead. However, I wanted to showcase the GPU alternative, which is trickier
+    to install, in case anyone wants to experiment with bigger datasets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To install the dependencies in Linux:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first step is to load the dataset and analyze it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For it, before continuing, **you have to run the notebook [data_prep.ipynb](https://render.githubusercontent.com/view/data_prep.ipynb)**,
+    which will generate the SQLite database.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | Time | V1 | V2 | V3 | V4 | V5 | V6 | V7 | V8 | V9 | ... | V21 | V22 |
+    V23 | V24 | V25 | V26 | V27 | V28 | Amount | Class |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 0.0 | -1.359807 | -0.072781 | 2.536347 | 1.378155 | -0.338321 | 0.462388
+    | 0.239599 | 0.098698 | 0.363787 | ... | -0.018307 | 0.277838 | -0.110474 | 0.066928
+    | 0.128539 | -0.189115 | 0.133558 | -0.021053 | 149.62 | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 0.0 | 1.191857 | 0.266151 | 0.166480 | 0.448154 | 0.060018 | -0.082361
+    | -0.078803 | 0.085102 | -0.255425 | ... | -0.225775 | -0.638672 | 0.101288 |
+    -0.339846 | 0.167170 | 0.125895 | -0.008983 | 0.014724 | 2.69 | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | 1.0 | -1.358354 | -1.340163 | 1.773209 | 0.379780 | -0.503198 | 1.800499
+    | 0.791461 | 0.247676 | -1.514654 | ... | 0.247998 | 0.771679 | 0.909412 | -0.689281
+    | -0.327642 | -0.139097 | -0.055353 | -0.059752 | 378.66 | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | 1.0 | -0.966272 | -0.185226 | 1.792993 | -0.863291 | -0.010309 | 1.247203
+    | 0.237609 | 0.377436 | -1.387024 | ... | -0.108300 | 0.005274 | -0.190321 | -1.175575
+    | 0.647376 | -0.221929 | 0.062723 | 0.061458 | 123.50 | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | 2.0 | -1.158233 | 0.877737 | 1.548718 | 0.403034 | -0.407193 | 0.095921
+    | 0.592941 | -0.270533 | 0.817739 | ... | -0.009431 | 0.798278 | -0.137458 | 0.141267
+    | -0.206010 | 0.502292 | 0.219422 | 0.215153 | 69.99 | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: 5 rows × 31 columns
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we can see, the dataset is extremely imbalanced. The minority class counts
+    for around 0.002% of the examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: The next step is to split the dataset into train and test.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Training with LightGBM - Baseline
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For this task we use a simple set of parameters to train the model. We just
+    want to create a baseline model, so we are not performing here cross validation
+    or parameter tunning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The details of the different parameters of LightGBM can be found in the [documentation](https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters.rst).
+    Also, the authors provide [some advices](https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters-Tuning.rst) on
+    how to tune the parameters and prevent overfitting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: Once we have the trained model, we can obtain some metrics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Confusion Matrix](../Images/9d43e51cb4429246863d109770aa14ee.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In business terms, if the system classifies a fair transaction as fraud (false
+    positive), the bank will investigate the issue probably using human intervention.
+    According to a [2015 report from Javelin Strategy](https://www.javelinstrategy.com/press-release/false-positive-card-declines-push-consumers-abandon-issuers-and-merchants#),
+    15% of all cardholders have had at least one transaction incorrectly declined
+    in the previous year, representing an annual decline amount of almost $118 billion.
+    Nearly 4 in 10 declined cardholders report that they abandoned their card after
+    being falsely declined.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, if a fraudulent transaction is not detected, effectively meaning that
+    the classifier predicts that a transaction is fair when it is really fraudulent
+    (false negative), then the bank is losing money and the bad guy is getting away
+    with it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A common way to use business rules in these predictions is to control the threshold
+    or operation point of the prediction. This can be controlled changing the threshold
+    value in `binarize_prediction(y_prob, threshold=0.5)`. It is common to do a loop
+    from 0.1 to 0.9 and evaluate the different business outcomes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: O16N with Flask and Websockets
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The next step is to operationalize (o16n) the machine learning model. For it,
+    we are going to use [Flask](http://flask.pocoo.org/) to create a RESTfull API.
+    The input of the API is going to be a transaction (defined by its features), and
+    the output, the model prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Aditionally, we designed a [websocket service](https://miguelgfierro.com/blog/2018/demystifying-websockets-for-real-time-web-communication/) to
+    visualize fraudulent transactions on a map. The system works in real time using
+    the library [flask-socketio](https://github.com/miguelgrinberg/Flask-SocketIO).
+  prefs: []
+  type: TYPE_NORMAL
+- en: When a new transaction is sent to the API, the LightGBM model predicts whether
+    the transaction is fair or fraudulent. If the transaction is fraudulent, the server
+    sends a signal to the a web client, that renders a world map showing the location
+    of the fraudulent transaction. The map is made with javascript using [amCharts](http://amcharts.com/) and
+    the map locations are taken from the previously created SQLite database.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To start the api execute `(fraud)$ python api.py` inside the conda environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE24]'
+  prefs: []
+  type: TYPE_PRE
+- en: First, we make sure that the API is on
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE25]'
+  prefs: []
+  type: TYPE_PRE
+- en: The fraud police is watching you
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/f39cf9728096f014c1e8b578120251fb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, we are going to select one value and predict the output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE26]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE27]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE28]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE29]'
+  prefs: []
+  type: TYPE_PRE
+- en: Fraudulent transaction visualization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that we know that the main end point of the API works, we will try the /predict_map
+    end point. It creates a real time visualization system for fraudulent transactions
+    using websockets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A websocket is a protocol intended for real-time communications developed for
+    the HTML5 specification. It creates a persistent, low latency connection that
+    can support transactions initiated by either the client or server. [In this post](https://miguelgfierro.com/blog/2018/demystifying-websockets-for-real-time-web-communication/)
+    you can find a detailed explanation of websockets and other related technologies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/aa05baa6de9f9f3c3b73020d78f30e87.png)For our case, whenever a
+    user makes a request to the end point `/predict_map`, the machine learning model
+    evaluates the transaction details and makes a prediction. If the prediction is
+    classified as fraudulent, the server sends a signal using `socketio.emit(''map_update'',
+    location)`. This signal just contains a dictionary, called `location`, with a
+    simulated name and location of where the fraudulent transaction occurred. The
+    signal is shown in `index.html`, which just renders some javascript code that
+    is referenced via an `id="chartdiv"`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The javascript code is defined in the file `frauddetection.js`. The websocket
+    part is the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE30]'
+  prefs: []
+  type: TYPE_PRE
+- en: When a new signal is emited from the server in python, the javascript code receives
+    it and processes it. It creates a new variable called `newLocation` containing
+    the location information, that is going to be saved in a global array called `mapLocations`.
+    This variable contains all the fradulent locations that appeared since the session
+    started. Then there is a clearing process for amCharts to be able to draw the
+    new information in the map and finally the array is stored in `map.dataProvider.images`,
+    which actually refresh the map with the new point. The variable `map` is set earlier
+    in the code and it is the amCharts object responsible for defining the map.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To make a query to the visualization end point:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE31]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE32]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now you can go the map url (in local it would be http://localhost:5000/map)
+    and see how the map is reshesed with a new fraudulent location every time you
+    execute the previous cell. You should see a map like the following one:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e4766c0703951537c3484955db166ee2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Load test
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Once we have the API, we can test its scalability and response time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here you can find a simple load test to evaluate the performance of your API.
+    Please bear in mind that, in this case, there is no request overhead due to the
+    different locations of client and server, since the client and server are the
+    same computer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The response time of 10 requests is around 300ms, so one request would be 30ms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE33]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE34]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE35]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE36]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE37]'
+  prefs: []
+  type: TYPE_PRE
+- en: Enterprise grade reference architecture for fraud detection
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this tutorial we have seen how to create a baseline fraud detection model.
+    However, for a big company this is not enough.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the next figure we can see a reference architecture for fraud detection,
+    that should be adapted to the customer specifics. All services are based on Azure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '1) Two general data sources for the customer: real time data and static information.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2) A general database piece to store the data. Since it is a reference architecture,
+    and without more data, I put several options together ([SQL Database](https://azure.microsoft.com/en-gb/services/sql-database/), [CosmosDB](https://azure.microsoft.com/en-gb/services/cosmos-db/), [SQL
+    Data Warehouse](https://azure.microsoft.com/en-gb/services/sql-data-warehouse/),
+    etc) on cloud or on premise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3) Model experimentation using [Azure ML](https://azure.microsoft.com/en-gb/overview/machine-learning/),
+    again, using general computation targets such as [DSVM](https://azure.microsoft.com/en-gb/services/virtual-machines/data-science-virtual-machines/), [BatchAI](https://azure.microsoft.com/en-gb/services/batch-ai/), [Databricks](https://azure.microsoft.com/en-gb/services/databricks/) or [HDInsight](https://azure.microsoft.com/en-gb/services/hdinsight/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4) Model retraining using new data and a model obtained from the [Model Management](https://docs.microsoft.com/en-gb/azure/machine-learning/desktop-workbench/model-management-overview).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5) Operationalization layer with a [Kubernetes cluster](https://azure.microsoft.com/en-gb/services/container-service/kubernetes/),
+    which takes the best model and put it in production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 6) Reporting layer to show the results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e9a4672215422ba64b766a7a91cb2cd4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Original](https://github.com/miguelgfierro/sciblog_support/blob/master/Intro_to_Fraud_Detection/fraud_detection.ipynb).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Using GRAKN.AI to Detect Patterns in Credit Fraud Data](https://www.kdnuggets.com/2017/08/grakn-ai-detect-patterns-credit-fraud-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI for Fraud Detection – How does Mastercard do it? Learn how global leaders
+    use AI](https://www.kdnuggets.com/2018/07/rework-ai-fraud-detection-mastercard-global-leaders.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Intuitive Ensemble Learning Guide with Gradient Boosting](https://www.kdnuggets.com/2018/07/intuitive-ensemble-learning-guide-gradient-boosting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How Data Science Fuels Fraud Prevention](https://www.kdnuggets.com/2022/09/data-science-fuels-fraud-prevention.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fighting AI with AI Fraud Monitoring for Deepfake Applications](https://www.kdnuggets.com/2023/05/fighting-ai-ai-fraud-monitoring-deepfake-applications.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Uncertainty Quantification in Artificial Intelligence-based Systems](https://www.kdnuggets.com/2022/04/uncertainty-quantification-artificial-intelligencebased-systems.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ten Key Lessons of Implementing Recommendation Systems in Business](https://www.kdnuggets.com/2022/07/ten-key-lessons-implementing-recommendation-systems-business.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Chip Huyen shares frameworks and case studies for implementing ML systems](https://www.kdnuggets.com/2023/02/sphere-chip-huyen-shares-frameworks-case-studies-implementing-ml-systems.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[OLAP vs. OLTP: A Comparative Analysis of Data Processing Systems](https://www.kdnuggets.com/2023/08/olap-oltp-comparative-analysis-data-processing-systems.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

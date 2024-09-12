@@ -1,0 +1,274 @@
+- en: How to Train a Keras Model 20x Faster with a TPU for Free
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/03/train-keras-model-20x-faster-tpu-free.html](https://www.kdnuggets.com/2019/03/train-keras-model-20x-faster-tpu-free.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Chengwei Zhang](https://www.dlology.com/), Shanghai Industrial Technology
+    Institute / Programmer / Maker**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/3f9d6ae1d0a78e13f27b40eb06055fb5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: For quite some while, I feel content training my model on a single GTX 1070
+    graphics card which is rated around 8.18 TFlops single precision, then Google
+    opens up their free Tesla K80 GPU on Colab which comes with 12GB RAM, and rated
+    at slightly faster 8.73 TFlops. Until recently, the Cloud TPU option with 180
+    TFlops pops up in Colab’s runtime type selector. In this quick tutorial, you will
+    learn how to take your existing Keras model, turn it into a TPU model and train
+    on Colab x20 faster compared to training on my GTX1070 for free.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are going to build an easy to understand yet complex enough to train Keras
+    model so we can warm up the Cloud TPU a little bit. Training an LSTM model on
+    the IMDB sentiment classification task could be a great example because LSTM can
+    be more computationally expensive to train than other layers like Dense and convolutional.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An overview of the workflow,
+  prefs: []
+  type: TYPE_NORMAL
+- en: Build a Keras model for training in functional API with static input `batch_size`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Convert Keras model to TPU model.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Train the TPU model with static `batch_size * 8` and save the weights to file.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Build a Keras model for inference with the same structure but variable batch
+    input size.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Load the model weights.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Predict with the inferencing model.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**You can play with the Colab Jupyter notebook — [Keras_LSTM_TPU.ipynb](https://colab.research.google.com/drive/1QZf1WeX3EQqBLeFeT4utFKBqq-ogG1FN)
+    while reading on.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Firstly, Follow the instruction in the image below to activate the TPU in the
+    Colab runtime.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![activate-tpu](../Images/4637ff952b6b0dfeacd3d05378bd8036.png)Activate TPU'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Static input Batch size
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Input pipelines running on CPU and GPU are mostly free from the static shape
+    requirement, while in the XLA/TPU environment, static shapes and batch size is
+    imposed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Could TPU contains 8 TPU cores, which operate as independent processing
+    units. The TPU is not fully utilized unless all eight cores are used. To fully
+    speed up the training with vectorization, we can choose a larger batch size compared
+    to training the same model on a single GPU. A total batch size of 1024 (128 per
+    core) is generally a good starting point.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In case you are going to train a larger model where the batch size is too large,
+    try slowly reduce the batch size until it fits in TPU memory, just making sure
+    that the total batch size is a multiple of 64 (the per-core batch size should
+    be a multiple of 8).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It is also worth to mention when training with larger batch size; it is generally
+    safe to increase the learning rate of the optimizer to allow even faster convergence.
+    You can find a reference in this paper — “[Accurate, Large Minibatch SGD: Training
+    ImageNet in 1 Hour](https://arxiv.org/pdf/1706.02677.pdf)”.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Keras, to define a static batch size, we use its functional API and then
+    specify the `batch_size` parameter for the Input layer. Notice that the model
+    builds in a function which takes a `batch_size` parameter so we can come back
+    later to make another model for inferencing runs on CPU or GPU which takes variable
+    batch size inputs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Also, use `tf.train.Optimizer` instead of a standard Keras optimizer since Keras
+    optimizer support is still experimental for TPU.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Convert Keras model to TPU model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The `tf.contrib.tpu.keras_to_tpu_model` function converts a `tf.keras` model
+    to an equivalent TPU version.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: We then use the standard Keras methods to train, save the weights and evaluate
+    the model. Notice that the `batch_size` is set to eight times of the model input
+    `batch_size` since the input samples are evenly distributed to run on 8 TPU cores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: I set up an experiment to compare the training speed between a single GTX1070
+    running locally on my Windows PC and TPU on Colab, here is the result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Both GPU and TPU takes the input batch size of 128,
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'GPU: **179 seconds per epoch**. 20 epochs reach 76.9% validation accuracy,
+    total 3600 seconds.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'TPU: **5 seconds per epoch** except for the very first epoch which takes 49
+    seconds. 20 epochs reach 95.2% validation accuracy, total 150 seconds.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The validation accuracy for TPU after 20 epochs are higher than GPU may be caused
+    by training 8 batches of the mini-batch size of 128 samples at a time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Inferencing on CPU
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Once we have the model weights, we can load it as usual and make predictions
+    on another device like CPU or GPU. We also want the inferencing model to accept
+    flexible input batch size, that can be done with the previous `make_model()` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can see the inferencing model now takes variable input samples,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Then you can use the standard `fit()`, `evaluate()` functions with the inferencing
+    model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion and further reading
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This quick tutorial shows you how to train a Keras model faster leveraging the
+    free Cloud TPU resource on Google Colab.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Cloud TPU Documentation](https://cloud.google.com/tpu/docs/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Cloud TPU Performance Guide](https://cloud.google.com/tpu/docs/performance-guide)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Cloud TPU Troubleshooting guide](https://cloud.google.com/tpu/docs/troubleshooting)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[XLA Overview](https://www.tensorflow.org/performance/xla/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Share on Twitter](https://twitter.com/intent/tweet?url=https%3A//www.dlology.com/blog/how-to-train-keras-model-x20-times-faster-with-tpu-for-free/&text=How%20to%20train%20Keras%20model%20x20%20times%20faster%20with%20TPU%20for%20free)
+    [Share on Facebook](https://www.facebook.com/sharer/sharer.php?u=https://www.dlology.com/blog/how-to-train-keras-model-x20-times-faster-with-tpu-for-free/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Chengwei Zhang](https://www.dlology.com/)** is a programmer with interest
+    in the field of deep learning and natural language processing.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/swlh/how-to-train-keras-model-x20-times-faster-with-tpu-for-free-cac6cf5089cb).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Keras Hyperparameter Tuning in Google Colab Using Hyperas](/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using a Keras Long Short-Term Memory (LSTM) Model to Predict Stock Prices](/2018/11/keras-long-short-term-memory-lstm-model-predict-stock-prices.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Essential Google Colaboratory Tips & Tricks](/2018/02/essential-google-colaboratory-tips-tricks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Introducing TPU v4: Googles Cutting Edge Supercomputer for Large…](https://www.kdnuggets.com/2023/04/introducing-tpu-v4-googles-cutting-edge-supercomputer-large-language-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Keras 3.0: Everything You Need To Know](https://www.kdnuggets.com/2023/07/keras-30-everything-need-know.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why we will always need humans to train AI — sometimes in real-time](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

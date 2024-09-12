@@ -1,0 +1,419 @@
+- en: How to Generate FiveThirtyEight Graphs in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/12/generate-fivethirtyeight-graphs-python.html](https://www.kdnuggets.com/2017/12/generate-fivethirtyeight-graphs-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Alex Olteanu](https://www.dataquest.io/blog/author/alex-olteanu/), Student
+    Success Specialist at Dataquest.io**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you read data science articles, you may have already stumbled upon [FiveThirtyEight's](https://fivethirtyeight.com/) content.
+    Naturally, you were impressed by their [awesome visualizations](https://fivethirtyeight.com/features/the-52-best-and-weirdest-charts-we-made-in-2016/).
+    You wanted to make your own awesome visualizations and so asked [Quora](https://www.quora.com/How-does-FiveThirtyEight-create-their-data-visualizations) and [Reddit](https://www.reddit.com/r/statistics/comments/2jon2b/anyone_knows_how_are_made_the_graphs_on/) how
+    to do it. You received some answers, but they were rather vague. You still can't
+    get the graphs done yourself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post, we'll help you. Using Python's [matplotlib](https://matplotlib.org/index.html#) and [pandas](http://pandas.pydata.org/pandas-docs/stable/index.html),
+    we'll see that it's rather easy to replicate the core parts of any FiveThirtyEight
+    (FTE) visualization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We''ll start here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![default_graph](../Images/0c08238c4969eb5ff53e0ccfa7e48e54.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'And, at the end of the tutorial, arrive here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![final3](../Images/02b129309908aee0d2db50c351d3d94d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: To follow along, you'll need at least some basic knowledge of Python. If you
+    know what's the difference between methods and attributes, then you're good to
+    go.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introducing the dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We'll work with data describing the percentages of Bachelors conferred to women
+    in the US from 1970 to 2011\. We'll use a dataset compiled by data scientist [Randal
+    Olson](http://www.randalolson.com/2014/06/14/percentage-of-bachelors-degrees-conferred-to-women-by-major-1970-2012/),
+    who collected the data from the [National Center for Education Statistics](https://nces.ed.gov/about/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you want to follow along by writing code yourself, you can download the
+    data from [Randal''s blog](http://www.randalolson.com/wp-content/uploads/percent-bachelors-degrees-women-usa.csv).
+    To save yourself some time, you can skip downloading the file, and just pass in
+    the direct link to pandas'' `read_csv()` [function](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html?highlight=read_csv#pandas.read_csv).
+    In the following code cell, we:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Import the pandas module.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Assign the direct link toward the dataset as a `string` to a variable named `direct_link`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Read in the data by using `read_csv()`, and assign the content to `women_majors`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Print information about the dataset by using the `info()` [method](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.info.html?highlight=dataframe%20info#pandas.DataFrame.info).
+    We're looking for the number of rows and columns, and checking for null values
+    at the same time.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Show the first five rows to understand better the structure of the dataset by
+    using the `head()` [method](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.head.html?highlight=dataframe%20head#pandas.DataFrame.head).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | YEAR | AGRICULTURE | ARCHITECTURE | ART AND PERFORMANCE | BIOLOGY | BUSINESS
+    | COMMUNICATIONS AND JOURNALISM | COMPUTER SCIENCE | EDUCATION | ENGINEERING |
+    ENGLISH | FOREIGN LANGUAGES | HEALTH PROFESSIONS | MATH AND STATISTICS | PHYSICAL
+    SCIENCES | PSYCHOLOGY | PUBLIC ADMINISTRATION | SOCIAL SCIENCES AND HISTORY |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    | --- | --- | --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 1970 | 4.229798 | 11.921005 | 59.7 | 29.088363 | 9.064439 | 35.3 | 13.6
+    | 74.535328 | 0.8 | 65.570923 | 73.8 | 77.1 | 38.0 | 13.8 | 44.4 | 68.4 | 36.8
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 1971 | 5.452797 | 12.003106 | 59.9 | 29.394403 | 9.503187 | 35.5 | 13.6
+    | 74.149204 | 1.0 | 64.556485 | 73.9 | 75.5 | 39.0 | 14.9 | 46.2 | 65.5 | 36.2
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | 1972 | 7.420710 | 13.214594 | 60.4 | 29.810221 | 10.558962 | 36.6 | 14.9
+    | 73.554520 | 1.2 | 63.664263 | 74.6 | 76.9 | 40.2 | 14.8 | 47.6 | 62.6 | 36.1
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | 1973 | 9.653602 | 14.791613 | 60.2 | 31.147915 | 12.804602 | 38.4 | 16.4
+    | 73.501814 | 1.6 | 62.941502 | 74.9 | 77.4 | 40.9 | 16.5 | 50.4 | 64.3 | 36.4
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | 1974 | 14.074623 | 17.444688 | 61.9 | 32.996183 | 16.204850 | 40.5 |
+    18.9 | 73.336811 | 2.2 | 62.413412 | 75.3 | 77.9 | 41.8 | 18.2 | 52.6 | 66.1 |
+    37.3 |'
+  prefs: []
+  type: TYPE_TB
+- en: Besides the `Year` column, every other column name indicates the subject of
+    a Bachelor degree. Every datapoint in the Bachelor columns represents the percentage
+    of Bachelor degrees conferred to women. Thus, every row describes the percentage
+    for various Bachelors conferred to women in a given year.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As mentioned before, we have data from 1970 to 2011\. To confirm the latter
+    limit, let''s print the last five rows of the dataset by using the `tail()` [method](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.tail.html?highlight=tail#pandas.DataFrame.tail):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | YEAR | AGRICULTURE | ARCHITECTURE | ART AND PERFORMANCE | BIOLOGY | BUSINESS
+    | COMMUNICATIONS AND JOURNALISM | COMPUTER SCIENCE | EDUCATION | ENGINEERING |
+    ENGLISH | FOREIGN LANGUAGES | HEALTH PROFESSIONS | MATH AND STATISTICS | PHYSICAL
+    SCIENCES | PSYCHOLOGY | PUBLIC ADMINISTRATION | SOCIAL SCIENCES AND HISTORY |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    | --- | --- | --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 37 | 2007 | 47.605026 | 43.100459 | 61.4 | 59.411993 | 49.000459 | 62.5 |
+    17.6 | 78.721413 | 16.8 | 67.874923 | 70.2 | 85.4 | 44.1 | 40.7 | 77.1 | 82.1
+    | 49.3 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 38 | 2008 | 47.570834 | 42.711730 | 60.7 | 59.305765 | 48.888027 | 62.4 |
+    17.8 | 79.196327 | 16.5 | 67.594028 | 70.2 | 85.2 | 43.3 | 40.7 | 77.2 | 81.7
+    | 49.4 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 39 | 2009 | 48.667224 | 43.348921 | 61.0 | 58.489583 | 48.840474 | 62.8 |
+    18.1 | 79.532909 | 16.8 | 67.969792 | 69.3 | 85.1 | 43.3 | 40.7 | 77.1 | 82.0
+    | 49.4 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 40 | 2010 | 48.730042 | 42.066721 | 61.3 | 59.010255 | 48.757988 | 62.5 |
+    17.6 | 79.618625 | 17.2 | 67.928106 | 69.0 | 85.0 | 43.1 | 40.2 | 77.0 | 81.7
+    | 49.3 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 41 | 2011 | 50.037182 | 42.773438 | 61.2 | 58.742397 | 48.180418 | 62.2 |
+    18.2 | 79.432812 | 17.5 | 68.426730 | 69.5 | 84.8 | 43.1 | 40.1 | 76.7 | 81.9
+    | 49.2 |'
+  prefs: []
+  type: TYPE_TB
+- en: The context of our FiveThirtyEight graph
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Almost every FTE graph is part of an article. The graphs complement the text
+    by illustrating a little story, or an interesting idea. We'll need to be mindful
+    of this while replicating our FTE graph.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To avoid digressing from our main task in this tutorial, let's just pretend
+    we've already written most of an article about the evolution of gender disparity
+    in US education. We now need to create a graph to help readers visualize the evolution
+    of gender disparity for Bachelors where the situation was really bad for women
+    in 1970\. We've already set a threshold of 20%, and now we want to graph the evolution
+    for every Bachelor where the percentage of women graduates was less than 20% in
+    1970.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s first identify those specific Bachelors. In the following code cell,
+    we will:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Use `.loc`, a [label-based indexer](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.loc.html?highlight=loc#pandas.DataFrame.loc),
+    to:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: select the first row (the one that corresponds to 1970);
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: select the items in the first row only where the values are less than 20; the `Year` field
+    will be checked as well, but will obviously not be included because 1970 is much
+    greater than 20.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Assign the resulting content to `under_20`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Using matplotlib's default style
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let''s begin working on our graph. We''ll first take a peek at what we can
+    build by default. In the following code block, we will:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Run the Jupyter magic `%matplotlib` to [enable Jupyter and matplotlib work together
+    effectively](http://ipython.readthedocs.io/en/stable/interactive/plotting.html#id1),
+    and add `inline` to have our graphs displayed inside the notebook.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Plot the graph by using the `plot()` [method](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.plot.html?highlight=plot#pandas.DataFrame.plot) on `women_majors`.
+    We pass in to `plot()`the following parameters:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`x` - specifies the column from `women_majors` to use for the x-axis;'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`y` - specifies the columns from `women_majors` to use for the y-axis; we''ll
+    use the index labels of `under_20` which are stored in the `.index` attribute
+    of this object;'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`figsize` - sets the size of the figure as a `tuple` with the format `(width,
+    height)` in inches.'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Assign the plot object to a variable named `under_20_graph`, and print its type
+    to show that pandas uses `matplotlib` objects under the hood.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/a593bbd04871b2356ba6b00209b670ab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Using matplotlib's fivethirtyeight style
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The graph above has certain characteristics, like the width and color of the
+    spines, the font size of the y-axis label, the absence of a grid, etc. All of
+    these characteristics make up matplotlib's default style.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a short parenthesis, it's worth mentioning that we'll use a few technical
+    terms about the parts of a graph throughout this post. If you feel lost at any
+    point, you can refer to the legend below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![anatomy1](../Images/0f47f940dc093daadce8595661fb8dca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source: [Matplotlib.org](http://matplotlib.org/faq/usage_faq.html#parts-of-a-figure)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Besides the default style, matplotlib comes with several built-in styles that
+    we can use readily. To see a list of the available styles, we will:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Import the `matplotlib.style` [module](https://matplotlib.org/api/style_api.html?highlight=style%20available#module-matplotlib.style) under
+    the name `style`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Explore the content of `matplotlib.style.available` (a predefined variable of
+    this module), which contains a list of all the available in-built styles.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: You might have already observed that there's a built-in style called `fivethirtyeight`.
+    Let's use this style, and see where that leads. For that, we'll use the aptly
+    named `use()` [function](https://matplotlib.org/api/style_api.html?highlight=style%20available#matplotlib.style.use)from
+    the same `matplotlib.style` module (which we imported under the name `style`).
+    Then we'll generate our graph using the same code as earlier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![538_graphs_AO_11_1](../Images/cdee0cf7d81b8bba45d2ceb49508800d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/c69d43b978cacd11f996c059d1cb2047.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Wow, that's a major change! With respect to our first graph, we can see that
+    this one has a different background color, it has grid lines, there are no spines
+    whatsoever, the weight and the font size of the major tick labels are different,
+    etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can read a technical description of the `fivethirtyeight` style [here](https://github.com/matplotlib/matplotlib/blob/38be7aeaaac3691560aeadafe46722dda427ef47/lib/matplotlib/mpl-data/stylelib/fivethirtyeight.mplstyle) -
+    it should also give you a good idea about what code runs under the hood when we
+    use this style. The author of the style sheet, [Cameron David-Pilon](https://github.com/CamDavidsonPilon),
+    discusses some of the characteristics [here](https://dataorigami.net/blogs/napkin-folding/17543615-replicating-538s-plot-styles-in-matplotlib).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*For more on generating FiveThirtyEight graphs in Python, see the rest of the
+    [original article here](https://www.dataquest.io/blog/making-538-plots/).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Alex Olteanu](https://www.dataquest.io/blog/author/alex-olteanu/)**
+    is a Student Success Specialist at Dataquest.io. He enjoys learning and sharing
+    knowledge, and is getting ready for the new AI revolution.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.dataquest.io/blog/making-538-plots/). Reposted with
+    permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Analyzing the Migration of Scientific Researchers](/2017/11/analyzing-migration-scientific-researchers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Techniques to Visualize Geospatial Data](/2017/10/7-techniques-visualize-geospatial-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Python Graph Gallery](/2017/11/python-graph-gallery.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Generate Synthetic Tabular Dataset](https://www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generate Synthetic Time-series Data with Open-source Tools](https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Ways to Generate Passive Income Using ChatGPT](https://www.kdnuggets.com/2023/03/4-ways-generate-passive-income-chatgpt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generate Music From Text Using Google MusicLM](https://www.kdnuggets.com/2023/06/generate-music-text-google-musiclm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Ways to Generate Hyper-Realistic Faces Using Stable Diffusion](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Combining Data Management and Data Storytelling to Generate Value](https://www.kdnuggets.com/combining-data-management-and-data-storytelling-to-generate-value)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

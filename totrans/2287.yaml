@@ -1,0 +1,596 @@
+- en: 'Back To Basics, Part Dos: Gradient Descent'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html](https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Welcome to the second part of our ***Back To Basics*** series. In the [first
+    part](https://medium.com/towards-data-science/back-to-basics-part-uno-linear-regression-cost-function-and-gradient-descent-590dcb3eee46),
+    we covered how to use Linear Regression and Cost Function to find the best-fitting
+    line for our house prices data. However, we also saw that testing multiple *intercept* values
+    can be tedious and inefficient. In this second part, we’ll delve deeper into Gradient
+    Descent, a powerful technique that can help us find the perfect *intercept* and
+    optimize our model. We’ll explore the math behind it and see how it can be applied
+    to our linear regression problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Gradient descent is a powerful optimization algorithm that ***aims to quickly
+    and efficiently find the minimum point of a curve.*** The best way to visualize
+    this process is to imagine you are standing at the top of a hill, with a treasure
+    chest filled with gold waiting for you in the valley.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/5d19f0944f791eb0a9d6f16b1facfe4f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: However, the exact location of the valley is unknown because it’s super dark
+    out and you can’t see anything. Moreover, you want to reach the valley before
+    anyone else does (because you want all of the treasure for yourself duh). Gradient
+    descent helps you navigate the terrain and reach this *optimal* point ***efficiently
+    and quickly***. At each point it’ll tell you how many steps to take and in what
+    direction you need to take them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Similarly, gradient descent can be applied to our linear regression problem
+    by using the steps laid out by the algorithm. To visualize the process of finding
+    the minimum, let’s plot the **MSE** curve. We already know that the equation of
+    the curve is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/737e52874ea32b77d4d6154e51555832.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: the equation of the curve is the equation used to calculate the MSE
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And from the [previous article](https://towardsdatascience.com/back-to-basics-part-uno-linear-regression-cost-function-and-gradient-descent-590dcb3eee46#e9d3),
+    we know that the equation of **MSE** in our problem is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/b5eb66fcef8e423ecf363808f778b8c6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'If we zoom out we can see that an **MSE** curve (which resembles our valley)
+    can be found by substituting a bunch of *intercept* values in the above equation.
+    So let’s plug in 10,000 values of the *intercept*, to get a curve that looks like
+    this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/6829eca33ad9d3c887892fd49d136e6b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: in reality, we won’t know what the MSE curve looks like
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The goal is to reach the bottom of this **MSE** curve, which we can do by following
+    these steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 1: Start with a random initial guess for the intercept value'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In this case, let’s assume our initial guess for the *intercept* value is 0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 2: Calculate the gradient of the MSE curve at this point'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The* gradient *of a curve at a point is represented by the tangent line (a fancy
+    way of saying that the line touches the curve only at that point) at that point.
+    For example, at Point A, the *gradient* of the **MSE**curve can be represented
+    by the red tangent line, when the intercept is equal to 0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/c1d5e0542e80349a3afd325459352d65.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: the gradient of the MSE curve when intercept = 0
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In order to determine the value of the *gradient*, we apply our knowledge of
+    calculus. Specifically, the *gradient* is equal to the derivative of the curve
+    with respect to the *intercept *at a given point. This is denoted as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/d5d5a9ed724645ca6957ec078416236e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'NOTE: If you’re unfamiliar with derivatives, I recommend watching this [Khan
+    Academy video](https://www.khanacademy.org/math/ap-calculus-ab/ab-differentiation-1-new/ab-2-6a/v/derivative-properties-and-polynomial-derivatives) if
+    interested. Otherwise you can glance over the next part and still be able to follow
+    the rest of the article.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'We calculate the ***derivative of the MSE curve***as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/776088318fa18a2c2d17d391277c7dfe.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Now to find the ***gradient at point A***, we substitute the value of the *intercept* at
+    point A in the above equation. Since *intercept* = 0, the derivative at point
+    A is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/67db4fea0b447240477d8ff003773e9f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: So when the *intercept* = 0, the *gradient* = -190
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**NOTE:** As we approach the optimal value, the gradient values approach zero.
+    At the optimal value, the gradient is equal to zero. Conversely, the farther away
+    we are from the optimal value, the larger the gradient becomes.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/31ba9dc3a9f7fd31faeca6e279b1fae6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: From this, we can infer that the step size should be related to the *gradient*,
+    since it tells us if we should take a baby step or a big step. This means that
+    when the *gradient* of the curve is close to 0, then we should take baby steps
+    because we are close to the optimal value. And if the *gradient* is bigger, we
+    should take bigger steps to get to the optimal value faster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**NOTE:** However, if we take a super huge step, then we could make a big jump
+    and miss the optimal point. So we need to be careful.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/83feba1c3c30a9ae017ea84520ec0d4a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Step 3: Calculate the Step Size using the gradient and the Learning Rate and
+    update the intercept value'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Since we see that the ***Step Size*** and *gradient* are proportional to each
+    other, the *Step Size *is determined by multiplying the *gradient* by a pre-determined
+    constant value called the ***Learning Rate:***
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/dd61f74bee009d27cdc05eebc65dbbc6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The *Learning Rate* controls the magnitude of the *Step Size* and ensures that
+    the step taken is not too large or too small.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In practice, the Learning Rate is usually a small positive number that is ?
+    0.001\. But for our problem let’s set it to 0.1.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: So when the intercept is 0, the *Step Size = gradient *x* Learning Rate* *=
+    -190*0.1 = -19.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Based on the *Step Size* we calculated above, we update the *intercept *(aka
+    change our current location)using any of these equivalent formulas:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/c2d6b9191a2cc8c8a311fdfe637632ef.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: To find the new *intercept *in this step, we plug in the relevant values…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/bfdea6e65612c731551a91113de67952.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: …and find that the new *intercept* = 19.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now plugging this value in the **MSE** equation, we find that the **MSE** when
+    the *intercept* is 19 = 8064.095\. We notice that in one big step, we moved closer
+    to our optimal value and reduced the **MSE**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/bd224aa9af161fda1ef3a1fea6d57077.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Even if we look at our graph, we see how much better our new line with *intercept* 19
+    is fitting our data than our old line with *intercept* 0:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/dac783aa1dc1c8852610d966da3fe552.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Step 4: Repeat steps 2–3'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We repeat Steps 2 and 3 using the updated *intercept* value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example, since the new *intercept* value in this iteration is 19, following [Step
+    2](https://medium.com/towards-data-science/back-to-basics-part-dos-linear-regression-cost-function-and-gradient-descent-e3d7d05c56fd#6ab4),
+    we will calculate the gradient at this new point:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/d62bfd120ad7554a8260635b17c84b4d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And we find that the *gradient* of the **MSE** curve at the intercept value
+    of 19 is -152 (as represented by the red tangent line in the illustration below).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/a9c9701640ea3e7d14fa5b8db8c323eb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Next, in accordance with [Step 3](https://medium.com/towards-data-science/back-to-basics-part-dos-linear-regression-cost-function-and-gradient-descent-e3d7d05c56fd#67b0),
+    let’s calculate the* Step Size*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/a4603c5f6fb177ed11418ac5814bd0e4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'And subsequently, update the *intercept* value:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/8715781f8c423fa69ffd05f4488d00f7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now we can compare the line with the previous *intercept *of 19 to the new line
+    with the new intercept 34.2…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/f4bfe4b7beb6b83bdbdfaf11f59901b2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: …and we can see that the new line fits the data better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Overall, the **MSE** is getting smaller…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/f618bd0080bb66d326a5826a7d63eed6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '…and our *Step Sizes* are getting smaller:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/15c541dcac99271f58f96df770e10797.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'We repeat this process iteratively until we converge toward the optimal solution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/2b5b643559ce6e7ac8f7d06d8e7a1293.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As we progress toward the minimum point of the curve, we observe that the *Step
+    Size* becomes increasingly smaller. After 13 steps, the gradient descent algorithm
+    estimates the *intercept* value to be 95\. If we had a crystal ball, this would
+    be confirmed as the minimum point of the **MSE** curve. And it is clear to see
+    how this method is more efficient compared to the brute force approach that we
+    saw in the [previous article](https://medium.com/towards-data-science/back-to-basics-part-uno-linear-regression-cost-function-and-gradient-descent-590dcb3eee46).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now that we have the optimal value of our *intercept*, the linear regression
+    model is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/61244bb741c82f91f42c98bb02a639c0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'And the linear regression line looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/5527a5bf8aa4e535e29e6a878f42e46a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: best fitting line with intercept = 95 and slope = 0.069
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, going back to our friend Mark’s question — What value should he sell
+    his 2400 feet² house for?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/ba1f1c05b426df495c7bae00bed79768.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Plug in the house size of 2400 feet² into the above equation…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/5bd96e8a9a7ebe978819d16426e395f0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: …and voila. We can tell our unnecessarily worried friend Mark that based on
+    the 3 houses in his neighborhood, he should look to sell his house for around
+    $260,600.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we have a solid understanding of the concepts, let’s do a quick Q&A
+    sesh answering any lingering questions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why does finding the gradient actually work?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'To illustrate this, consider a scenario where we are attempting to reach the
+    minimum point of curve C, denoted as *x**. And we are currently at point A at *x*,
+    located to the left of *x**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/c445f16302e50d42ce0b4d94f6bcfa6e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If we take the derivative of the curve at point A with respect to *x*, represented
+    as *dC(x)/dx*, we obtain a negative value (this means the *gradient* is sloping
+    downwards). We also observe that we need to move to the right to reach *x**. Thus,
+    we need to increase *x* to arrive at the minimum *x*.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/0e4d00a3fc662b0d31e8163a471d6378.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: the red line, or the gradient, is sloping downwards => a negative Gradient
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since *dC(x)/dx* is negative, *x-??*dC(x)/dx* will be larger than *x*, thus
+    moving towards *x**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similarly, if we are at point A located to the right of the minimum point x*,
+    then we get a **positive *gradient*** (*gradient* is sloping upwards), *dC(x)/dx*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/c6c8d53b45f3bcfa2f039351007c88e5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: the red line, or the Gradient, is sloping upwards => a positive Gradient
+  prefs: []
+  type: TYPE_NORMAL
+- en: So *x-??*dC(x)/dx* will be less than *x*, thus moving towards *x**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How does gradient decent know when to stop taking steps?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Gradient descent stops when the *Step Size* is very close to 0\. As previously
+    discussed, at the minimum point the *gradient* is 0 and as we approach the minimum,
+    the *gradient* approaches 0\. Therefore, when the *gradient* at a point is close
+    to 0 or in the vicinity of the minimum point, the *Step Size* will also be close
+    to 0, indicating that the algorithm has reached the optimal solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/b351ad5b83c9a126f86ca31bd7c0d72a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: when we are close to the minimum point, the gradient is close to 0, and subsequently
+    Step Size is close to 0
+  prefs: []
+  type: TYPE_NORMAL
+- en: In practice the Minimum Step Size = 0.001 or smaller
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/76186f8d24893a15731b57b79e5db9af.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: That being said, gradient descent also includes a limit on the number of steps
+    it will take before giving up called the *Maximum Number of Steps*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In practice, the Maximum Number of Steps = 1000 or greater
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: So even if the* Step Size* is larger than the *Minimum Step Size*, if there
+    have been more than the *Maximum Number of Steps*, gradient descent will stop.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What if the minimum point is more challenging to identify?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Until now, we have been working with a curve where it’s easy to identify the
+    minimum point (these kinds of curves are called ***convex***). But what if we
+    have a curve that’s not as pretty (technically aka ***non-convex***) and looks
+    like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/95362b61547e16eaa6527163af4d0472.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here, we can see that Point B is the *global minimum* (actual minimum), and
+    Points A and C are* local minimums* (points that can be confused for the *global
+    minimum* but aren’t). So if a function has multiple *local minimums* and a *global
+    minimum*, it is not guaranteed that gradient descent will find the *global minimum*.
+    Moreover, which local minimum it finds will depend on the position of the initial
+    guess (as seen in [Step 1 ](https://towardsdatascience.com/back-to-basics-part-dos-linear-regression-cost-function-and-gradient-descent-e3d7d05c56fd#87cf)of
+    gradient descent).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/c935384e980297c511af9d0eeaa79146.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Taking this non-convex curve above as an example, if the initial guess is at
+    Block A or Block C, gradient descent will declare that the minimum point is at
+    local minimums A or C, respectively when in reality it’s at B. Only when the initial
+    guess is at Block B, the algorithm will find the global minimum B.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Now the question is — how do we make a good initial guess?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Simple answer: *Trial and Error. Kind of.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Not-so-simple answer: *From the graph above, if our minimum guess of *x* was
+    0 since that lies in Block A, it’ll lead to the local minimum A. Thus, as you
+    can see, 0 may not be a good initial guess in most cases. A common practice is
+    to apply a random function based on a uniform distribution on the range of all
+    possible values of x. Additionally, if feasible, running the algorithm with different
+    initial guesses and comparing their results can provide insight into whether the
+    guesses differ significantly from each other. This helps in identifying the global
+    minimum more efficiently.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Okay, we’re almost there. Last question.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What if we are trying to find more than one optimal value?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Until now, we were focused on only finding the optimal intercept value because
+    we magically knew the *slope* value of the linear regression is 0.069\. But what
+    if don’t have a crystal ball and don't know the optimal *slope* value? Then we
+    need to optimize both the slope and intercept values, expressed as *x?* and *x?* respectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to do that, we must utilize partial derivatives instead of just derivatives.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'NOTE: Partial derivates are calculated in the same way as reglar old derivates,
+    but are denoted differently because we have more than one variable we are trying
+    to optimize for. To learn more about them, read this [article](https://www.mathsisfun.com/calculus/derivatives-partial.html) or
+    watch this [video](https://www.youtube.com/watch?v=JAf_aSIJryg).'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: However, the process remains relatively similar to that of optimizing a single
+    value. The cost function (such as **MSE**) must still be defined and the gradient
+    descent algorithm must be applied, but with the added step of finding partial
+    derivatives for both x? and x?.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 1: Make initial guesses for x₀ and x₁**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 2: Find the partial derivatives with respect to x₀ and x₁ at these points**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/a7339e26b9ad52d4263bc524b7b94e3f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Step 3: Simultaneously update x₀ and x₁ based on the partial derivatives
+    and the Learning Rate**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Back To Basics, Part Dos: Linear Regression, Cost Function, and Gradient
+    Descent](../Images/a2f81be7d310c4a5c9cfd8b68e863f78.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Step 4: Repeat Steps 2–3 until the Maximum Number of Steps is reached or
+    the Step Size is less that the Minimum Step Size**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*And we can extrapolate these steps to 3, 4, or even 100 values to optimize
+    for.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In conclusion, gradient descent is a powerful optimization algorithm that helps
+    us reach the optimal value efficiently. The gradient descent algorithm can be
+    applied to many other optimization problems, making it a fundamental tool for
+    data scientists to have in their arsenal. Onto bigger and better algorithms now!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Shreya Rao](https://www.linkedin.com/in/shreyarao24/)** illustrate and explain
+    Machine Learning algorithms in layman''s terms.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/back-to-basics-part-dos-linear-regression-cost-function-and-gradient-descent-e3d7d05c56fd).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Concepts You Should Know About Gradient Descent and Cost Function](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Gradient Descent: The Mountain Trekker''s Guide to Optimization with…](https://www.kdnuggets.com/gradient-descent-the-mountain-trekker-guide-to-optimization-with-mathematics)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Back to Basics Week 1: Python Programming & Data Science Foundations](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Back to Basics Week 3: Introduction to Machine Learning](https://www.kdnuggets.com/back-to-basics-week-3-introduction-to-machine-learning)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Back to Basics Week 4: Advanced Topics and Deployment](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Back to Basics Bonus Week: Deploying to the Cloud](https://www.kdnuggets.com/back-to-basics-bonus-week-deploying-to-the-cloud)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

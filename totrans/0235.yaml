@@ -1,0 +1,192 @@
+- en: 'Machine Learning Is Not Like Your Brain Part 3: Fundamental Architecture'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-3-fundamental-architecture.html](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-3-fundamental-architecture.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Machine Learning Is Not Like Your Brain Part 3: Fundamental Architecture](../Images/9fe3c28be5e8e7d37ee7dc2fc4681152.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Alex wong](https://unsplash.com/@killerfvith?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+    on [Unsplash](https://unsplash.com/s/photos/fundamental-architecture?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Today’s artificial intelligence (AI) can do some extraordinary things. Its functionality,
+    though, has very little to do with the way in which a human brain works to achieve
+    the same tasks. For AI to overcome its inherent limitations and advance to artificial
+    general intelligence, we must recognize the differences between the brain and
+    its artificial counterparts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: With that in mind, this nine-part series examines the capabilities and limitations
+    of biological neurons and how these relate to machine learning (ML). In the first
+    two parts of this series, we examined how a neuron’s slowness makes an ML approach
+    to learning implausible in neurons, and how the fundamental algorithm of the perceptron
+    differs from a biological neuron model involving spikes. Part Three examines the
+    fundamental architecture underlying ML and the brain.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ve all seen diagrams of the orderly layers of ML neural networks in which
+    the neurons in each layer are fully connected to those in the next. In contrast,
+    the brain appears to contain lots of apparently disordered connections. Because
+    it is so difficult to trace out individual connections within the brain, we don’t
+    know what the brain’s layering structure actually is. It is obvious, though, that
+    it is not the orderly layer-by-layer structure of ML.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This fundamental difference drastically impacts the algorithms which can be
+    used in ML. While we don’t think much about how solidly perceptrons and ML algorithms
+    rely on the orderly layered structure, a problem arises if we allow perceptrons
+    to have synapses from any arbitrary neuron in the network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Synapse Counts
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In a neural network where each layer is fully connected to the next, the number
+    of synapses increases with the square of the number of neurons in each layer (assuming
+    all layers are the same size for easy calculation). If you allow any neuron to
+    connect to any other in the network, the synapse count goes up with the square
+    of the total number of neurons in the network. A 10 layer network with 1,000 neurons
+    per layer would have a total of 9 million synapses (the output layer doesn’t need
+    synapses). If any neuron may connect to any other, there is the potential for
+    100 million synapses, with a likely 11-fold performance hit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the brain, most of these synapses don’t exist. The neocortex has 16 billion
+    (16x109) neurons with the potential for any neuron to connect to any other or
+    256x1018 possible synapses—256 exabytes with 1 byte per synapse, a ridiculously
+    large number. The number of actual synapses, however, is estimated at 104 per
+    neuron totaling only 16x1013 which is only a *staggeringly* large number (160
+    terabytes).
+  prefs: []
+  type: TYPE_NORMAL
+- en: A huge proportion of these synapses must have near-zero weights. These “synapses-in-waiting”
+    are there to store a memory by changing weight quickly should the need arise.
+    Regardless, we end up with a “sparse array,” with mostly zero entries. While it’s
+    straightforward to come up with a structure whereby only non-zero synapses are
+    represented, the blistering performance improvement of today’s GPUs is likely
+    lost if we do that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Perceptron Algorithms
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The fundamental algorithm of the perceptron sums the input values from the previous
+    layer. If you allow connections from subsequent layers, you need to differentiate
+    between neuron content which has already been calculated from previous layers
+    and those which have yet to be calculated. If the algorithm doesn’t include this
+    extension, then the perceptron values will be dependent on the order of processing
+    of the neurons. In a multi-thread implementation, this makes the perceptron values
+    indeterminant.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To correct for this problem, the perceptron algorithm needs two phases with
+    two internal values: the PreviousValue and the CurrentValue. In the first phase,
+    the algorithm calculates its CurrentValue based on the PreviousValues of the input
+    neurons. In the second phase, it transfers its current value to the previous value.
+    In this way, all of the PreviousValues used in the calculation are stable for
+    the duration of the calculation in the first phase.  This algorithm change clears
+    up the problem, again with a performance penalty.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is an implementation of this two-phase algorithm in the open-source Brain
+    Simulator II in the file NeuronBase.cpp ([https://github.com/FutureAIGuru/BrainSimII](https://github.com/FutureAIGuru/BrainSimII)).
+    To get that performance back, we could build custom hardware or capitalize on
+    the strengths of spiking models where no processing is needed unless the neuron
+    fires. On a 16-core desktop computer, the above algorithm has been clocked at
+    2.5 billion synapses per second.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Structure
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Because each of the 16 billion neurons of the human neocortex cannot possibly
+    be fully connected to all the other neurons, we can shift to a data structure
+    which is more like the biological structure. In this way, each neuron only represents
+    the useful synapses by maintaining a list or array of just those synapses. This
+    is much more efficient in terms of memory and potentially faster because there
+    is no need to process all of those zero-entries. This really hurts the GPU processing
+    advantage, however, because today’s GPUs are not good at processing the small
+    arrays, loops, and if-clauses needed to support this structure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Backpropagation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The real problem of adapting a more random neuron/synapse structure to ML is
+    that the backpropagation algorithm doesn’t adapt to it very well. Backpropagation’s
+    gradient descent relies on a stable error surface. As soon as we allow for looping
+    connections, that surface is no longer constant over time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*In Part Four of this series, the neuron’s limited ability to represent the
+    precise values on which ML depends will be addressed.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Charles Simon](https://futureai.guru/Founder.aspx)** is a nationally recognized
+    entrepreneur and software developer, and the CEO of FutureAI. Simon is the author
+    of Will the Computers Revolt?: Preparing for the Future of Artificial Intelligence,
+    and the developer of Brain Simulator II, an AGI research software platform. For
+    more information, [visit here](https://futureai.guru/Founder.aspx).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Machine Learning Is Not Like Your Brain Part One: Neurons Are Slow,…](https://www.kdnuggets.com/2022/04/machine-learning-like-brain-part-one-neurons-slow-slow-slow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Is Not Like Your Brain Part Two: Perceptrons vs Neurons](https://www.kdnuggets.com/2022/05/machine-learning-like-brain-part-two-perceptrons-neurons.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Is Not Like Your Brain Part 4: The Neuron’s…](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-4-neuron-limited-ability-represent-precise-values.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Is Not Like Your Brain Part 5: Biological Neurons…](https://www.kdnuggets.com/2022/07/machine-learning-like-brain-part-5-biological-neurons-cant-summation-inputs.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Is Not Like Your Brain Part 6: The Importance of…](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning is Not Like Your Brain Part Seven: What Neurons…](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-seven-neurons-good.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

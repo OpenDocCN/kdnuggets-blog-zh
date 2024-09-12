@@ -1,0 +1,465 @@
+- en: 'Build an Artificial Neural Network From Scratch: Part 2'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/03/build-artificial-neural-network-scratch-part-2.html](https://www.kdnuggets.com/2020/03/build-artificial-neural-network-scratch-part-2.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/c9b03ee546c984cf6fada48aa5830875.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Source](https://forum.novelupdates.com/threads/i-need-answers.16270/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In my previous article, [**Build an Artificial Neural Network(ANN) from scratch:
+    Part-1**](https://towardsdatascience.com/build-an-artificial-neural-network-ann-from-scratch-part-1-a21988497962)we
+    started our discussion about what are artificial neural networks; we saw how to
+    create a simple neural network with one input and one output layer, from scratch
+    in Python. Such a neural network is called a perceptron. However, real-world neural
+    networks, capable of performing complex tasks such as image classification and
+    stock market analysis, contain multiple hidden layers in addition to the input
+    and output layer.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the previous article, we concluded that a Perceptron is capable of finding
+    a linear decision boundary. We used the perceptron to predict whether a person
+    is diabetic or not using a dummy dataset. However, **a perceptron is not capable
+    of finding non-linear decision boundaries.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we will develop a neural network with one input layer, one
+    hidden layer, and one output layer. We will see that the neural network that we
+    will develop will be capable of finding non-linear boundaries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generating a dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s start by generating a dataset we can play with. Fortunately, [scikit-learn](http://scikit-learn.org/) has
+    some useful dataset generators, so we don’t need to write the code ourselves.
+    We will go with the [make_moons](http://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_moons.html) function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/29a9ae72755b310886ff687fc841e614.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The dataset we generated has two classes, plotted as red and blue points. You
+    can think of the blue dots as male patients and the red dots as female patients,
+    with the x-axis and y-axis being medical measurements.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our goal is to train a Machine Learning classifier that predicts the correct
+    class (male or female) given the `x` and `y`coordinates. Note that the data is
+    not linearly separable, we can’t draw a straight line that separates the two classes.
+    This means that linear classifiers, such as ANN without any hidden layer or even
+    Logistic Regression, won’t be able to fit the data unless you hand-engineer non-linear
+    features (such as polynomials) that work well for the given dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Neural Networks with One Hidden Layer
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Here’s our simple network:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fdd87697154b2bd9784b0ceed74a5cf3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We have two inputs: **x1** and **x2**. There is a single hidden layer with 3
+    units (nodes): **h1, h2**, and **h3**. Finally, there are two outputs: **y1** and **y2**.
+    The arrows that connect them are the weights. There are two weights matrices: **w**,
+    and **u**. The **w** weights connect the input layer and the hidden layer. The **u** weights
+    connect the hidden layer and the output layer. We have employed the letters **w**,
+    and **u**, so it is easier to follow the computation to follow. You can also see
+    that we compare the outputs **y1** and **y2** with the targets **t1** and **t2**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There is one last letter we need to introduce before we can get to the computations.
+    Let **a** be the linear combination prior to activation. Thus, we have:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/439b819aae373829b90d9174d522e237.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: and
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/434fbfe985ff45b2fbaa8dae922c1fd7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Since we cannot exhaust all activation functions and all loss functions, we
+    will focus on two of the most common. A **sigmoid** activation and an **L2-norm
+    loss**. With this new information and the new notation, the output y is equal
+    to the activated linear combination.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Therefore, for the output layer, we have:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/facc4d63342964822889148b02a922a5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'while for the hidden layer:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/956ac8ed8250ea3ce341d186d7f7a0ca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We will examine backpropagation for the output layer and the hidden layer separately,
+    as the methodologies differ.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I would like to remind you that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/93e86f051d737f9fd5382cf96b06aec6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The sigmoid function is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4d8f2ba13f34e96007b11946575c8542.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'and its derivative is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c61e2215da96d344393a1cdb220e5f3f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Backpropagation for the output layer
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In order to obtain the update rule:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6666261d5aa8814bbb88483ab35ed6f2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: we must calculate
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b4b1e6984fda749dcfb8222d7fd02cf4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Let’s take a single weight *u*ij . The partial derivative of the loss w.r.t. *u*ij
+    equals:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fc37eeeedb738c64fc33a127448e33c0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: where i corresponds to the previous layer (input layer for this transformation)
+    and j corresponds to the next layer (output layer of the transformation). The
+    partial derivatives were computed simply following the chain rule.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7d6d25ad485edee669bebe7feccd898e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: following the L2-norm loss derivative.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/759bfb3e847d8aee144b39460e27ece6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: following the sigmoid derivative.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally, the third partial derivative is simply the derivative of:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/434fbfe985ff45b2fbaa8dae922c1fd7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: So,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/08850244595ca1cf164aeec7edd0adc0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Replacing the partial derivatives in the expression above, we get:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6c06ef7bc245aa3df9066a95aba67a9c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Therefore, the update rule for a single weight for the output layer is given
+    by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8db95d12806ce2f99e5619d0ca7afd07.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 5\. Backpropagation of a hidden layer
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Similarly to the backpropagation of the output layer, the update rule for a
+    single weight, *wij* would depend on:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/62ad4693fc62b76dbb9d9081b404152e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'following the chain rule. Taking advantage of the results we have so far for
+    transformation using the sigmoid activation and the linear model, we get:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7342f010519945bddc9f40d11aff893b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: and
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ceb75107e4dc2c12135998a034fccb5b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The actual problem for backpropagation comes from the term
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/55435ed94c0cd7c31c3885d2ca12b97e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: That’s due to the fact that there is no “hidden” target. You can follow the
+    solution for weight *w11* below. It is advisable to keep a look on the NN diagram
+    shown above, while going through the computations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4005feb701d1e03924701879e0e8ada8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: From here, we can calculate
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2cb24bcd18194bd78b7ecbd8559f79f7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Which was what we wanted. The final expression is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/baa55ff6d8cc63a8edf579dafb9c0e10.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The generalized form of this equation is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2adb09a0fc5b9bc6319733aa1b92767f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Backpropagation generalization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Using the results for backpropagation for the output layer and the hidden layer,
+    we can put them together in one formula, summarizing backpropagation, in the presence
+    of L2-norm loss and sigmoid activations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b60b742945e59628928aa6b066ab43de.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: where for a hidden layer
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6433c58e11c166fd2a334db235c2c67f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Code for Neural Networks with One Hidden Layer
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now let’s implement the neural network that we just discussed in Python from
+    scratch. We will again try to classify the non-linear data that we created above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We start by defining some useful variables and parameters for gradient descent
+    like training dataset size, dimensions of input and output layers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Also defining the Gradient descent parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'First, let’s implement the loss function we defined above. We use this to evaluate
+    how well our model is doing:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: We also implement a helper function to calculate the output of the network.
+    It does forward propagation and returns the class with the highest probability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Finally, here comes the function to train our Neural Network. It implements
+    batch gradient descent using the backpropagation derivates we found above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This function learns parameters for the neural network and returns the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**nn_hdim**: Number of nodes in the hidden layer'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**num_passes**: Number of passes through the training data for gradient descent'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**print_loss**: If True, print the loss every 1000 iterations'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Finally the main method:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Print loss after every 1000 iterations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2379742845310b45ea5aaaaba1dd09c4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/d8f8aa5b2fe29ab7c66fce9b731bcfc8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Classification when the number of nodes in the hidden layer is 3
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now Let’s now get a sense of how varying the hidden layer size affects the result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/720b6b3c0ad14b2f64ca3799a648f12a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can see that a hidden layer of low dimensionality nicely captures the general
+    trend of our data. Higher dimensionalities are prone to overfitting. They are
+    “memorizing” the data as opposed to fitting the general shape.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we were to evaluate our model on a separate test set the model with a smaller
+    hidden layer size would likely perform better due to better generalization. We
+    could counteract overfitting with stronger regularization, but picking the correct
+    size for the hidden layer is a much more “economical” solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can get the whole code in this GitHub repo.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**nageshsinghc4/Artificial-Neural-Network-from-scratch-python**](https://github.com/nageshsinghc4/Artificial-Neural-Network-from-scratch-python/tree/master)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So in this article, we saw how we can mathematically derive a neural network
+    with one hidden layer and we also created a neural network with 1 hidden layer,
+    from scratch in Python using NumPy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, this concludes the two-article series on building an Artificial Neural
+    Network from scratch**. **I hope you guys have enjoyed reading it, feel free to
+    share your comments/thoughts/feedback in the comment section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)**
+    is a Big data developer at CirrusLabs. He has over 4 years of working experience
+    in various sectors like Telecom, Analytics, Sales, Data Science having specialisation
+    in various Big data components.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/build-an-artificial-neural-network-ann-from-scratch-part-2-a33c44eca56b).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Build an Artificial Neural Network From Scratch: Part 1](/2019/11/build-artificial-neural-network-scratch-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Nothing but NumPy: Understanding & Creating Neural Networks with Computational
+    Graphs from Scratch](/2019/08/numpy-neural-networks-computational-graphs.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Convert a Picture to Numbers](/2020/01/convert-picture-numbers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn Deep Learning by Building 15 Neural Network Projects in 2022](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Neural Network Optimization with AIMET](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Convolutional Neural Network with PyTorch](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Importance of Permutation in Neural Network Predictions](https://www.kdnuggets.com/2022/12/importance-permutation-neural-network-predictions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

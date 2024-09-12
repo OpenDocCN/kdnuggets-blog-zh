@@ -1,0 +1,237 @@
+- en: Sparse Matrix Representation in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Most machine learning practitioners are accustomed to adopting a matrix representation
+    of their datasets prior to feeding the data into a machine learning algorithm.
+    Matrices are an ideal form for this, usually with rows representing dataset instances
+    and columns representing features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A [sparse matrix](https://en.wikipedia.org/wiki/Sparse_matrix) is a matrix in
+    which most elements are zeroes. This is in contrast to a dense matrix, the differentiating
+    characteristic of which you can likely figure out at this point without any help.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/1a29300a49b9bb3c0a35a3f3f0f7a31d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Image source: [TU Berlin](http://wordpress.discretization.de/geometryprocessingandapplicationsws19/2019/11/28/tutorial-05-textures-and-exterior-calculus/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Often our data is dense, with feature columns filled up for every instance
+    we have. If we are using a finite number of columns to robustly describe some
+    thing, generally the allotted descriptive values for a given data point have their
+    work cut out for them in order to provide meaningful representation: a person,
+    an image, an iris, housing prices, a potential credit risk.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: But some types of data are not in need of such verbosity in their representation.
+    Think *relationships*. There may be a large number of potential things we need
+    to capture the relationship status of, but at the intersection of these things
+    we may need to simply record either yes, there is a relationship, or no, there
+    is not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Did this person purchase that item? Does that sentence have this word in it?
+    There are a lot of potential words that could show up in any given sentence, but
+    not very many of them actually do. Similarly, there may be a lot of items for
+    sale, but any individual person will not have purchased many of them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is one way in which sparse matrices come into play in machine learning.
+    Picture a column as items for sales, and rows as shoppers. For every intersection
+    where a given item was not purchased by a given shopper, there would be a "no"
+    (null) representation, such as a 0\. Only intersections where the given item was
+    purchased by a given shopper would there need to be a "yes" representation, such
+    as a 1\. The same goes for occurrences of given words in given sentences. You
+    can see why such matrices would contain many zeroes, meaning they would be sparse.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One problem that comes up with sparse matrices is that they can be very taxing
+    on memory. Assuming you take a standard approach to representing a 2x2 matrix,
+    allocations for every null representation need to be made in memory, though there
+    is no useful information captured. This memory taxation continues on to permanent
+    storage as well. In a standard approach to matrix representation, we are forced
+    to also record the absence of a thing, as opposed to simply its presence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But wait. There's got to be a better way!
+  prefs: []
+  type: TYPE_NORMAL
+- en: It just so happens that there is. Sparse matrices need not be represented in
+    the standard matrix form. There are a number of approaches to relieving the stress
+    that this standard form puts our computational systems under, and it just so happens
+    that some algorithms in prevalent Python machine learning workhorse Scikit-learn
+    accept some of these sparse representations as input. Getting familiar could save
+    you time, trouble, and sanity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How can we better represent these sparse matrices? We need a manner in which
+    to track where zeroes are *not*. What about a 2 column table, in which we track
+    in one column the `row,col` of where a non-zero item exists, and its corresponding
+    value in the other column? Keep in mind there is no necessity for sparse matrices
+    to only house zeroes and ones; so long as most elements are zeroes, the matrix
+    is sparse, regardless of what exists in non-zero elements.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We also need an order in which we go about creating the sparse matrix — do we
+    go row by row, storing each non-zero element as we encounter them, or do we go
+    column by column? If we decide to go row by row, congratulations, you have just
+    created a compressed sparse *row* matrix. If by column, you now have a compressed
+    sparse *column* matrix. Conveniently, Scipy includes support for both.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's have a look at how to create these matrices. First we create a simple
+    matrix in Numpy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Then we need to zero out a majority of the matrix elements, making it sparse.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now we store standard matrix X as a compressed sparse row matrix. In order to
+    do so, elements are traversed row by row, left to right, and entered into this
+    compressed matrix representation as they encountered.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Presto!
+  prefs: []
+  type: TYPE_NORMAL
+- en: And what about a compressed sparse *column* matrix? For its creation, elements
+    are traversed column by column, top to bottom, and entered into the compressed
+    representation as they are encountered.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note the differences between the resultant sparse matrix representations, specifically
+    the difference in location of the same element values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As noted, many Scikit-learn algorithms accept `scipy.sparse` matrices of shape
+    `[num_samples, num_features]` is place of Numpy arrays, so there is no pressing
+    requirement to transform them back to standard Numpy representation at this point.
+    There could also be memory constraints preventing one from doing so (recall this
+    was one of the main reasons for employing this approach). However, just for demonstration,
+    here's how to convert a sparse Scipy matrix representation back to a Numpy multidimensional
+    array.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: And what about the difference in memory requirements between the 2 representations?
+    Let's go through the process again, starting off with a larger matrix in standard
+    Numpy form, and then compute the memory (in bytes) that each representation uses.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: There you can see a significant savings in memory that the compressed matrix
+    form enjoys over the standard Numpy representation, approximately 360 megabytes
+    versus 800 megabytes. That's a 440 megabyte savings, with nearly no time overhead,
+    given that the conversion between formats is highly optimized. Obviously these
+    sparse SciPy matrices can be created directly as well, saving the interim memory-hogging
+    step.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now imagine you are working on a huge dataset, and think of the memory savings
+    (and associated storage and processing times) you could enjoy by properly using
+    a sparse matrix format.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13))
+    is a Data Scientist and the Editor-in-Chief of KDnuggets, the seminal online Data
+    Science and Machine Learning resource. His interests lie in natural language processing,
+    algorithm design and optimization, unsupervised learning, neural networks, and
+    automated approaches to machine learning. Matthew holds a Master''s degree in
+    computer science and a graduate diploma in data mining. He can be reached at editor1
+    at kdnuggets[dot]com.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Working With Sparse Features In Machine Learning Models](https://www.kdnuggets.com/2021/01/sparse-features-machine-learning-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Best Machine Learning Model For Sparse Data](https://www.kdnuggets.com/2023/04/best-machine-learning-model-sparse-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Representation for Natural Language Processing Tasks](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unsupervised Disentangled Representation Learning in Class…](https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Idiot''s Guide to Precision, Recall, and Confusion Matrix](https://www.kdnuggets.com/2020/01/guide-precision-recall-confusion-matrix.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

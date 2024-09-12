@@ -1,0 +1,695 @@
+- en: Predict Electricity Consumption Using Time Series Analysis
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/01/predict-electricity-consumption-time-series-analysis.html](https://www.kdnuggets.com/2020/01/predict-electricity-consumption-time-series-analysis.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/c248c9e12ad62e45724654ee5e058261.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Pic Credit: [https://gfycat.com/frailofficialdegus](https://gfycat.com/frailofficialdegus)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: “Time series models are used to forecast future events based on previous events
+    that have been observed (and data collected) at regular time intervals.”
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: We will be taking a small forecasting problem and try to solve it till the end
+    learning time series forecasting alongside.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Time Series analysis
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Time series forecasting is a technique for the prediction of events through
+    a sequence of time. The technique is used across many fields of study, from geology
+    to behavior to economics. The techniques predict future events by [analyzing](https://searchbusinessanalytics.techtarget.com/definition/predictive-analytics) the
+    trends of the past, on the assumption that future trends will hold similar to
+    historical trends.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Time series forecasting is performed in a variety of applications including:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Weather forecasting
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Earthquake prediction
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Astronomy
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Statistics
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Mathematical finance
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Econometrics
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pattern recognition
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Signal](https://searchnetworking.techtarget.com/definition/signal) processing'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Control engineering
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Time series forecasting is sometimes just the analysis of experts studying
+    a field and offering their predictions. In many modern applications, however,
+    time series forecasting uses computer technologies, including:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Machine learning](https://searchenterpriseai.techtarget.com/definition/machine-learning-ML)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Artificial neural networks](https://searchenterpriseai.techtarget.com/definition/neural-network)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Support vector machines](https://whatis.techtarget.com/definition/support-vector-machine-SVM)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fuzzy logic](https://searchenterpriseai.techtarget.com/definition/fuzzy-logic)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Gaussian processes
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Hidden [Markov models](https://whatis.techtarget.com/definition/Markov-model)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'There are two main goals of time series analysis: (a) identifying the nature
+    of the phenomenon represented by the sequence of observations, and (b) forecasting
+    (predicting future values of the time series variable). Both of these goals require
+    that the pattern of observed time series data is identified and more or less formally
+    described. Once the pattern is established, we can interpret and integrate it
+    with other data (i.e., use it in our theory of the investigated phenomenon, e.g.,
+    seasonal commodity prices). Regardless of the depth of our understanding and the
+    validity of our interpretation (theory) of the phenomenon, we can extrapolate
+    the identified pattern to predict future events.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Stages in Time Series Forecasting
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Solving a time series problem is a little different as compared to a regular
+    modeling task. A simple/basic journey of solving a time series problem can be
+    demonstrated through the following processes. We will understand about tasks which
+    one needs to perform in every stage. We will also look at the python implementation
+    of each stage of our problem-solving journey.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Steps are –
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. Visualizing time series**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this step, we try to visualize the series. We try to identify all the underlying
+    patterns related to the series like trend and seasonality. Do not worry about
+    these terms right now, as we will discuss them during implementation. You can
+    say that this is more a type of exploratory analysis of time series data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2\. Stationarising time series**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A stationary time series is one whose statistical properties such as mean,
+    variance, autocorrelation, etc. are all constant over time. Most statistical forecasting
+    methods are based on the assumption that the time series can be rendered approximately
+    stationary (i.e., “stationarised”) through the use of mathematical transformations.
+    A stationarised series is relatively easy to predict: you simply predict that
+    its statistical properties will be the same in the future as they have been in
+    the past! Another reason for trying to stationarise a time series is to be able
+    to obtain meaningful sample statistics such as means, variances, and correlations
+    with other variables. Such statistics are useful as descriptors of future behavior
+    only if the series is stationary. For example, if the series is consistently increasing
+    over time, the sample mean and variance will grow with the size of the sample,
+    and they will always underestimate the mean and variance in future periods. And
+    if the mean and variance of a series are not well-defined, then neither are its
+    correlations with other variables.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3\. Finding the best parameters for our model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We need to find optimal parameters for forecasting models one’s we have a stationary
+    series. These parameters come from the ACF and PACF plots. Hence, this stage is
+    more about plotting above two graphs and extracting optimal model parameters based
+    on them. Do not worry, we will cover on how to determine these parameters during
+    the implementation part below!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**4\. Fitting model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once we have our optimal model parameters, we can fit an ARIMA model to learn
+    the pattern of the series. Always remember that time series algorithms work on
+    stationary data only hence making a series stationary is an important aspect
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**5\. Predictions**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After fitting our model, we will be predicting the future in this stage. Since
+    we are now familiar with a basic flow of solving a time series problem, let us
+    get to the implementation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Problem Statement
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The dataset can be downloaded from [**here**](https://drive.google.com/open?id=1051N7h_L7XUXJU1ztSvWTV2VMb6yZfnD).
+    It contains only 2 columns, one column is Date and the other column relates to
+    the consumption percentage.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It shows the consumption of electricity from 1985 till 2018\. The goal is to
+    predict electricity consumption for the next 6 years i.e. till 2024.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Load the dataset
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now, Define column names, drop nulls, convert Date to DateTime format and make
+    Date as an index column because it is not possible to plot the graph without index.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/c25cd4ba5e6409f69067c0f9244d3d0b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Dataset
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, let us start with our predefined steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. Visualizing the time series.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/dfb3a46d2347daf5c5940c9d90fd36e8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Original time series data points
+  prefs: []
+  type: TYPE_NORMAL
+- en: Remember that for time series forecasting, a series needs to be stationary.
+    The series should have a constant mean, variance, and covariance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are few points to note here, the mean is not constant in this case as
+    we can clearly see an upward trend.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hence, we have identified that our series is not stationary. We need to have
+    a stationary series to do time series forecasting. In the next stage, we will
+    try to convert this into a stationary series.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Lets us plot the scatterplot:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/d4c4d12bc48e1a6e4810b91ee0f7f97b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Scatter plot of time series data points
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can also visualize the data in our series through a distribution too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b20e8147afe05a4d403c25853f451827.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can observe a near-normal distribution(bell-curve) over consumption values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, a given time series is thought to consist of three systematic components
+    including level, trend, seasonality, and one non-systematic component called noise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'These components are defined as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Level**: The average value in the series.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Trend**: The increasing or decreasing value in the series.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Seasonality**: The repeating short-term cycle in the series.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Noise**: The random variation in the series.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In order to perform a time series analysis, we may need to separate seasonality
+    and trend from our series. The resultant series will become stationary through
+    this process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So let us separate Trend and Seasonality from the time series.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/5c0775018ed3c73952f4e52546c471fe.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This gives us more insight into our data and real-world actions. Clearly, there
+    is an upward trend and a recurring event where electricity consumption shoots
+    maximum every year.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2\. Stationarising the time series.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we need to check if a series is stationary or not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ADF (Augmented Dickey-Fuller) Test**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The Dickey-Fuller test is one of the most popular statistical tests. It can
+    be used to determine the presence of unit root in the series, and hence help us
+    understand if the series is stationary or not. The null and alternate hypothesis
+    of this test is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Null Hypothesis:** The series has a unit root (value of a =1)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Alternate Hypothesis:** The series has no unit root.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we fail to reject the null hypothesis, we can say that the series is non-stationary.
+    This means that the series can be linear or difference stationary (we will understand
+    more about difference stationary in the next section).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If both mean and standard deviation are flat lines(constant mean and constant
+    variance), the series becomes stationary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The following function is one that can plot a series with its rolling mean and
+    standard deviation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/c3d4b4193d0ec0e53b9286e5e72686b9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Through the above graph, we can see the increasing mean and standard deviation
+    and hence our series is not stationary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6da2e750c73d55a1c29f436a5128f08a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Results of Dicky-Fuller test
+  prefs: []
+  type: TYPE_NORMAL
+- en: We see that the p-value is greater than 0.05 so we cannot reject the **Null
+    hypothesis**. Also, the test statistics is greater than the critical values. so
+    the data is non-stationary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To get a stationary series, we need to eliminate the trend and seasonality from
+    the series.
+  prefs: []
+  type: TYPE_NORMAL
+- en: we start by taking a log of the series to reduce the magnitude of the values
+    and reduce the rising trend in the series. Then after getting the log of the series,
+    we find the rolling average of the series. A rolling average is calculated by
+    taking input for the past 12 months and giving a mean consumption value at every
+    point further ahead in series.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/cd9d4fa9ba13711cc5cc4f614d4980a8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: After finding the mean, we take the difference of the series and the mean at
+    every point in the series.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This way, we eliminate trends out of a series and obtain a more stationary series.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Perform the Dickey-Fuller test (ADFT) once again. We have to perform this function
+    every time to check whether the data is stationary or not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/95388987e34b4711450e24fc01e5c434.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: From the above graph, we observed that the data attained stationarity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the modules is completed as we came to a conclusion. We need to check
+    the weighted average, to understand the trend of the data in time series. Take
+    the previous log data and to perform the following operation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: The exponential moving average (EMA) is a weighted average of the last n prices,
+    where the weighting decreases exponentially with each previous price/period. In
+    other words, the formula gives recent prices more weight than past prices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/962926beaef8ee29c67564bc8f4558c2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Previously we subtracted df_log with moving average, now take the same df_log
+    and subtract with weighted_average and perform the Dickey-Fuller test (ADFT) once
+    again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/e1539dc78ec0593da27f1b930de78526.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Figure](../Images/0746a0afbe809122f8d29d8c1da4b33b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Results of Dicky-Fuller test
+  prefs: []
+  type: TYPE_NORMAL
+- en: From the above graph, we observed that the data attained stationarity. We also
+    see that the test statistics and critical value is relatively equal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There can be cases when there is a high seasonality in the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In those cases, just removing the trend will not help much. We need to also
+    take care of the seasonality in the series. One such method for this task is differencing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Differencing is a method of transforming a time series dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It can be used to remove the series dependence on time, so-called temporal dependence.
+    This includes structures like trends and seasonality. Differencing can help stabilize
+    the mean of the time series by removing changes in the level of a time series,
+    and so eliminating (or reducing) trend and seasonality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Differencing is performed by subtracting the previous observation from the current
+    observation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Perform the Dickey-Fuller test (ADFT) once again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/454f6ac4acd56560e46bc9552729d75b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The next step is to perform decomposition which provides a structured way of
+    thinking about a time series forecasting problem, both generally in terms of modeling
+    complexity and specifically in terms of how to best capture each of these components
+    in a given model. Finally, perform the Dickey-Fuller test (ADFT) once again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/0eef215bcefd854dcad6dd894590f2cc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: After the decomposition, if we look at the residual then we have clearly a flat
+    line for both mean and standard deviation. We have got our stationary series and
+    now we can move to find the best parameters for our model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3\. Finding the best parameters for our model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before we go on to build our forecasting model, we need to determine optimal
+    parameters for our model. For those optimal parameters, we need ACF and PACF plots.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A nonseasonal ARIMA model is classified as an “ARIMA(p,d,q)” model, where:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: p → Number of autoregressive terms,
+  prefs: []
+  type: TYPE_NORMAL
+- en: d → Number of nonseasonal differences needed for stationarity, and
+  prefs: []
+  type: TYPE_NORMAL
+- en: q → Number of lagged forecast errors in the prediction equation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Values of p and q come through ACF and PACF plots. So let us understand both
+    ACF and PACF!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Autocorrelation Function(ACF)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Statistical correlation summarizes the strength of the relationship between
+    two variables. Pearson’s correlation coefficient is a number between -1 and 1
+    that describes a negative or positive correlation respectively. A value of zero
+    indicates no correlation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can calculate the correlation for time series observations with previous
+    time steps, called lags. Because the correlation of the time series observations
+    is calculated with values of the same series at previous times, this is called
+    a serial correlation, or an autocorrelation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A plot of the autocorrelation of a time series by lag is called the **A**uto**C**orrelation **F**unction,
+    or the acronym ACF. This plot is sometimes called a correlogram or an autocorrelation
+    plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Partial Autocorrelation Function(PACF)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A partial autocorrelation is a summary of the relationship between an observation
+    in a time series with observations at prior time steps with the relationships
+    of intervening observations removed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The partial autocorrelation at lag k is the correlation that results after removing
+    the effect of any correlations due to the terms at shorter lags.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The autocorrelation for observation and observation at a prior time step is
+    comprised of both the direct correlation and indirect correlations. It is these
+    indirect correlations that the partial autocorrelation function seeks to remove.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Below code plots, both ACF and PACF plots for us:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/afd326f6376a540cda25c22f8ed81149.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**4\. Fitting model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to find the p and q values from the above graphs, we need to check,
+    where the graph cuts off the origin or drops to zero for the first time from the
+    above graphs the p and q values are merely close to 3 where the graph cuts off
+    the origin ( draw the line to x-axis) now we have p,d,q values. So now we can
+    substitute in the ARIMA model and let's see the output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/b57540811435e9eea8464ac0c79423c9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Less the RSS value, the more effective the model is. You check with (2,1,0),(3,1,1),
+    etc to look for the smallest values of RSS.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**5\. Predictions**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The following code helps us to forecast shampoo sales for the next 6 years.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/799347500c89c55c018c68653b1517b9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: From the above graph, we calculated the future predictions till 2024 the greyed
+    out area is the confidence interval that means the predictions will not cross
+    that area.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Finally, we were able to build an ARIMA model and actually forecast for a future
+    time period. Keep note that this is a basic implementation to get one started
+    with time series forecasting. There are a lot of concepts like smoothening etc
+    and models like ARIMAX, prophet, etc to build your time series models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, that’s all for this article hope you guys have enjoyed reading this it,
+    feel free to share your comments/thoughts/feedback in the comment section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/bb5866fe888ae1ac0fd95aaed064e11b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Pic Credit: [http://mrwgifs.com/grainy-classic-the-end-gif/](http://mrwgifs.com/grainy-classic-the-end-gif/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can find full code on this GitHub link: [https://github.com/nageshsinghc4/Time-Series-Analysis](https://github.com/nageshsinghc4/Time-Series-Analysis)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Happy Learning !!!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)**
+    is a Data Science enthusiast. Interested in Big Data, Python, Machine Learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Original. Reposted with permission.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Combining Different Methods to Create Advanced Time Series Prediction](/2016/11/combining-different-methods-create-advanced-time-series-prediction.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AutoML for Temporal Relational Data: A New Frontier](/2019/10/automl-temporal-relational-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Time Series Analysis: A Simple Example with KNIME and Spark](/2019/10/time-series-analysis-simple-example-knime-spark.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

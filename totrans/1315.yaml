@@ -1,0 +1,367 @@
+- en: Stop Running Jupyter Notebooks From Your Command Line
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/10/stop-running-jupyter-notebooks-command-line.html](https://www.kdnuggets.com/2020/10/stop-running-jupyter-notebooks-command-line.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Ashton Sidhu](https://ashton-sidhu.github.io/blog/), Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/71c7a1dc81d79f1927e6950ff307f2ad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo taken by Justin Jairam from [@jusspreme](https://www.instagram.com/jusspreme/?hl=en) (with
+    permission)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Jupyter Notebook provides a great platform to produce human-readable documents
+    containing code, equations, analysis, and their descriptions. Some even consider
+    it a powerful development when combining it with NBDev. For such an integral tool,
+    the out of the box start up is not the best. Each use requires starting the Jupyter
+    web application from the command line and entering your token or password. The
+    entire web application relies on that terminal window being open. Some might “daemonize”
+    the process and then use [nohup](https://www.computerhope.com/unix/unohup.htm) to
+    detach it from their terminal, but that’s not the most elegant and maintainable
+    solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lucky for us, Jupyter has already come up with a solution to this problem by
+    coming out with an extension of Jupyter Notebooks that runs as a sustainable web
+    application and has built-in user authentication. To add a cherry on top, it can
+    be managed and sustained through Docker allowing for isolated development environments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By the end of this post we will leverage the power of JupyterHub to access a
+    Jupyter Notebook instance which can be accessed without a terminal, from multiple
+    devices within your network, and a more user friendly authentication method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prerequisites
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A basic knowledge of Docker and the command line would be beneficial in setting
+    this up.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I recommend doing this on the most powerful device you have and one that is
+    turned on for most of the day, preferably all day. One of the benefits of this
+    setup is that you will be able to use Jupyter Notebook from any device on your
+    network, but have all the computation happen on the device we configure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Jupyter Hub
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: JupyterHub brings the power of notebooks to groups of users. The idea behind
+    JupyterHub was to scale out the use of Jupyter Notebooks to enterprises, classrooms,
+    and large groups of users. Jupyter Notebook, however, is supposed to run as a
+    local instance, on a single node, by a single developer. Unfortunately, there
+    was no middle ground to have the usability and scalability of JupyterHub and the
+    simplicity of running a local Jupyter Notebook. That is, until now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: JupyterHub has pre-built Docker images that we can utilize to spawn a single
+    notebook on a whim, with little to no overhead in technical complexity. We are
+    going to use the combination of Docker and JupyterHub to access Jupyter Notebooks
+    from anytime, anywhere, at the same URL.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Architecture
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The architecture of our JupyterHub server will consist of 2 services: JupyterHub
+    and JupyterLab. JupyterHub will be the entry point and will spawn JupyterLab instances
+    for any user. Each of these services will exist as a Docker container on the host.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/4274fafb126a3d97630213b781131a90.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: JupyterLab Architecture Diagram (Image by Author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Building the Docker Images
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To build our at-home JupyterHub server we will use the pre-built Docker images
+    of JupyterHub & JupyterLab.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dockerfiles
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The JupyterHub Docker image is simple.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: We use the pre-built JupyterHub Docker Image and add our own configuration file
+    to stop idle servers, `cull_idle_servers.py`. Lastly, we install additional packages
+    to spawn JupyterLab instances via Docker.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Docker Compose
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To bring everything together, let’s create a `docker-compose.yml` file to define
+    our deployments and configuration.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The key environment variables to note are `DOCKER_JUPYTER_IMAGE` and `DOCKER_NETWORK_NAME`.
+    JupyterHub will create Jupyter Notebooks with the images defined in the environment
+    variable.For more information on selecting Jupyter images you can visit the following
+    Jupyter [documentation](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`DOCKER_NETWORK_NAME` is the name of the Docker network used by the services.
+    This network gets an automatic name from Docker Compose, but the Hub needs to
+    know this name to connect the Jupyter Notebook servers to it. To control the network
+    name we use a little hack: we pass an environment variable COMPOSE_PROJECT_NAME
+    to Docker Compose, and the network name is obtained by appending _default to it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Create a file called `.env` in the same directory as the `docker-compose.yml` file
+    and add the following contents:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Stopping Idle Servers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Since this is our home setup, we want to be able to stop idle instances to preserve
+    memory on our machine. JupyterHub has services that can run along side it and
+    one of them being [jupyterhub-idle-culler](https://github.com/jupyterhub/jupyterhub-idle-culler).
+    This service stops any instances that are idle for a prolonged duration.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To add this servive, create a new file called `cull_idle_servers.py` and copy
+    the contents of [jupyterhub-idle-culler project](https://raw.githubusercontent.com/jupyterhub/jupyterhub-idle-culler/master/jupyterhub_idle_culler/__init__.py) into
+    it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ensure `cull_idle_servers.py` is in the same folder as the Dockerfile.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: To find out more about JupyterHub services, check out their official [documentation](https://jupyterhub.readthedocs.io/en/stable/reference/services.html) on
+    them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Jupyterhub Config
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To finish off, we need to define configuration options such, volume mounts,
+    Docker images, services, authentication, etc. for our JupyterHub instance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below is a simple `jupyterhub_config.py` configuration file I use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Take note of the following configuration options:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`''command'': [sys.executable, ''cull_idle_servers.py'', ''--timeout=42000'']` :
+    Timeout is the number of seconds until an idle Jupyter instance is shut down.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`c.Spawner.default_url = ''/lab''`: Uses Jupyterlab instead of Jupyter Notebook.
+    Comment out this line to use Jupyter Notebook.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`''/home/sidhu'': ''/home/jovyan/work''`: I mounted my home directory to the
+    JupyterLab home directory to have access to any projects and notebooks I have
+    on my Desktop. This also allows us to achieve persistence in the case we create
+    new notebooks, they are saved to our local machine and will not get deleted if
+    our Jupyter Notebook Docker container is deleted.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Remove this line if you do not wish to mount your home directory and do not
+    forget to change `sidhu` to your user name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Start the Server
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To start the server, simply run `docker-compose up -d`, navigate to `localhost:8000` in
+    your browser and you should be able to see the JupyterHub landing page.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/dd920e50c9e82df320b0df5a1aa2ac6c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: JupyterHub Landing Page Screenshot (Image by Author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: To access it on other devices on your network such asva laptop, an iPad, etc,
+    identify the IP of the host machine by running `ifconfig` on Unix machines & `ipconfig` on
+    Windows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/47bd6ba427523bb8b68111ee95da1bd4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Ipconfig (Image by Author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: From your other device, navigate to the IP you found on port 8000: `http://IP:8000` and
+    you should see the JupyterHub landing page!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Authenticating
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: That leaves us with the last task of authenticating to the server. Since we
+    did not set up a LDAP server or OAuth, JupyterHub will use PAM (Pluggable Authentication
+    Module) authentication to authenticate users. This means JupyterHub uses the user
+    name and passwords of the host machine to authenticate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To make use of this, we will have to create a user on the JupyterHub Docker
+    container. There are other ways of doing this such as having a script placed on
+    the container and executed at container start up but we will do it manually as
+    an exercise. If you tear down or rebuild the container you will have to recreate
+    users.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I do not recommend hard coding user credentials into any script or Dockerfile.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 1) Find the JupyterLab container ID: `docker ps -a`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/0dbfc2280ebc3550541bd568d61b0405.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: JupyterLab Container ID (Image by Author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2) “SSH” into the container: `docker exec -it $YOUR_CONTAINER_ID bash`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3) Create a user and follow the terminal prompts to create a password: `useradd
+    $YOUR_USERNAME`
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4) Sign in with the credentials and you’re all set!
+  prefs: []
+  type: TYPE_NORMAL
+- en: You now have a ready to go Jupyter Notebook server that can be accessed from
+    any device, in the palm of your hands! Happy Coding!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feedback
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I welcome any and all feedback about any of my posts and tutorials. You can
+    message me on [twitter](https://twitter.com/ashtonasidhu) or e-mail me at sidhuashton@gmail.com.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Ashton Sidhu](https://ashton-sidhu.github.io/blog/)** (**[@ashtonasidhu](https://twitter.com/ashtonasidhu)**)
+    is a Data Scientist focused in the cyber security area. He is an engineer at heart
+    and have both a Bachelors of Applied Science and Engineering as well as a Master’s
+    of Engineering focused in Information Systems as well as Predictive and Perscriptive
+    analytics.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/tutorial-stop-running-jupyter-notebooks-from-your-command-line-b3af93265230).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Complete guide to Google Colab for Deep Learning](/2020/06/google-colab-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Here are the Most Popular Python IDEs/Editors](/2020/10/most-popular-python-ides-editors.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Netflix’s Polynote is a New Open Source Framework to Build Better Data Science
+    Notebooks](/2020/08/netflix-polynote-open-source-framework-better-data-science-notebooks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[ChatGPT CLI: Transform Your Command-Line Interface Into ChatGPT](https://www.kdnuggets.com/2023/07/chatgpt-cli-transform-commandline-interface-chatgpt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science at the Command Line: The Free eBook](https://www.kdnuggets.com/2022/03/data-science-command-line-free-ebook.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 More Command Line Tools for Data Science](https://www.kdnuggets.com/2023/03/5-command-line-tools-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Master The Art Of Command Line With This GitHub Repository](https://www.kdnuggets.com/master-the-art-of-command-line-with-this-github-repository)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build a Command-Line App with Python in 7 Easy Steps](https://www.kdnuggets.com/build-a-command-line-app-with-python-in-7-easy-steps)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 5 Free Cloud Notebooks in 2022](https://www.kdnuggets.com/2022/04/top-5-free-cloud-notebooks-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

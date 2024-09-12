@@ -1,0 +1,302 @@
+- en: How to Create and Deploy a Simple Sentiment Analysis App via API
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/06/create-deploy-sentiment-analysis-app-api.html](https://www.kdnuggets.com/2021/06/create-deploy-sentiment-analysis-app-api.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/577cfe14fcb8f4b13d547bfba1b66c5c.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Image source: [Reputation X](https://blog.reputationx.com/reputation-sentiment)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's say you've built an NLP model for some specific task, whether it be text
+    classification, question answering, translation, or what have you. You've tested
+    it out locally and it performs well. You've had others test it out as well, and
+    it continues to perform well. Now you want to roll it out to a larger audience,
+    be that audience a team of developers you work with, a specific group of end users,
+    or even the general public. You have decided that you want to do so using a REST
+    API, as you find this to be your best option. What now?
+  prefs: []
+  type: TYPE_NORMAL
+- en: FastAPI might be able to help. [FastAPI](https://fastapi.tiangolo.com/) is FastAPI
+    is a web framework for building APIs with Python. We will use FastAPI in this
+    article to build a REST API to service an NLP model which can be queried via GET
+    request and can dole out responses to those queries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For this example, we will skip the building of our own model, and instead leverage
+    the [Pipeline class](https://huggingface.co/transformers/main_classes/pipelines.html)
+    of the [HuggingFace](https://huggingface.co/transformers/) Transformers library.
+    [Transformers](https://huggingface.co/transformers/) is full of SOTA NLP models
+    which can be used out of the box as-is, as well as fine-tuned for specific uses
+    and high performance. The library''s pipelines can be summed up as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The pipelines are a great and easy way to use models for inference. These pipelines
+    are objects that abstract most of the complex code from the library, offering
+    a simple API dedicated to several tasks, including Named Entity Recognition, Masked
+    Language Modeling, Sentiment Analysis, Feature Extraction and Question Answering.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Using the Transformers library, FastAPI, and astonishingly little code, we are
+    going to create and deploy a very simple [sentiment analysis](https://www.kdnuggets.com/2018/08/emotion-sentiment-analysis-practitioners-guide-nlp-5.html)
+    app. We will also see how extending this same approach to a more complex app would
+    be quite straightforward.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting Started
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'As outlined above, we will be using Transformers and FastAPI to build this
+    app, which means you will need these installed on your system. You will also require
+    installation of [Uvicorn](https://www.uvicorn.org/), an [ASGI server](https://asgi.readthedocs.io/en/latest/)
+    that FastAPI relies on as part of its backend. I easily installed them all on
+    my *buntu system using pip:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: That's it. Moving on...
+  prefs: []
+  type: TYPE_NORMAL
+- en: Analyzing Sentiment
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Since we will be using Transformers for our NLP pipeline, let's first see how
+    we would get this working standalone. Doing so is remarkably uncomplicated, and
+    requires very few basic parameters be passed to the pipeline object in order to
+    get started. Specifically, what we will need to define are a task — what it is
+    we want to do — and a model — what it is we will use to perform our task. And
+    that's really all there is to it. We can optionally provide additional parameters
+    or fine-tune the pipeline to our specific task and data, but for our purposes
+    using a model out of the box should work just fine.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For us, the task is `sentiment-analysis` and the model is `[nlptown/bert-base-multilingual-uncased-sentiment](https://huggingface.co/nlptown/bert-base-multilingual-uncased-sentiment)`.
+    This is a BERT model trained for multilingual sentiment analysis, and which has
+    been contributed to the HuggingFace model repository by [NLP Town](https://www.nlp.town/).
+    Note that the first time you run this script the sizable model will be downloaded
+    to your system, so ensure that you have the available free space to do so.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is the code to setup the standalone sentiment analysis app:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: What is returned by the call to the pipeline object is a predicted label and
+    its corresponding probability. In our case, the combination of task and model
+    that we are using results in labels between 1 (negative) and 5 (positive), along
+    with the prediction probability. Let's give our script a run to see how it does.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: And that's all there is to getting some functionally basic NLP task-specific
+    out of the box model up and running using the Transformers library and its Pipeline
+    class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you want to test this out a bit more before we move on to deploying it via
+    a REST API, give this modified script a shot, which allows us to pass text from
+    the command line and responds with a more nicely formatted reply:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let''s run this a few times to see how it performs:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is better functionality, since we don't have to hard code the text we want
+    analyzed into our program, and we have also made the results a bit more user-friendly.
+    Let's extend this more useful version and deploy it as a REST API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating The API
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Time to deploy this ridiculously simple sentiment analysis app via REST API
+    built using FastAPI. If you want to learn more about FastAPI and how to format
+    your code using the framework, check out its documentation. What you absolutely
+    need to know here is that we will create an instance of FastAPI (`app`), and then
+    must define get requests, attach them to URLs, and assign responses for these
+    requests via functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below, we will define 2 such get requests; one for the root URL (`'/'`), which
+    displays a welcome message, and another for accepting strings for performing sentiment
+    analysis on (`'/sentiment_analysis/'`). The code for both is quite simple; you
+    should recognize much of what is contained in the `analyze_sentiment()` function
+    that the `'/sentiment_analysis/'` request calls from our standalone app.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And now we have a REST API capable of accepting get requests and performing
+    sentiment analysis. Before we try it out, we have to run the Uvicorn web server
+    which will provide the necessary back end functionality. In order to do so, and
+    assuming you saved the above code in a file called `main.py` and left the name
+    of the FastAPI instance as `app`, run this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'You should then see something like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Open your browser as indicated to http://127.0.0.1:8000 and you should see:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![API response](../Images/7fcd0ce954d7df772c423d60d1414df4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'If you see the welcome message, congrats, it works! We can try using the browser
+    address bar to make some requests, pasting what is in the quotation marks below
+    after the request URL and query string (`http://127.0.0.1:8000/sentiment_analysis/?text=`):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**"welcome to my home!"**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![API response](../Images/d0d6c8735adcaceda7fa038bfce7dcad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**"i don''t like your cat"**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![API response](../Images/30aebef4b84ba3aab21496426d743fe8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**"that movie was just okay"**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![API response](../Images/b82560d7baf0820f9857c290570c40e6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Great, we get results! Now what if we want to treat this like an API and access
+    it accordingly? In Python, we could use the requests library. Make sure it''s
+    installed using:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then give a script like this a try:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After saving, execute the script and you should get a result like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: This worked as well. Excellent!
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can read more about the requests library [here](https://docs.python-requests.org/en/master/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There is obviously much more we could have done here. Preprocessing the data
+    would have been useful. Performing error checking would have been advisable. As
+    confirmation of this, try using some crazy characters or not wrapping a lengthy
+    request with punctuation in quotes and see what happens.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next time I promise we will expand upon what we have done here today and will
+    make something more robust and far more interesting. I'm already working on it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Getting Started with 5 Essential Natural Language Processing Libraries](/2021/02/getting-started-5-essential-nlp-libraries.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn Neural Networks for Natural Language Processing Now](/2021/04/learn-neural-networks-natural-language-processing-now.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Pipeline Optimization with TPOT](/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Deploy a Machine Learning Web App with Heroku](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Collect Data For Customer Sentiment Analysis](https://www.kdnuggets.com/2022/12/collect-data-customer-sentiment-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sentiment Analysis on Encrypted Data with Homomorphic Encryption](https://www.kdnuggets.com/2022/12/zama-sentiment-analysis-encrypted-data-homomorphic-encryption.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sentiment Analysis in Python: Going Beyond Bag of Words](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Fine-Tune BERT for Sentiment Analysis with Hugging Face Transformers](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Successfully Deploy Data Science Projects](https://www.kdnuggets.com/2022/01/successfully-deploy-data-science-projects.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

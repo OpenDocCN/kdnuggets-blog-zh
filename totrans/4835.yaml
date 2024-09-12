@@ -1,0 +1,238 @@
+- en: The Keras 4 Step Workflow
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/06/keras-4-step-workflow.html](https://www.kdnuggets.com/2018/06/keras-4-step-workflow.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: Francois Chollet, in his book "[Deep Learning with Python](https://www.amazon.com/Deep-Learning-Python-Francois-Chollet/dp/1617294438),"
+    outlines early on an overview for developing neural networks with Keras. Generalizing
+    from a simple MNIST example earlier in the book, Chollet simplifies the network
+    building process, as relates directly to Keras, to 4 main steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/18ac70fa7c1744a26764009b05f2135f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'This is not a machine learning workflow, nor is it a complete framework for
+    approaching a problem to solve with deep learning. These 4 steps pertain solely
+    to the portion of your overall neural network machine learning workflow where
+    Keras comes into play. These steps are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Define the training data
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Define a neural network model
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Configure the learning process
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Train the model
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[![Image](../Images/61726ecd071b690280edc20163c2a3b8.png)](https://www.kdnuggets.com/wp-content/uploads/keras-4-step-workflow.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: While Chollet then spends the rest of his book sufficiently filling in the necessary
+    details to utilize it, let's take a preliminary look at the workflow by way of
+    an example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. Define the training data**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This first step is straightforward: you must define your input and target tensors.
+    The more difficult data-related aspect -- which falls outside of the Keras-specific
+    workflow -- is actually finding or curating, and then cleaning and otherwise preprocessing
+    some data, which is a concern for **any** machine learning task. This is the one
+    step of the model which does not generally concern tuning model hyperparameters.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'While our contrived example randomly generates some data to use, it captures
+    the singular aspect of this step: define your input (X_train) and target (y_train)
+    tensors.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**2\. Define a neural network model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Keras has 2 ways to define a neural network: the Sequential model class and
+    the Functional API. Both share the goal of defining a neural network, but take
+    different approach.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The [Sequential class](https://keras.io/getting-started/sequential-model-guide/)
+    is used to define a linear stack of network layers which then, collectively, constitute
+    a model. In our example below, we will use the Sequential constructor to create
+    a model, which will then have layers added to it using the `add()` method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The alternative manner for creating a model is via the [Functional API](https://keras.io/getting-started/functional-api-guide/).
+    As opposed to the Sequential model's limitation of defining a network solely constructed
+    of layers in a linear stack, the Functional API provides the flexibility required
+    for more complex models. This complexity is best exemplified in the use cases
+    of multi-input models, multi-output models, and the definition of graph-like models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code in our example uses the Sequential class. It first calls the constructor,
+    after which calls are made to the `add()` method to add layers to the model. The
+    first such call adds a layer of type [Dense](https://keras.io/layers/core/#dense)
+    ("Just your regular densely-connected NN layer"). The Dense layer has an output
+    of size 16, and an input of size INPUT_DIM, which is 32 in our case (check the
+    above code snippet to confirm). Note that only the first layer of the model requires
+    the input dimension to be explicitly stated; the following layers are able to
+    infer from the previous linear stacked layer. Following standard practice, the
+    rectified linear unit activation function is used for this layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The next line of code defines the next Dense layer of our model. Note that the
+    input size is not specified here. The output size of 5 is specified, however,
+    which matches our number of presumed classes in our toy multi-class classification
+    problem (check the above code snippet, again, to confirm). Since it is a multi-class
+    classification problem we are solving with our network, the activation function
+    for this layer is set to softmax.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'With those few lines, our Keras model is defined. The Sequential class'' `summary()`
+    method provides the following insight into our model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/8691ad64fbe304b926ac0671b5dad127.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**3\. Configure the learning process**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With both the training data defined and model defined, it''s time configure
+    the learning process. This is accomplished with a call to the `[compile()](https://keras.io/getting-started/sequential-model-guide/#compilation)`
+    method of the Sequential model class. Compilation requires 3 arguments: an [optimizer](https://keras.io/optimizers/),
+    a [loss function](https://keras.io/losses/), and a list of [metrics](https://keras.io/metrics/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our example, set up as a multi-class classification problem, we will use
+    the Adam optimizer, the categorical crossentropy loss function, and include solely
+    the accuracy metric.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: The with the call made to `compile()` with these arguments, our model now has
+    its learning process configured.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**4\. Train the model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: At this point we have training data and a fully configured neural network to
+    train with said data. All that is left is to pass the data to the model for the
+    training process to commence, a process which is completed by iterating on the
+    training data. Training begins by calling the `fit()` method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'At minimum, `fit()` requires 2 arguments: input and target tensors. If nothing
+    more is provided, a single iteration of the training data is performed, which
+    generally won''t do you any good. Therefore, it would be more conventional to,
+    at a practical minimum, define a pair of additional arguments: batch_size and
+    epochs. Our example includes these 4 total arguments.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image](../Images/7d31c85a14ad387591639acb14695904.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note that the epoch accuracies are not particularly admirable, which makes sense
+    given the random data which was used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hopefully this has shed some light on the manner in which Keras can be used
+    to solve plain old classification problems by using a straightforward 4 step process
+    prescribed by the library's author and outlined herein.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Frameworks for Approaching the Machine Learning Process](/2018/05/general-approaches-machine-learning-process.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Deep Learning with Keras](/2017/10/seven-steps-deep-learning-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Genetic Algorithm for Optimizing Recurrent Neural Networks](/2018/01/genetic-algorithm-optimizing-recurrent-neural-network.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

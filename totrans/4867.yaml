@@ -1,0 +1,346 @@
+- en: 'Implementing Deep Learning Methods and Feature Engineering for Text Data: The
+    Skip-gram Model'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-skip-gram.html](https://www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-skip-gram.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Editor''s note:** This post is only one part of a far more thorough and in-depth
+    original, [found here](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa),
+    which covers much more than what is included here.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The Skip-gram Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The Skip-gram model architecture usually tries to achieve the reverse of what
+    the CBOW model does. It tries to predict the source context words (surrounding
+    words) given a target word (the center word). Considering our simple sentence
+    from earlier, ***“the quick brown fox jumps over the lazy dog”.*** If we used
+    the CBOW model, we get pairs of ***(context_window, target_word)***where if we
+    consider a context window of size 2, we have examples like ***([quick, fox], brown),
+    ([the, brown], quick), ([the, dog], lazy) ***and so on. Now considering that the
+    skip-gram model’s aim is to predict the context from the target word, the model
+    typically inverts the contexts and targets, and tries to predict each context
+    word from its target word. Hence the task becomes to predict the context ***[quick,
+    fox]*** given target word ***‘brown’*** or ***[the, brown]*** given target word ***‘quick’*** and
+    so on. Thus the model tries to predict the context_window words based on the target_word.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/07676425bba068c4ffcce509c873b346.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The Skip-gram model architecture (Source: [https://arxiv.org/pdf/1301.3781.pdf](https://arxiv.org/pdf/1301.3781.pdf) Mikolov
+    el al.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Just like we discussed in the CBOW model, we need to model this Skip-gram architecture
+    now as a deep learning classification model such that we take in the *target word
+    as our input *and try to *predict the context words.*This becomes slightly complex
+    since we have multiple words in our context. We simplify this further by breaking
+    down each ***(target, context_words) pair*** into ***(target, context) pairs*** such
+    that each context consists of only one word. Hence our dataset from earlier gets
+    transformed into pairs like ***(brown, quick), (brown, fox), (quick, the), (quick,
+    brown)*** and so on. But how to supervise or train the model to know what is contextual
+    and what is not?
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this, we feed our skip-gram model pairs of ***(X, Y)*** where ***X ***is
+    our ***input ***and ***Y ***is our ***label***. We do this by using ***[(target,
+    context), 1] ***pairs as ***positive input samples*** where ***target ***is our
+    word of interest and ***context ***is a context word occurring near the target
+    word and the ***positive label 1*** indicates this is a contextually relevant
+    pair. We also feed in ***[(target, random), 0]*** pairs as ***negative input samples*** where ***target ***is
+    again our word of interest but ***random ***is just a randomly selected word from
+    our vocabulary which has no context or association with our target word. Hence
+    the ***negative label 0***indicates this is a contextually irrelevant pair. We
+    do this so that the model can then learn which pairs of words are contextually
+    relevant and which are not and generate similar embeddings for semantically similar
+    words.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Implementing the Skip-gram Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s now try and implement this model from scratch to gain some perspective
+    on how things work behind the scenes and also so that we can compare it with our
+    implementation of the CBOW model. We will leverage our Bible corpus as usual which
+    is contained in the `**norm_bible**` variable for training our model. The implementation
+    will focus on five parts
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Build the corpus vocabulary**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Build a skip-gram [(target, context), relevancy] generator**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Build the skip-gram model architecture**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Train the Model**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Get Word Embeddings**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Let’s get cracking and build our skip-gram Word2Vec model!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Build the corpus vocabulary**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To start off, we will follow the standard process of building our corpus vocabulary
+    where we extract out each unique word from our vocabulary and assign a unique
+    identifier, similar to what we did in the CBOW model. We also maintain mappings
+    to transform words to their unique identifiers and vice-versa.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Just like we wanted, each unique word from the corpus is a part of our vocabulary
+    now with a unique numeric identifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Build a skip-gram [(target, context), relevancy] generator**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s now time to build out our skip-gram generator which will give us pair of
+    words and their relevance like we discussed earlier. Luckily, `keras` has a nifty `skipgrams` utility
+    which can be used and we don’t have to manually implement this generator like
+    we did in CBOW.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** The function `[**skipgrams(…)**](https://keras.io/preprocessing/sequence/#skipgrams)` is
+    present in `[**keras.preprocessing.sequence**](https://keras.io/preprocessing/sequence)`'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'This function transforms a sequence of word indexes (list of integers) into
+    tuples of words of the form:'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '- (word, word in the same window), with label 1 (positive samples).'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '- (word, random word from the vocabulary), with label 0 (negative samples).'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Thus you can see we have successfully generated our required skip-grams and
+    based on the sample skip-grams in the preceding output, you can clearly see what
+    is relevant and what is irrelevant based on the label (0 or 1).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Build the skip-gram model architecture**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We now leverage `keras` on top of `tensorflow` to build our deep learning architecture
+    for the skip-gram model. For this our inputs will be our target word and context
+    or random word pair. Each of which are passed to an embedding layer (initialized
+    with random weights) of it’s own. Once we obtain the word embeddings for the target
+    and the context word, we pass it to a merge layer where we compute the dot product
+    of these two vectors. Then we pass on this dot product value to a dense sigmoid
+    layer which predicts either a 1 or a 0 depending on if the pair of words are contextually
+    relevant or just random words (***Y’***). We match this with the actual relevance
+    label (***Y***), compute the loss by leveraging the `mean_squared_error` loss
+    and perform backpropagation with each epoch to update the embedding layer in the
+    process. Following code shows us our model architecture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/237c9b10ed40a7418f23231b8adcd717.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Skip-gram model summary and architecture
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understanding the above deep learning model is pretty straightforward. However,
+    I will try to summarize the core concepts of this model in simple terms for ease
+    of understanding. We have a pair of input words for each training example consisting
+    of ***one input target word*** having a unique numeric identifier and ***one context
+    word*** having a unique numeric identifier. If it is ***a positive sample*** the
+    word has contextual meaning, is ***a context word***and our ***label Y=1***, else
+    if it is a ***negative sample***, the word has no contextual meaning, is just ***a
+    random word*** and our ***label Y=0***. We will pass each of them to an ***embedding
+    layer*** of their own, having size `**(vocab_size x embed_size)**` which will
+    give us ***dense word embeddings*** for each of these two words `**(1 x embed_size
+    for each word)**`. Next up we use a ***merge layer*** to compute the ***dot product*** of
+    these two embeddings and get the dot product value. This is then sent to the ***dense
+    sigmoid layer*** which outputs either a 1 or 0\. We compare this with the actual
+    label Y (1 or 0), compute the loss, backpropagate the errors to adjust the weights
+    (in the embedding layer) and repeat this process for all ***(target, context)*** pairs
+    for multiple epochs. The following figure tries to explain the same.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f9906c94dce46e3afb30e51283843aab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Visual depiction of the Skip-gram deep learning model
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s now start training our model with our skip-grams.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Train the Model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Running the model on our complete corpus takes a fair bit of time but lesser
+    than the CBOW model. Hence I just ran it for 5 epochs. You can leverage the following
+    code and increase it for more epochs if necessary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Once this model is trained, similar words should have similar weights based
+    off the embedding layer and we can test out the same.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Get Word Embeddings**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To get word embeddings for our entire vocabulary, we can extract out the same
+    from our embedding layer by leveraging the following code. Do note that we are
+    only interested in the target word embedding layer, hence we will extract the
+    embeddings from our `**word_model**` embedding layer. We don’t take the embedding
+    at position 0 since none of our words in the vocabulary have a numeric identifier
+    of 0 and we ignore it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2995edd6df7b95adfff70a43eb9d79d3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Word Embeddings for our vocabulary based on the Skip-gram model
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thus you can clearly see that each word has a dense embedding of size `**(1x100)**` as
+    depicted in the preceding output similar to what we had obtained from the CBOW
+    model. Let’s now apply the euclidean distance metric on these dense embedding
+    vectors to generate a pairwise distance metric for each word in our vocabulary.
+    We can then find out the n-nearest neighbors of each word of interest based on
+    the shortest (euclidean) distance similar to what we did on the embeddings from
+    our CBOW model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can clearly see from the results that a lot of the similar words for each
+    of the words of interest are making sense and we have obtained better results
+    as compared to our CBOW model. Let’s visualize these words embeddings now using [**t-SNE**](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding)which
+    stands for [***t-distributed stochastic neighbor embedding***](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding)a
+    popular [dimensionality reduction](https://en.wikipedia.org/wiki/Dimensionality_reduction) technique
+    to visualize higher dimension spaces in lower dimensions (e.g. 2-D).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9916982cd1c109657827c078892b3b62.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Visualizing skip-gram word2vec word embeddings using t-SNE
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have marked some circles in red which seemed to show different words of contextual
+    similarity positioned near each other in the vector space. If you find any other
+    interesting patterns feel free to let me know!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Dipanjan Sarkar](https://www.linkedin.com/in/dipanzan)** is a Data
+    Scientist @Intel, an author, a mentor @Springboard, a writer, and a sports and
+    sitcom addict.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Text Data Preprocessing: A Walkthrough in Python](/2018/03/text-data-preprocessing-walkthrough-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A General Approach to Preprocessing Text Data](/2017/12/general-approach-preprocessing-text-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Framework for Approaching Textual Data Science Tasks](/2017/11/framework-approaching-textual-data-tasks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Practical Approach To Feature Engineering In Machine Learning](https://www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Tractable, Feature Engineering Pipeline for Multivariate…](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using RAPIDS cuDF to Leverage GPU in Feature Engineering](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Engineering for Beginners](https://www.kdnuggets.com/feature-engineering-for-beginners)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

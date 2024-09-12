@@ -1,0 +1,244 @@
+- en: 'Building a Visual Search Engine – Part 2: The Search Engine'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Editor''s note**: You can find part one of this article [here](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html).'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Task**: The task is to generate a ranked list of images which are semantically
+    similar to the query image.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Dataset****'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'We will split our dataset into two parts: training and evaluation. From each
+    class, we will randomly sample 20 images and create an evaluation set out of it.
+    The remaining images will be part of the training set. We further split the evaluation
+    set into two parts, query set and candidate set. We will take 5 images from each
+    class of the evaluation set and make it part of the query set and the remaining
+    images in the evaluation set are part of the candidate set. This is done to calculate
+    the evaluation metric.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For each query set image, the system generates a ranked list of images from
+    the evaluation set. Then the metric defined below is used to evaluate the performance
+    of the system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Metrics****'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We use the Precision @ K metric to measure the performance of the system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Visual Search Engine - Part 2: The Search Engine](../Images/ecacb2ddf40649eab21e8273b7d8223b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This metric does not focus on the rank of the entries and only focuses on the
+    number of relevant entries. To capture the ranking factor of the system, we also
+    present Average Precision(AP) on the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Visual Search Engine - Part 2: The Search Engine](../Images/f5f2afbb8c8477b3e700bc1ca5aa5e8d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '****Methods****'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: For this exercise, we present two baselines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Baseline 1**: In this method, we randomly take 10 samples from the candidate
+    set across all classes. We do this for each query and calculate the metric.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Baseline 2**: In this method, we use the embeddings generated from MobileNetV2
+    model and use cosine distance as similarity metric to rank candidate entries.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note: We are aware that both of these methods make no use of the training split.
+    These methods only present baselines for the system'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Results****'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '**Quantitative Results**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We use the method defined in the dataset section to calculate evaluation metrics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Visual Search Engine - Part 2: The Search Engine](../Images/6edafdc0fa801e4dc637b81754fe8838.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Qualitative Results**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The results below are presented for baseline 2 method (cosine similarity)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Visual Search Engine - Part 2: The Search Engine](../Images/2983ecf874ba04552889d5a01297adfd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample search results
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Visual Search Engine - Part 2: The Search Engine](../Images/0923dfe0a1cc2646e27ea9398c492a33.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample search results
+  prefs: []
+  type: TYPE_NORMAL
+- en: Please find the code to reproduce the metrics and results [here](https://github.com/muditbac/caltech-search).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Future Scope
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '**Data Collection and Labelling:** To create a full-fledged image search engine,
+    we need to revisit our requirements for this system. Does this system need to
+    work on certain types of images? Should it work on all real life objects? Should
+    the search focus on semantic objects present in the image or images with similar
+    color and textures will be sufficient? These requirements will help clarify the
+    data requirements. To create a full-fledged search engine, we need to collect
+    millions of images from the web and maintain an index for it. After collecting
+    the data, we need to define our task and start labelling the data for this task.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '** Error Analysis**: We can analyse the error occurred in the cosine similarity
+    results. We can go through the search results which were included in the top 10
+    results but belonged to another class. This may reveal errors like results from
+    similar classes and results from noise class.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Methods:** The existing method uses knowledge from the pre-trained MobileNetV2
+    model. Going forward, we can train our own model using triplet loss or contrastive
+    loss on similar and dissimilar images. The aim here is to create an embedder which
+    can capture the object/s in the image.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '** Deployment**: Building a full fledged search engine will require building
+    multiple components.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Image Crawler**: This component will crawl images for model training and
+    validation'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Data Labeller**: This component will be used by the human labeller to label
+    and clean the collected data. The data will be collected and cleaned in multiple
+    requirements. The data for training and validation will be processed with different
+    pipelines.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Model Training**: This component will take the labelled data and generate
+    model artifacts that can be used for inference.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Model Evaluation**: The component will generate the report on improvement
+    on the model. Any change in the system should be visible in this report and changes
+    should be driven by keeping this mind. This system should also generate failure
+    cases to focus on.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Embedding Pre-computation:** Once a model is trained and validated, it should
+    be used to generate the embedding for all the deployment data. The embedding should
+    be precomputed for faster retrieval during request time.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Real time serving and application interface**: The component contains the
+    frontend and backend for processing and generating the request'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Building a Visual Search Engine - Part 2: The Search Engine](../Images/2ef582305ff797e5e409c939a606dcce.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: References
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[1] Caltech 101, [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[2] Mean Average Precision (MAP) For Recommender Systems, [https://sdsawtelle.github.io/blog/output/mean-average-precision-MAP-for-recommender-systems.htm](https://sdsawtelle.github.io/blog/output/mean-average-precision-MAP-for-recommender-systems.html)l'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Mudit Bachhawat](https://www.linkedin.com/in/muditbac/?originalSubdomain=in)**
+    works as a machine learning engineer at Google, and has more than 5 years of experience
+    in data science, deep learning, computer vision, multi-modal information retrieval,
+    and optimization. Feel free to drop any comments or questions.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Elevate Your Search Engine Skills with Uplimit''s Search with ML Course!](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Qdrant: Open-Source Vector Search Engine with Managed Cloud Platform](https://www.kdnuggets.com/2023/02/qdrant-open-source-vector-search-engine-managed-cloud-platform.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Geospatial Application in Python with Google Earth…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Essential Math for Data Science: Visual Introduction to Singular…](https://www.kdnuggets.com/2022/06/essential-math-data-science-visual-introduction-singular-value-decomposition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

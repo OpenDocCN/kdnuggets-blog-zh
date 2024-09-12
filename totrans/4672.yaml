@@ -1,0 +1,728 @@
+- en: How to Automate Tasks on GitHub With Machine Learning for Fun and Profit
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/05/automate-tasks-github-machine-learning-fun-profit.html](https://www.kdnuggets.com/2019/05/automate-tasks-github-machine-learning-fun-profit.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Hamel Husain](https://twitter.com/HamelHusain), [Michal Jastrzębski](https://twitter.com/_inc0_) and [Jeremy
+    Lewi](https://twitter.com/jeremylewi)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Teaser: Build a model that labels issues and launch it as a product!'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c02dc82f2b4a75b8573e5e5867ba5596.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Link](https://github.com/genuinetools/img/issues/224) to this issue. More
+    examples can be viewed [here](https://mlbot.net/).![Figure](../Images/86411aa6eef5f6ee391cb84b4c9b8912.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Link](https://github.com/hamelsmu/Issue-Label-Bot-Examples/issues/114) to
+    this issue. More examples can be viewed [here](https://mlbot.net/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Install this app on your GitHub repositories from this page**](https://mlbot.net/)**.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Motivation: The elusive, perfect machine learning problem'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ddbb3122a83f9b3d1b05787c51474c54.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Finding the ideal machine learning problem can feel like searching for treasure
+    or chasing dragons. [Image credit](https://polycount.com/discussion/179516/help-on-creating-a-wide-a-treasure-room-full-of-gold).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Our friends and colleagues who are data scientists would describe the ideal
+    predictive modeling project as a situation where:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is an **abundance of data**, which is already labeled or where labels
+    can be inferred.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The data can be used to solve **real problems**.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The problem relates to a **domain you are passionate about **or the problem
+    you want to solve is your own and **you can be your first customer**.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: There is** a platform** where your data product can reach a **massive audience, **with
+    mechanisms to** gather feedback and improve**.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can create this with **minimal expense and time**, hopefully using languages
+    and tools you are familiar with.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: There is a way to **monetize your product** if it becomes successful.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The above list is aspirational and data scientists are lucky to encounter a
+    problem that meets all of these (the authors feel lucky if we can find a problem
+    that satisfies even half of these!).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Enter GH-Archive & GitHub Apps: Where Data Meets Opportunity'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Today, we present a dataset, platform, and domain that we believe satisfies
+    the criteria set forth above!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The dataset**:[**GH-Archive**](https://www.gharchive.org/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'GH-Archive logs a tremendous amount of data from GitHub by ingesting most of [these
+    events](https://developer.github.com/v3/activity/events/types/) from the [GitHub
+    REST API](https://developer.github.com/v3/). These events are sent from GitHub
+    to GH-Archive in JSON format, referred to as a [payload](https://developer.github.com/v3/activity/events/types/).
+    Below is an example of a payload that is received when an issue is edited:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5fc8c49f45fd2380001639d8f81fd43b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A truncated version of [this example](https://developer.github.com/v3/activity/events/types/#webhook-payload-example-14).
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can imagine, there is a large number of payloads given the number of
+    event types and users on GitHub. Thankfully, [this data is stored in BigQuery](http://www.gharchive.org/#bigquery)which
+    allows for fast retrieval through a SQL interface! It is very economical to acquire
+    this data, as Google gives you $300 when you first sign up for an account, and
+    if you already have one, the costs are very reasonable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Since the data is in a JSON format, the syntax for un-nesting this data may
+    be a bit unfamiliar. We can use the *JSON_EXTRACT* function to get the data we
+    need. Below is a toy example of how you might extract data from issue payloads:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5261c65e969a696028ccd91c7a671061.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Example query syntax you might use for GH-Archive data stored on BigQuery. Pay
+    close attention to the syntax used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A step-by-step explanation on how to extract GitHub issues from BigQuery can
+    be found in the [appendix section of this article](https://towardsdatascience.com/how-to-create-data-products-that-are-magical-using-sequence-to-sequence-models-703f86a231f8),
+    however, it is important to note that more than issue data is available — you
+    can retrieve data for [almost anything](https://developer.github.com/v3/activity/events/types/#event-types--payloads) that
+    happens on GitHub! You can even retrieve large corpus of [code from public repos
+    in BigQuery](https://github.com/hamelsmu/code_search/blob/master/notebooks/1%20-%20Preprocess%20Data.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The platform**: [**GitHub Apps**](https://developer.github.com/apps/)** &
+    The **[**GitHub Marketplace**](https://developer.github.com/marketplace/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The GitHub platform allows you to build apps that can perform many actions,
+    such as [interacting with issues](https://developer.github.com/v3/issues/), [creating
+    repositories](https://developer.github.com/v3/repos/) or [fixing code in pull
+    requests](https://fixmie.com/). Since all that is required from your app is to
+    receive [payloads](https://developer.github.com/v3/activity/events/types/) from
+    GitHub and make calls to [the REST API](https://developer.github.com/v3/), you
+    can write the app in any language of your choice, including python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most importantly, the [GitHub marketplace](https://github.com/marketplace) gives
+    you a way to [list your app](https://developer.github.com/marketplace/#apps) on
+    a searchable platform and charge users a monthly subscription. This is a great
+    way to monetize your ideas. You can even host [unverified free apps](https://developer.github.com/marketplace/#unverified-apps) as
+    a way to collect feedback and iterate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Surprisingly, there are not many GitHub apps that use machine learning, despite
+    the availability of these public datasets! Raising awareness of this is one of
+    the motivations for this blog post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'An End-to-End Example: Automatically Label GitHub Issues With Machine Learning'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/99cc6272c451a4752bd5b6b33af6c8ef.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Automatically labeling issues can help with organizing and finding information.
+    Photo by [Susan Yin](https://unsplash.com/@syinq?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to show you how to create your own apps, we will walk you through the
+    process of creating a GitHub app that can automatically label issues. Note that
+    all of the code for this app, including the model training steps are located in [this
+    GitHub repository](https://github.com/hamelsmu/MLapp).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 1: Register your app & complete pre-requisites.**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: First, you will need to set up your development environment. Complete steps
+    1–4 of [this article](https://developer.github.com/apps/quickstart-guides/setting-up-your-development-environment/).
+    You do not need to read the section on “The Ruby Programming Language”, or any
+    steps beyond step 4\. Make sure you set up a Webhook secret even though that part
+    is optional.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that there is a [difference between GitHub apps and Oauth apps](https://developer.github.com/apps/differences-between-apps/).
+    For the purposes of this tutorial, we are interested in GitHub apps. You don’t
+    need to worry about this too much, but the distinction is good to know in case
+    you are going through the documentation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 2: Get comfortable interacting with the GitHub API with python.**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Your app will need to interact with the GitHub API in order to perform actions
+    on GitHub. It is useful to use a pre-built client in the programming language
+    of your choice in order to make life easier. While the [official docs ](https://developer.github.com/apps/quickstart-guides/using-the-github-api-in-your-app/)on
+    GitHub show you how to use a Ruby client, there are [third-party clients](https://developer.github.com/v3/libraries/) for
+    many other languages, including Python. For the purposes of this tutorial, we
+    will be using the [Github3.py library](https://github3.readthedocs.io/en/master/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the most confusing aspects of interfacing with the GitHub API as an app
+    is authentication. For the following instructions, use the curl commands, not
+    the ruby examples in the documentation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, you must [authenticate as an app](https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) by
+    signing a JSON Web Token (JWT). Once you have signed a JWT, you may use it to [authenticate
+    as an app installation](https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation).
+    Upon authenticating as an app installation, you will receive an installation access
+    token which you can use to interact with the REST API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that the authenticating as an app is done via a GET request, whereas authenticating
+    as an app installation is done via a PUT request. Even though this is illustrated
+    in the example CURL commands, it is a detail that we missed when getting started.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Knowing the above authentication steps are useful even though you will be using
+    the [Github3.py library](https://github3.readthedocs.io/en/master/), as there
+    may be routes that are not supported that you may want to implement yourself using
+    the [requests](http://docs.python-requests.org/en/master/) library. This was the
+    case for us, so we ended up writing a thin wrapper around the Github3.py library
+    called [**mlapp**](https://github.com/hamelsmu/MLapp/blob/master/flask_app/mlapp.py) to
+    help us interact with issues, which is [defined here](https://github.com/hamelsmu/MLapp/blob/master/flask_app/mlapp.py).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below is code that can be used to create an issue, make a comment, and apply
+    a label. This code is also available in [this notebook](https://github.com/hamelsmu/MLapp/blob/master/notebooks/GitHub-api-example.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/721ccf5149fd3ccda1f517bbdf206932.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The above code created [this issue on GitHub](https://github.com/hamelsmu/simple_flask_app/issues/1).
+    This code is also available [in this notebook](https://github.com/hamelsmu/MLapp/blob/master/notebooks/GitHub-api-example.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can see the issue created by this code [here](https://github.com/hamelsmu/simple_flask_app/issues/1).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 3: Acquire and prepare the data.'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'As mentioned previously, we can use [GH-Archive](https://www.gharchive.org/) hosted
+    on [BigQuery](https://www.gharchive.org/#bigquery) to retrieve examples of issues.
+    Additionally, we can also retrieve the labels that people manually apply for each
+    issue. Below is the query we used to build a Pareto chart of all of these labels:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/478edb5e20b05f3e38360d8349aae5b1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Link](https://console.cloud.google.com/bigquery?sq=123474043329:b424d2bbd79844999b970a0bc8498efa) to
+    this query. Data produced by this query is available in [this spreadsheet](https://docs.google.com/spreadsheets/d/1NPacnVsyZMBneeewvPGhCx512A1RPYf8ktDN_RpKeS4/edit?usp=sharing).![Figure](../Images/ae2363d37f5b076c23a8a29f5e174466.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Top issue labels from the public dataset. There is an extremely long tail (not
+    shown here).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[This spreadsheet](https://docs.google.com/spreadsheets/d/1NPacnVsyZMBneeewvPGhCx512A1RPYf8ktDN_RpKeS4/edit?usp=sharing) contains
+    the data for the entire Pareto chart. There is a long tail of issue labels which
+    are not mutually exclusive. For example, the *enhancement* and *feature* labels
+    could be grouped together. Furthermore, the quality and meaning of labels may
+    vary greatly by project. Despite these hurdles, we decided to simplify the problem
+    and group as many labels as possible into three categories: *feature request*, *bug*,
+    and *question *using heuristics we constructed after manually looking at the top
+    ~ 200 labels. Additionally, we consulted with the maintainers of a large open
+    source project, [Kubeflow](https://github.com/kubeflow), as our first customer
+    to validate our intuitions.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We experimented with creating a fourth category called *other *in order to have
+    negative samples of items not in the first three categories, however, we discovered
+    that the information was noisy as there were many bugs, feature requests, and
+    questionsin this “other” category*. *Therefore, we limited the training set to
+    issues that we could categorize as either a *feature request, bug *or* question *exclusively*.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: It should be noted that this arrangement of the training data is far from ideal,
+    as we want our training data to resemble the distribution of real issues as closely
+    as possible. However, our goal was to construct a minimal viable product with
+    the least time and expense possible and iterate later, so we moved forward with
+    this approach.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally, we took special care to de-duplicate issues. To be conservative, we
+    resolved the following types of duplicates (by arbitrarily choosing one issue
+    in the duplicate set):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Issues with the same title in the same repo.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Issues that have the same content in their body, regardless of the title. Removed
+    further duplicates by only considering the first 75% of characters and alternatively
+    last 75% of characters in an issue body.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The SQL query used to categorize issues and deduplicate issues can be [viewed
+    with this link](https://console.cloud.google.com/bigquery?sq=123474043329:01abf8866144486f932c756730ddaff1).
+    You don’t have to run this query, as our friends from the [Kubeflow](https://www.kubeflow.org/) project
+    have run this query and are hosting the resulting data as CSV files on Google
+    Cloud Bucket, which you can retrieve by following the code [in this notebook](https://github.com/hamelsmu/MLapp/blob/master/notebooks/Issue_Labeling_Model.ipynb).
+    An exploration of the raw data as well as a description of all the fields in the
+    dataset is also located [in the notebook](https://github.com/hamelsmu/MLapp/blob/master/notebooks/Issue_Labeling_Model.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 4: Build & train the model.'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that we have the data, the next step is to build and train the model. For
+    this problem, we decided to borrow a text pre-processing pipeline that [we built
+    for a similar problem](https://towardsdatascience.com/how-to-create-data-products-that-are-magical-using-sequence-to-sequence-models-703f86a231f8) and
+    apply it here. This pre-processing pipeline cleans the raw text, tokenizes the
+    data, builds a vocabulary, and pads the sequences of text to equal length, which
+    are steps that are outlined in the [“Prepare and Clean Data” section](https://towardsdatascience.com/how-to-create-data-products-that-are-magical-using-sequence-to-sequence-models-703f86a231f8) of
+    our prior blog post. The code that accomplishes this task for issue labeling is
+    outlined in [this notebook](https://github.com/hamelsmu/MLapp/blob/master/notebooks/Issue_Labeling_Model.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Our model takes two inputs: the issue title and body and classifies each issue
+    as either a *bug*, *feature request* or *question*. Below is our model’s architecture
+    defined with [tensorflow.Keras](https://www.tensorflow.org/guide/keras):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3d87488fc066fe2f3a17321d8e0b7a9e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Code available in [this notebook](https://github.com/hamelsmu/MLapp/blob/master/notebooks/Issue_Labeling_Model.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A couple of notes about this model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You do not have to use deep learning to solve this problem. We just used an
+    existing pipeline we built for another closely related problem in order to quickly
+    bootstrap ourselves.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The model architecture is embarrassingly simple. Our goal was to keep things
+    as simple as possible to demonstrate that you can build a real data product using
+    a simple approach. We did not spend much time tuning or experimenting with different
+    architectures.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We anticipate that there is plenty of room for improvements on this model by
+    using more state of the art architectures or improving the dataset. We provide
+    several hints in the *next steps* section of this blog post.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Evaluating the model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below is a confusion matrix showing our model’s accuracy on a test set of the
+    three categories. The model really struggles to categorize questions but does
+    a fairly decent job at distinguishing bugs from features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/34a540567ba7e27423be5fe3ebf847c4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note that since our test set is not representative of all issues (as we filtered
+    the dataset to only those that we could categorize), the accuracy metrics above
+    should be taken with a grain of salt. We somewhat mitigate this problem by gathering
+    explicit feedback from our users, which allows us to re-train our model and debug
+    problems very fast. We discuss the explicit feedback mechanism in a later section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Making predictions**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below are model predictions on toy examples. The full code is available [in
+    this notebook](https://github.com/hamelsmu/MLapp/blob/master/notebooks/Issue_Labeling_Model.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/7ca095f3364391f7ece45cc0df8161a9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Link](https://github.com/hamelsmu/MLapp/blob/master/notebooks/Issue_Labeling_Model.ipynb) to
+    the notebook.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We wanted to choose reasonable thresholds so the model is not spamming people
+    with too many incorrect predictions (this means that our app may not offer any
+    predictions in some cases). We selected thresholds by testing our system on several
+    repos and consulting with several maintainers on an acceptable [false positive
+    rate](https://en.wikipedia.org/wiki/False_positive_rate).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 5: Use Flask to respond to payloads.'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now that you have a model that can make predictions, and a way to programmatically
+    add comments and labels to issues (step 2), all that is left is gluing the pieces
+    together. You can accomplish this with the following steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Start a web server that listens to payloads from GitHub.com (you specified the
+    endpoint that GitHub will send payloads to when you registered your app in step
+    1).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Verify the payload is coming from GitHub (illustrated by the verify_webhook
+    function in [this script](https://github.com/hamelsmu/MLapp/blob/master/flask_app/app.py)).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Respond to the payload if desired by using the GitHub API (which you learned
+    in step 2).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Log appropriate data and feedback you receive to a database to facilitate model
+    retraining.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'A great way to accomplish this is to use a framework like [Flask](http://flask.pocoo.org/) and
+    database interface like [SQLAlchemy](http://flask-sqlalchemy.pocoo.org/2.3/).
+    If you are already familiar with flask, below is a truncated version of the code
+    that applies predicted issue labels when notified by GitHub that an issue has
+    been opened:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c00858b34325953a72aa8044c5f0a436.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This code is also available [here](https://github.com/hamelsmu/MLapp/blob/master/flask_app/app.py).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Don’t worry if you are not familiar with Flask or SQLAchemy. You can learn everything
+    you need to know about this subject from this wonderful [MOOC on Flask, HTML,
+    CSS and Javascript](https://www.edx.org/course/cs50s-web-programming-with-python-and-javascript).
+    This course is a really great investment of time if you are a data scientist,
+    as this will allow you to build interfaces for your data products in a lightweight
+    way. We took this course and were impressed with it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We leave it as an exercise for the reader to go through the rest of the [flask
+    code in our GitHub repository](https://github.com/hamelsmu/MLapp).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Collecting explicit user feedback.
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/a87519003233f2368ebd3a7d0ec25318.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This screenshot was taken from [this issue.](https://github.com/genuinetools/img/issues/224)
+  prefs: []
+  type: TYPE_NORMAL
+- en: As illustrated above, explicit feedback is requested by asking users to react
+    with ???? or ???? to a prediction. We can store these reactions in a database
+    which allows us to re-train and debug our models. This is is perhaps one of the
+    most exciting and important aspects of launching a data product as a GitHub App!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can see more examples of predictions and user feedback on [our app’s homepage](https://mlbot.net/).
+    For example, this is the page for the kubeflow/kubeflow repo:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/576402916a42df15439e68dbd32003b7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Link](https://mlbot.net/data/kubeflow/kubeflow) to this page.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Please install our app, it’s free!
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you enjoy what you have read thus far and want to support this project, please
+    install this app on your public repositories (this app will not make predictions
+    on private repos even if installed there), and give our bot feedback when it makes
+    predictions ???? ????.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Here is the link to install our app**](https://github.com/apps/issue-label-bot).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Conclusion: Tips for building your own machine learning powered apps'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Don’t be afraid to **use public datasets**. You can do a lot more than just
+    label issues (see the resources section for ideas).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Don’t be afraid to iterate fast, even if the solution is not perfect**. Building
+    a model is sometimes the smallest component of a project and getting user feedback
+    is very valuable so you do not waste time.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Try to consult with at least one real customer or user **and have them guide
+    and validate decisions.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Take advantage of opportunities to gather explicit user feedback**. This
+    will allow you to improve your solution and your models quickly.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Part II & Next Steps
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: One aspect we did not cover is how to serve your app at scale. When you are
+    just starting out, you probably do not need to worry about this and can serve
+    this on a single server with your favorite cloud provider. You can also use a
+    service [like Heroku](https://devcenter.heroku.com/articles/container-registry-and-runtime),
+    which is covered in the course on Flask linked in the resources section below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In Part II, we will cover the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to deploy your Flask app on Kubernetees so it can scale to many users.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Using [Argo pipelines](https://argoproj.github.io/) to manage the model training
+    and serving pipeline.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'We believe there are many opportunities to improve upon the approach we illustrated
+    in this post. Some ideas we have in mind are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Constructing better labels and negative samples of items that do not belong
+    in the label set.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Using the tools from [fastai](https://docs.fast.ai/) to explore state of the
+    art architectures, such as [Multi-Head Attention](https://docs.fast.ai/text.models.html#MultiHeadAttention).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pre-training on a large corpus and fine tuning that on GitHub issues to enable
+    a user to predict repo-specific labels instead of a small global set of labels.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Using additional data such as information about the repository or the user opening
+    the issue, perhaps learning an embedding for these entities.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Allow users to customize the label thresholds and the names of labels, as well
+    as choose which labels to predict.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Resources
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Our app’s [website](https://mlbot.net/).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The [installation page](https://github.com/apps/issue-label-bot) of our app.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The GitHub repository](https://github.com/hamelsmu/MLapp) with all of this
+    code.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Need inspiration for other data products you can build using machine learning
+    and public GitHub datasets? See these examples: (1) [GitHub issue summarization](https://towardsdatascience.com/how-to-create-data-products-that-are-magical-using-sequence-to-sequence-models-703f86a231f8) and
+    (2) Natural language [semantic code search](https://towardsdatascience.com/semantic-code-search-3cd6d244a39c).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[This public data](https://archive.org/details/stackexchange) provided by stack
+    exchange could be useful for transfer learning. A cool machine learning project
+    that recently leveraged this data is [stackroboflow.com](https://stackroboflow.com/about/index.html).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning on Source Code](https://ml4code.github.io/), a survey of
+    the literature on applications of applying machine learning to code, by [Miltos
+    Allamanis](https://miltos.allamanis.com/).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Excellent course on flask: [HarvardX CS50 Web](https://www.edx.org/course/cs50s-web-programming-with-python-and-javascript).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: MOOCs by [fastai](https://www.fast.ai/) for [machine learning](http://course18.fast.ai/ml) and [deep
+    learning](http://course.fast.ai/).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The code in our repo and associated tutorial(s) assume familiarity with Docker. [This
+    blog post](https://towardsdatascience.com/how-docker-can-help-you-become-a-more-effective-data-scientist-7fc048ef91d5) offers
+    a gentle introduction to Docker for data scientists.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The [Kubeflow project](https://www.kubeflow.org/) contains resources that we
+    will use in part 2 of this blog post. Furthermore, the content of this blog post
+    will be the subject of [this upcoming talk](https://conferences.oreilly.com/artificial-intelligence/ai-ny/public/schedule/detail/73422) on
+    April 17, 2019.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Get In Touch!
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We hope you enjoyed this blog post. Please feel free to get in touch with us:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Hamel Husain](https://twitter.com/HamelHusain)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Michal Jastrzębski](https://twitter.com/_inc0_)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Jeremy Lewi](https://twitter.com/jeremylewi)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Disclaimer
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Any ideas or opinions presented in this article are our own. Any ideas or techniques
+    presented do not necessarily foreshadow future products of any company. The purpose
+    of this blog is for educational purposes only.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/mlapp-419f90e8f007?sk=760e18a2d6e60999d7eb2887352a92a8).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Synthetic Data Generation: A must-have skill for new data scientists](/2018/12/synthetic-data-generation-must-have-skill.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Trending Deep Learning Github Repositories](/2019/02/trending-top-deep-learning-github-repositories.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Comparing MobileNet Models in TensorFlow](/2019/03/comparing-mobilenet-models-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Progress Bars in Python with tqdm for Fun and Profit](https://www.kdnuggets.com/2022/09/progress-bars-python-tqdm-fun-profit.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Tasks To Automate With Python](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Short and Fun Courses to Get You Up to Speed About Generative AI](https://www.kdnuggets.com/short-and-fun-courses-to-get-you-up-to-speed-about-generative-ai)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beginner Friendly Python Projects That Are Fun!](https://www.kdnuggets.com/2022/10/beginner-friendly-python-projects-fun.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automate Microsoft Excel and Word Using Python](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automate the Boring Stuff with GPT-4 and Python](https://www.kdnuggets.com/2023/03/automate-boring-stuff-chatgpt-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

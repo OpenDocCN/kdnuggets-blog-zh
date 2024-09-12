@@ -1,0 +1,273 @@
+- en: Dealing with Imbalanced Data in Machine Learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/10/imbalanced-data-machine-learning.html](https://www.kdnuggets.com/2020/10/imbalanced-data-machine-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As an ML engineer or data scientist, sometimes you inevitably find yourself
+    in a situation where you have hundreds of records for one class label and thousands
+    of records for another class label.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Upon training your model you obtain an accuracy above 90%. You then realize
+    that the model is predicting everything as if it’s in the class with the majority
+    of records. Excellent examples of this are fraud detection problems and churn
+    prediction problems, where the majority of the records are in the negative class.
+    What do you do in such a scenario? That will be the focus of this post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Collect More Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The most straightforward and obvious thing to do is to collect more data, especially
+    data points on the minority class. This will obviously improve the performance
+    of the model. However, this is not always possible. Apart from the cost one would
+    have to incur, sometimes it's not feasible to collect more data. For example,
+    in the case of churn prediction and fraud detection, you can’t just wait for more
+    incidences to occur so that you can collect more data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Consider Metrics Other than Accuracy
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Accuracy is not a good way to measure the performance of a model where the class
+    labels are imbalanced. In this case, it's prudent to consider other metrics such
+    as precision, recall, Area Under the Curve (AUC) — just to mention a few.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Precision** measures the ratio of the true positives among all the samples
+    that were predicted as true positives and false positives. For example, out of
+    the number of people our model predicted would churn, how many actually churned?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/8c8a6e75ec765f13c71b170a739268d0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Recall** measures the ratio of the true positives from the sum of the true
+    positives and the false negatives. For example, the percentage of people who churned
+    that our model predicted would churn.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/d9823a244fcef9c52f95a711414e44ad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The AUC is obtained from the Receiver Operating Characteristics (ROC) curve.
+    The curve is obtained by plotting the true positive rate against the false positive
+    rate. The false positive rate is obtained by dividing the false positives by the
+    sum of the false positives and the true negatives.
+  prefs: []
+  type: TYPE_NORMAL
+- en: AUC closer to one is better, since it indicates that the model is able to find
+    the true positives.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Emphasize the Minority Class
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Another way to deal with imbalanced data is to have your model focus on the
+    minority class. This can be done by computing the class weights. The model will
+    focus on the class with a higher weight. Eventually, the model will be able to
+    learn equally from both classes. The weights can be computed with the help of
+    scikit-learn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'You can then pass these weights when training the model. For example, in the
+    case of logistic regression:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Alternatively, you can pass the class weights as `balanced` and the weights
+    will be automatically adjusted.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here’s the ROC curve before the weights are adjusted.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/72c19a66abae792bd28fd187eb3cf048.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And here’s the ROC curve after the weights have been adjusted. Note the AUC
+    moved from 0.69 to 0.87.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/4613bff2ccc6dc6c1ca9df6fcd6f086f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Try Different Algorithms
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As you focus on the right metrics for imbalanced data, you can also try out
+    different algorithms. Generally, tree-based algorithms perform better on imbalanced
+    data. Furthermore, some algorithms such as [LightGBM](https://heartbeat.fritz.ai/lightgbm-a-highly-efficient-gradient-boosting-decision-tree-53f62276de50) have
+    hyperparameters that can be tuned to indicate that the data is not balanced.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generate Synthetic Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can also generate [synthetic data](https://heartbeat.fritz.ai/synthetic-data-a-bridge-over-the-data-moat-29f392a52f27) to
+    increase the number of records in the minority class — usually known as oversampling.
+    This is usually done on the training set after doing the train test split. In
+    Python, this can be done using the [Imblearn](https://github.com/scikit-learn-contrib/imbalanced-learn) package.
+    One of the strategies that can be implemented from the package is known as the [Synthetic
+    Minority Over-sampling Technique (SMOTE)](https://imbalanced-learn.readthedocs.io/en/stable/generated/imblearn.over_sampling.SMOTE.html).
+    The technique is based on k-nearest neighbors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When using SMOTE:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first parameter is a `float` that indicates the ratio of the number of samples
+    in the minority class to the number of samples in the majority class, once resampling
+    has been done.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The number of neighbors to be used to generate the synthetic samples can be
+    specified via the `k_neighbors`parameter.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can then fit your resampled data to your model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Undersample the Majority Class
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can also experiment on reducing the number of samples in the majority class.
+    One such strategy that can be implemented is the `[NearMiss](https://imbalanced-learn.readthedocs.io/en/stable/generated/imblearn.under_sampling.NearMiss.html)` method.
+    You can also specify the ratio just like in SMOTE, as well as the number of neighbors
+    via `n_neighbors`***.***
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Final Thoughts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Other techniques that can be used include using building [an ensemble](https://heartbeat.fritz.ai/a-guide-to-ensemble-learning-390027fe38b8) of
+    weak learners to create a strong classifier. Metrics such as precision-recall
+    curve and area under curve (PR, AUC) are also worth trying when the positive class
+    is the most important.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As always, you should experiment with different techniques and settle on the
+    ones that give you the best results for your specific problems. Hopefully, this
+    piece has given some insights on how to get started.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Code available here](https://github.com/mwitiderrick/imbalanced-data)**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: Derrick Mwiti** is a data scientist who has a great passion for sharing
+    knowledge. He is an avid contributor to the data science community via blogs such
+    as Heartbeat, Towards Data Science, Datacamp, Neptune AI, KDnuggets just to mention
+    a few. His content has been viewed over a million times on the internet. Derrick
+    is also an author and online instructor. He also trains and works with various
+    institutions to implement data science solutions as well as to upskill their staff.
+    Derrick’s studied Mathematics and Computer Science from the Multimedia University,
+    he also is an alumnus of the Meltwater Entrepreneurial School of Technology. If
+    the world of Data Science, Machine Learning, and Deep Learning interest you, you
+    might want to check his [Complete Data Science & Machine Learning Bootcamp in
+    Python course](https://www.udemy.com/course/data-science-bootcamp-in-python/?referralCode=9F6DFBC3F92C44E8C7F4).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://heartbeat.fritz.ai/dealing-with-imbalanced-data-in-machine-learning-18e45fea7bb5).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to fix an Unbalanced Dataset](/2019/05/fix-unbalanced-dataset.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Most Useful Techniques to Handle Imbalanced Datasets](/2020/01/5-most-useful-techniques-handle-imbalanced-datasets.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Pro Tips: How to deal with Class Imbalance and Missing Labels](/2019/11/tips-class-imbalance-missing-labels.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Dealing With Noisy Labels in Text Data](https://www.kdnuggets.com/2023/04/dealing-noisy-labels-text-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Dealing with Position Bias in Recommendations and Search](https://www.kdnuggets.com/2023/03/dealing-position-bias-recommendations-search.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unsupervised Disentangled Representation Learning in Class…](https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, August 31: The Complete Data Science Study Roadmap…](https://www.kdnuggets.com/2022/n35.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Techniques to Handle Imbalanced Data](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Overcoming Imbalanced Data Challenges in Real-World Scenarios](https://www.kdnuggets.com/2023/07/overcoming-imbalanced-data-challenges-realworld-scenarios.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

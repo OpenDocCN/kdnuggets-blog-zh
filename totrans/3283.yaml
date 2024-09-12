@@ -1,0 +1,302 @@
+- en: 'Optimization in Machine Learning: Robust or global minimum?'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/06/robust-global-minimum.html](https://www.kdnuggets.com/2017/06/robust-global-minimum.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By Nikolaos Vasiloglou**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Optimization in Machine Learning](../Images/a067afc3bc25ba23a5ea3941a8ccf004.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'In 2014 the Facebook best paper award @UAI was awarded to *“Universal Convexification
+    via Risk-Aversion” b.y* Krishnamurthy Dvijotham; Maryam Fazel; Emanuel Todorov
+    [http://www.auai.org/uai2014/proceedings/individuals/121.pdf](http://www.auai.org/uai2014/proceedings/individuals/121.pdf).
+    Three years later we follow up with the authors in a brief interview:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**NV:** First of all congratulations for the award. We understand that in convex
+    problems it is much easier to find the global optimum.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**KD, MF:** Thank you! We appreciate the opportunity to participate in this
+    discussion.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. NV: Does the convexified problem always have the same minimum with the
+    original problem**?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**KD, MF:** No, the convexified problem can have a minimum that is quite different
+    from the original problem. The motivation for our paper comes from the fact that
+    in many problems (like control and reinforcement learning) one is interested in
+    a “robust” minimum (a minimum such that the cost does not increase much when you
+    perturb the parameters). Our method destroys non-robust minima and preserves a
+    single robust minimum of the problem.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2\. NV: We have seen a lot of interest in analyzing non-convex problems that
+    have all their local minimum equivalent to the global minimum. For example A.
+    Anandkumar’s group has been working on how to guarantee minimums in nonConvex
+    problems. How does your work compare to that direction?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**KD:** Yes, the results along these lines are very interesting and have potential
+    connections with our work. In particular, the papers [https://arxiv.org/abs/1503.03712](https://arxiv.org/abs/1503.03712),
+    [https://arxiv.org/pdf/1610.09322.pdf](https://arxiv.org/pdf/1610.09322.pdf) study
+    the approach of smoothing nonconvex functions to eliminate local minima, but do
+    this in a gradual fashion (starting with a large amount of smoothing and gradually
+    reduce it while tracking the global minimum). Our approach does this in a one-shot
+    way (adds a large amount of noise/risk-aversion) to directly convexify the problem,
+    but this can be improved (in the sense of allowing weaker assumptions to guarantee
+    location of a robust minimum) potentially by doing this in a graduated fashion.
+    We are excited to further explore these connections.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**MF:** Just to add that our work (as well as the papers KD mentioned above)
+    are not focused on the restricted case where all local minima are equivalent to
+    the global minimum.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3\. NV:**  **The biggest headache is with Deep Learning. You have an example
+    with MNIST on your paper. Have you tried it in other cases?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**KD:** The results we had on MNIST were quite preliminary and definitely need
+    more careful investigation and comparison with the latest deep learning algorithms
+    . Unfortunately, we did not have a chance to follow up with more detailed experiments
+    – I left for a postdoc shortly after we wrote this paper and shifted focus to
+    other topics.  We plan to get back to this over the next few months and write
+    an extended version of this paper. However, several papers by other authors have
+    appeared in the literature that explore similar ideas of adding noise to neural
+    networks to improve optimization and generalization (for example, [https://openreview.net/forum?id=B1YfAfcgl](https://openreview.net/forum?id=B1YfAfcgl)).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**4\. NV: The deep learning enthusiasts say that SGD works most of the times
+    and with a couple of restarts you train your network. How do you comment on that?
+    Why do you think your method is still better?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**KD:** The contribution of our paper is a specific approach that quantifies
+    precisely how much noise/risk-aversion one needs to convexify the problem. We
+    do not expect the approach to compete directly with SGD at least for standard
+    supervised learning problems, although it may offer some insights on how much
+    noise to add so that the training is less susceptible to local minima (**MF:**
+    Recently, noisy gradient descent and Langevin dynamics have received attention
+    for a similar goal).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, our main motivation for developing this was in RL and control problems
+    where robustness is inherently a desirable quality (for example it is a way to
+    ensure that a robotic system will not violate safety constraints in spite of perturbations
+    and disturbances). Our intuition was that finding robust minima is actually easier
+    and the theory developed in the paper provides some rigorous justification for
+    this statement.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**6\. NV: How was your paper received from the community? Were there any follow
+    ups? Your method seems very straightforward to implement. Do you think that a
+    tensorFlow implementation (or any other popular package) would help people adopt
+    it more?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**KD:** We have received some followup from recent papers applying similar
+    ideas to computer vision ([https://link.springer.com/chapter/10.1007/978-3-319-14612-6_4](https://link.springer.com/chapter/10.1007/978-3-319-14612-6_4))
+    and general nonconvex optimization ([https://arxiv.org/abs/1602.02191](https://arxiv.org/abs/1602.02191)).
+    However, since we did not continue to work on this ourselves, the paper was not
+    well publicized. We hope to get back to it soon, improve the algorithm to make
+    it practical and publish an open source implementation. The basic method in the
+    paper is straightforward to implement. However, to achieve good performance in
+    practice, we believe that the approach needs to be combined with variance reduction
+    ideas developed by researchers working on SGD in recent years. As I said in the
+    previous question, our view is that the method is most appropriate for problems
+    where robustness is of direct interest as opposed to standard supervised learning
+    problems. We hope to develop an implementation of the approach suitable to RL
+    problems using the OpenAIgym environment ([https://gym.openai.com/](https://gym.openai.com/))
+    over the next few months and make this publicly available.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**7\. NV: Tell us about other successful approaches in the problem of finding
+    the global minimum in practice.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**KD:** Global optimization of nonconvex problems is challenging and difficult
+    in general. In the optimization community, several approaches have been developed
+    that rely on branch and bound, i.e., constructing and refining convex relaxations
+    combined with some kind of search strategy (see, for example BARON: [http://archimedes.cheme.cmu.edu/?q=baron](http://archimedes.cheme.cmu.edu/?q=baron)).
+    For problems with no additional structure, these approaches are the best one can
+    hope for. However, the performance of these algorithms on any specific problem
+    can vary widely (in the worst case they are doing something akin to a brute force
+    search). For the case of polynomial optimization problems, the Lasserre hierarchy
+    ([http://homepages.laas.fr/lasserre/book-flyer.pdf](http://homepages.laas.fr/lasserre/book-flyer.pdf))
+    allows the computation of global optima via a hierarchy of semidefinite programs
+    growing in size. In theory, one needs to solve very large semidefinite programs
+    to find the global optimum, but in practice, for several instances of polynomial
+    optimization problems, a reasonably sized semidefinite program suffices to compute
+    the global optimum.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**8\. NV: Is it worth looking for convex envelopes for nonconvex problems?
+    How much slower would your algorithm would be compared to the convex envelope?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**KD:** This is a great question. The problem of constructing the convex envelope
+    of a general nonconvex function is again NP-hard and difficult except in special
+    cases. In the very special cases where constructing a convex envelope is easy,
+    one can minimize this envelope if one is interested in finding the minimum of
+    the original objective function. As stated earlier, however, the point of our
+    approach is to find a robust minimum rather than the global minimum and it is
+    not obvious that the convex envelope will be useful for this goal. It may also
+    be possible to interpret our approach in terms of a different kind of envelope
+    known as the Moreau envelope; we are currently investigating these connections.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**9\. NV: In your experiments you emphasize more on the generalization error
+    and less on the proximity to the global minimum.  Why is that? Does your method
+    actually solve both problems?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**KD:** Our approach can produce an optimum that is far from the global minimum
+    since it tries to find a robust minimum. The hypothesis that we tested in the
+    experiments was that perhaps the robust minimum is better than the global minimum
+    in terms of generalization error – the reason to expect this is that in the experiments,
+    we added noise to the prediction of the SVM (w’x+b) and the intermediate neurons
+    of a neural network. The idea was that adding noise of this kind and trying to
+    minimize the expected learning loss over the noise  tries to ensure that the prediction
+    of the algorithm remains stable not just for a given input but also for a range
+    of noisy perturbations around it. Of course, this was not really justified rigorously
+    in our paper, but the preliminary experiments we had indicated that this was indeed
+    the case. We are investigating ways to formalize this; it has been known that
+    stability of learning algorithms to perturbations is connected to generalization
+    ability [http://www.jmlr.org/papers/volume2/bousquet02a/bousquet02a.pdf](http://www.jmlr.org/papers/volume2/bousquet02a/bousquet02a.pdf)).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**10\. NV: Your method adds noise to the input and optimizes over the expectation?
+    Is there a link with bayesian methods? Any connections to accelerated Monte Carlo
+    variants? Also does your method provide a distribution for the learned model?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**KD:** There is no direct link since the noise in our approach is injected
+    on purpose and does not come from a probabilistic model as in the Bayesian approach
+    . Also, at the end, we do not obtain a posterior distribution over the model parameters
+    as in a Bayesian approach – only a point estimate. There may be ways to leverage
+    Monte Carlo algorithms to obtain a better estimate of the stochastic gradient
+    sample but we have not studied that yet. Our method only produces a single estimate
+    of the model parameters, not an entire distribution.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**11\. NV:  Are there any connections of your method with dropout (with regards
+    to improving generalization)?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**KD,MF:** We are not aware of any direct connections.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**12\. NV: The best paper at ICLR 2017 “**[Understanding Deep Learning required
+    Rethinking Generalization](https://openreview.net/pdf?id=Sy8gdB9xx)**” ends with
+    the following phrase: “*Another insight resulting from our experiments is that
+    optimization continues to be empirically easy even if the resulting model does
+    not generalize. This shows that the reasons for why optimization is empirically
+    easy must be different from the true cause of generalization*”. You seem to treat
+    both (optimization and generalization) at the same time. Does your approach contradict
+    the findings of this paper?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**KD:** I have not studied this paper carefully, but it does have an interesting
+    observation. As I mentioned earlier, our approach does seem to indicate that finding
+    robust minima is easier than finding the global and there is some evidence (from
+    our experiments and other learning theory papers) that robustness and generalization
+    are connected. However, our experiments were fairly preliminary and used very
+    small data sets and neural networks. Recent work in deep learning has shown that
+    optimization issues (local minima etc.) tend to go away in the realm of big data
+    and large neural networks – thus the situation studied in the recent ICLR paper
+    may actually present a different regime where both optimization and generalization
+    have different qualitative properties than a setup with a small number of model
+    parameters and small datasets. I would not say that the two studies contradict
+    each other but the new ICLR work is intriguing since it goes against the conventional
+    wisdom on learning and generalization.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.linkedin.com/pulse/robust-global-minimum-nikolaos-vasiloglou).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: **[Nikolaos Vasiloglou](https://www.linkedin.com/in/vasiloglou/) ****is Organizing
+    Committee Member at UAI 2017 and has several years experience in building/developing
+    distributed machine learning systems.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Introducing Dask-SearchCV: Distributed hyperparameter optimization with Scikit-Learn](/2017/05/dask-searchcv-distributed-hyperparameter-optimization-scikit-learn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learning to Learn by Gradient Descent by Gradient Descent](/2017/02/learning-learn-gradient-descent.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Machine Learning Projects You Can No Longer Overlook, January](/2017/01/five-machine-learning-projects-cant-overlook-january.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Data Science Minimum: 10 Essential Skills You Need to Know to Start…](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Pipeline Optimization with TPOT](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Want to Use Your Data Skills to Solve Global Problems? Here’s What…](https://www.kdnuggets.com/2022/04/jhu-want-data-skills-solve-global-problems.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Gradient Descent: The Mountain Trekker''s Guide to Optimization with…](https://www.kdnuggets.com/gradient-descent-the-mountain-trekker-guide-to-optimization-with-mathematics)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

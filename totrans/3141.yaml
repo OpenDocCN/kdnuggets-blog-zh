@@ -1,0 +1,448 @@
+- en: CatBoost vs. Light GBM vs. XGBoost
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/03/catboost-vs-light-gbm-vs-xgboost.html](https://www.kdnuggets.com/2018/03/catboost-vs-light-gbm-vs-xgboost.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Alvira Swalin](https://www.linkedin.com/in/alvira-swalin), University
+    of San Francisco**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Header image](../Images/bce95a9e42f88fdaba11ede661ef8750.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: I recently participated in this Kaggle competition (WIDS Datathon by Stanford)
+    where I was able to land up in Top 10 using various boosting algorithms. Since
+    then, I have been very curious about the fine workings of each model including
+    parameter tuning, pros and cons and hence decided to write this blog. Despite
+    the recent re-emergence and popularity of neural networks, I am focusing on boosting
+    algorithms because they are still more useful in the regime of limited training
+    data, little training time and little expertise for parameter tuning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/524ea5bbe63e2ca0102cb6071b43c94e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Since XGBoost (often called GBM Killer) has been in the machine learning world
+    for a longer time now with lots of articles dedicated to it, this post will focus
+    more on CatBoost & LGBM. Below are the topics we will cover-
+  prefs: []
+  type: TYPE_NORMAL
+- en: Structural Differences
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Treatment of categorical variables by each algorithm
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Understanding Parameters
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Implementation on Dataset
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Performance of each algorithm
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Structural Differences in LightGBM & XGBoost
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: LightGBM uses a novel technique of Gradient-based One-Side Sampling (GOSS) to
+    filter out the data instances for finding a split value while XGBoost uses pre-sorted
+    algorithm & Histogram-based algorithm for computing the best split. Here instances
+    means observations/samples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First let us understand how pre-sorting splitting works-
+  prefs: []
+  type: TYPE_NORMAL
+- en: For each node, enumerate over all features
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For each feature, sort the instances by feature value
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use a linear scan to decide the best split along that feature basis [information
+    gain](https://en.wikipedia.org/wiki/Information_gain_ratio)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Take the best split solution along all the features
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In simple terms, Histogram-based algorithm splits all the data points for a
+    feature into discrete bins and uses these bins to find the split value of histogram.
+    While, it is efficient than pre-sorted algorithm in training speed which enumerates
+    all possible split points on the pre-sorted feature values, it is still behind
+    GOSS in terms of speed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**So what makes this GOSS method efficient?** In AdaBoost, the sample weight
+    serves as a good indicator for the importance of samples. However, in Gradient
+    Boosting Decision Tree (GBDT), there are no native sample weights, and thus the
+    sampling methods proposed for AdaBoost cannot be directly applied. Here comes
+    gradient-based sampling.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Gradient represents the slope of the tangent of the loss function, so logically
+    if gradient of data points are large in some sense, these points are important
+    for finding the optimal split point as they have higher error
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: GOSS keeps all the instances with large gradients and performs random sampling
+    on the instances with small gradients. For example, let’s say I have 500K rows
+    of data where 10k rows have higher gradients. So my algorithm will choose (10k
+    rows of higher gradient+ x% of remaining 490k rows chosen randomly). Assuming
+    x is 10%, total rows selected are 59k out of 500K on the basis of which split
+    value if found.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The basic assumption taken here is that samples with training instances with
+    small gradients have smaller training error and it is already well-trained.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In order to keep the same data distribution, when computing the information
+    gain, GOSS introduces a constant multiplier for the data instances with small
+    gradients. Thus, GOSS achieves a good balance between reducing the number of data
+    instances and keeping the accuracy for learned decision trees.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/6dbd2ba56f33e97353f10aa1eb98428e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Leaf with higher gradient/error is used for growing further in LGBM
+  prefs: []
+  type: TYPE_NORMAL
+- en: How each model treats Categorical Variables?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**CatBoost**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: CatBoost has the flexibility of giving indices of categorical columns so that
+    it can be encoded as one-hot encoding using one_hot_max_size (Use one-hot encoding
+    for all features with number of different values less than or equal to the given
+    parameter value).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you don’t pass any anything in cat_features argument, CatBoost will treat
+    all the columns as numerical variables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note: If a column having string values is not provided in the cat_features,
+    CatBoost throws an error. Also, a column having default int type will be treated
+    as numeric by default, one has to specify it in cat_features to make the algorithm
+    treat it as categorical.**'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/69fdd46bf459ceddc6c7f071ef72bb75.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: For remaining categorical columns which have unique number of categories greater
+    than one_hot_max_size, CatBoost uses an efficient method of encoding which is
+    similar to mean encoding but reduces overfitting. The process goes like this —
+  prefs: []
+  type: TYPE_NORMAL
+- en: Permuting the set of input observations in a random order. Multiple random permutations
+    are generated
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Converting the label value from a floating point or category to an integer
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'All categorical feature values are transformed to numeric values using the
+    following formula:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![](../Images/6b7dc94c4587b4eb4ac5a5f8c92e6773.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Where, **CountInClass** is how many times the label value was equal to “1” for
+    objects with the current categorical feature value **Prior** is the preliminary
+    value for the numerator. It is determined by the starting parameters. **TotalCount**
+    is the total number of objects (up to the current one) that have a categorical
+    feature value matching the current one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Mathematically, this can be represented using below equation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/14870ff745ee5c94e7bb182010a3522e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**LightGBM**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similar to CatBoost, LightGBM can also handle categorical features by taking
+    the input of feature names. It does not convert to one-hot coding, and is much
+    faster than one-hot coding. LGBM uses a special algorithm to find the split value
+    of categorical features [[Link](http://www.csiss.org/SPACE/workshops/2004/SAC/files/fisher.pdf)].
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/999bab5392ea19967c6590e0ab2f04b1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Note: You should convert your categorical features to int type before you
+    construct Dataset for LGBM. It does not accept string values even if you passes
+    it through categorical_feature parameter.**'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**XGBoost**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unlike CatBoost or LGBM, XGBoost cannot handle categorical features by itself,
+    it only accepts numerical values similar to Random Forest. Therefore one has to
+    perform various encodings like label encoding, mean encoding or one-hot encoding
+    before supplying categorical data to XGBoost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similarity in Hyperparameters
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: All these models have lots of parameters to tune but we will cover only the
+    important ones. Below is the list of these parameters according to their function
+    and their counterparts across different models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/15d1efa342da20fe09437044c82c8d40.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Implementation on a Dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I am using the Kaggle [Dataset](https://www.kaggle.com/usdot/flight-delays/data) of
+    flight delays for the year 2015 as it has both categorical and numerical features.
+    With approximately 5 million rows, this dataset will be good for judging the performance
+    in terms of both speed and accuracy of tuned models for each type of boosting.
+    I will be using a 10% subset of this data ~ 500k rows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Below are the features used for modeling:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**MONTH, DAY, DAY_OF_WEEK**: data type int'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**AIRLINE and FLIGHT_NUMBER**: data type int'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**ORIGIN_AIRPORT** and **DESTINATION_AIRPORT: **data type string'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**DEPARTURE_TIME: **data type float'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**ARRIVAL_DELAY**: this will be the target and is transformed into boolean
+    variable indicating delay of more than 10 minutes'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**DISTANCE and AIR_TIME**: data type float'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**XGBoost**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Light GBM**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**CatBoost**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: While tuning parameters for CatBoost, it is difficult to pass indices for categorical
+    features. Therefore, I have tuned parameters without passing categorical features
+    and evaluated two model — one with and other without categorical features. I have
+    separately tuned one_hot_max_size because it does not impact the other parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Results
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/9398778e4795eb40b2d0aad94a2c74aa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: End Notes
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For evaluating model, we should look into the performance of model in terms
+    of both speed and accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keeping that in mind, CatBoost comes out as the winner with maximum accuracy
+    on test set (0.816), minimum overfitting (both train and test accuracy are close)
+    and minimum prediction time & tuning time. But this happened only because we considered
+    categorical variables and tuned one_hot_max_size. If we don’t take advantage of
+    these features of CatBoost, it turned out to be the worst performer with just
+    0.752 accuracy. Hence we learnt that CatBoost performs well only when we have
+    categorical variables in the data and we properly tune them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our next performer was XGBoost which generally works well. It’s accuracy was
+    quite close to CatBoost even after ignoring the fact that we have categorical
+    variables in the data which we had converted into numerical values for its consumption.
+    However, the only problem with XGBoost is that it is too slow. It was really frustrating
+    to tune its parameters especially (took me 6 hours to run GridSearchCV — very
+    bad idea!). The better way is to tune parameters separately rather than using
+    GridSearchCV. Check out this [blog](https://www.analyticsvidhya.com/blog/2016/03/complete-guide-parameter-tuning-xgboost-with-codes-python/)post
+    to understand how to tune parameters smartly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, the last place goes to Light GBM. An important thing to note here is
+    that it performed poorly in terms of both speed and accuracy when cat_features
+    is used. I believe the reason why it performed badly was because it uses some
+    kind of modified mean encoding for categorical data which caused overfitting (train
+    accuracy is quite high — 0.999 compared to test accuracy). However if we use it
+    normally like XGBoost, it can achieve similar (if not higher) accuracy with much
+    faster speed compared to XGBoost (LGBM — 0.785, XGBoost — 0.789).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lastly, I have to say that these observations are true for this particular dataset
+    and may or may not remain valid for other datasets. However, one thing which is
+    true in general is that XGBoost is slower than the other two algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So which one is your favorite? Please comment with the reasons.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Any feedback or suggestions for improvement will be really appreciated!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Check out my other blogs [here](https://medium.com/@aswalin)!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Resources**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[http://learningsys.org/nips17/assets/papers/paper_11.pdf](http://learningsys.org/nips17/assets/papers/paper_11.pdf)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://papers.nips.cc/paper/6907-lightgbm-a-highly-efficient-gradient-boosting-decision-tree.pdf](https://papers.nips.cc/paper/6907-lightgbm-a-highly-efficient-gradient-boosting-decision-tree.pdf)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://arxiv.org/pdf/1603.02754.pdf](https://arxiv.org/pdf/1603.02754.pdf)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://github.com/Microsoft/LightGBM](https://github.com/Microsoft/LightGBM)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://www.analyticsvidhya.com/blog/2017/06/which-algorithm-takes-the-crown-light-gbm-vs-xgboost/](https://www.analyticsvidhya.com/blog/2017/06/which-algorithm-takes-the-crown-light-gbm-vs-xgboost/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://stats.stackexchange.com/questions/307555/mathematical-differences-between-gbm-xgboost-lightgbm-catboost](https://stats.stackexchange.com/questions/307555/mathematical-differences-between-gbm-xgboost-lightgbm-catboost)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Bio: [Alvira Swalin](https://www.linkedin.com/in/alvira-swalin)** ([**Medium**](https://medium.com/@aswalin))
+    is currently pursuing Master''s in Data Science at USF, I am particularly interested
+    in Machine Learning & Predictive Modeling. She is a Data Science Intern at Price
+    (Fx).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/catboost-vs-light-gbm-vs-xgboost-5f93620723db).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Gradient Boosting in TensorFlow vs XGBoost](/2018/01/gradient-boosting-tensorflow-vs-xgboost.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Lessons Learned From Benchmarking Fast Machine Learning Algorithms](/2017/08/lessons-benchmarking-fast-machine-learning-algorithms.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[XGBoost: A Concise Technical Overview](/2017/10/xgboost-concise-technical-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[WTF is the Difference Between GBM and XGBoost?](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 5 Advantages That CatBoost ML Brings to Your Data to Make it Purr](https://www.kdnuggets.com/2023/02/top-5-advantages-catboost-ml-brings-data-make-purr.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What are the Assumptions of XGBoost?](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tuning XGBoost Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Leveraging XGBoost for Time-Series Forecasting](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

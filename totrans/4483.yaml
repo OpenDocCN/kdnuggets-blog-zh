@@ -1,0 +1,450 @@
+- en: Optimize Response Time of your Machine Learning API In Production
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/05/optimize-response-time-machine-learning-api-production.html](https://www.kdnuggets.com/2020/05/optimize-response-time-machine-learning-api-production.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Yannick Wolf](https://www.linkedin.com/in/yannick-wolff-457616124/),
+    Lead Data Scientist @ Sicara**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article demonstrates how building a smarter API serving Deep Learning models
+    minimizes the response time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: <picture>![](../Images/e8acc09138d252f613079422b466a468.png)</picture>
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Your team worked hard to build a Deep Learning model for a given task (let''s
+    say: detecting bought products in a store thanks to Computer Vision). Good.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You then developed and deployed an API that integrates this model (let''s keep
+    our example: self-checkout machines would call this API). Great!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The new product is working well and you feel like all the work is done.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But since the manager decided to install more self-checkout machines (I really
+    like this example), users have started to complain about the huge latency that
+    occurs each time they are scanning a product.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What can you do? Buy 10x faster—and 10x more expensive—GPUs? Ask data scientists
+    to try reducing the depth of the model without degrading its accuracy?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cheaper and easier solutions exist, as you will see in this article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A basic API with a big dummy model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'First of all, we''ll need a model with a long inference time to work with.
+    Here is how I would do that with [TensorFlow 2](https://www.tensorflow.org/)''s
+    Keras API (if you''re not familiar with this Deep Learning framework, just step
+    over this piece of code):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When testing the model on my [GeForce RTX 2080](https://www.nvidia.com/fr-fr/geforce/graphics-cards/rtx-2080/)
+    GPU, I measured an inference time of 303 ms. That's what we can call a big model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, we need a very simple API to serve our model, with only one route to ask
+    for a prediction. A very standard API framework in Python is [Flask](https://www.palletsprojects.com/p/flask/).
+    That's the one I chose, along with a [WSGI HTTP Server](https://www.fullstackpython.com/wsgi-servers.html)
+    called [Gunicorn](https://gunicorn.org/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our unique route parses the input from the request, calls the instantiated model
+    on it and sends the output back to the user.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can run our deep learning API with the command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Okay, I can now send some random numbers to my API and it responds to me with
+    some other random numbers. The question is: how fast?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's load test our API
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We indeed want to know how fast our API responds, and especially when increasing
+    the number of requests per second. Such a load test can be performed using [Locust](https://locust.io/)
+    Python library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This library works with a locustfile.py which indicates which behavior to simulate:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Locust simulates several users, executing different tasks at the same time.
+    In our case, we want to define only one task which is to call the /predict route
+    with a random input.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can also parametrize the wait_time, which is the time a simulated user waits
+    after having received a response from the API, before sending his next request.
+    To simulate the self-checkout use case, I've set this time to be a random value
+    between 1 and 3 seconds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The number of users is chosen through Locust''s dashboard, where all the statistics
+    are shown in real-time. This dashboard can be run by calling the command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Locust dashboard
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So, how does our naive API react when we increase the number of users? As we
+    could expect, quite badly:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: with 1 user, the average response time I measured was 332 ms (slightly more
+    than the isolated inference time previously measured, nothing surprising)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'with 5 users, this average time increased a little bit: 431 ms'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: with 20 users, it reached 4.1 s (more than 12 times more than with 1 user)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: <picture>![gunicorn-flask-tensorflow-api-response-time](../Images/e9ae12e8925c2b179622755f9d2e5010.png)</picture>
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'These results are not so surprising when we think of how requests are handled
+    by our API. By default Gunicorn launches 2 processes: a master process listen
+    to incoming requests, stores them into a [FIFO](https://en.wikipedia.org/wiki/FIFO_and_LIFO_accounting#FIFO)
+    queue, and sends them successively to a worker process, each time it''s available.
+    The latter manages to run your code to compute the response for each request.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since the worker process is single-threaded, requests are handled one by one.
+    If 5 requests arrive simultaneously, the 5th request will receive its response
+    after 5 x 300 ms = 1500 ms, which explains the high average response time with
+    20 users.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The more the faster
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Luckily, Gunicorn provides two ways to scale APIs by increasing:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: the number of threads handling requests
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the number of worker processes
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The multi-threading option is not the one that may help us the most since TensorFlow
+    would not allow a thread to access the session graph initialized in another thread.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the other hand, setting a number of workers greater than one would create
+    several processes, with the whole Flask app initialized for each worker. Each
+    one instantiates its own TensorFlow session with its own model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: <picture>![multi-workers-gunicorn-flask-tensorflow-api-schema](../Images/1c4723ca5844a91abd1575e67f684d17.png)</picture>
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s try this approach by running the following command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And here are the new performances we get with a multi-workers API:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: <picture>![multi-workers-gunicorn-flask-tensorflow-api-response-time](../Images/69dfec94e4ccee61dcc3858dfb78e933.png)</picture>
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can see that the effect on response time when using 5 workers instead of
+    1 is drastic: the 4.1 s average for 20 users has almost been divided by 2\. By
+    2 and not by 5 as you might expect, because of the wait time between requests
+    — it would have been divided by 5 if the simulated users were immediately requesting
+    the API again after having received a response.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You may wonder why I stopped to 5 workers: why not to set-up 20 workers, to
+    be able to handle all the 20 users requesting the API at the exact same time?
+    The reason is that each worker is an independent process that instantiates its
+    own version of the model in the GPU memory.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 20 workers would thus consume 20 times the size of the model just for initializing
+    the weights, and more memory is then needed for inference computing. With a 2GiB
+    model and an 8GiB GPU, we are a bit limited.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/781550b5a91b86e5e76a34b60c897835.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Each of the 2 workers consumes 2349MiB of GPU memory
+  prefs: []
+  type: TYPE_NORMAL
+- en: It's possible to maximize the number of running workers, by fine-tuning the
+    memory allocated to each of them with a TensorFlow parameter (per_process_gpu_memory_fraction
+    in TensorFlow 1.x, and memory_limit in TensorFlow 2.x — I've only tested the first
+    one), setting it to the minimal value which does not make predictions fail with
+    an out of memory error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As warned by the library, reducing the available memory could theoretically
+    increase inference time by disabling optimization. However, I did not personally
+    notice any significant change.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Anyway, this will not allow us to run 20 workers, even using our 2 GPUs. So,
+    let us buy 2 more? Don't panic, you have more than one string to your bow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Haste makes waste
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let us come back to the mono-worker case for now. If you think about how things
+    happen when two or more requests arrive almost at the same time to this API, there
+    is something unoptimized:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/06d468e84c3a8937dd518aa81510fca8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 3 requests arriving with 100 ms between each of them, the average response time
+    is 1433 ms
+  prefs: []
+  type: TYPE_NORMAL
+- en: The API passes the 3 inputs through the model one by one. However, most Deep
+    Learning models, thanks to the nature of the mathematical operations they are
+    made of, can process several inputs at the same time without increasing inference
+    time — that's what we call batch processing, and that's what we usually do during
+    the training phase.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, why not processing these 3 inputs in a batch? This would imply that after
+    receiving the first request, the API waits a bit before running the model, in
+    order to receive the 2 next requests before processing them all in one. This would
+    increase the response time for the first request but decrease it on average.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c266286ba19aad8c0e6421495b0655e0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If the API waits 300 ms before processing requests by batch, we get an average
+    response time of 600 ms
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In practice, we do not know when future requests will arrive, and it''s a bit
+    complex to decide how long to wait for potential next requests. A quite logical
+    rule to trigger processing of queued requests is to do it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: if the number of queued requests has reached a maximum value, corresponding
+    to the GPU memory limit or the maximum number of users (if known)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: OR
+  prefs: []
+  type: TYPE_NORMAL
+- en: if the oldest request in the queue is older than a timeout value. This value
+    has to be fine-tuned empirically to minimize the average response time.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Here is a way to implement such behavior, still with a Gunicorn - Flask - TensorFlow
+    stack, using a Python queue and a thread dedicated to handling requests by batch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This new API has to be run with as many threads as the maximum number of requests
+    we want to be able to process in batch:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here are the very satisfying results I''ve got after a very quick fine-tuning
+    of the timeout value:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: <picture>![batching-gunicorn-flask-tensorflow-api-response-time](../Images/5141b3adf790bc580e4c443de1d5c6ef.png)</picture>
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see, when simulating only 1 user, this new API set-up with a timeout
+    of 500 ms increases response time by 500 ms (the timeout value) and is of course
+    useless. But with 20 users, the average response time has been divided by 6.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that in order to get still better results, this batching technique can
+    be used in parallel with the multi-workers one presented above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Didn't we reinvent the wheel?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As developers, it's a kind of guilty pleasure to code from scratch something
+    that should very likely already be implemented by an existing tool and that's
+    what we've just done all along this article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A tool indeed exists for serving a TensorFlow model in an API. It has been developed
+    by TensorFlow and it is called... [TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Not only does it allow to start a prediction API for the model without writing
+    any other code than the model itself, but it also provides several optimizations
+    that you may find interesting, like parallelism and requests batching!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To serve a model with TF Serving, the first thing you need is to export it
+    to your disk (in the TensorFlow format, not the Keras one), which can be done
+    with the following piece of code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then, one of the easiest ways to start a serving API is to use the TF Serving
+    [docker image](https://www.tensorflow.org/tfx/serving/docker).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The command below will start a prediction API that you can test by requesting
+    this endpoint: [http://localhost:8501/v1/models/my_model:predict](http://localhost:8501/v1/models/my_model:predict)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that it does not use the GPU by default. You can find in [this documentation](https://www.tensorflow.org/tfx/serving/docker#serving_with_docker_using_your_gpu)
+    how to make it work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'What about batching? You will have to write such a batching config file:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'It includes, in particular, the 2 parameters used in our custom implementation:
+    max_batch_size and batch_timeout_micros parameter. The latter is what we called
+    the timeout and has to be given in microseconds.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally, the command to run TF Serving with batching enabled is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'I tested it and thanks to some black magic, I got even better results than
+    with my custom batching API:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: <picture>![batching-tensorflow-serving-api-response-time](../Images/01ab4df8dea678bba57bcbd7fde2432f.png)</picture>
+  prefs: []
+  type: TYPE_NORMAL
+- en: I hope that you will be able to use the different tips presented in this article
+    to boost your own Machine Learning APIs. There are many tracks I did not explore,
+    especially the optimizations on the model itself (rather than the API) like [Model
+    Pruning](https://towardsdatascience.com/pruning-deep-neural-network-56cae1ec5505)
+    or [Post-training Quantization](https://www.tensorflow.org/model_optimization/guide/quantization).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Yannick Wolf](https://www.linkedin.com/in/yannick-wolff-457616124/)**
+    is Lead Data Scientist at Sicara.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.sicara.ai/blog/optimize-response-time-api). Reposted
+    with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Software Interfaces for Machine Learning Deployment](/2020/03/software-interfaces-machine-learning-deployment.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[TensorFlow 2.0 Tutorial: Optimizing Training Time Performance](/2020/03/tensorflow-optimizing-training-time-performance.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Do Hyperparameter Tuning on Any Python Script in 3 Easy Steps](/2020/04/hyperparameter-tuning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Top 10 MLOps Tools to Optimize & Manage Machine Learning Lifecycle](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploying Your Machine Learning Model to Production in the Cloud](https://www.kdnuggets.com/deploying-your-ml-model-to-production-in-the-cloud)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Optimize SQL Queries for Faster Data Retrieval](https://www.kdnuggets.com/2023/06/optimize-sql-queries-faster-data-retrieval.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Optimize Dockerfile Instructions for Faster Build Times](https://www.kdnuggets.com/how-to-optimize-dockerfile-instructions-for-faster-build-times)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Full End-to-End Deployment of a Machine Learning Algorithm into a…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Operationalizing Machine Learning from PoC to Production](https://www.kdnuggets.com/2022/05/operationalizing-machine-learning-poc-production.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

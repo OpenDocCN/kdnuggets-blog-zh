@@ -1,0 +1,188 @@
+- en: 'Doing Data Science: A Kaggle Walkthrough – Cleaning Data'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/03/doing-data-science-kaggle-walkthrough-cleaning-data.html](https://www.kdnuggets.com/2016/03/doing-data-science-kaggle-walkthrough-cleaning-data.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Brett Romero, Open Data Kosovo**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*This article on cleaning data is Part III in a series looking at data science
+    and machine learning by walking through a Kaggle competition. If you have not
+    done so already, it is recommended that you go back and read [Part I](http://brettromero.com/wordpress/data-science-a-kaggle-walkthrough-introduction/)
+    and [Part II](http://brettromero.com/wordpress/data-science-a-kaggle-walkthrough-understanding-the-data/)*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this part we will focus on cleaning the data provided for the Airbnb Kaggle
+    competition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Dirty data](../Images/9cccd97cf0197adc18e3a221a9c4dbde.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Cleaning Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'When we talk about cleaning data, what exactly are we talking about? Generally
+    when people talk about cleaning data, there are a few specific things they are
+    referring to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Fixing up formats** – Often when data is saved or translated from one format
+    to another (for example in our case from CSV to Python), some data may not be
+    translated correctly. We saw a good example of this in the last article in csv.
+    The timestamp_first_active column contained numbers like 20090609231247 instead
+    of timestamps in the expected format: 2009-06-09 23:12:47\. A typical job when
+    it comes to cleaning data is correcting these types of issues.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Filling in missing values** – As we also saw in Part II, it is quite common
+    for some values to be missing from datasets. This typically means that a piece
+    of information was simply not collected. There are several options for handling
+    missing data that will be covered below.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Correcting erroneous values** – For some columns, there are values that can
+    be identified as obviously incorrect. This may be a ‘gender’ column where someone
+    has entered a number, or an ‘age’ column where someone has entered a value well
+    over 100\. These values either need to be corrected (if the correct value can
+    be determined) or assumed to be missing.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Standardizing categories** – More of a subcategory of ‘correcting erroneous
+    values’, this type of data cleansing is so common it is worth special mention.
+    In many (all?) cases where data is collected from users directly – particularly
+    using free text fields – spelling mistakes, language differences or other factors
+    will result in a given answer being provided in multiple ways. For example, when
+    collecting data on country of birth, if users are not provided with a standardized
+    list of countries, the data will inevitably contain multiple spellings of the
+    same country (e.g. USA, United States, U.S. and so on). One of the main cleaning
+    tasks often involves standardizing these values to ensure that there is only one
+    version of each value.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Options for Dealing With Missing Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Missing data in general is one of the trickier issues that is dealt with when
+    cleaning data. Broadly there are two solutions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. Deleting/Ignoring rows with missing values**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The simplest solution available when faced with missing values is to not use
+    the records with missing values when training your model. However, there are some
+    issues to be aware of before you starting deleting masses of rows from your dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first is that this approach only makes sense if the number of rows with
+    missing data is relatively small compared to the dataset. If you are finding that
+    you will be deleting more than around 10% of your dataset due to rows having missing
+    values, you may need to reconsider.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The second issue is that in order to delete the rows containing missing data,
+    you have to be confident that the rows you are deleting do not contain information
+    that is not contained in other rows. For example, in the current Airbnb dataset
+    we have seen that many users have not provided their age. Can we assume that the
+    people who chose not to provide their age are the same as the users who did? Or
+    are they likely to represent a different type of user, perhaps an older and more
+    privacy conscious user, and therefore a user that is likely to make different
+    choices on which countries to visit? If the answer is the latter, we probably
+    do not want to just delete the records.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2\. Filling in the Values**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The second broad option for dealing with missing data is to fill the missing
+    values with a value. But what value to use? This depends on a range of factors,
+    including the type of data you are trying to fill.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the data is categorical (i.e. countries, device types, etc.), it may make
+    sense to simply create a new category that will represent ‘unknown’. Another option
+    may be to fill the values with the most common value for that column (the mode).
+    However, because these are broad methods for filling the missing values, this
+    may oversimplify your data and/or make your final model less accurate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For numerical values (for example the age column) there are some other options.
+    Given that in this case using the mode to fill values makes less sense, we could
+    instead use the mean or median. We could even take an average based on some other
+    criteria – for example filling the missing age values based on an average age
+    for users that selected the same `country_destination`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For both types of data (categorical and numerical), we can also use far more
+    complicated methods to impute the missing values. Effectively, we can use a similar
+    methodology that we are planning to use to predict the `country_destination` to
+    predict the values in any of the other columns, based on the columns that do have
+    data. And just like with modeling in general, there are an almost endless number
+    of ways this can be done, which won’t be detailed here. For more information on
+    this topic, the [orange Python library](http://docs.orange.biolab.si/reference/rst/Orange.feature.imputation.html)
+    provides some excellent documentation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Classification Metrics Walkthrough: Logistic Regression with…](https://www.kdnuggets.com/2022/10/classification-metrics-walkthrough-logistic-regression-accuracy-precision-recall-roc.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Free Kaggle Micro-Courses for Data Science Beginners](https://www.kdnuggets.com/7-free-kaggle-micro-courses-for-data-science-beginners)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 Kaggle Machine Learning Projects to Become Data Scientist in 2024](https://www.kdnuggets.com/top-10-kaggle-machine-learning-projects-to-become-data-scientist-in-2024)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 4 tricks for competing on Kaggle and why you should start](https://www.kdnuggets.com/2022/05/packt-top-4-tricks-competing-kaggle-start.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Most Comprehensive List of Kaggle Solutions and Ideas](https://www.kdnuggets.com/2022/11/comprehensive-list-kaggle-solutions-ideas.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

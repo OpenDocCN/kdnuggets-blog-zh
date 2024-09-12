@@ -1,0 +1,372 @@
+- en: Getting Started with Distributed Machine Learning with PyTorch and Ray
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html](https://www.kdnuggets.com/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Michael Galarnyk](https://twitter.com/GalarnykMichael), [Richard Liaw](https://twitter.com/richliaw),
+    and [Robert Nishihara](https://twitter.com/robertnishihara)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/2e652136f9d14830daf0b1e7bcade4e5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Machine learning today *requires* distributed computing. Whether you’re [training
+    networks](https://www.youtube.com/watch?v=rEB3NPUoxMM), [tuning hyperparameters](https://docs.ray.io/en/master/tune/), [serving
+    models](https://docs.ray.io/en/master/serve/), or [processing data](https://medium.com/distributed-computing-with-ray/data-processing-support-in-ray-ae8da34dce7e),
+    machine learning is computationally intensive and can be prohibitively slow without
+    access to a cluster. [Ray](https://ray.io/) is a popular framework for distributed
+    Python that can be paired with PyTorch to rapidly scale machine learning applications.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This post covers various elements of the Ray ecosystem and how it can be used
+    with PyTorch!
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Ray
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/0c7d3372f00ec70dbc844670bec0f7e5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Ray is an open source library for parallel and distributed Python. The diagram
+    above shows that at a high level, the Ray ecosystem consists of three parts: the
+    core Ray system, scalable libraries for machine learning (both native and third
+    party), and tools for [launching clusters on any cluster or cloud provider](https://medium.com/distributed-computing-with-ray/how-to-scale-python-on-every-major-cloud-provider-12b3bde01208).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Core Ray System
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Ray](https://github.com/ray-project/ray) can be used to [scale Python applications](https://towardsdatascience.com/modern-parallel-and-distributed-python-a-quick-tutorial-on-ray-99f8d70369b8) across
+    multiple cores or machines. It has a couple major advantages including:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Simplicity: you can scale your Python applications without rewriting them,
+    and the same code can run on one machine or multiple machines.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Robustness: applications gracefully handle machine failures and preemption.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Performance](https://towardsdatascience.com/10x-faster-parallel-python-without-python-multiprocessing-e5017c93cce1):
+    tasks run with millisecond latencies, scale to tens of thousands of cores, and
+    handle numerical data with minimal serialization overhead.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Library Ecosystem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Because Ray is a general-purpose framework, the community has built many libraries
+    and frameworks on top of it to accomplish different tasks. The vast majority of
+    these support PyTorch, require minimal modifications to your code, and integrate
+    seamlessly with each other. Below are just a few of the [many libraries](https://www.anyscale.com/blog/understanding-the-ray-ecosystem-and-community) in
+    the ecosystem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**RaySGD**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/4f506a6863cbb7f15269e461d4ae661a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Comparison of PyTorch’s DataParallel vs Ray (which uses PyTorch’s Distributed
+    DataParallel underneath the hood) on p3dn.24xlarge instances. [Image source](https://medium.com/distributed-computing-with-ray/faster-and-cheaper-pytorch-with-raysgd-a5a44d4fd220).
+  prefs: []
+  type: TYPE_NORMAL
+- en: RaySGD is a library that provides distributed training wrappers for data parallel
+    training. For example, the [RaySGD TorchTrainer](https://docs.ray.io/en/master/raysgd/raysgd_pytorch.html) is
+    a wrapper around torch.distributed.launch. It provides a Python API to easily
+    incorporate distributed training into a larger Python application, as opposed
+    to needing to wrap your training code in bash scripts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some other advantages of the library are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Ease of use: You can scale PyTorch’s native DistributedDataParallel without
+    needing to monitor individual nodes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Scalability: You can scale up and down. Start on a single CPU. Scale up to
+    multi-node, multi-CPU, or multi-GPU clusters by changing 2 lines of code.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Accelerated Training: There is built-in support for mixed precision training
+    with NVIDIA Apex.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Fault Tolerance: There is support for automatic recovery when cloud machines
+    are preempted.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Compatibility: There is seamless integration with other libraries like [Ray
+    Tune](https://docs.ray.io/en/master/tune/index.html) and [Ray Serve](https://docs.ray.io/en/master/serve/).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'You can get started with TorchTrainer by installing Ray (pip install -U ray
+    torch) and running the code below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The script will download CIFAR10 and use a ResNet18 model to do image classification.
+    With a single parameter change (num_workers=N), you can utilize multiple GPUs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you would like to learn more about RaySGD and how to scale PyTorch training
+    across a cluster, you should check out this [blog post](https://medium.com/distributed-computing-with-ray/faster-and-cheaper-pytorch-with-raysgd-a5a44d4fd220).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Ray Tune**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/b430f66bf5d49d073a678c7a63666bb1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Ray Tune’s implementation of optimization algorithms like Population Based Training
+    (shown above) [can be used with PyTorch](https://docs.ray.io/en/master/tune/tutorials/tune-advanced-tutorial.html) for
+    more performant models. Image from [Deepmind](https://deepmind.com/blog/article/population-based-training-neural-networks).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Ray Tune](https://docs.ray.io/en/master/tune/index.html) is a Python library
+    for experiment execution and hyperparameter tuning at any scale. Some advantages
+    of the library are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The ability to launch a multi-node [distributed hyperparameter sweep](https://docs.ray.io/en/master/tune/tutorials/tune-distributed.html#tune-distributed) in
+    fewer than 10 lines of code.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Support for every major machine learning framework [including PyTorch](https://pytorch.org/tutorials/beginner/hyperparameter_tuning_tutorial.html).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: First-class support for GPUs.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Automatic management of checkpoints and logging to [TensorBoard](https://docs.ray.io/en/master/tune/user-guide.html#tune-logging).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Access to state of the art algorithms such as [Population Based Training (PBT)](https://docs.ray.io/en/master/tune/api_docs/schedulers.html#tune-scheduler-pbt), [BayesOptSearch](https://docs.ray.io/en/master/tune/api_docs/suggestion.html#bayesopt), [HyperBand/ASHA](https://docs.ray.io/en/master/tune/api_docs/schedulers.html#tune-scheduler-hyperband).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can get started with Ray Tune by installing Ray (pip install ray torch torchvision)
+    and running the code below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you would like to learn about how to incorporate Ray Tune into your PyTorch
+    workflow, you should check out this [blog post](https://towardsdatascience.com/fast-hyperparameter-tuning-at-scale-d428223b081c).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Ray Serve**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/0b9b606dabee68b96e923ccb4b9d7d5a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Ray Serve can not only be used to serve models on its own, but also to[ scale
+    other serving tools like FastAPI](https://medium.com/distributed-computing-with-ray/how-to-scale-up-your-fastapi-application-using-ray-serve-c9a7b69e786).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Ray Serve](https://docs.ray.io/en/master/serve/) is a library for easy-to-use
+    scalable model serving. Some advantages of the library are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The ability to use a single toolkit to serve everything from deep learning models
+    (PyTorch, TensorFlow, etc) to scikit-learn models, to arbitrary Python business
+    logic.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Scale to many machines, both in your datacenter and in the cloud.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Compatibility with many other libraries like [Ray Tune](https://medium.com/distributed-computing-with-ray/simple-end-to-end-ml-from-selection-to-serving-with-ray-tune-and-ray-serve-10f5564d33ba) and [FastAPI](https://medium.com/distributed-computing-with-ray/how-to-scale-up-your-fastapi-application-using-ray-serve-c9a7b69e786).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If you would like to learn how to incorporate Ray Serve and Ray Tune together
+    into your PyTorch workflow, you should check out the [documentation](https://docs.ray.io/en/master/tune/tutorials/tune-serve-integration-mnist.html#tune-trainable-for-model-selection) for
+    a [full code example](https://docs.ray.io/en/master/tune/tutorials/tune-serve-integration-mnist.html#sphx-glr-download-tune-tutorials-tune-serve-integration-mnist-py).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**RLlib**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/edfac255c7cffdb09e6501e2860a316c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: RLlib provides ways to customize almost all aspects of training, including neural
+    network models, action distributions, policy definitions, environments, and the
+    sample collection process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[RLlib](https://docs.ray.io/en/master/rllib.html) is a library for reinforcement
+    learning that offers both high scalability and a unified API for a variety of
+    applications. Some advantages include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Native support for PyTorch, TensorFlow Eager, and TensorFlow (1.x and 2.x).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Support for model-free, model-based, evolutionary, planning, and multi-agent
+    algorithms
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Support for complex model types, such as attention nets and LSTM stacks via
+    simple config flags and auto-wrappers
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Compatibility with other libraries like [Ray Tune](https://docs.ray.io/en/master/rllib-training.html).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Cluster Launcher**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/0bc773ad98d89810da54245138a3805e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The Ray Cluster Launcher simplifies the process of launching and scaling across
+    any cluster or cloud provider.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once you have developed an application on your laptop and want to scale it up
+    to the cloud (perhaps with more data or more GPUs), the next steps aren’t always
+    clear. The process is either to have an infrastructure team set it up for you
+    or to go through the following steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Choose a cloud provider (AWS, GCP, or Azure).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Navigate the management console to set instance types, security groups,
+    spot prices, instance limits, and more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Figure out how to distribute your Python script across a cluster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An easier approach is to use the [Ray Cluster Launcher to launch and scale machines
+    across any cluster or cloud provider](https://medium.com/distributed-computing-with-ray/how-to-scale-python-on-every-major-cloud-provider-12b3bde01208).
+    Cluster Launcher allows you autoscale, sync files, submit scripts, port forward,
+    and more. This means that you can run your Ray clusters on Kubernetes, AWS, GCP,
+    Azure, or a private cluster without needing to understand the low-level details
+    of cluster management.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/b84fa86cf0d0c2f8285a4409d1178478.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Ray provides a distributed computing foundation for [Ant Group’s Fusion Engine](https://youtu.be/Wwv9YNlXx0Q).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article contained some of the benefits of Ray in the PyTorch ecosystem. [Ray](https://github.com/ray-project/ray) is
+    being used for a wide variety of applications from [Ant Group using Ray to support
+    its financial business](https://youtu.be/Wwv9YNlXx0Q), to [LinkedIn running Ray
+    on Yarn](https://youtu.be/0Z0Th9ySIfs), to [Pathmind using Ray to connect reinforcement
+    learning to simulation software](https://youtu.be/U9deXfKYDSs), and more. If you
+    have any questions or thoughts about Ray or want to learn more about [parallel
+    and distributed Python](https://docs.ray.io/en/master/), please join our community
+    through [Discourse](https://discuss.ray.io/) or [Slack](https://docs.google.com/forms/d/e/1FAIpQLSfAcoiLCHOguOm8e7Jnn-JJdZaCxPGjgVCvFijHB5PLaQLeig/viewform).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/pytorch/getting-started-with-distributed-machine-learning-with-pytorch-and-ray-fd83c98fdead).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to Speed up Scikit-Learn Model Training](/2021/02/speed-up-scikit-learn-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Train sklearn 100x Faster](/2019/09/train-sklearn-100x-faster.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Computer Vision at Scale With Dask And PyTorch](/2020/11/computer-vision-scale-dask-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyTorch in 5 Steps](https://www.kdnuggets.com/5-steps-getting-started-pytorch)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n07, Feb 16: How to Learn Math for Machine…](https://www.kdnuggets.com/2022/n07.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Mesh & Its Distributed Data Architecture](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with Scikit-learn for Classification in Machine Learning](https://www.kdnuggets.com/getting-started-with-scikit-learn-for-classification-in-machine-learning)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started With Claude 3 Opus That Just Destroyed GPT-4 and Gemini](https://www.kdnuggets.com/getting-started-with-claude-3-opus-that-just-destroyed-gpt-4-and-gemini)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,394 @@
+- en: How (dis)similar are my train and test data?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/06/how-dissimilar-train-test-data.html](https://www.kdnuggets.com/2018/06/how-dissimilar-train-test-data.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Shikhar Gupta](https://twitter.com/shik1470)**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: They always say that don’t compare apples to oranges. But how about if we’re
+    comparing one mix of apples and oranges with another mix of apples and oranges,
+    but the distribution is different. Can you still compare ? And how will you go
+    about it ?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In most of the cases in the real world, you’ll come across the latter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7fd101b721fb668c1c84bbdb733785ce.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This happens quite often in data science. While developing a machine learning
+    model we come across a situation where our model performs well on our training
+    data but it fails to match up to the same performance for the test data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’m not referring to overfitting here. Even if I’ve picked my best model based
+    on cross-validation and it still performs poorly on test data, there is some inherent
+    patterns in test data that we are not capturing.< Imagine a situation where I’m
+    trying to model the shopping behaviour of customers. Now if my train and test
+    data looks like below then you can clearly see the issue here. ![](../Images/43e718e8ed8f3f92c83ced1e95a27790.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The model will be trained on customers with lower average age compared to test.
+    This model would have never seen age patterns like the ones in test data. If age
+    is an important feature in your model, then it’ll not perform well on the test.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In this post, I’ll talk about how to identify this issue and some raw ideas
+    on how we can fix it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Covariate Shift
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We can define this situation more formally. **Covariate** refers to the predictor
+    variables in our model. **Covariate shift** refers to a situation where predictor
+    variables have different **characteristics (distribution)** in train and test
+    data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In real world problems with many variables, covariate shift is hard to spot.
+    In this post I have tried to discuss a method to identify this and also how to
+    account for such shift between train and test.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basic Idea
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If there exist a covariate shift, then upon mixing train and test we’ll still
+    be able to classify the origin of each data point (whether it is from test or
+    train) with good accuracy.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/5fffdd4138a36a820dde11d61ba677df.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let’s understand why. Consider the above example where age was the drifting
+    feature between test and train. If we take a classifier like Random Forest and
+    try to classify rows into test and train, age will be come out be very important
+    feature in splitting the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b84dfc6b3d7271b626a6a088a6d0dbfd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Implementation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now let’s try to apply this idea on a real dataset. I’m using dataset from
+    this kaggle competition: [https://www.kaggle.com/c/porto-seguro-safe-driver-prediction/data](https://www.kaggle.com/c/porto-seguro-safe-driver-prediction/data)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Step1: Data pre-processing*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have to first clean our data, impute all missing values and do label encoding
+    for all the categorical variables. For this dataset, this step was not required
+    so I have skipped this step.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*Step2:*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have to add a feature **‘is_train’**in both train and test data. Value for
+    this feature will be **0 for test and 1 for train**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*Combining train and test*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then we have to combine both the datasets. **Also since train data has the original
+    ‘target’ variable which is not present in test, we have to drop that variable
+    too.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** For your problem, ‘target’ will be replaced by the name of the dependent
+    variable for your original problem.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*Step4: Building and testing a classifier*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For classification purposes I’m using **Random Forest Classifier** to predict
+    the labels for each row in the combined dataset. You can use any other classifier
+    also.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: We are using stratified 4 fold to ensure that percentage for each class is preserved
+    and we cover the whole data once. For each row the classifier will calculate the
+    probability of it belonging to train.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*Step5: Interpreting the results*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll output the ROC-AUC metric for our classifier as an estimate how much covariate
+    shift this data has.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the classifier is able to classify the rows into train and test with good
+    accuracy, our AUC score should be on the higher side (greater than 0.8). This
+    implies strong covariate shift between train and test.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: AUC value of 0.49 implies that there is no evidence of strong covariate shift.
+    This means that majority of the observations comes from a feature space which
+    is not specific to test or train.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: As this dataset is taken from Kaggle, this result is quite expected. As in such
+    kind of competition dataset is carefully curated to ensure such shifts are not
+    there.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This process can be replicated for any data science problem to check for covariate
+    shift before we start modeling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Going beyond
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: At this point we either observe covariate shift or not. So what can we possibly
+    do to improve our performance on the test data ??
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dropping of drifting features
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Importance weight using Density Ratio Estimation
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Dropping of drifting features:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** This method is applicable to the situation where you witness covariate
+    shift.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Extract feature importance from the random forest classifier object that we
+    have built in the previous section
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The top features are the ones which are drifting and causing the shift
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: From the top features drop one variable at a time and build your model and check
+    its performance. Collect all the features for which performance is not degrading
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now drop all those features while building the final model
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/4f8f24d188f813f569030fe34a3240aa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The idea is to remove the features that fall in the red bucket
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Importance weight using Density Ratio Estimation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** This method is applicable irrespective of whether there exist a covariate
+    shift or not.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s look at the predictions that we have calculated in the previous section.
+    For each observation, this prediction tells us the probability that it belongs
+    to the training data according to our classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'So for the first row our classifier thinks that it belongs to training data
+    with .34 probability. Let’s call this P(train). Or we can also say that it has
+    .66 probability of being from the test data. Let’s call this as P(test). Now here
+    is the magic trick:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For each row of training data we calculate a coefficient **w = P(test)/P(train)**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This w tells us how close is the observation from the training data to our
+    test data. Here is the punchline:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can use this w as sample weights in any of our classifier to increase the
+    weight of these observation which seems similar to our test data. Intuitively
+    this makes sense as our model will focus more on capturing patterns from the observations
+    which seems similar to our test.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: These weights can be calculated using the below code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '< You can pass the weights calculated in the model fit method like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/4781dc6afd070dbf42e7978dbc01e0f6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Some things to notice in the above plot:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Higher the weight for the observation, more is it similar to the test data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Almost 70% of training samples have sample weight of close to 1 and hence comes
+    from a feature space which is not very specific to train or test high density
+    region. This is in line with the AUC value that we have calculated
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: End Notes
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I hope that now you have a better understanding about covariate shift, how you
+    can identify it and treat it effectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Shikhar Gupta](https://twitter.com/shik1470)** is pursuing masters
+    in data science at U. of San Francisco, Intern @IsaziConsulting, alumni @iitroorkee
+    .'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/how-dis-similar-are-my-train-and-test-data-56af3923de9b).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Training Sets, Test Sets, and 10-fold Cross-validation](https://www.kdnuggets.com/2018/01/training-test-sets-cross-validation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 6 components of Open-Source Data Science/ Machine Learning Ecosystem;
+    Did Python declare victory over R?](https://www.kdnuggets.com/2018/06/ecosystem-data-science-python-victory.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Statistics of Gang Violence](https://www.kdnuggets.com/2018/06/statistics-gang-violence.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Ace Data Science Assessment Test by Using Automatic EDA Tools](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Performing a T-Test in Python](https://www.kdnuggets.com/2023/01/performing-ttest-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beyond Accuracy: Evaluating & Improving a Model with the NLP Test Library](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why we will always need humans to train AI — sometimes in real-time](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,622 @@
+- en: 'Deep Learning for NLP: Creating a Chatbot with Keras!'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/08/deep-learning-nlp-creating-chatbot-keras.html](https://www.kdnuggets.com/2019/08/deep-learning-nlp-creating-chatbot-keras.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Jaime Zornoza](https://www.linkedin.com/in/jaime-zornoza/), Universidad
+    Politecnica de Madrid**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/466171708fa0abb0c85f38ffa04addb0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the previous post, we learned what **Artificial Neural Networks and Deep
+    Learning **are. Also, some neural network structures for exploiting sequential
+    data like text or audio were introduced. If you haven’t read that post, you should
+    sit back, grab a coffee, and slowly enjoy it. **It can be found **[**here**](https://towardsdatascience.com/deep-learning-for-nlp-anns-rnns-and-lstms-explained-95866c1db2e4?source=friends_link&sk=3f07244ea80a8ceaf23ee8a4e8a4beea)**.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: This new post will cover** how to use Keras**, a very popular library for neural
+    networks to build a Chatbot. The main concepts of this library will be explained,
+    and then we will go through a step-by-step guide on how to use it to create a
+    yes/no **answering bot in Python**. We will use the easy going nature of Keras
+    to implement a RNN structure from the paper “*End to End Memory Networks*” by
+    Sukhbaatar et al (which you can find [here](https://arxiv.org/pdf/1503.08895.pdf)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is interesting because having defined a task or application (creating a
+    yes/no chatbot to answer specific questions), we will learn how **to translate
+    the insights from a research work onto an actual model** that we can then use
+    to reach our application goals.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Don’t be scared if this is your first time **implementing an NLP model**; I
+    will go through every step, and put a link to the code at the end. For the **best
+    learning experience**, I suggest you first read the post, and then go through
+    the code while glancing at the sections of the post that go along with it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lets get to it then!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Keras: Easy Neural Networks in Python**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Keras is an **open source, high level library **for developing neural network
+    models. It was developed by François Chollet, a Deep Learning researcher from
+    Google. It’s core principle is to make the process of building a neural network,
+    training it, and then using it to make predictions, **easy and accessible for
+    anyone with a basic programming knowledge**, while still allowing developers to
+    fully customise the parameters of the ANN.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basically, Keras is actually just an interface that can run on top of different
+    Deep Learning frameworks like** CNTK, Tensorflow, or Theano** for example. It
+    works the same, independently of the back-end that is used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/216ff5898cd42996150f992a83cd0b75.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Layered structure of the Keras API. As it can be seen, it can run on top of
+    different frameworks seamlessly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we mentioned in the previous post, in a Neural Network each node in a specific
+    layer takes the weighted sum of the outputs from the previous layer, applies a
+    mathematical function to them, and then passes that result to the next layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With Keras we can create a block representing each layer, where these mathematical
+    operations and the number of nodes in the layer can be easily defined. These different
+    layers can be created by typing an intuitive and **single line of code.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The **steps for creating a Keras model** are the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 1:** First we must define a network model, which most of the time will
+    be the **S*equential* model:** the network will be defined as a sequence of layers,
+    each with its own customisable size and activation function. In these models the
+    first layer will be the **input layer**, which requires us to define the size
+    of the input that we will be feeding to the network. After this more and more
+    layers can be added and customised until we reach the final output layer.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Step 2:** After creating the structure of the network in this manner we have
+    to **compile it**, which transforms the simple sequence of layers that we have
+    previously defined, into a complex group of matrix operations that dictate how
+    the network behaves. Here we must define the optimisation algorithm that will
+    be used to train the network, and also choose the loss function that will be minimised.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Step 3: **Once this is done, we can *train* or ***fit*** the network, which
+    is done using the back-propagation algorithm mentioned in the previous post.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Step 4: **Hurray! Our network is trained. Now we can use it to make predictions
+    on new data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see,** it is fairly easy to build a network using Keras,** so lets
+    get to it and use it to create our chatbot! The blocks of code used above are
+    not representative of an actual concrete neural network model, they are just examples
+    of each of the steps to help illustrate how straightforward it is to build a Neural
+    Network using the Keras API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can find all the documentation about Keras and how to install it in its [official
+    web page](https://keras.io/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The Project: Using Recurrent Neural Networks to build a Chatbot'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now we know what all these different types of neural networks are, lets use
+    them to **build a chat-bo**t that can answer some questions for us!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most of the time, neural network structures are more complex than just the standard
+    input-hidden layer-output. Sometimes we might want to **invent a neural network
+    ourselfs** and play around with the different node or layer combinations. Also,
+    in some occasions we might want to **implement a model we have seen somewhere**,
+    like in a scientific paper.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post we will go through an example of this second case, and **construct
+    the neural model from the paper “*End to End Memory Networks*”** by Sukhbaatar
+    et al (which you can find [here](https://arxiv.org/pdf/1503.08895.pdf)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also we will see how to save the trained model, so that we don’t have to train
+    the network every time we want to make predictions using the model we have built. **Lets
+    go then!**
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The model: Inspiration'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As mentioned earlier, the RNN used in this post, has been taken from the paper [“*End
+    to End Memory Networks*”](https://arxiv.org/pdf/1503.08895.pdf) , so I recommend
+    you take a look at it before proceeding, although I will explain the most relevant
+    parts in the following lines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This paper implements an RNN like structure that uses an **attention model** to
+    compensate for the long term memory issue about RNNs that we discussed in the
+    previous post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Don’t know what an attention model is? **Do not worry**, I will explain it in
+    simple terms to you. Attention models gathered a lot of interest because of their
+    very good results in tasks like** machine translation**. They address the issue
+    of** long sequences** and short term memory of RNNs that was mentioned previously.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To gather an **intuition **of what attention does, think of how a **human would
+    translate **a long sentence from one language to another. **Instead** of taking
+    the **whoooooole** sentence and then translating it in one go, you would split
+    the sentence into smaller chunks and translate these smaller pieces one by one.
+    We work part by part with the sentence because **it is really difficult to memorise
+    it entirely** and then translate it at once.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/488803d9ccddb53671a3a9824af3406a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: How a human would translate the text on the top from English to Spanish
+  prefs: []
+  type: TYPE_NORMAL
+- en: An attention mechanism does just this. In each time step, t**he model gives
+    a higher weight** in the output to those parts of the input sentence that are
+    more relevant towards the task that we are trying to complete. This is where the
+    name comes from: **it *plays attention* to what is more important**. The example
+    above illustrates this very well; to translate the first part of the sentence,
+    it makes little sense to be looking at the entire sentence or to the last part
+    of the sentence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The following figure shows the** performance of RNN vs Attention models as we
+    increase the length of the input sentence**. When faced with a very long sentence,
+    and ask to perform a specific task, the RNN, after processing all the sentence
+    will have probably forgotten about the first inputs it had.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c75d59aeca6037776c61928c03b776f4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Performance vs Sentence Length for RNNs and Attention models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Okay, now that we know what an attention model is, lets take a loser look at
+    the structure of the model we will be using. This model takes an **input *xi*** (a
+    sentence), a** query *q ***about such sentence, and outputs a yes/ no **answer** ***a***.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/23e823c3de7f5094234cd219bf9a515e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: On the left (a) a representation of a single layer of the model. On the right
+    (b) 3 of these layers stacked together.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the left part of the previous image we can see a representation of a **single
+    layer of this model**. Two different embeddings are calculated for each sentence, ***A*** and ***C***.
+    Also, the query or question q is embedded, using the ***B*** embedding.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The A embeddings ***mi***, are then computed using an inner product with the
+    question embedding ***u*** (this is the part where the **attention is taking place**,
+    as by computing the **inner product** between these embeddings what we are doing
+    is looking for **matches of words from the query and the sentence**, to then give
+    more importance to these matches using a *Softmax* function on the resulting terms
+    of the dot product).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lastly, we compute the output vector ***o*** using the embeddings from C ***(ci)***,
+    and the weights or probabilities ***pi*** obtained from the dot product. With
+    this output vector ***o***, the weight matrix ***W***, and the embedding of the
+    question ***u***, we can finally calculate the predicted answer ***a hat***.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To build the **entire network**, we just repeat these procedure on the different
+    layers, using the predicted output from one of them as the input for the next
+    one. This is shown on the right part of the previous image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Don’t worry if all these came too quick at you, hopefully you will get a better
+    and complete understanding as we go through the different steps to **implement
+    this model in Python**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The data: Stories, questions and answers'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In 2015, Facebook came up with a **bAbI data-set** and 20 tasks for testing
+    text understanding and reasoning in the bAbI project. **The tasks are described
+    in detail in the paper **[**here**](https://arxiv.org/abs/1502.05698#)**.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: The goal of each task is to **challenge a unique aspect of machine-text related
+    activities**, testing different capabilities of learning models. In this post
+    we will face one of these tasks, specifically the “*QA with single supporting
+    fact*”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The block bellow shows an example of the expected behaviour from this kind
+    of QA bot:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The data-set comes already separated into** training data (10k instances)** and **test
+    data (1k instances)**, where each instance has a **fact**, a **question**, and
+    a yes/no **answer** to that question.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we have seen the structure of our data, we need to **build a vocabulary**out
+    of it. On a **Natural Language Processing** model a vocabulary is basically a **set
+    of words** that the model knows and therefore can understand. If after building
+    a vocabulary the model sees inside a sentence a word that is not in the vocabulary,
+    it will either give it a 0 value on its sentence vectors, or represent it as unknown.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: As our** training data is not very varied **(most questions use the same verbs
+    and nouns but with different combinations), our vocabulary is not very big, but
+    in **moderately sized NLP projects** the vocabulary can be very large.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Take into account that to build a vocabulary we should only use the **training
+    data** most of the time; the **test data should be separated** from the training
+    data at the very beginning of a Machine Learning project and not touched until
+    it is time to **asses the performance** on the model that has been chosen and
+    tuned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After building the vocabulary we need to ***vectorize*** our data. As we are
+    using normal words as the inputs to our models and **computers can only deal with
+    numbers under the hood**, we need a way to **represent** our sentences, which
+    are groups of words, **as vectors of numbers. Vectorizing does just this**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are many ways of vectorizing our sentences, like ***Bag of Words*** models,
+    or ***Tf-Idf***, however, for simplicity, we are going to just use an indexing
+    vectorizing technique, in which we give each of the words in the vocabulary a
+    unique index from 1 to the length of the vocabulary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Take into account that this vectorization is done using a random seed to start,
+    so even tough you are using the same data as me, **you might get different indexes
+    for each word**. Don’t worry; this will not affect the results of the project.
+    Also, the words in our vocabulary were in upper and lowercase; when doing this
+    vectorization all the words get **lowercased** for uniformity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After this, **because of the way Keras works**, we **need to pad **the sentences.
+    What does this mean? It means that we need to search for the length of the longest
+    sentence, convert every sentence to a vector of that length, and fill the gap
+    between the number of words of each sentence, and the number of words of the longest
+    sentences with zeros.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After doing this, a random sentence of the dataset should look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As we can see, it has zeros everywhere except in the end (this sentence was
+    a lot shorter than the longest sentence), where it has some numbers. What are
+    these numbers? Well, they are the indexes representing the different words of
+    the sentence: 20 is the index representing the word ***Mary****, *30 *is ****moved****, *24
+    is ***to***, 1 is ***the***, 3 represents ***bathroom ***and so on. The actual
+    sentence is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Okay, now that we have prepared the data, we are ready to build our Neural Network!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The Neural Network: Building the model'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first step to creating the network is to create what in Keras is known as ***placeholders*** for
+    the inputs, which in our case are the **stories** and the **questions**. In an
+    easy manner, these placeholders are containers where batches of our training data
+    will be placed before being fed to the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: They have to have the same dimension as the data that will be fed, and can also
+    have a batch size defined, although we can leave it blank if we dont know it at
+    the time of creating the placeholders.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we have to create the **embeddings** mentioned in the paper, **A, C and
+    B. **An embedding turns an integer number (in this case the index of a word) into
+    a ***d***dimensional vector, where **context is taken into account**. Word embeddings
+    are**widely used in NLP** and is one of the techniques that has made the field
+    progress so much in the recent years.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code above is an example of one of the embeddings done in the paper (A embedding).
+    Like always in **Keras**, we first define the model (Sequential), and then add
+    the embedding layer and a dropout layer, which reduces the chance of the model
+    over-fitting by triggering off nodes of the network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once we have created the two embeddings for the input sentences, and the embeddings
+    for the questions, we can start defining the operations that take place in our
+    model. As mentioned previously, we compute the attention by doing the **dot product** between
+    the embedding of the questions and one of the embeddings of the stories, and then
+    doing a softmax. The following block shows how this is done:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: After this, we need to calculate the output ***o*** adding the match matrix
+    with the second input vector sequence, and then calculate the **response** using
+    this output and the encoded question.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Lastly, once this is done we add the rest of the layers of the model, adding
+    an **LSTM **layer (instead of an RNN like in the paper), a dropout layer and a
+    final softmax to compute the output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Notice here that the output is a vector of the size of the vocabulary (that
+    is, the length of the number of words known by the model), where all the positions
+    should be zero except the ones at the indexes of** ‘yes’ and ‘no’.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Learning from the data: Training the model'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now we are ready to compile the model, and train it!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: With these two lines we **build the final model**, and compile it, that is,
+    define all the maths that will be going on in the background by specifying an **optimiser**,
+    a **loss function** and a **metric** to optimise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now its **time to train the model**, here we need to define the **inputs to
+    the training**, (the input stories, questions and answers), the **batch size** that
+    we will be feeding the model with (that is, how many inputs at once), and the **number
+    of epochs** that we will train the model for (that is, how many times the model
+    will go through the training data in order to update the weights). I used 1000
+    epochs and obtained an accuracy of 98%, but even with 100 to 200 epochs you should
+    get some pretty good results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that depending on your hardware, this training might take a while. Just
+    relax, sit back, **keep reading Medium** and wait until its done.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After its completed the training you might be left wondering *“am I going to
+    have to wait this long every time I want to use the model?”* the obvious answer
+    my friend is, ***NO***. Keras allows developers to **save a certain model** it
+    has trained, with the weights and all the configurations. The following block
+    of code shows how this is done.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now, when we want to use the model is as easy as **loading** it like so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: Cool cool. Now that we have trained our model, lets see how it performs on new
+    data, and** play a little bit with it!**
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Seeing the results: Testing and playing'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Lets see how our model performs on the test data!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: These results are **an array**, as mentioned earlier that contain in every position
+    the probabilities of each of the words in the vocabulary being the answer to the
+    question. If we look at the first element of this array, we will see a vector
+    of the size of the** vocabulary**, where all the times are close to 0 except the
+    ones corresponding to **yes or no**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Out of these, if we pick the **index of the highest value of the array **and
+    then see to which word it corresponds to, we should **find out if the answer** is
+    affirmative or negative.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One fun thing that we can do now, is **create our own stories and questions**,
+    and feed them to the bot to see what he says!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: I created a story and a question somehow** similar to what our little bot has
+    seen before**, and after adapting it to the format that the neural network wants
+    the bot answered ‘***YES***’ (in lowercase tough, he is not as enthusiastic as
+    I am).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s try with something different:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The answer this time was: ‘***Of course, who doesn’t?***’'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Just kidding, I didn’t try that story/question combination, as many of the words
+    included are** not inside the vocabulary** of our little answering machine. Also,
+    he only knows how to say ‘yes’ and ‘no’, and does not usually give out any other
+    answers. **However, with more training data and some workarounds this could be
+    easily achieved.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: That is it for today! I hope you guys enjoyed reading the post as much as I
+    enjoyed writing it. Have a good day, take care, and enjoy AI!
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can find the code and the data on my [Github](https://github.com/jaimezorno/Deep-Learning-for-NLP-Creating-a-Chatbot/blob/master/Deep%20Learning%20for%20NLP-%20Creating%20a%20chatbot.ipynb) page.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Other resources:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you want to go deeper into attention models, or understand some word vectorizing
+    techniques that I mentioned, check out these additional resources I’ve put together
+    for you. Enjoy!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Beginner’s Guide to Attention Mechanisms and Memory Networks](https://skymind.ai/wiki/attention-mechanism-memory-network)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Andrew’s Ng video with the intuition to attention models.](https://www.youtube.com/watch?v=SysgYptB198&t=486s)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Begginner’s Guide to Tf-Idf and Bag of Words](https://skymind.ai/wiki/bagofwords-tf-idf).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Keras guide to building this same model.](https://keras.io/examples/babi_memnn/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feel Free to connect with me on [LinkedIn](https://www.linkedin.com/in/jaime-zornoza/) or
+    follow me on Twitter at @jaimezorno. Also, you can take a look at my other posts
+    on Data Science and Machine Learning [here](https://medium.com/@jaimezornoza). **Have
+    a good read!**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Jaime Zornoza](https://www.linkedin.com/in/jaime-zornoza/)** is an
+    Industrial Engineer with a bachelor specialized in Electronics and a Masters degree
+    specialized in Computer Science.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/deep-learning-for-nlp-creating-a-chatbot-with-keras-da5ca051e051).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deep Learning for NLP: ANNs, RNNs and LSTMs explained!](/2019/08/deep-learning-nlp-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Training a Neural Network to Write Like Lovecraft](/2019/07/training-neural-network-write-like-lovecraft.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Adapters: A Compact and Extensible Transfer Learning Method for NLP](/2019/07/adapters-compact-extensible-transfer-learning-method-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

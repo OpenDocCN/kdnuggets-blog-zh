@@ -1,0 +1,291 @@
+- en: Overview of Python Visualization Tools
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2015/11/overview-python-visualization-tools.html/2](https://www.kdnuggets.com/2015/11/overview-python-visualization-tools.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Bokeh
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Bokeh](http://bokeh.pydata.org/) is different from the prior 3 libraries in
+    that it does not depend on matplotlib and is geared toward generating visualizations
+    in modern web browsers. It is meant to make interactive web visualizations so
+    my example is fairly simplistic. Import and read in the data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`import pandas as pd from bokeh.charts import Bar`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`budget = pd.read_csv("mn-budget-detail-2014.csv") budget = budget.sort(''amount'',ascending=False)[:>10]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One different aspect of bokeh is that I need to explicitly list out the values
+    we want to plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`details = budget["detail"].values.tolist() amount = >list(budget["amount"].astype(>float).values)`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we can plot it. This code causes the browser to display the HTML page containing
+    the graph. I was able to save a png copy in case I wanted to use it for other
+    display purposes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`bar = Bar(amount, details, filename="bar.html") bar.title("MN Capital Budget
+    - 2014").xlabel("Detail").ylabel("Amount") bar.show()`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is the png image:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Bokeh image](../Images/f49503165394e2a493d8c5153af91c14.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As you can see the graph is nice and clean. I did not find a simple way to more
+    easily format the y-axis. Bokeh has a lot more functionality but I did not dive
+    into in this example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pygal
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Pygal](http://pygal.org/) is used for creating svg charts. If the proper dependencies
+    are installed, you can also save a file as a png. The svg files are pretty useful
+    for easily making interactive charts. I also found that it was pretty easy to
+    create unique looking and visually appealing charts with this tool. Do our imports
+    and read in the data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`import pandas as pd import pygal from pygal.style import LightStyle`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`budget = pd.read_csv("mn-budget-detail-2014.csv") budget = budget.sort(''amount'',ascending=False)[:>10]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We need to create the type of chart and set some basic settings:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`bar_chart = pygal.Bar(style=LightStyle, width=>800, height=>600, legend_at_bottom=True,
+    human_readable=True, title=''MN Capital Budget - 2014'')`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One interesting note is `human_readable` which does a nice job of formatting
+    the data so that it mostly “just works.” Now we need to add the data to our chart.
+    This is where the integration with pandas is not very tight but I found it straightforward
+    to do for this small data set. Performance might be an issue when there are lots
+    of rows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`for index, row >in budget.iterrows(): bar_chart.add(row["detail"], row["amount"])`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now render the file as an svg and png file:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`bar_chart.render_to_file(''budget.svg'') bar_chart.render_to_png(''budget.png'')`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Pygal image](../Images/8e2f7004512d00bc9ad18594ee28d5d0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: I think the svg presentation is really nice and I like how the resulting graph
+    has a unique, visually pleasing style. I also found it relatively easy to figure
+    out what I could and could not do with the tool. I encourage you to download the
+    [svg file](http://pbpython.com/extras/MN-2014-budget-pygal.svg) and look at it
+    in your browser to see the interactive nature of the graph.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Plot.ly
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Plot.ly](#plot-ly) is differentiated by being an online tool for doing analytics
+    and visualization. It has robust API’s and includes one for python. Browsing the
+    website, you’ll see that there are lots of very rich, interactive graphs. Thanks
+    to the excellent [documentation](https://plot.ly/python/user-guide/), creating
+    the bar chart was relatively simple. You’ll need to follow the [docs](https://plot.ly/python/getting-started/)
+    to get your API key set up. Once you do, it seems to all work pretty seamlessly.
+    The one caveat is that everything you are doing is posted on the web so make sure
+    you are ok with it. There is an option to keep plots private so you do have control
+    over that aspect. Plotly integrates pretty seamlessly with pandas. I also will
+    give a shout out to them for being very responsive to an email question I had.
+    I appreciate their timely reply. Setup my imports and read in the data'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`import plotly.plotly as py import pandas as pd from plotly.graph_objs import
+    *`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: budget=pd.read_csv(“mn-budget-detail-2014.csv”)
+  prefs: []
+  type: TYPE_NORMAL
+- en: budget.sort(‘amount’,ascending=False,inplace=True)
+  prefs: []
+  type: TYPE_NORMAL
+- en: budget = budget[:>10]
+  prefs: []
+  type: TYPE_NORMAL
+- en: Setup the data and chart type for plotly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`data = Data([ Bar( x=budget["detail"], y=budget["amount"] ) ])`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I also decided to add some additional layout information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`layout = Layout( title=''2014 MN Capital Budget'', font=Font( family=''Raleway,
+    sans-serif'' ), showlegend=False, xaxis=XAxis( tickangle=->45 ), bargap=>0.05
+    )`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, plot the data. This will open up a browser and take you to your finished
+    plot. I originally didn’t see this but you can save a local copy as well, using
+    `py.image.save_as` . This is a really cool feature. You get the interactivity
+    of a rich web-based report as well as the ability to save a local copy to for
+    embedding in your documents.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`fig = Figure(data=data, layout=layout) plot_url = py.plot(data,filename=''MN
+    Capital Budget - 2014'') py.image.save_as(fig, ''mn-14-budget.png'')`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![plotly image](../Images/ef2e3e99ad492484176dc11a830f581b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Check out the [full-interactive version](https://plot.ly/~chris1610/12/) too.
+    You can see a lot more robust examples on their site. The out of the box plot
+    is very appealing and highly interactive. Because of the docs and the python api,
+    getting up and running was pretty easy and I liked the final product.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Plotting data in the python ecosystem is a good news/bad news story. The good
+    news is that there are a lot of options. The bad news is that there are a lot
+    of options. Trying to figure out which ones works for you will depend on what
+    you’re trying to accomplish. To some degree, you need to play with the tools to
+    figure out if they will work for you. I don’t see one clear winner or clear loser.
+    Here are a few of my closing thoughts:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandas is handy for simple plots but you need to be willing to learn matplotlib
+    to customize.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Seaborn can support some more complex visualization approaches but still requires
+    matplotlib knowledge to tweak. The color schemes are a nice bonus.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ggplot has a lot of promise but is still going through growing pains.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: bokeh is a robust tool if you want to set up your own visualization server but
+    may be overkill for the simple scenarios.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: pygal stands alone by being able to generate interactive svg graphs and png
+    files. It is not as flexible as the matplotlib based solutions.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Plotly generates the most interactive graphs. You can save them offline and
+    create very rich web-based visualizations.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As it stands now, I’ll continue to watch progress on the ggplot landscape and
+    use pygal and plotly where interactivity is needed. Feel free to provide feedback
+    in the comments. I am sure people will have lots of questions and comments on
+    this topic. If I’ve missed anything or there are other options out there, let
+    me know.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Chris Moffitt](https://www.linkedin.com/in/cmoffitt) is a Director,
+    Pricing and Contracting at Boston Scientific. He has extensive experience in pricing
+    and contracting in the medical device industry and also leading teams in IS and
+    business functional roles to develop and support new applications for sales and
+    marketing organizations.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://pbpython.com/visualization-tools-1.html ).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[TheWalnut.io: An Easy Way to Create Algorithm Visualizations](/2015/07/thewalnutio-algorithm-visualizations.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Open Source Enabled Interactive Analytics: An Overview](/2015/06/open-source-interactive-analytics-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[21 Essential Data Visualization Tools](/2015/05/21-essential-data-visualization-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Data Labeling for Machine Learning: Market Overview, Approaches, and Tools](https://www.kdnuggets.com/2021/12/data-labeling-ml-overview-and-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Comparative Overview of the Top 10 Open Source Data Science Tools in 2023](https://www.kdnuggets.com/a-comparative-overview-of-the-top-10-open-source-data-science-tools-in-2023)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 SQL Visualization Tools for Data Engineers](https://www.kdnuggets.com/2023/02/5-sql-visualization-tools-data-engineers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Approaches to Text Summarization: An Overview](https://www.kdnuggets.com/2019/01/approaches-text-summarization-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[An Overview of Logistic Regression](https://www.kdnuggets.com/2022/02/overview-logistic-regression.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[An Overview of Mercury: Creating Data Science Portfolio and…](https://www.kdnuggets.com/2022/05/overview-mercury-creating-data-science-portfolio-notebook-based-webapps.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

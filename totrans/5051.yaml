@@ -1,0 +1,267 @@
+- en: 'Doing Data Science: A Kaggle Walkthrough – Cleaning Data'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/03/doing-data-science-kaggle-walkthrough-cleaning-data.html/2](https://www.kdnuggets.com/2016/03/doing-data-science-kaggle-walkthrough-cleaning-data.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Step by Step
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With that general overview out of the way, let’s start cleaning the Airbnb data.
+    In relation to the datasets provided for the Airbnb Kaggle competition, we will
+    focus our cleaning efforts on two files – `train_users_2.csv` and `test_users.csv`
+    and leave aside `sessions.csv`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Loading in the Data**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first step is to load the data from the CSV files using Python. To do this
+    we will use the Pandas library and load the data from two files `train_users_2.csv`
+    and `test_users.csv`. After loading, we will combine them into one dataset so
+    that any cleaning (and later any other changes) will be done to all the data at
+    once [1].
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Clean the Timestamps**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once the data has been loaded and combined, the first cleaning step we will
+    undertake is fixing the format of the dates – as we saw in [Part II](http://brettromero.com/wordpress/data-science-a-kaggle-walkthrough-understanding-the-data/),
+    at least one of the date columns looks like it is formatted as one long number.
+    You may be wondering why this is necessary – after all, can’t we all see what
+    the dates are supposed to represent when we look at the data?
+  prefs: []
+  type: TYPE_NORMAL
+- en: The reason we need to convert the values in the date columns is that, if we
+    want to do anything with those dates (e.g. subtract one date from another, extract
+    the month of the year from each date etc.), it will be far easier if Python recognizes
+    the values as dates. This will become much clearer next week when we start adding
+    various new features to the training data based on this date information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Luckily, fixing date formats is relatively easy. Pandas has a simple function,
+    [to_datetime](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.to_datetime.html),
+    that will allow us to input a column and get the correctly formatted dates as
+    a result. When using this function we also provide a parameter called ‘format’
+    that is like a [regular expression](https://en.wikipedia.org/wiki/Regular_expression)
+    for dates. In simpler terms, we are providing the function with a generalized
+    form of the date so that it can interpret the data in the column. For example,
+    for the `date_account_created` column we are telling the function to expect a
+    four-digit year (%Y) followed by a ‘-’, then a two-digit month (%m), then ‘-’,
+    then a two-digit day (%d) – altogether the expression would be ‘%Y-%m-%d’ (for
+    the full list of directives that can be used, see [here](https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior)).
+    For the `timestamp_first_active` column, the date format provided is different
+    so we adjust our expression accordingly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once we have fixed the date formats, we simply replace the existing date columns
+    with the corrected data. Finally, because the `date_account_created` column is
+    sometimes empty, we replace the empty values with the value in the `date_account_created`
+    column using the [fillna](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.fillna.html)
+    function. The code for this step is provided below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Remove booking date field**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Those following along and/or paying attention may have noticed that in the original
+    dataset, there are three date fields, but we have only covered two above. The
+    remaining date field, `date_first_booking`, we are going to drop (remove) from
+    the training data altogether. The reason is that this field is only populated
+    for users who have made a booking. For the data in training_users_2.csv, all the
+    users that have a first booking country have a value in the date_first_booking
+    column and for those that have not made a booking (`country_destination` = NDF)
+    the value is missing. However, for the data in `test_users.csv`, the `date_first_booking`
+    column is empty for all the records.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Clean data](../Images/24e861db776514b0deb4604084003055.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'This means that this column is not going to be useful for predicting which
+    country a booking will be made. What is more, if we leave it in the training dataset
+    when building the model, it will likely increase the chances that the model predicts
+    NDF as those are the records without dates in the training dataset. The code for
+    removing the column is provided below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Clean the Age column**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As identified in [Part II](http://brettromero.com/wordpress/data-science-a-kaggle-walkthrough-understanding-the-data/),
+    there are several age values that are clearly incorrect (unreasonably high or
+    too low). In this step, we replace these incorrect values with ‘NaN’, which literally
+    stands for Not a Number, but implies we do not know the age value. In other words
+    we are changing the incorrect values into missing values. To do this, we create
+    a simple function that intakes a dataframe (table), a column name, a maximum acceptable
+    value (90) and a minimum acceptable value (15). This function will then replace
+    the values in the specified column that are outside the acceptable range with
+    NaN.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Again from [Part II](http://brettromero.com/wordpress/data-science-a-kaggle-walkthrough-understanding-the-data/)
+    we know there were also a significant number of users who did not provide their
+    age at all – so they also show up as NaN in the dataset. After we have converted
+    the incorrect age values to NaN, we then change all the NaN values to -1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The code for these steps is shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As mentioned earlier, there are several more complicated ways to fill in the
+    missing values in the age column. We are selecting this simple method for two
+    main reasons:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Clarity – this series of articles is going to be long enough without adding
+    the complication of a complex methodology for imputing missing ages.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Questionable results – in my testing during the actual competition, I did test
+    several more complex imputation methodologies. However, none of the methods I
+    tested actually produced a better end result than the methodology outlined above.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Identify and fill additional columns with missing values**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: From more detailed analysis of the data, you may have also realized there is
+    one more column that has missing values – the `first_affiliate_tracked` column.
+    In the same way we have been filling in the missing values in other columns, we
+    now fill in the values in this column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Is that all?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Those more experienced with working with data may be thinking that we have not
+    done all that much cleaning with this data – and you would be right. One of the
+    nice things about Kaggle competitions is that the data provided does not require
+    all that much cleaning as that is not what the providers of the data want participants
+    to focus on. Many of the problems that would be found in real world data (as covered
+    earlier) do not exist in this dataset, saving us significant time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, what this relatively easy cleaning process also tells us is that even
+    when datasets are provided with the intention of needing no or minimal cleaning,
+    there is always something that needs to be done.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next Time
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the next piece, we will focus on transforming the data and feature extraction,
+    allowing us to create a training dataset that will hopefully allow the model to
+    make better predictions. To make sure you don’t miss out, use the subscription
+    feature below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[1] For those with more data mining experience you may realize that combining
+    the test and training data at this stage is not best practice. The best practice
+    would be to avoid using the test dataset in any of the data preprocessing or model
+    tuning/validation steps to avoid over fitting. However, in the context of this
+    competition, because we are only trying to create the model to classify one unchanging
+    dataset, simply maximizing the accuracy of the model for that dataset is the primary
+    concern.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Brett Romero](http://brettromero.com/)** is a data analyst with experience
+    working in a number of countries and industries, including government, management
+    consulting and finance. Currently based in Pristina, Kosovo, he is working as
+    a data consultant with development agencies such as UNDP and [Open Data Kosovo](http://opendatakosovo.org/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://brettromero.com/wordpress/data-science-kaggle-walkthrough-cleaning-data/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Doing Data Science: A Kaggle Walkthrough Part 1 – Introduction](/2016/05/doing-data-science-kaggle-walkthrough-intro.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Doing Data Science at Twitter](/2015/09/data-science-at-twitter.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Machine Learning With Python](/2015/11/seven-steps-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Classification Metrics Walkthrough: Logistic Regression with…](https://www.kdnuggets.com/2022/10/classification-metrics-walkthrough-logistic-regression-accuracy-precision-recall-roc.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Free Kaggle Micro-Courses for Data Science Beginners](https://www.kdnuggets.com/7-free-kaggle-micro-courses-for-data-science-beginners)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 Kaggle Machine Learning Projects to Become Data Scientist in 2024](https://www.kdnuggets.com/top-10-kaggle-machine-learning-projects-to-become-data-scientist-in-2024)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 4 tricks for competing on Kaggle and why you should start](https://www.kdnuggets.com/2022/05/packt-top-4-tricks-competing-kaggle-start.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Most Comprehensive List of Kaggle Solutions and Ideas](https://www.kdnuggets.com/2022/11/comprehensive-list-kaggle-solutions-ideas.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

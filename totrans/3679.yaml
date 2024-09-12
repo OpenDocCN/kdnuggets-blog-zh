@@ -1,0 +1,279 @@
+- en: Dealing With Noisy Labels in Text Data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/04/dealing-noisy-labels-text-data.html](https://www.kdnuggets.com/2023/04/dealing-noisy-labels-text-data.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Dealing With Noisy Labels in Text Data](../Images/15973e5270fd138ec4bc5d0349e92906.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Editor
+  prefs: []
+  type: TYPE_NORMAL
+- en: With the rising interest in natural language processing, more and more practitioners
+    are hitting the wall not because they can’t build or fine-tune LLMs, but because
+    their data is messy!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We will show simple, yet very effective coding procedures for fixing noisy
+    labels in text data. We will deal with 2 common scenarios in real-world text data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Having a category that contains mixed examples from a few other categories.
+    I love to call this kind of category a meta category.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Having 2 or more categories that should be merged into 1 category because texts
+    belonging to them refer to the same topic.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'We will use ITSM (IT Service Management) dataset created for this tutorial
+    (CCO license). It’s available on Kaggle from the link below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://www.kaggle.com/datasets/nikolagreb/small-itsm-dataset](https://www.kaggle.com/datasets/nikolagreb/small-itsm-dataset)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s time to start with the import of all libraries needed and basic data examination.
+    Brace yourself, code is coming!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Import and Data Examination
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Each row represents one entry in the ITSM database. We will try to predict the
+    category of the ticket based on the text of the ticket written by a user. Let’s
+    examine deeper the most important fields for described business use cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'If we take a look at the first two tickets, although one ticket is in German,
+    we can see that described problems refer to the same software?—?Asana, but they
+    carry different labels. This is starting distribution of our categories:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: The help needed looks suspicious, like the category that can contain tickets
+    from multiple other categories. Also, categories Outlook and Mail sound similar,
+    maybe they should be merged into one category. Before diving deeper into mentioned
+    categories, we will get rid of missing values in columns of our interest.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Assigning Tickets to the Proper Category
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'There isn’t a valid substitute for the examination of data with the bare eye.
+    The fancy function to do so in pandas is .sample(), so we will do exactly that
+    once more, now for the suspicious category:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Obviously, we have tickets talking about Discord, Asana, and CRM. So the name
+    of the category should be changed from “Help Needed” to existing, more specific
+    categories. For the first step of the reassignment process, we will create the
+    new column “Keywords” that gives the information if the ticket has the word from
+    the list of categories in the “Text” column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Also, note that using "if word in str(words_categories)" instead of "if word
+    in words_categories" would catch words from categories with more than 1 word (Internet
+    Browser in our case), but would also require more data preprocessing. To keep
+    things simple and straight to the point, we will go with the code for categories
+    made of just one word. This is how our dataset looks now:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'output as image:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![XXXXX](../Images/7f8932ac292c1f768b45f3d6520af4f8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'After extracting the keywords column, we will assume the quality of the tickets.
+    Our hypothesis:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ticket with just 1 keyword in the Text field that is the same as the category
+    to the which ticket belongs would be easy to classify.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Ticket with multiple keywords in the Text field, where at least one of the keywords
+    is the same as the category to the which ticket belongs would be easy to classify
+    in the majority of cases.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The ticket that has keywords, but none of them is equal to the name of the category
+    to the which ticket belongs is probably a noisy label case.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Other tickets are neutral based on keywords.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: We made our new distribution and now is the time to examine tickets classified
+    as a potential problem. In practice, the following step would require much more
+    sampling and look at the larger chunks of data with the bare eye, but the rationale
+    would be the same. You are supposed to find problematic tickets and decide if
+    you can improve their quality or if you should drop them from the dataset. When
+    you are facing a large dataset stay calm, and don't forget that data examination
+    and data preparation usually take much more time than building ML algorithms!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: We understand that tickets from Outlook and Mail categories are related to the
+    same problem, so we will merge these 2 categories and improve the results of our
+    future ML classification algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Merging into the Cluster
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: Last, but not least, we want to relabel some tickets from the meta category
+    “Help Needed” to the proper category.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: We did our data relabeling and cleaning but we shouldn't call ourselves data
+    scientists if we don't do at least one scientific experiment and test the impact
+    of our work on the final classification. We will do so by implementing The Complement
+    Naive Bayes classifier in sklearn. Feel free to try other, more complex algorithms.
+    Also, be aware that further data cleaning could be done - for example, we could
+    also drop all tickets left in the "Help Needed" category.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Testing the Impact of Data Munging
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: Pretty impressive, right? The dataset we used is small (on purpose, so you can
+    easily see what happens in each step) so different random seeds might produce
+    different results, but in the vast majority of cases, the model will perform significantly
+    better on the dataset after cleaning compared to the original dataset. We did
+    a good job!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Nikola Greb](https://www.linkedin.com/in/ngreb/)** been coding for more
+    than four years, and for the past two years he specialized in NLP. Before turning
+    to data science, he was successful in sales, HR, writing and chess.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Dealing with Position Bias in Recommendations and Search](https://www.kdnuggets.com/2023/03/dealing-position-bias-recommendations-search.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Transforming AI with LangChain: A Text Data Game Changer](https://www.kdnuggets.com/2023/08/transforming-ai-langchain-text-data-game-changer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Use the Hugging Face Tokenizers Library to Preprocess Text Data](https://www.kdnuggets.com/how-to-use-the-hugging-face-tokenizers-library-to-preprocess-text-data)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Cleaning and Preprocessing Text Data in Pandas for NLP Tasks](https://www.kdnuggets.com/cleaning-and-preprocessing-text-data-in-pandas-for-nlp-tasks)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Use ChatGPT to Convert Text into a PowerPoint Presentation](https://www.kdnuggets.com/2023/08/chatgpt-convert-text-powerpoint-presentation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

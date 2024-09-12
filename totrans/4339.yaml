@@ -1,0 +1,546 @@
+- en: Monte Carlo integration in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/12/monte-carlo-integration-python.html](https://www.kdnuggets.com/2020/12/monte-carlo-integration-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/77fa6f289cd10c116556006943d8d173.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Image source: Wikipedia(Free) and collage made by the author'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Disclaimer**: The inspiration for this article stemmed from [**Georgia Tech’s
+    Online Masters in Analytics (OMSA)**](https://www.gatech.edu/academics/degrees/masters/analytics-online-degree-oms-analytics)program
+    study material. I am proud to pursue this excellent Online MS program. You can
+    also [check the details here.](http://catalog.gatech.edu/programs/analytics-ms/#onlinetext)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Monte Carlo integration?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Monte Carlo, is in fact, the name of the world-famous casino located in the
+    eponymous district of the city-state (also called a Principality) of Monaco, on
+    the world-famous French Riviera.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It turns out that the casino inspired the minds of famous scientists to devise
+    an intriguing mathematical technique for solving complex problems in statistics,
+    numerical computing, system simulation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5d936d7a368551f4e0f6c19eacdf55d8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image source: [Wikipedia](https://en.wikipedia.org/wiki/Monte_Carlo#/media/File:Monaco_Monte_Carlo_1.jpg)
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the [first and most famous uses of this technique was during the Manhattan
+    Project](https://www.solver.com/press/monte-carlo-methods-led-atomic-bomb-may-be-your-best-bet-business-decision-making) when
+    the chain-reaction dynamics in highly enriched uranium presented an unimaginably
+    complex theoretical calculation to the scientists. Even the genius minds like
+    John Von Neumann, Stanislaw Ulam, Nicholas Metropolis could not tackle it in the
+    traditional way. They, therefore, turned to the wonderful world of random numbers
+    and let these probabilistic quantities tame the originally intractable calculations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f6471b50a5066adf386399f5bf10668f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Trinity test: (Image source: [Wikipedia](https://en.wikipedia.org/wiki/Nuclear_weapon#/media/File:Trinity_Detonation_T&B.jpg))'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Amazingly, these random variables could solve the computing problem, which stymied
+    the sure-footed deterministic approach. The elements of uncertainty actually won.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Just like **uncertainty and randomness rule in the world of Monte Carlo games**.
+    That was the inspiration for this particular moniker.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b1d55e1477e3b74105c3c32742467f99.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image source: [Pixabay](https://pixabay.com/illustrations/cube-random-luck-eye-numbers-1655118/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Today, it is a technique used in a wide swath of fields —
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[risk analysis, financial engineering](https://en.wikipedia.org/wiki/Monte_Carlo_methods_in_finance),'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: supply chain logistics,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[healthcare research](https://www.beckershospitalreview.com/healthcare-information-technology/a-million-trials-in-5-minutes-how-monte-carlo-simulations-could-revolutionize-healthcare.html),
+    drug development'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: statistical learning and modeling,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[computer graphics](https://link.springer.com/chapter/10.1007/978-3-540-74496-2_8),
+    image processing, [game design](https://beej.us/blog/data/monte-carlo-method-game-ai/),'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: large system simulations,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[computational physics](https://en.wikipedia.org/wiki/Monte_Carlo_method_in_statistical_physics),
+    astronomy, etc.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For all its successes and fame, the basic idea is deceptively simple and easy
+    to demonstrate. We demonstrate it in this article with a simple set of Python
+    code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the first and most famous uses of this technique was during the Manhattan
+    Project
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The idea
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A tricky integral
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: While the general Monte Carlo simulation technique is much broader in scope,
+    we focus particularly on the Monte Carlo integration technique here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is nothing but a numerical method for computing complex definite integrals,
+    which lack closed-form analytical solutions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Say, we want to calculate,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/7ef8d2a00651cb95daf554686502b7f4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It’s not easy or downright impossible to get a closed-form solution for this
+    integral in the indefinite form. But **numerical approximation can always give
+    us the definite integral as a sum**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is the plot of the function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/da7de0f653dabd0428e49f3e0cfd4d69.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The Riemann sum
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are many such techniques under the general category of [**Riemann sum**](https://en.wikipedia.org/wiki/Riemann_sum).
+    The idea is just to divide the area under the curve into small rectangular or
+    trapezoidal pieces, approximate them by the simple geometrical calculations, and
+    sum those components up.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For a simple illustration, I show such a scheme with only 5 equispaced intervals.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/7ff62cc143d2819a49205cb6c547242b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: For the programmer friends, in fact, there is a ready-made [function in the
+    Scipy package](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html#scipy.integrate.quad) which
+    can do this computation fast and accurately.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What if I go random?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: What if I told you that I do not need to pick the intervals so uniformly, and,
+    in fact, I can go completely probabilistic, and pick 100% random intervals to
+    compute the same integral?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Crazy talk? My choice of samples could look like this…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/5a9ebea687ad2fa400391afa8645bf9d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Or, this…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/2e401b92bbc65b724d3a27f7595d0c30.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We don’t have the time or scope to prove the theory behind it, but it can be
+    shown that **with a reasonably high number of random sampling, we can, in fact,
+    compute the integral with sufficiently high accuracy**!
+  prefs: []
+  type: TYPE_NORMAL
+- en: We just choose random numbers (between the limits), evaluate the function at
+    those points, add them up, and scale it by a known factor. We are done.
+  prefs: []
+  type: TYPE_NORMAL
+- en: OK. What are we waiting for? Let’s demonstrate this claim with some simple Python
+    code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For all its successes and fame, the basic idea is deceptively simple and easy
+    to demonstrate.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The Python code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Replace complex math by simple averaging
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If we are trying to calculate an integral — any integral — of the form below,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/e694aead902052e72285e6f482d86286.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: we just replace the ‘estimate’ of the integral by the following average,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/4b7c9ef1712f1a273a6da80a3211e1c6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: where the ***U***’s represent uniform random numbers between 0 and 1\. Note,
+    how we **replace the complex integration process by simply adding up a bunch of
+    numbers and taking their average**!
+  prefs: []
+  type: TYPE_NORMAL
+- en: In any modern computing system, programming language, or even commercial software
+    packages like Excel, you have access to this uniform random number generator.
+    Check out my article on this topic,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**How to generate random variables from scratch (no library used)**](https://towardsdatascience.com/how-to-generate-random-variables-from-scratch-no-library-used-4b71eb3c8dc7)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We go through a simple pseudo-random generator algorithm and show how to use
+    that for generating important random…
+  prefs: []
+  type: TYPE_NORMAL
+- en: We just choose random numbers (between the limits), evaluate the function at
+    those points, add them up, and scale it by a known factor. We are done.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The function
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here is a Python function, which accepts another function as the first argument,
+    two limits of integration, and an optional integer to compute the definite integral
+    represented by the argument function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/dd2bbe370a2489b1e53a194d4bca82c7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The code may look slightly different than the equation above (or another version
+    that you might have seen in a textbook). That is because **I am making the computation
+    more accurate by distributing random samples over 10 intervals**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For our specific example, the argument function looks like,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/90901243ac85649d978edecb4e9afb5b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And we can compute the integral by simply passing this to the `monte_carlo_uniform()` function,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/998b1b0d47e2acf9699163806c68d5a3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here, as you can see, we have taken 100 random samples between the integration
+    limits ***a*** = 0 and ***b*** = 4.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How good is the calculation anyway?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This integral cannot be calculated analytically. So, we need to benchmark the
+    accuracy of the Monte Carlo method against another numerical integration technique
+    anyway. We chose the Scipy `integrate.quad()`function for that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, you may also be thinking — **what happens to the accuracy as the sampling
+    density changes**. This choice clearly impacts the computation speed — we need
+    to add less number of quantities if we choose a reduced sampling density.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Therefore, we simulated the same integral for a range of sampling density and
+    plotted the result on top of the gold standard — the Scipy function represented
+    as the horizontal line in the plot below,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/415da12d2af845ef5a33b9e0cd0a5bfc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Therefore, we observe some small perturbations in the low sample density phase,
+    but they smooth out nicely as the sample density increases. In any case, the absolute
+    error is extremely small compared to the value returned by the Scipy function
+    — on the order of 0.02%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Monte Carlo trick works fantastically!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/293dd9b094de23338f564c875d2ff32a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image source: [Pixabay](https://pixabay.com/illustrations/gambling-roulette-game-bank-2001033/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: What about the speed?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: But is it as fast as the Scipy method? Better? Worse?
+  prefs: []
+  type: TYPE_NORMAL
+- en: We try to find out by running 100 loops of 100 runs (10,000 runs in total) and
+    obtaining the summary statistics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/5b7b98ed98fcd9782a367769c3da8898.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In this particular example, the Monte Carlo calculations are running twice as
+    fast as the Scipy integration method!
+  prefs: []
+  type: TYPE_NORMAL
+- en: While this kind of speed advantage depends on many factors, we can be assured
+    that the **Monte Carlo technique is not a slouch when it comes to the matter of
+    computation efficiency**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: we observe some small perturbations in the low sample density phase, but they
+    smooth out nicely as the sample density increases
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Rinse, repeat, rinse, and repeat…
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For a probabilistic technique like Monte Carlo integration, it goes without
+    saying that mathematicians and scientists almost never stop at just one run but
+    repeat the calculations for a number of times and take the average.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is a distribution plot from a 10,000 run experiment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/99821ae3cbbd7d6c9f7f9f9fe4d28738.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As you can see, the plot almost resembles a [Gaussian Normal distribution](https://en.wikipedia.org/wiki/Normal_distribution) and
+    this fact can be utilized to not only get the average value but also construct [**confidence
+    intervals**](https://www.mathsisfun.com/data/confidence-interval.html) around
+    that result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Confidence Intervals**](https://www.mathsisfun.com/data/confidence-interval.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An interval of 4 plus or minus 2 A Confidence Interval is a range of values
+    we are fairly sure our true value lies in…
+  prefs: []
+  type: TYPE_NORMAL
+- en: Particularly suitable for high-dimensional integrals
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Although for our simple illustration (and for pedagogical purpose), we stick
+    to a single-variable integral, the same idea can easily be extended to high-dimensional
+    integrals with multiple variables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And it is in this higher dimension that the Monte Carlo method particularly
+    shines as compared to Riemann sum based approaches. The sample density can be
+    optimized in a much more favorable manner for the Monte Carlo method to make it
+    much faster without compromising the accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In mathematical terms, the convergence rate of the method is independent of
+    the number of dimensions. In machine learning speak, the **Monte Carlo method
+    is the best friend you have to beat the curse of dimensionality when it comes
+    to complex integral calculations**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Read this article for a great introduction,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Monte Carlo Methods in Practice (Monte Carlo Integration)**](https://www.scratchapixel.com/lessons/mathematics-physics-for-computer-graphics/monte-carlo-methods-in-practice/monte-carlo-integration)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Monte Carlo Methods in Practice If you understand and know about the most important
+    concepts of probability and…
+  prefs: []
+  type: TYPE_NORMAL
+- en: And it is in this higher dimension that the Monte Carlo method particularly
+    shines as compared to Riemann sum based approaches.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We introduced the concept of Monte Carlo integration and illustrated how it
+    differs from the conventional numerical integration methods. We also showed a
+    simple set of Python codes to evaluate a one-dimensional function and assess the
+    accuracy and speed of the techniques.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The broader class of [Monte Carlo simulation techniques](https://en.wikipedia.org/wiki/Monte_Carlo_method) is
+    more exciting and is used in a ubiquitous manner in fields related to artificial
+    intelligence, data science, and statistical modeling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, the famous Alpha Go program from DeepMind used a Monte Carlo search
+    technique to be computationally efficient in the high-dimensional space of the
+    game Go. Numerous such examples can be found in practice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Introduction to Monte Carlo Tree Search: The Game-Changing Algorithm behind
+    DeepMind''s AlphaGo**](https://www.analyticsvidhya.com/blog/2019/01/monte-carlo-tree-search-introduction-algorithm-deepmind-alphago/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A best-of five-game series, $1 million dollars in prize money - A high stakes
+    shootout. Between 9 and 15 March, 2016…
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you liked it…
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you liked this article, you may also like my other articles on similar topics,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**How to generate random variables from scratch (no library used)**](https://towardsdatascience.com/how-to-generate-random-variables-from-scratch-no-library-used-4b71eb3c8dc7)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We go through a simple pseudo-random generator algorithm and show how to use
+    that for generating important random…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Mathematical programming — a key habit to build up for advancing in data
+    science**](https://towardsdatascience.com/mathematical-programming-a-key-habit-to-built-up-for-advancing-in-data-science-c6d5c29533be)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We show a small step towards building the habit of mathematical programming,
+    a key skill in the repertoire of a budding…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Brownian motion with Python**](https://towardsdatascience.com/brownian-motion-with-python-9083ebc46ff0)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We show how to emulate Brownian motion, the most famous stochastic process used
+    in a wide range of applications, using…
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, you can check the author’s [**GitHub**](https://github.com/tirthajyoti?tab=repositories)** repositories **for
+    code, ideas, and resources in machine learning and data science. If you are, like
+    me, passionate about AI/machine learning/data science, please feel free to [add
+    me on LinkedIn](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) or [follow
+    me on Twitter](https://twitter.com/tirthajyotiS).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/monte-carlo-integration-in-python-a71a209d277e).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Fast and Intuitive Statistical Modeling with Pomegranate](/2020/12/fast-intuitive-statistical-modeling-pomegranate.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Forgotten Algorithm](/2020/02/forgotten-algorithm-monte-carlo-simulation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Practical Markov Chain Monte Carlo](/2020/06/practical-markov-chain-monte-carlo.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sky''s the Limit: Learn how JetBlue uses Monte Carlo and Snowflake…](https://www.kdnuggets.com/2022/12/monte-carlo-jetblue-snowflake-build-trust-improve-model-accuracy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Monte Carlo is Kicking Off IMPACT 2023, Keynotes From Data & AI Pioneers](https://www.kdnuggets.com/2023/11/monte-carlo-is-kicking-off-impact-2023-keynotes-from-data-ai-pioneers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

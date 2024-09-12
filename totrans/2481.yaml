@@ -1,0 +1,692 @@
+- en: Alternative Feature Selection Methods in Machine Learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Alternative Feature Selection Methods in Machine Learning](../Images/46a2cd0981a5ec1c8ee11314fd34e20c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by [Gerd Altmann](https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1594742)
+    from [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1594742)
+  prefs: []
+  type: TYPE_NORMAL
+- en: You’ve probably done your online searches on "Feature Selection", and you've
+    probably found tons of articles describing the three umbrella terms that group
+    selection methodologies, i.e., "Filter Methods", "Wrapper Methods" and "Embedded
+    Methods".
+  prefs: []
+  type: TYPE_NORMAL
+- en: Under the "Filter Methods", we find statistical tests that select features based
+    on their distributions. These methods are computationally very fast, but in practice
+    they do not render good features for our models. In addition, when we have big
+    datasets, p-values for statistical tests tend to be very small, highlighting as
+    significant tiny differences in distributions, that may not be really important.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The "Wrapper Methods" category includes greedy algorithms that will try every
+    possible feature combination based on a step forward, step backward, or exhaustive
+    search. For each feature combination, these methods will train a machine learning
+    model, usually with cross-validation, and determine its performance. Thus, wrapper
+    methods are very computationally expensive, and often, impossible to carry out.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The "Embedded Methods," on the other hand, train a single machine learning model
+    and select features based on the feature importance returned by that model. They
+    tend to work very well in practice and are faster to compute. On the downside,
+    we can’t derive feature importance values from all machine learning models. For
+    example, we can’t derive importance values from nearest neighbours. In addition,
+    co-linearity will affect the coefficient values returned by linear models, or
+    the importance values returned by decision tree based algorithms, which may mask
+    their real importance. Finally, decision tree based algorithms may not perform
+    well in very big feature spaces, and thus, the importance values might be unreliable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Filter Methods are hard to interpret and are not commonly used in practice;
+    Wrapper Methods are computationally expensive and often impossible to carry out;
+    and Embedded Methods are not suitable in every scenario or for every machine learning
+    model. What do we do then? How else can we select predictive features?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fortunately, there are more ways to select features for supervised learning.
+    And I will cover three of them in detail throughout this blog post. For more feature
+    selection methods, check out the online course [Feature Selection for Machine
+    Learning](https://www.trainindata.com/p/feature-selection-for-machine-learning).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Alternative feature selection methods**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, I will describe three algorithms that select features based
+    on their impact on model performance. They are often referred to as "Hybrid Methods"
+    because they share characteristics of Wrapper and Embedded methods. Some of these
+    methods rely on training more than one machine learning model, a bit like wrapper
+    methods. Some selection procedures rely on feature importance like Embedded Methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But nomenclature aside, these methods have been successfully used in the industry
+    or in data science competitions, and provide additional ways of finding the most
+    predictive features for a certain machine learning model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Throughout the article, I will lay out the logic and procedure of some of these
+    feature selection methods and show how we can implement them in Python using the
+    open source library Feature-engine. Let's get started.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We will discuss selection by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature shuffling
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Feature performance
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Target mean performance
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Feature shuffling**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Feature shuffling, or permutation feature importance consists of assigning importance
+    to a feature based on the decrease in a model performance score when the values
+    of a single feature are randomly shuffled. Shuffling the order of the feature
+    values (across the rows of the dataset) alters the original relationship between
+    the feature and the target, so the drop in the model performance score is indicative
+    of how much the model depends on that feature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Alternative Feature Selection Methods in Machine Learning](../Images/7231c0d175f848878d579e52e63b790c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The procedure works as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It trains a machine learning model and determines its performance.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It shuffles the order of the values of 1 feature.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It makes predictions with the model trained in step 1, and determines the performance.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If the performance drops below a threshold, it keeps the feature, otherwise
+    it removes it.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It repeats from step 2 until all features are examined.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Selection by shuffling features has several advantages. First, we need to train
+    only one machine learning model. The importance is subsequently assigned by shuffling
+    the feature values and making predictions with that model. Second, we can select
+    features for any supervised machine learning model of our choice. Third, we can
+    implement this selection procedure utilizing open source, and we will see how
+    to do this in the coming paragraphs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Pros:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It only trains one machine learning model, so it is quick.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is suitable for any supervised machine learning model.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is available in Feature-engine, a Python open source library.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: On the downside, if two features are correlated, when one of the features is
+    shuffled, the model will still have access to the information through its correlated
+    variable. This may result in a lower importance value for both features, even
+    though they might *actually* be important. In addition, to select features, we
+    need to define an arbitrary importance threshold below which features will be
+    removed. With higher threshold values, fewer features will be selected. Finally,
+    shuffling features introduces an element of randomness, so for features with borderline
+    importance, that is, importance values close to the threshold, different runs
+    of the algorithm may return different subsets of features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Considerations:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Correlations may affect the interpretation of the feature's importance.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The user needs to define an arbitrary threshold.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The element of randomness makes the selection procedure non-deterministic.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: With this in mind, selecting features by feature shuffling is a good feature
+    selection method that focuses on highlighting those variables that directly affect
+    the model performance. We can manually derive the [permutation importance](https://scikit-learn.org/stable/modules/generated/sklearn.inspection.permutation_importance.html)
+    with Scikit-learn, and then select those variables that show an importance above
+    a certain threshold. Or we can automate the entire procedure with Feature-engine.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Python Implementation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s see how to carry out selection by feature shuffling with Feature-engine.
+    We will use the diabetes dataset that comes with Scikit-learn. First, we load
+    the data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We set up the machine learning model we are interested in:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We will select features based on the drop in the r² using 3 fold cross-validation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: With the method fit() the transformer finds the important variables —those that
+    cause a drop in r² when shuffled. By default, features will be selected if the
+    performance drop is bigger than the mean drop caused by all features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'With the method transform() we drop the unselected features from the dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can inspect the individual feature’s importance through one of the transformer’s
+    attributes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can access to the names of the features that will be removed in another
+    attribute:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: That’s it, simple. We have a reduced dataframe in Xt.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Feature performance**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A direct way of determining the importance of a feature is to train a machine
+    learning model using solely that feature. In this case, the "importance" of the
+    feature is given by the performance score of the model. In other words, how well
+    a model trained on a single feature predicts the target. Poor performance metrics
+    speak of weak or non-predictive features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The procedure works as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It trains a machine learning model for each feature.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For each model, it makes predictions and determines model performance.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It selects features with performance metrics above a threshold.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In this selection procedure, we train one machine learning model per feature.
+    The model uses an individual feature to predict the target variable. Then, we
+    determine the model performance, usually with cross-validation, and select features
+    whose performance falls above a certain threshold.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On one hand, this method is more computationally costly because we would train
+    as many models as features we have in our data set. On the other hand, models
+    trained on a single feature tend to train fairly quickly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With this method, we can select features for any model that we want, because
+    the importance is given by the performance metric. On the downside, we need to
+    provide an arbitrary threshold for the feature selection. With higher threshold
+    values, we select smaller feature groups. Some threshold values can be fairly
+    intuitive. For example, if the performance metric is the roc-auc, we can select
+    features whose performance is above 0.5\. For other metrics, like accuracy, what
+    determines a good value is not so clear.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Pros:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is suitable for any supervised machine learning model.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It explores features individually, thus avoiding correlation issues.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is available in Feature-engine, a Python open source project.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Considerations:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training one model per feature can be computationally costly.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The user needs to define an arbitrary threshold.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It does not pick up feature interactions.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We can implement selection by single feature performance utilizing Feature-engine.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Python Implementation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s load the diabetes dataset from Scikit-learn:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: We want to select features whose r² > 0.01, utilizing a linear regression and
+    using 3 fold cross-validation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: The transformer uses the method fit() to fit 1 model per feature, determine
+    performance, and select the important features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can explore the features that will be dropped:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can also examine each individual feature’s performance:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'With the method transform() we remove the features from the dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: And that’s it. Now we have a reduced dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Target mean performance**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The selection procedure that I will discuss now was introduced in the KDD 2009
+    data science competition by [Miller and co-workers](http://proceedings.mlr.press/v7/miller09/miller09.pdf).
+    The authors do not attribute any name to the technique, but since it uses the
+    mean target value per group of observations as a proxy for predictions, I like
+    to call this technique "Selection by Target Mean Performance."
+  prefs: []
+  type: TYPE_NORMAL
+- en: This selection methodology also assigns an "importance" value to each feature.
+    This importance value is derived from a performance metric. Interestingly, the
+    model does not train any machine learning models. Instead, it uses a much simpler
+    proxy as a prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In a nutshell, the procedure uses the mean target value per category or per
+    interval (if the variable is continuous) as a proxy for prediction. With this
+    prediction, it derives a performance metric, like r², accuracy, or any other metric
+    that assesses a prediction against the truth.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How does this procedure exactly work?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For categorical variables:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It splits the dataframe into a training and a testing set.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For every categorical feature, it determines the mean target value per category
+    (using the train set).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It replaces categories with corresponding target mean values in the test.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It determines a performance metric using the encoded features and the target
+    (on the test set).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It selects features whose performance is above a threshold.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For categorical values, the mean value of the target is determined for each
+    category based on the training set. Then, the categories are replaced by the learned
+    values in the test set, and these values are used to determine the performance
+    metric.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For continuous variables, the procedure is fairly similar:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It splits the dataframe into a training and a testing set.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For every continuous feature, it sorts the values into discrete intervals finding
+    the limits using the train set.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It determines the mean target value per interval (using a training set).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It sorts variables in the test set into the intervals identified in 2.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It replaces intervals with corresponding target mean values (using the test
+    set).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It determines a performance metric between the encoded feature and the target
+    (on the test set).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It selects features whose performance is above a threshold.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For continuous variables, the authors first separated the observations into
+    bins, a process otherwise called discretization. They used 1% quantiles. Then
+    they determined the mean value of the target in each bin using the training set
+    and evaluated the performance after replacing the bin values with the target mean
+    in the test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This feature selection technique is very simple; it involves taking the mean
+    of the responses for each level (category or interval), and comparing these values
+    to the target values to obtain a performance metric. Despite its simplicity, it
+    has a number of advantages.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, it does not involve training a machine learning model, so it is incredibly
+    fast to compute. Second, it captures non-linear relationships with the target.
+    Third, it is suitable for categorical variables, unlike the great majority of
+    the existing selection algorithms. It is robust to outliers as these values will
+    be allocated to one of the extreme bins. According to the authors, it offers comparable
+    performance between categorical and numerical variables. And, it is model-agnostic.
+    The features selected by this procedure should, in theory, be suitable for any
+    machine learning model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Pros:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is fast because no machine learning model is trained.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is suitable for categorical and numerical variables alike.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is robust to outliers.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It captures non-linear relationships between features and the target.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is model-agnostic.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This selection method also presents some limitations. First, for continuous
+    variables, the user needs to define an arbitrary number of intervals in which
+    the values will be sorted. This poses a problem for skewed variables, where most
+    of the values may fall into just one bin. Second, categorical variables with infrequent
+    labels may lead to unreliable results as there are few observations for those
+    categories. Therefore, the mean target value per category will be unreliable.
+    In extreme cases, if a category was not present in the training set, we would
+    not have a mean target value to use as a proxy to determine performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Considerations:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It needs tuning of interval numbers for skewed variables.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Rare categories will offer unreliable performance proxies or make the method
+    impossible to compute.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: With these considerations in mind, we can select variables based on the target
+    mean performance with Feature-engine.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Python implementation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will use this method to select variables from the Titanic dataset, which
+    has a mix of numerical and categorical variables. When loading the data, I will
+    do some preprocessing to facilitate the demonstration and then separate it into
+    train and test.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: We will select features based on the roc-auc using 2 fold cross-validation.
+    The first thing to note is that Feature-engine allows us to use cross-validation,
+    which is an improvement with respect to the original method described by the authors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature-engine also allows us to decide how we will determine the intervals
+    for numerical variables. We can choose equal frequency or equal width intervals.
+    The authors used 1% quantiles, which is suitable for continuous variables with
+    a fair spread of values, but not often suitable for skewed variables. In this
+    demo, we will separate numerical variables into equal frequency intervals.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, we want to select features for which the roc-auc is greater than 0.6.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'With the method fit() the transformer:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: replaces categories by the target mean
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: sorts numerical variables into equal frequency bins
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: replaces bins by the target mean
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: using the target mean encoded variables returns the roc-auc
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: selects features whose roc-auc > 0.6
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can explore the ROC-AUC for each feature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can find the features that will be dropped from the data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'With the method transform() we drop the features from the data sets:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: Simple. Now we have reduced versions of the train and test sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Wrapping up**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We’ve reached the end of the article. If you made it this far, well done and
+    thank you for reading. If you want to know more about feature selection, including
+    Filter, Wrapper, Embedded and a number of Hybrid methods, check out the online
+    course [Feature Selection for Machine Learning](https://www.trainindata.com/p/feature-selection-for-machine-learning).
+  prefs: []
+  type: TYPE_NORMAL
+- en: For additional courses on machine learning, including Feature Engineering, Hyperparameter
+    Optimization and Model Deployment, visit our [website](https://www.trainindata.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: To implement Filter, Wrapper, Embedded and Hybrid selection methods in Python,
+    check out the selection modules in [Scikit-learn](https://scikit-learn.org/stable/modules/feature_selection.html),
+    [MLXtend](http://rasbt.github.io/mlxtend/user_guide/feature_selection/SequentialFeatureSelector/)
+    and [Feature-engine](https://feature-engine.readthedocs.io/en/latest/index.html).
+    The libraries come with extensive documentation that will help you understand
+    the underlying methodology.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Soledad Galli, PhD](https://linkedin.com/in/soledad-galli)** is the
+    Lead Data Scientist and machine learning instructor at [Train in Data](https://www.trainindata.com/).
+    Sole teaches intermediate and advanced courses in data science and machine learning.
+    She worked in finance and insurance, received a [Data Science Leaders Award](https://www.information-age.com/data-leaders-awards-2018-revealed-123472520/)
+    in 2018 and was selected as "[LinkedIn’s voice](https://www.linkedin.com/pulse/linkedin-top-voices-2019-data-science-analytics-lorenzetti-soper/)"
+    in data science and analytics in 2019\. She is also the creator and maintainer
+    of the Python open source library [Feature-engine](https://feature-engine.readthedocs.io/en/latest/index.html).
+    Sole is passionate about sharing knowledge and helping others succeed in data
+    science.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Advanced Feature Selection Techniques for Machine Learning Models](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Selection: Where Science Meets Art](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[OpenChatKit: Open-Source ChatGPT Alternative](https://www.kdnuggets.com/2023/03/openchatkit-opensource-chatgpt-alternative.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[8 Open-Source Alternative to ChatGPT and Bard](https://www.kdnuggets.com/2023/04/8-opensource-alternative-chatgpt-bard.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[ChatGLM-6B: A Lightweight, Open-Source ChatGPT Alternative](https://www.kdnuggets.com/2023/04/chatglm6b-lightweight-opensource-chatgpt-alternative.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

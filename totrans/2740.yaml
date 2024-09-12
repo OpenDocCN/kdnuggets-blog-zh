@@ -1,0 +1,956 @@
+- en: Deploy Machine Learning Pipeline on AWS Fargate
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/07/deploy-machine-learning-pipeline-aws-fargate.html](https://www.kdnuggets.com/2020/07/deploy-machine-learning-pipeline-aws-fargate.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Moez Ali](https://www.linkedin.com/in/profile-moez/), Founder & Author
+    of PyCaret**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/befec28a20f24190d036356e9f022bcc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: RECAP
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In our [last post](https://towardsdatascience.com/deploy-machine-learning-model-on-google-kubernetes-engine-94daac85108b) on
+    deploying a machine learning pipeline in the cloud, we demonstrated how to develop
+    a machine learning pipeline in PyCaret, containerize it with Docker and serve
+    it as a web application using Google Kubernetes Engine. If you haven’t heard about
+    PyCaret before, please read this [announcement](https://towardsdatascience.com/announcing-pycaret-an-open-source-low-code-machine-learning-library-in-python-4a1f1aad8d46) to
+    learn more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this tutorial, we will use the same machine learning pipeline and Flask app
+    that we built and deployed previously. This time we will demonstrate how to containerize
+    and deploy a machine learning pipeline serverless using AWS Fargate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Learning Goals of this Tutorial
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: What is a Container? What is Docker? What is Kubernetes?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: What is Amazon Elastic Container Service (ECS)?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: What are AWS Fargate and serverless deployment?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Build and push a Docker image onto Amazon Elastic Container Registry.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Create and execute a task definition using AWS-managed infrastructure i.e. AWS
+    Fargate.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: See a web app in action that uses a trained machine learning pipeline to predict
+    new data points in real-time.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This tutorial will cover the entire workflow starting from building a docker
+    image locally, uploading it onto Amazon Elastic Container Registry, creating a
+    cluster and then defining and executing task using AWS-managed infrastructure
+    i.e. AWS Fargate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the past, we have covered deployment on other cloud platforms such as Azure
+    and Google. If you are interested in learning more about those, you can read the
+    following stories:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploy Machine Learning Pipeline on Google Kubernetes Engine](https://towardsdatascience.com/deploy-machine-learning-model-on-google-kubernetes-engine-94daac85108b)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploy Machine Learning Pipeline on AWS Web Service](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-cloud-using-docker-container-bec64458dc01)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build and deploy your first machine learning web app on Heroku PaaS](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ???? Toolbox for this tutorial
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: PyCaret
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PyCaret](https://www.pycaret.org/) is an open source, low-code machine learning
+    library in Python that is used to train and deploy machine learning pipelines
+    and models into production. PyCaret can be installed easily using pip.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Flask
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Flask](https://flask.palletsprojects.com/en/1.1.x/) is a framework that allows
+    you to build web applications. A web application can be a commercial website,
+    blog, e-commerce system, or an application that generates predictions from data
+    provided in real-time using trained models. If you don’t have Flask installed,
+    you can use pip to install it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Docker Toolbox for Windows 10 Home
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Docker](https://www.docker.com/)is a tool designed to make it easier to create,
+    deploy, and run applications by using containers. Containers are used to package
+    up an application with all of its necessary components, such as libraries and
+    other dependencies, and ship it all out as one package. If you haven’t used docker
+    before, this tutorial also covers the installation of Docker Toolbox (legacy)
+    on **Windows 10 Home**. In the [previous tutorial](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-cloud-using-docker-container-bec64458dc01) we
+    covered how to install Docker Desktop on **Windows 10 Pro edition**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Amazon Web Services (AWS)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Amazon Web Services (AWS) is a comprehensive and broadly adopted cloud platform,
+    offered by Amazon. It has over 175 fully-featured services from data centers globally.
+    If you haven’t used AWS before, you can [sign-up](https://aws.amazon.com/) for
+    a free account.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ✔️Let’s get started…..
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: What is a Container?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before we get into implementation using AWS Fargate, let’s understand what a
+    container is and why we would need one?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/af20cef74cb4bc8bc10d4e8b3422f9e8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[https://www.freepik.com/free-photos-vectors/cargo-ship](https://www.freepik.com/free-photos-vectors/cargo-ship)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Have you ever had the problem where your code works fine on your computer but
+    when a friend tries to run the exact same code, it doesn’t work? If your friend
+    is repeating the exact same steps, he or she should get the same results, right?
+    The one-word answer to this is ***the environment*. **Your friend’s environment
+    is different than yours.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What does an environment include? → The programing language such as Python and
+    all the libraries and dependencies with the exact versions using which application
+    was built and tested.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If we can create an environment that we can transfer to other machines (for
+    example: your friend’s computer or a cloud service provider like Google Cloud
+    Platform), we can reproduce the results anywhere. Hence, ***a******container* **is
+    a type of software that packages up an application and all its dependencies so
+    the application runs reliably from one computing environment to another.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Docker?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Docker is a company that provides software (also called **Docker**) that allows
+    users to build, run and manage containers. While Docker’s container are the most
+    common, there are other less famous *alternatives* such as [LXD](https://linuxcontainers.org/lxd/introduction/) and [LXC](https://linuxcontainers.org/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5d90553dcb766734cb933c344182dd46.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now that you theoretically understand what a container is and how Docker is
+    used to containerize applications, let’s imagine a scenario where you have to
+    run multiple containers across a fleet of machines to support an enterprise level
+    machine learning application with varied workloads during day and night. This
+    is pretty common for real-life and as simple as it may sound, it is a lot of work
+    to do manually.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You need to start the right containers at the right time, figure out how they
+    can talk to each other, handle storage considerations, deal with failed containers
+    or hardware and million other things!
+  prefs: []
+  type: TYPE_NORMAL
+- en: This entire process of managing hundreds and thousands of containers to keep
+    the application up and running is known as **container orchestration**. Don’t
+    get caught up in the technical details yet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At this point, you must recognize that managing real-life applications require
+    more than one container and managing all of the infrastructure to keep containers
+    up and running is cumbersome, manual and an administrative burden.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This brings us to **Kubernetes**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Kubernetes?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Kubernetes is an open-source system developed by Google in 2014 for managing
+    containerized applications. In simple words, Kubernetes is a system for running
+    and coordinating containerized applications across a cluster of machines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b9545b2b3caa066aaaa3d8b48b56b861.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [chuttersnap](https://unsplash.com/@chuttersnap?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: While Kubernetes is an open-source system developed by Google, almost all major
+    cloud service providers offer Kubernetes as a Managed Service. For example: **Amazon
+    Elastic Kubernetes Service (EKS) **offered by Amazon**, Google Kubernetes Engine
+    (GKE) **offered by Google**, **and **Azure Kubernetes Service (AKS) **offered
+    by Microsoft.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So far we have discussed and understood:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ✔️ A ***container***
+  prefs: []
+  type: TYPE_NORMAL
+- en: ✔️ Docker
+  prefs: []
+  type: TYPE_NORMAL
+- en: ✔️ Kubernetes
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before introducing AWS Fargate, there is only one thing left to discuss and
+    that is Amazon’s own container orchestration service **Amazon Elastic Container
+    Service (ECS).**
+  prefs: []
+  type: TYPE_NORMAL
+- en: AWS Elastic Container Service (ECS)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Amazon Elastic Container Service (Amazon ECS) is Amazon’s home-grown container
+    orchestration platform. The idea behind ECS is similar to Kubernetes *(both of
+    them are orchestration services)*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ECS is an AWS-native service, meaning that it is only possible to use on AWS
+    infrastructure. On the other hand, **EKS** is based on Kubernetes, an open-source
+    project which is available to users running on multi-cloud (AWS, GCP, Azure) and
+    even On-Premise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Amazon also offers a Kubernetes based container orchestration service known
+    as **Amazon Elastic Kubernetes Service (Amazon EKS). **Even though the purpose
+    of ECS and EKS is pretty similar i.e. *orchestrating containerized applications*,
+    there are quite a few differences in pricing, compatibility and security. There
+    is no best answer and the choice of solution depends on the use-case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Irrespective of whichever container orchestration service you are using (ECS
+    or EKS), there are two ways you can implement the underlying infrastructure:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Manually manage the cluster and underlying infrastructure such as Virtual Machines
+    / Servers / (also known as EC2 instances in AWS).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Serverless — Absolutely no need to manage anything. Just upload the container
+    and that’s it. ← **This is AWS Fargate.**
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/abcd4c3351fab4bc61ba41313d151563.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Amazon ECS underlying infrastructure
+  prefs: []
+  type: TYPE_NORMAL
+- en: AWS Fargate — serverless compute for containers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: AWS Fargate is a serverless compute engine for containers that works with both
+    Amazon Elastic Container Service (ECS) and Amazon Elastic Kubernetes Service (EKS).
+    Fargate makes it easy for you to focus on building your applications. Fargate
+    removes the need to provision and manage servers, lets you specify and pay for
+    resources per application, and improves security through application isolation
+    by design.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fargate allocates the right amount of compute, eliminating the need to choose
+    instances and scale cluster capacity. You only pay for the resources required
+    to run your containers, so there is no over-provisioning and paying for additional
+    servers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/9b80301155c032bf10e84cd6744a2c7f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: How AWS Fargate works — [https://aws.amazon.com/fargate/](https://aws.amazon.com/fargate/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There is no best answer as to which approach is better. The choice between
+    going serverless or manually managing an EC2 cluster depends on the use-case.
+    Some pointers that can assist with this choice include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ECS EC2 (Manual Approach)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You are all-in on AWS.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You have a dedicated Ops team in place to manage AWS resources.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You have an existing footprint on AWS i.e. you are already managing EC2 instances
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**AWS Fargate**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You do not have huge Ops team to manage AWS resources.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You do not want operational responsibility or want to reduce it.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Your application is stateless *(A stateless app is an application that does
+    not save client data generated in one session for use in the next session with
+    that client)*.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Setting the Business Context
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: An insurance company wants to improve its cash flow forecasting by better predicting
+    patient charges using demographic and basic patient health risk metrics at the
+    time of hospitalization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/a783d299ecd604bc5d1524a793c8d557.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*(*[*data source*](https://www.kaggle.com/mirichoi0218/insurance#insurance.csv)*)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Objective
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To build and deploy a web application where the demographic and health information
+    of a patient is entered into a web-based form which then outputs a predicted charge
+    amount.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tasks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Train and develop a machine learning pipeline for deployment.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Build a web app using a Flask framework. It will use the trained ML pipeline
+    to generate predictions on new data points in real-time.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Build and push a Docker image onto Amazon Elastic Container Registry.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Create and execute a task to deploy the app using AWS Fargate serverless infrastructure.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Since we have already covered the first two tasks in our initial tutorial, we
+    will quickly recap them and then focus on the remaining items in the list above.
+    If you are interested in learning more about developing a machine learning pipeline
+    in Python using PyCaret and building a web app using a Flask framework, please
+    read [this tutorial](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99).
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Develop a Machine Learning Pipeline
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We are using PyCaret in Python for training and developing a machine learning
+    pipeline which will be used as part of our web app. The Machine Learning Pipeline
+    can be developed in an Integrated Development Environment (IDE) or Notebook. We
+    have used a notebook to run the below code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When you save a model in PyCaret, the entire transformation pipeline based
+    on the configuration defined in the **setup() **function is created . All inter-dependencies
+    are orchestrated automatically. See the pipeline and model stored in the ‘deployment_28042020’
+    variable:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/2c64ca792b45cf465473c8266ac2f6a8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Machine Learning Pipeline created using PyCaret
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Build a Web Application
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'This tutorial is not focused on building a Flask application. It is only discussed
+    here for completeness. Now that our machine learning pipeline is ready we need
+    a web application that can connect to our trained pipeline to generate predictions
+    on new data points in real-time. We have created the web application using Flask
+    framework in Python. There are two parts of this application:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Front-end (designed using HTML)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Back-end (developed using Flask)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This is how our web application looks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c5ce94edc4cabf0ca49b06bd68e8e86e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Web application on local machine
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you haven’t followed along so far, no problem. You can simply fork this [repository](https://www.github.com/pycaret/pycaret-deployment-aws) from
+    GitHub. This is how your project folder should look at this point:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '10-steps to deploy a ML pipeline using AWS Fargate:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: ???? Step 1 — Install Docker Toolbox (for Windows 10 Home)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In order to build a docker image locally, you will need Docker installed on
+    your computer. If you are using Windows 10 64-bit: Pro, Enterprise, or Education
+    (Build 15063 or later) you can download Docker Desktop from [DockerHub](https://hub.docker.com/editions/community/docker-ce-desktop-windows/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, if you are using Windows 10 Home, you would need to install the last
+    release of legacy Docker Toolbox (v19.03.1) from [Dockers GitHub page](https://github.com/docker/toolbox/releases).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6d850c5410b4dbf7528b880ad882727f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[https://github.com/docker/toolbox/releases](https://github.com/docker/toolbox/releases)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Download and Run **DockerToolbox-19.03.1.exe** file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The easiest way to check if the installation was successful is by opening the
+    command prompt and typing in ‘docker’. It should print the help menu.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5df6389e7f7aba6d1e610041a63b493b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Anaconda Prompt to check docker
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Step 2— Create a Dockerfile
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The first step for creating a Docker image is to create a Dockerfile in the
+    project directory. A Dockerfile is just a file with a set of instructions. The
+    Dockerfile for this project looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Dockerfile is case-sensitive and must be in the project folder with the other
+    project files. A Dockerfile has no extension and can be created using any text
+    editor. You can download the Dockerfile used in this project from this [GitHub
+    Repository](https://www.github.com/pycaret/pycaret-deployment-aws).
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Step 3— Create a Repository in Elastic Container Registry (ECR)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**(a) Login to your AWS console and search for Elastic Container Registry:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8e2551b255c8e951108e1047f2aae941.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: AWS Console
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(b) Create a new repository:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/1f07ecea416f3a78c3682f6f6247a228.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Create New Repository on Amazon Elastic Container Registry
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*For this demo we have created ‘pycaret-deployment-aws-repository’.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(c) Click on “View push commands”:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/78b190e6f4e096f16da3ad4cfe2ab3d6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: pycaret-deployment-aws-repository
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(d) Copy Push Commands:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/1a60488f1db805820837baf7a2db3797.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Push commands for pycaret-deployment-aws-repository
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Step 4— Execute push commands
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Navigate to your project folder using Anaconda Prompt and execute the commands
+    you have copied in the step above. The code below is for demonstration only and
+    may not work as it is. To get the right code to execute, you must get a copy of
+    code from “View push commands” inside the repository.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You must be in the folder where the Dockerfile and the rest of your code reside
+    before executing these commands.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: ???? Step 5— Check your uploaded image
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Click on the repository you created and you will see an image URI of the uploaded
+    image in the step above. Copy the image URI (it would be needed in step 7 below).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1bb9e9c309111ca1187b93e46884ceb9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: ???? Step 6 — Create and Configure a Cluster
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**(a) Click on “Clusters” on left-side menu:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8479d8c5e6b89e517bdc1bc1c02e69f1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Create Cluster — Step 1
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(b) Select “Networking only” and click Next step:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/53b806267b1b206b797e3c486b370b86.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Select Networking Only Template
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(c) Configure Cluster (Enter cluster name) and click on Create:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3403126fd1897ec44fe15aa22d607a3a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Configure Cluster
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(d) Cluster Created:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/dfe37839ba4e815d33cfb07bba3b88e0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Cluster Created
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Step 7— Create a new Task definition
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'A **task** definition is required to run Docker containers in Amazon ECS. Some
+    of the parameters you can specify in a **task** definition include: The Docker
+    image to use with each container in your **task**. How much CPU and memory to
+    use with each **task** or each container within a **task**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(a) Click on “Create new task definition”:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/eef82785c502daff7c68e5fa5a697bca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Create a new task definition
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(b) Select “FARGATE” as launch type:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ff3f03070dd0cde5ea476778e6f6686b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Select Launch Type Compatibility
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(c) Fill in the details:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b3451fb5fa283044f113fe1cc7a4ae9b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Configure Task and container definitions (part 1)![Figure](../Images/477c2f78010ed0989e82e957f76eb671.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Configure Task and container definitions (part 2)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(d) Click on “Add Containers” and fill in the details:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/975bf27b4569936a1c0481e47dff9ddd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Adding Container in task definitions
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(e) Click “Create Task” on the bottom right.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/46ee98d89d3929b8363ae5dffccb10c0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: ???? Step 8 —Execute Task Definition
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In step 7 we created a task that will start the container. Now we will execute
+    the task by clicking **“Run Task”** under Actions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/24344177a60d61949d7fa39beed1d544.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Execute Task Definition
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(a) Click on “Switch to launch type” to change the type to Fargate:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/87a89677f4dca090a7af19c988b27e38.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Running Task — Part 1
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(b) Select the VPC and Subnet from the dropdown:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5f398c350ade7bbf8f2397ad259ccade.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Running Task — Part 2
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(c) Click on “Run Task” on bottom right:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/cb75bf5addf1cffde41d5371338f5f41.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Task Created Successfully
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Step 9— Allow inbound port 5000 from Network settings
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'One last step before we can see our application in action on Public IP address
+    is to allow port 5000 by creating a new rule. In order to do that, follow these
+    steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(a) Click on Task**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3d224fd160d524e8f88172140f7d5d37.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(b) Click on ENI Id:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e5b5700b2be549c5de3569e1da71b840.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(c) Click on Security groups**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/36d1d2bf37b5e419314938afb6ff3495.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(d) Click on “Edit inbound rules”**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5f92ced801cc0ba168ad610aaa5af1d1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(e) Add a Custom TCP rule of port 5000**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/284fa69473d3e3a15990af585062249a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: ???? Step 10 — See the app in action
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Use public IP address with port 5000 to access the application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6a118bb981391165a86e4bc695dfe696.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Task definition logs![Figure](../Images/f2c363e06d336fe092bdbc120ce74ee2.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Final app uploaded on [http://35.182.227.98:5000](http://35.182.227.98:5000/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** By the time this story is published, the app will be removed from
+    the public address to restrict resource consumption.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyCaret 2.0.0 is coming!
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We have received overwhelming support and feedback from the community. We are
+    actively working on improving PyCaret and preparing for our next release. **PyCaret
+    2.0.0 will be bigger and better**. If you would like to share your feedback and
+    help us improve further, you may [fill this form](https://www.pycaret.org/feedback) on
+    the website or leave a comment on our [GitHub ](https://www.github.com/pycaret/)or [LinkedIn](https://www.linkedin.com/company/pycaret/) page.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Follow our [LinkedIn](https://www.linkedin.com/company/pycaret/) and subscribe
+    to our [YouTube](https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g) channel
+    to learn more about PyCaret.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Want to learn about a specific module?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As of the first release 1.0.0, PyCaret has the following modules available for
+    use. Click on the links below to see the documentation and working examples in
+    Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Classification](https://www.pycaret.org/classification)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Regression](https://www.pycaret.org/regression)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Clustering](https://www.pycaret.org/clustering)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Anomaly Detection](https://www.pycaret.org/anomaly-detection)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing](https://www.pycaret.org/nlp)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Association Rule Mining](https://www.pycaret.org/association-rules)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Also see:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'PyCaret getting started tutorials in Notebook:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Clustering](https://www.pycaret.org/clu101)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Anomaly Detection](https://www.pycaret.org/anom101)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing](https://www.pycaret.org/nlp101)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Association Rule Mining](https://www.pycaret.org/arul101)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Regression](https://www.pycaret.org/reg101)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Classification](https://www.pycaret.org/clf101)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Would you like to contribute?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: PyCaret is an open source project. Everybody is welcome to contribute. If you
+    would like contribute, please feel free to work on [open issues](https://github.com/pycaret/pycaret/issues).
+    Pull requests are accepted with unit tests on dev-1.0.1 branch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Please give us ⭐️ on our [GitHub repo](https://www.github.com/pycaret/pycaret) if
+    you like PyCaret.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Medium: [https://medium.com/@moez_62905/](https://medium.com/@moez_62905/machine-learning-in-power-bi-using-pycaret-34307f09394a)
+  prefs: []
+  type: TYPE_NORMAL
+- en: LinkedIn: [https://www.linkedin.com/in/profile-moez/](https://www.linkedin.com/in/profile-moez/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Twitter: [https://twitter.com/moezpycaretorg1](https://twitter.com/moezpycaretorg1)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Moez Ali](https://www.linkedin.com/in/profile-moez/)** is a Data Scientist,
+    and is Founder & Author of PyCaret.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-aws-fargate-eb6e1c50507).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploy a Machine Learning Pipeline to the Cloud Using a Docker Container](/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build and deploy your first machine learning web app](/2020/05/build-deploy-machine-learning-web-app.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Announcing PyCaret 1.0.0](/2020/04/announcing-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,265 @@
+- en: Working With Time Series Using SQL
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/04/time-series-using-sql.html](https://www.kdnuggets.com/2021/04/time-series-using-sql.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Michael Grogan](http://michael-grogan.com/), Data Science Consultant**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/76d764c5f8e4cada72a9591a556d0b14.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: Photo by [Tumisu](https://pixabay.com/users/tumisu-148124/) from [Pixabay](https://pixabay.com/illustrations/database-data-computer-network-1954920/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tools such as Python or R are most often used to conduct deep time series analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, knowledge of how to work with time series data using SQL is essential,
+    particularly when working with very large datasets or data that is constantly
+    being updated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here are some useful commands that can be invoked in SQL to better work with
+    time series data within the data table itself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Background
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this example, we are going to work with weather data collected across a range
+    of different times and locations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The data types in the table of the PostgreSQL database are as below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you can see, *date* is defined as a timestamp data type without time zone
+    (which we will also look at in this article).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The variable of interest is temp (temperature) — we are going to look at ways
+    to analyse this variable more intuitively using SQL.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Calculating Moving Averages
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Here is a snippet of some of the columns in the data table:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Suppose we wish to calculate a moving average of temperature across different
+    time periods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To do this, we firstly need to make sure that the data is ordered by date, and
+    decide on how many periods should be included in the averaging window.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To start with, a 7-period moving average is used, with all temperature values
+    ordered by date.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now, let’s add a 30 and 60-period moving average. We will store these averages
+    along with the 7-period moving average in the one table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/5dda346183a359201c27afbbf9dc1896.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: Output Created by Author'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More information on how to calculate moving averages within SQL can be found
+    at the following resource by [sqltrainingonline.com](https://www.sqltrainingonline.com/sql-moving-average/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Working with time zones
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You will notice that the timestamp contains a date and time. While this is fine
+    when storing just one location in the table, things can get quite tricky when
+    working with locations across multiple time zones.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that an integer variable named *timezone *was created within the table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Suppose that we are analysing weather patterns across different places with
+    a range of time zones ahead of the inputted time — in this case, all data points
+    were inputted at GMT time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The new times can be calculated as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can now store the new times as an updated variable, which we will name as *newdate.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: This clause allows us to generate the updated times (which would reflect the
+    actual time in each specific place when variables such as temperature, barometric
+    pressure, etc, were recorded.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Inner Join and Having Clauses
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You will notice in the above table that temperature values are included across
+    a range of places.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Suppose that wind speed is also calculated for each place in a separate table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case, we wish to calculate the average temperature across each listed
+    place where the wind speed is higher than 20.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This can be accomplished using the **inner join** and **having** clauses as
+    follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, you have been introduced to some introductory examples of using
+    SQL to work with time series data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In particular, you saw how to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Calculate moving averages
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Work with different time zones
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Calculate averages across different subsets of data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Many thanks for your time and any questions or feedback are greatly appreciated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Disclaimer: This article is written on an “as is” basis and without warranty.
+    It was written with the intention of providing an overview of data science concepts,
+    and should not be interpreted as professional advice. The findings and interpretations
+    in this article are those of the author and are not endorsed by or affiliated
+    with any third-party mentioned in this article.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Michael Grogan](http://michael-grogan.com/)** is a Data Science Consultant.
+    He posesses expertise in time series analysis, statistics, Bayesian modeling,
+    and machine learning with TensorFlow.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/working-with-time-series-using-sql-34e70ce48025).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Multidimensional multi-sensor time-series data analysis framework](/2021/02/multidimensional-multi-sensor-time-series-data-analysis-framework.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Rejection Sampling with Python](/2021/03/rejection-sampling-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deep Learning Is Becoming Overused](/2021/03/deep-learning-becoming-overused.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,262 @@
+- en: Doing Statistics with SQL
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/08/doing-statistics-sql.html](https://www.kdnuggets.com/2016/08/doing-statistics-sql.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Jean-Nicholas Hould, JeanNicholasHould.com**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I recently wrote an article on why you should [learn SQL for data analysis](http://www.jeannicholashould.com/sql-for-data-analysis.html).
+    I received lots of feedback from this post. People wanted to see some concrete
+    examples of using SQL for data analysis. I decided to apply some of my own advice
+    and load up one of these [awesome datasets](https://github.com/caesar0301/awesome-public-datasets) to
+    do some basic data exploration queries on it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SQL](../Images/7b90faf67d8c5a9b93c5838add6004a0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: For this post, I am using an open data set. The million songs data sets is a
+    *«freely-available collection of audio features and metadata for a million contemporary
+    popular music tracks»*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you want to follow along, here are the steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Download the Million Song Data Set. [I used the 10K songs subset](http://labrosa.ee.columbia.edu/millionsong/pages/getting-dataset#subset).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Download a [SQLite Client](http://sqlitebrowser.org/)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Open `subset_track_metadata.db` file with SQLite and start exploring
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Why Descriptive Statistics?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'When I start the analysis of a new data set, I run some basic queries to get
+    a sense of how the data is organized, how the values are distributed. I am trying
+    to understand what I’m dealing with. For numerical data, I will often run some
+    descriptive statistics on the data set: I will measure the central tendency (*mean*,
+    *median*, *mode*) and measure the level of variability of the data. Those measurements
+    are generally a good start to data exploration. They will often lead to new questions
+    that fuel my analysis.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Central Tendency
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Mean**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The mean is the number you obtain when you sum up a given set of numbers and
+    then divide this sum by the total number in the set. The mean is very sensible
+    to outliers. It can be drastically affected by values that are much higher or
+    lower compared to the rest of the data set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`CAST`: *Run-time data type conversion between compatible data types. In this
+    case, I’m converting a float to an integer for rounding purpose.*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`AVG`: *Aggregation function that returns the mean of the input expression
+    value.*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`as avg_year`: *Temporarily renames a column heading - This is only for readbility
+    purpose, to make the code more human-friendly. I will use this aliasing throughout
+    the post.*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Median**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The median is the number separating the higher half of a ordered data set from
+    the lower half. The median is sometimes a better measure of a mid point because
+    each data point is weighted equally.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`ORDER BY`: *Sorts the resulting data set by one or more column. The ordering
+    can be ascending `ASC` (default) or descending `DESC`.*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`COUNT`: *Aggregation function that returns the # of rows that matches a criteria.*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`LIMIT`: *Specifies the maximum number of rows that can be returned from the
+    resulting data set.*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`OFFSET`: *Skip X rows before beginning to return rows. In this specific example,
+    we are skipping 5000 rows (which is equal to the total row count`COUNT(*)` divided
+    by 2).*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Mode**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The mode is the value that appears most often in a set of data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`GROUP BY`: *Used with aggregation functions such as `COUNT`, `AVG`, etc. Groups
+    the resulting data set by one or more column.*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Variability
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Min/Max Values**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Minimum/Maximum value in a data set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`MIN`: *Aggregation function that returns the smallest value in a data set.*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`MAX`: *Aggregation function that returns the largest value in a data set.*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Distribution of songs per year**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Count of songs released in each years
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next Steps
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The SQL queries in this post are fairly simple. They are not the result of technical
+    gymmstastics. They are just simple measurements helping us understand the data
+    set and that’s what’s great about them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this specific data set, we noticed that for more than half of the data set,
+    the year of the song is equal to `0`. This means we are either looking at a data
+    set of very old songs or that we are dealing with missing values. The latter is
+    more realistic. If we filter out songs from year `0`, our data makes more sense.
+    The songs are ranging from `1926` to `2010` and the median is the year `2001`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With the data partially cleaned up, we can start exploring other columns of
+    our data set and asking ourselves more questions: How many unique artists composed
+    songs per year? How has that evolved through time? Are songs shorter nowadays
+    than before? What’s great about those simple measurements is that they can be
+    reused as our queries and filters get more and more complex. By applying the simple
+    descriptive statistics measurements, we can have a good grasps of the data and
+    we can keep exploring deeper and deeper.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: Jean-Nicholas Hould** is a [Data Scientist from Montreal, Canada](http://jeannicholashould.com/?utm_source=kdnugget).
+    Author at JeanNicholasHould.com.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://www.jeannicholashould.com/descriptive-statistics-in-sql.html).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering SQL for Data Science](/2016/06/seven-steps-mastering-sql-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Statistics 101](/2016/07/data-science-statistics-101.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build vs Buy – Analytics Dashboards](/2016/07/build-buy-analytics-dashboards.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Doing this on ChatGPT and Get Ahead of the 99% of its Users](https://www.kdnuggets.com/2023/05/stop-chatgpt-get-ahead-99-users.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Minimum: 10 Essential Skills You Need to Know to Start…](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Is ChatGPT Doing and Why Does It Work?](https://www.kdnuggets.com/2023/04/chatgpt-work.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Phi-2: Small LMs that are Doing Big Things](https://www.kdnuggets.com/phi-2-small-lms-that-are-doing-big-things)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Descriptive Statistics Key Terms, Explained](https://www.kdnuggets.com/2017/05/descriptive-statistics-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 8 Basic Statistics Concepts for Data Science](https://www.kdnuggets.com/2020/06/8-basic-statistics-concepts.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,500 @@
+- en: Parallel Processing Large File in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/07/parallel-processing-large-file-python.html](https://www.kdnuggets.com/2022/07/parallel-processing-large-file-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Parallel Processing Large File in Python](../Images/644d2d1ea41ea4a38f2569081bef10d5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: For parallel processing, we divide our task into sub-units. It increases the
+    number of jobs processed by the program and reduces overall processing time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, if you are working with a large CSV file and you want to modify
+    a single column. We will feed the data as an array to the function, and it will
+    parallel process multiple values at once based on the number of available  **workers**.
+    These workers are based on the number of cores within your processor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** using parallel processing on a smaller dataset will not improve processing
+    time.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In this blog, we will learn how to reduce processing time on large files using
+    **multiprocessing**, **joblib**, and **tqdm** Python packages. It is a simple
+    tutorial that can apply to any file, database, image, video, and audio.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** we are using the Kaggle notebook for the experiments. The processing
+    time can vary from machine to machine.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Getting Started
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We will be using the [US Accidents (2016 - 2021)](https://www.kaggle.com/datasets/sobhanmoosavi/us-accidents)
+    dataset from Kaggle which consists of 2.8 million records and 47 columns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will import `multiprocessing`, `joblib`, and `tqdm` for **parallel processing**,
+    `pandas` for **data ingestions**, and `re`, `nltk`, and `string` for **text processing**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before we jump right in, let's set `n_workers` by doubling `cpu_count()`. As
+    you can see, we have 8 workers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: In the next step, we will ingest large CSV files using the **pandas** `read_csv`
+    function. Then, print out the shape of the dataframe, the name of the columns,
+    and the processing time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** Jupyter’s magic function `%%time` can display **CPU times** and **wall
+    time** at the end of the process.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Output**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Cleaning the Text
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The `clean_text` is a straightforward function for processing and cleaning the
+    text. We will get English **stopwords** using `nltk.copus` the use it to filter
+    out stop words from the text line. After that, we will remove special characters
+    and extra spaces from the sentence. It will be the baseline function to determine
+    processing time for **serial**, **parallel**, and **batch** processing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Serial Processing
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: For serial processing, we can use the pandas `.apply()` function, but if you
+    want to see the progress bar, you need to activate **tqdm** for **pandas** and
+    then use the `.progress_apply()` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are going to process the 2.8 million records and save the result back to
+    the “Description” column column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Output**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It took 9 minutes and 5 seconds for the **high-end** processor to serial process
+    2.8 million rows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Multiprocessing
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: There are various ways to parallel process the file, and we are going to learn
+    about all of them. The `multiprocessing` is a built-in python package that is
+    commonly used for parallel processing large files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will create a multiprocessing **Pool** with **8 workers** and use the **map**
+    function to initiate the process. To display progress bars, we are using **tqdm**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The map function consists of two sections. The first requires the function,
+    and the second requires an argument or list of arguments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Learn more by reading [documentation](https://docs.python.org/3/library/multiprocessing.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Output**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have improved our processing time by almost **3X**. The processing time dropped
+    from **9 minutes 5 seconds** to **3 minutes 51 seconds**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Parallel
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We will now learn about another Python package to perform parallel processing.
+    In this section, we will use joblib’s **Parallel** and **delayed** to replicate
+    the **map** function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The Parallel requires two arguments: n_jobs = 8 and backend = multiprocessing.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Then, we will add **clean_text**  to the **delayed** function.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Create a loop to feed a single value at a time.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The process below is quite generic, and you can modify your function and array
+    according to your needs. I have used it to process thousands of audio and video
+    files without any issue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Recommended:** add exception handling using `try:` and `except:`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Add the “Description” column to `text_parallel_clean()`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Output**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It took our function 13 seconds more than multiprocessing the **Pool.** Even
+    then, **Parallel** is 4 minutes and 59 seconds faster than **serial** processing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Parallel Batch Processing
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: There is a better way to process large files by splitting them into batches
+    and processing them parallel. Let’s start by creating a batch function that will
+    run a `clean_function` on a single batch of values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Batch Processing Function
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Splitting the File into Batches
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The function below will split the file into multiple batches based on the number
+    of workers. In our case, we get 8 batches.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Running Parallel Batch Processing
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Finally, we will use **Parallel** and **delayed** to process batches.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** To get a single array of values, we have to run list comprehension
+    as shown below.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Output**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have improved the processing time. This technique is famous for processing
+    complex data and training deep learning models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: tqdm Concurrent
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: tqdm takes multiprocessing to the next level. It is simple and powerful. I will
+    recommend it to every data scientist.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Check out the [documentation](https://tqdm.github.io/) to learn more about multiprocessing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `process_map` requires:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Function name
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Dataframe column
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: max_workers
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: chucksize is similar to batch size. We will calculate the batch size using the
+    number of workers or you can add the number based on your preference.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Output**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: With a single line of code, we get the best result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: You need to find a balance and select the technique that works best for your
+    case. It can be serial processing, parallel, or batch processing. The parallel
+    processing can backfire if you are working with a smaller, less complex dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this mini-tutorial, we have learned about various Python packages and techniques
+    that allow us to parallel process our data functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you are only working with a tabular dataset and want to improve your processing
+    performance, then I will suggest you try [Dask](https://www.dask.org/), [datatable](https://github.com/h2oai/datatable),
+    and [RAPIDS](https://rapids.ai/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reference
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[Parallel batch processing in Python | by Dennis Bakhuis | Towards Data Science](https://towardsdatascience.com/parallel-batch-processing-in-python-8dcce607d226)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Parallel processing large file in Python · Nurda Bolatov](https://nurdabolatov.com/parallel-processing-large-file-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))
+    is a certified data scientist professional who loves building machine learning
+    models. Currently, he is focusing on content creation and writing technical blogs
+    on machine learning and data science technologies. Abid holds a Master''s degree
+    in Technology Management and a bachelor''s degree in Telecommunication Engineering.
+    His vision is to build an AI product using a graph neural network for students
+    struggling with mental illness.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, July 20: Machine Learning Algorithms Explained in…](https://www.kdnuggets.com/2022/n29.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Parallel Processing in Prompt Engineering: The Skeleton-of-Thought…](https://www.kdnuggets.com/parallel-processing-in-prompt-engineering-the-skeleton-of-thought-technique)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Monitor Your File System With Python’s Watchdog](https://www.kdnuggets.com/monitor-your-file-system-with-pythons-watchdog)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python String Processing Cheatsheet](https://www.kdnuggets.com/2020/01/python-string-processing-primer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[25 Free Books to Master SQL, Python, Data Science, Machine…](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Open Source Large Language Models](https://www.kdnuggets.com/2022/09/john-snow-top-open-source-large-language-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/eb105b2b614c4a6165d83fbc2b9711a1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[](/news/subscribe.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Get the FREE ebook ''The Great Big Natural Language Processing Primer'' and
+    ''The Complete Collection of Data Science Cheat Sheets'' along with the leading
+    newsletter on Data Science, Machine Learning, AI & Analytics straight to your
+    inbox.](/news/subscribe.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: By subscribing you accept KDnuggets [Privacy Policy](https://www.kdnuggets.com/news/privacy-policy.html)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[<= Previous post](https://www.kdnuggets.com/2023/02/data-cleaning-python-cheat-sheet.html)[Next
+    post =>](https://www.kdnuggets.com/2023/02/essential-ab-testing-course-data-science.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Latest Posts](/news/index.html)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[7 Free Cloud IDE for Data Science That You Are Missing Out](https://www.kdnuggets.com/7-free-cloud-ide-for-data-science-that-you-are-missing-out)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bootstrapping Your Data Science Career: A Guide to Self-Learning Pathways](https://www.kdnuggets.com/bootstrapping-your-data-science-career-a-guide-to-self-learning-pathways)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Developing End-to-End Data Science Pipelines with Data Ingestion, Processing,
+    and Visualization](https://www.kdnuggets.com/developing-end-to-end-data-science-pipelines-with-data-ingestion-processing-and-visualization)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Trace Memory Allocation in Python](https://www.kdnuggets.com/how-to-trace-memory-allocation-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Import Data in R](https://www.kdnuggets.com/how-to-import-data-in-r)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 5 Machine Learning APIs Practitioners Should Know](https://www.kdnuggets.com/top-5-machine-learning-apis-practitioners-should-know)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Top Posts
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '|'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[5 Hidden Gem Python Libraries for Data Science](https://www.kdnuggets.com/5-hidden-gem-python-libraries-for-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Math for Data Science](https://www.kdnuggets.com/7-steps-to-mastering-math-for-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Entry-Level Certificates from Microsoft to Land In-Demand Jobs](https://www.kdnuggets.com/4-entry-level-certificates-from-microsoft-to-land-in-demand-jobs)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Manage Categorical Data Effectively with Pandas](https://www.kdnuggets.com/how-to-manage-categorical-data-effectively-with-pandas)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Built-In Python Modules Every Data Engineer Should Know](https://www.kdnuggets.com/10-built-in-python-modules-every-data-engineer-should-know)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 5 Machine Learning APIs Practitioners Should Know](https://www.kdnuggets.com/top-5-machine-learning-apis-practitioners-should-know)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using FastAPI for Building ML-Powered Web Apps](https://www.kdnuggets.com/using-fastapi-for-building-ml-powered-web-apps)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[I Took Udacity’s Free A/B Testing Course by Google: Here’s What I Learned](https://www.kdnuggets.com/i-took-udacitys-free-a-b-testing-course-by-google-heres-what-i-learned)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Project Ideas to Master Data Engineering](https://www.kdnuggets.com/project-ideas-to-master-data-engineering)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using FLUX.1 Locally](https://www.kdnuggets.com/using-flux-1-locally)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: © 2024 [Guiding Tech Media](https://www.guidingtechmedia.com/)   |   [About](/about/index.html)
+      |   [Contact](/contact.html)   |   [Advertise](https://mailchi.mp/kdnuggets/media-kit)
+    |   [Privacy](/news/privacy-policy.html)   |   [Terms of Service](/terms-of-service.html)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Published on February 21, 2023 by Abid Ali Awan
+  prefs: []
+  type: TYPE_NORMAL

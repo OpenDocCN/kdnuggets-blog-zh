@@ -1,0 +1,281 @@
+- en: Implementing DBSCAN in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/08/implementing-dbscan-python.html](https://www.kdnuggets.com/2022/08/implementing-dbscan-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Implementing DBSCAN in Python](../Images/94e0605a1cccd911b0460aa70cfec065.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Clustering is applied on a dataset to group similar sets of data points. It
+    looks for similarities and dissimilarities in data points and clutters them together.
+    There are no labels in clustering. Clustering is an unsupervised learning to find
+    the underlying structure of the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Types of clustering algorithms:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Partition-based clustering
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Fuzzy clustering
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Hierarchical clustering
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Grid-Based clustering
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Exclusive clustering
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Overlapping clustering
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Density-based clustering
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In this blog, we will be focusing on density-based clustering methods, especially
+    the DBSCAN algorithm with scikit-learn. The density-based algorithms are good
+    at finding high-density regions and outliers. It is commonly used for anomaly
+    detection and clustering non-linear datasets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is DBSCAN?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: DBSCAN (Density-Based Spatial Clustering of Applications with Noise) is a density-based
+    unsupervised learning algorithm. It computes nearest neighbor graphs to find arbitrary-shaped
+    clusters and outliers. Whereas the K-means clustering generates spherical-shaped
+    clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'DBSCAN does not require **K** clusters initially. Instead, it requires two
+    parameters: eps and minPts.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**eps**: it is the radius of specific neighborhoods. If the distance between
+    two points is less than or equal to esp, it will be considered its neighbors.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**minPts**: minimum number of data points in a given neighborhood to form the
+    clusters.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: DBSCAN uses these two parameters to define a core point, border point, or outlier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Implementing DBSCAN in Python](../Images/c1396de7ad158c30211a70ba97a24097.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image from [Wikipedia](https://en.wikipedia.org/wiki/DBSCAN)
+  prefs: []
+  type: TYPE_NORMAL
+- en: How does the DBSCAN clustering algorithm work?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Randomly selecting any point **p**. It is also called **core point** if there
+    are more data points than **minPts** in a neighborhood.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It will use **eps** and **minPts** to identify all density reachable points.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It will create a cluster using **eps** and **minPts** if **p** is a core point.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It will move to the next data point if **p** is a **border point**. A data point
+    is called a border point if it has fewer points than **minPts** in the neighborhood.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The algorithm will continue until all points are visited.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: DBSCAN Clustering in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We will be using the Deepnote notebook to run the example. It comes with pre-installed
+    Python packages, so we just have to import NumPy, pandas, seaborn, matplotlib,
+    and sklearn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: We are using [Mall Customer Segmentation Data](https://www.kaggle.com/datasets/vjchoudhary7/customer-segmentation-tutorial-in-python)
+    from Kaggle. It contains customers' age, gender, income, and spending score. We
+    will be using these features to create various clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we will load the dataset using pandas `read_csv`. Then, we will select
+    three columns (‘Age', 'Annual Income (k$)', 'Spending Score (1-100)') to create
+    the **X_train** dataframe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: We will fit **X_train** on the DBSCAN algorithm with **eps** 12.5 and **min_sample**
+    4\. After that, we will create a **DBSCAN_dataset** from **X_train** and create
+    a ‘Cluster’ column using *clustering.labels_*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: To visualize the distribution of clusters, we will use value_counts() and convert
+    it into a dataframe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see, we have 5 clusters and 1 outlier. The `0` cluster has the largest
+    size with 112 rows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Implementing DBSCAN in Python](../Images/58594769218df7713ab39c8bf07c978a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In this section, we will use the above information and visualize the scatter
+    plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are two plots: “Annual Income vs. Spending Score” and “Annual Income
+    vs. Age.” The clusters are defined by colors, and the outliers are defined as
+    small black dots.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The visualization clearly shows how each customer is part of one of the 5 clusters,
+    and we can use this information to give high-end offers to customers with purple
+    clusters and cheaper offers to customers with dark green clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Implementing DBSCAN in Python](../Images/36c5e6e22fd005e1a3979bcc807d0eca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: DBSCAN is one of the many algorithms that is used for customer segmentation.
+    You can use K-means or Hierarchical clustering to get even better results. The
+    clustering algorithms are generally used for recommendation engines, market and
+    customer segmentation, social network Analysis, and document analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this blog, we have learned the basics of the density-based algorithm DBCAN
+    and how we can use it to create customer segmentation using scikit-learn. You
+    can improve the algorithm by finding optimal **eps** and **min_samples** using
+    **silhouette score** and heatmap.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reference
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[DBSCAN Clustering — Explained. Detailed theoretical explanation](https://towardsdatascience.com/dbscan-clustering-explained-97556a2ad556)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DBSCAN in Python (with example dataset)](https://www.reneshbedre.com/blog/dbscan-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Customers clustering: K-Means, DBSCAN and AP](https://www.kaggle.com/code/datark1/customers-clustering-k-means-dbscan-and-ap)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Demo of DBSCAN clustering algorithm — scikit-learn 1.1.1 documentation](https://scikit-learn.org/stable/auto_examples/cluster/plot_dbscan.html#sphx-glr-auto-examples-cluster-plot-dbscan-py)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))
+    is a certified data scientist professional who loves building machine learning
+    models. Currently, he is focusing on content creation and writing technical blogs
+    on machine learning and data science technologies. Abid holds a Master''s degree
+    in Technology Management and a bachelor''s degree in Telecommunication Engineering.
+    His vision is to build an AI product using a graph neural network for students
+    struggling with mental illness.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, August 24: Implementing DBSCAN in Python • How to…](https://www.kdnuggets.com/2022/n34.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DBSCAN Clustering Algorithm in Machine Learning](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understanding and Implementing Genetic Algorithms in Python](https://www.kdnuggets.com/understanding-and-implementing-genetic-algorithms-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understanding by Implementing: Decision Tree](https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ten Key Lessons of Implementing Recommendation Systems in Business](https://www.kdnuggets.com/2022/07/ten-key-lessons-implementing-recommendation-systems-business.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Implementing Adaboost in Scikit-learn](https://www.kdnuggets.com/2022/10/implementing-adaboost-scikitlearn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

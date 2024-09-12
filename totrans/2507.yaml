@@ -1,0 +1,375 @@
+- en: Getting Started with PyTorch Lightning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/10/getting-started-pytorch-lightning.html](https://www.kdnuggets.com/2021/10/getting-started-pytorch-lightning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Getting Started with PyTorch Lightning](../Images/d90c82e8ba6cac010727d13ce27b16a8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Getting Started with PyTorch Lightning: a High-Level Library for High Performance
+    Research**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Libraries like TensorFlow and PyTorch take care of most of the intricacies of
+    building deep learning models that train and infer fast. Predictably, this leaves
+    machine learning engineers spending most of their time on the next level up in
+    abstraction, running hyperparameter search, validating performance, and versioning
+    models and experiments to keep track of everything.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There’s a lot more to deep learning than just gluing some layers together.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If PyTorch and TensorFlow (and now JAX) are the deep learning cake, higher-level
+    libraries are the icing. For years now TensorFlow has had its “icing on the cake”
+    in the high-level Keras API, which became an official part of TensorFlow itself
+    with the release of TF 2.0 in 2019\. Similarly, PyTorch users have benefited from
+    the high-level fastai library, which is exceptionally well-suited for efficiency
+    and transfer learning. This makes fastai a favorite of successful data scientists
+    on the Kaggle contest platform. More recently, another streamlined wrapper for
+    PyTorch has been quickly gaining steam in the aptly named [PyTorch Lightning](https://github.com/PyTorchLightning/pytorch-lightning).
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyTorch Lighting has actually been around, at least in some capacity, since
+    2019\. It started as a sort of side project undertaken by William Falcon during
+    his PhD research at New York University. By the time 2020 rolled around (and we
+    mean the 2020 that started in March) PyTorch Lightning was no longer just a personal
+    project as Falcon[ announced venture funding](https://medium.com/pytorch/pytorch-lightning-0-7-1-release-and-venture-funding-dd12b2e75fb3).
+    Around the same time the open source (under the Apache 2.0 License) repository
+    moved from Falcon’s personal GitHub profile to its own dedicated profile. As of
+    this writing PyTorch Lightning has grown to over 15,000 stars and nearly 2,000
+    forks, becoming nearly as popular as[ fastai](https://github.com/fastai/fastai) (which
+    has over 21,000 stars) and handily more popular than the in-house high-level library
+    from PyTorch,[ Ignite](https://github.com/pytorch/ignite), which has about 4,000
+    stars!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Where fastai was designed to facilitate the inaugural fastai course,[ Practical
+    Deep Learning for Coders](https://course.fast.ai/), PyTorch Lightning is intended
+    to streamline production research. Fastai has a focus on transfer learning and
+    efficiency and its ease of use has made it a popular high-level library on the
+    Kaggle data science competition platform, with over[ 4,500 notebooks](https://www.kaggle.com/search?q=fastai) referencing
+    the library. Compare that to just[ over 100](https://www.kaggle.com/search?q=ignite) notebook
+    results referring to PyTorch Ignite, and[ about 500](https://www.kaggle.com/search?q=PyTorch+Lightning) for
+    PyTorch Lightning. PyTorch Lightning is a relatively newer library, but it also
+    targets a different demographic. PyTorch Lightning streamlines the engineering
+    aspects of developing a new model, such as logging, validation and hooks, and
+    it’s targeted toward machine learning researchers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Research is all about answering falsifying questions, and in this tutorial we’ll
+    take a look at what PyTorch Lightning can do for us to make that process easier.
+    We’ll set up a simple mock research question of whether there is any advantage
+    to using a “fancy” activation function (such as the so-called[ swish function](https://en.wikipedia.org/wiki/Swish_function))
+    versus a more standard rectified linear unit ([ReLU](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)).
+    We’ll use the vanishingly small (in terms of both number of samples and image
+    size) digits dataset from SciKit-Learn to set up our experiment. Starting with
+    digits should make this an accessible project for someone running the code on
+    an efficient laptop, but readers are encouraged to swap in a more realistic images
+    dataset like CIFAR10 for extra credit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a library designed for production research, PyTorch Lightning streamlines
+    hardware support and distributed training as well, and we’ll show how easy it
+    is to move training to a GPU toward the end.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Getting Started: Installing PyTorch Lightning****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Like many Python projects these days, PyTorch Lightning installs easily using
+    pip, and we recommend using your favorite virtual environment manager to manage
+    installs and dependencies without cluttering up your base Python installation.
+    We’ll provide three examples, the first of which is using `virtualenv` and pip,
+    and we are assuming you are using a Unix-style command line on Linux or Mac, or
+    that you are savvy enough to adapt the examples for Windows using something like
+    Git Bash or Anaconda Prompt. After navigating to the project folder for this tutorial:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'You can also use[ Anaconda](https://www.anaconda.com/) to manage your virtual
+    environment:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Or even combine the two, creating a new anaconda environment and then using
+    pipt o install packages. For more general usage there are some[ caveats](https://www.anaconda.com/blog/using-pip-in-a-conda-environment) to
+    using pip and Anaconda together, but for purposes of this tutorial it should be
+    fine:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Using PyTorch Lightning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The design strategy employed by PyTorch Lightning revolves around the LightningModule
+    class. This class, itself inheriting from the `pytorch.nn.Module` class, provides
+    a convenient entry point and attempts to organize as much of the training and
+    validation process as possible all in one place.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A key feature of this strategy is that the contents of a typical training and
+    validation loop is instead defined in the model itself, accessible via a `fit` API
+    very similar to keras, fastai, or even SciKit-Learn. Unlike those other examples
+    where `fit` is accessed through the model itself, in PyTorch Lightning `fit` is
+    accessed via a Trainer object. But that’s getting ahead of ourselves, first let’s
+    set the stage for our experiment by importing everything we’ll need.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then we can go ahead and define our model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Notably, training functionality is devolved to the module itself in the `training_step` function.
+    Most ML practitioners having some practice with PyTorch will already be quite
+    familiar with the practice of overloading the `forward` function, and LightningModule
+    objects have many more methods to overload for fine-grained control of the relatively
+    painless logging and evaluation features that are built-in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code that defines our `MyClassifier` model class might seem pretty verbose,
+    but this strategy massively simplifies things when it’s time to actually start
+    training, which we’ll see later. There are plenty of other callbacks and functions
+    that are included in the `LightningModule` class, and all of them can be overloaded
+    for more fine-tuned control. A full list of these callbacks can be found[ in the
+    PyTorch Lightning documentation.](https://pytorch-lightning.readthedocs.io/en/latest/extensions/callbacks.html#hooks)
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this tutorial, we’ll also define a `torch.utils.data.Dataset` object to
+    wrap the digits dataset from SciKit-Learn. This should make it easy to rapidly
+    get everything working before switching to a larger and more informative dataset
+    like MNIST or CIFAR10.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'With all that out of the way, actually launching a training run becomes incredibly
+    simple. All we have to do is create a dataset and feed it into a `DataLoader`,
+    instantiate our model, create a PyTorch Lightning `Trainer` object, and call the
+    trainer’s fit method. Here’s a simplified version:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: But of course we will want to continuously log validation metrics throughout
+    the training process, making use of the `validation_step` and `validation_epoch_end` methods
+    we overloaded in our model. Here’s the actual code I use to launch a training
+    run, using the `if __name__ == "__main__":` pattern that provides a simple entry
+    point for running a Python file as a module.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: When you run the code above, you should see a progress bar displayed in your
+    terminal that looks something like the one below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![pl-terminal-1.png](../Images/28210cdaae631256933e335d905b6fb6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: After allowing training to run for a while, have a look in your working directory
+    and you’ll notice a new folder called **lightning_logs**. This is where PyTorch
+    Lightning records your training sessions, and you can quickly boot up a Tensorboard
+    session to see how things are going. After launching tensorboard with the line
+    below, use a browser to navigate to localhost:6006 (by default) to open up the
+    dashboard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: If it took you a few starts and stops to get training to take off, you’ll notice
+    a list of training runs displayed in the left sidebar with version_0, version_1,
+    version_2 and so on. PyTorch Lightning automatically versions your training runs
+    this way, so it should be pretty easy to compare a few different experimental
+    conditions or random seeds..
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, if we wanted to run our little experiment comparing the efficacy
+    of using Swish versus ReLU activations, we can use the code below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: And after running our little experiment we’ll find our results nicely logged
+    for our perusal in Tensorboard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![pl-tensorboard-1.png](../Images/60cae6ec1ddb4e9612d2f76104311e20.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You’ll probably notice we have the option to run training on the much larger
+    MNIST dataset. At 60,000 training samples of 28 by 28 pixel images, it’s closer
+    to a useful real-world dataset than the miniaturized sklearn digits dataset, which
+    provides fewer than 2,000 samples of 8 by 8 images. However, you probably won’t
+    want to run 6 replicate training runs on the MNIST dataset using an underpowered
+    laptop CPU, so we’ll want to move everything over to a GPU first.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you are already used to building experiments and training pipelines in standard
+    PyTorch from scratch, you probably know the frustration of a forgotten tensor
+    languishing on a CPU device, and the show-stopping errors they generate. It’s
+    usually an easy fix, but frustrating nonetheless.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Using a GPU for Training**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If you’re working with a machine with an available GPU, you can easily use
+    it to train. To launch training on the GPU instead of the CPU, we’ll have to modify
+    some of the code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: That’s right, by modifying a single line of code defining the trainer object
+    we can run training on the GPU. No worrying about forsaken tensors and with all
+    the convenience of logging and validation we built into our original model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![pl-tensorboard-2.png](../Images/040ed16ce6762f52159139f7c5ae3211.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '****Next Steps****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A striking aspect of working with PyTorch Lightning is that it seems to get
+    easier the further along you go. Defining our `MyClassifer` model was a little
+    more complicated than a model of similar complexity sub-classed from `torch.nn.Module` up
+    front, but once we had training, validation, and logging all taken care of by
+    the `LightningModule` model, every subsequent step was easier than it would have
+    been normally.
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyTorch Lightning also makes managing hardware a breeze, and we caught a glimpse
+    of just how simple this is when we switched to training MNIST on a GPU. PyTorch
+    Lightning also readily facilitates training on more esoteric hardware like Google’s
+    Tensor Processing Units, and on multiple GPUs, and it is being developed in parallel
+    alongside [Grid](https://www.grid.ai/), a cloud platform for scaling up experiments
+    using PyTorch Lightning, and [Lightning Bolts](https://www.pytorchlightning.ai/bolts) a
+    modular toolbox of deep learning examples driven by the PyTorch Lightning community.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That covers our “Hello, World” introduction to PyTorch Lightning, but we’ve
+    barely scratched the surface of what Lightning intends to deliver to your deep
+    learning workflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**In our next PyTorch Lightning tutorial, we’ll dive into two complementary
+    PyTorch Lightning libraries: Lightning Flash and TorchMetrics.** TorchMetrics
+    unsurprisingly provides a modular approach to define and track useful metrics
+    across batches and devices, while Lightning Flash offers a suite of functionality
+    facilitating more efficient transfer learning and data handling, and a recipe
+    book of state-of-the-art approaches to typical deep learning problems.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Now, on to our next PyTorch Lightning tutorial:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PyTorch Lightning Tutorial #2: Using TorchMetrics and Lightning Flash](https://www.exxactcorp.com/blog/Deep-Learning/advanced-pytorch-lightning-using-torchmetrics-and-lightning-flash)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Kevin Vu](https://www.kdnuggets.com/author/kevin-vu)** manages Exxact
+    Corp blog and works with many of its talented authors who write about different
+    aspects of Deep Learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.exxactcorp.com/blog/Deep-Learning/getting-started-with-pytorch-lightning).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Introduction to PyTorch Lightning](/2021/10/introduction-pytorch-lightning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to deploy PyTorch Lightning models to production](/2020/11/deploy-pytorch-lightning-models-production.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyTorch Multi-GPU Metrics Library and More in New PyTorch Lightning Release](/2020/07/pytorch-multi-gpu-metrics-library-pytorch-lightning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Deep Learning Libraries: PyTorch and Lightning AI](https://www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyTorch in 5 Steps](https://www.kdnuggets.com/5-steps-getting-started-pytorch)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Lightning AI Studio For Free](https://www.kdnuggets.com/using-lightning-ai-studio-for-free)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with SQL Cheatsheet](https://www.kdnuggets.com/2022/08/getting-started-sql-cheatsheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyCaret](https://www.kdnuggets.com/2022/11/getting-started-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

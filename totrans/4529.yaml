@@ -1,0 +1,630 @@
+- en: Geovisualization with Open Data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/01/open-data-germany-maps-viz.html](https://www.kdnuggets.com/2020/01/open-data-germany-maps-viz.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Dr. Juan Camilo Orduz](https://juanitorduz.github.io/), Mathematician
+    & Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post I want to show how to use public available (open) data to create
+    geo visualizations in python. Maps are a great way to communicate and compare
+    information when working with geolocation data. There are many frameworks to plot
+    maps, here I focus on [matplotlib](https://matplotlib.org/) and [geopandas](http://geopandas.org/)
+    (and give a glimpse of [mplleaflet](https://github.com/jwass/mplleaflet)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Reference:** A very good introduction to matplotlib is the chapter on [Visualization
+    with Matplotlib](https://jakevdp.github.io/PythonDataScienceHandbook/04.00-introduction-to-matplotlib.html) from
+    the [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/) by [Jake
+    VanderPlas](https://jakevdp.github.io/pages/about.html).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Remark:** When I finished writing this notebook, I discovered a similar analysis
+    done in R [here](https://www.r-bloggers.com/case-study-mapping-german-zip-codes-in-r/).
+    Please check it out!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prepare Notebook
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Get Germany Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The main data source for this post is [www.suche-postleitzahl.org/downloads](https://www.suche-postleitzahl.org/downloads).
+    Here we download three data sets:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`plz-gebiete.shp`: shapefile with germany postal codes polygons.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`zuordnung_plz_ort.csv`: postal code to city and bundesland mapping.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`plz_einwohner.csv`: population is assigned to each postal code area.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Germany Maps
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We begin by generating a Germany map with the most important cities.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | plz | note | geometry |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 52538 | 52538 Gangelt, Selfkant | POLYGON ((5.86632 51.05110, 5.86692
+    51.05124, … |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 47559 | 47559 Kranenburg | POLYGON ((5.94504 51.82354, 5.94580 51.82409,
+    … |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | 52525 | 52525 Waldfeucht, Heinsberg | POLYGON ((5.96811 51.05556, 5.96951
+    51.05660, … |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | 52074 | 52074 Aachen | POLYGON ((5.97486 50.79804, 5.97495 50.79809,
+    … |'
+  prefs: []
+  type: TYPE_TB
+- en: "| 4 | 52531 | 52531 Ã\x9Cbach-Palenberg | POLYGON ((6.01507 50.94788, 6.03854\
+    \ 50.93561, … |"
+  prefs: []
+  type: TYPE_TB
+- en: The `geometry` column contains the polygons which define the postal code’s shape.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can use [geopandas mapping tools](http://geopandas.org/mapping.html) to generate
+    the map with the `plot` method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/ebc81095f2ae5fbe048b1fb8a15c6571.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: First-Digit-Postalcodes Areas
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Next, let us plot different regions corresponding to the first digit of each
+    postal code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/e9eb67e648bbc1d497bd41ff550020e1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Bundesland Map
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let us now map each postal code to the corresponding region:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | ort | plz | bundesland |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | Aach | 78267 | Baden-Württemberg |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | Aach | 54298 | Rheinland-Pfalz |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | Aachen | 52062 | Nordrhein-Westfalen |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | Aachen | 52064 | Nordrhein-Westfalen |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | Aachen | 52066 | Nordrhein-Westfalen |'
+  prefs: []
+  type: TYPE_TB
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | plz | geometry | first_dig_plz | ort | bundesland |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 52538 | POLYGON ((5.86632 51.05110, 5.86692 51.05124, … | 5 | Gangelt
+    | Nordrhein-Westfalen |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 52538 | POLYGON ((5.86632 51.05110, 5.86692 51.05124, … | 5 | Selfkant
+    | Nordrhein-Westfalen |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | 47559 | POLYGON ((5.94504 51.82354, 5.94580 51.82409, … | 4 | Kranenburg
+    | Nordrhein-Westfalen |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | 52525 | POLYGON ((5.96811 51.05556, 5.96951 51.05660, … | 5 | Heinsberg
+    | Nordrhein-Westfalen |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | 52525 | POLYGON ((5.96811 51.05556, 5.96951 51.05660, … | 5 | Waldfeucht
+    | Nordrhein-Westfalen |'
+  prefs: []
+  type: TYPE_TB
+- en: 'Generate Bundesland map:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/55d1533532248f13a617c61686bf4303.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Number of Inhabitants
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now we include the number of inhabitants per postal code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | plz | einwohner |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 01067 | 11957 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 01069 | 25491 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | 01097 | 14811 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | 01099 | 28021 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | 01108 | 5876 |'
+  prefs: []
+  type: TYPE_TB
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | plz | geometry | first_dig_plz | ort | bundesland | einwohner |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 52538 | POLYGON ((5.86632 51.05110, 5.86692 51.05124, … | 5 | Gangelt
+    | Nordrhein-Westfalen | 21390 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 52538 | POLYGON ((5.86632 51.05110, 5.86692 51.05124, … | 5 | Selfkant
+    | Nordrhein-Westfalen | 21390 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | 47559 | POLYGON ((5.94504 51.82354, 5.94580 51.82409, … | 4 | Kranenburg
+    | Nordrhein-Westfalen | 10220 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | 52525 | POLYGON ((5.96811 51.05556, 5.96951 51.05660, … | 5 | Heinsberg
+    | Nordrhein-Westfalen | 49737 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | 52525 | POLYGON ((5.96811 51.05556, 5.96951 51.05660, … | 5 | Waldfeucht
+    | Nordrhein-Westfalen | 49737 |'
+  prefs: []
+  type: TYPE_TB
+- en: 'Generate map:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/71ab1c3e70cba4906a33a3a3c2974d1a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: City Maps
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We can now filter for cities using the `ort` feature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Munich
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/b2bc83046f1e0e632fbd5ad8e5065712.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Berlin
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/e905a6c238ae309666f1fad72e8afac6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Berlin
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We can use the portal [https://www.statistik-berlin-brandenburg.de](https://www.statistik-berlin-brandenburg.de/) to
+    get the official postal code to area mapping in Berlin [here](https://www.statistik-berlin-brandenburg.de/produkte/verzeichnisse/ZuordnungderBezirkezuPostleitzahlen.xls).
+    After some formating (not structured raw data):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | plz | area |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 10115 | Mitte |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 10117 | Mitte |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | 10119 | Mitte |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | 10178 | Mitte |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | 10179 | Mitte |'
+  prefs: []
+  type: TYPE_TB
+- en: 'Note however that this map is not one-to-one, i.e. a postal code can correspond
+    to many areas:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | plz | area |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | 10119 | Mitte |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 41 | 10119 | Pankow |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | 10179 | Mitte |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 26 | 10179 | Friedrichshain-Kreuzberg |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 42 | 10247 | Pankow |'
+  prefs: []
+  type: TYPE_TB
+- en: '| … | … | … |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 133 | 14197 | Steglitz-Zehlendorf |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 95 | 14197 | Charlottenburg-Wilmersdorf |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 165 | 14197 | Tempelhof-Schöneberg |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 134 | 14199 | Steglitz-Zehlendorf |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 96 | 14199 | Charlottenburg-Wilmersdorf |'
+  prefs: []
+  type: TYPE_TB
+- en: 99 rows × 2 columns
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hence, we need to change the postal code grouping variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Berlin Neighbourhoods
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Fortunately, the website [http://insideairbnb.com/get-the-data.html](http://insideairbnb.com/get-the-data.html),
+    containing AirBnB data for many cities (which is definitely worth investigatinig!),
+    has a convinient data set `neighbourhoods.geojson` which maps Berlin’s area to *neighbourhoods*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | neighbourhood | neighbourhood_group | geometry |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | Blankenfelde/Niederschönhausen | Pankow | MULTIPOLYGON (((13.41191 52.61487,
+    13.41183 52… |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | Helmholtzplatz | Pankow | MULTIPOLYGON (((13.41405 52.54929, 13.41422
+    52… |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | Wiesbadener Straße | Charlottenburg-Wilm. | MULTIPOLYGON (((13.30748
+    52.46788, 13.30743 52… |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | Schmöckwitz/Karolinenhof/Rauchfangswerder | Treptow - Köpenick | MULTIPOLYGON
+    (((13.70973 52.39630, 13.70926 52… |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | Müggelheim | Treptow - Köpenick | MULTIPOLYGON (((13.73762 52.40850,
+    13.73773 52… |'
+  prefs: []
+  type: TYPE_TB
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/96fa7e23ac495fa53dd674754af1b7fe.png)Here the divisions correspond
+    to `Neighbourhood` ⊂⊂ `Neighbourhood Group`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Selected Locations in Berlin
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Sometimes it is useful to include well-known locations on the maps so that the
+    user can identify them and understand the distances and scales. One way to do
+    it is to manualy input the latitude and longitude of each point (as above). This
+    of course can be time consuming and prone to errors. As expected, there is a library
+    which can fetch this type of data automatically, namely [geopy](https://github.com/geopy/geopy).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is a simple example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: Humboldt-Universität zu Berlin, Dorotheenstraße, Spandauer Vorstadt, Mitte,
+    Berlin, 10117, Deutschland
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let us write a function to get the latitude and longitude coordinates:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let us see the resulting map:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/d0167d8636642b4f5ce310934bff3af0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Christmas Markets
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let us enrich the maps by including other type of information. There is a great
+    resource for publicly available data for Berlin: [Berlin Open Data](https://daten.berlin.de/).
+    Among many interesting datasets, I found one on the Christmas markets around the
+    city (which are really fun to visit!) [here](https://daten.berlin.de/datensaetze/berliner-weihnachtsm%C3%A4rkte-2019).
+    You can accces the data via a public API. Let us use the `requests` module to
+    do this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: Convert to pandas dataframe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: We do not have a postal code feature, but we can create one by extracting it
+    from the `plz_ort` column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: '|  | name | bezirk | lat | lng | plz |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | Weihnachtsmarkt vor dem Schloss Charlottenburg | Charlottenburg-Wilmersdorf
+    | 52.519951 | 13.295946 | 14059 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: Weihnachtsmarkt an der Gedächtniskirche
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '| Charlottenburg-Wilmersdorf | 52.504886 | 13.335511 | 10789 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | Weihnachtsmarkt in der Fußgängerzone Wilmersdo… | Charlottenburg-Wilmersdorf
+    | 52.509313 | 13.305994 | 10627 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | Weihnachten in Westend | Charlottenburg-Wilmersdorf | 52.512538 | 13.259213
+    | 14052 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | Weihnachtsmarkt Berlin-Grunewald des Johannisc… | Charlottenburg-Wilmersdorf
+    | 52.488350 | 13.277250 | 14193 |'
+  prefs: []
+  type: TYPE_TB
+- en: 'Let us plot the Christmas markets locations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE24]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![png](../Images/d4837146030f223f6245220676889ae8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Interactive Maps
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We can use the [mplleaflet](https://github.com/jwass/mplleaflet) library which *converts
+    a matplotlib plot into a webpage containing a pannable, zoomable Leaflet map*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Berlin Neighbourhoods
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE25]'
+  prefs: []
+  type: TYPE_PRE
+- en: Christmas Markets
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE26]'
+  prefs: []
+  type: TYPE_PRE
+- en: I hope these data sources and code snippets serve as a starting point to explore
+    geodata analysis and visualization with python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Dr. Juan Camilo Orduz](https://juanitorduz.github.io/)** ([@juanitorduz](https://twitter.com/juanitorduz))
+    in a Berlin based mathematician & data scientist.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://juanitorduz.github.io/germany_plots/). Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[6 Books About Open Data Every Data Scientist Should Read](/2019/02/6-books-open-data-every-data-scientist-read.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Eight iconic examples of data visualisation](/2018/08/iconic-data-visualisation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Metadata Enrichment is Essential to Realize the Value of Open Datasets](/2018/11/metadata-enrichment-value-open-datasets.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Open Assistant: Explore the Possibilities of Open and Collaborative…](https://www.kdnuggets.com/2023/04/open-assistant-explore-possibilities-open-collaborative-chatbot-development.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introducing MetaGPT''s Data Interpreter: SOTA Open Source LLM-based…](https://www.kdnuggets.com/metagpt-data-interpreter-open-source-llm-based-data-solutions)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generate Synthetic Time-series Data with Open-source Tools](https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Comparative Overview of the Top 10 Open Source Data Science Tools in 2023](https://www.kdnuggets.com/a-comparative-overview-of-the-top-10-open-source-data-science-tools-in-2023)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Open Data and Why it is Necessary](https://www.kdnuggets.com/2022/03/open-data-necessary.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Role of Open Source Tools in Accelerating Data Science Progress](https://www.kdnuggets.com/2023/05/role-open-source-tools-accelerating-data-science-progress.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

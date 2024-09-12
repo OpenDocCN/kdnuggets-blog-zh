@@ -1,0 +1,810 @@
+- en: Python for data analysis… is it really that simple?!?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/04/python-data-analysis-really-that-simple.html](https://www.kdnuggets.com/2020/04/python-data-analysis-really-that-simple.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Ferenc Bodon Ph.D.](https://www.linkedin.com/in/ferencbodon/), Data Engineer,
+    Cloud Solutions Architect at Kx**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b8a0052d9e1d377c6bae71923bcd8ad5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Graphic designed and made by CineArt
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Python](https://www.python.org/) is a popular programming language that is
+    easy to learn, efficient and enjoys the support of a large and active community.
+    It is a general-purpose language with libraries specialized for various areas,
+    including web development, scripting, data science, and DevOps.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Its primary data analysis library, [Pandas](https://pandas.pydata.org/), gained
+    popularity among data scientists and data engineers. It follows Python’s principles,
+    so it seems to be easy to learn, read and allows rapid development… at least based
+    on the textbook examples. But, what happens if we leave the safe and convenient
+    world of the textbook examples? Is Pandas still an easy-to-use data analysis tool
+    to query **tabular data**? How does it perform compared to other professional
+    tools like [R](https://www.r-project.org/) and [kdb+](https://code.kx.com/q/learn/)?
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, I will take an example that goes just one step beyond the simplest
+    use cases by performing some **aggregation based on multiple columns**. The complexity
+    of my use case is around level 2 out of 5 levels. Anybody who analyzes data tables
+    will bump into the problem, probably in the second week. For comparison, I will
+    also cover other popular tools that aim for data analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First of all, the problem can be solved by [ANSI SQL](https://en.wikipedia.org/wiki/SQL) so
+    all traditional RDBM systems like [PostegreSQL](https://www.postgresql.org/), [MySQL](https://www.linkedin.com/redir/general-malware-page?url=https%3A%2F%2Fwww%2emysql%2ecom%2F),
+    etc can enter the game. In the experiments, I will use [BigQuery](https://cloud.google.com/bigquery/),
+    a serverless, highly-scalable data warehouse solution by Google.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The [R](https://www.r-project.org/) programming language is designed for statistical
+    analysis. It natively supports tables via its class [data.frame](https://www.google.com/search?q=r+data.frame&oq=r+data.fr&aqs=chrome.0.0j69i57j0l4j69i60j69i61.6225j1j7&sourceid=chrome&ie=UTF-8).
+    Using multiple aggregations is quite inconvenient due to the limitation of the
+    core function [aggregate](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/aggregate).
+    The R community developed the library [plyr](https://cran.r-project.org/web/packages/plyr/index.html) to
+    simplify the usage of data.frame. Package [plyr](https://cran.r-project.org/web/packages/plyr/index.html) was
+    retired and package [dplyr](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8) was
+    introduced with the promise of improved API and faster execution. Package [dplyr](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8) is
+    part of the [tidyverse](https://www.tidyverse.org/) collection that is designed
+    for professional data science work. It provides an abstract query layer and decouples
+    the query from the data storage let it be data.frame or in an external database
+    that supports ANSI SQL. Package [data.table](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html) is
+    an alternative of [dplyr](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8) and
+    it is famous for its speed and concise syntax. A data.table can also be queried
+    by the dplyr syntax.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the [Q/Kdb+](https://code.kx.com/v2/learn/q-for-all/) programming language,
+    tables are also first-class citizens and the speed was a primary design concept
+    of the language. Kdb+ made use of multicore processors and [employs map-reduce](https://code.kx.com/q4m3/14_Introduction_to_Kdb+/#1437-map-reduce) from
+    its birth in 2004 if data was [partitioned](https://code.kx.com/q4m3/14_Introduction_to_Kdb+/#143-partitioned-tables) on
+    the disk. From version 4.0 (released in March 2020) most primitives (such as sum,
+    avg, dev) use slave threads and are executed in parallel even if the table is
+    in memory. Productivity was the other design consideration - any redundant programming
+    element that does not contribute to the understanding (even a parenthesis) is
+    regarded as visual noise. Kdb+ is a good contender for any data analysis tool.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: I will consider the elegance, simplicity and the speed of the various solutions.
+    Also, I investigate how to **tune the performance** and leverage multicore processors
+    or cluster of computers by employing **parallel computation**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![An example input table](../Images/90809ed59bbfbe9914c3071e0b9e2e8d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We are given a simple table with four columns, one nominal, called **bucket **and
+    three numerical, **qty**, **risk**, and **weight**. For simplicity let us assume
+    that the numerical columns contain integers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We would like to see for each **bucket**
+  prefs: []
+  type: TYPE_NORMAL
+- en: the number of elements, as column NR
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the sum and the average of **qty**and **risk**, as columns TOTAL_QTY/TOTAL_RISK and AVG_QTY/AVG_RISK
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the weighted average of **qty**and **risk**, as columnsW_AVG_QTY and W_AVG_RISK.
+    Weights are provided in column **weight**.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To get the solution, I will not use any deprecated approach e.g [renaming aggregation
+    by a nested dictionary](https://github.com/pandas-dev/pandas/issues/18366). Let
+    us solve each task separately.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Number of elements in each bucket
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Getting the number of elements in each bucket does not look enticing and requires
+    intense typing
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/09dbc34b1ce0a1f854605837fbbecd46.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The literal **bucket **is required three times and you need to use 5 brackets/parentheses [????](https://en.wikipedia.org/wiki/%F0%9F%98%90).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The solutions in R look more tempting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/d8dd9c42ea18835850c82d7ec1698196.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Developers of libraries dplyr and data.table also have aversion to word repetition.
+    They introduced special built-in variables **n()** and **.N** respectively that
+    hold the number of observations in the current group. This simplifies the expressions
+    and we can get rid of a pair of parentheses.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/d0a435e726edac8b2dfa565a41abb199.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The ANSI SQL expression is simple and easy to understand.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/cf1334e8735319fcab68085a13ebf857.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can avoid the repetition of the literal bucket by employing column indices
+    in the GROUP BY clause. IMHO this is not a recommended design because the expression
+    is not self-documenting and less robust. In fact, [Apache deprecated usage of
+    numbers](https://issues.apache.org/jira/browse/DRILL-942) in GROUP BY clauses.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The kdb+ expression is more elegant. It requires no brackets, quote marks or
+    any word repetition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/18dd6a40ac5e9e05bc79f239bb8bdf60.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: SQL forms the basis of data analysis so probably everybody understands the ANSI
+    SQL and kdb+ solutions. R and kdb+ developers agree that "GROUP BY" is too verbose,
+    a simple "by" literal is expressive enough.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that apart from Pandas, no languages use any quotation marks in this simple
+    expression. The query in Pandas requires four pairs of them [????](https://en.wikipedia.org/wiki/%F0%9F%98%90) to
+    wrap column names. In R, SQL, and kdb+ you can refer to columns as if they were
+    variables. The notation .() in R - which is an alias for list() - allows this
+    convenience feature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Aggregation of multiple columns
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Calculating sum and average of a single column and calculating the sums of multiple
+    columns are quite simple with Pandas
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/6ec1c299d8ec3781122391df1160c25f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![No alt text provided for this image](../Images/bdb598a90547d3cec86cc0947080d21e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![No alt text provided for this image](../Images/a236c220eb5a01618c1178fc6015d892.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![No alt text provided for this image](../Images/abc52c2336cdd49ae81ecc4a7f89f146.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Code gets nasty if you try to combine the two approaches as it results in a
+    column name conflict. [Multi-level columns](https://pandas.pydata.org/pandas-docs/stable/advanced.html) and
+    function [map](https://docs.python.org/3/library/functions.html#map) need to be
+    introduced.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/1152478e711c7acec5ae6ff74ebb8b27.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![No alt text provided for this image](../Images/b579576cf182169ab5bfa0e1bd7b5bf3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The SQL, R, and kdb+ equivalents do not require introducing any new concept.
+    The new aggregations are simply separated by commas. You can use keyword [sum](https://code.kx.com/q/ref/arith-integer/#sum)and [avg](https://code.kx.com/v2/ref/stats-aggregates/#avg-average)/[mean](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mean)to
+    get sum and average respectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/2f244c5f53b988918700736159dfec04.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Observe the lightness of the kdb+ expression; it does not require parentheses
+    or brackets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/a229bab4db85c16e330ea10bcdd452b3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Weighted average
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The weighted average is supported by [Numpy](http://www.numpy.org/) library
+    that Pandas relies on. Unfortunately, it cannot be used in the same way such as
+    np.sum. You need to wrap it in a [lambda expression](https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions),
+    introduce a local variable, use [apply ](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.apply.html)instead
+    of [agg](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.agg.html) and
+    create a data frame from a series.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/ddb0578e6a3329675ac8fec347b94763.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![No alt text provided for this image](../Images/31ddf49336f61983417332e95ee3c09a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Neither standard SQL nor its Google extension, BigQuery, provides a built-in
+    function to get a weighted average. You need to recall the definition and implement
+    it by hand.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/9451c257a36f1647822fc087988a3722.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Again the R and Q/Kdb+ solutions do not require introducing any new concept.
+    The function weighted average is supported natively and accepts two column names
+    as parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/4d22bb3a4180e3b8d37f45f5225f8945.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In kdb+ you can use infix notation to get a more natural syntax - just pronounce
+    this "**w** weighted average **x**".
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/44af1a3b6d157860e89282b6d5e55796.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: All in one statement
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let us put all the parts together. We created multiple data frames, so we need
+    to join them
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/385ca65b6d18111fbafd145f8b680d10.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![No alt text provided for this image](../Images/adb4ef52dba992faf73efce55d01ae7f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note that the first [join](https://docs.python.org/3/library/stdtypes.html#str.join) expression
+    has nothing to do with the others. It creates a string from a list of strings
+    as opposed to the others which perform [left joins](https://en.wikipedia.org/wiki/Join_(SQL)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: To get the final result, we need three expressions and a temporary variable **res**.
+    If we spend more time searching forums then we can find out that this complexity
+    is partially attributed to deprecating nested dictionaries in function [agg](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.agg.html).
+    Also, we might discover an alternative, less documented approach using just the
+    function [apply](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.apply.html),
+    with no join. Unfortunately, this solution returns all numeric columns of type
+    float so you need to explicitly cast integer columns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/43c61ad539c87048ef81ac96b602cc49.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This solution requires creating a temporary function that will probably never
+    be used again in your source code. We can squeeze all the statements into a single,
+    stateless solution but that results in a hard-to-read and hard-to-maintain, nested
+    code. Also, this second approach is slower on mid-size tables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Pandas [release of the 18th of July, 2019](https://pandas.pydata.org/pandas-docs/stable/whatsnew/v0.25.0.html) supported
+    group-by aggregation by [named aggregator](http://pandas-docs.github.io/pandas-docs-travis/user_guide/groupby.html#aggregation).
+    It provides a more elegant syntax than the aforementioned apply-based solution
+    and does not require typecasting. Also, the developers probably recognized the
+    pain caused by the overwhelming usage of the quotation marks. Unfortunately, the
+    weighted average is not supported because only a single column can be used in
+    the aggregation. For completeness, we provide the new proper syntax, ignoring
+    the weighted average calculation. It is great to see that the output column names
+    no longer require quotation marks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/629c97d73d3196e3a291e0f8889848d6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In contrast, SQL could already provide an elegant solution 30 years ago.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/9b1f4d0545f1bb90da296f0b3f167ab9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let us see how R solves the task with a data.table
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/97325ee6d91274a11ecbbea83638169c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: and how the solution in kdb+ appears
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/50880fb4fe953406cda883a5245f61e9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It seems that kdb+ has the **most intuitive, simplest and most readable** solution.
+    It is stateless, requires no parenthesis/bracket and creation of temporary variables
+    (or functions).
+  prefs: []
+  type: TYPE_NORMAL
+- en: What about the performance?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The experiments were conducted on both Windows and Linux using the stable latest
+    binaries and libraries. Queries were executed a hundred times, test Jupyter notebooks
+    are available on [Github.](https://github.com/BodonFerenc/PythonIsThisReallySimple) The
+    data were randomly generated. The bucket fields were strings of size two and fields **qty** and **risk** are
+    represented by 64-bit integers. Library [bit64](https://cran.r-project.org/web/packages/bit64/index.html) was
+    used in R to get 64-bit integers. The table below summarises execution times in
+    milliseconds. The axes are log scaled. The two Python solutions of version 3.6.8
+    with Pandas 0.25.3 are compared to the three R libraries (version 3.6.0) and to
+    the two kdb+ versions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/50507e7d70a7e844b6ebc76ee774bdac.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The kdb+ solution is not only more elegant than Pandas but it is also faster
+    by more than an order of magnitude. R's data.table of version 1.12.6 is three
+    times slower than kdb+ 3.6 for this particular query. Kdb+ 4.0 is five times faster
+    than kdb+ 3.6 for tables of billion rows. Package dplyr of version 0.8.3 was two
+    orders of magnitude slower than plyr of version 1.8.5 ????.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandas hit memory limit with an input table of 1 billion rows. All other solutions
+    could handle that volume without running out of memory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let see how can we decrease execution times.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Performance optimizations
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The column bucket contains strings. If the domain size is small and there are
+    many repetitions then it is suggested to use **categorical** values instead of
+    strings. Categories are like enums and represented by integers, hence they consume
+    less memory and comparison is faster. You can convert string to categorical in
+    Pandas by
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/73accb51f6d0fb3b5bc5ef29919a4f3a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: but it is more memory efficient to create the category column during the table
+    construct. We use function [product](https://docs.python.org/2/library/itertools.html#itertools.product) to
+    generate the universe of strings of length two by employing the [cartesian product](https://en.wikipedia.org/wiki/Cartesian_product).
+    In the code snippet below we omit the syntax for creating other columns. *N* stores
+    the number of rows to be inserted.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/c5b89afd5ab91b225ef844c1d90ffb9b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Categories are called **factors** in R. Class data.frame converts strings to
+    factors automatically (use "stringAsFactors = FALSE" to avoid this) but in data.table
+    strings are left intact for good reasons.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/5b272ddf500676bc805aa50daf5d8217.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: BigQuery has no concept of category or factor. Instead, it applies various [encoding
+    and compression techniques](http://db.csail.mit.edu/projects/cstore/abadisigmod06.pdf) to
+    achieve the best performance. To generate random strings you can use Unicode [code
+    points](https://en.wikipedia.org/wiki/Code_point), functions RAND and [CODE_POINTS_TO_STRING](https://cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#code_points_to_string) and
+    some casting. Lowercase letter "a" has code points 97 - you can figure this out
+    by using function [TO_CODE_POINTS](https://cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#to_code_points).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/ea82a723615b346ff150438ac487e9e7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can employ a [user-defined function](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions) to
+    avoid code duplication.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/871bafeb6392a6867c6ebdd44de59c04.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: For comparison, the same operation in kdb+ looks like this
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/59f019d6bf657f2bec2628a52651a4ab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The construct [N?M](https://code.kx.com/q/ref/deal/) generates N random values
+    depending on the type of M. If M is an integer, float, date or boolean then a
+    random integer, float, date or boolean vector is returned. If M is a list then
+    random list elements are picked. If N is a negative integer then the result will
+    not contain any duplicates. In kdb+ many operators are overloaded in a similar
+    way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Enums are called **symbols** in kdb+ parlance and are heavily used by developers.
+    The language strongly supports symbols. You can use them without defining possible
+    values upfront, kdb+ maintains the mapping for you.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Based on my measurement, optimization by categories/symbols reduces run times
+    by a **factor of two** in Pandas and kdb+. R's data.table shows different characteristics.
+    Using factors instead of strings has no impact on the performance. This is due
+    to the built-in string optimization via the **global string pool**. Although,
+    factors are stored as 32-bit integers and strings require 64-bit pointers to the
+    pool elements, the difference has a marginal impact on the execution times.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can further improve performance if we use types that require less space.
+    For example, if column **qty** fits into 2 bytes then we can use [int16](https://numpy.org/devdocs/user/basics.types.html) in
+    Pandas and [short](https://code.kx.com/q4m3/2_Basic_Data_Types_Atoms/#212-short-and-int) in
+    kdb+. This results in less memory operation which is often the bottleneck in data
+    analysis. R does not support 2-bytes integers so we used its default integer type
+    which occupies 4 bytes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Integers of size 32, which is the default in R, results in a 5-6 fold execution
+    time improvements. Use 64-bit integers only if you really need the large cardinality.
+    This is especially true for package dplyr.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When calculating the aggregation we need to keep track of the bucket due to
+    the grouping. If the table is sorted by the group column then aggregation is faster
+    as groups are already gathered contiguously in RAM. The execution times drop to
+    circa one third in Pandas, half in R and fifth in kdb+. The execution times with
+    the type optimizations on a sorted table of size 1 billion is shown below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/f76b3f1c536fe46463888ba67835d7b9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Parallelization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: All modern computers have multiple CPU cores. Pandas by default operate on a
+    single core. What do we need to do to make the computation parallel and exploit
+    multiple cores?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Python libraries [Dask](https://dask.org/) and [Ray](https://github.com/ray-project/ray) are
+    the two most famous libraries for running parallel computations. Library [Modin](https://modin.readthedocs.io/en/latest/) is
+    a wrapper above these engines for Pandas data frames. The "media" is loud from
+    the claim that you gain significant query performance improvements, even on an
+    average laptop, by replacing a single line from
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/cbd9819fe215b1dfa1a2eebe966e7882.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: to
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/3ca36daed1406cf034705e2564d9f129.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This is probably true for a small number of textbook examples but does not apply
+    in real life. With my simple exercise, I run into several issues both with Ray
+    and with Dask. Let me describe the problem one-by-one starting with Ray.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, the category type is not supported. Second, function [apply](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html#pandas.DataFrame.apply) and [agg](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.agg.html#pandas.DataFrame.agg) behaves
+    differently than the corresponding Pandas functions. Using multiple aggregates
+    with a group-by in function [agg](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.agg.html#pandas.DataFrame.agg) is
+    not supported so the operation falls back to Pandas operation. The function [applies](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html#pandas.DataFrame.apply) only
+    handles lambdas that return a scalar. This disables the second, more elegant Pandas
+    solution. Furthermore, apply returns a Modin data frame instead of a series. You
+    need to transpose the result and rename the column index (0) to a meaningful column
+    name, e.g.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/2921d63f8270367cfdd8f64cebfde02c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Finally, the code ran significantly slower than the Pandas equivalent and broke
+    with 100M rows. Pandas and the others handle 1B rows easily.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Moving to the library Dask also has some nuisances. First, it does not handle
+    the weighted average if the bucket’s type is categorical. We lose an important
+    performance improvement technique. Second, you need to provide type hinting to
+    suppress warnings. This means yet another column name repetition. In the more
+    elegant apply-based solution you type the output column names (like TOTAL_QTY)
+    four times ☹️. So it seems moving to Dask is not as simple as extending the code
+    with a simple [compute](https://docs.dask.org/en/latest/dataframe.html) statement
+    to trigger the computation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/c43adaa24c846a34ec6614a449924c16.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Parallelization in kdb+ is automatic** for on-disk, partitioned tables and
+    for in-memory tables in version 4.0\. You won''t observe any type problem - everything
+    works smoothly. All you need is to start kdb+ in multiprocess mode via [command
+    line parameter -s](https://code.kx.com/q/basics/syscmds/#s-number-of-slaves).
+    The [built-in map-reduce](https://code.kx.com/q4m3/14_Introduction_to_Kdb+/#1437-map-reduce) decomposition
+    spreads the computation to several cores for the majority of operations including [sum](https://code.kx.com/q/ref/sum/), [avg](https://code.kx.com/q/ref/avg/), [count](https://code.kx.com/q/ref/count/), [wavg](https://code.kx.com/q/ref/avg/), [cor](https://code.kx.com/q/ref/cor/),
+    etc. You can also get performance gain by partitioning the table manually and
+    use function [peach](https://code.kx.com/v2/ref/each/) that executes functions
+    in parallel. All we need is to change from'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/b008380e3dddeb72d3431f2b32531649.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: to
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/9644443ab45161925cc211f122377808.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This simple code modification resulted in almost an order of magnitude faster
+    execution on a 16-core box with kdb+ version 3.6\. Since version 4.0 already employs
+    parallel computing, manual parallelization adds no value. If you are aiming for
+    the best performance then code will be simpler with kdb+ 4.0 than with 3.6.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**R data.table also uses multiple threads by default** and executes queries
+    in parallel behind the scene. You can check and set the number of threads that
+    the data.table uses via function [setDTthreads](https://www.rdocumentation.org/packages/data.table/versions/1.12.8/topics/setDTthreads).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us compare the execution times of the most performant versions of all languages.
+    For SQL we evaluated BigQuery which is considered to be the fastest SQL implementation
+    for huge datasets due to its massive parallelization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/ae75206d32368a5a479ea33b41000b14.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: kdb+ is again the winner in this category, BigQuery being the runner-up. R data.table
+    is two times faster than Pandas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Above 1 billion rows
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The largest tables in our experience contained one billion rows. Above this
+    number the table does not fit into the memory, hence Pandas is out of the league.
+    Dask and Ray which is designed for parallel processing and cluster of computers
+    performed poorly compared to the other contenders. **For BigQuery the size of
+    the table almost does not matter.** The execution time will hardly increase if
+    we move from 1 billion rows to 10 or 100 billion rows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In kdb+, the data can be persisted to disk so it can cope with terabytes of
+    data. The query will be the same and kdb+ automatically applies map-reduce and
+    leverage multicore processors. Furthermore, if the data is segmented and segments
+    are located on different storages with separate IO channels then IO operation
+    will be executed in parallel. These low-level optimizations allow the kdb+-based
+    solution to scale gracefully.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Distributed computing with kdb+
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As a final simple exercise let us investigate how can we spread the computation
+    across many kdb+ processes, leverage our cluster of machines and horizontally
+    partition our sample table. How difficult it is to achieve a Ray/Dask/Spark-like
+    distributed computation with kdb+?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Function peach uses external, slave kdb+ processes as opposed to slave threads
+    if variable [.z.pd](https://code.kx.com/v2/ref/dotz/#zpd-peach-handles) stores
+    connection handles to slave kdb+ processes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/7076b41e633ca03c787d89834e9c2625.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can split table **t** by bucket values
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/9e2947cfcc84890d63991af6544b3986.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Finally, we can distribute the select statement and merge the result. Function [raze](https://code.kx.com/q/ref/raze/) is
+    similar to Pandas' [concat](https://pandas.pydata.org/pandas-docs/stable/user_guide/merging.html) function.
+    From a list of tables, it produces a large table via concatenation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/db8042fb22f14074923e27a320a5be16.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Well done! We implemented "kdb-spark" with four lines of code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code simplicity
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I collected a few statistics about the code themselves. Although short code
+    does not necessarily mean clean code, for this particular example these metrics
+    well correlate with simplicity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/68d2942f4fa51ce053a89dab058e893c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: My observations are collected in the table below. Emoji ????stands for excellent,
+    ✔️for good and ☹️for a disappointing performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![No alt text provided for this image](../Images/2b59ea9e74f33cc6be88ae78a1e435b8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Python is often the first programming language a student learns. It is simple,
+    performant and has a slight learning curve. Its library Pandas is a natural step
+    to introduce new-joiners to the world of data analyses. Pandas is also often used
+    in a professional environment and more complex data analysis. Pandas looks tempting
+    in simple, textbook exercises but is inconvenient to use in our simple real-world
+    use-case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is more focus on extending Pandas and support large tables via cluster
+    computing. Ray, Dask and Modin are in an early phase with a bunch of limitations.
+    In our use case, they simply added syntactical complexity and actually decreased
+    performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: R outperformed Pandas in every sense, including simplicity, elegance and performance.
+    There are several built-in optimizations, such as inherent multi-threading. Optimization
+    of string representation works like a charm and allows developers to focus on
+    the analyses as opposed to minor technical details. It comes as no surprise that
+    R data.table is being [ported to Python](https://github.com/h2oai/datatable).
+    Maybe package data.table will be the replacement of Pandas in the future?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Kdb+ takes data analyses to the next level. It is designed for extreme productivity.
+    In our use case, it was the clear winner of simplicity, elegance, and performance.
+    No wonder that 20 out of the 20 top organizations in the capital market chose
+    kdb+ as a primary tool for data analyses. In this industry, the data analysis
+    drives the revenue and the tools are tested under extreme conditions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: BigQuery is a winner in performance above 100 Billion rows assuming that you
+    don't have a cluster of computers at hand. If you need to analyze huge tables
+    and you are sensitive to run-times then BigQuery does a great job for you.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Related works
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[DB ops benchmark](https://h2oai.github.io/db-benchmark/) was initially started
+    by [Matt Dowle](https://twitter.com/MattDowle) the creator of R data.table. Besides
+    Pandas, data.table, dask dplyr they also test [Apache Spark](https://spark.apache.org/), [ClickHouse](https://clickhouse.yandex/) and [Julia
+    data frames](https://juliadata.github.io/DataFrames.jl/stable/) on a variety of
+    queries with different parameters. Anyone can see the queries side-by-side and
+    even download the test environment to conduct the experiments of his/her custom
+    hardware.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Mark Litwintschik](https://www.linkedin.com/in/marklitwintschik/) uses the
+    NYC taxi drives database and four queries on [33 database-like systems](https://tech.marksblogg.com/benchmarks.html).
+    He provides a detailed description of the test environments, the settings he used
+    and some valuable personal remarks. It is a thorough work that demonstrates Mark''s
+    outstanding knowledge in Big Data platforms. His observation is in line with our
+    experiments, kdb+ turned out the be the fastest among the non-GPU-based database
+    solutions.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The STAC-M3 benchmark was originally [developed in 2010](https://stacresearch.com/system/files/central/STAC-M3_Overview.pdf) by
+    several of the world’s largest banks and trading firms. It is designed to measure
+    exactly how much emerging hardware and software innovations improve the performance
+    of time-series analytics. After STAC-M3 was developed, kdb+ quickly became the
+    favorite database platform for hardware vendors running the tests because it set
+    performance standards that other software providers simply couldn’t beat. Also,
+    Google acknowledged STAC-M3 as an industry-standard benchmark for time-series
+    analytics. They used kdb+ to [demonstrate](https://cloud.google.com/blog/products/compute/can-cloud-instances-perform-better-than-bare-metal-latest-stac-m3-benchmarks-say-yes) that
+    migrating data and workload from on-premise to GCP does not mean compromising
+    the performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Acknowledgments
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I would like to thank [Péter Györök](https://github.com/gyorokpeter), [Péter
+    Simon Vargha](https://www.linkedin.com/in/varghaps/) and [Gergely Daróczi](https://www.linkedin.com/in/daroczig/) for
+    their insightful bits of advice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Ferenc Bodon Ph.D.](https://www.linkedin.com/in/ferencbodon/)** is
+    an experienced data engineer, software developer, multi language programmer, software
+    architect with academic background in data mining and statistics. Reflects long-term
+    thinking and always striving to find top quality, robust solutions that are scalable
+    and allow rapid development. Believes in software quality and cannot relax until
+    the "glory solution" is found.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.linkedin.com/pulse/python-data-analysis-really-simple-ferenc-bodon-ph-d-/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[10 Simple Hacks to Speed up Your Data Analysis in Python](/2019/07/10-simple-hacks-speed-data-analysis-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Last SQL Guide for Data Analysis You’ll Ever Need](/2019/10/last-sql-guide-data-analysis-ever-need.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Berlin Rent Freeze: How many illegal overpriced offers can I find online?](/2020/03/berlin-rent-freeze-illegal-overpriced-offers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

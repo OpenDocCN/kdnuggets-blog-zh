@@ -1,0 +1,262 @@
+- en: 'Inside The Machine Learning that Google Used to Build Meena: A Chatbot that
+    Can Chat About Anything'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/02/inside-machine-learning-google-build-meena-chatbot.html](https://www.kdnuggets.com/2020/02/inside-machine-learning-google-build-meena-chatbot.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f758dfb0abce243555721f3d4b1f1a9b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It seems that every year Google plans to shock the artificial intelligence(AI)
+    world with new astonishing progress in natural language understanding(NLU) systems.
+    Last year, [the BERT model](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html) definitely
+    stole the headlines of the NLU research space. Just a few weeks into 2020, Google
+    Research [published a new paper introducing Meena, a new deep learning model that
+    can power chatbots that can engage in conversations about any domain](https://arxiv.org/abs/2001.09977).
+  prefs: []
+  type: TYPE_NORMAL
+- en: NLU has been one of the most active areas of research of the last few years
+    and have produced some of the most widely adopted AI systems to date. However,
+    despite all the progress, most conversational systems remain highly constrained
+    to a specific domain which contrasts with our ability as humans to naturally converse
+    about different topics. In NLU theory, those specialized conversational agents
+    are known as closed-domain chatbots. The alternative is an emerging area of research
+    known as open-domain chatbots that focuses on building conversational agents that
+    chat about virtually anything a user wants. If effective, open-domain chatbots
+    might be a key piece in the journey to humanize computer interactions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Despite the excitement around open-domain chatbots, the current implementation
+    attempts still have weaknesses that prevent them from being generally useful:
+    they often respond to open-ended input in ways that do not make sense, or with
+    replies that are vague and generic. With Meena, Google ventures tries to address
+    some of these challenges by building an open-domain chatbot that can chat about
+    almost anything.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before building Meena, Google had to solve a non-trivial challenge that is often
+    ignored in open-domain chatbot systems. A key criterion to evaluate the quality
+    of an open-domain chatbot is the fact that its dialogs feel natural to human.
+    That idea seems intuitive but also incredibly subjective. How can we measure the
+    human-likeness of a dialog? To address that challenge, Google started by introducing
+    a new metric as the cornerstone of the Meena chatbot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sensibleness and Specificity Average
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Sensibleness and Specificity Average(SSA) is a new metric for open-domain chatbots
+    that h captures basic, but important attributes for human conversation. Specifically,
+    SSA tries to quantify two key aspects of human-conversations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: making sense.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: being specific.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Sensibleness arguably covers some of the most basic aspects of conversational
+    human-likeness, such as common sense and logical coherence. Sensibleness also
+    captures other important aspects of a chatbot, such as consistency. However, being
+    sensible is not enough. A generic response (ex: I don’t know) can be sensible,
+    but it is also boring and unspecific. Such responses are frequently generated
+    by bots that are evaluated according to metrics like sensibleness alone. Specificity
+    is the second metric that can help quantify human-likeness of a conversational
+    interaction. For instance, A says, “I love tennis,” and B responds, “That’s nice,”
+    then the utterance should be marked, “not specific”. That reply could be used
+    in dozens of different contexts. However, if B responds, “Me too, I can’t get
+    enough of Roger Federer!” then it is marked as “specific”, since it relates closely
+    to what is being discussed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***SSA →f(Sensibleness, Specificity)***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The actual mathematical formulation of the SSA metric is pretty sophisticated
+    but the initial experiments conducted by Google showed a strong correlation with
+    the human-likeness of a chatbot. The following figure shows that correlation for
+    different chatbots(blue dots).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Having formulated a quantifiable metric to evaluate human-likeness, the next
+    step was to build an open-domain chatbot optimized for that metric.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Meena
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Meena is an end-to-end, neural conversational model that learns to respond sensibly
+    to a given conversational context. Surprisingly, Meena does not rely on a brand-new
+    architecture but leverages the Evolved Transformer Architecture(ET) pioneered
+    by Google last year.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ET
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As its name indicates, ET is an optimization over traditional [Transformer architectures ](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)that
+    are common in NLU tasks. The optimizations were the results of applying neural
+    architecture search(NAS) to a series of Transformer models used in NLU scenarios.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At first glance, ET looks like most Transformer neural network architectures.
+    It has an encoder that encodes the input sequence into embeddings and a decoder
+    that uses those embeddings to construct an output sequence; in the case of translation,
+    the input sequence is the sentence to be translated and the output sequence is
+    the translation. However, ET adds some interesting changes to Transformer models.
+    The most interesting of those is convolutional layers at the bottom of both its
+    encoder and decoder modules that were added in a similar branching pattern in
+    both places. This optimization is particularly interesting because the encoder
+    and decoder architectures are not shared during the NAS, so this architecture
+    was independently discovered as being useful in both the encoder and decoder,
+    speaking to the strength of this design. Whereas the original Transformer relied
+    solely on self-attention, the Evolved Transformer is a hybrid, leveraging the
+    strengths of both self-attention and wide convolution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8102b59881069cbee020734aa64c3710.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Meena and ET
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A way to think about Meena is as a massive ET architecture. Meena has a single
+    ET encoder block and 13 Evolved Transformer decoder blocks as illustrated below.
+    The encoder is responsible for processing the conversation context to help Meena
+    understand what has already been said in the conversation. The decoder then uses
+    that information to formulate an actual response. Through tuning the hyper-parameters,
+    we discovered that a more powerful decoder was the key to higher conversational
+    quality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the things that Meena demonstrates is that, when it comes to open-domain
+    chatbots, size matters. For decades the AI research community has been debating
+    whether in order to reach a point where a model can carry out high-quality, multi-turn
+    conversations with humans, we could simply take an end-to-end model and make it
+    bigger — by adding more training data and increasing its parameter count — or
+    is it necessary to combine such a model with other components? Meena showed that
+    massively large end-to-end models can achieve human like performance in conversational
+    interactions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How big is Meena? Well, the first version of Meena reportedly has 2.6 billion
+    parameters and is trained on 341 GB of text, filtered from public domain social
+    media conversations. To put that in context, compared to an existing state-of-the-art
+    generative model, [OpenAI GPT-2](https://openai.com/blog/better-language-models/),
+    Meena has 1.7x greater model capacity and was trained on 8.5x more data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The initial tests with Meena showed that the chatbot was able to engage in conversations
+    across a large variety of topics achieving high levels of SSA.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/afd53f854052b1b492d46918d9f3c536.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: One of the most surprising discoveries during the Meena research was the correlation
+    exhibited between the SSA metric and the well-known [perplexity](https://en.wikipedia.org/wiki/Perplexity) performance
+    indicator in NLU models. Conceptually, perplexity measures the uncertainty of
+    a language model. The lower the perplexity, the more confident the model is in
+    generating the next token (character, subword, or word). During tests, the SSA
+    metric and its individual factors(specificity and sensibleness) showed strong
+    correlations to perplexity in open-domain chatbots.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/01fbac0bdc3bfc33bb9c8948d90ede38.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Given its performance requirements, Meena is out of reach for most organizations.
+    However, it is unquestionable that Meena represents a major milestone in the implementation
+    of conversational interfaces. In addition to the model itself, Meena contributed
+    the SSA metric that take us closer to evaluate the human-likeness of chatbot interactions.
+    In the future, we should see other human-like conversation attributes like humor
+    or empathy added to the SSA metric. Similarly, we should expect to see new open-domain
+    chatbots build on some of the principles of Meena to power the next generation
+    of conversational interfaces.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/inside-the-machine-learning-that-google-used-to-build-meena-a-chatbot-that-can-chat-about-anything-32e4d2242f79).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Let’s Build an Intelligent Chatbot](/2019/12/build-intelligent-chatbot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[NLP vs. NLU: from Understanding a Language to Its Processing](/2019/07/nlp-vs-nlu-understanding-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Amazon Uses Self-Learning to Teach Alexa to Correct its Own Mistakes](/2020/02/amazon-uses-self-learning-teach-alexa-correct-mistakes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Learning How to Use ChatGPT to Learn Python (or anything else)](https://www.kdnuggets.com/2023/02/learn-python-chatgpt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Segment Anything Model: Foundation Model for Image Segmentation](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build a ChatGPT-like Chatbot with These Courses](https://www.kdnuggets.com/2023/05/build-chatgptlike-chatbot-courses.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build AI Chatbot in 5 Minutes with Hugging Face and Gradio](https://www.kdnuggets.com/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Inside DeepMind’s New Efforts to Use Deep Learning to Advance Mathematics](https://www.kdnuggets.com/2021/12/inside-deepmind-new-efforts-deep-learning-advance-mathematics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Chatbot Transformation: From Failure to the Future](https://www.kdnuggets.com/2021/12/chatbot-transformation-failure-future.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

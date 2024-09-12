@@ -1,0 +1,605 @@
+- en: Algorithms for Advanced Hyper-Parameter Optimization/Tuning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/11/algorithms-for-advanced-hyper-parameter-optimization-tuning.html](https://www.kdnuggets.com/2020/11/algorithms-for-advanced-hyper-parameter-optimization-tuning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Gowrisankar JG](https://www.linkedin.com/in/gowrisankar-jg/), Software
+    Developer at Hexaware**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most Professional Machine Learning practitioners follow the ML Pipeline as a
+    standard, to keep their work efficient and to keep the flow of work. A pipeline
+    is created to allow data flow from its raw format to some useful information.
+    All sub-fields in this pipeline’s modules are equally important for us to produce
+    quality results, and one of them is *Hyper-Parameter Tuning.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/7a860a576205a10b864f38d935c21a35.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**A Generalized Machine Learning Pipeline**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most of us know the best way to proceed with Hyper-Parameter Tuning is to use
+    the [GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html)
+    or [RandomSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html)
+    from the sklearn module. But apart from these algorithms, there are many other
+    Advanced methods for Hyper-Parameter Tuning. This is what the article is all about,
+    Introduction to Advanced Hyper-Parameter Optimization, Transfer Learning and when
+    & how to use these algorithms to make out the best of them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Both of the algorithms, Grid-Search and Random-Search are instances of Uninformed
+    Search. Now, let’s dive deep !!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Uninformed search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here in these algorithms, each iteration of the Hyper-parameter tuning does
+    not learn from the previous iterations. This is what allows us to parallelize
+    our work. But, this isn’t very efficient and costs a lot of computational power.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Random search tries out a bunch of hyperparameters from a uniform distribution
+    randomly over the preset list/hyperparameter search space (the number iterations
+    is defined). It is good in testing a wide range of values and normally reaches
+    to a very good combination very fastly, but the problem is that, it doesn’t guarantee
+    to give the best parameter’s combination.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the other hand, Grid search will give the best combination, but it can takes
+    a lot of time and the computational cost is high.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/589a454c302e0cf0015566b12ca8832f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Searching Pattern of Grid and Random Search**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It may look like grid search is the better option, compared to the random one,
+    but bare in mind that when the dimensionality is high, the number of combinations
+    we have to search is enormous. For example, to grid-search ten boolean (yes/no)
+    parameters you will have to test 1024 (2¹⁰) different combinations. This is the
+    reason, why random search is sometimes combined with clever heuristics, is often
+    used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why bring Randomness in Grid Search? [Mathematical Explanation]
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Random search is more of a stochastic search/optimization perspective — the
+    reason we introduce noise (or some form of stochasticity) into the process is
+    to potentially *bounce out* of poor local minima. While this is more typically
+    used to explain the intuition in general optimization (like stochastic gradient
+    descent for updating parameters, or learning temperature-based models), we can
+    think of humans looking through the meta-parameter space as simply a higher-level
+    optimization problem. Since most would agree that these dimensional spaces (reasonably
+    high) lead to a non-convex form of optimization, we humans, armed even with some
+    clever heuristics from the previous research, can get stuck in the local optima.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Therefore, Randomly exploring the search space might give us better coverage,
+    and more importantly, it might help us find better local optima.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sofar in Grid and Random Search Algorithms, we have been creating all the models
+    at once and combining their scores before deciding the best model at the end.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An alternative approach would be to build models sequentially, learning from
+    each iteration. This approach is termed as ***Informed Search***.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Informed Method: Coarse to Fine Tuning'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A basic informed search methodology.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The process follows:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Random search
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Find promising areas in the search space
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Grid search in the smaller area
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Continue until optimal score is obtained
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: You could substitute (3) with random searches before the grid search.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Coarse to Fine?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*Coarse to Fine* *tuning* optimizes and uses the advantages of both grid and
+    random search.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wide searching capabilities of random search
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Deeper search once you know where a good spot is likely to be
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: No need to waste time on search spaces that are not giving good results !! Therefore,
+    this better utilizes the spending of time and computational efforts, i.e we can
+    iterate quickly, also there is boost in the performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Informed Method: Bayesian Statistics'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The most popular informed search method is Bayesian Optimization. Bayesian Optimization
+    was originally designed to optimize black-box functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a basic theorem or rule from *Probability Theory and Statistics*, in
+    case if you want to brush up and get refreshed with the terms used here, refer [this](https://towardsdatascience.com/basic-probability-theory-and-statistics-3105ab637213).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Bayes Rule | Theorem***'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: A statistical method of using *new evidence* to iteratively update our beliefs
+    about some *outcome*. In simpler words, it is used to calculate the probability
+    of an event based on its association with another event.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/adeebe6c343bec80ed4c3044e8073132.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source: [Bayes Theorem in Data Science](https://luminousmen.com/post/data-science-bayes-theorem)
+  prefs: []
+  type: TYPE_NORMAL
+- en: LHS is the probability of A, given B has occurred. B is some new evidence. This
+    is known as the ‘posterior’.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: RHS is how we calculate this.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: P(A) is the ‘prior’. The initial hypothesis about the event. It is different
+    to P(A|B), the P(A|B) is the probability given new evidence.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: P(B) is the ‘marginal likelihood’ and it is the probability of observing this
+    new evidence.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: P(B|A) is the ‘likelihood’ which is the probability of observing the evidence,
+    given the event we care about.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Applying the logic of Bayes rule to hyperparameter tuning:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pick a hyperparameter combination
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Build a model
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Get new evidence (i.e the score of the model)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Update our beliefs and chose better hyperparameters next round
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '*Bayesian hyperparameter tuning is quite new but is very popular for larger
+    and more complex hyperparameter tuning tasks as they work well to find optimal *hyperparameter
+    combinations in these kinds of situations.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Note
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For more complex cases you might want to dig a bit deeper and explore all the
+    details about Bayesian optimization. Bayesian optimization can only work on continuous
+    hyper-parameters, and not categorical ones.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bayesian Hyper-parameter Tuning with HyperOpt
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: HyperOpt package, uses a form of Bayesian optimization for parameter tuning
+    that allows us to get the best parameters for a given model. It can optimize a
+    model with hundreds of parameters on a very large scale.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8e2d799ec43e4a30d5c1c2c297ec1e17.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[HyperOpt](http://hyperopt.github.io/hyperopt/): [**Distributed Hyper-parameter
+    Optimization**](https://github.com/hyperopt/hyperopt)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To know more about this library and the parameters of HyperOpt library feel
+    free to visit [*here*](https://www.analyticsvidhya.com/blog/2020/09/alternative-hyperparameter-optimization-technique-you-need-to-know-hyperopt/).
+    And visit [*here*](https://machinelearningmastery.com/hyperopt-for-automated-machine-learning-with-scikit-learn/)for
+    a quick tutorial with adequate explanation on how to use HyperOpt for Regression
+    and Classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introducing the HyperOpt package.
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To undertake Bayesian hyperparameter tuning we need to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Set the Domain: Our Grid i.e. search space (with a bit of a twist)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Set the Optimization algorithm (default: TPE)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Objective function to minimize: we use “*1-Accuracy”*'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Know more about the Optimization Algorithm used, Original Paper of TPE (Tree
+    of Parzen Estimators)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Sample Code for using HyperOpt [ Random Forest ]
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: HyperOpt does not use point values on the grid but instead, each point represents
+    probabilities for each hyperparameter value. Here, simple uniform distribution
+    is used, but there are many more if you check the [documentation](http://hyperopt.github.io/hyperopt/getting-started/search_spaces/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**HyperOpt implemented on Random Forest**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To really see this in action !!* try on a larger search space, with more trials,
+    more CVs and a larger dataset size.*
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/f20c865d8a22dd6693482e7cdad8e6b4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'For practical implementation of HyperOpt refer:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[1] [Hyperopt Bayesian Optimization for Xgboost and Neural network](https://medium.com/analytics-vidhya/hyperparameter-tuning-hyperopt-bayesian-optimization-for-xgboost-and-neural-network-8aedf278a1c9)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[2] [Tuning using HyperOpt in python](http://www.17bigdata.com/python%E8%B0%83%E5%8F%82%E7%A5%9E%E5%99%A8hyperopt/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Curious to know why XGBoost has high potential in winning competitions ?? Read
+    the below article to expand your knowledge !!
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[**XGBoost — Queen of Boosting Algorithms?**](https://levelup.gitconnected.com/xgboost-queens-of-boosting-algorithms-f270894c6aa5)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Kaggler’s Favo Algorithm | Understanding How & Why XGBoost is used to win Kaggle
+    competitions
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Informed Method: Genetic Algorithms'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '***Why does this work well?***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It allows us to learn from previous iterations, just like Bayesian hyperparameter
+    tuning.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It has the additional advantage of some *randomness*
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: TPOT will automate the most tedious part of machine learning by intelligently
+    exploring thousands of possible pipelines to find the best one for your data.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**A useful library for genetic hyperparameter tuning: TPOT**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**TPOT is a Python Automated Machine Learning tool that optimizes machine learning
+    pipelines using genetic programming.**'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Consider TPOT your **Data Science Assistant** for advanced optimization.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Pipelines not only include the model (or multiple models) but also work on features
+    and other aspects of the process. Plus it returns the Python code of the pipeline
+    for you! TPOT is designed to run for many hours to find the best model. You should
+    have a much larger population and offspring size as well as hundreds of more generations
+    to find a good model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: TPOT Components ( Key Arguments )
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '***generations ***— Iterations to run training for'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***population_size*** — The number of models to keep after each iteration'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***offspring_size*** — Number of models to produce in each iteration'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***mutation_rate*** — The proportion of pipelines to apply randomness to'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***crossover_rate*** — The proportion of pipelines to breed each iteration'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***scoring* **— The function to determine the best models'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***cv*** — Cross-validation strategy to use'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: TPOT Classifier
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will keep default values for ***mutation_rate* **and ***crossover_rate* **as
+    they are best left to the default without deeper knowledge on genetic programming.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Notice: No algorithm-specific hyperparameters?'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Since TPOT is an open-source library for performing *AutoML *in Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***AutoML ??***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Automated Machine Learning (AutoML) refers to techniques for automatically discovering
+    well-performing models for predictive modeling tasks with very little user involvement.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/2fa3dc19bdd1bc023f5d5bb7aaef5d69.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Output for the above code snippet**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: TPOT is quite unstable when not run for a reasonable amount of time. The below
+    code snippets shows the instability of TPOT. Here, only the random state has been
+    changed in the below three codes, but the Output shows major differences in choosing
+    the pipeline, i.e. model and it’s hyperparameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can see in the output the score produced by the chosen model (in this case
+    a version of Naive Bayes) over each generation, and then the final accuracy score
+    with the hyperparameters chosen for the final model. This is a great first example
+    of using TPOT for automated hyperparameter tuning. You can now extend this on
+    your own and build great machine learning models!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**To understand more about TPOT:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[1] [TPOT for Automated Machine Learning in Python](https://machinelearningmastery.com/tpot-for-automated-machine-learning-in-python/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[2] For more information in using TPOT, visit the [documentation](http://epistasislab.github.io/tpot/using/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In informed search, each iteration learns from the last, whereas in Grid and
+    Random, modelling is all done at once and then the best is picked. In case for
+    small datasets, GridSearch or RandomSearch would be fast and sufficient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: AutoML approaches provide a neat solution to properly select the required hyperparameters
+    that improve the model’s performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Informed methods explored were:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ‘Coarse to Fine’ (Iterative random then grid search).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Bayesian hyperparameter tuning, updating beliefs using evidence on model performance
+    (HyperOpt).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Genetic algorithms, evolving your models over generations (TPOT).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: I hope you’ve learned some useful methodologies for your future work undertaking
+    hyperparameter tuning in Python!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Create REST API in Minutes With Go / Golang**](https://medium.com/swlh/create-rest-api-in-minutes-with-go-golang-c4a2c6279721)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, there is a short comparison between different routers and then
+    the walk-through to create a REST API…
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you are curious to know about Golang’s Routers and want to try out a simple
+    web development project using Go, I suggest to read the above article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*For more informative articles from me, follow me on *[*medium*](https://medium.com/@jggowrisankar)*.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: And if you’re passionate about Data Science/Machine Learning, feel free to add
+    me on [*LinkedIn*](http://linkedin.com/in/gowrisankar-jg/)*.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/3013180f2562a1fd674e3f5231c77bc4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**References**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[1] [Bayesian Hyperparameter Optimization — A Primer](https://www.wandb.com/articles/bayesian-hyperparameter-optimization-a-primer)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[2] [How To Make Deep Learning Models That Don’t Suck](https://nanonets.com/blog/hyperparameter-optimization/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[3] [Algorithms for Hyper-Parameter Optimization](https://papers.nips.cc/paper/4443-algorithms-for-hyper-parameter-optimization.pdf)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[4] [Grid Search and Bayesian Hyperparameter Optimization](https://www.r-bloggers.com/2020/03/grid-search-and-bayesian-hyperparameter-optimization-using-tune-and-caret-packages/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[5] [Tree-structured Parzen Estimator](https://optunity.readthedocs.io/en/latest/user/solvers/TPE.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[6] [Informed Search - Hyperparameter Tuning](https://learn.datacamp.com/courses/hyperparameter-tuning-in-python)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Gowrisankar JG](https://www.linkedin.com/in/gowrisankar-jg/)** (**[@jg_gowrisankar](https://twitter.com/jg_gowrisankar)**)
+    is passionate about Data Science, Data Analytics, Machine Learning and #NLP, and
+    is a Software Developer at Hexaware.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/analytics-vidhya/algorithms-for-advanced-hyper-parameter-optimization-tuning-cebea0baa5d6).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Automated Machine Learning: The Free eBook](/2020/05/automated-machine-learning-free-ebook.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Python Libraries for Data Science, Data Visualization & Machine Learning](/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build Your Own AutoML Using PyCaret 2.0](/2020/08/build-automl-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Research-Driven Advanced Prompting Techniques for LLM Efficiency…](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Pipeline Optimization with TPOT](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,246 @@
+- en: Can We Query a Table with T5?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/05/query-table-t5.html](https://www.kdnuggets.com/2022/05/query-table-t5.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Can We Query a Table with T5?](../Images/aee45eb918738c5942550836c22227f7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: Adobe Stock'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Do you remember the first time you started to build some SQL queries to analyse
+    your data? I’m sure most of the time you just wanted to see the “Top selling products”
+    or “Count of product visits by weekly”. Why write SQL queries instead of just
+    asking what you have in your mind in natural language?
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is now possible thanks to the recent advancements in NLP. You can now not
+    just use the LLM (Large Language Model) but also teach them new skills. This is
+    called transfer learning. You can use a pretrained model as a starting point.
+    Even with smaller labeled datasets you can get great performances compared to
+    training on the data alone.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this tutorial we are going to do transfer learning with text-to-text generation
+    model [T5 by Google](https://ai.googleblog.com/2020/02/exploring-transfer-learning-with-t5.html) with
+    our custom data so that it can convert basic questions to SQL queries. We will
+    add a new task to T5 called: `translate English to SQL`. At the end of this article
+    you will have a trained model that can translate the following sample query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'into the following SQL query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can find the [Gradio](https://gradio.app/) demo [**here**](https://huggingface.co/spaces/mecevit/english-to-sql) and
+    the Layer Project [**here**](https://app.layer.ai/layer/t5-fine-tuning-with-layer).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Build the Training Data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Unlike the common language to language translation datasets, we can build custom
+    English to SQL translation pairs programmatically with the help of templates.
+    Now, time to come up with some templates:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can build our function which will use these templates and generate our dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As you can see we have used Layer [@dataset](https://docs.app.layer.ai/docs/sdk-library/dataset-decorator) decorator
+    here. We can now pass this function to Layer easily with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Once the run is complete, we can start building our custom dataset loader to
+    fine tune T5.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create Dataloader
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Our dataset is basically a [PyTorch Dataset](https://pytorch.org/tutorials/beginner/basics/data_tutorial.html) implementation
+    specific to our custom built dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finetune T5
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Our dataset is ready and registered to Layer. Now we are going to develop the
+    fine tuning logic. Decorate the function with [@model](https://docs.app.layer.ai/docs/sdk-library/model-decorator) and
+    pass it to Layer. This trains the model on Layer infra and registers it under
+    our project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here we use three separate Layer decorators:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`[@model](https://docs.app.layer.ai/docs/sdk-library/model-decorator)`: Tells
+    Layer that this function trains an ML model'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[@fabric](https://docs.app.layer.ai/docs/sdk-library/fabric-decorator)`: Tells
+    Layer the computation resources (CPU, GPU etc.) needed to train the model. T5
+    is a big model and we need GPU to fine tune it. Here is a list of the [available
+    fabrics](https://docs.app.layer.ai/docs/reference/fabrics) you can use with Layer.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`[@pip_requirements](https://docs.app.layer.ai/docs/sdk-library/pip-requirements-decorator)`:
+    The Python packages needed to fine tune our model.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now we can just pass the tokenizer and model training functions to Layer to
+    train our model on a remote GPU instance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Once the training is complete, we can find our models and the metrics in the
+    Layer UI. Here is our loss curve:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Can We Query a Table with T5?](../Images/49ef8dc9e9a1ddcc3f4ac46e7265a408.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Build the Gradio Demo
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[Gradio](https://gradio.app/) is the fastest way to demo your machine learning
+    model with a friendly web interface so that anyone can use it, anywhere! We will
+    build an interactive demo with [Gradio](https://gradio.app/) to provide a UI for
+    people want to try our model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s get to coding. Create a Python file called `app.py` and put the following
+    code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the above code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We fetch the our fine-tuned model and the related tokenizer from Layer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Create a simple UI with Gradio: an input textfield for query input and an output
+    textfield to display the predicted SQL query'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'We will need some extra libraries for this small Python application, so create
+    a `requirements.txt` file with the following content:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We are ready to publish our Gradio app now:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Go to Hugging face and [create a space](https://huggingface.co/login?next=/new-space).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Don’t forget to select Gradio as the Space SDK
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Now clone your repo into your local directory with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Put the `requirements.txt`and `app.py` file into to cloned directory and run
+    the following commands in your terminal:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now head over to your Hugging face space, you will see your example once the
+    app is deployed
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Can We Query a Table with T5?](../Images/929ccd3e3686d638f27ccd9dfd4e0b03.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Final Thoughts
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We learned how to fine tune a large language model to teach them a new skill.
+    You can now design your own task and fine tune T5 for your own use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Check out the full [Fine Tuning T5](https://app.layer.ai/layer/t5-fine-tuning-with-layer) project
+    and modify it for your own task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Resources
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[https://ai.googleblog.com/2020/02/exploring-transfer-learning-with-t5.html](https://ai.googleblog.com/2020/02/exploring-transfer-learning-with-t5.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://app.layer.ai/layer/t5-fine-tuning-with-layer](https://app.layer.ai/layer/t5-fine-tuning-with-layer)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://huggingface.co/spaces](https://huggingface.co/spaces)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**[Mehmet Ecevit](https://www.linkedin.com/in/mecevt/)** is Co-founder & CEO
+    at Layer: Collaborative Machine Learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Query Your Pandas DataFrames with SQL](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Tips for Improving SQL Query Performance](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Fast Can BERT Go With Sparsity?](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How You Can Use Machine Learning to Automatically Label Data](https://www.kdnuggets.com/2022/02/machine-learning-automatically-label-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How a Level System can Help Forecast AI Costs](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

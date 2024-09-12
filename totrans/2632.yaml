@@ -1,0 +1,529 @@
+- en: Saving and loading models in TensorFlow — why it is important and how to do
+    it
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/02/saving-loading-models-tensorflow.html](https://www.kdnuggets.com/2021/02/saving-loading-models-tensorflow.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d6d138bf9bad0178ad0122d702dcb071.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Photo by [Nana Smirnova](https://unsplash.com/@nananadolgo?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we are going to discuss the following topics
+  prefs: []
+  type: TYPE_NORMAL
+- en: Importance of saving deep learning models (in general, not limited to TensorFlow).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to save deep learning models in TensorFlow 2, and different types, categories,
+    and techniques of saving the models.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Loading the saved models in TensorFlow 2.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Importance of saving deep learning models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Remember, in gradient descent, we update the weights and bias based on the error
+    or loss function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/886dd93c4d1cf92b9b527e2ae87af6d6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now imagine you trained a model for thousands of epochs for days or weeks or
+    even hours, and get pretty good weights for your model, meaning that your model
+    is performing a lot well, and then you lose all the weights when you close your
+    program/jupyter notebook.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This will turn into a more hectic problem when you want to reuse that model
+    in another application, and you have no saved progress. You have to start the
+    training process from scratch, which might waste your hours or days.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Practically you can imagine a scenario that you have coded a really good facial
+    recognition model application with above 99% accuracy, precision, etc., and it
+    took you around 30 hours to train that model on a big dataset. Now, if you have
+    not saved the model, and you want to use it in any application, you would have
+    to retrain the whole model for 30 hours.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is why saving the model is a very important step and can save you a ton
+    of time and resources with just some extra lines of code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Saving models in TensorFlow 2
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are 2 different formats to save the model weights in TensorFlow. The first
+    one is the **TensorFlow native format**, and the second one is the **hdf5** format,
+    also known as **h5** or **HDF** format.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, there are 2 different ways of saving models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Simple, and less complex way, but gives you no freedom.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Using callbacks**to save the model that allows you a lot of freedom, such
+    as saving per-epoch, saving after every n number of examples etc.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We will discuss both in detail.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s load important python libraries and dataset first.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Simple Way
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The simple way to save the model in TensorFlow is that we can use the built-in
+    function of *Tensorflow.Keras.models* “Model saving & serialization APIs” that
+    is the *save_weights* method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s say we have a sequential model in TensorFlow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: And now we fit the model using *model.fit* function in TensorFlow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can evaluate the performance of our model via,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/6026b662eede755193b243e4b32a56e8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now we can save our model just by calling *model.save* function and passing
+    in the *filepath *as the argument. This will save the model’s
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model Architecture
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Model Weights
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Model optimizer state (so that you can continue the training from where you
+    left)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now adding the extension is important. If you add *.h5* as the extension, it
+    will save the model as *hdf5* format, and if no extension is provided, the model
+    is saved as TensorFlow native format.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now when the model is saved in the current directory as *myModel.h5* file, you
+    can simply load it in a new program, or same program as a different model via,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can check the accuracy of the new loaded model via,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/090fb3395a9d3e21f58be16eb3c7a893.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And we can see that we are getting exactly the same accuracy as the old model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can confirm it further by checking the model summary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: And the new summary is precisely identical to our original model’s summary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Similarly, we can save the weights in TensorFlow native format via,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: See how we have not added any file format after the name. This will save our
+    model in TensorFlow native format in the folder *newmodel*. If we peak into the
+    folder, then we can check what the files are with
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: This command will only run in the jupyter notebook, so alternatively, you can
+    open the folder and check the files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You will always have 1 file and 2 folders that are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: assets (folder)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: pb
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: variables (folder)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We will have a look at what these folders and files are later. But simply to
+    load the model, we just have to give the pathname which we used to save the model,
+    such as with
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: And you can confirm that it is the same model simply via checking its *summary *or
+    evaluating it to match the results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now to save the **weights only** using the simple way, you just have to call
+    the built-in function *save_weights* on your model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's take the same old model,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: and train it for a few epochs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now you can simply save the weights via,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: This will create a folder named *weights_folder* and save the weights in Tensorflow
+    native format with the name of *my_weight*s. It is going to have 3 files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: checkpoint
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: data-00000-of-00001
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: index
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Let's take a look at these files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****my_weights.**index**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This file tells TensorFlow which weights are stored where. When running models
+    on distributed systems, there may be different *shards*, meaning the full model
+    may have to be recomposed from multiple sources. In the last notebook, you created
+    a single model on a single machine, so there is only one *shard*, and all weights
+    are stored in the same place.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**my_weights.data-00000-of-00001**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This file contains the actual weights from the model. It is by far the largest
+    of the 3 files. Recall that the model you trained had around 14000 parameters,
+    meaning this file is roughly 12 bytes per saved weight.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**checkpoint**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This file is by far the smallest. It’s actually so small that we can just look
+    at it directly. It’s a human-readable file with the following text,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now when you have saved the weights, you can simply load them by just calling,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: This will load the weights for that model at that specific path.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alternatively, you can save the weights only in the *hdf5 *format via,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: This will create a *my_weights.h5* file in your working directory, and you can
+    simply load them via *model.load_weights('my_weights.h5')*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Important Point
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When you are loading the weights for a model, you need to have the correct architecture
+    of that model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can not load the weights of our *model *we just created to a sequential
+    model with 1 Dense layer, as both are not compatible. So you might be thinking,
+    what is the use of saving the weights only?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, the answer is that if you are looking at some big SOTA application, such
+    as YOLO, or something like that where they give you the source code. But, to train
+    them on your machines is a long and lengthy task, so they also give you the pre-trained
+    weights on different epochs, such as if you want to see how this model is performing
+    at 50 epochs, then you can load the saved weights of 50 epochs, and similarly
+    for other numbers of epochs. In this way, you can check the performance of the
+    model on the number of training epochs based on how the model is performing on
+    X number of epochs without explicitly training it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: TensorFlow Native format vs. hdf5, which to use and when
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You have seen that using the .h5 format is simple and clean as it only creates
+    one single file, whereas using tensorflow native format creates multiple folders
+    and files, which is difficult to read. So, you might be thinking that why should
+    we use tensorflow native format? The answer to this is that in the TensorFlow
+    native format, everything is structural and organized in its place. For example,
+    the .pb file contains structural data that can be loaded by multiple languages.
+    Some of the advantages of TF native format are listed in the following.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Advantages of the TensorFlow native format**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[TensorFlow’s Serving](https://www.tensorflow.org/tfx/guide/serving)uses it
+    when you want to take your model to production.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Language-agnostic — binary format can be read by multiple languages (Java, Python,
+    Objective-C, and C++, among others).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Advised to use since 0, you can see the [official serializing guide](https://www.tensorflow.org/guide/keras/save_and_serialize)of
+    TensorFlow, which recommends using TensorFlow Native format.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Saves various metadata of the model such as optimizer information, losses, learning
+    rate, etc., which can help later.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Disadvantages**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: SavedModelis conceptually harder to grasp than a single file
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Creates a separate folder to store the weights.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Advantages of h5**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Used to save giant data, which might not be tabular.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Common file saving format.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Everything saved in one file (weights, losses, optimizers used with keras)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Disadvantages**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cannot be used with Tensorflow Servingbut you can simply convert it to .pb via experimental.export_saved_model(model,
+    'path_to_saved_model')
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**What to use**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you are not going to use TensorFlow while serving or deploying your model,
+    then for simplicity, you can use .hdf5 format, but if you are going to use TensorFlow
+    serving, then you should use tensorflow native format.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Learning Outcome
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, you learned
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why should you save your machine learning model.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to save model weights only using the simple method.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to save a complete model using the simple method.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Saving in TensorFlow Native format or HDF5 format.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Difference between TensorFlow Native and HDF5 format and what to use.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'For more details, check out:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Getting Started with TensorFlow 2 by Imperial College London](https://www.coursera.org/learn/getting-started-with-tensor-flow2)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Difference between h5 and pb](https://stackoverflow.com/questions/62079274/difference-between-pb-and-h5)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Getting Started with TensorFlow 2](https://www.kdnuggets.com/2020/07/getting-started-tensorflow2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploying Trained Models to Production with TensorFlow Serving](https://www.kdnuggets.com/2020/11/serving-tensorflow-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A TensorFlow Modeling Pipeline Using TensorFlow Datasets and TensorBoard](https://www.kdnuggets.com/2020/06/tensorflow-modeling-pipeline-tensorflow-datasets-tensorboard.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How Big Data Is Saving Lives in Real Time: IoV Data Analytics Helps…](https://www.kdnuggets.com/how-big-data-is-saving-lives-in-real-time-iov-data-analytics-helps-prevent-accidents)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What are Vector Databases and Why Are They Important for LLMs?](https://www.kdnuggets.com/2023/06/vector-databases-important-llms.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why is Data Management so Important to Data Science?](https://www.kdnuggets.com/2022/08/data-management-important-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is Superalignment & Why It is Important?](https://www.kdnuggets.com/2023/07/superalignment-important.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Use Hugging Face’s Datasets Library for Efficient Data Loading](https://www.kdnuggets.com/how-to-use-hugging-faces-datasets-library-for-efficient-data-loading)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Is Domain Knowledge Important for Machine Learning?](https://www.kdnuggets.com/2022/07/domain-knowledge-important-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

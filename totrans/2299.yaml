@@ -1,0 +1,634 @@
+- en: Building a Recommender System for Amazon Products with Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/02/building-recommender-system-amazon-products-python.html](https://www.kdnuggets.com/2023/02/building-recommender-system-amazon-products-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Building a Recommender System for Amazon Products with Python](../Images/3f776ba892d59933aec09a0e9ab3bd92.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Marques Thomas](https://unsplash.com/@querysprout?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The project’s goal is to **partially recreate** the **Amazon Product Recommender
+    System** for the **Electronics** product category.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s November and **Black Friday** is here! What type of shopper are you? Do
+    you save all the products you would like to buy for the day or would you rather
+    open the website and see the **live offers** with their great discounts?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Even though online shops have been incredibly successful in the past decade,
+    showing huge potential and growth, one of the fundamental differences between
+    a physical and online store is the consumers’ **impulse purchases**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If clients are presented with an **assortment of products**, they’re much more
+    likely to purchase an item they didn’t originally plan on purchasing. The **phenomenon** of **impulse
+    buying** is incredibly **limited** by the configuration of an **online** store.
+    The same **does not happen** for their **physical** counterparts. The biggest
+    physical retail chains make their customers go through a **precise path** to ensure
+    they visit every aisle before exiting the store.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A way online stores like Amazon thought could **recreate** an impulse buying
+    phenomenon is through **recommender systems**. Recommender systems identify the **most
+    similar** or **complementary** products the customer just bought or viewed. The
+    intent is to maximize the **random purchases** phenomenon that online stores normally
+    lack.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Purchasing on Amazon** made me quite interested in the mechanics and I wanted
+    to** re-create **(even partially) the results of their recommender system.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: According to the blog “Recostream”, the Amazon product recommender system has **three
+    types of dependencies**, one of them being **product-to-product recommendations**.
+    When a user has virtually no search history, the algorithm clusters products together
+    and suggests them to that same user based on the items’ metadata.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The first step of the project is gathering the **data**. Luckily, the researchers
+    at the **University of California** in San Diego have a repository to let the
+    students, and individuals outside of the organization, use the data for research
+    and projects. Data can be accessed through the following [link](http://jmcauley.ucsd.edu/data/amazon/links.html) along
+    with **many other interesting datasets** related to recommender systems[2][3].
+    The product metadata was **last updated in 2014**; a lot of the products might
+    not be available today.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The electronics category metadata contains **498,196 records** and has **8
+    columns** in total:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`asin` — the unique ID associated with each product'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`imUrl` — the URL link of the image associated with each product'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`description` — The product’s description'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`categories` — a python list of all the categories each product falls into'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`title` — the title of the product'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`price` — the price of the product'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`salesRank` — the ranking of each product within a specific category'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`related` — products viewed and bought by customers related to each product'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`brand` — the brand of the product.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You will notice that the file is in a “loose” `JSON` format, where each line
+    is a `JSON `containing all the columns previously mentioned as one of the fields.
+    We’ll see how to deal with this in the code deployment section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: EDA
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Let’s start with a quick Exploratory Data Analysis. After **cleaning all the
+    records** that contained at least a `NaN` value in one of the columns, I created
+    the visualizations for the electronics category.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Recommender System for Amazon Products with Python](../Images/4dabaf4aa97a121f6cc23ea6b20514ad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Price Boxplot with Outliers — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first chart is a **boxplot** showing the maximum, minimum, 25th percentile,
+    75th percentile, and average price of each product. For example, we know the **maximum** worth
+    of a product is going to be $1000, whereas the **minimum** is around $1\. The
+    line above the $160 mark is made of **dots**, and each of these dots identifies
+    an **outlier**. An outlier represents a record only happening once in the whole
+    dataset. As a result, we know that there is only 1 product priced at around $1000.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The **average** price seems to be around the $25 mark. It is important to note
+    that the library `matplotlib` automatically excludes outliers with the option`showfliers=False`.
+    In order to make our boxplot look cleaner we can set the parameter equal to false.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Recommender System for Amazon Products with Python](../Images/76f444d4bd5a06863c75c073431c478d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Price Boxplot — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: The result is a much cleaner Boxplot without the outliers. The chart also suggests
+    that the vast majority of electronics products are priced around the $1 to $160
+    range.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Recommender System for Amazon Products with Python](../Images/9bdc4e7f113b83420ec086cd4cf63a26.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Top 10 Brands by Number of Products Listed — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: The chart shows the **top 10 brands** by the number of **listed products** selling
+    on Amazon within the Electronics category. Among them, there are HP, Sony, Dell,
+    and Samsung.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Recommender System for Amazon Products with Python](../Images/aec9cd7244aaaf6064eebece50d4efdd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Top 10 Retailers Pricing Boxplot — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, we can see the **price distribution** for each of the **top 10 sellers**.
+    Sony and Samsung definitely offer a **wide range of products**, from a few dollars
+    all the way to $500 and $600, as a result, their average price is higher than
+    most of the top competitors. Interestingly enough, **SIB and SIB-CORP** offer
+    more products but at a much more affordable price on average.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The chart also tells us that Sony offers products that are roughly 60% of the
+    highest-priced product in the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cosine Similarity
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: A possible solution to cluster products together by their characteristics is **cosine
+    similarity**. We need to understand this concept thoroughly to then build our
+    recommender system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Cosine similarity** measures how “close” two sequences of numbers are. How
+    does it apply to our case? Amazingly enough, sentences can be transformed into
+    numbers, or better, into vectors.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cosine similarity can take values **between -1 and 1**, where **1** indicates
+    two vectors are **formally the same** whereas **-1** indicates they’re as **different** as
+    they can get.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Mathematically, **cosine similarity** is the dot product of two multidimensional
+    vectors divided by the product of their magnitude [4]. I understand there are
+    a lot of bad words in here but let’s try to break it down using a practical example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s suppose we’re** analyzing document A** and **document B**. Document A
+    has three most common terms: “today”, “good”, and “sunshine” which respectively
+    appear 4, 2, and 3 times. The same three terms in document B appear 3, 2, and
+    2 times. We can therefore write them like the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A = (2, 2, 3) ; B = (3, 2, 2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'The formula for the **dot product** of two vectors can be written as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Their vector **dot product** is no other than 2x3 + 2x2 + 3x2 = 16
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The **single vector magnitude** on the other hand is calculated as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If I apply the formula I get
+  prefs: []
+  type: TYPE_NORMAL
+- en: '||A|| = 4.12 ; ||B|| = 4.12'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: their cosine similarity is therefore
+  prefs: []
+  type: TYPE_NORMAL
+- en: 16 / 17 = 0.94 = 19.74°
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: the two vectors are very similar.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As of now, we calculated the score only **between two vectors** with **three
+    dimensions**. A word vector can virtually have **an infinite number** of dimensions
+    (depending on how many words it contains) but the logic behind the process is
+    mathematically the same. In the next section, we’ll see how to apply all the concepts
+    in practice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code Deployment
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Let’s move on to the **code deployment phase** to build our recommender system
+    on the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Importing the libraries
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The first cell of every data science notebook should **import the libraries, **the
+    ones we need for the project are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`gzip` unzips the data files'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`json` decodes them'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`pandas` transforms JSON data into a more manageable dataframe format'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`tqdm` creates progress bars'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`nltk` to process text strings'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`re` provides regular expression support'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: finally, `sklearn` is needed for text pre-processing
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reading the data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: As previously mentioned, the data has been uploaded in a **loose JSON** format.
+    The solution to this issue is first to transform the file into **JSON readable
+    format lines** with the command `json.dumps` . Then, we can transform this file
+    into a **python list** made of JSON lines by setting `\n` as the linebreak. Finally,
+    we can append each line to the `data` empty list while reading it **as a JSON** with
+    the command `json.loads` .
+  prefs: []
+  type: TYPE_NORMAL
+- en: With the command `pd.DataFrame` the `data` list is read as a dataframe that
+    we can now use to build our recommender.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: To give you an idea of how each line of the `data` list looks like we can run
+    a **simple command** `print(data[0])` , the console **prints the line at index
+    0**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you can see the output is a JSON file, it has the `{}` to open and close
+    the string, and each column name is followed by the `:` and the correspondent
+    string. You can notice this first product is missing the `price`, `salesRank`, `related`,
+    and `brand information` . Those columns are automatically filled with `NaN` values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once we read the entire list as a dataframe, the electronics products show
+    the following 8 features:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Feature Engineering
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '**Feature engineering** is responsible for **data cleaning and creating** the
+    column in which we’ll calculate **the cosine similarity score**. Because of RAM
+    memory limitations, I didn’t want the columns to be particularly long, as a review
+    or product description could be. Conversely, I decided to create a **“data soup”** with
+    the `categories`, `title`, and `brand `columns. Before that though, we need to
+    eliminate every single row that contains a NaN value in either one of those three
+    columns.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The selected columns contain valuable and essential information in the form
+    of text we need for our recommender. The `description` column could also be a
+    potential candidate but the string is often too long and it’s not standardized
+    across the entire dataset. It doesn’t represent a reliable enough piece of information
+    for what we’re trying to accomplish.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After running this first portion of code, the rows vertiginously decrease from **498,196** to
+    roughly **142,000**, a big change. It’s only at this point we can create the so-called
+    data soup:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: The name of the **brand** needs to be included since the title does not always
+    contain it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now I can move on to the **cleaning portion**. The function `text_cleaning` is
+    responsible for removing every `amp` string from the ensemble column. On top of
+    that, the string`[^A-Za-z0–9]` filters out every **special character**. Finally,
+    the last line of the function eliminates every **stopword** the string contains.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: With the **lambda function**, we can apply `text_cleaning` to the entire column
+    called `ensemble` , we can randomly select a data soup of a random product by
+    calling `iloc` and indicating the index of the random record.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: The record on the** 10001st row** (indexing starts from 0) is the **vcool VGA
+    cooler from Antec**. This is a scenario in which the brand name was not in the
+    title.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cosine Computation and Recommender Function
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The computation of cosine similarity starts with **building a matrix containing
+    all the words that ever appear in the ensemble column**. The method we’re going
+    to use is called “**Count Vectorization**” or more commonly “**Bag of words**”.
+    If you’d like to read more about count vectorization, you can read one of my previous
+    articles at the following [link](https://medium.com/mlearning-ai/a-bow-vs-a-tfidf-feature-extractor-a-practical-application-on-a-na%C3%AFve-bayes-classifier-in-python-a68e8fb2248c).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because of RAM limitations, the cosine similarity score will be computed only
+    on the first **35,000** records out of the **142,000** available after the pre-processing
+    phase. This most likely affects the final performance of the recommender.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: The command `cosine_similarity` , as the name suggests, calculates cosine similarity
+    for each line in the `count_matrix` . Each line on the `count_matrix` is no other
+    than a vector with the word count of every word that appears in the ensemble column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before running the **actual recommender system**, we need to make sure to create
+    an index and that this index has no duplicates.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s only at this point we can define the `content_recommender`function. It
+    has 4 arguments: `title`, `cosine_sim`, `df`, and `indices`. The title will be
+    the only element to input when calling the function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`content_recommender` works in the following way:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It finds the **product’s index** associated with the title the user provides
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It searches the product’s index within the **cosine similarity matrix** and
+    gathers all the scores of all the products
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It **sorts** all the scores from the **most similar product** (closer to 1)
+    to the least similar (closer to 0)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It only selects the **first 30 most similar** products
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It adds an index and **returns a pandas series** with the result
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now let’s test it on the “Vcool VGA Cooler”. We want 30 products that are similar
+    and customers would be interested in buying. By running the command `content_recommender(product_title)` ,
+    the **function returns a list of 30 recommendations**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Among the **5 most similar products** we find other Antec products such as the
+    Tricool Computer Case Fan, the Expansion Slot Cooling Fan, and so forth.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: The `related` column in the original dataset contains a list of products consumers
+    also bought, bought together, and bought after viewing the VGA Cooler.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: By printing the head of the python dictionary in that column the console returns
+    the following dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s test if our recommender did well. Let’s see if some of the `asin` ids
+    in the `also_bought` list are present in the recommendations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: Our recommender correctly suggested** 5 out of 44 products.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: I agree it’s **not an optimal result** but considering we only used **35,000** out
+    of the **498,196** rows available in the full dataset, it’s acceptable. It certainly
+    has a lot of room for improvement. If NaN values were less frequent or even non-existent
+    for target columns, recommendations could be more accurate and close to the actual
+    Amazon ones. Secondly, having access to **larger RAM memory**, or even distributed
+    computing, could allow the practitioner to compute even larger matrices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: I hope you enjoyed the project and that it’ll be useful for any future use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As mentioned in the article, the final result can be further improved by **including
+    all lines of the dataset** in the cosine similarity matrix. On top of that, we
+    could add each product’s **review average score** by merging the metadata dataset
+    with others available in the repository. We could **include the price** in the
+    computation of the cosine similarity. Another possible improvement could be building
+    a recommender system completely based on each **product’s descriptive **images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The main solutions for further improvements have been listed. Most of them are
+    even worth pursuing from the perspective of future implementation into actual **production**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*As a final note, if you liked the content please consider dropping a follow
+    to be notified when new articles are published. If you have any observations about
+    the article, write them in the comments! I’d love to read them :) Thank you for
+    reading!*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*PS: If you like my writing, it would mean the world to me if you could subscribe
+    to a medium membership through *[*this link*](https://giovanni-valdata.medium.com/membership)*.
+    With the membership, you get the amazing value that medium articles provide and
+    it’s an indirect way of supporting my content!*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reference
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[1] Amazon’s Product Recommendation System In 2021: How Does The Algorithm
+    Of The eCommerce Giant Work? — Recostream. (2021). Retrieved November 1, 2022,
+    from Recostream.com website: [https://recostream.com/blog/amazon-recommendation-system](https://recostream.com/blog/amazon-recommendation-system)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[2] He, R., & McAuley, J. (2016, April). Ups and downs: Modeling the visual
+    evolution of fashion trends with one-class collaborative filtering. In *Proceedings
+    of the 25th international conference on world wide web* (pp. 507–517).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[3] McAuley, J., Targett, C., Shi, Q., & Van Den Hengel, A. (2015, August).
+    Image-based recommendations on styles and substitutes. In *Proceedings of the
+    38th international ACM SIGIR conference on research and development in information
+    retrieval* (pp. 43–52).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[4] Rahutomo, F., Kitasuka, T., & Aritsugi, M. (2012, October). Semantic cosine
+    similarity. In *The 7th international student conference on advanced science and
+    technology ICAST* (Vol. 4, ?1, p. 1).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[5] Rounak Banik. 2018\. Hands-On Recommendation Systems with Python: Start
+    building powerful and personalized, recommendation engines with Python.* Packt
+    Publishing.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Giovanni Valdata](https://www.linkedin.com/in/giovanni-valdata/)** holds
+    two BBAs and a Msc. in Management, at the end of which leveraged NLP for his thesis
+    in Data Science and Management. Giovanni enjoys helping readers to learn more
+    about the field by developing technical projects with practical applications.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/building-a-recommender-system-for-amazon-products-with-python-8e0010ec772c).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Next Level AI Programming: Prompt Design & Building AI Products](https://www.kdnuggets.com/2023/03/corise-prompt-design-building-ai-products.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building AI Products with OpenAI: A Free Course from CoRise](https://www.kdnuggets.com/2023/07/corise-building-ai-products-openai-free-course-corise.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Supercharge Your AI Journey! Join Uplimit''s Free Building AI…](https://www.kdnuggets.com/2024/01/uplimit-supercharge-your-ai-journey-openai-course)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Recommendation System with Hugging Face Transformers](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tapping into the Potential of Data Products in 2023](https://www.kdnuggets.com/2023/01/tapping-potential-data-products-2023.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Monitor Your File System With Python’s Watchdog](https://www.kdnuggets.com/monitor-your-file-system-with-pythons-watchdog)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

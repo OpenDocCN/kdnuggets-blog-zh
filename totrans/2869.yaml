@@ -1,0 +1,341 @@
+- en: 'Feature Selection: Beyond feature importance?'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/10/feature-selection-beyond-feature-importance.html](https://www.kdnuggets.com/2019/10/feature-selection-beyond-feature-importance.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Dor Amir](https://www.linkedin.com/in/dor-amir-07a35155/), Data Science
+    Manager, [Guesty](https://www.guesty.com/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In machine learning, Feature Selection is the process of choosing features that
+    are most useful for your prediction. Although it sounds simple it is one of the
+    most complex problems in the work of creating a new machine learning model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post, I will share with you some of the approaches that were researched
+    during the last project I led at [Fiverr](https://www.fiverr.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: You will get some ideas on the basic method I tried and also the more complex
+    approach, which got the best results — removing over 60% of the features, while
+    maintaining accuracy and achieving more stability for our model. I’ll also be
+    sharing our improvement to this algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/66bc31fee8dfdcfb378721021bd038cb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Why is it SO IMPORTANT to do Feature Selection?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you build a machine learning model, you know how hard it is to identify which
+    features are important and which are just noise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Removing the noisy features will help with memory, computational cost and the
+    accuracy of your model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, by removing features you will help avoid the overfitting of your model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sometimes, you have a feature that makes business sense, but it doesn’t mean
+    that this feature will help you with your prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You need to remember that features can be useful in one algorithm (say, a decision
+    tree), and may go underrepresented in another (like a regression model) — not
+    all features are born alike :)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Irrelevant or partially relevant features can negatively impact model performance.
+    Feature Selection and Data Cleaning should be the first and most important step
+    in designing your model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Feature Selection Methods:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Although there are a lot of techniques for Feature Selection, like backward
+    elimination, lasso regression. In this post, I will share 3 methods that I have
+    found to be most useful to do better Feature Selection, each method has its own
+    advantages.
+  prefs: []
+  type: TYPE_NORMAL
+- en: “All But X”
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The name “All But X” was given to this technique at Fiverr. This technique is
+    simple, but useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You run your train and evaluation in iterations
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In each iteration, you remove a single feature.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If you have a large number of features, you can remove a “family” of features
+    — we, at Fiverr, usually aggregate features in different times, 30 days clicks,
+    60 days clicks, etc. This is a family of features.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Check your evaluation metrics against the baseline.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The goal of this technique is to see which of the family of features don’t affect
+    the evaluation, or if even removing it improves the evaluation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/469721269482cc6e716fcab6b2c761a3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*“All but X” diagram of running the full flow — after running all the iterations,
+    we compared to check which one didn’t affect the model’s accuracy.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The problem with this method is that by removing one feature at a time, you
+    don’t get the effect of features on each other (non-linear effect). Maybe the
+    combination of feature X and feature Y is making the noise, and not only feature
+    X.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature Importance + Random Features
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Another approach we tried, is using the feature importance that most of the
+    machine learning model APIs have.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'What we did, is not just taking the top N feature from the feature importance.
+    We added 3 random features to our data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Binary random feature ( 0 or 1)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Uniform between 0 to 1 random feature
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Integer random feature
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: After the feature important list, we only took the feature that was higher than
+    the random features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is important to take different distributions of random features, as each
+    distribution can have a different effect.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In trees, the model “prefers” continuous features (because of the splits), so
+    those features will be located higher up in the hierarchy. That’s why you need
+    to compare each feature to its equally distributed random feature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Boruta
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Boruta](http://feature%20selection%20with%20the%20boruta%20package%20-%20journal%20of%20...%20%20https//www.jstatsoft.org%20%E2%80%BA%20article%20%E2%80%BA%20view) is
+    a feature ranking and selection algorithm that was developed at the University
+    of Warsaw. This algorithm is based on random forests, but can be used on XGBoost
+    and different tree algorithms as well.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: At Fiverr, I used this algorithm with some improvements to XGBoost ranking and
+    classifier models that I will elaborate on briefly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This algorithm is a kind of combination of both approaches I mentioned above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating a “shadow” feature for each feature on our dataset, with the same feature
+    values but only shuffled between the rows
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Run in a loop, until one of the stopping conditions:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 2.1\. We are not removing any more features
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 2.2\. We removed enough features — we can say we want to remove 60% of our features
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 2.3\. We ran N iterations — we limit the number of iterations to not get stuck
+    in an infinite loop
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Run X iterations — we used 5, to remove the randomness of the mode
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 3.1\. Train the model with the regular features and the shadow features
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 3.2\. Save the average feature importance score for each feature
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 3.3 Remove all the features that are lower than their shadow feature
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Boruta pseudo code![Figure](../Images/688d039fa22373013b935cf9e8b95df9.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Boruta diagram of running flow from creating shadows — training — comparing
+    — removing features and back again.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Boruta 2.0
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here is the best part of this post, our improvement to the Boruta.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We ran the Boruta with a “short version” of our original model. By taking a
+    sample of data and a smaller number of trees (we used XGBoost), we improved the
+    runtime of the original Boruta, without reducing the accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another improvement, we ran the algorithm using the random features mentioned
+    before. This is a good sanity or stopping condition, to see that we have removed
+    all the random features from our dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With the improvement, we didn’t see any change in model accuracy, but we saw
+    improvement in runtime. By removing, we were able to shift from 200+ features
+    to less than 70\. We saw the stability of the model on the number of trees and
+    in different periods of training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We also saw an improvement in the distance between the loss of the training
+    and the validation set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The advantage of the improvement and the Boruta, is that you are running your
+    model. In that case, the problematic features, which were found, are problematic
+    to your model and not a different algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrapping up
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this post, you saw 3 different techniques of how to do Feature Selection
+    to your datasets and how to build an effective predictive model. You saw our implementation
+    of Boruta, the improvements in runtime and adding random features to help with
+    sanity checks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With these improvements, our model was able to run much faster, with more stability
+    and maintained level of accuracy, with only 35% of the original features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Choose the technique that suits you best. Remember, Feature Selection can help
+    improve accuracy, stability, and runtime, and avoid overfitting. More importantly,
+    the debugging and explainability are easier with fewer features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Dor Amir](https://www.linkedin.com/in/dor-amir-07a35155/)** is Data
+    Science Manager at [Guesty](https://www.guesty.com/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/fiverr-engineering/feature-selection-beyond-feature-importance-9b97e5a842f).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[The Hitchhiker’s Guide to Feature Extraction](/2019/06/hitchhikers-guide-feature-extraction.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature selection by random search in Python](/2019/08/feature-selection-random-search-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Opening Black Boxes: How to leverage Explainable Machine Learning](/2019/08/open-black-boxes-explainable-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Beyond Guesswork: Leveraging Bayesian Statistics for Effective…](https://www.kdnuggets.com/beyond-guesswork-leveraging-bayesian-statistics-for-effective-article-title-selection)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Selection: Where Science Meets Art](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Advanced Feature Selection Techniques for Machine Learning Models](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Celebrating Awareness of the Importance of Data Privacy](https://www.kdnuggets.com/2022/01/celebrating-awareness-importance-data-privacy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Is Not Like Your Brain Part 6: The Importance of…](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

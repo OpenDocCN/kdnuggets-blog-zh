@@ -1,0 +1,262 @@
+- en: Diffusion Map for Manifold Learning, Theory and Implementation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/03/diffusion-map-manifold-learning-theory-implementation.html](https://www.kdnuggets.com/2020/03/diffusion-map-manifold-learning-theory-implementation.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Rahul Raj](https://randomwalk.in), Indian Institute of Technology Kanpur**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: ‘Curse of dimensionality’ is a well-known problem in Data Science, which often
+    causes poor performance, inaccurate results, and, most importantly, a similarity
+    measure break-down. The primary cause of this is because high dimensional datasets
+    are typically sparse, and often a lower-dimensional structure or ‘Manifold’ would
+    embed this data. So there is a non-linear relationship among the variables (or
+    features or dimensions), which we need to learn to compute better similarity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Manifold learning is an approach to non-linear dimensionality reduction. The
+    basis for algorithms in manifold learning is that the dimensionality of many data
+    sets is only artificially high ¹. In this blog, we learn one of the many techniques
+    in manifold learning called Diffusion Maps. The key idea is that Euclidean Distance,
+    which is the most common measure of similarity, is meaningful only ‘locally.’
+    Therefore, assuming there is a lower-dimensional structure or manifold to the
+    data, it would be appropriate to measure similarity over this structure rather
+    than in the Euclidean space itself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us begin exploring with the following example of 2D datapoints neatly arranged
+    in **S** shape.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![alt](../Images/50288a3fb0963cff7205af177fd02cab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: There is a definite shape to this dataset. Now, if we have to measure the similarity
+    of two points in this set, we measure the Euclidean Distance. If this distance
+    is small, then we say points are similar or if this is large, otherwise. The following
+    figure represents this scenario.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![alt](../Images/46b1f89c723e1d052a6d9a78b04e3107.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: However, knowing the geometric structure, we know that this similarity measure
+    is inaccurate. Since there is a non-linear relationship between ‘x’ and ‘y’ coordinates,
+    it would be correct if we measure the similarity (or distance) over the very geometric
+    structure itself, as shown in the Figure below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![alt](../Images/8f0caf1bcaf021a1c7a22b86b2ace876.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: With Diffusion Map, we can do a non-linear dimensionality reduction as well
+    as learn the underlying geometry of the high dimensional data. Let’s get straight
+    to the theory and implementation, hand in hand
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is the takeaway?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This blog aims to introduce one of the manifold learning techniques called **Diffusion
+    Map**². This technique enables us to understand the underlying geometric structure
+    of high dimensional dataset as well as to reduce the dimensions, if required,
+    by neatly capturing the non-linear relationships between the original dimensions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Theory behind (very briefly)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The core idea is a time-dependent diffusion process, which is nothing but a
+    random walk on the dataset where each hop has a probability associated with it.
+    When the diffusion process runs for a time t, we get different probabilities of
+    various paths it can take to calculate the distance over the underlying geometric
+    structure. Mathematically, we call this the steady-state probability of the Markov
+    Chain.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![alt](../Images/5fee970a0b7519d60665416cdf94c65c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The connectivity between two data points, x, and y, is defined as the probability
+    of jumping from x to y in one step of the random walk and is
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/9fd609a3923aa64072013c1b281bb5e1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: However, it is useful to express the connectivity as a row-normalized likelihood
+    function, K using Gaussian Kernel. This will be called **diffusion kernel**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/b9f427b46dffb629be7b5d29599d85fa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now we define a row-normalized diffusion matrix, P. Mathematically, this is
+    equivalent to the transition matrix in the Markov chain. While P denotes the probability
+    (or connectivity in this case) of single hopping from point x to point y, P² denotes
+    the probability of reaching y from x in two hops and so on. As we increase the
+    number of hops or Pᵗ for increasing values of t we observe that the diffusion
+    process runs forward. Or in other words, the probability of following the geometric
+    structure increases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you would like to dig deeper into the theory behind, the [paper](https://inside.mines.edu/~whereman/talks/delaPorte-Herbst-Hereman-vanderWalt-DiffusionMaps-PRASA2008.pdf) has
+    explained it pretty neatly. For a quick overview, [this](https://en.wikipedia.org/wiki/Diffusion_map) Wikipedia
+    article also explains the theory well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Implementation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To demonstrate the algorithm, we begin with a dataset having a definite geometric
+    structure. Let us begin by creating a 2D figure, as shown earlier. Our main aim
+    is to find out whether the diffusion map unravels the underlying geometric structure
+    of data or not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![alt](../Images/50288a3fb0963cff7205af177fd02cab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, let us add a synthetic 3rd dimension (data drawn from a uniform distribution)
+    to this 2D dataset. Thus our new 3D dataset is as follows
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![alt](../Images/6d5db19bd974ce6dab18d154de4f268b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As you might have noticed, the 3D dataset preserves the ‘S’ shape in one angle,
+    and that is correct. Now our goal is to flatten the dimensions to 2 while preserving
+    this shape. After applying the Diffusion Map, hopefully, we should see the ‘S’
+    like structure in 2D.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Output
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![alt](../Images/ed9ce1e228008f1fdb4ab3e9fc3e9c99.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Result
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As it is evident from the above output figures, with a diffusion map applied
+    to reduce dimension from 3 to 2, we get to understand somewhat the original geometric
+    structure, which is the ‘S’ shape. With varying values for alpha, we get slightly
+    different variations in the final structure. (alpha is the parameter in diffusion
+    kernel described above).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Source Code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Source code is available [here](https://gist.github.com/rahulrajpl/36a5724d0c261b915292182b1d741393) and
+    is open-sourced under MIT License. You can try out the code in Google Colaboratory
+    with the link provided on top of the gist.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'References:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Manifold Learning methods in Scikit-Learn (https://scikit-learn.org/stable/modules/manifold.html)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Porte, Herbst, Hereman, Walt, *An introduction to Diffusion Maps*
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Bio: [Rahul Raj](https://www.linkedin.com/in/rahul-r-909409184/)** (**[@rahulrajpl](https://twitter.com/rahulrajpl)**)
+    is currently pursuing Masters in Computer Science and Engineering at Indian Institute
+    of Technology Kanpur, India. His interests are in machine learning, data science
+    and its applications in cybersecurity. More about the Author at: **[https://randomwalk.in](https://randomwalk.in)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://randomwalk.in/python/ml/2020/03/14/Diffusion-Map.html).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[4 Tips for Advanced Feature Engineering and Preprocessing](/2019/08/4-tips-advanced-feature-engineering-preprocessing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Intermediate Machine Learning with Python — 2019 Edition](/2019/06/7-steps-mastering-intermediate-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Is Dimension Reduction In Data Science?](/2019/01/dimension-reduction-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Generative AI Playground: Text-to-Image Stable Diffusion with…](https://www.kdnuggets.com/2024/02/intel-generative-ai-playground-text-to-image-stable-diffusion)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Become an AI Artist Using Phraser and Stable Diffusion](https://www.kdnuggets.com/2022/09/become-ai-artist-phraser-stable-diffusion.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Diffusion and Denoising: Explaining Text-to-Image Generative AI](https://www.kdnuggets.com/diffusion-and-denoising-explaining-text-to-image-generative-ai)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 7 Diffusion-Based Applications with Demos](https://www.kdnuggets.com/2022/10/top-7-diffusionbased-applications-demos.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stable Diffusion: Basic Intuition Behind Generative AI](https://www.kdnuggets.com/2023/06/stable-diffusion-basic-intuition-behind-generative-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Ways to Generate Hyper-Realistic Faces Using Stable Diffusion](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

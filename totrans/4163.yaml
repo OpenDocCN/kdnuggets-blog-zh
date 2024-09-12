@@ -1,0 +1,775 @@
+- en: Hands-On Reinforcement Learning Course, Part 2
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Pau Labarta Bajo](https://www.linkedin.com/in/pau-labarta-bajo-4432074b/),
+    mathematician and data scientist**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c19e83adecd71128d40a6a9cf495faea.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Venice’s taxis by [Helena Jankovičová Kováčová](https://www.pexels.com/@helen1?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) from [Pexels](https://www.pexels.com/photo/blue-and-black-boat-on-dock-5870314/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is part 2 of my hands-on course on reinforcement learning, which takes
+    you from zero to HERO. Today we will learn about Q-learning, a classic RL algorithm
+    born in the 90s.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you missed **[part 1](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)**,
+    please read it to get the reinforcement learning jargon and basics in place.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Today we are solving our first learning problem…
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are going to train an agent to drive a taxi!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, a simplified version of a taxi environment, but a taxi at the end of the
+    day.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will use Q-learning, one of the earliest and most used RL algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And, of course, Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: All the code for this lesson is in [this Github repo](https://github.com/Paulescu/hands-on-rl). Git
+    clone it to follow along with today’s problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8e791db2e016c67f84eb37e4ce3a49dd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 1\. The taxi driving problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We will teach an agent to drive a taxi using Reinforcement Learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Driving a taxi in the real world is a very complex task to start with. Because
+    of this, we will work in a simplified environment that captures the 3 essential
+    things a good taxi driver does, which are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: pick up passengers and drop them at their desired destination.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: drive safely, meaning no crashes.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: drive them in the shortest time possible.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We will use an environment from OpenAI Gym, called the [Taxi-v3](https://gym.openai.com/envs/Taxi-v3/) environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f7f84ad98333cb3b04f6f7c173c9c2b7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: There are four designated locations in the grid world indicated by R(ed), G(reen),
+    Y(ellow), and B(lue).
+  prefs: []
+  type: TYPE_NORMAL
+- en: When the episode starts, the taxi starts off at a random square, and the passenger
+    is at a random location (R, G, Y, or B).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The taxi drives to the passenger’s location, picks up the passenger, drives
+    to the passenger’s destination (another one of the four specified locations),
+    and then drops off the passenger. While doing so, our taxi driver needs to drive
+    carefully to avoid hitting any wall, marked as **|**. Once the passenger is dropped
+    off, the episode ends.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is how the q-learning agent we will build drives today:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before we get there, let’s understand well what are the actions, states, and
+    rewards for this environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Environment, actions, states, rewards
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[**notebooks/00_environment.ipynb**](https://github.com/Paulescu/hands-on-rl/blob/main/01_taxi/notebooks/00_environment.ipynb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s first load the environment:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d94758758bcf33c2f4f5d6bcb912764b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: What are the **actions** the agent can choose from at each step?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 0 drive down
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 1 drive up
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 2 drive right
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 3 drive left
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 4 pick up a passenger
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 5 drop off a passenger
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/dda1b6f218b71cf9befdb3e7f08564b4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And the **states**?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 25 possible taxi positions because the world is a 5×5 grid.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 5 possible locations of the passenger, which are R, G, Y, B, plus the case when
+    the passenger is in the taxi.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 4 destination locations
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: which gives us 25 x 5 x 4 = 500 states.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/986bb09fe9fad037114572c7c4d44de4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: What about **rewards**?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**-1** default per-step reward.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Why -1, and not simply 0? *Because we want to encourage the agent to spend
+    the shortest time, by penalizing each extra step. This is what you expect from
+    a taxi driver, don’t you?'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**+20** reward for delivering the passenger to the correct destination.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**-10** reward for executing a pickup or dropoff at the wrong location.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can read the rewards and the environment transitions *(state, action ) →
+    next_state *from *env.P*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d4ea29025d74a7700ca3c4aadaf1ff85.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'By the way, you can render the environment under each state to double-check
+    this env.P vectors make sense:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'From *state=123*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8b865fde7b191545b18bdfa4f094c93e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'the agent moves south action=0 to get to state=223:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/3c1edb78e1242f57ff161a7946fb2eaa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And the reward is -1, as neither the episode ended nor the driver incorrectly
+    picked or dropped.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Random agent baseline
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[**notebooks/01_random_agent_baseline.ipynb**](https://github.com/Paulescu/hands-on-rl/blob/main/01_taxi/notebooks/01_random_agent_baseline.ipynb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before you start implementing any complex algorithm, you should always build
+    a baseline model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This advice applies not only to Reinforcement Learning problems but Machine
+    Learning problems in general.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is very tempting to jump straight into the complex/fancy algorithms, but
+    unless you are really experienced, you will fail terribly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s use a random agent as a baseline model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/270c825aa8e14bc646cb67792dd766a1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'We can see how this agent performs for a given initial state=198:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/578ffc63657a1a6466048286ab8ae753.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 3,804 steps is a lot!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Please watch it yourself in this video:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To get a more representative measure of performance, we can repeat the same
+    evaluation loop n=100 times starting each time at a random state.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8581ccf4cbc20b3b16ed446c7fab83dd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If you plot *timesteps_per_episode* and *penalties_per_episode* you can observe
+    that none of them decreases as the agent completes more episodes. In other words,
+    the agent is NOT LEARNING anything.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/715c8031ae7d6e6fb4b69fae9adb7f7f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/8364e5fd83678d1eef7326595dd5e42e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'If you want summary statistics of performance, you can take averages:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ae1fb6f5e11b1f427f518492d87865b1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Implementing agents that learn is the goal of Reinforcement Learning, and of
+    this course too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s implement our first “intelligent” agent using Q-learning, one of the earliest
+    and most used RL algorithms that exist.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. Q-learning agent
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[**notebooks/02_q_agent.ipynb**](https://github.com/Paulescu/hands-on-rl/blob/main/01_taxi/notebooks/02_q_agent.ipynb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Q-learning](https://www.gatsby.ucl.ac.uk/~dayan/papers/cjch.pdf) (by [Chris
+    Walkins](http://www.cs.rhul.ac.uk/~chrisw/) and [Peter Dayan](https://en.wikipedia.org/wiki/Peter_Dayan))
+    is an algorithm to find the optimal q-value function.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we said in [part 1](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html),
+    the q-value function **Q(s, a)** associated with a policy **π** is the total reward
+    the agent expects to get when at state **s** the agent takes action **a** and
+    follows policy **π** thereafter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The optimal q-value function **Q*(s, a)**is the q-value function associated
+    with the optimal policy **π*.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you know **Q*(s, a),** you can infer π*: i.e., you pick as the next action
+    the one that maximizes Q*(s, a) for the current state s.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Q-learning is an iterative algorithm to compute better and better approximations
+    to the optimal q-value function **Q*(s, a)**, starting from an arbitrary initial
+    guess **Q⁰(s, a)**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2e0bbb83d32186622b9afecd12bf3c5b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In a tabular environment like Taxi-v3 with a finite number of states and actions,
+    a q-function is essentially a matrix. It has as many rows as states and columns
+    as actions, i.e. 500 x 6.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ok, *but how exactly do you compute the next approximation Q¹(s, a) from Q⁰(s,
+    a)?*
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is the key formula in Q-learning:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2043cf6a1d4117afe3a6e636a3fdb2e0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As our q-agent navigates the environment and observes the next state ***s’*** and
+    reward ***r***, you update your q-value matrix with this formula.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*What is the learning rate* **????** *in this formula?*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The **learning rate** (as usual in machine learning) is a small number that
+    controls how large are the updates to the q-function. You need to tune it, as
+    too large of a value will cause unstable training, and too small might not be
+    enough to escape local minima.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*And this discount factor ****????****?*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The **discount factor** is a (hyper) parameter between 0 and 1 that determines
+    how much our agent cares about rewards in the distant future relative to those
+    in the immediate future.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When ????=0, the agent only cares about maximizing immediate reward. As it happens
+    in life, maximizing immediate reward is not the best recipe for optimal long-term
+    outcomes. This happens in RL agents too.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When ????=1, the agent evaluates each of its actions based on the sum total
+    of all of its future rewards. In this case, the agent weights equally immediate
+    rewards and future rewards.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The discount factor is typically an intermediate value, e.g., 0.6.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To sum up, if you
+  prefs: []
+  type: TYPE_NORMAL
+- en: train long enough
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: with a decent learning rate and discount factor
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: and the agent explores enough the state space
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: and you update the q-value matrix with the Q-learning formula,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: your initial approximation will eventually converge to optimal q-matrix. Voila!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s implement a Python class for a Q-agent then.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e6ff5ddac5a22c63f93bf1c9d3611c52.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Its API is the same as for the *RandomAgent *above, but with an extra method *update_parameters()*.
+    This method takes the transition vector (*state*, *action*, *reward*, *next_state)* and
+    updates the q-value matrix approximation *self.q_table* using the Q-learning formula
+    from above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, we need to plug this agent into a training loop and call its update_parameters() method
+    every time the agent collects a new experience.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, remember we need to guarantee the agent explores enough the state space.
+    Remember the exploration-exploitation parameter we talked about in [part 1](https://towardsdatascience.com/hands-on-reinforcement-learning-course-part-1-269b50e39d08)?
+    This is when the epsilon parameter enters into the game.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s train the agent for *n_episodes =* 10,000 and use *epsilon* = 10%:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/13d747cc47923b46f098a8f91d33694c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'And plot *timesteps_per_episode* and *penalties_per_episode*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ab3528a3546bf82ed0349404ec3d7de2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/1364060daf13431e85edbf87a14deb5b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/311f38bac5b8e7a468a7b92b29ba3765.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Nice! These graphs look much much better than for the RandomAgent. Both metrics
+    decrease with training, which means our agent is learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can actually see how the agent drives starting from the same state = 123 as
+    we used for the *RandomAgent*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8fb85955227b640bc71c33d8932f8d36.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Nice ride by our Q-agent!
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to compare hard numbers, you can evaluate the performance of the
+    q-agent on, let’s say, 100 random episodes and compute the average number of timestamps
+    and penalties incurred.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***A little bit about epsilon-greedy policies***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When you evaluate the agent, it is still good practice to use a positive epsilon value,
+    and not epsilon = 0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: W*hy so? Isn’t our agent fully trained? Why do we need to keep this source of
+    randomness when we choose the next action?*
+  prefs: []
+  type: TYPE_NORMAL
+- en: The reason is to prevent overfitting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Even for such a small state, action space in Taxi-v3 (i.e., 500 x 6), it is
+    likely that during training, our agent has not visited enough certain states.
+    Hence, its performance in these states might not be 100% optimal, causing the
+    agent to get “caught” in an almost infinite loop of suboptimal actions. If epsilon
+    is a small positive number (e.g., 5%), we can help the agent escape these infinite
+    loops of suboptimal actions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By using a small epsilon at evaluation, we are adopting a so-called **epsilon-greedy
+    strategy**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s evaluate our trained agent on *n_episodes* = 100 using *epsilon* = 0.05. Observe
+    how the loop looks almost exactly as the train loop above, but without the call
+    to *update_parameters()*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4bdb7fd14f852c58f8af97e677c9e50b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/0b8eb1bd615841db2864097453637088.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: These numbers look much much better than for the *RandomAgent*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can say our agent has learned to drive the taxi!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Q-learning gives us a method to compute optimal q-values. But, *what about the
+    hyper-parameters* alpha, gamma, and epsilon?
+  prefs: []
+  type: TYPE_NORMAL
+- en: I chose them for you, rather arbitrarily. But in practice, you will need to
+    tune them for your RL problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s explore their impact on learning to get a better intuition of what is
+    going on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5\. Hyper-parameter tuning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[**notebooks/03_q_agent_hyperparameters_analysis.ipynb**](https://github.com/Paulescu/hands-on-rl/blob/main/01_taxi/notebooks/03_q_agent_hyperparameters_analysis.ipynb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s train our q-agent using different values for alpha (learning rate) and gamma (discount
+    factor). As for epsilon, we keep it at 10%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to keep the code clean, I encapsulated the q-agent definition inside [src/q_agent.py](https://github.com/Paulescu/hands-on-rl/blob/50c61a385bbd511a6250407ffb1fcb59fbfb983f/01_taxi/src/q_agent.py#L4) and
+    the training loop inside the *train()* function in [src/loops.py](https://github.com/Paulescu/hands-on-rl/blob/50c61a385bbd511a6250407ffb1fcb59fbfb983f/01_taxi/src/loops.py#L9).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c35eb95c735324dc4505b38a2ad7668c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/8c69f52dbca2b84b531a06eb04cd097c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let us plot the timesteps per episode for each combination of hyper-parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/37e768096b4617468f5503bc37104e27.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/f36d4911367f3da23ee5b0b4640e52dd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The graph looks artsy but a bit too noisy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Something you can observe, though, is that when alpha = 0.01 the learning is
+    slower. alpha (learning rate) controls how much we update the q-values in each
+    iteration. Too small of a value implies slower learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s discard alpha = 0.01 and do 10 runs of training for each combination of
+    hyper-parameters. We average the timesteps for each episode number, from 1 to
+    1000, using these 10 runs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I created the function [train_many_runs()](https://github.com/Paulescu/hands-on-rl/blob/50c61a385bbd511a6250407ffb1fcb59fbfb983f/01_taxi/src/loops.py#L121) in src/loops.py to
+    keep the notebook code cleaner:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/386888060649efc27e0ceb07e7259785.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/59289224f49ade16b59396cfd9c8de35.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It looks like *alpha* = 1.0 is the value that works best, while gamma seems
+    to have less of an impact.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Congratulations! You have tuned your first learning rate in this course.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tuning hyper-parameters can be time-consuming and tedious. There are excellent
+    libraries to automate the manual process we just followed, like [Optuna](https://optuna.org/),
+    but this is something we will play with later in the course. For the time being,
+    enjoy the speed-up in training we have just found.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wait, what happens with this epsilon = 10% that I told you to trust me on?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is the current 10% value the best?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s check it ourselves.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We take the best alpha and gamma we found, i.e.,
+  prefs: []
+  type: TYPE_NORMAL
+- en: alpha = 1.0
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: gamma = 0.9 (we could have taken 0.1 or 0.6 too)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And train with different epsilons = [0.01, 0.1, 0.9]
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f3ff67521f028c7c23c9c8e4bc068f22.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'And plot the resulting timesteps and penalties curves:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5b890652973f1ba39b436e503b6a015f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/413e32ca2b896c8c893181927bea73c7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As you can see, both epsilon = 0.01 and epsilon = 0.1 seem to work equally well,
+    as they strike the right balance between exploration and exploitation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the other side, epsilon = 0.9 is too large of a value, causing “too much”
+    randomness during training and preventing our q-matrix from converging to the
+    optimal one. Observe how the performance plateaus at around 250 timesteps per
+    episode.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In general, the best strategy to choose the epsilon hyper-parameter is **progressive
+    epsilon decay**. That is, at the beginning of training, when the agent is very
+    uncertain about its q-value estimation, it is best to visit as many states as
+    possible, and for that, a large epsilon is great (e.g., 50%)
+  prefs: []
+  type: TYPE_NORMAL
+- en: As training progresses and the agent refines its q-value estimation, it is no
+    longer optimal to explore that much. Instead, by decreasing epsilon, the agent
+    can learn to perfect and fine-tune the q-values to make them converge faster to
+    the optimal ones. Too large of epsilon can cause convergence issues, as we see
+    for epsilon = 0.9.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will be tunning epsilons along the course, so I will not insist too much
+    for the moment. Again, enjoy what we have done today. It is pretty remarkable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e7bfc9562614ee6e044325600418c393.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*B-R-A-V-O! (Image by the author).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recap
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Congratulations on (probably) solving your first Reinforcement Learning problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'These are the key learnings I want you to sleep on:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The difficulty of a Reinforcement Learning problem is directly related to the
+    number of possible actions and states. Taxi-v3 is a tabular environment (i.e.
+    finite number of states and actions), so it is an easy one.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Q-learning is a learning algorithm that works excellent for tabular environments.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: No matter what RL algorithm you use, there are hyper-parameters you need to
+    tune to make sure your agent learns the optimal strategy.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Tunning hyper-parameters is a time-consuming process but necessary to ensure
+    our agents learn. We will get better at this as the course progresses.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Homework
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[**notebooks/04_homework.ipynb**](https://github.com/Paulescu/hands-on-rl/blob/main/01_taxi/notebooks/04_homework.ipynb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is what I want you to do:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Git clone](https://github.com/Paulescu/hands-on-rl) the repo to your local
+    machine.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Setup](https://github.com/Paulescu/hands-on-rl/tree/main/01_taxi#quick-setup) the
+    environment for this lesson 01_taxi.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Open [01_taxi/otebooks/04_homework.ipynb](https://github.com/Paulescu/hands-on-rl/blob/main/01_taxi/notebooks/04_homework.ipynb)
+    and try completing the 2 challenges.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: I call them challenges (not exercises) because they are not easy. I want you
+    to try them, get your hands dirty, and (maybe) succeed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the first challenge, I dare you to update the train()function src/loops.py to
+    accept an episode-dependent epsilon.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the second challenge, I want you to upgrade your Python skills and implement
+    paralleling processing to speed up hyper-parameter experimentation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As usual, if you get stuck and you need feedback, drop me a line at plabartabajo@gmail.com.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I will be more than happy to help you.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to get updates on the course, subscribe to the [**datamachines**](https://datamachines.xyz/subscribe/)
+    newsletter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://datamachines.xyz/2021/12/06/hands-on-reinforcement-learning-course-part-2/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Hands-on Reinforcement Learning Course Part 3: SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On Reinforcement Learning Course, Part 1](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[HuggingFace Has Launched a Free Deep Reinforcement Learning Course](https://www.kdnuggets.com/2022/05/huggingface-launched-free-deep-reinforcement-learning-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On with Supervised Learning: Linear Regression](https://www.kdnuggets.com/handson-with-supervised-learning-linear-regression)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On with Unsupervised Learning: K-Means Clustering](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generative AI with Large Language Models: Hands-On Training](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

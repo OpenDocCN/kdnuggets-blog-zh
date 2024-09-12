@@ -1,0 +1,312 @@
+- en: 3 Interesting Uses of Python’s Context Managers
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/3-interesting-uses-of-python-context-managers](https://www.kdnuggets.com/3-interesting-uses-of-python-context-managers)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![3 Interesting Uses of Python''s Context Managers](../Images/4634679c3b9355581de61827cbecda51.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by johnstocker on [Freepik](https://www.freepik.com/free-vector/young-programmer-working-laptop-computer-cartoon-character_33906144.htm#query=python%20programmer&position=7&from_view=search&track=ais&uuid=660bb4cc-54bf-4668-8bd8-114802f3425e)
+  prefs: []
+  type: TYPE_NORMAL
+- en: A while ago, I wrote a tutorial on [writing efficient Python code](/how-to-write-efficient-python-code-a-tutorial-for-beginners).
+    In it, I talked about using context managers and the with statement to manage
+    resources efficiently.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I used a simple file handling example to show how files are automatically closed
+    when the execution exits the with block—even if there is an exception.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While file handling is a good first example, it can quickly get boring. That
+    is why I'd like to go over other interesting uses of context managers—beyond file
+    handling—in this tutorial. We’ll focus on handling database connections, managing
+    subprocesses, and high-precision floating point arithmetic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What Are Context Managers in Python?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Context managers in Python allow you to write cleaner code when working with
+    resources. They provide a concise syntax to set up and tear down resources through:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An **enter** logic that gets called when the execution enters the context and
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An **exit** logic the gets called when the execution exits the context
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The simplest example of this is in file handling. Here we use the `open()`
+    function in the `with` statement to get a file handler:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: This acquires the resource—the file object—that is used (we write to the file)
+    within the code block. The file is closed once the execution exits the context;
+    so there are no resource leaks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can write the generic version of this like so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now let’s proceed to the specific examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Handling Database Connections
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'When you''re building Python applications, it''s quite common to connect to
+    databases and query the tables they contain. And the workflow to do this will
+    look like so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Install the database connector to work with the database (such as psycopg2 for
+    Postgres and the mysql-connector-python for MySQL databases).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Parse the config file to retrieve the connection parameters.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use the `connect()` function to establish connection to the database.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![3 Interesting Uses of Python''s Context Managers](../Images/a78e3dbbd7547d349932a4affb886e73.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Connecting to the db | Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once you’ve connected to the database, you can create a database to query the
+    database. Run queries and fetch the results of the query using the run and fetch
+    cursor methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![3 Interesting Uses of Python''s Context Managers](../Images/00ab54842a3ba36c0eaeb04eecef89e3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Querying the db | Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In doing so, you create the following resources: a database connection and
+    a database cursor. Now let’s code a simple generic example to see how we can use
+    the connection and the cursor objects as context managers.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Parsing TOML Files in Python
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Consider a sample TOML file, say db_config.toml, containing the required info
+    to connect to the database:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Note**: You need Python 3.11 or a later version to use [tomllib](https://docs.python.org/3/library/tomllib.html).'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Python has a built-in [tomllib](https://docs.python.org/3/library/tomllib.html)
+    module (introduced in Python 3.11) that lets you parse TOML files. So you can
+    open the db_config.toml file and parse its contents like so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Notice that we tap into the ‘database’ section of the db_config.toml file.
+    The `load()` function returns a Python dictionary. You can verify this by printing
+    out the contents of `credentials`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Connecting to the Database
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Say you want to connect to a Postgres database. You can install the [psycopg2
+    connector](https://www.psycopg.org/docs/) using pip:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'You can use both the connection and the cursor objects in with statements as
+    shown:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In this code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We use the `with` statement to create a context for managing the database connection.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Inside this context, we create another context to manage the database cursor.
+    The cursor is automatically closed when exiting this inner context.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Because the connection is also closed when exiting the outer context, this construct
+    ensures that both the connection and cursor are properly managed—reducing the
+    chance of resource leaks.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can use a similar construct when working with SQLite and MySQL databases
+    too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Managing Python Subprocesses
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Python’s subprocess module provides functionality to run external commands
+    inside a Python script. The `subprocess.Popen()` constructor creates a new subprocess.
+    Which you can use in a `with` statement like so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here, we run the Bash command `ls -l` command to long list the files in the
+    current directory:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: The resources associated with the subprocess are freed once the execution exits
+    the context of the `with` statement.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. High-Precision Floating-Point Arithmetic
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The built-in float data type in Python is not suitable for high-precision floating-point
+    arithmetic. But you do need high precision when working with financial data, sensor
+    readings, and the like. For such applications, you can use the [decimal](https://docs.python.org/3/library/decimal.html)
+    module instead.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `localcontext()` function [returns a context manager](https://docs.python.org/3/library/decimal.html#decimal.localcontext).
+    So you can use the `localcontext()` function in the `with` statement, and set
+    the precision for the current context using as shown:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here’s the output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here, the precision is set to 40 decimal places—but only within this `with`
+    block. When the execution exits the current context, the precision is restored
+    to the default precision (of 28 decimal places).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrapping Up
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In this tutorial, we learned how context managers can be used for handling database
+    connections, managing subprocesses and contexts in high-precision floating-point
+    arithmetic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the next tutorial, we’ll see how we can create custom context managers in
+    Python. Until then, happy coding!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)****
+    is a developer and technical writer from India. She likes working at the intersection
+    of math, programming, data science, and content creation. Her areas of interest
+    and expertise include DevOps, data science, and natural language processing. She
+    enjoys reading, writing, coding, and coffee! Currently, she''s working on learning
+    and sharing her knowledge with the developer community by authoring tutorials,
+    how-to guides, opinion pieces, and more. Bala also creates engaging resource overviews
+    and coding tutorials.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How To Create Custom Context Managers in Python](https://www.kdnuggets.com/how-to-create-custom-context-managers-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How LinkedIn Uses Machine Learning To Rank Your Feed](https://www.kdnuggets.com/2022/11/linkedin-uses-machine-learning-rank-feed.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Programming Languages and Their Uses](https://www.kdnuggets.com/2021/05/top-programming-languages.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n04, Jan 26: The High Paying Side Hustles…](https://www.kdnuggets.com/2022/n04.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, November 16: How LinkedIn Uses Machine Learning •…](https://www.kdnuggets.com/2022/n45.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sky''s the Limit: Learn how JetBlue uses Monte Carlo and Snowflake…](https://www.kdnuggets.com/2022/12/monte-carlo-jetblue-snowflake-build-trust-improve-model-accuracy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,327 @@
+- en: How to deploy PyTorch Lightning models to production
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/11/deploy-pytorch-lightning-models-production.html](https://www.kdnuggets.com/2020/11/deploy-pytorch-lightning-models-production.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Caleb Kaiser](https://www.linkedin.com/in/caleb-kaiser-843249126/), Cortex
+    Labs**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/514b91d766979480cf4b46bcfd1d1f32.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source: [Pexels](https://www.pexels.com/photo/lightning-over-sea-against-storm-clouds-248775/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Looking at the machine learning landscape, one of the major trends is the proliferation
+    of projects focused on applying software engineering principles to machine learning. [Cortex](https://github.com/cortexlabs/cortex),
+    for example, recreates the experience of deploying serverless functions, but with
+    inference pipelines. DVC, similarly, implements modern version control and CI/CD
+    pipelines, but for ML.
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyTorch Lightning has a similar philosophy, only applied to training. The frameworks
+    provides a Python wrapper for PyTorch that lets data scientists and engineers
+    write clean, manageable, and performant training code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As people who built an [entire deployment platform](https://towardsdatascience.com/why-we-built-a-platform-for-machine-learning-engineering-not-data-science-54004d5b6e95) in
+    part because we hated writing boilerplate, we’re huge fans of PyTorch Lightning.
+    In that spirit, I’ve put together this guide to deploying PyTorch Lightning models
+    to production. In the process, we’re going to look at a few different options
+    for exporting PyTorch Lightning models for inclusion in your inference pipelines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Every way to deploy a PyTorch Lightning model for inference
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'There are three ways to export a PyTorch Lightning model for serving:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Saving the model as a PyTorch checkpoint
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Converting the model to ONNX
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Exporting the model to Torchscript
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We can serve all three with Cortex.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Package and deploy PyTorch Lightning modules directly
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Starting with the simplest approach, let’s deploy a PyTorch Lightning model
+    without any conversion steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The PyTorch Lightning Trainer, a class which abstracts boilerplate training
+    code (think training and validation steps), has a builtin save_checkpoint() function
+    which will save your model as a .ckpt file. To save your model as a checkpoint,
+    simply add this code to your training script:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/fa36e3e0e9699769f07f58afcdc33958.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: Author'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, before we get into serving this checkpoint, it’s important to note that
+    while I keep saying “PyTorch Lightning model,” PyTorch Lightning is a wrapper
+    around PyTorch — the project’s README literally says “PyTorch Lightning is just
+    organized PyTorch.” The exported model, therefore, is a normal PyTorch model,
+    and can be served accordingly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With a saved checkpoint, we can serve the model pretty easily in Cortex. If
+    you’re unfamiliar with Cortex, you can [familiarize yourself quickly here](https://docs.cortex.dev/),
+    but the simple overview of the deployment process with Cortex is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We write a prediction API for our model in Python
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We define our APIs infrastructure and behavior in YAML
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We deploy the API with a command from the CLI
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Our prediction API will use Cortex’s Python Predictor class to define an init()
+    function to initialize our API and load the model, and a predict() function to
+    serve predictions when queried:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pretty simple. We repurpose some code from our training code, add a little inference
+    logic, and that’s it. One thing to note is that if you upload your model to S3
+    (recommended), you’ll need to add some logic for accessing it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Next, we configure our infrastructure in YAML:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Again, simple. We give our API a name, tell Cortex where our prediction API
+    is, and allocate some CPU.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Next, we deploy it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/4e5a3fd4b57f69ed3e24ee6e222eaddd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: Author'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note that we can also deploy to a cluster, spun up and managed by Cortex:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/7bc660b5730754bcc2ef26e2da7bfa2e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: Author'
+  prefs: []
+  type: TYPE_NORMAL
+- en: With all deployments, Cortex containerizes our API and exposes it as a web service.
+    With cloud deployments, Cortex configures load balancing, autoscaling, monitoring,
+    updating, and many other infrastructure features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And that’s it! We now have a live web API serving predictions from our model
+    on request.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Export to ONNX and serve via ONNX Runtime
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that we’ve deployed a vanilla PyTorch checkpoint, lets complicate things
+    a bit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'PyTorch Lightning recently added a convenient abstraction for exporting models
+    to ONNX (previously, you could use PyTorch’s built-in conversion functions, though
+    they required a bit more boilerplate). To export your model to ONNX, just add
+    this bit of code to your training script:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b70f75a4b628c2f6275d1578a94ef3b4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: Author'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that your input sample should mimic the shape of your actual model input.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once you’ve exported an ONNX model, you can serve it using Cortex’s ONNX Predictor.
+    The code will basically look the same, and the process is identical. For example,
+    this is an ONNX prediction API:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basically the same. The only difference is that instead of initializing the
+    model directly, we access it through the onnx_client, which is an ONNX Runtime
+    container Cortex spins up for serving our model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Our YAML also looks pretty similar:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ‍I added a monitoring flag here just to show how easy it is to configure, and
+    there are some ONNX specific fields, but otherwise it’s the same YAML.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, we deploy by using the same $ cortex deploy command as before, and
+    our ONNX API is live.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Serialize with Torchscript’s JIT compiler
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'For a final deployment, we’re going to export our PyTorch Lightning model to
+    Torchscript and serve it using PyTorch’s JIT compiler. To export the model, simply
+    add this to your training script:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/92ec2c3c612cab32fbd93c9d8b535b75.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: Author'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The Python API for this is nearly identical to the vanilla PyTorch example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The YAML stays the same as before, and the CLI command of course is consistent.
+    If we want, we can actually update our previous PyTorch API to use the new model
+    by simply replacing our old predictor.py script with the new one, and running$
+    cortex deploy again:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3c280b57c196afaf26a0d27b74be83d1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: Author'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cortex automatically performs a rolling update here, in which a new API is spun
+    up and then swapped with the old API, preventing any downtime between model updates.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And that’s all there is to it. Now you have a fully operational prediction API
+    for realtime inference, serving predictions from a Torchscript model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, which method should you use?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The obvious question here is which method performs best. The truth is that there
+    isn’t a straightforward answer here, as it depends on your model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For Transformer models like BERT and GPT-2, ONNX can offer incredible optimizations
+    (we measured a [40x improvement in throughput on CPUs](https://www.cortex.dev/post/40x-nlp-inference-with-hugging-face-and-onnx)).
+    For other models, Torchscript likely performs better than vanilla PyTorch — though
+    that too comes with some caveats, as not all models export to Torchscript cleanly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fortunately, with how easy it is to deploy using any option, you can test all
+    three in parallel and see which performs best for your particular API.‍
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Caleb Kaiser](https://www.linkedin.com/in/caleb-kaiser-843249126/)**
+    ([@KaiserFrose](https://twitter.com/KaiserFrose)) is on the founding team of Cortex
+    Labs, where he helps maintain Cortex.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/how-to-deploy-pytorch-lightning-models-to-production-7e887d69109f).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PyTorch Multi-GPU Metrics Library and More in New PyTorch Lightning Release](/2020/07/pytorch-multi-gpu-metrics-library-pytorch-lightning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Pytorch Lightning vs PyTorch Ignite vs Fast.ai](/2019/08/pytorch-lightning-vs-pytorch-ignite-vs-fast-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[9 Tips For Training Lightning-Fast Neural Networks In Pytorch](/2019/08/9-tips-training-lightning-fast-neural-networks-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Deep Learning Libraries: PyTorch and Lightning AI](https://www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Prioritizing Data Science Models for Production](https://www.kdnuggets.com/2022/04/prioritizing-data-science-models-production.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2023: Practical Strategies for Deploying ML…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Lightning AI Studio For Free](https://www.kdnuggets.com/using-lightning-ai-studio-for-free)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn How to Design & Deploy Responsible AI Systems](https://www.kdnuggets.com/2023/10/teradata-design-deploy-responsible-ai-systems-whitepaper)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

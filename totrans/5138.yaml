@@ -1,0 +1,256 @@
+- en: SQL Query Optimization Techniques
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![SQL Query Optimization Techniques](../Images/41f30feb0f08d02cc4e3508fc8274d43.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: At the beginner level, we only focus on just writing and running the SQL queries.
+    We do not bother about how much time it takes to execute or whether it can handle
+    millions of records. But at the intermediate level, people expect your query to
+    be optimized and take minimum time to execute.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Writing an optimized query in large applications with millions of records, like
+    e-commerce platforms or banking systems, is imperative. Suppose you own an e-commerce
+    company with more than a million products, and a customer wants to search for
+    a product. What if the query you wrote in the backend takes more than a minute
+    to fetch that product from the database? Will you think the customers buy products
+    from your website?
+  prefs: []
+  type: TYPE_NORMAL
+- en: You have to understand the importance of SQL query optimization. In this tutorial,
+    I will show you some tips and tricks to optimize your SQL queries and make them
+    to execute faster. The primary pre-requisite is that you must have a basic knowledge
+    of SQL.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Use EXIST() instead of COUNT() to find a Specific Element in the Table
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: To check whether a specific element is present in the table, use the `EXIST()`
+    keyword instead of the `COUNT()` will run the query in a more optimized way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using `COUNT()`, the query needs to count all the occurrences of that particular
+    element which may be inefficient when the database is extensive. On the other
+    hand, `EXIST()` will check only the first occurrence of that element and then
+    stop when it finds the first occurrence. This saves a lot of time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, you are only interested in finding whether a particular element is present
+    or not. You are not interested in finding the number of occurrences. That’s why
+    also `EXIST()` is better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The above query will return **1** if at least one table row contains an entry
+    where a column named `myColumn` has a value equal to **val**. Otherwise, it will
+    return **0**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Use of Varchar instead of Char
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Both `char` and `varchar` data types are used to store character strings in
+    the table. But `varchar` is much more memory efficient than `char`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The char datatype can only store the character string of fixed length defined.
+    If the length of the string is less than the fixed length, then it will pad the
+    blank spaces to make its length equal to the set length. This will unnecessarily
+    waste memory in padding. For example,`CHAR(100)` will take 100 bytes of memory
+    even if a single character is stored.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the other hand, varchar datatype stores the character string of variable
+    length having a length less than the maximum length specified. It does not pad
+    the blank spaces and only takes the memory equal to the string's actual length.
+    For example, `VARCHAR(100)` takes only 1 byte of memory when storing a single
+    character.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: In the above example, a table `myTable` is created having two columns, `charCol`
+    and `varcharCol` having char and varchar datatypes respectively. `charCol` will
+    always take 10 bytes of memory. In contrast, `varcharCol` takes memory equal to
+    the actual size of the character string stored in it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Avoid Subqueries in WHERE Clause
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We must avoid using subqueries inside the WHERE clause to optimize an SQL query.
+    As the subqueries can be expensive and difficult to execute when they return a
+    large number of rows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead of using the subquery, you can get the same result by using a join operation
+    or writing a correlated subquery. A correlated subquery is a subquery in which
+    the inner query depends on the outer query. And they are very efficient as compared
+    to non-correlated subquery.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below is an example to understand the difference between the two.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: In the 1st example, the subquery first collects all the customer ids that belong
+    to INDIA, and then the outer query will get all the orders of the selected customer
+    ids. And in the 2nd example, we have achieved the same result by joining the `customers`
+    and `orders` tables and then selecting only orders where the customers belong
+    from INDIA.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this way, we can optimize the query by avoiding the use of subqueries inside
+    the WHERE clause and making them easier to read and understand.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. Ordering JOINs from a Larger Table to a Smaller Table
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Applying the `JOIN` operation from a larger table to a smaller table is a common
+    SQL optimization technique. Because joining from a larger table to a smaller table
+    will make your query to execute faster. If we apply a `JOIN` operation from a
+    smaller table to a larger table, our SQL engine has to search in a larger table
+    for matching rows. This is more resource-intensive and time-consuming. But on
+    the other hand, if the `JOIN` is applied from a larger table to a smaller table,
+    then the SQL engine has to search in a smaller table for matching rows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is an example for your better understanding.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 5\. Use `regexp_like` instead of `LIKE` Clause
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Unlike the `LIKE` clause, `regexp_like` is also used for pattern searching.
+    The `LIKE` clause is a basic pattern-matching operator that can perform only basic
+    operations like **_** or **%**, which are used to match a single character or
+    any number of characters respectively. The `LIKE` clause must scan the complete
+    database to find the particular pattern, which is slow for large tables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the other hand, `regexp_like` is a more efficient, optimized, and powerful
+    pattern-searching technique. It uses more complex regular expressions to find
+    specific patterns in a character string. These regular expressions are more specific
+    than simple wildcard matching because they allow you to search for the exact pattern
+    that we are finding. Due to this, the amount of data that needs to be searched
+    is reduced, and the query executes faster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Please note that `regexp_like` may not be present in all database management
+    systems. Its syntax and functionality may vary in other systems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is an example for your better understanding.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: The above queries are used to find the elements that name starts with A or B.
+    In the first example, `LIKE` is used to search all the names that start with A
+    or B. `A%` means that the first character is A; after that, any number of characters
+    can be present. In the second example, `regexp_like` is used. Inside `^[AB]`,
+    `^` represents that the symbol will match at the beginning of the string, `[AB]`
+    represents that the beginning character can be A or B, and `.*` represents all
+    the characters after that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using `regexp_like`, the database can quickly filter out the rows that don’t
+    match the pattern, improving performance and reducing resource usage.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In this article, we have discussed various methods and tips to optimize the
+    SQL query. This article gives you a clear understanding of how to write efficient
+    SQL queries and the importance of optimizing them. There are many more ways of
+    optimizing the queries, like preferring the use of integer values rather than
+    characters or using Union All instead of Union when your table doesn’t contain
+    duplicates, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Aryan Garg](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)** is a B.Tech.
+    Electrical Engineering student, currently in the final year of his undergrad.
+    His interest lies in the field of Web Development and Machine Learning. He have
+    pursued this interest and am eager to work more in these directions.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Query Your Pandas DataFrames with SQL](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Tips for Improving SQL Query Performance](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Research-Driven Advanced Prompting Techniques for LLM Efficiency…](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Can We Query a Table with T5?](https://www.kdnuggets.com/2022/05/query-table-t5.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 5 Free Resources for Learning Advanced SQL Techniques](https://www.kdnuggets.com/top-5-free-resources-for-learning-advanced-sql-techniques)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

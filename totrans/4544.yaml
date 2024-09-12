@@ -1,0 +1,268 @@
+- en: 'Lit BERT: NLP Transfer Learning In 3 Steps'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/11/lit-bert-nlp-transfer-learning-3-steps.html](https://www.kdnuggets.com/2019/11/lit-bert-nlp-transfer-learning-3-steps.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [William Falcon](https://www.linkedin.com/in/wfalcon/), AI Researcher**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/1d950559d97e64975792a40da35f8bc1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[BERT](https://arxiv.org/pdf/1810.04805.pdf) (Devlin, et al, 2018) is perhaps
+    the most popular NLP approach to transfer learning. The implementation by [Huggingface](https://github.com/huggingface/transformers) offers
+    a lot of nice features and abstracts away details behind a beautiful API.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PyTorch Lightning](https://github.com/williamFalcon/pytorch-lightning) is
+    a lightweight framework (really more like refactoring your PyTorch code) which
+    allows anyone using [PyTorch](https://pytorch.org/) such as students, researchers
+    and production teams, to scale deep learning code easily while making it reproducible.
+    It also provides 42+ advanced research features via trainer flags.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lightning does not add abstractions on to of PyTorch which means it plays nicely
+    with other great packages like Huggingface! In this tutorial we’ll use their implementation
+    of BERT to do a finetuning task in Lightning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this tutorial we’ll do transfer learning for NLP in 3 steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll import BERT from the [huggingface](https://github.com/huggingface/transformers) library.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: We’ll create a [LightningModule](https://pytorch-lightning.readthedocs.io/en/latest/LightningModule/RequiredTrainerInterface/) which
+    finetunes using features extracted by BERT
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: We’ll train the BertMNLIFinetuner using the [Lighting Trainer](https://github.com/williamFalcon/pytorch-lightning).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Live DEMO
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you’d rather see this in actual code, [copy this colab notebook!](https://colab.research.google.com/drive/1DovlWenVCuXZ-EZT66wc3GVHZqREyblV)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finetuning (aka transfer learning)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/b02a8bd976da1d4c6433ae56b977e8ba.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If you’re a researcher trying to improve on the [NYU GLUE](https://gluebenchmark.com/) benchmark,
+    or a data scientist trying to understand product reviews to recommend new content,
+    you’re looking for a way to extract a representation of a piece of text so you
+    can solve a different task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For transfer learning you generally have two steps. You use dataset X to pretrain
+    your model. Then you use that pretrained model to carry that knowledge into solving
+    dataset B. In this case, BERT has been pretrained on BookCorpus and English Wikipedia [[1]](https://arxiv.org/pdf/1810.04805.pdf).
+    The *downstream task* is what you care about which is solving a GLUE task or classifying
+    product reviews.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The benefit of pretraining is that we don’t need much data in the downstream
+    task to get amazing results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finetuning with PyTorch Lightning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/9c69c33774c195f6c27f989c23b28fa0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'In general, we can finetune with PyTorch Lightning using the following abstract
+    approach:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For transfer learning we define two core parts inside the LightningModule.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The pretrained model (ie: feature extractor)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The finetune model.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: You can think of the pretrained model as a feature extractor. This can allow
+    you to represent objects or inputs in a much better way than say a boolean or
+    some tabular mapping.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For instance if you have a collection of documents, you could run each through
+    the pretrained model, and use the output vectors to compare documents to each
+    other.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The finetune model can be arbitrarily complex. It could be a deep network, or
+    it could be a simple Linear model or SVM.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finetuning with BERT
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/058fe3b161fc7527c47985b6ed22ae7a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Huggingface
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here we’ll use a pretrained BERT to finetune on a task called MNLI. This is
+    really just trying to classify text into three categories. Here’s the LightningModule:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case we’re using the pretrained BERT from the huggingface library and
+    adding our own simple linear classifier to classify a given text input into one
+    of three classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, we still need to define the validation loop which calculates our validation
+    accuracy
+  prefs: []
+  type: TYPE_NORMAL
+- en: And the test loop which calcualates our test accuracy
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, we define the optimizer and dataset we’ll operate on. This dataset
+    should be the *downstream dataset* which you’re trying to solve.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The full LightningModule Looks like this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Here we learned to use the Huggingface BERT as a feature extractor inside a
+    LightningModule. This approach means you can leverage a really strong text representation
+    to do things like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sentiment analysis
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Suggested replies to chatbots
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Build recommendation engines using NLP
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Improve the Google Search algorithm](https://www.blog.google/products/search/search-language-understanding-bert/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: …
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Create embeddings for documents for similarity search
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Anything you can creatively think about!
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: You also saw how well [PyTorch Lightning](https://github.com/williamFalcon/pytorch-lightning/) plays
+    with other libraries including [Huggingface](https://github.com/huggingface/transformers)!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [William Falcon](https://www.linkedin.com/in/wfalcon/)** is an AI Researcher,
+    startup founder, CTO, Google Deepmind Fellow, and current PhD AI research intern
+    at Facebook AI.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/lit-bert-nlp-transfer-learning-in-3-steps-272a866570db).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Pytorch Lightning vs PyTorch Ignite vs Fast.ai](/2019/08/pytorch-lightning-vs-pytorch-ignite-vs-fast-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Attention Craving RNNS: Building Up To Transformer Networks](/2019/04/attention-craving-rnn-building-transformer-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[9 Tips For Training Lightning-Fast Neural Networks In Pytorch](/2019/08/9-tips-training-lightning-fast-neural-networks-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[8 Innovative BERT Knowledge Distillation Papers That Have Changed…](https://www.kdnuggets.com/2022/09/eight-innovative-bert-knowledge-distillation-papers-changed-nlp-landscape.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fine-Tuning BERT for Tweets Classification with HuggingFace](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Fast Can BERT Go With Sparsity?](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Comparing Natural Language Processing Techniques: RNNs, Transformers, BERT](https://www.kdnuggets.com/comparing-natural-language-processing-techniques-rnns-transformers-bert)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Extractive Summarization with LLM using BERT](https://www.kdnuggets.com/extractive-summarization-with-llm-using-bert)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

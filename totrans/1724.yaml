@@ -1,0 +1,239 @@
+- en: 'Applied Data Science: Solving a Predictive Maintenance Business Problem'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/10/applied-data-science-solving-predictive-maintenance-business-problem.html/2](https://www.kdnuggets.com/2017/10/applied-data-science-solving-predictive-maintenance-business-problem.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Formulating the Predictive Problem : Connecting the dots……**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To help formulate the predictive problem, let us revisit the business problem
+    we have at hand and then connect it with the data points which we have at hand. 
+    The predictive problem requires us to predict two things
+  prefs: []
+  type: TYPE_NORMAL
+- en: Which battery will fail &
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Which period of time in future will the battery fail.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since the prediction is at a battery level, our unit of reference for formulating
+    the predictive problem is individual battery. This means that all the variables
+    which are present across the multiple data sets have to be consolidated at the
+    individual battery level.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The next question is, at what period of time do we have to consolidate the variables
+    for each battery ? To answer this question, we will have to look at the frequency
+    of data collection for each variable. In the case of our battery data set, the
+    data points for each of the variables are capture at different intervals. In addition
+    the volume of data collected for each of those variables at those instances of
+    time also vary substantially.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Conductance : One reading of a battery captured once every 3 days.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Voltage & Temperature : 4-5 readings per battery captured every day.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Discharge : A set of reading captured every second at different intervals of
+    a day once every 3 months (approximately 4500 – 5000 data points collected in
+    a day).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Since we have to predict the probability of failure at a period of time in future,
+    we will have to have our model learn the behavior of these variables across time
+    periods. However we have to select a time period, where we will have sufficient
+    data points for each of the variables. The ideal time period we should choose
+    in this scenario is every 3 months as discharge data is available only once every
+    3 months. This would mean that all the data points for each battery for each variable
+    would have to be consolidated to a single record for every 3 months. So if each
+    battery has around 3 years of data it would entail 12 records for a battery.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![DataConsolidation](../Images/171e842898bf3c9b1acc6201d25f6969.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Another aspect we have to look at is how 3 months of data points for a battery
+    can be consolidated to make one record corresponding to each variable. For this
+    we have to resort to some suitable form of consolidation metric for each variable.
+    What that consolidation metric should be can be finalized after exploratory analysis
+    and feature engineering . We will deal with those aspects in detail when we talk
+    about exploratory analysis and feature engineering phases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The next important point which we have to deal with would be the labeling of
+    the response variable. Since the business problem is to predict which battery
+    would fail, the response variable would be classifying whether a record of a battery
+    falls under a failure class or not. However there is a lacunae in this approach.
+    What we want is to predict well ahead of time when a battery is likely to fail
+    and therefore we will have to factor in the “when” part also into the classification
+    task. This would entail, looking at samples of batteries which has actually failed
+    and identifying the point of time when failure happened. We label that point as
+    “failure point” and then look back in time from the failure point to classify
+    periods leading to failure. Since the consolidation period for data points is
+    three months, we can fix the “looking back” period also to be 3 months. This would
+    mean, for those samples of batteries where we know the failure point, we look
+    at the record which is one time period( 3 months) before failure and label the
+    data as 1 period before failure, record of data which corresponds to 6 month before
+    failure will be labelled as 2 periods before failure and so on. We can continue
+    labeling the data according to periods before failure, till we reach a comfortable
+    point in time ahead of failure ( say 1 year). If the comfortable period we have
+    in mind is 1 year, we would have 4 failure classes i.e 1 period before failure,
+    2 periods before failure, 3 periods before failure and 4 periods before failure.
+    All records before the 1 year period of time can be labelled as “Normal Periods”.
+    This labeling strategy will mean that our predictive problem is a multinomial
+    classification problem, with 5 classes ( 4 failure period classes and 1 normal
+    period class).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Failure-Labelling](../Images/bf097655c6275644166021c0cc1f70bd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The above discussed, labeling strategy is for samples of batteries within our
+    data set which have actually failed and where we know when the failure has happened.
+    However if we do not have information about the list of batteries which have failed
+    and which have not failed, we have to resort to intense exploratory analysis to
+    first determine samples of batteries which have failed and then label them according
+    to the labeling strategy discussed above. We can discuss about how we can use
+    exploratory analysis to identify batteries which have failed, in the next post.
+    Needless to say, the records of all batteries which have not failed, will be labelled
+    as “Normal Periods”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we have seen the predictive problem formulation part, let us recap
+    our discussions so far. The predictive problem formulation step involves the following
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understand the business problem and formulate the response variables.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Identify the unit of reference to which the business problem will apply ( each
+    battery in our case)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Look at the key variables related to the unit of reference and the volume and
+    velocity at which data for these variables are generated
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Depending on the velocity of data, decide on a data consolidation period and
+    identify the number of records which will be present for the unit of reference.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: From the data set, identify those units which have failed and which have not
+    failed. Such information will generally be available from past maintenance contracts
+    for each units.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Adopt a labeling strategy for both the failed units and normal units. Identify
+    the number of classes which will be applied to all records of the units. For the
+    failed units, label the records as failed classes till a convenient period( 1
+    year in this case). All records before that period will be labelled the same as
+    the units which have not failed ( “Normal Periods”)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Wrapping up till we meet again**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So far we have discussed the initial two phase of a data science project . The
+    first phase entails defining the business problem and carrying out the business
+    discovery. In the next phase, which is the data discovery phase, we align the
+    available data points to the business problem and then formulate the predictive
+    problem. Once we have a clear understanding of how the predictive problem have
+    to be formulated our next task will be to get into exploratory analysis and feature
+    engineering phases. These phases and the subsequent phases would be dealt in detail
+    in the next post of this series. Watch out this space for more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Thomas Joseph](https://www.linkedin.com/in/thomasjoseph24)** is Senior
+    Data Scientist at Aspire Systems, working on growing the Data Science footprint
+    and enabling superior delivery.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://bayesianquest.com/2017/09/30/applied-data-science-series-solving-a-predictive-maintenance-business-problem/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Mind of a Data Scientist – Part 1](/2016/10/mind-data-scientist-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mind of a Data Scientist – Part 2](/2016/10/mind-data-scientist-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Career Advice to Data Scientists – Go Make More Money](/2016/03/career-advice-data-scientists-make-more-money.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Graph of Thoughts: A New Paradigm for Elaborate Problem-Solving in…](https://www.kdnuggets.com/graph-of-thoughts-a-new-paradigm-for-elaborate-problem-solving-in-large-language-models)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Solving 5 Complex SQL Problems: Tricky Queries Explained](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Definitive Guide to Solving the Phantom Read in MySQL](https://www.kdnuggets.com/2022/06/definitive-guide-solving-phantom-read-mysql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Step Blueprint to Your Next Data Science Problem](https://www.kdnuggets.com/5-step-blueprint-to-your-next-data-science-problem)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Range of NLP Applications in the Real World: A Different…](https://www.kdnuggets.com/2022/03/different-solution-problem-range-nlp-applications-real-world.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Genetic Programming in Python: The Knapsack Problem](https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,265 @@
+- en: Introduction to Anomaly Detection
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/04/datascience-introduction-anomaly-detection.html](https://www.kdnuggets.com/2017/04/datascience-introduction-anomaly-detection.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By [DataScience.com](https://www.datascience.com/blog/intro-to-anomaly-detection-learn-data-science-tutorials)**
+    Sponsored Post.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This overview is intended for beginners in the fields of data science and machine
+    learning. Almost no formal professional experience is needed to follow along,
+    but the reader should have some basic knowledge of calculus (specifically integrals),
+    the programming language Python, functional programming, and machine learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Introduction: Anomaly Detection'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Anomaly detection is a technique used to identify unusual patterns that do not
+    conform to expected behavior, called outliers. It has many applications in business,
+    from intrusion detection (identifying strange patterns in network traffic that
+    could signal a hack) to system health monitoring (spotting a malignant tumor in
+    an MRI scan), and from fraud detection in credit card transactions to fault detection
+    in operating environments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This overview will cover several methods of detecting anomalies, as well as
+    how to build a detector in Python using simple moving average (SMA) or low-pass
+    filter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![](../Images/1ff5523f9fb1df59f1b2a666d68c0ee2.png)](https://www.datascience.com/blog/intro-to-anomaly-detection-learn-data-science-tutorials)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fig 1\. Anomalies in Sunspots
+  prefs: []
+  type: TYPE_NORMAL
+- en: What Are Anomalies?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Before getting started, it is important to establish some boundaries on the
+    definition of an anomaly. Anomalies can be broadly categorized as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Point anomalies:** A single instance of data is anomalous if it''s too far
+    off from the rest. *Business use case:* Detecting credit card fraud based on "amount
+    spent."'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Contextual anomalies:** The abnormality is context specific. This type of
+    anomaly is common in time-series data. *Business use case:* Spending $100 on food
+    every day during the holiday season is normal, but may be odd otherwise.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Collective anomalies:** A set of data instances collectively helps in detecting
+    anomalies. *Business use case:* Someone is trying to copy data form a remote machine
+    to a local host unexpectedly, an anomaly that would be flagged as a potential
+    cyber attack.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Anomaly detection is similar to - but not entirely the same as - noise removal
+    and novelty detection. **Novelty detection** is concerned with identifying an
+    unobserved pattern in new observations not included in training data - like a
+    sudden interest in a new channel on YouTube during Christmas, for instance. **Noise
+    removal** ([NR](http://datamining.rutgers.edu/publication/tkdehcleaner.pdf)) is
+    the process of immunizing analysis from the occurrence of unwanted observations;
+    in other words, removing noise from an otherwise meaningful signal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Anomaly Detection Techniques
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Simple Statistical Methods**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The simplest approach to identifying irregularities in data is to flag the data
+    points that deviate from common statistical properties of a distribution, including
+    mean, median, mode, and quantiles. Let's say the definition of an anomalous data
+    point is one that deviates by a certain standard deviation from the mean. Traversing
+    mean over time-series data isn't exactly trivial, as it's not static. You would
+    need a rolling window to compute the average across the data points. Technically,
+    this is called a rolling average or a moving average, and it's intended to smooth
+    short-term fluctuations and highlight long-term ones. Mathematically, an n-period
+    simple moving average can also be defined as a "low pass filter." (A Kalman filter
+    is a more sophisticated version of this metric; you can find a very intuitive
+    explanation of it [here](http://www.bzarg.com/p/how-a-kalman-filter-works-in-pictures/).)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Challenges** The low pass filter allows you to identify anomalies in simple
+    use cases, but there are certain situations where this technique won''t work.
+    Here are a few:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data contains noise which might be similar to abnormal behavior, because
+    the boundary between normal and abnormal behavior is often not precise.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The definition of abnormal or normal may frequently change, as malicious adversaries
+    constantly adapt themselves. Therefore, the threshold based on moving average
+    may not always apply.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The pattern is based on seasonality. This involves more sophisticated methods,
+    such as decomposing the data into multiple trends in order to identify the change
+    in seasonality.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Machine Learning-Based Approaches
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Below is a brief overview of popular machine learning-based techniques for anomaly
+    detection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Density-Based Anomaly Detection**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Density-based anomaly detection is based on the k-nearest neighbors algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Assumption:* Normal data points occur around a dense neighborhood and abnormalities
+    are far away.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The nearest set of data points are evaluated using a score, which could be
+    Eucledian distance or a similar measure dependent on the type of the data (categorical
+    or numerical). They could be broadly classified into two algorithms:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[K-nearest neighbor](http://www.scholarpedia.org/article/K-nearest_neighbor):
+    k-NN is a simple, non-parametric lazy learning technique used to classify data
+    based on similarities in distance metrics such as Eucledian, Manhattan, Minkowski,
+    or Hamming distance.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Relative density of data: This is better known as [local outlier factor](http://link.springer.com/article/10.1007%2Fs10618-012-0300-z)
+    (LOF). This concept is based on a distance metric called reachability distance.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Clustering-Based Anomaly Detection**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Clustering is one of the most popular concepts in the domain of unsupervised
+    learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Assumption:* Data points that are similar tend to belong to similar groups
+    or clusters, as determined by their distance from local centroids.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[K-means](https://www.datascience.com/blog/introduction-to-k-means-clustering-algorithm-learn-data-science-tutorials)
+    is a widely used clustering algorithm. It creates ''k'' similar clusters of data
+    points. Data instances that fall outside of these groups could potentially be
+    marked as anomalies.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Support Vector Machine-Based Anomaly Detection**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A [support vector machine](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.675.575&rep=rep1&type=pdf)
+    is another effective technique for detecting anomalies. A SVM is typically associated
+    with supervised learning, but there are extensions ([OneClassCVM,](http://scikit-learn.org/stable/modules/generated/sklearn.svm.OneClassSVM.html)
+    for instance) that can be used to identify anomalies as an unsupervised problems
+    (in which training data are not labeled). The algorithm learns a soft boundary
+    in order to cluster the normal data instances using the training set, and then,
+    using the testing instance, it tunes itself to identify the abnormalities that
+    fall outside the learned region.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Depending on the use case, the output of an anomaly detector could be numeric
+    scalar values for filtering on domain-specific thresholds or textual labels (such
+    as binary/multi labels).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Building a Simple Detection Solution Using a Low-Pass Filter
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In this section, we will focus on building a simple anomaly-detection package
+    using moving average to identify anomalies in the number of sunspots per month
+    in a sample dataset, which can be [downloaded here](http://www-personal.umich.edu/~mejn/cp/data/sunspots.txt)
+    using the following command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The file has 3,143 rows, which contain information about sunspots collected
+    between the years 1749-1984\. Sunspots are defined as dark spots on the surface
+    of the sun. The study of sunspots helps scientists understand the sun's properties
+    over a period of time; in particular, its magnetic properties.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Read the rest of this tutorial including the Python code on [**DataScience.com
+    site**](https://www.datascience.com/blog/intro-to-anomaly-detection-learn-data-science-tutorials).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Beginner''s Guide to Anomaly Detection Techniques in Data Science](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Anomaly Detection in BigQuery: Uncover Hidden Insights and Drive Action](https://www.kdnuggets.com/anomaly-detection-in-bigquery-uncover-hidden-insights-and-drive-action)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Perform Motion Detection Using Python](https://www.kdnuggets.com/2022/08/perform-motion-detection-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Hugging Face Transformers for Emotion Detection in Text](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, August 17: How to Perform Motion Detection Using…](https://www.kdnuggets.com/2022/n33.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Density Kernel Depth for Outlier Detection in Functional Data](https://www.kdnuggets.com/density-kernel-depth-for-outlier-detection-in-functional-data)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

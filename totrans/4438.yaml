@@ -1,0 +1,249 @@
+- en: Building a REST API with Tensorflow Serving (Part 2)
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/07/building-rest-api-tensorflow-serving-part-2.html](https://www.kdnuggets.com/2020/07/building-rest-api-tensorflow-serving-part-2.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Guillermo Gomez](https://www.linkedin.com/in/mlgxmez/), Data Scientist
+    & Machine Learning Engineer**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once these Tensorflow objects have been generated, it’s time to make them publicly
+    available to everyone. By building a REST API around the object, people will be
+    able to use your service in their project. Let’s see how we can do it!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Docker in a nutshell
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'For this part I’m assuming we have basic knowledge of Docker. For those unfamiliar
+    with this, Docker is a tool to build isolated environments (containers) in your
+    computer in such a way that it doesn’t get into conflict with any file or program
+    in your local filesystem (the host). Among all its advantages, I would highlight
+    these:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unlike with virtual machines, you can run containers with only what’s strictly
+    necessary to run a single component of your project. This helps you generate containers
+    as light as you want.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Docker networking capabilities allows you easily communicate multiple containers
+    to each other.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Even if your OS is not fully compatible with the tool you want to use, with
+    containers you don’t run into compatibility issues anymore.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Docker containers will run in the same way regardless of the hosting environment,
+    be in your computer or a server running in a cloud service.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Whenever I step into learning something new I recommend go for a tutorial or
+    quick start in the documentation itself. Tensorflow Serving has a short one in
+    its Github [repo](https://github.com/tensorflow/serving):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Pay attention to the arguments passed to the `docker run` command, specifically
+    the ones accepting external values:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`-p 8501:8501`, publishes the container’s port specified at the right of the
+    colon, and is mapped to the same port in the host, specified at the left of the
+    colon. For REST API, Tensorflow Serving makes use of this port, **so don’t change
+    this parameter in your experiments**.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`-v "$TESTDATA/saved_model_half_plus_two_cpu:/models/half_plus_two"`, attaches
+    a volume to the container. This volume contains a copy of the folder where you
+    saved your Tensorflow object. Just a level above the folder named `/1/`. This
+    folder will appear in the container, under `/models/`.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`-e MODEL_NAME=half_plus_two`, defines an environment variable. This variable
+    is required to serve your model. For convenience, **use the same identifier as
+    the container’s folder name where you attached your model**.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Deploying servables in containers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can design an API for your servable, but Tensorflow Serving abstracts away
+    this step thanks to Docker. Once you deploy the container, you can make a request
+    to the server where your container is located to perform some kind of computation.
+    Within the body of the request you may attach some input (required to run the
+    servable) and obtain some output in return.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In order to make the computation you need to specify the endpoint URL of the
+    servable in your request. In the example shown above this endpoint URL is `[http://localhost:8501/v1/models/half_plus_two:predict](http://localhost:8501/v1/models/half_plus_two:predict)`.
+    Now everything is ready to run our Tensorflow objects. We will start with the
+    Keras model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'When this command was executed, the current directory was `tmp/`. This is the
+    folder where I’ve been saving all my models. This is what the terminal returns:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0467661333e34c3820d348c02cf42e01.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The model is up and ready to be used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Make requests to servables
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With `curl` library
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that the container is up and running we can make requests by sending an
+    image to be recognized. I’ll show you two ways to achieve that. First I made a
+    little shell script (download it from [here](https://gist.github.com/mlgxmez/6cd3b5824567ba69edd4468e8de97f1f))
+    that receives the path of an image file as an argument and makes the call itself
+    with the library `curl`. Here I show you how we make the request and what is the
+    image that the model is trying to classify.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e3272e4cc1b764c9be9f1bbd38f2b71a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This chilling panda wasn’t hurt during the experiment
+  prefs: []
+  type: TYPE_NORMAL
+- en: And this is how we make the call with the API we built.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e45d2bd46cd9493b6929f1fbbee433cf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The second example involves the servable that adds 2 to every element of the
+    vector. This is how the call is made after the container is up.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/18801fd31989f825c562ae42c3103389.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: With `requests` library
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The library `requests` allows you doing the same thing but using Python code
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: In this piece of code, you will notice there are some rules you have to follow
+    when defining the JSON that is sent in your request, such as the naming of the
+    keys and the presence of nested structures. This is explained more extensively
+    in the Tensorflow [documentation](https://www.tensorflow.org/tfx/serving/api_rest#predict_api).
+    Regarding images, they are binarized using the Base64 encoding before being sent
+    to the servable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And this covers everything I wanted to explain with Tensorflow Serving (for
+    now). I hope this tutorial will spark your motivation for building machine learning
+    services. This is only the tip of the iceberg. Good luck!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Guillermo Gomez](https://www.linkedin.com/in/mlgxmez/)** builds machine
+    learning-based products in the public infrastructure and services industry. His
+    website where more tutorials can be found: [http://thelongrun.blog](http://thelongrun.blog)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://thelongrun.blog/2020/01/26/rest-api-tensorflow-serving-pt2/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Building a REST API with Tensorflow Serving (Part 1)](/2020/07/building-rest-api-tensorflow-serving-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimize Response Time of your Machine Learning API In Production](/2020/05/optimize-response-time-machine-learning-api-production.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with TensorFlow 2](/2020/07/getting-started-tensorflow2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Top 7 Model Deployment and Serving Tools](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[OpenAI’s Whisper API for Transcription and Translation](https://www.kdnuggets.com/2023/06/openai-whisper-api-transcription-translation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Meet Gorilla: UC Berkeley and Microsoft’s API-Augmented LLM…](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

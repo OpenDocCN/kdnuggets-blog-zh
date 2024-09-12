@@ -1,0 +1,742 @@
+- en: Build and deploy your first machine learning web app
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/05/build-deploy-machine-learning-web-app.html](https://www.kdnuggets.com/2020/05/build-deploy-machine-learning-web-app.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Moez Ali](https://www.linkedin.com/in/profile-moez/), Founder & Author
+    of PyCaret**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8213893cbe65e0b98f2f494411a5cb55.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In our [last post](https://towardsdatascience.com/machine-learning-in-power-bi-using-pycaret-34307f09394a)
+    we demonstrated how to train and deploy machine learning models in Power BI using [PyCaret](https://www.pycaret.org/).
+    If you haven’t heard about PyCaret before, please read our [announcement](https://towardsdatascience.com/announcing-pycaret-an-open-source-low-code-machine-learning-library-in-python-4a1f1aad8d46) to
+    get a quick start.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this tutorial we will use PyCaret to develop a **machine learning pipeline,** that
+    will include preprocessing transformations and a regression model to predict patient
+    hospitalization charges based on demographic and basic patient health risk metrics
+    such as age, BMI, smoking status etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? What you will learn in this tutorial
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: What is a deployment and why do we deploy machine learning models.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Develop a machine learning pipeline and train models using PyCaret.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Build a simple web app using a Python framework called ‘Flask’.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Deploy a web app on ‘Heroku’ and see your model in action.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ???? What tools we will use in this tutorial?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**PyCaret**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PyCaret](https://www.pycaret.org/) is an open source, low-code machine learning
+    library in Python to train and deploy machine learning pipelines and models in
+    production. PyCaret can be installed easily using pip.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Flask**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Flask](https://flask.palletsprojects.com/en/1.1.x/) is a framework that allows
+    you to build web applications. A web application can be a commercial website,
+    a blog, e-commerce system, or an application that generates predictions from data
+    provided in real-time using trained models. If you don’t have Flask installed,
+    you can use pip to install it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**GitHub**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[GitHub](https://www.github.com/) is a cloud-based service that is used to
+    host, manage and control code. Imagine you are working in a large team where multiple
+    people (sometime hundreds of them) are making changes. PyCaret is itself an example
+    of an open-source project where hundreds of community developers are continuously
+    contributing to source code. If you haven’t used GitHub before, you can [sign
+    up](https://github.com/join) for a free account.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Heroku**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Heroku](https://www.heroku.com/) is a platform as a service (PaaS) that enables
+    the deployment of web apps based on a managed container system, with integrated
+    data services and a powerful ecosystem. In simple words, this will allow you to
+    take the application from your local machine to the cloud so that anybody can
+    access it using a Web URL. In this tutorial we have chosen Heroku for deployment
+    as it provides free resource hours when you [sign up](https://signup.heroku.com/) for
+    new account.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/d7e260c18d29b72de9c8083c75ff54ef.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Machine Learning Workflow (from Training to Deployment on PaaS)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Deploy Machine Learning Models?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The deployment of machine learning models is the process of making models available
+    in production where web applications, enterprise software and APIs can consume
+    the trained model by providing new data points and generating predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Normally machine learning models are built so that they can be used to predict
+    an outcome (binary value i.e. 1 or 0 for [Classification](https://www.pycaret.org/classification),
+    continuous values for [Regression](https://www.pycaret.org/regression), labels
+    for [Clustering](https://www.pycaret.org/clustering) etc. There are two broad
+    ways of generating predictions (i) predict by batch; and (ii) predict in real-time.
+    In our [last tutorial](https://towardsdatascience.com/machine-learning-in-power-bi-using-pycaret-34307f09394a) we
+    demonstrated how to deploy machine learning model in Power BI and predict by batch.
+    In this tutorial we will see how to deploy a machine learning model to predict
+    in real-time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Business Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: An insurance company wants to improve its cash flow forecasting by better predicting
+    patient charges using demographic and basic patient health risk metrics at the
+    time of hospitalization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/55da7f0ae496ad44230dae57479ebf11.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*(*[*data source*](https://www.kaggle.com/mirichoi0218/insurance#insurance.csv)*)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Objective
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To build a web application where demographic and health information of a patient
+    is entered in a web form to predict charges.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tasks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Train and validate models and develop a machine learning pipeline for deployment.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Build a basic HTML front-end with an input form for independent variables (age,
+    sex, bmi, children, smoker, region).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Build a back-end of the web application using a Flask Framework.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Deploy the web app on Heroku. Once deployed, it will become publicly available
+    and can be accessed via Web URL.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ???? Task 1 — Model Training and Validation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Training and model validation are performed in Integrated Development Environment
+    (IDE) or Notebook either on your local machine or on cloud. In this tutorial we
+    will use PyCaret in Jupyter Notebook to develop machine learning pipeline and
+    train regression models. If you haven’t used PyCaret before, [click here](https://towardsdatascience.com/announcing-pycaret-an-open-source-low-code-machine-learning-library-in-python-4a1f1aad8d46) to
+    learn more about PyCaret or see [Getting Started Tutorials](https://www.pycaret.org/tutorial) on
+    our [website](https://www.pycaret.org/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this tutorial, we have performed two experiments. The first experiment is
+    performed with default preprocessing settings in PyCaret (missing value imputation,
+    categorical encoding etc). The second experiment has some additional preprocessing
+    tasks such as scaling and normalization, automatic feature engineering and binning
+    continuous data into intervals. See the setup example for the second experiment:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/23c9b273943d56697487a97c23d17fc0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Comparison of information grid for both experiments
+  prefs: []
+  type: TYPE_NORMAL
+- en: The magic happens with only a few lines of code. Notice that in **Experiment
+    2** the transformed dataset has 62 features for training derived from only 7 features
+    in the original dataset. All of the new features are the result of transformations
+    and automatic feature engineering in PyCaret.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/4efab6a3013cd24cbd02b82bb1877314.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Columns in dataset after transformation
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Sample code for model training and validation in PyCaret:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/77b5d1d13d4a17347dcdb86135860829.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 10 Fold cross-validation of Linear Regression Model(s)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice the impact of transformations and automatic feature engineering. The
+    R2 has increased by 10% with very little effort. We can compare the **residual
+    plot** of linear regression model for both experiments and observe the impact
+    of transformations and feature engineering on the **heteroskedasticity **of model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/3b081a146b5974e560d42e3bfeb4447f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Residual Plot of Linear Regression Model(s)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Machine learning is an *iterative *process. Number of iterations and techniques
+    used within are dependent on how critical the task is and what the impact will
+    be if predictions are wrong. The severity and impact of a machine learning model
+    to predict a patient outcome in real-time in the ICU of a hospital is far more
+    than a model built to predict customer churn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this tutorial, we have performed only two iterations and the linear regression
+    model from the second experiment will be used for deployment. At this stage, however,
+    the model is still only an object within notebook. To save it as a file that can
+    be transferred to and consumed by other applications, run the following code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'When you save a model in PyCaret, the entire transformation pipeline based
+    on the configuration defined in the **setup() **function is created . All inter-dependencies
+    are orchestrated automatically. See the pipeline and model stored in the ‘deployment_28042020’
+    variable:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/9e478a35206a20e549f19d30a9661636.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Pipeline created using PyCaret
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We have finished our first task of training and selecting a model for deployment.
+    The final machine learning pipeline and linear regression model is now saved as
+    a file in the local drive under the location defined in the **save_model() **function.
+    (In this example: c:/*username*/ins/deployment_28042020.pkl).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Task 2 — Building Web Application
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now that our machine learning pipeline and model are ready we will start building
+    a web application that can connect to them and generate predictions on new data
+    in real-time. There are two parts of this application:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Front-end (designed using HTML)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Back-end (developed using Flask in Python)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Front-end of Web Application
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Generally, the front-end of web applications are built using HTML which is not
+    the focus of this article. We have used a simple HTML template and a CSS style
+    sheet to design an input form. Here’s the HTML snippet of the front-end page of
+    our web application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/2b54ec5cc7b7325392fccda870773a6d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Code snippet from home.html file
+  prefs: []
+  type: TYPE_NORMAL
+- en: You don’t need to be an expert in HTML to build simple applications. There are
+    numerous free platforms that provide HTML and CSS templates as well as enable
+    building beautiful HTML pages quickly by using a drag and drop interface.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**CSS Style Sheet**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: CSS (also known as Cascading Style Sheets) describes how HTML elements are displayed
+    on a screen. It is an efficient way of controlling the layout of your application.
+    Style sheets contain information such as background color, font size and color,
+    margins etc. They are saved externally as a .css file and is linked to HTML but
+    including 1 line of code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e6172cc6c23d83a4fd3683b3a341b880.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Code snippet from home.html file
+  prefs: []
+  type: TYPE_NORMAL
+- en: Back-end of Web Application
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The back-end of a web application is developed using a Flask framework. For
+    beginner’s it is intuitive to consider Flask as a library that you can import
+    just like any other library in Python. See the sample code snippet of our back-end
+    written using a Flask framework in Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/feb16c63a07224b37ffa90a4a955a984.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Code snippet from app.py file
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you remember from the Step 1 above we have finalized linear regression model
+    that was trained on 62 features that were automatically engineered by PyCaret.
+    However, the front-end of our web application has an input form that collects
+    only the six features i.e. age, sex, bmi, children, smoker, region.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How do we transform 6 features of a new data point in real-time into 62 features
+    on which model was trained? With a sequence of transformations applied during
+    model training, coding becomes increasingly complex and time-taking task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In PyCaret all transformations such as categorical encoding, scaling, missing
+    value imputation, feature engineering and even feature selection are automatically
+    executed in real-time before generating predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Imagine the amount of code you would have had to write to apply all the transformations
+    in strict sequence before you could even use your model for predictions. In practice,
+    when you think of machine learning, you should think about the entire ML pipeline
+    and not just the model.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Testing App**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'One final step before we publish the application on Heroku is to test the web
+    app locally. Open Anaconda Prompt and navigate to folder where **‘app.py’** is
+    saved on your computer. Run the python file with below code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/ca5a8bbb6144dfd4c02bc8262e3aff94.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output in Anaconda Prompt when app.py is executed
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once executed, copy the URL into a browser and it should open a web application
+    hosted on your local machine (127.0.0.1). Try entering test values to see if the
+    predict function is working. In the example below, the expected bill for a 19
+    year old female smoker with no children in the southwest is $20,900.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/d5073bc26689c4ed2520b3788f1b4bdc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Web application opened on local machine
+  prefs: []
+  type: TYPE_NORMAL
+- en: Congratulations! you have now built your first machine learning app. Now it’s
+    time to take this application from your local machine into the cloud so other
+    people can use it with a Web URL.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Task 3 — Deploy the Web App on Heroku
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that the model is trained, the machine learning pipeline is ready, and the
+    application is tested on our local machine, we are ready to start our deployment
+    on Heroku. There are couple of ways to upload your application source code onto
+    Heroku. The simplest way is to link a GitHub repository to your Heroku account.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you would like to follow along you can fork this [repository](https://github.com/pycaret/deployment-heroku) from
+    GitHub. If you don’t know how to fork a repo, please [read this](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) official
+    GitHub tutorial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b2daa1c271a42ab84e0dcc83c5b4bb87.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[https://www.github.com/pycaret/deployment-heroku](https://www.github.com/pycaret/deployment-heroku)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: By now you are familiar with all the files in repository shown above except
+    for two files i.e. ‘**requirements.txt’** and ‘**Procfile’.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/35693d5786a9d88caa018a90432f0d30.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: requirements.txt
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**requirements.txt ** file is a text file containing the names of the python
+    packages required to execute the application. If these packages are not installed
+    in the environment application is running, it will fail.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/17ea811b90d8d3bd37482f7e5a324eec.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Procfile
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Procfile **is simply one line of code that provides startup instructions
+    to web server that indicate which file should be executed first when somebody
+    logs into the application. In this example the name of our application file is
+    ‘**app.py’ **and the name of the application is also ‘**app’**. *(hence app:app)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once all the files are uploaded onto the GitHub repository, we are now ready
+    to start deployment on Heroku. Follow the steps below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 1 — Sign up on heroku.com and click on ‘Create new app’**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/aa02c1b6a02bcf867d41f7b46df172b9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Heroku Dashboard
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 2 — Enter App name and region**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/701e0be8acd243ba464ee5d7a833a8fd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Heroku — Create new app
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 3 — Connect to your GitHub repository where code is hosted**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/a494b41066c23b3f6fcaab7eb27b91ca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Heroku — Connect to GitHub
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 4 — Deploy branch**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3470a80faee1fd99b96f7dcbbb6a69e4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Heroku — Deploy Branch
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 5 — Wait 5–10 minutes and BOOM**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5f2d87a6bdbbef8693b83f79722b3d93.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Heroku — Successful deployment
+  prefs: []
+  type: TYPE_NORMAL
+- en: App is published to URL: [https://pycaret-insurance.herokuapp.com/](https://pycaret-insurance.herokuapp.com/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e1bde245a86a323e2c9dcd6df0112113.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[https://pycaret-insurance.herokuapp.com/](https://pycaret-insurance.herokuapp.com/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is one last thing to see before we end the tutorial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So far we have built and deployed a web application that works with our machine
+    learning pipeline. Now imagine that you already have an enterprise application
+    in which you want to integrate predictions from your model. What you need is a
+    web service where you can make an API call with input data points and get the
+    predictions back. To achieve this we have created the ***predict_api*** function
+    in our **‘app.py’** file. See the code snippet:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/9b9346b7d5a4a3870f9877bc5ed6e1f5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Code snippet from app.py file (back-end of web app)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here’s how you can use this web service in Python using the requests library:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/af12c785bd4cf0f7db433e8b8ce99546.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Make a request to a published web service to generate predictions in a Notebook
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next Tutorial
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the next tutorial for deploying machine learning pipelines, we will dive
+    deeper into deploying machine learning pipelines using docker containers. We will
+    demonstrate how to easily deploy and run containerized machine learning applications
+    on Linux.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Follow our [LinkedIn](https://www.linkedin.com/company/pycaret/) and subscribe
+    to our [Youtube](https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g) channel
+    to learn more about PyCaret.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Important Links**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[User Guide / Documentation](https://www.pycaret.org/guide)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GitHub Repository](https://www.github.com/pycaret/pycaret)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Install PyCaret](https://www.pycaret.org/install)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Notebook Tutorials](https://www.pycaret.org/tutorial)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Contribute in PyCaret](https://www.pycaret.org/contribute)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Want to learn about a specific module?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As of the first release 1.0.0, PyCaret has the following modules available for
+    use. Click on the links below to see the documentation and working examples in
+    Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Classification](https://www.pycaret.org/classification)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Regression](https://www.pycaret.org/regression)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Clustering](https://www.pycaret.org/clustering)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Anomaly Detection](https://www.pycaret.org/anomaly-detection)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing](https://www.pycaret.org/nlp)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Association Rule Mining](https://www.pycaret.org/association-rules)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Also see:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'PyCaret getting started tutorials in Notebook:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Clustering](https://www.pycaret.org/clu101)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Anomaly Detection](https://www.pycaret.org/anom101)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing](https://www.pycaret.org/nlp101)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Association Rule Mining](https://www.pycaret.org/arul101)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Regression](https://www.pycaret.org/reg101)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Classification](https://www.pycaret.org/clf101)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**What’s in the development pipeline?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are actively working on improving PyCaret. Our future development pipeline
+    includes a new **Time Series Forecasting **module, integration with **TensorFlow, **and
+    major improvements on the scalability of PyCaret. If you would like to share your
+    feedback and help us improve further, you may [fill this form](https://www.pycaret.org/feedback) on
+    the website or leave a comment on our [GitHub ](https://www.github.com/pycaret/)or [LinkedIn](https://www.linkedin.com/company/pycaret/) page.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Would you like to contribute?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyCaret is an open source project. Everybody is welcome to contribute. If you
+    would like contribute, please feel free to work on [open issues](https://github.com/pycaret/pycaret/issues).
+    Pull requests are accepted with unit tests on dev-1.0.1 branch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Please give us ⭐️ on our [GitHub repo](https://www.github.com/pycaret/pycaret) if
+    you like PyCaret.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Medium : [https://medium.com/@moez_62905/](https://medium.com/@moez_62905/machine-learning-in-power-bi-using-pycaret-34307f09394a)
+  prefs: []
+  type: TYPE_NORMAL
+- en: LinkedIn : [https://www.linkedin.com/in/profile-moez/](https://www.linkedin.com/in/profile-moez/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Twitter : [https://twitter.com/moezpycaretorg1](https://twitter.com/moezpycaretorg1)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Moez Ali](https://www.linkedin.com/in/profile-moez/)** is a Data Scientist,
+    and is Founder & Author of PyCaret.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Announcing PyCaret 1.0.0](/2020/04/announcing-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning in Power BI using PyCaret](/2020/05/machine-learning-power-bi-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build Pipelines with Pandas Using pdpipe](/2019/12/build-pipelines-pandas-pdpipe.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Deploy a Machine Learning Web App with Heroku](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build a Machine Learning Web App in 5 Minutes](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News March 9, 2022: Build a Machine Learning Web App in 5…](https://www.kdnuggets.com/2022/n10.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

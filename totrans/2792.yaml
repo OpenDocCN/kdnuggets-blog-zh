@@ -1,0 +1,292 @@
+- en: 'Deep Learning Breakthrough: a sub-linear deep learning algorithm that does
+    not need a GPU?'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/03/deep-learning-breakthrough-sub-linear-algorithm-no-gpu.html](https://www.kdnuggets.com/2020/03/deep-learning-breakthrough-sub-linear-algorithm-no-gpu.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Anshumali Shrivastava](https://www.cs.rice.edu/~as143/), Rice University**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We all know that [deep neural networks](https://www.kdnuggets.com/2020/02/deep-neural-networks.html)
+    (DNNs) are spearheading the current AI revolution. [The backpropagation algorithm](https://www.kdnuggets.com/2019/01/backpropagation-algorithm-demystified.html) is
+    a commonly used method for training DNNs. Backpropagation consists offorward and
+    backward pass over the network, which can be written as a sequence of matrix multiplications. [GPUs
+    (Graphical Processing Units)](https://en.wikipedia.org/wiki/Graphics_processing_unit) have
+    a unique advantage here because they have thousands of processing cores optimized
+    for Matrix multiplication. They can perform [an order of magnitude faster matrix
+    multiplications](https://graphics.stanford.edu/papers/gpumatrixmult/gpumatrixmult.pdf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wasteful Computations in Backpropagation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Backpropagation is not an efficient algorithm. Prof. Geoffrey Hinton, one of
+    the pioneers of backpropagation, has identified several of its vital shortcomings
+    in an [interview](https://www.i-programmer.info/news/105-artificial-intelligence/11135--geoffrey-hinton-says-ai-needs-to-start-over.html).
+    The core idea behind the SLIDE algorithm is to minimize *wasteful computations* in
+    backpropagation. Imagine a vast neural network with hundreds of millions of parameters.
+    As training progresses, different neurons specialize and focus (with large activations)
+    on very different characteristics of the data. The result is a network where only
+    a few neurons are important for any given input, as demonstrated by the famous [cat
+    neuron article](https://www.nytimes.com/2012/06/26/technology/in-a-big-network-of-computers-evidence-of-machine-learning.html?auth=login-email&login=email).
+    We call this characteristic *adaptive sparsity*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Backpropagation is oblivious to adaptive sparsity. Instead, backpropagation
+    updates millions of parameters using full matrix multiplication. Most of these
+    updates are unnecessary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since 2013, adaptive sparsity has been exploited in several ways to improve
+    generalization. For example, [a NeurIPS 2013paper ](https://papers.nips.cc/paper/5032-adaptive-dropout-for-training-deep-neural-networks.pdf)showed
+    we could limit the weight updates to a tiny subset of the neurons in each layer.
+    The subset was selected using adaptive sampling. The sampling is adaptive in the
+    sense that it favors neurons with large values of activation during sampling.
+    The authors argue that sparse adaptive updates support better [generalization ](https://www.kdnuggets.com/2017/06/understanding-deep-learning-rethinking-generalization.html)leading
+    to better accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unfortunately, these sparse updates are far from being computationally efficient.
+    We need to compute all the activations for each input to determine which neurons
+    to update. Since every neuron must be accessed, the number of operations is *linear* in
+    the number of parameters. Thus, if we have one million parameters, we must perform
+    one million arithmetic operations for every input.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Detour: The Fundamental Puzzle of Inner Product Sampling'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Algorithms for efficient sparse updated are locked behind an algorithmic puzzle.
+    The puzzle is: “How can we sample neurons with large activations without computing
+    all of the activations? A key observation is that the activations are a monotonic
+    function of the inner product between neuron weights and the input. Thus, we can
+    reduce the problem to: “How can we efficiently sample weight vectors that will
+    have a large inner product with the input?”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The problem seems a little absurd because we need to know the values of the
+    inner products to tell which ones are large. The problem is analogous to a similarity
+    search problem in disguise, where the inner product is the similarity measure,
+    and the input is the query. In web search, it is [well known ](https://en.wikipedia.org/wiki/Search_engine_indexing)that
+    we can find documents that are similar (or relevant) to the query without linear
+    computations using [indexing](https://en.wikipedia.org/wiki/Web_indexing).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hash Tables for Adaptive Sampling
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'A hash function h(x) maps an input x to an integer, called a hash value or
+    fingerprint. Let us assume that h(x) has a special property: given two vectors,
+    the hash values of both vectors are the same with probability Pr⁡(h(x)=h(y))=g(⟨x,y⟩),
+    where g is a monotonic function. This property describes a [locality sensitive
+    hash (LSH)](https://en.wikipedia.org/wiki/Locality-sensitive_hashing) function.
+    In simpler terms, if two vectors x and y have a large inner product, then their
+    corresponding hash values h(x) and h(y) are very likely to be identical. If the
+    vectors have a small inner product, then h(x) and h(y) will most likely be different.
+    We showed how to construct a hash function with this property in [this paper](https://papers.nips.cc/paper/5329-asymmetric-lsh-alsh-for-sublinear-time-maximum-inner-product-search-mips.pdf)**,**
+    which received the outstanding paper award in NIPS 2014 (now NeurIPS).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In early 2016, we showed that ([paper](https://dl.acm.org/doi/10.1145/3097983.3098035))
+    our functions lead to an efficient sampling algorithm for neurons. The idea is
+    to index all the neurons into a hash table using h, as shown in Figure 2\. We
+    store a reference to neuron hash  at the memory location pointed to by its fingerprint
+    . After preprocessing the neurons, we can efficiently sample neurons for any input
+    x. We simply go to the memory location h(x) and choose neurons from there. This
+    process ensures hash collisions, and hence we only select neurons that are likely
+    to have large inner products. Our sampling process is provably adaptive to the
+    activation values without needing to explicitly compute all activations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/030e824cfa522a8537913434e6aa28d2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Figure 1:** Illustration of Hash tables for sampling neurons. The HASH function
+    satisfied the LSH property.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Subsequent work has shown that probabilistic hash tables can lead to O(1) importance
+    sampling for efficient estimation of [partition functions](https://arxiv.org/abs/1703.05160)**,**
+    [kernels](https://arxiv.org/abs/1912.02283), and [stochastic gradients](http://papers.nips.cc/paper/9401-fast-and-accurate-stochastic-gradient-estimation.pdf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cc9e2e8256466f32241e632ad55f1289.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Figure 2:** SLIDE Algorithm Illustration. Every layer has hash tables for
+    efficiently identifying neurons with high activation. for every input,  we only
+    need hash computation and a few memory probes to obtain a very sparse snapshot
+    of the network.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The SLIDE Algorithm: Sparse Backpropagation with Hash Tables'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The SLIDE algorithm (Figure 2) uses hash tables to select neurons during training.
+    Complete implementation details are available in our [paper](https://arxiv.org/abs/1903.03129).
+  prefs: []
+  type: TYPE_NORMAL
+- en: SLIDE begins by initializing the neural network parameters and pre-indexing
+    all of the neurons into LSH hash tables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To train the network with a given input, we first compute the LSH hash value
+    (H1) of the input. Then, we look up neurons with H1 as the address (memory location)
+    and sample neurons from the corresponding bucket. We only compute the activations
+    for these neurons, and we set the activations for other neurons to 0\. In the
+    next layer, we use the sparse activation output of the previous layer as the input.
+    The input is sparse because the only non-zero activations are from the selected
+    neurons. We obtain a new hash value H2 for our new input and repeat the sampling
+    process for the next layer. For every input, we only need a few hash values and
+    memory lookups to select a sparse set of important nodes in the network. We only
+    feedforward and backpropagate on the selected neurons. Finally, we update the
+    position of the selected neurons in the hash tables using the updated weights.
+  prefs: []
+  type: TYPE_NORMAL
+- en: During training, all operations are of the order of active neurons (sub-linear)
+    rather than the total number of neurons (linear). In our experiments, we show
+    that only 0.5% of the neurons are needed to get the same accuracy as full backpropagation.
+    While SLIDE introduces a small overhead to maintain the hash tables, our operations
+    are around 200x less expensive when compared to standard backpropagation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Parallel Gradient Updates
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Since only 0.5% of the nodes are active for a given input, it is unlikely that
+    two unrelated inputs x and y will share many selected neurons. As a result, we
+    can perform asynchronous gradient updates in parallel. The [HOGWILD paper](https://papers.nips.cc/paper/4390-hogwild-a-lock-free-approach-to-parallelizing-stochastic-gradient-descent.pdf)
+    shows that this idea is both theoretically sound and practical for gradient descent.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To summarize, the SLIDE algorithm requires orders of magnitude fewer arithmetic
+    operations on each input. When combined with asynchronous data-parallel gradient
+    updates, we have a highly efficient training process. In contrast, standard backpropagation
+    on a GPU performs a costly arithmetic operation. GPU parallelization is limited
+    to the scaling up matrix multiplications rather than data-parallel processes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '** ![](../Images/6d4334dce2e09655789780a566421bed.png)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Figure 3:** Training time comparison of SLIDE (in red) against TF-GPU (in
+    blue) and TF-CPU (in black). The x-axis is on the log scale. SLIDE was implemented
+    in C++ and experiments were done on the same CPU as TF-CPU. TF-CPU used the most
+    optimized Intel’s version (MKL-DNN).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Comparison with TensorFlow Backpropagation on CPU and V100 GPU
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: SLIDE was compared on large, fully connected neural networks with more than
+    100 million parameters, commonly encountered in commercial recommendation engines.
+    We highlight one of the training plots from the [paper](https://arxiv.org/abs/1903.03129).
+    The code, along with benchmark scripts are publicly available on [Github](https://github.com/keroro824/HashingDeepLearning).  The
+    data is publicly available [Amazon-670k dataset](https://www.kaggle.com/c/extreme-classification-amazon/overview) from
+    Kaggle.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Figure 3\. illustrates the complete progress of training with SLIDE (Red Curve)
+    running on a 44-core Intel Xeon CPU (2 sockets of 22 cores each). SLIDE is compared
+    with the most optimized implementations of backpropagation available via [TensorFlow](https://www.tensorflow.org/) on
+    V100 GPU (TF-GPU) (Blue curve) as well as [Intel optimized TensorFlow](https://github.com/intel/mkl-dnn) on
+    the same 44-core CPU (TF-CPU) (Black curve). The running time is on the log scale.
+    TF-CPU is slow compared to TF-GPU, indicating the advantages of GPUs for backpropagation
+    on this large workload. The exciting part is that a C++ implementation of the
+    efficient SLIDE algorithm, on the same CPU, significantly outperforms the GPU
+    acceleration. SLIDE converges 3.5x faster than TensorFlow on V100 GPU (1 hour
+    vs. 3.5 hours).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Anshumali Shrivastava](https://www.linkedin.com/in/shrivastava-anshumali-58098b6/) ([@Anshumali_](https://twitter.com/Anshumali_))
+    is an assistant professor in the computer science department at Rice University. 
+    His broad research interests include randomized algorithms for large-scale machine
+    learning. In 2018, Science news named him one of the Top-10 scientists under 40
+    to watch.  He is a recipient of the National Science Foundation CAREER Award,
+    a Young Investigator Award from the Air Force Office of Scientific Research, and
+    a machine learning research award from Amazon. He has won numerous paper awards,
+    including Best Paper Award at NIPS 2014 and Most Reproducible Paper Award at SIGMOD
+    2019\. His work has been featured in several media outlets including the New York
+    Times, IEEE Spectrum, Science News, Engadget, and ArsTechnica.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Here’s how you can accelerate your Data Science on GPU](https://www.kdnuggets.com/2019/07/accelerate-data-science-on-gpu.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deep Neural Networks](https://www.kdnuggets.com/2020/02/deep-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Basics of GPU Computing for Data Scientists](https://www.kdnuggets.com/2016/04/basics-gpu-computing-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a GPU Machine vs. Using the GPU Cloud](https://www.kdnuggets.com/building-a-gpu-machine-vs-using-the-gpu-cloud)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Does the Random Forest Algorithm Need Normalization?](https://www.kdnuggets.com/2022/07/random-forest-algorithm-need-normalization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is K-Means Clustering and How Does its Algorithm Work?](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine learning does not produce value for my business. Why?](https://www.kdnuggets.com/2021/12/machine-learning-produce-value-business.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Naïve Bayes Algorithm: Everything You Need to Know](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, April 13: Python Libraries Data Scientists Should…](https://www.kdnuggets.com/2022/n15.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

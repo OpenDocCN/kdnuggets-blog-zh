@@ -1,0 +1,217 @@
+- en: Data Science Data Architecture
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2015/09/data-science-data-architecture.html/2](https://www.kdnuggets.com/2015/09/data-science-data-architecture.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**The data flow**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Figure 2 shows the data flow for analytical applications. The left side of
+    the picture describes the database, the right side the analytics stack: in red
+    dots the scheduling instances, in blue dots the actual analytical processes. The
+    top part “Dev” indicates the model development environment, while the lower box
+    ‘Prod’ indicates the model production environment.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f7f2718ce9067d1dbfbfa72c100f79d7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'In the model development environment, the database is divided up into three
+    parts (or schemas):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A staging area or (for the data scientists) read-only environment where IT can
+    make data available. This has to be read-only in order for IT to guarantee there
+    is no confusion on what has been delivered (from a quality and a quantity point
+    of view).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The data science playground (or sandbox). This is the free area where model
+    experimentation takes place, where ad-hoc questions are answered and where reports
+    and insights are developed.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The lower part of the model development environment indicates the pre-production
+    stage. This is an area where the data scientist works closely with the IT department.
+    The discussions that the data scientist and the IT operator have, revolve around
+    a hand-over process of the model. In addition, the IT operator needs to understand
+    the data requirement of the model and needs to prepare the operational environment
+    for the model. The hand-over of a model to an operational team needs to come with
+    an audit structure.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The data flow described below supports the full workflow of data scientists:
+    from ad-hoc reports to models supporting multiple departments. As mentioned, the
+    journey starts with data being made available in the read-only (staging) area.
+    The data available here is a mix of first time deliveries (a data scientist is
+    curious by nature always on the lookout for new data sources) and regular scheduled
+    data deliveries (e.g. monthly new customers, usages, transactions etc.). Initially,
+    the data comes in raw, and is being explored as such. Further collaboration between
+    IT and the data scientists may lead to requests to certain aggregations or selections
+    of data. The regular data delivery is picked up by scheduled tasks that prepare
+    the data for the data science data-mart. Ideally, this is a change-history based
+    data-mart that contains the data to answer 90% of the ad-hoc questions and is
+    capable of generating the modeling data from. Alternative to change-history is
+    the storage of monthly snapshots, however, that makes time based selections and
+    models much more difficult. Note that the playground is intended to contain **transformed** staging
+    area data, not a copy of the original. Moreover, the playground should ideally **only** contain
+    data from the staging area in order to prevent non-replicable models.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'From the data mart, the data scientist creates two types of data for the modeling:
+    analytical data and operational data. Analytical data refers to the data used
+    to build the model. It is historic data, and is properly split up in train/test/validate.
+    The operational data refers to the data that is needed for scoring. Note that,
+    since the playground only contains historic data, the operational data refers
+    to the format of the data only, not to its recency. This is an important point,
+    as I’ve encountered multiple situations where the data scientists imagined that
+    they needed to have the most recent data in order to score the model (in the development
+    environment). This placed an unreasonable pressure on IT to deliver data with
+    a high frequency in a development environment, with all the undesirable consequences
+    that come from not separating model development from model production.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once the model is built, that is: trained, tested, validated and confirmed
+    to score on the operational data, the model can be placed in pre-production. Rather
+    than this being a separate environment, it turns out more practical to reserve
+    an area in the development environment specifically for this. In terms of the
+    storage of the model, it can be a folder in the model repository, in terms of
+    the database, it is best practice to not allow the data scientists create the
+    required tables, but to provide the table create statements to IT in order to
+    discuss naming conventions and such. After table creation by IT, the data scientists
+    can insert the operational test data into the table in order to show that the
+    model scores in pre-production. This is important in order to identify any overlooked
+    dependencies.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In order to have the model run in production, IT needs to make the operational
+    data available in the production environment. There are two routes for that. First
+    of all, since IT knows exactly what they placed in the read-only staging area,
+    they can make this available in the production environment. All the data preparation
+    of the model then comes down to the data scientists, who build this as part of
+    the model scoring job. When this scenario is explained to IT, they invariably
+    want to take over and provide the exact data as needed for the model using their
+    preferred ETL tooling. The data scientists are then tasked to document the data
+    transformations in a way that IT can rebuild this. Typically this is not without
+    challenge, as data scientists come up with very creative ways to transform the
+    data, which might not be easy to archive in ETL tools. In practice, it comes down
+    to choosing the middle road: IT provides semi-manufactured data, upon which the
+    data science work stream completes the remainder and subsequently scores the model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is best practice to not have the data scientists migrate the model to production.
+    It maybe one member of the data science team with a strong IT background and awareness
+    of the IT policies who becomes the IT-data science liaison and it able to assist
+    the migration.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data science requires a close interplay between IT and the data scientists.
+    It’s a bottom up process and it’s agile. That means, prior to doing the analyses,
+    it cannot be written out as a list of specifications that need to be followed
+    to the letter. Typically, data scientists start with investigating samples of
+    data in combination with understanding the business, after which requirements
+    for model building and data delivery will follow. This happens in an iterative
+    way and with advancing insights come new or altered data requirements. An IT department
+    that understand this process and can play this game, can greatly contribute to
+    the success of data science and the enhancements it brings to the business.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Concluding remarks**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article it was discussed how IT architecture can support the workflow
+    of data scientists. I’ve found this architecture to hold for many companies that
+    not have data science as their core business (most industries such as financial
+    institutions, retail industry, telecoms, and manufacturing industry as opposed
+    to companies that, say, specialize in deep learning). I’m also aware of rapidly
+    changing technology, exchanging the traditional databases with Hadoop and alike.
+    In those cases I’ve found that modeling against a database in a training environment
+    (or at least having a database as part of the model development environment) often
+    offers the biggest flexibility. The value of data science comes from the ability
+    to play with data to determine the next steps in the analysis. Any architecture
+    that enhances that ability will result in better outcomes for data science, and
+    hence, better decision making.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.linkedin.com/pulse/data-science-architecture-dr-olav-laudy)
+    .'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Olav Laudy](https://www.linkedin.com/profile/view?id=10505631) is
+    Chief Data Scientist, IBM Analytics, Asia-Pacific.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data Hierarchy of Needs](/2015/08/data-hierarchy-needs.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automatic Statistician and the Profoundly Desired Automation for Data Science](/2015/02/automated-statistician-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Inconvenient Truth About Data Science](/2015/05/data-science-inconvenient-truth.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Data Mesh & Its Distributed Data Architecture](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n07, Feb 16: How to Learn Math for Machine…](https://www.kdnuggets.com/2022/n07.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Mesh Architecture: Reimagining Data Management](https://www.kdnuggets.com/2022/05/data-mesh-architecture-reimagining-data-management.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, May 18: 5 Free Hosting Platform For Machine…](https://www.kdnuggets.com/2022/n20.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Exploring Data Mesh: A Paradigm Shift in Data Architecture](https://www.kdnuggets.com/exploring-data-mesh-a-paradigm-shift-in-data-architecture)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Build a Scalable Data Architecture with Apache Kafka](https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

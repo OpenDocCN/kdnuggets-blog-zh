@@ -1,0 +1,593 @@
+- en: A Complete Guide To Survival Analysis In Python, part 2
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/07/guide-survival-analysis-python-part-2.html](https://www.kdnuggets.com/2020/07/guide-survival-analysis-python-part-2.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Pratik Shukla](https://medium.com/@shuklapratik22), Aspiring machine
+    learning engineer**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the [first article of this three-part series](https://www.kdnuggets.com/2020/07/complete-guide-survival-analysis-python-part1.html),
+    we saw the basics of the Kaplan-Meier Estimator. Now, it’s time to implement the
+    theory we discussed in the first part.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Example 1: Kaplan-Meier Estimator (Without any groups)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let’s code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(1) Import required libraries:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ea17a33a34abdd2d558870ad09929871.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(2) Read the dataset:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/187a2546b6389939b1dd9180484386a1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(3) Columns of our dataset:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a9b07d0cf3e9354737eca4b10b8bc29c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(4) Additional info about dataset:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It gives us information about the data types and the number of rows in each
+    column that has null values. It’s very important for us to remove the rows with
+    a null value for some of the methods in survival analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/88dff26ae6e1e545e2c79084c608b3d2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(5) Statistical info about dataset:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It gives us some statistical information like the total number of rows, mean,
+    standard deviation, minimum value, 25th percentile, 50th percentile, 75th percentile,
+    and maximum value for each column in our dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/72b0fb00ba66a70c727d6273d8cd0250.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(6) Find out sex distribution using histogram:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This gives us a general idea about how our data is distributed. In the following
+    graph, you can see that around 139 values have a status of 1, and around 90 values
+    have a status of 2\. It means that in our dataset, there are 139 males and around
+    90 females.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a97dfc46129576dc3aecfcb5993188b2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(7) Create an object for KaplanMeierFitter:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/67d223752b4c5f19fdf904627d5b6b2a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(8) Organize the data:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we need to organize our data. We’ll add a new column in our dataset that
+    is called “dead”. It stores the data about whether a person that is a part of
+    our experiment is dead or alive (based on the status value). If our status value
+    is 1 then that person is alive, and if our status value is 2 then the person is
+    dead. It’s a very crucial step for what we need to do in the next step. As we
+    are going to store our data in columns called censored and observed. Where observed
+    data stores the value of dead persons in a specific timeline and censored data
+    stores the value of alive persons or persons that we’re not going to investigate
+    at that timeline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5c8e0a899f28b1679841154557f1c142.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(9) Fitting our data into object:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here our goal is to find the number of days a patient survived before they died.
+    So our event of interest will be “death”, which is stored in the “dead” column.
+    The first argument it takes is the timeline for our experiment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/dc4ddb3f430925fdde21f8e0c113e731.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(10) Event table :**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One most important method of *kmf* object is “event_table”. It gives us various
+    information for our data fitted. Let’s have a look at it column-by-column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '(1) *Event_at*: It stores the value of the timeline for our dataset, i.e.,
+    when was the patient observed in our experiment or when was the experiment conducted.
+    It can be the number of minutes, days, months, years etc. In our case, it’s going
+    to be the number of days. It basically stores the value of survival days for a
+    patient.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '(2) *At_risk*: It stores the number of current patients. At the start, it will
+    be the total number of patients we are going to observe in our experiment. If
+    at a certain time, new patients are added, then we have to increase it’s value
+    accordingly. Basically, we can say that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*at_risk = current patients at_risk + entrance — removed*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '(3) *Entrance*: It stores the value of new patients in a given timeline. It’
+    possible that while we have other patients, some new patients are also diagnosed
+    with cancer. That’s why we add it here.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '(4) *Censored*: Our ultimate goal is to find the survival probability for a
+    patient. If at a specific timeline person under experiment is alive, then that
+    person goes into the censored category. If we don’t have information about when
+    a patient died, then we add it to the censored data. Other possibilities are if
+    a patient chooses to shift to another town where the experiment can’t be conducted,
+    then we add that patient into the censored category.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '(5) *Observed*: The number of patients that died during the experiment.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '(6) *Removed*: It stores the values of patients that are no longer part of
+    our experiment. If a person died or is censored, then they fall into this category.
+    In short,'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Removed = Observed + Censored*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fdfcf4cec13132d202af843d8cf41ba2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(11) Calculating the probability of survival for individual timelines:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here we are going to use the following formula to count it by hand:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5e2377712258505b01fc86552f643ddc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/c2a7cfba382ee59764789d1b68206ab0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/45043c392cd42193c0fd2ea9172dcedf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(12) Event_At_5:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4dc17dd9a0b3bf38d0452b4ac1ffbf4e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/7a5659fc394847d57ba7e7fac4c2ef38.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(13) Event_At_11:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/56dcccebaeec8a13b3d75388b65c751b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/ab2167e555e77b5bf9dfedc7189756da.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now what we found here is the probability for a certain period of time only.
+    What we want is the probability for the entire time period for a patient, i.e.,
+    the probability of the patient surviving all the rounds of experiment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This seems confusing, right?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s take a very simple example to understand the concept of conditional probability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’ say we have a total of 15 balls in a non-transparent box. Out of the 15
+    balls, we have 7 black balls, 5 red balls, and 3 green balls. Here’s a pictorial
+    view for that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4bf652b5c6d9f1a73f6225c0a51faa2a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now let’s find some probabilities!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Probability for choosing a red ball :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice that we have a total of 5 red balls out of 15 balls.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/754f1c8d2a482be7104e2ef024c27713.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'probability of choosing 2nd red ball:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since we’ve removed a ball that was red, the total number of red balls we have
+    is 4, and the total number of balls we have is 14.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c7d6a6314f7e8b1e99c6c4740445b616.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Now what my point here is: What if we want to find the probability of both
+    the balls selected to be red. This is our case here. Like we want to find the
+    probability that we know that a patient has survived the 1st time interval, and
+    we want to find the probability of them surviving the 2nd time interval given
+    that they have survived the 1st time interval. My point here is we just don’t
+    want to find the probability of the 2nd time interval only. We want the total
+    probability of them surviving the time period.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the case of the balls, we want to find out what’s the probability that both
+    of the selected balls are red?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d89fcf9507e0b23d409a98cdafb08549.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Probability of both red balls.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here our goal is to find the probability for the entire timeline of that person.
+    Like they survived the 1st, 2^(nd), and 3rd timeslines, then our survival probability
+    will be:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b196ce9676cf4e3225be5ccec91574b5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Getting back to our main example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(14) Surv_After_probability:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We want to find the probability that a patient has survived through all the
+    timeline till now. Now we need to find the actual survival probability for a patient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/aa8edf86f301d539450b61f0a89b37e1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/c26f9b51e9cb0cd1d1b1e356a65a95e4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/8654f363ae9c31a5ed9fb7931c9d3fa6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(15) Predict function:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now the *kmf* object’s predict function does all of this work for us. But it’s
+    always good to know the logic behind it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e7f822e9679fb550a9a988ac2251a478.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(16) Finding survival probability for an array of the timeline:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can find the probability for an array of time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a08ace7735561584c5951ae0c7918668.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(17) Get survival probability for the whole timeline:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *kmf* object’s *survival_function_* gives us the complete data for our timeline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a58b9bfafa592ff2fe0df27c70eefb7e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Explanation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The survival probability for a patient at timeline 0 is 1\. If you think it
+    over, then you can understand that the probability that a person dies on the 1st
+    day of diagnosis is nearly equal to 0\. So we can say that the survival probability
+    is as high as possible. As the timeline increases, the probability of survival
+    decreases for a patient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(18) Median:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It provides the number of days where on average, 50% of patients survived.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0b87bdfb43c0b4d8c43c4499a91a1b7d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: From the above code, we can say that, on average, a person lives 310 days after
+    the day of diagnosis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(19) Plot the graph:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here we can plot the graph for survival probability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cee4e745e27ffbed64bdc436f835273c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(20) Confidence interval:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The confidence interval gives us the range of values we are fairly sure our
+    true values lie in. Here you can see in the above graph the light blue color shade
+    represents the confidence interval of survival. From that, we can say that the
+    probability at that timeline certainly lies between that confidence interval only.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d27ee7049bd6d6edc7fe7d64350488b4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now all the information we have is for the survival of a person. Now we are
+    going to see what is the probability for a person to die at a certain timeline.
+    Here notice that a higher survival probability is good for a person, but higher
+    cumulative density (probability of a person to die) is not so good!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(21) Probability of a person to die:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9e60d447937823fbe829840b8942984e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here notice that the denominator value is the subjects at risk just before time
+    (t). In a simple way, we can say that the person *at_risk* of the previous row.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The formula for cumulative density:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b8bf4961186172b185cda37252c51cda.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Cumulative Density.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Calculate the probability by hand:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/39c7a1109b9694e849780dac311372f0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*t = 0*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/41a445fc7e08cce76657f82ecc1e6efa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*t = 5*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f22a5b780438e55dcf2bb7e7c3863865.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*t = 11*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Find the cumulative density:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8064b0096eae86d08ac1f045c08e4c8b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/0d2007990349a8abcbb73e05e22acb56.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/42ec10b7f1b369f3526d4f23fb8fc64d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(22) Plot the graph:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6834c2a374cbca7e9fbe5c6f368ba535.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Notice that, as the number of survival days increases, the probability of a
+    person dying increases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Example 2: Estimating hazard rates using Nelson-Aalen'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Hazard function:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The survival functions are a great way to summarize and visualize the survival
+    dataset. However, it is not the only way. If we are curious about the hazard function
+    h(t) of a population, we, unfortunately, can’t transform the Kaplan Meier estimate.
+    For that, we use the Nelson-Aalen hazard function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cf963b5dd953218aa0959c4b84e28312.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Hazard Function*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Where,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*di* = number of deaths at time *ti*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*ni* = number of patients at the start.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(23) Import library:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0b37bf1bf58d4eb48c7d1bee88e8271b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(24) Fitting the data:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ee157da56fb9eaa6872bd1a437132319.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(25) Cumulative hazard:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Keep in mind we take *at_risk* of the current row:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/22dd1a24a5e064b69aa95846cfcd3848.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/539dc0f8ff0ff19b003e47b9fbd8ba57.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/591e70756bee336c30a0853c9d0e3571.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/e8c61d60b356f98c4fcd83074065cb7e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/9155f052dd21f86632d0d3834e73ff96.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/e413ca91ce0cc8c0ec555363ccb13b2c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**(26) Plot the data:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c15ccfe05d3ef6b5766dc90929a29593.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The cumulative hazard has less obvious understanding than the survival functions,
+    but the hazard functions are the basis of more advanced techniques in survival
+    analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**(27) Predict a value:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c8170c41ed8ec977ddac5413cb272c2a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Putting it all together:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[You can download the jupyter notebooks from here.](https://drive.google.com/open?id=1Vj9UNMfcsqP3S7D3-oQRjEuc2Gnw43dF)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In [the next article](https://www.kdnuggets.com/2020/07/guide-survival-analysis-python-part-3.html),
+    we’ll discuss the log-rank test and cox regression with an example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/@shuklapratik22/a-complete-guide-to-survival-analysis-in-python-b0e6354d599d).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Pratik Shukla](https://medium.com/@shuklapratik22) is an aspiring
+    machine learning engineer who loves to put complex theories in simple ways. Pratik
+    pursued his undergraduate in computer science and is going for a master''s program
+    in computer science at University of Southern California.  “Shoot for the moon.
+    Even if you miss it you will land among the stars. -- Les Brown”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Complete Guide To Survival Analysis In Python, part 1](https://www.kdnuggets.com/2020/07/complete-guide-survival-analysis-python-part1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Survival Analysis for Business Analytics](https://www.kdnuggets.com/2017/11/survival-analysis-business-analytics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Challenges of Building a Predictive Churn Model](https://www.kdnuggets.com/2017/03/datascience-building-predictive-churn-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[The Complete Collection of Data Science Cheat Sheets - Part 1](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Complete Collection of Data Science Cheat Sheets - Part 2](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Complete Collection Of Data Repositories - Part 1](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Complete Collection Of Data Repositories - Part 2](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Complete Collection of Data Science Books - Part 1](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Complete Collection of Data Science Books - Part 2](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

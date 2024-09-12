@@ -1,0 +1,274 @@
+- en: How to Anonymise Places in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/12/anonymise-places-python.html](https://www.kdnuggets.com/2022/12/anonymise-places-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![How to Anonymise Places in Python](../Images/a7359356a8dc0b6bb623713f503486cf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Max Chen](https://unsplash.com/@maxchen2k?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, I illustrate how to identify and anonymise places in Python, **without
+    the usage of NLP techniques, such as Named Entity Recognition.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: Places identification is based on a gazetteer, which is built from the [Geonames
+    Database](http://www.geonames.org/).
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Geonames is a Web service, containing (almost) all the places in the world.**
+    The Geonames database can be downloaded for free at this [link](https://download.geonames.org/export/dump/).
+    You can download the full database, covering all the world countries, or only
+    one specific country.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The idea behind this article is to build a **gazetteer **from the Geonames Database
+    and exploit it to recognise places in a sentence. In practice, **the implemented
+    algorithm searches whether every word in the sentence is contained in the gazetteer
+    or not**. In order to search also for places longer than one word, **ngrams are
+    considered**.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'The article is organised as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: import the Geonames Database
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: identify places in a sentence
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: anonymise places in a sentence
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: extend the anonymise function
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Import the Geonames Database
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The first step involves importing the Geonames Database, which can be downloaded
+    from [this link](https://download.geonames.org/export/dump/). You can choose whether
+    to import the full database (AllCountries.zip) or a specific country (e.g. IT.zip
+    for Italy). Every country is identified by its identification code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The full database is more complete, but it requires more processing time than
+    a single-country database.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Thus, you should choose the right database, according to the text to be processed.
+    In this tutorial, I focus on the Italian database, but the same code can be also
+    exploited by other databases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'From the [Geonames link](https://download.geonames.org/export/dump/), I download
+    the IT.zip file, I decompress it and I put in my working directory:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![How to Anonymise Places in Python](../Images/d385c71a7b50481fc793614b03dd93f5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Then I import it into a Pandas dataframe:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![How to Anonymise Places in Python](../Images/5bc2b21827b501363c019affc257fb98.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The column 1 of the dataframe contains the list of places, which is used to
+    build the gazetteer:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The implemented gazetteer contains 119.539 places.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Identify Places in a Sentence
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Now I define a function which receives as input a text and then returns all
+    the places contained in the text. The function performs the following operations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: remove all punctuation from the text
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: split the sentence in tokens, separated by the space character. This can be
+    done through the `split()` function
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'starting from the identified tokens, build all the possible ngrams, with n
+    ? 5\. I exploit the `ngrams` function of the `nltk` library to split the text
+    into ngrams. For example in the sentence: *Oggi sono andata a Parigi*, the ngrams
+    with n ? 5 include:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: starting from the biggest ngrams (n = 5), search if each ngram is contained
+    in the gazetteer. If so, a place is found and can be added to the list of found
+    places and remove the place from the original text, otherwise, continue. Note
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The full code of the function is the following one:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now I can test the function with an example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'which gives the following output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Anonymise Places in a Sentence
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Now, I’m ready to exploit the previous defined function to anonymise function.
+    Simply, I can replace the found places with a symbolic character, such as X. All
+    the searching operations must be done on a copy of the original text, in order
+    to preserve the original text (i.e. punctuation is remove for manipulation).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here the complete function for anonymisation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Extend the Anonymise Function
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'The implemented function can be extended with a gazetteer covering all the
+    world. However, the GeoNames database for all the world is about 1.5 GB thus resulting
+    difficult to manage. For this reason, you can download it, load in Pandas and
+    then select only the interesting column (which corresponds to column 1) and export
+    the result as a new csv file, which is about 274 MB:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: The previous operation may require a while, since the file is quite huge. Then,
+    you can exploit this new file as a gazetteer, instead of IT.txt.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In this article, I have described how to anonymise places in Python without
+    the usage of NLP techniques. The proposed methodology is based on the usage of
+    a gazetteer, which is built from the Geonames Database.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The full code of this tutorial can be downloaded from my [Github Repository](https://github.com/alod83/data-science/blob/master/TextAnalysis/Anonymise%20Places.ipynb).
+    The tutorial also contains a function test in `gradio`, a very powerful Python
+    library for Web Apps. Stay tuned for a tutorial on `gradio` :)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Angelica Lo Duca](https://alod83.altervista.org/)** ([Medium](https://alod83.medium.com/))
+    (@alod83)works as a researcher at the Institute of Informatics and Telematics
+    of the National Research Council (IIT-CNR) in Pisa, Italy. She is a professor
+    of "Data Journalism" for the Master degree course in Digital Humanities at the
+    University of Pisa. Her research interests include Data Science, Data Analysis,
+    Text Analysis, Open Data, Web Applications, and Data Journalism, applied to society,
+    tourism, and cultural heritage. She used to work on Data Security, Semantic Web,
+    and Linked Data. Angelica is also an enthusiastic tech writer.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/how-to-anonymise-places-in-python-55597d0ded24).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[The 5 Best Places To Host Your Data Science Portfolio](https://www.kdnuggets.com/2022/07/5-best-places-host-data-science-portfolio.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Step up your Python game with Fast Python for Data Science!](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Enum: How To Build Enumerations in Python](https://www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simplifying Decision Tree Interpretability with Python & Scikit-learn](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sparse Matrix Representation in Python](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,312 @@
+- en: 'Diffusion and Denoising: Explaining Text-to-Image Generative AI'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/diffusion-and-denoising-explaining-text-to-image-generative-ai](https://www.kdnuggets.com/diffusion-and-denoising-explaining-text-to-image-generative-ai)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Diffusion and Denoising: Explaining Text-to-Image Generative AI](../Images/ddf316fd3e2893f67a9d64b6401c6fef.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '## The Concept of Diffusion'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Denoising diffusion models are trained to pull patterns out of noise, to generate
+    a desirable image. The training process involves showing model examples of images
+    (or other data) with varying levels of noise determined according to a noise scheduling
+    algorithm, intending to predict what parts of the data are noise. If successful,
+    the noise prediction model will be able to gradually build up a realistic-looking
+    image from pure noise, subtracting increments of noise from the image at each
+    time step.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![diffusion and denoising process](../Images/e53be5f6aad31b14b122d1a17b57103c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Unlike the image at the top of this section, modern diffusion models don’t predict
+    noise from an image with added noise, at least not directly. Instead, they predict
+    noise in a latent space representation of the image. Latent space represents images
+    in a compressed set of numerical features, the output of an encoding module from
+    a variational autoencoder, or [VAE](https://en.wikipedia.org/wiki/Variational_autoencoder).
+    This trick put the “latent” in [latent diffusion](https://arxiv.org/pdf/2112.10752.pdf),
+    and greatly reduced the time and computational requirements for generating images.
+    As reported by the paper authors, latent diffusion speeds up inference by at least
+    ~2.7X over direct diffusion and trains about three times faster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: People working with latent diffusion often talk of using a “diffusion model,”
+    but in fact, the diffusion process employs several modules. As in the diagram
+    above, a diffusion pipeline for text-to-image workflows typically includes a text
+    embedding model (and its tokenizer), a denoise prediction/diffusion model, and
+    an image decoder. Another important part of latent diffusion is the scheduler,
+    which determines how the noise is scaled and updated over a series of “time steps”
+    (a series of iterative updates that gradually remove noise from latent space).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![latent diffusion model architecture diagram](../Images/e3eb94eb011d1bc8106e89dc07afa10a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Latent Diffusion Code Example
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We’ll use CompVis/latent-diffusion-v1-4 for most of our examples. Text embedding
+    is handled by a [CLIPTextModel and CLIPTokenizer](https://en.wikipedia.org/wiki/DALL-E#Contrastive_Language-Image_Pre-training_(CLIP).
+    Noise prediction uses a ‘[U-Net](https://en.wikipedia.org/wiki/U-Net),’ a type
+    of image-to-image model that originally gained traction as a model for applications
+    in biomedical images (especially segmentation). To generate images from denoised
+    latent arrays, the pipeline uses a variational autoencoder ([VAE](https://en.wikipedia.org/wiki/Variational_autoencoder))
+    for image decoding, turning those arrays into images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll start by building our version of this pipeline from HuggingFace components.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Make sure to check[ pytorch.org](https://pytorch.org/get-started/locally/) to
+    ensure the right version for your system if you’re working locally. Our imports
+    are relatively straightforward, and the code snippet below suffices for all the
+    following demos.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now for the details. Start by defining image and diffusion parameters and a
+    prompt.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Initialize your pseudorandom number generator with a seed of your choice for
+    reproducing your results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now we can initialize the text embedding model, autoencoder, a U-Net, and the
+    time step scheduler.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Encoding the text prompt as an embedding requires first tokenizing the string
+    input. Tokenization replaces characters with integer codes corresponding to a
+    vocabulary of semantic units, e.g. via byte pair encoding ([BPE](https://en.wikipedia.org/wiki/Byte_pair_encoding)).
+    Our pipeline embeds a null prompt (no text) alongside the textual prompt for our
+    image. This balances the diffusion process between the provided description and
+    natural-appearing images in general. We’ll see how to change the relative weighting
+    of these components later in this article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: We initialize latent space as random normal noise and scale it according to
+    our diffusion time step scheduler.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Everything is ready to go, and we can dive into the diffusion loop itself. We
+    can keep track of images by sampling periodically throughout so we can see how
+    noise is gradually decreased.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: At the end of the diffusion process, we have a decent rendering of what you
+    wanted to generate. Next, we’ll go over additional techniques for greater control.
+    As we’ve already made our diffusion pipeline, we can use the streamlined diffusion
+    pipeline from HuggingFace for the rest of our examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Controlling the Diffusion Pipeline
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'We’ll use a set of helper functions in this section:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We’ll start with the most well-known and straightforward application of diffusion
+    models: image generation from textual prompts, known as text-to-image generation.
+    The model we’ll use was released into the wild (of the Hugging Face Hub) by the
+    academic[ ](https://ommer-lab.com/)lab that published the latent diffusion paper.
+    Hugging Face coordinates workflows like latent diffusion via the convenient pipeline
+    API. We want to define what device and what floating point to calculate based
+    on if we have or do not have a GPU.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Guidance Scale
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you use a very unusual text prompt (very unlike those in the dataset), it’s
+    possible to end up in a less-traveled part of latent space. The null prompt embedding
+    provides a balance and combining the two according to guidance_scale allows you
+    to trade off the specificity of your prompt against common image characteristics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Since we generated the prompt using the 9 guidance coefficients, you can plot
+    the prompt and view how the diffusion developed. The default guidance coefficient
+    is 0.75 so on the 7th image would be the default image output.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Negative Prompts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Sometimes latent diffusion really “wants” to produce an image that doesn’t match
+    your intentions. In these scenarios, you can use a negative prompt to push the
+    diffusion process away from undesirable outputs. For example, we could use a negative
+    prompt to make our Martian astronaut diffusion outputs a little less human.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: You should receive outputs that follow your prompt while avoiding outputting
+    the things described in your negative prompt.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Image Variation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Text-to-image generation from scratch is not the only application for diffusion
+    pipelines. Actually, diffusion is well-suited for image modification, starting
+    from an initial image. We’ll use a slightly different pipeline and pre-trained
+    model tuned for image-to-image diffusion.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: One application of this approach is to generate variations on a theme. A concept
+    artist might use this technique to quickly iterate different ideas for illustrating
+    an exoplanet based on the latest research.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We’ll first download a public domain artist’s concept of planet 1e in the TRAPPIST
+    system ([credit: NASA/JPL-Caltech](https://photojournal.jpl.nasa.gov/catalog/PIA22093)).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then, after downscaling to remove details, we’ll use a diffusion pipeline to
+    make several different versions of the exoplanet TRAPPIST-1e.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![diffusion image variation test](../Images/23eb7c1af72b1ce4acf0e8bc46b4e436.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: By feeding the model an example initial image, we can generate similar images.
+    You can also use a text-guided image-to-image pipeline to change the style of
+    an image by increasing the guidance, adding negative prompts and more such as
+    “non-realistic” or “watercolor” or “paper sketch.” Your mile may vary and adjusting
+    your prompts will be the easiest way to find the right image you want to create.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusions
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Despite the discourse behind diffusion systems and imitating human generated
+    art, diffusion models have other more impactful purposes. It has [been](https://github.com/microsoft/foldingdiff)
+    [applied to](https://www.pnas.org/doi/10.1073/pnas.0910390107) [protein folding
+    prediction](https://arxiv.org/abs/2305.04120) for protein design and drug development.
+    Text-to-video is also an [active area](https://arxiv.org/abs/2311.15127) of [research](https://arxiv.org/abs/2211.13221) and
+    is offered by several companies (e.g. [Stability AI](https://stability.ai/stable-video),
+    [Google](https://imagen.research.google/video/)). Diffusion is also an [emerging
+    approach](https://arxiv.org/abs/2305.04120) for [text-to-speech](https://arxiv.org/abs/2304.11750) applications.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s clear that the diffusion process is taking a central role in the evolution
+    of AI and the interaction of technology with the global human environment. While
+    the intricacies of copyright, other intellectual property laws, and the impact
+    on human art and science are evident in both positive and negative ways. But what
+    is truly a positive is the unprecedented capability AI has to understand language
+    and generate images. It was AlexNet that had computers analyze an image and output
+    text, and only now computers can analyze textual prompts and output coherent images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.exxactcorp.com/blog/deep-learning/diffusion-and-denoising-explaining-text-to-image-generative-ai).
+    Republished with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Kevin Vu](https://blog.exxactcorp.com/)** manages [Exxact Corp blog](https://blog.exxactcorp.com/)
+    and works with many of its talented authors who write about different aspects
+    of Deep Learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Generative AI Playground: Text-to-Image Stable Diffusion with…](https://www.kdnuggets.com/2024/02/intel-generative-ai-playground-text-to-image-stable-diffusion)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stable Diffusion: Basic Intuition Behind Generative AI](https://www.kdnuggets.com/2023/06/stable-diffusion-basic-intuition-behind-generative-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Become an AI Artist Using Phraser and Stable Diffusion](https://www.kdnuggets.com/2022/09/become-ai-artist-phraser-stable-diffusion.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Ways to Generate Hyper-Realistic Faces Using Stable Diffusion](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 7 Diffusion-Based Applications with Demos](https://www.kdnuggets.com/2022/10/top-7-diffusionbased-applications-demos.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Explaining Explainable AI for Conversations](https://www.kdnuggets.com/2022/10/explaining-explainable-ai-conversations.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

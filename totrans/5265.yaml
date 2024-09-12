@@ -1,0 +1,309 @@
+- en: 'How To Write Better SQL Queries: The Definitive Guide – Part 1'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-1.html/2](https://www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-1.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 3\. Don’t Make Queries More Complex Than They Need To Be
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The data type conversions bring you to a next point: you should not over-engineer
+    your queries. Try to keep them simple and efficient. This might seem too simple
+    or stupid to even be a tip, especially because queries can get complex.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, you’ll see in the examples that are mentioned in the next sections
+    that you can easily start making simple queries more complex than they need to
+    be.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The `OR` Operator**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When you use the `OR` operator in your query, it’s likely that you’re not using
+    an index.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Remember** that an index is a data structure that improves the speed of the
+    data retrieval in your database table, but it comes at a cost: there will be additional
+    writes and additional storage space is needed to maintain the index data structure.
+    Indexes are used to quickly locate or look up data without having to search every
+    row in a database every time the database table is accessed. Indexes can be created
+    by using one or more columns in a database table.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you don’t make use of the indexes that the database includes, your query
+    will inevitably take longer to run. That’s why it’s best to look for alternatives
+    to using the `OR` operator in your query;
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Consider the following query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'You can replace the operator by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A condition with IN; or
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Two `SELECT` statements with a `UNION`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Tip**: here, you need to be careful not to unnecessarily use the `UNION`operation
+    because you go through the same table multiple times. At the same time, you have
+    to realize that when you use a `UNION` in your query, the execution time will
+    increase. Alternatives to the `UNION` operation are: reformulating the query in
+    such a way that all conditions are placed in one `SELECT` instruction, or using
+    an `OUTER JOIN` instead of `UNION`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Tip**: keep in mind also here that, even though `OR` -and also the other
+    operators that will be mentioned in the following sections- likely isn’t using
+    an index, index lookups aren’t always preferred!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The `NOT` Operator**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When your query contains the `NOT` operator, it’s likely that the index is
+    not used, just like with the `OR` operator. This will inevitably slow down your
+    query. If you don’t know what is meant here, consider the following query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This query will definitely run slower than you would maybe expect, mainly because
+    it’s formulated a lot more complex than it could be: in cases like this one, it’s
+    best to look for an alternative. Consider replacing `NOT` by comparison operators,
+    such as `>`, `<>` or `!>`; The example above might indeed be rewritten and become
+    something like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: That already looks way neater, doesn’t it?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The `AND` Operator**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `AND` operator is another operator that doesn’t make use of the index and
+    that can slow your query down if used in an overly complex and inefficient way,
+    like in the example below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'It’s better to rewrite this query and use `BETWEEN` operator:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**The **ANY** and **ALL** Operators**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also the `ALL` and `ALL` operators are some that you should be careful with
+    because, by including these into your queries, the index won’t be used. Alternatives
+    that will come in handy here are aggregation functions like `MIN`or `MAX`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Tip**: in cases where you make use of the proposed alternatives, you should
+    be aware of the fact that all aggregation functions like `SUM`, `AVG`, `MIN`, `MAX`over
+    many rows can result in a long-running query. In such cases, you can try to either
+    minimize the amount of rows to handle or pre-calculate these values. You see once
+    again that it’s important to be aware of your environment, your query goal, …
+    when you make decisions on which query to use!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Isolate Columns in Conditions**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Also in cases where a column is used in a calculation or in a scalar function,
+    the index isn’t used. A possible solution would be to simply isolate the specific
+    column so that it no longer is a part of the calculation or the function. Consider
+    the following example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This is looks funky, huh? Instead, try to reconsider the calculation and rewrite
+    the query to something like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 4\. No Brute Force
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This last tip actually means that you shouldn’t try to restrict the query too
+    much because it can affect its performance. This is especially true for joins
+    and for the `HAVING` clause.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Joins**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The Order Of Tables**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When you join two tables, it can be important to consider the order of the tables
+    in your join. If you notice that one table is considerably larger than the other
+    one, you might want to rewrite your query so that the biggest table is placed
+    last in the join.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Redundant Conditions on Joins**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When you add too many conditions to your joins, you basically obligate SQL to
+    choose a certain path. It could be, though, that this path isn’t always the more
+    performant one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The `HAVING` Clause**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `HAVING` clause was originally added to SQL because the `WHERE` keyword
+    could not be used with aggregate functions. `HAVING` is typically used with the `GROUP
+    BY` clause to restrict the groups of returned rows to only those that meet certain
+    conditions. However, if you use this clause in your query, the index is not used,
+    which -as you already know- can result in a query that doesn’t really perform
+    all that well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you’re looking for an alternative, consider using the `WHERE` clause. Consider
+    the following queries:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: The first query uses the `WHERE` clause to restrict the number of rows that
+    need to be summed, whereas the second query sums up all the rows in the table
+    and then uses `HAVING` to throw away the sums it calculated. In these types of
+    cases, the alternative with the `WHERE` clause is obviously the better one, as
+    you don’t waste any resources.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You see that this is not about limiting the result set, rather about limiting
+    the intermediate number of records within a query.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note** that the difference between these two clauses lies in the fact that
+    the `WHERE` clause introduces a condition on individual rows, while the `HAVING`clause
+    introduces a condition on aggregations or results of a selection where a single
+    result, such as `MIN`, `MAX`, `SUM`,… has been produced from multiple rows.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You see, evaluating the quality, writing and rewriting of queries is not an
+    easy job when you take into account that they need to be as performant as possible;
+    Avoiding anti-patterns and considering alternatives will also be a part of responsibility
+    when you write queries that you want to run on databases in a professional environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This list was just a small overview of some anti-patterns and tips that will
+    hopefully help beginners; If you’d like to get an insight into what more senior
+    developers consider the most frequent anti-patterns, check out [this discussion](https://stackoverflow.com/questions/346659/what-are-the-most-common-sql-anti-patterns).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Karlijn Willems](https://www.linkedin.com/in/karlijnwillems)** is a
+    data science journalist and writes for the [DataCamp community](https://www.datacamp.com/community/authors/karlijn-willems),
+    focusing on data science education, the latest news and the hottest trends. She
+    holds degrees in Literature and Linguistics and Information Management.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.datacamp.com/community/tutorials/sql-tutorial-query#gs.QQP_Fhg).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering SQL for Data Science](/2016/06/seven-steps-mastering-sql-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Most Underutilized Function in SQL](/2017/03/most-underutilized-function-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Doing Statistics with SQL](/2016/08/doing-statistics-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[The Definitive Guide To Switching Your Career Into Data Science](https://www.kdnuggets.com/2022/05/definitive-guide-switching-career-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Function Arguments: A Definitive Guide](https://www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Definitive Guide to Solving the Phantom Read in MySQL](https://www.kdnuggets.com/2022/06/definitive-guide-solving-phantom-read-mysql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Step by Step Guide to Reading and Understanding SQL Queries](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Write SQL in Native Python](https://www.kdnuggets.com/2022/02/easy-sql-native-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, December 7: Top 10 Data Science Myths Busted • 4…](https://www.kdnuggets.com/2022/n47.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

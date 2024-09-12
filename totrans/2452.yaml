@@ -1,0 +1,178 @@
+- en: Building a Tractable, Feature Engineering Pipeline for Multivariate Time Series
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Building a Tractable, Feature Engineering Pipeline for Multivariate Time
+    Series](../Images/ee523c67b75080a28800f479d5af0495.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by [Christophe Dion](https://unsplash.com/@chris_dion?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+    on [Unsplash](https://unsplash.com/photos/3KA1M16PuoE)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Accurate time series forecasting is crucial for business problems such as predicting
+    the evolution of material properties in manufacturing and sales forecasting. Modern
+    forecasting techniques include the use of machine learning algorithms like Xgboost
+    to build regression models on tabular data to predict the future. Tabular data
+    allows regression models to forecast by leveraging non-target factors like daily
+    crowd size of a retail store that correlates with the actual sales.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature engineering is essential to enrich the influential factors that enhance
+    forecasting accuracy. However, building a time series feature engineering pipeline
+    is not trivial because it involves different transformations at various stages
+    such as the aggregation of window values. Rolling window based features such as
+    “the average of two weeks of records” are basic yet useful for forecasting and
+    a pipeline that supports this type of feature generation is valuable. Furthermore,
+    the transformed features output order can be shuffled upon the transformations
+    and this poses the challenge for feature tracking. It is crucial to track and
+    validate the transformed features of a pipeline before the final model training.
+    This [github repository](https://github.com/JQGoh/multivariate_time_series_pipeline)
+    provides an example of designing a time series pipeline that serves the mentioned
+    needs and this article explains some of the key steps to achieve this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Scikit-learn based transformers may support the *get_feature_names_out()* function
+    to provide their output names upon the transformations. For example, [*OneHotEncoder
+    transformer*](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html#sklearn.preprocessing.OneHotEncoder.get_feature_names_out)
+    has this built-in function but not the *SimpleImputer* transformer. Scikit-learn
+    pipeline requires all the underlying transformers supporting the *get_feature_names_out()*
+    if we wish to retrieve the output names conveniently. Our solution is to design
+    a FeatureNamesMixin mixin class together with a [Factory Method](https://realpython.com/factory-method-python/)
+    design pattern class, *TransformWithFeatureNamesFactory*, to equip a transformer
+    with the *get_feature_names_out()* function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can then create a customized *SimpleImputer* and use it as part of a Scikit-learn
+    Pipeline’s steps or ColumnTransformer as shown below
+  prefs: []
+  type: TYPE_NORMAL
+- en: This only requires the transformer class initialized with any desired output
+    names specified by the parameter *names*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Any other transformers can also be customized similarly to support the retrieval
+    of output names provided we introduce the *get_feature_names_out()*. Here is an
+    example of the [*TsfreshRollingMixin*](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/tsfresh_transformers.py#L15)
+    class that leverages the [*roll_time_series()*](https://tsfresh.readthedocs.io/en/latest/api/tsfresh.utilities.html#tsfresh.utilities.dataframe_functions.roll_time_series)
+    utility function from TSFresh library to extract the rolling windows of time series.
+    To track the derived rolling window features, we simply require the features assigned
+    as the [*derived_names* attribute](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/tsfresh_transformers.py#L153-L168).
+    *TsfreshRollingMixin* class has the other helper functions like [*prepare_df()*](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/ceeb3e3ad639e64c9bc905686e590658133b315c/src/features/tsfresh_transformers.py#L97),
+    [*get_combined()*](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/ceeb3e3ad639e64c9bc905686e590658133b315c/src/features/tsfresh_transformers.py#L112)
+    to facilitate the casting of numpy arrays into pandas.DataFrame and combining
+    the derived features together with the input features. Interested readers are
+    welcome to study the [repository](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/master/src/features/tsfresh_transformers.py)
+    to understand better the implementation of this. Together with the [*extract_features()*](https://tsfresh.readthedocs.io/en/latest/api/tsfresh.feature_extraction.html#tsfresh.feature_extraction.extraction.extract_features)
+    of TSFresh, we can design a *TSFreshRollingTransformer* class that allows us to
+    specify the relevant [TSFresh parameters](https://tsfresh.readthedocs.io/en/latest/text/feature_extraction_settings.html)
+    to derive the desired time series features as shown below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We mark the derived features of *TSFreshRollingTransformer* with a names like
+    **(window #)** to indicate the aggregation window size.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In addition to the TSFresh derived time series features, [*RollingLagsTrasformer*](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/tsfresh_transformers.py#L171)
+    class shows an example of how to extract the lag value from a given rolling window
+    using the *TsfreshRollingMixin* class and track the output features with **(lag
+    #)** as the lag order. Any other specific transformation performed on a rolling
+    window can follow this example to design the transformers that are compatible
+    with the tractable pipelines.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[This script](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/master/src/features/make_features.py)
+    demonstrates the building of time series pipelines using the above transformers
+    to derive the features at different stages. For instance, the [feature](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/make_features.py#L73)
+    extracted from the first pipeline has a feature named *Pre-MedianImputer__Global_intensity*
+    to indicate that the raw feature “Global_intensity” is imputed based on the *SimpleImputer*
+    using the median strategy. Subsequently, [rolling based feature](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/make_features.py#L162)
+    derived with a name like *TSFreshRolling__Pre-MedianImputer–Global_intensity__maximum(window
+    30)* refers to the maximum of the imputed “Global_intensity” within a window size
+    of 30 steps. Finally, the rolling window based feature will be imputed followed
+    by standard scaling, and the [suggested name](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/make_features.py#L213)
+    *ImputeAndScaler__TSFreshRolling__Pre-MedianImputer–Global_intensity__median(window
+    30)* indicates that the raw feature “Global_intensity” has gone through all the
+    previously mentioned transformations. We can conveniently track the transformed
+    names provided by the pipelines based on the relevant markers and validate the
+    transformed outputs.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We complement this demonstration with an [example](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/master/src/models/train_and_predict.py)
+    of building a linear regression model using the [Darts](https://github.com/unit8co/darts)
+    package for forecasting. Once the pipelines are ready, it is straightforward to
+    load the input data set and derive the features accordingly. The following chart
+    shows the forecasting result based on a linear regression model trained using
+    the derived features from the pipelines. We hope this article can provide the
+    readers a basic template to build a time series pipeline conveniently for their
+    time series forecasting use cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building a Tractable, Feature Engineering Pipeline for Multivariate Time
+    Series](../Images/1552414f230e4b4d59d8f86d00c6e877.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Linear regression model based forecasting based on the engineered features from
+    the designed pipeline. Image by the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Jing Qiang Goh](https://twitter.com/JQGoh)** is a time series enthusiast.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Multivariate Time-Series Prediction with BQML](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](https://www.kdnuggets.com/building-a-formula-1-streaming-data-pipeline-with-kafka-and-risingwave)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building Your First ETL Pipeline with Bash](https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building Data Pipeline with Prefect](https://www.kdnuggets.com/building-data-pipeline-with-prefect)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Stores for Real-time AI & Machine Learning](https://www.kdnuggets.com/2022/03/feature-stores-realtime-ai-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

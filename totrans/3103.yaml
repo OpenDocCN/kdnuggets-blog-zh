@@ -1,0 +1,312 @@
+- en: 'IoT on AWS: Machine Learning Models and Dashboards from Sensor Data'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/06/zimbres-iot-aws-machine-learning-dashboard.html](https://www.kdnuggets.com/2018/06/zimbres-iot-aws-machine-learning-dashboard.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Rubens Zimbres](https://www.linkedin.com/in/rubens-zimbres), Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Google Colab has open source projects that help Data Scientists everywhere.
+    Inspired in this mindset, I developed my first IoT project using my notebook as
+    an IoT device and AWS IoT as infrastructure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So, I had a "simple" idea: collect CPU Temperature from my Notebook running
+    on Ubuntu, send to Amazon AWS IoT, save data, make it available for Machine Learning
+    models and dashboards.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'However, the operationalization of this idea is quite complex: first, develop
+    a Python notebook that runs Ubuntu command line internally (''sensors''), collecting
+    CPU temperature and is able to connect to AWS IoT via proper security protocols
+    using MQTT. Without using a MQTT broker like Mosquitto.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is necessary to create a Thing at AWS IoT, get the Certificates, create and
+    attach the Policy and create a SQL Rule to send data (JSON) to Cloud Watch and
+    Dynamo DB. Then, create a Data Pipeline from Dynamo DB to S3, so that the data
+    become available for a Machine Learning model and also to AWS Quick Sight dashboard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s get started by installing ''sensors'' in Ubuntu 16.04 and ''AWSIoTPythonSDK''
+    library in Anaconda 3:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s see what the ‘sensors’ command look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/82c2d2ab18a91a704f8880a9f54eb20a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Now, install AWSIoTPythonSDK library:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let''s start with the Python notebook: the following function was developed
+    to collect CPU Temperature with a delay of 5 seconds:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then, we run the notebook from Linux command line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/ce5145e73ef340db7ae016a891cad001.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Good. Now this code is inserted in basicPubSub.py notebook from AWSIoTPythonSDK
+    library like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Cool. We have a Python notebook that will connect to AWS IoT Core via MQTT protocol.
+    Now we set up the shadow (JSON file) at AWS IoT, that is similar to the 'device
+    twin' from Microsoft. Note that as I had only one device, I didn’t insert a device
+    ID in the JSON file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now we get the certificates .pem, .key files and rootCA.pem for a safe connection.
+    We type CTRL+ALT+T at Ubuntu and enter the command line and publish to a topic
+    ''-t'':'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We will receive the feedback from AWS IoT connection in the Linux shell, and
+    check in AWS IoT monitoring tool (after 1 minute) if connections were successful:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/7177fd039e2ed87c2d4478dafa3ad5dc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'It is also possible to see if the messages are being published (orange area)
+    and also the protocol used for the connection (on the left):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/941499f684dd7b4e951657720d97ea6d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Also, we see that the ''shadow'' is also being updated (center):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/e7e43d00421e4d3e1b8c499d87714f1f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Now we create a SQL rule to send data to Cloud Watch and also to Dynamo DB,
+    creating IAM roles, policies and permissions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/9a101f2e1a378e2363376ae28f716fcf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Image](../Images/734310ed2148a0933de572fb7b9f54ca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Data is then saved in DynamoDB, as a JSON file. Instead of timestamp, you can
+    use MessageID as the Primary Key.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/0cb9407ab4ec653e86db220e76b56ca7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Now we can visualize Cloud dynamics and data transfer in CloudWatch:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/664b5f745138cd0395f21246a0fd3b3d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Then we create a Data Pipeline from DynamoDB to S3 to be used by QuickSight:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/1be476996e3aa4cbd73c77d76c4d4989.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'It is also needed to create a JSON file and set up IAM permissions so that
+    Quick Sight can read from S3 bucket:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now we have our static plot of CPU Temperature in Quick Sight.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/fc12a46fa8ff728d3c2d49b569c3edd2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Also, S3 data (.JSON file) is now available for Machine Learning models, like
+    anomaly detection, prediction and classification, making possible to create a
+    pipeline with Sage Maker and Deep Learning libraries = FUN.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This was a very nice way to get in touch with Amazon AWS services, like EC2,
+    IoT, Cloud Watch, DynamoDB, S3, Quick Sight and Lambda. It's definitely not easy
+    to set up everything and their dependencies, but this part of the project costed
+    less than 1 USD. And generated a lot of fun !
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is the flowchart of the first part of the project at AWS:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/a747d00790333e65eed9bad2f560cb0a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Project Part 2 – Near Real-Time Dashboard
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now let's develop a second solution, using Streaming Data from AWS IoT that
+    is sent to Kinesis / Firehose and then to AWS ElasticSearch, and finally to Kibana,
+    a near real-time dashboard. You can opt to clean and extract data with Lambda
+    (or not) using AWS IoT as input and AWS Batch as output to connect with Kinesis.
+    Anyway, Kibana is able to interpret your JSON file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/dd47965d3e2952596fe435604fde331d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'First we must set up another rule for AWS IoT send telemetry to Kinesis Firehose
+    stream delivery:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/06b92365ebdbe5924ad2c04c0296fd43.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Then create an Elastic Search domain
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/7cd6885fb708b7f253dc0ef2da6aa256.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Setting up the access to a specific IP:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Then we create the Stream and Stream delivery with Kinesis Firehose.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/c275d7f80044f2f0ab3c9ee10ed3e2d3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Image](../Images/07ec9b798b92160182af451163f1a582.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Finally, we connect AWS Elasticsearch with Kibana, adjusting at Kibana’s ''Dev
+    Tools'':'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that Elasticsearch will provide a Kibana endopint. Finally, we have our
+    Near Real-Time Dashboard of CPU Temperature. It’s important to notice that we
+    are almost in a real-time environment. The issue here is that Kibana updates the
+    graphic each 5 seconds (or 15 if you want) but Elasticsearch has a minimum latency
+    of 60 seconds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can now visualize our fancy dashboard:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/0afd4b1e7d4fe0761d02d5c25ebe7440.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'More info and files at my GitHub - Repo 2018 (CPU Temperature – IoT Project):
+     [https://github.com/RubensZimbres/Repo-2018](https://github.com/RubensZimbres/Repo-2018)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Rubens Zimbres](https://www.linkedin.com/in/rubens-zimbres)** is a
+    Data Scientist, PhD in Business Administration with emphasis in Artificial Intelligence
+    and Cellular Automata. Currently works in Telecommunications area, developing
+    Machine Learning, Deep Learning models and IoT solutions for the financial sector
+    and agriculture.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[GANs in TensorFlow from the Command Line: Creating Your First GitHub Project](/2018/05/zimbres-first-github-project-gans.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Putting the “Science” Back in Data Science](/2017/09/science-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Applied to Big Data, Explained](/2017/07/machine-learning-big-data-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Prepare Your Data for Effective Tableau & Power BI Dashboards](https://www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[11 Best Practices of Cloud and Data Migration to AWS Cloud](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Setup and use JupyterHub (TLJH) on AWS EC2](https://www.kdnuggets.com/2023/01/setup-jupyterhub-tljh-aws-ec2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Datawig, an AWS Deep Learning Library for Missing Value Imputation](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The AIoT Revolution: How AI and IoT Are Transforming Our World](https://www.kdnuggets.com/2022/07/aiot-revolution-ai-iot-transforming-world.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, July 27: The AIoT Revolution: How AI and IoT Are…](https://www.kdnuggets.com/2022/n30.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

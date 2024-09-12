@@ -1,0 +1,567 @@
+- en: 'Build an Artificial Neural Network From Scratch: Part 1'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/11/build-artificial-neural-network-scratch-part-1.html](https://www.kdnuggets.com/2019/11/build-artificial-neural-network-scratch-part-1.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In my previous article [**Introduction to Artificial Neural Networks(ANN)**](https://towardsdatascience.com/introduction-to-artificial-neural-networks-ann-1aea15775ef9)**, **we
+    learned about various concepts related to ANN so I would recommend going through
+    it before moving forward because here I’ll be focusing on the implementation part
+    only. In this article series, we are going to build ANN from scratch using only
+    the [numpy](https://www.guru99.com/numpy-tutorial.html) Python library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this part-1, we will build a fairly easy ANN with just having 1 input layer
+    and 1 output layer and no hidden layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In part-2, we will build ANN with 1 input layer, 1 hidden layer, and 1 output
+    layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Why from scratch?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, there are many deep learning libraries([Keras](https://keras.io/), [TensorFlow](https://www.tensorflow.org/), [PyTorch](https://pytorch.org/) etc)
+    that can be used to create a neural network in a few lines of code. However, if
+    you really want to understand the in-depth working of a neural network, I suggest
+    you learn how to code it from scratch using Python or any other programming language.
+    So let's get started.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s create some random dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c81bdcaab407a183e947b7ab63b0c89f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Random dataset with binary values for simplicity
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the above table, we have five columns: `Person, X1, X2, X3, and Y`. Here
+    1 refers to true and 0 refers to false. Our task is to create an artificial neural
+    network that is capable of predicting the value of `Y` based on values of `X1,
+    X2 and X3`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We will create an artificial neural network with one input layer and one output
+    layer with no hidden layer. Before we start coding, let’s first let’s see how
+    our neural network will execute in theory:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Theory of ANN**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An artificial neural network is a supervised learning algorithm which means
+    that we provide it the input data containing the independent variables and the
+    output data that contains the dependent variable. For instance, in our example
+    our independent variables are `X1, X2 and X3`. The dependent variable is `Y`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the beginning, the ANN makes some random predictions, these predictions are
+    compared with the correct output and the error(the difference between the predicted
+    values and the actual values) is calculated. The function that finds the difference
+    between the actual value and the propagated values is called the cost function.
+    The cost here refers to the error. Our objective is to minimize the cost function.
+    Training a neural network basically refers to minimizing the cost function. We
+    will see how we can perform this task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A neural network executes in two phases: **Feed Forward** phase and **Back Propagation **phase.
+    Let us discuss both these steps in detail.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Feed Forward**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/fb1e559a1856525bc66cecb2914cf480.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source: [Single-layer neural network also called Perceptron](https://towardsdatascience.com/single-neuron-training-3fc7f84d67d)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the feed-forward phase of ANN, predictions are made based on the values
+    in the input nodes and the weights. If you look at the neural network in the above
+    figure, you will see that we have three features in the dataset: X1, X2, and X3,
+    therefore we have three nodes in the first layer, also known as the input layer.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The weights of a neural network are basically the strings that we have to adjust
+    in order to be able to correctly predict our output. For now, just remember that
+    for each input feature, we have one weight.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The following are the steps that execute during the feedforward phase of ANN:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 1: Calculate the dot product between inputs and weights**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The nodes in the input layer are connected with the output layer via three weight
+    parameters. In the output layer, the values in the input nodes are multiplied
+    with their corresponding weights and are added together. Finally, the bias term `b` is
+    added to the sum.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Why do we even need a bias term?***'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Suppose if we have a person who has input values (0,0,0), the sum of the products
+    of input nodes and weights will be zero. In that case, the output will always
+    be zero no matter how much we train the algorithms. Therefore, in order to be
+    able to make predictions, even if we do not have any non-zero information about
+    the person, we need a bias term. The bias term is necessary to make a robust neural
+    network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Mathematically, the summation of dot product:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`X.W=x1.w1 + x2.w2 + x3.w3 + b`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 2: Pass the summation of dot products (X.W) through an activation function**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The dot product XW can produce any set of values. However, in our output, we
+    have the values in the form of 1 and 0\. We want our output to be in the same
+    format. To do so we need an A[ctivation Function](https://en.wikipedia.org/wiki/Activation_function),
+    which restricts the input values between 0 and 1\. So of course we’ll go ahead
+    with Sigmoid activation function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/494bbc0bc64ef03adaad348fecdd42c7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Sigmoid activation function](https://towardsdatascience.com/activation-functions-neural-networks-1cbd9f8d91d6)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The sigmoid function returns 0.5 when the input is 0\. It returns a value close
+    to 1 if the input is a large positive number. In the case of negative input, the
+    sigmoid function outputs a value close to zero.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Therefore, it is especially used for models where we have to **predict the probability** as
+    an output. Since probability of anything exists only between the range of **0
+    and 1,** sigmoid is the right choice for our problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the above figure `z` is the summation of dot product X.W
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Mathematically, the sigmoid activation function is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8251273f7914ec76939f7616fc54756e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Sigmoid activation function](https://analyticsindiamag.com/most-common-activation-functions-in-neural-networks-and-rationale-behind-it/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us summarize what we have done so far. First, we have to find the dot product
+    of the input features(matrix of independent variables) with the weights. Next,
+    pass the summation of dot products through an activation function. **The result
+    of the activation function is basically the predicted output for the input features.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Back Propagation**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the beginning, before you do any training, the neural network makes random
+    predictions which are of course incorrect.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We start by letting the network make random output predictions. We then compare
+    the predicted output of the neural network with the actual output. Next, we update
+    the weights and the bias in such a manner that our predicted output comes closer
+    to the actual output. In this phase, we train our algorithm. Let’s take a look
+    at the steps involved in the backpropagation phase.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 1: Calculate the cost**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first step in this phase is to find the cost of the predictions. The cost
+    of the prediction can be calculated by finding the difference between the predicted
+    output values and the actual output values. If the difference is large then cost
+    will also be large.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will use the [mean squared error](https://en.wikipedia.org/wiki/Mean_squared_error) or
+    MSE cost function. A cost function is a function that finds the cost of the given
+    output predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/923b7bdfd93b37400fee96b508ddc1c0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[mean squared error](https://stackoverflow.com/questions/44038581/mse-cost-function-for-training-neural-network)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Here, *`*Yi is the actual output value*`* and *`*Ŷi is the predicted output
+    value *`*and *`*n is the number of Observations.*`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 2: Minimize the cost**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our ultimate goal is to fine-tune the weights of our neural network in such
+    a way that the cost is minimized the minimum. If you notice carefully, you’ll
+    get to know that we can only control the weights and the bias. Everything else
+    is beyond our control. We cannot control the inputs, we cannot control the dot
+    products, and we cannot manipulate the sigmoid function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to minimize the cost, we need to find the weight and bias values for
+    which the cost function returns the smallest value possible. The smaller the cost,
+    the more correct our predictions are.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To find the minima of a function, we can use the [gradient descent](https://en.wikipedia.org/wiki/Optimization_problem) algorithm.
+    The gradient descent can be mathematically represented as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5a71058e6f68584257f32317adaaf57f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Weight update using gradient descent](http://hmkcode.com/ai/backpropagation-step-by-step/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**????Error** is the cost function. The above equation tells us to find the
+    partial derivative of the cost function with respect to each weight and bias and
+    subtract the result from the existing weights to get new weights.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The derivative of a function gives us its slope at any given point. To find
+    if the cost increases or decreases, given the weight value, we can find the derivative
+    of the function at that particular weight value. If the cost increases with the
+    increase in weight, the derivative will return a positive value which will then
+    be subtracted from the existing value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the other hand, if the cost is decreasing with an increase in weight, a negative
+    value will be returned, which will be added to the existing weight value since
+    negative into negative is positive.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the above equation `**a**` is called the learning rate, which is multiplied
+    by the derivative. The learning rate decides how fast our algorithm learns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We need to repeat the execution of gradient descent for all the weights and
+    biases until the cost is minimized and for which the cost function returns a value
+    close to zero.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now is the time to implement what we have studied so far. We will create a simple
+    neural network with one input and one output layer in Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Artificial Neural Network Implementation using numpy
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/19407a669cab463068bc45cc68f1e3fc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Pic Credit: [hackernoon.com](https://hackernoon.com/building-a-neural-network-only-using-numpy-7ba75da60ec0)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Steps to follow:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Define independent variables and dependent variable
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Define Hyperparameters
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Define Activation Function and its derivative
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. Train the model
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5\. Make predictions**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step-1: Let’s first create our independent variables or input feature set
+    and the corresponding dependent variable or labels.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Our input set contains seven records. Similarly, we also created a `labels` set
+    that contains corresponding labels for each record in the input set. The labels
+    are the values that we want our ANN to predict.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step-2: Define Hyperparameters**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: we will use the `random.seed` function of numpy so that we can get the same
+    random values whenever we execute the below code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, we initialize our weights with normally distributed random numbers. Since
+    we have three features in the input, we have a vector of three weights. We then
+    initialize the bias value with another random number. Finally, we set the learning
+    rate to 0.05.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Step-3: Define Activation Function and it’s derivative: Our activation function
+    is the sigmoid function.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now define a function that calculates the derivative of the sigmoid function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Step-4: Its time to train our ANN model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll start off by defining the number of epochs. An epoch is the number of
+    times we want to train the algorithm on our dataset. We will train the algorithm
+    on our data 25,000 times so our epoch will be 25000\. You can try a different
+    number to further decrease the cost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let's understand each step one by one and then we will go to our last step of
+    making predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: we store the values from the input `input_set` to the `inputs` variable so that
+    the value of `input_set` remain as it is in each iteration and whatever changes
+    are done that must be done to `inputs` variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, we find the dot product of the input and the weight and add bias to it.
+    (**Step-1 of Feedforward phase)**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, We pass the dot product through the sigmoid activation function. (**Step-2
+    of Feedforward phase)**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: This completes the feedforward part of our algorithm and now is the time to
+    start backpropagation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The variable `z` contains the predicted outputs. The first step of the backpropagation
+    is to find the error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We know that our cost function is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/923b7bdfd93b37400fee96b508ddc1c0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We need to differentiate this function with respect to each weight and this
+    can be done easily using [chain rule of differentiation](https://en.wikipedia.org/wiki/Chain_rule).
+    I’ll skip the derivation part but if anyone is interested let me know I’ll post
+    it in the comment section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So our final derivative of the cost function with respect to any weight is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now the slope can be simplified as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: we have the `z_del` variable, which contains the product of `dcost` and `dpred`.
+    Instead of looping through each record and multiplying the input with the corresponding `z_del`,
+    we take the transpose of the input feature matrix and multiply it with the `z_del`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, we multiply the learning rate variable `lr` with the derivative to
+    increase the speed of learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Along with updating the weights we also have to update the bias term.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Once the loop starts, you will see that the total error starts decreasing and
+    by the end of the training the error is left with a very small value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Step-5: Make predictions**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Its time to make some predictions. Let's try with [1,0,0]
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`Output : [0.01031463]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see the output is closer to 0 than 1 so it is classified as 0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's try again with [0,1,0]
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`Output : [0.99440207]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see the output is closer to 1 than 0 so it is classified as 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, we learned how to create a very simple artificial neural network
+    with one input layer and one output layer from scratch using numpy python library.
+    This ANN is able to classify linearly separable data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What if we have non-linearly separated data, our ANN will not be able to classify
+    that type of data. This is what we are going to build in part-2 of this article
+    series.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, that's all. I hope you guys have enjoyed reading this article. Please
+    share your thoughts/doubts in the comment section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can reach me out over [LinkedIn](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/?source=post_page---------------------------) for
+    any query.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/73b355546c187367af36f2a1ff722ef5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Pic credit](https://gifer.com/en/7DFc)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for reading!!!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)**
+    is a Big data developer at CirrusLabs. He has over 4 years of working experience
+    in various sectors like Telecom, Analytics, Sales, Data Science having specialisation
+    in various Big data components.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/build-an-artificial-neural-network-ann-from-scratch-part-1-a21988497962).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Introduction to Artificial Neural Networks](/2019/10/introduction-artificial-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Friendly Introduction to Support Vector Machines](/2019/09/friendly-introduction-support-vector-machines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Classifying Heart Disease Using K-Nearest Neighbors](/2019/07/classifying-heart-disease-using-k-nearest-neighbors.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn Deep Learning by Building 15 Neural Network Projects in 2022](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Neural Network Optimization with AIMET](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Convolutional Neural Network with PyTorch](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Importance of Permutation in Neural Network Predictions](https://www.kdnuggets.com/2022/12/importance-permutation-neural-network-predictions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

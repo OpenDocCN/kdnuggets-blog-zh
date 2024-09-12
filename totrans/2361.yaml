@@ -1,0 +1,219 @@
+- en: 'Beyond Pipelines: Graphs as Scikit-Learn Metaestimators'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/09/graphs-scikitlearn-metaestimators.html](https://www.kdnuggets.com/2022/09/graphs-scikitlearn-metaestimators.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Scikit-learn provides us with a flexible framework for defining machine learning
+    (ML) tasks, but its support for composing those tasks into a larger workflow are
+    often too limited for the messy world of production. `[skdag](https://github.com/scikit-learn-contrib/skdag)` offers
+    a more powerful task composition approach which allows you to get much more out
+    of your machine learning tools.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The Scikit-Learn approach to machine learning is popular for a reason. It provides
+    ML practitioners with a [common language](https://scikit-learn.org/stable/developers/develop.html) to
+    describe and implement many tasks. Let’s briefly go over some key parts of that
+    language:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Estimator** — an estimator is an object that takes in data and learns something
+    from it in its `fit()`method.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Transformer** — a type of estimator that filters or modifies its input data
+    in some way via its `transform()` method.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Predictor** — a type of estimator that derives some kind of inference from
+    the input data, via the `predict()` method.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Metaestimator** — an estimator which takes one or more estimators as input
+    parameters and does something with them. Metaestimators can be used for a range
+    of tasks including hyperparameter optimisation (e.g. `[GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html)`),
+    model ensembling (e.g. `[StackingClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.StackingClassifier.html)`)
+    or workflow composition (`[Pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html)`).'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'The metaestimators for workflow composition focus on simplicity: simplicity
+    of both the composition interface and of the composition itself. Here’s a quick
+    example that creates a small pipeline:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The clear interface makes it easy to see what’s going on here. We start off
+    by filling in any missing values in our input data with the feature mean, we then
+    perform some SVD dimensionality reduction before training a random forest regressor
+    to make some predictions. The beauty of the `Pipeline` metaestimator is that it
+    can be treated as an estimator itself which just runs all of the relevant methods,
+    quietly chaining together the inputs and outputs of each step:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Real-life problems are rarely solved with a model this simple though. Let’s
+    take a deeper look at features in the [*diabetes* dataset](https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset),
+    which are used to predict a measure of disease progression after one year:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: …age, sex, body mass index, average blood pressure, and six blood serum measurements
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'These features are quite varied. Does it really make sense to perform the exact
+    same pre-processing on all of them? Probably not. Here’s how we can process some
+    features differently using only what `sklearn` gives us:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To treat each feature differently we need to bring in a new estimator, `ColumnTransformer`,
+    and start nesting things to get the desired behaviour of different imputation
+    strategies, along with some SVD but only on the blood serum tests. Our code is
+    rapidly becoming less readable and less manageable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Replacing Pipelines with Graphs
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Even this relatively small example shows that pipelines sacrifice too much flexibility
+    in the name of simplicity. What we need is an approach that keeps our code simple
+    but doesn’t force our workflows to be simple. Such an approach exists: [*directed
+    acyclic graphs*](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (DAGs).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Many production frameworks used by industry define ML workflows as DAGs for
+    just these reasons, but they lack the tight integration with the scikit-learn
+    API that can make pipelines so easy to use and also come with a lot of extra overhead,
+    required for other things like delayed dependencies and distributed processing.
+    These features are not needed for many of the use cases that scikit-learn excels
+    at, such as small-scale experimentation and defining model architectures (which
+    may then be run in some of the aforementioned frameworks). This is where *skdag* comes
+    in (`pip install skdag`). *skdag* is a small extension for scikit-learn that implements
+    DAG metaestimators. This allows it to go beyond pipelines and column transformers
+    in several ways. Let’s demonstrate by recreating our previous workflow in *skdag*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With the DAG approach, no matter how complex our workflow is the code will
+    always be a simple list of steps, each one defining what its dependencies are.
+    Dependencies can simply be a list of step names, or if we only wish to take certain
+    columns from the output of a step, we can provide a dictionary of step name to
+    columns. Another benefit of using *skdag* is that it allows you to easily visualise
+    the workflow with `dag.show()` which can be very useful for verifying complex
+    workflows do what we expect:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Graphs as Scikit-Learn Metaestimators](../Images/a2ea0a33e0d3de6f9aac042020dc307e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**skdag**-generated workflow visualisation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another benefit of using DAGs is the ability to understand dependencies better.
+    In the above DAG, we can see that `mean`, `ohe`, `ref` and `median` don’t depend
+    on one another so in theory there is no reason we couldn’t perform them all at
+    the same time. One small change in our DAG creation allows us to do this in practice.
+    Replacing `make_dag()` with `make_dag(n_jobs=-1)` will tell the DAG to run steps
+    in parallel wherever possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model Stacking
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Let’s say we want to make our workflow even more complex. Instead of using a
+    single random forest regressor to make our predictions, let’s use a diverse variety
+    of models and then [stack](https://towardsdatascience.com/simple-model-stacking-explained-and-automated-1b54e4357916) them
+    together to create a final prediction. Model stacking is where we take the predictions
+    from multiple models, and use them as inputs to a final meta-learner which is
+    usually a very simple model that simply combines the results together, deciding
+    how much weight to apply to each model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Implementing stacking for our example in scikit-learn requires yet another
+    metaestimator: the `[StackingRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.StackingRegressor.html)`.
+    A DAG however can handle this pattern natively, so we simply need to include our
+    stacking logic in the graph definition:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Graphs as Scikit-Learn Metaestimators](../Images/45ceeba4bffda243f7bdf80c6136b5aa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: DAG for the stacked model. Note that unlike pipelines, **skdag** does not have
+    any restriction on predictors appearing mid-workflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By adding a couple of simple, readable steps we have constructed a DAG that
+    would be complex and difficult to maintain using only scikit-learn’s linear components.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hopefully this small demo shows you the benefits of using DAGs instead of pipelines
+    to create manageable, maintainable machine learning workflows — and that *skdag* will
+    become another useful member of your toolkit!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/@big-o/graphs-as-scikit-learn-metaestimators-d05b3300c102).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Big O](https://medium.com/@big-o)** is a machine learning engineer and author
+    of skdag. Big O works in the tech industry implementing machine learning solutions,
+    specialising in human-machine interactions and recommender systems.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Graphs: The natural way to understand data](https://www.kdnuggets.com/2022/10/manning-graphs-natural-way-understand-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL for Data Visualization: How to Prepare Data for Charts and Graphs](https://www.kdnuggets.com/sql-for-data-visualization-how-to-prepare-data-for-charts-and-graphs)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Answering Questions with HuggingFace Pipelines and Streamlit](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simple NLP Pipelines with HuggingFace Transformers](https://www.kdnuggets.com/2023/02/simple-nlp-pipelines-huggingface-transformers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unify Batch and ML Systems with Feature/Training/Inference Pipelines](https://www.kdnuggets.com/2023/09/hopsworks-unify-batch-ml-systems-feature-training-inference-pipelines)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building Data Science Pipelines Using Pandas](https://www.kdnuggets.com/building-data-science-pipelines-using-pandas)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

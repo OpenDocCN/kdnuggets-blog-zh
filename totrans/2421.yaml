@@ -1,0 +1,414 @@
+- en: Centroid Initialization Methods for k-means Clustering
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Simple clustering methods such as *k*-means may not be as sexy as contemporary
+    neural networks or other recent advanced non-linear classifiers, but they certainly
+    have their utility, and knowing how to correctly approach an unsupervised learning
+    problem is a great skill to have at your disposal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is intended to be the first in a series of articles looking at the different
+    aspects of a *k*-means clustering pipeline. In this first article we will discuss
+    centroid initialization: what it is, what it accomplishes, and some of the different
+    approaches that exist. We will assume familiarity with machine learning, Python
+    programming, and the general idea of clustering.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*k*-means Clustering'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: k-means is a simple, yet often effective, approach to clustering. Traditionally,
+    *k* data points from a given dataset are randomly chosen as cluster centers, or
+    centroids, and all training instances are plotted and added to the closest cluster.
+    After all instances have been added to clusters, the centroids, representing the
+    mean of the instances of each cluster are re-calculated, with these re-calculated
+    centroids becoming the new centers of their respective clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At this point, all cluster membership is reset, and all instances of the training
+    set are re-plotted and re-added to their closest, possibly re-centered, cluster.
+    This iterative process continues until there is no change to the centroids or
+    their membership, and the clusters are considered settled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Convergence is achieved once the re-calculated centroids match the previous
+    iteration’s centroids, or are within some preset margin. The measure of distance
+    is generally Euclidean in *k*-means, which, given 2 points in the form of (x,
+    y), can be represented as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6caecd241af5ba356579714b862cb7ae.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Of technical note, especially in the era of parallel computing, iterative clustering
+    in *k*-means is serial in nature; however, the distance calculations within an
+    iteration need not be. Therefore, for sets of a significant size, distance calculations
+    are a worthy target for parallelization in the *k*-means clustering algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Centroid Initialization Methods
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: As *k*-means clustering aims to converge on an optimal set of cluster centers
+    (centroids) and cluster membership based on distance from these centroids via
+    successive iterations, it is intuitive that the more optimal the positioning of
+    these initial centroids, the fewer iterations of the *k*-means clustering algorithms
+    will be required for convergence. This suggests that some strategic consideration
+    to the initialization of these initial centroids could prove useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'What methods of centroid initialization exist? While there are a number of
+    initialization strategies, let''s focus on the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**random data points**: In this approach, described in the "traditional" case
+    above, *k* random data points are selected from the dataset and used as the initial
+    centroids, an approach which is obviously highly volatile and provides for a scenario
+    where the selected centroids are not well positioned throughout the entire data
+    space.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**k-means++**: As spreading out the initial centroids is thought to be a worthy
+    goal, *k*-means++ pursues this by assigning the first centroid to the location
+    of a randomly selected data point, and then choosing the subsequent centroids
+    from the remaining data points based on a probability proportional to the squared
+    distance away from a given point''s nearest existing centroid. The effect is an
+    attempt to push the centroids as far from one another as possible, covering as
+    much of the occupied data space as they can from initialization. *k*-means++ original
+    paper, from 2006, can be read [here](http://ilpubs.stanford.edu:8090/778/1/2006-13.pdf).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**naive sharding**: This lesser known (unknown?) centroid initialization method
+    was the subject of some of my own graduate research. It is primarily dependent
+    on the calculation of a composite summation value reflecting all of the attribute
+    values of an instance. Once this composite value is computed, it is used to sort
+    the instances of the dataset. The dataset is then horizontally split into *k*
+    pieces, or shards. Finally, the original attributes of each shard are independently
+    summed, their mean is computed, and the resultant collection of rows of shard
+    attribute mean values becomes the set of centroids to be used for initialization.
+    The expectation is that, as a deterministic method, it should perform much quicker
+    than stochastic methods, and approximate the spread of initial centroids across
+    the data space via the composite summation value. You can read more about it [here](/2017/03/naive-sharding-centroid-initialization-method.html)
+    if interested.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Variants of any of these are possible: you could randomly select from anywhere
+    in the data space, as opposed to just the space which contains existing data points;
+    you could attempt to find the most centrally located data point first, as opposed
+    to a random selection, and proceed with *k*-means++ from there; you could swap
+    the post-summation mean operation for an alternate in naive sharding.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, a form of [hierarchical clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering)
+    (often [Ward's method](https://en.wikipedia.org/wiki/Ward%27s_method)) can be
+    used as a method to find the initial cluster centers, which can then be passed
+    off to *k*-means for the actual data clustering task. This can be effective, but
+    since it would mean also discussing hierarchical clustering we will leave this
+    until a later article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Centroid Initialization and Scikit-learn
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'As we will use Scikit-learn to perform our clustering, let''s have a look at
+    its [`KMeans`](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html)
+    module, where we can see the following written about available centroid initialization
+    methods:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`**init{‘k-means++’, ‘random’, ndarray, callable}, default=’k-means++’**`'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Method for initialization:'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '''`k-means++`'': selects initial cluster centers for k-mean clustering in a
+    smart way to speed up convergence. See section Notes in k_init for more details.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '''`random`'': choose `n_clusters` observations (rows) at random from data for
+    the initial centroids.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: If an ndarray is passed, it should be of shape (n_clusters, n_features) and
+    gives the initial centers.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: If a callable is passed, it should take arguments X, n_clusters and a random
+    state and return an initialization.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: With this in mind, and since we want to be able to compare and inspect initialized
+    centroids — which we are not able to do with Scikit-learn's implementations —
+    we will use our own implementations of the 3 methods discussed above, namely random
+    centroid initialization, *k*-means++, and naive sharding. We can then use our
+    implementations independent of Scikit-learn to create our centroids, and pass
+    them in as an ndarray at the time of clustering. We could also use the callable
+    option, as opposed to the ndarray option, and integrate the centroid initialization
+    into the Scikit-learn *k*-means execution, but that puts us right back to square
+    one with not being able to examine and compare these centroids prior to clustering.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With that said, the `centroid_initialization.py` file contains our centroid
+    initialization implementations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With this file placed in the same directory as where I have started Jupyter
+    notebook, I can proceed as follows, starting with imports.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Creating Some Data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Clearly we will need some data. We will create a small synthetic set in order
+    to have control over clearly delineating our clusters (see Figure 1).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/a8b9a80d2e8bb4a773aa6e7ab3437aa1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Figure 1: Our synthetic dataset**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Initializing the Centroids
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Let's initialize some centroids, using the implementation from above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Random Initialization**'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**k-means++ Initialization**'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Naive Sharding Initialization**'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you can see, the sets of initialized centroids differ from each other.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Visualizing Centroid Initialization
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Let's see how our centroids compare to each other, and to the data points, visually.
+    We will call the plotting function below a number of subsequent times for comparison.
+    Figure 2 plots the the 3 sets of centroids created above against the data points.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/be0f4c3346a8e5ee491db6a2d974e84c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Figure 2\. Centroids plotted against data points: random (yellow), *k*-means++
+    (red), naive sharding (green)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Of note, the luck of the draw has placed 3 of the randomly initialized centroids
+    in the right-most cluster; the *k*-means++ initialized centroids are located one
+    in each of the clusters; and the naive sharding centroids ended up spread across
+    the data space in a somewhat arcing fashion upward and to the right across the
+    data space, skewed toward where the data is heavily clustered.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keep in mind that we created a 2 dimensional data space, so the visualization
+    of these centroids is accurate; we aren't stripping away a number of dimensions
+    and artificially plotting the data in a stripped-down space which may be problematic.
+    This means the comparison of the centroids in this case is as accurate as is possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You may be asking, what of this initialization is affected by random seeding?
+    Both random initialization and and *k*-means++ are stochastic methods, and so
+    they can be affected by random seeds. If we pass some different seeds to additional
+    runs of the initialization algorithms, the results are visualized in Figure 3.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/9e4af4908f968588daddfd8d2af0f776.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Figure 3\. Experimenting with random seeds for centroid initialization, clockwise
+    from top left: 123, 249, 127, 13**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some observations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: random initialization is (fittingly) all over the place
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: k-means++ is relatively consistent within clusters, with the specific data points
+    selected as initial centroids varying slightly
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: naive sharding is deterministic, and so is not affected by seeding
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This leads us to some questions, which relate directly to the next steps in
+    clustering:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What effect does centroid placement have on the resulting clustering task?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: What effect does the centroid placement have on the speed of the resulting clustering
+    task?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: What effect does the centroid placement have on the accuracy of the resulting
+    clustering task?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When would we use certain of these initialization methods over others?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If random seems as though it might be such a poor initialization method from
+    an optimal placement standpoint, why is it used?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Is there any advantage to a deterministic initialization method, like naive
+    sharding?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We will start searching out the answers to these next time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13))
+    is a Data Scientist and the Editor-in-Chief of KDnuggets, the seminal online Data
+    Science and Machine Learning resource. His interests lie in natural language processing,
+    algorithm design and optimization, unsupervised learning, neural networks, and
+    automated approaches to machine learning. Matthew holds a Master''s degree in
+    computer science and a graduate diploma in data mining. He can be reached at editor1
+    at kdnuggets[dot]com.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Clustering Unleashed: Understanding K-Means Clustering](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is K-Means Clustering and How Does its Algorithm Work?](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On with Unsupervised Learning: K-Means Clustering](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Clustering in Python with PyCaret](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Choosing the Right Clustering Algorithm for Your Dataset](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DBSCAN Clustering Algorithm in Machine Learning](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

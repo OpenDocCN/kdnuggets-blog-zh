@@ -1,0 +1,358 @@
+- en: How to Fine-Tune BERT Transformer with spaCy 3
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/06/fine-tune-bert-transformer-spacy.html](https://www.kdnuggets.com/2021/06/fine-tune-bert-transformer-spacy.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/), Founder
+    of UBIAI**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b94c536c815124975b86c678b96e4590.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by[ ](https://unsplash.com/@jasonrosewell)[Alina Grubnyak](https://unsplash.com/@alinnnaaaa) on [Unsplash](https://unsplash.com/photos/ASKeuOZqhYU)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since the seminal paper “[Attention is all you need](https://arxiv.org/abs/1706.03762)”
+    of Vaswani et al, Transformer models have become by far the state of the art in
+    NLP technology. With applications ranging from NER, Text Classification, Question
+    Answering or text generation, the applications of this amazing technology are
+    limitless.
+  prefs: []
+  type: TYPE_NORMAL
+- en: More specifically, BERT — which stands for Bidirectional Encoder Representations
+    from Transformers— leverages the transformer architecture in a novel way. For
+    example, BERT analyses both sides of the sentence with a randomly masked word
+    to make a prediction. In addition to predicting the masked token, BERT predicts
+    the sequence of the sentences by adding a classification token [CLS] at the beginning
+    of the first sentence and tries to predict if the second sentence follows the
+    first one by adding a separation token[SEP] between the two sentences.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cecc0d84e605d6d0448b80f784f925c2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: BERT Architecture
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this tutorial, I will show you how to fine-tune a BERT model to predict entities
+    such as skills, diploma, diploma major and experience in software job descriptions.
+    If you are interested to go a step further and extract relations between entities,
+    please read our [article](https://walidamamou.medium.com/how-to-train-a-joint-entities-and-relation-extraction-classifier-using-bert-transformer-with-spacy-49eb08d91b5c) on
+    how to perform joint entities and relation extraction using transformers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fine tuning transformers requires a powerful GPU with parallel processing. For
+    this we use Google Colab since it provides freely available servers with GPUs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this tutorial, we will use the newly released [spaCy 3 library](https://spacy.io/usage/v3) to
+    fine tune our transformer. Below is a step-by-step guide on how to fine-tune the
+    BERT model on spaCy 3.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Data Labeling:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To fine-tune BERT using spaCy 3, we need to provide training and dev data in
+    the spaCy 3 JSON format ([see here](https://spacy.io/api/data-formats)) which
+    will be then converted to a .spacy binary file. We will provide the data in IOB
+    format contained in a TSV file then convert to spaCy JSON format.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have only labeled 120 job descriptions with entities such as *skills*, *diploma*, *diploma
+    major,* and *experience* for the training dataset and about 70 job descriptions
+    for the dev dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this tutorial, I used the [UBIAI](https://ubiai.tools/) annotation tool
+    because it comes with extensive features such as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ML auto-annotation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Dictionary, regex, and rule-based auto-annotation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Team collaboration to share annotation tasks
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Direct annotation export to IOB format**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Using the regular expression feature in UBIAI, I have pre-annotated all the
+    experience mentions that follows the pattern “\d.*\+.*” such as “5 + years of
+    experience in C++”. I then uploaded a csv dictionary containing all the software
+    languages and assigned the entity skills. The pre-annotation saves a lot of time
+    and will help you minimize manual annotation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/51ecdfeb05d752adb7430e36c06b3f02.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: UBIAI Annotation Interface
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For more information about [UBIAI](https://ubiai.tools/) annotation tool, please
+    visit the [documentation](https://ubiai.tools/Docs) page and my previous post
+    “[Introducing UBIAI: Easy-to-Use Text Annotation for NLP Applications](https://chatbotslife.com/introducing-ubiai-easy-to-use-text-annotation-for-nlp-applications-74a2401fa725)”.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The exported annotation will look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In order to convert from IOB to JSON (see documentation [here](https://spacy.io/api/cli#convert)),
+    we use spaCy 3 command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After conversion to spaCy 3 JSON, we need to convert both the training and
+    dev JSON files to .spacy binary file using this command (update the file path
+    with your own):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Model Training:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Open a new Google Colab project and make sure to select GPU as hardware accelerator
+    in the notebook settings.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In order to accelerate the training process, we need to run parallel processing
+    on our GPU. To this end we install the NVIDIA 9.2 cuda library:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To check the correct cuda compiler is installed, run: !nvcc --version'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Install the spacy library and spacy transformer pipeline:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Next, we install the pytorch machine learning library that is configured for
+    cuda 9.2:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After pytorch install, we need to install spacy transformers tuned for cuda
+    9.2 and change the CUDA_PATH and LD_LIBRARY_PATH as below. Finally, install the
+    cupy library which is the equivalent of numpy library but for GPU:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: SpaCy 3 uses a config file config.cfg that contains all the model training components
+    to train the model. In [spaCy training page](https://spacy.io/usage/training),
+    you can select the language of the model (English in this tutorial), the component
+    (NER) and hardware (GPU) to use and download the config file template.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/9fb53accb51c2ad8c13a1350ec3f8b62.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Spacy 3 config file for training. [Source](https://spacy.io/usage/training)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The only thing we need to do is to fill out the path for the train and dev .spacy
+    files. Once done, we upload the file to Google Colab.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now we need to auto-fill the config file with the rest of the parameters that
+    the BERT model will need; all you have to do is run this command:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'I suggest to debug your config file in case there is an error:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We are finally ready to train the BERT model! Just run this command and the
+    training should start:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'P.S: if you get the error cupy_backends.cuda.api.driver.CUDADriverError: CUDA_ERROR_INVALID_PTX:
+    a PTX JIT compilation failed, just uninstall cupy and install it again and it
+    should fix the issue.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If everything went correctly, you should start seeing the model scores and
+    losses being updated:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/dcdd504db38bb7cecb9372d09b82e76c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: BERT training on google colab
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'At the end of the training, the model will be saved under folder model-best.
+    The model scores are located in meta.json file inside the model-best folder:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: The scores are certainly well below a production model level because of the
+    limited training dataset, but it’s worth checking its performance on a sample
+    job description.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Entity Extraction with Transformers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To test the model on a sample text, we need to load the model and run it on
+    our text:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Below are the entities extracted from our sample job description:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Pretty impressive for only using 120 training documents! We were able to extract
+    most of the skills, diploma, diploma major, and experience correctly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With more training data, the model would certainly improve further and yield
+    higher scores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Conclusion:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With only a few lines of code, we have successfully trained a functional NER
+    transformer model thanks to the amazing spaCy 3 library. Go ahead and try it out
+    on your use case and please share your results. Note, you can use [UBIAI](https://ubiai.tools/) annotation
+    tool to label your data, we offer free 14 days trial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As always, if you have any comment, please leave a note below or email at admin@ubiai.tools!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)**
+    is the Founder of UBIAI, an annotation tool for NLP applications, and holds a
+    PhD in Physics.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/how-to-fine-tune-bert-transformer-with-spacy-3-6a90bfe57647).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to Create and Deploy a Simple Sentiment Analysis App via API](/2021/06/create-deploy-sentiment-analysis-app-api.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Apply Transformers to Any Length of Text](/2021/04/apply-transformers-any-length-text.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Great New Resource for Natural Language Processing Research and Applications](/2021/05/great-new-resource-natural-language-processing-research-applications.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Finetune Mistral AI 7B LLM with Hugging Face AutoTrain](https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with spaCy for NLP](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing with spaCy](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fine-Tuning BERT for Tweets Classification with HuggingFace](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Fast Can BERT Go With Sparsity?](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

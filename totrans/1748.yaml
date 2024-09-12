@@ -1,0 +1,227 @@
+- en: How to Build a Data Science Pipeline
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/07/build-data-science-pipeline.html](https://www.kdnuggets.com/2017/07/build-data-science-pipeline.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Balázs Kégl, Data scientist, co-creator of [RAMP](http://www.ramp.studio/).**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is no debate on how a well-functioning predictive workflow works when
+    it is finally put into production. Data sources are transformed into a set of
+    features or indicators *X*, describing each instance (client, piece of equipment,
+    asset) on which the prediction will act on. A predictor then turns *X* into an
+    actionable piece of information *y_pred* (will the client churn?, will the equipment
+    fail?, will the asset price go up?). In certain fluid markets (e.g., ad targeting)
+    the prediction is then monetized through a fully automated process, in other cases
+    it is used as decision support with a human in the loop.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ad14dee5b05eafb0757e03274901b08a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The data flow in a data science pipeline in production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This sounds simple, yet examples of working and well-monetized predictive workflows
+    are rare. Companies struggle with the building process. The questions they need
+    to ask are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Who builds this workflow? What are the roles and expertises I need to cover?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: What is the building process? What are the steps, and what expertise I need
+    at each step?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: What are the costs and risks at any of those steps, and how do I control them?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Hype around data challenges gave the false impression that the data scientist
+    and the predictive score are the main drivers of the process. Even industrial
+    processes (e.g., [CRISP-DM](https://en.wikipedia.org/wiki/Cross_Industry_Standard_Process_for_Data_Mining)
+    and [Dataiku](https://blog.dataiku.com/2016/03/30/automation-scenarios-another-step-towars-a-successful-model-deployment))
+    that have been around since the nineties usually put the data scientist in the
+    center and deployment at the end of the process. While they are not wrong, they
+    are mostly irrelevant. Building and optimizing the predictor is easy. What is
+    hard is finding the business problem and the KPI that it will improve, hunting
+    and transforming the data into digestible instances, defining the steps of the
+    workflow, putting it into production, and organizing the model maintenance and
+    regular update.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Companies usually start by what seems to be a no brainer: asking their IT departments
+    to put in place the big data infrastructure and build a data lake. They then hire
+    their first data scientists. These experts, fresh off school and a handful of
+    Kaggle challenges, armed with the data science toolkit, are eager to put their
+    hands on the data. They can predict anything, and they do! They talk the business
+    unit, they find reasonable prediction targets for which labels exist already,
+    they try a dozen models, hyperopt them, and choose the best. They build POCs and
+    send reports to the business unit. And then start again.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The usual way to construct a data science workflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Most of those POCs never go into production.** The business unit doesn’t
+    know what to do with them. They can’t interpret the scores. The prediction target
+    seems reasonable, yet they have no clue how they will make a money with their
+    *y_pred*. If they do, putting the POC into production seems insurmountable. Code
+    has to be rewritten. Real time data has to be channeled into the workflow. Operational
+    constraints need to be satisfied. The decision support system needs to be integrated
+    with the existing work tools of the users. Model maintenance, user feedback, rollback
+    needs to be put in place. These operations usually cost more and create more risk
+    than the safe POCs the data scientist worked on, and the POC simply cannot drive
+    the process.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The process I describe below will not solve these problems, but it gives you
+    an ordering in which you can at least address and control costs and risks. First,
+    **find a chief data officer** (or rather a *data value architect*) at any cost
+    who has already put in production a predictive workflow. Your CDO doesn’t need
+    to know the latest deep learning architecture, but she should have a broad understanding
+    of both the business of the company and the data science process. She should play
+    a central role and drive the process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting IT on board early is important. You need your data lake, but more importantly,
+    **you need data engineers to think in terms of production from day one**. But
+    this is not the first step. The first step is to figure out **whether you need
+    a prediction at all**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, start with ***y***, the prediction target.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Your CDO should work closely and longly with the business unit to figure out
+    what they want to know. What *y* drives their decisions? How would a better prediction
+    of *y* will improve the bottom line (cost down, profit up, productivity up)? Once
+    you have your *y*, try to **monetize prediction error as much as possible**. There
+    is nothing that makes your (future) data scientists happier than a well monetized
+    metrics. They will know that improving their score by 2% make you a million dollars;
+    more importantly ***you* will know how much you can spend on your data science
+    team**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once you cemented *y* and the metrics,
+  prefs: []
+  type: TYPE_NORMAL
+- en: go for a data hunt,
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: find **indicators** in your data lake and elsewhere which are **likely to correlate
+    with your prediction target**. In principle, you still don’t need a data scientist
+    for this, the process should be driven by the CDO and the BU (after all, *they*
+    know what information they use for their decisions, which is usually a great baseline).
+    But it may help to have someone who knows what’s out there in terms of open and
+    buyable data. Here you absolutely need to **talk to IT to have an idea about what
+    the operational costs will be** when these indicators need to be collected real
+    time. The data scientist needs this information. If storing a new feature on each
+    client costs you 4TB a day, that single fact decides how the predictor will look
+    like.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Now* hire a data scientist, preferably one that can also develop production
+    quality software. Make him'
+  prefs: []
+  type: TYPE_NORMAL
+- en: build the experimental setup and the baseline workflow
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: with a simple prediction and check whether it can be put into production. At
+    this point you are ready for the full scale experimental data science loop which
+    data scientists know how to handle. You may need a deep learning specialist, but
+    it is likely that you can out- and crowdsource your first model, e.g., by doing
+    a [RAMP](http://www.ramp.studio/) with us.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**If you like what you read, follow me on [Medium](https://medium.com/@balazskegl),
+    [LinkedIn](https://www.linkedin.com/in/balazskegl/), & [Twitter](https://twitter.com/balazskegl).**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Balázs Kégl](https://twitter.com/balazskegl)** is a senior research
+    scientist at CNRS and head of the Center for Data Science of the Université Paris-Saclay.
+    He is co-creator of RAMP ([www.ramp.studio](http://www.ramp.studio)).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/towards-data-science/how-to-build-a-data-science-pipeline-f24341848045).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Teaching the Data Science Process](/2017/05/teaching-data-science-process.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Will Data Science Eliminate Data Science?](/2017/05/data-science-eliminate-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Embrace the Random: A Case for Randomizing Acceptance of Borderline Papers](/2016/05/embrace-random-acceptance-borderline-papers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

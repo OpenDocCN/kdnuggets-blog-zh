@@ -1,0 +1,517 @@
+- en: 'Making Intelligent Document Processing Smarter: Part 1'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Akshay Kumar & Vijendra Jain**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To this day, a significant number of organizational processes rely on paper
+    documents. Instances invoice processing, and customer onboarding processes in
+    insurance companies. Advances in [data science](https://www.sigmoid.com/data-science-services/)
+    and data engineering have led to the development of Intelligent document processing
+    (IDP) solutions. These solutions allow organizations to automate the extraction,
+    analysis, and processing of paper documents using AI techniques minimizing manual
+    intervention. Essentially, there are two major players in the optical character
+    recognition (OCR)  segment: Amazon’s API Textract and Google’s Vision API along
+    with open-source API Tesseract.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: According to a report by Forrester, 80% of an organization’s data is unstructured
+    including PDFs, images, and more. Here is the true test of IDP solutions. Our
+    hypothesis is that the accuracy of these OCR APIs might suffer due to various
+    noises present in the scanned documents like blurs, watermarks, faded text, distortions,
+    etc. This article attempts to measure the effectiveness of such noises on the
+    performance of various APIs, In order to establish, “Is there a scope to make
+    Intelligent Document Processing smarter?”
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Types of Noises in Documents
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: There are various types of noises in the documents which can lead to poor accuracy
+    of OCR. These
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'noises can be divided into two categories:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Noises due to the document quality:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Paper Distortion - Crumbled Paper, Wrinkled Paper, Torn Paper
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Stains - Coffee Stains, Liquid spill, ink spill
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Watermark, stamp
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Background Text
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Special Fonts
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Making Intelligent Document Processing Smarter: Part 1](../Images/08e25b80de2ba9b74032535a2299cee7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 2.1 Noises due to the document quality
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Noises due to image capturing process:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Skewness - Warpage, Non-parallel camera
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Blur - Out of Focus Blur, Motion Blur
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Lighting Conditions - Low Light (Underexposed), High Light (Overexposed), Partial
+    Shadow
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![Making Intelligent Document Processing Smarter: Part 1](../Images/ceee2bd9acea9720bea3b1add192fdf3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Fig 2.2 Noises related to image capturing process
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because of the presence of these noises, images need pre-processing/ cleaning
+    before being fed to an IDP/OCR pipeline. Some OCR engines have built-in pre-processing
+    tools which can handle most of these noises. Our aim is to test the APIs with
+    a variety of noises in order to determine the noises the OCR APIs can handle.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Metrics to Measure the Performance of the API
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: To measure the performance of an OCR engine, ground truth or actual text is
+    compared with the OCR output or the text detected by the API. If the text detected
+    by the API is exactly the same as the ground truth, that means accuracy is 100%
+    for that document. But this is a very ideal case. In the real world, the detected
+    text will differ from the ground truth because of the noises present in the document.
+    This difference between ground truth and detected text is measured using various
+    metrics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The following table lists the metrics that we have considered to measure the
+    performance of the APIs. Except for the first metric (Mean Confidence Score),
+    the rest all the metrics compare the detected text with the ground truth.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **S. No.** | **Metric** | **Type** | **Brief Description** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | Mean Confidence Score | Given by API | Confidence score indicates the
+    degree to which the OCR API is certain that it has recognized the text component
+    correctly.Mean confidence score is the average of all the word level confidence
+    scores. |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | Character Error Rate (CER) | Error Rate | The CER compares the total
+    number of characters (including spaces) in the ground truth, to the minimum number
+    of insertions, deletions and substitution of characters that are required in the
+    OCR output to obtain the ground truth result.CER = (Substitutions + Insertions
+    + Deletions) in OCR Output Number of Characters in Ground Truth |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | Word Error Rate (WER) | Error Rate | It is similar to CER but the only
+    difference is that WER operates at word level instead of characters.WER = (Substitutions
+    + Insertions + Deletions)  in OCR Output Number of Words in Ground Truth |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | Cosine Similarity | Similarity | If x is mathematical vector representation
+    of the ground truth text and y is mathematical vector representation of the OCR
+    output, the cosine similarity is defined as below: Cos(x, y) = x . y / &#124;&#124;x&#124;&#124;
+    * &#124;&#124;y&#124;&#124; |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 5 | Jaccard Index | Similarity | If A is set of all the words from Ground
+    Truth and B is set of all the words in OCR output, the Jaccard Index is defined
+    as below: ????= &#124;????∩????&#124;/&#124;????∪????&#124; |'
+  prefs: []
+  type: TYPE_TB
+- en: Note that WER and CER are affected by the order of the text whereas Cosine Similarity,
+    Jaccard Index and Mean Confidence Score are independent of the text order. Consider
+    a case where an OCR API detects all the words correctly, but if the order of the
+    detected words is different from the Ground Truth, then WER/CER will be very poor
+    (high error i.e. poor performance) whereas Cosine Similarity will be very good
+    (high similarity, i.e. good performance). Hence it is important to see all the
+    metrics together to get a clear idea of the OCR API’s performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. Data Sets Explored
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We have explored some standard datasets available in the literature and we also
+    created some custom datasets using real-world invoices and dummy invoices. After
+    exploring approximately 5900 documents including invoices, bills, receipts, text
+    documents, and dummy invoices scanned under various noisy conditions. These noises
+    include coffee stains, folding, wrinkles, small font sizes, skewness, blur, watermark,
+    and more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Making Intelligent Document Processing Smarter: Part 1](../Images/6d417f907ce78af31e76c85c3759b44e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig 4.1 – Sample images from various datasets explored. Left box: Noisy Office;
+    Middle Box: Smart Doc QA; Right Top Box: SROIE Dataset; Right Bottom Box: Custom
+    Datasets.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5\. Results Summary
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: As mentioned earlier, we tested three APIs Vision, Textract, and Tesseract on
+    the mentioned datasets and calculated the performance metrics. We observed that
+    Tesseract’s performance is significantly worse than Vision and Textract in almost
+    all the cases, hence, in the result summary, Tesseract is excluded. Our result
+    summary is divided into two parts, first based on the dataset and second based
+    on the noise type.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Results Summary (Based on the Dataset)
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We have classified the metrics into two sets, the first set includes error rates
+    (WER & CER) and the second set includes similarity metrics (Cosine Similarity
+    & Jaccard index). APIs are compared using means of these metrics for their respective
+    sets. This is used to develop a rating system ranging from 1 to 10\. Here a rating
+    of 1 represents that the mean performance metric for that dataset is between 0-10%
+    (Worst Performance), whereas a rating of 10 represents it is between 91-100% (Best
+    Performance).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **Sl. No.** | **Data Set** | **Major Noise on which API performs poorly**
+    | **API Performance Relative Rating****(1: Worst, 10: Best)** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **Based on Error Rate** | **Based on Similarity Metrics** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **Vision** | **Textract** | **Vision** | **Textract** | **Vision** | **Textract**
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | Noisy Office 2007 | Both APIs work well on all the noises of Noisy office
+    dataset | 10 | 10 | 10 | 10 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | Smart Doc QA 2015 | Motion Blur, Out of Focus Blur, Invoice Type Documents
+    | 7 | 9 | 9 | 8 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | SROIE 2019 | Dot Printer Font, Stamp | 6 | 9 | 10 | 10 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | Custom Dataset 1 | Blur and watermark | 6 | 9 | 10 | 9 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 5 | Custom Dataset 2 (Alpha Foods) | Both APIs work good on all the noises
+    | 5 | 7 | 10 | 9 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 6 | Custom Dataset 3 | Without solid background (when there is a text present
+    on both the sides) | 3 | 8 | 10 | 9 |'
+  prefs: []
+  type: TYPE_TB
+- en: An important point here is that Vision's CER and WER error rates are generally
+    higher than that of Textract. But the Cosine Similarity and Jaccard Index are
+    similar for both the APIs. This is because of the order of the words or sorting
+    method used by APIs. Our finding is that although both Vision and Textract are
+    detecting texts with almost equal performance, but because of the different ordering
+    in Vision’s output, its error rates are higher than that of Textract. Hence, Vision
+    shows poor performance based on the error rate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Results Summary (Based on Noise)
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Here we provide a subjective evaluation of the API based on their observed performance.
+    Right tick (✓) represents that the API can generally handle that particular noise
+    and cross (X) represents that the API generally performs poorly with that particular
+    noise. For example we observed that Textract cannot detect a vertical text in
+    a document.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| S. No. | Noise / Variation | Google’sVision API | Amazon’sTextract API |
+    Observation |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | Light Variation(Day Light, Night Light, Partial Shadow, Grid Shadow,
+    Low Light) | ✓ | ✓ | Both Vision and Textract APIs can handle these kind of noises
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | Nonparallel camera (x, y, x-y) | ✓ | ✓ |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | Uneven Surface  | ✓ | ✓ |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | 2x Zoom In | ✓ | ✓ |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 5 | Vertical Text | ✓ | X | Limitation of the Amazon API |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 6 | Without solid background | X | X | Both Vision and Textract APIs tend
+    to perform poor in these kind of noises |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 7 | Watermark | X | X |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 8 | Blur (Out of Focus) | X | X |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 9 | Blur (Motion Blur) | X | X |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 10 | Dot Printer Font | X | X |'
+  prefs: []
+  type: TYPE_TB
+- en: 'Some of the examples are given below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Making Intelligent Document Processing Smarter: Part 1](../Images/31235543d0ec3ba6f8f2b4537db86b2e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig 5.2 (a): SmartDocQA - Out of focus blur: Vision and Textract text output
+    comparison. Left image is the input and middle one is Vision output where yellow
+    boxes are word level bounding boxes and the right image is Textract output where
+    blue boxes are word level bounding boxes. Red boxes indicate the words without
+    bounding boxes, i.e. the words that have not been detected by the API.![Making
+    Intelligent Document Processing Smarter: Part 1](../Images/b6a328e5f74b8e03e50a51fd5dbe6ea5.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Fig 5.2 (b): SmartDocQA - 2D Motion Blur: Vision and Textract text output comparison.
+    Red boxes indicate the texts that are not recognized by the APIs.![Making Intelligent
+    Document Processing Smarter: Part 1](../Images/f4726d868fd339a5b47279b9573b2a3d.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Fig 5.2 (c): SmartDocQA - Vertical text: Vision and Textract text output comparison.
+    Red circle indicates that Textract API is not able to detect the vertical text
+    in the image.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 6\. Document Denoising
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: It is now established that some noises do affect API’s text recognition capabilities.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Hence we tried various methods to clean the images before feeding to the API
+    and checked whether API performance improved or not. We have provided links in
+    the reference section where these methods can be understood. Below is the summary
+    of the observations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **S. No.** | **Noise / Variation** | **Cleaning Method** | **Total Samples**
+    | **Observation** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **Vision** | **Textract** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | Blur (Out of Focus) | Kernel Sharpening | 1 | Degraded | No Effect |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Custom Pre-processing | 3 | 1: Improved1: Slightly Improved1: Slightly Degraded
+    | 1: Improved2: No Effect |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | Blur (2D Motion Blur) | Blurring (Average/Median) | 2 | 2: Improved |
+    1: Slightly Degraded1: Improved |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Kernel Sharpening | 2 | 1: No effect1: Degraded | 1: Degraded1: Improved
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Custom Pre-processing | 1 | No effect | 1: No effect |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | Horizontal Motion Blur) | Blurring (Average/Median) | 2 | 1: Degraded1:
+    Improved | 1: Slightly Improved1: Degraded |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Custom Pre-processing | 1 | Slightly Improved | No Effect |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | Watermark | Morphological Filtering | 2 | 1: Improved1: Degraded | 1:
+    Improved1: Degraded |'
+  prefs: []
+  type: TYPE_TB
+- en: As seen from the table, these cleaning methods do not work on all the images
+    and in fact sometimes the API performance degrades after applying these cleaning
+    methods. Hence there is a need for a unified solution which can work on all kinds
+    of noises.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: After testing various datasets including Noisy Office, Smart Doc QA, SROIE and
+    custom datasets to compare and evaluate the performance of Tesseract, Vision and
+    Textract, we can conclude that the OCR output gets affected by the noises present
+    in the documents. The inbuilt denoiser or pre-processor is not sufficient to handle
+    most of the noises including motion blur, watermark etc. If the document images
+    are denoised, the OCR output can improve significantly. The noises in the documents
+    are diversified and we tried various non-model methods to clean the images. Different
+    methods work for different kinds of noises. Currently, there is no unified option
+    available which can handle all kinds of noises or at least major noises. Hence
+    there is a scope to make Intelligent Document Processing smarter. There is a need
+    for a unified (“one model fitting all”) solution which can denoise the document
+    before inputting to the OCR API to improve the performance. In part 2 of this
+    blog series we will explore denoising methods to enhance the API’s performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: References
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'F. Zamora-Martinez, S. España-Boquera and M. J. Castro-Bleda, Behaviour-based
+    Clustering of Neural Networks applied to Document Enhancement, in: Computational
+    and Ambient Intelligence, pages 144-151, Springer, 2007.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: UCI Machine Learning Repository [https://archive.ics.uci.edu/ml/datasets/NoisyOffice]
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Castro-Bleda, MJ.; España Boquera, S.; Pastor Pellicer, J.; Zamora Martínez,
+    FJ. (2020). The NoisyOffice Database: A Corpus To Train Supervised Machine Learning
+    Filters For Image Processing. The Computer Journal. 63(11):1658-1667\. https://doi.org/10.1093/comjnl/bxz098'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Nibal Nayef, Muhammad Muzzamil Luqman, Sophea Prum, Sebastien Eskenazi, Joseph
+    Chazalon, Jean-Marc Ogier: “SmartDoc-QA: A Dataset for Quality Assessment of Smartphone
+    Captured Document Images - Single and Multiple Distortions”, Proceedings of the
+    sixth international workshop on Camera Based Document Analysis and Recognition
+    (CBDAR), 2015.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Zheng Huang, Kai Chen, Jianhua He, Xiang Bai, Dimosthenis Karatzas, Shjian Lu,
+    C. V. Jawahar , ICDAR2019 Competition on Scanned Receipt OCR and Information Extraction,
+    (SROIE) 2021 [arXiv:2103.10213v1]
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://cloud.google.com/vision](https://cloud.google.com/vision)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://aws.amazon.com/textract/](https://aws.amazon.com/textract/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://docs.opencv.org/3.4/d4/d13/tutorial_py_filtering.html](https://docs.opencv.org/3.4/d4/d13/tutorial_py_filtering.html)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://scikit-image.org/docs/stable/auto_examples/applications/plot_morphology.html](https://scikit-image.org/docs/stable/auto_examples/applications/plot_morphology.html)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://pyimagesearch.com/2014/09/01/build-kick-ass-mobile-document-scanner-just-5-minutes/](https://pyimagesearch.com/2014/09/01/build-kick-ass-mobile-document-scanner-just-5-minutes/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**[Akshay Kumar](https://www.linkedin.com/in/akshay-kumar-datascience/)** is
+    Principal Data Scientist at [Sigmoid](http://www.sigmoid.com/) with 12 years of
+    experience in data sciences and is an expert in marketing analytics, recommendation
+    systems, time series forecasting, fraud risk modelling, image processing & NLP.
+    He builds scalable data science based solutions & systems to solve tough business
+    problems while keeping user experience at the centre.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Vijendra Jain](https://www.linkedin.com/in/jainvijendra/)** is currently
+    working with [Sigmoid](http://www.sigmoid.com/) as an Associate Lead Data Scientist.
+    With 7+ years of experience in Data Science, he has majorly worked in areas like
+    in Marketing Mix Modelling, Image Classification and Segmentation, and Recommendation
+    Systems.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How Retrieval Augment Generation Makes LLMs Smarter](https://www.kdnuggets.com/how-retrieval-augment-generation-makes-llms-smarter)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning’s Sweet Spot: Pure Approaches in NLP and Document Analysis](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Evaluating Methods for Calculating Document Similarity](https://www.kdnuggets.com/evaluating-methods-for-calculating-document-similarity)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Ethics of AI: Navigating the Future of Intelligent Machines](https://www.kdnuggets.com/2023/04/ethics-ai-navigating-future-intelligent-machines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Data Maturity Pyramid: From Reporting to a Proactive…](https://www.kdnuggets.com/the-data-maturity-pyramid-from-reporting-to-a-proactive-intelligent-data-platform)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ploomber vs Kubeflow: Making MLOps Easier](https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

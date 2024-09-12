@@ -1,0 +1,408 @@
+- en: Deep Residual Networks for Image Classification with Python + NumPy
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/07/deep-residual-neworks-image-classification-python-numpy.html](https://www.kdnuggets.com/2016/07/deep-residual-neworks-image-classification-python-numpy.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Daniele Ciriello, Independent Machine Learning Researcher**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Overview
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I wanted to implement [“Deep Residual Learning for Image Recognition”](https://arxiv.org/abs/1512.03385) from
+    scratch with Python for [my master’s thesis in computer engineering](http://www.slideshare.net/DanieleCiriello1/reti-neurali-di-convoluzione-per-la-visione-artificiale),
+    I ended up implementing a [simple (CPU-only) deep learning framework](https://github.com/dnlcrl/PyFunt/) along
+    with the [residual model](https://github.com/dnlcrl/deep-residual-networks-pyfunt),
+    and trained it on [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html), [MNIST](http://yann.lecun.com/exdb/mnist/) and [SFDDD](https://www.kaggle.com/c/state-farm-distracted-driver-detection). [Results](https://github.com/dnlcrl/deep-residual-networks-pyfunt/tree/master/docs)
+    speak by themselves.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Convolutional Neural Networks for Computer Vision
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: On Monday, June 13rd, I graduated with a master’s degree in computer engineering,
+    presenting a thesis on deep convolutional neural networks for computer vision.
+    For now it is available only in Italian, I am working on the english translation
+    but don’t know if and when I’ll got the time to finish it, so I try to describe
+    in brief each chapter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The document is composed as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Introduction**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: An introduction of the topic, the description of the thesis’ structure and a
+    rapid description of the neural networks history from perceptrons to NeoCognitron.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**Neural Networks fundamentals**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A description of the fundamental mathematical concepts behind deep learning.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**State of the Art**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A description of the main concepts that permitted the goals achieved in the
+    last decade, an introduction of image classification and object localization problems,
+    ILSVRC and the models that obtained best results from 2012 to 2015 in both the
+    tasks.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**Implementing a Deep Learning Framework**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This chapter contains an explanation on how to implement both forward and backward
+    steps for each one of the layers used by the residual model, the residual model’s
+    implementation and some method to test a network before training.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**Experimental Results**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: After developed the model and a solver to train it, I conducted several experiments
+    with the residual model on CIFAR-10, in this chapter I show how I tested the model
+    and how the behavior of the network changes when one removes the residual paths,
+    applies data-augmenting functions to reduce overfitting or increases the number
+    of the layers, then I show how to foil a trained network using random generated
+    images or images from the dataset.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**Conclusions**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Here I describe other results obtained training the same model on MNIST and
+    SFDDD (check below for more infos), an overview of the project and possible future
+    works with it.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Thesis links:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Italian](http://www.slideshare.net/DanieleCiriello1/reti-neurali-di-convoluzione-per-la-visione-artificiale)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: English (WIP)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Presentation links:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[slides + transcript, Italian](https://www.slideshare.net/DanieleCiriello1/pres-tesi-lm2016transcriptita)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[slides + transcript, English](https://www.slideshare.net/DanieleCiriello1/pres-tesi-lm2016transcripteng)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Below I describe in brief how I got all of that, the sources I used, the structure
+    of the residual model I trained and the results I obtained. Please keep in mind
+    that my first objective was to develop and train the model so I didn’t spent much
+    time on the design aspect of the framework, but I’m working on it (and pull requests
+    are welcome)!
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyFunt, PyDatSet and Deep Residual Networks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Pyfunt](https://github.com/dnlcrl/PyFunt) is a simple pythonic imperative
+    deep learning framework: it mainly provides the implementations for the forward
+    and backward steps for most notorious neural layers, some useful initialization
+    function, and a solver, that is essentially a class that you instantiate and to
+    which you pass the model to be trained and the data loaded with [pydatset](https://github.com/dnlcrl/PyDatSet),
+    which contains functions to import some dataset and a set of functions to artificially
+    augment the training set. Just to clarify, PyFunt and PyDatSet are the names for
+    the repos, pyfunt and pydatset are the names for the packages (so you import them
+    with `from pydatset import ...`).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The residual model implementation resides in [deep-residual-networks-pyfunt](https://github.com/dnlcrl/deep-residual-networks-pyfunt),
+    which also contains the train.py file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The residual model proposed in the reference paper is derived from the VGG model,
+    in which convolution filters of 3x3 applied with a step of 1 if the number of
+    channels is constant, 2 if the number of features got doubled (this is done to
+    preserve the computational complexity on each convolutional layer). So the residual
+    model is composed by a cascade of many residual block (or residual layers), which
+    are groups of convolutional layers in series where the output of the last layer
+    output is added to the original input to the block, authors suggest a couple of
+    conv layer for each residual block should work well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each residual block is composed where, if dimensionality reduction is applied
+    (using a convolution step of 2 instead of 1), downsampling and zero-padding must
+    be applied to the input before the addition, in order to permit the sum of the
+    two ndarrays (skip_path + conv_out).
+  prefs: []
+  type: TYPE_NORMAL
+- en: A parametric residual network have in total (6*n)+2 layers, composed as below
+    (right values represents the dimension of a [3,32,32] sample like CIFAR images).
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can see below a sort of package diagram that shows how train.py uses the
+    other components to train the residual model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Package Diagram](../Images/730871585cbfb796dd62009c17a98089.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: After I had every piece I started experimenting what happens when you remove
+    the residual paths, when you apply or not data augmenting functions for the training
+    set, when increase the number of layers or the number of filters for each layer.
+    Below you can find some image of the results but I suggest to give a look at the [respective
+    JuPyter notebooks](https://github.com/dnlcrl/deep-residual-networks-pyfunt/tree/master/docs) (in
+    addition to thesis and presentation linked above), for a deeper understanding,
+    as you can find a more exhaustive description of the results on all datasets I
+    show below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Results
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I trained the residual model on [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html), [MNIST](http://yann.lecun.com/exdb/mnist/) and [SFDDD](https://www.kaggle.com/c/state-farm-distracted-driver-detection),
+    and results are really exciting, at least for me. The networks learn well in nearly
+    every test I’ve done, obviously my limit is the capacity of my desktop PC.
+  prefs: []
+  type: TYPE_NORMAL
+- en: CIFAR-10
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '![CIFAR-10](../Images/e6598865c0a7ddb5bc8fa5f36fba7a8c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: One of the experiments on CIFAR-10 implied training a simple 20 layers resnet,
+    applying data-augmenting regularization functions I obtained a similar result
+    showed in the reference paper as you can see below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Results on CIFAR-10](../Images/a4e47363095822dd08d07d3b91ea6ef4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Results on CIFAR-10 from MSRA](../Images/ef984d86fec0245bee9dc4ce4340095a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The training for this model took approximately 10 hours. more infos are available
+    in [this jupyter ipython notebook](https://github.com/dnlcrl/deep-residual-networks-pyfunt/blob/master/docs/CIFAR-10%20Experiments.ipynb) from
+    the repo’s docs folder.
+  prefs: []
+  type: TYPE_NORMAL
+- en: MNIST
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '![MNIST](../Images/8d32dd9236d6f830da9ad628386182de.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: MNIST is a much simpler dataset in comparison with CIFAR-10, so the training
+    times are relatively shorter and I also tried to use the half of the number of
+    filters of each conv layers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![MNIST results](../Images/e0a37e9d58924e90a8a706d73cbe92fc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: More infos for experiments with residual networks on MNIST are available [here](https://github.com/dnlcrl/deep-residual-networks-pyfunt/blob/master/docs/MNIST%20Experiments.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![MNIST wrong classification from the best model](../Images/e02bb43ee49a269ebe34cf06dde3a77e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the image above you can see all the wrongly classified validation samples
+    from the 32 layers network, trained for just 30 epochs(!). upper left are the
+    ground-truth class, lower left the wrong classification from the net and lower
+    right the second classification for confidence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: SFDDD
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '![SFDDD](../Images/62b2f902e28116382a959b85f2e9582c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: State Farm Distracted Driver Detection is a dataset from State Farm on [kaggle.com](https://kaggle.com/),
+    it contains 640x480 images of drivers in 10 classes of distraction. For this dataset
+    I decided to resize all the images to 64x48 and use random cropping of 32x32 for
+    training and using the center 32x32 crop for testing. I also tried to directly
+    scale all images to 32x32 but results were worse (confirming the fact that scaling
+    the images doesn’t help a lot conv nets to learn more general features).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below you can see the learning curves for two models of respectively 32 and
+    44 layers, it looks that both models produce a low error after 80 epochs, but
+    the problem here is that for the validation set I used 2k images randomly extracted
+    from the training set, so my validation set has a correlation factor which is
+    higher than the correlation between the original training set and the validation
+    set proposed by State Farm (on which I got an error of circa 3%).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SFDDD](../Images/a00598f164027ed60aec7c1f638da7c1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Below you can see the saliency maps for six images for the class “talking on
+    phone with right hand”, in where the lighter zones represent the portions of the
+    images that most contributed to a correct classification from the network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SFDDD](../Images/511f026c6dbc0fc5e84f78812dc9caa3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Other infos will be available [here](https://github.com/dnlcrl/deep-residual-networks-pyfunt/tree/master/docs) after
+    competition ends.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Final Words
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I hope my projects could help you learn something new. If not, maybe *you* can
+    teach me something new, comments and pull requests are welcome as always!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sources
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When I started to think I wanted to implement [“Deep Residual Networks for Image
+    Recognition”](https://arxiv.org/abs/1512.03385), on GitHub there was only [this
+    project](https://github.com/gcr/torch-residual-networks) from [gcr](http://sneakygcr.net/),
+    based on Lua + Torch, this code really helped me a lot when I had to implement
+    the residual model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/) by [Michael
+    Nielsen](http://michaelnielsen.org/) contains a really well organized exhaustive
+    introduction to the subject and a lot of code to help the user understand what
+    is going on on each part of the process.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[colah.github.io](http://colah.github.io/archive.html) by [Christopher Olah](http://colah.github.io/about.html) has
+    a lot of very well written posts about deep learning and NNs, for example I found [this
+    post about convolution layers](http://colah.github.io/posts/2014-07-Conv-Nets-Modular/) really
+    illuminating.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Stanford’s CS231N](http://cs231n.github.io/) by [Andrej Karpathy](https://twitter.com/karpathy) et
+    Al., a really interesting course about CNN for visual recognition, I mainly used
+    the course material and my assignments’ solutions to build[PyFunt](https://github.com/dnlcrl/PyFunt).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Arxiv](https://arxiv.org/), a repository of e-prints of scientific papers
+    in the fields of mathematics, physics, astronomy, computer science, quantitative
+    biology, statistics, and quantitative finance, which can be accessed online. Check
+    also [Arxiv Sanity Preserver](http://www.arxiv-sanity.com/) by [Karpathy](https://twitter.com/karpathy).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Many other awesome resources are listed here: [https://github.com/ChristosChristofidis/awesome-deep-learning](https://dnlcrl.github.io/projects/2016/06/22/awesome-deep-learning).
+  prefs: []
+  type: TYPE_NORMAL
+- en: When I started studying deep learning I kept track of the best papers and collected
+    titles, authors, years and links in [this google sheet](https://docs.google.com/spreadsheets/d/1DBFylWzALpMpZLLrukHGt29L1tDUsKq4A11sxIbB-Js/edit?usp=sharing),
+    which I should update frequently.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Daniele Ciriello](https://twitter.com/dnlcrl)** holds a Master''s Degree
+    in Computer Engineering, and is a Deep Learning enthusiast and lover of Python
+    and open source.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://dnlcrl.github.io/projects/2016/06/22/Deep-Residual-Networks-for-Image-Classification-with-Python+NumPy.html).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[An Introduction to Scientific Python (and a Bit of the Maths Behind It) –
+    NumPy](/2016/06/intro-scientific-python-numpy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Peeking Inside Convolutional Neural Networks](/2016/06/peeking-inside-convolutional-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learning to Code Neural Networks](/2016/01/learning-to-code-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Image Classification with Convolutional Neural Networks (CNNs)](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Multilabel Classification: An Introduction with Python''s Scikit-Learn](https://www.kdnuggets.com/2023/08/multilabel-classification-introduction-python-scikitlearn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[NumPy for Image Processing](https://www.kdnuggets.com/numpy-for-image-processing)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[More Performance Evaluation Metrics for Classification Problems You…](https://www.kdnuggets.com/2020/04/performance-evaluation-metrics-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fine-Tuning BERT for Tweets Classification with HuggingFace](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

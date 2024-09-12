@@ -1,0 +1,300 @@
+- en: Scaling the Wall Between Data Scientist and Data Engineer
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/02/scaling-wall-data-scientist-data-engineer.html](https://www.kdnuggets.com/2020/02/scaling-wall-data-scientist-data-engineer.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Byron Allen](https://www.linkedin.com/in/byronaallen/), ML Engineer,
+    Servian**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fe3deab6f4aadb1470e63b4c296c89e7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Source: [Chris Gonzalez](https://www.pexels.com/@hellochrisgonzalez).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the most exciting things in [machine learning](https://www.servian.com/ai/) (ML)
+    today, for me at least, is not at the bleeding-edge of deep learning or reinforcement
+    learning. Rather it has more to do with how models are managed and how data scientists
+    and data engineers effectively collaborate as teams. Navigating those waters will
+    lead organisations towards a more effective and sustainable application of ML.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sadly, there is a divide between “scientist” and “engineer.” A wall so to speak.
+    Andy Konwinski, Co-founder and VP of Product at Databricks, along with others,
+    point to some key hurdles in a recent blog post about [MLFlow](https://databricks.com/blog/2019/03/06/managed-mlflow-on-databricks-now-in-public-preview.html).
+    “Building production machine learning applications is challenging because there
+    is no standard way to record experiments, ensure reproducible runs, and manage
+    and deploy models,” says Databricks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The genesis of many major challenges in applying ML today — whether that be
+    technical, commercial, or societal — is the imbalance of data over time coupled
+    with the management, as well as utilisation, of ML artifacts. A model can perform
+    exceptionally well, but if the underlying data drifts and artifacts are not being
+    used to assess performance, your model will not generalise well nor update appropriately.
+    This problem falls into a gray area that is inhabited by both data scientists
+    and engineers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/323bb53c341e9f39b2751b6fbec0606a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Source: [burak kostak](https://www.pexels.com/@burakkostak).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In other words, the crux of the problem is that the principals of CI/CD are
+    missing in ML. It doesn’t matter if you can create a really good ‘black box’ model
+    if your environment changes, such as input data, and the model isn’t regularly
+    assessed in the context of what it was built to do causing it to lose its relevance
+    and value over time. This is an issue that’s hard to tackle because the people
+    that are feeding the data in, engineers, and the people that designed the model,
+    scientists, don’t have the happiest of marriages.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are tangible examples of this challenge. Think about all those predictions
+    saying Hillary Clinton was going to win amongst several other ML goofs. From self-driving
+    cars killing an innocent pedestrian to [prejudiced AIs](https://www.forbes.com/sites/intelai/2019/03/27/the-risks-of-dirty-data-and-ai/#7bee43d72dc7),
+    there have been some large [missteps](https://medium.com/syncedreview/2018-in-review-10-ai-failures-c18faadf5983),
+    which I would argue generally have origins in the gray area between data science
+    and engineering.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b5466609a48e96f9030b424c19698c4d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Source: [Kayla Velasquez](https://unsplash.com/@kaylawithav).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: That said, negative and positive alike, ML impacts our society. More positive,
+    and slightly less commercial, examples include the [electricityMap](https://www.electricitymap.org/),
+    which uses ML to map the environmental impact of electricity all over the world;
+    ML in cancer research is currently helping us to detect several cancer types earlier
+    and more accurately; AI-driven sensors powering [Agriculture](https://www.forbes.com/sites/danielnewman/2019/02/07/4-ways-artificial-intelligence-will-drive-digital-transformation-in-agriculture/#75ac0fbb1273) towards
+    meeting the global skyrocketing demands for food.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Wall
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With that in mind, it’s critical to get production ML and, more specifically,
+    model management right. However, coming back to the point, data scientists and
+    data engineers don’t always speak the same language.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is not uncommon for a data scientist to lack an understanding of how their
+    models should live in an environment that continuously ingests new data, integrates
+    new code, is called by end-users, and can fail in a variety of ways from time
+    to time (i.e., a production environment). On the other side of the divide, many
+    data engineers do not understand enough about machine learning to understand what
+    they are putting into production and the ramifications for the organisation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Far too often have these two roles operated without enough consideration for
+    one another despite the fact that they occupy the same space. “That’s not my job”
+    is not the right approach. To produce something that is reliable, sustainable,
+    and adaptable, both roles must work together more effectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Scaling the Wall
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first step to speaking each other’s language is to build a common vocabulary
+    — to have some kind of standardisation of the semantics, and therefore how the
+    challenge is, or tangential challenges are, discussed. Naturally, this is fraught
+    with challenges — just ask several different people what a data lake is, and you’re
+    likely to get at least two different answers, if not more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’ve developed common reference points that I call the ProductionML Value Chain
+    and ProductionML Framework.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/388008a4cbb718c4f3a24a86d5a1c860.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We’ve broken the process of productionising ML into five overlapping concepts,
+    which are too often considered separately. Whilst it may seem like introducing
+    a holistic framework like this would increase complexity and interdependency —
+    in practice, those complexities and interdependencies already exist — and ignoring
+    them is just kicking a problem down the line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By allowing for consideration of neighbouring concepts in the design of your
+    production ML pipeline — you begin to introduce that elusive reliability, sustainability,
+    and adaptability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ProductionML Framework
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The ProductionML Value Chain is a high-level description of what is required
+    to operate a data science and engineering team for the purpose of deploying models
+    to end-users. There is naturally a more technical and detailed understanding —
+    I call that a ProductionML Framework (some might call this Continous Intelligence).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/58773a01976646a78393ad9aae0684b8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*ProductionML Framework.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This framework was developed after several rounds of experimentation with commercial
+    MLOps tools, open source options, and the development of an internal PoC. It is
+    meant to guide the future development of ProductionML projects, particularly the
+    aspects of production ML that require input from both data scientists and engineers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a972556f5c2d168674738cbeb0f176e3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Data Science in orange and Data Engineering/DevOps in blue.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you’re not familiar with those aspects, see data science in orange and data
+    engineering / DevOps in blue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see, the “Training Performance Tracking” mechanism (e.g., MLFlow)
+    and the Govern mechanism are centrally situated in this architecture. That is
+    because every artifact, including metrics, parameters, and graphs, must be archived
+    during the training and testing stages. Moreover, what is called Model Management
+    is fundamentally tied to how the model is governed, which leverages those model
+    artifacts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Governmechanism combines artifacts and business rules to promote the appropriate
+    model, or estimator to be more specific, to production while labeling others according
+    to rules specific to the use case. This is also called model versioning, but the
+    term ‘govern’ is used to avoid confusion with *version control* and emphasise
+    the central role that the mechanism plays in overseeing model management.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Golden Gun?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We’re all on this journey together. We’re all trying to scale the wall. There
+    are a lot of great tools entering the market, but to date, no one has a golden
+    gun…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/feafa0ec16bdd40defe7d6dc953812d7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Source: mrgarethm — Golden Gun — International Spy Museum.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: MLFlow makes great strides from my perspective, and it answers certain questions
+    around model management and artifact archiving. Other products similarly address
+    relatively specific issues — albeit their strengths may be in other parts of the
+    ProductionML Value Chain. This can be seen in the Google Cloud ML Engine and AWS
+    Sagemaker. Recently, the beta version of AutoML Tables beta was made available
+    by GCP but even that does not deliver everything required out of the box, albeit
+    does come much closer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With that continued disparity in mind, it is absolutely critical to have a common
+    vocabulary and framework as a foundation between scientists and engineers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is the wall too tall? From my experience, the answer is no, but that’s not to
+    say ProductionML is not complex.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Obligatory James Bond Quote
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'M: So if I heard correctly, Scaramanga got away — in a car that sprouted wings!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Q: Oh, that’s perfectly feasible, sir. As a matter of fact, we’re working on
+    one now.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Perhaps that’s how you should get over that wall…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/weareservian/scaling-the-wall-between-data-scientist-and-data-engineer-51b0a99da073).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[What Does it Mean to Deploy a Machine Learning Model?](https://www.kdnuggets.com/2020/02/deploy-machine-learning-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Overview of Different Approaches to Deploying Machine Learning Models in Production](https://www.kdnuggets.com/2019/06/approaches-deploying-machine-learning-production.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What’s the Machine Learning Engineering Job Like](https://www.kdnuggets.com/2019/07/machine-learning-engineering-job.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Scaling Data Management Through Apache Gobblin](https://www.kdnuggets.com/2023/01/scaling-data-management-apache-gobblin.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Scaling with Python](https://www.kdnuggets.com/2023/07/data-scaling-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Things You Should Know When Scaling Your Web Data-Driven Product](https://www.kdnuggets.com/2023/08/things-know-scaling-web-datadriven-product.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Between Dreams and Reality: Generative Text and Hallucinations](https://www.kdnuggets.com/between-dreams-and-reality-generative-text-and-hallucinations)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What’s the Difference Between Data Analysts and Data Scientists?](https://www.kdnuggets.com/2022/03/difference-data-analysts-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Difference Between Training and Testing Data in Machine Learning](https://www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

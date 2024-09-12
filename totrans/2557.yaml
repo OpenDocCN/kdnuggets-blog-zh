@@ -1,0 +1,336 @@
+- en: How to Create Unbiased Machine Learning Models
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/07/create-unbiased-machine-learning-models.html](https://www.kdnuggets.com/2021/07/create-unbiased-machine-learning-models.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By Philip Tannor, Co-Founder & CEO of [Deepchecks](https://deepchecks.com/)**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f109257a81bf17a819ae1929ce210afe.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Image by* [*Clker-Free-Vector-Images*](https://pixabay.com/users/clker-free-vector-images-3736/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=307248)
+    *from* [*Pixabay*](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=307248)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: AI systems are becoming increasingly popular and central in many industries.
+    They decide who might get a loan from the bank, whether an individual should be
+    convicted, and we may even entrust them with our lives when using systems such
+    as autonomous vehicles in the near future. Thus, there is a growing need for mechanisms
+    to harness and control these systems so that we may ensure that they behave as
+    desired.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One important issue that has been gaining popularity in the last few years is
+    *fairness*. While usually ML models are evaluated based on metrics such as accuracy,
+    the idea of fairness is that we must ensure that our models are unbiased with
+    regard to attributes such as gender, race and other selected attributes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A classic example of an episode regarding racial bias in AI systems, is the
+    COMPAS software system, developed by Northpointe, which aims to assist US courts
+    with assessing the likelihood of a defendant becoming a recidivist. Propublica
+    published an [article](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing)
+    which claims that this system is biased against blacks, giving them higher risk
+    ratings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/286f789c76493394720b3c8cbe64ca84.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*ML system bias against African Americans? (*[*source*](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing)*)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post we will try to understand where biases in ML models originate,
+    and explore methods for creating unbiased models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Where Does Bias Come From?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '"Humans are the weakest link"'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: —Bruce Schneier
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In the field of Cybersecurity it is often said that “humans are the weakest
+    link” (Schneier). This idea applies in our case as well. Biases are in fact introduced
+    into ML models by humans unintentionally.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Remember, an ML model can only be as good as the data it’s trained on, and thus
+    if the training data contains biases, we can expect our model to mimic those same
+    biases. Some representative examples for this can be found in the field of word
+    embeddings in NLP. Word embeddings are learned dense vector representations of
+    words, that are meant to capture semantic information of a word, which can then
+    be fed to ML models for different downstream tasks. Thus, embeddings of words
+    with similar meanings are expected to be “close” to each other.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/226ab20e7f0444a5cf42625469fff5d4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Word embeddings can capture the semantic meaning of words. (*[*source*](https://www.ibm.com/blogs/research/2018/11/word-movers-embedding/)*)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It turns out that the embedded space can be used to extract relations between
+    words, and to find analogies as well. A classic example for this is the [well
+    known](https://www.technologyreview.com/2015/09/17/166211/king-man-woman-queen-the-marvelous-mathematics-of-computational-linguistics/)
+    king-man+woman=queen equation. However, if we substitute the word “doctor” for
+    the word “king” we get “nurse” as the female equivalent of the “doctor”. This
+    undesired result simply reflects existing gender biases in our society and history.
+    If in most available texts doctors are generally male and nurses are generally
+    female, that’s what our model will understand.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*Code example:* *man* *is to* *doctor* *as* *woman* *is to* *nurse* *according
+    to gensim word2vec* *(*[*source*](https://colab.research.google.com/drive/165qN7RfKByFDlWB6m-E5gRvcSEEodGV0?usp=sharing)*)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Culture Specific Tendencies
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Currently, the most used language on the internet is [English](https://www.statista.com/statistics/262946/share-of-the-most-common-languages-on-the-internet/#:~:text=As%20of%20January%202020%2C%20English,percent%20of%20global%20internet%20users.).
+    Much of the research and products in the field of Data Science and ML is done
+    in English as well. Thus, many of the “natural” datasets that are used to create
+    huge language models tend to match American thought and culture, and may be biased
+    towards other nationalities and cultures.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3a6bd2ee7625df70901f1fe33257b7ca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Cultural bias: GPT-2 needs active steering in order to produce a positive
+    paragraph with the given prompt. (*[*source*](https://blog.einstein.ai/gedi/)*)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Synthetic Datasets
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Some biases in the data may be created unintentionally in the process of the
+    dataset’s construction. During construction and evaluation people are more likely
+    to notice and pay attention to details they are familiar with. A well known example
+    for an image classification mistake, is when Google Photos [misclassified black
+    people as gorillas](https://www.wsj.com/articles/BL-DGB-42522). While a single
+    misclassification of this sort may not have a strong impact on the overall evaluation
+    metrics, it is a sensitive issue, and could have a large impact on the product
+    and the way customers relate to it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/05cedf7c97a4e086de2b0fa7ba670e26.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Racist AI algorithm? Misclassification of black people as gorillas. (*[*source*](https://www.wsj.com/articles/BL-DGB-42522)*)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In conclusion, no dataset is perfect. Whether a dataset is handcrafted or “natural”,
+    it is likely to reflect the biases of it’s creators, and thus the resulting model
+    will contain the same biases as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating fair ML models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are multiple proposed methods for creating fair ML models, which generally
+    fall into one of the following stages.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Preprocessing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A naive approach to creating ML models that are unbiased with respect to sensitive
+    attributes is to simply remove these attributes from the data, so that the model
+    cannot use them for its prediction. However, it is not always straightforward
+    to divide attributes into clear cut categories. For example, a person’s name may
+    be correlated with their gender or ethnicity, nevertheless we would not necessarily
+    want to regard this attribute as sensitive. More sophisticated approaches attempt
+    to use dimensionality reduction techniques in order to eliminate sensitive attributes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At Training Time
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: An elegant method for [creating unbiased ML models](https://deepchecks.com/how-to-create-unbiased-ml-models/)
+    is using adversarial debiasing. In this method we simultaneously train two models.
+    The adversary model is trained to predict the protected attributes given the predictors
+    prediction or hidden representation. The predictor is trained to succeed on the
+    original task while making the adversary fail, thus minimizing the bias.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ac04940d304eced71c619b269d1c2468.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Adversarial debiasing illustration: The predictor loss function consists of
+    two terms, the predictor loss, and the adversarial loss. (*[*source*](https://arxiv.org/pdf/1801.07593.pdf)*)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This method can achieve great results for debiasing models without having to
+    “throw away” the input data, however, it may suffer from difficulties that arise
+    in general when training adversarial networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Post Processing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the post processing stage we get the model’s predictions as probabilities,
+    but we can still choose how to act based on these outputs, for example we can
+    move the decision threshold for different groups in order to meet our fairness
+    requirements.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One way to ensure model fairness in the post processing stage is to look at
+    the intersection of the area under the ROC curve for all groups. The intersection
+    represents TPRs and FPRs that can be achieved for all classes simultaneously.
+    Note that in order to satisfy the desired result of  equal TPRs and FPRs for all
+    classes one might need to purposefully choose to get less good results on some
+    of the classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/1bd7e256c87e70aaceaf57dc23972269.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*The colored region is what’s achievable while fulfilling the separability
+    criterion for fairness. (*[*source*](https://fairmlbook.org/classification.html)*)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Another method for debiasing a model in the post processing stage involves
+    *calibrating* the predictions for each class independently. *Calibration* is a
+    method for ensuring that the probability outputs of a classification model indeed
+    reflect the matching ratio of positive labels. Formally, a classification model
+    is calibrated if for each value of r:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/4261c701bf4517a4b0357b5fd7d1157d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When a model is properly calibrated error rates will be similar across the different
+    values of protected attributes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To sum it up, we have discussed the concepts of *bias* and *fairness* in the
+    ML world, we have seen that model biases often reflect existing biases in society.
+    There are various ways in which we could enforce and test for fairness in our
+    models, and hopefully, using these methods will lead to more just decision making
+    in AI assisted systems around the world.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Further Reading
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Gender bias in word embeddings](https://towardsdatascience.com/gender-bias-word-embeddings-76d9806a0e17)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Propublica article](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alekh Agarwal, Alina Beygelzimer, Miroslav Dudík, John Langford, & Hanna Wallach.
+    (2018). A Reductions Approach to Fair Classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Brian Hu Zhang, Blake Lemoine, & Margaret Mitchell. (2018). Mitigating Unwanted
+    Biases with Adversarial Learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Solon Barocas, Moritz Hardt, & Arvind Narayanan (2019). *Fairness and Machine
+    Learning*. fairmlbook.org.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ninareh Mehrabi, Fred Morstatter, Nripsuta Saxena, Kristina Lerman, & Aram Galstyan.
+    (2019). A Survey on Bias and Fairness in Machine Learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: Philip Tannor** is Co-Founder & CEO of [Deepchecks](https://deepchecks.com/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data Protection Techniques Needed to Guarantee Privacy](/2020/10/data-protection-techniques-guarantee-privacy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes AI Trustworthy?](/2021/05/what-makes-ai-trustworthy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ethics, Fairness, and Bias in AI](/2021/06/ethics-fairness-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building Data Pipelines to Create Apps with Large Language Models](https://www.kdnuggets.com/building-data-pipelines-to-create-apps-with-large-language-models)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Create a Dataset for Machine Learning](https://www.kdnuggets.com/2022/02/create-dataset-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Create a Sampling Plan for Your Data Project](https://www.kdnuggets.com/2022/11/create-sampling-plan-data-project.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Create Efficient Combined Data Sources with Tableau](https://www.kdnuggets.com/2022/05/create-efficient-combined-data-sources-tableau.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Use your Data Science Skills to Create 5 Streams of Income](https://www.kdnuggets.com/2023/03/data-science-skills-create-5-streams-income.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Create a Time Series Ratio Analysis Dashboard](https://www.kdnuggets.com/2023/06/wolfer-create-time-series-ratio-analysis-dashboard.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

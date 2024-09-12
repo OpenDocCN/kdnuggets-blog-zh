@@ -1,0 +1,244 @@
+- en: Machine Learning Pipeline Optimization with TPOT
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/768d8e0940ca454156bd5deead1beb7d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Erik Mclean](https://unsplash.com/@introspectivedsgn?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+    on [Unsplash](https://unsplash.com/s/photos/pipeline?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: AutoML & TPOT
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: It's been a while since I've had a look at [TPOT](https://github.com/EpistasisLab/tpot/),
+    the Tree-based Pipeline Optimization Tool. TPOT is a Python automated machine
+    learning (AutoML) tool for optimizing machine learning pipelines through the use
+    of genetic programming. We are told by the authors to consider it our "data science
+    assistant."
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The rationale for AutoML stems from this idea: if numerous machine learning
+    models must be built, using a variety of algorithms and a number of differing
+    hyperparameter configurations, then this model building can be automated, as can
+    the comparison of model performance and accuracy.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I want to have a fresh look at TPOT to to see if we can flesh out an actual
+    fully-automated assistant for data scientists. What if we could expand on the
+    functionality of TPOT and build an end-to-end prediction pipeline, which we could
+    point at a dataset and get predictions out the other end, with no intervention
+    in between? Sure, other possible tools for this exist, but what better way to
+    understand the machine learning pipeline process, and any particular resulting
+    single constructed pipeline, than building it ourselves, and making the decisions
+    as to what happens along the way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The goal wouldn't necessarily be to cut the data scientist out of the loop altogether,
+    but to provide a baseline or a number of possible solutions to compare hand-crafted
+    machine learning pipelines to. While the assistant toils in the background, the
+    master can come up with more clever attempted approaches. At the very least, resulting
+    prediction pipelines could be good starting points for a data scientist to manually
+    tweak and intervene with after the fact, with much of the rote work taken care
+    of on her behalf.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An AutoML "solution" could include the tasks of data preprocessing, feature
+    engineering, algorithm selection, algorithm architecture search, and hyperparameter
+    tuning, or some subset or variation of these distinct tasks. Thus, automated machine
+    learning can now be thought of as anything from solely performing a single task,
+    such as automated feature engineering, all the way through to a fully-automated
+    pipeline, from data preprocessing, to feature engineering, to algorithm selection,
+    and so on. So why not build something that does it all?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Anyhow, the first step of this plan is to refamiliarize ourselves with TPOT,
+    the project that will eventually be at the center of our fully-automated prediction
+    pipeline optimizer. TPOT is a Python tool which "automatically creates and optimizes
+    machine learning pipelines using genetic programming." TPOT works in tandem with
+    Scikit-learn, describing itself as a Scikit-learn wrapper. TPOT is open source,
+    written in Python, and aimed at simplifying a machine learning process by way
+    of an AutoML approach based on genetic programming. The end result is automated
+    hyperparameter selection, modeling with a variety of algorithms, and exploration
+    of numerous feature representations, all leading to iterative model building and
+    model evaluation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/49a6192aa0b8ec1192da08cbbdf0e83e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Aspects of a machine learning pipeline automated by TPOT ([source](https://github.com/EpistasisLab/tpot/))
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pipeline Optimization
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We will take a look at something a little more involved than than the simple
+    yet perfectly useful example script that can be found in [the TPOT repository](https://github.com/EpistasisLab/tpot/).
+    The code should be straightforward and fairly easy to follow, so I won't go over
+    it with a fine-toothed comb.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is an example output from running our optimization script:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The output provides some basic info on the pipeline iterations. If you can't
+    tell from the combination of the script and its output, we have run the optimization
+    process a total of 3 separate times; with each of these, we have used stratified
+    10-fold cross-validation; and the genetic optimization process has run for 5 generations
+    on a population size of 50 for each of these iterations. Can you figure out how
+    many pipelines were tested during the process? This is something we will have
+    to give consideration to moving forward, not least for the practical reasons associated
+    with computation time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you may recall, TPOT outputs the best pipeline — or pipelines, upon multiple
+    iterations — to file, which can then be used to recreate the same experiment,
+    or to use the same pipeline on new data. We will harness this as we move forward
+    creating our fully-automated end-to-end prediction pipeline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our case, our script noted that each of the resulting pipelines were identical,
+    and so only outputted one of them. This is a reasonable result on such a small
+    dataset, but due to the nature of genetic optimization, best pipelines could be
+    different between iterations on larger, more complex data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Some things we tried with our script this time that we did not [in the past](/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-4.html):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cross-validation for model evaluation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Iterating on the modeling more than once — likely not useful on such a small
+    dataset, but possibly will be as we progress
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Comparing resulting pipelines on these multiple iterations — are they all the
+    same?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Did you know TPOT now uses PyTorch under the hood to build neural networks for
+    prediction?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Maybe you already see some ways we can improve on the above. Some specific
+    things we might not want to do in our future implementations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We would want to think about our dataset splitting proportions in order to have
+    the ideal amount of training, validation, and testing data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As we are using cross-validation for training and validation (related to the
+    above point), we would want to hang on to our testing data to use only on our
+    best performing model, as opposed to on each one
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Since feature selection/engineering/construction is dealt with using TPOT, we
+    will want to automate the conversion of categorical variables to numerical form
+    prior to feeding them in
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We will want to be able to deal with a wider array of datasets :)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Much, much more!
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: These points, while important for actual modeling, aren't really an issue right
+    now, since our focus was only on putting the structure in place to iteratively
+    build and evaluate machine learning pipelines. We can address these legitimate
+    concerns as we move forward.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I encourage you to have a look at the [TPOT documentation](http://epistasislab.github.io/tpot/)
+    to see what it has in store for us as we leverage it to help build an end-to-end
+    prediction pipeline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13))
+    is a Data Scientist and the Editor-in-Chief of KDnuggets, the seminal online Data
+    Science and Machine Learning resource. His interests lie in natural language processing,
+    algorithm design and optimization, unsupervised learning, neural networks, and
+    automated approaches to machine learning. Matthew holds a Master''s degree in
+    computer science and a graduate diploma in data mining. He can be reached at editor1
+    at kdnuggets[dot]com.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Neural Network Optimization with AIMET](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Gradient Descent: The Mountain Trekker''s Guide to Optimization with…](https://www.kdnuggets.com/gradient-descent-the-mountain-trekker-guide-to-optimization-with-mathematics)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Research-Driven Advanced Prompting Techniques for LLM Efficiency…](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,258 @@
+- en: How To Leverage Docker Cache for Optimizing Build Speeds
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/how-to-leverage-docker-cache-for-optimizing-build-speeds](https://www.kdnuggets.com/how-to-leverage-docker-cache-for-optimizing-build-speeds)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![How To Leverage Docker Cache for Optimizing Build Speeds](../Images/ae994ea03b207d5b88fa192f562e5e06.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Editor | Midjourney & Canva
+  prefs: []
+  type: TYPE_NORMAL
+- en: Leveraging Docker cache can significantly speed up your builds by reusing layers
+    from previous builds. Let’s learn how to optimize a Dockerfile to make the best
+    use of Docker's layer caching mechanism.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prerequisites
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Before you start:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You should have Docker installed. [Get Docker](https://docs.docker.com/get-docker/)
+    if you haven’t already.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You should be familiar with basic Docker concepts, creating Dockerfiles, and
+    common Docker commands.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How the Docker Build Cache Works
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Docker images are built in layers, where each instruction in the Dockerfile
+    creates a new layer. For example, instructions like `FROM`, `RUN`, `COPY`, and
+    `ADD` each create a new layer in the resulting image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Docker uses a content-addressable storage mechanism to manage image layers.
+    Each layer is **identified by a unique hash** that Docker calculates based on
+    the contents of the layer. Docker compares these hashes to determine if it can
+    reuse a layer from the cache.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![build-cache-1](../Images/379ad70193c5f463402fac9847b40323.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Building a Docker Image | Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: When Docker builds an image, it goes through each instruction in the Dockerfile
+    and performs a cache lookup to see if it can reuse a previously built layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![build-cache-2](../Images/2eb3be10a48670946130a610c06515b6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: To reuse or build from scratch | Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The decision to use the cache is based on several factors:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Base image**: If the base image (`FROM` instruction) has changed, Docker
+    will invalidate the cache for all subsequent layers.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Instructions**: Docker checks the exact content of each instruction. If the
+    instruction is the same as a previously executed one, the cache can be used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Files and directories**: For instructions that involve files, like `COPY`
+    and `ADD`, Docker checks the contents of the files. If the files haven’t changed,
+    the cache can be used.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Build context**: Docker also considers the build context (the files and directories
+    sent to the Docker daemon) when deciding to use the cache.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Understanding Cache Invalidation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Certain changes can invalidate the cache, causing Docker to rebuild the layer
+    from scratch:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Modification in the Dockerfile**: If an instruction in the Dockerfile changes,
+    Docker invalidates the cache for that instruction and all subsequent instructions.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Changes in source files**: If files or directories involved in `COPY` or
+    `ADD` instructions change, **Docker invalidates the cache for these layers and
+    subsequent layers**.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'To sum up, here’s what you need to know about docker build cache:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Docker builds images layer by layer. If a layer hasn’t changed, Docker can reuse
+    the cached version of that layer.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a layer changes, all subsequent layers are rebuilt. Therefore, putting instructions
+    that do not change often (such as the base image, dependency installations, initialization
+    scripts) much earlier in the Dockerfile can help maximize cache hits.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Best Practices to Leverage Docker’s Build Cache
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'To take advantage of the Docker build cache, you can structure your Dockerfile
+    in a way that maximizes cache hits. Here are some tips:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Order instructions by frequency of change**: Place instructions that change
+    less frequently higher up in the Dockerfile. And place frequently changing instructions,
+    such as `COPY` or `ADD` of application code towards the end of the Dockerfile.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Separate dependencies from application code**: Separate instructions that
+    install dependencies from those that copy the source code. This way, dependencies
+    are only reinstalled if they change.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Next, let’s take a couple of examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Examples: Dockerfiles That Leverage the Build Cache'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '1\. Here’s an example Dockerfile for setting up a PostgreSQL instance with
+    some initial setup scripts. The example focuses on optimizing layer caching:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The base image layer often doesn’t change frequently. Environment variables
+    are unlikely to change often, so setting them early helps reuse the cache for
+    subsequent layers. Note that we copy the initialization scripts before the application
+    code. This is because copying files that don’t change frequently before those
+    that do helps in leveraging the cache.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '2\. Here’s another example of a Dockerfile for containerizing a Python app:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Copying the rest of the application code after installing dependencies ensures
+    that changes to the application code do not invalidate the cache for the dependencies
+    layer. This maximizes the reuse of cached layers, leading to faster builds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By understanding and leveraging Docker's caching mechanism, you can structure
+    your Dockerfiles for faster builds and more efficient image creation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Additional Resources
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Learn more about caching at the following links:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Docker build cache](https://docs.docker.com/build/cache/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using the build cache](https://docs.docker.com/guides/docker-concepts/building-images/using-the-build-cache/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)****
+    is a developer and technical writer from India. She likes working at the intersection
+    of math, programming, data science, and content creation. Her areas of interest
+    and expertise include DevOps, data science, and natural language processing. She
+    enjoys reading, writing, coding, and coffee! Currently, she''s working on learning
+    and sharing her knowledge with the developer community by authoring tutorials,
+    how-to guides, opinion pieces, and more. Bala also creates engaging resource overviews
+    and coding tutorials.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Better Leverage Data Science for Business Growth](https://www.kdnuggets.com/2022/08/better-leverage-data-science-business-growth.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using RAPIDS cuDF to Leverage GPU in Feature Engineering](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Genes with a Genetic Algorithm](https://www.kdnuggets.com/2022/04/optimizing-genes-genetic-algorithm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Data Storage: Exploring Data Types and Normalization in SQL](https://www.kdnuggets.com/optimizing-data-storage-exploring-data-types-and-normalization-in-sql)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Data Analytics: Integrating GitHub Copilot in Databricks](https://www.kdnuggets.com/optimizing-data-analytics-integrating-github-copilot-in-databricks)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

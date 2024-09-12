@@ -1,0 +1,441 @@
+- en: What to do when your training and testing data come from different distributions
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/01/when-your-training-testing-data-different-distributions.html](https://www.kdnuggets.com/2019/01/when-your-training-testing-data-different-distributions.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Nezar Assawiel](https://www.linkedin.com/in/assawiel/), Machine Learning
+    Developer, Founder at Clinical AI**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/7906a1dad8eea961af94ad613f47a801.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'credit: [https://www.chessbazaar.com/blog/game-chess-can-make-child-genius-smarter/](https://www.chessbazaar.com/blog/game-chess-can-make-child-genius-smarter/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To build a well-performing machine learning (ML) model, it is essential to train
+    the model on and test it against data that come from the same target distribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, sometimes only a limited amount of data from the target distribution
+    can be collected. It may not be sufficient to build the needed train/dev/test
+    sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Yet similar data from other data distributions might be readily available. What
+    to do in such a case? Let us discuss some ideas!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Some background knowledge****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To better follow the discussion here, you can read up on the following basic
+    ML concepts, if you are not familiar with them already:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Train, dev (development), and test sets: **Note that the dev set is also
+    called the validation or the hold-on set. [This post](https://towardsdatascience.com/train-validation-and-test-sets-72cb40cba9e7) is
+    a good short introduction to the topic.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bias (underfitting) and variance (overfitting) errors: **[This](https://www.quora.com/What-is-the-best-way-to-explain-the-bias-variance-trade-off-in-layman%E2%80%99s-terms) is
+    a great simple explanation of these errors.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**How the train/dev/test split is correctly made:** You may refer to [this
+    post](https://medium.freecodecamp.org/how-to-strategically-accomplish-your-machine-learning-models-performance-goals-44dddc11697e) that
+    I havewritten before for a short background on this topic.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Scenario
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Say you are building a dog-image classifier application that determines if an
+    image is of a dog or not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The application is intended for users in rural areas who can take pictures of
+    animals by their mobile devices for the application to classify the animals for
+    them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Studying the target data distribution — you found that the images are mostly
+    blurry, low resolution, and similar to the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/dc5a1bfada6c5f213065ac99f836a8a2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Left: Dog (Volpino Italiano breed), Right: Arctic fox.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You were only able to collect 8,000 such images, which is not enough to build
+    the train/dev/test sets. Let us assume you have determined you’ll need at least
+    100,000 images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You wondered if you could use images from another dataset — in addition to the
+    8,000 images you collected — to build the train/dev/test sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You realized you can easily scrape the web to build a dataset of 100,000 images
+    or more, with similar dog-image vs. non-dog-image frequencies to those frequencies
+    required.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But, clearly this web dataset comes from a different distribution, with high
+    resolution and clear images such as the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b85bc6bc9858be3d6e4a30380895fae9.png)   ![](../Images/f3f393c4a8cefdb2a476debdbebee0ed.png)   ![](../Images/964ddc69d412a0d7fcfeed96c96fc163.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Images of dogs (left and right) and a fox (center).
+  prefs: []
+  type: TYPE_NORMAL
+- en: How would you build the train/dev/test sets?
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can’t only use the original 8,000 images you collected to build the train/dev/test
+    sets as they are not enough to make a well-performing classifier. Generally, computer
+    vision as other natural perception problems — speech recognition or natural language
+    processing — need a lot of data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, you can’t only use the web dataset. The classifier will not perform well
+    on the users’ blurry images, which are different from the clear, high definition
+    web images used to train the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, what do you do? Let us consider some possibilities.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**A possible option — shuffling the data**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Something you can do is to combine the two datasets and randomly shuffle them.
+    Then, split the resulting dataset into train/dev/test sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Assuming you decided to go with a 96:2:2% split for the train/dev/test sets,
+    this process will be something like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7d0d026dc1de4fd2c05d213cfbfd506b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: With this set up, the train/dev/test sets all come from the same distribution,
+    as illustrated by the colors in the graph above, which is desired.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, there a big drawback here!
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you look at the dev set, out of 2,000 images, on average only 148 images
+    come from the target distribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This means that for the most part you are optimizing the classifier for the
+    web images distribution (1,852 images out of 2,000 images) — which is **not **what
+    you want!
+  prefs: []
+  type: TYPE_NORMAL
+- en: The same thing can be said about the test set when assessing the performance
+    of the classifier against it. So, this is not a good way to make the train/dev/test
+    split.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**A better option**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: An alternative is to make the dev/test sets come from the target distribution
+    dataset, and the training set from the web dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Say you’re still using 96:2:2% split for the train/dev/test sets as before.
+    The dev/test sets will be 2,000 images each — coming from the target distribution — and
+    the rest will go to the train set, as illustrated below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7c4de9a024e2aa831d65c0746ab9795a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Using this split, you will be optimizing the classifier to perform well on the
+    target distribution, which is what you care about. This is because the images
+    of the dev set come solely from the target distribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, the training distribution is now different from the dev/test distribution.
+    This means that for the most part, you are training the classifier on web images.
+    Thus, it will take longer and more effort to optimize the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: More importantly, you will not be able to easily tell if the classifier error
+    on the dev set relative to the error on the train set is a variance error, a data
+    mismatch error, or a combination of both.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us consider this in more detail, and see what we can do about it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Variance vs data mismatch**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Consider the train/dev/test split from the second option above. Assume the human
+    error is zero, for simplicity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, let us assume you found that the training error to be 2% and the dev error
+    10%. How much of the 8% error between these two is due to the data mismatch between
+    the two sets — given they are coming from different distributions? And how much
+    is due to the variance of the model (overfitting)? We can’t tell.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let us modify the train/dev/test split. Take out a small portion of the train
+    set and call it the “bridge” set. The bridge set will not be used to train the
+    classifier. It is instead an independent set. The split now has four sets belonging
+    to two data distributions — as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d141541582d501acf408fde6059cce54.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Variance error**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'With this split, let us assume you found training and dev errors to be 2% and
+    10%, respectively. You found the bridge error to be 9%, as shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e190aa06d9d7e4bacf2db74bd6b32b72.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, how much of the 8% error between the train and dev set errors is a variance
+    error, and how much of it is a data mismatch error?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Easy! The answer is 7% variance error and 1% data mismatch error. But why?
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s because the bridge set comes from the same distribution as the train set,
+    and the error difference between them is 7%. This means the classifier is overfitted
+    to the train set. This tells us we have a **high variance problem** at hand.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data mismatch error**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now, let us assume you found the error on the bridge set to be 3% and the rest
+    as before as shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2836527243d47d6500e6099f663527a4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: How much of the 8% error between the train and dev sets is a variance error
+    and how much of it is a data mismatch error?
+  prefs: []
+  type: TYPE_NORMAL
+- en: The answer is 1% variance error and 7% data mismatch error. Why so?
+  prefs: []
+  type: TYPE_NORMAL
+- en: This time, it is because the classifier performs well on a dataset it hasn’t
+    seen before if it comes from the same distribution, such as the bridge set. It
+    performs poorly if it comes from a different distribution, like the dev set. Thus,
+    we have a **data mismatch problem**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reducing the variance error is a common task in ML. For example, you can use
+    regularization methods, or allocate a larger train set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, mitigating the data mismatch error is a more interesting problem. So,
+    let us talk bout it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Mitigating data mismatch**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To reduce the data mismatch error, you would need to somehow incorporate the
+    characteristics of the dev/test datasets — the target distribution — into the
+    train set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Collecting more data from the target distribution to add to the train set is
+    always the best option. But, if that is not possible (as we assumed at the beginning
+    of our discussion), you can try the following approaches:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Error analysis**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Analyzing the errors on the dev set and how they are different from the errors
+    on the train set could give you ideas to address the data mismatch problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, if you find many of the errors on the dev set occur when the background
+    of the animal’s image is rocky, you can mitigate such errors by adding animal
+    images with rocky background to the train set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Artificial data synthesis**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Another way to incorporate the characteristics of the dev/test sets into the
+    train set is to synthesize data with similar characteristics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example, we mentioned before that the images in our dev/test sets are mostly
+    blurry in contrast to the clear images from the web that make most of our train
+    set. You can artificially add blurriness to the images of the train set to be
+    more similar to the dev/test sets as in the following image:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9207d15c4581896bc9e9adee824018cf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image from the train set before and after blurring.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, there is an important point to notice here!
+  prefs: []
+  type: TYPE_NORMAL
+- en: You could end up overfitting your classifier to the artificial characteristics
+    you made.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our example, the blurriness you artificially made by some mathematical function
+    might only be a small sub-set of the blurriness that exists in the images of the
+    target distribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In other words, the blurriness in the target distribution could be due to many
+    reasons. For example, fog, low resolution camera, subject movement could all be
+    causes. But your synthesized blurriness may not represent all of these causes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: More generally, when synthesizing data for the training set for any type of
+    problem (such as computer vision, or speech recognition), you could overfit your
+    model to the synthesized dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This dataset may look representative enough of the target distribution to the
+    human eye. But in fact, it is only a small set of the target distribution. So,
+    just keep this in mind while using this powerful tool — data synthesis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**In Summary**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When developing an ML model, ideally the trian/dev/test datasets should all
+    come from the same data distribution — that of the data which the model will encounter
+    when used by the userbase.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, sometimes it is not possible to collect enough data from the target
+    distribution to build the trian/dev/test sets, while similar data from other distributions
+    is readily available.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In such cases, the dev/test sets should come from the target distribution while
+    the data from the other distributions can be used to build (most of) the train
+    set. Data mismatch techniques can then be used to mitigate the the data distribution
+    differences between the train set vs the dev/test sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Nezar Assawiel](https://www.linkedin.com/in/assawiel/)** is a Machine
+    Learning Developer and Founder at Clinical AI.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.freecodecamp.org/what-to-do-when-your-training-and-testing-data-come-from-different-distributions-d89674c6ecd8).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How (dis)similar are my train and test data?](/2018/06/how-dissimilar-train-test-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is Normal?](/2018/07/what-is-normal.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why Data Scientists Love Gaussian](/2018/06/why-data-scientists-love-gaussian.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Where Does Data Come From?](https://www.kdnuggets.com/2022/08/data-come.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hypothesis Testing and A/B Testing](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Exploring Data Distributions with Histograms](https://www.kdnuggets.com/2023/05/exploring-data-distributions-histograms.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Things Aren''t Always Normal: Some of the "Other" Distributions](https://www.kdnuggets.com/2023/01/things-arent-always-normal-distributions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Difference Between Training and Testing Data in Machine Learning](https://www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Different Ways to Load Data in Python](https://www.kdnuggets.com/2020/08/5-different-ways-load-data-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

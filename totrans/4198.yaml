@@ -1,0 +1,435 @@
+- en: 'AutoML: An Introduction Using Auto-Sklearn and Auto-PyTorch'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/10/automl-introduction-auto-sklearn-auto-pytorch.html](https://www.kdnuggets.com/2021/10/automl-introduction-auto-sklearn-auto-pytorch.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![autoML.png](../Images/62f872662eee3e99a9dd99ba62bc7d95.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Getting a Computer to Do What You Want Automatically
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Machine learning (ML)](https://www.exxactcorp.com/blog/Deep-Learning/a-breakdown-of-deep-learning-frameworks) now
+    impacts a wide swath of business, engineering, and research domains, to the extent
+    where you’d be hard-pressed to find a niche where machine learning is totally
+    uninvolved. Progress in ML has come on the coattails of broader trends in software
+    and automation: Wherever human activity depends on doing repetitive tasks that
+    can be readily described in a way that a computer can handle, it’s generally useful
+    to write down a recipe (or program) for the task that the computer can follow.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using ML now means that for many useful tasks it’s no longer necessary to manually
+    write a program, or even to know exactly how to solve the problem. Instead we
+    can approach many problems by defining a search space and a learning algorithm,
+    and then let the machine figure it out.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Modern machine learning is sometimes referred to as “software 2.0” and is a
+    trend that has been super-charged by the effectiveness of, and ensuing research
+    and development interest in, deep learning. There are obvious applications that
+    make a good fit for this approach: like fitting a statistical model to data, for
+    example; but there are more esoteric and impressive examples that were never so
+    obvious in the days of statistical or old-school machine learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the last few years we’ve seen machine learning predict protein folding better
+    than any other method, beat expert human game players in Go, Dota II, Starcraft
+    II, and more, and create reasonably coherent text and speech responses (though
+    the last accomplishment can be hit or miss).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Still, these projects almost always require the application of substantial world-class
+    engineering and research talent. That’s not entirely surprising, as coaxing a
+    computer program, even one equipped with sophisticated state-of-the-art machine
+    learning algorithms, to accomplish completely new objectives still requires human
+    innovation. That may change in the future, when AI researchers create new machine
+    learning agents that crack the human expert-level AI researcher threshold.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For now, while groundbreaking AI science is still difficult to automate, there’s
+    an ever-growing volume of ML applications where a [human engineer isn’t necessarily
+    needed to optimize a model](https://www.exxactcorp.com/blog/Deep-Learning/how-ai-is-changing-the-construction-industry) for
+    a given task. In fact, in some tasks, leaving the task of choosing a specific
+    model and stirring the learning hyperparameters up to human judgment might actually
+    slow things down or lead to sub-par results. A human might do a poor job of exploring
+    hyperparameter space, might tend to favor their preferred types of models for
+    bad reasons, or might stop and start training runs more often than is good for
+    effectively training the model for the task (which can also be bad for their mental
+    state).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Instead, a good ML practitioner should take advantage of all the tools at their
+    disposal, which now includes open source off-the-shelf tools and best practices
+    for applying ML to ML. In other words, **AutoML**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![automl.png](../Images/928bab5e5c050b1c0d88ea047058bf05.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: What is AutoML?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: AutoML is a broad category of techniques and tools for applying automated search
+    to your automated search and learning to your learning. These range from applying
+    Bayesian optimization to the hyperparameters for a statistical learning algorithm,
+    to neural architecture search for deep learning models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The field is quite active and diverse, with a healthy ecosystem of contests,
+    many of which are cataloged at[ automl.ai](https://automl.ai/competitions/). In
+    fact, one of the most prominent AutoML packages, [Auto-SciKit-Learn](https://github.com/automl/auto-sklearn) (Auto-Sklearn),
+    got started as the[ winner](/2016/08/winning-automl-challenge-auto-sklearn.html) of
+    the 2014 to 2016 ChaLearn AutoML challenge.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Auto-Sklearn was developed by one of the most notable research groups pursuing
+    Automated machine learning in the pre-eminent [AutoML supergroup](https://www.automl.org/automl/) from
+    Germany. This[ collaboration](https://www.automl.org/) is made up of labs at the
+    University of Freiburg and the University of Hannover. Other noteworthy contributors
+    to the field include the scientists behind [Auto-WEKA](https://www.automl.org/automl/autoweka/),
+    one of the first popular AutoML toolkits, and its successor Auto-WEKA 2.0\. These
+    researchers are mostly scattered around North America but with a nucleus at the
+    University of British Columbia in Canada. Whereas Auto-WEKA works with the open-source
+    WEKA software and Java, Auto-Sklearn is a Python package and is built to closely
+    follow the usage patterns of SciKit-Learn (hence the name "Auto-SciKit-Learn").
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition to Auto-Sklearn, the Freiburg-Hannover AutoML group has also developed
+    an [Auto-PyTorch](https://github.com/automl/Auto-PyTorch) library. We’ll use both
+    of these as our entry point into AutoML in the following simple tutorial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: AutoML Tutorial Demo
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: First we’ll set up our needed packages and dependencies. We're using Python3’s
+    virtualenv to manage a virtual environment for this project, but you’ll find similar
+    instructions should work if you prefer Anaconda (especially if you use pip in
+    Anaconda).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The following are commands to set up your environment from the command line
+    on a unix-based system like Ubuntu, or from something like Anaconda prompt if
+    you happen to be using Windows. The Auto-Sklearn documentation recommends installing
+    from their requirements.txt dependency file first, but we haven’t found it necessary
+    for the code used in this tutorial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: You’re likely to run into conflicts if you use the same environment for both
+    AutoML libraries, so make a second environment for Auto-PyTorch. Note that this
+    environment needs to use Python of version greater than or equal to 3.7.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note the extra two install statements following pip install -e . In our hands,
+    upgrading the NumPy version to 1.20.0 fixed a strange error, reproduced below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you want to contribute to the project, or just want to view the latest work-in-progress
+    code, check out the development branch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The rest of the code for this tutorial is in Python, so spin up your Python
+    prompt, Jupyter notebook, or text editor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This tutorial will consist of minimal demonstrations of classification using
+    standard SciKit-Learn, Auto-Sklearn, and Auto-PyTorch classifiers. We'll use one
+    of the built-in datasets from SciKit-Learn for each scenario, and each demonstration
+    shares some code to import common dependencies and load and split the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code for setting up the dataset above will be used for every demo in this
+    tutorial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We're using the small “iris” dataset (150 samples, 4 features, and 3 label categories)
+    in the interest of time, but you may want to try more complex datasets once you’ve
+    been through the examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Other classification datasets from sklearn.datasets to try include the diabetes
+    (**load_diabetes**) dataset and the digits dataset (**load_digits**). The diabetes
+    dataset has 569 samples with 30 features each and 2 label categories, while the
+    digits set has 1797 samples with 64 features each (corresponding to 8 by 8 images)
+    with 10 label categories.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before we start working with the AutoML classifier from sklearn, let’s train
+    a few standard classifiers from vanilla sklearn with default settings. There are
+    plenty to choose from, but we’ll stick to a k-nearest neighbors classifier, a
+    support vector machine classifier, and a multilayer perceptron.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: SciKit-Learn uses a friendly fit/predict API, making training models a snap,
+    and Auto-Sklearn and Auto-PyTorch retain the same API. This is a major factor
+    in ease-of-use, as training a model in any of the three packages feels very much
+    the same.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Likewise, evaluating your models is simple. SciKit-Learn classification models
+    have a predict method that takes input data and predicts the labels, which can
+    then be passed to **sklearn.metrics.accuracy_score** to calculate the accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code below can be used to calculate predictions and prediction accuracy
+    on the held-out test set using the k-nearest neighbors, support vector machine,
+    and multilayer perceptron classifiers trained in the last snippet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/49b5f26a303ba61bd253033cfca7c7d9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sklearn classifiers on iris dataset image
+  prefs: []
+  type: TYPE_NORMAL
+- en: These models were pretty effective on the iris training dataset, but there was
+    a significant gap between the training and test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next let’s use the class
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: from
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code for using this basic AutoML class looks exactly like training a single
+    model in the example above, but in fact it performs a hyperparameter search over
+    multiple types of machine learning models and retains the best as an ensemble.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After bringing in common imports and setting up our training and test dataset
+    split, we’ll need to import and instantiate the AutoML classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/f43d91f167d3b49fd419adad11f63c6f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Auto-Sklearn classifier ensemble on iris dataset
+  prefs: []
+  type: TYPE_NORMAL
+- en: Running the fit method with an **AutoSklearnClassifier **will take a significant
+    amount of time if you don’t reset `time_left_for_this_task` as the default value
+    is 3600 seconds (one hour). That’s substantial overkill for our simple iris dataset.
+    Judging from the package documentation, the time limit is supposed to be settable
+    as an input argument when initializing the classifier object, but in our experience
+    (version 0.13.0) this wasn’t the case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can also try running the fit method with cross validation enabled, and if
+    you choose to do so you’ll need to train again using the method
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: to train on the entire training dataset with the best models and hyperparameters.
+    We found a slight improvement in the test set accuracy from 80% to 86.67% when
+    using cross-validation and refit as compared to the default settings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Remember, when you run inference after fitting an **AutoSklearnClassifier **object
+    with the predict method, you’re actually taking advantage of an ensemble of the
+    best models found during the AutoML hyperparameter search.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **Method** | **Training Accuracy** | **Test Accuracy** | **Run Time** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Default KNN | 0.9833 | 0.8000 | **0.6 ms total** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Default SVM | 0.9667 | 0.7000 | **0.6 ms total** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Default MLP | 0.9833 | 0.7667 | **0.6 ms total** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Auto-Sklearn | 1.000 | 0.8000 | 291.390 s |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Auto-Sklearn(with cv + refit) | 1.000 | 0.8667 | 918.658 s |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Auto-PyTorch | **0.9917** | **0.9667** | 302.236 s |'
+  prefs: []
+  type: TYPE_TB
+- en: Finally, let’s try an AutoML package that caters to deep learning enthusiasts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Auto-PyTorch, like Auto-Sklearn, is built to be extremely simple to use. To
+    run the next bit of code, remember to switch to your Auto-PyTorch environment
+    to ensure the correct dependencies are available. After importing common imports
+    and splitting up the data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/bb6f6cfaecf6d13a62ae45c38c3558ac.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Auto-PyTorch classifier on iris dataset diagram
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you’ll notice in the results table, Auto-PyTorch is efficient and effective
+    at fitting the iris dataset, yielding training and test accuracy in the mid to
+    high 90s. This is moderately better than the automatic SciKit-Learn classifier
+    we trained earlier and much better than the standard sklearn classifiers with
+    default parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Will AutoML Replace Data Scientists?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: No, not necessarily. AutoML promises to improve the utility, performance, and
+    efficiency of typical data science and machine learning workflows. The additional
+    layer of abstraction and automated best-practices hyperparameter search certainly
+    can make a big difference if used properly. For the packages we experimented with
+    in today’s tutorial, we would describe their level of readiness as working research
+    prototypes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There were a number of little fixes we had to go through to get everything to
+    work properly, like upgrading NumPy to 1.20.0 to fix a cryptic error message,
+    not being able to set the run time limits as n input argument (as suggested in
+    the documentation for Auto-Sklearn), and not being able to use a single virtual
+    environment for both package due to some cryptic conflicts. There’s also some
+    humor to the fact that AutoML’s value comes from automating hyperparameter search,
+    but the auto-classifiers themselves have quite a few parameters that can have
+    a big impact on ultimate results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: All that being said, we think AutoML is a valuable addition to any ML or data
+    science practitioner’s toolbox, whether they use Auto-Sklearn/Auto-PyTorch, Auto-WEKA,
+    some other package, or even roll their own solutions. When the AutoML tool fits,
+    it not only should give a boost to your project’s performance, but a decrease
+    in the economic and energetic (including environmental) costs of a long meandering
+    hyperparameter and architecture search.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Even if some of the tools still have plenty of rough edges, that’s only a good
+    excuse and motivation to contribute to the projects yourself. Auto-PyTorch is
+    available under an Apache 2.0 license, while Auto-Sklearn uses a BSD 3-Clause
+    license.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Kevin Vu](https://www.kdnuggets.com/author/kevin-vu)** manages Exxact
+    Corp blog and works with many of its talented authors who write about different
+    aspects of Deep Learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.exxactcorp.com/blog/Deep-Learning/automl-an-introduction-using-auto-sklearn-and-auto-pytorch).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Introduction to Automated Machine Learning](/2021/09/introduction-automated-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Create an AutoML Pipeline Optimization Sandbox](/2021/09/automl-pipeline-optimization-sandbox.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Pipeline Optimization with TPOT](/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[No Brainer AutoML with AutoXGB](https://www.kdnuggets.com/2022/02/no-brainer-automl-autoxgb.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Nota AI releases beta version of NetPresso Model Search, their…](https://www.kdnuggets.com/2022/04/nota-ai-releases-beta-version-netpresso-model-search-hardwareaware-automl-tool.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Top AutoML Frameworks You Should Consider in 2023](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Data Visualization Using Matplotlib](https://www.kdnuggets.com/2022/12/introduction-data-visualization-matplotlib.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Numpy and Pandas](https://www.kdnuggets.com/introduction-to-numpy-and-pandas)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Deep Learning Libraries: PyTorch and Lightning AI](https://www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

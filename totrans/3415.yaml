@@ -1,0 +1,222 @@
+- en: 'Deep Learning Reading Group: Deep Residual Learning for Image Recognition'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/09/deep-learning-reading-group-deep-residual-learning-image-recognition.html](https://www.kdnuggets.com/2016/09/deep-learning-reading-group-deep-residual-learning-image-recognition.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/7de88231876e55a10fbd949387f67285.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Today’s [paper offers a new architecture for Convolution Networks](https://arxiv.org/abs/1512.03385).
+    It was written by He, Zhang, Ren, and Sun from Microsoft Research. I’ll warn you
+    before we start: this paper is ancient. It was published in the dark ages of deep
+    learning sometime at the end of 2015, which I’m pretty sure means its original
+    format was papyrus; thankfully someone scanned it so that future generations could
+    read it. But it is still worth blowing off the dust and flipping through it because
+    the architecture it proposes has been used time and time again, including in [some
+    of the papers we have previously read](https://gab41.lab41.org/lab41-reading-group-deep-networks-with-stochastic-depth-564321956729):[Deep
+    Networks with Stochastic Depth](https://arxiv.org/abs/1603.09382).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'He *et al.* begin by noting a seemingly paradoxical situation: very deep networks
+    perform more poorly than moderately deep networks, that is, that while adding
+    layers to a network generally improves the performance, after some point the new
+    layers begin to hinder the network. They refer to this effect as network degradation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have been following our [previous posts](https://gab41.lab41.org/lab41-reading-group-deep-networks-with-stochastic-depth-564321956729) this
+    won’t surprise you; training issues like vanishing gradients become worse as networks
+    get deeper so you would expect more layers to make the network worse after some
+    point. But the authors anticipate this line of reasoning and state that several
+    other deep learning methods, like [batch normalization](https://arxiv.org/abs/1502.03167) (see [our
+    post](https://gab41.lab41.org/batch-normalization-what-the-hey-d480039a9e3b)for
+    a summary), essentially have solved these training issues, and yet the networks
+    still perform increasingly poorly as their depth increases. For example, they
+    compare 20- and 56-layer networks and find the 56-layer network performs far worse;
+    see the image below from their paper.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![CIFAR Nets](../Images/fa20235ad1477a7fa79c4b093a35095e.png)](https://cdn-images-1.medium.com/max/1500/1*UbNuXfVNVfTq1WkMZyJ1QA.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Comparison of 20- and 56-layer networks on CIFAR-10\. Note that the 56-layer
+    network performs more poorly in both training and testing.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The authors then set up a thought experiment (or [gedankenexperiment](https://en.wiktionary.org/wiki/gedankenexperiment) if
+    you’re a recovering physicist like me) to demonstrate that deeper networks should
+    always perform better. Their argument is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Start with a network that performs well;
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Add additional layers that are forced to be the identity function, that is,
+    they simply pass along whatever information arrives at them without change;
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This network is deeper, but must have the same performance as the original network
+    by construction since the new layers do not do anything;
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Layers in a network can learn the identity function, so they should be able
+    to exactly replicate the performance of this deep network if it is optimal.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This thought experiment leads them to propose their deep residual learning architecture.
+    They construct their network of what they call residual building blocks. The image
+    below shows one such block. These blocks have become known as ResBlocks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![ResBlock](../Images/0798dc5151f41fd870ef7235d82b7976.png)](https://cdn-images-1.medium.com/max/1500/1*4sO3vjCdUlYQZcRq-GNqyw.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*A ResBlock; a residual function f(x) is learned on the top and information
+    is passed along the bottom unchanged. Image modified from [Huang et al.’s Stochastic
+    Depth paper](https://arxiv.org/abs/1603.09382).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The ResBlock is constructed out of normal network layers connected with [rectified
+    linear units](https://en.wikipedia.org/wiki/Rectifier_%28neural_networks%29) (ReLUs)
+    and a pass-through below that feeds through the information from previous layers
+    unchanged. The network part of the ResBlock can consist of an arbitrary number
+    of layers, but the simplest is two.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To get a little into the math behind the ResBlock: let us assume that a set
+    of layers would perform best if they learned a specific function, *h(x)*. The
+    authors note that the residual, *f(x) = h(x)*−*x*, can be learned instead and
+    combined with the original input such that we recover *h(x)* as follows: *h(x)
+    = f(x) + x.* This can be accomplished by adding a *+x* component to the network,
+    which, thinking back to our thought experiment, is simply the identity function.
+    The authors hope that adding this “pass-through” to their layers will aid in training.
+    As with most deep learning, there is only this intuition backing up the method
+    and not any deeper understanding. However, as the authors show, it works, and
+    in that end that’s the only thing many of us practitioners care about.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The paper also explores a few modifications to the ResBlock. The first is creating
+    bottleneck blocks with three layers where the middle layer constricts the information
+    flow by using fewer inputs and outputs. The second is testing different types
+    of pass-through connections including learning a full projection matrix. Although
+    the more complicated pass-throughs perform better, they do so only slightly and
+    at the cost of training time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The rest of the paper tests the performance of the network. The authors find
+    that their networks perform better than identical networks without the pass-through;
+    see the image below for their plot showing this. They also find that they can
+    train far deeper networks and still show improved performance, culminating in
+    training a 152-layer ResNet that outperforms shallower networks. They even train
+    a 1202-layer network to prove that it is feasible, but find that its performance
+    is worse than the other networks examined in the paper.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![](../Images/a10ad9ecf70715537142a85783583456.png)](https://cdn-images-1.medium.com/max/1500/1*f8TRIszXY6xGqtcMBWvD3g.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*A comparison of the performance of two networks: the ones on the left do not
+    use ResBlocks, while the ones on the right do. Notice the the 34-layer network
+    performs better than the 18-layer network, but only when using ResBlocks.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So that’s it! He *et al.* proposed a new architecture motivated by thought experiments
+    and the hope that it will work better than previous ones. They construct several
+    networks, including a few very deep ones, and find that their new architecture
+    does indeed improve performance of the networks. Although we don’t gain any further
+    understanding of the underlying principles of deep learning, we do get a new method
+    of making our networks work better, and in the end maybe that’s good enough.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Alexander Gude](https://twitter.com/alex_gude)** is currently a data scientist
+    at Lab41 working on investigating recommender system algorithms. He holds a BA
+    in physics from University of California, Berkeley, and a PhD in Elementary Particle
+    Physics from University of Minnesota-Twin Cities.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Lab41](http://www.lab41.org)** is a “challenge lab” where the U.S. Intelligence
+    Community comes together with their counterparts in academia, industry, and In-Q-Tel
+    to tackle big data. It allows participants from diverse backgrounds to gain access
+    to ideas, talent, and technology to explore what works and what doesn’t in data
+    analytics. An open, collaborative environment, Lab41 fosters valuable relationships
+    between participants.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://gab41.lab41.org/lab41-reading-group-deep-residual-learning-for-image-recognition-ffeb94745a1f).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[In Deep Learning, Architecture Engineering is the New Feature Engineering](/2016/07/deep-learning-architecture-engineering-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Up to Speed on Deep Learning: July Update](/2016/08/deep-learning-july-update.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why Do Deep Learning Networks Scale?](/2016/07/deep-learning-networks-scale.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Step by Step Guide to Reading and Understanding SQL Queries](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Reading Minds with AI: Researchers Translate Brain Waves to Images](https://www.kdnuggets.com/2023/03/reading-minds-ai-researchers-translate-brain-waves-images.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[2024 Reading List: 5 Essential Reads on Artificial Intelligence](https://www.kdnuggets.com/2024-reading-list-5-essential-reads-on-artificial-intelligence)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Evolution of Speech Recognition Metrics](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 IT Jobs That Are High in Demand But Don’t Get Enough Recognition](https://www.kdnuggets.com/5-it-jobs-that-are-high-in-demand-but-dont-get-enough-recognition)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

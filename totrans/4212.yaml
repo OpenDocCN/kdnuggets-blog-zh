@@ -1,0 +1,572 @@
+- en: An Introduction to Reinforcement Learning with OpenAI Gym, RLlib, and Google
+    Colab
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/09/intro-reinforcement-learning-openai-gym-rllib-colab.html](https://www.kdnuggets.com/2021/09/intro-reinforcement-learning-openai-gym-rllib-colab.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/) & [Sven
+    Mika](https://www.anyscale.com/blog?author=sven-mika)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This tutorial will use reinforcement learning (RL) to help balance a virtual
+    CartPole. The [video](https://www.youtube.com/watch?v=XiigTGKZfks&t=106s) above
+    from PilcoLearner shows the results of using RL in a real-life CartPole environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One possible definition of reinforcement learning (RL) is a computational approach
+    to learning how to maximize the total sum of rewards when interacting with an
+    environment. While a definition is useful, this tutorial aims to illustrate what
+    reinforcement learning is through images, code, and video examples and along the
+    way introduce reinforcement learning terms like agents and environments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In particular, this tutorial explores:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Reinforcement Learning
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The OpenAI Gym CartPole Environment
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The Role of Agents in Reinforcement Learning
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to Train an Agent by using the Python Library RLlib
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to use a GPU to Speed Up Training
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Hyperparameter Tuning with Ray Tune
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: What is Reinforcement Learning
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: As a [previous post noted](https://www.anyscale.com/blog/reinforcement-learning-with-rllib-in-the-unity-game-engine),
+    machine learning (ML), a sub-field of AI, uses neural networks or other types
+    of mathematical models to learn how to interpret complex patterns. Two areas of
+    ML that have recently become very popular due to their high level of maturity
+    are supervised learning (SL), in which neural networks learn to make predictions
+    based on large amounts of data, and reinforcement learning (RL), where the networks
+    learn to make good action decisions in a trial-and-error fashion, using a simulator.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![intro-to-rl-1](../Images/f4070fd03af2cf9672e423792ec19925.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: RL is the tech behind mind-boggling successes such as DeepMind’s AlphaGo Zero
+    and the StarCraft II AI (AlphaStar) or OpenAI’s DOTA 2 AI (“OpenAI Five”). Note
+    that there are [many impressive uses of reinforcement learning](https://www.anyscale.com/blog/best-reinforcement-learning-talks-from-ray-summit-2021) and
+    the reason why it is so powerful and promising for real-life decision making problems
+    is because RL is capable of learning continuously — sometimes even in ever changing
+    environments — starting with no knowledge of which decisions to make whatsoever
+    (random behavior).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Agents and Environments
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![agents-and-environments](../Images/c4030151c211208821ed55d1d5fc4a13.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The diagram above shows the interactions and communications between an agent
+    and an environment. In reinforcement learning, one or more agents interact within
+    an environment which may be either a simulation like CartPole in this tutorial
+    or a connection to real-world sensors and actuators. At each step, the agent receives
+    an observation (i.e., the state of the environment), takes an action, and usually
+    receives a reward (the frequency at which an agent receives a reward depends on
+    a given task or problem). Agents learn from repeated trials, and a sequence of
+    those is called an episode — the sequence of actions from an initial observation
+    up to either a “success” or “failure” causing the environment to reach its “done”
+    state. The learning portion of an RL framework trains a policy about which actions
+    (i.e., sequential decisions) cause agents to maximize their long-term, cumulative
+    rewards.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The OpenAI Gym Cartpole Environment
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/fb66617e97423db91b7a05be0ca7dab1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: CartPole
+  prefs: []
+  type: TYPE_NORMAL
+- en: The problem we are trying to solve is trying to keep a pole upright. Specifically,
+    the pole is attached by an un-actuated joint to a cart, which moves along a frictionless
+    track. The pendulum starts upright, and the goal is to prevent it from falling
+    over by increasing and reducing the cart's velocity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![policy ](../Images/76939bcc741d03593c2fcc04fa4e1a03.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Rather than code this environment from scratch, this tutorial will use [OpenAI
+    Gym](http://gym.openai.com/) which is a toolkit that provides a wide variety of
+    simulated environments (Atari games, board games, 2D and 3D physical simulations,
+    and so on). Gym makes no assumptions about the structure of your agent (what pushes
+    the cart left or right in this cartpole example), and is compatible with any numerical
+    computation library, such as numpy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code below loads the cartpole environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let's now start to understand this environment by looking at the action space.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![env.action_space](../Images/4f953445588d3239751a5922010d343a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The output Discrete(2) means that there are two actions. In cartpole, 0 corresponds
+    to "push cart to the left" and 1 corresponds to "push cart to the right". Note
+    that in this particular example, standing still is not an option. In reinforcement
+    learning, the agent produces an action output and this action is sent to an environment
+    which then reacts. The environment produces an observation (along with a reward
+    signal, not shown here) which we can see below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![env.reset ()](../Images/33891c8ea8faa80c232aaed5c512eed7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The observation is a vector of dim=4, containing the cart's x position, cart
+    x velocity, the pole angle in radians (1 radian = 57.295 degrees), and the angular
+    velocity of the pole. The numbers shown above are the initial observation after
+    starting a new episode (`env.reset()`). With each timestep (and action), the observation
+    values will change, depending on the state of the cart and pole.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training an Agent
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In reinforcement learning, the goal of the agent is to produce smarter and smarter
+    actions over time. It does so with a policy. In deep reinforcement learning, this
+    policy is represented with a neural network. Let's first interact with the gym
+    environment without a neural network or machine learning algorithm of any kind.
+    Instead we'll start with random movement (left or right). This is just to understand
+    the mechanisms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![policy random movement](../Images/8cffa24f22da5da6a05db5329f856048.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The code below resets the environment and takes 20 steps (20 cycles), always
+    taking a random action and printing the results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![steps](../Images/b12cc3182b86e800c621b97f36132b17.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample output. There are multiple conditions for episode termination in cartpole.
+    In the image, the episode is terminated because it is over 12 degrees (0.20944
+    rad). Other conditions for episode termination are cart position is more than
+    2.4 (center of the cart reaches the edge of the display), episode length is greater
+    than 200, or the solved requirement which is when the average return is greater
+    than or equal to 195.0 over 100 consecutive trials.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The printed output above shows the following things:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: step (how many times it has cycled through the environment). In each timestep,
+    an agent chooses an action, and the environment returns an observation and a reward
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: observation of the environment [x cart position, x cart velocity, pole angle
+    (rad), pole angular velocity]
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: reward achieved by the previous action. The scale varies between environments,
+    but the goal is always to increase your total reward. The reward is 1 for every
+    step taken for cartpole, including the termination step. After it is 0 (step 18
+    and 19 in the image).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: done is a boolean. It indicates whether it's time to reset the environment again.
+    Most tasks are divided up into well-defined episodes, and done being True indicates
+    the episode has terminated. In cart pole, it could be that the pole tipped too
+    far (more than 12 degrees/0.20944 radians), position is more than 2.4 meaning
+    the center of the cart reaches the edge of the display, episode length is greater
+    than 200, or the solved requirement which is when the average return is greater
+    than or equal to 195.0 over 100 consecutive trials.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: info which is diagnostic information useful for debugging. It is empty for this
+    cartpole environment.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: While these numbers are useful outputs, a video might be clearer. If you are
+    running this code in Google Colab,  it is important to note that there is no display
+    driver available for generating videos. However, it is possible to install a virtual
+    display driver to get it to work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: The next step is to start an instance of the virtual display.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: OpenAI gym has a VideoRecorder wrapper that can record a video of the running
+    environment in MP4 format. The code below is the same as before except that it
+    is for 200 steps and is recording.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![user warning](../Images/bacf6b8d7d383ca0f38b53d49dfa3ad2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Usually you end the simulation when done is 1 (True). The code above let the
+    environment keep on going after a termination condition was reached. For example,
+    in CartPole, this could be when the pole tips over, pole goes off-screen, or reaches
+    other termination conditions.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The code above saved the video file into the Colab disk. In order to display
+    it in the notebook, you need a helper function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code below renders the results. You should get a video similar to the one
+    below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Playing the video demonstrates that randomly choosing an action is not a good
+    policy for keeping the CartPole upright.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to Train an Agent using Ray's RLlib
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The previous section of the tutorial had our agent make random actions disregarding
+    the observations and rewards from the environment. The goal of having an agent
+    is to produce smarter and smarter actions over time and random actions don't accomplish
+    that. To make an agent make smarter actions over time, itl needs a better policy.
+    In deep reinforcement learning, the policy is represented with a neural network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![policy deep-rl](../Images/bcf88c97a0e018a6555b2e832af00d3e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'This tutorial will use the [RLlib library](https://docs.ray.io/en/master/rllib.html) to
+    train a smarter agent. RLlib has many advantages like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Extreme flexibility. It allows you to customize every aspect of the RL cycle.
+    For instance, this section of the tutorial will make a custom neural network policy
+    using PyTorch (RLlib also has native support for TensorFlow).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Scalability. Reinforcement learning applications can be quite compute intensive
+    and often need to scale-out to a cluster for faster training. RLlib not only has
+    first-class support for GPUs, but it is also built on [Ray](https://ray.io/) which
+    makes scaling Python programs from a laptop to a cluster easy.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A unified API and support for offline, model-based, model-free, multi-agent
+    algorithms, and more (these algorithms won’t be explored in this tutorial).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Being part of the [Ray Project ecosystem](https://github.com/ray-project/ray).
+    One advantage of this is that RLlib can be run with other libraries in the ecosystem
+    like [Ray Tune](https://docs.ray.io/en/master/tune/index.html), a library for
+    experiment execution and hyperparameter tuning at any scale (more on this later).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: While some of these features won't be fully utilized in this post, they are
+    highly useful for when you want to do something more complicated and solve real
+    world problems. You can learn about some impressive use-cases of RLlib [here](https://www.anyscale.com/blog/best-reinforcement-learning-talks-from-ray-summit-2021).
+  prefs: []
+  type: TYPE_NORMAL
+- en: To get started with RLlib, you need to first install it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now you can train a PyTorch model using the Proximal Policy Optimization (PPO)
+    algorithm. It is a very well rounded, one size fits all type of algorithm which
+    you can learn more about [here](https://docs.ray.io/en/master/rllib-algorithms.html#proximal-policy-optimization-ppo).
+    The code below uses a neural network consisting of a single hidden layer of 32
+    neurons and linear activation functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This code should produce quite a bit of output. The final entry should look
+    something like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![status](../Images/55c8f51dc6dba6aecf920e54657ea47f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The entry shows it took 35 iterations, running over 258 seconds, to solve the
+    environment. This will be different each time, but will probably be about 7 seconds
+    per iteration (258 / 35 = 7.3). Note that if you like to learn the Ray API and
+    see what commands like ray.shutdown and ray.init do, you can [check out this tutorial](https://www.anyscale.com/blog/writing-your-first-distributed-python-application-with-ray).
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to use a GPU to Speed Up Training
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: While the rest of the tutorial utilizes CPUs, it is important to note that you
+    can speed up model training by using a GPU in Google Colab. This can be done by
+    selecting **Runtime > Change runtime type** and set hardware accelerator to **GPU**.
+    Then select **Runtime > Restart and run all**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![status 2](../Images/35133d87395977e42ff8f7e55d01a004.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Notice that, although the number of training iterations might be about the same,
+    the time per iteration has come down significantly (from 7 seconds to 5.5 seconds).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating a Video of the Trained Model in Action
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: RLlib provides a Trainer class which holds a policy for environment interaction.
+    Through the trainer interface, a policy can be trained, action computed, and checkpointed.
+    While the analysis object returned from *ray.tune.run* earlier did not contain
+    any trainer instances, it has all the information needed to reconstruct one from
+    a saved checkpoint because  *checkpoint_at_end=True* was passed as a parameter.
+    The code below shows this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s now create another video, but this time choose the action recommended
+    by the trained model instead of acting randomly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: This time, the pole balances nicely which means the agent has solved the cartpole
+    environment!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hyperparameter Tuning with Ray Tune
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c8485cf99eafb673e010078db6660b81.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The Ray Ecosystem
+  prefs: []
+  type: TYPE_NORMAL
+- en: RLlib is a reinforcement learning library that is part of the Ray Ecosystem.
+    Ray is a highly scalable universal framework for parallel and distributed python.
+    It is very general and that generality is important for supporting its library
+    ecosystem. The ecosystem covers everything from [training](https://docs.ray.io/en/latest/tune/index.html),
+    to [production serving](https://docs.ray.io/en/master/serve/index.html), to [data
+    processing](https://www.anyscale.com/blog/data-processing-support-in-ray) and
+    more. You can use multiple libraries together and build applications that do all
+    of these things.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This part of the tutorial utilizes [Ray Tune](https://docs.ray.io/en/latest/tune/index.html) which
+    is another library in the Ray Ecosystem. It is a library for experiment execution
+    and hyperparameter tuning at any scale. While this tutorial will only use grid
+    search, note that Ray Tune also gives you access to more efficient hyperparameter
+    tuning algorithms like population based training, BayesOptSearch, and HyperBand/ASHA.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s now try to find hyperparameters that can solve the CartPole environment
+    in the fewest timesteps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Enter the following code, and be prepared for it to take a while to run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: By asking for 12 CPU cores by passing in num_cpus=12 to ray.init, four trials
+    get run in parallel across three cpus each. If this doesn’t work, perhaps Google
+    has changed the VMs available on Colab. Any value of three or more should work.
+    If Colab errors by running out of RAM, you might need to do **Runtime > Factory
+    reset runtime**, followed by **Runtime > Run all**. Note that there is an area
+    in the top right of the Colab notebook showing the RAM and disk use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Specifying num_samples=5 means that you will get five random samples for the
+    learning rate. For each of those, there are two values for the size of the hidden
+    layer, and two values for the activation function. So, there will be 5 * 2 * 2
+    = 20 trials, shown with their statuses in the output of the cell as the calculation
+    runs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that Ray prints the current best configuration as it goes. This includes
+    all the default values that have been set, which is a good place to find other
+    parameters that could be tweaked.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After running this, the final output might be similar to the following output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'INFO tune.py:549 -- Total run time: 3658.24 seconds (3657.45 seconds for the
+    tuning loop).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Best hyperparameters found: {''env'': ''CartPole-v0'', ''framework'': ''torch'',
+    ''model'': {''fcnet_hiddens'': [64], ''fcnet_activation'': ''relu''}, ''lr'':
+    0.006733929096170726};'''''''
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, of the twenty sets of hyperparameters, the one with 64 neurons, the ReLU
+    activation function, and a learning rate around 6.7e-3 performed best.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/96b0fd8599b56a82579732a4fa9ecfdd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Neural MMO is an environment modeled from Massively Multiplayer Online games
+    — a genre supporting hundreds to thousands of concurrent players. You can learn
+    how Ray and RLlib help enable some key features of this and other projects [here](https://www.anyscale.com/blog/best-reinforcement-learning-talks-from-ray-summit-2021).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This tutorial illustrated what reinforcement learning is by introducing reinforcement
+    learning terminology, by showing how agents and environments interact, and by
+    demonstrating these concepts through code and video examples. If you would like
+    to learn more about reinforcement learning, check out the [RLlib tutorial by Sven
+    Mika](https://www.anyscale.com/events/2021/06/24/hands-on-reinforcement-learning-with-rays-rllib).
+    It is a great way to learn about RLlib’s best practices, multi-agent algorithms,
+    and much more. If you would like to keep up to date with all things RLlib and
+    Ray, consider [following @raydistributed on twitter](https://twitter.com/raydistributed) and [sign
+    up for the Ray newsletter](https://anyscale.us5.list-manage.com/subscribe?u=524b25758d03ad7ec4f64105f&id=d94e960a03).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.anyscale.com/blog/an-introduction-to-reinforcement-learning-with-openai-gym-rllib-and-google).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Getting Started with Reinforcement Learning](/2021/04/getting-started-reinforcement-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Facebook Launches One of the Toughest Reinforcement Learning Challenges in
+    History](/2021/06/facebook-launches-toughest-reinforcement-learning-challenges.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Real-Life Applications of Reinforcement Learning](/2021/04/10-real-life-applications-reinforcement-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Running Redis on Google Colab](https://www.kdnuggets.com/2022/01/running-redis-google-colab.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[From Google Colab to a Ploomber Pipeline: ML at Scale with GPUs](https://www.kdnuggets.com/2022/03/google-colab-ploomber-pipeline-ml-scale-gpus.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fine Tuning LLAMAv2 with QLora on Google Colab for Free](https://www.kdnuggets.com/fine-tuning-llamav2-with-qlora-on-google-colab-for-free)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Running Mixtral 8x7b On Google Colab For Free](https://www.kdnuggets.com/running-mixtral-8x7b-on-google-colab-for-free)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[RAPIDS cuDF for Accelerated Data Science on Google Colab](https://www.kdnuggets.com/2023/01/rapids-cudf-accelerated-data-science-google-colab.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[OpenAI’s Whisper API for Transcription and Translation](https://www.kdnuggets.com/2023/06/openai-whisper-api-transcription-translation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

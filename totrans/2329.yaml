@@ -1,0 +1,289 @@
+- en: Getting Started with PyTorch Lightning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Getting Started with PyTorch Lightning](../Images/6394c873a8f46f44e1753428841f39c5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Editor
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is PyTorch Lightning?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: PyTorch Lightning is a powerful deep learning framework that supports scalable
+    state-of-the-art AI research work. It keeps your code structured for the research
+    work and saves it from the growing complexity of your project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But before we proceed to understand what code complexity entails, let's first
+    explore in detail how structured code in PyTorch Lightning (referred to as Lightning
+    throughout the post) helps us in our endeavor to expedite the model-building process.
+    As you gear up to code your machine learning model, you typically design the model
+    architecture along with choosing the right optimizer for the given dataset. With
+    all these aspects given, you are now ready to get hands-on writing python code
+    that would involve steps like iterating through batches of data for training and
+    validation. Not to forget the periodic debugging measures that are inevitable
+    in any machine learning project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Further, the code complexity involves multiple factors such as the utilization
+    of multiple GPUs, early stopping criteria, the need for checkpointing, 16-bit
+    precision, training on TPU accelerators, etc. Lightning allows training models
+    on CPUs, GPUs, or TPUs without changing the Pytorch code and assists in building
+    reproducible models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Quoting the benefits directly from the [Lightning creator](https://towardsdatascience.com/from-pytorch-to-pytorch-lightning-a-gentle-introduction-b371b7caaf09)
+    – “PyTorch Lightning was created for professional researchers and Ph.D. students
+    working on AI research. It is designed to be extremely extensible while making
+    state-of-the-art AI research techniques (like TPU training) trivial”
+  prefs: []
+  type: TYPE_NORMAL
+- en: How is it Different from PyTorch?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: It is important to understand the PyTorch characteristics to appreciate the
+    offerings and benefits that come with Lightning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyTorch is a python based open-sourced library popularly used to build neural
+    network models. It enjoys a vast community base and predominantly finds use in
+    research environments as compared to TensorFlow which is its most common alternative
+    for building production models. If you are interested in learning the basics of
+    PyTorch, then this documentation serves as an excellent [reference](https://pytorch-lightning.readthedocs.io/en/stable/notebooks/course_UvA-DL/01-introduction-to-pytorch.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Though PyTorch is intended for researchers, it soon becomes engineering and
+    code-driven concerning efforts related to training and tuning the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lightning builds upon the flexibility that PyTorch offers for model training
+    and facilitates the quick iteration of multiple cutting-edge experiments. It improves
+    code readability by structuring it further enhancing reproducibility.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Largely the code remains similar, except for the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The training and validation loop have been abstracted away by the Trainer.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Further, some of the code blocks namely data loader, forward pass, optimizer,
+    etc. are restructured that require minimum details from the developer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For example, Lightning automatically saves the model checkpoint by default as
+    compared to Pytorch which expects the developer to insert that logic for checkpointing.
+    Lightning also provides the logs of weights summary, checkpointing, early stopping,
+    and tensorboard logs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to Install PyTorch Lightning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'You can run the below command in your terminal (for MAC/Linux) or command line
+    (for Windows):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Welcome to the “Hello-World” of Lightning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Let’s build an image classification model to recognize digits using the [MNIST
+    dataset](https://www.kaggle.com/competitions/digit-recognizer). You can learn
+    about how to import multiple datasets through the torchvision module on [Pytorch's
+    official documentation page](https://pytorch.org/vision/stable/datasets.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Getting Started with PyTorch Lightning](../Images/b380df6642df1155f35bf34938516f55.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: [MLM](https://machinelearningmastery.com/how-to-develop-a-convolutional-neural-network-from-scratch-for-mnist-handwritten-digit-classification/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The four core components of building any neural network model involve the model,
+    data, loss, and optimizer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s start with the neural network architecture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this demo, we will be building a 4-layer (3-layer if input layer is not
+    explicitly counted) fully connected deep neural network architecture including
+    the input and the output layers.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: However, the square image (size 28 * 28) needs to be vectorized or flattened
+    to be consumed by the neural network as input. Hence, the number of neurons in
+    the input layer is equal to the width * height of the images i.e. 784 (28*28).
+    The flattening process places the values of each row in a vector, as demonstrated
+    below.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Getting Started with PyTorch Lightning](../Images/d9bc151e1f993daaf4d882c935374ed7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: [A Practical Guide to Convolutional Neural Networks (CNNs) with Keras](https://towardsdatascience.com/a-practical-guide-on-convolutional-neural-networks-cnns-with-keras-21421172005e)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the other hand, the number of neurons in the output layer is equal to the
+    number of labels i.e. 10 (digits from 0 to 9).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You have the option to choose the number of neurons in the hidden layers. Generally
+    speaking, a smaller number of neurons might risk losing the information from the
+    input layer while a larger number leads to information duplication from the neurons.
+    Let’s pick 128 neurons for the first hidden layer and 256 neurons for the second
+    hidden layer.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The neural network architecture looks like the image below.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Getting Started with PyTorch Lightning](../Images/8e13e2ef9389df8e4cccf8038a8b4c82.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Source: [PyTorch Lightning Introduction](https://colab.research.google.com/drive/1Mowb4NzWlRCxzAFjOIJqUmmk_wAT-XP3#scrollTo=ohJoivXxaIgP)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You also need to specify a forward propagation function let’s pick a ReLu activation
+    function for hidden layers and a Softmax activation function for the output layer.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The training or validation runs on the network involve forward propagation to
+    compute the output probabilities followed by loss computation to adjust network
+    parameters using the Adam optimizer.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The neural network architecture, loss, and optimizer selection as detailed
+    above is shown in the code (sourced and modified from “[From PyTorch to PyTorch
+    Lightning - An Introduction](https://colab.research.google.com/drive/1Mowb4NzWlRCxzAFjOIJqUmmk_wAT-XP3#scrollTo=x83-rnVKT8Wo)”)
+    below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can download the train and test data by following the code below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that the train argument is set to True when pulling in training data and
+    set to False for test data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The training data can further be split into train and validation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Bonus
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The post explained the benefits of Lightning and demonstrated how to build your
+    first model with the help of python code. Further, if you prefer learning from
+    video lessons, then you can refer to the bonus resource listing [byte-sized video
+    tutorials](https://www.pytorchlightning.ai/tutorials).
+  prefs: []
+  type: TYPE_NORMAL
+- en: References
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[https://towardsdatascience.com/from-pytorch-to-pytorch-lightning-a-gentle-introduction-b371b7caaf09](https://towardsdatascience.com/from-pytorch-to-pytorch-lightning-a-gentle-introduction-b371b7caaf09)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://learnopencv.com/getting-started-with-pytorch-lightning/](https://learnopencv.com/getting-started-with-pytorch-lightning/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://colab.research.google.com/drive/1F_RNcHzTfFuQf-LeKvSlud6x7jXYkG31#scrollTo=HOk9c4_35FKg](https://colab.research.google.com/drive/1F_RNcHzTfFuQf-LeKvSlud6x7jXYkG31#scrollTo=HOk9c4_35FKg)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** is an AI strategist and
+    a digital transformation leader working at the intersection of product, sciences,
+    and engineering to build scalable machine learning systems. She is an award-winning
+    innovation leader, an author, and an international speaker. She is on a mission
+    to democratize machine learning and break the jargon for everyone to be a part
+    of this transformation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Introduction to Deep Learning Libraries: PyTorch and Lightning AI](https://www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyTorch in 5 Steps](https://www.kdnuggets.com/5-steps-getting-started-pytorch)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Lightning AI Studio For Free](https://www.kdnuggets.com/using-lightning-ai-studio-for-free)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with SQL Cheatsheet](https://www.kdnuggets.com/2022/08/getting-started-sql-cheatsheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyCaret](https://www.kdnuggets.com/2022/11/getting-started-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with Scikit-learn for Classification in Machine Learning](https://www.kdnuggets.com/getting-started-with-scikit-learn-for-classification-in-machine-learning)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,256 @@
+- en: What Comes After HDF5? Seeking a Data Storage Format for Deep Learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/11/after-hdf5-data-storage-format-deep-learning.html](https://www.kdnuggets.com/2021/11/after-hdf5-data-storage-format-deep-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Davit Buniatyan](https://www.linkedin.com/in/davidbuniatyan/), CEO of
+    [Activeloop](https://www.activeloop.ai/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f6d6b0c47c1b4214e1b277a09812ab39.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: HDF5 for unstructured data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[HDF5](https://www.hdfgroup.org/solutions/hdf5/) is one of the most popular
+    and reliable formats for non-tabular, numerical data.¹ Let me give you an example.
+    NASA’s Earth Observing System satellites gather around 16 TBs of data a day in
+    the HDF5 format.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Features like named datasets, hierarchically organized groups, user defined
+    metadata and attributes, compression filters, lazy loading² and array-like slicing
+    across different axes make it suitable for many data processing tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Even though it was created over twenty years ago, HDF remains popular with the
+    PyData community through well-maintained open source libraries like [h5py](https://docs.h5py.org/en/stable/quick.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: HDF5 is not optimized for Deep Learning
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'In HDF5, large datasets are typically stored as “chunks”; that is, a regular
+    partition of the array. While this design decision means HDF can store petascale,
+    unstructured numerical data like images and video, it was created before cloud
+    object stores or deep learning. As result, there are a number of shortcomings
+    when it comes to DL workloads:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The layout of HDF files makes them difficult to query efficiently on cloud storage
+    systems (like Amazon’s S3³), where ML datasets increasingly are stored.⁴ You can’t
+    read a HDF5 library directly from HDF5 files that are stored as S3 objects. In
+    practice, the entire file, which very often can be gigabytes in size, should be
+    copied to local storage and the first byte could only be read after that.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It is difficult to apply transformations to data in a parallel fashion. Transformations,
+    whether it is data augmentation for computer vision or tokenization for NLP, is
+    core to any deep learning experiment.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: HDF5 (Python implementation) is basically single-threaded. That means only one
+    core can read or write to a dataset at a given time. It is not readily accessible
+    to concurrent reads, which limits the ability of HDF5 data to support multiple
+    workers.⁵
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It’s not integrated with modern frameworks like Keras and PyTorch, which means
+    researchers often need to write custom DataLoaders. As DataLoaders take on more
+    responsibilities such as sharding datasets for parallel training, they become
+    more difficult to define.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Because HDF metadata is strewn throughout the file, it is difficult to access
+    a random chunk of data. In fact, it needs to make many small reads in order to
+    gather the metadata necessary to pull out a chunk of data.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Due to these challenges, most users convert data to another format (e.g. csv
+    or TFRecords) before a single epoch can be run.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The ML community needs a new data storage format
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Rather than rewriting or repurposing HDF for the cloud, we think there should
+    be a modern data storage format designed for distributed deep learning. While
+    there are [packages](https://github.com/HDFGroup/h5pyd) and [managed services](https://www.hdfgroup.org/solutions/highly-scalable-data-service-hsds/)
+    that allow users to read HDF data directly from the cloud⁶, they are not designed
+    for large collections of unstructured data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With training with petascale datasets of cloud infrastructure becoming the
+    norm for both the academic and industry, a deep-learning format means a format
+    that is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Cloud native**. It should play well with cloud object storage systems (such
+    as S3 and GCS) without sacrificing GPU utilization.⁷'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Parallelizable**. As most ML datasets are write-once, read many, it should
+    support concurrent reads by multiple workers.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Random access**. Since researchers rarely need the entire dataset upfront,
+    data stored in this format should be accessible in a random manner.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Transformations**. It should be able to apply arbitrary transformations to
+    data at runtime with minimal code overhead. That’s because downloading TBs of
+    data is often impractical: most users don’t have access to a big data cluster
+    to slice and dice the data as they need after it’s downloaded.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Integration**. It should be integrated with popular deep learning frameworks
+    like Keras and PyTorch as well as other PyData libraries such as Numpy and Pandas.
+    Ideally, researchers should be able to access these huge cloud-located datasets
+    using the same scripts they have developed for smaller datasets stored locally.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Although designing and promoting a new data format is not a simple task (there
+    have been several examples of unsuccessful “HDF for the cloud” libraries), we
+    think a new format [designed for ML purposes](https://github.com/activeloopai/Hub)
+    and unstructured data like images, videos, audio, to name a few, could help researchers
+    and engineers do more with less.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Notes**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I recently used HDF5 to store 1024-dim embeddings for roughly one million images.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Keep in mind that the actual data lives on disk; when slicing is applied to
+    an HDF5 dataset, the appropriate data is found and loaded into memory. Slicing
+    in this fashion leverages the underlying subsetting capabilities of HDF5 and is
+    consequently very fast.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Amazon has something called HDF5 virtual file layer.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: That’s because HDF5 needs to read its table of indices, then make range requests
+    to each chunk. This slowdown is significant because the HDF library makes many
+    small 4kB reads. Each of those tiny reads made sense when the data was local,
+    but now that we’re sending out a web request each time. This means that users
+    can sit for minutes just to open a file.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: I often see concurrent writes to a single HDF5 file. This is not recommended
+    because it is likely that multiple processes try to write at the same time.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Even Pandas can [read HDF5 files directly from S3](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_hdf.html).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Of course, the biggest disadvantage of cloud object stores is egress.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Bio: [Davit Buniatyan](https://www.linkedin.com/in/davidbuniatyan/)** (**[@DBuniatyan](https://twitter.com/dbuniatyan)**)
+    started his Ph.D. at Princeton University at 20\. His research involved reconstructing
+    the connectome of the mouse brain under the supervision of Sebastian Seung. Trying
+    to solve hurdles he faced analyzing large datasets in the neuroscience lab, David
+    became the founding CEO of Activeloop, a Y-Combinator alum startup. He is also
+    a recipient of the Gordon Wu Fellowship and AWS Machine Learning Research Award.
+    Davit is the creator of the open source package, Hub, [the dataset format for
+    AI](https://github.com/activeloopai/Hub).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[CSV Files for Storage? No Thanks. There’s a Better Option](/2021/08/csv-files-storage-better-option.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Query Your Pandas Dataframe](/2021/08/query-pandas-dataframe.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Pandas not enough? Here are a few good alternatives to processing larger and
+    faster data in Python](/2021/07/pandas-alternatives-processing-larger-faster-data-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[This Week in AI, August 7: Generative AI Comes to Jupyter & Stack…](https://www.kdnuggets.com/2023/mm/this-week-ai-2023-08-07.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How I Got 4 Data Science Offers and Doubled My Income 2 Months…](https://www.kdnuggets.com/2021/01/data-science-offers-doubled-income-2-months.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Data Storage: Exploring Data Types and Normalization in SQL](https://www.kdnuggets.com/optimizing-data-storage-exploring-data-types-and-normalization-in-sql)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[From Oracle to Databases for AI: The Evolution of Data Storage](https://www.kdnuggets.com/2022/02/oracle-databases-ai-evolution-data-storage.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Use Docker Volumes for Persistent Data Storage](https://www.kdnuggets.com/how-to-use-docker-volumes-for-persistent-data-storage)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Cloud Storage Adoption is the Need of the Hour for Business](https://www.kdnuggets.com/2022/02/cloud-storage-adoption-need-hour-business.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

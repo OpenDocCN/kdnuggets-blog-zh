@@ -1,0 +1,287 @@
+- en: Pedestrian Detection in Aerial Images Using RetinaNet
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/03/pedestrian-detection-aerial-images-retinanet.html](https://www.kdnuggets.com/2019/03/pedestrian-detection-aerial-images-retinanet.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Priyanka Kochhar](https://github.com/priya-dwivedi), Deep Learning Consultant**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Object Detection in Aerial Images is a challenging and interesting problem.
+    With the cost of drones decreasing, there is a surge in amount of aerial data
+    being generated. It will be very useful to have models that can extract valuable
+    information from aerial data. [Retina Net](https://arxiv.org/abs/1708.02002) is
+    the most famous single stage detector and in this blog, I want to test it out
+    on an aerial images of pedestrians and bikers from the [Stanford Drone Data set](http://cvgl.stanford.edu/projects/uav_data/).
+    See a sample image below. This is a challenging problem since most objects are
+    only a few pixels wide, some objects are occluded and objects in shade are even
+    harder to detect. I have read several blogs of object detection on aerial images
+    or cars/planes but there are only a few links for pedestrian detection aerially
+    which is especially challenging.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/e306cf2a57f5516f04eff71360826911.png)Aerial Images
+    from Stanford drone dataset — Pedestrians in pink and Bikers in red'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Retina Net
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[RetinaNet](https://arxiv.org/abs/1708.02002) is a single stage detector that
+    uses Feature Pyramid Network (FPN) and Focal loss for training. [Feature pyramid
+    network](https://medium.com/@jonathan_hui/understanding-feature-pyramid-networks-for-object-detection-fpn-45b227b9106c)
+    is a structure for multiscale object detection introduced in this [paper](https://arxiv.org/abs/1612.03144).
+    It combines low-resolution, semantically strong features with high-resolution,
+    semantically weak features via a top-down pathway and lateral connections. The
+    net result is that it produces feature maps of different scale on multiple levels
+    in the network which helps with both classifier and regressor networks.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Focal Loss is designed to address the single-stage object detection problems
+    with the imbalance where there is a very large number of possible background classes
+    and just a few foreground classes. This causes training to be inefficient as most
+    locations are easy negatives that contribute no useful signal and the massive
+    amount of these negative examples overwhelm the training and reduces model performance.
+    Focal loss is based on cross entropy loss as shown below and by adjusting the
+    gamma parameter, we can reduce the loss contribution from well classified examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Focal Loss Explanation](../Images/0ecbff8b100cabc7535fcd410c6a6b9c.png)Focal
+    Loss Explanation'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this blog, I want to talk about how to train a RetinaNet model on Keras.
+    I haven’t done enough justice to the theory behind RetinaNet. I used this [link](https://medium.com/@14prakash/the-intuition-behind-retinanet-eb636755607d)
+    to understand the model and would highly recommend it. My first trained model
+    worked quite well in detecting objects aerially as shown in the video below. I
+    have also open sourced the code on my [Github link](https://github.com/priya-dwivedi/keras_retinanet_cs230).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Retina Net on Aerial Images of pedestrians and bikers](../Images/4e8095d921b682922a0ad9255be899a8.png)Retina
+    Net on Aerial Images of pedestrians and bikers'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Stanford Drone DataSet
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stanford Drone Data](http://cvgl.stanford.edu/projects/uav_data/) is a massive
+    data set of aerial images collected by drone over the Stanford campus. The data
+    set is ideal for object detection and tracking problems. It contains about 60
+    aerial videos. For each video we have bounding box coordinates for the 6 classes — “Pedestrian”,
+    “Biker”, “Skateboarder”, “Cart”, “Car” and “ Bus”. The data set is very rich in
+    pedestrians and bikers with these 2 classes covering about 85%-95% of the annotations.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training a RetinaNet in Keras on Stanford Drone Data Set
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To train the Retina Net, I used [this implementation](https://github.com/fizyr/keras-retinanet)
+    in Keras. It is very well documented and works without bugs. Thanks a lot to Fizyr
+    for open sourcing their implementation!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The main steps I followed were:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Selecting a sample of images from the massive stanford drone data set for building
+    the model. I took about 2200 training images with 30,000+ annoations and kept
+    around 1000 images for validation. I have put my image data set on google drive
+    [here](https://drive.google.com/drive/u/0/folders/1bLt6KK_9zKogJdvW-lKh9BnBKgFfvPp9)
+    for anyone interested in skipping this step.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Generating annotations in the format required for Retina Net. Retina Net requires
+    all annotations to be in the format.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: I converted Stanford annotations in this format and my train and validation
+    annotations are uploaded to my [Github](https://github.com/priya-dwivedi/keras_retinanet_cs230).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Adjusting the anchor sizes: The Retina Net has default anchor sizes of 32,
+    64, 128, 256, 512\. These anchor sizes work well for most objects however since
+    we are working on aerial images, some objects may be smaller than 32\. This repo
+    provides a handy tool for checking if existing anchors suffice. In the image below
+    annotations in green are covered by existing in anchors and those in red are ignored.
+    As can been seen a good portion of annotations are too small for even the smallest
+    anchor size.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Retina Net with default anchors](../Images/c98c6ab4f9a5868945fe4322ac271246.png)Retina
+    Net with default anchors'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So I adjusted the anchors to drop the biggest one of 512 and instead add a
+    small anchor of size 16\. This results in a noticeable improvement as shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![After adding a small anchor](../Images/dc6487dd52610a7c051381de4ba88d3a.png)After
+    adding a small anchor'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With all this we are ready to start training. I kept most other default parameters
+    including the Resnet50 backbone and started training by:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here weights are the COCO weights that can be used to jump start training. The
+    annotations for training and validation are the input data and config.ini has
+    the updated anchor sizes. All the files are on my [Github repo](https://github.com/priya-dwivedi/keras_retinanet_cs230)
+    too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That’s it! The model is slow to train and I trained it overnight. I tested the
+    accuracy of the trained model by checking for **mean average precision (MAP)**
+    on the test set. As can be seen below the first trained model had a very good
+    MAP of 0.63\. The performance is especially good on car and bus classes which
+    are easy to see aerially. The MAP on Biker class is low as this is often confused
+    by pedestrian. I am currently working on further improving accuracy of the Biker
+    class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Retina Net is a powerful model that uses Feature Pyramid Networks. It is able
+    to detect objects aerially on a very challenging data set where object sizes are
+    quite small. I was able to train a Retina Net with half a day of work. The first
+    version of the trained model has pretty good performance. I am still exploring
+    how to further adapt Retina Net architecture to have a higher accuracy in aerial
+    detection. That will be covered in my next blog.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I hope you liked the blog and try training the model yourself too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have my own deep learning consultancy and love to work on interesting problems.
+    I have helped many startups deploy innovative AI based solutions. Check us out
+    at — [http://deeplearninganalytics.org/](http://deeplearninganalytics.org/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can also see my other writings at: [http://deeplearninganalytics.org/blog](http://deeplearninganalytics.org/blog)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have a project that we can collaborate on, then please contact me through
+    my website or at priya.toronto3@gmail.com
+  prefs: []
+  type: TYPE_NORMAL
+- en: References
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Retina Net](https://medium.com/@14prakash/the-intuition-behind-retinanet-eb636755607d)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stanford Drone Data Set](http://cvgl.stanford.edu/projects/uav_data/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Retina Net Keras Implementation](https://github.com/fizyr/keras-retinanet)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Priyanka Kochhar](https://github.com/priya-dwivedi)** has been a data
+    scientist for 10+ years. She now has her own deep learning consultancy and loves
+    to work on interesting problems. She has helped several startups deploy innovative
+    AI based solutions. If you have a project that she can collaborate on then please
+    contact her at [priya.toronto3@gmail.com](mailto:priya.toronto3@gmail.com)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/pedestrian-detection-in-aerial-images-using-retinanet-9053e8a72c6).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[People Tracking using Deep Learning](/2019/03/people-tracking-using-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Deep Learning with Keras](/2018/10/introduction-deep-learning-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Keras 4 Step Workflow](/2018/08/auto-keras-create-deep-learning-model-4-lines-code.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Perform Motion Detection Using Python](https://www.kdnuggets.com/2022/08/perform-motion-detection-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Hugging Face Transformers for Emotion Detection in Text](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, August 17: How to Perform Motion Detection Using…](https://www.kdnuggets.com/2022/n33.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Beginner''s Guide to Anomaly Detection Techniques in Data Science](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Density Kernel Depth for Outlier Detection in Functional Data](https://www.kdnuggets.com/density-kernel-depth-for-outlier-detection-in-functional-data)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Anomaly Detection in BigQuery: Uncover Hidden Insights and Drive Action](https://www.kdnuggets.com/anomaly-detection-in-bigquery-uncover-hidden-insights-and-drive-action)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

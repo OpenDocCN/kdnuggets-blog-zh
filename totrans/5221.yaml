@@ -1,0 +1,355 @@
+- en: Why physical storage of your database tables might matter
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/05/physical-storage-database-tables-might-matter.html](https://www.kdnuggets.com/2019/05/physical-storage-database-tables-might-matter.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Apoorva Aggarwal](https://www.linkedin.com/in/apoorvaaggarwal/), Machine
+    Learning and Data Engineer at Grofers**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Header image](../Images/3f45e8b7a780a3d4ea36631f77ad2b47.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In our quest to simplify and enrich online grocery shopping for our users, we
+    experimented with serving personalized item recommendations to each one of them.
+    For this we operated in batch mode and pre computed relevant top 200 item recommendations
+    for each user and dumped the results in a table of our OLTP PostgreSQL database
+    to enable us to serve these recommendations in real time. Queries on this table
+    were taking too long which resulted in bad user experience.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Narrowing down into problem space**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Recommendations were pre computed for all users who have ever transacted on
+    our platform, the size of this table was close to 12 GB. A simple SELECT query
+    was used to retrieve recommendations from this table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: A BTree index on column `customer_id` was created to enable faster lookups.
+    But even then, sometimes query times were as large as **~1 s**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Looking at the query plan :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Isolating the cause**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Even though the query planner was using the created index, query times were
+    still huge.This required us to dig deeper into what does having an “index” really
+    mean? How does having an index help in faster fetching of query results? Lets
+    revisit the basic anatomy of an index.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Default index in postgres is of type BTree which constitutes a BTree or a balanced
+    tree of index entries and index leaf nodes which store physical address of an
+    index entry.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'An index lookup requires three steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tree traversal
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Following the leaf node chain
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Fetching the table data
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The above steps are explained in detail [here](https://use-the-index-luke.com/sql/anatomy/the-tree).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tree traversal is the only step that has an upper bound for the number of accessed
+    blocks — the index depth. The other two steps might need to access many blocks — their
+    upper bound can be as large as the full table scan.¹
+  prefs: []
+  type: TYPE_NORMAL
+- en: An Index Scan performs a B-tree traversal, walks through the leaf nodes to find
+    all matching entries, and fetches the corresponding table data. It is like an* INDEX
+    RANGE SCAN *followed by a *TABLE ACCESS BY INDEX ROWID*operation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Following the leaf node chain requires getting *ROWID*’s that fulfill the `customer_id` condition:
+    in our case, it has max limit of 200 row ID’s. Since these index leaf nodes are
+    stored in a sorted manner, their access is upper bounded by the length of this
+    chain or total rows in the table.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The next step is the *TABLE ACCESS BY INDEX ROWID* operation. It uses the *ROWID* from
+    previous step to fetch the rows — all columns — from the table. Here the db engine
+    must fetch the rows individually hitting each record in page and bringing them
+    in memory for retrieval. It involves random access IO’s apart from read operations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We decided it might be worthwhile to look at how these query result rows were
+    distributed on physical memory. In postgres, location of a row is given by `ctid`which
+    is a tuple. `ctid` is of type `tid` (tuple identifier), called `ItemPointer` in
+    the C code. [Per documentation](http://www.postgresql.org/docs/current/interactive/datatype-oid.html):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*This is the data type of the system column *`*ctid*`*. A tuple ID is a pair
+    (****block number****, ****tuple index within block****) that identifies the physical
+    location of the row within its table.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The distribution was like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Clearly, rows for a particular customer id were far from each other on disk.
+    This seemed to explain the high execution times of queries having `customer_id` in
+    WHERE clause. The db engine was hitting pages on disk for retrieving each row.
+    There was high random access IO. What if we could bring all rows of a particular
+    customer together? If done, the engine might be able to retrieve all rows in result
+    set in one go.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Possible solutions to root cause and exploring feasibility**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Postgres provides a `[CLUSTER](https://www.postgresql.org/docs/9.1/static/sql-cluster.html)` command
+    which physically rearranges the rows on disk based on a given column. But given
+    constraints like acquiring a READ WRITE lock on table and requiring 2.5x the table
+    size made it tricky to use. We began to explore if we could write the table in
+    customer id rows sorted manner. The application which was writing these rows was
+    a Spark application using collaborative filtering algorithm to derive recommended
+    products.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An attempt to fix the problem right from the source
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Understanding how Spark writes data to table**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The problem required us to dig deeper into how Spark writes to Postgres. It
+    writes data `[partition](https://jaceklaskowski.gitbooks.io/mastering-apache-spark/spark-rdd-partitions.html)` wise.
+    Now, what is this partition?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spark being a distributed computing frame work distributes a particular data
+    frame into partitions amongst its workers. It allows you to explicitly partition
+    a dataframe based on a partition key to ensure minimal shuffling (bring partitions
+    from one worker to another for reading/writing operations). Looking at the code
+    we found that we had partitioned on `product_id` for a particular transformation
+    operation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/976d6ac4550cd709f9e6312e234bcb80.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Partitions of spark dataframe. Note how rows containing a particular product
+    ID are in one partition
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This meant that the data written to our postgres table should be `product_id`wise,
+    i.e. rows of all customer ID’s whose recommendations were a particular product
+    ID should be clubbed together. We tested our hypothesis by looking at results
+    of :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Yes indeed, all rows of a particular product ID were together on the table.
+    So if we instead partitioned on `customer_id`, our objective of bringing all result
+    rows of a customer_id would be met. This could be achieved by re partitioning
+    the dataframe. [This](https://deepsense.ai/optimize-spark-with-distribute-by-and-cluster-by/) post
+    here talks about repartition in detail.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Attempting to align the data**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We repartitioned the dataframe by :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: And wrote the final dataframe to postgres. Now we checked for distribution of
+    rows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Alas, the table is still not pivoted on `customer_id`. What did we do wrong?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Apparently, the default number of partitions on which data is rearranged is
+    200\. But since the number of distinct customer ID’s were greater than 200 (~10
+    million), this meant that a single partition will contain recommended products
+    of more that 1 customer as seen in the figure below. In this case, close to (~10
+    million/200=50,000) customers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/53f3b4ae9d27e7ec5dd63a8a08bb00ca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Repartioned dataframe. Notice how all rows of a product ID are in one partition
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When this particular partition will be written to the db, this will still not
+    ensure that all rows belonging to a customer_id be written together. We then sorted
+    rows within a partition by `customer_id`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/1bf72e28d7420e0b9cff23423d8bdf17.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Dataframe after partitioning and sorting on customer_id key
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is an expensive operation for spark to perform but nevertheless necessary
+    for us. We did this and wrote again to the database. Next we checked for distribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Voila! Its now pivoted on customer_id (tears of joy :,-) ).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Testing the solution**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The final test still remains. Will the query execution now be faster. Lets see
+    what the query planner says.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Execution time came down from ~100 ms to ~3ms.**'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This optimization really helped us use personalized recommendations to serve
+    a variety of use cases like generating targeted advertising pushes for a growing
+    consumer base of more than 200 thousand users in bulk etc. When this was first
+    launched, size of the data was ~12 GB. Now in the past 1 year, it has grown to
+    ~22GB but rearranging the records in the table has helped to keep database retrieval
+    latencies to minimal. Although now, the time taken for Spark application to generate
+    these recommendations, arranging the dataframe and writing to database has increased
+    manifold. But since that happens in batch mode, it is still acceptable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With growing scale of users on the platform, data too is growing daily and so
+    are the challenges to process it and make it useful for data driven decision making.
+    If you like to solve similar problems at scale, we are always looking for new
+    talent. Check for open positions [here](https://grofers.recruiterbox.com/?team=Technology+-+Engineering%2C+Product+and+Design#content).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Footnotes:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[1]. [https://use-the-index-luke.com/sql/anatomy/slow-indexes](https://use-the-index-luke.com/sql/anatomy/slow-indexes)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Apoorva Aggarwal](https://www.linkedin.com/in/apoorvaaggarwal/)** is
+    a Machine Learning and Data Engineer at Grofers.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Originally posted on Grofers Engineering Blog](https://lambda.grofers.com/why-physical-storage-of-your-database-tables-might-matter-74b563d664d9).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering SQL for Data Science — 2019 Edition](/2019/05/7-steps-mastering-sql-data-science-2019-edition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simple Tips for PostgreSQL Query Optimization](/2018/06/simple-tips-postgresql-query-optimization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Loading Terabytes of Data from Postgres into BigQuery](/2018/04/loading-terabytes-data-postgres-into-bigquery.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[24 SQL Questions You Might See on Your Next Interview](https://www.kdnuggets.com/2022/06/24-sql-questions-might-see-next-interview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Novice to Ninja: Why Your Python Skills Matter in Data Science](https://www.kdnuggets.com/novice-to-ninja-why-your-python-skills-matter-in-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Pandas Plotting Functions You Might Not Know](https://www.kdnuggets.com/2023/02/5-pandas-plotting-functions-might-know.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Is Data Lineage, And Why Does It Matter?](https://www.kdnuggets.com/what-is-data-lineage-and-why-does-it-matter)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[From Oracle to Databases for AI: The Evolution of Data Storage](https://www.kdnuggets.com/2022/02/oracle-databases-ai-evolution-data-storage.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Cloud Storage Adoption is the Need of the Hour for Business](https://www.kdnuggets.com/2022/02/cloud-storage-adoption-need-hour-business.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

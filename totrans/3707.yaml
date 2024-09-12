@@ -1,0 +1,373 @@
+- en: Creating a Web Application to Extract Topics from Audio with Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Creating a Web Application to Extract Topics from Audio with Python](../Images/dec9cc3aab0728cb753ff456ee486922.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [israel palacio](https://unsplash.com/@othentikisra) on [Unsplash](https://unsplash.com/photos/Y20JJ_ddy9M)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The article is in continuation of the story [How to build a Web App to Transcribe
+    and Summarize audio with Python](https://towardsdatascience.com/how-to-build-a-web-app-to-transcribe-and-summarize-audio-with-python-dc719cb9e1f5?sk=96f349f866419fe55cd6a1496e740069).
+    In the previous post, I have shown how to build an app that transcribes and summarizes
+    the content of your favourite Spotify Podcast. The summary of a text can be useful
+    for listeners to decide if the episode is interesting or not before listening
+    to it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But there are other possible features that can be extracted from audio. The
+    topics. Topic modelling is one of the many natural language processing that enables
+    the automatic extraction of topics from different types of sources, such as reviews
+    of hotels, job offers, and social media posts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post, we are going to build an app that collects the topics from a podcast
+    episode with Python and analyzes the importance of each topic extracted with nice
+    data visualizations. In the end, we’ll deploy the web app to Heroku for free.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Requirements
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Create a **GitHub repository**, that will be needed to deploy the web application
+    into production to Heroku!
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Clone the repository on your local PC with `git clone <name-repository>.git`.
+    In my case, I will use VS code, which is an IDE really efficient to work with
+    python scripts, includes Git support and integrates the terminal. Copy the following
+    commands on the terminal:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Create a virtual environment in Python.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Part 1: Create the Web Application to Extract Topics'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: This tutorial is split into two main parts. In the first part, we create our
+    simple web application to extract the topics from the podcast. The remaining part
+    focuses on the deployment of the app, which is an important step for sharing your
+    app with the world anytime. Let’s get started!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Extract Episode’s URL from Listen Notes
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![Creating a Web Application to Extract Topics from Audio with Python](../Images/0d49888cda0a6f0afbf0715c91f77593.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We are going to discover the topics from an episode of Unconfirmed, called Want
+    a Job in Crypto? Exchanges are hiring — Ep. 110\. You can find the link to the
+    episode [here](https://www.listennotes.com/podcasts/unconfirmed/want-a-job-in-crypto-p0QLnhWKHbl/).
+    As you may know from the news in television and newspaper, blockchain industry
+    is exploding and there is the esigence to keep updated in the opening of jobs
+    in that field. Surely, they will need data engineers and data scientists to manage
+    data and extract values from these huge amounts of data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Listen Notes is a podcast search engine and database online, allowing us to
+    get access to podcast audio through their APIs. We need to define the function
+    to extract the episode’s URL from the web page. First, you need to create an account
+    to retrieve the data and subscribe to [free plan](https://www.listennotes.com/podcast-api/pricing/) to
+    use the Listen Notes API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then, you click the episode you are interested in and select the option “Use
+    API to fetch this episode” at the right of the page. Once you pressed it, you
+    can change the default coding language to Python and click the requests option
+    to use that python package. After, you copy the code and adapt it into a function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'It takes the credentials from a separate file, **secrets.yaml**, which is composed
+    of a collection of key-value pairs like the dictionaries:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 2\. Retrieve Transcription and Topics from Audio
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To extract the topics, we first need to send a post request to AssemblyAI’s
+    transcript endpoint by giving in input the audio URL retrieved in the previous
+    step. After we can obtain the transcription and the topics of our podcast by sending
+    a GET request to [AssemblyAI](https://www.assemblyai.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The results will be saved into two different files:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Below I show an example of transcription:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now, I show the output of the topics extracted from the podcast’s episode:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: We have obtained a JSON file, containing all the topics detected by AssemblyAI.
+    Essentially, we transcribed the podcast into text, which is split up into different
+    sentences and their corresponding relevance. For each sentence, we have a list
+    of topics. At the end of this big dictionary, there is a summary of topics that
+    have been extracted from all the sentences.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s worth noticing that Careers and JobSearch constitute the most relevant
+    topic. In the top five labels, we also find Business and Finance, Startups, Economy,
+    Business and Banking, Venture Capital, and other similar topics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Build a Web Application with Streamlit
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![Creating a Web Application to Extract Topics from Audio with Python](../Images/607bb4aed0df9fbaa0e5572de9c40e90.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The link to the App deployed is [here](https://topic-web-app-heroku.herokuapp.com/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, we put all the functions defined in the previous steps into the main block,
+    in which we build our web application with Streamlit, a free open-source framework
+    that allows building applications with few lines of code using Python:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The main title of the app is displayed using `st.markdown`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A left panel sidebar is created using `st.sidebar`. We need it to insert the
+    episode id of our podcast.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: After pressing the button “Submit”, a bar plot will appear, showing the most
+    relevant 5 topics extracted.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: there is the Download button in case you want to download the transcription,
+    the topics, and the data visualization
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To run the web application, you need to write the following command line on
+    the terminal:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Amazing! Now two URL should appear, click one of these and the web application
+    is ready to be used!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Part 2: Deploy the Web Application to Heroku'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Once you completed the code of the web application and you checked if it works
+    well, the next step is to deploy it on the Internet to Heroku.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You are probably wondering what [Heroku](https://www.heroku.com/home) is. It’s
+    a cloud platform that allows the development and deployment of web applications
+    using different coding languages.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Create requirements.txt, Procfile, and setup.sh
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: After, we create a file **requirements.txt**, that includes all the python packages
+    requested by your script. We can automatically create it using the following command
+    line by using this marvellous python library [pipreqs](https://pypi.org/project/pipreqs/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'It will magically generate a *requirements.txt *file:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Avoid using the command line `pip freeze > requirements` like [this article](https://towardsdatascience.com/stop-using-pip-freeze-for-your-python-projects-9c37181730f9) suggested.
+    The problem is that it returns more python packages that could not be required
+    from that specific project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition to **requirements.txt**, we also need Procfile, which specifies
+    the commands that are needed to run the web application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The last requirement is to have a **setup.sh **file that contains the following
+    code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 2\. Connect to Heroku
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'If you didn’t register yet on [Heroku](https://id.heroku.com/login)’s website,
+    you need to create a free account to be able to exploit its services. It’s also
+    necessary to install Heroku on your local PC. Once you accomplished these two
+    requirements, we can begin the fun part! Copy the following command line on the
+    terminal:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After pressing the command, a window of Heroku will appear on your browser
+    and you’ll need to put the email and password of your account. If it works, you
+    should have the following result:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Creating a Web Application to Extract Topics from Audio with Python](../Images/36ee549765643344effe682113e6be0a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'So, you can return on VS code and write the command to create your web application
+    on the terminal:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To deploy the app to Heroku, we need this command line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'It’s used to push the code from the local repository’s main branch to heroku
+    remote. After you push the changes to your repository with other commands:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: We are finally done! Now you should see your app that is finally deployed!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Final Thoughts
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: I hope you appreciated this mini-project! It can be really fun to create and
+    deploy apps. The first time can be a little intimidating, but once you finish,
+    you won’t have any regrets! I also want to highlight that it’s better to deploy
+    your web application to Heroku when you are working on small projects with low
+    memory requirements. Other alternatives can be bigger cloud platform frameworks,
+    like AWS Lambda and Google Cloud. The GitHub code is [here](https://github.com/eugeniaring/topic-web-app-heroku).
+    Thanks for reading. Have a nice day!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Eugenia Anello](https://www.linkedin.com/in/eugenia-anello/)** is currently
+    a research fellow at the Department of Information Engineering of the University
+    of Padova, Italy. Her research project is focused on Continual Learning combined
+    with Anomaly Detection.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/towards-data-science/creating-a-web-application-to-extract-topics-from-audio-with-python-21c3f541f3ca).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Bark: The Ultimate Audio Generation Model](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[WavJourney: A Journey into the World of Audio Storyline Generation](https://www.kdnuggets.com/wavjourney-a-journey-into-the-world-of-audio-storyline-generation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Back to Basics Week 4: Advanced Topics and Deployment](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Geospatial Application in Python with Google Earth…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build An AI Application with Python in 10 Easy Steps](https://www.kdnuggets.com/build-an-ai-application-with-python-in-10-easy-steps)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[RAG vs Finetuning: Which Is the Best Tool to Boost Your LLM Application?](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

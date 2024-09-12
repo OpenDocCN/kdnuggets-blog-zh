@@ -1,0 +1,484 @@
+- en: Mastering The New Generation of Gradient Boosting
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/11/mastering-new-generation-gradient-boosting.html](https://www.kdnuggets.com/2018/11/mastering-new-generation-gradient-boosting.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Tal Peretz](https://www.linkedin.com/in/tal-per/), Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/6f0021d10fa8e75d1f0681617209fb04.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Catboost
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Gradient Boosted Decision Trees** and Random Forest are my favorite ML models
+    for tabular heterogeneous datasets. These models are the top performers on [Kaggle](https://www.kaggle.com/) competitions
+    and in widespread use in the industry.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Catboost**, the new kid on the block, has been around for a little more than
+    a year now, and it is already threatening *XGBoost*, *LightGBM* and *H2O*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Catboost?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Better Results**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Catboost achieves the best results on the benchmark, and that’s great, yet I
+    don’t know if I would replace a working production model for only a fraction of
+    a log-loss improvement alone (especially when the company who conducted the benchmark
+    has a clear interest in the favor of Catboost ????).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Though, when you look at datasets where **categorical features play a large
+    role**, such as *Amazon* and the *Internet *datasets, this improvement becomes
+    significant and undeniable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c0f56356b0efe76253f46b1b9e3e4db4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: GBDT Algorithms Benchmark
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Faster Predictions**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: While training time can take up longer than other GBDT implementations, prediction
+    time is 13–16 times faster than the other libraries according to the Yandex benchmark.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b878dfec55b45c7736bc70937ced22a9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Left: CPU, Right: GPU'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Batteries Included**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Catboost’s default parameters are a better starting point than in other GBDT
+    algorithms. And this is good news for beginners who want a plug and play model
+    to start experience tree ensembles or Kaggle competitions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Yet, there are some very important parameters which we must address and we’ll
+    talk about those in a moment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1d04b9a46e27fdf79d1394772740d7c8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: GBDT Algorithms with default parameters Benchmark
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some more noteworthy advancements by Catboost are the features interactions,
+    object importance and the snapshot support.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition to classification and regression, Catboost supports **ranking** out
+    of the box.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Battle Tested**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Yandex](https://yandex.com/) is relying heavily on Catboost for ranking, forecasting
+    and recommendations. This model is serving more than 70 million users each month.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: CatBoost is an algorithm for **gradient boosting on decision trees**. Developed
+    by Yandex researchers and engineers, it is the successor of the [**MatrixNet algorithm**](https://yandex.com/company/technologies/matrixnet/)that
+    is widely used within the company for ranking tasks, forecasting and making recommendations.
+    It is universal and can be applied across a wide range of areas and to a variety
+    of problems.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/c5da7f5f59cc6ccf130e81e835370235.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The Algorithm
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Classic Gradient Boosting**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5c4a3ead431e03d2e430b6f2cd022cf1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Gradient Boosting on Wikipedia
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d9ca34b445477fccd614b5d7fa7e7ae8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Catboost Secret Sauce
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Catboost introduces two critical algorithmic advances - the implementation of **ordered
+    boosting**, a permutation-driven alternative to the classic algorithm, and an
+    innovative algorithm for **processing categorical features**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Both techniques are using random permutations of the training examples to fight
+    the *prediction shift* caused by a special kind of *target leakage* present in
+    all existing implementations of gradient boosting algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Cat**egorical Feature Handling'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Ordered Target Statistic**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most of the GBDT algorithms and Kaggle competitors are already familiar with
+    the use of Target Statistic (or target mean encoding).
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s a simple yet effective approach in which we encode each categorical feature
+    with the estimate of the expected target y conditioned by the category.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, it turns out that applying this encoding carelessly (average value of
+    y over the training examples with the same category) results in a target leakage.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To fight this *prediction shift *CatBoost uses a more effective strategy. It
+    relies on the ordering principle and is inspired by online learning algorithms
+    which get training examples sequentially in time. In this setting, the values
+    of TS for each example rely only on the observed history.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To adapt this idea to a standard offline setting, Catboost introduces an artificial
+    “time”— a random permutation *σ1* of the training examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then, for each example, it uses all the available “history” to compute its Target
+    Statistic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that, using only one random permutation, results in preceding examples
+    with higher variance in Target Statistic than subsequent ones. To this end, CatBoost
+    uses different permutations for different steps of gradient boosting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**One Hot Encoding**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Catboost uses a one-hot encoding for all the features with at most *one_hot_max_size* unique
+    values. The default value is 2.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2f8ee6fadf0aa6b7e40160287f640d95.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Catboost’s Secret Sauce
+  prefs: []
+  type: TYPE_NORMAL
+- en: Orderd Boosting
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: CatBoost has two modes for choosing the tree structure, Ordered and Plain. **Plain
+    mode** corresponds to a combination of the standard GBDT algorithm with an ordered
+    Target Statistic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In **Ordered mode** boosting we perform a random permutation of the training
+    examples - *σ2,* and maintain n different supporting models - *M1, . . . , Mn*
+    such that the model *Mi* is trained using only the first *i* samples in the permutation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At each step, in order to obtain the residual for *j*-th sample, we use the
+    model *Mj−1*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unfortunately, this algorithm is not feasible in most practical tasks due to
+    the need of maintaining n different models, which increase the complexity and
+    memory requirements by n times. Catboost implements a modification of this algorithm,
+    on the basis of the gradient boosting algorithm, using one tree structure shared
+    by all the models to be built.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7245343ce5d8d1988a29e6935d988b25.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Catboost Ordered Boosting and Tree Building
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to avoid *prediction shift*, Catboost uses permutations such that *σ1* = *σ2*.
+    This guarantees that the target-*yi* is not used for training *Mi* neither for
+    the Target Statistic calculation nor for the gradient estimation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hands On
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For this section, we’ll use the [*Amazon Dataset*](https://www.kaggle.com/c/amazon-employee-access-challenge/data),
+    since it’s clean and has a strong emphasize on categorical features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/54f9b2df0a33b9243c0edaeb7b2614e7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Dataset in a brief
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tuning Catboost
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Important Parameters**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**cat_features** — This parameter is a must in order to leverage Catboost preprocessing
+    of categorical features, if you encode the categorical features yourself and don’t
+    pass the columns indices as *cat_features *you are missing the essence of Catboost*.*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***one_hot_max_size**** — *As mentioned before,Catboost uses a one-hot encoding
+    for all features with at most *one_hot_max_size* unique values. In our case, the
+    categorical features have a lot of unique values, so we won’t use one hot encoding,
+    but depending on the dataset it may be a good idea to adjust this parameter.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***learning_rate* & *n_estimators*** — The smaller the learning_rate, the more
+    n_estimators needed to utilize the model. Usually the approach is to start with
+    a relative high *learning_rate*, tune other parameters and then decrease the *learning_rate* while
+    increasing *n_estimators*.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***max_depth**** — *Depth of the base trees*, *this parameter has an high impact
+    on training time*.*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***subsample ****— *Sample rate of rows, can’t be used in a *Bayesian* boosting
+    type setting.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***colsample_bylevel ****— *Sample rate of columns.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***l2_leaf_reg ****— *L2 regularization coefficient.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***random_strength ****— *Every split gets a score and random_strength is adding
+    some randomness to the score, it helps to reduce overfitting.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Model Exploration with Catboost
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In addition to feature importance, which is quite popular for GBDT models to
+    share, Catboost provides **feature interactions** and **object (row) importance**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/082c2a9b1ba4d6c8314ba8aa236e987b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Catboost’s Feature Importance![](../Images/56623055e6f9f321c7421840035723e3.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Catboost’s Feature Interactions![](../Images/aee63f4ec198f40df446c77d26da3020.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Catboost’s Object Importance![](../Images/cc8f573706b8833248e07619ab3f075f.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[SHAP](https://catboost.ai/news/new-ways-to-explore-your-data) values can be
+    used for other ensembles as well'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Full Notebook
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Check it out for some useful Catboost code snippets
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Catboost Playground Notebook ### Bottom Line'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ef39987d7aca7ca0507cfb9e7cd44cb7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Catboost vs. XGBoost (default, greedy and exhaustive parameter search)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fc9fa159d967eadf6f7a1be280d62dca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Take Away**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Catboost is built with a similar approach and attributes as with the “older”
+    generation of GBDT models.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Catboost’s power lies in its **categorical features preprocessing**, **prediction
+    time** and **model analysis**.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Catboost’s weaknesses are its **training and optimization times**.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Don’t forget to pass ***cat_features*** argument to the classifier object. You
+    aren’t really utilizing the power of Catboost without it.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Though Catboost performs well with default parameters, there are several parameters
+    that drive a significant improvement in results when tuned.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Further Reading**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Catboost Documentation](https://tech.yandex.com/catboost/doc/dg/concepts/about-docpage/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Catboost Github](https://github.com/catboost/catboost)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Catboost official website](https://catboost.ai/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'I highly recommend you to dig into the [CatBoost: unbiased boosting with categorical
+    features paper on arXiv](https://arxiv.org/abs/1706.09516).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Catboost playground notebook](https://gist.github.com/talperetz/6030f4e9997c249b09409dcf00e78f91)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SHAP Values](https://github.com/slundberg/shap)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Huge thanks to Catboost Team Lead [Anna Veronika Dorogush](https://medium.com/@a.v.dorogush).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you enjoyed this post, feel free to hit the clap button ???????? and if you’re
+    interested in posts to come, make sure to follow me on
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Medium: **[**https://medium.com/@talperetz24**](https://medium.com/@talperetz24)
+    **Twitter:**[**https://twitter.com/talperetz24**](https://twitter.com/talperetz24)
+    **LinkedIn:**[**https://www.linkedin.com/in/tal-per/**](https://www.linkedin.com/in/tal-per/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Like every year, I want to mention [DataHack](https://www.datahack.org.il/)-
+    the best data driven hackathon out there. This year [דור פרץ](https://medium.com/@sdorperetz) and
+    I used Catboost for our project and won the 1st place ????.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Tal Peretz](https://www.linkedin.com/in/tal-per/)** is a Data Scientist,
+    Software Engineer, and a Continuous Learner. He is passionate about solving complex
+    problems with high-value potential using data, code and algorithms. He especially
+    likes building and improving models to separate the ones from the zeros. 0|1'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/https-medium-com-talperetz24-mastering-the-new-generation-of-gradient-boosting-db04062a7ea2).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Gradient Boosting in TensorFlow vs XGBoost](/2018/01/gradient-boosting-tensorflow-vs-xgboost.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[CatBoost vs. Light GBM vs. XGBoost](/2018/03/catboost-vs-light-gbm-vs-xgboost.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Intuitive Ensemble Learning Guide with Gradient Boosting](/2018/07/intuitive-ensemble-learning-guide-gradient-boosting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Retrieval Augmented Generation: Where Information Retrieval Meets…](https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Ultimate Guide to Mastering Seasonality and Boosting Business Results](https://www.kdnuggets.com/2023/08/media-mix-modeling-ultimate-guide-mastering-seasonality-boosting-business-results.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Boosting Machine Learning Algorithms: An Overview](https://www.kdnuggets.com/2022/07/boosting-machine-learning-algorithms-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bark: The Ultimate Audio Generation Model](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Future of AI: Exploring the Next Generation of Generative Models](https://www.kdnuggets.com/2023/05/future-ai-exploring-next-generation-generative-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unveiling Midjourney 5.2: A Leap Forward in AI Image Generation](https://www.kdnuggets.com/2023/06/unveiling-midjourney-52-leap-forward.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

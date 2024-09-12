@@ -1,0 +1,491 @@
+- en: How to Build a Scalable Data Architecture with Apache Kafka
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html](https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![How to Build a Scalable Data Architecture with Apache Kafka](../Images/9c5d0e1e11b48a64ac229f965a43009f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Apache Kafka is a distributed message-passing system that works on a publisher-subscriber
+    model. It is developed by Apache Software Foundation and written in Java and Scala.
+    Kafka was created to overcome the problem faced by the distribution and scalability
+    of traditional message-passing systems. It can handle and store large volumes
+    of data with minimal latency and high throughput. Due to these benefits, it can
+    be suitable for making real-time data processing applications and streaming services.
+    It is currently open-source and used by many organisations like Netflix, Walmart
+    and Linkedin.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Message Passing System makes several applications send or receive data from
+    each other without worrying about data transmission and sharing. **Point-to-Point**
+    and **Publisher-Subscriber** are two widespread message-passing systems. In point-to-point,
+    the sender pushes the data into the queue, and the receiver pops from it like
+    a standard queue system following FIFO(first in, first out) principle. Also, the
+    data gets deleted once it gets read, and only a single receiver is allowed at
+    a time. There is no time dependency laid for the receiver to read the message.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![How to Build a Scalable Data Architecture with Apache Kafka](../Images/efa5d4c06f76f04465e52ebcdb70dc19.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Fig.1** Point-to-Point Message System | Image by Author'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the Publisher-Subscriber model, the sender is termed a publisher, and the
+    receiver is termed a subscriber. In this, multiple senders and receivers can read
+    or write data simultaneously. But there is a time dependency in it. The consumer
+    has to consume the message before a certain amount of time, as it gets deleted
+    after that, even if it didn’t get read. Depending on the user's configuration,
+    this time limit can be a day, a week, or a month.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![How to Build a Scalable Data Architecture with Apache Kafka](../Images/a47141ce8f4609d6c2550993775a5f18.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Fig.2** Publisher-Subscriber Message System | Image by Author'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Kafka Architecture
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Kafka architecture consists of several key components:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Topic
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Partition
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Broker
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Producer
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Consumer
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Kafka-Cluster
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Zookeeper
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![How to Build a Scalable Data Architecture with Apache Kafka](../Images/883018809ecf5ef892050f17df50b2d0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Fig.3** Kafka Architecture | Image by [ibm-cloud-architecture](https://ibm-cloud-architecture.github.io/refarch-eda/technology/kafka-overview/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s briefly understand each component.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Kafka stores the messages in different **Topics**. A topic is a group that contains
+    the messages of a particular category. It is similar to a table in a database.
+    A topic can be uniquely identified by its name. We cannot create two topics with
+    the same name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The topics are further classified into **Partitions.** Each record of these
+    partitions is associated with a unique identifier termed **Offset**, which denotes
+    the position of the record in that partition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Other than this, there are Producers and Consumers in the system. Producers
+    write or publish the data in the topics using the Producing APIs. These producers
+    can write either on the topic or partition levels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Consumers read or consume the data from the topics using the Consumer APIs.
+    They can also read the data either at the topic or partition levels. Consumers
+    who perform similar tasks will form a group known as the **Consumer Group**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are other systems like **Broker** and **Zookeeper,** which run in the
+    background of Kafka Server. Brokers are the software that maintains and keeps
+    the record of published messages. It is also responsible for delivering the right
+    message to the right consumer in the correct order using offsets. The set of brokers
+    collectively communicating with each other can be called **Kafka clusters**. Brokers
+    can be dynamically added or removed from the Kafka cluster without facing any
+    downtime in the system. And one of the brokers in the Kafka cluster is termed
+    a **Controller**. It manages states and replicas inside the cluster and performs
+    administrative tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the other hand, Zookeeper is responsible for maintaining the health status
+    of the Kafka cluster and coordinating with each broker of that cluster. It maintains
+    the metadata of each cluster in the form of key-value pairs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This tutorial is mainly focused on the practical implementation of Apache Kafka.
+    If you want to read more about its architecture, you can read [this](https://www.upsolver.com/blog/apache-kafka-architecture-what-you-need-to-know#:~:text=Its%20core%20architectural%20concept%20is,maintain%20a%20consistent%20system%20state.)
+    article by Upsolver.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Taxi Booking App: A Practical Use Case'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Consider the use case of a taxi booking service like Uber. This application
+    uses Apache Kafka to send and receive messages through various services like Transactions,
+    Emails, Analytics, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![How to Build a Scalable Data Architecture with Apache Kafka](../Images/664bb35c487cf63d41198f8b0d60b017.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Fig.4** Architecture of the Taxi App | Image by Author'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The architecture consists of several services. The `Rides` service receives
+    the ride request from the customer and writes the ride details on the Kafka Message
+    System.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then these order details were read by the `Transaction` service, which confirms
+    the order and payment status. After confirming that ride, this `Transaction` service
+    writes the confirmed ride again in the message system with some additional details.
+    And then finally, the confirmed ride details are read by other services like Email
+    or Data Analytics to send the confirmation mail to the customer and to perform
+    some analysis on it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can execute all these processes in real-time with very high throughput and
+    minimum latency. Also, due to the capability of horizontal scaling of Apache Kafka,
+    we can scale this application to handle millions of users.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Practical Implementation of the above Use Case
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: This section contains a quick tutorial to implement the kafka message system
+    in our application. It includes the steps to download kafka, configure it, and
+    create producer-consumer functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** This tutorial is based on python programming language and uses a
+    windows machine.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Apache Kafka Downloading Steps
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 1.Download the latest version of Apache Kafka from [that](https://kafka.apache.org/downloads)
+    link. Kafka is based on JVM languages, so Java 7 or greater version must be installed
+    in your system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Extract the downloaded zip file from your computer's (C:) drive and rename the
+    folder as `/apache-kafka`.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The parent directory contain two sub-directories, `/bin` and `/config`, which
+    contains the executable and configuration files for the zookeeper and the kafka
+    server.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Configuration Steps
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: First, we need to create log directories for the Kafka and Zookeeper servers.
+    These directories will store all the metadata of these clusters and the messages
+    of the topics and partitions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** By default, these log directories are created inside the `/tmp` directory,
+    a volatile directory that vanishes off all the data inside when the system shuts
+    down or restarts. We need to set the permanent path for the log directories to
+    resolve this issue. Let’s see how.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Navigate to `apache-kafka` >> `config` and open the `server.properties` file.
+    Here you can configure many properties of kafka, like paths for log directories,
+    log retention hours, number of partitions, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Inside the `server.properties` file, we have to change the path of the log directory's
+    file from the temporary `/tmp` directory to a permanent directory. The log directory
+    contains the generated or written data in the Kafka Server. To change the path,
+    update the `log.dirs` variable from `/tmp/kafka-logs` to `c:/apache-kafka/kafka-logs`.
+    This will make your logs stored permanently.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The Zookeeper server also contains some log files to store the metadata of the
+    Kafka servers. To change the path, repeat the above step, i.e open `zookeeper.properties`
+    file and replace the path as follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: This zookeeper server will act as a resource manager for our kafka server.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Run the Kafka and Zookeeper Servers
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To run the zookeeper server, open a new cmd prompt inside your parent directory
+    and run the below command.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![How to Build a Scalable Data Architecture with Apache Kafka](../Images/b6dc180652bec959922eb6b09f7361dd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keep the zookeeper instance running.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To run the kafka server, open a separate cmd prompt and execute the below code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Keep the kafka and zookeeper servers running, and in the next section, we will
+    create producer and consumer functions which will read and write data to the kafka
+    server.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating Producer & Consumer Functions
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: For creating the producer and consumer functions, we will take the example of
+    our e-commerce app that we discussed earlier. The `Orders` service will function
+    as a producer, which writes order details to the kafka server, and the Email and
+    Analytics service will function as a consumer, which reads that data from the
+    server. The Transaction service will work as a consumer as well as a producer.
+    It reads the order details and writes them back again after transaction confirmation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But first, we need to install the Kafka python library, which contains inbuilt
+    functions for Producer and Consumers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now, create a new directory named `kafka-tutorial`. We will create the python
+    files inside that directory containing the required functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Producer Function:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, create a python file named `rides.py` and paste the following code into
+    it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`rides.py`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Explanation:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Firstly, we have imported all the necessary libraries, including kafka. Then,
+    the topic name and a list of various items are defined. Remember that topic is
+    a group that contains similar types of messages. In this example, this topic will
+    contain all the orders.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then, we create an instance of a KafkaProducer function and connect it to the
+    kafka server running on the localhost:9092\. If your kafka server is running on
+    a different address and port, then you must mention the server’s IP and port number
+    there.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After that, we will generate some orders in JSON format and write them to the
+    kafka server on the defined topic name. Sleep function is used to generate a gap
+    between the subsequent orders.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Consumer Functions:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`transaction.py`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Explanation:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `transaction.py` file is used to confirm the transitions made by the users
+    and assign them a driver and estimated pickup time. It reads the ride details
+    from the kafka server and writes it again in the kafka server after confirming
+    the ride.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, create two python files named `email.py` and `analytics.py`, which are
+    used to send emails to the customer for their ride confirmation and to perform
+    some analysis respectively. These files are only created to demonstrate that even
+    multiple consumers can read the data from the Kafka server simultaneously.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`email.py`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`analysis.py`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now, we have done with the application, in the next section, we will run all
+    the services simultaneously and check the performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Test the Application
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Run each file one by one in four separate command prompts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![How to Build a Scalable Data Architecture with Apache Kafka](../Images/aa6353d2ed294dbf68800c4b306dd089.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can receive output from all the files simultaneously when the ride details
+    are pushed into the server. You can also increase processing speed by removing
+    the delay function in the `rides.py` file. The `rides.py` file pushed the data
+    into the kafka server, and the other three files simultaneously read that data
+    from the kafka server and function accordingly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I hope you get a basic understanding of Apache Kafka and how to implement it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In this article, we have learnt about Apache Kafka, its working and its practical
+    implementation using a use case of a taxi booking app. Designing a scalable pipeline
+    with Kafka requires careful planning and implementation. You can increase the
+    number of brokers and partitions to make these applications more scalable. Each
+    partition is processed independently so that the load can be distributed among
+    them. Also, you can optimise the kafka configuration by setting the size of the
+    cache, the size of the buffer or the number of threads.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[GitHub](https://github.com/aryan0141/apache-kafka-tutorial/tree/master) link
+    for the complete code used in the article.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for reading this article. If you have any comments or suggestions, please
+    feel free to contact me on [Linkedin](https://www.linkedin.com/in/aryan-garg-1bbb791a3/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Aryan Garg](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)** is a B.Tech.
+    Electrical Engineering student, currently in the final year of his undergrad.
+    His interest lies in the field of Web Development and Machine Learning. He have
+    pursued this interest and am eager to work more in these directions.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](https://www.kdnuggets.com/building-a-formula-1-streaming-data-pipeline-with-kafka-and-risingwave)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Scalable ETL with SQL + Python](https://www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n07, Feb 16: How to Learn Math for Machine…](https://www.kdnuggets.com/2022/n07.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Mesh & Its Distributed Data Architecture](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Mesh Architecture: Reimagining Data Management](https://www.kdnuggets.com/2022/05/data-mesh-architecture-reimagining-data-management.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,636 @@
+- en: The Evolution of Tokenization – Byte Pair Encoding in NLP
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/10/evolution-tokenization-byte-pair-encoding-nlp.html](https://www.kdnuggets.com/2021/10/evolution-tokenization-byte-pair-encoding-nlp.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/), Data Science
+    Instructor | Mentor | YouTuber**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/7d609b3bd5f5effc62c7f83b74dbf6a6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: NLP may have been a little late to the AI epiphany but it is doing wonders with
+    organisations like Google, OpenAI releasing state-of-the-art(SOTA) language models
+    like BERT and GPT-2/3 respectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: GitHub Copilot and OpenAI codex are among a few very popular applications that
+    are in the news. As someone who has very limited exposure to NLP, I decided to
+    take up NLP as an area of research and the next few blogs/videos will be me sharing
+    what I learn after dissecting some important components of NLP.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'NLP systems have three main components that help machines understand natural
+    language:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tokenization
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Embedding
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Model architectures
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Top Deep Learning models like BERT, GPT-2, or GPT-3 all share the same components
+    but with different architectures that distinguish one model from another.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this newsletter(and [notebook](https://colab.research.google.com/drive/1QLlQx_EjlZzBPsuj_ClrEDC0l8G-JuTn?usp=sharing)),
+    we are going to focus on the basics of the first component of an NLP pipeline
+    which is **tokenization**. An often overlooked concept but it is a field of research
+    in itself. We have come so far ahead of the traditional NLTK tokenization process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Though we have SOTA algorithms for tokenization, it's always a good practice
+    to understand the evolution trail and learning how have we reached here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So, here''s what we''ll cover:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is tokenization?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Why do we need a tokenizer?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Types of tokenization - Word, Character, and Subword.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Byte Pair Encoding Algorithm - a version of which is used by most NLP models
+    these days.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The next part of this tutorial will dive into more advanced(or enhanced version
+    of BPE) algorithms:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Unigram Algorithm**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**WordPiece - BERT transformer**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**SentencePiece - End-to-End tokenizer system**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: What is Tokenization?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Tokenization is the process of representing raw text in smaller units called
+    tokens. These tokens can then be mapped with numbers to further feed to an NLP
+    model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here''s an overly simplified example of what a tokenizer does:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[![](../Images/f7f26c06b602d353f1881e141d340e98.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fcaa2e479-181a-4703-afb6-9796d0f74d09_229x327.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here, we have simply mapped every word in the text to a numerical index. Obviously,
+    this is a very simple example and we have not considered grammar, punctuations,
+    compound words(like test, test-ify, test-ing, etc.).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thus, we need a more technical and accurate definition of tokenization. To take
+    into account every punctuation and related word, we need to start working at the
+    character level.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are multiple applications of tokenization. One of the use cases comes
+    from compiler design where we need to parse computer programs to convert raw characters
+    into keywords of a programming language.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**In deep learning,** tokenization is the process of converting a sequence
+    of characters into a sequence of tokens which further needs to be converted into
+    a sequence of numerical vectors that can be processed by a neural network.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why do we need a Tokenizer?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The need for a tokenizer has protruded from the question "How can we make machines
+    read?"
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the common ways of processing textual data is by defining a set of rules
+    in a dictionary and then looking up that fixed dictionary of rules. But this method
+    can only go so far and we want machines to learn these rules from the text that
+    is read by it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, machines don't know any language, nor do they understand sound or phonetics.
+    They need to be taught from scratch and in such a way that they could read any
+    language possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Quite a task, right?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Humans learn a language by connecting sound to the meaning and then we learn
+    to read and write in that language. Machines can't do that, so they need to be
+    given the most basic units of text to start processing it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That's where tokenization comes into play. Break down the text into smaller
+    units called "tokens".
+  prefs: []
+  type: TYPE_NORMAL
+- en: And there are different ways of tokenizing text which is what we'll learn now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tokenization policies - simple ways to tokenize
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'To make the deep learning model learn from the text, we need a two-step process:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![](../Images/3a952105e1bfa4e42c255f0dd40324af.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fff7fafb7-a127-4e41-a050-cb02951f3112_1391x821.jpeg)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tokenize - decide the algorithm to be used to generate the tokens.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Encode the tokens to vectors
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: As the first step suggests, we need to decide how to convert text into small
+    tokens. A simple and straight forward method that most of us would propose is
+    the word-based tokens, splitting the text by space.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Problems with Word tokenizer
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**the risk of missing words in the training data:** with word tokens, your
+    model won''t recognize the variants of words that were not part of the data on
+    which the model was trained. So, if your model has seen `foot` and `ball` in the
+    training data but the final text has `football`, the model won''t be able to recognize
+    the word and it will be treated with `<UNK>` token. Similarly, punctuations pose
+    another problem, `let` or `let''s` will need individual tokens and it is an inefficient
+    solution. This will **require a huge vocabulary** to make sure you''ve every variant
+    of the word. Even if you add a **lemmatizer** to solve this problem, you''re adding
+    an extra step in your processing pipeline.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Handling slang and abbreviations-** another problem is the use of slang and
+    abbreviations in texts these days such as "FOMO", "LOL", "tl;dr" etc. What do
+    we do for these words?'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**What if the language doesn''t use space for segmentation:** for a language
+    like Chinese, which doesn''t use spaces for word separation, this tokenizer will
+    fail completely.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: After encountering these problems, researchers looked into another approach
+    which was tokenizing all the characters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Character-based tokenization
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To resolve the problems associated with word-based tokenization, an alternative
+    approach of character-by-character tokenization was tried.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This did solve the problem of missing words as now we are dealing with characters
+    that can be encoded using ASCII or Unicode and it could generate embedding for
+    any word now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Every character, be it space or apostrophes or colons, can now be assigned a
+    symbol to generate a sequence of vectors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But this approach had its own cons.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Drawbacks of character-based models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Requirement of more compute:** character-based models will treat each character
+    as tokens and more tokens mean more input computations to process each token which
+    in turn requires more compute resources. For a 5-word long sentence, you may need
+    to process 30 tokens instead of 5 word-based tokens.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Narrows down the number of NLP tasks and applications:** with long sequences
+    of characters, only a certain type of neural network architecture can be used.
+    This puts a limitation on the type of NLP tasks we can perform. For applications
+    like Entity recognition or text classification, character-based encoding might
+    turn out to be an inefficient approach.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Risk of learning incorrect semantics:** working with characters could generate
+    incorrect spellings of words. Also, with no inherent meaning, learning with characters
+    is like learning with no meaningful semantics.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: What's fascinating is that for such a seemingly simple task, mutliple algorithms
+    are written to find the optimal tokenization policy.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: After understanding the pros and cons of these tokenization methods, it makes
+    sense to look for an approach that offers a middle route i.e. preserve the semantics
+    with limited vocabulary that can generate all the words in the text on merging.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Subword Tokenization
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: With character-based models, we risk losing the semantic features of the word
+    and with word-based tokenization, we need a very large vocabulary to encompass
+    all the possible variations of every word.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So, the goal was to develop an algorithm that could:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Retain the semantic features of the token i.e. information per token.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: tokenize without demanding a very large vocabulary with a finite set of words.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: To solve this problem, we could think of breaking down the words based on a
+    set of prefixes and suffixes. For example, we can write a rule-based system to
+    identify subwords like `"##s"`, `"##ing"`, `"##ify"`, `"un##"` etc., where the
+    position of double hash denotes prefix and suffixes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, a word like `"unhappily"` is tokenized using subwords like `"un##"`, `"happ"`,
+    and `"##ily"`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The model only learns a few subwords and then puts them together to create other
+    words. This solves the problem of memory requirement and effort to create a large
+    vocabulary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Problems with this algorithm:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Some of the subwords that are created as per the defined rules may never appear
+    in your text to tokenize and may end up occupying extra memory.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Also, for every language, we'll need to define a different set of rules to create
+    subwords.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To alleviate this problem, in practice, most modern tokenizers have a training
+    phase that identifies the recurring text in the input corpus and creates new subwords
+    tokens. For rare patterns, we stick to word-based tokens.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another important factor that plays a vital role in this process is the size
+    of the vocabulary that is set by the user. Large vocabulary size allows for more
+    common words to be tokenized whereas smaller vocabulary requires more subwords
+    to be created to create every word in the text without using the `<UNK>` token.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Striking the balance for your application is key here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Byte Pair Encoding(BPE)
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: BPE was originally a data compression algorithm that is used to find the best
+    way to represent data by identifying the common byte pairs. It is now used in
+    NLP to find the best representation of text using the least number of tokens.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here''s how it works:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Add an identifier(`</w>`) at the end of each word to identify the end of a word
+    and then calculate the word frequency in the text.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Split the word into characters and then calculate the character frequency.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: From the character tokens, for a predefined number of iterations, count the
+    frequency of the consecutive byte pairs and merge the most frequently occurring
+    byte pairing.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Keep iterating until you have reached the iteration limit(set by you) or if
+    you have reached the token limit.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Let's go through each step(in code) for a sample text. For coding this, I have
+    taken help from [Lei Mao's very minimalistic blog on BPE](https://leimao.github.io/blog/Byte-Pair-Encoding/).
+    I encourage you to check it out!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here''s our sample text:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[![](../Images/b12c502f08d3d40df13b3a665ddeb325.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fb90e5882-9f1f-4b05-be48-3e9336cf1854_283x392.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 2: Split the word into characters and then calculate the character frequency.'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[![](../Images/c1e660153c7aec3e03f4430fc9301f49.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fecbf93c5-7fd6-4a40-a63d-e504be1bf157_396x536.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 3: Merge the most frequently occurring consecutive byte pairing.'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[![](../Images/abcae8d892a8f69406e06c3c0bf6f78a.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fdaf21979-946b-4dfb-b090-64e591c13907_400x590.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 4 - Iterate a number of times to find the best(in terms of frequency) pairs
+    to encode and then concatenate them to find the subwords.
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'It is better at this point to turn structure our code into functions. This
+    will require us to perform the following steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Find the most frequently occurring byte pairs in each iteration.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Merge these tokens.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Recalculate the character tokens frequency with the new pair encoding added.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Keep doing it until there is no more pair or you reach the end of the for a
+    loop.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For detailed code, you should **check out my [Colab notebook](https://colab.research.google.com/drive/1QLlQx_EjlZzBPsuj_ClrEDC0l8G-JuTn?usp=sharing).**
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here’s a trimmed output of those 4 steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![](../Images/db0e450fa66790cc0afbb9effa4ede62.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F4cb7b992-1986-4dbc-a444-da817255f80f_1295x637.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So as we iterate with each best pair, we merge(concatenating) the pair and you
+    can see as we recalculate the frequency, the original character token frequency
+    is reduced and the new paired token frequency pops up in the token dictionary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you look at the number of tokens created, it first increases because we create
+    new pairings but the number starts to decrease after a number of iterations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here, we started from 25 tokens, went up to 31 tokens in the 14th iteration,
+    and then came down to 16 tokens in the 50th iteration. Interesting, right?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Scope of improvement for the BPE algorithm
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: BPE algorithm is a greedy algorithm i.e. it tries to find the best pair in each
+    iteration. And there are some limitations of this greedy approach.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thus, there are pros and cons of the BPE algorithm too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The final tokens will vary depending upon the number of iterations you have
+    run which also causes another problem. We now can have different tokens for a
+    single text and thus different embeddings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To address this issue, multiple solutions were proposed but the one that stood
+    out was a unigram language model that added [subword regularization(a new method
+    of subword segmentation)](https://arxiv.org/pdf/1804.10959.pdf) training that
+    calculates the probability for each subword token to choose the best option using
+    a loss function. More on this in the upcoming blogs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Do they use BPE in BERTs or GPTs?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Models like BERT or GPT-2 use some version of the BPE or the unigram model to
+    tokenize the input text.
+  prefs: []
+  type: TYPE_NORMAL
+- en: BERT included a new algorithm called WordPiece which is also similar to the
+    BPE but has an added layer of likelihood calculation to decide whether the merged
+    token will make the final cut.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: What you've learned(if at all) in this blog how a machine starts to make sense
+    of language by breaking down the text into very small units.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, there are many ways to break text down and thus it becomes important to
+    compare one approach with another.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We started off by understanding tokenization by splitting the English text by
+    spaces but not every language is written the same way(i.e. using spaces to denote
+    segmentation) so we looked at splitting by character to generate character tokens.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The problem with characters was the loss of semantic features from the tokens
+    at the risk of creating incorrect word representations or embeddings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To get the best of both worlds, subword tokenization was introduced which was
+    more promising and then we looked at the BPE algorithm to implement subword tokenization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: More on the next steps and advanced tokenizers like WordPiece, SentencePiece
+    and how to work with the HuggingFace tokenizer next week.
+  prefs: []
+  type: TYPE_NORMAL
+- en: References and Notes
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'My post is actually an accumulation of the following papers and blogs that
+    I encourage you to read:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/pdf/1508.07909.pdf) -
+    Research paper that discusses different segmentation techniques based BPE compression
+    algorithm.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[GitHub repo on Subword NMT(Neural Machine Translation) ](https://github.com/rsennrich/subword-nmt)-
+    supporting code for the above paper.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Lei Mao’s blog on Byte Pair Encoding](https://leimao.github.io/blog/Byte-Pair-Encoding/) -
+    I used the code in his blog to implement and understand BPE myself.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[How Machines read](https://blog.floydhub.com/tokenization-nlp/) - a blog by
+    Cathal Horan.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If you’re looking to start in the field of data science or ML, check out my
+    course on [Foundations of Data Science & ML](https://www.wiplane.com/p/foundations-for-data-science-ml).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you would like to see more of such content and you are not a subscriber,
+    consider subscribing to my newsletter using the button below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/)** is an engineer
+    with amalgamated experience in web technologies and data science(aka full-stack
+    data science). He has mentored over 1000 AI/Web/Data Science aspirants, and is
+    designing data science and ML engineering learning tracks. Previously, Harshit
+    developed data processing algorithms with research scientists at Yale, MIT, and
+    UCLA.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://dswharshit.substack.com/p/the-evolution-of-tokenization-byte).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Text Preprocessing Methods for Deep Learning](/2021/09/text-preprocessing-methods-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[15 Must-Know Python String Methods](/2021/09/15-must-know-python-string-methods.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learning Data Science and Machine Learning: First Steps After The Roadmap](/2021/08/learn-data-science-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Encoding Categorical Features with MultiLabelBinarizer](https://www.kdnuggets.com/2023/01/encoding-categorical-features-multilabelbinarizer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[From Oracle to Databases for AI: The Evolution of Data Storage](https://www.kdnuggets.com/2022/02/oracle-databases-ai-evolution-data-storage.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Analyzing the Probability of Future Success with Intelligence…](https://www.kdnuggets.com/2022/02/analyzing-probability-future-success-intelligence-node-attributes-evolution-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Evolution From Artificial Intelligence to Machine Learning to…](https://www.kdnuggets.com/2022/08/evolution-artificial-intelligence-machine-learning-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Evolution of Speech Recognition Metrics](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Deep Dive into GPT Models: Evolution & Performance Comparison](https://www.kdnuggets.com/2023/05/deep-dive-gpt-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

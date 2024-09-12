@@ -1,0 +1,337 @@
+- en: How to Speed up Scikit-Learn Model Training
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/02/speed-up-scikit-learn-model-training.html](https://www.kdnuggets.com/2021/02/speed-up-scikit-learn-model-training.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/), Developer
+    Relations at Anyscale**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/eda130a8ac5452ae7b9f9619e330a799.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Resources (dark blue) that scikit-learn can utilize for single core (A), multicore
+    (B), and multinode training (C)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Scikit-Learn is an easy to use a Python library for machine learning. However,
+    sometimes scikit-learn models can take a long time to train. The question becomes,
+    how do you create the best scikit-learn model in the least amount of time? There
+    are quite a few approaches to solving this problem like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Changing your optimization function (solver)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Using different hyperparameter optimization techniques (grid search, random
+    search, early stopping)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Parallelize or distribute your training with [joblib](https://joblib.readthedocs.io/en/latest/) and [Ray](https://docs.ray.io/en/master/index.html)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This post gives an overview of each approach, discusses some limitations, and
+    offers resources to speed up your machine learning workflow!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Changing your optimization algorithm (solver)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ca8011fc425afd71a24944fa837ca982.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Some solvers can take longer to converge. Image from [Gaël Varoquaux’s talk](https://youtu.be/1s8RzWwMdqg?t=671).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Better algorithms allow you to make better use of the same hardware. With a
+    more efficient algorithm, you can produce an optimal model faster. One way to
+    do this is to change your optimization algorithm (solver). For example, [scikit-learn’s
+    logistic regression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html),
+    allows you to choose between solvers like ‘newton-cg’, ‘lbfgs’, ‘liblinear’, ‘sag’,
+    and ‘saga’.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To understand how different solvers work, I encourage you to watch a talk by
+    scikit-learn core contributor [Gaël Varoquaux](https://youtu.be/1s8RzWwMdqg?t=671).
+    To paraphrase part of his talk, a full gradient algorithm (liblinear) converges
+    rapidly, but each iteration (shown as a white +) can be prohibitively costly because
+    it requires you to use all of the data. In a sub-sampled approach, each iteration
+    is cheap to compute, but it can converge much more slowly. Some algorithms like
+    ‘saga’ achieve the best of both worlds. Each iteration is cheap to compute, and
+    the algorithm converges rapidly because of a variance reduction technique. It
+    is important to note that [quick convergence doesn’t always matter in practice](https://leon.bottou.org/publications/pdf/nips-2007.pdf) and
+    different solvers suit different problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b7bf81e13a71f36ef73e6608bde755e4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Choosing the right solver for a problem can save a lot of time ([code example](https://gist.github.com/mGalarnyk/f42f434fc162be108a3bb5bc36464a59)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: To determine which solver is right for your problem, you can check out the [documentation](https://scikit-learn.org/stable/modules/linear_model.html) to
+    learn more!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Different hyperparameter optimization techniques (grid search, random search,
+    early stopping)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To achieve high performance for most scikit-learn algorithms, you need to tune
+    a model’s hyperparameters. Hyperparameters are the parameters of a model which
+    are not updated during training. They can be used to configure the model or training
+    function. Scikit-Learn natively contains a [couple techniques for hyperparameter
+    tuning](https://scikit-learn.org/stable/modules/grid_search.html) like grid search
+    ([GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV))
+    which exhaustively considers all parameter combinations and [randomized search](https://www.jmlr.org/papers/volume13/bergstra12a/bergstra12a.pdf) ([RandomizedSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV))
+    which samples a given number of candidates from a parameter space with a specified
+    distribution. Recently, scikit-learn added the experimental hyperparameter search
+    estimators halving grid search ([HalvingGridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.HalvingGridSearchCV.html#sklearn.model_selection.HalvingGridSearchCV))
+    and halving random search ([HalvingRandomSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.HalvingRandomSearchCV.html#sklearn.model_selection.HalvingRandomSearchCV)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/760eb1242540966e6674ba4f4eda7b09.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Successive halving is an experimental new feature in scikit-learn version 0.24.1
+    (January 2021). Image from [documentation](https://scikit-learn.org/stable/modules/grid_search.html#searching-for-optimal-parameters-with-successive-halving).
+  prefs: []
+  type: TYPE_NORMAL
+- en: These techniques can be used to search the parameter space using [successive
+    halving](https://scikit-learn.org/stable/modules/grid_search.html#searching-for-optimal-parameters-with-successive-halving).
+    The image above shows that all hyperparameter candidates are evaluated with a
+    small number of resources at the first iteration and the more promising candidates
+    are selected and given more resources during each successive iteration.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While these new techniques are exciting, there is a library called [Tune-sklearn](https://github.com/ray-project/tune-sklearn) that
+    provides cutting edge hyperparameter tuning techniques (bayesian optimization,
+    early stopping, and distributed execution) that can provide significant speedups
+    over grid search and random search.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b3c3f2cce2bbe237fd6efd4f9a7fc427.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Early stopping in action. Hyperparameter set 2 is a set of unpromising hyperparameters
+    that would be detected by Tune-sklearn’s early stopping mechanisms, and stopped
+    early to avoid wasting time and resources. Image from [GridSearchCV 2.0](https://medium.com/distributed-computing-with-ray/gridsearchcv-2-0-new-and-improved-ee56644cbabf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Features of [Tune-sklearn](https://github.com/ray-project/tune-sklearn) include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Consistency with the scikit-learn API: You usually only need to change a couple
+    lines of code to use Tune-sklearn ([example](https://github.com/ray-project/tune-sklearn/blob/master/examples/random_forest.py)).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Accessibility to modern hyperparameter tuning techniques: It is easy to change
+    your code to utilize techniques like bayesian optimization, early stopping, and
+    distributed execution'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Framework support: There is not only support for scikit-learn models, but other
+    scikit-learn wrappers such as [Skorch (PyTorch)](https://github.com/ray-project/tune-sklearn/blob/master/examples/torch_nn.py), [KerasClassifiers
+    (Keras)](https://github.com/ray-project/tune-sklearn/blob/master/examples/keras_example.py),
+    and [XGBoostClassifiers (XGBoost)](https://github.com/ray-project/tune-sklearn/blob/master/examples/xgbclassifier.py).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Scalability: The library leverages [Ray Tune](https://docs.ray.io/en/master/tune/index.html),
+    a library for distributed hyperparameter tuning, to efficiently and transparently
+    parallelize cross validation on multiple cores and even multiple machines.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Perhaps most importantly, tune-sklearn is fast as you can see in the image below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/94b36e7d23d42c2eabe56065eef4c15d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can see significant performance differences on an average laptop using tune-sklearn.
+    Image from [GridSearchCV 2.0](https://medium.com/distributed-computing-with-ray/gridsearchcv-2-0-new-and-improved-ee56644cbabf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you would like to learn more about tune-sklearn, you should check out this [blog
+    post](https://medium.com/distributed-computing-with-ray/gridsearchcv-2-0-new-and-improved-ee56644cbabf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Parallelize or distribute your training with joblib and Ray
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/634e09a182470626719b71f2df805753.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Resources (dark blue) that scikit-learn can utilize for single core (A), multicore
+    (B), and multinode training (C)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another way to increase your model building speed is to parallelize or distribute
+    your training with [joblib](https://joblib.readthedocs.io/en/latest/) and [Ray](https://docs.ray.io/en/master/index.html).
+    By default, scikit-learn trains a model using a single core. It is important to
+    note that virtually all computers today have multiple cores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/10429781abb5d12826d18e083d9cc71c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: For the purpose of this blog, you can think of the MacBook above as a single
+    node with 4 cores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Consequently, there is a lot of opportunity to speed up the training of your
+    model by utilizing all the cores on your computer. This is especially true if
+    your model has a high degree of high degree of parallelism like a random forest®.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f0c12d04f8fec41e2ec3e30d8f0d3c61.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A random forest® is an easy model to parallelize as each decision tree is independent
+    of the others.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Scikit-Learn can parallelize training on a single node with [joblib which by
+    default uses the ‘loky’ backend](https://joblib.readthedocs.io/en/latest/parallel.html).
+    Joblib allows you to choose between backends like ‘loky’, ‘multiprocessing’, ‘dask’,
+    and ‘ray’. This is a great feature as the ‘loky’ backend is [optimized for a single
+    node and not for running distributed (multinode) applications](https://scikit-learn.org/stable/modules/generated/sklearn.utils.parallel_backend.html).
+    Running distributed applications can introduce a host of complexities like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Scheduling tasks across multiple machines
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Transferring data efficiently
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Recovering from machine failures
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Fortunately, the [‘ray’ backend](https://docs.ray.io/en/master/joblib.html) can
+    handle these details for you, keep things simple, and give you better performance.
+    The image below shows the normalized speedup in terms of execution time of Ray,
+    Multiprocessing, and Dask relative to the default ‘loky’ backend.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/85873a44503158f15ad8af003c192d63.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The performance was measured on one, five, and ten m5.8xlarge nodes with 32
+    cores each. The performance of Loky and Multiprocessing does not depend on the
+    number of machines because they run on a single machine. [Image source](https://medium.com/distributed-computing-with-ray/easy-distributed-scikit-learn-training-with-ray-54ff8b643b33).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you would like to learn about how to quickly parallelize or distribute your
+    scikit-learn training, you can check out this [blog post](https://medium.com/distributed-computing-with-ray/easy-distributed-scikit-learn-training-with-ray-54ff8b643b33).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This post went over a couple ways you can build the best scikit-learn model
+    possible in the least amount of time. There are some ways that are native to scikit-learn
+    like changing your optimization function (solver) or by utilizing experimental
+    hyperparameter optimization techniques like [HalvingGridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.HalvingGridSearchCV.html#sklearn.model_selection.HalvingGridSearchCV) or [HalvingRandomSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.HalvingRandomSearchCV.html#sklearn.model_selection.HalvingRandomSearchCV).
+    There are also libraries that you can use as plugins like [Tune-sklearn](https://github.com/ray-project/tune-sklearn) and [Ray](https://github.com/ray-project/ray) to
+    further speed up your model building. If you have any questions or thoughts about
+    Tune-sklearn and Ray, please feel free to join our community through [Discourse](https://discuss.ray.io/) or [Slack](https://docs.google.com/forms/d/e/1FAIpQLSfAcoiLCHOguOm8e7Jnn-JJdZaCxPGjgVCvFijHB5PLaQLeig/viewform).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)** works
+    in Developer Relations at Anyscale, the company behind the [Ray Project](https://github.com/ray-project/ray).
+    You can find him on [Twitter](https://twitter.com/GalarnykMichael), [Medium](https://medium.com/@GalarnykMichael),
+    and [GitHub](https://github.com/mGalarnyk).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/distributed-computing-with-ray/how-to-speed-up-scikit-learn-model-training-aaf17e2d1e1).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[The Ultimate Scikit-Learn Machine Learning Cheatsheet](/2021/01/ultimate-scikit-learn-machine-learning-cheatsheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Lists and List Manipulation](/2019/11/python-lists-list-manipulation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[K-Means 8x faster, 27x lower error than Scikit-learn in 25 lines](/2021/01/k-means-faster-lower-error-scikit-learn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Use Synthetic Data To Overcome Data Shortages For Machine…](https://www.kdnuggets.com/2022/03/synthetic-data-overcome-data-shortages-machine-learning-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Speed up Machine Learning with Fast Kriging (FKR)](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Simple Ways to Speed Up Your Python Code](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Speed Up SQL Queries Using Indexes [Python Edition]](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Research-Driven Advanced Prompting Techniques for LLM Efficiency…](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

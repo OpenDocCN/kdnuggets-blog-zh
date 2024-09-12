@@ -1,0 +1,385 @@
+- en: 'Introducing Generalized Integrated Gradients (GIG): A Practical Method for
+    Explaining Diverse Ensemble Machine Learning Models'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/01/generalized-integrated-gradients-explaining-ensemble-models.html](https://www.kdnuggets.com/2020/01/generalized-integrated-gradients-explaining-ensemble-models.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Jay Budzik](https://www.linkedin.com/in/jaybudzik/), CTO at [Zest AI](https://www.zest.ai/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Ensemble machine learning models provide more predictive accuracy and stability
+    than single ML models alone, as we showed earlier in our post* [*Ensembles are
+    Better*](https://docs.google.com/document/d/1IFgr8V_ebJqR6oROm0fNStf_a-ctsVJlPU2_A3jONDw/edit)*.
+    But ensemble models are hard to explain and trust using common methods such as
+    SHAP and Integrated Gradients.*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Zest developed a new method for explaining complex ensemble models called
+    Generalized Integrated Gradients that renders them safe to use in applications
+    like credit risk underwriting. Unlike other approaches, GIG follows directly from
+    a small set of reasonable rules and needs no arbitrary assumptions.*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Why A New Credit Assignment Method is Needed**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Machine learning is proven to yield better underwriting results and mitigate
+    bias in lending. But not all machine learning techniques, including the wide swath
+    at work in unregulated uses, is built to be transparent. Many of the algorithms
+    that get deployed generate results that are difficult to explain. Recently, researchers
+    have proposed novel and powerful methods for explaining machine learning models,
+    notably [Shapley Additive Explanations](https://arxiv.org/abs/1705.07874) (SHAP
+    Explainers) and [Integrated Gradients](https://arxiv.org/abs/1703.01365) (IG).
+    These methods provide mechanisms for assigning credit to the data variables used
+    by a model to generate a score. They work by representing the machine learning
+    model as a game: each variable is a player, the rules of the game are the model''s
+    scoring functions, and the value of the game is the score given by the model.
+    Credit allocation in a [cooperative game](https://en.wikipedia.org/wiki/Cooperative_game_theory)
+    is a well-understood problem.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[SHAP](https://arxiv.org/pdf/1705.07874.pdf) uses various methods to compute
+    Shapley values, which work well in atomic games to identify the most important
+    variables by re-computing the outcome of the model with each variable systematically
+    removed. When the algorithm is a neural net, which runs infinitesimal tiny games
+    none of which individually matters but they do in the aggregate, you need [Integrated
+    Gradients](https://arxiv.org/pdf/1703.01365.pdf) to explain a model. IG uses Aumann-Shapley
+    values to understand the difference in model scores between two applicants. It
+    quantifies how much each input variable contributes to the difference in a model’s
+    score. After all, some changes matter more than others according to the model,
+    and so our task is to measure which changes the model thinks are more or less
+    important.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Both are great innovations in their own right, but neither provides satisfactory
+    credit allocation for mixed-type models that achieve the best results. As we explained
+    in an earlier post ([Why Not Just Use SHAP](https://www.zest.ai/blog/why-you-shouldnt-just-use-shap-to-power-your-ml-explainability-requirements)),
+    the explainers implemented in the SHAP package either require variables to be
+    statistically independent or that missing values can be replaced by an average.
+    Both of these are non-starters in financial services. IG requires the model to
+    be everywhere differentiable, which isn’t true for decision trees, and so it only
+    works on models like neural networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Big tech firms like Google, Facebook, and Microsoft have been exploiting the
+    benefits of ensembled ML for years. They build models that use trees and neural
+    networks and a full palette of modeling math, but they’re not operating under
+    the same regulatory constraints as financial services firms. Banks and lenders
+    would benefit immensely from using these same kinds of advanced models for applications
+    like credit underwriting and fraud detection. (Check out our [recent post](https://www.zest.ai/blog/many-heads-are-better-than-one-making-the-case-for-ensemble-learning)
+    introducing a new ensemble method called deep stacking that yielded one small
+    lender $13 million in profit and a more accurate and stable model.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: All the arrows point to the need for a new way to explain complex, ensembled
+    ML models for high-stakes applications such as credit and lending. This is why
+    we invented GIG.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Introducing Generalized Integrated Gradients**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Generalized Integrated Gradients](https://arxiv.org/abs/1909.01869) (GIG)
+    is Zest AI’s new credit assignment algorithm that overcomes the limitations of
+    both Shapley and Aumann-Shapley by applying the tools of [measure theory](https://www.amazon.com/Principles-Mathematical-Analysis-International-Mathematics/dp/007054235X).
+    GIG is a formal extension of IG that accurately allocates credit for a significantly
+    broader class of models, including almost all of the scoring functions currently
+    in use in the machine learning field. GIG is the only method for rigorously calculating
+    the contributions of each variable with respect to diverse ensembles of models.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What makes GIG better at explaining complex ML models is that it avoids making
+    unrealistic and potentially dangerous assumptions about the data. GIG follows
+    directly from its axioms. With SHAP and other methods based on Shapley Values,
+    you have to map the input variables into a much higher dimensional space in order
+    to get the values to work for machine learning functions. There are an uncountable
+    number of such mappings, and it is not clear which, if any, is the correct mapping.
+    By contrast, GIG is entirely determined by mathematics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: GIG allocates credit by directly analyzing the model function in pieces to answer
+    the question, “Which input variables led to the change in the model score?” It
+    measures the importance of each variable by accumulating changes in the model
+    score along a path from first input to another according to a unique formula that
+    computes the amount each variable causes the predictive function to change its
+    score.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Application to a real-world credit risk model**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To demonstrate GIG’s capabilities, we used it to explain a mixed ensemble model
+    built from real-world lending data. The model, illustrated below and cited earlier,
+    is a stacked ensemble of 4 XGBoost models and 2 neural network models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8d17f0ae5fe8c4a07c819595af391e92.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 1: A deeply stacked ensemble: The training data is used to train multiple
+    sub-models, some of which may be tree-based models like XGBoost, others neural
+    networks, which are then ensembled, along with the inputs, into a larger model,
+    using a neural network.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Table stakes in any model explainability task are to quantify accurately the
+    importance of each feature in the model. We conducted a series of experiments
+    (described in our paper) that show that GIG accurately quantifies the influence
+    of the variables in simple models. The experiments built a series of toy models
+    based on known variations in input data, and we showed that GIG was able to accurately
+    portray what the model learned from the deliberately modified data. Here, we look
+    at a real-world application. Table 1 shows feature importance for the more complex
+    ensemble displayed in Figure 1\. The table shows that GIG can explain even this
+    more complex, real-world model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **Feature Definition** | **Importance** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Proportion of income sources which are current | 0.045763 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Number of full-time jobs | 0.028215 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Number of employers | 0.025663 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Number of current income sources | 0.020645 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Applicant has filed for bankruptcy | 0.020339 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Applicant has a Chapter 7 bankruptcy | 0.020039 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Number of monthly income sources | 0.017467 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Majority of income sources are current | 0.016271 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Debt-to-income ratio | 0.015139 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Proportion of income sources from employment | 0.011887 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Was the applicant dismissed from a bankruptcy | 0.010515 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Did the applicant have a Chapter 13 bankruptcy | 0.010456 |'
+  prefs: []
+  type: TYPE_TB
+- en: 'Table 1: Feature importances for the ensemble shown in Figure 1. In addition
+    to computing overall feature importance, GIG allows you to quantify feature importance
+    for each applicant and for various populations, such as the highest performing
+    and the lowest-performing loans, or the variables that caused a difference in
+    approval rate between men and women applicants.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**How GIG works**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As we mentioned earlier, GIG is a differential credit assignment function based
+    on IG and [Aumann-Shapley](https://en.wikipedia.org/wiki/Shapley_value#Aumann%E2%80%93Shapley_value).
+    Differential credit assignment answers the question of how much each change in
+    the input caused a change in the model’s score. You compare the set of inputs
+    between two applicants and the likelihood of default returned by the model for
+    each (for example, one applicant might have been denied, and another applicant
+    might have been approved). GIG shows how much each input variable contributed
+    to the change in score that led to the approved/denied decision.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s visualize how this all works. Figure 2 shows a set of approved applicants
+    in green and a set of denied applicants in red. Declined applicants have a high
+    number of delinquencies and bankruptcies. The opposite is true for approved applicants.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/bc4a16eb5a04fedb5736f62784938274.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 2\. This model considers two variables: bankruptcies and delinquencies.
+    The approved applicants, have low bankruptcies and low delinquencies. The denied
+    applicants have high bankruptcies and high delinquencies.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Differential credit assignment functions like GIG explain the difference between
+    the two classes of applicants by comparing each approved applicant with each denied
+    applicant: You’re basically computing the difference in delinquencies and bankruptcies
+    between each pair of approved and denied applicants and taking the average. This
+    process is illustrated for one pair in this comparison, shown in Figure 3, below.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/9ec95896938ec8634aaab264097aabdd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 3\. The difference in score between the denied applicant in red and the
+    approved applicant in green can be explained by the difference in delinquencies
+    and the difference in the count of bankruptcies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is meant for illustration only, the charts are missing the model score.
+    A more realistic picture is displayed in Figure 4, below, which shows how the
+    model score varies with respect to the delinquency and bankruptcy variables along
+    a path between a denied applicant and an approved applicant. The IG method uses
+    Aumann-Shapley values to computes the contribution of delinquencies and bankruptcies
+    to the change in the model score along the path between the approved and denied
+    applicants.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b7830495c61cebc99e92b4693b465efb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 4\. Here the model score is represented by the *y-*axis. The delinquency
+    count and bankruptcies are represented on the *x-* and *z-*axes. The integral
+    of the partial derivatives along the path between the denied applicant (red dot)
+    and the approved applicant (green dot) represents the Aumann-Shapley contribution
+    of each variable, delinquencies *x*, and bankruptcies *z*, to the model score
+    *y*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A model can have any number of dimensions, and Aumann-Shapley will accommodate
+    them. But as we said before, the Aumann-Shapley value only works for smooth functions
+    like neural networks. Figure 5 illustrates a simple example of a composition of
+    functions that Aumann-Shapley (and therefore IG) cannot explain.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/460f1e5d811abd165b8a90ed28e26f7d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 5\. A sample composition of functions. Here the discrete component is
+    in red, and represents a decision tree that has a jump discontinuity at x=1.75\.
+    The continuous part is shown in blue. The composition of these two functions is
+    shown in green. The combined function contains a jump discontinuity at x=1.75,
+    just like the discrete function that is part of it. These kinds of functions can’t
+    be adequately explained by Shapley or Aumann-Shapley, they require something different
+    like GIG.
+  prefs: []
+  type: TYPE_NORMAL
+- en: GIG works by first enumerating all the discontinuities in the discrete functions
+    (e.g., by depth-first search of the model’s decision trees) and computes the value
+    of the discrete function from the left and from the right of each discontinuity.
+    It assigns credit based on the average of these two values, as shown in the left
+    panel of Figure 6 below. The credit assigned to the continuous parts is computed
+    using IG (right panel of Figure 6). The discrete and continuous contributions
+    are then put back together to arrive at a highly accurate combined contribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5c05dd23d00b6c78486eed6511c58c49.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 6\. GIG works by calculating the credit at the jumps by averaging the
+    value to the left and the value to the right of the discrete part and then combining
+    that with the credit assigned by Aumann-Shapley on the continuous parts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The details of how this is done are contained in the [GIG explainable ML paper](https://arxiv.org/abs/1909.01869),
+    which also mathematically proves that GIG is the only way of computing credit
+    allocation for these types of mixed models under a small set of reasonable axioms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Conclusion**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Ensemble models produce better results than any single modeling method alone,
+    but they have heretofore been impossible to explain accurately. We introduced
+    a new method, [Generalized Integrated Gradients](https://arxiv.org/abs/1909.01869),
+    which is the only method, under a small set of reasonable axioms, of explaining
+    diverse ensembles and combinations of functions that we often encounter in real-world
+    applications of machine learning such as in financial services. GIG makes it possible
+    to use these advanced, more effective models in your lending business to make
+    more good loans and fewer bad loans and still explain the results to consumers,
+    regulators, and business owners.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.zest.ai/insights/introducing-gig-a-practical-method-for-explaining-diverse-ensemble-machine-learning-models).
+    Reposted by permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Jay Budzik](https://www.linkedin.com/in/jaybudzik/)** is CTO at **[Zest
+    AI](https://www.zest.ai/)**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Ensemble Methods for Machine Learning: AdaBoost](/2019/09/ensemble-methods-machine-learning-adaboost.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Explainability: Cracking open the black box, Part 1](/2019/12/explainability-black-box-part1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Many Heads Are Better Than One: The Case For Ensemble Learning](/2019/09/ensemble-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How CoRise Helped Ben Wilson Land a New Job as a Analytics Engineer…](https://www.kdnuggets.com/2022/08/corise-land-new-job-analytics-engineer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using the apply() Method with Pandas Dataframes](https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to __getitem__: A Magic Method in Python](https://www.kdnuggets.com/2023/03/introduction-getitem-magic-method-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning with Examples](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

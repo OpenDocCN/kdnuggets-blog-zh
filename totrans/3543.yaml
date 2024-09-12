@@ -1,0 +1,214 @@
+- en: The High Cost of Maintaining Machine Learning Systems
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2015/01/high-cost-machine-learning-technical-debt.html](https://www.kdnuggets.com/2015/01/high-cost-machine-learning-technical-debt.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: Last December, a group of Google researchers led by D. Sculley presented a position
+    paper at NIPS describing [the cost of maintaining software that relies on machine
+    learning](https://research.google.com/pubs/pub43146.html). Using the idea of **technical
+    debt**, the authors suggest that while machine learning offers a path to quickly
+    engineering complex systems, the convenience comes with tremendous downstream
+    costs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Technical debt is a metaphor relating the consequences of poor software design
+    to servicing a financial debt. As a loan must eventually be paid off, with compounding
+    interest, so too hasty design decisions must be paid for with refactoring, debugging,
+    and complicated testing. The notion of compounding interest, of course, is applied
+    more poetically than precisely to software development headaches. in software
+    development, the metaphor of technical debt is typically invoked with respect
+    to the trade-offs between shipping code quickly and engineering high quality sustainable
+    solutions. One must decide how to weigh speed now against development costs, in
+    the future.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![credit-cards](../Images/32aeddae67b8cf8b7da863e26eab0296.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: While an extension of this idea to machine learning systems is interesting,
+    it is important to note a fundamental difference between technical debt as traditionally
+    discussed and as applied to machine learning. Unlike most conventional software
+    design decisions, the decision to apply machine learning is usually not clearly
+    expressed as a trade-off. **The problems that can be solved with machine learning
+    are often not solvable by other methods**. On the other hand, as the authors explain,
+    given many different algorithms (even subtly different), there may be trade-offs
+    between algorithm performance and the technical debt incurred. Still, the most
+    frightening costs appear to be universal across all machine algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Types of Debt**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One sense in which all machine learning algorithms incur a technical debt is
+    through the **erosion of boundaries**. The authors note that good software design
+    practice is typically modular. Modules isolate regions of related code whose which
+    perform a well defined task, separating them from the other modules with which
+    they interact. This disentangling of the code base makes it possible to rigorously
+    test code, and also makes it possible for different parts of the code base to
+    be maintained by different people. The performance of machine learning algorithms,
+    however, depends upon both the input taking from external data sources and the
+    performance can only be assessed with respect to external data sources. This tight
+    coupling of algorithm and data means that a change in the external data typically
+    would change the way that we would like the algorithm to behave. In the real world,
+    data acquisition, preprocessing, and model tuning are likely to be managed by
+    different people. This presents an uncomfortably tight coupling that can be difficult
+    to maintain, especially in the face of changes to the underlying data source.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As noted before, this problem may be intrinsic to machine learning, and it may
+    be that the only choices are to accept this debt or abandon the task entirely.
+    In contrast, a problem that may actually be addressable through design decisions
+    is what the authors call **entanglement.** This refers to a model's dependence
+    on all of its features. A sudden loss of one feature, introduction of a new feature,
+    or perturbation of the values of a feature may render an entire model useless.
+    D. Sculley et. al. give this phenomenon the appellation **Changing Anything Changes
+    Everything**. They reference several other papers offering strategies to reduce
+    entanglement, including a method using ensemble learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Several other strategies are not discussed but seem appropriate. The problem
+    of missing data is handled gracefully by Bayesian networks. Denoising autoencoders
+    and other dimensionality reduction / matrix factorization techniques also offer
+    strategies to dealing with missing data. Regarding the continual and gradual growth
+    of the feature space, John Langford's work on hashing methods as implemented in
+    Vowpal Rabbit seem suited to mitigating this problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the most interesting ideas addressed in the paper is that feedback loops
+    that form between algorithms and the external world. Search engines that adapt
+    based on click-data which itself depends on the links shown represent a clear
+    example. It seems user data taken from any machine learning-based recommendation
+    system may be subject to similar dynamics. Pandora, for example may set out to
+    determine what users prefer, but the feedback acquired is highly dependent on
+    the songs recommended.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Abstractly, these feedback loops might be analogous to filter bubbles in social
+    networks and web search. **Filter bubble** describes the phenomenon in which people,
+    shown only views and posts that they are predicted to agree with, rarely experience
+    dissent and thus are trapped in ideological bubbles unable to interact with contrasting
+    viewpoints.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![code](../Images/7acfc0c08f271d03f41bdbeaf8f5f6cc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Finally, the authors concentrate on the problems that arise from the code typically
+    generated by data scientists. Unlike the previous examples, these cases truly
+    fit the conventional notion of technical debt. One problem, **dead experimental
+    codepaths,** describes code which is designed for experimentation but shipped
+    into production. Such code typically implements many different experiments, variants
+    gated by conditional statements. Any subtle change or accident that results in
+    a different branch of the experiment being selected could have disastrous consequences
+    while not presenting any easily detectable software bugs (compile-time or run-time
+    errors). The authors mention that such a bug was responsible for the runaway trading
+    algorithms at Knight Capital.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A final software trade-off described by Sculley et. al. that occurs when shipping
+    machine learning code is the matter of **glue code**. Advanced machine learning
+    algorithms are often implemented in packages that provide general solutions. As
+    a result, engineers often write software that consists of glue code built on top
+    of these packages. The glue code may process the data, set the values of hyper-parameters,
+    select the appropriate algorithm, report the results, etc. As with all reliance
+    on external libraries, this presents the problem of ongoing vulnerability to any
+    change in the underlying library. The authors suggest that engineers building
+    live systems should seriously consider reimplementing machine learning algorithms
+    within the broader system architecture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This paper has the tone of a good provocative operating systems paper. The writers
+    are forthcoming with opinions, and the reader gets the sense that the authors
+    themselves have experienced many hours of frustration on account of these problems.
+    Generally, the systems implementation of machine learning methodology and ongoing
+    software maintenance challenges are an understudied area that will continue to
+    grow in importance as machine learning systems become more commonplace in commercial
+    and open source software. This draft describes high level categories of problems,
+    similar to how Butler Lampson's attempts a unifying language for talking about
+    security in his **Protection** paper. It would be nice in the future to see more
+    papers describing the specific software engineering and ongoing maintenance challenges
+    encountered by large organizations deploying major machine learning systems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Zachary Chase Lipton](../Images/240b273c667af1a53a99fd93d1fd39ce.png) **[Zachary
+    Chase Lipton](http://zacklipton.com)** is a PhD student in the Computer Science
+    Engineering department at the University of California, San Diego. Funded by the
+    [Division of Biomedical Informatics](http://healthsciences.ucsd.edu/som/medicine/divisions/dbmi/pages/default.aspx),
+    he is interested in both theoretical foundations and applications of machine learning.
+    In addition to his work at UCSD, he has interned at Microsoft Research Labs.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[IBM Watson Analytics vs. Microsoft Azure Machine Learning (Part 1)](/2014/12/ibm-watson-analytics-microsoft-azure-machine-learning-p1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Differential Privacy: How to make Privacy and Data Mining Compatible](/2015/01/differential-privacy-data-mining-compatible.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Geoff Hinton AMA: Neural Networks, the Brain, and Machine Learning](/2014/12/geoff-hinton-ama-neural-networks-brain-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Concepts You Should Know About Gradient Descent and Cost Function](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[HuggingChat Python API: Your No-Cost Alternative](https://www.kdnuggets.com/2023/05/huggingchat-python-api-alternative.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Is Academia Obsessing Over Methodology at the Cost of True Insights?](https://www.kdnuggets.com/is-academia-obsessing-over-methodology-at-the-cost-of-true-insights)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The High Paying Side Hustles for Data Scientists](https://www.kdnuggets.com/2022/01/high-paying-side-hustles-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[People Management for AI: Building High-Velocity AI Teams](https://www.kdnuggets.com/2022/03/people-management-ai-building-highvelocity-ai-teams.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 High Paying Side Hustles for Data Scientists](https://www.kdnuggets.com/7-high-paying-side-hustles-for-data-scientists)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

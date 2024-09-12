@@ -1,0 +1,533 @@
+- en: Introduction to AutoEncoder and Variational AutoEncoder (VAE)
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/10/introduction-autoencoder-variational-autoencoder-vae.html](https://www.kdnuggets.com/2021/10/introduction-autoencoder-variational-autoencoder-vae.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7aefaceef06727cc22d841d3a1bd86a9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*[Image Credits](https://www.quantilus.com/will-this-video-go-viral-explaining-and-predicting-the-popularity-of-youtube-videos/)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In recent years, deep learning-based generative models have gained more and
+    more interest due to some astonishing advancements in the field of Artificial
+    Intelligence (AI). Relying on a huge amount of data, well-designed networks architectures,
+    and smart training techniques, deep generative models have shown an incredible
+    ability to produce highly realistic pieces of content of various kinds, such as
+    images, texts, and sounds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we will dive deep into these generative networks, specifically
+    on Autoencoders, Variational Autoencoders (VAE), and their implementation using
+    Keras.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is an Autoencoder?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Autoencoders (AE) are neural networks that aim to copy their inputs to their
+    outputs. They work by compressing the input into a latent-space representation
+    and then reconstructing the output from this representation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'An autoencoder consists of two primary components:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Encoder:** Learns to compress (reduce) the input data into an encoded representation.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Decoder:** Learns to reconstruct the original data from the encoded representation
+    to be as close to the original input as possible.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bottleneck/Latent space:** The layer that contains the compressed representation
+    of the input data.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Reconstruction loss:** The method measures how well the decoder is performing,
+    i.e., measures the difference between the encoded and decoded vectors. Lesser,
+    the better.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/19a47e51111ed60ac4c5fb07afbab979.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*[Autoencoder](https://www.compthree.com/blog/autoencoder/).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The model involves encoded function **g** parameterized by **ϕ** and a decoder
+    function **f** parameterized by **θ**. The bottleneck layer is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/04e75588502248873285911f29d12665.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'the reconstructed input:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/733f3936c0a6c9282dfdc06b8d9a6b24.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'For measuring the reconstruction loss, we can use the cross-entropy (when activation
+    function is sigmoid) or basic **Mean Squared Error (MSE)**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ea273e4c08350a07e82e4bd509dcb33a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Types of vanilla autoencoders
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Undercomplete Autoencoders:** An autoencoder whose latent space is less than
+    the input dimension is called Undercomplete. Learning an undercomplete representation
+    forces the autoencoder to capture the most salient features of the training data.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Regularized Autoencoder:** They use a loss function that encourages the model
+    to have other properties besides the ability to copy its input to its output.
+    In practice, we usually find two types of regularized autoencoder: the sparse
+    autoencoder and the denoising autoencoder.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Sparse Autoencoder:** Sparse autoencoders are usually used to learn features
+    for another task, such as classification. An autoencoder that has been regularized
+    to be sparse must respond to unique statistical features of the dataset it has
+    been trained on, rather than simply acting as an identity function. In this way,
+    training to perform the copying task with a sparsity penalty can yield a model
+    that has learned useful features as a byproduct.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Denoising Autoencoder:** The goal is no longer to reconstruct the input data.
+    Rather than adding a penalty to the loss function, we can obtain an autoencoder
+    that learns something useful by changing the reconstruction error term of the
+    loss function. This can be done by adding some noise to the input image and making
+    the autoencoder learn to remove it. By this means, the encoder will extract the
+    most important features and learn a robust representation of the data.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/a39ae1b8cf855841209a443ef6033a12.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Different types of Autoencoders.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Applications of Autoencoders
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'There are two main applications for traditional autoencoders:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Noise removal:** As we’ve seen above, Noise removal is the process of removing
+    noise from an image. Noise reduction techniques exist for audio and images.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/e106dce48d4c930dbc737e289fb2bfa2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*[Denoising image](https://www.machinecurve.com/index.php/2019/12/20/building-an-image-denoiser-with-a-keras-autoencoder-neural-network/).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Dimensionality reduction:** As the encoder segment learns representations
+    of your input data with much lower dimensionality, the encoder segments of autoencoders
+    are useful when you wish to perform dimensionality reduction. This can especially
+    be handy when, e.g., PCA doesn’t work, but you suspect that nonlinear dimensionality
+    reduction does (i.e., using neural networks with nonlinear activation functions).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Anomaly detection:** By learning to replicate the most salient features in
+    the training data under some of the constraints, the model is encouraged to learn
+    to precisely reproduce the most frequently observed characteristics. When facing
+    anomalies, the model should worsen its reconstruction performance. In most cases,
+    only data with normal instances are used to train the autoencoder. After training,
+    the autoencoder will accurately reconstruct “normal” data while failing to do
+    so with unfamiliar anomalous data. Reconstruction error (the error between the
+    original data and its low dimensional reconstruction) is used as an anomaly score
+    to detect anomalies.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Machine translation:** Autoencoders have been applied to machine translation,
+    which is usually referred to as Neural machine translation (NMT). Unlike traditional
+    autoencoders, the output does not match the input — it is in another language.
+    In NMT, texts are treated as sequences to be encoded into the learning procedure,
+    while on the decoder side, sequences in the target language(s) are generated.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/caca27c06ef04a58c73b787fd6a3ff4d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*[Dimensionality reduction in action](https://www.kaggle.com/c/osic-pulmonary-fibrosis-progression/discussion/167025).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keras Implementation of Autoencoders
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let us use the famous MNIST dataset and apply autoencoders to recreate it. The
+    MNIST dataset is comprised of 70000, 28 pixels by 28 pixels images of handwritten
+    digits, and 70000 vectors containing information on which digit each one is.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here’s what we get. The top row is the original digits, and the bottom row is
+    the reconstructed digits. We are losing quite a bit of detail with this basic
+    approach.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e8097214573494ec91c0e68dfea4f3b5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Limitations of Autoencoders for Content Generation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After we train an autoencoder, we might think about whether we can use the model
+    to create new content. Particularly, we may ask can we make a point randomly from
+    that latent space and decode it to get new content?
+  prefs: []
+  type: TYPE_NORMAL
+- en: The answer is “yes,” but the quality and relevance of generated data depend
+    on the regularity of the latent space. The latent space regularity depends on
+    the distribution of the initial data, the dimension of the latent space, and the
+    architecture of the encoder. It is quite difficult to ensure, a priori, that the
+    encoder will organize the latent space in a smart way compatible with the generative
+    process I mentioned. No regularization means overfitting, which leads to meaningless
+    content once decoded for some point.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How can we make sure the latent space is regularized enough? We can explicitly
+    introduce regularization during the training process. Therefore, we introduce
+    **Variational Autoencoders**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Variational Autoencoder (VAE)?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Variational autoencoder (VAE) is a slightly more modern and interesting take
+    on autoencoding.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A VAE assumes that the source data has some sort of underlying probability distribution
+    (such as Gaussian) and then attempts to find the parameters of the distribution.
+    Implementing a variational autoencoder is much more challenging than implementing
+    an autoencoder. The one main use of a variational autoencoder is to generate new
+    data that’s related to the original source data. Now, exactly what the additional
+    data is good for is hard to say. A variational autoencoder is a generative system
+    and serves a similar purpose as a generative adversarial network (although GANs
+    work quite differently).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4762a152b455485cf09df1959ce24967.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*[Variational Autoencoders(VAE)](https://stats.stackexchange.com/questions/423758/variational-autoencoder-understanding-this-diagram).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Mathematics behind Variational Autoencoder (VAE)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: VAE uses [KL-divergence](https://www.countbayesie.com/blog/2017/5/9/kullback-leibler-divergence-explained)
+    as its loss function. The goal of this is to minimize the difference between a
+    supposed distribution and the original distribution of a dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Suppose we have a distribution **z**, and we want to generate the observation
+    **x** from it. In other words, we want to calculate:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/768e6f4280c52a6106109cd107db1148.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'We can do it by following way:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/59621938e5d42fab05415f49df7796dc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'But, the calculation of **p(x)** can be done by using integration as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/67714276339c2823eed593047300846b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'This usually makes it an intractable distribution(take equal to or more than
+    exponential-time). Hence, we need to approximate **p(z|x)** to **q(z|x)** to make
+    it a tractable distribution. To better approximate **p(z|x)** to **q(z|x)**, we
+    will minimize the **KL-divergence** loss, which calculates how similar two distributions
+    are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/32c7d583cf7c43e583e90447b0c535b1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'By simplifying, the above minimization problem is equivalent to the following
+    maximization problem :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2990a1ce07456baf7419c4e8a72d058b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The first term represents the reconstruction likelihood, and the other term
+    ensures that our learned distribution **q** is similar to the true prior distribution
+    **p**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Thus our total loss consists of two terms, one is reconstruction error, and
+    the other is KL-divergence loss:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4bc36f91871415ec8dc70e9d19224d83.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Keras Implementation of Variational Autoencoder (VAEs)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For implementing VAE, First, an encoder network turns the input samples **x**
+    into two parameters in a latent space, which we will note **z_mean** and **z_log_sigma**.
+    Then, we randomly sample similar points z from the latent normal distribution
+    that is assumed to generate the data, via **z = z_mean + exp(z_log_sigma) * epsilon**,
+    where epsilon is a random normal tensor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, a decoder network maps these latent space points back to the original
+    input data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The parameters of the model are trained via two loss functions: a **reconstruction
+    loss** forcing the decoded samples to match the initial inputs (just like in our
+    previous autoencoders), and the **KL divergence** between the learned latent distribution
+    and the prior distribution, acting as a regularization term. You could actually
+    get rid of this latter term entirely, although it does help in learning well-formed
+    latent spaces and reducing overfitting to the training data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now since our latent space is two-dimensional, there are a few awesome visualizations
+    that can be done. One, for example, is to look at the neighborhoods of different
+    classes on the latent 2D plane:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/ac17b0a49f8df671b56c837a192e0c19.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Different digits on the latent 2D plane.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each of these colored clusters is a type of digit. In the above figure, close
+    clusters are digits that are structurally similar (i.e., digits that share information
+    in the latent space).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because the VAE is a generative model, we can also use it to generate new digits!
+    Here we will scan the latent plane, sampling latent points at regular intervals
+    and generating the corresponding digit for each of these points. This gives us
+    a visualization of the latent manifold that “generates” the MNIST digits.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/e25b8defda4a6ed6ddd14043788547b0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Generating digits using VAE.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Variational Autoencoder (VAE) vs. Generative Adversarial Networks (GAN)
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Both VAE and GANs are very exciting approaches to learning the underlying data
+    distribution using unsupervised learning GANs yield better results as compared
+    to VAE.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1864e920f8db7c8a27e2d65ea538d2a4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*[Network architecture of VAE and GAN](https://towardsdatascience.com/what-a-disentangled-net-we-weave-representation-learning-in-vaes-pt-1-9e5dbc205bd1).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A GAN’s generator samples from a relatively low dimensional random variable
+    and produces an image. Then the discriminator takes that image and predicts whether
+    the image belongs to a target distribution or not. Once trained, I can generate
+    a variety of images just by sampling the initial random variable and forwarding
+    it through the generator.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A VAE’s encoder takes an image from a target distribution and compresses it
+    into a low-dimensional latent space. Then the decoder’s job is to take that latent
+    space representation and reproduce the original image. Once the network is trained,
+    I can generate latent space representations of various images and interpolate
+    between these before forwarding them through the decoder, which produces new images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'They are different techniques as they optimize different objective functions.
+    It’s not like one of them will win across all of these situations. They will be
+    useful in different situations. The objective function a learning method optimizes
+    should ideally match the task we want to apply them for. In this sense, theory
+    suggests that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: GANs should be best at generating nice-looking samples — avoiding generating
+    samples that don’t look plausible, at the cost of potentially underestimating
+    the entropy of data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: VAEs should be best at compressing data, as they maximize (a lower bound to)
+    the likelihood. That said, evaluating the likelihood in VAE models is intractable,
+    so it cannot be used very directly for direct entropy encoding.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: There are many models these days where the likelihood can be computed, such
+    as pixel-RNNs, spatial LSTMs, RIDE, NADE, NICE, etc. These should also be best
+    in terms of compression performance (shortest average codelength under lossless
+    entropy coding).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'I would recommend one paper comparing GANs and VAEs models: [A Probe Towards
+    Understanding GAN and VAE Models](https://arxiv.org/pdf/1812.05676.pdf)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: As we have seen in this article, an autoencoder is a neural network architecture
+    capable of pioneering structure within data in order to develop a compressed representation
+    of the input data/image. Many different variants of the general autoencoder architecture
+    exist with the goal of ensuring that the compressed representation represents
+    significant traits of the original input data; typically, the biggest defiance
+    when working with autoencoder is getting your model to actually learn a meaningful
+    and generalizable latent space representation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We also looked at how variational autoencoders perform better at generalizing
+    a meaningful representation and can also be used as a generative model. Further,
+    we saw how VAEs are different from generative adversarial networks (GANs).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Credits:***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://www.jeremyjordan.me/variational-autoencoders/](https://www.jeremyjordan.me/variational-autoencoders/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://www.countbayesie.com/blog/2017/5/9/kullback-leibler-divergence-explained](https://www.countbayesie.com/blog/2017/5/9/kullback-leibler-divergence-explained)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://blog.keras.io/building-autoencoders-in-keras.html](https://blog.keras.io/building-autoencoders-in-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73](https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Original](https://www.theaidream.com/post/an-introduction-to-autoencoder-and-variational-autoencoder-vae).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Unsupervised Learning for Predictive Maintenance using Auto-Encoders](https://www.kdnuggets.com/2021/01/unsupervised-learning-predictive-maintenance-auto-encoders.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Neural Networks 201: All About Autoencoders](https://www.kdnuggets.com/2019/11/all-about-autoencoders.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Variational Autoencoders Explained in Detail](https://www.kdnuggets.com/2018/11/variational-autoencoders-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

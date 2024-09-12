@@ -1,0 +1,580 @@
+- en: Write and train your own custom machine learning models using PyCaret
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/05/pycaret-write-train-custom-machine-learning-models.html](https://www.kdnuggets.com/2021/05/pycaret-write-train-custom-machine-learning-models.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Moez Ali](https://www.linkedin.com/in/profile-moez/), Founder & Author
+    of PyCaret**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f3d71174487d3e14feeed2b4cbb3a143.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Rob Lambert](https://unsplash.com/@roblambertjr?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyCaret
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: PyCaret is an open-source, low-code machine learning library and end-to-end
+    model management tool built-in Python for automating machine learning workflows.
+    It is incredibly popular for its ease of use, simplicity, and ability to quickly
+    and efficiently build and deploy end-to-end ML prototypes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyCaret is an alternate low-code library that can replace hundreds of code lines
+    with few lines only. This makes the experiment cycle exponentially fast and efficient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyCaret is **simple and** **easy to use**. All the operations performed in PyCaret
+    are sequentially stored in a **Pipeline** that is fully automated for **deployment. **Whether
+    it’s imputing missing values, one-hot-encoding, transforming categorical data,
+    feature engineering, or even hyperparameter tuning, PyCaret automates all of it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This tutorial assumes that you have some prior knowledge and experience with
+    PyCaret. If you haven’t used it before, no problem — you can get a quick headstart
+    through these tutorials:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PyCaret 2.2 is here — what’s new](https://towardsdatascience.com/pycaret-2-2-is-here-whats-new-ad7612ca63b)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Announcing PyCaret 2.0](https://towardsdatascience.com/announcing-pycaret-2-0-39c11014540e)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Five things you don’t know about PyCaret](https://towardsdatascience.com/5-things-you-dont-know-about-pycaret-528db0436eec)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Installing PyCaret
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Installing PyCaret is very easy and takes only a few minutes. We strongly recommend
+    using a virtual environment to avoid potential conflicts with other libraries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyCaret’s default installation is a slim version of pycaret that only installs
+    hard dependencies [listed here](https://github.com/pycaret/pycaret/blob/master/requirements.txt).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: When you install the full version of pycaret, all the optional dependencies
+    as [listed here](https://github.com/pycaret/pycaret/blob/master/requirements-optional.txt) are
+    also installed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Let’s get started
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before we start talking about custom model training, let’s see a quick demo
+    of how PyCaret works with out-of-the-box models. I will be using the ‘insurance’
+    dataset available on [PyCaret’s Repository](https://github.com/pycaret/pycaret/tree/master/datasets).
+    The goal of this dataset is to predict patient charges based on some attributes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? **Dataset**
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/fae3dfa9a10905b75b6f8853af494e65.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample rows from insurance dataset
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? **Data Preparation**
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Common to all modules in PyCaret, the `setup` is the first and the only mandatory
+    step in any machine learning experiment performed in PyCaret. This function takes
+    care of all the data preparation required before training models. Besides performing
+    some basic default processing tasks, PyCaret also offers a wide array of pre-processing
+    features. To learn more about all the preprocessing functionalities in PyCaret,
+    you can see this [link](https://pycaret.org/preprocessing/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/85fe7b54a3626a0d00b62f41f5db0383.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: setup function in pycaret.regression module
+  prefs: []
+  type: TYPE_NORMAL
+- en: Whenever you initialize the `setup` function in PyCaret, it profiles the dataset
+    and infers the data types for all input features. If all data types are correctly
+    inferred, you can press enter to continue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/49ed9255c57fd3ed7f1bb7c02d87be52.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from setup — truncated for display
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Available Models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To check the list of all models available for training, you can use the function
+    called `models` . It displays a table with model ID, name, and the reference of
+    the actual estimator.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/ecaedf0bb163f9a78072d41633c664a1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from models() — Output truncated for display purpose
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Model Training & Selection
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The most used function for training any model in PyCaret is `create_model` .
+    It takes an ID for the estimator you want to train.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/22cb20e0d040a8e0edc793f817188b44.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from create_model(‘dt’)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The output shows the 10-fold cross-validated metrics with mean and standard
+    deviation. The output from this function is a trained model object, which is essentially
+    a `scikit-learn` object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/0c1ce4f0ba7e039a693b28c7ad4cbb86.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from print(dt)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To train multiple models in a loop, you can write a simple list comprehension:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/f2b1f7f0b90b9f4ebd8acf7354ef1b64.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from print(multiple_models)
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to train all the models available in the library instead of the
+    few selected you can use PyCaret’s `compare_models` function instead of writing
+    your own loop (*the results will be the same though*).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/7c0cdf94f96072890f7952396eff0051.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from the compare_models function
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`compare_models` returns the output which shows the cross-validated metrics
+    for all models. According to this output, Gradient Boosting Regressor is the best
+    model with $2,702 in Mean Absolute Error(MAE)using 10-fold cross-validation on
+    the train set.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/ec8516090da521d25b6e9d7ab052c4ee.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from the print(best_model)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The metrics shown in the above grid is cross-validation scores, to check the
+    score of the `best_model`on hold-out set:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/e426eb5120cfa56c6097b5ea9cc3c8cd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from the predict_model(best_model) function
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To generate predictions on the unseen dataset you can use the same `predict_model` function
+    but just pass an extra parameter `data` :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/862cf3d9f8cd723b9b7ed0ed6bf4708b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from predict_model(best_model, data = data2)
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Writing and Training Custom Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So far what we have seen is training and model selection for all the available
+    models in PyCaret. However, the way PyCaret works for custom models is exactly
+    the same. As long as, your estimator is compatible with `sklearn` API style, it
+    will work the same way. Let’s see few examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before I show you how to write your own custom class, I will first demonstrate
+    how you can work with custom non-sklearn models (models that are not available
+    in sklearn or pycaret’s base library).
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? **GPLearn Models**
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: While Genetic Programming (GP) can be used to perform a [very wide variety of
+    tasks](http://www.genetic-programming.org/combined.php), `gplearn` is purposefully
+    constrained to solving symbolic regression problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Symbolic regression is a machine learning technique that aims to identify an
+    underlying mathematical expression that best describes a relationship. It begins
+    by building a population of naive random formulas to represent a relationship
+    between known independent variables and their dependent variable targets to predict
+    new data. Each successive generation of programs is then evolved from the one
+    that came before it by selecting the fittest individuals from the population to
+    undergo genetic operations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To use models from `gplearn` you will have to first install it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now you can simply import the untrained model and pass it in the `create_model` function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/66a630f98663fa2b1d63ba0a98212b6d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from create_model(sc_trained)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/e676a570f81885915b30dc18cc24d3d4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from print(sc_trained)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can also check the hold-out score for this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/3757871ff51629c0fd8b13f78442af2d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from predict_model(sc_trained)
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? NGBoost Models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'ngboost is a Python library that implements Natural Gradient Boosting, as described
+    in [“NGBoost: Natural Gradient Boosting for Probabilistic Prediction”](https://stanfordmlgroup.github.io/projects/ngboost/).
+    It is built on top of [Scikit-Learn](https://scikit-learn.org/stable/) and is
+    designed to be scalable and modular with respect to the choice of proper scoring
+    rule, distribution, and base learner. A didactic introduction to the methodology
+    underlying NGBoost is available in this [slide deck](https://drive.google.com/file/d/183BWFAdFms81MKy6hSku8qI97OwS_JH_/view?usp=sharing).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To use models from ngboost, you will have to first install ngboost:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Once installed, you can import the untrained estimator from the ngboost library
+    and use `create_model` to train and evaluate the model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/f19311e7720b0d9f3ebc5f4e144ec2bc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from create_model(ng)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/68f00a25b30e14e6761fa8691a97c516.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from print(ng_trained)
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Writing Custom Class
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The above two examples `gplearn` and `ngboost` are custom models for pycaret
+    as they are not available in the default library but you can use them just like
+    you can use any other out-of-the-box models. However, there may be a use-case
+    that involves writing your own algorithm (i.e. maths behind the algorithm), in
+    which case you can inherit the base class from `sklearn` and write your own maths.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s create a naive estimator which learns the mean value of `target` variable
+    during `fit` stage and predicts the same mean value for all new data points, irrespective
+    of X input (*probably not useful in real life, but just to make demonstrate the
+    functionality*).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now let’s use this estimator for training:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/c089fe6ac015fa821cee2295f480baa6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from create_model(mom)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/6cc6e0701a9efb401a9a87a096e5b04c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from predict_model(mom, data=data)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice that `Label` column which is essentially the prediction is the same number
+    $13,225 for all the rows, that’s because we created this algorithm in such a way,
+    that learns from the mean of train set and predict the same value (just to keep
+    things simple).
+  prefs: []
+  type: TYPE_NORMAL
+- en: I hope that you will appreciate the ease of use and simplicity in PyCaret. In
+    just a few lines, you can perform end-to-end machine learning experiments and
+    write your own algorithms without adjusting any native code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Coming Soon!
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Next week I will be writing a tutorial to advance this tutorial. We will write
+    a more complex algorithm instead of just a mean prediction. I will introduce some
+    complex concepts in the next tutorial. Please follow me on [Medium](https://medium.com/@moez-62905), [LinkedIn](https://www.linkedin.com/in/profile-moez/),
+    and [Twitter](https://twitter.com/moezpycaretorg1) to get more updates.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is no limit to what you can achieve using this lightweight workflow automation
+    library in Python. If you find this useful, please do not forget to give us ⭐️
+    on our GitHub repository.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To hear more about PyCaret follow us on [LinkedIn](https://www.linkedin.com/company/pycaret/) and [Youtube](https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Join us on our slack channel. Invite link [here](https://join.slack.com/t/pycaret/shared_invite/zt-p7aaexnl-EqdTfZ9U~mF0CwNcltffHg).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You may also be interested in:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Build your own AutoML in Power BI using PyCaret 2.0](https://towardsdatascience.com/build-your-own-automl-in-power-bi-using-pycaret-8291b64181d)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploy Machine Learning Pipeline on Azure using Docker](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-cloud-using-docker-container-bec64458dc01)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploy Machine Learning Pipeline on Google Kubernetes Engine](https://towardsdatascience.com/deploy-machine-learning-model-on-google-kubernetes-engine-94daac85108b)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploy Machine Learning Pipeline on AWS Fargate](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-aws-fargate-eb6e1c50507)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Build and deploy your first machine learning web app](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploy PyCaret and Streamlit app using AWS Fargate serverless](https://towardsdatascience.com/deploy-pycaret-and-streamlit-app-using-aws-fargate-serverless-infrastructure-8b7d7c0584c2)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Build and deploy machine learning web app using PyCaret and Streamlit](https://towardsdatascience.com/build-and-deploy-machine-learning-web-app-using-pycaret-and-streamlit-28883a569104)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploy Machine Learning App built using Streamlit and PyCaret on GKE](https://towardsdatascience.com/deploy-machine-learning-app-built-using-streamlit-and-pycaret-on-google-kubernetes-engine-fd7e393d99cb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Important Links
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Documentation](https://pycaret.readthedocs.io/en/latest/installation.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Blog](https://medium.com/@moez_62905)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[GitHub](https://www.github.com/pycaret/pycaret)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[StackOverflow](https://stackoverflow.com/questions/tagged/pycaret)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Install PyCaret](https://pycaret.readthedocs.io/en/latest/installation.html)
+    [Notebook Tutorials](https://pycaret.readthedocs.io/en/latest/tutorials.html)
+    [Contribute in PyCaret](https://pycaret.readthedocs.io/en/latest/contribute.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Want to learn about a specific module?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Click on the links below to see the documentation and working examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Classification](https://pycaret.readthedocs.io/en/latest/api/classification.html)
+    [Regression](https://pycaret.readthedocs.io/en/latest/api/regression.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Clustering](https://pycaret.readthedocs.io/en/latest/api/clustering.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Anomaly Detection](https://pycaret.readthedocs.io/en/latest/api/anomaly.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing](https://pycaret.readthedocs.io/en/latest/api/nlp.html)
+    [Association Rule Mining](https://pycaret.readthedocs.io/en/latest/api/arules.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Moez Ali](https://www.linkedin.com/in/profile-moez/)** is a Data Scientist,
+    and is Founder & Author of PyCaret.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/write-and-train-your-own-custom-machine-learning-models-using-pycaret-8fa76237374e).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Easy MLOps with PyCaret + MLflow](/2021/05/easy-mlops-pycaret-mlflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GitHub is the Best AutoML You Will Ever Need](/2020/08/github-best-automl-ever-need.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploy a Machine Learning Pipeline to the Cloud Using a Docker Container](/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Announcing PyCaret 3.0: Open-source, Low-code Machine Learning in Python](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tailor ChatGPT to Fit Your Needs with Custom Instructions](https://www.kdnuggets.com/2023/08/tailor-chatgpt-fit-needs-custom-instructions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Binary Classification with PyCaret](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Clustering in Python with PyCaret](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,294 @@
+- en: 'Automate Stacking In Python: How to Boost Your Performance While Saving Time'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/08/automate-stacking-python-boost-performance.html](https://www.kdnuggets.com/2019/08/automate-stacking-python-boost-performance.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Lukas Frei](https://www.linkedin.com/in/lukas-k-frei/), PwC**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Utilizing stacking (stacked generalizations) is a very hot topic when it comes
+    to pushing your machine learning algorithm to new heights. For instance, most
+    if not all winning Kaggle submissions nowadays make use of some form of stacking
+    or a variation of it. First introduced in the 1992 paper *Stacked Generalization *by
+    David Wolpert*, *their main purpose is to reduce the generalization error. According
+    to Wolpert, they can be understood “as a more sophisticated version of cross-validation”*. *WhileWolpert
+    himself noted at the time that large parts of stacked generalizations are “black
+    art”, it seems that building larger and larger stacked generalizations win over
+    smaller stacked generalizations. However, as these models keep increasing in size,
+    they also increase in complexity. Automating the process of building different
+    architectures would significantly simplify this process. The remainder of this
+    article will deal with the package ***vecstack ***I recently came across that
+    is attempting just this***.***
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/6a9a0a6d18107156947e2b316d8415e7.png)Source: [https://giphy.com/gifs/funny-food-hRsayJrDAx8WY](https://giphy.com/gifs/funny-food-hRsayJrDAx8WY)'
+  prefs: []
+  type: TYPE_IMG
+- en: What Does a Stacked Generalization Look like?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The main idea behind the structure of a stacked generalization is to use one
+    or more first level models, make predictions using these models and then use these
+    predictions as features to fit one or more second level models on top. To avoid
+    overfitting, cross-validation is usually used to predict the OOF (out-of-fold)
+    part of the training set. There are two different variants available in this package
+    but I’m going to describe ‘Variant A’ in this paragraph. To get the final predictions
+    in this variant, we take the mean or mode of all of our predictions. The whole
+    process can be visualized using this GIF from vecstacks’ documentation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/b67acfb1d333e7cee31dbb4f3056a430.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Use Case: Building a Stacked Generalization for Classification'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After having taken a look at the documentation, it was time to try using the
+    package myself and see how it works. To do so, I decided to use the wine data
+    set available on the UCI Machine Learning Repository. The problem statement for
+    this data set is to use the 13 features, which all represent different aspects
+    of the wine, to predict from which of three cultivars in Italy the wine was derived.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To get started, let’s first import the packages we are going to need for our
+    project:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now we are ready to import our data and take a look at it to gain a better
+    understanding of what it looks like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Running the code chunk above gives us:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/6c4f3cb721feca132d0a79ac81fab88d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note that I used **.sample()** instead if **.head()** to avoid being potentially
+    misled by assuming the entire data set has the structure of the first five rows.
+    Luckily, this data set does not have any missing values, so we can easily use
+    it to test our package right away without any of the usually required data cleaning
+    and preparation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Following this, we are going to separate the response from the input variables
+    and perform an 80:20 train-test-split following the example on vecstacks’ documentation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We are getting closer to the interesting part. Remember the GIF from earlier?
+    It is time now to define a few first level models for our stacked generalization.
+    This step definitely deserves its own article but for purposes of simplicity,
+    we are going to use three models: A KNN-Classifier, a Random Forest Classifier
+    and an XGBoost Classifier.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: These parameters were not tuned prior to setting them as the purpose of this
+    article is testing the package. If you were to optimize performance, you should
+    not just copy and paste these.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Taking the next part of code from the documentation, we are essentially performing
+    the GIF’s first part using first level models to make predictions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The stacking function takes several inputs:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***models***: the first level models we defined earlier'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***X_train, y_train, X_test***: our data'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***regression***: Boolean indicating whether we want to use the function for
+    regression. In our case set to False since this is a classification'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***mode:*** using the earlier describe out-of-fold during cross-validation'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***needs_proba***: Boolean indicating whether you need the probabilities of
+    class labels'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***save_dir***: save the result to directory Boolean'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***metric***: what evaluation metric to use (we imported the accuracy_score
+    in the beginning)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***n_folds***: how many folds to use for cross-validation'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***stratified***: whether to use stratified cross-validation'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***shuffle***: whether to shuffle the data'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***random_state***: setting a random state for reproducibility'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***verbose***: 2 here refers to printing all info'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Doing so, we get the following output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Again, referring to the GIF, all that’s left to do now is fit the second level
+    model(s) of our choice on our predictions to make our final predictions. In our
+    case, we are going to use an XGBoost Classifier. This step is not significantly
+    different from a regular fit-and-predict in sklearn except for the fact that instead
+    of using X_train to train our model, we are using our predictions S_train.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Using vecstacks’ stacking automation, we’ve managed to predict the correct wine
+    cultivar with an accuracy of approximately 97.2%! As you can see, the API does
+    not collide with the sklearn API and could, therefore, provide a helpful tool
+    when trying to speed up your stacking workflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As always, if you have any feedback or found mistakes, please don’t hesitate
+    to reach out to me.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*References*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[1] David H. Wolpert, [Stacked Generalization](https://www.researchgate.net/publication/222467943_Stacked_Generalization) (1992),
+    Neural Networks'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[2] Igor Ivanov, [Vecstack](https://github.com/vecxoz/vecstack) (2016), GitHub'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[3] M. Forina et al, [Wine Data Set](https://archive.ics.uci.edu/ml/datasets/wine) (1991),
+    UCI Machine Learning Repository'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Lukas Frei](https://www.linkedin.com/in/lukas-k-frei/)** is a Data
+    Science Consultant at PwC.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/automate-stacking-in-python-fc3e7834772e).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Here’s how you can accelerate your Data Science on GPU](/2019/07/accelerate-data-science-on-gpu.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[One Simple Trick for Speeding up your Python Code with Numpy](/2019/06/speeding-up-python-code-numpy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GPU Accelerated Data Analytics & Machine Learning](/2019/08/gpu-accelerated-data-analytics-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How Big Data Is Saving Lives in Real Time: IoV Data Analytics Helps…](https://www.kdnuggets.com/how-big-data-is-saving-lives-in-real-time-iov-data-analytics-helps-prevent-accidents)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Mistakes I Made While Switching to Data Science Career](https://www.kdnuggets.com/2023/07/5-mistakes-made-switching-data-science-career.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Boost your machine learning model performance!](https://www.kdnuggets.com/2023/04/manning-boost-machine-learning-model-performance.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automate Your Codebase with Promptr and GPT](https://www.kdnuggets.com/2023/04/automate-codebase-promptr-gpt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Tasks To Automate With Python](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automate Microsoft Excel and Word Using Python](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,296 @@
+- en: 'Fake It Till You Make It: Generating Realistic Synthetic Customer Datasets'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/01/fake-realistic-synthetic-customer-datasets-projects.html](https://www.kdnuggets.com/2022/01/fake-realistic-synthetic-customer-datasets-projects.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Fake It Till You Make It: Generating Realistic Synthetic Customer Datasets](../Images/0732fd4650daffd644ed13bcbade53c2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by [mcmurryjulie on Pixabay](https://pixabay.com/users/mcmurryjulie-2375405/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Being able to create and use synthetic data in projects has become a must-have
+    skill for data scientists.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have [written in the past](/2021/11/easy-synthetic-data-python-faker.html)
+    about using the Python library **Faker** for creating your own synthetic datasets.
+    Instead of repeating anything in that article, let's treat this as the second
+    in a series of generating synthetic data for your own data science projects. This
+    time around, let's generate some fake customer order data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you don't know anything about Faker, how it is used, or what you can do with
+    it, I suggest that you [check out the previous article](/2021/11/easy-synthetic-data-python-faker.html)
+    first.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Plan
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The plan is to synthesize a scaled-down version of a set of tables that would
+    be used in the real-world business case of a customer order system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Aside from items for purchase, let's think about what is called for in such
+    a scenario.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Customers** - in what is not much of a surprise, if you are going to build
+    a system to track customer orders, you are going to need customers'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Credit cards** - customers need to pay for things, and in our simplified
+    scenario they can only do so with credit cards'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Orders** - an order will consist of a customer, a cost, and a credit card
+    for payment'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: That's the data we need, so that's the data we will make. After you go through
+    this, you will probably find ways to make it more robust, more detailed, and more
+    like the real world, which you should be able to go ahead and do on your own.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imports and Helper Functions
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Let's get started. First, the imports.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, let's write a few helper functions that will be of use a little later
+    on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The first function, **`random_n_digits`**, will be used to generate a random
+    integer of length `n`. With attribution to [this StackOverflow answer](https://stackoverflow.com/questions/2673385/how-to-generate-a-random-number-with-a-specific-amount-of-digits),
+    see the example below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: This will come in handy for identifiers such as customer and order numbers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The next function, **`unique_rand()`**, will be used to ensure that a generated
+    identifier is unique to our system. It simply takes a list of integers and an
+    integer representing the length of a new integer to be created, uses the previous
+    function to create a new integer of this length, checks this new integer against
+    the unique list, and if this new integer is also unique, it gets added to the
+    list.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The final function's utility is given away by its name, `**generate_cost()**`.
+    To generate a cost, the function randomly generates an integer between 1 and 4,
+    which will become the length of the dollar place digits string for our generated
+    cost. random_n_digits() is then used to generate an integer of that length. After
+    this, the process is repeated to create a 2 digit integer, which becomes the decimal
+    cents portion of the cost, to the right hand side of the decimal point. These
+    2 are put together and returned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let's move on to faking it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Don''t worry, even Elaine fakes it.](../Images/67e1eb6782d3ab88b2831accdf532e41.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Don't worry, even Elaine fakes it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating Customers
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'With that, let''s generate the customers. Our 10,000 customers will include
+    the following attributes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: customer ID (`cust_id`) - generated using the helper functions outlined above
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: customer name (`name`) - generated using Faker; `use_weighting=True` means an
+    attempt is made to have the frequency of generated values match real-world frequencies
+    ("Lisa" will be more frequently generated than will "Braelynn"); the locales denote
+    from where names are being generated
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: customer address (`address`) - generated using Faker
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: customer phone number (`phone_number`) - generated using Faker
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: customer date of birth (`dob`) - generated using Faker
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: customer note text field (`note`) - generated using Faker
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The code also stores generated unique customer IDs (`cust_ids`) as a list in
+    order to compare newly-generated IDs with existing to ensure uniqueness. After
+    this, the dictionary which is used to store the customer data is passed into a
+    new Pandas DataFrame, and ultimately stored to a CSV file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Creating Credit Cards
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Customers need a method to pay for their orders, so let's give them all credit
+    cards.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Actually, in an effort to simplify, we will generate credit cards without assigning
+    them to any particular customer. Instead, we will just match customers and cards
+    for orders. You could modify this with a little ingenuity to assign cards to customers
+    and then ensure that orders were paid for with the proper cards. I'll leave that
+    an an exercise for interested readers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below you will find that unique credit card numbers are generated with the same
+    helper functions and same basic method as the unique customer IDs were. The credit
+    card numbers are artificially short, but go ahead and make them as long you would
+    like. The rest of the data is generated using Faker. The data is then fed into
+    a Pandas DataFrame and saved as a CSV file for later use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Creating Orders
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Now let's generate ourselves some money.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Orders will be unique in the same manner as the previous customer IDs and credit
+    card numbers. We will then link a random customer and a random credit card in
+    an order, and generate a random cost using the third of the original three helper
+    functions introduced earlier on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In what has become a common pipeline, we then create a Pandas DataFrame of the
+    dictionary, and save the data to file as a CSV.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: The results it that you should have yourself three CSV files constituting the
+    real-world emulation of an actual business process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'What do you do with the synthetic data now? Get creative. You *could* do some
+    study, learn some new techniques or concepts, or undertake a project. A few more
+    specific ideas include: using Python to create an SQL database out of this data
+    to then practice your SQL skills with; performing a data exploration project;
+    visualizing some of the synthetic data in interesting ways; seeing what kind of
+    data preprocessing you could come up with to perform, such as splitting customer
+    names into first and last, verifying that each customer has a credit card, ensuring
+    young children aren''t able to make purchases.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And just remember: keep on faking it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13))
+    is a Data Scientist and the Editor-in-Chief of KDnuggets, the seminal online Data
+    Science and Machine Learning resource. His interests lie in natural language processing,
+    algorithm design and optimization, unsupervised learning, neural networks, and
+    automated approaches to machine learning. Matthew holds a Master''s degree in
+    computer science and a graduate diploma in data mining. He can be reached at editor1
+    at kdnuggets[dot]com.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[3 Ways to Generate Hyper-Realistic Faces Using Stable Diffusion](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Reasons Why You Need Synthetic Data](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[20 Questions (with Answers) to Detect Fake Data Scientists: ChatGPT…](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[20 Questions (with Answers) to Detect Fake Data Scientists: ChatGPT…](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Use Synthetic Data To Overcome Data Shortages For Machine…](https://www.kdnuggets.com/2022/03/synthetic-data-overcome-data-shortages-machine-learning-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Generate Synthetic Tabular Dataset](https://www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

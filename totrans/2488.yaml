@@ -1,0 +1,453 @@
+- en: 'Feature Selection: Where Science Meets Art'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By [Mahbubul Alam](https://www.linkedin.com/in/mab-alam/), Data Scientist,
+    Economist and Quantitative Researcher**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/cb4fde334a43c5979b8e5d08f990d42a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [David Clode](https://unsplash.com/@davidclode?utm_source=medium&utm_medium=referral)
+    on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some people say feature selection and engineering is the most important part
+    of data science projects. In many cases it’s not sophisticated algorithms, rather
+    it’s feature selection that makes all the difference in model performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Too few features can under-fit a model. For example, if you want to predict
+    house prices, knowing just the number of bedrooms and floor area is not good enough.
+    You are omitting many important variables a buyer cares about such as location,
+    school district, property age etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can also come from the other direction and choose 100 different features
+    that describe every tiny detail such as names of trees on the property. Instead
+    of adding more information, these features add noise and complexity. Many of the
+    features chosen might be outright irrelevant. On top of that, too many features
+    add computational costs to train a model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So to build a good predictive model, what is the right number of features and
+    how to choose which features to keep and which features to drop and which new
+    features to add? This is an important consideration in machine learning projects
+    in managing what’s known as the [bias-variance tradeoff](https://towardsdatascience.com/bias-variance-tradeoff-in-machine-learning-an-intuition-da85228c5074).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is also where “science” meets “arts.”
+  prefs: []
+  type: TYPE_NORMAL
+- en: The purpose of this article is to demystify feature selection techniques with
+    some simple implementation. The techniques I’m describing below should equally
+    work in regression and classification problems. Unsupervised classification (e.g.
+    clustering) can be a bit tricky, so I’ll talk about it separately.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Heuristic approach
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'We don’t talk much about heuristics in data science but it is quite relevant.
+    Let’s look at the definition (source: [Wikipedia](https://en.wikipedia.org/wiki/Heuristic)):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A heuristic or heuristic technique **…. **employs a practical method that is
+    not guaranteed to be optimal, perfect, or rational, but is nevertheless sufficient
+    for reaching an immediate, short-term goal or approximation.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This definition equally applies to feature selection, if done based on intuition.
+    Just by looking at a dataset, you’ll get the gut feeling that such and such features
+    are strong predictors and some others have nothing to do with the dependent variable
+    and you feel that it’s safe to eliminate them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you are not sure, you can go a step further to check the correlation between
+    features and the dependent variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With too many features in the dataset, just these heuristics— intuition and
+    correlation — will get most of your job done in choosing the right features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As an example, let’s say your company is allocating budgets for advertising
+    in different channels (TV, radio, newspaper). You want to predict which channel
+    is most effective as an advertisement platform and what’s the expected return.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before you build a model you look at the historical data and found the following
+    relationship between ad expenses on different platforms and corresponding sales
+    revenue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8c2c5f121cd9f6ffe2cc60f48d9be253.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Bivariate scatterplots showing relationships between sales and ad expenditure
+    on different platforms (figure source: author; data source: [ISLR](https://rdrr.io/cran/ISLR/),
+    license: GLP 2, public domain).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Based on the scatterplots what do you think are the best features to explain
+    ad revenue? Clearly, newspaper ads do not have any significant impact on the outcome,
+    so you may want to drop it from the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Automated feature selection
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We will now get into automated feature selection techniques. Most of them are
+    integrated within the `sklearn` module, so you can implement feature selection
+    only in a few lines of code in a standard format.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For demonstration, I’ll use the ‘iris’ dataset (source: [Kaggle/UCI Machine
+    Learning](https://www.kaggle.com/uciml/iris/metadata), license: CC0 public domain).
+    It’s a simple dataset and has only 5 columns, nevertheless, you’ll get the key
+    points across.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s load the dataset from `seaborn` library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/63644ab4ea21380679aaa4629cd6d2b4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In the dataset “species” is the one that we want to predict and the remaining
+    4 columns are predictors. Let’s confirm the number of features programmatically:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s now go ahead and implement a few feature selection techniques.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1) Chi-squared based technique
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The chi-squared-based technique selects a specific number of user-defined features
+    (k) based on some scores. These scores are determined by computing chi-squared
+    statistics between X (independent) and y (dependent) variables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`sklearn` has built-in methods for chi-square-based feature selection. All
+    you have to do is determine how many features you want to keep (let’s say, k=3
+    for the iris dataset).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s now confirm that we’ve got the 3 best features out of 4.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: For a large number of features, you can rather specify a certain percentage
+    of features you want to keep or drop. It works in a similar fashion as above.
+    Let’s say we want to keep 75% of features and drop the remaining 25%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 2) Impurity-based feature selection
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Tree-based algorithms (e.g. Random Forest Classifier) have built-in `feature_importances_` attribute.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Decision Tree would split data using a feature that decreases the impurity
+    (measured in terms of [Gini impurity](https://en.wikipedia.org/wiki/Decision_tree_learning#Gini_impurity) or [information
+    gain](https://en.wikipedia.org/wiki/Decision_tree_learning#Information_gain)).
+    That means, finding the best feature is a key part of how the algorithm works
+    to solve classification problems. We can then access the best features via `feature_importances_` attribute.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s first fit the “iris” dataset to a Random Forest Classifier with 200 estimators.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now let’s access feature importance by the attribute call.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: The output above shows the importance of each of the 4 features at reducing
+    impurity at each node/split.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since the Random Forest Classifier has many estimators (e.g. 200 decision trees
+    above), we can calculate an estimate of the relative importance with a confidence
+    interval. Let’s visualize it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/b5061526f9889c48e31fcf0b514a0175.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure: Importance of features in impurity measures (source: author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we know the importance of each feature, we can manually (or visually)
+    determine which features to keep and which one to drop.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alternatively, we can take advantage of Scikit-Learn’s meta transformer `SelectFromModel` to
+    do this job for us.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 3) Regularization
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Regularization is an important concept in machine learning to reduce overfitting
+    (read: [Avoid Overfitting with Regularization](https://towardsdatascience.com/avoid-overfitting-with-regularization-6d459c13a61f)).
+    If you have too many features, regularization controls their effect, either by
+    shrinking feature coefficients (called L2 regularization/Ridge Regression) or
+    by setting some feature coefficients to zero(called L1 regularization/LASSO Regression).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some linear models have built-in L1 regularization as a hyperparameter to penalize
+    features. Those features can be eliminated using the meta transformer `SelectFromModel`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s implement the`LinearSVC` algorithm with hyperparameter *penalty = ‘l1’*.
+    We’ll then use `SelectFromModel`to remove some features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 4) Sequential selection
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Sequential feature selection is an age-old statistical technique. In this case,
+    you add (or remove) features to/from the model one by one, and check your model
+    performance, and then heuristically choose which one to keep.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sequential selection has two variants. The *forward selection* technique starts
+    with zero feature, then adds one feature which minimizes the error the most; then
+    adds another feature, and so on. The *backward selection *works in the opposite
+    direction. The model starts with all features and calculates error; then it eliminates
+    one feature which minimizes error even further, and so on, until the desired number
+    of features remains.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Scikit-Learn module has `SequentialFeatureSelector `meta transformer to make
+    life easier. Note that it works for `sklearn`v0.24 or later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Alternative techniques…**'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Aside from the techniques I just described, there are few other methods you
+    can try. Some of them are not exactly designed for feature selection, but if you
+    dig a bit deeper you will find out how they can be creatively applied for feature
+    selection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Beta coefficients**: the coefficients you get after running a linear regression
+    (the beta coefficients) show the relative sensitivity of the dependent variable
+    to each feature. From here you can choose the features with high coefficient values.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**p-value**: If you implement regression in a classical statistical package
+    (e.g. `statsmodels` ), you’ll notice that the model output includes p-values for
+    each feature ([check this out](https://www.statsmodels.org/stable/regression.html)).
+    The p-value tests the null hypothesis that the coefficient is exactly zero. So
+    you can eliminate the features associated with high p-values.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Variance Inflation Factor (VIF)**](https://etav.github.io/python/vif_factor_python.html):
+    Typically VIF is used to detect multicollinearity in the dataset. Statisticians
+    usually remove variables with high VIF to meet a key assumption of linear regression.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Akaike and Bayesian Information Criteria (AIC/BIC)**](https://en.wikipedia.org/wiki/Akaike_information_criterion):
+    Generally AIC and BIC are used to compare performances between two models. But
+    you can use it to your advantage for feature selection, for example by choosing
+    certain features that get you a better model quality measured in terms of AIC/BIC.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Principal Component Analysis (PCA)**: If you know what PCA is, you guessed
+    it right. It’s not exactly a feature selection technique, but the dimensionality
+    reduction properties of PCA can but used to that effect, without eliminating features
+    entirely.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**And many others:** There are quite a few other feature selection classes
+    that come with `sklearn` module, [check out the documentation](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.feature_selection).
+    A clustering-based algorithm has also been proposed recently in a [scientific
+    paper](https://www.sciencedirect.com/science/article/pii/S2314717218300059). Fisher’s
+    Score is yet another technique available.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How about clustering?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Clustering is an unsupervised machine learning algorithm, meaning you feed your
+    data into a clustering algorithm and the algorithm will figure out how to segment
+    the data into different clusters based on some “property”. These properties actually
+    come from the features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Does clustering require feature selection? Of course. Without appropriate features,
+    the clusters could be useless. Let’s say you want to segment customers in order
+    to sell high-end, mid-range and low-end products. That means you are implicitly
+    using *customer income* as a factor. You could also through *education *into the
+    mix. Their *age *and years of *experience*? Sure. But as you increase the number
+    of features, the algorithm becomes confused as to what you are trying to achieve
+    and therefore the outputs may not be exactly what you were looking for.
+  prefs: []
+  type: TYPE_NORMAL
+- en: All that is to say, data scientists do not run clustering algorithms in a vacuum,
+    they often have a hypothesis or question in mind. So the features must correspond
+    to that need.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Data scientists take feature selection very seriously because of the impact
+    it has on model performance. For a low dimensional dataset heuristics and intuition
+    work perfectly, however, for high dimensional data, there are automated techniques
+    to do the job. Most useful techniques include chi-squared and impurity-based algorithms
+    as well as regularization and sequential feature selection. In addition, there
+    are alternative techniques that can be made useful such as beta coefficients in
+    regression, p-value, VIF, AIC/BIC and dimensionality reduction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the title of this article, I said “science meets art”. It is because there’s
+    no right or wrong answer when it comes to feature selection. We can use science
+    tools, but in the end, it can be a subjective decision made by a data scientist.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for reading. Feel free to [subscribe](https://mab-datasc.medium.com/subscribe) to
+    be notified of my forthcoming articles or simply connect with me via [Twitter ](https://twitter.com/DataEnthus)or [LinkedIn](https://www.linkedin.com/in/mab-alam/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Mahbubul Alam](https://www.linkedin.com/in/mab-alam/)** has 8+ years
+    of work experience applying data science in making policy and business decisions,
+    and has worked closely with stakeholders in government and non-government organizations
+    and helped make better decisions with data-driven solutions. Mab is passionate
+    about statistical modeling and all aspects of data science – from survey design
+    and data collection to building advanced predictive models. Mab is also teaching/mentoring
+    a data science and business analytics course designed for early to mid-career
+    analysts, team leads and IT professionals who are transitioning to data science
+    or building data science capabilities within their organizations.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/feature-selection-where-science-meets-art-639757d91293).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Be Wary of Automated Feature Selection — Chi Square Test of Independence Example](/2021/08/automated-feature-selection-chi-square-test-independence-example.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Selection – All You Ever Wanted To Know](/2021/06/feature-selection-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[From Scratch: Permutation Feature Importance for ML Interpretability](/2021/06/from-scratch-permutation-feature-importance-ml-interpretability.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Advanced Feature Selection Techniques for Machine Learning Models](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Retrieval Augmented Generation: Where Information Retrieval Meets…](https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Linear Regression Model Selection: Balancing Simplicity and Complexity](https://www.kdnuggets.com/2023/02/linear-regression-model-selection-balancing-simplicity-complexity.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensuring Reliable Few-Shot Prompt Selection for LLMs](https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,228 @@
+- en: 'Implementing Deep Learning Methods and Feature Engineering for Text Data: The
+    GloVe Model'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-glove.html](https://www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-glove.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Editor''s note:** This post is only one part of a far more thorough and in-depth
+    original, [found here](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa),
+    which covers much more than what is included here.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The GloVe Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The GloVe model stands for Global Vectors which is an unsupervised learning
+    model which can be used to obtain dense word vectors similar to Word2Vec. However
+    the technique is different and training is performed on an aggregated global word-word
+    co-occurrence matrix, giving us a vector space with meaningful sub-structures.
+    This method was invented in Stanford by Pennington et al. and I recommend you
+    to read the original paper on GloVe, [*‘GloVe: Global Vectors for Word Representation’* by
+    Pennington et al.](https://nlp.stanford.edu/pubs/glove.pdf) which is an excellent
+    read to get some perspective on how this model works.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We won’t cover the implementation of the model from scratch in too much detail
+    here but if you are interested in the actual code, you can check out the [*official
+    GloVe page*](https://nlp.stanford.edu/projects/glove/). We will keep things simple
+    here and try to understand the basic concepts behind the GloVe model. We have
+    talked about count based matrix factorization methods like LSA and predictive
+    methods like Word2Vec. The paper claims that currently, both families suffer significant
+    drawbacks. Methods like LSA efficiently leverage statistical information but they
+    do relatively poorly on the word analogy task like how we found out semantically
+    similar words. Methods like skip-gram may do better on the analogy task, but they
+    poorly utilize the statistics of the corpus on a global level.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The basic methodology of the GloVe model is to first create a huge word-context
+    co-occurence matrix consisting of (word, context) pairs such that each element
+    in this matrix represents how often a word occurs with the context (which can
+    be a sequence of words). The idea then is to apply matrix factorization to approximate
+    this matrix as depicted in the following figure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/80cf078c73ceb2a6e7c36fc8d7cc3d69.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Conceptual model for the GloVe model’s implementation
+  prefs: []
+  type: TYPE_NORMAL
+- en: Considering the ***Word-Context (WC)*** matrix, ***Word-Feature (WF)*** matrix
+    and ***Feature-Context (FC)*** matrix, we try to factorize `**WC = WF x FC**`,
+    such that we we aim to reconstruct ***WC*** from ***WF*** and ***FC*** by multiplying
+    them. For this, we typically initialize ***WF*** and ***FC*** with some random
+    weights and attempt to multiply them to get ***WC’*** (an approximation of WC)
+    and measure how close it is to ***WC***. We do this multiple times using [*Stochastic
+    Gradient Descent (SGD)*](https://en.wikipedia.org/wiki/Stochastic_gradient_descent) to
+    minimize the error. Finally, the ***Word-Feature matrix (WF)*** gives us the word
+    embeddings for each word where ***F*** can be preset to a specific number of dimensions.
+    A very important point to remember is that both Word2Vec and GloVe models are
+    very similar in how they work. Both of them aim to build a vector space where
+    the position of each word is influenced by its neighboring words based on their
+    context and semantics. Word2Vec starts with local individual examples of word
+    co-occurrence pairs and GloVe starts with global aggregated co-occurrence statistics
+    across all words in the corpus.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Applying GloVe features for Machine Learning Tasks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s try and leverage GloVe based embeddings for our document clustering task.
+    The very popular `[**spacy**](https://spacy.io/)` framework comes with capabilities
+    to leverage GloVe embeddings based on different language models. You can also [get
+    pre-trained word vectors](https://nlp.stanford.edu/projects/glove/) and load them
+    up as needed using `gensim` or `spacy`. We will first install spacy and use the [en_vectors_web_lg](https://spacy.io/models/en#en_vectors_web_lg) model
+    which consists of 300-dimensional word vectors trained on [Common Crawl](http://commoncrawl.org/) with
+    GloVe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: There are automated ways to install models in `spacy` too, you can check their [Models
+    & Languages page](https://spacy.io/usage/models) for more information if needed.
+    I had some issues with the same so I had to manually load them up. We will now
+    load up our language model using `spacy`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: This validates that everything is working and in order. Let’s get the GloVe
+    embeddings for each of our words now in our toy corpus.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7d4096fb874254581b44b3fe25a6a800.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: GloVe embeddings for words in our toy corpus
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can now use t-SNE to visualize these embeddings similar to what we did using
+    our Word2Vec embeddings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/29df7fbe8977356b425429931fd7e3f3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Visualizing GloVe word embeddings on our toy corpus
+  prefs: []
+  type: TYPE_NORMAL
+- en: The beauty of `spacy` is that it will automatically provide you the averaged
+    embeddings for words in each document without having to implement a function like
+    we did in Word2Vec. We will leverage the same to get document features for our
+    corpus and use [***k-means***](https://en.wikipedia.org/wiki/K-means_clustering) clustering
+    to cluster our documents.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/81a9b2a64f3a39b1e19db9ea6bcaa6b7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Clusters assigned based on our document features from GloVe
+  prefs: []
+  type: TYPE_NORMAL
+- en: We see consistent clusters similar to what we obtained from our Word2Vec model
+    which is good! The GloVe model claims to perform better than the Word2Vec model
+    in many scenarios as illustrated in the following graph from the [original paper
+    by Pennington el al.](https://nlp.stanford.edu/pubs/glove.pdf)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f091c4c53dea7145f115373f5c3fe01f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: GloVe vs Word2Vec performance (Source: [https://nlp.stanford.edu/pubs/glove.pdf](https://nlp.stanford.edu/pubs/glove.pdf) by
+    Pennington et al.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The above experiments were done by training 300-dimensional vectors on the same
+    6B token corpus (Wikipedia 2014 + Gigaword 5) with the same 400,000 word vocabulary
+    and a symmetric context window of size 10 in case anyone is interested in the
+    details.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Dipanjan Sarkar](https://www.linkedin.com/in/dipanzan)** is a Data
+    Scientist @Intel, an author, a mentor @Springboard, a writer, and a sports and
+    sitcom addict.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Text Data Preprocessing: A Walkthrough in Python](/2018/03/text-data-preprocessing-walkthrough-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A General Approach to Preprocessing Text Data](/2017/12/general-approach-preprocessing-text-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Framework for Approaching Textual Data Science Tasks](/2017/11/framework-approaching-textual-data-tasks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Practical Approach To Feature Engineering In Machine Learning](https://www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Tractable, Feature Engineering Pipeline for Multivariate…](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using RAPIDS cuDF to Leverage GPU in Feature Engineering](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Engineering for Beginners](https://www.kdnuggets.com/feature-engineering-for-beginners)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

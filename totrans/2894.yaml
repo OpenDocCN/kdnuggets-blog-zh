@@ -1,0 +1,226 @@
+- en: OpenStreetMap Data to ML Training Labels for Object Detection
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/09/openstreetmap-data-ml-training-labels-object-detection.html](https://www.kdnuggets.com/2019/09/openstreetmap-data-ml-training-labels-object-detection.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Shay Strong](https://www.linkedin.com/in/shay-strong/), Director of Data
+    Science & Machine Learning at EagleView**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So I wanted to create a seamless tutorial for taking OpenStreetMap (OSM) vector
+    data and converting it for use with machine learning (ML) models. In particular,
+    I am really interested in creating a tight, clean pipeline for disaster relief
+    applications, where we can use something like crowd sourced building polygons
+    from OSM to train a supervised object detector to discover buildings in an unmapped
+    location.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The recipe for building a basic deep learning object detector is to have two
+    components: (1) training data (raster image + vector label pairs) and (2) model
+    framework. The deep learning model itself will be a Single Shot Detector (SSD)
+    object detector. We will use OSM polygons as the basis of our label data and Digital
+    Globe imagery for the raster data. We won’t go into the details of an SSD here,
+    as there are plenty sources available. We will run the object detector in [AWS
+    Sagemaker](https://aws.amazon.com/sagemaker/). This current article only focuses
+    on the training data generation. I’ll follow up with a separate article on model
+    training.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I should note that this tutorial is available in this [Github repo](https://github.com/shaystrong/sagely),
+    so you can bypass this article if you want to dive in. Although it is a work in
+    progress as part of an upcoming [UW Geohackweek](https://geohackweek.github.io/).
+    I anticpate using this tutorial in conjunction with [HOT-OSM](https://www.hotosm.org/) related
+    tasks — where there may be crowd-sourced vector data as part of a specific project.
+    For the purpose of establishing a demo, we will use a recent HOT OSM task area
+    that was impacted by Cyclone Kenneth in 2019, Nzwani, Comores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/0fff813d4fc63f67a48919ba2489c09e.png)Cyclone Kenneth
+    track in late April 2019.![figure-name](../Images/d3896569ea9e025396e63a3818695d41.png)HOT-OSM
+    task data from [https://wiki.openstreetmap.org/wiki/2019_Cyclone_Kenneth](https://wiki.openstreetmap.org/wiki/2019_Cyclone_Kenneth).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The OSM vector data is freely available. The imagery we require is often not.
+    Welcome to the world of GIS. BUT, [Digital Globe has Open Data](https://www.digitalglobe.com/ecosystem/open-data) imagery
+    for many of these natural disaster areas. So we can grab that data for this application
+    (a little later on).
+  prefs: []
+  type: TYPE_NORMAL
+- en: I decided to use the [OSMNX](https://automating-gis-processes.github.io/2017/lessons/L7/retrieve-osm-data.html) python
+    library for interfacing with OSM (which can be a bit daunting otherwise). Based
+    on the HOT-OSM task, Nzwani, Comores was labeled as an ‘Urgent’ location (see
+    table above). So I’m going to start there because it seems like a lot of training
+    data could be available.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/4e8c6c678c3ffab9fedbfa3990865d6b.png)(left) The OSM
+    ‘DiGraph’ of nodes & edges. (right) The Nzwani landmass with the roads and buildings
+    overlaid.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you inspect the length of the buildings (a geopandas dataframe that is returned),
+    you will see a significant amount of features. We will use these as the training
+    data for our object detectors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s grab some DG imagery. To create an object detector, we will mimic the [VOC
+    Pascal training data format](http://host.robots.ox.ac.uk/pascal/VOC/), where we
+    require pairs of images (jpegs) and vector (xml) labels. The xml files are formated
+    in a particular way. You can read about it (on this difficult to navigate) [website](http://host.robots.ox.ac.uk/pascal/VOC/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: I would prefer to pull the data directly from the Digital Globe Open Data website,
+    but unforuntately at present, there seems to be no imagery that covers this area
+    post-event. I really want to keep this location as a point of focus, given the
+    amount of buildings we found and the relevance of this task. So, I will just separately
+    download the necessary imagery and make a small subset available for this demo.
+    You can find a sample GeoTIFF in the [GitHub repo](https://github.com/shaystrong/sagely).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let me digress a little about the [DG Open Data website](https://www.digitalglobe.com/ecosystem/open-data).
+    This website is rather difficult to search, and even though a huge amount of timely
+    and relevant imagery is made available free for areas impacted by natural disasters,
+    it is nearly impossible to search efficiently in a geospatial way as an individual
+    user. Bottom line, it is a little hard to determine which image may optimally
+    contain a significant amount of buildings for the region I am interested in. My
+    typical process would be to click through some thumbnails on the website and find
+    a region with significant urban-looking growth. There has to be buildings in urban
+    areas! I sort of gave up after 20 minutes of looking at patterns in thumbnails
+    (well 45 min, as I can get obsessive at pattern matching). Assuming the DG Open
+    Data has this image at some point in the future, the subsequent steps will still
+    be consistent for any GeoTIFF you download.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you get imagery directly from the DG Open Data website, they are actually
+    in the format of a Cloud Optimized GeoTIFF (COG) which turn out to be super convenient
+    to create a virtual raster (vrt) from. The benefit of this is that we can create
+    a light-weight file that loads in a local QGIS window without downloading the
+    entire tif. We can cut, subset, etc and just wind up with the image we want, and
+    not supereflous regions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once you have the GeoTIFF, we will use GDAL to translate it to a [MBtile](https://github.com/mapbox/mbtiles-spec) format
+    and then unpack it to it x/y/z slippymap (TMS) directory structure. MBtiles are
+    super advantageous for us here, since there a 256x256 image chips (png) that lend
+    themselves well for deep learning model training formats.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You may notice that the images generated are in a nested file structure. We
+    need to ‘flatten’ them, so that all the images are in a single directory. You
+    can’t just copy them to a single directory since the .png filenames are not unique.
+    We will also convert them to jpeg from png. We will stick them in a nonsensical
+    VOC-like folder to distinguish it from a legit VOC dataset, VOC1900.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Yay. Images are done!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, we will take our buildings and buffer them to the nearest rectangle. This
+    is what the object detector wants.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we have the buildings represented as axis-aligned bounding boxes, we
+    will want to use my new favorite utility called [Supermercado](https://github.com/mapbox/supermercado).
+    We will go to the ‘supermarket’ to identify all the TMS tiles that the building
+    boxes overlap. We will map the TMS tile ID to the building box itself and then
+    convert the building box, which is in a geospatial lat/long format, to a slippymap
+    tile reference frame. Now we will have a building box on a TMS tile grid consistent
+    with the imagery we unpacked on the same grid.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, we want to cleanup the xml labels and images to ensure we remove excess
+    vector labels. We only want an identical pair of images and annotations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You should now have a clean and ready to go directory of VOC-style images and
+    labels ready for training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next will be the actual training. Stay tuned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Shay Strong](https://www.linkedin.com/in/shay-strong/)** is the Director
+    of Data Science & Machine Learning at EagleView and has interests in Geospatial
+    Machine Learning & Remote Sensing.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Original. Reposted with permission.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A 2019 Guide to Object Detection](/2019/08/2019-guide-object-detection.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Analyze a Soccer (Football) Game Using Tensorflow Object Detection and OpenCV](/2018/07/analyze-soccer-game-using-tensorflow-object-detection-opencv.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Pedestrian Detection in Aerial Images Using RetinaNet](/2019/03/pedestrian-detection-aerial-images-retinanet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Dealing With Noisy Labels in Text Data](https://www.kdnuggets.com/2023/04/dealing-noisy-labels-text-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n09, Mar 2: Telling a Great Data Story: A…](https://www.kdnuggets.com/2022/n09.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Is the Difference Between SQL and Object-Relational Mapping (ORM)?](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Beginner''s Guide to Anomaly Detection Techniques in Data Science](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, August 17: How to Perform Motion Detection Using…](https://www.kdnuggets.com/2022/n33.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Density Kernel Depth for Outlier Detection in Functional Data](https://www.kdnuggets.com/density-kernel-depth-for-outlier-detection-in-functional-data)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

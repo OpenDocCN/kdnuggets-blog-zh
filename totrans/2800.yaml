@@ -1,0 +1,506 @@
+- en: Decision Boundary for a Series of Machine Learning Models
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/03/decision-boundary-series-machine-learning-models.html](https://www.kdnuggets.com/2020/03/decision-boundary-series-machine-learning-models.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Matthew Smith](https://www.linkedin.com/in/msmithsm14/), Complutense
+    University Madrid**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Machine Learning at the Boundary:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There is nothing new in the fact that machine learning models can outperform
+    traditional econometric models but I want to show as part of my research why and
+    how some models make given predictions or in this instance classifications.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I wanted to show the decision boundary in which my binary classification model
+    was making. That is, I wanted to show the partition space that splits my classification
+    into each class. The problem and code can be split into a multi-classification
+    problem with some tweeks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Initialisation:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I first load in a series of packages and initialise a logistic function to convert
+    log-odds to a logistic probability function later on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The data:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I use the `iris` dataset which contains information on 3 different plant variables
+    collected by British statistican Ronald Fisher in 1936\. The dataset consists
+    of 44 different characteristics of plant species which should uniquely distinguish
+    the 33 different species (*Setosa*, *Virginica* and *Versicolor*). However, my
+    problem required a binary classification problem and not a multi-classifciation
+    problem. In the following code I import the `iris` data and remove a type of plant
+    Species `virginica` to bring it from a multi-classification to a binary classification
+    problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: I plot the data by first storing the `ggplot` objects changing only the `x` and `y` variables
+    in each of the `plt`’s.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: I also wanted to use the new `patchwork` package which makes displaying `ggplot` plots
+    very easy. i.e the below code plots our graphics as its written (1 top plot stretching
+    the length of the grid space, 2 middle plots, another single plot and a further
+    2 more plots at the bottom.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/1b8077e556fd77387eefecc1d37dfdb5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Alternatively, we can re-arrange the plots into any way we wish and plot them
+    in the following way:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/21bf1cf183f88129d3cac813ff18747a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Which I think looks awesome.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Objective
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The objective is to build a classification algorithm to distinguish between
+    the two classes and then compute the decision boundaries in order to better see
+    how the models made such predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to create the decision boundary plots for each variable combination
+    we need the different combinatons of variables in the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Table 1: Variable Combinations
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Var1 | Var2 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Sepal.Width | Sepal.Length |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Petal.Length | Sepal.Length |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Petal.Width | Sepal.Length |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Sepal.Length | Sepal.Width |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Petal.Length | Sepal.Width |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Petal.Width | Sepal.Width |'
+  prefs: []
+  type: TYPE_TB
+- en: Next, I want to use the different variable combinations previously and create
+    lists (one for each variable combination) and populate these lists with synthetic
+    data - or data from the minimum to maximum value of each variable combination.
+    This will act as our synthetically created test data in which we make predictions
+    on and build the decision boundary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s important to note that the plots will eventually be 2 dimensional for illustrative
+    purposes, therefore we only train the Machine Learning models on two variables,
+    but for each combination of the two variables, these variables are the first two
+    variables in the `boundary_lists` data frames.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can see how the first 4 observations of the first and last two lists look
+    like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Training time:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now that we have the synthetically created testing data set up, I want to train
+    the models on the actual observed observations. I use each data point in the plots
+    above as my training data. I apply the following models:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Logistic Model
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Support Vector Machine with a linear kernel
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Support Vector Machine with a polynomial kernel
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Support Vector Machine with a radial kernel
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Support Vector Machine with a sigmoid kernel
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Random Forest
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Extreme Gradiant Boosting (XGBoost) model with default parameters
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Single layer Keras Neural Network (with linear components)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Deeper layer Keras Neural Network (with linear components)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Deeper’er layer Keras Neural Network (with linear components)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Light Gradient Boosting model (LightGBM) with default parameters
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Side note: I am not an expert in Deep learning/Keras/Tensorflow, so I am sure
+    better models will yield better decision boundaries but it was a fun task getting
+    the different Machine Learning models to fit inside a `purrr`, `map` call.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Testing time:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that the models have been trained, we can begin makign the predictions on
+    the synthetically created data we created in the `boundary_lists` data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: Calibrating the data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now we have our trained models, along with predictions we can `map` these predictions
+    into data which we can plot using `ggplot` and then arrange using `patchwork`!.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now that we have our predictions we can create the `ggplots`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Plot all the different combinations of the decision boundaries. **Note**: The
+    above code will work better in your console, when I ran the code to compile the
+    blog post the plots were too small. Therefore, I provide individual plots for
+    a sample of the models & variable combinations.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I first needed to select the first two columns which are the variables of interest
+    (Petal.Width, Petal.Length, Sepal.Width and Sepal.Length). Then I wanted to take
+    a random sample of the columns thereafter (which are the different Machine Learning
+    Model predictions).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next I can make the plots by taking a random sample of the lists.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/f0fcc6e0ae7a8ae8efa079465e409ee9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Some other random models:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/a28b0c6d73afaef699016b5019757ae5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/0b740f0c10626aa86bb96289baed5b95.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE24]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/f326ef09871b151259e191ae8e8530ed.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE25]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/2fddfb7ddadda0f1f9a329327673d3d8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE26]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE27]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE28]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/fe78f389f3683f2e013bc223a3c7b6ab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Natually the linear models made a linear decision boundary. It looks like the
+    random forest model overfit a little the data, where as the XGBoost and LightGBM
+    models were able to make better, more generalisable decision boundaries. The Keras
+    Neural Networks performed poorly because they should be trained better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`glm` = Logistic Model'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`keras.engine.sequential.Sequential Prediction...18` = Single layer Neural
+    Network'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`keras.engine.sequential.Sequential Prediction...18` = Deeper layer Neural
+    Network'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`keras.engine.sequential.Sequential Prediction...22` = Deeper’er layer Neural
+    Network'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`lgb.Booster Prediction` = Light Gradient Boosted Model'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`randomForest.formula Prediction` = Random Forest Model'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`svm.formula Prediction...10` = Support Vector Machine with a Sigmoid Kernel'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`svm.formula Prediction...12` = Support Vector Machine with a Radial Kernel'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`svm.formula Prediction...6` = Support Vector Machine with a Linear Kernel'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`svm.formula Prediction...8` = Support Vector Machine with a Polynomial Kernel'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`xgb.Booster Prediction` = Extreme Gradient Boosting Model'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In many of the combinations the Keras Neural Network model just predicted all
+    observations to be of a specific class (again by my poor tuning of the models
+    and the fact that the Neural Networks only had 100 observations to learn from
+    and 40,000 observation to predict on). That is, it coloured the whole background
+    blue or red and made many mis-classifications. In some of the plots the Neural
+    Networks managed to mae perfect classifications, in other it made strange decision
+    boundaries. - Neural Networks are fun.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As some brief analysis of the plots, it looks like the simple logistic model
+    made near-perfect classifications. Which isn’t suprising given that each of the
+    variable ralationships are linearly seperable. However, I have a preferece for
+    XGBoost and LightGBM models since they can handle non-linear relationships through
+    the incorporation of regularisation in its objective functions which allows them
+    to make more robust decision boundaries. Random Forest models fail here which
+    is why their decision boundary appears to do a good job but is also slightly erratic
+    and sharpe in it’s decision boundaries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Of course it goes without saying that these decision boundaries can become significantly
+    more complex and non-linear with the inclusion of more variables and higher dimensions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE29]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'End note:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I wrote this model on an Amazon Ubuntu EC2 Instance however, when I went to
+    compile the blog post in R on my Windows system I ran into some problems. These
+    problems were mostly down to installing the `lightgbm` package and package versions.
+    The code was working without error using the following package versions (i.e. using
+    the most up-to-date package versions)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE30]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE31]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Bio: [Matthew Smith](https://www.linkedin.com/in/msmithsm14/)** ([@MatthewSmith786](https://twitter.com/MatthewSmith786))
+    is a PhD student at the Complutense University Madrid. His research focuses on
+    Machine Learning methods applied to Economics and Finance. [He writes about topics](https://lf0.com/)
+    in R, Python and C++.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://lf0.com/post/machine-learning-boundary-conditions/machine-learning-boundary-conditions/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Getting Started with R Programming](/2020/02/getting-started-r-programming.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Serverless Machine Learning with R on Cloud Run](/2020/02/serverless-machine-learning-r-cloud-run.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Basics of Audio File Processing in R](/2020/02/basics-audio-file-processing-r.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Time Series Analysis: ARIMA Models in Python](https://www.kdnuggets.com/2023/08/times-series-analysis-arima-models-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning from Scratch: Decision Trees](https://www.kdnuggets.com/2022/11/machine-learning-scratch-decision-trees.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simplifying Decision Tree Interpretability with Python & Scikit-learn](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Decision Tree Algorithm, Explained](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understanding by Implementing: Decision Tree](https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Telling a Great Data Story: A Visualization Decision Tree](https://www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,240 @@
+- en: 'The Human Vector: Incorporate Speaker Embeddings to Make Your Bot More Powerful'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/09/human-vector-incorporate-speaker-embedding-powerful-bot.html](https://www.kdnuggets.com/2016/09/human-vector-incorporate-speaker-embedding-powerful-bot.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Megan Barnes, Init.ai**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How do we evaluate AI? You may have heard about [self-driving cars](https://medium.com/self-driving-cars)
+    recently; their release seems imminent. Self-driving cars have a clear objective
+    for evaluation: *don’t crash*. Beyond avoiding accidents, there isn’t a notion
+    of how *well* a car drives.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the engineering challenge of conversational agents, the threshold for what
+    we want becomes higher and hazier. There is a *don’t crash* analog in conversational
+    AI: functional failures. We can tell when bots don’t really understand us. They
+    respond in ways that don’t answer our questions, aren’t relevant to the conversation,
+    or just don’t make sense. The researchers behind “[A Persona-Based Neural Conversation
+    Model](http://nlp.stanford.edu/pubs/jiwei2016Persona.pdf)” point out a more subtle
+    way in which bots can fail: their (lack of) persona.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In human conversations, we rely on assumptions about how other speakers conduct
+    themselves. This is known as the [cooperative principle](https://en.wikipedia.org/wiki/Cooperative_principle) in
+    the field of [pragmatics](https://en.wikipedia.org/wiki/Pragmatics). This principle
+    breaks down into ‘[maxims](https://en.wikipedia.org/wiki/Cooperative_principle#Grice.27s_Maxims)’
+    for speech that speakers either follow or flout. In short, we rely on others saying
+    truthful statements, providing as much information as possible, being relevant,
+    and saying things appropriately. When speakers purposefully flout these maxims,
+    it carries [meaning](https://en.wikipedia.org/wiki/Implicature) that we can understand
+    (e.g. sarcasm, in which a speaker makes statements that are obviously untrue).
+    When deviation from the maxims is unintentional, however, it can derail a conversation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Consider these example exchanges from “A Persona-Based Neural Conversation
+    Model”:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Conversations](../Images/94dae495e56dfa4cee3d60c042d4aab4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*(Li et al. 1)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The problem here is that our knowledge of the world makes this a clear violation
+    of the Maxim of Quality (paraphrase: *say things that are true*). One person can’t
+    live in two different places or be two different ages at the same time. That means
+    that we understand at least some of the responses to be untrue. It’s conceivable
+    that a skilled speaker of English could make these exact same statements intentionally
+    and make an implicature in the process. In the last exchange above, for example,
+    the responder could be making a joke about the amount of reading required for
+    a psych major. Whether it’s actually funny is a matter of taste. The difference
+    with bots is that we don’t expect humor. It becomes clear to us that inconsistent
+    responses are unintentional and that makes communication difficult.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The specific issue of inconsistent responses is intrinsic to language modeling
+    because data-driven systems are geared toward generating responses with the highest
+    likelihood, without regard for the source of that response. When searching through
+    the output space, an inference is made based on the most likely sequence of words
+    to follow another sequence according to the model. In the study referenced above,
+    the baseline model is an [LSTM](https://en.wikipedia.org/wiki/Long_short-term_memory) [recurrent
+    neural network](https://en.wikipedia.org/wiki/Recurrent_neural_network), an architecture
+    common in conversational AI. It uses the softmax function to create a probability
+    distribution over possible outputs and picks the most likely next word in the
+    sequence, no matter who generated it in the training data. Human speakers expect
+    consistent *personas*from the bots they speak to and current techniques are ignoring
+    that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Li et al. describe personas as, “composite[s] of elements of identity (background
+    facts or user profile), language behavior, and interaction style”(1). A persona
+    is based on a real individual that generated part of the training data, and is
+    represented by a vector, the speaker embedding. They randomly initialize speaker
+    embeddings and learn them during training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A basic LSTM can be graphically represented like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![LSTM](../Images/b44585ca405a53250dbcf2f1ed82428c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*(Kevin Gimpel 2016)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: where *x* represents a word embedding in a sequence, *c* represents a hidden
+    layer and *h *represents the output of the model, all at time *t. *The colored
+    rectangles represent gates, which transform input vectors. The model can also
+    be represented by the functions below (in which *e* takes the place of *x*to represent
+    a word embedding), where *i, f, o, *and *l* represent the multicolor gates above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Functions](../Images/8c9e44a5c7ed41cbe9deef854076a128.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*(Li et al. 2)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In what Li et al. term the Speaker Model, they inject the model with the speaker
+    embedding, *v*, which can be seen in its representation below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Speaker Model](../Images/9ded39e322a6918352d451b1f9d46a5f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*(Li et al. 3)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This adds information about speaker *i* into every time step of the sequence.
+    This is equivalent to adding a *v *input node into the hidden layer of the LSTM
+    graphical model, marked with a blue gate. Incorporating speaker embeddings into
+    the LSTM model improved its performance, decreasing perplexity and increasing
+    BLEU score in the majority of the datasets the researchers examined.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The researchers also noted that a single persona should be adaptable. A person
+    doesn’t address their boss in the same way they address their little brother.
+    Because of this, they also decided to try what they termed the Speaker-Addressee
+    Model. This model substitutes a speaker pair embedding,*V*, for a speaker embedding,
+    of the form below. The speaker pair embedding is meant to model interactions between
+    specific individuals.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Speaker pair embedding](../Images/66669ef94794363104aecd1254650a47.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*(Li et al. 4)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The Speaker-Addressee model achieved similar success. This is a particularly
+    cute result that the Speaker-Addressee model generates when trained on movie conversation
+    data (with reference to character relationships in *Friends*and *The Big Bang
+    Theory*):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Training results](../Images/1c90b6e88115928a13bdb98055e7ef42.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*(Li et al. 8)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The important takeaway from Li et al.’s research is that AI is a diverse field
+    with a range of different tasks that need nuanced solutions. Neural nets are great,
+    but if they are treated like a black box, they can only perform so well on complex
+    tasks like conversation. We need to take into account what we actually expect
+    out of a bot. Cohesive, adaptive personas and systems tailored to reflect those
+    expectations are the key to achieving sophisticated results. After all, we want
+    more from bots than just avoiding crash and burn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Megan Barnes](https://medium.com/@megan.initai)** is a software developer
+    working on machine learning infrastructure. If you’re interested in learning more
+    about conversational interfaces, follow her on [Medium](https://medium.com/@megan.initai)
+    and [Twitter](https://twitter.com/megan_initai).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: And if you’re looking to create a conversational app for your company, check
+    out [**Init.ai**](http://init.ai/) and our blog on [Medium](https://medium.com/init-ai),
+    or connect with us on [Twitter](https://twitter.com/initdotai). Check out the
+    original research referenced in this article [here](http://nlp.stanford.edu/pubs/jiwei2016Persona.pdf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://blog.init.ai/the-human-vector-incorporate-speaker-embeddings-to-make-your-bot-more-powerful-ade6fdfca035).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deep Learning For Chatbots, Part 2 – Implementing A Retrieval-Based Model
+    In TensorFlow](/2016/07/deep-learning-chatbots-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Survey of Available Corpora for Building Data-driven Dialogue Systems](/2016/07/survey-available-corpora-building-data-driven-dialog-systems.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Artificial Intelligence ‘Chatbots’ – When or if?](/2016/05/ai-chatbots-when-if.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Python Vector Databases and Vector Indexes: Architecting LLM Apps](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How ChatGPT Works: The Model Behind The Bot](https://www.kdnuggets.com/2023/04/chatgpt-works-model-behind-bot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Data Science to Make Clean Energy More Equitable](https://www.kdnuggets.com/2022/03/data-science-make-clean-energy-equitable.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Greening AI: 7 Strategies to Make Applications More Sustainable](https://www.kdnuggets.com/greening-ai-7-strategies-to-make-applications-more-sustainable)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[LLaMA 3: Meta’s Most Powerful Open-Source Model Yet](https://www.kdnuggets.com/llama-3-metas-most-powerful-open-source-model-yet)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Support Vector Machines: An Intuitive Approach](https://www.kdnuggets.com/2022/08/support-vector-machines-intuitive-approach.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,296 @@
+- en: Using Hugging Face Transformers for Emotion Detection in Text
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Emotion detection and sentiment analysis is a popular NLP task](../Images/22573f8999395d71f8c12dd0adedaba6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by [juicy_fish on Freepik](https://www.freepik.com/free-vector/three-feedback-emoji-happy-sad-medium-flat-style_41681695.htm#fromView=search&page=1&position=13&uuid=6fbf4fab-f376-491f-992a-75df016f5210)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Hugging Face hosts a variety of transformer-based Language Models (LMs) specialized
+    in addressing language understanding and language generation tasks, including
+    but not limited to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Text classification
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Named Entity Recognition (NER)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Text generation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Question-answering
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Summarization
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Translation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A particular -and pretty common- case of text classification task is sentiment
+    analysis, where the goal is to identify the sentiment of a given text. The "simplest"
+    type of sentiment analysis LMs are trained to determine the polarity of an input
+    text such as a customer review of a product, into positive vs negative, or positive
+    vs negative vs neutral. These two specific problems are formulated as binary or
+    multiple-class classification tasks, respectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are also LMs that, while still identifiable as sentiment analysis models,
+    are trained to categorize texts into several emotions such as anger, happiness,
+    sadness, and so on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This Python-based tutorial focuses on loading and illustrating the use of a
+    Hugging Face pre-trained model for classifying the main emotion associated with
+    an input text. We will use the [emotions dataset](https://huggingface.co/datasets/jeffnyman/emotions)
+    publicly available on the Hugging Face hub. This dataset contains thousands of
+    Twitter messages written in English.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loading the Dataset
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'We''ll start by loading the training data within the emotions dataset by running
+    the following instructions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Below is a summary of what the training subset in the *train_data* variable
+    contains:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The training fold in the emotions dataset contains 16000 instances associated
+    with Twitter messages. For each instance, there are two features: one input feature
+    containing the actual message text, and one output feature or label containing
+    its associated emotion as a numerical identifier:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '0: sadness'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '1: joy'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '2: love'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '3: anger'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '4: fear'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '5: surprise'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'For instance, the first labeled instance in the training fold has been classified
+    with the ''sadness'' emotion:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Loading the Language Model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Once we have loaded the data, the next step is to load a suitable pre-trained
+    LM from Hugging Face for our target emotion detection task. There are two main
+    approaches to loading and utilizing LMs using **Hugging Face''s Transformer library**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Pipelines** offer a very high abstraction level for getting ready to load
+    an LM and perform inference on them almost instantly with very few lines of code,
+    at the cost of having little configurability.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Auto classes** provide a lower level of abstraction, requiring more coding
+    skills but offering more flexibility to adjust model parameters as well as customize
+    text preprocessing steps like tokenization.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'This tutorial gives you an easy start, by focusing on loading models as pipelines.
+    Pipelines require specifying at least the type of language task, and optionally
+    a model name to load. Since emotion detection is a very specific form of text
+    classification problem, the task argument to use when loading the model should
+    be "text-classification":'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: On the other hand, it is highly recommended to specify with the 'model' argument
+    the name of a specific model in Hugging Face hub capable of addressing our specific
+    task of emotion detection. Otherwise, by default, we may load a text classification
+    model that has not been trained upon data for this particular 6-class classification
+    problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You may ask yourself: "How do I know which model name to use?". The answer
+    is simple: do a little bit of exploration throughout the Hugging Face website
+    to find suitable models or models trained upon a specific dataset like the emotions
+    data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The next step is to start making predictions. Pipelines make this inference
+    process incredibly easy, but just calling our newly instantiated pipeline variable
+    and passing an input text to classify as an argument:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As a result, we get a predicted label and a confidence score: the closer this
+    score to 1, the more "reliable" the prediction made is.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: So, our input example "I love hugging face transformers!" confidently conveys
+    a sentiment of joy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can pass multiple input texts to the pipeline to perform several predictions
+    simultaneously, as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The second input in this example seemed much more challenging for the model
+    to perform a confident classification:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Last, we can also pass a batch of instances from a dataset like our previously
+    loaded ''emotions'' data. This example passes the first 10 training inputs to
+    our LM pipeline for classifying their feelings, then it prints a list containing
+    each predicted label, leaving their confidence scores aside:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'For comparison, here are the original labels given to these 10 training instances:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: By looking at the emotions each numerical identifier is associated with, we
+    can see that about 7 out of 10 predictions match the real labels given to these
+    10 instances.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that you know how to use Hugging Face transformer models to detect text
+    emotions, why not explore other use cases and language tasks where pre-trained
+    LMs can help?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[](https://www.linkedin.com/in/ivanpc/)****[Iván Palomares Carrascosa](https://www.linkedin.com/in/ivanpc/)****
+    is a leader, writer, speaker, and adviser in AI, machine learning, deep learning
+    & LLMs. He trains and guides others in harnessing AI in the real world.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Fine-Tune BERT for Sentiment Analysis with Hugging Face Transformers](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Use GPT for Generating Creative Content with Hugging Face…](https://www.kdnuggets.com/how-to-use-gpt-for-generating-creative-content-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Recommendation System with Hugging Face Transformers](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Use the Hugging Face Tokenizers Library to Preprocess Text Data](https://www.kdnuggets.com/how-to-use-the-hugging-face-tokenizers-library-to-preprocess-text-data)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 Machine Learning Demos: Hugging Face Spaces Edition](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A community developing a Hugging Face for customer data modeling](https://www.kdnuggets.com/2022/08/objectiv-community-developing-hugging-face-customer-data-modeling.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,200 @@
+- en: Building a Wikipedia Text Corpus for Natural Language Processing
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/11/building-wikipedia-text-corpus-nlp.html](https://www.kdnuggets.com/2017/11/building-wikipedia-text-corpus-nlp.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: One of the first things required for natural language processing (NLP) tasks
+    is a corpus. In linguistics and NLP, **corpus** (literally Latin for body) refers
+    to a collection of texts. Such collections may be formed of a single language
+    of texts, or can span multiple languages -- there are numerous reasons for which
+    multilingual corpora (the plural of corpus) may be useful. Corpora may also consist
+    of themed texts (historical, Biblical, etc.). Corpora are generally solely used
+    for statistical linguistic analysis and hypothesis testing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The good thing is that the internet is filled with text, and in many cases this
+    text is collected and well oganized, even if it requires some finessing into a
+    more usable, precisely-defined format. Wikipedia, in particular, is a rich source
+    of well-organized textual data. It's also a vast collection of knowledge, and
+    the unhampered mind can dream up all sorts of uses for just such a body of text.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What we will do here is build a corpus from the set of English Wikipedia articles,
+    which is freely and conveniently available online.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Wikipedia](../Images/8f2962b58d464bf97d168a4617f22220.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Install gensim**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In order to easily build a text corpus void of the Wikipedia article markup,
+    we will use [gensim](https://radimrehurek.com/gensim/index.html), a [topic modeling](https://en.wikipedia.org/wiki/Topic_model)
+    library for Python. Specifically, the `gensim.corpora.wikicorpus.WikiCorpus` class
+    is made just for this task:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Construct a corpus from a Wikipedia (or other MediaWiki-based) database dump.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'In order to properly progress through the following steps, you will need to
+    have [gensim installed](https://radimrehurek.com/gensim/install.html). It''s a
+    simple enough process; using pip:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Moving on...
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Download the Wikipedia Dump File**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Wikipedia dump file is also required for this procedure, quite obviously.
+    The latest such files can be found [here](https://dumps.wikimedia.org/enwiki/latest/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A warning: the latest such English Wikipedia database dump file is ~14 GB in
+    size, so downloading, storing, and processing said file is not exactly trivial.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The file I aquired and used for this task was `enwiki-latest-pages-articles.xml.bz2`.
+    Go ahead and download it or another similar file to use in the next steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Make the Corpus**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I wrote a simple Python script (with inspiration from [here](https://github.com/panyang/Wikipedia_Word2vec/blob/master/v1/process_wiki.py))
+    to build the corpus by stripping all Wikipedia markup from the articles, using
+    gensim. You can read up on the WikiCorpus class (mentioned above) [here](https://radimrehurek.com/gensim/install.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The code is pretty straightforward: the Wikipedia dump file is opened and read
+    article by article using the `get_texts()` method of the `WikiCorpus` class, all
+    of which are ultimately written to a single text file. Both the Wikipedia dump
+    file and the resulting corpus file must be specified on the command line.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: After several hours, the above code leaves me with a corpus file named `wiki_en.txt`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Check the Corpus**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A second script then checks the corpus text file we just built.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, keep in mind that this large Wikipedia dump file then resulted in a very
+    large corpus file. Given its enormous size, you may have dificulty reading the
+    full file into memory at one time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This script, then, starts by reading 50 lines -- which equates to 50 full articles
+    -- from the text file and outputting them to the terminal, after which you can
+    press a key to output another 50, or type 'STOP' to quit. If you *do* stop, the
+    script then proceeds to load the entire file into memory. Which could be a problem
+    for you. You can, however, verify the text by batches of lines, in order to satisfy
+    your curiousity that something good happened as a result of running the first
+    script.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you are planning on working on such a large text file, you may need some
+    workarounds for its large size in comparison to your machine's memory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The corpus file must be specified at the command line to execute.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: And that's it. Some simple code to accomplish what gensim makes a simple task.
+    Now that you are armed with an ample corpus, the natural language processing world
+    is your oyster. Time for something fun.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Framework for Approaching Textual Data Science Tasks](/2017/11/framework-approaching-textual-data-tasks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing Key Terms, Explained](/2017/02/natural-language-processing-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Free Resources for Getting Started with Deep Learning for Natural Language
+    Processing](/2017/07/5-free-resources-getting-started-deep-learning-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[N-gram Language Modeling in Natural Language Processing](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing Key Terms, Explained](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Representation for Natural Language Processing Tasks](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Start Using Natural Language Processing With PyTorch](https://www.kdnuggets.com/2022/04/start-natural-language-processing-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Gentle Introduction to Natural Language Processing](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

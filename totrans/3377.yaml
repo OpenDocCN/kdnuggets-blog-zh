@@ -1,0 +1,300 @@
+- en: 'Deep Learning Research Review: Reinforcement Learning'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/11/deep-learning-research-review-reinforcement-learning.html/2](https://www.kdnuggets.com/2016/11/deep-learning-research-review-reinforcement-learning.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[DQN For Reinforcement Learning](http://www.nature.com/nature/journal/v518/n7540/pdf/nature14236.pdf)** (RL
+    With Atari Games)**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/43d0762f632865f822943babc68ce0c8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Introduction**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This paper was published by Google Deepmind in February of 2015 and graced the
+    cover of Nature, a world famous weekly journal of science. This was one of the
+    first successful attempts at combining deep neural networks with reinforcement
+    learning ([This](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf) was Deepmind’s
+    original paper). The paper showed that their system was able to play Atari games
+    at a level comparable to professional game testers across a set of 49 games. Let’s
+    take a look at how they did it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Approach**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Okay, so remember where we left off in the intro tutorial at the beginning of
+    the post? We had just described the main goal of having to optimize our action
+    value function Q. The folks at Deepmind approached this task through a Deep Q-Network,
+    or a DQN. This network is able to come up with successful policies that optimize
+    Q, all from inputs in the form of pixels from the game screen and the current
+    score.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Network Architecture**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s take a closer look at what inputs this DQN will have. Consider the game
+    of Breakout, and take 4 of the most recent frames in the current game. Each of
+    these frame originally starts as a 210 x 160 x 3 image (because width and height
+    are 210 and 160 pixels and it is a color image). Then, some preprocessing takes
+    place where the frames are scaled to 84 x 84 (not extremely important to know
+    how this is done, but check page 6 for details). So, now we have an 84 x 84 x
+    4 input volume.  This volume is going to get plugged into a convolutional neural
+    network ([tutorial](https://adeshpande3.github.io/adeshpande3.github.io/A-Beginner's-Guide-To-Understanding-Convolutional-Neural-Networks/))
+    where it will go through a series of conv and ReLU layers. The output of the network
+    is an 18 dimensional vector where each number is the Q-value for each possible
+    action the user can take (move up, down, left, etc).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2de0ce70346dc78245e2793eaebba9dd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Okay, so let’s take a step back for a second and figure out how we’re going
+    to train this network so that It will predict accurate Q-values. Let’s first remember
+    what we’re trying to optimize.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/60957a586ed7a59690253b4bf8219fe7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This is the same form as the Q function we saw earlier, except this one represents
+    Q* which is the max over all Q’s. Let’s examine how we’re going to get this Q*.
+    Now, remember we just want an approximation for Q*, which is where our function
+    approximators are going to come in (our Qhats). Just keep that thought in your
+    head while we switch gears a little.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to find the best policy, we want to frame some sort of supervised learning
+    problem where the predicted Q function is compared to some expected one, and then
+    is adjusted in the correct direction. In order to do that, we need a set of training
+    examples. In our case, we are going to have to create a set of experiences that
+    store the agent’s state, action, reward, and next state for every time step. Let’s
+    formalize that a bit more. We have a **replay memory** D which contains (st, at, rt, st+1)
+    for a bunch of different time steps. This dataset gets built over time, as the
+    agent interacts more with the environment. Now, we’re going a take a random batch
+    of this data (let’s say data for 64 time steps), compute the loss function for
+    each of them, and then follow the gradient to improve our Q function approximation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/42084c56cdcdd68cdcb38d031f39ca7f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: So, as you can see, the loss function wants to optimize the mean squared error
+    (MSE) between the Q network function approximation (Q(s,a,theta)) and the **Q
+    learning targets**. Let me quickly explain those.  This Q learning target is the
+    reward r plus the maximum Q value (in the next time step) that you can get from
+    some action a’.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once the loss function is computed, the derivatives are taken w.r.t the theta
+    values (or the w vector). These values are then updated so as to minimize the
+    loss function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Conclusion**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of my favorite parts about the paper is this visualization it gives of the
+    value function during certain points of the game.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/db5d9b941dfe804bd1671e0a33aeec49.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'As you remember, the value function is basically a metric for measuring “how
+    good it is to be in a particular situation”. If you look at #4, you can see, based
+    on the trajectory of the ball and the location of the bricks, that we’re in for
+    a lot of points and the high value function is quite representative of that.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: All 49 Atari games used the same network architecture, algorithm, and hyperparameters
+    which is an impressive testament to the robustness of such an approach to reinforcement
+    learning. The combination of deep networks and traditional reinforcement learning
+    strategies, like Q learning, proved to be a great breakthrough in setting the
+    stage for...
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Mastering AlphaGo with RL](http://www.nature.com/nature/journal/v529/n7587/pdf/nature16961.pdf)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/6a21d464905371282791c48249f984ed.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Introduction**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**4-1**. That’s the record Deepmind’s RL agent had against one of the best
+    Go players in the world, Lee Sedol. In case you didn’t know, Go is an abstract
+    strategy game of capturing territory on a game board. It is considered to be one
+    of the hardest games in the world for AI because of the incredible number of different
+    game scenarios and moves. The paper begins with a comparison of Go and common
+    board games like chess and checkers. While those can be attacked with variations
+    of tree search algorithms, Go is a totally different animal because there are
+    about 250150 different sequences of moves in a game. It’s clear that reinforcement
+    learning was needed, so let’s look into how AlphaGo managed to beat the odds.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Approach**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The basis behind AlphaGo are the ideas of evaluation and selection. With any
+    reinforcement learning problem (especially with a board game), you need a way
+    of evaluating the environment, or the current board position. This is going to
+    be our **value network**. You then need a way of selecting an action to take through
+    a **policy network**. We’ve definitely had experience with both of these terms,
+    value and policy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Network Architecture**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s look at what inputs both of these networks are going to take. The board
+    position is passed in as a 19 x 19 image that goes through a series of conv layers
+    to construct a good representation of the current state. So let’s first look at
+    our SL (Supervised Learning) policy network. This network is going to take in
+    the image as input and then output a probability distribution over all of the
+    legal actions the agent can take. This network is pretrained (before the actual
+    game) on 30 million different Go board positions. Each of these board positions
+    is labeled with what an expert move would be in that situation. The team also
+    trained a smaller, but faster rollout policy network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, CNNs can only do so much to predict the correct move you should take, given
+    a representation of the current board. That’s when reinforcement learning comes
+    in. We’re going to improve this policy network through a process called **policy
+    gradients**. Remember how in the last paper, we wanted to optimize our action
+    value function Q? Well now, we’re going straight to optimizing our policy (Policy
+    gradients take a while to explain but David Silver does a good job in [Lecture
+    7](https://www.youtube.com/watch?v=KHZVXao4qXs)). From a high level, the policy
+    is improved by simulating games between the current policy network and a previous
+    iteration of the network. The reward signal is +1 for winning the game, -1 for
+    losing, and so we can improve the network through the normal gradient descent.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a3679d9f59bc52dd92867ee3b9ed9802.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Okay, so now we have a pretty good network that tells us the best action to
+    play. The next step is having a value network that predicts the outcome a game
+    which is at board position S and where both players are using policy P.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/70d0b6b99dd07a7490e63b634ae7bb58.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In order to get the optimal V*, we’ll use our good old function approximators
+    with weights W. The weights are trained by the value network which are conditioned
+    on state, outcome pairs (similar to what we saw in the last paper).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we have these main two networks, our final step is to use a **Monte
+    Carlo Tree Search** to put everything together. The basic idea behind MCTS is
+    that it selects the best actions through lookahead search where each edge in the
+    tree stores an action value Q, a visit count, and a prior probability. From that
+    info, the MCTS algorithm will pick the best action A from the current state. This
+    part of the system is a little less RL and more traditional AI so if you’d like
+    more details, definitely check out the paper, which will do a much better job
+    of summarizing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Conclusion**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A computer system just beat the world’s best player at one of the hardest board
+    games ever. Who even needs a conclusion?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[via GIPHY](http://giphy.com/gifs/obama-mic-drop-out-3o7qDSOvfaCO9b3MlO)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Big thanks to David Silver for the equations and the excellent lecture course
+    on RL**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Adit Deshpande](https://twitter.com/aditdeshpande3)** is currently
+    a second year undergraduate student majoring in computer science and minoring
+    in Bioinformatics at UCLA. He is passionate about applying his knowledge of machine
+    learning and computer vision to areas in healthcare where better solutions can
+    be engineered for doctors and patients.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://adeshpande3.github.io/adeshpande3.github.io/Deep-Learning-Research-Review-Week-2-Reinforcement-Learning).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deep Learning Research Review: Generative Adversarial Nets](/2016/10/deep-learning-research-review-generative-adversarial-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deep Learning in Neural Networks: An Overview](/2016/04/deep-learning-neural-networks-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[9 Key Deep Learning Papers, Explained](/2016/09/9-key-deep-learning-papers-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[HuggingFace Has Launched a Free Deep Reinforcement Learning Course](https://www.kdnuggets.com/2022/05/huggingface-launched-free-deep-reinforcement-learning-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI, Analytics, Machine Learning, Data Science, Deep Learning…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-on Reinforcement Learning Course Part 3: SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On Reinforcement Learning Course, Part 1](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On Reinforcement Learning Course, Part 2](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Reinforcement Learning for Newbies](https://www.kdnuggets.com/2022/05/reinforcement-learning-newbies.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

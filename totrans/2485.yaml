@@ -1,0 +1,325 @@
+- en: How to Speed Up XGBoost Model Training
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/), Data
+    Science Professional**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Gradient boosting algorithms are widely used in supervised learning. While they
+    are powerful, they can take a long time to train. Extreme gradient boosting, or [XGBoost](https://xgboost.readthedocs.io/en/latest/),
+    is an open-source implementation of gradient boosting designed for speed and performance.
+    However, even XGBoost training can sometimes be slow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are quite a few approaches to accelerating this process like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Changing tree construction method
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Leveraging cloud computing
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Distributed XGBoost on Ray](https://docs.ray.io/en/latest/xgboost-ray.html#:~:text=XGBoost%2DRay%20integrates%20with%20Ray,training%20run%20parallelized%20by%20itself.)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This article will review the advantages and disadvantages of each approach as
+    well as go over how to get started.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Changing your tree construction algorithm
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: XGBoost’s `tree_method` parameter allows you to specify which tree construction
+    algorithm you want to use. Choosing an appropriate tree construction algorithm
+    (`exact`, `approx`, `hist`, `gpu_hist`, `auto`) for your problem can help you
+    produce an optimal model faster. Let’s now review the algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**exact**](https://xgboost.readthedocs.io/en/latest/treemethod.html#exact-solution)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is an accurate algorithm, but it is not very scalable as during each split
+    find procedure it iterates over all entries of input data. In practice, this means
+    long training times. It also doesn’t support distributed training. You can learn
+    more about this algorithm in the original [XGBoost paper](https://arxiv.org/abs/1603.02754).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**approx**](https://xgboost.readthedocs.io/en/stable/treemethod.html#approximated-solutions)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: While the exact algorithm is accurate, it is inefficient when the data does
+    not completely fit into memory. The approximate tree method from the original [XGBoost
+    paper](https://arxiv.org/abs/1603.02754) uses quantile sketch and gradient histograms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**hist**](https://xgboost.readthedocs.io/en/stable/treemethod.html#approximated-solutions)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An approximation tree method used in [LightGBM](https://lightgbm.readthedocs.io/en/latest/) with
+    slight differences in implementation (uses some performance improvements such
+    as bins caching) from `approx`. This is typically faster than `approx`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**gpu_hist**](https://xgboost.readthedocs.io/en/stable/treemethod.html#approximated-solutions)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As GPUs are critical for many machine learning applications, XGBoost has a GPU
+    implementation of the hist algorithm `gpu_hist`) that has support for external
+    memory. [It is much faster and uses considerably less memory than hist](https://xgboost.readthedocs.io/en/latest/gpu/index.html).
+    Note that XGBoost doesn’t have **native support** for GPUs on some operating systems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/95469c31b40f2c1610179db6491bf5f8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[XGBoost documentation](https://xgboost.readthedocs.io/en/latest/install.html#python)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**auto**](https://xgboost.readthedocs.io/en/stable/treemethod.html#approximated-solutions)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is the default value for the parameter. Based on the dataset size, XGBoost
+    will choose the “fastest method”. For small datasets, exact will be used. For
+    larger datasets, approx will be used. Note that hist and gpu_hist aren’t considered
+    in this heuristic based approach even though they are often faster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you run this [code](https://gist.github.com/mGalarnyk/16d15183f691594bc2c256505a4c42b1),
+    you will see how running models using gpu_hist can save a lot of time. On a relatively
+    small dataset (100,000 rows, 1000 features) on my computer, changing from hist
+    to gpu_hist decreased training time by about a factor of 2.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Leveraging cloud computing
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/63ba4b59cda9c8aad2caed8c9f1a7a36.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Cloud computing allows you to not only utilize more cores and memory than your
+    local machine, but can also give you access to specialized resources like GPUs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The last section was mostly about choosing more efficient algorithms in order
+    to better use of available computational resources. However, sometimes available
+    computational resources are not enough and you simply need more. For example,
+    the MacBook shown in the image below only has 4 cores and 16GB memory. Furthermore,
+    it runs on MacOS which at the time of this writing, XGBoost doesn’t have GPU support
+    for.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3433f8727939e797b3baa086e57ff2a6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: For the purpose of this post, you can think of the MacBook above as a single
+    node with 4 cores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A way around this problem is to utilize more resources on the cloud. Utilizing
+    cloud providers aren’t free, but they often allow you to utilize more cores and
+    memory than your local machine. Additionally, if XGBoost doesn’t have support
+    for your local machine, it is easy to choose an instance type that XGBoost has
+    GPU support for.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you would like to try speeding up your training on the cloud, below is an
+    overview of the steps from [Jason Brownlee’s article](https://machinelearningmastery.com/train-xgboost-models-cloud-amazon-web-services/) on
+    how to train an XGBoost model on an AWS EC2 instance:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Setup an AWS account (if needed)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Launch an AWS Instance
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Login and run the code
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. Train an XGBoost model
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5\. Close the AWS Instance (only pay for the instance when you are using it)
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you select a more powerful instance than what you have locally, you’ll likely
+    see that training on the cloud is faster. **Note that multi-GPU training with
+    XGBoost actually requires distributed training which means you need more than
+    a single node/instance to accomplish this**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Distributed XGBoost Training with Ray
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: So far, this tutorial has covered speeding up training by changing the tree
+    construction algorithm and by increasing computing resources through cloud computing.
+    Another solution is to distribute XGBoost model training with [XGBoost-Ray](https://docs.ray.io/en/latest/xgboost-ray.html) which
+    leverages Ray.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Ray?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Ray](https://www.ray.io/) is a fast, simple distributed execution framework
+    that makes it easy to scale your applications and to leverage state of the art
+    machine learning libraries. Using Ray, you can take Python code that runs sequentially
+    and with minimal code changes transform it into a distributed application. If
+    you would like to learn about Ray and the [actor model](https://en.wikipedia.org/wiki/Actor_model),
+    you can learn about it [here](https://www.anyscale.com/blog/writing-your-first-distributed-python-application-with-ray).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/083311ce0dee8896c9f5d6e7e590e60a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: While this tutorial explores how Ray makes it easy to parallelize and distribute
+    XGBoost code, it is important to note that Ray and its ecosystem also make it
+    easy to distribute plain Python code as well as existing libraries like [scikit-learn](https://www.anyscale.com/blog/how-to-speed-up-scikit-learn-model-training), [LightGBM](https://www.anyscale.com/blog/introducing-distributed-lightgbm-training-with-ray), [PyTorch](https://medium.com/pytorch/getting-started-with-distributed-machine-learning-with-pytorch-and-ray-fd83c98fdead),
+    and much more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to get started with XGBoost-Ray
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To get started with XGBoost-Ray, [you first need to install it](https://docs.ray.io/en/latest/xgboost-ray.html#installation).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pip install "xgboost_ray"`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since it is fully compatible with the core XGBoost API, all you need is a few
+    code changes to scale XGBoost training from a single machine to a cluster with
+    hundreds of nodes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c23814fc9e976d61881209a2f55c06f7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: XGBoost-Ray supports multi-node/multi-GPU training. On a machine, GPUs communicate
+    gradients via NCCL2\. Between nodes, they use Rabit instead ​​([learn more](https://www.anyscale.com/blog/distributed-xgboost-training-with-ray)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see in the code below, the API is very similar to XGBoost. The highlighted
+    portions are where the code is different than the normal XGBoost API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The code above shows how little you need to change your code to use XGBoost-Ray.
+    While you don’t need XGboost-Ray to train the breast cancer dataset, [a previous
+    post](https://www.anyscale.com/blog/distributed-xgboost-training-with-ray) ran
+    benchmarks on several dataset sizes (~1.5M to ~12M rows) across different amounts
+    of workers (1 to 8) to show how it performs on bigger datasets on a single node.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/265932e9cf9560e6c44b7ac24d546857.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Training times for single node benchmarks (lower is better). XGBoost-Ray and
+    XGBoost-Dask achieve similar performance on a single AWS m5.4xlarge instance with
+    16 cores and 64 GB memory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: XGBoost-Ray is also performant in multi-node (distributed) settings as the image
+    below shows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/fc94371aa91631c47093678af8cd51e5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Multi-node training times on several synthetic dataset sizes ranging from ~400k
+    to ~2B rows (where lower is better). XGBoost-Ray and XGBoost-Spark achieve similar
+    performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you would like to learn more about XGBoost Ray, [check out this post on XGBoost-Ray](https://www.anyscale.com/blog/distributed-xgboost-training-with-ray).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: This post went over a couple approaches you can use to speed up XGBoost model
+    training like changing tree construction methods, leveraging cloud computing,
+    and distributed XGBoost on Ray. If you have any questions or thoughts about XGBoost
+    on Ray, please feel free to join our community through [Discourse](https://discuss.ray.io/) or [Slack](https://docs.google.com/forms/d/e/1FAIpQLSfAcoiLCHOguOm8e7Jnn-JJdZaCxPGjgVCvFijHB5PLaQLeig/viewform).
+    If you would like to keep up to date with all things Ray, [consider following
+    @raydistributed on twitter](https://twitter.com/raydistributed) and [sign up for
+    the Ray newsletter](https://anyscale.us5.list-manage.com/subscribe?u=524b25758d03ad7ec4f64105f&id=d94e960a03).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)** is
+    a Data Science Professional, and works in Developer Relations at Anyscale.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.anyscale.com/blog/how-to-speed-up-xgboost-model-training).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[What are the Assumptions of XGBoost?](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tuning XGBoost Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Leveraging XGBoost for Time-Series Forecasting](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[WTF is the Difference Between GBM and XGBoost?](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Use Synthetic Data To Overcome Data Shortages For Machine…](https://www.kdnuggets.com/2022/03/synthetic-data-overcome-data-shortages-machine-learning-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Simple Ways to Speed Up Your Python Code](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

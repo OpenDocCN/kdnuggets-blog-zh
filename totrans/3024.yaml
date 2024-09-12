@@ -1,0 +1,382 @@
+- en: A Guide to Decision Trees for Machine Learning and Data Science
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/12/guide-decision-trees-machine-learning-data-science.html](https://www.kdnuggets.com/2018/12/guide-decision-trees-machine-learning-data-science.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [George Seif](https://towardsdatascience.com/@george.seif94), AI / Machine
+    Learning Engineer**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Decision Trees are a class of very powerful Machine Learning model cable of
+    achieving high accuracy in many tasks while being highly interpretable. What makes
+    decision trees special in the realm of ML models is really their clarity of information
+    representation. The “knowledge” learned by a decision tree through training is
+    directly formulated into a hierarchical structure. This structure holds and displays
+    the knowledge in such a way that it can easily be understood, even by non-experts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/247d774fc1b4a93bcba12afc67523f20.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Decision Trees in Real-Life
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You’ve probably used a decision tree before to make a decision in your own life.
+    Take for example the *decision* about what activity you should do this weekend.
+    It might depend on whether or not you feel like going out with your friends or
+    spending the weekend alone; in both cases, your decision also depends on the weather.
+    If it’s sunny and your friends are available, you may want to play soccer. If
+    it ends up raining you’ll go to a movie. And if your friends don’t show up at
+    all, well then you like playing video games no matter what the weather is like!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4476e73464585bcc9cddaf0ae303d4a1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This is a clear example of a *real-life decision tree*. We’ve built a tree to
+    model a set of **sequential, hierarchical decisions** that ultimately lead to
+    some final result. Notice that we’ve also chosen our decisions to be quite “high-level”
+    in order to keep the tree small. For example, what if we set up *many* possible
+    options for the weather such as 25 degrees sunny, 25 degrees raining, 26 degrees
+    sunny, 26 degrees raining, 27 degrees sunny…. etc, our tree would be huge! The
+    **exact** temperature really isn’t too relevant, we just want to know whether
+    it’s OK to be outside or not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The concept is the same for decision trees in Machine Learning. We want to build
+    a tree with a set of hierarchical decisions which eventually give us a final result,
+    i.e our classification or regression prediction. The decisions will be selected
+    such that the tree is as small as possible while aiming for high classification
+    / regression accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Decision Trees in Machine Learning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Decision Tree models are created using 2 steps: Induction and Pruning. Induction
+    is where we actually build the tree i.e set all of the hierarchical decision boundaries
+    based on our data. Because of the nature of training decision trees they can be
+    prone to major overfitting. Pruning is the process of removing the unnecessary
+    structure from a decision tree, effectively reducing the complexity to combat
+    overfitting with the added bonus of making it even easier to interpret.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Induction**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'From a high level, decision tree induction goes through 4 main steps to build
+    the tree:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Begin with your training dataset, which should have some feature variables and
+    classification or regression output.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Determine the “best feature” in the dataset to split the data on; more on how
+    we define “best feature” later
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Split the data into subsets that contain the possible values for this best feature.
+    This splitting basically defines a node on the tree i.e each node is a splitting
+    point based on a certain feature from our data.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Recursively generate new tree nodes by using the subset of data created from
+    step 3\. We keep splitting until we reach a point where we have optimised, by
+    some measure, maximum accuracy while minimising the number of splits / nodes.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Step 1 is easy, just grab your dataset!
+  prefs: []
+  type: TYPE_NORMAL
+- en: For step 2, the selection of which feature to use and the specific split is
+    commonly chosen using a greedy algorithm to minimise a cost function. If we think
+    about it for a second, performing a split when building a decision tree is equivalent
+    to dividing up the feature space. We will iteratively try out different split
+    points and then at the end select the one that has the lowest cost. Of course
+    we can do a couple of smart things like only splitting within the range of values
+    in our dataset. This will keep us from wasting computations on testing out split
+    points that are trivially poor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For a regression tree, we can use a simple squared error as our cost function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9e737360b5111722e071106141110538.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Where Y is our ground truth and Y-hat is our predicted value; we sum over all
+    the samples in our dataset to get the total error. For a classification, we use
+    the *Gini Index Function:*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cbd57496eddd6d3825f64340081d9c88.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Where pk are the proportion of training instances of class k in a particular
+    prediction node. A node should *ideally *have an error value of zero, which means
+    that each split outputs a single class 100% of the time. This is exactly what
+    we want because then we know, once we get to that particular decision node, what
+    exactly our output will be whether we are on one side of the decision boundary
+    or the other.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This concept of having a single class per-split across our dataset is known
+    as*information gain*. Check out the example below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a52e214cfcc8a71a438dc70e9007a719.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If we were to choose a split where each output has a mix of classes depending
+    on the input data, then we really haven’t *gained *any information at all; we
+    don’t know any better whether or not a particular node i.e feature has any influence
+    in classifying our data! On the otherhand, if our split has a high percentage
+    of each class for each output, then we have *gained* the information that splitting
+    in that particular way on that particular feature variable gives us a particular
+    output!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we could of course keep splitting and splitting and splitting until our
+    tree has thousands of branches….. but that’s not really such a good idea! Our
+    decision tree would be huge, slow, and overfitted to our training dataset. Thus,
+    we will set some predefined stopping criterion to halt the construction of the
+    tree.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The most common stopping method is to use a minimum count on the number of training
+    examples assigned to each leaf node. If the count is less than some minimum value
+    then the split is not accepted and the node is taken as a final leaf node. If
+    all of our leafs nodes become final, the training stops. A smaller minimum count
+    will give you finer splits and potentially more information, but is also prone
+    to overfitting on your training data. Too large of a min count and you might stop
+    to early. As such, the min value is usually set based on the dataset, depending
+    on how many examples are expected to be in each class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Pruning**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because of the nature of training decision trees they can be prone to major
+    overfitting. Setting the correct value for minimum number of instances per node
+    can be challenging. Most of the time, we might just go with a safe bet and make
+    that minimum quite small, resulting in there being many splits and a very large,
+    complex tree. The key is that many of these splits will end up being redundant
+    and unnecessary to increasing the accuracy of our model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tree pruning is a technique that leverages this splitting redundancy to remove
+    i.e *prune* the unnecessary splits in our tree. From a high-level, pruning compresses
+    part of the tree from strict and rigid decision boundaries into ones that are
+    more smooth and generalise better, effectively reducing the tree complexity. The
+    complexity of a decision tree is defined as the number of splits in the tree.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A simple yet highly effective pruning method is to go through each node in the
+    tree and evaluate the effect of removing it on the cost function. If it doesn’t
+    change much, then prune away!
+  prefs: []
+  type: TYPE_NORMAL
+- en: An Example in Scikit Learn
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Decision trees for both classification and regression are super easy to use
+    in Scikit Learn with a built in class! We’ll first load in our dataset and initialise
+    our decision tree for classification. Running training is then a simple one-liner!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Scikit Learn also allows us to visualise our tree using the graphviz library.
+    It comes with a few options that will help in visualising the decision nodes and
+    splits that the model learned which is super useful for understanding how it all
+    works! Below we will colour the nodes based on the feature names and display the
+    class and feature information of each node.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ecaf20a53098ea1fa03240e432bd03e3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'There are several parameters that you can set for your decision tree model
+    in Scikit Learn too. Here are a few of the more interesting ones to play around
+    with to try and get some better results:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**max_depth:** The max depth of the tree where we will stop splitting the nodes.
+    This is similar to controlling the maximum number of layers in a deep neural network.
+    Lower will make your model faster but not as accurate; higher can give you accuracy
+    but risks overfitting and may be slow.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**min_samples_split: **The minimum number of samples required to split a node.
+    We discussed this aspect of decision trees above and how setting it to a higher
+    value would help mitigate overfitting.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**max_features: **The number of features to consider when looking for the best
+    split. Higher means potentially better results with the tradeoff of training taking
+    longer.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**min_impurity_split: **Threshold for early stopping in tree growth. A node
+    will split if its impurity is above the threshold. This can be used to tradeoff
+    combating overfitting (high value, small tree) vs high accuracy (low value, big
+    tree).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**presort:** Whether to presort the data to speed up the finding of best splits
+    in fitting. If we sort our data on each feature beforehand, our training algorithm
+    will have a much easier time finding good values to split on.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Tips for Practically Applying Decision Trees
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Here are a few of the pro and cons of decision trees that can help you decide
+    on whether or not it’s the right model for your problem, as well as some tips
+    as to how you can effectively apply them:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Pros**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Easy to understand and interpret.** At each node, we are able to see *exactly* what
+    decision our model is making. In practice we’ll be able to fully understand where
+    our accuracies and errors are coming from, what type of data the model would do
+    well with, and how the output is influenced by the values of the features. Scikit
+    learn’s visualisation tool is a fantastic option for visualising and understanding
+    decision trees.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Require very little data preparation. **Many ML models may require heavy
+    data pre-processing such as normalization and may require complex regularisation
+    schemes. Decision trees on the other hand work quite well out of the box after
+    tweaking a few of the parameters.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**The cost of using the tree for inference is logarithmic in the number of
+    data points used to train the tree. **That’s a huge plus since it means that having
+    more data won’t necessarily make a huge dent in our inference speed.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Cons**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Overfitting is quite common with decision trees simply due to the nature of
+    their training. It’s often recommended to perform some type of dimensionality
+    reduction such as [PCA](https://towardsdatascience.com/principal-component-analysis-your-tutorial-and-code-9719d3d3f376) so
+    that the tree doesn’t have to learn splits on so many features
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For similar reasons as the case of overfitting, decision trees are also vulnerable
+    to becoming biased to the classes that have a majority in the dataset. It’s always
+    a good idea to do some kind of [class balancing](https://towardsdatascience.com/handling-imbalanced-datasets-in-deep-learning-f48407a0e758) such
+    as class weights, sampling, or a specialised loss function.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Like to learn?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Follow me on[ twitter](https://twitter.com/GeorgeSeif94) where I post all about
+    the latest and greatest AI, Technology, and Science!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [George Seif](https://towardsdatascience.com/@george.seif94)** is a
+    Certified Nerd and AI / Machine Learning Engineer.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/a-guide-to-decision-trees-for-machine-learning-and-data-science-fe2607241956).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[5 Quick and Easy Data Visualizations in Python with Code](/2018/07/5-quick-easy-data-visualizations-python-code.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Clustering Algorithms Data Scientists Need to Know](/2018/06/5-clustering-algorithms-data-scientists-need-know.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Get a 2–6x Speed-up on Your Data Pre-processing with Python](/2018/10/get-speed-up-data-pre-processing-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,656 @@
+- en: Predict Customer Churn (the right way) using PyCaret
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/07/pycaret-predict-customer-churn-right-way.html](https://www.kdnuggets.com/2021/07/pycaret-predict-customer-churn-right-way.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Moez Ali](https://www.linkedin.com/in/profile-moez/), Founder & Author
+    of PyCaret**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d30c89e197e08c3f1818262c2757be9f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Predict Customer Churn (the right way) using PyCaret — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Introduction**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Customer retention is one of the primary KPI for companies with a subscription-based
+    business model. Competition is tough particularly in the SaaS market where customers
+    are free to choose from plenty of providers. One bad experience and customer may
+    just move to the competitor resulting in customer churn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**What is Customer Churn?**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Customer churn is the percentage of customers that stopped using your company’s
+    product or service during a certain time frame. One of the ways to calculate a
+    churn rate is to divide the number of customers lost during a given time interval
+    by the number of active customers at the beginning of the period. For example,
+    if you got 1000 customers and lost 50 last month, then your monthly churn rate
+    is 5 percent.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Predicting customer churn is a challenging but extremely important business
+    problem especially in industries where the cost of customer acquisition (CAC)
+    is high such as technology, telecom, finance, etc. The ability to predict that
+    a particular customer is at a high risk of churning, while there is still time
+    to do something about it, represents a huge additional potential revenue source
+    for companies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How is the Customer Churn machine learning model used in practice?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The primary objective of the customer churn predictive model is to retain customers
+    at the highest risk of churn by proactively engaging with them. For example: Offer
+    a gift voucher or any promotional pricing and lock them in for an additional year
+    or two to extend their lifetime value to the company.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are two broad concepts to understand here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We want a customer churn predictive model to predict the churn in advance (let’s
+    say one month in advance, three months in advance, or even six months in advance
+    — it all depends on the use-case). This means that you have to be extremely careful
+    of the cut-off date i.e. You shouldn’t be using any information after the cut-off
+    date as a feature in the machine learning model, otherwise it will be leakage.
+    The period before the cut-off date is known as the **Event.**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Normally for customer churn prediction, you will have to work a little bit to
+    create a ***target column***, it’s generally not available in the form you would
+    want it. For example, you want to predict if the customer will churn within the
+    next quarter, and so you will iterate through all the active customers as of your
+    event cut-off date and check if they left the company in the next quarter or not
+    (1 for yes, 0 for no). The quarter in this case is called **Performance Window**.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/58ffbc62902aceb2f52993e2c40f8b7f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: How to create customer churn dataset — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Customer Churn Model Workflow
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now that you understand how the data is sourced and churn target is created
+    (which is one of the most challenging parts of the problem), let’s discuss how
+    this machine learning model will be used in the business. Read the below diagram
+    from left-to-right:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A model is trained on customer churn history (event period for X features and
+    performance window for target variable).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Every month active customer base is passed onto **Machine Learning Predictive
+    Model** to return the probability of churn for each customer (in business lingo,
+    this is sometimes called a score of churn).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The list will be sorted from highest to lowest probability value (or score as
+    they say it) and the customer retention teams will start engaging with the customer
+    to stop the churn, normally by offering some kind of promotion or gift card to
+    lock in few more years.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Customers that have a very low probability of churn (or essentially model predicts
+    no-churn) are happy customers. No actions are taken on them.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/e91b9c8c3e68ddee366a72d0af70af4f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Customer Churn Model Workflow— Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s get started with the practical example
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this section, I will demonstrate the complete end-to-end workflow for machine
+    learning model training & selection, hyperparameter tuning, analysis, and interpretation
+    of the results. I will also discuss the metrics that you can optimize and why
+    conventional metrics like AUC, Accuracy, Recall may not be suitable for the customer
+    churn models. I will be using [PyCaret](https://www.pycaret.org/) — an open-source,
+    low-code machine learning library to perform this experiment. This tutorial assumes
+    you have basic knowledge of PyCaret.
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyCaret
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PyCaret](https://www.pycaret.org/) is an open-source, low-code machine learning
+    library and end-to-end model management tool built-in Python for automating machine
+    learning workflows. PyCaret is known for its ease of use, simplicity, and ability
+    to quickly and efficiently build and deploy end-to-end machine learning pipelines.
+    To learn more about PyCaret, check out their [GitHub](https://www.github.com/pycaret/pycaret).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/88a030e919f0d8cb248448f7778563ae.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Features of PyCaret — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Install PyCaret
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: ????Dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For this tutorial, I am using a [Telecom Customer Churn](https://www.kaggle.com/blastchar/telco-customer-churn) dataset
+    from Kaggle. The dataset already contains the target column that we can use as
+    is. You can read this dataset directly from this [GitHub](https://raw.githubusercontent.com/srees1988/predict-churn-py/main/customer_churn_data.csv) link.
+    (*Shoutout to srees1988*)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/dcad3db3c93e570415cddfa1ec0a45cc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample dataset — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**???? Exploratory Data Analysis**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/84590e750b1347784d7884990412f1ea.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Data types — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice that `TotalCharges` is of an `object` type instead of `float64.` Upon
+    investigation, I figured out there are some blank spaces in this column which
+    has caused Python to force the data type as `object` . To fix that, we will have
+    to trim blank spaces before changing the data type.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Intuitively contract type, tenure (length of stay of the customer), and pricing
+    plans are very important information when it comes to customer churn or retention.
+    Let’s explore the relationship:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://gist.github.com/moezali1/2624c9a5eaf78d9a7ffa1b97195a4812](https://gist.github.com/moezali1/2624c9a5eaf78d9a7ffa1b97195a4812)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/35598cb787fa11a5b752f1514c3b91d5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Customer Churn by Tenure, Charges, and Contract Type (Image by Author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice that most churn can be seen in the contracts that are “Month-to-Month”.
+    Makes sense, ofcourse. Also, I can see that as the tenure increases and so are
+    the total charges, the likelihood of customers with high tenure and low charges
+    is less compared to customers with high tenure and high charges.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Missing Values**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/8670ba57f1d45a72ccadc28e8f0ead3b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Missing Values — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice that because we replaced blank values with `np.nan` there are now 11
+    rows with missing values in `TotalCharges`. No problem — I will leave it with
+    PyCaret to impute it automatically.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**????Data Preparation**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Common to all modules in PyCaret, the `setup` is the first and the only mandatory
+    step in any machine learning experiment performed in PyCaret. This function takes
+    care of all the data preparation required prior to training models. Besides performing
+    some basic default processing tasks, PyCaret also offers a wide array of pre-processing
+    features. To learn more about all the preprocessing functionalities in PyCaret,
+    you can see this [link](https://pycaret.org/preprocessing/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/7ec559818d4479530de12c4be1716312.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: setup function in pycaret.classification — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Whenever you initialize the `setup` function in PyCaret, it profiles the dataset
+    and infers the data types for all input features. In this case, you can see except
+    for `tenure` `MonthlyCharges` and `TotalCharges` , everything else is categorical,
+    which is correct, you can now press enter to continue. If data types are not inferred
+    correctly (which can happen sometimes), you can use `numeric_feature` and `categorical_feature` to
+    overwrite the data types.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, notice that I have passed `ignore_features = ['customerID']` in the `setup` function
+    so that it is not considered when training the models. The good thing about this
+    is PyCaret will not remove the column from the dataset, it will just ignore it
+    behind the scene for model training. As such when you generate predictions at
+    the end, you don’t need to worry about joining IDs back by yourself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/da45ec42dc9fe41871cbce475be5690a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from setup — truncated for display — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Model Training & Selection
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that data preparation is done, let’s start the training process by using `compare_models` functionality.
+    This function trains all the algorithms available in the model library and evaluates
+    multiple performance metrics using cross-validation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/3ffd6b7d55c7694c9d8d22e2843723fc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from compare_models — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: The best model based on **AUC**is `Gradient Boosting Classifier `. AUC using
+    10-fold cross-validation is 0.8472.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/2001af02cbfa5355dcdcb8dc95550223.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Best Model Parameters — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Hyperparameter Tuning**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can use the `tune_model` function from PyCaret to automatically tune the
+    hyperparameters of the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/de76e0c6f1e6a453d570dc188335ffe6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: tune_model results — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice that AUC has slightly increased from `0.8472` to `0.8478` .
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model Analysis
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/a1b55482711e184c8da6e153b87d4e3a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: AUC Plot —Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/418830a4ce44d421caa99a4ee4b3a2c5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Feature Importance Plot — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/8b2c00c3aa421704fb991125b3bde26b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Confusion Matrix Gradient Boosting Classifier — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: This confusion matrix is on the test set which includes 30% of our data (2,113
+    rows) We have 309 ***True Positives*** (15%) — these are the customers for which
+    we will be able to extend the lifetime value. If we wouldn’t have predicted, then
+    there was no opportunity for intervention.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We also have 138 (7%) ***False Positives*** where we will lose money because
+    the promotion offered to these customers will just be an extra cost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1,388 (66%) are True Negatives (good customers) and 278 (13%) are ***False Negative*** (this
+    is a missed opportunity).
+  prefs: []
+  type: TYPE_NORMAL
+- en: So far we have trained multiple models to select the best model giving the highest
+    AUC, followed by tuning the hyperparameters of the best model to squeeze a little
+    more performance in terms of AUC. However, the best AUC doesn’t necessarily translate
+    into the best model for business.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In a churn model, often the reward of ***true positives*** is way different
+    than the cost of ***false positives***. Let’s use the following assumptions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: $1,000 voucher will be offered to all the customers identified as churn (True
+    Positive + False Positive);
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If we are able to stop the churn, we will gain $5,000 in customer lifetime value.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Using these assumptions and the confusion matrix above, we can calculate the
+    $ impact of this model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ef9c858bba6c8930acccefbeb34240d3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: $ Impact of Model over 2,113 Customers — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s a good model but the problem is it’s not a business-smart model. It is
+    doing a pretty good job compared to if you have no model but how can we train
+    and select a model that maximizes the business value. In order to achieve that
+    we have to train, select, and optimize models using business metrics instead of
+    any conventional metric like AUC or Accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**???? Adding Custom Metric in PyCaret**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Thanks to PyCaret, it is extremely easy to achieve this using `add_metric` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now let’s run `compare_models` and see the magic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/db2b1d5d27db3676634fd789e74b149a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from compare_models — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Notice that a new column `Profit` is added this time and surprisingly Naive
+    Bayes which is a pretty bad model in terms of `AUC` is the best model when it
+    comes to profit. Let’s see how:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/375110ebf9a7ffe1ca221e3956d70796.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Confusion Matrix Naive Bayes — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The total number of customers is still the same (2,113 customers in the test
+    set), what’s changed is now how the model is making errors over false positives
+    and false negatives. Let’s put some $ value against it, using the same assumptions
+    (as above):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8116232fdd30c0d1b81d53c37c5009be.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: $ Impact of Model over 2,113 Customers — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***BAM!**** We have just increased profit by ~$400,000 with a model that does
+    2% less in AUC than the best model. How does this happen? Well, for starters,
+    AUC or any other out-of-the-box classification metric (*Accuracy, Recall, Precision,
+    F1, Kappa, etc.*) is not a business-smart metric, so it does not take into account
+    the risk and reward proposition. Adding a custom metric and using it for model
+    selection or optimization is a great idea and right way to go with.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: I hope you will appreciate the simplicity and ease of use in PyCaret. With only
+    a few lines of code, we were able to train multiple models and select the one
+    that matters to the business. I am a regular blogger and I mostly write about
+    PyCaret and its use-cases in the real world, If you would like to be notified
+    automatically, you can follow me on [Medium](https://medium.com/@moez-62905), [LinkedIn](https://www.linkedin.com/in/profile-moez/),
+    and [Twitter](https://twitter.com/moezpycaretorg1).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e22de83ee64026c62225c29c299ff790.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: PyCaret — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e41c1178fc485896497b06e71de91329.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: PyCaret — Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is no limit to what you can achieve using this lightweight workflow automation
+    library in Python. If you find this useful, please do not forget to give us ⭐️
+    on our GitHub repository.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To hear more about PyCaret follow us on [LinkedIn](https://www.linkedin.com/company/pycaret/) and [Youtube](https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Join us on our slack channel. Invite link [here](https://join.slack.com/t/pycaret/shared_invite/zt-p7aaexnl-EqdTfZ9U~mF0CwNcltffHg).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Important Links
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Documentation](https://pycaret.readthedocs.io/en/latest/installation.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Blog](https://medium.com/@moez_62905)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[GitHub](https://www.github.com/pycaret/pycaret)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[StackOverflow](https://stackoverflow.com/questions/tagged/pycaret)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Install PyCaret](https://pycaret.readthedocs.io/en/latest/installation.html)
+    [Notebook Tutorials](https://pycaret.readthedocs.io/en/latest/tutorials.html)
+    [Contribute in PyCaret](https://pycaret.readthedocs.io/en/latest/contribute.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'More PyCaret related tutorials:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[**Machine Learning in Alteryx with PyCaret**](https://towardsdatascience.com/machine-learning-in-alteryx-with-pycaret-fafd52e2d4a)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A step-by-step tutorial on training and deploying machine learning models in
+    Alteryx Designer using PyCaret
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Machine Learning in KNIME with PyCaret**](https://towardsdatascience.com/machine-learning-in-knime-with-pycaret-420346e133e2)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A step-by-step guide on training and deploying end-to-end machine learning pipelines
+    in KNIME using PyCare
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Easy MLOps with PyCaret + MLflow**](https://towardsdatascience.com/easy-mlops-with-pycaret-mlflow-7fbcbf1e38c6)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A beginner-friendly, step-by-step tutorial on integrating MLOps in your Machine
+    Learning experiments using PyCaret
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Write and train your own custom machine learning models using PyCaret**](https://towardsdatascience.com/write-and-train-your-own-custom-machine-learning-models-using-pycaret-8fa76237374e)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Build with PyCaret, Deploy with FastAPI**](https://towardsdatascience.com/build-with-pycaret-deploy-with-fastapi-333c710dc786)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A step-by-step, beginner-friendly tutorial on how to build an end-to-end Machine
+    Learning Pipeline with PyCaret and…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Time Series Anomaly Detection with PyCaret**](https://towardsdatascience.com/time-series-anomaly-detection-with-pycaret-706a6e2b2427)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A step-by-step tutorial on unsupervised anomaly detection for time series data
+    using PyCaret
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Supercharge your Machine Learning Experiments with PyCaret and Gradio**](https://towardsdatascience.com/supercharge-your-machine-learning-experiments-with-pycaret-and-gradio-5932c61f80d9)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A step-by-step tutorial to develop and interact with machine learning pipelines
+    rapidly
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Multiple Time Series Forecasting with PyCaret**](https://towardsdatascience.com/multiple-time-series-forecasting-with-pycaret-bc0a779a22fe)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A step-by-step tutorial on forecasting multiple time series using PyCaret
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Moez Ali](https://www.linkedin.com/in/profile-moez/)** is a Data Scientist,
+    and is Founder & Author of PyCaret.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/predict-customer-churn-the-right-way-using-pycaret-8ba6541608ac).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PyCaret 101: An introduction for beginners](/2021/06/pycaret-101-introduction-beginners.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Things You Don’t Know About PyCaret](/2020/07/5-things-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Customer Churn Prediction: A Global Performance Study](/2020/05/customer-churn-prediction-global-performance-study.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Learn modern forecasting techniques to help predict future business…](https://www.kdnuggets.com/2022/12/sphere-learn-modern-forecasting-techniques-help-predict-future-business-outcomes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Use Python and Machine Learning to Predict Football Match Winners](https://www.kdnuggets.com/2023/01/python-machine-learning-predict-football-match-winners.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Binary Classification with PyCaret](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Clustering in Python with PyCaret](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Announcing PyCaret 3.0: Open-source, Low-code Machine Learning in Python](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyCaret](https://www.kdnuggets.com/2022/11/getting-started-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

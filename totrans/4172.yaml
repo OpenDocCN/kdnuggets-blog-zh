@@ -1,0 +1,441 @@
+- en: Analyzing Scientific Articles with fine-tuned SciBERT NER Model and Neo4j
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/12/analyzing-scientific-articles-finetuned-scibert-ner-model-neo4j.html](https://www.kdnuggets.com/2021/12/analyzing-scientific-articles-finetuned-scibert-ner-model-neo4j.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Khaled Adrani](https://www.linkedin.com/in/khaled-adrani/), UBIAI**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5ce6147a3d8777d31d2d2c689b15cd97.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Image by Author: Knowledge graph of scientific articles'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It is [estimated](https://ncses.nsf.gov/pubs/nsb20206/) that 1.8 million articles
+    are published each year, in about 28,000 journals. The publications throughput
+    has increased by 4% each since the last decade and grew from 1.8 million to 2.6
+    million from 2008 to 2018\. But who actually read those papers? [According to
+    one 2007 study](https://www.smithsonianmag.com/smart-news/half-academic-studies-are-never-read-more-three-people-180950222/),
+    not many people: half of the academic papers are read-only by their authors and
+    journal editors. Analyzing articles manually is tedious and time-consuming. Therefore
+    providing researchers with the tool that quickly extracts and analyze information
+    from articles will have a tremendous impact on accelerating new discoveries.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Knowledge graphs KG present an ideal solution for quick and rapid analysis of
+    information. They represent a network of real-world entities like objects and
+    concepts and provide the relationships between them. This information is usually
+    stored in a graph database and visualized as a graph structure. However, building
+    a knowledge graph manually is a time-consuming task. Fortunately, with the recent
+    advancement in Machine Learning and Natural Language Processing, Named Entity
+    Recognition (NER) came to the rescue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we will be analyzing a dataset of scientific abstracts using
+    the Neo4j Graph database and a fine-tuned SciBERT model. After, we will be querying
+    the data to answer some questions as our analysis for this corpus. This article
+    assumes that you have the basic fundamentals of NLP and Neo4j.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Model training**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The NER model we will be using is based on SciBERT and has been fine-tuned
+    on scientific articles by annotating Materials, processes, and tasks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Material: Represents any mention of material in the abstract'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Process: Represents a process or a method used in the experiment'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Task: Represents the task of the study to be carried'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'For the annotation part, we have used [UBIAI text annotation tool](https://ubiai.tools/) and
+    have exported the annotation in IOB format as shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ab8bf89a7ef3e679a06618139574e80b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Image by Author: UBIAI Text Annotation Tool'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For more information on how to generate training data using UBIAI and fine-tuning
+    the NER model, check out the articles below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Introducing UBIAI: Easy-to-Use Text Annotation for NLP Applications](https://chatbotslife.com/introducing-ubiai-easy-to-use-text-annotation-for-nlp-applications-74a2401fa725?gi=61b6ebb7114d)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Train a Joint Entities and Relation Extraction Classifier using BERT
+    Transformer with spaCy 3](https://towardsdatascience.com/how-to-train-a-joint-entities-and-relation-extraction-classifier-using-bert-transformer-with-spacy-49eb08d91b5c)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Fine-Tune BERT Transformer with spaCy 3](https://towardsdatascience.com/how-to-fine-tune-bert-transformer-with-spacy-3-6a90bfe57647)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Setup**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will be working on Google Collaboratory. Obviously, we will be using Python.
+    We mount our google drive which contains the dataset and the model. We need also
+    to install various dependencies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let us load our NER model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Data Preparation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The dataset contains the abstracts of scientific articles written by the main
+    authors and published in various scientific journals. We are also interested in
+    the entities mentioned within these articles. So, you can see clearly how our
+    graph will be structured. Let us load our data and get a look at some examples:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/b9b5aad77938bbae47a626eb10af0c9d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A sample of our dataset
+  prefs: []
+  type: TYPE_NORMAL
+- en: To make our knowledge graph, we will add the authors, the journals, and the
+    articles with their properties, then we will add existing relationships between
+    them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We start easy by extracting the list of authors. Some preprocessing was required.
+    Each article usually has multiple authors and so for each article, we transformed
+    the string containing their names into a list. We will also need to produce ids
+    through hashing our entities.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here is the code to get the list of all journals:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: For the articles, we will be transforming the dataframe into a list of dictionaries.
+    Each article will hold the attribute of its own dictionary as properties in the
+    graph (like name, list of authors, etc).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To extract entities from each article, we will combine its title and its abstract
+    as the text to be analyzed. At the same time, we added its own id by making it
+    the hash of its text content:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now, this function served me well as a reusable code to work with a list of
+    documents. The labels of our entities are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: PROCESS
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: MATERIAL
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: TASK
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let us see what are the entities extracted from the first article:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/bc438beb6a5c381f0c8818fea62cd3d0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: An example of entities present within an article
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally, we add every dictionary to its appropriate article dictionary in the
+    articles list:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Creating the Knowledge Graph**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data preparation is done. Now is the time to insert and manipulate it using
+    Neo4j!
+  prefs: []
+  type: TYPE_NORMAL
+- en: We defined a function that we will be using to communicate with our instance
+    from the [Neo4j Aura database](https://neo4j.com/cloud/aura/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: These are the queries we used to populate our database, they are very straightforward.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/b370e26c881150bb6ddc51337320f2e5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Image by Author: Three journals and their published articles'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Adding the entities is a little bit tricky. This query is composed of three
+    parts:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we match every article node in the database with its own dictionary from
+    our list of articles. UNWIND helps us loop through the list and get one article
+    each time.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Second, for every entity, we create it if it does not exist or match it by using
+    MERGE. After, the entity we will be linked with the current article.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Last, we add the label PROCESS, MATERIAL, or TASK for every entity, the value
+    of the label is already contained within a property with the same name. Then we
+    proceed to remove that property.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/50ce069828e7c231cbd29ba3538ee88f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Image by Author: An article and its connected nodes'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Abstract Analysis**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, we arrive at the most interesting part!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Say that you are an NLP expert working with a physics expert. He wants you
+    to analyze the abstracts of some scientific papers he finds very interesting.
+    He gives you four questions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1) Most popular material and process
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2) Most popular author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3) Highest co-occurrence between materials and processes
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4) Shortest path between two given authors
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us answer these questions using Neo4j!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To find out the most popular material and process in the entirety of our corpus,
+    we need to count how many relations one entity has with journals, to see how many
+    times they appeared:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/5ed5bf8a1dc102cf0210e2af125445b5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Top ten popular materials and processes in our corpus
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The most popular author can be obtained using the same reasoning and here is
+    the query for that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now, Co-occurrence analysis is the counting of the occurrences of a pair of
+    entities within the document. For example, we want to know how many times a certain
+    process and a certain material were mentioned together within the same article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/a4ffb378250657c272e91d5537609a17.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Co-occurrence analysis output
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can see that the material van der Waals heterostructures and the term VB
+    were mentioned three times together in the entirety of the corpus. VB is the acronym
+    of Valence Band which is the highest energy an electron can jump out of, moving
+    into the conduction band when excited and it plays a very important role in van
+    der Waals structures. Using our knowledge graph we have discovered this correlation
+    semantically without any prior knowledge! Such analysis can help us find new connections
+    and unseen correlations between scientific concepts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lastly, we want to find the shortest path between two given authors, for that,
+    we match each one with their respective id, use the predefined function shortestPath
+    which accepts a path as an input, and then we get our result. We ran this query
+    directly on the Neo4j browser to be able to get the graph picture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/dbafefa8ad1eb1ef7c48f6eaecf7acf6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Image by Author: Shortest path between two given authors'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Interestingly enough, we can predict that these two authors might need a common
+    article for their research, or that they can actually cooperate together in some
+    form or another. Visualizing meaningful relationships is of utmost importance
+    in making informed decisions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Conclusion**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This was a demonstration of the power of combining Named Entity Recognition
+    and Knowledge Graph in Text Mining. We did not delve into details because we wanted
+    to focus more on showcasing the workflow of handling text semantic analysis. I
+    hope that you have learned a thing or two and in the future, we will be delving
+    more in-depth!
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have any questions or want to create custom models for your specific
+    case, leave a note below or send us an email at admin@ubiai.tools.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Follow us on Twitter [@UBIAI5](https://twitter.com/UBIAI5)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Khaled Adrani](https://www.linkedin.com/in/khaled-adrani/)** is a Computer
+    Science Engineer and intern at UBIAI.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/ubiai-nlp/analyzing-scientific-documents-with-fine-tuned-scibert-ner-model-and-neo4j-133015a29418).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Build a Serverless News Data Pipeline using ML on AWS Cloud](/2021/11/build-serverless-news-data-pipeline-ml-aws-cloud.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Meta-Learning for Keyphrase Extraction](/2021/12/metalearning-keyphrase-extraction.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Ultimate Guide To Different Word Embedding Techniques In NLP](/2021/11/guide-word-embedding-techniques-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Analyzing the Probability of Future Success with Intelligence…](https://www.kdnuggets.com/2022/02/analyzing-probability-future-success-intelligence-node-attributes-evolution-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Analytics: The Four Approaches to Analyzing Data and How To…](https://www.kdnuggets.com/2023/04/data-analytics-four-approaches-analyzing-data-effectively.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Analyzing Diversity & Inclusion with SQL](https://www.kdnuggets.com/2022/11/analyzing-diversity-inclusion-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Master the Power of Data Analytics: The Four Approaches to Analyzing Data](https://www.kdnuggets.com/2023/03/master-power-data-analytics-four-approaches-analyzing-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Segment Anything Model: Foundation Model for Image Segmentation](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,253 @@
+- en: Brewing a Domain-Specific LLM Potion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/08/brewing-domainspecific-llm-potion.html](https://www.kdnuggets.com/2023/08/brewing-domainspecific-llm-potion.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Brewing a Domain-Specific LLM Potion](../Images/f59d17e898dc57d2cb666479c010020f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image from Unsplash
+  prefs: []
+  type: TYPE_NORMAL
+- en: Arthur Clarke famously quipped that any sufficiently advanced technology is
+    indistinguishable from magic. AI has crossed that line with the introduction of
+    Vision and Language (V&L) models and Large Language Models (LLMs). Projects like
+    [Promptbase](https://promptbase.com) essentially weave the right words in the
+    correct sequence to conjure seemingly spontaneous outcomes. If “prompt engineering”
+    doesn't meet the criteria of spell-casting, it's hard to say what does. Moreover,
+    the quality of prompts [matter](https://toloka.ai/blog/best-stable-diffusion-prompts/).
+    Better "spells" lead to better results!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Nearly every company is keen on harnessing a share of this LLM magic. But it’s
+    only magic if you can align the LLM to specific business needs, like summarizing
+    information from your knowledge base.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's embark on an adventure, revealing the recipe for creating a potent potion—an
+    LLM with domain-specific expertise. As a fun example, we'll develop an LLM proficient
+    in Civilization 6, a concept that’s geeky enough to intrigue us, boasts a fantastic
+    [WikiFandom](https://civilization.fandom.com/wiki/Civilization_Games_Wiki) under
+    a CC-BY-SA license, and isn't too complex so that even non-fans can follow our
+    examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 1: Decipher the Documentation'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The LLM may already possess some domain-specific knowledge, accessible with
+    the right prompt. However, you probably have existing documents that store knowledge
+    you want to utilize. Locate those documents and proceed to the next step.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 2: Segment Your Spells'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: To make your domain-specific knowledge accessible to the LLM, segment your documentation
+    into smaller, digestible pieces. This segmentation improves comprehension and
+    facilitates easier retrieval of relevant information. For us, this involves splitting
+    the Fandom Wiki markdown files into sections. Different LLMs can process prompts
+    of different length. It makes sense to split your documents into pieces that would
+    be significantly shorter (say, 10% or less) then the maximum LLM input length.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 3: Create Knowledge Elixirs and Brew Your Vector Database'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Encode each segmented text piece with the corresponding embedding, using, for
+    instance, [Sentence Transformers](https://sbert.net/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Store the resulting embeddings and corresponding texts in a vector database.
+    You could do it DIY-style using Numpy and SKlearn's KNN, but seasoned practitioners
+    often recommend vector [databases](https://towardsdatascience.com/milvus-pinecone-vespa-weaviate-vald-gsi-what-unites-these-buzz-words-and-what-makes-each-9c65a3bd0696).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 4: Craft Spellbinding Prompts'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: When a user asks the LLM something about Civilization 6,  you can search the
+    vector database for elements whose embedding closely matches the question embedding.
+    You can use these texts in the prompt you craft.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 5: Manage the Cauldron of Context'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Let's get serious about spellbinding! You can add database elements to the prompt
+    until you reach the maximum context length set for the prompt. Pay close attention
+    to the size of your text sections from Step 2\. There are usually significant
+    trade-offs between the size of the embedded documents and how many you include
+    in the prompt.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 6: Choose Your Magic Ingredient'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Regardless of the LLM chosen for your final solution, these steps apply. The
+    LLM landscape is changing rapidly, so once your pipeline is ready, choose your
+    success metric and run side-by-side comparisons of different models. For instance,
+    we can compare [Vicuna-13b](https://medium.com/@martin-thissen/vicuna-13b-best-free-chatgpt-alternative-according-to-gpt-4-tutorial-gpu-ec6eb513a717)
+    and GPT-3.5-turbo.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 7: Test Your Potion'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Testing if our "potion" works is the next step. Easier said than done, as there's
+    no scientific consensus on evaluating LLMs. Some researchers develop new benchmarks
+    like [HELM](https://github.com/stanford-crfm/helm) or [BIG-bench](https://github.com/google/BIG-bench),
+    while others advocate for human-in-the-loop assessments or assessing the output
+    of domain-specific LLMs with a superior model. Each approach has pros and cons.
+    For a problem involving domain-specific knowledge, you need to build an evaluation
+    pipeline relevant to your business needs. Unfortunately, this usually involves
+    starting from scratch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 8: Unveil the Oracle and Conjure Answers and Evaluation'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: First, collect a set of questions to assess the domain-specific LLM's performance.
+    This may be a tedious task, but in our Civilization example, we leveraged Google
+    Suggest. We used search queries like “Civilization 6 how to …” and applied Google's
+    suggestions as the questions to evaluate our solution. Then with a set of domain-related
+    questions, run your QnA pipeline. Form a prompt and generate an answer for each
+    question.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 9: Assess Quality Through the Seer''s Lens'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Once you have the answers and original queries, you must assess their alignment.
+    Depending on your desired precision, you can compare your LLM''s answers with
+    a superior model or use a [side-by-side comparison on Toloka](https://toloka.ai/docs/template-builder/templates/sbs-text/).
+    The second option has the advantage of direct human assessment, which, if done
+    correctly, safeguards against implicit bias that a superior LLM might have (GPT-4,
+    for [example](https://arxiv.org/abs/2305.11206), tends to rate its responses higher
+    than humans). This could be crucial for actual business implementation where such
+    implicit bias could negatively impact your product. Since we''re dealing with
+    a toy example, we can follow the first path: comparing Vicuna-13b and GPT-3.5-turbo''s
+    answers with those of GPT-4.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 10: Distill Quality Assessment'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: LLMs are often used in open setups, so ideally, you want an LLM that can distinguish
+    questions with answers in your vector database from those without. Here is a side-by-side
+    comparison of Vicuna-13b and GPT-3.5, as assessed by humans on [Toloka](https://toloka.ai/)
+    (aka Tolokers) and GPT.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Method | Tolokers | GPT-4 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Model | vicuna-13b | GPT-3.5 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Answerable, correct answer | 46.3% | 60.3% | 80.9% |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Unanswerable, AI gave no answer | 20.9% | 11.8% | 17.7% |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Answerable, wrong answer | 20.9% | 20.6% | 1.4% |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Unanswerable, AI gave some answer | 11.9% | 7.3% | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: We can see the differences between evaluations conducted by superior models
+    versus human assessment if we examine the evaluation of Vicuna-13b by Tolokers,
+    as illustrated in the first column. Several key takeaways emerge from this comparison.
+    Firstly, discrepancies between GPT-4 and the Tolokers are noteworthy. These inconsistencies
+    primarily occur when the domain-specific LLM appropriately refrains from responding,
+    yet GPT-4 grades such non-responses as correct answers to answerable questions.
+    This highlights a potential evaluation bias that can emerge when an LLM's evaluation
+    is not juxtaposed with human assessment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Secondly, both GPT-4 and human assessors demonstrate a consensus when evaluating
+    overall performance. This is calculated as the sum of the numbers in the first
+    two rows compared to the sum in the second two rows. Therefore, comparing two
+    domain-specific LLMs with a superior model can be an effective DIY approach to
+    preliminary model assessment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And there you have it! You have mastered spellbinding, and your domain-specific
+    LLM pipeline is fully operational.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Ivan Yamshchikov](https://www.linkedin.com/in/kroniker/?originalSubdomain=de)**
+    is a professor of Semantic Data Processing and Cognitive Computing at the Center
+    for AI and Robotics, Technical University of Applied Sciences Würzburg-Schweinfurt.
+    He also leads the Data Advocates team at Toloka AI. His research interests include
+    computational creativity, semantic data processing and generative models.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Web LLM: Bring LLM Chatbots to the Browser](https://www.kdnuggets.com/2023/05/webllm-bring-llm-chatbots-browser.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Run an LLM Locally with LM Studio](https://www.kdnuggets.com/run-an-llm-locally-with-lm-studio)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Chatbot Arena: The LLM Benchmark Platform](https://www.kdnuggets.com/2023/05/chatbot-arena-llm-benchmark-platform.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Falcon LLM: The New King of Open-Source LLMs](https://www.kdnuggets.com/2023/06/falcon-llm-new-king-llms.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Meet Gorilla: UC Berkeley and Microsoft’s API-Augmented LLM…](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Free Full Stack LLM Bootcamp](https://www.kdnuggets.com/2023/06/free-full-stack-llm-bootcamp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,717 @@
+- en: dbt for Data Transformation – Hands-on Tutorial
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/07/dbt-data-transformation-tutorial.html](https://www.kdnuggets.com/2021/07/dbt-data-transformation-tutorial.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Essi Alizadeh](https://www.linkedin.com/in/alizadehesmaeil/) is an engineer
+    and a senior data scientist, in permanent beta**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/570cfd46355d3e26b449a45bfa4b1b3f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: dbt (data build tool) is a data transformation tool that uses select SQL statements.
+    It allows you to create complex models, use variables and macros (aka functions),
+    run tests, generate documentation, and many more features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: dbt does not extract or load data, but it’s powerful at transforming data that’s
+    already available in the database —dbt does the **T** in ELT (Extract, Load, Transform)
+    processes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this post, you will learn how to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Configure a dbt project.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Create dbt models (SELECT statements).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Build complex dbt models using global variables and macros.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Build complex models by referring to other dbt models.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Run tests.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Generate documentation.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pre-requisite
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Signup
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can sign up at [getdbt.com](https://cloud.getdbt.com/). The free plan is
+    a great plan for small projects and testing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Database with populated data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can check my post on [how to deploy a *free* PostgreSQL database on Heroku](https://ealizadeh.com/blog/deploy-postgresql-db-heroku).
+    The post provides step-by-step instructions on how to do it. You can also check
+    the [data ingestion script](https://github.com/e-alizadeh/sample_dbt_project/blob/master/data/data_ingestion.py)
+    in the [GitHub repo](https://github.com/e-alizadeh/sample_dbt_project) accompanying
+    this article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Following the above, we generated two tables in a PostgreSQL database that we
+    are going to use in this post. There are two tables in the database, named covid_latest
+    and population_prosperity. You can find the ingestion script on the GitHub repo
+    for this post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: dbt CLI Installation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can install the dbt command-line interface (CLI) by following the instructions
+    on the following [dbt documentation page](https://docs.getdbt.com/dbt-cli/installation/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basics of a dbt project
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'There are three main things to know about in order to use the dbt tool:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: dbt project
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: database connection
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: dbt commands
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to use dbt?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'A dbt project is a directory containing *.sql* and *.yml* files. The minimum
+    required files are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A project file named *dbt_project.yml*: This file contains configurations of
+    a dbt project.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Model(s) (*.sql* files): A model in dbt is simply a single *.sql* file containing
+    a **single** ***select*** **statement**.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Every dbt project needs a *dbt_project.yml* file — this is how dbt knows a directory
+    is a dbt project. It also contains important information that tells dbt how to
+    operate on your project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can find more information about dbt projects [here](https://docs.getdbt.com/docs/introduction#dbt-projects).
+  prefs: []
+  type: TYPE_NORMAL
+- en: A **dbt model** is basically a *.sql* file with a **SELECT** statement.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: dbt Commands
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'dbt commands start with *dbt* and can be executed using one of the following
+    ways:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: dbt Cloud (the command section at the bottom of the dbt Cloud dashboard),
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: dbt CLI
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some commands can only be used in dbt CLI like *dbt init*. Some dbt commands
+    we will use in this post are
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*dbt init* (only in dbt CLI)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*dbt run*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*dbt test*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*dbt docs generate*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: dbt Project Setup
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Step 1: Initialize a dbt project (sample files) using dbt CLI'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'You can use [dbt init](https://docs.getdbt.com/reference/commands/init) to
+    generate sample files/folders. In particular, *dbt init project_name* will create
+    the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: a *~/.dbt/profiles.yml *file if one does not already exist
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: a new folder called *[project_name]*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: directories and sample files necessary to get started with dbt
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Caution**: Since *dbt init* generates a directory named *project_name*, and
+    in order to avoid any conflict, you should *not have any existing folder with
+    an identical name*.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/d65e97387ef5c3e9288422b2cb3d5ecb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*dbt init <project_name>*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The result is a directory with the following sample files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: For this post, we will just consider the minimum files and remove the extra
+    stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 2: Set Up a Git Repository'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can use an existing repo, as specified during the setup. You can configure
+    the repositories by following the dbt documentation [here](https://docs.getdbt.com/docs/dbt-cloud/cloud-configuring-dbt-cloud/cloud-configuring-repositories).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Or, if you want to create a new repo...**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can create a new repository from inside the created directory. You can
+    do that as below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 3: Set Up a New Project on dbt Cloud Dashboard'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the previous step, we created a sample dbt project containing sample models
+    and configurations. Now, we want to create a new project and connect our database
+    and repository on the dbt Cloud dashboard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before we continue, you should have
+  prefs: []
+  type: TYPE_NORMAL
+- en: some data already available in a database,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: a repository with the files generated at the previous step
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can follow the steps below to set up a new project in dbt Cloud (keep in
+    mind this step is different than the previous step in that we only generated some
+    sample files).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *dbt_project.yml* file for our project is shown below (you can find the
+    complete version in the [GitHub repo](https://github.com/e-alizadeh/sample_dbt_project.git)
+    to this post).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*dbt_project.yml*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: dbt Models and Features
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: dbt models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let's create simple dbt models that retrieve few columns of the tables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '***covid19_latest_stats** dbt model (models/covid19_latest_stats.sql)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '***population** dbt model (models/population.sql)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Caution:** The dbt model name is the filename of the sql file in the *models*
+    directory. The model name may differ from the table name in the database. For
+    instance, in the above, the dbt model *population* is the result of a *SELECT*
+    statement on *population_prosperity* table in the database.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Run models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can run all models in your dbt project by executing *dbt run*. A sample
+    dbt run output is shown below. You can see a summary or detailed log of running
+    all dbt models. This helps a lot to debug any issue you may have in the queries.
+    For instance, you can see a failed model that throws a Postgres error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5afcff8ce22f5e73cb4b0bc0374d7436.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Detailed log of failed **jinja_and_variable_usage** dbt model.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Jinja & Macros
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: dbt uses the [Jinja](https://jinja.palletsprojects.com/) templating language,
+    which makes a dbt project an ideal programming environment for SQL. With Jinja,
+    you can do transformations that are not normally possible in SQL, like using environment
+    variables or macros — abstract snippets of SQL, analogous to functions in most
+    programming languages. Whenever you see a *{{ ... }}*, you're already using Jinja.
+    For more information about Jinja and additional Jinja-style functions defined,
+    you can check [dbt documentation](https://docs.getdbt.com/docs/building-a-dbt-project/jinja-macros/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Later in this post, we will cover custom macros defined by dbt.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using Variables
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Define a variable**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can define your variables under the *vars* section in your *dbt_project.yml*.
+    For instance, let's define a variable called *selected_country* whose default
+    value is *USA* and another one called *selected_year* whose default value is *2019*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*dbt_project.yml*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Use a Variable**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can use variables in your dbt models via the [*var()*](https://docs.getdbt.com/reference/dbt-jinja-functions/var)
+    Jinja function (*{{ var("var_key_name") }}*) .
+  prefs: []
+  type: TYPE_NORMAL
+- en: Macros
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are many useful transformations and useful macros in *dbt_utils* that
+    can be used in your project. For a list of all available macros, you can check
+    their [GitHub repo](https://hub.getdbt.com/dbt-labs/dbt_utils/latest/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, let''s add dbt_utils to our project and install it by following the below
+    steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Add dbt_utils macro to your *packages.yml* file, as follows:'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*Add **dbt_utils** package to packages.yml.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Run *dbt deps* to install the package.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![](../Images/2028a0e2a0e1b6af8f7bc1f4f7dde969.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Install packages using **dbt deps**.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Complex dbt models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The models (selects) are usually stacked on top of one another. For building
+    more complex models, you will have to use [ref()](https://docs.getdbt.com/reference/dbt-jinja-functions/ref)
+    macro. *ref()* is the most important function in dbt as it allows you to refer
+    to other models. For instance, you may have a model (aka SELECT query) that does
+    multiple stuff, and you don’t want to use it in other models. It will be difficult
+    to build a complex model without using macros introduced earlier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**dbt model using *ref()* and global variables**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can build more complex models using the two dbt models defined earlier in
+    the post. For instance, let's create a new dbt model that joins the above two
+    tables on the country code and then filters based on selected country and year.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '***jinja_and_variable_usage** dbt model (models/jinja_and_variable_usage.sql).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A few points about the query above:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*{{ref(''dbt_model_name'')}}* is used to refer to dbt models available in the
+    project.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can get a column from the model like *{{ref('dbt_model_name')}}.column_name*.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can use variables defined in *dbt_project.yml* file by *{{var("variable_name)}}*.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The above code snippet joins the data from population and covid19_latest_stats
+    models on the country code and filters them based on the selected_country=USA
+    and selected_year=2019\. The output of the model is shown below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/536bc58271b80fed3154adcbe66cc106.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*The output of the **jinja_and_variable_usage** dbt model.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can also see the compiled SQL code snippet by clicking on **compile sql**
+    button. This is very useful, particularly if you want to run the query outside
+    the dbt tool.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e65cf74e2b860e338dcbf5376561fd6d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Compiled SQL code for **jinja_and_variable_usage** dbt model.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**dbt model using dbt_utils package and macros**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *dbt_utils* package contains macros (aka functions) you can use in your
+    dbt projects. A list of all macros is available on [dbt_utils' GitHub page](https://github.com/dbt-labs/dbt-utils/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s use dbt_utils [pivot()](https://github.com/dbt-labs/dbt-utils/#pivot-source)
+    and [get_column_values()](https://github.com/dbt-labs/dbt-utils/#get_column_values-source)
+    macros in a dbt model as below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '***using_dbt_utils_macros** dbt model (models/using_dbt_utils_macros.sql).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The above dbt model will compile to the following SQL query in dbt.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*Compiled SQL query from **using_dbt_utils_macros** dbt model.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Run Tests in dbt
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Another benefit of using dbt is the ability to test your data. Out of the box,
+    dbt has the following generic tests: *unique*, *not_null*, *accepted_values*,
+    and *relationships*. An example of these tests on the model is shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*schema.yml (dbt testing).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can run the tests via *dbt test*. You can see the output below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/15b74802bbc411868a0a0777cc846927.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Results of running dbt test on the dbt Cloud dashboard.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For more information on testing in dbt, you can visit [dbt documentation](https://docs.getdbt.com/docs/building-a-dbt-project/tests).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generate Documentation in dbt
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: You can generate documentation for your dbt project by simply running *dbt docs
+    generate* in the command section as shown below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a58d67a7303b580ee42a5ccf732e536b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Generate documentation for a dbt project.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can browse through the generated documentation by clicking on **view docs**.
+    You can see an overview of the generated docs below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition to dbt docs generate, dbt docs can also serve a webserver with the
+    generated documentation. To do so, you need to simply run dbt docs serve. More
+    information about generating docs for your dbt project is available [here](https://docs.getdbt.com/docs/building-a-dbt-project/documentation).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Other Features
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Database administration using Hooks & Operations
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'There are database management tasks that require running additional SQL queries,
+    such as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create user-defined functions
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Grant privileges on a table
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: and many more
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: dbt has two interfaces (hooks and operations) for executing these tasks, and,
+    importantly, version controls them. Hooks and operations are briefly introduced
+    here. For more info, you can check [dbt documentation](https://docs.getdbt.com/docs/building-a-dbt-project/hooks-operations).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hooks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Hooks are simply SQL snippets that are executed at different times. Hooks are
+    defined in the *dbt_project.yml* file. Different hooks are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*pre-hook*: executed before a model is built'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*post-hook*: executed after a model is built'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*on-run-start*: executed at the start of dbt run'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*on-run-end*: executed at the end of dbt run'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Operations
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Operations are a convenient way to invoke a macro without running a model. Operations
+    are triggered using [dbt run-operation](https://docs.getdbt.com/reference/commands/run-operation)
+    command. Note that, unlike hooks, you need to explicitly execute the SQL in a
+    [dbt operation](https://docs.getdbt.com/docs/building-a-dbt-project/hooks-operations#operations).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'dbt is a nice tool that is definitely worth giving a try as it may simplify
+    your data ELT(or ETL) pipeline. In this post, we learned how to set up and use
+    dbt for data transformation. I walked you through the different features of this
+    tool. In particular, I provided a step-by-step guide on:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Configuring a dbt project
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Creating dbt models (SELECT statements)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Build complex dbt models using global variables and macros
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Building complex models by referring to other dbt models
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Running tests
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Generating documentation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can find the [GitHub repo](https://github.com/e-alizadeh/sample_dbt_project)
+    containing all scripts (including the data ingestion script) below. *Feel free
+    to fork the source code of this article.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Essi Alizadeh](https://ealizadeh.com/) ([@es_alizadeh](https://twitter.com/es_alizadeh))
+    is an engineer and a senior data scientist who is in permanent beta. He likes
+    to write about different technologies, Statistics, Time Series, and Machine Learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Introducing dbt, the ETL and ELT Disrupter](https://www.kdnuggets.com/2021/03/dbt-etl-elt-disrupter.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 4 Data Extraction Tools](https://www.kdnuggets.com/2021/05/top-4-data-extraction-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Preparation in SQL, with Cheat Sheet!](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Hands-on Reinforcement Learning Course Part 3: SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On Reinforcement Learning Course, Part 1](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On Reinforcement Learning Course, Part 2](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generative AI with Large Language Models: Hands-On Training](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On with Supervised Learning: Linear Regression](https://www.kdnuggets.com/handson-with-supervised-learning-linear-regression)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On with Unsupervised Learning: K-Means Clustering](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

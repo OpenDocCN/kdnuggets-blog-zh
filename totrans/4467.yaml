@@ -1,0 +1,354 @@
+- en: Machine Learning Experiment Tracking
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/06/machine-learning-experiment-tracking.html](https://www.kdnuggets.com/2020/06/machine-learning-experiment-tracking.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Lukas Biewald](https://twitter.com/l2k), Founder/CEO of Weights and Biases**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'At first glance, building and deploying machine learning models looks a lot
+    like writing code. But there are some key differences that make machine learning
+    harder:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Machine Learning projects have far more branching and experimentation than a
+    typical software project.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Machine Learning code generally doesn’t throw errors, it just underperforms,
+    making debugging extra difficult and time consuming.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: A single small change in training data, training code or hyperparameters can
+    wildly change a model’s performance, so reproducing earlier work often requires
+    exactly matching the prior setup.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Running machine learning experiments can be time consuming and just the compute
+    costs can get expensive.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Tracking experiments in an organized way helps with all of these core issues.
+    Weights and Biases (wandb) is a simple tool that helps individuals to track their
+    experiments — I talked to several machine learning leaders of different size teams
+    about how they use wandb to track their experiments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Getting started with experiment tracking with wandb**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/eaa71f2ce46baac32744caae08e94431.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: View [live dashboard](https://app.wandb.ai/stacey/estuary/reports/Distributed-Training--Vmlldzo1MjEw)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The essential unit of progress in an ML project is an experiment, so most people
+    track what they’re doing somehow — generally I see practitioners start with a
+    spreadsheet or a text file to keep track of what they’re doing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spreadsheets and docs are incredibly flexible — what’s wrong with this approach?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is a Google doc I was using for a project a few years ago:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/056b121d80c5e9ecf4778211054ee4bc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: I’m sure these notes were important at the time, but now I have no idea what
+    these notes mean.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Weights and Biases makes it very simple to automatically record all of the hyperparameters
+    (inputs) and metrics (outputs).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/0623197a8b1bf670a6cc60715acb35e1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A typical project in [wandb](http://app.wandb.ai/l2k2/l2k).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is how you would [setup wandb in pytorch](https://docs.wandb.com/library/frameworks/pytorch) (you
+    can find other common ML frameworks in the [documentation](https://docs.wandb.com/library/frameworks)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Once set up, Weights and Biases monitors a lot of things by default. Any command
+    line argument becomes a saved hyperparameter. Any value made available by pytorch
+    becomes a metric. The experiment can automatically be linked to the latest git
+    commit or the exact state of the training code. Collecting information passively
+    is really important because it’s nearly impossible to consistently write down
+    all the things you might care about.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/1b71bc00b21cde5f4234493f6b19fede.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Experiment overview](https://app.wandb.ai/l2k2/l2k/runs/nv641wyz/overview) in
+    Weights & Biases'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s also extremely important to write down qualitative notes about the models
+    you build for later. In Weights and Biases, you can create reports to track notes
+    alongside model metrics, and to share your findings and progress with your team.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Collecting system metrics** in the background is a good example. Wandb collects
+    system usage metrics in the background — things like GPU Memory Allocated, Network
+    Traffic and Disk Usage. Most of the time you don’t need to look at all of this
+    information, but it’s easy to make a change where you are no longer using most
+    of your GPUs memory and hard to track down when you made that change. If you [instrument
+    your training code](https://docs.wandb.com/quickstart) with wandb once, you will
+    be able to look back at all of your experiments and see where the usage changed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/0f3af270a18bc6514409e7446e5c512a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: View in [live dashboard](https://app.wandb.ai/l2k2/examples-prod_monitor)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Using experiment tracking to compare results across experiments**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A typical ML workflow involves running lots of experiments. We’ve found that
+    looking at results [in the context of other results](https://app.wandb.ai/sweep/simpsons) is
+    much more meaningful than looking at a single experiment alone.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Looking across lots of experiments at once gets messy quickly. There are lots
+    of inputs changing and lots of different possible outputs. Some runs inevitably
+    fail early.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Different experimentation styles lead to different workflows, but we’ve found
+    that logging every metric that you might care about and tagging experiments with
+    a few consistent tags meaningful to you can keep things much more organized later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6ef74a7116e61a4ea7364155234355c1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: View in [live dashboard](https://app.wandb.ai/stacey/estuary/table).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once you have a number of models logged, you have way more dimensions to examine
+    than can be looked at all at once. One powerful visualization tool we’ve discovered
+    is the parallel coordinates chart.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/a77581064731a7d3e385aa4b6e040357.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: View [live dashboard](https://app.wandb.ai/sweep/simpsons)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here each line is an individual experiment and each column is an input hyperparameter
+    or an output metric. I’ve highlighted the top accuracy runs and it shows quite
+    clearly that across all of my experiments that I’ve selected, high accuracy comes
+    from low dropout values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Looking across experiments is so important that wandb lets you build workspaces
+    where you can select groups of graphs in visualizations like a scatterplot and
+    then immediately view comparisons of the selected runs
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Viewing specific examples**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Aggregate metrics are good, but it is essential to look at specific examples.
+    The function [wandb.log()](https://docs.wandb.com/library/log) can handle all
+    kinds of datatypes and automatically visualizes them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/73bfb956a1449f9867e78d998d50b6b7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: View [live report](https://app.wandb.ai/stacey/deep-drive/reports/The-View-from-the-Driver's-Seat--Vmlldzo1MTg5NQ)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Logging Images**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Logging images](https://docs.wandb.com/library/log#logging-images) is important
+    for many applications and it’s possible to see images across multiple runs. Here
+    are different approaches to building a GAN and the results at various scales and
+    timesteps.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/38d75003eee0cad47b5f3319703b0015.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Logging Matplotlib Plots**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Often code already tracks things in matplotlib — if you [log the chart](https://docs.wandb.com/library/log#logging-plots) it
+    will be saved forever and easy to pull back up. In fact you can log a unique chart
+    for every step of your training code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f05fe87ccf765a6c757c7a0a3b2177ae.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Using experiment tracking to manage distributed training**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When doing [distributed training](https://app.wandb.ai/stacey/estuary/reports/Distributed-Training--Vmlldzo1MjEw),
+    even just visualizing results can get even harder.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In a distributed run over many machines, every instance can call wandb init
+    and set group and job_type like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/455dc0dc84431d7610804050008bcbb3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: View [live dashboard](https://app.wandb.ai/stacey/estuary/reports/Distributed-Training--Vmlldzo1MjEw)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wandb will show the metrics for all of the runs in the group aggregated together,
+    but it’s also possible to go in and look at the individual process and see how
+    well they perform.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Using experiment tracking reports to manage team collaboration**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As teams grow, tracking everything becomes more and more important. Wandb lets
+    you build [static reports](https://app.wandb.ai/stacey/deep-drive/reports/The-View-from-the-Driver's-Seat--Vmlldzo1MTg5NQ) that
+    show exactly the experiments you’ve run with aggregate statistics and the ability
+    to dig deeper.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the OpenAI robotics team, wandb reports are the place where ML practitioners
+    record the work they’ve done and share it with their colleagues. It is crucial
+    for visualizing when a change may have inadvertently hurt progress.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At Latent Space, every team project meeting starts with a review of the latest
+    wandb experiment report and a discussion around how well the current approach
+    is working and what experiments should be tried next.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/471d00148c147e00c3f4c36cd17b9f58.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: View [live report](https://app.wandb.ai/stacey/curr_learn/reports/Layout%3A-Classify-Species--Vmlldzo0MDQ2NA)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Using experiment tracking as system of record for models**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As teams grow and models become are deployed into production it becomes more
+    and more important to have a record of everything that happened. At Toyota Research,
+    the wandb experiment link is used as the official record of every ML model that
+    gets built. If something happens downstream of a model build, they can trace the
+    issue back to the wandb training run. Building a report from a set of experiments
+    means there is a permanent record of the work done and teams can easily go back
+    and review exactly what happened.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Lukas Biewald](https://twitter.com/l2k)** is the founder of Weights
+    & Biases, and previously, the founder of Figure Eight (formerly CrowdFlower).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/machine-learning-experiment-tracking-93b796e501b0).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Why are Machine Learning Projects so Hard to Manage?](/2020/02/machine-learning-projects-manage.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Interactive Machine Learning Experiments](/2020/05/interactive-machine-learning-experiments.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Model Evaluation Metrics in Machine Learning](/2020/05/model-evaluation-metrics-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[7 Best Tools for Machine Learning Experiment Tracking](https://www.kdnuggets.com/2023/02/7-best-tools-machine-learning-experiment-tracking.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Versioning Machine Learning Experiments vs Tracking Them](https://www.kdnuggets.com/2021/12/versioning-machine-learning-experiments-tracking.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Developing an Open Standard for Analytics Tracking](https://www.kdnuggets.com/2022/07/developing-open-standard-analytics-tracking.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Importance of Experiment Design in Data Science](https://www.kdnuggets.com/2022/08/importance-experiment-design-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

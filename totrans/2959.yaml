@@ -1,0 +1,374 @@
+- en: 'XGBoost Algorithm: Long May She Reign'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/05/xgboost-algorithm.html](https://www.kdnuggets.com/2019/05/xgboost-algorithm.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Vishal Morde](https://www.linkedin.com/in/vishalmorde/) and [Anurag Setty](https://www.linkedin.com/in/venkatsetty/)**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/761721cbfdec29c67b1b4fe8eb636e39.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Photo by [Jared Subia](https://unsplash.com/photos/QczH4IiPNx0?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/search/photos/tiara?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: (This article was co-authored with [Venkat Anurag Setty](https://medium.com/@setgeti))
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I still remember the day 1 of my very first job fifteen years ago. I had just
+    finished my graduate studies and joined a global investment bank as an analyst.
+    On my first day, I kept straightening my tie and trying to remember everything
+    that I had studied. Meanwhile, deep down, I wondered if I was good enough for
+    the corporate world. Sensing my anxiety, my boss smiled and said:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*“Don’t worry! The only thing that you need to know is the regression modeling!”*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I remember thinking myself, “I got this!”. I knew regression modeling; both
+    linear and logistic regression. My boss was right. In my tenure, I exclusively
+    built regression-based statistical models. I wasn’t alone. In fact, at that time,
+    regression modeling was the undisputed queen of predictive analytics. Fast forward
+    fifteen years, the era of regression modeling is over. The old queen has passed.
+    Long live the new queen with a funky name; XGBoost or Extreme Gradient Boosting!
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is XGBoost?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[XGBoost](https://xgboost.ai/)is a decision-tree-based ensemble Machine Learning
+    algorithm that uses a [gradient boosting](https://en.wikipedia.org/wiki/Gradient_boosting) framework.
+    In prediction problems involving unstructured data (images, text, etc.) artificial
+    neural networks tend to outperform all other algorithms or frameworks. However,
+    when it comes to small-to-medium structured/tabular data, decision tree based
+    algorithms are considered best-in-class right now. Please see the chart below
+    for the evolution of tree-based algorithms over the years.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/51eaf3b11b2c984a8cb4f70a69c15825.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Evolution of XGBoost Algorithm from Decision Trees**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'XGBoost algorithm was developed as a research project at the University of
+    Washington. [Tianqi Chen and Carlos Guestrin](https://arxiv.org/pdf/1603.02754.pdf) presented
+    their paper at SIGKDD Conference in 2016 and caught the Machine Learning world
+    by fire. Since its introduction, this algorithm has not only been credited with
+    winning numerous Kaggle competitions but also for being the driving force under
+    the hood for several cutting-edge industry applications. As a result, there is
+    a strong community of data scientists contributing to the XGBoost open source
+    projects with ~350 contributors and ~3,600 commits on [GitHub](https://github.com/dmlc/xgboost/).
+    The algorithm differentiates itself in the following ways:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A wide range of applications: Can be used to solve regression, classification,
+    ranking, and user-defined prediction problems.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Portability: Runs smoothly on Windows, Linux, and OS X.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Languages: Supports all major programming languages including C++, Python,
+    R, Java, Scala, and Julia.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Cloud Integration: Supports AWS, Azure, and Yarn clusters and works well with
+    Flink, Spark, and other ecosystems.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: How to build an intuition for XGBoost?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Decision trees, in their simplest form, are easy-to-visualize and fairly interpretable
+    algorithms but building intuition for the next-generation of tree-based algorithms
+    can be a bit tricky. See below for a simple analogy to better understand the evolution
+    of tree-based algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ce8a0aa4b29d06c2eca8644d430fa0c4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Photo by [rawpixel](https://unsplash.com/photos/cnseVhmbA7k?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/search/photos/interview?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imagine that you are a hiring manager interviewing several candidates with excellent
+    qualifications. Each step of the evolution of tree-based algorithms can be viewed
+    as a version of the interview process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Decision Tree**: Every hiring manager has a set of criteria such as education
+    level, number of years of experience, interview performance. A decision tree is
+    analogous to a hiring manager interviewing candidates based on his or her own
+    criteria.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Bagging**: Now imagine instead of a single interviewer, now there is an interview
+    panel where each interviewer has a vote. Bagging or bootstrap aggregating involves
+    combining inputs from all interviewers for the final decision through a democratic
+    voting process.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Random Forest**: It is a bagging-based algorithm with a key difference wherein
+    only a subset of features is selected at random. In other words, every interviewer
+    will only test the interviewee on certain randomly selected qualifications (e.g.
+    a technical interview for testing programming skills and a behavioral interview
+    for evaluating non-technical skills).'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Boosting**: This is an alternative approach where each interviewer alters
+    the evaluation criteria based on feedback from the previous interviewer. This
+    ‘boosts’ the efficiency of the interview process by deploying a more dynamic evaluation
+    process.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Gradient Boosting**: A special case of boosting where errors are minimized
+    by gradient descent algorithm e.g. the strategy consulting firms leverage by using
+    case interviews to weed out less qualified candidates.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**XGBoost**: Think of XGBoost as gradient boosting on ‘steroids’ (well it is
+    called ‘Extreme Gradient Boosting’ for a reason!). It is a perfect combination
+    of software and hardware optimization techniques to yield superior results using
+    less computing resources in the shortest amount of time.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Why does XGBoost perform so well?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: XGBoost and Gradient Boosting Machines (GBMs) are both ensemble tree methods
+    that apply the principle of boosting weak learners ([CARTs](https://www.datasciencecentral.com/profiles/blogs/introduction-to-classification-regression-trees-cart) generally)
+    using the gradient descent architecture. However, XGBoost improves upon the base
+    GBM framework through systems optimization and algorithmic enhancements.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/00b082518e586d3d8b79c7b113b1441a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**How XGBoost optimizes standard GBM algorithm**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**System Optimization:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Parallelization**: XGBoost approaches the process of sequential tree building
+    using [parallelized](http://zhanpengfang.github.io/418home.html) This is possible
+    due to the interchangeable nature of loops used for building base learners; the
+    outer loop that enumerates the leaf nodes of a tree, and the second inner loop
+    that calculates the features. This nesting of loops limits parallelization because
+    without completing the inner loop (more computationally demanding of the two),
+    the outer loop cannot be started. Therefore, to improve run time, the order of
+    loops is interchanged using initialization through a global scan of all instances
+    and sorting using parallel threads. This switch improves algorithmic performance
+    by offsetting any parallelization overheads in computation.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Tree Pruning:**The stopping criterion for tree splitting within GBM framework
+    is greedy in nature and depends on the negative loss criterion at the point of
+    split. XGBoost uses ‘max_depth’ parameter as specified instead of criterion first,
+    and starts pruning trees backward. This ‘depth-first’ approach improves computational
+    performance significantly.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Hardware Optimization**: This algorithm has been designed to make efficient
+    use of hardware resources. This is accomplished by cache awareness by allocating
+    internal buffers in each thread to store gradient statistics. Further enhancements
+    such as ‘out-of-core’ computing optimize available disk space while handling big
+    data-frames that do not fit into memory.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Algorithmic Enhancements:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Regularization**: It penalizes more complex models through both LASSO (L1)
+    and Ridge (L2) [regularization](https://towardsdatascience.com/l1-and-l2-regularization-methods-ce25e7fc831c)to
+    prevent overfitting.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Sparsity Awareness**: XGBoost naturally admits sparse features for inputs
+    by automatically ‘learning’ best missing value depending on training loss and
+    handles different types of [sparsity patterns](https://www.kdnuggets.com/2017/10/xgboost-concise-technical-overview.html)in
+    the data more efficiently.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Weighted Quantile Sketch:**XGBoost employs the distributed [weighted Quantile
+    Sketch algorithm](https://arxiv.org/pdf/1603.02754.pdf) to effectively find the
+    optimal split points among weighted datasets.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Cross-validation**: The algorithm comes with built-in [cross-validation](https://towardsdatascience.com/cross-validation-in-machine-learning-72924a69872f)method
+    at each iteration, taking away the need to explicitly program this search and
+    to specify the exact number of boosting iterations required in a single run.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Where is the proof?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We used Scikit-learn’s ‘[Make_Classification](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_classification.html)’
+    data package to create a random sample of 1 million data points with 20 features
+    (2 informative and 2 redundant). We tested several algorithms such as Logistic
+    Regression, Random Forest, standard Gradient Boosting, and XGBoost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f25ea245834fda95344103c725cec06e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**XGBoost vs. Other ML Algorithms using SKLearn’s Make_Classification Dataset**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As demonstrated in the chart above, XGBoost model has the best combination of
+    prediction performance and processing time compared to other algorithms. Other
+    rigorous [benchmarking](https://github.com/szilard/benchm-ml) studies have produced
+    similar results. No wonder XGBoost is widely used in recent Data Science competitions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*“When in doubt, use XGBoost”**—**Owen Zhang, Winner of [Avito](https://blog.kaggle.com/2015/08/26/avito-winners-interview-1st-place-owen-zhang/) Context
+    Ad Click Prediction competition on Kaggle*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So should we use just XGBoost all the time?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When it comes to Machine Learning (or even life for that matter), there is no
+    free lunch. As Data Scientists, we must test all possible algorithms for data
+    at hand to identify the champion algorithm. Besides, picking the right algorithm
+    is not enough. We must also choose the right configuration of the algorithm for
+    a dataset by tuning the [hyper-parameters](https://www.analyticsvidhya.com/blog/2016/03/complete-guide-parameter-tuning-xgboost-with-codes-python/).
+    Furthermore, there are several other considerations for choosing the winning algorithm
+    such as computational complexity, explainability, and ease of implementation.
+    This is exactly the point where Machine Learning starts drifting away from science
+    towards art, but honestly, that’s where the magic happens!
+  prefs: []
+  type: TYPE_NORMAL
+- en: What does the future hold?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Machine Learning is a very active research area and already there are several
+    viable alternatives to XGBoost. Microsoft Research recently released [LightGBM](https://www.microsoft.com/en-us/research/project/lightgbm/) framework
+    for gradient boosting that shows great potential. [CatBoost](https://catboost.ai/) developed
+    by Yandex Technology has been delivering impressive bench-marking results. It
+    is a matter of time when we have a better model framework that beats XGBoost in
+    terms of prediction performance, flexibility, explanability, and pragmatism. However,
+    until a time when a strong challenger comes along, XGBoost will continue to reign
+    over the Machine Learning world!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/https-medium-com-vishalmorde-xgboost-algorithm-long-she-may-rein-edd9f99be63d).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio**: [Vishal Morde](https://www.linkedin.com/in/vishalmorde/) is a seasoned
+    executive and transformational leader with 15+ years of progressive experience
+    in Data Science, Machine Learning, Artificial Intelligence, Big Data, and Strategic
+    Analytics.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Resources:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[On-line and web-based: Analytics, Data Mining, Data Science, Machine Learning
+    education](https://www.kdnuggets.com/education/online.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Software for Analytics, Data Science, Data Mining, and Machine Learning](https://www.kdnuggets.com/software/index.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[XGBoost on GPUs: Unlocking Machine Learning Performance and Productivity](https://www.kdnuggets.com/2018/12/nvidia-xgboost-gpu-machine-learning-performance-productivity.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unveiling Mathematics Behind XGBoost](https://www.kdnuggets.com/2018/08/unveiling-mathematics-behind-xgboost.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Scientist Interviews Demystified](https://www.kdnuggets.com/2018/08/data-scientist-interviews-demystified.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What are the Assumptions of XGBoost?](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tuning XGBoost Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Leveraging XGBoost for Time-Series Forecasting](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[WTF is the Difference Between GBM and XGBoost?](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

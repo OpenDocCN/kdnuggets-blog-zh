@@ -1,0 +1,348 @@
+- en: The 8 Neural Network Architectures Machine Learning Researchers Need to Learn
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/02/8-neural-network-architectures-machine-learning-researchers-need-learn.html/2](https://www.kdnuggets.com/2018/02/8-neural-network-architectures-machine-learning-researchers-need-learn.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/02/8-neural-network-architectures-machine-learning-researchers-need-learn.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: 5 — Hopfield Networks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Recurrent networks of non-linear units are generally very hard to analyze.
+    They can behave in many different ways: settle to a stable state, oscillate, or
+    follow chaotic trajectories that cannot be predicted far into the future. A **Hopfield
+    net** is composed of binary threshold units with recurrent connections between
+    them. In 1982, [John Hopfield](http://www.pnas.org/content/79/8/2554.full.pdf) realized
+    that if the connections are symmetric, there is a global energy function. Each
+    binary “configuration” of the whole network has an energy; while the binary threshold
+    decision rule causes the network to settle for a minimum of this energy function.
+    A neat way to make use of this type of computation is to use memories as energy
+    minima for the neural net. Using energy minima to represent memories gives a content-addressable
+    memory. An item can be accessed by just knowing part of its content. It is robust
+    against hardware damage.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/389e610dd01eba5d37d2433e8cf8f61a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Each time we memorize a configuration, we hope to create a new energy minimum.
+    But what if two nearby minima at an intermediate location? This limits the capacity
+    of a Hopfield net. So how do we increase the capacity of a Hopfield net? Physicists
+    love the idea that the math they already know might explain how the brain works.
+    Many papers were published in physics journals about Hopfield nets and their storage
+    capacity. Eventually, [Elizabeth Gardner](http://www.baginsky.de/eli/eg_portr.html)figured
+    out that there was a much better storage rule that uses the full capacity of the
+    weights. Instead of trying to store vectors in one shot, she cycled through the
+    training set many times and used the perceptron convergence procedure to train
+    each unit to have the correct state given the states of all the other units in
+    that vector. Statisticians call this technique “pseudo-likelihood.”
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a5879ce459a4610c5864a73590815152.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: There is another computational role for Hopfield nets. Instead of using the
+    net to store memories, we use it to construct interpretations of sensory input.
+    The input is represented by the visible units, the interpretation is represented
+    by the states of the hidden units, and the badness of the interpretation is represented
+    by the energy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 6 — Boltzmann Machine Network
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A **Boltzmann machine** is a type of stochastic recurrent neural network. It
+    can be seen as the stochastic, generative counterpart of Hopfield nets. It was
+    one of the first neural networks capable of learning internal representations
+    and is able to represent and solve difficult combinatoric problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b30a0c0fdfe5954adf36bd121d128e76.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The goal of learning for Boltzmann machine learning algorithm is to maximize
+    the product of the probabilities that the Boltzmann machine assigns to the binary
+    vectors in the training set. This is equivalent to maximizing the sum of the log
+    probabilities that the Boltzmann machine assigns to the training vectors. It is
+    also equivalent to maximizing the probability that we would obtain exactly the
+    N training cases if we did the following: 1) Let the network settle to its stationary
+    distribution N different time with no external input; and 2) Sample the visible
+    vector once each time.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An efficient mini-batch learning procedure was proposed for Boltzmann Machines
+    by [Salakhutdinov and Hinton in 2012](http://proceedings.mlr.press/v5/salakhutdinov09a/salakhutdinov09a.pdf).
+  prefs: []
+  type: TYPE_NORMAL
+- en: For the positive phase, first initialize the hidden probabilities at 0.5, then
+    clamp a data vector on the visible units, then update all the hidden units in
+    parallel until convergence using mean field updates. After the net has converged,
+    record PiPj for every connected pair of units and average this over all data in
+    the mini-batch.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'For the negative phase: first keep a set of “fantasy particles.” Each particle
+    has a value that is a global configuration. Then sequentially update all the units
+    in each fantasy particle a few times. For every connected pair of units, average
+    SiSj over all the fantasy particles.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In a general Boltzmann machine, the stochastic updates of units need to be sequential.
+    There is a special architecture that allows alternating parallel updates which
+    are much more efficient (no connections within a layer, no skip-layer connections).
+    This mini-batch procedure makes the updates of the Boltzmann machine more parallel.
+    This is called a Deep Boltzmann Machine (DBM), a general Boltzmann machine with
+    a lot of missing connections.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2fb367be246b0e42e30f3f464619de56.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In 2014, Salakhutdinov and Hinton came up with another update for their model,
+    calling it [Restricted Boltzmann Machines](http://www.machinelearning.org/proceedings/icml2007/papers/407.pdf).
+    They restrict the connectivity to make inference and learning easier (only one
+    layer of hidden units and no connections between hidden units). In an RBM it only
+    takes one step to reach thermal equilibrium when the visible units are clamped.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Another efficient mini-batch learning procedure for RBM goes like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For the positive phase, first clamp a data vector on the visible units. Then
+    compute the exact value of <ViHj> for all pairs of a visible and a hidden unit.
+    For every connected pair of units, average <ViHj> over all data in the mini-batch.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For the negative phase, also keep a set of “fantasy particles.” Then update
+    each fantasy particle a few times using alternating parallel updates. For every
+    connected pair of units, average ViHj over all the fantasy particles.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 7 — Deep Belief Network
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/40b880c73edf17c5116730a46ce96a27.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Back-propagation is considered the standard method in artificial neural networks
+    to calculate the error contribution of each neuron after a batch of data is processed.
+    However, there are some major problems using back-propagation. Firstly, it requires
+    labeled training data; while almost all data is unlabeled. Secondly, the learning
+    time does not scale well, which means it is very slow in networks with multiple
+    hidden layers. Thirdly, it can get stuck in poor local optima, so for deep nets
+    they are far from optimal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To overcome the limitations of back-propagation, researchers have considered
+    using unsupervised learning approaches. This helps keep the efficiency and simplicity
+    of using a gradient method for adjusting the weights, but also use it for modeling
+    the structure of the sensory input. In particular, they adjust the weights to
+    maximize the probability that a generative model would have generated the sensory
+    input. The question is what kind of generative model should we learn? Can it be
+    an energy-based model like a Boltzmann machine? Or a causal model made of idealized
+    neurons? Or a hybrid of the two?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9309979c829915136afaa38be8b8b931.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'A **belief net** is a directed acyclic graph composed of stochastic variables.
+    Using belief net, we get to observe some of the variables and we would like to
+    solve 2 problems: 1) The inference problem: Infer the states of the unobserved
+    variables, and 2) The learning problem: Adjust the interactions between variables
+    to make the network more likely to generate the training data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Early graphical models used experts to define the graph structure and the conditional
+    probabilities. By then, the graphs were sparsely connected; so researchers initially
+    focused on doing correct inference, not on learning. For neural nets, learning
+    was central and hand-writing the knowledge was not cool, because knowledge came
+    from learning the training data. Neural networks did not aim for interpretability
+    or sparse connectivity to make inference easy. Nevertheless, there are neural
+    network versions of belief nets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are two types of generative neural network composed of stochastic binary
+    neurons: 1) **Energy-based**, in which we connect binary stochastic neurons using
+    symmetric connections to get a Boltzmann Machine; and 2) **Causal**, in which
+    we connect binary stochastic neurons in a directed acyclic graph to get a Sigmoid
+    Belief Net. The descriptions of these two types go beyond the scope of this article.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 8 — Deep Auto-encoders
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/a3146c500d37f940619b432a3a854e23.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Finally, let’s discuss **deep auto-encoders. **They always looked like a really
+    nice way to do non-linear dimensionality reduction because of a few reasons: They
+    provide flexible mappings both ways. The learning time is linear (or better) in
+    the number of training cases. And the final encoding model is fairly compact and
+    fast. However, it turned out to be very difficult to optimize deep auto encoders
+    using back propagation. With small initial weights, the back propagated gradient
+    dies. We now have a much better ways to optimize them; either use unsupervised
+    layer-by-layer pre-training or just initialize the weights carefully as in Echo-State
+    Nets.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For pre-training task, there are actually 3 different types of shallow auto-encoders:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**RBM’s as auto-encoders**: When we train an RBM with one-step contrastive
+    divergence, it tries to make the reconstructions look like data. It’s like an
+    auto encoder, but it’s strongly regularized by using binary activities in the
+    hidden layer. When trained with maximum likelihood, RBMs are not like auto encoders.
+    We can replace the stack of RBM’s used for pre-training by a stack of shallow
+    auto encoders; however pre-training is not as effective (for subsequent discrimination)
+    if the shallow auto encoders are regularized by penalizing the squared weights.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Denoising auto encoders**: These add noise to the input vector by setting
+    many of its components to 0 (like dropout, but for inputs). They are still required
+    to reconstructing these components so they must extract features that capture
+    correlations between inputs. Pre-training is very effective if we use a stack
+    of denoting auto encoders. It’s as good as or better than pre-training with RBMs.
+    It’s also simpler to evaluate the pre-training because we can easily compute the
+    value of the objective function. It lacks the nice variational bound we get with
+    RBMs, but this is only of theoretical interest.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Contractive auto encoders**: Another way to regularize an auto encoder is
+    to try to make the activities of the hidden units as insensitive as possible to
+    the inputs; but they cannot just ignore the inputs because they must reconstruct
+    them. We achieve this by penalizing the squared gradient of each hidden activity
+    with respect to the inputs. Contractive auto encoders work very well for pre-training.
+    The codes tend to have the property that only a small subset of the hidden units
+    are sensitive to changes in the input.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![](../Images/7ac6f888cc07b24fb8fe9dd7111e91ee.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In brief, there are now many different ways to do layer-by-layer pre-training
+    of features. For datasets that do not have huge numbers of labeled cases, pre-training
+    helps subsequent discriminative learning. For very large, labeled datasets, initializing
+    the weights used in supervised learning by using unsupervised pre-training is
+    not necessary, even for deep nets. Pre-training was the first good way to initialize
+    the weights for deep nets, but now there are other ways. But if we make the nets
+    much larger, we will need pre-training again!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Last Takeaway**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Neural networks are one of the most beautiful programming paradigms ever invented.
+    In the conventional approach to programming, we tell the computer what to do,
+    breaking big problems up into many small, precisely defined tasks that the computer
+    can easily perform. By contrast, in a neural network we don’t tell the computer
+    how to solve our problem. Instead, it learns from observational data, figuring
+    out its own solution to the problem at hand.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Today, deep neural networks and deep learning achieve outstanding performance
+    on many important problems in computer vision, speech recognition, and natural
+    language processing. They’re being deployed on a large scale by companies such
+    as Google, Microsoft, and Facebook.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I hope that this post helps you learn the core concepts of neural networks,
+    including modern techniques for deep learning. You can get all the lecture slides,
+    research papers and programming assignments I have done for Dr. Hinton’s Coursera
+    course [from my GitHub repo here](https://github.com/khanhnamle1994/neural-nets).
+    Good luck studying!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [James Le](https://www.linkedin.com/in/khanhnamle94/)** is currently
+    applying for Master of Science Computer Science programs in the US for the Fall
+    2018 admission. His intended research will focus on Machine Learning and Data
+    Mining. In the mean time, he is working as a freelance full-stack web developer.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/the-8-neural-network-architectures-machine-learning-researchers-need-to-learn-11a0c96d6073).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[The 10 Deep Learning Methods AI Practitioners Need to Apply](/2017/12/10-deep-learning-methods-ai-practitioners-need-apply.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 10 Algorithms Machine Learning Engineers Need to Know](/2016/08/10-algorithms-machine-learning-engineers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 10 Statistical Techniques Data Scientists Need to Master](/2017/11/10-statistical-techniques-data-scientists-need-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

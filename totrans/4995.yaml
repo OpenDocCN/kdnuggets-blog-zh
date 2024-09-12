@@ -1,0 +1,817 @@
+- en: Tidying Data in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/01/tidying-data-python.html](https://www.kdnuggets.com/2017/01/tidying-data-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Jean-Nicholas Hould, JeanNicholasHould.com.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I recently came across a paper named [Tidy Data](http://vita.had.co.nz/papers/tidy-data.pdf) by
+    Hadley Wickham. Published back in 2014, the paper focuses on one aspect of cleaning
+    up data, tidying data: structuring datasets to facilitate analysis. Through the
+    paper, Wickham demonstrates how any dataset can be structured in a standardized
+    way prior to analysis. He presents in detail the different types of data sets
+    and how to wrangle them into a standard format.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a data scientist, I think you should get very familiar with this standardized
+    structure of a dataset. Data cleaning is one the most frequent task in data science.
+    No matter what kind of data you are dealing with or what kind of analysis you
+    are performing, you will have to clean the data at some point. Tidying your data
+    in a standard format makes things easier down the road. You can reuse a standard
+    set of tools across your different analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post, I will summarize some tidying examples Wickham uses in his paper
+    and I will demonstrate how to do so using the Python [pandas](http://pandas.pydata.org/) library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Defining tidy data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The structure Wickham defines as tidy has the following attributes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each *variable* forms a column and contains *values*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Each *observation* forms a row
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Each type of *observational unit* forms a table
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'A few definitions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Variable: A measurement or an attribute. *Height, weight, sex, etc.*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Value: The actual measurement or attribute. *152 cm, 80 kg, female, etc.*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Observation: All values measure on the same unit. *Each person.*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'An example of a *messy dataset*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '|  | Treatment A | Treatment B |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| John Smith | - | 2 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Jane Doe | 16 | 11 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Mary Johnson | 3 | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: 'An example of a *tidy dataset*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Name | Treatment | Result |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| John Smith | a | - |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Jane Doe | a | 16 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Mary Johnson | a | 3 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| John Smith | b | 2 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Jane Doe | b | 11 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Mary Johnson | b | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: Tidying messy datasets
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Through the following examples extracted from Wickham’s paper, we’ll wrangle
+    messy datasets into the tidy format. The goal here is not to analyze the datasets
+    but rather prepare them in a standardized way prior to the analysis. These are
+    the five types of messy datasets we’ll tackle:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Column headers are values, not variable names.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Multiple variables are stored in one column.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Variables are stored in both rows and columns.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Multiple types of observational units are stored in the same table.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A single observational unit is stored in multiple tables.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Note: All of the code presented in this post is available on [Github](https://github.com/nickhould/tidy-data-python).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Column headers are values, not variable names
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Pew Research Center Dataset**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This dataset explores the relationship between income and religion.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Problem: The columns headers are composed of the possible income values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| religion | <$10k | $10-20k | $20-30k | $30-40k | $40-50k | $50-75k |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Agnostic | 27 | 34 | 60 | 81 | 76 | 137 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Atheist | 12 | 27 | 37 | 52 | 35 | 70 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Buddhist | 27 | 21 | 30 | 34 | 33 | 58 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Catholic | 418 | 617 | 732 | 670 | 638 | 1116 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Dont know/refused | 15 | 14 | 15 | 11 | 10 | 35 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Evangelical Prot | 575 | 869 | 1064 | 982 | 881 | 1486 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Hindu | 1 | 9 | 7 | 9 | 11 | 34 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Historically Black Prot | 228 | 244 | 236 | 238 | 197 | 223 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Jehovahs Witness | 20 | 27 | 24 | 24 | 21 | 30 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Jewish | 19 | 19 | 25 | 25 | 30 | 95 |'
+  prefs: []
+  type: TYPE_TB
+- en: A tidy version of this dataset is one in which the income values would not be
+    columns headers but rather values in an `income` column. In order to tidy this
+    dataset, we need to [melt](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.melt.html) it.
+    The *pandas* library has a built-in function that allows to do just that. It “unpivots”
+    a DataFrame from a wide format to a long format. We’ll reuse this function a few
+    times through the post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This outputs a tidy version of the dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| religion | income | freq |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Agnostic | <$10k | 27 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Agnostic | $30-40k | 81 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Agnostic | $40-50k | 76 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Agnostic | $50-75k | 137 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Agnostic | $10-20k | 34 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Agnostic | $20-30k | 60 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Atheist | $40-50k | 35 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Atheist | $20-30k | 37 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Atheist | $10-20k | 27 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Atheist | $30-40k | 52 |'
+  prefs: []
+  type: TYPE_TB
+- en: '**Billboard Top 100 Dataset**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This dataset represents the weekly rank of songs from the moment they enter
+    the Billboard Top 100 to the subsequent 75 weeks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Problems:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The columns headers are composed of values: the week number (`x1st.week`, …)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a song is in the Top 100 for less than 75 weeks, the remaining columns are
+    filled with missing values.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| year | artist.inverted | track | time | genre | date.entered | date.peaked
+    | x1st.week | x2nd.week | ... |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | Destiny''s Child | Independent Women Part I | 3:38 | Rock | 2000-09-23
+    | 2000-11-18 | 78 | 63.0 | ... |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | Santana | Maria, Maria | 4:18 | Rock | 2000-02-12 | 2000-04-08 | 15
+    | 8.0 | ... |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | Savage Garden | I Knew I Loved You | 4:07 | Rock | 1999-10-23 | 2000-01-29
+    | 71 | 48.0 | ... |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | Madonna | Music | 3:45 | Rock | 2000-08-12 | 2000-09-16 | 41 | 23.0
+    | ... |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | Aguilera, Christina | Come On Over Baby (All I Want Is You) | 3:38
+    | Rock | 2000-08-05 | 2000-10-14 | 57 | 47.0 | ... |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | Janet | Doesn''t Really Matter | 4:17 | Rock | 2000-06-17 | 2000-08-26
+    | 59 | 52.0 | ... |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | Destiny''s Child | Say My Name | 4:31 | Rock | 1999-12-25 | 2000-03-18
+    | 83 | 83.0 | ... |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | Iglesias, Enrique | Be With You | 3:36 | Latin | 2000-04-01 | 2000-06-24
+    | 63 | 45.0 | ... |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | Sisqo | Incomplete | 3:52 | Rock | 2000-06-24 | 2000-08-12 | 77 |
+    66.0 | ... |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | Lonestar | Amazed | 4:25 | Country | 1999-06-05 | 2000-03-04 | 81
+    | 54.0 | ... |'
+  prefs: []
+  type: TYPE_TB
+- en: A tidy version of this dataset is one without the week’s numbers as columns
+    but rather as values of a single column. In order to do so, we’ll *melt* the weeks
+    columns into a single `date` column. We will create one row per week for each
+    record. If there is no data for the given week, we will not create a row.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'A tidier version of the dataset is shown below. There is still a lot of repetition
+    of the song details: the track name, time and genre. For this reason, this dataset
+    is still not completely tidy as per Wickham’s definition. We will address this
+    in the next example.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| year | artist.inverted | track | time | genre | week | rank | date |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 1 | 87
+    | 2000-02-26 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 2 | 82
+    | 2000-03-04 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 3 | 72
+    | 2000-03-11 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 4 | 77
+    | 2000-03-18 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 5 | 87
+    | 2000-03-25 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 6 | 94
+    | 2000-04-01 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 7 | 99
+    | 2000-04-08 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | 2Ge+her | The Hardest Part Of Breaking Up (Is Getting Ba... | 3:15
+    | R&B | 1 | 91 | 2000-09-02 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | 2Ge+her | The Hardest Part Of Breaking Up (Is Getting Ba... | 3:15
+    | R&B | 2 | 87 | 2000-09-09 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | 2Ge+her | The Hardest Part Of Breaking Up (Is Getting Ba... | 3:15
+    | R&B | 3 | 92 | 2000-09-16 |'
+  prefs: []
+  type: TYPE_TB
+- en: Multiple types in one table
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Following up on the Billboard dataset, we’ll now address the repetition problem
+    of the previous table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Problems:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Multiple observational units (the `song` and its `rank`) in a single table.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'We’ll first create a `songs` table which contains the details of each song:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| year | artist.inverted | track | time | genre | song_id |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | 2Ge+her | The Hardest Part Of Breaking Up (Is Getting Ba... | 3:15
+    | R&B | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | 3 Doors Down | Kryptonite | 3:53 | Rock | 2 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | 3 Doors Down | Loser | 4:24 | Rock | 3 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | 504 Boyz | Wobble Wobble | 3:35 | Rap | 4 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | 98° | Give Me Just One Night (Una Noche) | 3:24 | Rock | 5 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | A*Teens | Dancing Queen | 3:44 | Pop | 6 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | Aaliyah | I Don''t Wanna | 4:15 | Rock | 7 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | Aaliyah | Try Again | 4:03 | Rock | 8 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2000 | Adams, Yolanda | Open My Heart | 5:30 | Gospel | 9 |'
+  prefs: []
+  type: TYPE_TB
+- en: We’ll then create a `ranks` table which only contains the `song_id`, `date` and
+    the `rank`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| song_id | date | rank |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 2000-02-26 | 87 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 2000-03-04 | 82 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 2000-03-11 | 72 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 2000-03-18 | 77 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 2000-03-25 | 87 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 2000-04-01 | 94 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 2000-04-08 | 99 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 2000-09-02 | 91 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 2000-09-09 | 87 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 2000-09-16 | 92 |'
+  prefs: []
+  type: TYPE_TB
+- en: Multiple variables stored in one column
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Tubercolosis Records from World Health Organization**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This dataset documents the count of confirmed tuberculosis cases by country,
+    year, age and sex.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Problems:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some columns contain multiple values: sex and age.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Mixture of zeros and missing values `NaN`. This is due to the data collection
+    process and the distinction is important for this dataset.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| country | year | m014 | m1524 | m2534 | m3544 | m4554 | m5564 | m65 | mu
+    | f014 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AD | 2000 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | NaN | NaN |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AE | 2000 | 2 | 4 | 4 | 6 | 5 | 12 | 10 | NaN | 3 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AF | 2000 | 52 | 228 | 183 | 149 | 129 | 94 | 80 | NaN | 93 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AG | 2000 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | NaN | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AL | 2000 | 2 | 19 | 21 | 14 | 24 | 19 | 16 | NaN | 3 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AM | 2000 | 2 | 152 | 130 | 131 | 63 | 26 | 21 | NaN | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AN | 2000 | 0 | 0 | 1 | 2 | 0 | 0 | 0 | NaN | 0 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AO | 2000 | 186 | 999 | 1003 | 912 | 482 | 312 | 194 | NaN | 247 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AR | 2000 | 97 | 278 | 594 | 402 | 419 | 368 | 330 | NaN | 121 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AS | 2000 | NaN | NaN | NaN | NaN | 1 | 1 | NaN | NaN | NaN |'
+  prefs: []
+  type: TYPE_TB
+- en: In order to tidy this dataset, we need to remove the different values from the
+    header and unpivot them into rows. We’ll first need to melt the `sex + age group`columns
+    into a single one. Once we have that single column, we’ll derive three columns
+    from it: `sex`, `age_lower` and `age_upper`. With those, we’ll be able to properly
+    build a tidy dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: This results in a *tidy dataset*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| country | year | cases | sex | age |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AD | 2000 | 0 | m | 0-14 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AD | 2000 | 0 | m | 15-24 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AD | 2000 | 1 | m | 25-34 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AD | 2000 | 0 | m | 35-44 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AD | 2000 | 0 | m | 45-54 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AD | 2000 | 0 | m | 55-64 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AE | 2000 | 3 | f | 0-14 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AE | 2000 | 2 | m | 0-14 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AE | 2000 | 4 | m | 15-24 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| AE | 2000 | 4 | m | 25-34 |'
+  prefs: []
+  type: TYPE_TB
+- en: Variables are stored in both rows and columns
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Global Historical Climatology Network Dataset**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This dataset represents the daily weather records for a weather station (MX17004)
+    in Mexico for five months in 2010.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Problems:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Variables are stored in both rows (`tmin`, `tmax`) and columns (`days`).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| id | year | month | element | d1 | d2 | d3 | d4 | d5 | d6 | d7 | d8 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| MX17004 | 2010 | 1 | tmax | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| MX17004 | 2010 | 1 | tmin | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| MX17004 | 2010 | 2 | tmax | NaN | 27.3 | 24.1 | NaN | NaN | NaN | NaN | NaN
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| MX17004 | 2010 | 2 | tmin | NaN | 14.4 | 14.4 | NaN | NaN | NaN | NaN | NaN
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| MX17004 | 2010 | 3 | tmax | NaN | NaN | NaN | NaN | 32.1 | NaN | NaN | NaN
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| MX17004 | 2010 | 3 | tmin | NaN | NaN | NaN | NaN | 14.2 | NaN | NaN | NaN
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| MX17004 | 2010 | 4 | tmax | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| MX17004 | 2010 | 4 | tmin | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| MX17004 | 2010 | 5 | tmax | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| MX17004 | 2010 | 5 | tmin | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: In order to make this dataset tidy, we want to move the three misplaced variables
+    (`tmin`, `tmax` and `days`) as three individual columns: `tmin`. `tmax` and `date`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| id | date | tmax | tmin |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| MX17004 | 2010-02-02 | 27.3 | 14.4 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| MX17004 | 2010-02-03 | 24.1 | 14.4 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| MX17004 | 2010-03-05 | 32.1 | 14.2 |'
+  prefs: []
+  type: TYPE_TB
+- en: One type in multiple tables
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Dataset: Illinois Male Baby Names for the year 2014/2015.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Problems:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data is spread across multiple tables/files.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The “Year” variable is present in the file name.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In order to load those different files into a single DataFrame, we can run a
+    custom script that will append the files together. Furthermore, we’ll need to
+    extract the “Year” variable from the file name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| rank | name | frequency | sex | year |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- | --- | --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | Noah | 837 | Male | 2014 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | Alexander | 747 | Male | 2014 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | William | 687 | Male | 2014 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | Michael | 680 | Male | 2014 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 5 | Liam | 670 | Male | 2014 |'
+  prefs: []
+  type: TYPE_TB
+- en: Final Thoughts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this post, I focused on one aspect of Wickham’s paper, the data manipulation
+    part. My main goal was to demonstrate the data manipulations in Python. It’s important
+    to mention that there is a significant section of his paper that covers the tools
+    and visualizations from which you can benefit by tidying your dataset. I did not
+    cover those in this post.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Overall, I enjoyed preparing this post and wrangling the datasets into a streamlined
+    format. The defined format makes it easier to query and filter the data. This
+    approach makes it easier to reuse libraries and code across analysis. It also
+    makes it easier to share a dataset with other data analysts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: Jean-Nicholas Hould** is a [Data Scientist from Montreal, Canada](http://jeannicholashould.com/?utm_source=kdnugget).
+    Author at JeanNicholasHould.com.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://www.jeannicholashould.com/tidy-data-in-python.html). Reposted
+    with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data Science Statistics 101](/2016/07/data-science-statistics-101.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Central Limit Theorem for Data Science](/2016/08/central-limit-theorem-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Doing Statistics with SQL](/2016/08/doing-statistics-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Step up your Python game with Fast Python for Data Science!](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Enum: How To Build Enumerations in Python](https://www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Collection of Guides on Mastering SQL, Python, Data Cleaning, Data…](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 38 Python Libraries for Data Science, Data Visualization &…](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News 22:n16, Apr 20: Top YouTube Channels for Learning…](https://www.kdnuggets.com/2022/n16.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,232 @@
+- en: The Most Underutilized Function in SQL
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/03/most-underutilized-function-sql.html](https://www.kdnuggets.com/2017/03/most-underutilized-function-sql.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Tristan Handy, Founder and President of Fishtown Analytics.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Over the past nine months I’ve worked with over a dozen venture-funded startups
+    to build out their internal analytics. In doing so, there’s a single SQL function
+    that I have come to use surprisingly often. At first it wasn’t at all clear to
+    me why I would want to use this function, but as time goes on I have found ever
+    more uses for it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SQL](../Images/7b90faf67d8c5a9b93c5838add6004a0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'What is it? **md5()**. If you’re not familiar, here’s an example snippet from
+    the Redshift docs:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Give md5() a varchar and it returns its [MD5 hash](https://en.wikipedia.org/wiki/MD5).
+    Simple... but seemingly pointless. *Why exactly would I want to use that?!*
+  prefs: []
+  type: TYPE_NORMAL
+- en: Great question. In this post I’m going to show you two uses for md5() that make
+    it one of the most powerful tools in my SQL kit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '#1: Building Yourself a Unique ID'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'I’m going to make a really strong statement here, but it’s one that I really
+    believe in: **every single** [**data model**](http://dbt.readthedocs.io/en/docs-0.6.0/guide/building-models/)
+    **in your warehouse should have a rock solid unique ID**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It’s extremely common for this not to be the case. One reason is that your
+    source data doesn’t have a unique key—if you’re syncing advertising performance
+    data from Facebook Ads via [Stitch](http://stitchdata.com/) or [Fivetran](http://fivetran.com/),
+    the source data in your ad_insights table doesn’t have a unique key you can rely
+    on. Instead, you have a combination of fields that is reliably unique (in this
+    case date and ad_id). Using that knowledge, you can build yourself a unique id
+    using md5():'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The resulting hash is a meaningless string of alphanumeric text that functions
+    as a unique identifier for your record. Of course, you could just as easily just
+    create a single concatenated varchar field that performed the same function, but
+    *it’s actually important to obfuscate the underlying logic behind the hash*: you
+    will innately treat the field differently if it looks like an id versus if it
+    looks like a jumble of human-readable text.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are a couple of reasons why creating a unique id is an important practice:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the most common causes of error is duplicate values in a key that an
+    analyst was expecting to be unique. Joins on that field will “fan out” a result
+    set in unexpected ways and can cause significant error that is difficult to troubleshoot.
+    To avoid this, only join on fields where you’ve validated the cardinality and
+    constructed a unique key where necessary.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Some BI tools require you to have a unique key in order to provide certain functionality.
+    For instance, Looker [symmetric aggregates](https://discourse.looker.com/t/symmetric-aggregates/261)
+    require a unique key in order to function.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: We create unique keys for every table and then test uniqueness on this key using
+    [dbt schema tests](http://dbt.readthedocs.io/en/master/guide/testing/). We run
+    these tests multiple times per day on [Sinter](http://sinterdata.com/)and get
+    notifications for any failures. This allows us to be completely confident of the
+    analytics we implement on top of these data models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '#2: Simplifying Complex Joins'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'This case is similar to #1 in its execution but it solves a very different
+    puzzle. Imagine the following case. You have the same Facebook Ads dataset as
+    referenced earlier but this time you have a new challenge: join that data to data
+    in your web analytics sessions table so that you can calculate Facebook [ROAS](http://www.verticalrail.com/kb/calculate-roas/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case, your available join keys are the date and your [UTM parameters](https://en.wikipedia.org/wiki/UTM_parameters)(utm_medium,
+    source, campaign, etc). Seems easy, right? Just do a join on all 6 fields and
+    call it a day.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Unfortunately that doesn’t work, for a really simple reason: it’s extremely
+    common for some subset of those fields to be null, and a null doesn’t join to
+    another null. So, that 6-field join is a dead end. You can hack together something
+    incredibly complicated using a bunch of conditional logic, but that code is hideous
+    and performs terribly (I’ve tried it).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Instead, use md5(). In both datasets, you can take the 6 fields we mentioned
+    and concatenate them together into a single string, and then call md5() on the
+    entire string. Here’s a code snippet from a client project where we did exactly
+    this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can see that this code is actually building the id on top of even more
+    fields: in this example we’re actually unioning together advertising spend data
+    from 7 different ad channels, and the data from Bing and Adwords is identified
+    by ad_group_id and keyword_id instead of by UTM parameters. The approach extends
+    cleanly.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the sessions table, you then create the exact same hashed id field. **The
+    resulting join is simple, readable, and easy to use for downstream analysis**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Resources
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Interested in implementing something like this yourself? Here are a few resources:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[dbt](https://github.com/fishtown-analytics/dbt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: (the open source tool we build and use to do all of our data modeling)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '[Facebook Ads code](https://github.com/fishtown-analytics/facebook-ads)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: (our open source Facebook Ads dbt package)
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Thanks for reading! I’m definitely curious to hear if anyone has any additional
+    clever uses for md5().
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Tristan Handy](https://twitter.com/jthandy)** is Founder and President
+    of [**Fishtown Analytics**](http://fishtownanalytics.com/). He builds open source
+    tools for advanced analytics.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://blog.fishtownanalytics.com/the-most-underutilized-function-in-sql-9279b536ed1a#.qb2x0foea).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering SQL for Data Science](/2016/06/seven-steps-mastering-sql-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Making Python Speak SQL with pandasql](/2017/02/python-speak-sql-pandasql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Doing Statistics with SQL](/2016/08/doing-statistics-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[3 More SQL Aggregate Function Interview Questions for Data Science](https://www.kdnuggets.com/2023/01/3-sql-aggregate-function-interview-questions-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Concepts You Should Know About Gradient Descent and Cost Function](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is a Function?](https://www.kdnuggets.com/2022/11/function.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Function Arguments: A Definitive Guide](https://www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Multi-label NLP: An Analysis of Class Imbalance and Loss Function…](https://www.kdnuggets.com/2023/03/multilabel-nlp-analysis-class-imbalance-loss-function-approaches.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Use the pivot_table Function for Advanced Data Summarization…](https://www.kdnuggets.com/how-to-use-the-pivot_table-function-for-advanced-data-summarization-in-pandas)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

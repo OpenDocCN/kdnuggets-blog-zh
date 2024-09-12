@@ -1,0 +1,277 @@
+- en: 'SQL Case Study: Helping a Startup CEO Manage His Data'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/09/sql-case-study-helping-startup-ceo-manage-data.html](https://www.kdnuggets.com/2018/09/sql-case-study-helping-startup-ceo-manage-data.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/09/sql-case-study-helping-startup-ceo-manage-data.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Ezz El Din Abdullah](https://www.linkedin.com/in/ezzeddinabdullah/),
+    Former Data Scientist Intern & Programming Tutor**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You may have heard that if you know English, you can mostly write queries with
+    SQL. This is almost right, because SQL is very intuitive, and it is really like
+    plain English.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this tutorial, you will learn how to create a table, insert values into it,
+    use and understand some data types, use SELECT statements, UPDATE records, use
+    some aggregate functions like COUNT(), MIN(), SUM(), use WHERE clause, remove
+    a character from a string, cast a string to numeric values, write subquery, retrieve
+    the top and bottom candidates, add a column, do a for loop, and make a histogram.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/64f8ef0e434222d28b74b283fc6e77f2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Though, if you love videos more than articles while learning, I have published
+    this article as a practical course at Udemy “[**Intuitive SQL Database Case Study**](https://www.udemy.com/intuitive-sql-databases-case-study)”.
+    This course includes all the snippets of codes written here and more in an interactive
+    way on a SQL shell.
+  prefs: []
+  type: TYPE_NORMAL
+- en: All the previous tasks can be done by showing a case study to help you find
+    some guidance to play with data in a practical way. The best thing to do while
+    reading this tutorial is to write the codes I write and please do yourself a favor
+    and make your hands dirty especially if you are a beginner because this is what
+    makes you brilliant in this language (actually true for almost anything you learn).
+    If you know some SQL, I hope you find this article useful as well and see some
+    other things might add to your knowledge.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’m working with PostgreSQL which is a general-purpose database management system,
+    but you can still do all the codes for MySQL, Oracle, DB2, etc. If you just happen
+    to find that a piece of code does not work, please ask google about the syntax
+    of the database management system you use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s say, we would like to have this table:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Id | name | age | city | salary |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | Wael | 23 | Cairo | 800$ |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | Ragab | 24 | Giza | 900$ |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | Ali | 24 | Giza | 1500$ |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | Othman | 25 | Giza | 2000$ |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 5 | Waleed | 26 | Cairo | 2100$ |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 6 | Abdo | 23 | Alex | 900$ |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 7 | Moetaz | 22 | Cairo | 800$ |'
+  prefs: []
+  type: TYPE_TB
+- en: '**Creating a table:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can create such a table using the following query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s see in more detail what happened for what we wrote. We created a table
+    using create(). The table is called startup and it includes the id city with the
+    data type integer with no possible NULL values; we’ll see why later. The second
+    column is ‘name’ whose data type is a varchar(10) which is a variable-length character
+    of 10 characters i.e. ‘Ali’ will take 3 character-size in memory while ‘Othman’
+    will take 6 character-size in memory. This column can also be stored as a char
+    which is a fixed-length character of 10 but in this case ‘Ali’ will take 10 character-size
+    in memory while ‘Othman’ will take also 10 character-size in memory. The ‘name’
+    column can also be stored as a text which is not very wise for storage because
+    text can take up to 2GB of text data in memory. When writing queries, you should
+    put storage into consideration because your table can contain large amounts of
+    data and retrieving them may not be as fast as you desire.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Back to the query, the ‘name’ column cannot be NULL (i.e. should contain a name
+    not nothing). The ‘age’ column contains integer values and only the positive numbers
+    are allowed. The ‘city’ and ‘salary’ contain variable-length character of 10 and
+    5 characters respectively. Finally, the ‘id’ column contain unique values (a primary
+    key). This means it cannot contain duplicate values (integers in our case). This
+    syntax could be done when defining id as int, so it can be done as such ‘id int
+    primary key not null’.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice that SQL is case insensitive, so any key words from the above query can
+    be lower case, but it’s a good practice to make them in upper case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Retrieving the data:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, we can retrieve what we have so far through:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The SELECT clause is the most used key word in SQL. This query simply can retrieve
+    all the data from the startup table. As we can use from the result, it includes
+    all the columns we created with 0 rows in it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Inserting values into a table:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s fill the first row in this table:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now the first row is done:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Id | name | age | city | salary |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | Wael | 23 | Cairo | 800$ |'
+  prefs: []
+  type: TYPE_TB
+- en: 'Let’s write the previous query again and see what happens:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We see an error telling us:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: That’s because the id is a primary key and can only contain unique values not
+    duplicates like the id = 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you made a mistake and enter a negative number for the age like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'You will get an error:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: That’s because you already made a constraint with a CHECK clause to include
+    only the positive numbers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s do another query to form the second row:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s see what will happen if I do the following to fill the third row:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'There is an error telling us:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: That’s because the column ‘name’ which contains ‘Ali’ is not appearing as a
+    string so we need to put it between single quotes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When forming the fourth row:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s fill the rest of the columns:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In the last row, I made a mistake and put the salary 2000$ not 800$. We can
+    fix this by an updating query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: The UPDATE clause is used followed by the name of the table setting the salary
+    to 800$ for a condition where we do know that it defines the row of interest like
+    the id = 7.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Inserting into specific columns:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s try to add another row with specific columns; id and salary values:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This will introduce an error telling us:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: This means you must fill the column ‘name’ because we defined it as NOT NULL
+    which means we can NOT let it empty; it must take value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So, we can fix this by adding the name column to the query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Automated Machine Learning with Python: A Case Study](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[12 Tips: From Data Analyst to Startup Co-Founder](https://www.kdnuggets.com/2021/12/12-tips-data-analyst-to-co-founder.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Hurdles of Building a Deep Tech Startup in the Age of ChatGPT](https://www.kdnuggets.com/2023/04/10-hurdles-building-deep-tech-startup-age-chatgpt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, August 31: The Complete Data Science Study Roadmap…](https://www.kdnuggets.com/2022/n35.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Super Study Guide: A Free Algorithms and Data Structures eBook](https://www.kdnuggets.com/2022/06/super-study-guide-free-algorithms-data-structures-ebook.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Complete Data Science Study Roadmap](https://www.kdnuggets.com/2022/08/complete-data-science-study-roadmap.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

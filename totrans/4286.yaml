@@ -1,0 +1,348 @@
+- en: Production-Ready Machine Learning NLP API with FastAPI and spaCy
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/04/production-ready-machine-learning-nlp-api-fastapi-spacy.html](https://www.kdnuggets.com/2021/04/production-ready-machine-learning-nlp-api-fastapi-spacy.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Julien Salinas](https://www.linkedin.com/in/julien-salinas-673b3811/),
+    Full Stack Developer, Founder and CTO of [NLPCloud.io](https://nlpcloud.io)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![FastAPI and spaCy](../Images/da0fac2c080db8d7cb5d9d06d8f799b8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[FastAPI](https://fastapi.tiangolo.com/) is a new Python API framework that
+    is more and more used in production today. We are using FastAPI under the hood
+    behind [NLP Cloud](https://nlpcloud.io/). NLP Cloud is an API based on spaCy and
+    HuggingFace transformers in order to propose Named Entity Recognition (NER), sentiment
+    analysis, text classification, summarization, and much more. FastAPI helped us
+    quickly build a fast and robust machine learning API serving NLP models.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let me tell you why we made such a choice, and show you how to implement an
+    API based on FastAPI and spaCy for Named Entity Recognition (NER).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why FastAPI?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Until recently, I’ve always used Django Rest Framework for Python APIs. But
+    FastAPI is proposing several interesting features:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is very fast
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is well documented
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is easy to use
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It automatically generates API schemas for you (like OpenAPI)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It uses type validation with Pydantic under the hood. For a Go developer like
+    myself who is used to static typing, it’s very cool to able to leverage type hints
+    like this. It makes the code clearer, and less error-prone.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: FastAPI’s performances are supposed to make it a great candidate for machine
+    learning APIs. Given that we’re serving a lot of demanding NLP models based on
+    spaCy and transformers at NLP Cloud, FastAPI is a great solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Set Up FastAPI
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The first option you have is to install FastAPI and Uvicorn (the ASGI server
+    in front of FastAPI) by yourself:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you can see, FastAPI is running behind an ASGI server, which means it can
+    natively work with asynchronous Python requests with asyncio.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Then you can run your app with something like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Another option is to use one the Docker images generously provided by Sebastián
+    Ramírez, the creator of FastAPI. These images are maintained and work out of the
+    box.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example the [Uvicorn + Gunicorn + FastAPI](https://github.com/tiangolo/uvicorn-gunicorn-fastapi-docker) image
+    adds Gunicorn to the stack in order to handle parallel processes. Basically Uvicorn
+    handles multiple parallel requests within one single Python process, and Gunicorn
+    handles multiple parallel Python processes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The application is supposed to automatically start with `docker run` if you
+    properly follow the image documentation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These images are customizable. For example, you can tweak the number of parallel
+    processes created by Gunicorn. It’s important to play with such parameters depending
+    on the resources demanded by your API. If your API is serving a machine learning
+    model that takes several GBs of memory, you might want to decrease Gunicorn’s
+    default concurrency, otherwise your application will quickly consume too much
+    memory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Simple FastAPI + spaCy API for NER
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s say you want to create an API endpoint that is doing Named Entity Recognition
+    (NER) with [spaCy](https://spacy.io/). Basically, NER is about extracting entities
+    like name, company, job title… from a sentence. [More details about NER here](https://nlpcloud.io/nlp-named-entity-recognition-ner-api.html) if
+    needed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This endpoint will take a sentence as an input, and will return a list of entities.
+    Each entity is made up of the position of the first character of the entity, the
+    last position of the entity, the type of the entity, and the text of the entity
+    itself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The endpoint will be queried with POST requests this way:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And it will return something like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here is how we could do it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: The first important thing here is that we’re loading the spaCy model. For our
+    example we’re using a large spaCy pre-trained model for the english language.
+    Large models take more memory and more disk space, but give a better accuracy
+    as they were trained on bigger datasets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Later, we are using this spaCy model for NER by doing the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The second thing, which is an amazing feature of FastAPI, is the ability to
+    force data validation with Pydantic. Basically, you need to declare in advance
+    which will be the format of your user input, and the format of the API response.
+    If you’re a Go developer, you’ll find it very similar to JSON unmarshalling with
+    structs. For example, we are declaring the format of a returned entity this way:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that `start` and `end` are positions in the sentence, so they are integers,
+    and `type` and `text` are strings. If the API is trying to return an entity that
+    does not implement this format (for example if `start` is not an integer), FastAPI
+    will raise an error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As you can see, it is possible to embed a validation class into another one.
+    Here we are returning a list of entities, so we need to declare the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Some simple types like `int` and `str` are built-in, but more complex types
+    like `List` need to be explicitly imported.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For brevity reasons, the response validation can be implemented within a decorator:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: More Advanced Data Validation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'You can do many more advanced validation things with FastAPI and Pydantic.
+    For example, if you need the user input to have a minimum length of 10 characters,
+    you can do the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now, what if Pydantic validation passes, but you later realize that there’s
+    something wrong with the data so you want to return an HTTP 400 code?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Simply raise an `HTTPException`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: It’s just a couple of examples, you can do much more! Just have a look at the
+    FastAPI and Pydantic docs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Root Path
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It’s very common to run such APIs behind a reverse proxy. For example we’re
+    using the Traefik reverse proxy behind NLPCloud.io.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A tricky thing when running behind a reverse proxy is that your sub-application
+    (here the API) does not necessarily know about the whole URL path. And actually
+    that’s great because it shows that your API is loosely coupled to the rest of
+    your application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example here we want our API to believe that the endpoint URL is `/entities`,
+    but actually the real URL might be something like `/api/v1/entities`. Here’s how
+    to do it by setting a root path:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'You can also achieve it by passing an extra parameter to Uvicorn in case you’re
+    starting Uvicorn manually:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As you can see, creating an API with FastAPI is dead simple, and the validation
+    with Pydantic makes the code very expressive (and then needs less documentation
+    in return) and less error-prone.
+  prefs: []
+  type: TYPE_NORMAL
+- en: FastAPI comes with great performances and the possibility to use asynchronous
+    requests out of the box with asyncio, which is great for demanding machine learning
+    models. The example above about Named Entity Extraction with spaCy and FastAPI
+    can almost be considered as production-ready (of course the API code is only a
+    small part of a full clustered application). So far, FastAPI has never been the
+    bottleneck in our NLPCloud.io infrastructure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have any question, please don’t hesitate to ask!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Existe aussi en français](https://juliensalinas.com/fr/api-machine-learning-nlp-production-fastapi-nlpcloud)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Julien Salinas](https://www.linkedin.com/in/julien-salinas-673b3811/)**
+    is a Full-Stack engineer, expert in Python/Django, Go, Vue.js, Linux and Docker.
+    He is the founder and CTO of [NLPCloud.io](https://nlpcloud.io), an API that helps
+    developers and data scientists use NLP easily in production. He likes the mountains,
+    skiing, boxing... and he''s the father of 2 boys.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://juliensalinas.com/en/machine-learning-nlp-api-production-fastapi-nlpcloud/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to Apply Transformers to Any Length of Text](/2021/04/apply-transformers-any-length-text.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Deploy a Flask API in Kubernetes and Connect it with Other Micro-services](/2021/02/deploy-flask-api-kubernetes-connect-micro-services.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why Do Machine Learning Projects Fail?](/2021/02/why-machine-learning-projects-fail.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Getting Started with spaCy for NLP](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing with spaCy](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[FastAPI Tutorial: Build APIs with Python in Minutes](https://www.kdnuggets.com/fastapi-tutorial-build-apis-with-python-in-minutes)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Meet Gorilla: UC Berkeley and Microsoft’s API-Augmented LLM…](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[OpenAI’s Whisper API for Transcription and Translation](https://www.kdnuggets.com/2023/06/openai-whisper-api-transcription-translation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Access and Use Gemini API for Free](https://www.kdnuggets.com/how-to-access-and-use-gemini-api-for-free)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

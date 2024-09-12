@@ -1,0 +1,322 @@
+- en: Reducing the High Cost of Training NLP Models With SRU++
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/03/reducing-high-cost-training-nlp-models-sru.html](https://www.kdnuggets.com/2021/03/reducing-high-cost-training-nlp-models-sru.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Tao Lei, PhD](https://www.asapp.com/blog/author/taolei/), Research Leader
+    and Scientist at ASAPP**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Natural language models have achieved various groundbreaking results in NLP
+    and related fields [[1](https://arxiv.org/abs/1810.04805), [2](https://arxiv.org/abs/2005.14165), [3](https://openai.com/blog/dall-e/), [4](https://arxiv.org/abs/1910.13461)].
+    At the same time, the size of these models have increased enormously, growing
+    to millions (or even billions) of parameters, along with a significant increase
+    in the financial cost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The cost associated with training large models limits the research communities
+    ability to innovate, because a research project often needs a lot of experimentation.
+    Consider training a top-performing language model [[5](https://arxiv.org/abs/1809.10853)]
+    on the [Billion Word](https://opensource.google/projects/lm-benchmark) benchmark.
+    A single experiment would take 384 GPU days (6 days * 64 V100 GPUs, or as much
+    as $36,000 using AWS on-demand instances). That high cost of building such models
+    hinders their use in real-world business, and makes monetization of AI & NLP technologies
+    more difficult.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our model obtains better perplexity and bits-per-character (bpc) while using
+    2.5x-10x less training time and cost compared to top-performing Transformer models.
+    Our results reaffirm the empirical observations that attention is not all we need.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: —[Tao Lei, PhD](https://www.asapp.com/blog/author/taolei/)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The increasing computation time and cost highlight the importance of inventing
+    computationally efficient models that retain top modeling power with reduced or
+    accelerated computation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Transformer [architecture](https://arxiv.org/abs/1706.03762) was proposed
+    to accelerate model training in NLP. Specifically, it is built entirely upon self-attention
+    and avoids the use of recurrence. The rationale of this design choice, as mentioned
+    in the original work, is to enable strong parallelization (by utilizing the full
+    power of GPUs and TPUs). In addition, the attention mechanism is an extremely
+    powerful component that permits efficient modeling of variable-length inputs.
+    These advantages have made Transformer an expressive and efficient unit, and as
+    a result, the predominant architecture for NLP.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A couple of interesting questions arises following the development of Transformer:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is attention all we need for modeling?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If recurrence is not a compute bottleneck, can we find better architectures?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**SRU++ and related work**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We present SRU++ as a possible answer to the above question. The inspiration
+    of SRU++ comes from two lines of research:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, previous works have tackled the parallelization/speed problem of RNNs
+    and proposed various fast recurrent networks [[7](https://arxiv.org/abs/1611.01576), [8](https://arxiv.org/abs/1709.02755), [9](https://arxiv.org/abs/1708.06834), [10](https://arxiv.org/abs/1905.13324)].
+    Examples include [Quasi-RNN](https://github.com/salesforce/pytorch-qrnn) and Simple
+    Recurrent Unit ([SRU](https://github.com/asappresearch/sru)), both are highly-parallelizable
+    RNNs. **The advance eliminates the need of eschewing recurrences to trade training
+    efficiency**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Second, several recent works have achieved strong results by leveraging recurrence
+    in conjunction with self-attention. For example, [Merity](https://arxiv.org/abs/1911.11423) (2019)
+    demonstrated a single-headed attention LSTM ([SHA-LSTM](https://github.com/Smerity/sha-rnn))
+    is sufficient to achieve competitive results on character-level language modeling
+    task while requiring significantly less training time. In addition, RNNs have
+    been incorporated into Transformer architectures, resulting in better results
+    on machine translation and natural language understanding tasks [[8](https://arxiv.org/abs/1709.02755), [12](https://arxiv.org/abs/2003.07000)]. **These
+    results suggest that recurrence and attention are complementary at sequence modeling**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In light of the previous research, we enhance the modeling capacity of SRU by
+    incorporating self-attention as part of the architecture. A simple illustration
+    of the resulting architecture SRU++ is shown in Figure 1c.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![ASAPP - Figure 1: An illustration of SRU and SRU++ networks. (a) the original
+    SRU network, (b) the SRU variant using a projection trick to reduce the number
+    of parameters, experimented in Lei et al. (2018), and (c) SRU++ proposed in this
+    work. Numbers indicate the hidden size of intermediate inputs / outputs. A more
+    detailed description of SRU and SRU++ is provided in our paper.](../Images/bc626d6b413b0cd5ff1e1564306c3101.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 1: An illustration of SRU and SRU++ networks. (a) the original SRU network,
+    (b) the SRU variant using a projection trick to reduce the number of parameters,
+    experimented in Lei et al. (2018), and (c) SRU++ proposed in this work. Numbers
+    indicate the hidden size of intermediate inputs / outputs. A more detailed description
+    of SRU and SRU++ is provided in our paper.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: SRU++ replaces the linear mapping of the input (Figure 1a) by first projecting
+    the input into a smaller dimension. An attention operation is then applied, followed
+    by a residual connection. The dimension is projected back to the hidden size needed
+    by the elementwise recurrence operation of SRU. In addition, not every SRU++ layer
+    needs attention. When the attention is disabled in SRU++, the network reduces
+    to a SRU variant using dimension reduction to reduce the number of parameters
+    (Figure 1b).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Results**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**1\. SRU++ is a highly-efficient neural architecture**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We evaluate SRU++ on several language modeling benchmarks such as Enwik8 dataset.
+    Compared to Transformer models such as Transformer-XL, SRU++ can achieve similar
+    results using only a fraction of the resources. Figure 2 compares the training
+    efficiency between the two with directly comparable training settings. SRU++ is
+    8.7x more efficient to surpass the dev result of Transformer-XL, and 5.1x more
+    efficient to reach a BPC (bits-per-character) of 1.17.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![ASAPP - Figure 2: Dev BPC on Enwik8 dataset vs GPU hours used for training.
+    The SRU++ and Transformer-XL model both have 41-42M parameters and are trained
+    with fp32 precision and comparable settings (such as learning rate). ](../Images/10af8624da3dff307c63e66480a869e8.png)Figure
+    2: Dev BPC on Enwik8 dataset vs GPU hours used for training. The SRU++ and Transformer-XL
+    model both have 41-42M parameters and are trained with fp32 precision and comparable
+    settings (such as learning rate).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **Model** | **Dataset** | **Result** | **GPU Days** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| [Longformer](https://arxiv.org/pdf/2004.05150.pdf) | Enwik8 | 0.99 | 104*
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| [All-attention network](https://arxiv.org/pdf/1907.01470.pdf) | Enwik8 |
+    0.98 | 64 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| SRU++ | Enwik8 | 0.97 | 7* |'
+  prefs: []
+  type: TYPE_TB
+- en: '| SRU++ | Enwik8 | 0.96 | 15* |'
+  prefs: []
+  type: TYPE_TB
+- en: '| [Transformer](https://arxiv.org/pdf/1809.10853.pdf) | Wiki-103 | 18.7 | 22*
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| [Feedback Transformer](https://arxiv.org/pdf/2002.09402v2.pdf) | Wiki-103
+    | 18.2 | 214 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| SRU++ | Wiki-103 | 18.4 | 8* |'
+  prefs: []
+  type: TYPE_TB
+- en: '| SRU++ | Wiki-103 | 17.8 | 12* |'
+  prefs: []
+  type: TYPE_TB
+- en: 'Table 1: Comparison of reported training costs (measured by total GPU days
+    used) and test results between SRU++ and various Transformer models. (*) indicates
+    mixed precision training. Numbers are lower the better.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Table 1 further compares the training cost of SRU++ and reported costs of leading
+    Transformer-based models on [Enwik8](http://mattmahoney.net/dc/textdata) and [Wiki-103](https://www.salesforce.com/products/einstein/ai-research/the-wikitext-dependency-language-modeling-dataset/) datasets.
+    Our model can achieve over 10x cost reduction while still outperforming the baseline
+    models on test perplexity or BPC.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2\. Little attention is needed given recurrence**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similar to the observation of Merity (2019), we found using a couple of attention
+    layers sufficient to obtain state-of-the-art results. Table 2 shows an analysis
+    by only enabling the attention computation every k layers of SRU++.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **Number of layers w/ attention** | **Test BPC** (42M model) | **Test BPC**
+    (108M model) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | 1.190 | – |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 1.033 | 0.991 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | 1.032 | 0.980 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 5 | 1.025 | 0.977 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 10 | 1.022 | 0.974 |'
+  prefs: []
+  type: TYPE_TB
+- en: 'Table 2: Test BPC on Enwik8 dataset by varying the number of active attention
+    sub-layers in SRU++ models. We tested two 10-layer SRU++ models with 42M and 108M
+    parameters respectively. Most of the gains are obtained using 1 or 2 attention
+    sub-layers. Numbers are lower the better.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Conclusion**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We present a recurrent architecture with optional built-in self-attention that
+    achieves leading model capacity and training efficiency. We demonstrate that highly
+    expressive and efficient models can be derived using a combination of attention
+    and fast recurrence. Our results reaffirm the empirical observations that attention
+    is not all we need, and can be complemented by other sequential modeling modules.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*For further reading, ASAPP also conducts research to reduce the cost of model
+    inference. See our published work on model [distillation](https://www.aclweb.org/anthology/2020.emnlp-main.494.pdf) and [pruning](https://www.aclweb.org/anthology/2020.emnlp-main.496.pdf) for
+    example.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Tao Lei, PhD](https://www.asapp.com/blog/author/taolei/)** is a Research
+    Leader and Scientist at ASAPP leading an applied research team for natural language
+    processing (NLP) and machine learning. Prior to joining ASAPP, Dr. Lei received
+    his PhD from MIT in 2017, where he was advised by Prof. Regina Barzilay. Dr. Lei’s
+    research interest lies within the algorithmic perspective of machine learning
+    and applications to NLP.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.asapp.com/blog/reducing-the-high-cost-of-training-nlp-models-with-sru/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Google’s Model Search is a New Open Source Framework that Uses Neural Networks
+    to Build Neural Networks](/2021/03/google-model-search-open-source-framework.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deep Learning Pioneer Geoff Hinton on his Latest Research and the Future of
+    AI](/2021/01/deep-learning-pioneer-geoff-hinton-research-future-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[2011: DanNet triggers deep CNN revolution](/2021/02/dannet-triggers-deep-cnn-revolution.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Concepts You Should Know About Gradient Descent and Cost Function](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[HuggingChat Python API: Your No-Cost Alternative](https://www.kdnuggets.com/2023/05/huggingchat-python-api-alternative.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Is Academia Obsessing Over Methodology at the Cost of True Insights?](https://www.kdnuggets.com/is-academia-obsessing-over-methodology-at-the-cost-of-true-insights)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Generative AI with Large Language Models: Hands-On Training](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The High Paying Side Hustles for Data Scientists](https://www.kdnuggets.com/2022/01/high-paying-side-hustles-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[People Management for AI: Building High-Velocity AI Teams](https://www.kdnuggets.com/2022/03/people-management-ai-building-highvelocity-ai-teams.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,423 @@
+- en: Activation maps for deep learning models in a few lines of code
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/10/activation-maps-deep-learning-models-lines-code.html](https://www.kdnuggets.com/2019/10/activation-maps-deep-learning-models-lines-code.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/172d14ff552ce3f79ca30349d8fb3b5d.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Deep learning has a bad rep: ‘black-box’'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**D**eep **L**earning (DL) models are [revolutionizing the business and technology
+    world with jaw-dropping performances](https://tryolabs.com/blog/2018/12/19/major-advancements-deep-learning-2018/) in
+    one application area after another — image classification, object detection, object
+    tracking, pose recognition, video analytics, synthetic picture generation — just
+    to name a few.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, they are like anything but classical **M**achine **L**earning (ML)
+    algorithms/techniques. DL models use millions of parameters and create extremely
+    complex and highly nonlinear internal representations of the images or datasets
+    that are fed to these models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: They are, therefore, often called the [**perfect black-box ML techniques**](https://www.wired.com/story/inside-black-box-of-neural-network/).
+    We can get highly accurate predictions from them after we train them with large
+    datasets, but [**we have little hope of understanding the internal features and
+    representations**](https://www.technologyreview.com/s/604087/the-dark-secret-at-the-heart-of-ai/)of
+    the data that a model uses to classify a particular image into a category.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/228630f7ce878a88a50a6d3e86d74745.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Source**: [CMU ML blog](https://blog.ml.cmu.edu/2019/05/17/explaining-a-black-box-using-deep-variational-information-bottleneck-approach/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Black-box problem of deep learning — predictive power without an intuitive and
+    easy-to-follow explanation.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This does not bode well because [we, humans, are visual creatures](https://www.seyens.com/humans-are-visual-creatures/).
+    Millions of years of evolution have gifted us an [amazingly complex pair of eyes](https://www.relativelyinteresting.com/irreducible-complexity-intelligent-design-evolution-and-the-eye/) and
+    an even more complex [visual cortex](https://www.neuroscientificallychallenged.com/blog/know-your-brain-primary-visual-cortex),
+    and we use those organs for making sense of the world.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/2dd409def7456c9d29aee92c4297bb0a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Source**: Wikimedia'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The scientific process starts with observation, and that is almost always synonymous
+    with vision. In business, only what we can observe and measure, we can control
+    and manage effectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Seeing/observing is how we start to [make mental models of worldly phenomena](https://medium.com/personal-growth/mental-models-898f70438075),
+    classify objects around us, separate a friend from a foe, love, work, and play.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Visualization helps a lot. Especially, for deep learning.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Therefore, a ‘black box’ DL model, where we cannot visualize the inner workings,
+    often draws some criticism.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Activation maps
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Among various deep learning architectures, perhaps the most prominent one is
+    the so-called **C**onvolutional **N**eural **N**etwork (CNN). [It has emerged
+    as the workhorse for analyzing high-dimensional, unstructured data](https://www.flatworldsolutions.com/data-science/articles/7-applications-of-convolutional-neural-networks.php) —
+    image, text, or audio — which has traditionally posed severe challenges for classical
+    ML (non-deep-learning) or hand-crafted (non-ML) algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Several approaches for understanding and visualizing CNN have been developed
+    in the[ literature](https://arxiv.org/pdf/1806.00069.pdf), partly as a response
+    to the common criticism that the learned internal features in a CNN are not interpretable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The most straight-forward visualization technique is to show the activations** of
+    the network during the forward pass.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, what are activation anyway?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: At a simple level, activation functions help decide whether a neuron should
+    be activated. This helps determine whether the information that the neuron is
+    receiving is relevant for the input. The activation function is a non-linear transformation
+    that happens over an input signal, and the transformed output is sent to the next
+    neuron.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to understand what precisely, these activations mean, and why are
+    they placed in the neural net architecture in the first place, check out this
+    article,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Fundamentals of Deep Learning - Activation Functions and When to Use Them?](https://www.analyticsvidhya.com/blog/2017/10/fundamentals-deep-learning-activation-functions-when-to-use-them/?source=post_page-----ed9ced1e8d21----------------------)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction Internet provides access to a plethora of information today. Whatever
+    we need is just a Google (search)…
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below is a fantastic video by the renowned data scientist [Brandon Rohrer](https://brohrer.github.io/blog.html) about
+    the basic mechanism of a CNN i.e. how a given input (say a two-dimensional image)
+    is processed layer by layer. At each layer, the output is generated by passing
+    the transformed input through an activation function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Activation maps are just a visual representation of these activation numbers
+    at various layers of the network as a given image progresses through as a result
+    of various linear algebraic operations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For ReLU activation based networks, the activations usually start out looking
+    relatively blobby and dense, but as the training progresses the activations usually
+    become more sparse and localized. One design pitfall that can be easily caught
+    with this visualization is that some activation maps may be all zero for many
+    different inputs, which can indicate *dead* filters and can be a symptom of high
+    learning rates.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Activation maps are just a visual representation of these activation numbers
+    at various layers of the network.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Sounds good. **But visualizing these activation maps is a non-trivial task**,
+    even after you have trained your neural net well and are making predictions out
+    of it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How do you easily visualize and show these activation maps for a reasonably
+    complicated CNN with just a few lines of code?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Activation maps with a few lines of code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The whole [**Jupyter notebook is here**](https://github.com/tirthajyoti/Deep-learning-with-Python/blob/master/Notebooks/Keract-activation.ipynb).
+    Feel free to fork and expand (and leave a star for the repository if you like
+    it).
+  prefs: []
+  type: TYPE_NORMAL
+- en: A compact function and a nice little library
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I showed previously in an article, how to write a single compact function for
+    obtaining a fully trained CNN model by reading image files one by one automatically
+    from your disk, by utilizing some amazing utility methods and classes offered
+    by Keras library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Do check out this article, because, without it, you cannot train arbitrary
+    models with arbitrary image datasets in a compact manner, as described in this
+    article**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[A single function to streamline image classification with Keras](https://towardsdatascience.com/a-single-function-to-streamline-image-classification-with-keras-bd04f5cfe6df?source=post_page-----ed9ced1e8d21----------------------)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We show, how to construct a single, generalized, utility function to pull images
+    automatically from a directory and…
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, we use this function along with a [nice little library called **Keract**](https://github.com/philipperemy/keract),
+    which makes the visualization of activation maps super easy. It is a high-level
+    accessory library to Keras library to show useful heatmaps and activation maps
+    on various layers of a neural network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7f9b95d5762d427bbc693c00547d8031.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Therefore, for this code, we need to use a couple of utility functions from
+    my `utils.DL_utils` module - `train_CNN_keras` and `preprocess_image` to make
+    a random RGB image compatible for generating the activation maps (these were described
+    in the article mentioned above).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Here is the Python module — **](https://raw.githubusercontent.com/tirthajyoti/Deep-learning-with-Python/master/Notebooks/utils/DL_utils.py)`[**DL_utils.py**](https://raw.githubusercontent.com/tirthajyoti/Deep-learning-with-Python/master/Notebooks/utils/DL_utils.py)`.
+    You can store in your local drive and import the functions as usual.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For training, we are using the famous **Caltech-101 dataset** from [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/).
+    This dataset was somewhat a **precursor to the **[**ImageNet database**](http://image-net.org/),
+    which is the current gold standard for image classification data repository.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8359b9ee76f7e1baadf3f4b32d961dbe.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It is an image dataset of diverse types of objects belonging to 101 categories.
+    There are about 40 to 800 images per category. Most categories have about 50 images.
+    The size of each image is roughly 300 x 200 pixels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, we are training only with 5 categories of images — *crab, cup, brain,
+    camera*, and *chair*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is just a random choice for this demo, feel free to choose your own categories.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training the model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Training is done in a few lines of code only.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A random image of a human brain downloaded from the internet
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For generating the activations, we download a random image of a human brain
+    from the internet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e1cc6c7c6432e84e966a75c041976532.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Generate the activations (a dictionary)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Then, another couple of lines of code to generate the activation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We get back a dictionary with layer names as the keys and Numpy arrays as the
+    values corresponding to the activations. Below an illustration is shown where
+    the activation arrays are shown to have varying lengths corresponding to the size
+    of the filter maps of that particular convolutional layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e1e45d99f81c3869ca6b14a5a8bd9187.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Display the activations
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Again, a single line of code,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: We get to see activation maps layer by layer. Here is the first convolutional
+    layer (**16 images corresponding to the 16 filters**)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5f4f3379ba06ffb4a3200e1007ea1782.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And, here is layer number 2 (**32 images corresponding to the 32filters**)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ba89486af99001bec03612730c27143a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We have 5 convolutional layers (followed by Max pooling layers) in this model,
+    and therefore, we get back 10 sets of images. For brevity, I am not showing the
+    rest but you can see them all in my Github repo here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Heatmaps
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can also show the activations as heatmaps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/184d2017bb4c94276a95a1bbf687f1dc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Update: Quiver'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After writing this article last week, I found out about another beautiful library
+    for activation visualization called [**Quiver**](https://github.com/keplr-io/quiver).
+    However, this one is built on the Python microserver framework Flask and displays
+    the activation maps on a browser port rather than inside your Jupyter Notebook.
+  prefs: []
+  type: TYPE_NORMAL
+- en: They also need a trained Keras model as input. So, you can easily use the compact
+    function described in this article (from my [DL_uitls module](https://github.com/tirthajyoti/Deep-learning-with-Python/blob/master/Notebooks/utils/DL_utils.py))
+    and try this library for interactive visualization of activation maps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/20f533df1b28d1fd7fd6d9a0b9c266fa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: That’s it, for now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The whole [**Jupyter notebook is here**](https://github.com/tirthajyoti/Deep-learning-with-Python/blob/master/Notebooks/Keract-activation.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We showed, how using only a few lines of code (utilizing compact functions from
+    a special module and a nice little accessory library to Keras) we can train a
+    CNN, generate activation maps, and display them layer by layer — from scratch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This gives you the ability to train CNN models (simple to complex) from any
+    image dataset (as long as you can arrange it in a simple format) and look inside
+    their guts for any test image you want.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For more of such hands-on tutorials, [**check my Deep-Learning-with-Python Github
+    repo**](https://github.com/tirthajyoti/Deep-learning-with-Python).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have any questions or ideas to share, please contact the author at [**tirthajyoti[AT]gmail.com**](mailto:tirthajyoti@gmail.com).
+    Also, you can check the author’s [**GitHub**](https://github.com/tirthajyoti?tab=repositories)** repositories **for
+    other fun code snippets in Python, R, and machine learning resources. If you are,
+    like me, passionate about machine learning/data science, please feel free to [add
+    me on LinkedIn](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) or [follow
+    me on Twitter.](https://twitter.com/tirthajyotiS)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/activation-maps-for-deep-learning-models-in-a-few-lines-of-code-ed9ced1e8d21).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Overcoming Deep Learning Stumbling Blocks](/2019/10/overcoming-deep-learning-stumbling-blocks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Evolving Deep Neural Networks](/2019/06/evolving-deep-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Research Guide for Neural Architecture Search](/2019/10/research-guide-neural-architecture-search.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

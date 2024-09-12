@@ -1,0 +1,1007 @@
+- en: 'Interpretability: Cracking open the black box, Part 2'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/12/interpretability-black-box-part-2.html](https://www.kdnuggets.com/2019/12/interpretability-black-box-part-2.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Manu Joseph](https://www.linkedin.com/in/manujosephv/), Problem Solver,
+    Practitioner, Researcher at Thoucentric Analytics**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the [last post](https://www.kdnuggets.com/2019/12/explainability-black-box-part1.html) in
+    the series, we defined what interpretability is and looked at a few interpretable
+    models and the quirks and ‘gotchas’ in it. Now let’s dig deeper into the post-hoc
+    interpretation techniques which is useful when your model itself is not transparent.
+    This resonates with most real-world use cases because whether we like it or not,
+    we get better performance with a black box model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data Set**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For this exercise, I have chosen the [Adult dataset a.k.a Census Income](https://archive.ics.uci.edu/ml/datasets/adult)
+    dataset. **Census Income** is a pretty popular dataset which has demographic information
+    like age, occupation, along with a column which tells us if the income of the
+    particular person >50k or not. We are using this column to run a binary classification
+    using Random Forest. The reasons for choosing Random Forest are two-fold:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Random Forest is one of the most popularly used algorithm, along with Gradient
+    Boosted Trees. Both of them are from the family of ensemble algorithms with Decision
+    Trees.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: There are a few techniques that are specific to tree-based models, which I want
+    to discuss.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![](../Images/3c89b369fec627eecc6f3f59ecfc7f28.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Overview of Census Income Dataset.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/54a25a4b4d365eccb2fbf5effa25f251.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Sample Data from Census Income Dataset.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Post-hoc Interpretation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now let’s look at techniques to do post-hoc interpretation to understand our
+    black box models. All through the rest of the blog, the discussion will be based
+    on machine learning models(and not deep learning) and will be based on structured
+    data. While many of the methods here are model agnostic, since there are a lot
+    of specific ways to interpret deep learning models, especially on unstructured
+    data, we leave that out of our current scope.(Maybe another blog, another day.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**DATA PREPROCESSING**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Encoded the target variable into numerical variables
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Dealt with missing values
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Transformed *marital_status*into a binary variable by combining a few values
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Dropped *education*because *education_num* gives the same info, but in numerical
+    format
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Dropped *capital_gain*and *capital_loss* because they do not have any information.
+    More than 90% of them are zeroes
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Dropped *native_country*because of high cardinality and skew towards US
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Dropped *relationship*because of a lot of overlap with marital_status
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A Random Forest algorithm was tuned and trained on the data with 83.58% performance.
+    It is a decent score considering the best scores vary from 78-86% based on the
+    way you model and test set. But for our purposes, the model performance is more
+    than enough.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1) Mean Decrease in Impurity
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This is by far the most popular way of explaining a tree-based model and it’s
+    ensembles. A lot of it is because of Sci-Kit Learn, and its easy to use implementation
+    of the same. Fitting a Random Forest or a Gradient Boosting Model and plotting
+    the “feature importance” has become the most used and abused technique among Data
+    Scientist.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The mean decrease in impurity importance of a feature is computed by measuring
+    how effective the feature is at reducing uncertainty (classifiers) or variance
+    (regressors) when creating decision trees within any ensemble Decision Tree method(Random
+    Forest, Gradient Boosting, etc.).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The **advantages** of the technique are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A fast and easy way of getting feature importance
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Readily available in Sci-kit Learn and Decision Tree implementation in R
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It is pretty intuitive to explain to a layman
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**ALGORITHM**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: During tree construction, whenever a split is made, we keep track of which feature
+    made the split, what was the Gini impurity before and after, and how many samples
+    did it affect
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: At the end of the tree building process, you calculate the total gain in Gini
+    Index attributed to each feature
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And in case of a Random Forest or a Gradient Boosted Trees, we average this
+    score over all the trees in the ensemble
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**IMPLEMENTATION**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sci-kit Learn implements this by default in the “feature importance” in tree-based
+    models. So retrieving them and plotting the top 25 features is very simple.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/1ba0c8f1e81dc3032bcb92eebb9e5877.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Click here for full interactive plot](https://chart-studio.plot.ly/~manujosephv/25)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can also retrieve and plot the mean decrease in the impurity of each tree
+    as a box plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/6765d702c2ad3f9016d787935576dc61.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Click for full interactive plot](https://chart-studio.plot.ly/~manujosephv/27)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**INTERPRETATION**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The top 4 features are *marital status, education_num, age,*and *hours_worked*.
+    This makes perfect sense, as they have a lot to do with how much you earn
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Notice the two features fnlwgt and random in there? Are they more important
+    than the occupation of a person?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: One other caveat here is that we are looking at the one-hot features as separate
+    features and it may have some bearing on why the occupation features are ranked
+    lower than random. Dealing with One-hot features when looking at feature importance
+    is a whole other topic
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Let’s take a look at what fnlwgt and random are.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The description of the dataset for fnlwgt is a long and convoluted description
+    of how the census agency uses sampling to create “weighted tallies” of any specified
+    socio-economic characteristics of the population. In short, it is a sampling weight
+    and nothing to do with how much a person earns
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And *random*is just what the name says. Before fitting the model, I made a column
+    with random numbers and called it random
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now, surely, these features cannot be more important than other features like
+    occupation, work_class, sex etc. If that is the case, then something is wrong.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**THE JOKER IN THE PACK A.K.A. THE ‘GOTCHA’**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Of course… there is. The mean decrease in impurity measure is a **biased measure
+    of feature importance**. It favours continuous features and features with high
+    cardinality. In 2007, Strobl *et al* [1] also pointed out in [Bias in random forest
+    variable importance measures: Illustrations, sources and a solution](https://link.springer.com/article/10.1186%2F1471-2105-8-25) that
+    “*the variable importance measures of Breiman’s original Random Forest method
+    … are not reliable in situations where potential predictor variables vary in their
+    scale of measurement or their number of categories*.”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s try to understand why it is biased. Remember how the mean decrease in
+    impurity is calculated? Each time a node is split on a feature, the decrease in
+    gini index is recorded. And when a feature is continuous or has high cardinality,
+    the feature may be split many more times than other features. This inflates the
+    contribution of that particular feature. And what do our two culprit features
+    have in common- they are both continuous variables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2) Drop Column Importance a.k.a Leave One Co-variate Out (LOOC)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Drop Column feature importance is another intuitive way of looking at the feature
+    importance. As the name suggests, it’s a way of iteratively removing a feature
+    and calculating the difference in performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The **advantages** of the technique are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Gives a pretty accurate picture of the predictive power of each feature
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: One of the most intuitive way to look at feature importance
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Model agnostic. Can be applied to any model
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The way it is calculated, it automatically takes into account all the interactions
+    in the model. If the information in a feature is destroyed, all its interactions
+    are also destroyed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**ALGORITHM**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use your trained model parameters and calculate the metric of your choice on
+    an OOB sample. You can use cross validation to get the score. This is your baseline.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now, drop one column at a time from your training set, and retrain the model
+    (with the **same parameters**and **random state**) and calculate the OOB score.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Importance = OOB score – Baseline*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**IMPLEMENTATION**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s do a 50 fold cross validation to estimate our OOB score. (I know it’s
+    excessive, but let’s keep it to increase the samples for our boxplot) Like before,
+    we are plotting the mean decrease in accuracy as well as the boxplot to understand
+    the distribution across cross validation trials.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/2813d405d0ef6e9d87d261583852d5e8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Click for full interactive plot](https://plot.ly/~manujosephv/33/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7d7cf1ede5162364fc02bb641edd3e2b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Click for full interactive plot](https://plot.ly/~manujosephv/35/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**INTERPRETATION**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The top 4 features are still *marital status, education_num, age,*and *hours_worked*.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*fnlwgt*is pushed down the list and now features after some of the one-hot
+    encoded occupations.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*random*still occupies a high rank, positioning itself right after the *hours_worked*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As expected, the *fnlwgt* was much less important that we were led to believe
+    from the Mean Decrease in Impurity importance. The high position of the *random* perplexed
+    me a little bit and I re-ran the importance calculation considering all one-hot
+    features as one. i.e., dropping all the occupation columns and checking the predictive
+    power of the occupation. When I do that, I can [see *random* and *fnlwgt* rank
+    lower than *occupation*, and *workclass*](https://plot.ly/~manujosephv/37/). At
+    the risk of making the post bigger than it already is, let’s leave that investigation
+    for another day.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, have we got the perfect solution? The results are aligned with the Mean
+    Decrease in Impurity, they make coherent sense, and they can be applied to any
+    model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**JOKER IN THE PACK**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The kicker here is the **computation** involved. To carry out this kind of importance
+    calculation, you have to train a model multiple times, one for each feature you
+    have and repeat that for the number of cross validation loops you want to do.
+    Even if you have a model that trains under a minute, the time required to calculate
+    this explodes as you have more features. To give you an idea, it took **2 hr 44
+    mins** for me to calculate the feature importance with 36 features and 50 cross
+    validation loops (which, of course, can be improved with parallel processing,
+    but you get the point). And if you have a large model which is takes two days
+    to train, then you can forget about this technique.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another concern I have with this method is that since we are retraining the
+    model every time with a new set of features, we are not doing a fair comparison.
+    We remove one column and train the model again, it will find another way to derive
+    the same information if it can, and this gets amplifies when there are collinear
+    features. So we are mixing two things when we investigate – the predictive power
+    of the feature and the way the model configures itself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3) Permutation Importance
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The permutation feature importance is defined to be the decrease in a model
+    score when a single feature value is randomly shuffled [2]. This technique measures
+    the difference in performance if you permute or shuffle a feature vector. The
+    key idea is that a feature is important if the model performance drops if that
+    feature is shuffled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The **advantages** of this technique are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is very intuitive. What is the drop in performance if the information in
+    a feature is destroyed by shuffling it?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Model agnostic. Even though the method was initially developed for Random Forest
+    by Breiman, it was soon adapted to a model agnostic framework
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The way it is calculated, it automatically takes into account all the interactions
+    in the model. If the information in a feature is destroyed, all its interactions
+    are also destroyed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The model need not be retrained, and hence we save on computation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**ALGORITHM**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Calculate a baseline score using the metric, trained model, the feature matrix
+    and the target vector
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For each feature in the feature matrix, make a copy of the feature matrix.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Shuffle the feature column, pass it through the trained model to get a prediction
+    and use the metric to calculate the performance.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Importance = Baseline – Score
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Repeat for N times for statistical stability and take an average importance
+    across trials
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**IMPLEMENTATION**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The permutation importance is implemented in at least three libraries in python
+    – [ELI5](https://eli5.readthedocs.io/en/latest/autodocs/sklearn.html#module-eli5.sklearn.permutation_importance), [mlxtend](http://rasbt.github.io/mlxtend/user_guide/evaluate/feature_importance_permutation/),
+    and in a [development branch of Sci-kit Learn](https://scikit-learn.org/dev/modules/generated/sklearn.inspection.permutation_importance.html#sklearn.inspection.permutation_importance).
+    I’ve picked the mlxtend version for purely no other reason other than convenience.
+    According to Strobl *et al.* [3], “*the raw [permutation] importance… has better
+    statistical properties*.” as opposed to normalizing the importance values by dividing
+    by the standard deviation. I have checked the source code for mlxtend and Sci-kit
+    Learn, and they do not normalize them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: We also plot a box plot of all trials to get a sense of the deviation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/e44cb1e73bbbd0b8385563291fbdcf15.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Click for full interactive plot](https://plot.ly/~manujosephv/29/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b65fd9518806cd1c8f93c56e711e989e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Click for full interactive plot](https://plot.ly/~manujosephv/31/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**INTERPRETATION**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The top 4 remains the same, but the first three(*marital_status, education,
+    age*) are much more pronounced in the permutation importance
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*fnlwgt*and *random* does not even make it to the top 25'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Being an *Exec Manager, or Prof-speciality *has a lot to do with whether you
+    are earning >50k or not
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: All in all, it resonates with our mental model of the process
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Everything is hunky-dory in feature importance land? Have we got the best way
+    of explaining what features the model is using for predictions?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**THE JOKER IN THE PACK**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We know from life that nothing is perfect and neither is this technique. It’s
+    Achilles’ Heel is the correlation between features. Just like drop column importance,
+    this technique is also affected by the effect of correlation between features.
+    Strobl *et al.* in Conditional variable importance for random forests [3] showed
+    that “*permutation importance over-estimates the importance of correlated predictor
+    variables.*” Especially in ensemble of trees, if you have two correlated variables,
+    some of the trees might have picker feature A and some others might have picked
+    feature B. And while doing this analysis, in the absence of feature A, the trees
+    which picked feature B would work well and keep the performance high and vice
+    versa. What this will result in is that both the correlated features A and B will
+    have inflated importance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another drawback of the technique is that the core idea in the technique is
+    about permuting a feature. But that is essentially randomness that is not in our
+    control. And because of this, the results **may** vary greatly. We don’t see it
+    here, but if the box plot shows a large variation in importance for a feature
+    across trials, I’ll be wary in my interpretation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b8b315f6fced91d271d764ef75ad9c74.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Correlation Coefficient](https://phik.readthedocs.io/en/latest/introduction.html) [7]
+    (in-built in pandas profiling which considers categorical variables as well).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is yet another drawback to this technique, which in my opinion, is the **most
+    concerning**. Giles Hooker et al. [6] says, *“When features in the training set
+    exhibit statistical dependence, permutation methods can be highly misleading when
+    applied to the original model.”*
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s consider *occupation *and* education*. We can understand this from two
+    perspectives:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Logical**: If you think about it, *occupation*and *education* have a definite
+    dependence. You can only get a few jobs if you have sufficient education and statistically,
+    you can draw parallels between them. So if we are permuting any one of those columns,
+    it would create feature combinations which do not make sense. A person with *education* as *10th* and *occupation* as *Prof-speciality* doesn’t
+    make a lot of sense, does it? So, when we are evaluating the model, we are evaluating
+    nonsensical cases like these, which muddles up the metric which we use to assess
+    the feature importance.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Mathematical**: *occupation*and *education* have strong statistical dependence(we
+    can see that from the correlation plot above). So, when we are permuting any one
+    of these features, we are forcing the model to explore unseen sub-spaces in the
+    high-dimensional feature space. And this forces the model to extrapolate and this
+    extrapolation is a significant source of error.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Giles Hooker et al. [6] suggests alternative methodologies that combine LOOC
+    and Permutation methods, but all the alternatives are computationally more intensive
+    and do not have a strong theoretical guarantee of having better statistical properties.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**DEALING WITH CORRELATED FEATURES**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After identifying the highly correlated features, there are two ways of dealing
+    with correlated features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Group the highly correlated variables together and evaluate only one feature
+    from the group as a representative of the group
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: When you permute the columns, permute the whole group of features in one trial.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '*N.B. The second method is the same method that I would suggest to deal with
+    one-hot variables.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**SIDENOTE (TRAIN OR VALIDATION)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: During the discussion of both Drop Column importance and Permutation importance,
+    one question should have come to your mind. We passed the test/validation set
+    to the methods to calculate the importance. Why not train set?
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a grey area in the application of some of these methods. There is no
+    right or wrong here because there are arguments for and against both. In Interpretable
+    Machine Learning, Christoph Molnar argues a case for both train and validation
+    sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The case for test/validation data is a no-brainer. For the same reason why we
+    do not judge a model by the error in the training set, we cannot judge the feature
+    importance on the performance on the training set (especially since the importance
+    is intrinsically linked to the error).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The case for train data is counter-intuitive. But if you think about it, you’ll
+    see that what we want to measure is how the model is using the features. And what
+    better data to judge that than the training set on which the model was trained?
+    Another trivial issue is also that we would ideally train the model on all available
+    data, and in such an ideal scenario, there will not be a test or validation data
+    to check performances on. In Interpretable Machine Learning [5], section 5.5.2
+    discusses this issue at length and even with a synthetic example of an overfitting
+    SVM.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It all comes down to whether you want to know what features the model relies
+    on to make predictions or the predictive power of each feature on unseen data.
+    For e.g., if you are evaluating feature importance in the context of feature selection,
+    do not use test data in any circumstances (there you are overfitting your feature
+    selection to fit the test data).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4) Partial Dependence Plots (PDP) and Individual Conditional Expectation (ICE)
+    plots
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: All the techniques we reviewed until now looked at the relative importance of
+    different features. Now let’s move slightly in a different direction and look
+    at a few techniques which explore how a particular feature interacts with the
+    target variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Partial Dependence Plots and Individual Conditional Expectation plots help
+    us understand the functional relationship between the features and the target.
+    They are graphical visualizations of the marginal effect of a given variable(or
+    multiple variables) on an outcome. Friedman(2001) introduced this technique in
+    his seminal paper *Greedy function approximation: A gradient boosting machine*[8].'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Partial Dependence Plots show an average effect, whereas ICE plots show the
+    functional relationship for individual observations. PD plots show the average
+    effect whereas ICE plots show the dispersion or heterogeneity of the effect.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The **advantages** of this technique are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The calculation is very intuitive and is easy to explain in layman terms
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We can understand the relationship between a feature or a combination of features
+    with the target variable, i.e. if it is linear, monotonic, exponential etc.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: They are easy to compute and implement
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: They give a causal interpretation, as opposed to a feature importance style
+    interpretation. But what we have to keep in mind is that the causal interpretation
+    of how the model sees the world and now the real world.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**ALGORITHM**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s consider a simple situation where we plot the PD plot for a single feature *x*,
+    with unique values ![\{x_1, x_2, .... x_n\}](../Images/d886e2b0f9f958256f9b8bdf8340be34.png
+    "\{x_1, x_2, .... x_n\}"). The PD plot can be constructed as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For ![i\: \epsilon \: \{1,2,...k\}](../Images/ea33b476be75ae3dbf6b1d7d906d1ad4.png
+    "i\: \epsilon \: \{1,2,...k\}")'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Copy the training data and replace the original values of *x *with ![x_i](../Images/8bbdd65717c97be8e583a6e702e26520.png
+    "x_i")
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use the trained model to generate predictions for the modified copy of the entire
+    training data
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Store all the predictions against ![x_i](../Images/8bbdd65717c97be8e583a6e702e26520.png
+    "x_i") in a map-like data structure
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'For PD plot:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Calculate the average predictions for each ![x_i \: for \: i \: \epsilon \:
+    \{1,2,...k\}](../Images/ba1ead72d9538c10cada95fc2622d613.png "x_i \: for \: i
+    \: \epsilon \: \{1,2,...k\}")'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Plot the pairs ![\{x_i, mean(all\: predictions \:with\: x_i)\}](../Images/69d5ad37d71913e692ea8fdd020376dd.png
+    "\{x_i, mean(all\: predictions \:with\: x_i)\}")'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'For ICE plot:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Plot all the pairs ![\{x_i, f(x_i,rest\:of\:features)_n\} \:where\:n\epsilon\{1,
+    2, ...N\}](../Images/f80f0ad34cb01d3565e750f8361679f6.png "\{x_i, f(x_i,rest\:of\:features)_n\}
+    \:where\:n\epsilon\{1, 2, ...N\}"). N is the total number of observations in the
+    training set.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In practice, instead of taking all the possible values of a feature, we define
+    a grid of intervals for the continuous variable to save on computation.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For a categorical variable also, this definition holds, But we won’t be defining
+    a grid there. Instead we take all the unique values in the category(or all the
+    one-hot encoded variables pertaining to a categorical feature) and calculate the
+    ICE and PD plots using the same methodology.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the process is still unclear to you, I suggest looking at this [medium post](https://towardsdatascience.com/introducing-pdpbox-2aa820afd312)
+    (by the author of PDPbox, a python library for plotting PD plots.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**IMPLEMENTATION**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have found the PD plots implemented in [PDPbox](https://github.com/SauceCat/PDPbox), [skater](https://github.com/oracle/Skater) and [Sci-kit
+    Learn](https://scikit-learn.org/stable/modules/partial_dependence.html). And the
+    ICE plots in [PDPbox](https://github.com/SauceCat/PDPbox), [pyCEbox](https://github.com/AustinRochford/PyCEbox),
+    and [skater](https://github.com/oracle/Skater). Out of all of these, I found PDPbox
+    to be the most polished. And they also support 2 variable PDP plots as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/8c00551a4dd062453bae710d097dfc5b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/b71eff4075340bb4ff026d7ba958ac3b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*ICE plot for Age.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let me take some time to explain the plot. On the x-axis, you can find the values
+    of the feature you are trying to understand, i.e., age. On the y-axis, you find
+    the prediction. In the case of classification, it is the prediction probability
+    and in the case of regression, it is the real-valued prediction. The bar on the
+    bottom represents the distribution of training data points in different quantiles.
+    It helps us gauge the goodness of the inference. The parts where the number of
+    points is very less, the model has seen fewer examples and the interpretation
+    can be tricky. The single line in the PD plot shows the average functional relationship
+    between the feature and target. All the lines in the ICE plot show the heterogeneity
+    in the training data, i.e., how all the observations in the training data vary
+    with the different values of the age.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**INTERPRETATION**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*age*has a largely monotonic relationship with the earning capacity of a person.
+    The older a person is, the more likely he is to earn above 50k'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The ICE plots show a lot of dispersion. But all of it shows the same kind of
+    behaviour that we see in the PD plot
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The training observations are considerable well balanced across the different
+    quantiles.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now, let’s also take an example with a categorical feature, like *education*.
+    PDPbox has a very nice feature where it lets you pass a list of features as an
+    input and it will calculate the PDP for them considering them as categorical features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/be9e8e3dab406df235ceae32fcb4165f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**INTERPRETATION**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most of the occupations have very minimal effect on how much you earn.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The ones that stand out from the rest are, Exec-managerial, Prof-speciality,
+    and Tech Support
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: But, from the distribution, we know that there were very little training examples
+    for Tech-support, and hence we take that with a grain of salt.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**INTERACTION BETWEEN MULTIPLE FEATURES**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: PD plots can be theoretically drawn for any number of features to show their
+    interaction effect, as well. But practically, we can only do it for two, at the
+    max three. Let’s take a look at an interaction plot between two continuous features* age* and *education*(education
+    and age are not truly continuous, but for lack of better example we are choosing
+    them).
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are two ways you can plot a PD plot between two features. There are three
+    dimensions here, feature value 1, feature value 2, and the target prediction.
+    Either, we can plot a 3-D plot or a 2-D plot with the 3rd dimension depicted as
+    color. I prefer the 2-D plot because I think it conveys the information in a much
+    more crisp manner than a 3-D plot where you have to look at the 3-D shape to infer
+    the relationship. PDPbox implements the 2-D interaction plots, both as a contour
+    plot and grid. Contour works best for continuous features and grid for categorical
+    features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/3813382752552964a3e62fcb6ba8147c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**INTERPRETATION**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Even though we observed a monotonic relationship with age when looked at isolation,
+    now we know that it is not universal. For e.g., look at the contour line to the
+    right of the *12th*education level. It’s pretty flat as compared to the lines
+    for some-college and above. What it really shows that your probability of getting
+    more than 50k doesn’t only increase with age, but it also has a bearing on your
+    education. *A college degree ensures you increase your earning potential as you
+    get older.*
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is also a very useful technique to investigate bias(the ethical kind) in
+    your algorithms. Suppose if we want to look at the algorithmic bias in the *sex* dimension.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/fa44ba48c933d8693189debdd077e05b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*PD Plot of sex on the left and PD interaction plot of sex and marital_status
+    on the right.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we look at just the PD plot of sex, we would conclude that there is no real
+    discrimination based on the sex of the person.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: But, just take a look at the interaction plot with marital_status. On the left-hand
+    side(married), both the squares have the same color and value, but on the right-hand
+    side(single) there is a difference between Female and Male
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We can conclude that being a single male gives you a much better chance of getting
+    more than 50k than being a single female. (Although I wouldn’t start an all-out
+    war against sexual discrimination based on this, it would definitely be a starting
+    point in the investigation.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**JOKER IN THE PACK**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The assumption of independence between the features is the biggest flaw in this
+    approach. The same flaw that is present in LOOC importance and Permutation Importance
+    is applicable to PDP and ICE plots. [Accumulated Local Effects](https://christophm.github.io/interpretable-ml-book/ale.html) plots
+    are a solution to this problem.  ALE plots solve this problem by calculating –
+    also based on the conditional distribution of the features – **differences in
+    predictions instead of averages**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To summarize how each type of plot (PDP, ALE) calculates the effect of a feature
+    at a certain grid value v:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Partial Dependence Plots**: “Let me show you what the model predicts on average
+    when each data instance has the value v for that feature. I ignore whether the
+    value v makes sense for all data instances.”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ALE plots**: “Let me show you how the model predictions change in a small
+    ‘window’ of the feature around v for data instances in that window.”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the python environment, there is no good and stable library for ALE. I’ve
+    only found one [ALEpython](https://github.com/blent-ai/ALEPython), which is still
+    very much in development. I managed to get an ALE plot of age, which you can find
+    below. But got an error when I tried an interaction plot. It’s also not developed
+    for categorical features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7f9fe847ca2903fdbc25600c71acca0b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*ALE plot for age.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is where we break off again and push the rest of the stuff to the next
+    blog post. In the next part, we take a look at LIME, SHAP, Anchors, and more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Full Code is available in my [Github](https://github.com/manujosephv/interpretability_blog).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://deep-and-shallow.com/2019/11/16/interpretability-cracking-open-the-black-box-part-ii/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: **[Manu Joseph](https://www.linkedin.com/in/manujosephv/) ([@manujosephv](https://twitter.com/manujosephv))
+    is an inherently curious and self-taught Data Scientist with about 8+ years of
+    professional experience working with Fortune 500 companies, including a researcher at [Thoucentric](https://www.thoucentric.com/) Analytics.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Explainability: Cracking open the black box, Part 1](https://www.kdnuggets.com/2019/12/explainability-black-box-part1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Libraries for Interpretable Machine Learning](https://www.kdnuggets.com/2019/09/python-libraries-interpretable-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[“Please, explain.” Interpretability of machine learning models](https://www.kdnuggets.com/2019/05/interpretability-machine-learning-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[The Quest for Model Confidence: Can You Trust a Black Box?](https://www.kdnuggets.com/the-quest-for-model-confidence-can-you-trust-a-black-box)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simplifying Decision Tree Interpretability with Python & Scikit-learn](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using SHAP Values for Model Interpretability in Machine Learning](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bounding Box Deep Learning: The Future of Video Annotation](https://www.kdnuggets.com/2022/07/bounding-box-deep-learning-future-video-annotation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Black Friday Deal - Master Machine Learning for Less with DataCamp](https://www.kdnuggets.com/2022/11/datacamp-black-friday-deal-master-machine-learning-less-datacamp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Open Assistant: Explore the Possibilities of Open and Collaborative…](https://www.kdnuggets.com/2023/04/open-assistant-explore-possibilities-open-collaborative-chatbot-development.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

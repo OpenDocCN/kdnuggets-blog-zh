@@ -1,0 +1,384 @@
+- en: 'Email Spam Filtering: An Implementation with Python and Scikit-learn'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/03/email-spam-filtering-an-implementation-with-python-and-scikit-learn.html](https://www.kdnuggets.com/2017/03/email-spam-filtering-an-implementation-with-python-and-scikit-learn.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By [Machine Learning in Action](https://appliedmachinelearning.wordpress.com/).**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Spam filter](../Images/b8a1b609f29a3b8d8f5000f853ad551f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Text mining (deriving information from text) is a wide field which has gained
+    popularity with the huge text data being generated. Automation of a number of
+    applications like sentiment analysis, document classification, topic classification,
+    text summarization, machine translation, etc has been done using machine learning
+    models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spam filtering is a beginner’s example of document classification task which
+    involves classifying an email as spam or non-spam (a.k.a. ham) mail. Spam box
+    in your Gmail account is the best example of this. So lets get started in building
+    a spam filter on a publicly available mail corpus. I have extracted equal number
+    of spam and non-spam emails from [Ling-spam corpus](http://www.aueb.gr/users/ion/data/lingspam_public.tar.gz).
+    The extracted subset on which we will be working can be downloaded from [here](https://www.dropbox.com/s/yjiplngoa430rid/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We will walk through the following steps to build this application :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Preparing the text data.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Creating word dictionary.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Feature extraction process
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Training the classifier
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Further, we will check the results on test set of the subset created.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Preparing the text data.
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The data-set used here, is split into a training set and a test set containing
+    702 mails and 260 mails respectively, divided equally between spam and ham mails.
+    You will easily recognize spam mails as it contains *spmsg* in its filename.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In any text mining problem, text cleaning is the first step where we remove
+    those words from the document which may not contribute to the information we want
+    to extract. Emails may contain a lot of undesirable characters like punctuation
+    marks, stop words, digits, etc which may not be helpful in detecting the spam
+    email. The emails in Ling-spam corpus have been already preprocessed in the following
+    ways:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: a) Removal of stop words – Stop words like “and”, “the”, “of”, etc are very
+    common in all English sentences and are not very meaningful in deciding spam or
+    legitimate status, so these words have been removed from the emails.
+  prefs: []
+  type: TYPE_NORMAL
+- en: b) Lemmatization – It is the process of grouping together the different inflected
+    forms of a word so they can be analysed as a single item. For example, “include”,
+    “includes,” and “included” would all be represented as “include”. The context
+    of the sentence is also preserved in lemmatization as opposed to stemming (another
+    buzz word in text mining which does not consider meaning of the sentence).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We still need to remove the non-words like punctuation marks or special characters
+    from the mail documents. There are several ways to do it. Here, we will remove
+    such words after creating a dictionary, which is a very convenient method to do
+    so since when you have a dictionary, you need to remove every such word only once.
+    So cheers !! As of now you don’t need to do anything.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Creating word dictionary.
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'A sample email in the data-set looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: It can be seen that the first line of the mail is subject and the 3rd line contains
+    the body of the email. We will only perform text analytics on the content to detect
+    the spam mails. As a first step, we need to create a dictionary of words and their
+    frequency. For this task, training set of 700 mails is utilized. This python function
+    creates the dictionary for you.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Once the dictionary is created we can add just a few lines of code written below
+    to the above function to remove non-words about which we talked in step 1\. I
+    have also removed absurd single characters in the dictionary which are irrelevant
+    here. Do not forget to insert the below code in the function `def make_Dictionary(train_dir)`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Dictionary can be seen by the command `print dictionary`. You may find some
+    absurd word counts to be high but don’t worry, it’s just a dictionary and you
+    always have the scope of  improving it later. If you are following this blog with
+    provided data-set, make sure your dictionary has some of the entries given below
+    as most frequent words. Here I have chosen 3000 most frequently used words in
+    the dictionary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 3\. Feature extraction process.
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Once the dictionary is ready, we can extract word count vector (our feature
+    here) of 3000 dimensions for each email of training set. Each **word count vector**
+    contains the frequency of 3000 words in the training file. Of course you might
+    have guessed by now that most of them will be zero. Let us take an example. Suppose
+    we have 500 words in our dictionary. Each word count vector contains the frequency
+    of 500 dictionary words in the training file. Suppose text in training file was
+    “Get the work done, work done” then it will be encoded as [0,0,0,0,0,…….0,0,2,0,0,0,……,0,0,1,0,0,…0,0,1,0,0,……2,0,0,0,0,0].
+    Here, all the word counts are placed at 296th, 359th, 415th, 495th index of 500
+    length word count vector and the rest are zero.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The below python code will generate a feature vector matrix whose rows denote
+    700 files of training set and columns denote 3000 words of dictionary. The value
+    at index ‘*ij’* will be the number of occurrences of j^(th) word of dictionary
+    in i^(th) file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 4\. Training the classifiers.
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here, I will be using [scikit-learn ML library](http://scikit-learn.org/stable/)
+    for training classifiers. It is an open source python ML library which comes bundled
+    in 3rd party distribution [anaconda](https://www.continuum.io/downloads) or can
+    be used by separate installation following [this](http://scikit-learn.org/stable/install.html).
+    Once installed, we only need to import it in our program.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have trained two models here namely Naive Bayes classifier and Support Vector
+    Machines (SVM). Naive Bayes classifier is a conventional and very popular method
+    for document classification problem. It is a supervised probabilistic classifier
+    based on Bayes theorem assuming independence between every pair of features. SVMs
+    are supervised binary classifiers which are very effective when you have higher
+    number of features. The goal of SVM is to separate some subset of training data
+    from rest called the support vectors (boundary of separating hyper-plane). The
+    decision function of SVM model that predicts the class of the test data is based
+    on support vectors and makes use of a kernel trick.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once the classifiers are trained, we can check the performance of the models
+    on test-set. We extract word count vector for each mail in test-set and predict
+    its class(ham or spam) with the trained NB classifier and SVM model. Below is
+    the full code for spam filtering application. You have to include the two functions
+    we have defined before in step 2 and step 3.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Checking Performance
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Test-set contains 130 spam emails and 130 non-spam emails. If you have come
+    so far, you will find below results. I have shown the confusion matrix of the
+    test-set for both the models. The diagonal elements represents the correctly identified(a.k.a.
+    true identification) mails where as non-diagonal elements represents wrong classification
+    (false identification) of mails.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Multinomial NB | Ham | Spam |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Ham | 129 | 1 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Spam | 9 | 121 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| SVM(Linear) | Ham | Spam |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Ham | 126 | 4 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Spam | 6 | 124 |'
+  prefs: []
+  type: TYPE_TB
+- en: Both the models had similar performance on the test-set except that the SVM
+    has slightly balanced false identifications. I must remind you that the test data
+    was neither used in creating dictionary nor in the training set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Task for you
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Download the pre-processed form of [Euron-spam](http://www.aueb.gr/users/ion/data/enron-spam/)
+    corpus. The corpus contains 33716 emails in 6 directories. Each of 6 directories
+    contains ‘ham’ and ‘spam’ folders. Total number of non-spam emails and spam emails
+    are 16545 and 17171 respectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Follow the same steps described in this blog post and check how is it performing
+    with Support Vector Machines and Multinomial Naive Bayes models. As the directory
+    structure of this corpus is different than the directory structure of ling-spam
+    subset used in the blog post, you may have to either reorganize it or do modifications
+    in `def make_Dictionary(dir)` and `def extract_features(dir)`functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I divided the Euron-spam corpus into training set and test set in 60:40 split.
+    After performing the same steps of this blog, i got the following results on 13487 test
+    set emails. We can see that SVM has performed slightly better than Naive Bayes
+    classifier in detecting spam emails correctly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Multinomial NB | Ham | Spam |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Ham | 6445 | 225 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Spam | 137 | 6680 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| SVM(Linear) | Ham | Spam |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Ham | 6490 | 180 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Spam | 109 | 6708 |'
+  prefs: []
+  type: TYPE_TB
+- en: Final Thoughts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Hope it was easy to go through tutorial as I have tried to keep it short and
+    simple. Beginners who are interested in text analytics can start with this application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You might be thinking about the mathematical techniques behind the used models
+    like Naive Bayes and SVM. SVM is mathematically complex model where as Naive bayes
+    is relatively easy to understand. You are encouraged to study about these models
+    from online sources. Apart from that, there can be a lot of experiments that can
+    be done in order to find the effect of various parameters like
+  prefs: []
+  type: TYPE_NORMAL
+- en: a) Amount of training data
+  prefs: []
+  type: TYPE_NORMAL
+- en: b) Dictionary size
+  prefs: []
+  type: TYPE_NORMAL
+- en: c) Variants of the ML techniques used (GaussianNB, BernoulliNB, SVC)
+  prefs: []
+  type: TYPE_NORMAL
+- en: d) Fine tuning of parameters of SVM models
+  prefs: []
+  type: TYPE_NORMAL
+- en: e) Improving the dictionary by eliminating insignificant words (may be manually)
+  prefs: []
+  type: TYPE_NORMAL
+- en: f) Some other feature (look for td-idf)
+  prefs: []
+  type: TYPE_NORMAL
+- en: I will be writing the mathematical explanation about these models in some another
+    blog-posts some other time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can get the full python implementation for both the corpus from GitHub link
+    [here](https://github.com/abhijeet3922/Mail-Spam-Filtering).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you liked the post, follow this blog to get updates about upcoming articles.
+    Also, share it so that it can reach out to the readers who can actually gain from
+    this. Please feel free to discuss anything regarding the post. I would love to
+    hear feedback from you.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Happy machine learning!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Machine Learning in Action](https://appliedmachinelearning.wordpress.com/)**
+    is a perfect hands-on practice for beginners to elevate their ML skills.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://appliedmachinelearning.wordpress.com/2017/01/23/email-spam-filter-python-scikit-learn/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Working With Numpy Matrices: A Handy First Reference](/2017/03/working-numpy-matrices.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Simple XGBoost Tutorial Using the Iris Dataset](/2017/03/simple-xgboost-tutorial-iris-dataset.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[K-Means & Other Clustering Algorithms: A Quick Intro with Python](/2017/03/k-means-clustering-algorithms-intro-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Cutting Down Implementation Time by Integrating Jupyter and KNIME](https://www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[First Open Source Implementation of DeepMind’s AlphaTensor](https://www.kdnuggets.com/2023/03/first-open-source-implementation-deepmind-alphatensor.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Ways of Filtering Python Lists](https://www.kdnuggets.com/2022/11/5-ways-filtering-python-lists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[An Intuitive Explanation of Collaborative Filtering](https://www.kdnuggets.com/2022/09/intuitive-explanation-collaborative-filtering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Five Ways to do Conditional Filtering in Pandas](https://www.kdnuggets.com/2022/12/five-ways-conditional-filtering-pandas.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understanding Python''s Iteration and Membership: A Guide to…](https://www.kdnuggets.com/understanding-pythons-iteration-and-membership-a-guide-to-__contains__-and-__iter__-magic-methods)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,298 @@
+- en: Making Python Speak SQL with pandasql
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/02/python-speak-sql-pandasql.html](https://www.kdnuggets.com/2017/02/python-speak-sql-pandasql.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This post originally appeared on the [Yhat blog](http://blog.yhat.com/). [**Yhat**](https://www.yhat.com/)
+    is a Brooklyn based company whose goal is to make data science applicable for
+    developers, data scientists, and businesses alike. Yhat provides a software platform
+    for deploying and managing predictive algorithms as REST APIs, while eliminating
+    the painful engineering obstacles associated with production environments like
+    testing, versioning, scaling and security.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: One of my favorite things about Python is that users get the benefit of observing
+    the R community and then emulating the best parts of it. I'm a big believer that
+    a language is only as helpful as its libraries and tools.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This post is about `pandasql`, a Python package we (Yhat) wrote that emulates
+    the R package [`sqldf`](https://github.com/ggrothendieck/sqldf). It's a small
+    but mighty library comprised of just [358 lines of code](https://github.com/yhat/pandasql).
+    The idea of `pandasql` is to make Python speak SQL. For those of you who come
+    from a SQL-first background or still "think in SQL", `pandasql` is a nice way
+    to take advantage of the strengths of both languages.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this introduction, we'll show you to get up and running with `pandasql` inside
+    of [Rodeo](https://www.yhat.com/products/rodeo), the integrated development environment
+    (IDE) we built for data exploration and analysis. Rodeo is an open source and
+    completely free tool. If you're an R user, its a comparable tool with a similar
+    feel to [RStudio](https://www.rstudio.com/). As of today, Rodeo can only run Python
+    code, but last week [we added](http://blog.yhat.com/posts/rodeo-2.4.0.html) syntax
+    highlighting for a bunch of other languages to the editor (markdown, JSON, julia,
+    SQL, markdown). As you may have read or guessed, we've got big plans for Rodeo,
+    including adding SQL support so that you can run your SQL queries right inside
+    of Rodeo, even without our handy little `pandasql`. More on that in the next week
+    or two!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Downloading Rodeo
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Start by downloading Rodeo for Mac, Windows or Linux from the [Rodeo page on
+    the Yhat website](https://www.yhat.com/products/rodeo).
+  prefs: []
+  type: TYPE_NORMAL
+- en: ps If you download Rodeo and encounter a problem or simply have a question,
+    we monitor our [discourse forum](http://discuss.yhat.com/) 24/7 (okay, almost).
+  prefs: []
+  type: TYPE_NORMAL
+- en: A bit of background, if you're curious
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Behind the scenes, `pandasql` uses the `pandas.io.sql` module to transfer data
+    between `DataFrame` and SQLite databases. Operations are performed in SQL, the
+    results returned, and the database is then torn down. The library makes heavy
+    use of `pandas` `write_frame`and `frame_query`, two functions which let you read
+    and write to/from `pandas` and (most) any SQL database.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Install `pandasql`
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Install `pandasql` using the package manager pane in Rodeo. Simply search for
+    `pandasql` and click Install Package.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Rodeo](../Images/df01e2be992655e3d8df842a35b7b555.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can also run `! pip install pandasql` from the text editor if you prefer
+    to install that way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Check out the datasets
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '`pandasql` has two built-in datasets which we''ll use for the examples below.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`meat`: Dataset from the U.S. Dept. of Agriculture containing metrics on livestock,
+    dairy, and poultry outlook and production'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`births`: Dataset from the United Nations Statistics Division containing demographic
+    statistics on live births by month'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Run the following code to check out the data sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Inside Rodeo, you really don't even need the print.variable.head() statements,
+    since you can actually just examine the dataframes directly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Rodeo](../Images/e16146ab2559389c09b51db6b64af166.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: An odd graph
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Notice that the plot appears both in the console and the plot tab (bottom right
+    tab).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Tip: You can "pop out" your plot by clicking the arrows at the top of the pane.
+    This is handy if you''re working on multiple monitors and want to dedicate one
+    just to your data visualzations.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Rodeo](../Images/033f5bc0a2de9b060afac0a299c60ecc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Usage
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To keep this post concise and easy to read, we've just given the code snippets
+    and a few lines of results for most of the queries below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you''re following along in Rodeo, a few tips as you''re getting started:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Run Script` will indeed run everything you have written in the text editor'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can highlight a code chunk and run it by clicking `Run Line` or pressing
+    Command + Enter
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can resize the panes (when I'm not making plots I shrink down the bottom
+    right pane)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Basics**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Write some SQL and execute it against your `pandas` `DataFrame` by substituting
+    DataFrames for tables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pandasql` creates a DB, schema and all, loads your data, and runs your SQL.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Aggregation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pandasql` supports aggregation. You can use [aliased column names](http://www.w3schools.com/sql/sql_alias.asp)
+    or column numbers in your `group by` clause.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**`locals()` vs. `globals()`**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pandasql` needs to have access to other variables in your session/environment.
+    You can pass `locals()` to `pandasql` when executing a SQL statement, but if you''re
+    running a lot of queries that might be a pain. To avoid passing locals all the
+    time, you can add this helper function to your script to set `globals()` like
+    so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**joins**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can join dataframes using normal SQL syntax.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**`WHERE` conditions**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here's a `WHERE` clause.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It's just SQL
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Since `pandasql` is powered by [SQLite3](https://docs.python.org/2/library/sqlite3.html),
+    you can do most anything you can do in SQL. Here are some examples using common
+    SQL features such as subqueries, order by, functions, and unions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Final thoughts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Rodeo](../Images/9d2174120c35e418253586777099d061.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '`pandas` is an incredible tool for data analysis in large part, we think, because
+    it is extremely digestible, succinct, and expressive. Ultimately, there are *tons*
+    of reasons to learn the nuances of `merge`, `join`, `concatenate`, `melt` and
+    other native `pandas` features for slicing and dicing data. Check out the [docs](http://pandas.pydata.org/pandas-docs/stable/merging.html)
+    for some examples.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our hope is that `pandasql` will be a helpful learning tool for folks new to
+    Python and `pandas`. In my own personal experience learning R, `sqldf` was a familiar
+    interface helping me become highly productive with a new tool as quickly as possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We hope you'll check out `pandasql` and Rodeo; if you do, please [let us know
+    what you think](http://discuss.yhat.com/)!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://blog.yhat.com/posts/pandasql-intro.html). Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Great Collection of Minimal and Clean Implementations of Machine Learning
+    Algorithms](/2017/01/great-collection-clean-machine-learning-algorithms.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Pandas Cheat Sheet: Data Science and Data Wrangling in Python](/2017/01/pandas-cheat-sheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Statistical Data Analysis in Python](/2016/07/statistical-data-analysis-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[SQL in Pandas with Pandasql](https://www.kdnuggets.com/sql-in-pandas-with-pandasql)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Making Predictions: A Beginner''s Guide to Linear Regression in Python](https://www.kdnuggets.com/2023/06/making-predictions-beginner-guide-linear-regression-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ploomber vs Kubeflow: Making MLOps Easier](https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Significance of Data Quality in Making a Successful Machine…](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Making Intelligent Document Processing Smarter: Part 1](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[From Data Analyst to Data Strategist: The Career Path for Making an Impact](https://www.kdnuggets.com/2023/05/data-analyst-data-strategist-career-path-making-impact.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

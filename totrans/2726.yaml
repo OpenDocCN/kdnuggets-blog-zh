@@ -1,0 +1,348 @@
+- en: Implementing MLOps on an Edge Device
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/08/implementing-mlops-edge-device.html](https://www.kdnuggets.com/2020/08/implementing-mlops-edge-device.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Felix Baum](https://developer.qualcomm.com/blogs/fbaum), Qualcomm Technologies**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The lifecycle of traditional software is arguably quite straight forward. At
+    its simplest, you develop, test, and deploy the software, and then release a new
+    version with features, updates, and/or fixes as needed. To facilitate this, traditional
+    software development often relies on [DevOps](https://en.wikipedia.org/wiki/DevOps),
+    which involves [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration)
+    (CI), [Continuous Delivery](https://en.wikipedia.org/wiki/Continuous_delivery)
+    (CD), and [Continuous Testing](https://en.wikipedia.org/wiki/Continuous_testing)
+    (CT) to reduce development time while continuously delivering new releases and
+    maintaining quality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When it comes to machine learning (ML) modeling, it’s easy to think that the
+    ML workflow follows a similar pattern. After all, it should just be a matter of
+    creating and training an ML model, deploying it, and releasing a new version as
+    required. But the environment in which ML systems operate complicates things.
+    For starters, the ML systems themselves are inherently different from traditional
+    software due to their data-driven, non-deterministic behaviour. And as recent
+    global events have highlighted, our world is constantly changing, so ML practitioners
+    must anticipate that the real-world data on which production models¹ infer, will
+    inevitably change too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As a result, a special kind of DevOps for ML has emerged, called *MLOps* (short
+    for “machine learning and operations”), to help manage this constant change and
+    the subsequent need for model redeployments. MLOps embraces DevOps’ continuous
+    integration and continuous delivery, but replaces the continuous testing phase
+    with *continuous training*. This continuous training of new models, which includes
+    redeployment of those new models and all of the technical efforts that go along
+    with it, aims to address three notable aspects of ML projects:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The need for “explainability” as to how and why a model makes certain predictions.
+    This is especially important for auditing purposes to meet regulations and/or
+    certain levels of predictive performance.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Model decay, which is the reduction of the production model’s predictive performance
+    over time, due to new and changing real-world data encountered by the model.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The continuous development and enhancements to the model driven by business
+    requirements.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Continuous training, and indeed MLOps in general, embrace the idea that the
+    model will constantly and inevitably change, which means organizations implement
+    MLOps strategies and tactics to varying degrees.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As MLOps have evolved, a number of organizations have put forth frameworks
+    for best practices. One prominent example is [Google’s MLOps](https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning#mlops_level_2_cicd_pipeline_automation)
+    guidelines which describes three levels of MLOps implementations adopted by organizations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**MLOps level 0: Manual Process**: the need for model training and deployment
+    are formally recognized, but are performed manually, often in an ad-hoc fashion
+    through scripts and interactive processes. This level generally lacks continuous
+    integration and continuous delivery.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**MLOps level 1: ML pipeline automation**: this level introduces a pipeline
+    for continuous training. Data and model validation are automated, and triggers
+    are in place to retrain the model with fresh data when its performance degrades.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**MLOps level 2: CI/CD pipeline automation**: the ML workflow has been automated
+    to the point where data scientists are able to update both the model and pipeline
+    with reduced intervention from developers.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Organizations that have implemented MLOps level 2 or MLOps level 3 may even
+    make use of so called “shadow models”, which are models that are trained in parallel
+    while the production model runs, using a different training dataset for each.
+    When a new production model is needed, a shadow model can be quickly selected
+    and deployed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Figure](../Images/22938573f024a01b728b506138623974.png)](https://developer.qualcomm.com/sites/default/files/attachments/mlops-01_0.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Figure 1 - A visual depiction of parallel training of shadow models on different
+    datasets. Each model is a potential candidate to become the new production model.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To better understand how and when these different levels of MLOps can be implemented,
+    consider the following examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Example 1: Packaging Robots**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A simple example is a robot at the end of an assembly line, that uses computer
+    vision powered by ML to analyze and package up products. The ML model may have
+    been trained to recognize square and rectangular boxes of a limited range of sizes.
+    However, the business will now introduce new shapes and sizes for its packages,
+    so a new ML model is created and deployed. In this scenario a development team
+    at MLOps level 0 would manually create, train, and deploy a new model, pre-emptively
+    before the new types of packages start rolling down the assembly line. Given the
+    limited domain of the robot’s capabilities, this level of MLOps may suffice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Example 2: Speech Recognition**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Consider a mobile app for speech recognition that can sense or identify context
+    (e.g., tone or emotion) based on how people speak. Over time, new phrases and
+    slangs come along, and the general style of how people talk changes. In this scenario
+    an ML model will likely exhibit model decay over a long period of time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is an example where the guidelines of MLOps level 1 could potentially help.
+    Under MLOps level 1, a system could be run on the device, to monitor the model’s
+    predictive performance. If performance approaches or falls below a threshold,
+    the system triggers an alert to the team that a new model should be trained using
+    fresh data, and then deployed to replace the production model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Example 3: Sudden Outliers in the Stock Market**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Earlier this year, the price of oil entered negative territory. If an ML model
+    makes predictions based on the price of oil but has only been trained with positive
+    prices, how will it perform when it suddenly encounters a negative stock price?
+    In this situation, team members will need to be alerted to the problem immediately,
+    and must be in a position to quickly train and redeploy a new model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here, an implementation of MLOps level 2 could be beneficial. At this level,
+    much of the pipeline for training and deploying a new model has been automated,
+    so data scientists should be able to handle most or all of the pipeline without
+    developer assistance. Moreover, the degree of automation should allow them to
+    focus updating, training, and deploying a new model as quickly and as reliably
+    as possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Implementing MLOps For Edge Devices**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Many of today’s premium edge devices are well positioned for MLOps. Not only
+    are they more than capable of hosting large models, but they are often equipped
+    with specialized vector processors optimized to run inference. On such example
+    is the [Hexagon](https://developer.qualcomm.com/software/hexagon-dsp-sdk/dsp-processor)
+    Digital Signal Processor (DSP) found on the Qualcomm® [Snapdragon](https://www.qualcomm.com/snapdragon)™
+    line of mobile platforms which [powers many of today’s premium devices](https://en.wikipedia.org/wiki/Devices_using_Qualcomm_Snapdragon_systems-on-chip)².
+    In addition, such processors are usually backed by a rich SDK and toolset for
+    artificial intelligence (AI), that developers use to optimize and load models
+    onto the device. It is these SDKs and tools that can be integrated into an MLOps
+    pipeline to facilitate the model deployment process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The general process for working with the SDK in the context of the ML workflow
+    is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The ML model is designed and trained using a framework such as [TensorFlow](https://www.tensorflow.org/).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The converter tool in the [Qualcomm Neural Processing SDK](https://developer.qualcomm.com/software/qualcomm-neural-processing-sdk)
+    is used to convert that model to a proprietary format, optimized for execution
+    on Snapdragon.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: API calls from the Qualcomm Neural Processing SDK are added to the app to load
+    the data onto the Qualcomm® Hexagon™ processor and to run inference.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Once loaded and the app is running, the model has been deployed to edge for
+    inference on real-world data.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[![Figure](../Images/4fc6183c11b6ba52714bfa3a5b8bba45.png)](https://developer.qualcomm.com/sites/default/files/attachments/mlops-02.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Figure 2 - The basic workflow for integrating and executing an ML model on
+    an edge device.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the context of MLOps, steps 1, 2, and 4 from above, would be repeated throughout
+    the product’s lifecycle as model updates are required. And depending on the level
+    of MLOps that has been implemented, developers may build additional entities such
+    as monitoring tools, that run on the edge device to gauge the model’s predictive
+    performance. They may also build some sort of alert and/or trigger that can start
+    a new iteration of the ML workflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**A Closer Looks at MLOps Pipeline**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Looking at this a bit closer, there are a number of tools and phases to integrate
+    into an MLOps pipeline model deployment script. The following shows an example
+    pipeline built on the Qualcomm Neural Processing SDK:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Figure](../Images/52ae9f34f0b50b1a7484756abbd57a08.png)](https://developer.qualcomm.com/sites/default/files/attachments/mlops-03.jpg)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Figure 3 – A more detailed view of the role of an edge device’s SDK in an
+    ML workflow.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the upper half of the workflow, an ML model is trained in an ML framework.
+    In the lower half of the workflow, the SDK’s tools are used to convert the model
+    to edge device’s proprietary format, and optionally, to optimize the model for
+    the edge device. In the context of MLOps, it’s these tools that would be invoked
+    either manually or as part of automated build scripts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Developers can also implement different methods to reload a new model into the
+    app running on the edge device. One method is to run services on the device that
+    automatically pull down the new model and restart the app (or even restart the
+    whole device) with new model, but that could disrupt service while the restart
+    is in progress. Alternatively, the app itself could watch for the presence of
+    new model files at runtime, and re-invoke the necessary APIs to load the new model.
+    Yet another option is to use a *push* approach, in which over-the-air updates
+    initiated by a server push a new model to the device.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Depending on the app’s architecture, each of these options may incur different
+    levels of downtime as the model is deployed and the app switches to using it.
+    Developers will therefore need to weigh the complexity of implementing each technique,
+    with the potential downtime required to deploy a new model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Conclusion**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ML systems are inherently different to traditional software because they are
+    non-deterministic, and operate in a world of constantly-evolving, ever-changing
+    data. But thanks to formal methodologies like MLOps, developers have the tools
+    they need to strategize and implement robust ML solutions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With ML gaining such prominence in edge computing on so many devices today,
+    it’s exciting to see how this hardware, in conjunction with their SDKs and tools,
+    can support an effective MLOps pipeline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A *production model* refers to the ML model that has been deployed for inference
+    on real-world data.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[https://www.statista.com/statistics/233415/global-market-share-of-applications-processor-suppliers/](https://www.statista.com/statistics/233415/global-market-share-of-applications-processor-suppliers/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Bio: [Felix Baum](https://developer.qualcomm.com/blogs/fbaum)** manages the
+    digital signal processor (DSP) software products for Qualcomm Technologies and
+    is instrumental in supporting Hexagon DSP in connectivity, audio, voice, sensor
+    fusion, computer vision and machine learning use cases.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://developer.qualcomm.com/blog/implementing-machine-learning-and-operations-mlops
+    ). Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Taming Complexity in MLOps](/2020/05/taming-complexity-mlops.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Demystifying the AI Infrastructure Stack](/2020/05/demystifying-ai-infrastructure-stack.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Tour of End-to-End Machine Learning Platforms](/2020/07/tour-end-to-end-machine-learning-platforms.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[On-device AI with Developer-Ready Software Stacks](https://www.kdnuggets.com/2022/03/qualcomm-ondevice-ai-developer-ready-software-stacks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn How to Run Alpaca-LoRA on Your Device in Just a Few Steps](https://www.kdnuggets.com/2023/05/learn-run-alpacalora-device-steps.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning on the Edge](https://www.kdnuggets.com/2022/10/machine-learning-edge.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Maximize Performance in Edge AI Applications](https://www.kdnuggets.com/maximize-performance-in-edge-ai-applications)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Windows on Snapdragon Brings Hybrid AI to Apps at the Edge](https://www.kdnuggets.com/qualcomm-windows-on-snapdragon-brings-hybrid-ai-to-apps-at-the-edge)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introducing TPU v4: Googles Cutting Edge Supercomputer for Large…](https://www.kdnuggets.com/2023/04/introducing-tpu-v4-googles-cutting-edge-supercomputer-large-language-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

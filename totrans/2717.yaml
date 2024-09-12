@@ -1,0 +1,556 @@
+- en: Autotuning for Multi-Objective Optimization on LinkedIn’s Feed Ranking
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/08/autotuning-multi-objective-optimization-linkedin-feed-ranking.html](https://www.kdnuggets.com/2020/08/autotuning-multi-objective-optimization-linkedin-feed-ranking.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Marco Varela](https://www.linkedin.com/in/marcovarelaalvarado/) & [Mavis
+    Li](https://www.linkedin.com/in/mavis-li-67aab91a/), LinkedIn**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The mission of LinkedIn’s Feed on the Homepage is to enable members to build
+    an active professional community that advances their careers. In order to provide
+    the best experience on the Feed, we leverage Artificial Intelligence (AI) to show
+    the most relevant content to the members. This is challenging because we need
+    to choose what content to show out of hundreds of options. The content types can
+    range from article shares by other members to job recommendations to course recommendations,
+    and each type has a different way of enriching our ecosystem, which as a whole
+    aim to fulfill LinkedIn’s mission to “connect the world’s professionals to make
+    them more productive and successful”. Given that we want to provide a diverse
+    and rich experience to our members, we cannot simply strive to increase clicks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to achieve the right balance of content for optimal member experience,
+    we follow a [multi-objective optimization](https://en.wikipedia.org/wiki/Multi-objective_optimization)
+    approach. We have different machine learning models that optimize for different
+    objectives such as reacts, comments, downstream impact from actions. However,
+    the balance of these different objectives has been achieved manually with the
+    adjustment of parameters by machine learning engineers, which is very inefficient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post, we share our experience coming up with an automated system to
+    tune one of the main parameters in our machine learning model that recommends
+    content on LinkedIn’s Feed, which is just one piece of the [community-focused
+    architecture](https://engineering.linkedin.com/blog/2019/06/community-focused-feed-optimization).
+    We aim to achieve the right balance of metrics for our members while addressing
+    the productivity of our engineers and meeting constraints in our ecosystem. For
+    additional context on LinkedIn’s feed, please refer to [this blog post](https://engineering.linkedin.com/blog/2018/03/a-look-behind-the-ai-that-powers-linkedins-feed--sifting-through).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Approach to Manage Metrics Trade-offs on Feed
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In order to address the complexity and tradeoffs in our ecosystem, we optimize
+    for one set of metrics while keeping another set constant. The optimization part
+    comes from our desire to maximize the “contributions” by our members. By “contribution”
+    we mostly refer to likes, comments, and shares, which are actions that are more
+    likely to drive conversations in our ecosystem, as opposed to simple clicks on
+    articles. Contributions drive more conversations in a few ways: shares create
+    new posts on feed, comments enable members to start conversations with post authors,
+    and likes generate downstream updates in the member''s network. These actions
+    can be considered “active” in that members actively consume content by contributing
+    to the ecosystem.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, we also wanted to leave room for content that isn’t as conversation-driven
+    and can be considered more “passive”. In particular, infrequent visitors on Feed
+    are more likely to be involved in passive consumption. Because of these reasons
+    we decided to keep “passive” consumption constant.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Translating Metrics Trade-off into a Scoring Function
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Given the diversity of content and objectives we need to manage on LinkedIn’s
+    Feed, we decided to apply a [multi-objective optimization](https://en.wikipedia.org/wiki/Multi-objective_optimization)
+    approach to rank content on our feed. At a high level (skipping many details)
+    we score each of our updates roughly with the following equation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/274fda16daa1c40b94c7f23f36375396.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can think of each P(x) as the probability score from a model for the particular
+    objective. We use a lever known as the click weight (????) to choose between more
+    passive-consumption content (e.g. job or article recommendations that might drive
+    clicks) vs. more community-driven content (e.g. a post that might encourage comments).
+    Different types of content are better for one use case than the other, so there’s
+    a tradeoff between passive consumption and active consumption. Even within a particular
+    type of content, there can be items that encourage more passive actions compared
+    to active actions. For example, a trending article might just encourage clicks,
+    but an article from a close connection could spark conversations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why We Need to Constantly Manage Trade-offs
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that we have provided enough context on LinkedIn’s Feed, we’d like to share
+    bits of our journey in choosing the right ???? (click weight) to balance passive
+    consumption (i.e. clicks) vs. active consumption (i.e like, comment, shares).
+    For the rest of the post, we’ll refer to the action set of like, comment, and
+    share as “contributions.”
+  prefs: []
+  type: TYPE_NORMAL
+- en: The ???? parameter determines the balance between active and passive consumption
+    cannot remain static for several reasons. We continuously work on our machine
+    learning models to provide the best experience to our members, which might affect
+    the balance between the two metrics. For example, we may incorporate new features
+    or try new modeling approaches. This affects the balance in several ways. One
+    way is that a particular feature change (e.g. member affinity to article posts)
+    or model change might be better at recommending content for active consumption
+    than passive consumption or vice versa. Another way is that there are random components
+    in our training process that might change the optimal weight after retraining
+    a model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Challenges with Maintaining Balance in a Multi-Objective Environment
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Our initial approach to manage the right balance was to build an offline simulator
+    based on historical data to run our models and then get simulated metrics on different
+    values of ????. This allowed us to get a sense of the right ???? by looking at
+    output graphs like the following, where each dot represents a different ????:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/2f5e89f3f95d9451f12e976ad27bca8b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 1: Simulation Result (actual values for click rate and contribution
+    rate are excluded since they are not relevant for this post). Control is the standard
+    experience for our members, while treatment is a variant on the standard experience
+    being evaluated.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'However, this method proved not to be enough. Our simulator approach inherently
+    has limitations in predicting the effect in the online world due to several reasons:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The LinkedIn ecosystem changes over time. Perhaps UI changes are introduced
+    that affect member behavior, or maybe we introduce new content to the feed that
+    wasn’t available before, such as polls. These changes are hard to replicate offline
+    since the simulator is limited to historical data and might not fully reflect
+    the current state of the ecosystem.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The sequence of actions a member might take could differ depending on the content
+    shown. For example, if they saw an article first they really liked they might
+    be more likely to continue interacting with other updates.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: There are [reinforcement learning](https://en.wikipedia.org/wiki/Reinforcement_learning)
+    components in the ecosystem that are particularly tricky to reflect in a simulator
+    environment.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: As a result, machine learning engineers had to launch multiple versions of a
+    model online for live traffic to test out different ???? values, which caused
+    two main pain points. First, it became time-consuming for engineers to create
+    variants with different ???? values of a particular model, especially since the
+    process involved trial and error. Second, given that we rely on A/B experiments
+    to evaluate each variant, we would run out of online traffic and not be able to
+    test as many experiments as we wanted to.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'New Approach to Choose Trade-off: Online Autotuning'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Given the difficulties in manually tuning ???? online, we decided to automate
+    the process with the goal of reducing manual engineering work and the online traffic
+    burden. We identified several requirements to allow our team to easily leverage
+    the tool and to allow enough experiments to run at the same time by respecting
+    online traffic needs:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The tool needed to be easy to use given that we are trying to remove manual
+    work for engineers, and it should be easily adoptable by tens of machine learning
+    engineers.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The tool should only require a small percentage of total traffic. E.g. if the
+    tool takes 50% of traffic it wouldn’t be useful.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The tool should conclude on an optimal value for ???? in a relatively short
+    period of time. E.g. if the tool takes a month to find an optimal weight, it’s
+    not useful.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Requirements 2 and 3 are needed to ensure we can maximize the number of experiments
+    run at the same time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Implementation of Online Autotuning: Initial Strategy Overview'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'With these requirements in mind, we decided to leverage the [TALOS](https://www.kdd.org/kdd2018/accepted-papers/view/online-parameter-selection-for-web-based-ranking-problems)
+    (tuning all large-scale online systems) library within LinkedIn, which is designed
+    to learn parameters in the online setting. Our goal is to autotune the click weight
+    (????) so that we maximize contributions while maintaining the level of passive
+    consumption. Formally, our problem can be written as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/f50c3e93d624ff259192cea24dc01fcd.png),'
+  prefs: []
+  type: TYPE_NORMAL
+- en: where *b* is a constant equal to the normalized clicks of the baseline model
+    and ???? is the click weight. We normalized contributions and clicks based on
+    the number of times the Feed was loaded with the relevant alpha (i.e. contributions/loaded_feeds).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our initial attempt at solving this problem involved using an [explore-exploit](https://en.wikipedia.org/wiki/Multi-armed_bandit)
+    strategy with TALOS. The explore phase would put members in different click weight
+    buckets and collect relevant metrics (i.e. contributions, normalized click) for
+    a few days. In the exploit phase, the algorithm would zoom in on a click weight
+    range to collect extra data in the range closer to the solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Implementation of Online Autotuning: Metrics Understanding'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before we could implement the solution, we first focused on understanding our
+    metrics. This involved determining the grid points and search range of exploration.
+    We chose the search range of exploration based on the manual chosen click weights
+    from historical model iterations, [0.0, 0.005]. There is a tradeoff in choosing
+    the number of grid points. Increasing the number of points gives us more granularity
+    in the click weight, but also gives each point less traffic and hence more noise
+    in the metric. Upon collection of our metrics when ramped with 31 grid points
+    we saw mostly noise with the normalized contributions metric and an increasing
+    trend with the normalized clicks metrics. This is illustrated in figures 2a and
+    2b, which show the results for an experiment with desktop (non-app) users.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/92d8ed17b9069b61cdeb86f4197f7049.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figures 2a, 2b: Small search range with 31 points*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To remedy this situation, we did two things:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reduced the number of points, from 31 to 15, to collect more data at each click
+    weight
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Increased the size of our search range in order to see the relationship between
+    contributions and click weight more clearly
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: As we can see from figures 3a and 3b, there is a clear trend in both clicks
+    and contributions after the changes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/74916b00f0fd5a4d8de09b9d4f0afc51.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figures 3a, 3b: Large search range with 15 points*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Figures 3a and 3b are the results of reducing points and increasing the search
+    range.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Implementation of Online Autotuning: Experience with Initial Strategy'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Once we determined the right parameters to reliably capture metrics, we experimented
+    with exploitation, as shown in the graphs below. The search range is different
+    since a different model on a different platform (mobile) is being exemplified
+    in this section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e655795ac9ae86be268f98c5a2a6d4b6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figures 4a, 4b: Exploration results*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Figures 4a and 4b show metrics collected in the exploration phase. We see a
+    clear positive trend in the normalized clicks metric (4a) and a decreasing but
+    noisy trend in the normalized contributions metric (4b). The black horizontal
+    line is at the constant b, which is the normalized clicks of our control model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/7a6d5d154e0314c8c53b546c2a797311.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figures 5a, 5b: Exploration and exploitation results*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Figures 5a and 5b show an aggregation of metrics over an exploration phase followed
+    by an exploitation phase. The white points are from the exploration phase (same
+    data as in 4a and 4b). After the exploration phase, the algorithm decided the
+    solution was in a reduced search range and selected new points (the green points)
+    to collect metrics for the exploitation phase.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The green exploitation points added too much noise to our metric, making it
+    unclear which click weights were actually feasible. This was surprising, so we
+    looked at our metrics a bit more closely. We first looked at how normalized clicks
+    changed from the previous day. As seen in figure 6, on some days the variation
+    can be 12%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/696ff326aff05de981365c6fbff713af.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figures 6: Day to Day Variation of NormalizedClicks*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This showed that our metrics had significant variance day-over-day and explained
+    why our exploitation points had such a different trend compared to exploration,
+    which threw off the algorithm since our metric could be affected in similar ways
+    by both click weight and time of day.
+  prefs: []
+  type: TYPE_NORMAL
+- en: LinkedIn app usage varies significantly on each day of the week (e.g. professionals
+    have different usage patterns on a Friday compared to a Wednesday), so seeing
+    this sort of variance isn’t fully surprising.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This was particularly challenging since our tool expected data from exploration
+    and exploitation to be on a similar trend; however, once we put exploration and
+    exploitation data together (as required by the tool) the trend was lost. Because
+    of these reasons, we decided to skip the exploitation phase to keep a reasonable
+    trend under the time and ramp constraints we were working with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Implementation of Online Autotuning: Revision of Optimization Problem'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We then focused on applying the optimization problem on exploration data exclusively,
+    which is shown below. We initially collected data at twice the online traffic
+    requirement we set for ourselves at the beginning of the project (i.e requirement
+    2) to get a better understanding of our metrics. Figures 7a and 7b summarize the
+    data collected The blue points in figure 7b correspond to the blue region in figure
+    7a, which is the feasible region as defined by our constraint.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/a8b61e2246baadefada78b732e2ee010.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figures 7a, 7b: Feasible region with constraint*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our biggest challenge was figuring out how to deal with the noisiness of the
+    contributions metrics. As we see from the plot of public contributions, even with
+    twice the required ramp percentage, the contributions metric is very noisy. Given
+    the limited traffic for our A/B experiments, we cannot trust the Contributions(????)
+    metric.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In order to address this challenge, we took a closer look at the patterns of
+    our metrics. Since the contributions metric is a decreasing function of ???? and
+    our constraint is an increasing function of ????, the solution to the problem
+    lies in the active set of constraints, normalizedClicks(????) = b. This is useful
+    since normalizedClicks(????) is a much more stable metric. We could, therefore,
+    reformulate our original problem as a minimization problem based on the original
+    constraint, where we simply try to keep normalized clicks at the same level as
+    the baseline, dropping our dependency on the normalizedContribuions metric:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/1f0598153faa4e764a38c18851b2ea24.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The reformulated problem involves minimizing the normalizedClicksDelta with
+    no constraints.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Implementation of Online AutoTuning: Final Strategy and Results'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In figure 6a we observe our new metric over a range of click weights at 5% traffic
+    for 2 days. Figure 6b shows the probability of click weight ???? (shown on the
+    x-axis) being the optimal point in the optimization problem. This probability
+    is calculated by first repeatedly sampling functions from the posterior Gaussian
+    Process and then by identifying the point that optimizes (maximizes or minimizes)
+    the sampled functions. The empirical distribution of the obtained points gives
+    us figure 6b.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/a52803cb16ad72078d3fc24e46dea7bd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figures 8a, 8b: Convergence with new objective*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Previously, engineers would ramp multiple models with varying click weights
+    in an attempt to find a properly tuned click weight model. This may involve relaunching
+    different click weights a couple of days later if the first set of click weights
+    did not contain an ideal click weight candidate. An example timeline of an actual
+    model can involve 4 different click weights collected at 5% traffic for 2 days
+    before selecting an “optimal” click weight. Figure 9 is an example of our ramping
+    schedule before the introduction of click autotuning. Figure 10 is an example
+    of the new ramping schedule with the autotuning tool
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e3d4e0e485759b4a0d667acced1104ec.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 9: Process with ramp volume before autotuning tool*![Figure](../Images/b09b7f17ec3bc2c20bbd58f9836bcf0e.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Figure 10: Process with ramp volume after autotuning tool*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The old ramping schedule may take 10% traffic over 5 days (4 days to collect
+    metrics and 1 day for the traffic change in between). Now with the automatic process
+    of picking the parameter ????, we can reduce this part of the process to 2 days
+    at 5% traffic. After a model ramps to 5%, the engineer can turn on click autotuning
+    with a script and within 2 days we would be serving a single converged click weight.
+    In these two days, we would be looking at 10 different click weights and choosing
+    a solution that may lie between these points. This new tool improved our efficiency
+    by reducing costs in the following three areas:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ramp duration
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Ramp volume
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Manual efforts by engineers
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In addition, the new tool also helped us find a more optimal click weight by
+    being more precise in choosing ???? than previous manual efforts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lessons
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We learned a few lessons along the way in this journey. First, we learned that
+    in this particular optimization problem it pays to formulate your problem as simple
+    as possible. After spending time to understand the metrics we wanted to target
+    and how they related to our particular machine learning model, we realized we
+    could switch our problem definition from a maximizing problem with constraints
+    to just a minimization problem. This allowed us to work with just the constraint
+    metric that was more reliable at lower ramp percentages, and it still allowed
+    us to satisfy our general goal, which was to keep passive consumption constant
+    between models while reducing both the manual effort required by engineers and
+    online traffic requirements.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, it is important to be cognizant about the constraints that must be addressed
+    for the solution to be practical. In our case, we could only allow the tool to
+    use limited ramp volume and for a limited time to maximize the number of experiments,
+    we can run at the same time. Once the constraints are well defined, it becomes
+    more apparent which solutions are appropriate. In our case, the metrics we were
+    working with had significant day-over-day, so we did not find explore-exploit
+    algorithms helpful under our constraints since these algorithms required longer
+    and bigger ramps for our problem space.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks to Kinjal Basu, Viral Gupta, Yunbo Ouyang for building the parameter
+    tuning library and all the advice, and our managers Ying Xuan and Zheng Li for
+    their support.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Marco Varela](https://www.linkedin.com/in/marcovarelaalvarado/)** is a Sr.
+    Software Engineer at Linkedin, where he is a part of the Feed AI team and works
+    on improving the ranking of updates on the Feed through a focus on automation
+    and feature freshness.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Mavis Li](https://www.linkedin.com/in/mavis-li-67aab91a/)** is a software
+    engineer on the Feed AI team at Linkedin working on personalization and ranking
+    of the Feed. She has worked on various projects including adding downstream models
+    as objectives, incorporating out of network group updates into the feed, and click
+    weight autotuning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Check out this comprehensive guide to model optimization techniques.](/2020/05/hyperparameter-optimization-machine-learning-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automated Machine Learning: The Free eBook](/2020/05/automated-machine-learning-free-ebook.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Death of Data Scientists – will AutoML replace them?](/2020/02/data-scientists-automl-replace.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How LinkedIn Uses Machine Learning To Rank Your Feed](https://www.kdnuggets.com/2022/11/linkedin-uses-machine-learning-rank-feed.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Pipeline Optimization with TPOT](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Neural Network Optimization with AIMET](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Gradient Descent: The Mountain Trekker''s Guide to Optimization with…](https://www.kdnuggets.com/gradient-descent-the-mountain-trekker-guide-to-optimization-with-mathematics)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

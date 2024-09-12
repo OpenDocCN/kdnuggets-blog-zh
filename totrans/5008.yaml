@@ -1,0 +1,299 @@
+- en: How to Rank 10% in Your First Kaggle Competition
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/11/rank-ten-precent-first-kaggle-competition.html/3](https://www.kdnuggets.com/2016/11/rank-ten-precent-first-kaggle-competition.html/3)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Model Training**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can improve a model’s performance by tuning its parameters. A model usually
+    have many parameters, but only a few of them are significant to its performance.
+    For example, the most important parameters for a random forset is the number of
+    trees in the forest and the maximum number of features used in developing each
+    tree. **We need to understand how models work and what impact does each parameter
+    have to the model’s performance, be it accuracy, robustness or speed.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Normally we would find the best set of parameters by a process called **[grid
+    search](http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.GridSearchCV.html))**.
+    Actually what it does is simply iterating through all the possible combinations
+    and find the best one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By the way, random forest usually reach optimum when `max_features` is set to
+    the square root of the total number of features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here I’d like to stress some points about tuning XGB. These parameters are
+    generally considered to have real impacts on its performance:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`eta`: Step size used in updating weights. Lower `eta` means slower training
+    but better convergence.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`num_round`: Total number of iterations.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`subsample`: The ratio of training data used in each iteration. This is to
+    combat overfitting.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`colsample_bytree`: The ratio of features used in each iteration. This is like `max_features` in `RandomForestClassifier`.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`max_depth`: The maximum depth of each tree. Unlike random forest, **gradient
+    boosting would eventually overfit if we do not limit its depth**.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`early_stopping_rounds`: If we don’t see an increase of validation score for
+    a given number of iterations, the algorithm will stop early. This is to combat
+    overfitting, too.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Usual tuning steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reserve a portion of training set as the validation set.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Set `eta` to a relatively high value (e.g. 0.05 ~ 0.1), `num_round` to 300 ~
+    500.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Use grid search to find the best combination of other parameters.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Gradually lower `eta` until we reach the optimum.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Use the validation set as `watch_list` to re-train the model with the best
+    parameters. Observe how score changes on validation set in each iteration. Find
+    the optimal value for `early_stopping_rounds`.**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Finally, note that models with randomness all have a parameter like `seed` or `random_state` to
+    control the random seed. **You must record this** with all other parameters when
+    you get a good model. Otherwise you wouldn’t be able to reproduce it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Cross Validation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Cross validation](https://en.wikipedia.org/wiki/Cross-validation_(statistics))** is
+    an essential step in model training. It tells us whether our model is at high
+    risk of overfitting. In many competitions, public LB scores are not very reliable.
+    Often when we improve the model and get a better local CV score, the LB score
+    becomes worse. **It is widely believed that we should trust our CV scores under
+    such situation.**Ideally we would want **CV scores obtained by different approaches
+    to improve in sync with each other and with the LB score**, but this is not always
+    possible.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Usually **5-fold CV** is good enough. If we use more folds, the CV score would
+    become more reliable, but the training takes longer to finish as well. However,
+    we shouldn’t use too many folds if our training data is limited. Otherwise we
+    would have too few samples in each fold to guarantee statistical significance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to do CV properly is not a trivial problem. It requires constant experiment
+    and case-by-case discussion. Many Kagglers share their CV approaches (like [this
+    one](https://www.kaggle.com/c/telstra-recruiting-network/forums/t/19277/what-is-your-cross-validation-method))
+    after competitions when they feel that reliable CV is not easy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Ensemble Generation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning](https://en.wikipedia.org/wiki/Ensemble_learning) refers
+    to the technique of combining different models. It **reduces both bias and variance
+    of the final model** (you can find a proof [here](http://link.springer.com/chapter/10.1007%2F3-540-33019-4_19)),
+    thus **increasing the score and reducing the risk of overfitting**. Recently it
+    became virtually impossible to win prize without using ensemble in Kaggle competitions.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Common approaches of ensemble learning are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bagging**: Use different random subsets of training data to train each base
+    model. Then all the base models vote to generate the final predictions. This is
+    how random forest works.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Boosting**: Train base models iteratively, modify the weights of training
+    samples according to the last iteration. This is how gradient boosted trees work.
+    (Actually it’s not the whole story. Apart from boosting, GBTs try to learn the
+    residuals of earlier iterations.) It performs better than bagging but is more
+    prone to overfitting.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Blending**: Use non-overlapping data to train different base models and take
+    a weighted average of them to obtain the final predictions. This is easy to implement
+    but uses less data.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Stacking**: To be discussed next.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'In theory, for the ensemble to perform well, two factors matter:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Base models should be as unrelated as possibly**. This is why we tend to
+    include non-tree-based models in the ensemble even though they don’t perform as
+    well. The math says that the greater the diversity, and less bias in the final
+    ensemble.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Performance of base models shouldn’t differ to much.**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Actually we have a **trade-off** here. In practice we may end up with highly
+    related models of comparable performances. Yet we ensemble them anyway because
+    it usually increase the overall performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Stacking**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Compared with blending, stacking makes better use of training data. Here’s
+    a diagram of how it works:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Stacking](../Images/fb2fd03a6a8cf5851969a1254b354966.png)](http://7xlo8f.com1.z0.glb.clouddn.com/blog-diagram-stacking.jpg)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*(Taken from [Faron](https://www.kaggle.com/mmueller). Many thanks!)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It’s much like cross validation. Take 5-fold stacking as an example. First
+    we split the training data into 5 folds. Next we will do 5 iterations. In each
+    iteration, train every base model on 4 folds and predict on the hold-out fold. **You
+    have to keep the predictions on the testing data as well.** This way, in each
+    iteration every base model will make predictions on 1 fold of the training data
+    and all of the testing data. After 5 iterations we will obtain a matrix of shape `#(samples
+    in training data) X #(base models)`. This matrix is then fed to the stacker (it’s
+    just another model) in the second level. After the stacker is fitted, use the
+    predictions on testing data by base models (**each base model is trained 5 times,
+    therefore we have to take an average to obtain a matrix of the same shape**) as
+    the input for the stacker and obtain our final predictions.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Maybe it’s better to just show the codes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prize winners usually have larger and much more complicated ensembles. For beginner,
+    implementing a correct 5-fold stacking is good enough.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Pipeline**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can see that the workflow for a Kaggle competition is quite complex, especially
+    for model selection and ensemble. Ideally, we need a highly automated pipeline
+    capable of:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Modularized feature transformations**. We only need to write a few lines
+    of codes (or better, rules / DSLs) and the new feature is added to the training
+    set.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Automated grid search**. We only need to set up models and parameter grid,
+    the search will be run and the best parameters will be recorded.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Automated ensemble selection**. Use K best models for training the ensemble
+    as soon as we put another base model into the pool.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For beginners, the first one is not very important because the number of features
+    is quite manageable; the third one is not important either because typically we
+    only do several ensembles at the end of the competition. But the second one is
+    good to have because**manually recording the performance and parameters of each
+    model is time-consuming and error-prone**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Chenglong Chen](https://www.kaggle.com/chenglongchen), the winner of [Crowdflower
+    Search Results Relevance](https://www.kaggle.com/c/crowdflower-search-relevance),
+    once released his pipeline on [GitHub](https://github.com/ChenglongChen/Kaggle_CrowdFlower).
+    It’s very complete and efficient. Yet it’s very hard to understand and extract
+    all his logic to build a general framework. This is something you might want to
+    do when you have plenty of time.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How LinkedIn Uses Machine Learning To Rank Your Feed](https://www.kdnuggets.com/2022/11/linkedin-uses-machine-learning-rank-feed.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Get Your First Job in Data Science without Any Work Experience](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[It''s alive! Build your first robots with Python and some cheap,…](https://www.kdnuggets.com/2023/06/manning-build-first-robots-python-cheap-basic-components.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[From Zero to Hero: Create Your First ML Model with PyTorch](https://www.kdnuggets.com/from-zero-to-hero-create-your-first-ml-model-with-pytorch)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploying Your First Machine Learning Model](https://www.kdnuggets.com/deploying-your-first-machine-learning-model)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

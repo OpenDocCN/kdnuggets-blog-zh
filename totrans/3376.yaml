@@ -1,0 +1,370 @@
+- en: 'Deep Learning Research Review: Reinforcement Learning'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/11/deep-learning-research-review-reinforcement-learning.html](https://www.kdnuggets.com/2016/11/deep-learning-research-review-reinforcement-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/21b4ad6273c43fa6a8bd2bd337284dbb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*This is the 2nd installment of a new series called Deep Learning Research
+    Review. Every couple weeks or so, I’ll be summarizing and explaining research
+    papers in specific subfields of deep learning. This week focuses on Reinforcement
+    Learning.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[*Last time*](https://adeshpande3.github.io/adeshpande3.github.io/Deep-Learning-Research-Review-Week-1-Generative-Adversarial-Nets)
+    *was Generative Adversarial Networks ICYMI*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Introduction to Reinforcement Learning**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**3 Categories of Machine Learning**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before getting into the papers, let’s first talk about what **reinforcement
+    learning** is. The field of machine learning can be separated into 3 main categories.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Supervised Learning
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Unsupervised Learning
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Reinforcement Learning
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![](../Images/7a5ff597262bfbaecade1e2614986dc5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The first category, **supervised learning**, is the one you may be most familiar
+    with. It relies on the idea of creating a function or model based on a set of
+    training data, which contains inputs and their corresponding labels. Convolutional
+    Neural Networks are a great example of this, as the images are the inputs and
+    the outputs are the classifications of the images (dog, cat, etc).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Unsupervised learning** seeks to find some sort of structure within data
+    through methods of cluster analysis. One of the most well-known ML clustering
+    algorithms, K-Means, is an example of unsupervised learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Reinforcement learning** is the task of learning what actions to take, given
+    a certain situation/environment, so as to maximize a reward signal. The interesting
+    difference between supervised and reinforcement learning is that this reward signal
+    simply tells you whether the action (or input) that the agent takes is good or
+    bad. It doesn’t tell you anything about what the *best* action is. Contrast this
+    to CNNs where the corresponding label for each image input is a definite instruction
+    of what the output should be for each input.  Another unique component of RL is
+    that an agent’s actions will affect the subsequent data it receives. For example,
+    an agent’s action of moving left instead of right means that the agent will receive
+    different input from the environment at the next time step. Let’s look at an example
+    to start off.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The RL Problem**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, let’s first think about what have in a reinforcement learning problem. Let’s
+    imagine a tiny robot in a small room. We haven’t programmed this robot to move
+    or walk or take any action. It’s just standing there. This robot is our **agent**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5612d33f51f345bd3f80fd3b221d4df9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Like we mentioned before, reinforcement learning is all about trying to understand
+    the optimal way of making decisions/actions so that we maximize some **reward** **R**.
+    This reward is a feedback signal that just indicates how well the agent is doing
+    at a given time step. The **action A** that an agent takes at every time step
+    is a function of both the reward (signal telling the agent how well it’s currently
+    doing) and the **state S**, which is a description of the environment the agent
+    is in. The mapping from environment states to actions is called our **policy P**.
+    The policy basically defines the agent’s way of behaving at a certain time, given
+    a certain situation. Now, we also have a **value function V** which is a measure
+    of how good each position is. This is different from the reward in that the reward
+    signal indicates what is good in the immediate sense, while the value function
+    is more indicative of how good it is to be in this state/position in the long
+    run. Finally, we also have a **model M** which is the agent’s representation of
+    the environment. This is the agent’s model of how it thinks that the environment
+    is going to behave.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7cde482d39514ca446c63adbf7dd676b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Markov Decision Process**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, let’s now think back to our robot (the agent) in the small room. Our **reward
+    function** is dependent on what we want the agent to accomplish. Let’s say that
+    we want it to move to one of the corners of the room where it will receive a reward.
+    The robot will get a +25 when it reaches this point, and will get a -1 for every
+    time step it takes to get there. We basically want the robot to get the corner
+    as fast as possible. The **actions** the agent can take are moving north, south,
+    east, or west. The agent’s **policy** can be a simple one, where the behavior
+    is that the agent will always move to the location with the higher value function.
+    Makes sense right? A position with a high value function = good to be in this
+    position (with regards to long term reward).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, this whole RL environment can be described with a **Markov Decision Process**.
+    For those that haven’t heard the term before, an MDP is a framework for modeling
+    an agent’s decision making. It contains a finite set of states (and value functions
+    for those states), a finite set of actions, a policy, and a reward function. Our
+    value function can be split into 2 terms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**State-value function V**: The expected return from being in a state S and
+    following a policy π. This return is calculated by looking at summation of the
+    reward at each future time step (The gamma refers to a constant discount factor,
+    which means that the reward at time step 10 is weighted a little less than the
+    reward at time step 1).'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![](../Images/29868060c2213b587f9057bd5e41c833.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Action-value function Q**: The expected return from being in a state S, following
+    a policy π, and taking an action a (Equation will be same as above except that
+    we have an additional condition that At = a).'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Now that we have all the components, what do we do with this MDP? Well, we want
+    to solve it, of course. By solving an MDP, you’ll be able to find the optimal
+    behavior (policy) that maximizes the amount of reward the agent can expect to
+    get from any state in the environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solving the MDP**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can solve an MDP and get the optimum policy through the use of dynamic programming
+    and specifically through the use of **policy iteration **(there is another technique
+    called value iteration, but won’t go into that right now). The idea is that we
+    take some initial policy π1 and evaluate the state value function for that policy.
+    The way we do this is through the **Bellman expectation equation**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/efc5925eb0ccb99a4fcd1e748c63df11.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This equation basically says that our value function, given that we’re following
+    policy π, can be decomposed into the expected return sum of the immediate reward
+    Rt+1 and the value function of the successor state St+1\. If you think about it
+    closely, this is equivalent to the value function definition we used in the previous
+    section. Using this equation is our **policy evaluation**component. In order to
+    get a better policy, we use a **policy **improvement step where we simply act
+    greedily with respect to the value function. In other words, the agent takes the
+    action that maximizes value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d6dbe01172b839fa39441614dd9d0708.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, in order to get the *optimal* policy, we repeat these 2 steps, one after
+    the other, until we converge to optimal policy π*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**When You’re Not Given an MDP**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Policy iteration is great and all, but it only works when we have a given MDP.
+    The MDP essentially tells you how the environment works, which realistically is
+    not going to be given in real world scenarios. When not given an MDP, we use model
+    free methods that go directly from the experience/interactions of the agents and
+    the environment to the value functions and policies. We’re going to be doing the
+    same steps of policy evaluation and policy improvement, just without the information
+    given by the MDP.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The way we do this is instead of improving our policy by optimizing over the
+    state value function, we’re going to optimize over the action value function Q.
+    Remember how we decomposed the state value function into the sum of immediate
+    reward and value function of the successor state? Well, we can do the same with
+    our Q function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/655495d0bbcdba93e724a2c83da5b86c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, we’re going to go through the same process of policy evaluation and policy
+    improvement, except we replace our state value function V with our action value
+    function Q. Now, I’m going to skip over the details of what changes with the evaluation/improvement
+    steps. To understand MDP free evaluation and improvement methods, topics such
+    as Monte Carlo Learning, Temporal Difference Learning, and SARSA would require
+    whole blogs just themselves (If you are interested, though, please take a listen
+    to David Silver’s [Lecture 4](https://www.youtube.com/watch?v=PnHCvfgC_ZA) and [Lecture
+    5](https://www.youtube.com/watch?v=0g4j2k_Ggc4)). Right now, however, I’m going
+    to jump ahead to value function approximation and the methods discussed in the
+    AlphaGo and Atari Papers, and hopefully that should give a taste of modern RL
+    techniques. **The main takeaway is that we want to find the optimal policy π* that
+    maximizes our action value function Q.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Value Function Approximation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, if you think about everything we’ve learned up until this point, we’ve treated
+    our problem in a relatively simplistic way. Look at the above Q equation. We’re
+    taking in a specific state S and action A, and then computing a number that basically
+    tells us what the expected return is. Now let’s imagine that our agent moves 1
+    millimeter to the right. This means we have a whole new state S’, and now we’re
+    going to have to compute a Q value for that. In real world RL problems, there
+    are millions and millions of states so it’s important that our value functions
+    understand generalization in that we don’t have to store a completely separate
+    value function for every possible state. The solution is to use a **Q value function
+    approximation **that is able to generalize to unknown states.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, what we want is some function, let’s call is Qhat, that gives a rough approximation
+    of the Q value given some state S and some action A.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/96caca4b660041c06c312793e33f7876.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This function is going to take in S, A, and a good old weight vector W (Once
+    you see that W, you already know we’re bringing in some gradient descent *). It
+    is going to compute the dot product between x (which is just a feature vector
+    that represents S and A) and W. The way we’re going to improve this function is
+    by calculating the loss between the true Q value (let’s just assume that it’s
+    given to us for now) and the output of the approximate function.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*![](../Images/61c07904b90863d6af0b7ae4b910caac.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After we compute the loss, we use gradient descent to find the minimum value,
+    at which point we will have our optimal W vector. This idea of function approximation
+    is going to be very key when taking a look at the papers a little later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Just One More Thing**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before getting to the papers, just wanted to touch on one last thing. An interesting
+    discussion with the topic of reinforcement learning is that of exploration vs
+    exploitation. **Exploitation** is the agent’s process of taking what it already
+    knows, and then making the actions that it knows will produce the maximum reward.
+    This sounds great, right? The agent will always be making the best action based
+    on its current knowledge. However, there is a key phrase in that statement. *Current
+    knowledge*. If the agent hasn’t explored enough of the state space, it can’t possibly
+    know whether it is really taking the best possible action. This idea of taking
+    actions with the main purpose of exploring the state space is called **exploration**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This idea can be easily related to a real world example. Let’s say you have
+    a choice of what restaurant to eat at tonight. You (acting as the agent) know
+    that you like Mexican food, so in RL terms, going to a Mexican restaurant will
+    be the action that maximizes your reward, or happiness/satisfaction in this case.
+    However, there is also a choice of Italian food, which you’ve never had before.
+    There’s a possibility that it could be better than Mexican food, or could be a
+    lot worse. This tradeoff between whether to exploit an agent’s past knowledge
+    vs trying something new in hope of discovering a greater reward is one of the
+    major challenges in reinforcement learning (and in our daily lives tbh).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Other Resources for Learning RL**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Phew. That was a lot of info. By no means, however, was that a comprehensive
+    overview of the field. If you’d like a more in-depth overview of RL, I’d strongly
+    recommend these resources.
+  prefs: []
+  type: TYPE_NORMAL
+- en: David Silver (from Deepmind) Reinforcement Learning [Video Lectures](https://www.youtube.com/watch?v=2pWv7GOvuf0&list=PL7-jPKtc4r78-wCZcQn5IqyuWhBZ8fOxT)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: My [personal notes](https://docs.google.com/document/d/1TjmYDOxQzOQ0jd0lUiFOVQ1hNAmtwKfSAACck9dR7a8/edit?usp=sharing) from
+    the RL course
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sutton and Barto’s [Reinforcement Learning Textbook](https://webdocs.cs.ualberta.ca/~sutton/book/bookdraft2016sep.pdf) (This
+    is really the holy grail if you are determined to learn the ins and outs of this
+    subfield)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Andrej Karpathy’s [Blog Post](http://karpathy.github.io/2016/05/31/rl/) on RL
+    (Start with this one if you want to ease into RL and want to see a really well
+    done practical example)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[UC Berkeley CS 188](http://ai.berkeley.edu/lecture_videos.html) Lectures 8-11'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Open AI Gym](https://gym.openai.com/): When you feel comfortable with RL,
+    try creating your own agents with this reinforcement learning toolkit that Open
+    AI created'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[HuggingFace Has Launched a Free Deep Reinforcement Learning Course](https://www.kdnuggets.com/2022/05/huggingface-launched-free-deep-reinforcement-learning-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI, Analytics, Machine Learning, Data Science, Deep Learning…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-on Reinforcement Learning Course Part 3: SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On Reinforcement Learning Course, Part 1](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On Reinforcement Learning Course, Part 2](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Reinforcement Learning for Newbies](https://www.kdnuggets.com/2022/05/reinforcement-learning-newbies.html)*'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

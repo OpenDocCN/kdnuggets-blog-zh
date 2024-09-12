@@ -1,0 +1,178 @@
+- en: 'Vowpal Wabbit: Fast Learning on Big Data'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2014/05/vowpal-wabbit-fast-learning-on-big-data.html](https://www.kdnuggets.com/2014/05/vowpal-wabbit-fast-learning-on-big-data.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)By
+    Ran Bi, May 26, 2014.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Vowpal Wabbit (VW) is a project started at Yahoo! Research and now sponsored
+    by Microsoft Research. Started and led by John Langford, VW focuses on fast learning
+    by building an intrinsically fast learning algorithm. John gave two guest lectures
+    to us on AllReduce and Bandits during NYU Big Data class this semester. From what
+    I see, he is a reputed researcher and really passionate about online learning
+    algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Vorpal Bunny](../Images/049b2733ec4274eb98d67fc0b9f0ac8d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The Vowpal Wabbit name is oddly pronounced and strange. Langford explained that
+    Vowpal Wabbit is how Elmer Fudd would pronounce “Vorpal Rabbit”. As for “Vorpal”,
+    if you Google it, you will find “Vorpal Bunny”, which is also known as a “killer
+    rabbit” in a popular computer game. Maybe this is exactly what he wants VW to
+    be – cute but also powerful and fast.
+  prefs: []
+  type: TYPE_NORMAL
+- en: VW supports a number of machine learning problems, importance weighting, a selection
+    of loss functions and optimization algorithms, like SGD (Stochastic Gradient Descent),
+    BFGS (a a popular algorithm for parameter estimation), conjugate gradient etc.
+    It has been used to learn a sparse **terafeature** (i.e. 10^(12) sparse features)
+    dataset on 1000 nodes in one hour, which beats all current machine linear learning
+    algorithms. According to its tutorial on John Langford’s GitHub, VW is about a
+    factor of 3 faster than [svmsgd](https://github.com/tpeng/svmsgd) on the RCV1
+    example, which is a collection for text categorization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The default mode of VW is a SGD online learner with a squared loss function.
+    To run VW, the data is expected to be in a particular format, which is
+  prefs: []
+  type: TYPE_NORMAL
+- en: “label [weight]| Namespace Feature1:Value1|Namespace Feature2:Value2 …”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hash trick speedup for Vowpal Wabbit](../Images/32ce02124d6027bc273d0ddaab0dea70.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The format is also ideal for sparse representations since feature value of zero
+    doesn’t need to be specified. If you are not sure whether the data is in the right
+    format, you can always paste lines of the data in the [Data Format Validation](http://hunch.net/~vw/validate.html).
+    VW is efficient and very scalable. To vectorize features it uses a hash trick,
+    which takes almost no RAM and is 10 times faster since no hash-map table is maintained
+    internally.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A dozen of companies are using VW. One of them is eHarmony, which helps people
+    find true love. It is John’s favorite app as he said on NIPS 2011. VW was also
+    used for solving several Kaggle competitions. More information can be found on
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[VW’s website](http://hunch.net/~vw/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GitHub site](https://github.com/JohnLangford/vowpal_wabbit/wiki)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Slideshare: Terascale Learning Algorithm](http://www.slideshare.net/pauldix/terascale-learning)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Note: Vowpal Wabbit is different from Deep Learning – see here [Where to Learn
+    Deep Learning – Courses, Tutorials, Software](/2014/05/learn-deep-learning-courses-tutorials-overviews.html).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[MLTK: Machine Learning Toolkit in Java – free download](/2014/04/mltk-machine-learning-toolkit-java.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Watch: Basics of Machine Learning](/2014/05/watch-basics-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Workflows for Machine Learning](/2014/04/data-workflows-machine-learning-paco-nathan.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Comment from Dan Rice on LinkedIn:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is interesting about Vowpal is that it is fast because it does sampling,
+    as it is a serial processing based method. This sampling is not done in the traditional
+    way by sampling observations. Instead, they sample one feature at a time in the
+    gradient descent – in what is stochastic gradient descent. So those in the machine
+    learning community who criticize sampling also need to be aware that their own
+    fast methods like Vowpal also clearly use sampling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Vowpal results sometimes might be as accurate as traditional gradient descent
+    methods in standard logistic regression, but are often substantially less accurate.
+    In fact, it is probably possible to match the speed and accuracy performance in
+    Vowpal with large numbers of observations by using standard logistic regression
+    and simply sampling observations. As referenced below, the inventor of Vowpal
+    – Langford, has recently been publishing on hybrid approaches that mix the stochastic
+    gradient descent approach of Vowpal with traditional gradient descent approaches
+    in logistic regression to try to increase accuracy. But these are now parallel
+    processing methods in part. With parallel processing today, the issue of speed
+    is much less important than it was a few years ago, but the other issues like
+    reliability, accuracy, stability and absence of bias are still far more important.
+    If sampling is done, the key is to make sure that it does not compromise accuracy
+    as it did in the case of Vowpal which is why there has been a movement to new
+    more accurate methods by its inventor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Reliable Effective Terascale Linear Learning System](http://arxiv.org/pdf/1110.4198.pdf),
+    by Alekh Agarwal, Olivier Chapelle, Miroslav Dudik, John Langford.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Simple and Fast Data Streaming for Machine Learning Projects](https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Speed up Machine Learning with Fast Kriging (FKR)](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Practical Deep Learning from fast.ai is Back!](https://www.kdnuggets.com/2022/07/practical-deep-learning-fastai-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Step up your Python game with Fast Python for Data Science!](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fast-track your next move with in-demand data skills](https://www.kdnuggets.com/2023/01/datacamp-fast-track-next-move-indemand-data-skills.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Fast Can BERT Go With Sparsity?](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

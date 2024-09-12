@@ -1,0 +1,408 @@
+- en: 'From Zero to Hero: Create Your First ML Model with PyTorch'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/from-zero-to-hero-create-your-first-ml-model-with-pytorch](https://www.kdnuggets.com/from-zero-to-hero-create-your-first-ml-model-with-pytorch)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![From Zero to Hero: Create Your First ML Model with PyTorch](../Images/aac9a7fec562df82c6895dad92e6871c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Motivation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyTorch is the most widely used Python-based Deep Learning framework. It provides
+    tremendous support for all machine learning architectures and data pipelines.
+    In this article, we go through all the framework basics to get you started with
+    implementing your algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'All machine learning implementations have 4 major steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data Handling**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Model Architecture**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Training Loop**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Evaluation**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We go through all these steps while implementing our own MNIST image classification
+    model in PyTorch. This will familiarize you with the general flow of a machine-learning
+    project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imports
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: torch.nn module provides support for neural network architectures and has built-in
+    implementations for popular layers such as Dense Layers, Convolutional Neural
+    Networks, and many more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: torch.optim provides implementations for optimizers such as Stochastic Gradient
+    Descent and Adam.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Other utility modules are available for data handling support and transformations.
+    We will go through each in more detail later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Declare Hyperparameters
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Each hyperparameter will be explained further where appropriate. However, it
+    is a best practice to declare them at the top of our file for ease of change and
+    understanding.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Data Loading and Transforms
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: MNIST is a popular image classification dataset, provided by default in PyTorch.
+    It consists of grayscale images of 10 hand-written digits from 0 to 9\. Each image
+    is of size 28 pixels by 28 pixels, and the dataset contains 60000 training and
+    10000 testing images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We load the training and testing dataset separately, denoted by the train argument
+    in the MNIST initialization function. The root argument declares the directory
+    in which the dataset is to be downloaded.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'However, we also pass an additional transform argument. For PyTorch, all inputs
+    and outputs are supposed to be in Torch.Tensor format. This is equivalent to a
+    numpy.ndarray in numpy. This tensor format provides additional support for data
+    manipulation. However, the MNIST data we load from is in the PIL.Image format.
+    We need to transform the images into PyTorch-compatible tensors. Accordingly,
+    we pass the following transforms:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The ToTensor() transform converts images to tensor format. Next, we pass an
+    additional Lambda transform. The Lambda function allows us to implement custom
+    transforms. Here we declare a function to flatten the input. The images are of
+    size 28x28, but, we flatten them i.e. convert them to a single-dimensional array
+    of size 28x28 or 784\. This will be important later when we implement our model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Compose function sequentially combines all the transforms. Firstly, the
+    data is converted to tensor format and then flattened to a one-dimensional array.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dividing our Data into Batches
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: For computational and training purposes, we can not pass the complete dataset
+    into the model at once. We need to divide our dataset into mini-batches that will
+    be fed to the model in sequential order. This allows faster training and adds
+    randomness to our dataset, which can assist in stable training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyTorch provides built-in support for batching our data. The DataLoader class
+    from torch. utils module can create batches of data, given a torch dataset module.
+    As above, we already have the dataset loaded.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: We pass the dataset to our dataloader, and our batch_size hyperparameter as
+    initialization arguments. This creates an iterable data loader, so we can easily
+    iterate over each batch using a simple for loop.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our initial image was of size (784, ) with a single associated label. The batching
+    then combines different images and labels in a batch. For example, if we have
+    a batch size of 64, the input size in a batch will become (64, 784) and we will
+    have 64 associated labels for each batch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We also shuffle the training batch, which changes the images within a batch
+    for each epoch. It allows for stable training and faster convergence of our model
+    parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Defining our Classification Model
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We use a simple implementation consisting of 3 hidden layers. Although simple,
+    this can give you a general understanding of combining different layers for more
+    complex implementations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As described above, we have an input tensor of size (784, ) and 10 different
+    output classes, one for each digit from 0-9.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**** For model implementation, we can ignore the batch dimension.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Firstly, the model must inherit from the torch.nn.Module class. This provides
+    basic functionality for neural network architectures. We then must implement two
+    methods, __init__ and forward.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the __init__ method, we declare all layers the model will use. We use Linear
+    (also called Dense) layers provided by PyTorch. The first layer maps the input
+    to 512 neurons. We can pass input_size as a model parameter, so we can later use
+    it for input of different sizes as well. The second layer maps the 512 neurons
+    to 256\. The third hidden layer maps the 256 neurons from the previous layer to
+    128\. The final layer then finally reduces to the output size. Our output size
+    will be a tensor of size (10, ) because we are predicting ten different numbers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![From Zero to Hero: Create Your First ML Model with PyTorch](../Images/892683a58550b21fc5cd9d81645de015.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Moreover, we initialize a ReLU activation layer for non-linearity in our model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The forward function receives images and we provide code for processing the
+    input. We use the layers declared and sequentially pass our input through each
+    layer, with an intermediate ReLU activation layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our main code, we can then initialize the model providing it with the input
+    and output size for our dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Once initialized, we change the model device (which can be either CUDA GPU or
+    CPU). We checked for our device when we initialized the hyperparameters. Now,
+    we have to manually change the device for our tensors and model layers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training Loop
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Firstly, we must declare our loss function and optimizer that will be used to
+    optimize our model parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Firstly, we must declare our loss function and optimizer that will be used to
+    optimize our model parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We use the Cross-Entropy Loss that is primarily used for multi-label classification
+    models. It first applies softmax to the predictions and calculates the given target
+    labels and predicted values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adam optimizer is the most-used optimizer function that allows stable gradient
+    descent toward convergence. It is the default optimizer choice nowadays and provides
+    satisfactory results. **We pass our model parameters as an argument that denotes
+    the weights that will be optimized.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: For our training loop, we build step-by-step and fill in missing portions as
+    we gain an understanding.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As a starting point, we iterate over the complete dataset multiple times (called
+    epoch), and optimize our model each time. However, we have divided our data into
+    batches. Then, for every epoch, we must iterate over each batch as well. The code
+    for this will look as below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now, we can train the model given a single input batch. Our batch consists of
+    images and labels. Firstly, we must separate each of these. Our model only requires
+    images as input to make predictions. We then compare the predictions with the
+    true labels, to estimate our model’s performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: We pass the batch of images directly to the model that will be processed by
+    the forward function defined within the model. Once we have our predictions, we
+    can optimize our model weights.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The optimization code looks as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Using the above code, we can compute all the backpropagation gradients and optimize
+    the model weights using the Adam optimizer. All the above codes combined can train
+    our model toward convergence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Complete training loop looks as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: The loss gradually decreases and reaches close to 0\. Then, we can evaluate
+    the model on the test dataset we declared initially.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Evaluating our Model Performace
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Similar to the training loop, we iterate over each batch in the test dataset
+    for evaluation. We generate predictions for the inputs. However, for evaluation,
+    we only need the label with the highest probability. The argmax function provides
+    this functionality to obtain the index of the value with the highest value in
+    our predictions array.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For the accuracy score, we can then compare if the predicted label matches the
+    true target label. We then compute the accuracy of the number of correct labels
+    divided by the total predicted labels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Results
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: I only trained the model for five epochs and achieved a test accuracy of over
+    96 percent, as compared to 10 percent accuracy before training. The image below
+    shows the model predictions after training five epochs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![From Zero to Hero: Create Your First ML Model with PyTorch](../Images/eb5127ca41a590e3e22753e37e78bab3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: There you have it. You have now implemented a model from scratch that can differentiate
+    hand-written digits just from image pixel values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This in no way is a comprehensive guide to PyTorch but it does provide you with
+    a general understanding of structure and data flow in a machine learning project.
+    This is nonetheless sufficient knowledge to get you started with implementing
+    state-of-the-art architectures in deep learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Complete Code
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'The complete code is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**model.py:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**main.py**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**[Muhammad Arham](https://www.linkedin.com/in/muhammad-arham-a5b1b1237/)**
+    is a Deep Learning Engineer working in Computer Vision and Natural Language Processing.
+    He has worked on the deployment and optimizations of several generative AI applications
+    that reached the global top charts at Vyro.AI. He is interested in building and
+    optimizing machine learning models for intelligent systems and believes in continual
+    improvement.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Breaking the Data Barrier: How Zero-Shot, One-Shot, and Few-Shot…](https://www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Zero-shot Learning, Explained](https://www.kdnuggets.com/2022/12/zeroshot-learning-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Bug That Can Make You a Data Science Hero](https://www.kdnuggets.com/2022/03/bug-make-data-science-hero.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploying Your First Machine Learning Model](https://www.kdnuggets.com/deploying-your-first-machine-learning-model)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Step-by-Step Tutorial to Building Your First Machine Learning Model](https://www.kdnuggets.com/step-by-step-tutorial-to-building-your-first-machine-learning-model)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyTorch Tips to Boost Your Productivity](https://www.kdnuggets.com/2023/08/pytorch-tips-boost-productivity.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

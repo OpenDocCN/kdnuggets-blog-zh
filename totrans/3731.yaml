@@ -1,0 +1,228 @@
+- en: 'oBERT: Compound Sparsification Delivers Faster Accurate Models for NLP'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Comparison of reported inference performance speedups for The Optimal BERT
+    Surgeon](../Images/120c07b58ced24c19051c4e1d1908546.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Comparison of reported inference performance speedups for The Optimal BERT Surgeon
+    (oBERT) with other methods on the SQuAD dataset. oBERT performance was measured
+    using the DeepSparse Engine on a c5.12xlarge AWS instance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The modern world is made up of constant communication happening through text.
+    Think messaging apps, social networks, documentation and collaboration tools,
+    or books. This communication generates enormous amounts of actionable data for
+    companies that wish to use it to improve their users’ experiences. For example,
+    the video at the bottom of this blog shows how a user can track the general sentiment
+    of cryptocurrency across Twitter using an NLP neural network – [BERT](https://arxiv.org/abs/1810.04805).
+    Through many novel contributions, BERT significantly improved the state-of-the-art
+    for NLP tasks such as text classification, token classification, and question
+    answering. It did this in a very “over-parameterized” way, though. Its 500MB model
+    size and slow inference prohibit many efficient deployment scenarios, especially
+    at the edge. And cloud deployments become fairly expensive, fairly quickly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'BERT’s inefficient nature has not gone unnoticed. Many researchers have pursued
+    ways to reduce its cost and size. Some of the most active research is in model
+    compression techniques such as smaller architectures (structured pruning), distillation,
+    quantization, and unstructured pruning. A few of the more impactful papers include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[DistilBERT](https://arxiv.org/abs/1910.01108) used [knowledge distillation](https://en.wikipedia.org/wiki/Knowledge_distillation)
+    to transfer knowledge from a BERT base model to a 6-layer version.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[TinyBERT](https://arxiv.org/abs/1909.10351) implemented a more complicated
+    distillation setup to better transfer the knowledge from the baseline model into
+    a 4-layer version.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Lottery Ticket Hypothesis](https://arxiv.org/abs/1803.03635) applied [magnitude
+    pruning](https://towardsdatascience.com/pruning-neural-networks-1bb3ab5791f9)
+    during pre-training of a BERT model to create a sparse architecture that generalized
+    well across fine-tuning tasks.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Movement Pruning](https://arxiv.org/abs/2005.07683) applied a combination
+    of the magnitude and gradient information to remove redundant parameters while
+    fine-tuning with distillation.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![DistilBERT training illustration](../Images/2b69b82b72a797d19cc1d44de32d5070.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: DistilBERT training illustration![TinyBERT training illustration](../Images/7ef98e9a8e1ed4db71abe59f3559b84d.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: TinyBERT training illustration
+  prefs: []
+  type: TYPE_NORMAL
+- en: BERT is Highly Over-Parameterized
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We show that BERT is highly over-parameterized in our recent paper, [*The Optimal
+    BERT Surgeon*](https://arxiv.org/pdf/2203.07259.pdf). **Ninety percent of the
+    network can be removed with minimal effect on the model and its accuracy**!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Really, 90%? Yes! Our research team at Neural Magic in collaboration with IST
+    Austria improved the prior best 70% sparsity to 90% by implementing a second-order
+    pruning algorithm, Optimal BERT Surgeon. The algorithm uses a Taylor expansion
+    to approximate the effect of each weight on the loss function – all of this means
+    we know exactly which weights are redundant in the network and are safe to remove.
+    When combining this technique with distillation while training, we are able to
+    get to 90% sparsity while recovering to 99% of the baseline accuracy!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Performance overview relative to current state-of-the-art unstructured pruning
+    methods on the 12-layer BERT-base-uncased model and the question-answering SQuAD
+    v1.1 dataset.](../Images/3bce90acca3987094978000a4b979dbc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Performance overview relative to current state-of-the-art unstructured pruning
+    methods on the 12-layer BERT-base-uncased model and the question-answering SQuAD
+    v1.1 dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But, are structured pruned versions of BERT over-parameterized as well? In trying
+    to answer this question, we removed up to 3/4 of the layers to create our 6-layer
+    and 3-layer sparse versions. We first retrained these compressed models with distillation
+    and then applied Optimal BERT Surgeon pruning. In doing this, we found that 80%
+    of the weights from these already-compressed models could be further removed without
+    affecting the accuracy. For example, our 3-layer model removes 81 million of the
+    110 million parameters in BERT while recovering 95% of the accuracy, creating
+    our **Optimal BERT Surgeon models (oBERT)**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given the high level of sparsity, we introduced with oBERT models, we measured
+    the inference performance using the [DeepSparse](https://github.com/neuralmagic/deepsparse)
+    [Engine](https://github.com/neuralmagic/deepsparse) – a freely-available, sparsity-aware
+    inference engine that’s engineered to increase the performance of sparse neural
+    networks on commodity CPUs, like the ones in your laptop. The chart below shows
+    the resulting speedups for a pruned 12-layer that outperforms DistilBERT and a
+    pruned 3-layer that outperforms TinyBERT. With the combination of DeepSparse Engine
+    and oBERT, highly accurate NLP CPU deployments are now measured in a few milliseconds
+    (few = single digits).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Better Algorithms Enable Performant and Efficient Deep Learning, Anywhere
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: After applying the structured pruning and Optimal BERT Surgeon pruning techniques,
+    we include quantization-aware training to take advantage of the DeepSparse Engine’s
+    sparse quantization support for X86 CPUs. Combining quantization and our sparse
+    models with [4-block pruning](https://arxiv.org/pdf/2203.07259.pdf) for DeepSparse
+    [VNNI support](https://www.intel.com/content/dam/www/public/us/en/documents/product-overviews/dl-boost-product-overview.pdf)
+    results in a quantized, 80% sparse 12-layer model that achieves the 99% recovery
+    target. The combination of all these techniques is what we termed “[compound sparsification](https://neuralmagic.com/blog/pruning-hugging-face-bert-compound-sparsification/).”
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Latency inference comparisons at batch size 1, sequence length 128 for oBERT
+    on CPUs and GPUs.](../Images/120c07b58ced24c19051c4e1d1908546.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Latency inference comparisons at batch size 1, sequence length 128 for oBERT
+    on CPUs and GPUs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The result is GPU-level performance for BERT models on readily available CPUs.
+    With the sparse quantized oBERT 12-layer model, a 4-core Intel MacBook is now
+    more performant than a T4 GPU and an 8-core server outperforms a V100 for latency-sensitive
+    applications. Even further speedups are realized when using the 3 and 6-layer
+    models for slightly less accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**“A 4-core Intel MacBook is now more performant than a T4 GPU and an 8-core
+    server outperforms a V100 for latency-sensitive applications.”**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Making Compound Sparsification Work for You
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Twitter natural language processing video comparing the performance improvements
+    from oBERT to an unoptimized, baseline model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In spirit with the research community and enabling continued contributions,
+    the source code for creating oBERT models is open sourced through [SparseML](https://github.com/neuralmagic/sparseml)
+    and the models are freely available on the [SparseZoo](https://sparsezoo.neuralmagic.com/?domain=nlp&sub_domain=masked_language_modeling&page=1&dataset=wikipedia_bookcorpus).
+    Additionally, the DeepSparse Twitter crypto example is [open sourced in the DeepSparse
+    repo](https://github.com/neuralmagic/deepsparse/tree/main/examples/twitter-nlp).
+    Try it out to performantly track crypto trends, or any other trends, on your hardware!
+    Finally, we’ve pushed up simple [use-case walkthroughs](https://neuralmagic.com/use-cases/#nlp)
+    to highlight the base flows needed to apply this research to your data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Mark Kurtz](https://www.linkedin.com/in/markkurtzjr/)** ([@markurtz_](https://twitter.com/markurtz_))
+    is Director of Machine Learning at Neural Magic, and an experienced software and
+    machine learning leader. Mark is proficient across the full stack for engineering
+    and machine learning, and is passionate about model optimizations and efficient
+    inference.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Explain NLP Models with LIME](https://www.kdnuggets.com/2022/01/explain-nlp-models-lime.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Faster Way to Prepare Time-Series Data with the AI & Analytics Engine](https://www.kdnuggets.com/2021/12/piexchange-faster-way-prepare-timeseries-data-ai-analytics-engine.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn Machine Learning 4X Faster by Participating in Competitions](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Become Data-Driven Faster with DataCamp’s Analyst Takeover](https://www.kdnuggets.com/2022/10/datacamp-data-driven-faster-analyst-takeover.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Optimize SQL Queries for Faster Data Retrieval](https://www.kdnuggets.com/2023/06/optimize-sql-queries-faster-data-retrieval.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Ways ChatGPT Makes You Code Better and Faster](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

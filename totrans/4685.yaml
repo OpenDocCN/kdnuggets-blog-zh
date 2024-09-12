@@ -1,0 +1,340 @@
+- en: Building a Recommender System
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/04/building-recommender-system.html](https://www.kdnuggets.com/2019/04/building-recommender-system.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By Matthew Mahowald, [Open Data Group](https://www.opendatagroup.com/)**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recommender systems are one of the most prominent examples of machine learning
+    in the wild today. They determine what shows up in your Facebook news feed, in
+    what order products appear on Amazon, what videos are suggested in your Netflix
+    queue, as well as countless other examples. But what are recommender systems,
+    and how do they work? This post is the first in a series exploring some common
+    techniques for building recommender systems as well as their implementation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Data Engineering](../Images/efe8223e7c92f882a8d32fd9e5e37cb1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: What is a recommender system?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'A recommender system is an information filtering model that ranks or scores
+    items for users. There are generally two types of ranking methods:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Content-based filtering**, in which recommended items are based on item-to-item
+    similarity and the user’s explicit preferences; and'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Collaborative filtering**, in which items are recommended to users based
+    on the preferences of other users with similar transaction histories and characteristics.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The information used in collaborative filtering can be explicit, where users
+    provide ratings for each item, or implicit, where user preferences have to be
+    extracted from user behavior (purchases, views, etc). The most successful recommender
+    systems use hybrid approaches combining both filtering methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The MovieLens Datasets
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To make this discussion more concrete, let’s focus on building recommender systems
+    using a specific example. [GroupLens](https://grouplens.org/), a research group
+    at the University of Minnesota, has generously made available [the MovieLens dataset](https://grouplens.org/datasets/movielens/).
+    This dataset consists of approximately 20 million user ratings applied to 27,000
+    movies by 138,000 users. In addition, the movies include genre and date information.
+    We’ll use this dataset to build
+  prefs: []
+  type: TYPE_NORMAL
+- en: Simple Content-based Filtering
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let’s build a simple recommender system that uses content-based filtering (
+    i.e. item similarity) to recommend movies for us to watch. First, load in the
+    movie dataset from MovieLens and multihot-encode the genre fields:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The `genres` feature consists of one or more pipe (“|”) separated genres. The
+    last line above adds a column for each possible genre and puts a 1 in that entry
+    if the genre tag is present, or a 0 otherwise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s generate some recommendations based on item similarity using these tags.
+    A very common similarity measure for categorical data (such as tags) is *cosine
+    similarity*. For any two items ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png
+    "i") and ![j](../Images/4b5e5503442fdfa2029fcc9208d6ca1a.png "j"), the cosine
+    similarity of ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png "i") and ![j](../Images/4b5e5503442fdfa2029fcc9208d6ca1a.png
+    "j") is simply the cosine of the angle between ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png
+    "i") and ![j](../Images/4b5e5503442fdfa2029fcc9208d6ca1a.png "j") where ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png
+    "i") and ![j](../Images/4b5e5503442fdfa2029fcc9208d6ca1a.png "j") are interpreted
+    as vectors in feature space. Recall that the cosine is obtained from the inner
+    product of these vectors:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![ \cos \theta = \frac{i \cdot j}{||i|| ||j||} ](../Images/3a502cd0acbdd797c1f8c8e41b7b7a9f.png
+    " \cos \theta = \frac{i \cdot j}{||i|| ||j||} ")'
+  prefs: []
+  type: TYPE_IMG
+- en: As a concrete example, consider the films $i := $ Toy Story (genre tags “Adventure”,
+    “Animation”, “Children”, “Comedy”, and “Fantasy”) and $j := $ Jumanji (genre tags
+    “Adventure”, “Children”, and “Fantasy”). The dot product ![i \cdot j](../Images/18c1f73139dbcc8f400317cc1558e470.png
+    "i \cdot j") is 3 (the two films have three tags in common). ![||i|| = \sqrt{5}](../Images/f9e775e1a1102b4e3de42072875562fd.png
+    "||i|| = \sqrt{5}") and ![||j|| = \sqrt{3}](../Images/c683224c2c69453efeae2284e2fe7f58.png
+    "||j|| = \sqrt{3}"), so the cosine similarity between these two films is
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![ \cos \theta = \frac{3}{\sqrt{15}} \approx 0.775 ](../Images/86e2624d8c47a992e299576a1b6b9b64.png
+    " \cos \theta = \frac{3}{\sqrt{15}} \approx 0.775 ")'
+  prefs: []
+  type: TYPE_IMG
+- en: 'We can compute the cosine similarity for all of the items in our dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The very first film in the dataset is Toy Story. Let’s find out what the similar
+    films to Toy Story are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| MovieID | Genres |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Toy Story (1995) | Adventure,Animation,Children,Comedy,Fantasy |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Turbo (2013) | Adventure,Animation,Children,Comedy,Fantasy |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Monsters, Inc. (2001) | Adventure,Animation,Children,Comedy,Fantasy |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Moana (2016) | Adventure,Animation,Children,Comedy,Fantasy |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Emperor’s New Groove, The (2000) | Adventure,Animation,Children,Comedy,Fantasy
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: The first five films all have exactly the same genre tags as Toy Story, and
+    hence a cosine similarity of 1\. In fact, for the sample data used here, there
+    are thirteen films with similarity 1; the most similar film without identical
+    tags is 2006’s “The Ant Bully”, which has the additional genre tag “IMAX”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Simple Collaborative Filtering
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Collaborative filtering recommends items based on what similar users liked.
+    Fortunately, in the MovieLens dataset, we have a wealth of user preference information
+    in the form of movie ratings: each user assigns one or more films numeric ratings
+    between 1 and 5 indicating how much they enjoyed the film. We can view the problem
+    of recommending items to the user as a *prediction* task: given the user’s ratings
+    of other films, what is their likely rating of the film in question?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'One simple way to do this is to assign a similarity-weighted rating to each
+    item using other users’ ratings:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![ \hat{r}_{u,i} = \frac{\sum_{v\neq u} s(u,v) r_{v, i}}{\sum_{v \neq u} s(u,v)}
+    ](../Images/5f6421befb7e1eb480685c5260bd8dd9.png " \hat{r}_{u,i} = \frac{\sum_{v\neq
+    u} s(u,v) r_{v, i}}{\sum_{v \neq u} s(u,v)} ")'
+  prefs: []
+  type: TYPE_IMG
+- en: where ![\hat{r}_{u,i}](../Images/bd523a20b848a5e6853139d33b96e37c.png "\hat{r}_{u,i}")
+    is the predicted rating of item ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png
+    "i") by user ![u](../Images/c1155b10039d460302206caf78e70b84.png "u"), ![s(u,v)](../Images/f6abcb8dc87947b544bb5ff5fba0b39e.png
+    "s(u,v)") is a measurement of similarity between users ![u](../Images/c1155b10039d460302206caf78e70b84.png
+    "u") and ![v](../Images/73161e4d85d5c3cc1fa03163b0a92a77.png "v"), and ![r](../Images/dc16d9309e95f2dd60bba8a2d99d78b4.png
+    "r") is the known rating of item ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png
+    "i") by user ![v](../Images/73161e4d85d5c3cc1fa03163b0a92a77.png "v").
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For our user similarity measurement, we’ll look at users’ ratings of movies.
+    Users with similar ratings will be considered similar. To work with this rating
+    data, an important first step is to normalize our ratings. We’ll do this in three
+    steps: first, we’ll subtract the overall mean rating (across all films and users)
+    so that our adjusted ratings are centered at 0\. Next, we’ll do the same thing
+    for each film, to account for the mean ratings of a given film differing. Finally
+    we’ll subtract off the mean rating for each user—this accounts for individual
+    variations (e.g. one user giving consistently higher ratings than another).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Mathematically, our adjusted rating ![\tilde{r}_{u,i}](../Images/52a9c49297042d77a17cce1bba397ac4.png
+    "\tilde{r}_{u,i}") is
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![ \tilde{r}_{u,i} := r_{u,i} - \bar{r} - \bar{r}_{i} - \bar{r}_{u} ](../Images/7e596563eff0b2daefe4be7079d610a7.png
+    " \tilde{r}_{u,i} := r_{u,i} - \bar{r} - \bar{r}_{i} - \bar{r}_{u} ")'
+  prefs: []
+  type: TYPE_IMG
+- en: where ![r_{u,i}](../Images/30a460c76c42202245eafbf4be93163d.png "r_{u,i}") is
+    the base rating, ![\bar{r}](../Images/37a022e0abffb5ed0c15433d52b6d2ca.png "\bar{r}")
+    is the overall mean rating, ![\bar{r},i](../Images/fa2dead136fcde4516fc578fb3ca28d5.png
+    "\bar{r},i") is the mean rating for item ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png
+    "i") (after subtracting the overall mean), and ![\bar{r},u](../Images/f7aa7e448aef9d73800f713f228bac10.png
+    "\bar{r},u") is the mean rating for user ![u](../Images/c1155b10039d460302206caf78e70b84.png
+    "u") (after adjusting for the overall mean rating and the item mean ratings).
+    For convenience, I’ll refer to the adjusted rating ![\tilde{r}](../Images/15faa8d8c7bbf110f5cdc90f3df75b49.png
+    "\tilde{r}") as the *preference* of user ![u](../Images/c1155b10039d460302206caf78e70b84.png
+    "u") for item ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png "i").
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s load in the ratings data and compute the adjusted ratings:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'At this point we can easily establish a reasonable baseline estimate for a
+    given user’s rating of films they haven’t seen:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can compute the distance to a particular user (in this case, user 0) as
+    follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'It turns out that the nearest user is user 12 (with distance 0):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We find two films that user 12 has seen that user 0 has not:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Unfortunately, user 12 dislikes both of the films that user 0 hasn’t seen yet!
+    We should continue our computation to account for all of the nearby users.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Concluding Remarks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The methods used in this post are *neighborhood-based*, and we’ve just seen
+    above a potential pitfall when generating recommendations based on neighbors:
+    neighbors may not actually recommend any items the user in question hasn’t already
+    seen. Because of the need to compute pairwise distances, neighborhood-based methods
+    also tend to scale poorly as the number of users increases.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In part 2 of this series, we’ll take a look at another approach for building
+    recommender systems, this time using *latent factor* methods. Latent factor models
+    avoid some of the pitfalls of the neighborhood-based methods described here—but
+    as we’ll see, they come with some challenges of their own!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Resources:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[On-line and web-based: Analytics, Data Mining, Data Science, Machine Learning
+    education](https://www.kdnuggets.com/education/online.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Software for Analytics, Data Science, Data Mining, and Machine Learning](https://www.kdnuggets.com/software/index.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Preparing for the Unexpected](https://www.kdnuggets.com/2019/02/preparing-unexpected.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Word Embeddings in NLP and its Applications](https://www.kdnuggets.com/2019/02/word-embeddings-nlp-applications.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[State of the art in AI and Machine Learning – highlights of papers with code](https://www.kdnuggets.com/2019/02/paperswithcode-ai-machine-learning-highlights.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a Recommender System for Amazon Products with Python](https://www.kdnuggets.com/2023/02/building-recommender-system-amazon-products-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Recommendation System with Hugging Face Transformers](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How a Level System can Help Forecast AI Costs](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learning System Design: Top 5 Essential Reads](https://www.kdnuggets.com/learning-system-design-top-5-essential-reads)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Monitor Your File System With Python’s Watchdog](https://www.kdnuggets.com/monitor-your-file-system-with-pythons-watchdog)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn Deep Learning by Building 15 Neural Network Projects in 2022](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

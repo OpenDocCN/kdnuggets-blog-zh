@@ -1,0 +1,276 @@
+- en: How to Create an AutoML Pipeline Optimization Sandbox
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/09/automl-pipeline-optimization-sandbox.html](https://www.kdnuggets.com/2021/09/automl-pipeline-optimization-sandbox.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You probably know about automated machine learning (AutoML). There's a good
+    chance you have hard of the open source AutoML tool [TPOT](https://github.com/EpistasisLab/tpot),
+    aka your *data science assistant*. You may have even seen [my recent article](/2021/05/machine-learning-pipeline-optimization-tpot.html)
+    on using TPOT to optimize machine learning pipelines (you probably haven't, so
+    here's your chance to [go have a look at it](/2021/05/machine-learning-pipeline-optimization-tpot.html)...
+    I'll wait).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In any event, exploring AutoML and the knobs of machine learning optimization
+    can make more sense when those knobs are visible and easily adjustable. In this
+    article, we will implement a version of the TPOT example we looked at in [my previous
+    article](/2021/05/machine-learning-pipeline-optimization-tpot.html) as a Streamlit
+    app.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you don''t know about [Streamlit](https://streamlit.io/), this is the 30,000
+    foot overview:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Streamlit turns data scripts into shareable web apps in minutes.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: All in Python. All for free. No front‑end experience required.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Overview
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I won't go any further into detail about Streamlit beyond what we use in this
+    article, but you can find this great introduction [here](/2021/09/create-stunning-web-apps-data-science-projects.html),
+    as well as the Streamlit cheat sheet, which basically covers everything you need
+    to know after getting a sense of how it works, [here](https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Along with getting a quick intro on implementing Streamlit projects, you will
+    end up with a sandbox web app allowing for pipeline optimization experiments with
+    TPOT using a pair of well-known datasets. With a few modifications, you should
+    also be able to get the sandbox running with other datasets and expand the functionality
+    to include more knobs as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/91bea11f3b494355221c0b5481a75a0f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The resulting "AutoML Pipeline Optimization Sandbox" web app we build with Streamlit
+    and TPOT
+  prefs: []
+  type: TYPE_NORMAL
+- en: I won't rehash the original blog post (again, feel free to [read it now](/2021/05/machine-learning-pipeline-optimization-tpot.html)),
+    but, in a nutshell, we are creating a script to automate the optimization of preprocessing
+    and modeling — including a limited number of preprocessing transformations as
+    well as algorithm selection — of a classification task on the iris and digits
+    datasets. Sure, boring datasets, but using well-known data to set the app up isn't
+    a bad idea, and like I said above, with changes to a few lines of code you can
+    set off trying out whatever other datasets you like.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some points of note about what this optimization process entails, beyond the
+    above, include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cross-validation for model evaluation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Iterating on the modeling more than once (due to the use of genetic algorithms
+    internally for TPOT) — likely not useful on such a small dataset, but possibly
+    will be as we progress
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Comparing resulting pipelines on these multiple iterations — are they all the
+    same?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Did you know TPOT now uses PyTorch under the hood to build neural networks for
+    prediction?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: That last point won't factor into what we're doing today, but keep it in mind
+    for future adventures.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's look at the code needed to create this simple Streamlit app.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'First, the imports:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Everything should be quite straightforward. The final import, `stqdm`, is a
+    [tqdm](https://github.com/tqdm/tqdm)-style progress bar written specifically to
+    work with Streamlit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Next, here''s the data loader function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: We use the load_iris() and load_digits() functions from Scikit-learn (with which
+    TPOT integrates closely) to pull the respective datasets. Note that they are split
+    into train and test sets here, and train/test features/labels are all returned
+    separately, along with a full dataset dataframe to be used for presentation to
+    the user, as it looks much nicer, especially when presented by Streamlit (Streamlit
+    is able to interpret and properly display a wide range of objects using its `write()`
+    method). There are other ways to accomplish this, but this was simple and not
+    a problem for such small datasets. Note the @st.cache decorator which caches the
+    results of the function for future runs of the app, instead of reloading the data
+    every time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now we set some application wide Streamlit configurations, setup a sidebar,
+    assign some variables, and load the data using the above function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Comparing the code above, where relevant, to either the previous article in
+    which we implemented this as a standalone script or to the Streamlit cheat sheet,
+    this should all, again, be quite straightforward.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note the ease of setting up interactive user-configurable variables which are
+    then used in our code, as well as the ease of setting up the sidebar. We are able
+    to use the sliders, checkbox, and select box to select and display the dataset,
+    as well as set the number of search iterations, generations, and population size
+    for the genetic algorithms TPOT uses internally for its optimization process.
+    It should be getting easier to see how opening this up to custom datasets can
+    be accomplished without too much trouble.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, let's define the scoring method; model evaluation method; and the actual
+    search method. After this, the optimization loop is shown, which includes the
+    display of some iteration-specific output for the user's benefit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: At this point, you should compare the the `write()`, `spinner()`, `success()`,
+    and other display functionality in the Streamlit cheat sheet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once run, the above optimization loop will output something similar to the
+    following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/6b12e943406dbebe341bf6d696422e7e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Finally, we need to assess our results:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]{output_folder}/tpot_{dataset}_pipeline_{i}.py[PRE5]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/c850b744efd826a8f55cdcceba7a11c5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '...and output the code of the best pipeline (also saved to file):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]{code}[PRE7]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/6e96f0deabe41eb7559d40df9ac25e56.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Here''s the complete code for Streamlit app (note that nothing beyond this
+    single, short Python script is needed to accomplish everything):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: And that's how to quickly build an AutoML pipeline optimization sandbox powered
+    by Streamlit and TPOT, using only Python code. Note the lack of web programming
+    skills we needed to succeed in doing so.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Very nice. Great success!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/6b7cdd2003a98a81aadd2e4d9be3401f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Machine Learning Pipeline Optimization with TPOT](/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Easy AutoML in Python](/2021/04/easy-automl-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fast AutoML with FLAML + Ray Tune](/2021/09/fast-automl-flaml-ray-tune.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Machine Learning Pipeline Optimization with TPOT](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[No Brainer AutoML with AutoXGB](https://www.kdnuggets.com/2022/02/no-brainer-automl-autoxgb.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Nota AI releases beta version of NetPresso Model Search, their…](https://www.kdnuggets.com/2022/04/nota-ai-releases-beta-version-netpresso-model-search-hardwareaware-automl-tool.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Top AutoML Frameworks You Should Consider in 2023](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,359 @@
+- en: Geocoding for Data Scientists
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/06/geocoding-data-scientists.html](https://www.kdnuggets.com/2023/06/geocoding-data-scientists.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: When data scientists need to know everything there is to know about the “where”
+    of their data, they often turn to Geographic Information Systems (GIS). GIS is
+    a complicated set of technologies and programs that serve a wide variety of purposes,
+    but the University of Washington provides a fairly comprehensive definition, saying
+    “a geographic information system is a complex arrangement of associated or connected
+    things or objects, whose purpose is to communicate knowledge about features on
+    the surface of the earth” (Lawler et al). GIS encompasses a broad range of techniques
+    for processing spatial data from acquisition to visualization, many of which are
+    valuable tools even if you are not a GIS specialist. This article provides a comprehensive
+    overview of geocoding with demonstrations in Python of several practical applications.
+    Specifically, you will determine the exact location of a pizza parlor in New York
+    City, New York using its address and connect it to data about nearby parks. While
+    the demonstrations use Python code, the core concepts can be applied to many programming
+    environments to integrate geocoding into your workflow. These tools provide the
+    basis for transforming data into spatial data and open the door for more complex
+    geographic analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![XXXXX](../Images/841f52699d19a08a7845df4f5da16c99.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Geocoding?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Geocoding is most commonly defined as the transformation of address data into
+    mapping coordinates. Usually, this involves detecting a street name in an address,
+    matching that street to the boundaries of its real-world counterpart in a database,
+    then estimating where on the street to place the address using the street number.
+    As an example, let’s go through the process of a simple manual geocode for the
+    address of a pizza parlor in New York on Broadway: 2709 Broadway, New York, NY
+    10025\. The first task is finding appropriate shapefiles for the road system of
+    the location of your address. Note that in this case the city and state of the
+    address are “New York, NY.”  Fortunately, the city of New York publishes detailed
+    road information on the [NYC Open Data](https://data.cityofnewyork.us/City-Government/road/svwp-sbcd)
+    page (CSCL PUB). Second, examine the street name “Broadway.” You now know that
+    the address can lie on any street called “Broadway” in New York city, so you can
+    execute the following Python code to query the NYC Open Data SODA API for all
+    streets named “Broadway.”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: There are over 700 results of this query, but that doesn’t mean you have to
+    check 700 streets to find your pizza. Visualizing the data, you can see that there
+    are 3 main Broadway streets and a few smaller ones.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![XXXXX](../Images/efc594233f7ae3f15dbc2b35215d7b5c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The reason for this is that each street is broken up into sections that correspond
+    roughly to a block, allowing for a more granular look at the data. The next step
+    of the process is determining exactly which of these sections the address is on
+    using the ZIP code and street number. Each street segment in the dataset contains
+    address ranges for the addresses of buildings on both the left and right sides
+    of the street. Similarly, each segment contains the ZIP code for both the left
+    and right sides of the street. To locate the correct segment, the following code
+    applies filters to find the street segment whose ZIP code matches the address’
+    ZIP code and whose address range contains the street number of the address.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: This narrows the list to the one street segment seen below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![XXXXX](../Images/1e654dbb27b4e0215c493a3cfcbffad0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The final task is to determine where the address lies on this line. This is
+    done by placing the street number inside the address range for the segment, normalizing
+    to determine how far along the line the address should be, and applying that constant
+    to the coordinates of the endpoints of the line to get the coordinates of the
+    address. The following code outlines this process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Having finished geocoding the address, it is now possible to plot the location
+    of this pizza parlor on a map to understand its location. Since the code above
+    looked at information pertaining to the left side of a street segment, the actual
+    location will be slightly left of the plotted point in a building on the left
+    side of the road. You finally know where you can get some pizza.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![XXXXX](../Images/9f6b44b6c2b5be7eb3d6ebfdb3428a0d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This process covers what is most commonly referred to as geocoding, but it is
+    not the only way the term is used. You may also see geocoding refer to the process
+    of transferring landmark names to coordinates, ZIP codes to coordinates, or coordinates
+    to GIS vectors. You may even hear reverse geocoding (which will be covered later)
+    referred to as geocoding. A more lenient definition for geocoding that encompasses
+    these would be “the transfer between approximate, natural language descriptions
+    of locations and geographic coordinates.” So, any time you need to move between
+    these two kinds of data, consider geocoding as a solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As an alternative to repeating this process whenever you need to geocode addresses,
+    a variety of API endpoints, such as the [U.S. Census Bureau Geocoder](https://geocoding.geo.census.gov/geocoder/)
+    and the [Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/overview),
+    provide an accurate geocoding service for free. Some paid options, such as [Esri's
+    ArcGIS](https://www.esri.com/en-us/arcgis/products/arcgis-pro/overview), [Geocodio](https://www.geocod.io/),
+    and [Smarty](https://www.smarty.com/) even offer rooftop accuracy for select addresses,
+    which means that the returned coordinate lands exactly on the roof of the building
+    instead of on a nearby street. The following sections outline how to use these
+    services to fit geocoding into your data pipeline using the U.S. Census Bureau
+    Geocoder as an example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to Geocode
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In order to get the highest possible accuracy when geocoding, you should always
+    begin by ensuring that your addresses are formatted to fit the standards of your
+    chosen service. This will differ slightly between each service, but a common format
+    is the USPS format of “PRIMARY# STREET, CITY, STATE, ZIP” where STATE is an abbreviation
+    code, PRIMARY# is the street number, and all mentions of suite numbers, building
+    numbers, and PO boxes are removed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once your address is formatted, you need to submit it to the API for geocoding.
+    In the case of the U.S. Census Bureau Geocoder, you can either manually submit
+    the address through the One Line Address Processing tab or use the [provided REST
+    API](https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.pdf) to
+    submit the address programmatically. The U.S. Census Bureau Geocoder also allows
+    you to geocode entire files using the batch geocoder and specify the data source
+    using the benchmark parameter. To geocode the pizza parlor from earlier, [this
+    link](https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=2709+Broadway%2C+New+York%2C+NY+10025&benchmark=Public_AR_Current&format=json)
+    can be used to pass the address to the REST API, which can be done in Python with
+    the following code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: The returned data is a JSON file, which is decoded easily into a Python dictionary.
+    It contains a “tigerLineId” field which can be used to match the shapefile for
+    the nearest street, a “side” field which can be used to determine which side of
+    that street the address is on, and “fromAddress” and “toAddress” fields which
+    contain the address range for the street segment.  Most importantly, it contains
+    a “coordinates” field that can be used to locate the address on a map. The following
+    code extracts the coordinates from the JSON file and processes it into a GeoDataFrame
+    to prepare it for spatial analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Visualizing this point shows that it is slightly off the road to the left of
+    the point that was geocoded manually.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![XXXXX](../Images/68387211dbdba0522f535fa6d9b0fc60.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: How to Reverse Geocode
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Reverse geocoding is the process of taking geographic coordinates and matching
+    them to natural language descriptions of a geographic region. When applied correctly,
+    it is one of the most powerful techniques for attaching external data in the data
+    science toolkit. The first step of reverse geocoding is determining your target
+    geographies. This is the region that will contain your coordinate data. Some common
+    examples are census tracts, ZIP codes, and cities. The second step is determining
+    which, if any, of those regions the point is in. When using common regions, the
+    [U.S. Census Geocoder](https://geocoding.geo.census.gov/geocoder/geographies/coordinates?form)
+    can be used to reverse geocode by making small changes to the REST API request.
+    A request for determining which Census geographies contain the pizza parlor from
+    before is linked [here](https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-73.96838669696855&y=40.799450999770706&benchmark=Public_AR_Current&vintage=ACS2022_Current&layers=all&format=json).
+    The result of this query can be processed using the same methods as before. However,
+    creatively defining the region to fit an analysis need and manually reverse geocoding
+    to it opens up many possibilities.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To manually reverse geocode, you need to determine the location and shape of
+    a region, then determine if the point is on the interior of that region. Determining
+    if a point is inside a polygon is actually a fairly difficult problem, but the
+    [ray casting algorithm](https://dl.acm.org/doi/10.1145/368637.368653), where a
+    ray starting at the point and travelling infinitely in a direction intersects
+    the boundary of the region an odd number of times if it is inside the region and
+    an even number of times otherwise (Shimrat), can be used to solve it in most cases.
+    For the mathematically inclined, this is actually a direct application of the
+    [Jordan curve theorem](https://www.britannica.com/science/Jordan-curve-theorem)
+    (Hosch). As a note, if you are using data from around the world, the ray casting
+    algorithm can actually fail since a ray will eventually wrap around the Earth’s
+    surface and become a circle. In this case, you will instead have to find the winding
+    number (Weisstein) for the region and the point. The point is inside the region
+    if the winding number is not zero. Fortunately, Python’s geopandas library provides
+    the functionality necessary to both define the interior of a polygonal region
+    and test if a point is inside of it without all the complex mathematics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While manual geocoding can be too complex for many applications, manual reverse
+    geocoding can be a practical addition to your skill set since it allows you to
+    easily match your points to highly customized regions. For example, assume you
+    want to take your slice of pizza to a park and have a picnic. You may want to
+    know if the pizza parlor is within a short distance of a park. New York City provides
+    shapefiles for their parks as part of the [Parks Properties dataset](https://nycopendata.socrata.com/Recreation/Parks-Properties/enfh-gkve)
+    (NYC Parks Open Data Team), and they can also be accessed via their SODA API using
+    the following code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: These parks can be added to the visualization to see what parks are nearby the
+    pizza parlor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![XXXXX](../Images/cb71e8c74732b1539860ee87d9fd4e56.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: There are clearly some options nearby, but figuring out the distance using the
+    shapefiles and the point can be difficult and computationally expensive. Instead,
+    reverse geocoding can be applied. The first step, as mentioned above, is determining
+    the region you want to attach the point to. In this case, the region is “a 1/2-mile
+    distance from a park in New York City.” The second step is calculation if the
+    point lies inside a region, which can be done mathematically using the previously
+    mentioned methods or by applying the “contains” function in geopandas. The following
+    code is used to add a 1/2-mile buffer to the boundaries of the parks before testing
+    to see which parks’ buffered regions now contain the point.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: This buffer reveals the nearby parks, which are highlighted in blue in the image
+    below
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![XXXXX](../Images/456f186d0e83357176edd979b798f287.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: After successful reverse geocoding, you have learned that there are 8 parks
+    within a half mile of the pizza parlor in which you could have your picnic. Enjoy
+    that slice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![XXXXX](../Images/03dca769c277af02035fed31a6c47d8a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Pizza Slice by j4p4n
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sources
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Lawler, Josh and Schiess, Peter. ESRM 250: Introduction to Geographic Information
+    Systems in Forest Resources. Definitions of GIS, 12 Feb. 2009, University of Washington,
+    Seattle. Class Lecture. [https://courses.washington.edu/gis250/lessons/introduction_gis/definitions.html](https://courses.washington.edu/gis250/lessons/introduction_gis/definitions.html)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: CSCL PUB. New York OpenData. [https://data.cityofnewyork.us/City-Government/road/svwp-sbcd](https://data.cityofnewyork.us/City-Government/road/svwp-sbcd)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: U.S. Census Bureau Geocoder Documentation. August 2022\. [https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.pdf](https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.pdf)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Shimrat, M., "Algorithm 112: Position of point relative to polygon" 1962, *Communications
+    of the ACM* Volume 5 Issue 8, Aug. 1962\. [https://dl.acm.org/doi/10.1145/368637.368653](https://dl.acm.org/doi/10.1145/368637.368653)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Hosch, William L.. "Jordan curve theorem". *Encyclopedia Britannica*, 13 Apr.
+    2018, [https://www.britannica.com/science/Jordan-curve-theorem](https://www.britannica.com/science/Jordan-curve-theorem)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Weisstein, Eric W. "Contour Winding Number." From *MathWorld*--A Wolfram Web
+    Resource. [https://mathworld.wolfram.com/ContourWindingNumber.html](https://mathworld.wolfram.com/ContourWindingNumber.html)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: NYC Parks Open Data Team. Parks Properties. April 14, 2023\. [https://nycopendata.socrata.com/Recreation/Parks-Properties/enfh-gkve](https://nycopendata.socrata.com/Recreation/Parks-Properties/enfh-gkve)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: j4p4n, “Pizza Slice.” From *OpenClipArt*. [https://openclipart.org/detail/331718/pizza-slice](https://openclipart.org/detail/331718/pizza-slice)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**[Evan Miller](https://www.linkedin.com/in/evan-m-miller/)** is a Data Science
+    Fellow at Tech Impact, where he uses data to support nonprofit and government
+    agencies with a mission of social good. Previously, Evan used machine learning
+    to train autonomous vehicles at Central Michigan University.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Geocoding in Python: A Complete Guide](https://www.kdnuggets.com/2022/11/geocoding-python-complete-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[High-Fidelity Synthetic Data for Data Engineers and Data Scientists Alike](https://www.kdnuggets.com/2022/tonic-high-fidelity-synthetic-data-engineers-scientists-alike.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[We Don''t Need Data Scientists, We Need Data Engineers](https://www.kdnuggets.com/2021/02/dont-need-data-scientists-need-data-engineers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What’s the Difference Between Data Analysts and Data Scientists?](https://www.kdnuggets.com/2022/03/difference-data-analysts-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Do Data Scientists and Data Engineers Work Together?](https://www.kdnuggets.com/2022/08/data-scientists-data-engineers-work-together.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mastering the Art of Data Storytelling: A Guide for Data Scientists](https://www.kdnuggets.com/2023/06/mastering-art-data-storytelling-guide-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,427 @@
+- en: How to Speed Up Pandas with Modin
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/03/speed-up-pandas-modin.html](https://www.kdnuggets.com/2021/03/speed-up-pandas-modin.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/), Developer
+    Relations at Anyscale**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/a2f02e7845fa9265b33d32c62787f1ad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A goal of Modin is to allow data scientists to use the same code for small (kilobytes)
+    and large datasets (terabytes). Image by [Devin Petersohn](https://towardsdatascience.com/the-modin-view-of-scaling-pandas-825215533122).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The pandas library provides easy-to-use data structures like pandas DataFrames
+    as well as tools for data analysis. One issue with pandas is that it can be slow
+    with large amounts of data. It[ wasn’t designed for analyzing 100 GB or 1 TB datasets](https://wesmckinney.com/blog/apache-arrow-pandas-internals/).
+    Fortunately, there is the [Modin](https://github.com/modin-project/modin) library
+    which has benefits like the ability to scale your pandas workflows by changing
+    one line of code and integration with the Python ecosystem and[ Ray](https://github.com/ray-project/ray) clusters.
+    This tutorial goes over how to get started with Modin and how it can speed up
+    your pandas workflows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to get started with Modin
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/1b52d1194af0e14293f4580370996975.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: To determine which Pandas methods to implement in Modin first, the developers
+    of Modin scraped 1800 of the most upvoted Python Kaggle Kernels ([code](https://github.com/adgirish/kaggleScape)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Modin’s coverage of the pandas API is over 90% with a focus on the most commonly
+    used pandas methods like pd.read_csv, pd.DataFrame, df.fillna, and df.groupby.
+    This means if you have a lot of data, you can perform most of the same operations
+    as the pandas library faster. This section highlights some commonly used operations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To get started, you need to install modin.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/0078b35ddc8a136cef3436abad5562c3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Don’t forgot the “” when pip installing
+  prefs: []
+  type: TYPE_NORMAL
+- en: Import Modin
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A major advantage of Modin is that it doesn’t require you to learn a new API.
+    You only need to change your import statement.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/68afbbcf93a4fb01f628dc05e56aa19d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You only need to change your import statement to use Modin.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Load data (read_csv)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/04a7ef18ab5d3d7b96c45e74e16d2886.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Modin really shines with larger datasets ([image source](https://github.com/devin-petersohn/presentations/tree/master/pydata_ny_2018))
+  prefs: []
+  type: TYPE_NORMAL
+- en: The dataset used in this tutorial is from the [Health Insurance Marketplace](https://www.kaggle.com/hhs/health-insurance-marketplace?select=Rate.csv) dataset
+    which is around 2GB .The code below reads the data into a Modin DataFrame.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/1063273d8350e825928a9b8fd93f9b7d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In this case, Modin is faster due to it taking work off the main thread to be
+    asynchronous. The file was read in-parallel. A large portion of the improvement
+    was from building the DataFrame components asynchronously.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**head**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code below utilizes the head command.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/aefc5be504a24020ceff65603ec068f6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In this case, Modin is slower as it requires collecting the data together. However,
+    users should not be able to perceive this difference in their interactive workflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**groupby**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similar to pandas, modin has a groupby operation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/baaae59fe33dc2478cff073794afdc8d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note that there are plans to further optimize the performance of groupby operations
+    in Modin.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**fillna**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Filling in missing values with the fillna method can be much faster with Modin.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/cda4f0ac5fcba1228e3147466fc85ad0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Default to pandas implementation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As mentioned earlier, Modin’s API covers about 90% of the Pandas API. For methods
+    not covered yet, Modin will default to a pandas implementation like in the code
+    below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/9e1fdc97bd1d098ab83c048e7a4c599f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When Modin defaults to pandas, you will see a warning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While there is a performance penalty for defaulting to pandas, Modin will complete
+    all operations whether or not the command is currently implemented in Modin.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/32671e3a7bc2a5bfd91acf94014ecc25.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If a method is not implemented, it will default to pandas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Modin’s documentation](https://modin.readthedocs.io/en/latest/supported_apis/index.html) explains
+    how this process works.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*We first convert to a pandas DataFrame, then perform the operation. There
+    is a performance penalty for going from a partitioned Modin DataFrame to pandas
+    because of the communication cost and single-threaded nature of pandas. Once the
+    pandas operation has completed, we convert the DataFrame back into a partitioned
+    Modin DataFrame. This way, operations performed after something defaults to pandas
+    will be optimized with Modin.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How Modin can Speed up your Pandas Workflows
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The three main ways modin makes pandas workflows faster are through it’s multicore/multinode
+    support, system architecture, and ease of use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Multicore/Multinode Support
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/17ca356b32ac8f0b35354ed884c2a9ba.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Pandas can only utilize a single core. Modin is able to efficiently make use
+    of all of the hardware available to it. The image shows resources (dark blue)
+    that Modin can utilize with multiple cores (B) and multiple nodes available (C).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The pandas library can only utilize a single core. As virtually all computers
+    today have multiple cores, there is a lot of opportunity to speed up your pandas
+    workflow by having modin utilize all the cores on your computer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/4f2ba2500b54062ac386d089a631e1ac.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: For the purpose of this blog, you can think of the MacBook above as a single
+    node with 4 cores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you would like to scale your code to more than 1 node, [Modin has an API
+    for switching between running code locally and on cloud providers/clusters](https://towardsdatascience.com/the-modin-view-of-scaling-pandas-825215533122).
+  prefs: []
+  type: TYPE_NORMAL
+- en: System Architecture
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Another way Modin can be faster than pandas is due to how pandas itself was
+    implemented. Wes McKinney, the creator of pandas, gave a famous talk “[10 Things
+    I Hate about Pandas](https://www.slideshare.net/wesm/practical-medium-data-analytics-with-python)”
+    where he went over some pandas’ lack of flexibility and performance issues.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/b921ff827b7e1df741e2bc98b8420abc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Some of Wes McKinney’s issues with pandas are performance related.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Modin endeavors to solve some of these issues. To understand how, it’s important
+    to understand some of its[ system architecture](https://modin.readthedocs.io/en/latest/developer/architecture.html#query-compiler).
+    The diagram below outlines the general layered view to the components of Modin
+    with a short description of each major section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/b02c04ec0cb1a52b2fc81caa6561b7ce.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Modin’s System Architecture
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[APIs layer](https://modin.readthedocs.io/en/latest/developer/architecture.html#api):
+    This is the user facing layer which primarily is Modin’s coverage of the pandas
+    API. The SQLite API is experimental and the Modin API is something still being
+    designed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Modin Query Compiler:[ In addition to its other duties](https://modin.readthedocs.io/en/latest/developer/architecture.html#query-compiler),
+    the Query Compiler layer closely follows the pandas API, but cuts out a large
+    majority of the repetition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Modin DataFrame layer](https://modin.readthedocs.io/en/latest/developer/architecture.html#modin-dataframe):
+    This is where Modin’s optimized dataframe algebra takes place.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Execution: While Modin also supports other execution engines like Dask, the
+    most commonly used execution engine is [Ray](https://github.com/ray-project/ray) which
+    you can learn about in the next section.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Ray
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/7290b3665b8bec7400c07b160e5cbae0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Ray makes parallel and distributed processing work more like you would hope
+    ([image source](https://www.reddit.com/r/aww/comments/2oagj8/multithreaded_programming_theory_and_practice/)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ray is the default execution engine for Modin. This section briefly goes over
+    what Ray is and how it can be used as more than just a execution engine.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/75ba50e30d970764e1d2547840720791.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The diagram above shows that at a high level, the Ray ecosystem consists of
+    the core Ray system and scalable libraries for data science like [Modin](https://github.com/modin-project/modin).
+    It is a library for[ scaling up Python applications](https://towardsdatascience.com/modern-parallel-and-distributed-python-a-quick-tutorial-on-ray-99f8d70369b8) across
+    multiple cores or machines. It has a couple major advantages including:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Simplicity: you can scale your Python applications without rewriting them,
+    and the same code can run on one machine or multiple machines.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Robustness: applications gracefully handle machine failures and preemption.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Performance](https://towardsdatascience.com/10x-faster-parallel-python-without-python-multiprocessing-e5017c93cce1):
+    tasks run with millisecond latencies, scale to tens of thousands of cores, and
+    handle numerical data with minimal serialization overhead.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Because Ray is a general-purpose framework, the community has built many libraries
+    and frameworks on top of it to accomplish different tasks like [Ray Tune](https://docs.ray.io/en/master/tune/index.html) for
+    hyperparameter tuning at any scale,[ Ray Serve](https://docs.ray.io/en/master/serve/) for
+    easy-to-use scalable model serving, and[ RLlib](https://docs.ray.io/en/master/rllib.html) for
+    reinforcement learning. It also has [integrations for machine learning libraries
+    like scikit-learn](https://medium.com/distributed-computing-with-ray/how-to-speed-up-scikit-learn-model-training-aaf17e2d1e1) as
+    well as support for data processing libraries [such as PySpark and Dask](https://medium.com/distributed-computing-with-ray/data-processing-support-in-ray-ae8da34dce7e).
+  prefs: []
+  type: TYPE_NORMAL
+- en: While you don’t need to learn how to use Ray to use Modin, the image below shows
+    that it generally only requires adding a couple lines of code to turn a simple
+    Python program into a distributed one running across a compute cluster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/3aa859324b01834c4aaba78c14b988f7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Example of how to turn a simple program into a distributed one using Ray ([code
+    explanation](https://youtu.be/zRaWCFJcagI?t=754)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/0b02ae3662f15cf8ec2a6ffb4d8c5948.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A goal of Modin is to allow data scientists to use the same code for small (kilobytes)
+    and large datasets (terabytes). Image from [Devin Petersohn](https://towardsdatascience.com/the-modin-view-of-scaling-pandas-825215533122).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Modin allows you to use the same Pandas script for a 10KB dataset on a laptop
+    as well as a 10TB dataset on a cluster. This is possible due to Modin’s easy to
+    use API and system architecture. This architecture can utilize Ray as an execution
+    engine to make scaling Modin easier. If you have any questions or thoughts about
+    Ray, please feel free to join our community through[ Discourse](https://discuss.ray.io/) or[ Slack](https://docs.google.com/forms/d/e/1FAIpQLSfAcoiLCHOguOm8e7Jnn-JJdZaCxPGjgVCvFijHB5PLaQLeig/viewform).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)** works
+    in Developer Relations at Anyscale, the company behind the [Ray Project](https://github.com/ray-project/ray).
+    You can find him on [Twitter](https://twitter.com/GalarnykMichael), [Medium](https://medium.com/@GalarnykMichael),
+    and [GitHub](https://github.com/mGalarnyk).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.anyscale.com/blog/how-to-speed-up-pandas-with-modin).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Getting Started with Distributed Machine Learning with PyTorch and Ray](/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Train sklearn 100x Faster](/2019/09/train-sklearn-100x-faster.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Speed up Scikit-Learn Model Training](/2021/02/speed-up-scikit-learn-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Speed Up Python Pandas by Over 300x](https://www.kdnuggets.com/how-to-speed-up-python-pandas-by-over-300x)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Speed up Machine Learning with Fast Kriging (FKR)](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Simple Ways to Speed Up Your Python Code](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Speed Up SQL Queries Using Indexes [Python Edition]](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Research-Driven Advanced Prompting Techniques for LLM Efficiency…](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

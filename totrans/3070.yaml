@@ -1,0 +1,498 @@
+- en: When Bayes, Ockham, and Shannon come together to define machine learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/09/when-bayes-ockham-shannon-come-together-define-machine-learning.html](https://www.kdnuggets.com/2018/09/when-bayes-ockham-shannon-come-together-define-machine-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Image](../Images/e31348f9367564a9e3a230f5e90e2944.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Introduction**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It is somewhat surprising that among all the high-flying buzzwords of machine
+    learning, we don’t hear much about the one phrase which fuses some of the core
+    concepts of statistical learning, information theory, and natural philosophy into
+    a single three-word-combo.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Moreover, it is not just an obscure and pedantic phrase meant for machine learning
+    (ML) Ph.Ds and theoreticians. It has a precise and easily accessible meaning for
+    anyone interested to explore, and a practical pay-off for the practitioners of
+    ML and data science.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I am talking about ***Minimum Description Length***. And you may be thinking
+    what the heck that is…
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s peel the layers off and see how useful it is…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bayes and his Theorem**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We start with (not chronologically) with [Reverend Thomas Bayes](https://en.wikipedia.org/wiki/Thomas_Bayes),
+    who by the way, never published his idea about how to do statistical inference,
+    but was later immortalized by the eponymous theorem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d47d81d21a96aaecdf618a5f8bbb2221.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It was the second half of the 18th century, and there was no branch of mathematical
+    sciences called “Probability Theory”. It was known simply by the rather odd-sounding
+    “[*Doctrine of Chances*](https://en.wikipedia.org/wiki/The_Doctrine_of_Chances)” — named
+    after a book by[Abraham de Moievre](https://en.wikipedia.org/wiki/Abraham_de_Moivre).
+    An article called, “[*An Essay towards solving a Problem in the Doctrine of Chances*](http://rstl.royalsocietypublishing.org/content/53/370)”,
+    first formulated by Bayes, but edited and amended by his friend [Richard Price](https://en.wikipedia.org/wiki/Richard_Price),
+    was read to Royal Society and published in the *Philosophical Transactions of
+    the Royal Society of London, *in 1763\. In this essay, Bayes described — *in a
+    rather frequentist manner* — the simple theorem concerning joint probability which
+    gives rise to the calculation of inverse probability i.e. Bayes Theorem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Many a battle have been fought](https://www.theregister.co.uk/2017/06/22/bayesian_vs_frequentist_ai/) since
+    then between the two warring factions of statistical science — Bayesians and Frequntists.
+    But for the purpose of the present article, let us ignore the history for a moment
+    and focus on the simple explanation of the mechanics of the Bayesian inference.
+    For a super intuitive introduction to the topic, [please see this great tutorial](https://brohrer.github.io/how_bayesian_inference_works.html) by [Brandon
+    Rohrer](https://brohrer.github.io/blog.html). I will just concentrate on the equation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5efdf115cf9573c2c7ca9c6f5c58f863.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This essentially tells that you update your belief (*prior probability*) after
+    seeing the data/evidence (*likelihood*) and assign the updated degree of belief
+    to the term *posterior probability*. You can start with a belief, but each data
+    point will either strengthen or weaken that belief and you update your hypothesis
+    all the time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sounds simple and intuitive? Great.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I did a trick in the last sentence of the paragraph though. Did you notice?
+    I slipped in a word “***Hypothesis***”. That is not normal English. That is formal
+    stuff :-)
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the world of statistical inference, a hypothesis is a belief. It is a belief
+    about about the true nature of the process (which we can never observe), that
+    is behind the generation of a random variable (which we can observe or measure,
+    albeit not without noise). In statistics, it is generally defined as a probability
+    distribution. But in the context of machine learning, it can be thought of any
+    set of rules (or logic or process), which we believe, can give rise to the *examples *or
+    training data, we are given to learn the hidden nature of this mysterious process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, let us try to recast the Bayes’ theorem in different symbols — symbols pertaining
+    to data science. Let us denote, data by ***D*** and hypothesis by ***h***. This
+    means we apply Bayes’ formula to try to determine ***what hypothesis the data
+    came from, given the data***. We rewrite the theorem as,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6f982332bcccdcf238ceb7a6018fd0c6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, in general, we have a large (often infinite) hypothesis space i.e. many
+    hypotheses to choose from. The essence of Bayesian inference is that we want to
+    examine the data to maximize the probability of one hypothesis which is most likely
+    to give rise to the observed data. We basically want to determine ***argmax*** of
+    the ***P***(***h***|***D***)i.e. we want to know for which ***h***, observed ***D*** is
+    most probable. To that end, we can safely drop the term in the denominator *P*(***D***)
+    because it does not depend on the hypothesis. This scheme is known by rather tongue
+    twisting name of [maximum a posteriori (MAP)](https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, we apply following mathematical tricks,
+  prefs: []
+  type: TYPE_NORMAL
+- en: The fact that maximization works similarly for logarithm as for the original
+    function i.e. taking logarithm does not change the maximization problem.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Logarithm of product is the sum of individual logarithms
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Maximization of a quantity is equivalent to minimization of the negative quantity
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/c63444e4619e40c2c9290cd6ffc7d560.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Curiouser* and *curiouser…*those terms with negative logarithm of 2 look familiar…
+    from **Information Theory**!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Enters **Claude Shannon**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Shannon**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It will take [many a volume](https://www.amazon.com/Mind-Play-Shannon-Invented-Information/dp/1476766681) to
+    describe the genius and strange life of Claude Shannon, who almost single handedly
+    laid the foundation of information theory and ushered us into the age of modern
+    high-speed communication and information exchange.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Shannon’s M.I.T. master’s thesis](https://en.wikipedia.org/wiki/A_Symbolic_Analysis_of_Relay_and_Switching_Circuits) in
+    electrical engineering has been called the most important MS thesis of the 20th
+    century: in it the 22-year-old Shannon showed how the logical algebra of 19th-century
+    mathematician George Boole could be implemented using electronic circuits of relays
+    and switches. This most fundamental feature of digital computers’ design — the
+    representation of “true” and “false” and “0” and “1” as open or closed switches,
+    and the use of electronic logic gates to make decisions and to carry out arithmetic — can
+    be traced back to the insights in Shannon’s thesis.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: But this was not his greatest achievement yet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In 1941, Shannon went to Bell Labs, where he worked on war matters, including
+    cryptography. He was also working on an original theory behind information and
+    communications. In 1948, this work emerged in a [widely celebrated paper published
+    in Bell Lab’s research journal](https://en.wikipedia.org/wiki/A_Mathematical_Theory_of_Communication).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Shannon defined the quantity of information produced by a source — for example,
+    the quantity in a message — by a formula [**similar to the equation that defines
+    thermodynamic entropy in physics**](https://en.wikipedia.org/wiki/Entropy_%28information_theory%29).
+    In its most basic terms, Shannon’s informational entropy is the number of binary
+    digits required to encode a message. And for a message or event with probability ***p***,
+    the most efficient (i.e. compact) encoding of that message will require **-*log2(p)*** bits.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And that is precisely the nature of those terms appearing in the *maximum a
+    posteriori* expression derived from the Bayes’ theorem!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Therefore, we can say that in the world of Bayesian inference, most probable
+    hypothesis depends on two terms which evoke the sense of length —** rather minimum
+    length.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a4466aed82e499c65c8b06a5b444ae49.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: But what could be the **notion of the length** in those terms?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Length (h): Occam’s Razor**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[William of Ockham](https://en.wikipedia.org/wiki/William_of_Ockham) (*circa* 1287–1347)
+    was an English Franciscan friar and [theologian](https://en.wikipedia.org/wiki/Theologian),
+    and an influential medieval [philosopher](https://en.wikipedia.org/wiki/Philosopher).
+    His popular fame as a great logician rests chiefly on the maxim attributed to
+    him and known as [Occam’s razor](https://en.wikipedia.org/wiki/Occam%27s_razor).
+    The term *razor* refers to distinguishing between two hypotheses either by “shaving
+    away” unnecessary assumptions or cutting apart two similar conclusions.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The precise words attributed to him are: *entia non sunt multiplicanda praeter
+    necessitatem* (entities must not be multiplied beyond necessity). In statistical
+    parlance, that means we must strive to work with the simplest hypothesis which
+    can explain all the data satisfactorily.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similar principles echoed by other luminaries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Sir Issac Newton: : “*We are to admit no more causes of natural things than
+    such as are both true and sufficient to explain their appearances.*”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Bertrand Russell: “*Whenever possible, substitute constructions out of known
+    entities for inferences to unknown entities.*”'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Always prefer the shorter hypothesis**.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Need an example about what ***length of a hypothesis*** is?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Which of the following decision trees have *smaller* length? **A** or **B**?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1032427501fc3b073d171d191abd11dd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Even without a precise definition of ‘length’ of a hypothesis, I am sure you
+    would think that the tree on the left (A) looks* smaller* or *shorter*. And you
+    will be right, of course. Therefore, a *shorter *hypothesis is the one which has
+    either less free parameters, or less complex decision boundary (for a classification
+    problem), or some combination of these **properties which can represent its brevity.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**What about the ‘Length(D|h)’?**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It is length of the data given the hypothesis. What does that mean?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Intuitively, it is related to the correctness or representation power of the
+    hypothesis. It governs, among other things, given a hypothesis, how well the data
+    can be ‘inferred’. **If the hypothesis generates the data really well and we can
+    measure the data error-free then we don’t need the data at all.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: Think of [Newton’s laws of motion](https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion).
+  prefs: []
+  type: TYPE_NORMAL
+- en: They, when appeared first in [*Principia*](https://en.wikipedia.org/wiki/Philosophi%C3%A6_Naturalis_Principia_Mathematica),
+    did not have any rigorous mathematical proof behind them. They were not theorems.
+    They were much like hypotheses, based on the observations of the motion of natural
+    bodies. But they described the data really really well. And, consequently they
+    became physical laws.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And that’s why you do not need to maintain and memorize a table of all possible
+    acceleration numbers as a function of force applied to a body. You just trust
+    the compact hypothesis aka law ***F=ma*** and believe that all the numbers you
+    need, can just be calculated from it when necessary. It makes the ***Length(D|h)*** really
+    small.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But if the data deviates from the compact hypothesis a lot, then you need to
+    have a **long** descriptions about what these deviations are, possible explanation
+    for them, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Therefore, ***Length(D|h)*** is succinctly capturing the notion of “**how well
+    the data fits the given hypothesis**”.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In essence, it is the notion of misclassification or error rate. For a perfect
+    hypothesis, it is short, zero in the limiting case. For a hypothesis, which does
+    not fit the data perfectly, it tends to be long.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And, there lies the trade-off.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: If you shave off your hypothesis with a big Occam’s razor, you will be likely
+    left with a simple model, one which cannot fit all the data. Consequently, you
+    have to supply more data to have better confidence. On the other hand, if you
+    create a complex (and long) hypothesis, you may be able to fit your training data
+    really well but this actually may not be the right hypothesis as it runs against
+    the MAP principle of having a hypothesis with small entropy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sounds like a bias-variance trade-off? Yes, also that :-)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/6d4b5e2452836abb9a9a557aefe5f198.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Image source](https://www.reddit.com/r/mlclass/comments/mmlfu/a_nice_alternative_explanation_of_bias_and/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Putting it all together**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Therefore, Bayesian inference tells us that the **best hypothesis is the one
+    which minimizes the sum of the two terms: length of the hypothesis and the error
+    rate**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this one profound sentence, it pretty much captures all of (supervised) machine
+    learning.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Think of its ramifications,
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model complexity of a **linear model**— what degree polynomial to choose, how
+    to reduce sum-of-square residuals
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Choice of the architecture of a **neural network** — how not to overfit the
+    training data and achieve good validation accuracy but reduce the classification
+    error.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Support vector machine** regularization and kernel choice — balance between
+    soft vs. hard margin i.e. trading off accuracy with decision boundary nonlinearity.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**What shall we really conclude?**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: What shall we conclude from this analysis of the Minimum Description
+  prefs: []
+  type: TYPE_NORMAL
+- en: Length (MDL) principle?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Does this prove once and for all that short hypotheses are best?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: No.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What MDL shows is that if a representation of hypotheses is chosen so that the
+    size of hypothesis h is — log2 P(***h***), and if a representation for exceptions
+    (errors) is chosen so that the encoding length of D given h is equal to -log2
+    P(***D***|***h***), then the MDL principle produces MAP hypotheses.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, to show that we have such a representation we must know all the prior
+    probabilities P(***h***), as well as the P(***D***|***h***). There is no reason
+    to believe that the MDL hypothesis relative to arbitrary encodings of hypothesis
+    and error/misclassification should be preferred.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For practical machine learning, it might sometimes be **easier for a human designer
+    to specify a representation that captures knowledge about the relative probabilities
+    of hypotheses** than it is to fully specify the probability of each hypothesis.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This is where the **matter of knowledge representation and domain expertise** become
+    critically important. It short-circuits the (often) infinitely large hypothesis
+    space and leads us towards a highly probable set of hypothesis which we can optimally
+    encode and work towards finding the set of MAP hypotheses among them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Summary and after-thought**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It is a wonderful fact that such a simple set of mathematical manipulations
+    over a basic identity of probability theory can result in such profound and succinct
+    description of the fundamental limitation and goal of supervised machine learning.
+    For a concise treatment of these issue, readers can refer to this Ph.D. thesis,
+    called [“Why Machine Learning Works”, from Carnegie Mellon University](http://www.cs.cmu.edu/~gmontane/montanez_dissertation.pdf).
+    It is also worthwhile to ponder over how all of these connect to [No-Free-Lunch
+    theorems](https://en.wikipedia.org/wiki/No_free_lunch_theorem).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**If you are interested in deeper reading in this area**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: “[No-Free-Lunch and the Minimum Description Length](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.160.798&rep=rep1&type=pdf)”
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: “ [No Free Lunch versus Occam’s Razor in Supervised Learning](https://pdfs.semanticscholar.org/83cd/86c2c7e507e8ebba9563a9efaba7c966a1b3.pdf)”
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: “[The No Free Lunch and Problem Description Length](http://www.no-free-lunch.org/ScVW01.pdf)”
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If you have any questions or ideas to share, please contact the author at [**tirthajyoti[AT]gmail.com**](mailto:tirthajyoti@gmail.com).
+    Also, you can check author’s [**GitHub repositories**](https://github.com/tirthajyoti?tab=repositories) for
+    other fun code snippets in Python, R, or MATLAB and machine learning resources.
+    If you are, like me, passionate about machine learning/data science, please feel
+    free to [add me on LinkedIn](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) or [follow
+    me on Twitter.](https://twitter.com/tirthajyotiS)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Tirthajyoti Sarkar](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)**
+    is a semiconductor technologist, machine learning/data science zealot, Ph.D. in
+    EE, blogger and writer.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/when-bayes-ockham-and-shannon-come-together-to-define-machine-learning-96422729a1ad?sk=4272ee34deb65dd8749cd5197b3fe77d).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Essential Math for Data Science:  ‘Why’ and ‘How’](/2018/09/essential-math-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Much Mathematics Does an IT Engineer Need to Learn to Get Into Data Science?](/2017/12/mathematics-needed-learn-data-science-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why You Should Forget ‘for-loop’ for Data Science Code and Embrace Vectorization](/2017/11/forget-for-loop-data-science-code-vectorization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Where Does Data Come From?](https://www.kdnuggets.com/2022/08/data-come.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Do Data Scientists and Data Engineers Work Together?](https://www.kdnuggets.com/2022/08/data-scientists-data-engineers-work-together.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bringing Human and AI Agents Together for Enhanced Customer Experience](https://www.kdnuggets.com/2024/06/softweb/bringing-human-and-ai-agents-together-for-enhanced-customer-experience)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Naïve Bayes Algorithm: Everything You Need to Know](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Ways Understanding Bayes Theorem Will Improve Your Data Science](https://www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Gaussian Naive Bayes, Explained](https://www.kdnuggets.com/2023/03/gaussian-naive-bayes-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

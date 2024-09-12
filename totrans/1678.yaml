@@ -1,0 +1,300 @@
+- en: A Beginner’s Guide to Data Engineering – Part II
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/03/beginners-guide-data-engineering-part-2.html](https://www.kdnuggets.com/2018/03/beginners-guide-data-engineering-part-2.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/03/beginners-guide-data-engineering-part-2.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Robert Chang](https://www.linkedin.com/in/robert-chang-877b1720/), Airbnb**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Header image](../Images/8eaf2321867f07225ee55fa3de019591.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Image Credit](https://www.archdaily.com/295502/hangar-16-inaqui-carnicero-architecture/50aa9e31b3fc4b0b54000045-hangar-16-inaqui-carnicero-architecture-image):
+    A transformed modern warehouse at Hangar 16, Madrid (Cortesía de Iñaqui Carnicero
+    Arquitectura)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recapitulation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In [**A Beginner’s Guide to Data Engineering** — **Part I**](https://medium.com/@rchang/a-beginners-guide-to-data-engineering-part-i-4227c5c457d7)**, **I
+    explained that an organization’s analytics capability is built layers upon layers.
+    From collecting raw data and building data warehouses to applying Machine Learning,
+    we saw why data engineering plays a critical role in all of these areas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of any data engineer’s most highly sought-after skills is the ability to
+    design, build, and maintain data warehouses. I defined what data warehousing is
+    and discussed its three common building blocks — **E**xtract, **T**ransform, and **L**oad,
+    where the name ETL comes from.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For those who are new to ETL processes, I introduced a few popular open source
+    frameworks built by companies like LinkedIn, Pinterest, Spotify, and highlight
+    Airbnb’s own open-sourced tool Airflow. Finally, I argued that data scientist
+    can learn data engineering much more effectively with the SQL-based ETL paradigm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Part II Overview
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The discussion in part I was somewhat high level. In Part II (this post), I
+    will share more technical details on how to build good data pipelines and highlight
+    ETL best practices. Primarily, I will use Python, Airflow, and SQL for our discussion.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, I will introduce the concept of **Data Modeling**, a design process where
+    one carefully defines table schemas and data relations to capture business metrics
+    and dimensions. We will learn **Data Partitioning**, a practice that enables more
+    efficient querying and data backfilling. After this section, readers will understand
+    the basics of data warehouse and pipeline design.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In later sections, I will dissect the anatomyof an **Airflow job. **Readers
+    will learn how to use sensors, operators, and transfers to operationalize the
+    concepts of extraction, transformation, and loading. We will highlight **ETL best
+    practices**, drawing from real life examples such as Airbnb, Stitch Fix, Zymergen,
+    and more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By the end of this post, readers will appreciate the versatility of Airflow
+    and the concept of [*configuration as code*](https://airflow.apache.org/#principles).
+    We will see, in fact, that Airflow has many of these best practices already built
+    in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Modeling
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/c04d876021524a21b2bb3e3cb0414615.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Image credit](https://digital-photography-school.com/lake-tekapo-stars/):
+    Star Schema, when used correctly, can be as beautiful as the actual sky'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When a user interacts with a product like Medium, her information, such as her
+    avatar, saved posts, and number of views are all captured by the system. In order
+    to serve them accurately and on time to users, it is critical to optimize the
+    production databases for *online transaction processing* (OLTP for short).
+  prefs: []
+  type: TYPE_NORMAL
+- en: When it comes to building an *online analytical processing* system (OLAP for
+    short), the objective is rather different. The designer need to focus on insight
+    generation, meaning analytical reasoning can be translated into queries easily
+    and statistics can be computed efficiently. This analytics-first approach often
+    involves a design process called **data modeling.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data Modeling, Normalization, and Star Schema**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To give an example of the design decisions involved, we often need to decide
+    the extent to which tables should be [**normalized**](https://en.wikipedia.org/wiki/Database_normalization).
+    Generally speaking, normalized tables have simpler schemas, more standardized
+    data, and carry less redundancy. However, a proliferation of smaller tables also
+    means that tracking data relations requires more diligence, querying patterns
+    become more complex (more `JOINs`), and there are more ETL pipelines to maintain.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the other hand, it is often much easier to query from a denormalized table
+    (aka a wide table), because all of the metrics and dimensions are already pre-joined.
+    Given their larger sizes, however, data processing for wide tables is slower and
+    involves more upstream dependencies. This makes maintenance of ETL pipelines more
+    difficult because the unit of work is not as modular.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Among the many design patterns that try to balance this trade-off, one of the
+    most commonly-used patterns, and the one we use at [Airbnb](https://ieondemand.com/presentations/building-airbnb-s-data-culture-insights-from-5-years-of-hypergrowth?_ga=2.230925083.5245429.1516779379-1586560381.1516779379),
+    is called [**star schema**](https://en.wikipedia.org/wiki/Star_schema). The name
+    arose because tables organized in star schema can be visualized with a star-like
+    pattern. This design focuses on building normalized tables, specifically fact
+    and dimension tables. When needed, denormalized tables can be built from these
+    smaller normalized tables. This design strives for a balance between ETL maintainability
+    and ease of analytics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6c703ed92b4505c125c49a049f0965c1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The star schema organized table in a star-like pattern, with a fact table at
+    the center, surrounded by dim tables
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Fact & Dimension Tables****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To understand how to build denormalized tables from fact tables and dimension
+    tables, we need to discuss their respective roles in more detail:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Fact tables **typically contain point-in-time transactional data. Each row
+    in the table can be extremely simple and is often represented as a unit of transaction.
+    Because of their simplicity, they are often the source of truth tables from which
+    business metrics are derived. For example, at Airbnb, we have various fact tables
+    that track transaction-like events such as bookings, reservations, alterations,
+    cancellations, and more.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Dimension tables **typically contain slowly changing attributes of specific
+    entities, and attributes sometimes can be organized in a hierarchical structure.
+    These attributes are often called “dimensions”, and can be joined with the fact
+    tables, as long as there is a foreign key available in the fact table. At Airbnb,
+    we built various dimension tables such as users, listings, and markets that help
+    us to slice and dice our data.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Below is a simple example of how fact tables and dimension tables (both are
+    normalized tables) can be joined together to answer basic analytics question such
+    as how many bookings occurred in the past week in each market. Shrewd users can
+    also imagine that if additional metrics `m_a, m_b, m_c` and dimensions `dim_x,
+    dim_y, dim_z` are projected in the final `SELECT` clause, a denormalized table
+    can be easily built from these normalized tables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Normalized tables can be used to answer ad-hoc questions or to build denormalized
+    tables
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Partitioning & Backfilling Historical Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/d99d4c9905f720e1427ce2fa60f2b199.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In an era where data storage cost is low and computation is cheap, companies
+    now can afford to store all of their historical data in their warehouses rather
+    than throwing it away. The advantage of such an approach is that companies can
+    re-process historical data in response to new changes as they see fit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data Partitioning by Datestamp**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: With so much data readily available, running queries and performing analytics
+    can become inefficient over time. In addition to following SQL best practices
+    such as “filter early and often”, “project only the fields that are needed”, one
+    of the most effective techniques to improve query performance is to partition
+    data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The basic idea behind [**data partitioning**](https://en.wikipedia.org/wiki/Partition_%28database%29) is
+    rather simple — instead of storing all the data in one chunk, we break it up into
+    independent, self-contained chunks. Data from the same chunk will be assigned
+    with the same partition key, which means that any subset of the data can be looked
+    up extremely quickly. This technique can greatly improve query performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In particular, one common partition key to use is **datestamp **(`ds` for short),
+    and for good reason. First, in data storage system like [S3](https://aws.amazon.com/s3/),
+    raw data is often organized by datestamp and stored in time-labeled directories.
+    Furthermore, the unit of work for a batch ETL job is typically one day, which
+    means new date partitions are created for each daily run. Finally, many analytical
+    questions involve counting events that occurred in a specified time range, so
+    querying by datestamp is a very common pattern. It is no wonder that datestamp
+    is a popular choice for data partitioning!
+  prefs: []
+  type: TYPE_NORMAL
+- en: A table that is partitioned by ds
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Backfilling Historical Data**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another important advantage of using datestamp as the partition key is the ease
+    of data backfilling. When a ETL pipeline is built, it computes metrics and dimensions
+    forward, not backward. Often, we might desire to revisit the historical trends
+    and movements. In such cases, we would need to compute metric and dimensions in
+    the past — We called this process **data backfilling**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Backfilling is so common that Hive built in the functionality of [**dynamic
+    partitions**](https://cwiki.apache.org/confluence/display/Hive/DynamicPartitions)**, **a
+    construct that perform the same SQL operations over many partitions and perform
+    multiple insertions at once. To illustrate how useful dynamic partitions can be,
+    consider a task where we need to backfill the number of bookings in each market
+    for a dashboard, starting from `earliest_ds` to `latest_ds` . We might do something
+    like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The operation above is rather tedious, since we are running the same query
+    many times but on different partitions. If the time range is large, this work
+    can become quickly repetitive. When dynamic partitions are used, however, we can
+    greatly simplify this work into just one query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice the extra `ds` in the `SELECT` and `GROUP BY` clause, the expanded range
+    in the `WHERE` clause, and how we changed the syntax from `PARTITION (ds= '{{ds}}')` to `PARTITION
+    (ds)` . The beauty of dynamic partitions is that we wrap all the same work that
+    is needed with a `GROUP BY ds` and insert the results into the relevant ds partitions
+    all at once. This query pattern is very powerful and is used by many of Airbnb’s
+    data pipelines. In a later section, I will demonstrate how one can write an Airflow
+    job that incorporates backfilling logic using [Jinja](http://jinja.pocoo.org/) control
+    flow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Beginner’s Guide to Data Engineering](https://www.kdnuggets.com/2023/07/beginner-guide-data-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Beginner''s Guide to Anomaly Detection Techniques in Data Science](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Data Science: A Beginner''s Guide](https://www.kdnuggets.com/2023/07/introduction-data-science-beginner-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beginner’s Guide to Data Cleaning with Pyjanitor](https://www.kdnuggets.com/beginners-guide-to-data-cleaning-with-pyjanitor)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Beginner''s Guide to End to End Machine Learning](https://www.kdnuggets.com/2021/12/beginner-guide-end-end-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Essential Machine Learning Algorithms: A Beginner''s Guide](https://www.kdnuggets.com/2021/05/essential-machine-learning-algorithms-beginners.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

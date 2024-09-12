@@ -1,0 +1,249 @@
+- en: Inside the Mind of a Neural Network with Interactive Code in Tensorflow
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/06/inside-mind-neural-network-interactive-code-tensorflow.html](https://www.kdnuggets.com/2018/06/inside-mind-neural-network-interactive-code-tensorflow.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/06/inside-mind-neural-network-interactive-code-tensorflow.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Jae Duk Seo](https://jaedukseo.me/), Ryerson University**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/a4da8f275f7ca7b1878ead38e8e6fccb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: GIF from this [website](https://giphy.com/gifs/trippy-9lRBSGg6l68Hm)
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have been wanting to understand the inner workings of my models, for such
+    a long time. And starting from today, I wish to learn about the topics related
+    to this subject. And for this post I want to cover three topics, histogram of
+    weights, visualizing the activation of neurons, [interior / integral gradients.](https://arxiv.org/pdf/1703.01365.pdf)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Please note that this post is for my future self to review these materials.**'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Before Reading On**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Original Video from TechTalksTV ([https://vimeo.com/user72337760](https://vimeo.com/user72337760))
+    If any problem arises I will delete the video asap. Original video Link here: [https://vimeo.com/238242575](https://vimeo.com/238242575)
+  prefs: []
+  type: TYPE_NORMAL
+- en: This video, is out of scope for this post, but it really helped me to understand
+    Interior and Integral gradient as well as general overview of how can we understand
+    the inner workings of neural network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data Set / Network Architecture / Accuracy / Class Numbers**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/af8e4afbaff1d7d1dfa91156b7a15eee.png)![](../Images/e33ace5e093d9f0b2ca6f6542c2527be.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image from this website
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Red Rectangle **→ Input Image (32*32*3)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Black Rectangle **→ Convolution with ELU() with / without mean pooling'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Orange Rectangle **→ Softmax for classification'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As usual we are going to use the CIFAR 10 data set to train our [All Convolutional
+    Network](https://towardsdatascience.com/iclr-2015-striving-for-simplicity-the-all-convolutional-net-with-interactive-code-manual-b4976e206760) and
+    try to see why the network have predicted certain image into it’s class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And one thing to note, since this post is more about getting to know the inner
+    workings of the network. I am only going to use 50 images from the test set to
+    measure the accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b24a63688c6bb3253076ba8f6cd87ccf.png)![](../Images/8c6d61d1bc614a70916de7465f04a928.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Left Image** → Accuracy / Cost over time for Test Image (50 images)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Right Image** → Accuracy / Cost over time for Training Image (50000 images)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f0ec4efc84c79de081b0168401a6e4ad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As seen above, the model had a final accuracy of 81 percent, on the 7 epoch.
+    (If you wish to access the full training log, [please click here](https://github.com/JaeDukSeo/Daily-Neural-Network-Practice-2/blob/master/Understanding_Concepts/COUNTERFACTUALS/viz/z_viz.txt).)
+    Finally, lets take a look at what each number represents for each class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a731e3ab8e9e13dd818a977c4656f3f1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image from this [website](https://github.com/EN10/CIFAR)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Histogram of Weights (Before / After Training )**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/601705b2077ada4a42dd471c99e0157c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Histogram of weighs before training
+  prefs: []
+  type: TYPE_NORMAL
+- en: Above image is histogram of weights for each layer, for easy visualization I
+    divided into three layers for each histogram. At the very left we can observer
+    the weights generally have a mean value of 0 and standard deviation (stddev) value
+    between 0.04 to 0.06\. And this is expected since we declared each layers with
+    different stddev values. Also the reason why some curves are smaller than others
+    is due to different numbers of weights per layers. (e.g. layer 0 only have 3 *
+    3 * 128 weights, while layer 2 have 3 * 128 * 128 weights.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e6a2ac82dc52da96d1cf867bcb4c8978.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Different stddev values![](../Images/9a9a8c0bbc3af2032a4463163434f23f.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Histogram of weighs after training
+  prefs: []
+  type: TYPE_NORMAL
+- en: Right off the bat, we can observe a clear difference. especially for the first
+    three layers. The range of the distribution have increase from -5 to 5\. However,
+    it seems like most of the weights exist between -1 and 1 (Or close to zero.) For
+    layer 4 to 6, it seems like the mean value have shifted as well as the final three
+    layers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Visualizing the Activation Values for Certain Layers**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/a232b4af38654cb6efe3556e31821e77.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Test Input for the network
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using the technique done by [Yosinski and his colleagues](https://arxiv.org/pdf/1506.06579.pdf),
+    lets visualize how the image above gets modified after layer 3, 6 and 9\. (Please
+    note I originally found this method used by [Arthur Juliani](https://medium.com/@awjuliani?source=post_header_lockup) in
+    this [blog post](https://medium.com/@awjuliani/visualizing-neural-network-layer-activation-tensorflow-tutorial-d45f8bf7bbc4).)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9e203f792f2e37e543c7279c8a815ec2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Activation after layer 3
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Green Box **→ Channels where Green Values are captured'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Blue Box** → Channels where Blue Values are captured'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now there is 128 channels so I won’t visualize them all. Rather I’ll visualize
+    the first 27 channels as seen above. We can see that after layer 3 certain color
+    values gets captured within the network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ad2a1aa223f7176144fb0bd7e1b9bb34.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Activation for layer 6
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Red Box** → Channels where Red Colors are captured'
+  prefs: []
+  type: TYPE_NORMAL
+- en: However after the sixth layer, it seems like certain filters are able to capture
+    the color red better than color green or blue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: <cener>![](../Images/9bbc0ff32982fe294cfc501dd22f3ee6.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Activation after layer 9</cener>
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, after ninth layer (right before global average pooling) we can visualize
+    each channel with depth 1 (hence it looks like a gray scale image). However (at
+    least for me), it does not seem to be human intelligible. All images can be [found
+    here ](https://github.com/JaeDukSeo/Daily-Neural-Network-Practice-2/tree/master/Understanding_Concepts/COUNTERFACTUALS/viz)and
+    I created a GIF accumulating all of the changes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/903cfcf07afc8b305a6892c902b1f520.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Order of GIF **→ Input Image, Activation after Layer 3, Activation After
+    Layer 6, and Activation After Layer 9'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 ChatGPT mind-blowing extensions to use anywhere](https://www.kdnuggets.com/2023/04/6-chatgpt-mindblowing-extensions-anywhere.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Things to Keep in Mind Before Selecting Your Next Data Science Job](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Management: How to Stay on Top of Your Customer''s Mind?](https://www.kdnuggets.com/2022/04/data-management-stay-top-customer-mind.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Inside DeepMind’s New Efforts to Use Deep Learning to Advance Mathematics](https://www.kdnuggets.com/2021/12/inside-deepmind-new-efforts-deep-learning-advance-mathematics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Neural Network Optimization with AIMET](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

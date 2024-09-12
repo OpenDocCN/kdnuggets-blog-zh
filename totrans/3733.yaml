@@ -1,0 +1,232 @@
+- en: How Fast Can BERT Go With Sparsity?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Here’s A Little Secret
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'If you want to analyze how fast 19 sparse BERT models perform inference, you’ll
+    only need a YAML file and 16GB of RAM to find out. And spoiler alert:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: … they run on CPUs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: … and they’re super fast!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![How Fast Can BERT Go With Sparsity?](../Images/7fd1f48b71edcf8e057b4e538b41dab7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The latest feature from Neural Magic’s [**DeepSparse**](https://github.com/neuralmagic/deepsparse)repo
+    is the DeepSparse Server! And the objective of this article is to show not only
+    how seamless it is to serve up to 19 sparse BERT models, but how much the impact
+    of sparsity has on model performance. For a bit of background, sparsification
+    is the process of taking a trained deep learning model and removing redundant
+    information from the over-parameterized network resulting in a faster and smaller
+    model. And for this demo, we’ll be using various BERT models and loading them
+    for inference to show the trade-off between accuracy and speed relative to the
+    model’s sparsification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The DeepSparse Server is built on top of our DeepSparse Engine and the popular
+    FastAPI web framework allowing anyone to deploy sparse models in production with
+    GPU-class speed but on CPUs! With the DeepSparse Engine, we can integrate into
+    popular deep learning libraries (e.g., Hugging Face, Ultralytics) allowing you
+    to deploy sparse models with ONNX.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As previously mentioned, all of the configuration required to run your models
+    in production only requires a YAML file and a small bit of memory (thanks to sparsity).
+    To get quickly started with serving four BERT models trained on the question answering
+    task, this is what the config YAML file would look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![How Fast Can BERT Go With Sparsity?](../Images/5321e6afbfbb2d1eb2fa67a1b71c851e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: config.yaml
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you want to go big and load all of the 19 Neural Magic sparse BERT models:
+    this is what the config file would look like ??:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![How Fast Can BERT Go With Sparsity?](../Images/fbcb2b8b37b344fab6f06912a005b387.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: For ease of use, we’ve built a demo on top of Streamlit for anyone to demo the
+    server and models for the question answering task in NLP. In order to test 19
+    models simultaneously, the app was tested on a virtual machine on the Google Cloud
+    Platform.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To give some grounding on what I used for computing in my tests, here are the
+    deets:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*Keep in mind that bare-metal machines will actually perform faster under the
+    same computing constraints described in this article. However, since the models
+    are already super fast, I feel comfortable showing their speed via virtualization.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We not only strongly encourage you to run the same tests on a VM for benchmarking
+    performance but also so you’ll have the RAM required to load all 19 BERTs into
+    memory, otherwise you’ll get this ??:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you prefer to get started quickly on a local machine without worrying about
+    out-of-memory problems, you should try only loading a few models into memory.
+    And the code below will show you how to do exactly this with 4 models (even though
+    most sparse models are super light and you can possibly add more at your discretion).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting Started With The SparseServer.UI
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'We split our app into separate server and client directories. The server directory
+    holds the YAML files for loading the models and the client has the logic for the
+    Streamlit app:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '1\. Clone the DeepSparse repo:'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '2\. Install the DeepSparse Server and Streamlit:'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Before we run the server, you can configure the `host` and `port` parameters
+    in our startup CLI command. If you choose to use the default settings, it will
+    run the server on `localhost` and port `5543` . For more info on the CLI arguments
+    run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '3\. Run the DeepSparse Server:'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Ok! It’s time to serve all of the models defined in the `config.yaml`. This
+    YAML file will download the four models from Neural Magic’s [SparseZoo](https://sparsezoo.neuralmagic.com/?domain=nlp&sub_domain=question_answering&page=1) ??.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: After downloading the models and your server is up and running, open a second
+    terminal to test out the client.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*If you altered the *`*host*`* and *`*port*`* configuration when you first
+    ran the server, please adjust these variables in the *`*pipelineclient.py*`* module
+    as well.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '4\. Run the Streamlit Client:'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: That’s it! Click on the URL in your terminal, and you are ready to start interacting
+    with the demo. You can choose examples from a list, or you can add your own context
+    and question.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![How Fast Can BERT Go With Sparsity?](../Images/63c104fe1ff452f0fdc484024f56d9ed.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the future, we’ll be expanding the number of NLP tasks outside of just question
+    answering so you get a wider scope in performance with sparsity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For the full code: check out the [SparseServer.UI](https://github.com/neuralmagic/deepsparse/tree/main/examples/sparseserver-ui) …'
+  prefs: []
+  type: TYPE_NORMAL
+- en: …and don’t forget to give the DeepSparse repo a GitHub ⭐!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Ricky Costa](https://www.linkedin.com/in/ricky-costa-nlp/)** is focused
+    on User Interface at [Neural Magic](https://neuralmagic.com/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://pub.towardsai.net/sparse-transformers-a-demo-58b6b1ebf3e4).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Fine-Tuning BERT for Tweets Classification with HuggingFace](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[8 Innovative BERT Knowledge Distillation Papers That Have Changed…](https://www.kdnuggets.com/2022/09/eight-innovative-bert-knowledge-distillation-papers-changed-nlp-landscape.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Comparing Natural Language Processing Techniques: RNNs, Transformers, BERT](https://www.kdnuggets.com/comparing-natural-language-processing-techniques-rnns-transformers-bert)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Extractive Summarization with LLM using BERT](https://www.kdnuggets.com/extractive-summarization-with-llm-using-bert)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Fine-Tune BERT for Sentiment Analysis with Hugging Face Transformers](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

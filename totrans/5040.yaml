@@ -1,0 +1,259 @@
+- en: 'Mining Twitter Data with Python Part 1: Collecting Data'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-1.html](https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-1.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Marco Bonzanini, Independent Data Science Consultant**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Twitter](https://www.twitter.com/) is a popular social network where users
+    can share short SMS-like messages called *tweets*. Users share thoughts, links
+    and pictures on Twitter, journalists comment on live events, companies promote
+    products and engage with customers. The list of different ways to use Twitter
+    could be really long, and with 500 millions of tweets per day, there’s a lot of
+    data to analyse and to play with.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is the first in a series of articles dedicated to mining data on Twitter
+    using Python. In this first part, we’ll see different options to collect data
+    from Twitter. Once we have built a data set, in the next episodes we’ll discuss
+    some interesting data applications.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Twitter banner](../Images/3da5b4dea824ea453ca3ae25f3548634.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Register Your App
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In order to have access to Twitter data programmatically, we need to create
+    an app that interacts with the Twitter API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The first step is the registration of your app. In particular, you need to
+    point your browser to [http://apps.twitter.com](http://apps.twitter.com/), log-in
+    to Twitter (if you’re not already logged in) and register a new application. You
+    can now choose a name and a description for your app (for example “Mining Demo”
+    or similar). You will receive a *consumer key* and a *consumer secret*: these
+    are application settings that should always be kept private. From the configuration
+    page of your app, you can also require an access token and an access token secret.
+    Similarly to the consumer keys, these strings must also be kept private: they
+    provide the application access to Twitter on behalf of your account. The default
+    permissions are read-only, which is all we need in our case, but if you decide
+    to change your permission to provide writing features in your app, you must negotiate
+    a new access token.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Important Note: there are rate limits in the use of the Twitter API, as well
+    as limitations in case you want to provide a downloadable data-set, see:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://dev.twitter.com/overview/terms/agreement-and-policy](https://dev.twitter.com/overview/terms/agreement-and-policy)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://dev.twitter.com/rest/public/rate-limiting](https://dev.twitter.com/rest/public/rate-limiting)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Accessing the Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Twitter provides [REST APIs](https://dev.twitter.com/rest/public) you can use
+    to interact with their service. There is also [a bunch of Python-based clients](https://dev.twitter.com/overview/api/twitter-libraries#python) out
+    there that we can use without re-inventing the wheel. In particular, [Tweepy](http://tweepy.readthedocs.org/) in
+    one of the most interesting and straightforward to use, so let’s install it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*Update*: the release 3.4.0 of Tweepy has introduced a problem with Python
+    3, currently fixed on [github](https://github.com/tweepy/tweepy) but not yet available
+    with `pip`, for this reason we’re using version 3.3.0 until a new release is available.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*More Updates*: the release 3.5.0 of Tweepy, already available via pip, seems
+    to solve the problem with Python 3 mentioned above.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In order to authorise our app to access Twitter on our behalf, we need to use
+    the OAuth interface:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The `api` variable is now our entry point for most of the operations we can
+    perform with Twitter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example, we can read our own timeline (i.e. our Twitter homepage) with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Tweepy provides the convenient Cursor interface to iterate through different
+    types of objects. In the example above we’re using *10* to limit the number of
+    tweets we’re reading, but we can of course access more. The `status` variable
+    is an instance of the `Status()` class, a nice wrapper to access the data. The
+    JSON response from the Twitter API is available in the attribute `_json` (with
+    a leading underscore), which is not the raw JSON string, but a dictionary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So the code above can be re-written to process/store the JSON:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'What if we want to have a list of all our followers? There you go:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And how about a list of all our tweets? Simple:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: In this way we can easily collect tweets (and more) and store them in the original
+    JSON format, fairly easy to convert into different data models depending on our
+    storage (many NoSQL technologies provide some bulk import feature).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The function `process_or_store()` is a place-holder for your custom implementation.
+    In the simplest form, you could just print out the JSON, one tweet per line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Streaming
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In case we want to “keep the connection open”, and gather all the upcoming
+    tweets about a particular event, the streaming API is what we need. We need to
+    extend the `StreamListener()` to customise the way we process the incoming data.
+    A working example that gathers all the new tweets with the #python hashtag:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Depending on the search term, we can gather tons of tweets within a few minutes.
+    This is especially true for live events with a world-wide coverage (World Cups,
+    Super Bowls, Academy Awards, you name it), so keep an eye on the JSON file to
+    understand how fast it grows and consider how many tweets you might need for your
+    tests. The above script will save each tweet on a new line, so you can use the
+    command `wc -l python.json` from a Unix shell to know how many tweets you’ve gathered.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can see a minimal working example of the Twitter Stream API in the following
+    Gist:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[twitter_stream_downloader.py](https://gist.github.com/bonzanini/af0463b927433c73784d)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We have introduced `tweepy` as a tool to access Twitter data in a fairly easy
+    way with Python. There are different types of data we can collect, with the obvious
+    focus on the “tweet” object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once we have collected some data, the possibilities in terms of analytics applications
+    are endless. In the next episodes, we’ll discuss some options.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Marco Bonzanini](https://twitter.com/marcobonzanini)** is a Data Scientist
+    based in London, UK. Active in the PyData community, he enjoys working in text
+    analytics and data mining applications. He''s the author of "[Mastering Social
+    Media Mining with Python](https://www.amazon.com/Mastering-Social-Media-Mining-Python-ebook/dp/B01BFD2Z2Q)"
+    (Packt Publishing, July 2016).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://marcobonzanini.com/2015/03/02/mining-twitter-data-with-python-part-1/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[The Data Awakens: Star Wars Sentiment Analysis](/2016/01/data-awakens-star-wars-sentiment-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tutorial: Building a Twitter Sentiment Analysis Process](/2015/11/tutorial-twitter-sentiment-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Dissecting the Big Data Twitter Community through a Big data Lens](/2015/09/dissecting-big-data-twitter-community.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, April 6: 8 Free MIT Courses to Learn Data Science…](https://www.kdnuggets.com/2022/n14.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Complete Collection of Data Science Cheat Sheets - Part 1](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Complete Collection of Data Science Cheat Sheets - Part 2](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Complete Collection Of Data Repositories - Part 1](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Complete Collection Of Data Repositories - Part 2](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

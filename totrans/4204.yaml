@@ -1,0 +1,196 @@
+- en: How to Auto-Detect the Date/Datetime Columns and Set Their Datatype When Reading
+    a CSV File in Pandas
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/10/auto-detect-date-datetime-columns-and-set-their-datatype-when-reading-a-csv-file-in-pandas.html](https://www.kdnuggets.com/2021/10/auto-detect-date-datetime-columns-and-set-their-datatype-when-reading-a-csv-file-in-pandas.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [David B Rosen (PhD)](http://linkedin.com/in/rosen1), Lead Data Scientist
+    for Automated Credit Approval at IBM Global Financing**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4b91a88132cea774924a3f6047dfac6d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Say I have a CSV data file that I want to read into a Pandas dataframe, and
+    some of its columns are dates or datetimes, but I don’t want to bother identifying/specifying
+    the names of these columns in advance. Instead I would like to automatically obtain
+    the datatypes shown in the `df.info()` output pictured *above,* where the appropriate
+    columns have been *automatically* given a datetime datatype (green outline boxes).
+    Here’s how to accomplish that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that I did **not** invoke pd.read_csv (the Pandas version of read_csv)
+    above directly. My dt_auto.read_csv function (see its code down below) has invoked
+    pd.read_csv() itself and then automatically detected and converted the datatype
+    of the two detected datetime columns. (The contents of this df will be shown down
+    below.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If I had used the regular Pandas pd.read_csv(), I would have obtained merely
+    generic object datatypes by default as below (red outline boxes):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/b87de01b2bf2432ed25bc718e95058d6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note that the only difference from the original code is in the import statement,
+    where I changed “from dt_auto” to “from pandas”. This is sufficient so long as
+    you use only “=read_csv()” throughout, not qualifying it as as “=pd.read_csv()”
+    or “=dt_auto.read_csv()”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is the contents of my `dt_auto.py` (“datetime automatic”):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'But isn’t this risky? What if one of the columns wasn’t entirely a datetime
+    column? Of course you could have some obscure strings that just happen to look
+    like dates but aren’t, but there is not much risk that this code will blindly
+    convert or lose non-datetime strings, for two reasons:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This code will **not** convert any values in a column unless **every** non-NaN
+    value in this column can successfully be parsed by pd.to_datetime and converted
+    to a datetime. In other words, we will not let it ever convert a string to a pd.NaT
+    (the “failure” result) because it can’t understand it as a datetime.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It will **not** attempt to convert columns that have already been interpreted
+    as being any type other than object, i.e. any specific type like int64 or float64,
+    even though pd.to_datetime would have happily (but likely undesirably) converted
+    a number like 2000 to the date 2000-01-01.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In my experience so far, the dt_auto.read_csv function does not take long to
+    run on a typical dataframe. Even if there are a lot of non-datetime object (string)
+    columns, it almost always very quickly encounters a value near the top of each
+    such column that it can’t parse as a datetime and gives up and moves on to the
+    next column without attempting to parse the rest of the column’s values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here’s what the resulting dataframe looks like from dt_auto.read_csv(), although
+    you can’t necessarily tell by looking at it that the two appropriate columns are
+    indeed datetime datatypes. As it happens, the CSV file had a varying number of
+    decimal places (three, none, and nine) for the seconds in Update_Timestamp, but
+    the datetime datatype itself shows nine such digits regardless. Birthdate in the
+    csv file in fact had only dates (no times) but was stored as a full datetime,
+    with zeros for the hours, minutes, and seconds (including zero as the decimal
+    part), but all of the time components in the column being zero causes Pandas to
+    display only the date (year-month-day) for this column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/463005979bdbae23cf647a01df7dcdd6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Of course pd.to_datetime, and thus dt_auto.read_csv, cannot handle all possible
+    date and datetime formats by default, but it will handle many common unambiguous
+    (generally year month day) formats such as those written by the dataframe.to_csv
+    method and many other tools, including many ISO datetime formats (which generally
+    have a “T” separating the date from the time rather than a space). I haven’t experimented
+    with datetimes that include timezone info because I don’t usually see data like
+    that, but do please let me know in a response comment whether these could be handled
+    better by further changes to the code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What do you think? Did you find this little article useful? And should Pandas
+    itself add (e.g. to the pd.read_csv function itself?) the capability to optionally
+    do this for us so you wouldn’t need to copy/import my dt_auto.py code above? I’d
+    be happy to see your comments and questions as responses here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks to Elliot Gunn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [David B Rosen (PhD)](http://linkedin.com/in/rosen1)** is Lead Data
+    Scientist for Automated Credit Approval at IBM Global Financing. Find more of
+    David''s writing at [dabruro.medium.com](https://dabruro.medium.com/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/auto-detect-and-set-the-date-datetime-datatypes-when-reading-csv-into-pandas-261746095361).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[5 Python Data Processing Tips & Code Snippets](/2021/07/python-tips-snippets-data-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[CSV Files for Storage? No Thanks. There’s a Better Option](/2021/08/csv-files-storage-better-option.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Query Your Pandas Dataframe](/2021/08/query-pandas-dataframe.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Select Rows and Columns in Pandas Using [ ], .loc, iloc, .at…](https://www.kdnuggets.com/2019/06/select-rows-columns-pandas.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Ways to Rename Pandas Columns](https://www.kdnuggets.com/2022/11/4-ways-rename-pandas-columns.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Step by Step Guide to Reading and Understanding SQL Queries](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Monitor Your File System With Python’s Watchdog](https://www.kdnuggets.com/monitor-your-file-system-with-pythons-watchdog)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Parallel Processing Large File in Python](https://www.kdnuggets.com/2022/07/parallel-processing-large-file-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, July 20: Machine Learning Algorithms Explained in…](https://www.kdnuggets.com/2022/n29.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

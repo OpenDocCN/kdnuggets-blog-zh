@@ -1,0 +1,245 @@
+- en: Deep Quantile Regression
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/07/deep-quantile-regression.html](https://www.kdnuggets.com/2018/07/deep-quantile-regression.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Sachin Abeywardana](https://www.linkedin.com/in/sachinabeywardana/),
+    Founder of [DeepSchool.io](http://DeepSchool.io)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One area that Deep Learning has not explored extensively is the uncertainty
+    in estimates. Most Deep Learning frameworks currently focus on giving a best estimate
+    as defined by a loss function. Occasionally something beyond a point estimate
+    is required to make a decision. This is where a distribution would be useful.
+    Bayesian statistics lends itself to this problem really well since a distribution
+    over the dataset is inferred. However, Bayesian methods so far have been rather
+    slow and would be expensive to apply to large datasets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As far as decision making goes, most people actually require quantiles as opposed
+    to true uncertainty in an estimate. For instance when measuring a child’s weight
+    for a given age, the weight of an individual will vary. What would be interesting
+    is (for arguments sake) the 10th and 90th percentile. Note that the uncertainty
+    is different to quantiles in that I could request for a confidence interval on
+    the 90th quantile. This article will purely focus on inferring quantiles.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Quantile Regression Loss function
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In regression the most commonly used loss function is the mean squared error
+    function. If we were to take the negative of this loss and exponentiate it, the
+    result would correspond to the gaussian distribution. The mode of this distribution
+    (the peak) corresponds to the mean parameter. Hence, when we predict using a neural
+    net that minimised this loss we are predicting the mean value of the output which
+    may have been noisy in the training set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The loss in Quantile Regression for an individual data point is defined as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/40bfe34e63f6ca33ef68a47761ff042a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Loss of individual data point
+  prefs: []
+  type: TYPE_NORMAL
+- en: where alpha is the required quantile (a value between 0 and 1) and
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e2b5a8b41ef98af888d44ee4d2dd50bc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'where f(x) is the predicted (quantile) model and y is the observed value for
+    the corresponding input x. The average loss over the entire dataset is shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f1f0c04d829a5a7470942307398b8560.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Loss funtion
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we were to take the negative of the individual loss and exponentiate it,
+    we get the distribution know as the Asymmetric Laplace distribution, shown below. **The
+    reason that this loss function works is that if we were to find the area under
+    the graph to the left of zero it would be alpha, the required quantile.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d4b53cd78dff1dae2ba8d6546aa00ee3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Probability distribution function (pdf) of an Asymmetric Laplace distribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The case when alpha=0.5 is most likely more familiar since it corresponds to
+    the Mean Absolute Error (MAE). This loss function consistently estimates the median
+    (50th percentile), instead of the mean.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Modelling in Keras
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The forward model is no different to what you would have had when doing MSE
+    regression. All that changes is the loss function. The following few lines defines
+    the loss function defined in the section above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'When it comes to compiling the neural network, just simply do:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: For a full example see [this Jupyter notebook](https://github.com/sachinruk/KerasQuantileModel/blob/master/Keras%20Quantile%20Model.ipynb) where
+    I look at a motor cycle crash dataset over time. The results are reproduced below
+    where I show the 10th 50th and 90th quantiles.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/da4fd8f5e51325a415feff9c2ca70f14.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Acceleration over time of crashed motor cycle.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Final Notes**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note that for each quantile I had to rerun the training.** This is due to
+    the fact that for each quantile the loss function is different, as the quantile
+    in itself is a parameter for the loss function.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Due to the fact that each model is a simple rerun, there is a risk of quantile
+    cross over. i.e. the 49th quantile may go above the 50th quantile at some stage.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Note that the quantile 0.5 is the same as median, which you can attain by minimising
+    Mean Absolute Error, which you can attain in Keras regardless with `loss='mae'`.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Uncertainty and quantiles are **not** the same thing. But most of the time you
+    care about quantiles and not uncertainty.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If you really do want uncertainty with deep nets checkout [http://mlg.eng.cam.ac.uk/yarin/blog_3d801aa532c1ce.html](http://mlg.eng.cam.ac.uk/yarin/blog_3d801aa532c1ce.html)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Edit 1**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As pointed out by [Anders Christiansen](https://medium.com/@andersasac?source=post_info_responses---------0----------------) (in
+    the responses) we may be able to get multiple quantiles in one go by having multiple
+    objectives. Keras however combines all loss functions by a `loss_weights` argument
+    as shown here: [https://keras.io/getting-started/functional-api-guide/#multi-input-and-multi-output-models](https://keras.io/getting-started/functional-api-guide/#multi-input-and-multi-output-models).
+    Would be easier to implement this in tensorflow. If anyone beats me to it would
+    be happy to change my notebook/ post to reflect this. As a rough guide if we wanted
+    the quantiles 0.1, 0.5, 0.9, the last layer in Keras would have `Dense(3)` instead,
+    with each node connected to a loss function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Edit 2**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Thanks to [Jacob Zweig](https://medium.com/@jacob.zweig?source=post_info_responses---------1----------------)
+    for implementing the simultaneous multiple Quantiles in TensorFlow: [https://github.com/strongio/quantile-regression-tensorflow/blob/master/Quantile%20Loss.ipynb](https://github.com/strongio/quantile-regression-tensorflow/blob/master/Quantile%20Loss.ipynb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you are enjoying my tutorials/ blog posts, **consider supporting me** on
+    [https://www.patreon.com/deepschoolio](https://www.patreon.com/deepschoolio) or
+    by subscribing to my YouTube channel [https://www.youtube.com/user/sachinabey](https://www.youtube.com/user/sachinabey)
+    (or both!).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Sachin Abeywardana](https://www.linkedin.com/in/sachinabeywardana/)**
+    is a PhD in Machine Learning and Founder of [DeepSchool.io](http://DeepSchool.io).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/deep-quantile-regression-c85481548b5a).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[DeepSchool.io: Deep Learning Learning](/2017/12/deepschool-io-deep-learning-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Docker for Data Science](/2018/01/docker-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Genetic Algorithm for Optimizing Recurrent Neural Networks](/2018/01/genetic-algorithm-optimizing-recurrent-neural-network.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Comparing Linear and Logistic Regression](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Reasons Why You Should Use Linear Regression Models Instead of…](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Linear vs Logistic Regression: A Succinct Explanation](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News 22:n12, March 23: Best Data Science Books for…](https://www.kdnuggets.com/2022/n12.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[An Overview of Logistic Regression](https://www.kdnuggets.com/2022/02/overview-logistic-regression.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Logistic Regression for Classification](https://www.kdnuggets.com/2022/04/logistic-regression-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

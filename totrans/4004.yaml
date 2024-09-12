@@ -1,0 +1,332 @@
+- en: How To Create Custom Context Managers in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/how-to-create-custom-context-managers-in-python](https://www.kdnuggets.com/how-to-create-custom-context-managers-in-python)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![custom-context-manager](../Images/e2b0dab861aafbb308d4bcbea8052ae4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Context managers in Python let you work more efficiently with resources—facilitating
+    setup and teardown of resources even if there are errors when working with the
+    resources. In the tutorial on [writing efficient Python code](https://www.kdnuggets.com/how-to-write-efficient-python-code-a-tutorial-for-beginners),
+    I covered what context managers are and why they’re helpful. And in [3 Interesting
+    Uses of Python's Context Managers](https://www.kdnuggets.com/3-interesting-uses-of-python-context-managers),
+    I went over the use of context managers in managing subprocesses, database connections,
+    and more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this tutorial, you’ll learn how to create your own custom context managers.
+    We’ll review how context manages work and then look at the different ways you
+    can write your own. Let's get started.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What Are Context Managers in Python?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Context managers in Python are objects that enable the management of resources
+    such as file operations, database connections, or network sockets within a controlled
+    block of code. They ensure that resources are properly initialized before the
+    block of code executes and automatically cleaned up afterward, regardless of whether
+    the code block completes normally or raises an exception.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In general, context managers in Python have the following two special methods:
+    `__enter__()` and `__exit__()`. These methods define the behavior of the context
+    manager when entering and exiting a context.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How Do Context Managers Work?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'When working with resources in Python, you have to consider setting up the
+    resource, anticipate errors, implement exception handling, and finally free up
+    the resource. To do this, you’ll probably use a `try-except-finally` block like
+    so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Essentially, we try provisioning and working with the resource, except for any
+    errors that may arise during the process, and finally free up the resource. The
+    `finally` block is always executed regardless of whether the operation succeeds
+    or not. But with context managers and the `with` statement, you can have reusable
+    `try-except-finally` blocks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let’s go over how context managers work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Enter Phase (`__enter__()` method)**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When a `with` statement is encountered, the `__enter__()` method of the context
+    manager is invoked. This method is responsible for initializing and setting up
+    the resource such as opening a file, establishing a database connection, and the
+    like. The value returned by `__enter__()` (if any) is made available to the context
+    block after the `as` keyword.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Execute the Block of Code**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once the resource is set up (after `__enter__()` is executed), the code block
+    associated with the `with` statement is executed. This is the operation you want
+    to perform on the resource.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Exit Phase (`__exit__()` method)**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After the code block completes execution—either normally or due to an exception—the
+    `__exit__()` method of the context manager is called. The `__exit__()` method
+    handles cleanup tasks, such as closing the resources. If an exception occurs within
+    the code block, information about the exception (type, value, traceback) is passed
+    to `__exit__()` for error handling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To sum up:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Context managers provide a way to manage resources efficiently by ensuring that
+    resources are properly initialized and cleaned up.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We use the `with` statement to define a context where resources are managed.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `__enter__()` method initializes the resource, and the `__exit__()` method
+    cleans up the resource after the context block completes.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now that we know how context managers work, let’s proceed to write a custom
+    context manager for handling database connections.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating Custom Context Managers in Python
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'You can write your own context managers in Python using one of the following
+    two methods:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Writing a class with `__enter__()` and `__exit__()` methods.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Using the `contextlib` module which provides the `contextmanager` decorator
+    to write a context manager using generator functions.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 1\. Writing a Class with __enter__() and __exit__() Methods
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'You can define a class that implements the two special methods: `__enter__()`
+    and `__exit__()` that control resource setup and teardown respectively. Here we
+    write a `ConnectionManager` class that establishes a connection to an SQLite database
+    and closes the database connection:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s break down how the `ConnectionManager` works:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `__enter__()` method is called when the execution enters the context of
+    the `with` statement. It is responsible for setting up the context, in this case,
+    connecting to a database. It returns the resource that needs to be managed: the
+    database connection. Note that we’ve used the `Optional` type from the [typing
+    module](https://docs.python.org/3/library/typing.html) for the connection object
+    `conn`. We use `Optional` when the value can be one of two types: here a valid
+    connection object or None.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The `__exit__()` method: It''s called when the execution leaves the context
+    of the `with` statement. It handles the cleanup action of closing the connection.
+    The parameters `exc_type`, `exc_value`, and `traceback` are for handling exceptions
+    within the `with` block. These can be used to determine whether the context was
+    exited due to an exception.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Now let’s use the `ConnectionManager` in the `with` statement. We do the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try to connect to the database
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Create a cursor to run queries
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Create a table and insert records
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Query the database table and retrieve the results of the query
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Running the above code should give you the following output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 2\. Using the @contextmanager Decorator From contextlib
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The `contextlib` module provides the `@contextmanager` decorator which can
+    be used to define a generator function as a context manager. Here''s how we do
+    it for the database connection example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here’s how the `database_connection` function works:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `database_connection` function first establishes a connection which the
+    `yield` statement then provisions the connection to the block of code in the `with`
+    statement block. Note that because `yield` itself is not immune to exceptions,
+    we wrap it in a `try` block.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `finally` block ensures that the connection is always closed, whether an
+    exception was raised or not, ensuring there are no resource leaks.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Like we did previously, let’s use this in a `with` statement:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We connect to the database, insert some more records, query the db, and fetch
+    the results of the query. Here’s the output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that we open and close the cursor object. So you can also use the cursor
+    object in a with statement. I suggest trying that as a quick exercise!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrapping Up
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'And that’s a wrap. I hope you learned how to create your own custom context
+    managers. We looked at two approaches: using a class with `__enter__()` and `__exit()__`
+    methods and using a generator function decorated with the `@contextmanager` decorator.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It’s quite easy to see that you get the following advantages when using a context
+    manager:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Setup and teardown of resources are automatically managed, minimizing resource
+    leaks.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The code is cleaner and easier to maintain.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Cleaner exception handling when working with resources.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As always, you can [find the code on GitHub](https://github.com/balapriyac/python-basics/blob/main/custom_context_manager/main.py).
+    Keep coding!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)****
+    is a developer and technical writer from India. She likes working at the intersection
+    of math, programming, data science, and content creation. Her areas of interest
+    and expertise include DevOps, data science, and natural language processing. She
+    enjoys reading, writing, coding, and coffee! Currently, she''s working on learning
+    and sharing her knowledge with the developer community by authoring tutorials,
+    how-to guides, opinion pieces, and more. Bala also creates engaging resource overviews
+    and coding tutorials.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[3 Interesting Uses of Python''s Context Managers](https://www.kdnuggets.com/3-interesting-uses-of-python-context-managers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Context, Consistency, And Collaboration Are Essential For Data…](https://www.kdnuggets.com/2022/01/context-consistency-collaboration-essential-data-science-success.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Qualities Hiring Managers Are Looking For in Data Scientists](https://www.kdnuggets.com/2022/04/qualities-hiring-managers-looking-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introducing OpenChat: The Free & Simple Platform for Building…](https://www.kdnuggets.com/2023/06/introducing-openchat-free-simple-platform-building-custom-chatbots-minutes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tailor ChatGPT to Fit Your Needs with Custom Instructions](https://www.kdnuggets.com/2023/08/tailor-chatgpt-fit-needs-custom-instructions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Create a Dashboard Using Python and Dash](https://www.kdnuggets.com/2023/08/create-dashboard-python-dash.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

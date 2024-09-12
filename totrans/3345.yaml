@@ -1,0 +1,327 @@
+- en: Learning to Learn by Gradient Descent by Gradient Descent
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/02/learning-learn-gradient-descent.html](https://www.kdnuggets.com/2017/02/learning-learn-gradient-descent.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[Learning to learn by gradient descent by gradient descent](https://arxiv.org/pdf/1606.04474v2.pdf),
+    Andrychowicz et al., *NIPS 2016*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the things that strikes me when I read these NIPS papers is just how
+    short some of them are – between the introduction and the evaluation sections
+    you might find only one or two pages! A general form is to start out with a basic
+    mathematical model of the problem domain, expressed in terms of functions. Selected
+    functions are then *learned*, by reaching into the machine learning toolbox and
+    combining existing building blocks in potentially novel ways. When looked at this
+    way, we could really call machine learning ‘*function learning*‘.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thinking in terms of functions like this is a bridge back to the familiar (for
+    me at least). We have function composition. For example, given a function *f*
+    mapping images to feature representations, and a function *g* acting as a classifier
+    mapping image feature representations to objects, we can build a systems that
+    classifies objects in images with *g ○ f*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each function in the system model could be learned or just implemented directly
+    with some algorithm. For example, feature mappings (or encodings) were traditionally
+    implemented by hand, but increasingly are learned...
+  prefs: []
+  type: TYPE_NORMAL
+- en: The move from hand-designed features to learned features in machine learning
+    has been wildly successful.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Part of the art seems to be to define the overall model in such a way that no
+    individual function needs to do too much (avoiding too big a gap between the inputs
+    and the target output) so that learning becomes more efficient / tractable, and
+    we can take advantage of different techniques for each function as appropriate.
+    In the above example, we composed one learned function for creating good representations,
+    and another function for identifying objects from those representations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can have higher-order functions that combine existing (learned or otherwise)
+    functions, and of course that means we can also use *combinators*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And what do we find when we look at the components of a ‘function learner’ (machine
+    learning system)? More functions!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Frequently, tasks in machine learning can be expressed as the problem of optimising
+    an objective function *f(θ)* defined over some domain *θ ∈ Θ*.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'The *optimizer* function maps from *f θ* to *argmin[θ ∈ Θ] f θ* . The standard
+    approach is to use some form of gradient descent (e.g., SGD – stochastic gradient
+    descent). A classic paper in optimisation is ‘No Free Lunch Theorems for Optimization’
+    which tells us that no general-purpose optimisation algorithm can dominate all
+    others. So to get the best performance, we need to match our optimisation technique
+    to the characteristics of the problem at hand:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '... specialisation to a subclass of problems is in fact the *only* way that
+    improved performance can be achieved in general.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Thus there has been a lot of research in defining update rules tailored to different
+    classes of problems – within deep learning these include for example *momentum*,
+    *Rprop*, *Adagrad*, *RMSprop*, and *ADAM*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But what if instead of hand designing an optimising algorithm (function) we
+    *learn* it instead? That way, by training on the class of problems we’re interested
+    in solving, we can learn an optimum optimiser for the class!
+  prefs: []
+  type: TYPE_NORMAL
+- en: The goal of this work is to develop a procedure for constructing a learning
+    algorithm which performs well on a particular class of optimisation problems.
+    Casting algorithm design as a learning problem allows us to specify the class
+    of problems we are interested in through example problem instances. This is in
+    contrast to the ordinary approach of characterising properties of interesting
+    problems analytically and using these analytical insights to design learning algorithms
+    by hand.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: If learned representations end up performing better than hand-designed ones,
+    can learned optimisers end up performing better than hand-designed ones too? The
+    answer turns out to be yes!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our experiments have confirmed that learned neural optimizers compare favorably
+    against state-of-the-art optimization methods used in deep learning.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/7c69ca09a51e00c66204243f71f2bb53.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In fact not only do these learned optimisers perform very well, but they also
+    provide an interesting way to transfer learning across problems sets. Traditionally
+    *transfer learning* is a hard problem studied in its own right. But in this context,
+    because we’re learning how to learn, straightforward *generalization* (the key
+    property of ML that lets us learn on a training set and then perform well on previously
+    unseen examples) provides for transfer learning!!
+  prefs: []
+  type: TYPE_NORMAL
+- en: We witnessed a remarkable degree of transfer, with for example the LSTM optimizer
+    trained on 12,288 parameter neural art tasks being able to generalize to tasks
+    with 49,512 parameters, different styles, and different content images all at
+    the same time. We observed similar impressive results when transferring to different
+    architectures in the MNIST task.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Learning how to learn
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Thinking functionally, here’s my mental model of what’s going on… In the beginning,
+    you might have hand-coded a classifier function, *c*, which maps from some *Input*
+    to a *Class*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'With machine learning, we figured out for certain types of functions it’s better
+    to learn an implementation than try and code it by hand. An optimisation function
+    *f* takes some *TrainingData* and an existing classifier function, and returns
+    an updated classifier function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: What we’re doing now is saying, “well, if we can learn a function, why don’t
+    we learn *f* itself?”
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let *ϕ* be the (to be learned) update rule for our (optimiser) optimiser. We
+    need to evaluate how effective *g* is over a number of iterations, and for this
+    reason *g* is modelled using a recurrent neural network (LSTM). The state of this
+    network at time *t* is represented by *h[t]*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Suppose we are training *g* to optimise an optimisation function *f*. Let *g(ϕ)*
+    result in a learned set of parameters for *f θ*, The loss function for training
+    *g(ϕ)* uses as *its* expected loss the expected loss of *f* as trained by *g(ϕ)*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can minimise the value of *L(ϕ)* using gradient descent on *ϕ*.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/dc6f1a42cb394731cee484c638eb1562.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: To scale to tens of thousands of parameters or more, the optimiser network *m*
+    operators coordinatewise on the parameters of the objective function, similar
+    to update rules like RMSProp and ADAM. The update rule for each coordinate is
+    implemented using a 2-layer LSTM network using a forget-gate architecture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The network takes as input the optimizee gradient for a single coordinate as
+    well as the previous hidden state and outputs the update for the corresponding
+    optimise parameter. We refer to this architecture as an LSTM optimiser.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/60dbbf12f986b7226c7a994f530dfa64.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Learned learners in action
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We compare our trained optimizers with standard optimisers used in Deep Learning:
+    SGD, RMSprop, ADAM, and Nesterov’s accelerated gradient (NAG). For each of these
+    optimizers and each problem we tuned the learning rate, and report results with
+    the rate that gives the best final error for each problem.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Optimisers were trained for 10-dimensional quadratic functions, for optimising
+    a small neural network on MNIST, and on the CIFAR-10 dataset, and on learning
+    optimisers for neural art (see e.g. [Texture Networks](https://blog.acolyer.org/2016/09/23/texture-networks-feed-forward-synthesis-of-textures-and-stylized-images/)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here’s a closer look at the performance of the trained LSTM optimiser on the
+    Neural Art task vs standard optimisers:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/113b9f3e96768859a22125e4ac49fdb3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And because they’re pretty… here are some images styled by the LSTM optimiser!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/795d9f37ab45ae6f1c60d68fb066c386.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A system model and learned components
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So there you have it. It seems that in the not-too-distant future, the state-of-the-art
+    will involve the use of learned optimisers, just as it involves the use of learned
+    feature representations today. This appears to be another crossover point where
+    machines can design algorithms that outperform those of the best human designers.
+    And of course, there’s something especially potent about learning learning algorithms,
+    because better learning algorithms accelerate learning…
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this paper, the authors explored how to build a function *g* to optimise
+    an function *f*, such that we can write:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![f'' = g(d,f)](../Images/011c40a0178f1353ec2e4c14e0f378e1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: where *d* is some training data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When expressed this way, it also begs the obvious question what if I write:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![g'' = g(d, g)](../Images/885d6bc0d2779eff6ccd89c8a2d9097d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'or go one step further using the Y-combinator to find a fixed point:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![g'' = Y g](../Images/7f5509479a0e372c7c4f225a5c3e35b7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Food for thought...
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Adrian Colyer](https://twitter.com/adriancolyer)** was CTO of SpringSource,
+    then CTO for Apps at VMware and subsequently Pivotal. He is now a Venture Partner
+    at Accel Partners in London, working with early stage and startup companies across
+    Europe. *If you’re working on an interesting technology-related business he would
+    love to hear from you: you can reach him at acolyer at accel dot com*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://blog.acolyer.org/2017/01/04/learning-to-learn-by-gradient-descent-by-gradient-descent/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Concise Overview of Standard Model-fitting Methods](/2016/05/concise-overview-model-fitting-methods.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deep Learning in Neural Networks: An Overview](/2016/04/deep-learning-neural-networks-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Artificial Intelligence and Life in 2030](/2016/12/artificial-intelligence-life-2030.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Concepts You Should Know About Gradient Descent and Cost Function](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Back To Basics, Part Dos: Gradient Descent](https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Gradient Descent: The Mountain Trekker''s Guide to Optimization with…](https://www.kdnuggets.com/gradient-descent-the-mountain-trekker-guide-to-optimization-with-mathematics)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Vanishing Gradient Problem: Causes, Consequences, and Solutions](https://www.kdnuggets.com/2022/02/vanishing-gradient-problem.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn Deep Learning by Building 15 Neural Network Projects in 2022](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,570 @@
+- en: Interpretable Neural Networks with PyTorch
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Interpretable Neural Networks With PyTorch](../Images/5ba5c52449e7cf37809764fe94987d2c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Photo by [Jan Schulz # Webdesigner Stuttgart](https://unsplash.com/@wombat?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are several approaches to rate machine learning models, two of them being
+    **accuracy** and **interpretability**. A model with high accuracy is what we usually
+    call a *good* model, it learned the relationship between the inputs *X* and outputs *y* well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If a model has high interpretability or explainability, we understand how the
+    model makes a prediction and how we can **influence** this prediction by changing
+    input features. While it is hard to say how the output of a deep neural network
+    behaves when we increase or decrease a certain feature of the input, for a linear
+    model it is extremely easy: if you increase the feature by one, the output increases
+    by the coefficient of that feature. Easy.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, you have probably often heard something like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: “There are interpretable models an there are well-performing models.” — someone
+    who doesn’t know it better
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: However, if you have read my article about the [Explainable Boosting Machine](https://github.com/interpretml/interpret) (EBM),
+    then you already know that this is not true. The EBM is an example of a model
+    that has a great performance while being interpretable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**The Explainable Boosting Machine**](https://towardsdatascience.com/the-explainable-boosting-machine-f24152509ebb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For my old article, I created the following figure displaying how we can place
+    some models in the *interpretability-accuracy space*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Interpretable Neural Networks With PyTorch](../Images/62ba27e46c8b8ea08845bc506f6bd858.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In particular, I placed the deep neural networks (omitting the *deep*) more
+    in the** very accurate, but hard to explain** region. Sure, you can mitigate the
+    interpretability issue to some extent by using libraries like [shap](https://github.com/slundberg/shap) or [lime](https://github.com/marcotcr/lime),
+    but these approaches come with their own set of assumptions and problems. So,
+    let us take another path and create a neural network architecture that is interpretable
+    by design in this article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Disclaimer:*** *The architecture that I am about to present just came to
+    my mind. I do not know if there is literature about it already, at least I could
+    not find anything. But if you know of any paper that does what I am doing here,
+    please let me know! I will put it in the references then.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Interpretable Architecture Idea
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '*Please note that I expect that you know how feedforward neural networks work.
+    I will not give a full introduction here because there are many great resources
+    about it already.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Consider the following toy neural network, having three input nodes *x*₁, *x*₂, *x*₃,
+    a single output node *ŷ*, and three hidden layers with six nodes each. I omitted
+    bias terms here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Interpretable Neural Networks With PyTorch](../Images/73ca1116db1a3c9fe17827a150296371.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The problem with this architecture for interpretability is that the inputs get
+    all completely mixed together because of the fully connected layers. Each single
+    input node influences all hidden layer nodes, and this influence gets more complicated
+    the deeper we go into the network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Inspiration by Trees
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: It is usually the same for tree-based models because a decision tree can potentially
+    use every feature to create a split if we do not restrict it. For example, standard
+    gradient boosting and its derivations like [XGBoost](https://xgboost.readthedocs.io/en/stable/), [LightGBM](https://lightgbm.readthedocs.io/en/latest/),
+    and [CatBoost](https://catboost.ai/) are not really interpretable on their own.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, you can make gradient boosting interpretable by using **decision trees
+    that only depend on a single feature**, as done with the EBM (read my article
+    about it! ????).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Restricting the trees like this does not hurt the performance too much in many
+    cases, but enables us to visualize the feature impacts like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Interpretable Neural Networks With PyTorch](../Images/6010d7abeb3804d7d84a7e363a4dcfc6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The output of **interpretml**’s show function. Image by the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Just take a look at the top part of the graphic with the blue line. It shows
+    the impact of feature_4 on the output in some regression problem. On the *x*-axis,
+    you can see the range of feature_4\. The *y*-axis shows the **Score**, which is
+    the value by how much the output is changed. The histogram below shows you the
+    distribution of feature_4.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can see the following from the graphic:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If feature_4 is about 0.62, the output increases by about 10 compared to feature_4
+    being 0.6 or 0.65.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If feature_4 is larger than 0.66, the impact on the output is negative.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Changing feature_4 in the range 0.4 to 0.56 a bit does change the output much.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The final prediction of the model is then just the sum of the different feature
+    scores. This behavior is similar to Shapley values but without the need to compute
+    them. Great, right? Now, let me show you how we can do the same for neural networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Remove Edges
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'So, if the problem is that the inputs of the neural network get scattered all
+    around the hidden layers because of too many edges, let us just remove some. In
+    particular, we have to remove edges that allow information of one feature to flow
+    to another feature. Deleting only these *spilling edges*, the toy neural network
+    from above becomes:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Interpretable Neural Networks With PyTorch](../Images/e9f1afaa6b7136c25c2db9c8e15edef7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We created three separate **blocks** for the three input variables, each block
+    being a fully connected network with a single partial output *ŷᵢ . *As the last
+    step, these* ŷᵢ *are summed, and a bias (omitted in the graphic) is added to produce
+    the final output *ŷ*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We introduced the partial outputs to be able to create the same kind of plots
+    that the EBM allows. One single block in the picture above allows for one plot: *xᵢ *goes
+    in*, ŷᵢ *comes out. We will see how to do this later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here we already have the complete architecture! I think it is quite easy to
+    understand it in theory, but let us also implement it. In this way, you are happy
+    because you can employ neural networks, and the business is happy because the
+    neural networks are interpretable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Implementation in PyTorch
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: I do not expect that you are completely familiar with [PyTorch](https://pytorch.org/),
+    so I will explain some basics on the way that will help you understand our custom
+    implementation. If you know the PyTorch basics, you can skip the **Fully Connected
+    Layers** section. If you have not installed PyTorch, [choose your version here](https://pytorch.org/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fully Connected Layers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'These layers are also known as **linear** in PyTorch or **dense **in [Keras](https://keras.io/).
+    They connect *n* input nodes to *m* output nodes using *nm* edges with multiplication
+    weights. This is basically a matrix multiplication plus an addition of a bias
+    term, as you can see in the following two code snippets:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is how you can create fully connected layers and apply them to PyTorch
+    tensors. You can get the matrix that is used for the multiplication via `linear_layer.weight` and
+    the bias via `linear_layer.bias` . Then you can do
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Nice, it’s the same! Now, the great part about PyTorch, Keras, and co. is that
+    you can stack many of these layers together to create a neural network. In PyTorch,
+    you can achieve this stacking via `torch.nn.Sequential` . To recreate the dense
+    network from above, you could do a simple
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '***Note:**** I have not shown you how to train this network so far, it is just
+    the definition of the architecture, including the initialization of the parameters.
+    But you can feed the network three dimensional inputs and receive one dimensional
+    outputs.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Since we want to create our own layer, let us practice with something easy
+    first: recreating PyTorch’s `Linear` layer. Here is how you can do it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: This code deserved some explanation. In the first bold block, we introduce the
+    weights of the linear layer by
+  prefs: []
+  type: TYPE_NORMAL
+- en: creating a PyTorch tensor (containing all zeroes, but this does not matter)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: registering it as a learnable parameter to the layer meaning that gradient descent
+    can update it during the training, and then
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: initializing the parameters.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Initializing parameters of a neural network is a whole topic on its own, so
+    we will not go down the rabbit hole. If it bothers you too much, you can also
+    initialize it differently, for example via using a standard normal distribution `torch.randn(out_features,
+    in_features)` , but chances are that training is slower then. Anyway, we do the
+    same for the bias.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then, the layer needs to know the mathematical operations it should perform
+    in the `forward` method. This is just the linear operation, i.e. a matrix multiplication
+    and addition of the bias.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Okay, now we are ready to implement the layer for our interpretable neural network!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Block Linear Layers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We now design a `BlockLinear` layer that we will use in the following way:
+    First, we start with *n* features. The `BlockLinear` layer should then create *n* blocks
+    consisting of *h* hidden neurons. To simplify things, *h* is the same in each
+    block, but you can generalize this of course. In total, the first hidden layer
+    will consist of *nh* neurons, but also only *nh* edges are connected to them (instead
+    of *n*²*h *for a fully connected layer)*. *To understand it better, see the picture
+    from above again. here, *n *= 3, *h *= 2.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Interpretable Neural Networks With PyTorch](../Images/850b88736969d2cad733483126d2b29b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then — after using some non-linearity like ReLU — we will put another `BlockLinear` layer
+    behind this one because the different blocks should not be merged again. We repeat
+    this a lot until we use a `Linear` layer at the end to tie everything up again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Implementation of the Block Linear Layer
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let us get to the code. It is quite similar to our custom-made linear layer,
+    so the code should not be too intimidating.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: I highlighted a few lines again. The first bold lines are similar to what we
+    have seen in our homemade linear layer, just repeated `n_blocks` times. This creates
+    an independent linear layer for each block.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the forward method, we get an `x` as a single tensor that we have to split
+    into blocks again first using `torch.split`. As an example, a block size of 2
+    does the following: `[1, 2, 3, 4, 5, 6] -> [1, 2], [3, 4], [5, 6]`. We then apply
+    the independent linear transformations to the different blocks, and glue the results
+    together using `torch.cat`. Done!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training the Interpretable Neural Network
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now, we have all the ingredients to define our interpretable neural network.
+    We just have to create a dataset first:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can see that we deal with a three-dimensional dataset consisting of a thousand
+    samples here. The true relationship is linear if you square feature 1 and cube
+    feature 2 — and this is what we want to recover with our model! So, let us define
+    a small model that should be able to capture this relationship.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'I split the model into two steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Computing the partial outputs *ŷᵢ *with `self.features` and then
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Compute the final prediction *ŷ *as a weighted sum of the* ŷᵢ *with `self.lr` .
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This makes it easier to extract the feature explanations. In the definition
+    of `self.features` you can see that we create a neural network with three blocks
+    because we have three features in the dataset. For each block, we create many
+    hidden layers with 20 neurons per block.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, we can create a simple training loop:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Basically, we choose Adam as an optimizer, the MSE as the loss, and then do
+    standard gradient descent, i.e. erase old gradient with `optimzer.zero_grad()` ,
+    compute the predictions, compute the loss, differentiate the loss via `loss.backward()` and
+    update the model parameters via `optimizer.step()` . You can see the training
+    loss decline over time. We do not care about validation or test sets here. The **training** *r*²
+    should be larger than 0.95 at the end.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can now print the model explanations via
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: and get
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Interpretable Neural Networks With PyTorch](../Images/21a485232a93af651ab9510e4408481f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Interpretable Neural Networks With PyTorch](../Images/7d728428c5301fd14a4a70d1ca9995b6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Interpretable Neural Networks With PyTorch](../Images/3109aaf24d8963643432d4720e885970.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Images by the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This looks pretty neat! The model figures out that the impact of feature 1 is
+    linear, the impact of feature 2 is quadratic and the impact of feature 3 is cubic.
+    And not only that, **the model is able to show it to us**, which is the great
+    thing about the whole construction!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**You can even throw the network away and make predictions solely based on
+    these charts!**'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: As an example, let us estimate the output of the network for *x* = (2, -2, 0).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*x*₁ = 2 translates into a **+5** for the prediction, based on the first figure.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*x*₂ = -2 translates to a **+9** for the prediction, based on the second figure.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*x*₃ = 0 translates to a **+0** for the prediction, based on the third figure.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: There is still a **bias** from the last linear layer that you can access via `model.get_submodule('lr').bias` this
+    has to be added as well, but it should be small.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In total, your prediction should be around *ŷ ***≈ **5 + 9 + 0 + bias **≈ **14,
+    which is fairly accurate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can also see what you have to do to minimize the output: choose small values
+    for feature 1, values close to zero for feature 2, and small values for feature
+    3\. This is something that you usually cannot see just looking at the neural network,
+    but with the score functions, we can. That is one huge benefit of interpretability.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note that the learned score functions from above can only be confident for
+    regions where we **actually had training data**. In our dataset, we actually only
+    observed values between -3 and 3 for each feature. Therefore, we can see that
+    we did not get perfect *x*² and *x*³ polynomials on the edges. But I think it
+    is still impressive that the directions of the graphs are about right. To fully
+    appreciate this, compare it to the results of the EBM:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Interpretable Neural Networks With PyTorch](../Images/6f653b465a72e7ced37b73d08bc971a9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Interpretable Neural Networks With PyTorch](../Images/64cb4eb2acb266b653ac6cc856e9f59d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Images by the author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The curves are blocky, and the extrapolation is just a straight line to both
+    sides, which is one of the main disadvantages of tree-based methods.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In this article, we have talked about the interpretability of models, and how
+    neural networks and gradient boosting fail to deliver it. While the authors of
+    the interpretml package created the EBM, an interpretable gradient boosting algorithm,
+    I presented to you a method to create interpretable neural networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have then implemented it in PyTorch, which was a bit code-heavy, but nothing
+    too crazy. As for the EBM, we could extract the learned score functions per feature
+    that we can even use to make predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The actual trained model is not even necessary anymore, which makes it possible
+    to deploy and use it on weak hardware. **This is because we only have to store
+    one lookup table per feature, which is light on memory. Using a grid size of *g* per
+    lookup table results in **storing only *O*(*n*_features * *g*) elements** instead
+    of potentially millions or even billions of model parameters. Making predictions
+    is cheap as well: just add some numbers from the lookup tables. Since this has
+    a **time complexity of only** ***O*(*n*_features)** lookups and additions, it
+    is much faster than a forward pass through the network.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Disclaimer again:**** I am not sure if this is a novel idea, but here it
+    is anyway! If you know of any paper that explained the same idea, please leave
+    me a message and I will reference it.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: I hope that you learned something new, interesting, and useful today. Thanks
+    for reading!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**As the last point, if you**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**want to support me in writing more about machine learning and**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**plan to get a Medium subscription anyway,**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**why not do it **[**via this link**](https://dr-robert-kuebler.medium.com/membership)**?
+    This would help me a lot! ????**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*To be transparent, the price for you does not change, but about half of the
+    subscription fees go directly to me.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Thanks a lot, if you consider supporting me!**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have any questions, write me on [LinkedIn](https://www.linkedin.com/in/dr-robert-k%C3%BCbler-983859150/)!
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**[Dr. Robert Kübler](https://www.linkedin.com/in/robert-kuebler/)** is a Data
+    Scientist at Publicis Media and Author at Towards Data Science.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/interpretable-neural-networks-with-pytorch-76f1c31260fe).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a Convolutional Neural Network with PyTorch](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Simple Things to Try Before Neural Networks](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deep Neural Networks Don''t Lead Us Towards AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Image Classification with Convolutional Neural Networks (CNNs)](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Comprehensive Survey on Trustworthy Graph Neural Networks:…](https://www.kdnuggets.com/2022/05/comprehensive-survey-trustworthy-graph-neural-networks-privacy-robustness-fairness-explainability.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

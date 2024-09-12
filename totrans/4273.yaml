@@ -1,0 +1,596 @@
+- en: Easy MLOps with PyCaret + MLflow
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/05/easy-mlops-pycaret-mlflow.html](https://www.kdnuggets.com/2021/05/easy-mlops-pycaret-mlflow.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Moez Ali](https://www.linkedin.com/in/profile-moez/), Founder & Author
+    of PyCaret**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyCaret
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: PyCaret is an open-source, low-code machine learning library and end-to-end
+    model management tool built-in Python for automating machine learning workflows.
+    It is known for its ease of use, simplicity, and ability to quickly and efficiently
+    build and deploy end-to-end ML prototypes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyCaret is an alternate low-code library that can replace hundreds of code lines
+    with few lines only. This makes the experiment cycle exponentially fast and efficient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/48d26d1892bf6f19a4e20b29cf8128a7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: PyCaret — An open-source, low-code machine learning library in Python
+  prefs: []
+  type: TYPE_NORMAL
+- en: To learn more about PyCaret, you can check out their [GitHub](https://www.github.com/pycaret/pycaret).
+  prefs: []
+  type: TYPE_NORMAL
+- en: MLflow
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'MLflow is an open-source platform to manage the ML lifecycle, including experimentation,
+    reproducibility, deployment, and a central model registry. MLflow currently offers
+    four components:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5a119b2d388f3596808e1616d53c3332.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: MLflow is an open-source platform to manage ML lifecycle
+  prefs: []
+  type: TYPE_NORMAL
+- en: To learn more about MLflow, you can check out [GitHub](https://github.com/mlflow/mlflow).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Installing PyCaret
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Installing PyCaret is very easy and takes only a few minutes. We strongly recommend
+    using a virtual environment to avoid potential conflicts with other libraries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyCaret’s default installation is a slim version of pycaret that only installs
+    hard dependencies [listed here](https://github.com/pycaret/pycaret/blob/master/requirements.txt).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: When you install the full version of pycaret, all the optional dependencies
+    as [listed here](https://github.com/pycaret/pycaret/blob/master/requirements-optional.txt) are
+    also installed. MLflow is part of PyCaret’s dependency and hence does not need
+    to be installed separately.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Let’s get started
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Before I talk about MLOps, let’s talk a little bit about the machine learning
+    lifecycle at a high level:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/574b97366435d88f6dca131eb00130bc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Machine Learning Life Cycle — Image by Author (Read from left-to-right)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Business Problem — **This is the first step of the machine learning workflow.
+    It may take from few days to a few weeks to complete, depending on the use case
+    and complexity of the problem. It is at this stage, data scientists meet with
+    subject matter experts (SME’s) to gain an understanding of the problem, interview
+    key stakeholders, collect information, and set the overall expectations of the
+    project.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Data Sourcing & ETL — **Once the problem understanding is achieved, it then
+    comes to using the information gained during interviews to source the data from
+    the enterprise database.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Exploratory Data Analysis (EDA) — **Modeling hasn’t started yet. EDA is where
+    you analyze the raw data. Your goal is to explore the data and assess the quality
+    of the data, missing values, feature distribution, correlation, etc.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Data Preparation — **Now it’s time to prepare the data model training. This
+    includes things like dividing data into a train and test set, imputing missing
+    values, one-hot-encoding, target encoding, feature engineering, feature selection,
+    etc.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Model Training & Selection — **This is the step everyone is excited about.
+    This involves training a bunch of models, tuning hyperparameters, model ensembling,
+    evaluating performance metrics, model analysis such as AUC, Confusion Matrix,
+    Residuals, etc, and finally selecting one best model to be deployed in production
+    for business use.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Deployment & Monitoring — **This is the final step which is mostly about
+    MLOps. This includes things like packaging your final model, creating a docker
+    image, writing the scoring script, and then making it all work together, and finally
+    publish it as an API that can be used to obtain predictions on the new data coming
+    through the pipeline.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The old way of doing all this is pretty cumbersome, long, and requires a lot
+    of technical know-how and I possibly cannot cover it in one tutorial. However,
+    in this tutorial, I will use PyCaret to demonstrate how easy it has become for
+    a data scientist to do all this very efficiently. Before we get to the practical
+    part, let’s talk a little bit more about MLOps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? **What is MLOps?**
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: MLOps is an engineering discipline that aims to combine machine learning development
+    i.e. experimentation (model training, hyperparameter tuning, model ensembling,
+    model selection, etc.), normally performed by Data Scientist with ML engineering
+    and operations in order to standardize and streamline the continuous delivery
+    of machine learning models in production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you are an absolute beginner, chances are you have no idea what I am talking
+    about. No worries. Let me give you a simple, non-technical definition:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*MLOps are bunch of technical engineering and operational tasks that allows
+    your machine learning model to be used by other users and applications accross
+    the organization. Basically, it’s a way through which your work i.e. *machine
+    learning models* are published online, so other people can use them and satisfy
+    some business objectives.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This is a very toned-down definition of MLOps. In reality, it involved a little
+    more work and benefits than this but it’s a good start for you if you are new
+    to all this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let’s follow the same workflow as shown in the diagram above to do a practical
+    demo, make sure you have pycaret installed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Business Problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For this tutorial, I will be using a very popular case study by Darden School
+    of Business, published in [Harvard Business](https://hbsp.harvard.edu/product/UV0869-PDF-ENG).
+    The case is regarding the story of two people who are going to be married in the
+    future. The guy named *Greg *wanted to buy a ring to propose to a girl named *Sarah*.
+    The problem is to find the ring Sarah will like, but after a suggestion from his
+    close friend, Greg decides to buy a diamond stone instead so that Sarah can decide
+    her choice. Greg then collects data of 6000 diamonds with their price and attributes
+    like cut, color, shape, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this tutorial, I will be using a dataset from a very popular case study by
+    the Darden School of Business, published in [Harvard Business](https://hbsp.harvard.edu/product/UV0869-PDF-ENG).
+    The goal of this tutorial is to predict the diamond price based on its attributes
+    like carat weight, cut, color, etc. You can download the dataset from [PyCaret’s
+    repository](https://github.com/pycaret/pycaret/tree/master/datasets).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/1bbc59a2d6702dd81534c9c427e52c4d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample rows from data
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Exploratory Data Analysis
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s do some quick visualization to assess the relationship of independent
+    features (weight, cut, color, clarity, etc.) with the target variable i.e. `Price`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/0486a3f02669c1a23e0d30691c1233da.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sarah gets a diamond case study
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s check the distribution of the target variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/a3d15e5315a513dc501fd5ab2f0aa2f7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Notice that distribution of `Price` is right-skewed, we can quickly check to
+    see if log transformation can make `Price` approximately normal to give fighting
+    chance to algorithms that assume normality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/299bdf04ca0020b55f4120689c1d1b9d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This confirms our hypothesis. The transformation will help us to get away with
+    skewness and make the target variable approximately normal. Based on this, we
+    will transform the `Price` variable before training our models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Data Preparation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Common to all modules in PyCaret, the `setup` is the first and the only mandatory
+    step in any machine learning experiment using PyCaret. This function takes care
+    of all the data preparation required prior to training models. Besides performing
+    some basic default processing tasks, PyCaret also offers a wide array of pre-processing
+    features. To learn more about all the preprocessing functionalities in PyCaret,
+    you can see this [link](https://pycaret.org/preprocessing/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/c4b6ef208abe74f5d368e297b87a1caa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: setup function in pycaret.regression module
+  prefs: []
+  type: TYPE_NORMAL
+- en: When you initialize the `setup` function in PyCaret, it profiles the dataset
+    and infers the data types for all input features. If all data types are correctly
+    inferred, you can press enter to continue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Notice that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have passed `log_experiment = True` and `experiment_name = 'diamond'` , this
+    will tell PyCaret to automatically log all the metrics, hyperparameters, and model
+    artifacts behind the scene as you progress through the modeling phase. This is
+    possible due to integration with [MLflow](https://www.mlflow.org/).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Also, I have used `transform_target = True` inside the `setup`. PyCaret will
+    transform the `Price` variable behind the scene using box-cox transformation.
+    It affects the distribution of data in a similar way as log transformation *(technically
+    different)*. If you would like to learn more about box-cox transformations, you
+    can refer to this [link](https://onlinestatbook.com/2/transformations/box-cox.html).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/f6aa688f11e00b54c059f25ab6843484.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from setup — truncated for display
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Model Training & Selection
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that data is ready for modeling, let’s start the training process by using `compare_models` function.
+    It will train all the algorithms available in the model library and evaluates
+    multiple performance metrics using k-fold cross-validation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/41baf2d435d40f90de71f5b91cd2bfde.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from compare_models
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/c49ca96d21bd91b035cedc2744d024ba.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Residuals and QQ-Plot of the best model
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/8c94f981a80372937c05792703bb4e8c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Finalize and Save Pipeline
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s now finalize the best model i.e. train the best model on the entire dataset
+    including the test set and then save the pipeline as a pickle file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '`save_model` function will save the entire pipeline (including the model) as
+    a pickle file on your local disk. By default, it will save the file in the same
+    folder as your Notebook or script is in but you can pass the complete path as
+    well if you would like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: ???? Deployment
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Remember we passed `log_experiment = True` in the setup function along with `experiment_name
+    = ''diamond''` . Let’s see the magic PyCaret has done with the help of MLflow
+    behind the scene. To see the magic let’s initiate the MLflow server:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now open your browser and type “localhost:5000”. It will open a UI like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1e2e7957f01c5bbd2c9740e76846633f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: https://localhost:5000
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Each entry in the table above represents a training run resulting in a trained
+    Pipeline and a bunch of metadata such as DateTime of a run, performance metrics,
+    model hyperparameters, tags, etc. Let’s click on one of the models:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e040d08c4a600f7e57204c385dfbd2f1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Part I — CatBoost Regressor
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e8add025c91932275b9b8cc072c9c54c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Part II — CatBoost Regressor (continued)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4187074323f4bacb809ba5e2800c3cf9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Part II — CatBoost Regressor (continued)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice that you have an address path for the `logged_model`. This is the trained
+    Pipeline with Catboost Regressor. You can read this Pipeline using the `load_model` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/6eab8c9fade1aba3516d78e43d2b540b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Output from print(pipeline)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s now use this Pipeline to generate predictions on the new data
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/d379a560bd8216bfdfa7c0ec0cc9a2be.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Predictions generated from Pipeline
+  prefs: []
+  type: TYPE_NORMAL
+- en: Woohoo! We now have inference from our trained Pipeline. Congrats, if this is
+    your first one. Notice that all the transformations such as target transformation,
+    one-hot-encoding, missing value imputation, etc. happened behind the scene automatically.
+    You get a data frame with prediction in actual scale, and this is what you care
+    about.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Coming Soon!
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: What I have shown today is one out of many ways you can serve trained Pipelines
+    from PyCaret in production with the help of MLflow. In the next tutorial, I plan
+    to show how you can using MLflow native serving functionalities to register your
+    models, version them and serve as an API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is no limit to what you can achieve using this lightweight workflow automation
+    library in Python. If you find this useful, please do not forget to give us ⭐️
+    on our GitHub repository.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To hear more about PyCaret follow us on [LinkedIn](https://www.linkedin.com/company/pycaret/) and [Youtube](https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Join us on our slack channel. Invite link [here](https://join.slack.com/t/pycaret/shared_invite/zt-p7aaexnl-EqdTfZ9U~mF0CwNcltffHg).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You may also be interested in:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Build your own AutoML in Power BI using PyCaret 2.0](https://towardsdatascience.com/build-your-own-automl-in-power-bi-using-pycaret-8291b64181d)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploy Machine Learning Pipeline on Azure using Docker](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-cloud-using-docker-container-bec64458dc01)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploy Machine Learning Pipeline on Google Kubernetes Engine](https://towardsdatascience.com/deploy-machine-learning-model-on-google-kubernetes-engine-94daac85108b)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploy Machine Learning Pipeline on AWS Fargate](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-aws-fargate-eb6e1c50507)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Build and deploy your first machine learning web app](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploy PyCaret and Streamlit app using AWS Fargate serverless](https://towardsdatascience.com/deploy-pycaret-and-streamlit-app-using-aws-fargate-serverless-infrastructure-8b7d7c0584c2)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Build and deploy machine learning web app using PyCaret and Streamlit](https://towardsdatascience.com/build-and-deploy-machine-learning-web-app-using-pycaret-and-streamlit-28883a569104)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploy Machine Learning App built using Streamlit and PyCaret on GKE](https://towardsdatascience.com/deploy-machine-learning-app-built-using-streamlit-and-pycaret-on-google-kubernetes-engine-fd7e393d99cb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Important Links
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Documentation](https://pycaret.readthedocs.io/en/latest/installation.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Blog](https://medium.com/@moez_62905)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[GitHub](https://www.github.com/pycaret/pycaret)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[StackOverflow](https://stackoverflow.com/questions/tagged/pycaret)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Install PyCaret](https://pycaret.readthedocs.io/en/latest/installation.html)
+    [Notebook Tutorials](https://pycaret.readthedocs.io/en/latest/tutorials.html)
+    [Contribute in PyCaret](https://pycaret.readthedocs.io/en/latest/contribute.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Want to learn about a specific module?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Click on the links below to see the documentation and working examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Classification](https://pycaret.readthedocs.io/en/latest/api/classification.html)
+    [Regression](https://pycaret.readthedocs.io/en/latest/api/regression.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Clustering](https://pycaret.readthedocs.io/en/latest/api/clustering.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Anomaly Detection](https://pycaret.readthedocs.io/en/latest/api/anomaly.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing](https://pycaret.readthedocs.io/en/latest/api/nlp.html)
+    [Association Rule Mining](https://pycaret.readthedocs.io/en/latest/api/arules.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Moez Ali](https://www.linkedin.com/in/profile-moez/)** is a Data Scientist,
+    and is Founder & Author of PyCaret.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/easy-mlops-with-pycaret-mlflow-7fbcbf1e38c6).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Multiple Time Series Forecasting with PyCaret](/2021/04/multiple-time-series-forecasting-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploy a Machine Learning Pipeline to the Cloud Using a Docker Container](/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GitHub is the Best AutoML You Will Ever Need](/2020/08/github-best-automl-ever-need.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Package and Distribute Machine Learning Models with MLFlow](https://www.kdnuggets.com/2022/08/package-distribute-machine-learning-models-mlflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Binary Classification with PyCaret](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Clustering in Python with PyCaret](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Announcing PyCaret 3.0: Open-source, Low-code Machine Learning in Python](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyCaret](https://www.kdnuggets.com/2022/11/getting-started-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

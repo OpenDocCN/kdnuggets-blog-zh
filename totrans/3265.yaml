@@ -1,0 +1,275 @@
+- en: 'Train your Deep Learning Faster: FreezeOut'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/08/train-deep-learning-faster-freezeout.html](https://www.kdnuggets.com/2017/08/train-deep-learning-faster-freezeout.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Deep neural networks have many, many learnable parameters that are used to
+    make inferences. Often, this poses a problem in two ways: Sometimes, the model
+    does not make very accurate predictions. It also takes a long time to train them.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In a previous post, we covered [Train your Deep Learning model faster and sharper:
+    Snapshot Ensembling — M models for the cost of 1](/2017/08/train-deep-learning-faster-snapshot-ensembling.html).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This post talks about reducing training time with little or no impact on accuracy
+    using a novel method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[FreezeOut — Training Acceleration by Progressively Freezing Layers](https://arxiv.org/pdf/1706.04983.pdf)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The authors of this paper propose a method to increase training speed by freezing
+    layers. They experiment with a few different ways of freezing the layers, and
+    demonstrate the training speed up with little(or none) effect on accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What does Freezing a Layer mean?
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Freezing a layer prevents its weights from being modified. This technique is
+    often used in **transfer learning, **where the base model(trained on some other
+    dataset)is frozen.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**How does freezing affect the speed of the model?**'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: If you don’t want to modify the weights of a layer, the **backward pass** to
+    that layer can be** completely avoided**, resulting in a significant **speed boost**.
+    For e.g. if half your model is frozen, and you try to train the model, it will
+    take about half the time compared to a fully trainable model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the other hand, you still need to train the model, so if you freeze it too **early**,
+    it will give **inaccurate** predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is the ‘novel’ approach?
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: The authors demonstrated a way to **freeze** the layers one by one as soon as
+    possible, resulting in fewer and fewer backward passes, which in turn lowers training
+    time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At first, the entire model is trainable (exactly like a regular model). After
+    a few iterations the first layer is frozen, and the rest of the model is continued
+    to train. After another few iterations , the next layer is frozen, and so on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Learning Rate Annealing**'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'The authors used learning rate annealing to govern the learning rate of the
+    model. The notably different technique they used was to **change** the learning
+    rate **layer by layer** instead of the whole model. They used the following equation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![learning rate layer by layer](../Images/3ee3d24d4a8960a68c1ed13706be64d5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Equation 2.0: **α** is the learning rate. **t** is the iteration number. ***i*** denotes
+    the ith layer of the model
+  prefs: []
+  type: TYPE_NORMAL
+- en: Equation 2.0 Explanation
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: The sub *i* denotes the ith layer. So *α* sub *i* denotes the learning rate
+    for the ith layer. Similarly , *t[i]* denotes the number of iterations the ith
+    layer has been trained on. *t* denotes the total number of iterations for the
+    whole model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![alpha](../Images/7b2da0a9a0e9eb8a88a5b558cfe03f31.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This denotes the initial learning rate for the ith layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The authors experimented with different values for Equation 2.1
+  prefs: []
+  type: TYPE_NORMAL
+- en: Initial learning rate for Equation 2.1
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: The authors tried scaling the initial learning rate so that each layer was trained
+    for an equal amount of time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Remember that because the first layer of the model would be stopped first, it
+    would be otherwise trained for the least amount of time. To remedy that, they
+    scaled the the learning rate for each layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![linear schedule](../Images/b36a7082533ab3cf8168df5b0e18f6e9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The scaling was done to ensure all the layers’ weights moved equally in the
+    weight space, i.e. the layers that were being trained the longest(the later layers),
+    had a lower learning rate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The authors also played with **cubic scaling**, where the value of t sub i is
+    replaced by its own cube.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Performance vs Error on DenseNet](../Images/eee55845ce5249ed089173cdc233e562.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Fig. 2.1: Performance vs Error on DenseNet'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The authors have included more benchmarks, and their method increases a training
+    speedup of about **20%** at only **3% accuracy** drop, and **15%** at **no drop** in
+    accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Their method does not work very well for models that do not utilize skip connections(such
+    as VGG-16). Neither accuracy not speedups were noticeably different in such networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: My Bonus Trick
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The authors are progressively stopping each layer from being trained, which
+    they then don’t calculate the backward passes for. They seemed to have missed to
+    exploit **precomputing layer activations**. By doing so, you can even prevent
+    calculating the **forward pass.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**What is precomputation**'
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: This is a trick used in transfer learning. This is the general workflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Freeze the layers you don’t want to modify
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Calculate the activations the last layer from the frozen layers(for your entire
+    dataset)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Save those activations to disk
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Use those activations as the input of your trainable layers
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Since the layers are frozen progressively, the new model can now be seen as
+    a standalone model(a smaller model) , that just takes the input of whatever the
+    last layer outputs. This can be done over and over again as each layer is frozen.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Doing this along with **FreezeOut **will result in a further substantial reduction
+    in training time while not affecting other metrics(like accuracy) in any way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I demonstrated 2(and half of my own) very recent and novel techniques to improve
+    accuracy and lower training time by fine tuning learning rates. By also adding
+    pre computation whenever possible, a significant speed boost can be possible using
+    my own proposed method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://hackernoon.com/training-your-deep-model-faster-and-sharper-e85076c3b047).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** Harshvardhan Gupta writes at [HackerNoon](https://hackernoon.com/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Train your Deep Learning model faster and sharper: Snapshot Ensembling — M
+    models for the cost of 1](/2017/08/train-deep-learning-faster-snapshot-ensembling.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DeepSense: A unified deep learning framework for time-series mobile sensing
+    data processing](/2017/08/deepsense-unified-deep-learning-framework-time-series-mobile.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to squeeze the most from your training data](/2017/07/squeeze-most-from-training-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Learn Machine Learning 4X Faster by Participating in Competitions](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why we will always need humans to train AI — sometimes in real-time](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Faster Way to Prepare Time-Series Data with the AI & Analytics Engine](https://www.kdnuggets.com/2021/12/piexchange-faster-way-prepare-timeseries-data-ai-analytics-engine.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[oBERT: Compound Sparsification Delivers Faster Accurate Models for NLP](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

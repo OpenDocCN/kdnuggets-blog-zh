@@ -1,0 +1,277 @@
+- en: 'Text Mining 101: Mining Information From A Resume'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/05/text-mining-information-resume.html](https://www.kdnuggets.com/2017/05/text-mining-information-resume.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Yogesh H. Kulkarni**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1e46e710e41a4018807625084a80b8e8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This article demonstrates a framework for mining relevant entities from a text
+    resume. It shows how separation of parsing logic from entity specification can
+    be achieved. Although only one resume sample is considered here, the framework
+    can be enhanced further to be used not only for different resume formats, but
+    also for documents such as judgments, contracts, patents, medical papers, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Majority of world’s unstructured data is in the textual form. To make sense
+    of it, one must, either go through it painstakingly or employ certain automated
+    techniques to extract relevant information. Looking at the volume, variety and
+    velocity of such textual data, it is imperative to employ Text Mining techniques
+    to extract the relevant information, transforming unstructured data into structured
+    form, so that further insights, processing, analysis, visualizations are possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article deals with a specific domain, of applicant profiles or resumes.
+    They, as we know, come not only in different file formats (txt, doc, pdf, etc.)
+    but also with different contents and layouts. Such heterogeneity makes extraction
+    of relevant information, a challenging task. Even though it may not be possible
+    to fully extract all the relevant information from all the types of formats, one
+    can get started with simple steps and at least extract whatever is possible from
+    some of the known formats.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Broadly there are two approaches: linguistics based and Machine Learning based.
+    In “linguistic” based approaches pattern searches are made to find key information,
+    whereas in “machine learning” approaches supervised-unsupervised methods are used
+    to extract the information. “Regular expression” (RegEx), used here, is one of
+    the “linguistic” based pattern-matching method.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Framework
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A primitive way of implementing entity extraction in a resume could be to write
+    the pattern-matching logic for each entity, in a code-program, monolithically.
+    In case of any change in the patterns, or if there is an introduction of new entities/patterns,
+    one needs to change the code-program. This makes maintenance cumbersome as the
+    complexity increases. To alleviate this problem, separation of parsing-logic and
+    specification of entities is proposed in a framework, which is demonstrated below.
+    Entities and their RegEx patterns are specified in a configuration file. The file
+    also specifies type of extraction method to be used for each type of the entity.
+    Parser uses these patterns to extract entities by the specified method. Advantages
+    of such separation is not just maintainability but also its potential use in other
+    domains such as legal/contracts, medical, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Entities Specification
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The configuration file specifies entities to be extracted along with their patterns
+    and extraction-method. It also specifies the section within which the given entities
+    are to be looked for. Specification shown in the textbox below, describes meta
+    data entities like Name, Phone, Email, etc. Method used to extract them is “univalue_extractor”.
+    Section within which these entities are to be searched is named “”, it’s a non-labelled
+    section, like the initial few lines of the resume. Entities like Email or Phone
+    can have multiple regular-expressions patterns. If first fails then the second
+    one is tried and so on. Here is a brief description of the patterns used:![](../Images/937d2cfcc0a91f8d5f04f640d9c95e1b.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Name: Resume’s first line is assumed to have the Name, with an optional “Name:”
+    prefix.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Email: Is a word (with optional dot in the middle) then “@”, then a word, dot
+    and then a word.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Phone: Optional International code in bracket, then digit pattern of 3-3-4,
+    with optional bracket to the first 3 digits. For India number, it can be hard
+    coded to “+91” as shown in the next entry.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Python’s ‘etree’ ElementTree library is used to parse the config xml into internal
+    dictionary.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Parser reads this specifications’ dictionary and uses it to find entities from
+    the text resume.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Once an entity is matched it is stored as the node-tag, like Email, Phone, etc.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/bc7b59b8a7aa1e02cce29b29f2e87b89.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Like Metadata described above, Educational qualifications can be searched with
+    a config below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Method “section_value_extractor” of the parser is to be used and within section
+    “EducationSection”. It finds value within a section just by matching given words.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If parser finds any of the words, say “10^(th)“ or “X” or “SSC”, then those
+    are the values extracted for the entity “Secondary”, describing Secondary School
+    level education.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If parser finds any of the words, say “12^(th)” or “XII” or “HSC”, then those
+    are the values extracted for the entity “HigherSecondary”, describing Higher Secondary
+    School level education.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Segmentation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The sections mentioned in the above code snippets are blocks of text, labelled
+    such as SummarySection, EducationSection, etc. These are specified at the top
+    of the config file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Method “section_extractor” parses the document line-wise and looks for section
+    headings.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sections are recognised by keywords used for its headings. Say, for SummarySection,
+    keywords are “Summary”, “Aim”, “Objective”, etc.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Once the match is found, state of “SummarySection” is set and further lines
+    are clubbed under it, till the next section is found.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Once the new heading matches, the new state of the next section starts, so on.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/13d7c4500c3acdddd9d67d91bd747c0d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Results**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A sample resume is shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/dee8d6e8b16ef536e15589413a0e257f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/13c4cc7f89cc34b302f3c39ffbb8a36c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Entities extracted are shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Implementation of the parser, along its config file and sample resume can be
+    found at [github](https://github.com/yogeshhk/MiningResume).
+  prefs: []
+  type: TYPE_NORMAL
+- en: End note
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This article demonstrates unearthing of structured information from unstructured
+    data such as a resume. As the implementation is shown only for one sample, it
+    may not work for other formats. One would need to enhance, customize it to cater
+    to the other resume types. Apart from resumes, the parsing-specifications separation
+    framework can be leveraged for the other types of documents from different domains
+    as well, by specifying domain specific configuration files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**![](../Images/9f10d69469cf984ba9ce95b6a4ab4ec7.png)Bio:** [**Yogesh H. Kulkarni**](https://www.linkedin.com/in/yogeshkulkarni/),
+    after working in the field of Geometric Modelling for more than 16 years, has
+    recently finished a PhD in it. He got into Data Sciences while doing the doctoral
+    research and wishes to pursue further career in it now. He is keenly interested
+    in Text Mining, Machine/Deep Learning and primarily uses Python stack for implementations.
+    He would love to hear from you about this article as well as on any such topics,
+    projects, assignments, opportunities, etc.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Using Deep Learning To Extract Knowledge From Job Descriptions](/2017/05/deep-learning-extract-knowledge-job-descriptions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Making sense of text analytics](/2017/02/sas-text-analytics-nyc.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Text Mining Amazon Mobile Phone Reviews: Interesting Insights](/2017/01/data-mining-amazon-mobile-phone-reviews-interesting-insights.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

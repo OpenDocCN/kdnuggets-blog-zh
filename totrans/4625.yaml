@@ -1,0 +1,241 @@
+- en: Annotated Heatmaps of a Correlation Matrix in 5 Simple Steps
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/07/annotated-heatmaps-correlation-matrix.html](https://www.kdnuggets.com/2019/07/annotated-heatmaps-correlation-matrix.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Julia Kho](https://www.linkedin.com/in/juliakho/), Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/173576d640b122ab8d237bb478ac0a09.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A heatmap is a graphical representation of data in which data values are represented
+    as colors. That is, it uses color in order to communicate a value to the reader.
+    This is a great tool to assist the audience towards the areas that matter the
+    most when you have a large volume of data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, I will guide you in creating your own annotated heatmap of
+    a correlation matrix in 5 simple steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Import Data
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Create Correlation Matrix
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Set Up Mask To Hide Upper Triangle
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Create Heatmap in Seaborn
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Export Heatmap
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: You can find the code from this article in my Jupyter Notebook located [here](https://github.com/julia-git/Annotated_Heatmap).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1) Import Data**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![figure-name](../Images/f97def919925e895ad5086eafb1f29dc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This highway accidents data set contains the automobile accident rate, in accidents
+    per million vehicle miles along with several design variables. More information
+    about the data set can be found [here](https://vincentarelbundock.github.io/Rdatasets/doc/carData/Highway1.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2) Create Correlation Matrix**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![figure-name](../Images/56f8258118c8da7c83d736b86d931ed8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We create the correlation matrix with `.corr` . Notice that the htype column
+    is not present in this matrix because it is not numeric. We will need to dummify
+    htype to calculate correlation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![figure-name](../Images/7616e8499fb04acfa67e19fbfbf8226b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In addition, note that the upper triangle half of the correlation matrix is
+    symmetrical to the lower triangle half. Thus, there is no need for our heatmap
+    to show the entire matrix. We’ll hide the upper triangle in the next step.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3) Set Up Mask To Hide Upper Triangle**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s break the above code down. `np.zeros_like()` returns an array of zeros
+    with the same shape and type as the given array. By passing in the correlation
+    matrix, we get an array of zeros like below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/bbe9e925d03cd4c76b00e9ba87512de8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The `dtype=np.bool` parameter overrides the data type, so our array is an array
+    of booleans.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/ccdf90e9d17c450591f64190651840fc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '`np.triu_indices_from(mask)` returns the indices for the upper triangle of
+    the array.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/c8dc6639508b3d880ccdce461332b4ca.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, we set the upper triangle to True.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`mask[np.triu_indices_from(mask)]= True`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/8468d0470df969c9c5dbef7330f52fc7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, we have a mask that we can use to generate our heatmap.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**4) Create Heatmap in Seaborn**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![figure-name](../Images/173576d640b122ab8d237bb478ac0a09.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: To create our heatmap, we pass in our correlation matrix from step 3 and the
+    mask we created in step 4, along with custom parameters to make our heatmap look
+    nicer. Here’s a description of the parameters if you are interested in understanding
+    what each line does.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**5) Export Heatmap**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that you have the heatmap, let’s export it out.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`heatmap.get_figure().savefig(‘heatmap.png’, bbox_inches=’tight’)`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you find that you have a very large heatmap that doesn’t export correctly,
+    use`bbox_inches = ‘tight’` to prevent your image from being cut off.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for reading! Feel free to share heatmaps that you’ve made with your data
+    in the comments below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Julia Kho](https://www.linkedin.com/in/juliakho/)** is a Data Scientist
+    passionate about creative problem solving and telling stories with data. She has
+    previous experience in environmental consulting and working with spatial data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/annotated-heatmaps-in-5-simple-steps-cc2a0660a27d).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PyViz: Simplifying the Data Visualisation Process in Python](/2019/06/pyviz-data-visualisation-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Make your Data Talk!](/2019/06/make-data-talk.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Best Data Visualization Techniques for small and large data](/2019/04/best-data-visualization-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Sparse Matrix Representation in Python](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Idiot''s Guide to Precision, Recall, and Confusion Matrix](https://www.kdnuggets.com/2020/01/guide-precision-recall-confusion-matrix.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Visualizing Your Confusion Matrix in Scikit-learn](https://www.kdnuggets.com/2022/09/visualizing-confusion-matrix-scikitlearn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Convert Text Documents to a TF-IDF Matrix with tfidfvectorizer](https://www.kdnuggets.com/2022/09/convert-text-documents-tfidf-matrix-tfidfvectorizer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Confusion Matrix, Precision, and Recall Explained](https://www.kdnuggets.com/2022/11/confusion-matrix-precision-recall-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Matrix Multiplication for Data Science (or Machine Learning)](https://www.kdnuggets.com/2022/11/matrix-multiplication-data-science-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,196 @@
+- en: Handling Missing Values in Time-series with SQL
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html](https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This morning I read [Madison Schott](https://medium.com/u/3ed0ce2dcf93?source=post_page-----a910b5f481fe--------------------------------)’s [article](https://medium.com/towards-data-science/optimize-your-sql-code-with-this-window-function-409d3341cb20) about
+    the `LAST_VALUE` function, where she highlights the usefulness of this lesser-known
+    SQL function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It inspired me to write a follow-up article about a specific use-case that comes
+    up often when dealing with time-series data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An Example
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Let’s pretend you’re building a predictive maintenance model using sensor data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After some wrangling, you end up with hourly data that looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Example of some preprocessed sensor data
+  prefs: []
+  type: TYPE_NORMAL
+- en: At this point, we’ve already done some pretty significant data engineering in
+    order to create these evenly spaced observations at every hour. *How* to do this
+    is a subject for another article. However, take notice that there are some gaps
+    in the temperature measurements. This is where `LAST_VALUE` comes to the rescue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The reason for the missing values is usually because sensors only report when
+    the value changes. This reduces the amount of data that the machine needs to transmit,
+    but it creates a data problem for us to solve.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Reason Why
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'If we build a model with this data directly, the accuracy is going to suffer
+    when a particular value is missing, because there is no historical context *written
+    into the row itself*. For the most accurate model possible, we should add features
+    such as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Last temperature reading
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Avg temperature over past 6 hours
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Hours since temperature reading increased/decreased
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Rate of change of temperature over past 12 hours
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Handling Missing Values in Time-series with SQL](../Images/c11c4e344b4169f71568aab552a5e120.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: An illustration of the types of features that will be useful for a predictive
+    model
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our very first step should be to replace the missing values with the last known
+    value. The reason we choose to do this *first*, is because the other features
+    will become much easier to create.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, if we leave them missing and try to calculate a rolling average,
+    the average will be calculated incorrectly (it will ignore the missing values
+    and only average the non-missing).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Avg Temp Prior 4 hours (with missing)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: (null + 85 + null + null) / 1 = **85**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Avg Temp Prior 4 hours (replaced)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: (84 + 85 + 85 + 85) / 4 = **84.75**
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to Fix It
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In python, we would start with [forwardfill](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.ffill.html).
+    However, doing this in SQL means that we can take advantage of the power of our
+    data warehouse.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In SQL, we use `LAST_VALUE`. See [this article](https://towardsdatascience.com/optimize-your-sql-code-with-this-window-function-409d3341cb20) for
+    a more in depth explanation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is the syntax:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Result with the missing replaced with LAST_VALUE
+  prefs: []
+  type: TYPE_NORMAL
+- en: There we have it!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Hopefully I’ve been able to shine a light on `LAST_VALUE` and it’s cousin, `FIRST_VALUE` ,
+    which are lesser known SQL Window functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Josh Berry](https://www.linkedin.com/in/joshberry022/)** ([**@Twitter**](https://mobile.twitter.com/itsamejoshabee))
+    leads Customer Facing Data Science at Rasgo and has been in the data and analytics
+    profession since 2008\. Josh spent 10 years at Comcast where he built the data
+    science team and was a key owner of the internally developed Comcast feature store
+    - one of the first feature stores to hit the market. Following Comcast, Josh was
+    a critical leader in building out Customer Facing Data Science at DataRobot. In
+    his spare time Josh performs complex analysis on interesting topics such as baseball,
+    F1 racing, housing market predictions, and more.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/@jberry_33001/handling-missing-values-in-time-series-with-sql-a910b5f481fe).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Machine Learning Is Not Like Your Brain Part 4: The Neuron’s…](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-4-neuron-limited-ability-represent-precise-values.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using SHAP Values for Model Interpretability in Machine Learning](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Datawig, an AWS Deep Learning Library for Missing Value Imputation](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Optimal Way to Input Missing Data with Pandas fillna()](https://www.kdnuggets.com/2023/02/optimal-way-input-missing-data-pandas-fillna.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Identify Missing Data in Time-Series Datasets](https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Semantic Layers are the Missing Piece for AI-Enabled Analytics](https://www.kdnuggets.com/2024/02/cube-semantic-layers-missing-piece-ai-enabled-analytics)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

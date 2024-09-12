@@ -1,0 +1,311 @@
+- en: 'Explaining “Blackbox” Machine Learning Models: Practical Application of SHAP'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/05/explaining-blackbox-machine-learning-models-practical-application-shap.html](https://www.kdnuggets.com/2020/05/explaining-blackbox-machine-learning-models-practical-application-shap.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Norman Niemer](https://www.linkedin.com/in/normanniemer/), Chief Data
+    Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Motivation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: GBM models have been battle-tested as powerful models but have been tainted
+    by the lack explainability. Typically data scientists look at variable importance
+    plots but they are not enough to explain how a model works. To maximize adoption
+    by the model user, use SHAP values to answer common explainability questions and
+    build trust in your models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post, we will train a GBM model on a simple dataset and you will learn
+    how to explain how the model works. The goal here is not to explain how the math
+    works, but to explain to a non-technical user how the input variables are related
+    to the output variable and how predictions are made.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The dataset we are using is the advertising dataset provided by [ISLR](http://faculty.marshall.usc.edu/gareth-james/ISL/) and
+    you can get the code used on [d6t github](http://tiny.cc/d6t-blog-20200426-shapley).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Setup
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: First, build highly effective data science workflows
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As explained in [Top 10 Coding Mistakes Made by Data Scientists](/2019/04/top-10-coding-mistakes-data-scientists.html),
+    to make a highly effective data science workflow, we will be using file manager [d6tpipe](https://github.com/d6t/d6tpipe) and
+    workflow manager [d6tflow](https://github.com/d6t/d6tflow).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Second, don't build a model without having an intuition on what it should do
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As explained in [Top 10 Statistics Mistakes Made by Data Scientists](/2019/06/statistics-mistakes-data-scientists.html),
+    you want to form an economic intuition on how the model should work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The advertising dataset shows sales as a function of advertising spend in TV,
+    radio and newspaper. By looking at the scatter plots, we can tell TV and radio
+    are effective marketing channels because sales is strongly related to spend in
+    those channels. But note that radio has a negative impact while TV has a positive
+    impact (NB we forced a negative relationship with radio). Newspaper seems to only
+    have a marginal impact. Finally, there seems to be an interaction effect between
+    TV and radio.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/91e1202f811974d4cc6613b24e9ab0dd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now train a "black box" ML model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: GBM models have been battle-tested as powerful models but have been tainted
+    by the lack explainability. Lets train the model and see how we can explain it.
+    We will be using [LightGBM](https://lightgbm.readthedocs.io/en/latest/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Why variable importance plots don't work
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'As the name suggests, variable importance plots tells you about the strength
+    of relationship between an input and output variable. But to trust a model, users
+    typically want to know more: is the impact positive/negative, linear/non-linear?
+    Are there times when it works/does not work? They want to see if the model conforms
+    with their economic intuition.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our example, the importance plot does not show newspaper spend with a negative
+    relationship that we established to be there. This would confuse the model user
+    and they would not trust the model based on this plot alone.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/cf2f0e726a61dfb0d37f84d0cce47f6f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Explain the model with SHAP
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[SHAP](https://github.com/slundberg/shap) allows you to see the directional
+    impact of each input on the output variable and this gives the model user the
+    crucial intuition on how the model works.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see, the model indeed shows higher sales for higher TV spend and
+    lower sales for higher radio spend. This is inline with our intuition and gives
+    the model user confidence that your model does the right thing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/90d1d1e5395c7e6ac4014d342b1669c4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can also investigate the "fitted" values in a scatter plot to visualize
+    the relationship between the input and output variable in more detail. This is
+    useful for more complex relationships and understanding interaction effects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case, the relationship is linear and there is an interaction between
+    TV and radio (you can confirm by running OLS and include the `tv_radio` variable).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/e409ed864fa73d1b3f9b9b98b80281bc.png)![Figure](../Images/317eb2b070625a1bcba2a0af0e4309d2.png)![Figure](../Images/85da95a70c69aa54c8ae1501fe42825a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: What about partial dependence plots?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Those work also. The advantage is that their output is in the same scale as
+    the actual target variable. This is unlike Shapley values which show the marginal
+    impact relative to the average forecast.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/b153753d6f8030c2bb65b39391790078.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Explain the latest forecasts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'This is another question commonly encountered in practice: you have trained
+    the model and make a prediction using the latest data. The model user wants to
+    know not just the predicted value but also why your model makes that prediction.
+    SHAP can explain individual predictions and can explain how each input variable
+    contributes to the overall prediction.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here we can see the latest predicted value is [13.18]. TV pushed the prediction
+    up while radio pushed it down. Newspaper barely had an impact. This is inline
+    with what we expected.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/b13cde286009eddb8396686e749ff3d4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Where to learn more?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Understand SHAP
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://github.com/slundberg/shap](https://github.com/slundberg/shap)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://christophm.github.io/interpretable-ml-book/shap.html](https://christophm.github.io/interpretable-ml-book/shap.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Build highly effective data science workflows
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://github.com/d6t/d6t-python/blob/master/blogs/effective-datasci-workflows.rst](https://github.com/d6t/d6t-python/blob/master/blogs/effective-datasci-workflows.rst)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://github.com/d6t/d6tflow-template](https://github.com/d6t/d6tflow-template)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Accelerate data science with Databolt
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://github.com/d6t/d6t-python](https://github.com/d6t/d6t-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[https://www.databolt.tech/](https://www.databolt.tech/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Norman Niemer](https://www.linkedin.com/in/normanniemer/)** is the
+    Chief Data Scientist at a large asset manager where he delivers data-driven investment
+    insights. He holds a MS Financial Engineering from Columbia University and a BS
+    in Banking and Finance from Cass Business School (London).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://github.com/d6t/d6t-python/blob/master/blogs/blog-20200426-shapley.ipynb).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Top 10 Coding Mistakes Made by Data Scientists](/2019/04/top-10-coding-mistakes-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 Statistics Mistakes Made by Data Scientists](/2019/06/statistics-mistakes-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Reasons Why Your Machine Learning Code is Probably Bad](/2019/02/4-reasons-machine-learning-code-probably-bad.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[SHAP: Explain Any Machine Learning Model in Python](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using SHAP Values for Model Interpretability in Machine Learning](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Explaining Explainable AI for Conversations](https://www.kdnuggets.com/2022/10/explaining-explainable-ai-conversations.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Diffusion and Denoising: Explaining Text-to-Image Generative AI](https://www.kdnuggets.com/diffusion-and-denoising-explaining-text-to-image-generative-ai)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2023: Practical Strategies for Deploying ML…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Essential Math for Data Science: Eigenvectors and Application to PCA](https://www.kdnuggets.com/2022/06/essential-math-data-science-eigenvectors-application-pca.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

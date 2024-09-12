@@ -1,0 +1,320 @@
+- en: 'Beyond One-Hot: an exploration of categorical variables'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2015/12/beyond-one-hot-exploration-categorical-variables.html](https://www.kdnuggets.com/2015/12/beyond-one-hot-exploration-categorical-variables.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By Will McGinnis**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In machine learning, data are king. The algorithms and models used to make
+    predictions with the data are important, and very interesting, but ML is still
+    subject to the idea of garbage-in-garbage-out. With that in mind, let’s look at
+    a little subset of those input data: categorical variables.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![mushrooms-cars](../Images/56c0fdcb94cc15a810d93943d1ca52f4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Categorical variables ([wiki](https://en.wikipedia.org/wiki/Categorical_variable))
+    are those that represent a fixed number of possible values, rather than a continuous
+    number.  Each value assigns the measurement to one of those finite groups, or
+    categories.  They differ from ordinal variables in that the distance from one
+    category to another ought to be equal regardless of the number of categories,
+    as opposed to ordinal variables which have some intrinsic ordering.  As an example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Ordinal: low, medium, high'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Categorical: Georgia, Alabama, South Carolina, … , New York'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The machine learning algorithms we will later use tend to want numbers, and
+    not strings, as their inputs so we need some method of coding to convert them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A quick interjection: there is one other concept that will come up frequently
+    in this post, and that is the concept of dimensionality.  In simplistic terms,
+    it is just the number of columns in the dataset, but it has significant downstream
+    effects on the eventual models.  At the extremes, the concept of the “[curse of
+    dimensionality](https://en.wikipedia.org/wiki/Curse_of_dimensionality)” discusses
+    that in high-dimensional spaces some things just stop working properly. Even in
+    relatively low dimensional problems, a dataset with more dimensions requires more
+    parameters for the model to understand, and that means more rows to reliably learn
+    those parameters. If the number of rows in the dataset is fixed, addition of extra
+    dimensions without adding more information for the models to learn from can have
+    a detrimental effect on the eventual model accuracy.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To circle back to the problem at hand: we want to code categorical variables
+    into numbers, but we are concerned about this dimensionality problem.  The obvious
+    answer is to just assign an integer to each category (we are assuming we know
+    all of the possible categories up front).  This is called ordinal coding.  It
+    does not add any dimensions to the problem, but implies an order to the variable
+    that may not actually exist.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Methodology
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'To find out how well this works, I put together a simple python script to test
+    different coding methods on common datasets.  First an overview of the process:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We gather a dataset for a classification problem that has categorical variables
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We use some method of coding to convert the X dataset into numeric values
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We use scikit-learn’s cross-validation-score and a BernoulliNB() classifier
+    to generate scores for the dataset. This is repeated 10x for each dataset and
+    the mean of all scores is used.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We store the dimensionality of the dataset, mean score, and time to code the
+    data and generate the scores.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This is all repeated for a few different datasets from the UCI dataset repository:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Car Evaluation](https://archive.ics.uci.edu/ml/datasets/Car+Evaluation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mushrooms](https://archive.ics.uci.edu/ml/datasets/Mushroom)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Splice Junctions](http://archive.ics.uci.edu/ml/machine-learning-databases/molecular-biology/splice-junction-gene-sequences/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'I tried 7 different encoding methods (descriptions of 4-7 are taken from [statsmodel’s
+    docs](http://statsmodels.sourceforge.net/devel/contrasts.html)):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Ordinal: as described above'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'One-Hot: one column per category, with a 1 or 0 in each cell for if the row
+    contained that column’s category'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Binary: first the categories are encoded as ordinal, then those integers are
+    converted into binary code, then the digits from that binary string are split
+    into separate columns.  This encodes the data in fewer dimensions that one-hot,
+    but with some distortion of the distances.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Sum: compares the mean of the dependent variable for a given level to the overall
+    mean of the dependent variable over all the levels. That is, it uses contrasts
+    between each of the first k-1 levels and level k In this example, level 1 is compared
+    to all the others, level 2 to all the others, and level 3 to all the others.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Polynomial: The coefficients taken on by polynomial coding for k=4 levels are
+    the linear, quadratic, and cubic trends in the categorical variable. The categorical
+    variable here is assumed to be represented by an underlying, equally spaced numeric
+    variable. Therefore, this type of encoding is used only for ordered categorical
+    variables with equal spacing.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Backward Difference: the mean of the dependent variable for a level is compared
+    with the mean of the dependent variable for the prior level. This type of coding
+    may be useful for a nominal or an ordinal variable.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Helmert: The mean of the dependent variable for a level is compared to the mean
+    of the dependent variable over all previous levels. Hence, the name ‘reverse’
+    being sometimes applied to differentiate from forward Helmert coding.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Results
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Mushroom
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '|  | Coding | Dimensionality | Avg. Score | Elapsed Time |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 0 | Ordinal | 22 | 0.81 | 3.65 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | One-Hot Encoded | 117 | 0.81 | 8.19 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 6 | Helmert Coding | 117 | 0.84 | 5.43 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 5 | Backward Difference Coding | 117 | 0.85 | 7.83 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | Sum Coding | 117 | 0.85 | 4.93 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | Polynomial Coding | 117 | 0.86 | 6.14 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | Binary Encoded | 43 | 0.87 | 3.95 |'
+  prefs: []
+  type: TYPE_TB
+- en: Cars
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '|  | Coding | Dimensionality | Avg. Score | Elapsed Time |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 10 | Sum Coding | 21 | 0.55 | 1.46 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 13 | Helmert Coding | 21 | 0.58 | 1.46 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 7 | Ordinal | 6 | 0.64 | 1.47 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 8 | One-Hot Encoded | 21 | 0.65 | 1.39 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 11 | Polynomial Coding | 21 | 0.67 | 1.49 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 12 | Backward Difference Coding | 21 | 0.70 | 1.50 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 9 | Binary Encoded | 9 | 0.70 | 1.44 |'
+  prefs: []
+  type: TYPE_TB
+- en: Splice
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '|  | Coding | Dimensionality | Avg. Score | Elapsed Time |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 14 | Ordinal | 61 | 0.68 | 5.11 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 17 | Sum Coding | 3465 | 0.92 | 25.90 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 16 | Binary Encoded | 134 | 0.94 | 3.35 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 15 | One-Hot Encoded | 3465 | 0.95 | 2.56 |'
+  prefs: []
+  type: TYPE_TB
+- en: Conclusions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This is by no means an exhaustive study, but it seems that with decent consistency
+    binary coding performs well, without a significant increase in dimensionality.
+     Ordinal, as expected, performs consistently poorly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you’d like to look at the source, add or suggest new datasets, or new coding
+    methods, I’ve put everything (including datasets) up on github: [https://github.com/wdm0006/categorical_encoding](https://github.com/wdm0006/categorical_encoding).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feel free to either contribute directly there, or comment with suggestions here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://willmcginnis.com/2015/11/29/beyond-one-hot-an-exploration-of-categorical-variables/
+    ).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data Mining Medicare Data – What Can We Find?](/2014/04/data-mining-medicare-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Tribes of Machine Learning – Questions and Answers](/2015/11/domingos-5-tribes-machine-learning-questions-answers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fraud Detection Solutions](/solutions/fraud-detection.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Deal with Categorical Data for Machine Learning](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Encoding Categorical Features with MultiLabelBinarizer](https://www.kdnuggets.com/2023/01/encoding-categorical-features-multilabelbinarizer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[ChatGPT-Powered Data Exploration: Unlock Hidden Insights in Your Dataset](https://www.kdnuggets.com/2023/07/chatgptpowered-data-exploration-unlock-hidden-insights-dataset.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beyond Coding: Why The Human Touch Matters](https://www.kdnuggets.com/beyond-coding-why-the-human-touch-matters)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beyond Pipelines: Graphs as Scikit-Learn Metaestimators](https://www.kdnuggets.com/2022/09/graphs-scikitlearn-metaestimators.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

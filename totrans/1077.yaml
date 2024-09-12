@@ -1,0 +1,588 @@
+- en: Orchestrate a Data Science Project in Python With Prefect
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/02/orchestrate-data-science-project-python-prefect.html](https://www.kdnuggets.com/2022/02/orchestrate-data-science-project-python-prefect.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Motivation
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: As a data scientist, why should you care about optimizing your data science
+    workflow? Let’s start with an example of a basic data science project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imagine you were working with an Iris dataset. You started with building functions
+    to process your data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After defining the functions, you execute them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your code ran fine, and you saw nothing wrong with the output, so you think
+    the workflow is good enough. However, there can be many disadvantages with a linear
+    workflow like above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/d127665d6694b5015ed667a0f432c449.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The disadvantages are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If there is an error in the function `get_classes` , the output produced by
+    the function `encode_categorical_columns` will be lost, and the workflow will
+    need to start from the beginning. This can be frustrating if it takes a long time
+    to execute the function `encode_categorical_columns` .
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/12ce19049288c80b227ee4e6b75aa423.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Since the functions `encode_categorical_columns` and `get_classes` are not
+    dependent on each other, they can be executed at the same time to save time:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/fa139968159d706d7b42e62f2ac6640e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Running the functions this way can also prevent wasting unnecessary time on
+    functions that don’t work. If there is an error in the function `get_classes` ,
+    the workflow will restart right away without waiting for the function `encode_categorical_columns` to
+    finish.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/cf9dda753060e43cfb10a577389c3543.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, you might agree with me that it is important to optimize the workflow of
+    different functions. However, it can be a lot of works to manually manage the
+    workflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is there a way that you can **automatically optimize the workflow **by adding
+    only several lines of code? That is when Prefect comes in handy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Prefect?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[Prefect](https://www.prefect.io/) is an open-sourced framework to build workflows
+    in Python. Prefect makes it easy to build, run, and monitor data pipelines at
+    scale.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To install Prefect, type:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Build Your Workflow with Prefect
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To learn how Prefect works, let’s encapsulate the workflow at the beginning
+    of the article with Prefect.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First Step — Create Tasks
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'A `Task` is a discrete action in a Prefect flow. Start with turning the functions
+    defined above into tasks using the decorator `prefect.task` :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Second Step — Create a Flow
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: A `Flow` represents the entire workflow by managing the dependencies between
+    tasks. To create a flow, simply insert the code to run your functions inside the `with
+    Flow(...)` context manager.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that none of these tasks are executed when running the code above. Prefect
+    allows you to either run the flow right away or schedule for later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s try to execute the flow right away using `flow.run()`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Running the code above will give you the output similar to this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To understand the workflow created by Prefect, let’s visualize the entire workflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Start with installing `prefect[viz]` :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then add the method `visualize` to the code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: And you should see the visualization of the `data-engineer` workflow like below!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/acfe31a541b6bd2197d85662e428e6dc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that Prefect automatically manages the orders of execution among tasks
+    so that the workflow is optimized. This is pretty cool for a few additional pieces
+    of code!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Third step — Add Parameters
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: If you find yourself frequently experimenting with different values of one variable,
+    it’s ideal to turn that variable into a `Parameter`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can consider a `Parameter` as a `Task` , except that it can receive user
+    inputs whenever a flow is run. To turn a variable into a parameter, simply use `task.Parameter` .
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first argument of `Parameter` specifies the name of the parameter. `default` is
+    an optional argument that specifies the default value of the parameter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Running `flow.visualize` again will give us an output like below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/44166d29185137f45ad8915794050701.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can overwrite the default parameter for each run by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'adding the argument `parameters` to `flow.run()` :'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'or using Prefect CLI:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'or using a JSON file:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Your JSON file should look similar to this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can also change parameters for each run using Prefect Cloud, which will
+    be introduced in the next section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Monitor Your Workflow
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Overview
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Prefect also allows you to monitor your workflow in Prefect Cloud. Follow [this
+    instruction](https://docs.prefect.io/orchestration/getting-started/set-up.html#server-or-cloud) to
+    install relevant dependencies for Prefect Cloud.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After all of the dependencies are installed and set up, start with creating
+    a project on Prefect by running:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Next, start a local agent to deploy our flows locally on a single machine:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then add:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '...at the end of your file.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After running the file, you should see something similar to the below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Click the URL in the output, and you will be redirected to an Overview page.
+    The Overview page shows the version of your flow, when it is created, the flow’s
+    run history, and its runs summary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/27be5414bd9ac912bc16daba19138177.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can also view the summary of other runs, when they are executed, and their
+    configurations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/900f750ad69f67d6a7de4c920241c509.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is pretty cool how these important pieces of information are automatically
+    tracked by Perfect!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Run the Workflow with Default Parameters
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Note that the workflow is registered to Prefect Cloud, but it is not executed
+    yet. To execute the workflow with the default parameters, click Quick Run in the
+    top right corner.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/b52b6e1a8515b1625fa18af129404492.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Click the run that is created. Now you will be able to see the activity for
+    your new flow run in real-time!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/53f3ed04303e6959f9622c1b148d7a6d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Run the Workflow with Custom Parameters
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To run the workflow with custom parameters, click the Run tab, then change the
+    parameters under Inputs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/500f29953a51ba46520a7507a9297495.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: When you are satisfied with the parameters, simply click the Run button to start
+    the run.
+  prefs: []
+  type: TYPE_NORMAL
+- en: View the Graph of the Workflow
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Clicking Schematic will give you the graph of the entire workflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/8f95084821ddf3cb25a4b6e757a38a67.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Other Features
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Besides some basic features mentioned above, Prefect also provides some other
+    cool features that will significantly increase the efficiency of your workflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Input Caching
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Remember the problem we mentioned at the beginning of the article? Normally,
+    if the function `get_classes` fails, the data created by the function `encode_categorical_columns` will
+    be discarded and the entire workflow needs to start from the beginning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, with Prefect, the output of `encode_categorical_columns` is stored.
+    Next time when the workflow is rerun, the output of `encode_categorical_columns` will
+    be used by the next task **without rerunning** the task `encode_categorical_columns` .
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/5837902e6ee1f5ecfb8f7c04207e0f27.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: This can result in a huge decrease in the time it takes to run the workflow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Persist Output
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Sometimes, you might want to export your task’s data to an external location.
+    This can be done by inserting to the task function the code to save the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, doing that will make it difficult to test the function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Prefect makes it easy to save the output of a task for each run by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: setting the checkpoint to `True`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: and adding `result = LocalResult(dir=...))` to the decorator `@task` .
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Now the output of the task `split_data` will be saved to the directory `data/processed` !
+    The name will look something similar to this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'If you want to customize the name of your file, you can add the argument `target` to `@task` :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prefect also provides other `Result` classes such as `GCSResult` and `S3Result` .
+    You can check out API docs for results [here](https://docs.prefect.io/api/latest/engine/results.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use Output of Another Flow for the Current Flow
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: If you are working with multiple flows, for example, `data-engineer` flow and `data-science` flow,
+    you might want to use the output of the `data-engineer` flow for the `data-science` flow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/e298c783aeb52920e3bee451ac6043ab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After saving the output of your `data-engineer` flow as a file, you can read
+    that file using the `read` method:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Connect Dependent Flows
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Imagine this scenario: You created two flows that depend on each other. The
+    flow `data-engineer` needs to be executed before the flow `data-science`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Somebody who looked at your workflow didn’t understand the relationship between
+    these two flows. As a result, they executed the flow `data-science` and the flow `data-engineer `at
+    the same time and encountered an error!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/179c539b21ae399aa7928b8c2ce53252.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: To prevent this from happening, we should specify the relationship between flows.
+    Luckily, Prefect makes it easier for us to do so.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Start with grabbing two different flows using `StartFlowRun` . Add `wait=True` to
+    the argument so that the downstream flow is executed only after the upstream flow
+    finishes executing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, calling `data_science_flow` under the `with Flow(...)` context manager.
+    Use `upstream_tasks` to specify the tasks/flows that will be executed before the `data-science` flow
+    is executed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now the two flows are connected like below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Orchestrate a Data Science Project in Python With Prefect](../Images/5deddfed0f278e9a0dffe9340d89edf3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pretty cool!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Schedule Your Flow
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Prefect also makes it seamless to execute a flow at a certain time or at a certain
+    interval.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example, to run a flow every 1 minute, you can initiate the class `IntervalSchedule` and
+    add `schedule` to the `with Flow(...)` context manager:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now your flow will be rerun every 1 minute!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Learn more about different ways to schedule your flow [here](https://docs.prefect.io/core/concepts/schedules.html#overview).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Logging
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'You can log the print statements within a task by simply adding `log_stdout=True` to `@task` :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And you should see an output like below when executing the task:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Congratulations! You have just learned how Prefect can optimize your data science
+    workflow in a few lines of Python code. Small optimization in your code can result
+    in a huge increase in efficiency in the long run.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feel free to play and [fork the source code of this article here](https://github.com/khuyentran1401/Data-science/tree/master/data_science_tools/prefect_example).
+  prefs: []
+  type: TYPE_NORMAL
+- en: I like to write about basic data science concepts and play with different data
+    science tools. You could connect with me on [LinkedIn](https://www.linkedin.com/in/khuyen-tran-1ab926151/) and [Twitter](https://twitter.com/KhuyenTran16).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Star [this repo](https://github.com/khuyentran1401/Data-science) if you want
+    to check out the codes for all of the articles I have written. Follow me on Medium
+    to stay informed with my latest data science articles like these:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Great Expectations: Always Know What to Expect From Your Data**](https://towardsdatascience.com/great-expectations-always-know-what-to-expect-from-your-data-51214866c24)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Kedro — A Python Framework for Reproducible Data Science Project**](https://towardsdatascience.com/kedro-a-python-framework-for-reproducible-data-science-project-4d44977d4f04)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Introduction to Weight & Biases: Track and Visualize your Machine Learning
+    Experiments in 3 Lines…**](https://towardsdatascience.com/introduction-to-weight-biases-track-and-visualize-your-machine-learning-experiments-in-3-lines-9c9553b0f99d)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Introduction to Datapane: A Python Library to Build Interactive Reports**](https://towardsdatascience.com/introduction-to-datapane-a-python-library-to-build-interactive-reports-4593fd3cb9c8)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**[Khuyen Tran](https://www.linkedin.com/in/khuyen-tran-1401/)** is a prolific
+    data science writer, and has written [an impressive collection of useful data
+    science topics along with code and articles](https://github.com/khuyentran1401/Data-science).
+    She has shared over 400 tips about data science and Python on **[Data Science
+    Simplified](https://mathdatasimplified.com/)**. Subscribe to her newsletter to
+    receive her daily tips.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/orchestrate-a-data-science-project-in-python-with-prefect-e69c61a49074).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building Data Pipeline with Prefect](https://www.kdnuggets.com/building-data-pipeline-with-prefect)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Free Python Project Coding Course](https://www.kdnuggets.com/2022/08/free-python-project-coding-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[From Data Collection to Model Deployment: 6 Stages of a Data…](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, July 5: A Rotten Data Science Project • 10 AI…](https://www.kdnuggets.com/2023/n24.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Hard Coding in a Data Science Project - Use Config Files Instead](https://www.kdnuggets.com/2023/06/stop-hard-coding-data-science-project-config-files-instead.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[19 Data Science Project Ideas for Beginners](https://www.kdnuggets.com/2021/11/19-data-science-project-ideas-beginners.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

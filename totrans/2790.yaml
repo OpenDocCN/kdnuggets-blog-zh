@@ -1,0 +1,471 @@
+- en: 'How (not) to use Machine Learning for time series forecasting: The sequel'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/03/machine-learning-time-series-forecasting-sequel.html](https://www.kdnuggets.com/2020/03/machine-learning-time-series-forecasting-sequel.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Vegard Flovik](https://www.linkedin.com/in/vegard-flovik/), Data Scientist,
+    Axbit AS**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Time series forecasting is an important area of machine learning. It is important
+    because there are so many prediction problems that involve a time component. However,
+    while the time component adds additional information, it also makes time series
+    problems more difficult to handle compared to many other prediction tasks. Time
+    series data, as the name indicates, differ from other types of data in the sense
+    that the temporal aspect is important. On a positive note, this gives us additional
+    information that can be used when building our machine learning model — that not
+    only the input features contain useful information, but also the changes in input/output
+    over time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: My previous article on the same topic, [How (not) to use Machine Learning for
+    time series forecasting](https://www.kdnuggets.com/2019/05/machine-learning-time-series-forecasting.html),
+    has received a lot of feedback. Based on this, I would argue that time series
+    forecasting and machine learning is of great interest to people and that many
+    recognize the potential pitfalls I discussed in my article. Due to the great interest
+    in the topic, I chose to write a follow-up article discussing some related issues
+    when it comes to [time series forecasting ](https://en.wikipedia.org/wiki/Time_series)and
+    machine learning, and how to avoid some of the common pitfalls.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Through a concrete example, I will demonstrate how one could seemingly have
+    a good model and decide to put it into production, whereas in reality, the model
+    might have no predictive power whatsoever. Importantly, I will discuss some of
+    these issues in a bit more detail and how to spot them before it is too late.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Example case: Prediction of time series data'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The example data used in this case is illustrated in the below figure. We will
+    get back to the data in more detail later, but for now, let’s assume this data
+    represents e.g., the yearly evolution of a stock index, the sales/demand of a
+    product, some sensor data or equipment status, whatever might be most relevant
+    for your case. The basic idea, for now, is that what the data actually represent
+    does not really affect the following analysis and discussions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/621d01721b5c92abdd3cd3150fee6ed0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As seen from the figure, we have a total of 4 “input features” or “input variables”
+    and one target variable, which is what we are trying to predict. The basic assumption
+    in cases like these is that the input variables to our model contain some useful
+    information that allows us to predict the target variable based on those features
+    (which might, or might not be the case).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Correlation and causality
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In [statistics](https://en.wikipedia.org/wiki/Statistics), correlation or dependence
+    is any statistical relationship, whether [causal](https://en.wikipedia.org/wiki/Causality) or
+    not. Correlations are useful because they can indicate a predictive relationship
+    that can be exploited in practice. For example, an electrical utility may produce
+    less power on a mild day based on the correlation between electricity demand and
+    weather. In this example, there is a [causal relationship](https://en.wikipedia.org/wiki/Causality),
+    because extreme weather causes people to use more electricity for heating or cooling.
+    However, in general, the presence of a correlation is not sufficient to infer
+    the presence of a causal relationship (i.e., [correlation does not imply causation](https://en.wikipedia.org/wiki/Correlation_does_not_imply_causation)).
+    This is a very important distinction, which we will get back to in more detail
+    later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To inspect our data, one thing we can look into is calculating the correlation
+    matrix, which represents the correlation coefficients between all variables in
+    our dataset. In [statistics](https://en.wikipedia.org/wiki/Statistics), the Pearson
+    correlation coefficient is a measure of the linear [correlation](https://en.wikipedia.org/wiki/Correlation) between
+    two variables. According to the [Cauchy-Schwarz inequality](https://en.wikipedia.org/wiki/Cauchy%E2%80%93Schwarz_inequality), it
+    has a value between +1 and −1, where 1 is a total positive linear correlation,
+    0 is no linear correlation, and −1 is a total negative linear correlation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/86dc618203d8700d79f77c560937e5f3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: However, while **correlation** is one thing, what we are often interested in
+    is rather **causality**. The conventional dictum that "[correlation does not imply
+    causation](https://en.wikipedia.org/wiki/Correlation_does_not_imply_causation)"
+    means that correlation cannot be used by itself to infer a causal relationship
+    between the variables (in either direction).
+  prefs: []
+  type: TYPE_NORMAL
+- en: A correlation between age and height in children is fairly causally transparent,
+    but a correlation between mood and health in people is less so. Does improved
+    mood lead to improved health, or does good health lead to good mood or both? Or
+    does some other factor underlie both? In other words, a correlation can be taken
+    as evidence for a possible causal relationship, but cannot indicate what the causal
+    relationship, if any, might be.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/910eb342fda43898a22d84d9a3085202.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*(Source: [https://xkcd.com/925/](https://xkcd.com/925/))*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The important distinction between correlation and causality is one of the major
+    challenges when building forecasting models based on machine learning. The model
+    is trained on what should (hopefully) be representative data of the process we
+    are trying to forecast. Any characteristic patterns/correlations between our input
+    variables and the target are then used by the model for establishing a relationship
+    that can be exploited to give new predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our case, from the correlation matrix, we see that our target variable is
+    indeed correlated with some of our input variables. Still, training a model on
+    our data, it might be that this apparent correlation is merely a statistical fluke
+    and that there is no causal relationship between them at all. However, for now,
+    let’s ignore this fact and try to set up our prediction model. We’ll get back
+    to discussing these potential pitfalls in more detail later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Machine learning models for time series forecasting
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are several types of models that can be used for time-series forecasting.
+    In my previous article, I used a Long short-term memory network, or in short [LSTM
+    Network](https://en.wikipedia.org/wiki/Long_short-term_memory). This is a special
+    kind of neural network that makes predictions according to the data of previous
+    times, i.e., it has a concept of “memory” explicitly built into the model structure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, it is my experience that, in many cases, simpler types of models actually
+    provide just as accurate predictions. In this example, I thus implement a forecasting
+    model based on a [feedforward neural network](https://en.wikipedia.org/wiki/Feedforward_neural_network) (as
+    illustrated below), instead of a [recurrent neural network](https://en.wikipedia.org/wiki/Recurrent_neural_network).
+    I also compare the predictions to that of a [random forest](https://en.wikipedia.org/wiki/Random_forest) model
+    (one of my go-to models, based on its simplicity and usually good performance
+    out-of-the-box).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d579f07d67d26ec71339a9b9117d3fda.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Implementing the models using open source software libraries
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I usually define my neural network type of models using [Keras](https://keras.io/),
+    which is a high-level neural networks API, written in Python and capable of running
+    on top of [TensorFlow](https://github.com/tensorflow/tensorflow), [CNTK](https://github.com/Microsoft/cntk),
+    or [Theano](https://github.com/Theano/Theano). For other types of models (like
+    the random forest model in this case), I usually use [Scikit-Learn](http://scikit-learn.org/stable/),
+    which is a free software machine learning library. It features various [classification](https://en.wikipedia.org/wiki/Statistical_classification), [regression](https://en.wikipedia.org/wiki/Regression_analysis) and [clustering](https://en.wikipedia.org/wiki/Cluster_analysis) algorithms,
+    and is designed to interoperate with the Python numerical and scientific libraries [NumPy](https://en.wikipedia.org/wiki/NumPy) and [SciPy](https://en.wikipedia.org/wiki/SciPy).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The main topic of this article does not concern the details of how to implement
+    a time series forecasting model, but rather how to evaluate the predictions. Due
+    to this, I will not go into the details of model building, etc., as there are
+    plenty of other blog posts and articles covering those subjects. (However, if
+    you are interested in the code used for this example, just let me know in the
+    comments below, and I'll share the code with you).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training the model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After setting up the neural network model using Keras, we split the data into
+    a training set and a test set. The first 6 months of data are used for training,
+    and the remaining data is used as a hold-out test set. During the model training,
+    10% of the data is used for validation to keep track of how the model performs.
+    The training process can then be visualized from the training curve below, where
+    the train and validation loss as a function of epochs is plotted. From the training
+    curve, it indeed appears that the model has been able to learn something useful
+    from the data. Both training and validation loss decrease as the training progress,
+    and then start to level out after approximately 50 epochs (without apparent signs
+    of [overfitting/underfitting](https://en.wikipedia.org/wiki/Overfitting)). So
+    far, so good.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/dbbc6741cbdf7564de3ead855f65bb23.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Evaluating results
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let us now visualize the model predictions vs. the ground truth data in the
+    hold-out test set to see whether we have a good match. We can also plot the real
+    vs. predicted values in a scatter plot and visualize the distribution of errors,
+    as shown in the below figure to the right.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/26e7fd628166b00620f49dadee100a37.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: From the figures above, it becomes clear that our model does not obtain a very
+    good match when comparing the real and predicted values. How could it be that
+    our model, which seemingly was able to learn useful information, performs so badly
+    in the hold-out test set?
+  prefs: []
+  type: TYPE_NORMAL
+- en: To get a better comparison, let us also implement a [random forest model](https://en.wikipedia.org/wiki/Random_forest) on
+    the same data, to see whether that would give us any better results. As we can
+    see from the results in the below figure to the left, the random forest model
+    does not perform much better than the neural network. However, a useful feature
+    of the random forest model is that it can also output the “feature importance”
+    as part of the training process, indicating the most important variables (according
+    to the model). This feature importance can, in many cases, provide us useful information
+    and is also something we will discuss in a bit more detail.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4dd72a7e52e6c86c839eeb2c3770270a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Spurious correlations and causality
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Interestingly, we notice from the above figure that Variable 4 was apparently
+    the most important input variable, according to the random forest model. From
+    the correlation matrix and plot in the figure below, however, we notice that the
+    variable which is most strongly correlated with the target is “Variable 1” (which
+    has the 2nd highest feature importance). Actually, if you have a closer look at
+    the plotted variables below, you probably notice that Variable 1 and Target follow
+    exactly the same trend. This makes sense, as will become apparent in our following
+    discussion of the data used in this example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Origin of the data used in this example
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As we are getting closer to finishing up the article, it is time to reveal some
+    additional details on the origin of the data used. If you have read my previous
+    article on [the pitfalls of machine learning for time series forecasting](https://www.linkedin.com/pulse/how-use-machine-learning-time-series-forecasting-vegard-flovik-phd/),
+    you might have realized that I am quite a fan of random walk processes (and [stochastic
+    processes](https://en.wikipedia.org/wiki/Stochastic_process) in general). In this
+    article, I indeed chose a similar approach to address that of spurious correlations
+    and causality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Actually, all the variables in the dataset (4 input variables, and one “target”),
+    are just generated by random walk processes. I originally generated 4 random walkers,
+    and to obtain the target variable, I simply implemented a time shift of 1 week
+    of “Variable 1” (with a little bit of added random noise, to make it less obvious
+    to notice by first glance).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/3bc1b949439fe11b300fad42713c0d47.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As such, there is, of course, no causal relationship between the variables and
+    the target. When it comes to the first variable, as the target is shifted one
+    week **back** in time compared to variable 1, any changes in the target variable
+    happens **prior** to the corresponding change in variable 1\. Due to this, the
+    only coupling to the target variable is through the inherent [autocorrelation](https://en.wikipedia.org/wiki/Autocorrelation) of
+    the random walk process itself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This time shift can be easily spotted if we calculate the cross-correlation
+    between variable 1 and the target, as illustrated in the below figure to the left.
+    In the cross-correlation, there is a clear peak for a time shift of 7 days. However,
+    we notice both from the correlation matrix above, and from the figure below, that
+    there exists a significant correlation between the target and variable 1 even
+    at a lag of zero days (correlation coefficient of 0.75, to be precise). However,
+    this correlation is merely due to the fact that the target variable has a slowly
+    decaying autocorrelation (significantly longer than the time shift of one week),
+    as illustrated in the below figure to the right.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c31032d73faac7fadaa37ee46a43de49.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The Granger Causality test
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'As mentioned previously, the input variables of our model are correlated with
+    the target, which does not mean that they have a causal relationship. These variables
+    may actually have no predictive power whatsoever when trying to estimate the target
+    at a later stage. However, when making data-driven predictive models, mistaking
+    correlation and causality is an easy trap to fall into. This then begs the important
+    question: is there anything we can do to avoid this?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The **Granger causality test** is a [statistical hypothesis test](https://en.wikipedia.org/wiki/Statistical_hypothesis_testing) for
+    determining whether one [time series](https://en.wikipedia.org/wiki/Time_series) is
+    useful in [forecasting](https://en.wikipedia.org/wiki/Forecasting) another. Ordinarily, [regressions](https://en.wikipedia.org/wiki/Regression_analysis) reflect
+    “mere” [correlations](https://en.wikipedia.org/wiki/Correlation), but [Clive Granger](https://en.wikipedia.org/wiki/Clive_Granger) argued
+    that [causality](https://en.wikipedia.org/wiki/Causality) could be tested for
+    by measuring the ability to predict the future values of a time series using prior
+    values of another time series. A time series *X* is said to Granger-cause *Y* if
+    it can be shown, usually through a series of [t-tests](https://en.wikipedia.org/wiki/T-test) and [F-tests](https://en.wikipedia.org/wiki/F-test) on [lagged
+    values](https://en.wikipedia.org/wiki/Lag_operator) of *X* (and with lagged values
+    of *Y* also included), that those *X* values provide [statistically significant](https://en.wikipedia.org/wiki/Statistical_significance) information
+    about future values of *Y*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Granger defined the causality relationship based on two principles:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The cause happens prior to its effect.**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**The cause has unique information about the future values of its effect.**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: When time series *X* Granger-causes time series *Y (*as illustrated below*)*,
+    the patterns in *X* are approximately repeated in *Y* after some time lag (two
+    examples are indicated with arrows). Thus, past values of *X* can be used for
+    the prediction of future values of *Y*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/920b86630a7ef5c6acac25f0e6ab0c14.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*[Source](https://en.wikipedia.org/wiki/Granger_causality).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The original definition of Granger causality does not account for [latent confounding
+    effects](https://en.wikipedia.org/wiki/Confounding) and does not capture instantaneous
+    and non-linear causal relationships. As such, performing a Granger causality test
+    cannot give you a definitive answer on whether there exists a causal relationship
+    between your input variables and the target you are trying to predict. Still,
+    it can definitely be worth looking into and provides additional information compared
+    to relying purely on the (possibly spurious) correlation between them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The “dangers” of non-stationary time-series
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Most statistical forecasting methods are based on the assumption that the time
+    series can be rendered approximately stationary (i.e., “stationarized”) through
+    the use of mathematical transformations. A [stationary time series](https://www.otexts.org/fpp/8/1) is
+    one whose statistical properties, such as [mean](https://en.wikipedia.org/wiki/Mean), [variance](https://en.wikipedia.org/wiki/Variance), [autocorrelation](https://en.wikipedia.org/wiki/Autocorrelation),
+    etc. are all constant over time. One such basic transformation is to [time-difference
+    the data](https://www.otexts.org/fpp/8/1).
+  prefs: []
+  type: TYPE_NORMAL
+- en: What this transformation does, is that rather than considering the values directly,
+    we are calculating the *difference *between consecutive time steps. Defining the
+    model to predict the *difference* in values between time steps rather than the
+    value itself is a much stronger test of the model's predictive powers. In that
+    case, it cannot simply use that the data has a strong autocorrelation, and use
+    the value at time “*t*” as the prediction for “ *t+* 1”. Due to this, it provides
+    a better test of the model and if it has learned anything useful from the training
+    phase, and whether analyzing historical data can actually help the model predict
+    future changes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The main point I would like to emphasize through this article is to be very
+    careful when working with time series data. As shown through the above example,
+    one can easily be fooled (as also discussed in one of my previous articles on
+    the [hidden risk of AI and Big Data](https://www.kdnuggets.com/2019/09/risk-ai-big-data.html)).
+    By simply defining a model, making some predictions, and calculating common accuracy
+    metrics, one could seemingly have a good model and decide to put it into production.
+    Whereas, in reality, the model might have no predictive power whatsoever.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With access to high quality and easy to use machine learning libraries and toolboxes,
+    the actual coding part of building a model has become quite straightforward. This
+    progress is great news. It saves us lots of time and effort and limits the risk
+    of coding errors during implementation. The time saved during model building should
+    rather be used to focus on asking the right questions. In my opinion, this is
+    one of the most important aspects of data science. How do you properly validate
+    your model predictions? Is there any hidden bias in your data that can potentially
+    skew your predictions or any subtle feedback loops that can cause unintentional
+    results?
+  prefs: []
+  type: TYPE_NORMAL
+- en: The most important point I want to emphasize is that it is key to **always** be
+    skeptical of what the data is telling you. Ask critical questions and never draw
+    any rash conclusions. The [scientific method](https://en.wikipedia.org/wiki/Scientific_method) should
+    be applied in data science as in any other kind of science.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/how-not-to-use-machine-learning-for-time-series-forecasting-the-sequel-e117e6ff55f1).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Vegard Flovik](https://www.linkedin.com/in/vegard-flovik/) is a Lead
+    Data Scientist in machine learning and advanced analytics at Axbit AS.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Stock Market Forecasting Using Time Series Analysis](https://www.kdnuggets.com/2020/01/stock-market-forecasting-time-series-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 Statistics Mistakes Made by Data Scientists](https://www.kdnuggets.com/2019/06/statistics-mistakes-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Painlessly Analyze Your Time Series](https://www.kdnuggets.com/2020/03/painlessly-analyze-time-series.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Time Series Forecasting with Ploomber, Arima, Python, and Slurm](https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Time Series Forecasting with statsmodels and Prophet](https://www.kdnuggets.com/2023/03/time-series-forecasting-statsmodels-prophet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

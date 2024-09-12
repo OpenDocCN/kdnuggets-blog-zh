@@ -1,0 +1,378 @@
+- en: Feature Engineering for Numerical Data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/09/feature-engineering-numerical-data.html](https://www.kdnuggets.com/2020/09/feature-engineering-numerical-data.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Numeric data is almost a blessing. Why almost? Well, because it is already in
+    a format that is ingestible by Machine Learning models. However, if we translate
+    it into human-relatable terms, just because a PhD level textbook is written in
+    English — I speak, read and write in English — does not mean that I am capable
+    of understanding the textbook well enough to derive useful insights. What would
+    make the textbook useful to me is if it epitomizes the most important information
+    in a manner that considers the assumptions of my mental model, such as “Maths
+    is a myth” (which, by the way, is no longer my view since I am really starting
+    to enjoying it). In the same way, a good feature should represent salient aspects
+    of the data, as well as taking the shape of the assumptions that are made by the
+    Machine Learning model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Data Engineering](../Images/efe8223e7c92f882a8d32fd9e5e37cb1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Feature engineering](https://www.kdnuggets.com/2018/12/feature-engineering-explained.html)
+    is the process of extracting features from raw data and transforming them into
+    formats that can be ingested by a machine learning model. Transformations are
+    often required to ease the difficulty of modelling and boost the results of our
+    models. Therefore, techniques to engineer numeric data types are fundamental tools
+    for Data Scientist (Machine Learning Engineers alike) to add to their artillery.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: “data is like the *crude oil* of machine learning, which means it has to be
+    refined into *features *— predictor variables — to be useful for training a model.” —
+    [Will Koehrsen](https://medium.com/u/e2f299e30cb9?source=post_page-----e20167ec18----------------------)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: As we strive for mastery, it is important to note that it is never enough to
+    know why a mechanism works and what it can do. Mastery knows how something is
+    done, has an intuition for the underlying principles, and has the neural connections
+    that make drawing the correct tool a seamless procedure when faced with a challenge.
+    That will not come from reading this article, but from the deliberate practice
+    of which this article will open the door for you to do by providing the intuition
+    behind the techniques so that you may understand how and when to apply them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The features in your data will directly influence the predictive models you
+    use and the results you can achieve.” — [Jason Brownlee](https://medium.com/u/f374d0159316?source=post_page-----e20167ec18----------------------)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Note: You can find the code used for this article on my [Github page](https://github.com/kurtispykes/demo/tree/master).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There may be occasions where data is collected on a feature that accumulates,
+    thereby having an infinite upper boundary. Examples of this type of continuous
+    data may be a tracking system that monitors the number of visits that all of my
+    blog posts receive on a daily basis. This type of data easily attracts outliers
+    since there could be some unpredictable event that affects the total traffic that
+    my articles are accumulating. For instance, one day, people may decide they want
+    to be able to do data analysis, so my article on [Effective data visualization](https://towardsdatascience.com/effective-data-visualization-ef30ae560961) may
+    spike for that day. In other words, when data can be collected quickly and in
+    large amounts, then it is likely that it would contain some extreme values that
+    would need engineering.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some methods to handle this instance are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Quantization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This method contains the scale of the data by grouping the values into bins.
+    Therefore, quantization maps a continuous value into a discrete value, and, conceptually,
+    this can be thought of as an ordered sequence of bins. To implement this, we must
+    consider the width of bins that we create, of which the solutions fall into two
+    categories, fixed-width bins or adaptive bins.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Note: This is particularly useful for linear models. In tree-based models,
+    this is not useful because tree-based models make their own splits.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In the fixed-width scenario, the value is automatically or custom-designed to
+    segment data into discrete bins — they can also be linearly scaled or exponentially
+    scaled. A popular example is separating ages of people into partitions by decade
+    intervals such that bin 1 contains ages 0–9, bin 2 has 10–19 etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Note that if the values span across a large magnitude of numbers, then a better
+    method may be to group the values into powers of a constant, such as to the power
+    of 10: 0–9, 10–99, 100–999, 1000–9999\. Notice that the bin widths grow exponentially,
+    hence in the case of 1000–9999, the bin width is O(10000), whereas 0–9 is O(10).
+    Take the log of the count to map from the count to the bin of the data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Adaptive bins are a better fit when there are large gaps within the counts.
+    When there are large margins in-between the values of the counts, then some of
+    the fixed-width bins would be empty.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To do adaptive binning, we can make use of the quantiles of the data — the values
+    that divide the data into equal portions like the median.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Power Transformations
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We have already seen an example of this: the log transformation is part of
+    a family of variance stabilizing transformations know as power transformations.
+    Wikipedia describes power transformations as a *“technique used to stabilize variance,
+    make the data more normal distribution-like, improve the validity of measures
+    of association such as the Pearson correlation between variables and for other
+    data stabilization procedures.”*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why would we want to transform our data to fit the Normal Distribution? Great
+    question! You may want to use a parametric model — a model that makes assumptions
+    of the data — rather than a non-parametric model. When the data is normally distributed,
+    parametric models are powerful. However, in some cases, the data we have may need
+    a helping hand to bring out the beautiful bell-shaped curve of the normal distribution.
+    For instance, the data may be skewed, so we apply a power transformation to assist
+    in helping our feature look more Gaussian.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The code below leverages data science frameworks such as pandas, scipy, and
+    numpy to demonstrate power transformations and visualize them using the Plotly.py
+    framework for interactive plots. The dataset used is the [*House Prices: Advanced
+    regression techniques*](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data) from
+    Kaggle, which you can easily download ([Click here for access data](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data)).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/0128765b007865d69c64281134a0a389.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 1: Visualizing the original data and various power transforms power
+    transformations.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Note: Box-cox transformations only work when the data is non-negative*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: “Which of these is best? You cannot know beforehand. You must try them and evaluate
+    the results to achieve on your algorithm and performance measures.” — [Jason Brownlee](https://medium.com/u/f374d0159316?source=post_page-----e20167ec18----------------------)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Feature Scaling
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As the name implies, feature scaling (also referred to as feature normalization)
+    is concerned with changing the scale of features. When the features of a dataset
+    differ greatly in scale, then a model that is sensitive to the scale of the input
+    features (i.e., linear regression, logistic regression, neural networks) would
+    be affected. Ensuring features are within a similar scale is imperative. Whereas,
+    models such as tree-based models (i.e., Decision Trees, Random Forest, Gradient
+    boosting) do not care about scale.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Common ways to scale features include min-max scaling, standardization, and
+    L² normalization. The following is a brief introduction and implementation in
+    python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Min-Max Scaling** - The feature is scaled to a fixed range (which is usually
+    between 0–1), meaning that we will have reduced standard deviations, therefore,
+    suppressing the effect of outliers on the feature. Where x is the individual value
+    of the instance (i.e., person 1, feature 2), max(x), min(x) is the maximum and
+    minimum values of the feature — see Figure 2\. For more on this, see the [sklearn
+    documentation.](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/157fdaa503f0d1e9470d4abdfecbed6d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 2: Formula for Min-max scaling.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Standardization **- The feature values will be rescaled so that they fit
+    the properties of a normal distribution where the mean is 0, and the standard
+    deviation is 1\. To do this, we subtract the mean of the feature — taken over
+    all the instances — from the feature instance value, then divide by the variance
+    — see Figure 3\. Refer to the [sklearn documentation](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html) for
+    standardization.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/eb10ee1da49f806d2f3c13d7c09bfc86.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 3: Formula for standardization.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**L² Normalization** - This technique divides the original feature value by
+    the l² norm (also euclidean distance) — the second equation in Figure 4\. L² norm
+    takes the sum of squares of the values in the feature set across all instances.
+    Refer to the sklearn [documentation](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.Normalizer.html#sklearn.preprocessing.Normalizer) for
+    L² Norm (note that there is also the option to do L¹ normalization by setting
+    the norm parameter to "l1" ).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7152bbf318af813b1bb26af628e98fb2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 4: Formula for L² Normalization.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Visualization of the effects of feature scaling will give a better image of
+    what is going on. For this, I am using the wine dataset that can be imported from
+    sklearn datasets.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/89d92631e43a8a4e64462d398d69b551.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 5: The plots for the original feature and various scaling implementations.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature Interactions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We can create the logical AND function by using the product of pairwise interactions
+    between features. In tree-based models, these interactions occur implicitly, but
+    in models that assume independence of the features, we can explicitly declare
+    interactions between features to improve the output of the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Think of a simple linear model that uses a linear combination of the input
+    features to predict the output y:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bfcaba2049dd879a6c88b78eb18ed3ef.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 6: Formula for a linear model.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can extend the linear model to capture the interactions that occur between
+    features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/72d7a01b39fe9a925af4ba2d08d110f7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 7: Extending the linear model.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Note: Linear functions are expensive to use, and the scoring and training
+    of a linear model with a pairwise interaction would go from O(n) to O(n²). However,
+    you could perform feature extraction to overcome this problem (feature extraction
+    is beyond the scope of this article, but will be something I discuss in a future
+    article).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s code this in python, I am going to leverage the scitkit-learn *PolynomialFeatures *class,
+    and you can read more about it in the [documentation](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*This article was heavily inspired by the book [Feature Engineering for Machine
+    Learning: Principles and Techniques for Data Scientists](https://www.amazon.co.uk/Feature-Engineering-Machine-Learning-Principles-ebook/dp/B07BNX4MWC),
+    which I''d definitely recommend reading. Though it was published in 2016, it is
+    still very informative and clearly explained, even for those without a mathematical
+    background.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There we have it. In this article, we discussed techniques to deal with numerical
+    features, such as quantization, power transformations, feature scaling, and interaction
+    features (which can be applied to various data types). This is by no means the
+    be-all and end-all of feature engineering, and there is always much more to learn
+    on a daily basis. Feature engineering is an art and will take practice, so now
+    that you have the intuition, you are ready to begin practicing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/feature-engineering-for-numerical-data-e20167ec18).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Kurtis Pykes](https://www.linkedin.com/in/kurtispykes/) is a Machine
+    Learning Engineer Intern at Codehouse. He is passionate about harnessing the power
+    of machine learning and data science to help people become more productive and
+    effective.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Feature Engineering in SQL and Python: A Hybrid Approach](https://www.kdnuggets.com/2020/07/feature-engineering-sql-python-hybrid-approach.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Transformation: Standardization vs Normalization](https://www.kdnuggets.com/2020/04/data-transformation-standardization-normalization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Tips for Advanced Feature Engineering and Preprocessing](https://www.kdnuggets.com/2019/08/4-tips-advanced-feature-engineering-preprocessing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Tractable, Feature Engineering Pipeline for Multivariate…](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using RAPIDS cuDF to Leverage GPU in Feature Engineering](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Practical Approach To Feature Engineering In Machine Learning](https://www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Engineering for Beginners](https://www.kdnuggets.com/feature-engineering-for-beginners)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Selection: Where Science Meets Art](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

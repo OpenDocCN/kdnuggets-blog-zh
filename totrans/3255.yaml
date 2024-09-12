@@ -1,0 +1,415 @@
+- en: 'Support Vector Machine (SVM) Tutorial: Learning SVMs From Examples'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/08/support-vector-machines-learning-svms-examples.html/3](https://www.kdnuggets.com/2017/08/support-vector-machines-learning-svms-examples.html/3)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Kernels**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Finally, the secret sauce that makes SVMs tick. This is where we need to look
+    at a bit of math.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s take stock of what we have seen so far:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For linearly separable data SVMs work amazingly well.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For data that’s almost linearly separable, SVMs can still be made to work pretty
+    well by using the right value of C.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For data that’s not linearly separable, we can project data to a space where
+    it is perfectly/almost linearly separable, which reduces the problem to 1 or 2
+    and we are back in business.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It looks like a big part of what makes SVMs universally applicable is projecting
+    it to higher dimensions. And this is where kernels come in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, a slight digression.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A very surprising aspect of SVMs is that in all of the mathematical machinery
+    it uses, the exact projection, or even the number of dimensions, doesn’t show
+    up. You could write all of it in terms of the *dot products*between various data
+    points (represented as vectors). For *p*-dimensional vectors *i* and *j* where
+    the first subscript on a dimensionidentifies the point and the second indicates
+    the dimension number:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/902cd31e282ee778387dde4bb15d1c37.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The dot product is defined as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bfd27fba90f66326b5f0f9a971760d62.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If we have *n* points in our dataset, the SVM needs *only* the dot product of
+    each pair of points to find a classifier. Just that. This is also true when we
+    want to project data to higher dimensions. We don’t need to provide the SVM with
+    exact projections; we need to give it the dot product between all pairs of points
+    in the projected space.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is relevant because this is exactly what kernels do. A kernel, short for *kernel
+    function*, takes as input two points in the original space, and directly gives
+    us the dot product in the projected space.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s revisit the projection we did before, and see if we can come up with a
+    corresponding kernel. We will also track the number of computations we need to
+    perform for the projection and then finding the dot products — to see how using
+    a kernel compares.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For a point *i*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8e72e7c177f300b021872e4f87444d64.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Our corresponding projected point was:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d0bfd1ae9bcd0251377040a8edeb24eb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'To compute this projection we need to perform the following operations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To get the new first dimension: 1 multiplication'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Second dimension: 1 multiplication'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Third dimension: 2 multiplications'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In all, 1+1+2 =** 4 multiplications**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The dot product in the new dimension is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2b946749d624301f34c7b7cbca94dc21.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: To compute this dot product for two points *i *and *j*, we need to compute their
+    projections first. So that’s 4+4 = 8 multiplications, and then the dot product
+    itself requires 3 multiplications and 2 additions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In all, that’s:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Multiplications: 8 (for the projections) + 3 (in the dot product) = 11 multiplications'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Additions: 2 (in the dot product)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Which is total of 11 + 2 = **13 operations**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I claim this kernel function gives me the same result:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9399f8a427d05d64e6a96ea353bf5cb4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We take the dot product of the vectors in the original space *first*, and then
+    square the result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let expand it out and check whether my claim is indeed true:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/85452feb7164d91637298815f179a405.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It is. How many operations does this need? Look at step (2) above. To compute
+    the dot product in two dimensions I need 2 multiplications and 1 addition. Squaring
+    it is another multiplication.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So, in all:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Multiplications: 2 (for the dot product in the original space) + 1 (for squaring
+    the result) = 3 multiplications'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Additions: 1 (for the dot product in the original space)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A total of 3 + 1 = **4 operations. **This is only** 31% of the operations** we
+    needed before.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It looks like it is faster to use a kernel function to compute the dot products
+    we need. It might not seem like a big deal here: we’re looking at 4 vs 13 operations,
+    but with input points with a lot more dimensions, and with the projected space
+    having an even higher number of dimensions, the computational savings for a large
+    dataset add up incredibly fast. So that’s one huge advantage of using kernels.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most SVM libraries already come pre-packaged with some popular kernels like *Polynomial,
+    Radial Basis Function (RBF)*, and *Sigmoid*. When we don’t use a projection (as
+    in our first example in this article), we compute the dot products in the original
+    space — this we refer to as using the *linear kernel*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Many of these kernels give you additional levers to further tune it for your
+    data. For example, the polynomial kernel:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1661dfcdaaebf0ea6ee84609f77095fa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: allows you to pick the value of *c *and *d* (the degree of the polynomial).
+    For the 3D projection above, I had used a polynomial kernel with *c=0* and *d=2*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But we are not done with the awesomeness of kernels yet!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Remember I mentioned projecting to infinite dimensions a while back? If you
+    haven’t already guessed, the way to make it work is to have the right kernel function.
+    That way, we really don’t have to project the input data, or worry about storing
+    infinite dimensions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*A kernel function computes what the dot product would be if you had actually
+    projected the data.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The RBF kernel is commonly used for a *specific *infinite-dimensional projection.
+    We won’t go into the math of it here, but look at the references at the end of
+    this article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How can we have infinite dimensions, but can still compute the dot product?
+    If you find this question confusing, think about how we compute sums of infinite
+    series. This is similar. There are infinite terms in the dot product, but there
+    happens to exist a formula to calculate their sum.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This answers the questions we had asked in the previous section. Let’s summarize:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We typically don’t define a specific projection for our data. Instead, we pick
+    from available kernels, tweaking them in some cases, to find one best suited to
+    the data.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Of course, nothing stops us from defining our own kernels, or performing the
+    projection ourselves, but in many cases we don’t need to. Or we at least start
+    by trying out what’s already available.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If there is a kernel available for the projection we want, we prefer to use
+    the kernel, because that’s often faster.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: RBF kernels can project points to infinite dimensions.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**SVM libraries to get started**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'There are quite a few SVM libraries you could start practicing with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[libSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SVM-Light](http://svmlight.joachims.org/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SVMTorch](http://bengio.abracadoudou.com/SVMTorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Many general ML libraries like [scikit-learn](http://scikit-learn.org/stable/) also
+    offer SVM modules, which are often wrappers around dedicated SVM libraries. My
+    recommendation is to start out with the tried and tested [*libSVM*](https://www.csie.ntu.edu.tw/~cjlin/libsvm/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: libSVM is available as a commandline tool, but the download also bundles Python,
+    Java, and Matlab wrappers. As long as you have a file with your data in a format
+    libSVM understands (the README that’s part of the download explains this, along
+    with other available options) you are good to go.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In fact, if you need a *really quick *feel of how different kernels, the value
+    of C, etc., influence finding the separating boundary, try out the “Graphical
+    Interface” on their [home page](https://www.csie.ntu.edu.tw/~cjlin/libsvm/). Mark
+    your points for different classes, pick the SVM parameters, and hit Run!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I couldn’t resist and quickly marked a few points:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/58389de916f9e685d93975c5f870185d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Yep, I’m not making it easy for the SVM.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Then I tried out a couple of kernels:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8c6175646063a8d95a54bc9c0737c42e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The interface doesn’t show you the separating boundary, but shows you the regions
+    that the SVM learns as belonging to a specific label. As you can see, the linear
+    kernel completely ignores the red points. It thinks of the whole space as yellow
+    (-ish green). But the RBF kernel neatly carves out a ring for the red label!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Helpful resources**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We have been primarily relying on visual intuitions here. While that’s a great
+    way to gain an initial understanding, I’d strongly encourage you to dig deeper.
+    An example of where visual intuition might prove to be insufficient is in understanding
+    margin width and support vectors for non-linearly separable cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Remember that these quantities are decided by optimizing a trade-off*.* Unless
+    you look at the math, some of the results may seem counter-intuitive.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Another area where getting to know the math helps is in understanding kernel
+    functions. Consider the RBF kernel, which I’ve barely introduced in this short
+    article. I hope the “mystique” surrounding it — its relation to an infinite-dimensional
+    projection coupled with the fantastic results on the last dataset (the “ring”) — has
+    convinced you to take a closer look at it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Resources I would recommend:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Video Lectures: Learning from Data](https://www.youtube.com/watch?v=MEG35RDD7RA&list=PLCA2C1469EA777F9A) by
+    Yaser Abu-Mostafa. Lectures from 14 to 16 talk about SVMs and kernels. I’d also
+    highly recommend the whole series if you’re looking for an introduction to ML,
+    it maintains an excellent balance between math and intuition.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Book: The Elements of Statistical Learning](http://web.stanford.edu/~hastie/ElemStatLearn/printings/ESLII_print12.pdf) — Trevor
+    Hastie, Robert Tibshirani, Jerome Friedman.Chapter 4 introduces the basic idea
+    behind SVMs, while Chapter 12 deals with it comprehensively.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Happy (Machine) Learning!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Abhishek Ghose](https://www.linkedin.com/in/abhishek-ghose-36197624/)**
+    is a Senior Data Scientist at 24/7, Inc.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://blog.statsbot.co/support-vector-machines-tutorial-c1618e635e93).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Support Vector Machines: A Concise Technical Overview](/2016/09/support-vector-machines-concise-technical-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is a Support Vector Machine, and Why Would I Use it?](/2017/02/yhat-support-vector-machine.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Machine Learning Abstracts: Support Vector Machines](/2017/08/machine-learning-abstracts-support-vector-machines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Support Vector Machines: An Intuitive Approach](https://www.kdnuggets.com/2022/08/support-vector-machines-intuitive-approach.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Gentle Introduction to Support Vector Machines](https://www.kdnuggets.com/2023/07/gentle-introduction-support-vector-machines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Semantic Vector Search Transforms Customer Support Interactions](https://www.kdnuggets.com/how-semantic-vector-search-transforms-customer-support-interactions)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Vector Databases and Vector Indexes: Architecting LLM Apps](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Picking Examples to Understand Machine Learning Model](https://www.kdnuggets.com/2022/11/picking-examples-understand-machine-learning-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning with Examples](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,231 @@
+- en: 'Deep Learning Reading Group: SqueezeNet'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/09/deep-learning-reading-group-squeezenet.html](https://www.kdnuggets.com/2016/09/deep-learning-reading-group-squeezenet.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Abhinav Ganesh, Lab41.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4ab887c7999e764c91ffdb9f2d513d5e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[The next paper](https://arxiv.org/abs/1602.07360) from our reading group is
+    by Forrest N. Iandola, Matthew W. Moskewicz, Khalid Ashraf, Song Han, William
+    J. Dally and Kurt Keutzer. This paper introduces a small CNN architecture called
+    “SqueezeNet” that achieves AlexNet-level accuracy on ImageNet with 50x fewer parameters.
+    As you may have noticed with one of [our recent posts](https://gab41.lab41.org/lab41-reading-group-deep-compression-9c36064fb209#.qy0o30qcv) we’re
+    really interested in learning more about the compression of neural network architectures
+    and this paper really stood out.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s no secret that much of deep learning is tied up in the hell that is parameter
+    tuning. This paper makes a case for increased study into the area of convolutional
+    neural network design in order to drastically reduce the number of parameters
+    you have to deal with. Unlike our previous [post on “deep compression”](https://gab41.lab41.org/lab41-reading-group-deep-compression-9c36064fb209#.b2l7ziyp0),
+    this paper proposes making a network smaller by starting with a smarter design
+    versus using a clever compression scheme. The authors outline 3 main strategies
+    for reducing parameter size while maximizing accuracy. I’ll walk you through them
+    now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Strategy 1\. Make the network smaller by replacing 3x3 filters with 1x1 filters
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This strategy reduces the number of parameters 9x by replacing a bunch of 3x3
+    filters with 1x1 filters. At first this seemed really confusing to me. By moving
+    1x1 filters across an image I would think that each filter has less information
+    to look at and would thus perform more poorly, however that doesn’t seem to be
+    the case! Typically a larger 3x3 convolution filter captures spatial information
+    of pixels close to each other. On the other hand, 1x1 convolutional filters zero
+    in on a single pixel and capture relationships amongst its channels as opposed
+    to neighboring pixels. If you are looking to learn more about the use of 1x1 filters
+    check out [this blog post](http://iamaaditya.github.io/2016/03/one-by-one-convolution/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Strategy 2\. Reduce the number of inputs for the remaining 3x3 filters
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'This strategy reduces the number of parameters by basically just using fewer
+    filters. The systematic way this is done is by feeding “squeeze” layers into what
+    they term “expand” layers as shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Squeeze](../Images/ad25266823d18359a7a53c22511ff7cb.png)](https://cdn-images-1.medium.com/max/1000/1*C4Y78hoaN0hPxyWJnkG5vQ.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*“Fire module”. Image from paper*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Time to define some terms that are specific only to this paper! As you can see
+    above, “squeeze” layers are convolution layers that are made up of only 1x1 filters
+    and “expand” layers are convolution layers with a mix of 1x1 and 3x3 filters.
+    By reducing the number of filters in the “squeeze” layer feeding into the “expand”
+    layer, they are reducing the number of connections entering these 3x3 filters
+    thus reducing the total number of parameters. The authors of this paper call this
+    specific architecture the “fire module” and it serves as the basic building block
+    for the SqueezeNet architecture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Strategy 3\. Downsample late in the network so that convolution layers have
+    large activation maps.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Now that we have talked about ways to reduce the sheer number of parameters
+    we are working with, how can we get the most out of our remaining set of smaller
+    parameters? The authors believe that by decreasing the stride with later convolution
+    layers and thus creating a larger activation/feature map later in the network,
+    classification accuracy actually increases. Having larger activation maps near
+    the end of the network is in stark contrast to networks like [VGG](https://arxiv.org/abs/1409.1556) where
+    activation maps get smaller as you get closer to the end of a network. This different
+    approach is very interesting and they cite a [paper by K. He and H. Sun](https://arxiv.org/abs/1412.1710) that
+    similarly applies a delayed down sampling that leads to higher classification
+    accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So how does this all fit together?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'SqueezeNet takes advantage of the aforementioned “fire module” and chains a
+    bunch of these modules together to arrive at a smaller model. Here are a few variants
+    of this chaining process as shown in their paper:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Chaining process variants](../Images/7aae430c3c14b8c7ce9e2666873ff69b.png)](https://cdn-images-1.medium.com/max/1000/1*QJGepE_JorGO1LlI0Qy1yA.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Left: SqueezeNet; Middle: SqueezeNet with simple bypass; Right: SqueezeNet
+    with complex bypass. Image from paper.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the surprising things I found with this architecture is the lack of fully-connected
+    layers. What’s crazy about this is that typically in a network like [VGG](https://arxiv.org/abs/1409.1556),
+    the later fully connected layers learn the relationships between the earlier higher
+    level features of a CNN and the classes the network is trying to identify. That
+    is, the fully connected layers are the ones that learn that noses and ears make
+    up a face, and wheels and lights indicate cars. However, in this architecture
+    that extra learning step seems to be embedded within the transformations between
+    various “fire modules”. The authors derived inspiration for this idea from the [NiN
+    architecture](https://arxiv.org/abs/1312.4400).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Enough with the details! How does this perform?
+  prefs: []
+  type: TYPE_NORMAL
+- en: The authors of the paper show some impressive results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Results](../Images/9ce8e13b58af9a994e6d24879114181c.png)](https://cdn-images-1.medium.com/max/1000/1*RaSehomyb8PZbpg2xnTamQ.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*SqueezeNet benchmarking against other CNN architectures. Image from paper.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Their SqueezeNet architecture was able to achieve a 50X reduction in model size
+    compared to AlexNet while meeting or exceeding the top-1 and top-5 accuracy of
+    AlexNet. But perhaps the most interesting part of this paper is their application
+    of Deep Compression (explained in [our previous post](https://gab41.lab41.org/lab41-reading-group-deep-compression-9c36064fb209#.qy0o30qcv))
+    to their already smaller model. This application of Deep Compression created a
+    model that was 510x smaller than AlexNet! These results are really encouraging
+    because it shows the potential for combining different approaches for compression.
+    As next steps I would love to see how this type of design thinking can apply to
+    other neural network architectures and deep learning applications.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If this paper seems interesting to you, definitely check out their open source
+    [code](https://github.com/DeepScale/SqueezeNet) for SqueezeNet on Github. I only
+    had time to cover the highlights but [their paper](https://arxiv.org/abs/1602.07360) is
+    full of in depth discussions on parameter reducing CNN design.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Abhinav Ganesh](https://www.linkedin.com/in/abhinav-ganesh-689b0953)** is
+    currently a software engineer at Lab41 working on applying machine learning to
+    cybersecurity. He holds a BS and MS in electrical and computer engineering from
+    Carnegie Mellon University.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Lab41](http://www.lab41.org)** is a “challenge lab” where the U.S. Intelligence
+    Community comes together with their counterparts in academia, industry, and In-Q-Tel
+    to tackle big data. It allows participants from diverse backgrounds to gain access
+    to ideas, talent, and technology to explore what works and what doesn’t in data
+    analytics. An open, collaborative environment, Lab41 fosters valuable relationships
+    between participants.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://gab41.lab41.org/lab41-reading-group-squeezenet-9b9d1d754c75).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deep Learning Reading Group: Deep Residual Learning for Image Recognition](/2016/09/deep-learning-reading-group-deep-residual-learning-image-recognition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Up to Speed on Deep Learning: July Update](/2016/08/deep-learning-july-update.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Understanding Deep Learning](/2016/01/seven-steps-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Reading Minds with AI: Researchers Translate Brain Waves to Images](https://www.kdnuggets.com/2023/03/reading-minds-ai-researchers-translate-brain-waves-images.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Step by Step Guide to Reading and Understanding SQL Queries](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[2024 Reading List: 5 Essential Reads on Artificial Intelligence](https://www.kdnuggets.com/2024-reading-list-5-essential-reads-on-artificial-intelligence)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL Group By and Partition By Scenarios: When and How to Combine…](https://www.kdnuggets.com/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, June 8: 21 Cheat Sheets for Data Science…](https://www.kdnuggets.com/2022/n23.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

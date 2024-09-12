@@ -1,0 +1,360 @@
+- en: Deploying Trained Models to Production with TensorFlow Serving
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/11/serving-tensorflow-models.html](https://www.kdnuggets.com/2020/11/serving-tensorflow-models.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/cc3390e60f5b0669e9916ac5a0a8c044.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Photo by [Kate Townsend](https://unsplash.com/@k8townsend?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+    on [Unsplash](https://unsplash.com/s/photos/serve?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once you’ve trained a TensorFlow model and it’s ready to be deployed, you’d
+    probably like to move it to a production environment. Luckily, TensorFlow provides
+    a way to do this with minimal effort. In this article, we’ll use a pre-trained
+    model, save it, and serve it using TensorFlow Serving. Let’s get moving!
+  prefs: []
+  type: TYPE_NORMAL
+- en: TensorFlow ModelServer
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving) is a system
+    built with the sole purpose of bringing machine learning models to production.
+    TensorFlow’s ModelServer provides support for RESTful APIs. However, we’ll need
+    to install it before we can use it. First, let’s add it as a package source.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Installing TensorFlow ModelServer can now be done by updating the system and
+    using `apt-get` to install it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Developing the Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Next, let’s use a pre-trained model to create the model we’d like to serve.
+    In this case, we’ll use a version of [VGG16](https://arxiv.org/abs/1409.1556) with
+    weights pre-trained on [ImageNet](http://www.image-net.org/). To make it work,
+    we have to get a couple of imports out of the way:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`VGG16` the architecture'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`image` for working with image files'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`preprocess_input` for pre-processing image inputs'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`decode_predictions` for showing us the probability and class names'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, we define the model with the ImageNet weights.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: With the model in place, we can try out a sample prediction. We start by defining
+    the path to an image file (a lion) and using `image`to load it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: After pre-processing it, we can make predictions using it. We can see that it
+    was able to predict that the image is a lion with 99% accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now that we have our model, we can save it to prepare it for serving with TensorFlow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Saving the Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s now save that model. Notice that we’re saving it to a`/1`folder to indicate
+    the model version. This is **critical**, especially when you want to serve new
+    model versions automatically. More on that in a few.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Running the Server with TensorFlow ModelServer
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let’s start by defining the configuration we’ll use for serving:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`name` is the name of our model—in this case, we’ll call it `vgg16`.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`base_path` is the absolute path to the location of our saved model. Be sure
+    to change this to your own path.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `model_platform` is obviously TensorFlow.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`model_version_policy` enables us to specify model versioning information.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Now we can run the command that will serve the model from the command line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`rest_api_port=8000` means that our REST API will be served at port 8000.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`model_config_file` defines the config file that we’d defined above.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`model_config_file_poll_wait_seconds` indicates how long to wait before checking
+    for changes in the config file. For example, changing the version to 2 in the
+    config file would lead to version 2 of the model being served automatically. This
+    is because changes in the config file are being checked every 300 seconds, in
+    this case.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Making Predictions using the REST API
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: At this point, the [REST API](https://www.tensorflow.org/tfx/serving/api_rest) for
+    our model can be found here: [http://localhost:8000/v1/models/vgg16/versions/1:predict](http://localhost:8000/v1/models/vgg16/versions/1:predict).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can use this endpoint to make predictions. In order to do that, we’ll need
+    to pass [JSON](https://www.json.org/json-en.html)-formatted data to the endpoint.
+    To that end — no pun intended — we’ll use the `*json*` module in Python. In order
+    to make requests to the endpoint, we’ll use the `requests` Python package.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s start by importing those two.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Remember that the *x* variable contained the pre-processed image. We’ll create
+    JSON data containing that. Like any other RESTFUL request, we set the content
+    type to`application/json`. Afterward, we make a request to our endpoint as we
+    pass in the headers and the data. After getting the predictions, we decode them
+    just like we did at the beginning of this article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/20bf95dec0e473ec61b0efb359e74d48.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Serving with Docker
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There is an even quicker and shorter way for you to serve TensorFlow models—using [Docker](https://hub.docker.com/r/tensorflow/serving).
+    This is actually the recommended way, but knowing the previous method is important,
+    just in case you need it for a specific use case. Serving your model with Docker
+    is as easy as pulling the [TensorFlow Serving image](https://www.tensorflow.org/tfx/serving/docker) and
+    mounting your model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With [Docker installed](https://docs.docker.com/engine/install/), run this code
+    to pull the TensorFlow Serving image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s now use that image to serve the model. This is done using `docker run`and
+    passing a couple of arguments:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`-p 8501:8501` means that the container’s port 8501 will be accessible on our
+    localhost at port 8501.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`— name`for naming our container—choose the name your prefer.I’ve chosen `tf_vgg_server` in
+    this case.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`— mount type=bind,source=/media/derrick/5EAD61BA2C09C31B/Notebooks/Python/serving/saved_tf_model,target=/models/vgg16`means
+    that the model will be mounted to `/models/vgg16`on the Docker container.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`-e MODEL_NAME=vgg16` indicates that TensorFlow serving should load the model
+    called `vgg16`.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`-t tensorflow/serving` indicates that we’re using the `tensorflow/serving`image
+    that we pulled earlier.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`&` running the command in the background.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Run the code below on your terminal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now we can use the REST API endpoint to make predictions, just like we did previously.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/2efc691497994698fa72ade40bf44f76.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Clearly, we obtained the same results. With that, we’ve seen how we can serve
+    a TensorFlow model with and without Docker.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Final Thoughts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[This article ](https://www.tensorflow.org/tfx/serving/architecture)from TensorFlow
+    will give you more information on the TensorFlow Serving architecture. If you’d
+    like to dive deeper into that, this [resource](https://www.tensorflow.org/tfx/serving/serving_config) will
+    get you there.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can also explore alternative ways of building using the standard [TensorFlow
+    ModelServer.](https://www.tensorflow.org/tfx/serving/serving_advanced) In this
+    article, we focused on serving using a CPU, but you can explore how to [serve
+    on GPUs](https://www.tensorflow.org/tfx/serving/docker), as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This [repo contains links ](https://github.com/tensorflow/serving)to more tutorials
+    on TensorFlow Serving. Hopefully, this piece was of service to you!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**mwitiderrick/TensorFlow-Serving**](https://github.com/mwitiderrick/TensorFlow-Serving)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Serving TensorFlow Models. Contribute to mwitiderrick/TensorFlow-Serving development
+    by creating an account on GitHub.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: Derrick Mwiti** is a data scientist who has a great passion for sharing
+    knowledge. He is an avid contributor to the data science community via blogs such
+    as Heartbeat, Towards Data Science, Datacamp, Neptune AI, KDnuggets just to mention
+    a few. His content has been viewed over a million times on the internet. Derrick
+    is also an author and online instructor. He also trains and works with various
+    institutions to implement data science solutions as well as to upskill their staff.
+    Derrick’s studied Mathematics and Computer Science from the Multimedia University,
+    he also is an alumnus of the Meltwater Entrepreneurial School of Technology. If
+    the world of Data Science, Machine Learning, and Deep Learning interest you, you
+    might want to check his [Complete Data Science & Machine Learning Bootcamp in
+    Python course](https://www.udemy.com/course/data-science-bootcamp-in-python/?referralCode=9F6DFBC3F92C44E8C7F4).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://heartbeat.fritz.ai/serving-tensorflow-models-3989df5d7d53).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Dealing with Imbalanced Data in Machine Learning](/2020/10/imbalanced-data-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to deploy PyTorch Lightning models to production](/2020/11/deploy-pytorch-lightning-models-production.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI Is More Than a Model: Four Steps to Complete Workflow Success](/2020/11/mathworks-ai-four-steps-workflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2023: Practical Strategies for Deploying ML…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploying Your Machine Learning Model to Production in the Cloud](https://www.kdnuggets.com/deploying-your-ml-model-to-production-in-the-cloud)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 7 Model Deployment and Serving Tools](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploying Machine Learning Models: A Step-by-Step Tutorial](https://www.kdnuggets.com/deploying-machine-learning-models-a-step-by-step-tutorial)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Prioritizing Data Science Models for Production](https://www.kdnuggets.com/2022/04/prioritizing-data-science-models-production.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tips & Tricks of Deploying Deep Learning Webapp on Heroku Cloud](https://www.kdnuggets.com/2021/12/tips-tricks-deploying-dl-webapps-heroku.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

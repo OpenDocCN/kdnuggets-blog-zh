@@ -1,0 +1,236 @@
+- en: How To Unit Test Machine Learning Code
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/11/unit-test-machine-learning-code.html](https://www.kdnuggets.com/2017/11/unit-test-machine-learning-code.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By Chase Roberts, Machine Learning Engineer**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![AI](../Images/7c1f9253aaea96785bcd1cea1033e67f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Credit: [provalisresearch.com/blog/machine-learning](https://provalisresearch.com/blog/machine-learning/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Over the past year, I’ve spent most of my working time doing deep learning research
+    and internships. And a lot of that year was making very big mistakes that helped
+    me learn not just about ML, but about how to engineer these systems correctly
+    and soundly. One of the main principles I learned during my time at Google Brain
+    was that unit tests can make or break your algorithm and can save you weeks of
+    debugging and training time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, there doesn’t seem to be a solid tutorial online on how to actually *write *unit
+    tests for neural network code. Even places like OpenAI only found bugs by [staring
+    at every line of their code and try to think why it would cause a bug](https://blog.openai.com/openai-baselines-dqn/).
+    Clearly, most of us don’t have that kind of time or self hatred, so hopefully
+    this tutorial can help you get started testing your systems sanely!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s start off with a simple example. Try to find the bug in this code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Do you see it? The network isn’t actually stacking. When I wrote this code,
+    I copy and pasted the line slim.conv2d(…) and only modified the kernel sizes,
+    and never the actual input.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’m embarrassed to say that this actually happened to me about a week ago… But
+    it’s an important lesson! These bugs are really hard to catch for a few reasons.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This code never crashes, raises an error, or even slows down.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This network still trains and the loss will still go down.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The values converge after a few hours, but to really poor results, leaving you
+    scratching your head as to what you need to fix.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: When your only feedback is the final validation error, the only place you have
+    to search is your entire network architecture. Needless to say, you’ll need a
+    better system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So how do we actually catch this *before* we do a full multi day training session?
+    Well, the easiest thing to notice about this is that the values of the layers
+    never actually reach any other tensors outside the function. So assuming we had
+    some type of loss and an optimizer, these tensors never get optimized, so they
+    will always have their default values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can detect it by simply taking a training step and comparing their before
+    and after.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Boom. In less than 15 lines of code, we now verified that a least all of the
+    variables that we created get trained.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This test is super simple and super useful. Let’s say that we fixed the previous
+    issue and now we want to start adding some batch normalization. See if you can
+    spot the bug.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Did you see it? This one is super subtle. You see, in tensorflow batch_norm
+    actually has is_training defaulted to *False, *so adding this line of code won’t
+    actually normalize your input during training! Thankfully, the last unit test
+    we wrote will catch this issue immediately! (I know, because this happened to
+    me 3 days ago.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s do another example. This actually comes from a [reddit post](https://www.reddit.com/r/MachineLearning/comments/6qyvvg/p_tensorflow_response_is_making_no_sense/) I
+    saw one day. I won’t get into too much detail, but basically the person wanted
+    to create a classifier that gave an output in the range of (0, 1). See if you
+    can find the bug.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice the bug? This one is really hard to spot before hand, and can lead to
+    super confusing results. Basically what is happening here is that prediction only
+    has a single output, which, when you apply [softmax cross entropy](https://en.wikipedia.org/wiki/Softmax_function) onto
+    it, causes the loss to be 0 always.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An easy way to test for this is to well… make sure the loss is never 0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another good test to do is similar to our first test, but backwards. You can
+    make sure that only the variables you want to train actually get trained. Take
+    for example a GAN. One of the common bugs to appear is accidentally forgetting
+    to set which variables to train during which optimization. Code like this happens
+    all the time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The biggest issue here is that the optimizer has a default setting to optimize
+    ALL of the variables. In advance architectures like GANs, this is a death sentence
+    to all of your training time. However, you can easily detect these mistakes by
+    writing a test like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A very similar test can be written for the discriminator. And this same test
+    can be used for a lot of reinforcement learning algorithms as well. Many actor-critic
+    models have separate networks that need to be optimized by different losses.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here are some patterns I would recommend following for your tests.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keep them deterministic. It would really suck to have a test fail in a weird
+    way, only to never be able to recreate it. If you *really* want randomized input,
+    make sure to seed the random number so you can rerun the test easily.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Keep the tests short. Don’t have a unit test that trains to convergence and
+    checks against a validation set. You are wasting your own time if you do this.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Make sure you reset the graph between each test.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In conclusion, these black box algorithms still have lots of ways to be tested!
+    Spending an hour writing a test can save you days of rerunning training sessions,
+    and can greatly improve your research. Wouldn’t suck to have to throw away perfectly
+    good ideas because our implementations were buggy?
+  prefs: []
+  type: TYPE_NORMAL
+- en: This list clearly isn’t comprehensive, but it’s a solid start! If you have extra
+    advice or specific tests that you found to be helpful, please message me on [twitter](https://twitter.com/TheNerdStation)!
+    I’d love to make a part 2 of this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: All opinions in this piece are a reflection of my experiences and are not sponsored
+    or supported by Google.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Chase Roberts](http://thenerdstation.github.io/)** is a former Google
+    Brain research intern. Worked on machine learning robotics team. Focused on implementation
+    and in depth analysis of Progressive Neural Networks for transfer learning. Also
+    helped implement reinforcement learning architecture.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[TensorFlow: What Parameters to Optimize?](/2017/11/tensorflow-parameters-optimize.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Software Engineering vs Machine Learning Concepts](/2017/03/software-engineering-vs-machine-learning-concepts.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using TensorFlow for Predictive Analytics with Linear Regression](/2017/11/tensorflow-predictive-analytics-linear-regression.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Perform Unit Testing in Python?](https://www.kdnuggets.com/2023/01/perform-unit-testing-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Ace Data Science Assessment Test by Using Automatic EDA Tools](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Performing a T-Test in Python](https://www.kdnuggets.com/2023/01/performing-ttest-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beyond Accuracy: Evaluating & Improving a Model with the NLP Test Library](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Announcing PyCaret 3.0: Open-source, Low-code Machine Learning in Python](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, April 27: A Brief Introduction to Papers With Code;…](https://www.kdnuggets.com/2022/n17.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

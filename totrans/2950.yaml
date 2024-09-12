@@ -1,0 +1,379 @@
+- en: 'How (not) to use Machine Learning for time series forecasting: Avoiding the
+    pitfalls'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/05/machine-learning-time-series-forecasting.html](https://www.kdnuggets.com/2019/05/machine-learning-time-series-forecasting.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Vegard Flovik](https://www.linkedin.com/in/vegard-flovik/)**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In my other posts, I have covereaud topics such as: [How to combine machine
+    learning and physics](https://towardsdatascience.com/how-do-you-combine-machine-learning-and-physics-based-modeling-3a3545d58ab9),
+    and how [machine learning can be used for production optimization](https://towardsdatascience.com/machine-learning-for-production-optimization-e460a0b82237) as
+    well as [anomaly detection and condition monitoring](https://www.linkedin.com/pulse/how-use-machine-learning-anomaly-detection-condition-flovik-phd/).
+    But in this post, I will discuss some of the common pitfalls of machine learning
+    for time series forecasting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/376ee98c1f8813944396a42ed0c44481.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Time series forecasting is an important area of machine learning. It is important
+    because there are so many prediction problems that involve a time component. However,
+    while the time component adds additional information, it also makes time series
+    problems more difficult to handle compared to many other prediction tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This post will go through the task of [time series forecasting](https://en.wikipedia.org/wiki/Time_series) using
+    machine learning, and how to avoid some of the common pitfalls. Through a concrete
+    example, I will demonstrate how one could seemingly have a good model and decide
+    to put it into production, whereas in reality, the model might have no predictive
+    power whatsoever, More specifically, I will focus on how to evaluate your model
+    accuracy, and show how relying simply on common error metrics such as [mean percentage
+    error](https://en.wikipedia.org/wiki/Mean_absolute_percentage_error), [R2 score](https://en.wikipedia.org/wiki/Coefficient_of_determination) etc.
+    can be very misleading if they are applied without caution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Machine learning models for time series forecasting
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are several types of models that can be used for time-series forecasting.
+    In this specific example, I used a Long short-term memory network, or in short [LSTM
+    Network](https://en.wikipedia.org/wiki/Long_short-term_memory), which is a special
+    kind of neural network that make predictions according to the data of previous
+    times. It is popular for language recognition, time series analysis and much more.
+    However, in my experience, simpler types of models actually provide just as accurate
+    predictions in many cases. Using models such as e.g. [random forest](https://en.wikipedia.org/wiki/Random_forest), [gradient
+    boosting regressor](https://en.wikipedia.org/wiki/Gradient_boosting)and [time
+    delay neural networks](https://en.wikipedia.org/wiki/Time_delay_neural_network),
+    temporal information can be included through a set of delays that are added to
+    the input, so that the data is represented at different points in time. Due to
+    their sequential nature, TDNN’s are implemented as a [feedforward neural network](https://en.wikipedia.org/wiki/Feedforward_neural_network) instead
+    of a [recurrent neural network](https://en.wikipedia.org/wiki/Recurrent_neural_network).
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to implement the models using open source software libraries
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I usually define my neural network type of models using [Keras](https://keras.io/),
+    which is a high-level neural networks API, written in Python and capable of running
+    on top of [TensorFlow](https://github.com/tensorflow/tensorflow), [CNTK](https://github.com/Microsoft/cntk),
+    or [Theano](https://github.com/Theano/Theano). For other types of models I usually
+    use [Scikit-Learn](http://scikit-learn.org/stable/), which is a free software
+    machine learning library, It features various [classification](https://en.wikipedia.org/wiki/Statistical_classification), [regression](https://en.wikipedia.org/wiki/Regression_analysis) and [clustering](https://en.wikipedia.org/wiki/Cluster_analysis) algorithms
+    including [support vector machines](https://en.wikipedia.org/wiki/Support_vector_machine), [random
+    forests](https://en.wikipedia.org/wiki/Random_forests), [gradient boosting](https://en.wikipedia.org/wiki/Gradient_boosting), [*k*-means](https://en.wikipedia.org/wiki/K-means_clustering) and [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN),
+    and is designed to inter-operate with the Python numerical and scientific libraries [NumPy](https://en.wikipedia.org/wiki/NumPy) and [SciPy](https://en.wikipedia.org/wiki/SciPy).
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, the main topic of this article is not how to implement a time series
+    forecasting model, but rather how to evaluate the model predictions. Due to this,
+    I will not go into the details of model building etc., as there are plenty of
+    other blog posts and articles covering those subjects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Example case: Prediction of time series data'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The example data used in this case is illustrated in the figure below. I will
+    get back to the data in more detail later, but for now, let`s assume this data
+    represents e.g. the yearly evolution of a stock index. The data is split into
+    a training and test set where the first 250 days are used as training data for
+    the model, and we then try to predict the stock index during the last part of
+    the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/3e4a7802a8b91fa90b5bb7fc9b8100a3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As I do not focus on model implementation in this article, let`s proceed directly
+    to the process of evaluating the model accuracy. Just by visually inspecting the
+    above figure, the model predictions seem to follow the real index closely, indicating
+    a good accuracy. However, to be a bit more precise, we can evaluate the model
+    accuracy by plotting the real vs. predicted values in a scatter plot as illustrated
+    below, and also calculate the common error metric [R2 score](https://en.wikipedia.org/wiki/Coefficient_of_determination).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/04f8f11a51f487fbbca068edf32b4582.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: From the model predictions, we obtain an R2 score of 0.89, and seemingly a good
+    match between the real and predicted values. However, as I will now discuss in
+    more detail, this metric and model evaluation can be very misleading.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is simply WRONG….
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: From the above figures and calculated error metrics, the model is apparently
+    giving accurate predictions. However, this is not the case at all, and is simply
+    an example of how choosing the wrong accuracy metric can be very misleading when
+    evaluating model performance. In this example, for the sake of illustration, the
+    data was explicitly chosen to represent data that actually cannot be predicted.
+    More specifically, the data I called “stock index”, was actually modeled using
+    a [random walk process](https://en.wikipedia.org/wiki/Random_walk). As the name
+    indicates, a random walk is a completely [stochastic process](https://en.wikipedia.org/wiki/Stochastic_process).
+    Due to this, the idea of using historical data as a training set in order to learn
+    the behavior and predict future outcomes is simply not possible. Given this, how
+    could it then be that the model is seemingly giving us such accurate predictions?
+    As I will get back to in more detail, it all comes down to the (wrong) choice
+    of accuracy metric.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Time delayed predictions and autocorrelations
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Time series data, as the name indicates, differ from other types of data in
+    the sense that the temporal aspect is important. On a positive note, this gives
+    us additional information that can be used when building our machine learning
+    model, that not only the input features contain useful information, but also the
+    changes in input/output over time. However, while the time component adds additional
+    information, it also makes time series problems more difficult to handle compared
+    to many other prediction tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this specific example, I used an [LSTM Network](https://en.wikipedia.org/wiki/Long_short-term_memory) that
+    make predictions according to the data at previous times. However, when zooming
+    in a bit on the model predictions, as indicated in the figure below, we start
+    to see what the model is actually doing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e1f7528d4a17c18cb8388b9b950c1f33.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Time series data tend to be correlated in time, and exhibit a significant [autocorrelation](https://en.wikipedia.org/wiki/Autocorrelation).
+    In this case, that means that the index at time “*t*+1” is quite likely close
+    to the index at time “*t*”. As illustrated in the above figure to the right, what
+    the model is actually doing is that when predicting the value at time “*t*+1”,
+    it simply uses the value at time “*t*” as its prediction (often referred to as
+    the [persistence model](https://machinelearningmastery.com/persistence-time-series-forecasting-with-python/)).
+    Plotting the c[ross-correlation](https://en.wikipedia.org/wiki/Cross-correlation) between
+    the predicted and real value (below figure), we see a clear peak at a time lag
+    of 1 day, indicating that the model simply uses the previous value as the prediction
+    for the future.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/07a5851d1035004b6b0b27f207386217.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Accuracy metrics can be very misleading when used incorrectly
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This means that when evaluating the model in terms of its ability of predicting
+    the value directly, common error metrics such as [mean percentage error](https://en.wikipedia.org/wiki/Mean_absolute_percentage_error) and [R2
+    score](https://en.wikipedia.org/wiki/Coefficient_of_determination) both indicate
+    a high prediction accuracy. However, as the example data is generated through
+    a random walk process, the model cannot possibly predict future outcomes. This
+    underlines the important fact that simply evaluating the models predictive powers
+    through directly calculating common error metrics can be very misleading, and
+    one can easily be fooled into being overly confident in the model accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Stationarity and differencing time series data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A [stationary time series](https://www.otexts.org/fpp/8/1) is one whose statistical
+    properties such as [mean](https://en.wikipedia.org/wiki/Mean), [variance](https://en.wikipedia.org/wiki/Variance), [autocorrelation](https://en.wikipedia.org/wiki/Autocorrelation),
+    etc. are all constant over time. Most statistical forecasting methods are based
+    on the assumption that the time series can be rendered approximately stationary
+    (i.e., “stationarized”) through the use of mathematical transformations. One such
+    basic transformation, is to [time-difference the data](https://www.otexts.org/fpp/8/1),
+    as illustrated in the below figure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bb0f437a4dd3a7ca78f33a07b8862536.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: What this transformation does, is that rather than considering the index directly,
+    we are calculating the *difference *between consecutive time steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Defining the model to predict the *difference* in values between time steps
+    rather than the value itself, is a much stronger test of the models predictive
+    powers. In that case, it cannot simply use that the data has a strong autocorrelation,
+    and use the value at time “*t*” as the prediction for “*t+*1”. Due to this, it
+    provides a better test of the model and if it has learnt anything useful from
+    the training phase, and whether analyzing historical data can actually help the
+    model predict future changes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prediction model for time-differenced data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As being able to predict the time-differenced data, rather than the data directly,
+    is a much stronger indication of the predictive power of the model, let us try
+    this with our model. The results of this test are illustrated in the figure below,
+    showing a scatter-plot of the real vs. predicted values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/25c19f3d6d1f44fc053d5cce69a0b1cb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This figure indicates that the model is **not** able to predict future changes
+    based on historical events, which is the expected result in this case, since the
+    data is generated using a completely stochastic [random walk process](https://en.wikipedia.org/wiki/Random_walk).
+    Being able to predict future outcomes of a [stochastic process](https://en.wikipedia.org/wiki/Stochastic_process) is
+    by definition not possible, and if someone claims to do this, one should be a
+    bit skeptical…
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is your time series a random walk?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Your time series may actually be a random walk, and some ways to check this
+    are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The time series shows a strong temporal dependence (autocorrelation) that decays
+    linearly or in a similar pattern.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The time series is non-stationary and making it stationary shows no obviously
+    learnable structure in the data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The persistence model (using the observation at the previous time step as what
+    will happen in the next time step) provides the best source of reliable predictions.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This last point is key for time series forecasting. Baseline forecasts with
+    the [persistence model](https://machinelearningmastery.com/persistence-time-series-forecasting-with-python/) quickly
+    indicate whether you can do significantly better. If you can’t, you’re probably
+    dealing with a random walk (or close to it). The human mind is hardwired to look
+    for patterns everywhere and we must be vigilant that we are not fooling ourselves
+    and wasting time by developing elaborate models for random walk processes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Author note: after publishing the article I became aware of a nice article
+    on the same topic by Jason Brownlee, which has similar treatment of random walks
+    and time series: [A Gentle Introduction to the Random Walk for Times Series Forecasting
+    with Python](https://machinelearningmastery.com/gentle-introduction-random-walk-times-series-forecasting-python/).*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The main point I would like to emphasize through this article, is to be **very
+    careful** when evaluating your model performance in terms of prediction accuracy.
+    As shown through the above example, even for a completely random process, where
+    predicting future outcomes is by definition impossible, one can easily be fooled.
+    By simply defining a model, making some predictions and calculating common accuracy
+    metrics, one could seemingly have a good model and decide to put it into production.
+    Whereas, in reality, the model might have no predictive power whatsoever.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you are working with time series forecasting, and perhaps consider yourself
+    a Data Scientist, I would urge you to put an emphasis on the [*Scientist*](https://en.wikipedia.org/wiki/Scientist) aspect
+    as well. Always be skeptical to what the data is telling you, ask critical questions
+    and never draw any rash conclusions. The [scientific method](https://en.wikipedia.org/wiki/Scientific_method) should
+    be applied in data science as in any other kind of science.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/how-not-to-use-machine-learning-for-time-series-forecasting-avoiding-the-pitfalls-19f9d7adf424).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio**: [Vegard Flovik](https://www.linkedin.com/in/vegard-flovik/) is a Lead
+    Data Scientist. Machine learning and advanced analytics at Axbit AS.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Resources:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[On-line and web-based: Analytics, Data Mining, Data Science, Machine Learning
+    education](https://www.kdnuggets.com/education/online.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Software for Analytics, Data Science, Data Mining, and Machine Learning](https://www.kdnuggets.com/software/index.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[An Introduction on Time Series Forecasting with Simple Neural Networks & LSTM](https://www.kdnuggets.com/2019/04/introduction-time-series-forecasting-simple-neural-networks-lstm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Accelerating Time Series Analysis with Automated Machine Learning](https://www.kdnuggets.com/2019/02/datarobot-accelerating-time-series-analysis-automated-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Fine Tune Your Machine Learning Models To Improve Forecasting Accuracy](https://www.kdnuggets.com/2019/01/fine-tune-machine-learning-models-forecasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Time Series Forecasting with Ploomber, Arima, Python, and Slurm](https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Time Series Forecasting with statsmodels and Prophet](https://www.kdnuggets.com/2023/03/time-series-forecasting-statsmodels-prophet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

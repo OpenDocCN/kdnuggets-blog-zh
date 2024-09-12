@@ -1,0 +1,575 @@
+- en: Predict Age and Gender Using Convolutional Neural Network and OpenCV
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/04/predict-age-gender-using-convolutional-neural-network-opencv.html](https://www.kdnuggets.com/2019/04/predict-age-gender-using-convolutional-neural-network-opencv.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/ab74974a523a926ad87742cfb6a68feb.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: source: [https://www.zymr.com/difference-machine-learning-artificial-intelligence-bots/](https://www.zymr.com/difference-machine-learning-artificial-intelligence-bots/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Automatic age and gender classification has become relevant to an increasing
+    amount of applications, particularly since the rise of social platforms and social
+    media. Nevertheless, performance of existing methods on real-world images is still
+    significantly lacking, especially when compared to the tremendous leaps in performance
+    recently reported for the related task of face recognition. — [**Age and Gender
+    Classification using Convolutional Neural Networks**](https://talhassner.github.io/home/publication/2015_CVPR)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Age and gender, two of the key facial attributes, play a very foundational role
+    in social interactions, making age and gender estimation from a single face image
+    an important task in intelligent applications, such as access control, human-computer
+    interaction, law enforcement, marketing intelligence and visual surveillance,
+    etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Real world use-case :**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e68f5884c27d59a18cd0b74421bc2c24.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source: [https://www.kiwi-digital.com/produkty/age-gender-detection](https://www.kiwi-digital.com/produkty/age-gender-detection)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recently I came across [**Quividi**](https://www.quividi.com/) which is an AI
+    software application which is used to detect age and gender of users who passes
+    by based on online face analyses and automatically starts playing advertisements
+    based on the targeted audience.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another example could be [**AgeBot**](https://play.google.com/store/apps/details?id=com.testa.agebot&hl=en_IN) which
+    is an Android App that determines your age from your photos using facial recognition.
+    It can guess your age and gender along with that can also find multiple faces
+    in a picture and estimate the age for each face.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Inspired by the above use cases we are going to build a simple Age and Gender
+    detection model in this detailed article. So let''s start with our use-case:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Use-case **—we will be doing some face recognition, face detection stuff
+    and furthermore, we will be using CNN (Convolutional Neural Networks) for age
+    and gender predictions from a youtube video, you don’t need to download the video
+    just the video URL is fine. The interesting part will be the usage of CNN for
+    age and gender predictions on video URLs.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Requirements :**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: pip install OpenCV-python
+  prefs: []
+  type: TYPE_NORMAL
+- en: numpy
+  prefs: []
+  type: TYPE_NORMAL
+- en: pip install pafy
+  prefs: []
+  type: TYPE_NORMAL
+- en: pip install youtube_dl (to know more about [youtube_dl](https://rg3.github.io/youtube-dl/))
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**pafy** : Pafy library is used to retrieve YouTube content and metadata(such
+    as Title, rating, viewcount, duration, rating, author, thumbnail, keywords etc).
+    To know more about [pafy](https://pypi.org/project/pafy/). Let''s check one sample :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Steps to follow :**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Get the video URL from YouTube.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Face detection with Haar cascades
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Gender Recognition with CNN
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Age Recognition with CNN
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**1.Get a video URL from YouTube:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Get the Youtube video URL and try to get the attributes of the video using pafy
+    as explained above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2\. Face detection with Haar cascades :**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a part most of us at least have heard of. OpenCV/JavaCV provide direct
+    methods to import Haar-cascades and use them to detect faces. I will not be explaining
+    this part in deep. You guys can refer to my previous [article](https://medium.com/analytics-vidhya/how-to-build-a-face-detection-model-in-python-8dc9cecadfe9) to
+    know more about face detection using OpenCV.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**3. Gender Recognition with CNN:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Gender recognition using OpenCV's fisherfaces implementation is quite popular
+    and some of you may have tried or read about it also. But, in this example, I
+    will be using a different approach to recognize gender. This method was introduced
+    by two Israel researchers, Gil Levi and Tal Hassner in 2015\. I have used the
+    CNN models trained by them in this example. We are going to use the OpenCV’s dnn
+    package which stands for “Deep Neural Networks”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the dnn package, OpenCV has provided a class called Net which can be used
+    to populate a neural network. Furthermore, these packages support importing neural
+    network models from well known deep learning frameworks like caffe, tensorflow
+    and torch. The researchers I had mentioned above have published their CNN models
+    as caffe models. Therefore, we will be using the CaffeImporter import that model
+    into our application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**4\. Age Recognition with CNN**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is almost similar to the gender detection part except that the corresponding
+    prototxt file and the caffe model file are “deploy_agenet.prototxt” and “age_net.caffemodel”.
+    Furthermore, the CNN’s output layer (probability layer) in this CNN consists of
+    8 values for 8 age classes (“0–2”, “4–6”, “8–13”, “15–20”, “25–32”, “38–43”, “48–53”
+    and “60-”)
+  prefs: []
+  type: TYPE_NORMAL
+- en: A caffe model has 2 associated files,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1 .prototxt** — The definition of CNN goes in here. This file defines the
+    layers in the neural network, each layer’s inputs, outputs and functionality.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**2 .caffemodel** — This contains the information of the trained neural network
+    (trained model).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Download .prtotxt and .caffemodel from [Here](https://talhassner.github.io/home/publication/2015_CVPR).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Download haar cascade for face detection from [Here](https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml).
+  prefs: []
+  type: TYPE_NORMAL
+- en: So let's start coding our model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Source Code:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now let''s understand the code :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 1: Import all the required libraries.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 2: Get the Youtube video URL and create an object ‘play’ which contains
+    the best resolution of the video in [webm](https://www.webmproject.org/about/)/mp4
+    format.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 3: Often, we have to capture live stream with a camera. OpenCV provides
+    a very simple interface to this. We can capture the video from the camera, convert
+    it into grayscale video and display it. Just a simple task to get started.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To capture a video, you need to create a video capture object. Its argument
+    can be either the device index or the name of a video file. Device index is just
+    the number to specify which camera. Normally one camera will be connected (as
+    in my case). So I simply pass 0 (or -1). You can select the second camera by passing
+    1 and so on. After that, you can capture frame-by-frame.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: But in my case I’m reading an online video URL, for that, I’ll pass ‘play’ object
+    to VideoCapture().
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 4: Using set() I’ll set the height and width of our video frame. **cap.set(propId,
+    value),** here 3 is the propertyId of width and 4 is for Height.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 5: Create 3 separate lists for storing Model_Mean_Values, Age and Gender.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 6: I have defined a function to load caffemodel and prototxt of both age
+    and gender detector, these are basically pre-trained CNN models which will do
+    the detection.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 7: Now we will perform face detection, Age detection, and Gender detection
+    and for that create a function **video_detector(age_net, gender_net)** inside
+    your main function and pass age_net and gender_net as its parameters.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 8: Read the cap object which is created from VideoCapture() in step 3.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**cap.read() **returns a bool (True/False). If the frame is read correctly,
+    it will be True.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '#So you can check the end of the video by checking this return value.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '#Sometimes, the cap may not have initialized the capture. In that case, this
+    code shows error.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '#You can check whether it is initialized or not by the method cap.isOpened().
+    If it is True, OK. Otherwise, open it using cap.open().'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 9: Convert the image to gray image as OpenCV face detector expects [gray
+    images](https://en.wikipedia.org/wiki/Grayscale).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 10: Load the pre-built model for facial detection.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 11: Now, how do we detect a face from an image using the CascadeClassifier ?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, again OpenCV’s CascadedClassifier has made it simple for us because of **detectMultiScale()**,
+    which detects exactly what you need.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: Below are arguments which should pass to **detectMultiScale().**
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a general function to detect objects, in this case, it’ll detect faces
+    since we called in the face cascade. If it finds a face, it returns a list of
+    positions of said face in the form “Rect(x,y,w,h).”, if not, then returns “None”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Image:** The first input is the **grayscale image**.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**scaleFactor:** This function compensates a false perception in size that
+    occurs when one face appears to be bigger than the other simply because it is
+    closer to the camera.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**minNeighbors: **Detection algorithm that uses a moving window to detect objects,
+    it does so by defining how many objects are found near the current one before
+    it can declare the face found.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 12: Loop through the list of faces and draw rectangles on the human faces
+    in the video. Here basically we’re finding faces, breaking the faces, their sizes,
+    and drawing rectangles.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 13 : OpenCV provides a function to facilitate image preprocessing for
+    deep learning classification: **blobFromImage()**. It performs :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Mean subtraction
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Scaling
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And optionally channel swapping
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: So blobFromImage*creates 4-dimensional blob from image. Optionally resizes and
+    crops image from center, subtract mean values, scales values by scalfactor , swap
+    Blue and Red channels*
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**image:** This is the input image we want to preprocess before passing it
+    through our deep neural network for classification.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**scale factor:** After we perform mean subtraction we can optionally scale
+    our images by some factor. This value defaults to `1.0` (i.e., no scaling) but
+    we can supply another value as well. It’s also important to note that scale factor
+    should be 1/**σ** as we’re actually multiplying the input channels (after mean
+    subtraction) by the scale factor.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**size:** Here we supply the spatial size that the Convolutional Neural Network
+    expects. For most current state-of-the-art neural networks this is either *224×224*, *227×227*,
+    or *299×299*.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**mean:** These are our mean subtraction values. They can be a 3-tuple of the
+    RGB means or they can be a single value in which case the supplied value is subtracted
+    from every channel of the image. If you’re performing mean subtraction, ensure
+    you supply the 3-tuple in `(R, G, B)` order, especially when utilizing the default
+    behavior of swapRB=True.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**swapRB** : OpenCV assumes images are in BGR channel order; however, the `mean` value
+    assumes we are using RGB order. To resolve this discrepancy we can swap the R
+    and B channels in the image by setting this value to `True`. By default, OpenCV
+    performs this channel swapping for us.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 14: Predict the gender.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 15: Predict the Age.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 16: Now we have to put text on our output frame using putText() module
+    of openCV.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'cv2.putText() takes parameters as :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Text data that you want to write
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Position coordinates of where you want to put it ( i.e. bottom-left corner where
+    data starts).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Font type (Check [**cv2.putText()**](https://docs.opencv.org/3.1.0/d6/d6e/group__imgproc__draw.html#ga5126f47f883d730f633d74f07456c576) docs
+    for supported fonts)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Font Scale (specifies the size of font)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: regular things like color, thickness, lineType etc. For better look, lineType
+    = cv2.LINE_AA is recommended.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Step 17: Finally print your final output.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'At the end we have :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: Our program waits up to 1 millisecond for the user to press a key. It then takes
+    the value of the key read and ANDs it with `0xFF` which removes anything above
+    the bottom 8-bits and compares the result of that with the ASCII code for the
+    letter `q` which would mean the user has decided to quit by pressing `q`on the
+    keyboard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Output** : Video URL-1: [https://www.youtube.com/watch?v=iH1ZJVqJO3Y](https://www.youtube.com/watch?v=iH1ZJVqJO3Y)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/a1c89e6e5e72c57f245f31473e3c5c13.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Youtube video 1
+  prefs: []
+  type: TYPE_NORMAL
+- en: Video URL-2: [https://www.youtube.com/watch?v=qLNhVC296YI](https://www.youtube.com/watch?v=qLNhVC296YI)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ebf2004b089b2167c848dfe2bf2a1645.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Youtube video 2
+  prefs: []
+  type: TYPE_NORMAL
+- en: Quite interesting isn’t it? Not very accurate though.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Conclusion :**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we have seen in this article that in just a few lines of code we have built
+    an age and gender detection model, from here on you can also incorporate emotion
+    detection and object detection in the same model and create a fully functional
+    application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hopefully, you found this article to be a good read and useful in your quest
+    for recognizing a person’s age and gender. Let me know your doubts in the comment
+    section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Happy Learning :)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Get in touch with me on [LinkedIn](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)**
+    is a Data Science enthusiast. Interested in Big Data, Python, Machine Learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/predict-age-and-gender-using-convolutional-neural-network-and-opencv-fd90390e3ce6).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Beginner’s Guide to Linear Regression in Python with Scikit-Learn](/2019/03/beginners-guide-linear-regression-python-scikit-learn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to do Everything in Computer Vision](/2019/02/everything-computer-vision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Pedestrian Detection in Aerial Images Using RetinaNet](/2019/03/pedestrian-detection-aerial-images-retinanet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

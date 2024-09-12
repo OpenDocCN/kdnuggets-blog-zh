@@ -1,0 +1,427 @@
+- en: A Gentle Guide to Starting Your NLP Project with AllenNLP
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/07/gentle-guide-starting-nlp-project-allennlp.html](https://www.kdnuggets.com/2019/07/gentle-guide-starting-nlp-project-allennlp.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Yasufumi Taniguchi](https://medium.com/@yasufumy), NLP Engineer**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ac5c93e8b81fcd6076cb2ecba7051cec.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Jamie Templeton](https://unsplash.com/@jamietempleton?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+    on [Unsplash](https://unsplash.com/search/photos/sign?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Do you happen to know the library, [AllenNLP](https://allennlp.org/)? If you’re
+    working on Natural Language Processing (NLP), you might hear about the name. However,
+    I guess a few people actually use it. Or the other has tried before but hasn’t
+    know where to start because there are lots of functions. For those who aren’t
+    familiar with AllenNLP, I will give a brief overview of the library and let you
+    know the advantages of integrating it to your project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: AllenNLP is the deep learning library for NLP. [Allen Institute for Artificial
+    Intelligence](https://allenai.org/), which is one of the leading research organizations
+    of Artificial Intelligence, develops this [PyTorch](https://pytorch.org/)-based
+    library. Using AllenNLP to develop a model is much easier than building a model
+    by PyTorch from scratch. Not only it provides easier development but also supports
+    the management of the experiments and its evaluation after development. **AllenNLP
+    has the feature to focus on research development**. More specifically, it’s possible
+    to **prototype the model quickly** and makes **easier to manage the experiments**
+    with a lot of different parameters. Also, it has consideration using readable
+    variable names.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We might have the experience to get messy codes or lost our important experimental
+    result by coding from scratch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6a4ee2d5554ad55625ea5cc4d5aa35f5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When I’ve got to know AllenNLP
+  prefs: []
+  type: TYPE_NORMAL
+- en: In AllenNLP, we should follow the development and experiment flow below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b2fb341b91c0b31e85006a7433a1a6e2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Comparison between the typical process and the process with AllenNLP
+  prefs: []
+  type: TYPE_NORMAL
+- en: According to your own research project, you only need to implement DatasetReader
+    and Model, and then run your various experiments with config files. Basically,
+    we need to understand three features below to start our project with AllenNLP
+  prefs: []
+  type: TYPE_NORMAL
+- en: Define Your DatasetReader
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Define Your Model
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Setup Your Config Files
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'In other words, once you get to understand it, you are able to do scalable
+    development. In this post, I’ll explain the three key features above with tackling
+    a sentiment analysis task. Also, you can check the code using in the post as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**yasufumy/allennlp_imdb**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*The Simplest AllenNLP recipe. Contribute to yasufumy/allennlp_imdb development
+    by creating an account on GitHub.*](https://github.com/yasufumy/allennlp_imdb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s get started!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '0\. Quick Recap: Sentiment Analysis'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Here I’ll explain the basis of sentiment analysis task for those who aren’t
+    familiar with it. So if you’ve already known it well, please proceed the next
+    section: 1\. Define DatasetReader.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Sentiment analysis is a task that tries to classify the polarity (positive
+    or negative) of a given document. In this post, we use the movie reviews in [IMDB](https://www.imdb.com/)as
+    given documents. For example, we’re going to find the positive and the negative
+    reviews in [Avengers: Endgame’s User Reviews](https://www.imdb.com/title/tt4154796/reviews?ref_=tt_urv).
+    In this time, we’ll use the dataset provided in the link below.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Sentiment Analysis**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*This is a dataset for binary sentiment classification containing substantially
+    more data than previous benchmark…*](https://ai.stanford.edu/~amaas/data/sentiment/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’re going to build the model takes the documents (the reviews) as input and
+    predicts the label (the polarity) as output. We should prepare the pair of the
+    document and the label as the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Define Your DatasetReader
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The figure below shows the DatasetReader class in AllenNLP. This class mainly
+    handles the data using in the task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/126ceac691f78d245ab5374720536624.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The DatasetReader takes raw dataset as input and applies the preprocessing like
+    lowercasing, tokenization and so on. Finally, it outputs the list of the Instance
+    object which holds preprocessed each data as attributes. In this post, the Instance
+    object has the document and the label information as attributes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we should inherit the DatasetReader class to make our own. Then we need
+    to implement the three methods: `__init__` ,`_read`and`text_to_instance`. So let’s
+    look at the way how to implement our own DatasetReader. I’ll skip the implementation
+    of the `read` method because it doesn’t relate to the usage of AllenNLP so much.
+    But if you’re interested in it, you can refer to [this link](https://github.com/yasufumy/allennlp_imdb/blob/master/allennlp_imdb/data/dataset_readers/imdb.py#L38) though.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The implementation `__init__` will be as follows. We can control the arguments
+    of this method via config files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: In this post, I set `token_indexers` and `tokenizer` as the arguments because
+    I assume that we change the way of indexing or tokenization in the experiments.
+    The `token_indexers` performs indexing and the `tokenizer`performs tokenization.
+    The class I implemented has the [decorator](https://docs.python.org/3/glossary.html#term-decorator)(`DatasetReader.register('imdb')`)
+    which enables us to control it by config files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The implementation `text_to_instance` will be as follows. This method is the
+    main process of DatasetReader. The `text_to_instance` takes each raw data as input,
+    applies some preprocessing and output each raw data as a `Instance`. In IMDB,
+    it takes the review string and the polarity label as input.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In AllenNLP, the Instance’s attributes correspond to the Field. We can create
+    the Instance from the dictionary of the Fields. The Instance’s attributes stand
+    each data like a document or a label. In IMDB, the Instance hash two attributes:
+    the review and the label. The review and the label correspond to the TextField
+    and the LabelField respectively.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The mentioned above is the way to define our DatasetReader. You can refer to
+    the whole code from [this link](https://github.com/yasufumy/allennlp_imdb/blob/master/allennlp_imdb/data/dataset_readers/imdb.py#L22).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Define Your Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The figure below shows the Model class in AllenNLP. This class mainly builds
+    the model to solve the task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1f2a255cb5e5a614eac16ef55823f6e8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The Model takes the data as input and outputs the results of the forward computation
+    and the evaluation metrics as the dictionary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we should inherit the Model class to make our own. Then we need to implement
+    the three methods: `__init__` ,`forward` and`get_metrics`. Here we implement the
+    polarity classification model for IMDB’s reviews with Recurrent Neural Network
+    (RNN).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The implementation `__init__` will be as follows. We can control the arguments
+    of this method via config files the same as the DatasetReader.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: In this post, I set `text_field_embedder` and `seq2vec_encoder` as the arguments
+    because I assume that we change the way of embedding or RNN types in the experiments.
+    The `text_field_embedder` embeds the token as the vector and the `seq2vec_encoder`
+    encodes the sequence of the tokens with RNN (Technically you can use other types
+    except for RNN). The class I implemented has the decorator (`Model.register('rnn_classifier')`)
+    which enables us to control it by config files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The implementation of `forward` will be as follows. This method is the main
+    process of Model. The `forward` takes the data as input, calculate by the forward
+    computation, and outputs the results of predicted labels and the evaluation metrics
+    as the dictionary. Most implementation is the same as the way of PyTorch. However,
+    please note that we should return results as the dictionary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: This implementation above computes the classification probabilities for polarity,
+    the cross-entropy loss, and the accuracy. We compute the classification probabilities
+    from the output of RNN through softmax. Also, we compute the model’s classification
+    accuracy if the label is given. Finally, it outputs each computational result
+    as the dictionary (`output_dict`).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The implementation `get_metrics` will be as follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: It returns the value of the accuracy as the dictionary. This is because we use
+    the model’s accuracy as the metric in this time. We can use multiple values in
+    the `get_metrics` method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The mentioned above is the way to define our Model. You can refer to the whole
+    code from [this link](https://github.com/yasufumy/allennlp_imdb/blob/master/allennlp_imdb/model/rnn_classifier.py).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Setup Your Config Files
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The figure below shows the way how to run our experiments in AllenNLP. We can
+    run our experiments by passing our config files to the `allennlp train`command.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/caa82e60e76dd46434d9d5264645a2a8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: I’ll explain the way how to make our config files to control our experiments.
+    We can make config files with the GUI interface via the command below. But I’ll
+    explain from scratch for better understanding.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: The config file mainly consists of the `dataset_reader` field, the `model` field,
+    and the `trainer` field.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The `dataset_reader` field and the `model` field specify the settings of the
+    DatasetReader and the Model we implemented so far respectively. Also, the `trainer`
+    field specifies the settings for optimizers, the number of epochs, and devices
+    (CPU/GPU). You can refer to the whole config files from [this link](https://github.com/yasufumy/allennlp_imdb/blob/master/training_config/base_cpu.jsonnet).
+    Next, I’ll explain the important parts of these three fields each.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The settings for DatasetReader will be as follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: First, we specify which DatasetReader we use in `type`. We can use our ImdbDatasetReader
+    to set `type` as `imdb` because it’s ready to use by `@DatasetReader.register('imdb')`.
+    AllenNLP provides a lot of popular datasets already. You can check these from [the
+    document](https://allenai.github.io/allennlp-docs/api/allennlp.data.dataset_readers.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then, we specify the arguments for the `ImdbDatasetReader.__init__` method.
+    We use `[SingleIdTokenIndexer](https://github.com/allenai/allennlp/blob/master/allennlp/data/token_indexers/single_id_token_indexer.py#L12)`
+    for `token_indexers` because we want the token to correspond to the single id.
+    Also, we use `[WordTokenizer](https://github.com/allenai/allennlp/blob/master/allennlp/data/tokenizers/word_tokenizer.py#L12)`
+    for `tokenizer` because we want the token to be the one word.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The settings for Model will be as follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: First, we specify which Model we use in `type` the same as DatasetReader. We
+    can use our RnnClassifier to set `type` as `rnn_classifier` because it’s ready
+    to use by `@Model.register('rnn_classifier')`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then, we specify the arguments for the `RnnClassifier.__init__` method. We use `[Embedding](https://allenai.github.io/allennlp-docs/api/allennlp.modules.token_embedders.html#embedding)` for `text_field_embedder` because
+    we want to embed the word as the vector. Also, we use `[GRU](https://allenai.github.io/allennlp-docs/api/allennlp.modules.seq2vec_encoders.html)` for `seq2vec_encoder` because
+    we want to encode the sequence of embedded words via GRU.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The settings for Trainer will be as follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: The `num_epochs` specifies the number of epochs to train. The `optimizer`specifies
+    the optimizer to update the parameters, in this case, we choose to use `adam`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The mentioned above is the way to set up your config file.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can run the experiment by executing the following command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: We need to make our new config file when we want to change the experimental
+    setting. But we can change the setting by the following command though if the
+    changes are a few. The command below updates GRU to LSTM.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: That’s all for the explanation. Thank you for reading my post. I hope you understand
+    the way how to build your data loader and model and manage your experiments in
+    AllenNLP.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks to [BrambleXu](https://medium.com/@bramblexu?source=post_page).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Yasufumi Taniguchi](https://medium.com/@yasufumy)** is an NLP Engineer
+    at a Japanese company. His interest lies in question answering, information retrieval,
+    and open-source development.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/allennlp-startup-guide-24ffd773cd5b).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[NLP vs. NLU: from Understanding a Language to Its Processing](/2019/07/nlp-vs-nlu-understanding-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Practical Speech Recognition with Python: The Basics](/2019/07/practical-speech-recognition-python-basics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Examining the Transformer Architecture – Part 2: A Brief Description of How
+    Transformers Work](/2019/07/transformer-architecture-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Gentle Introduction to Natural Language Processing](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Gentle Introduction to Support Vector Machines](https://www.kdnuggets.com/2023/07/gentle-introduction-support-vector-machines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Ultimate Guide To Different Word Embedding Techniques In NLP](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[NLP, NLU, and NLG: What’s The Difference? A Comprehensive Guide](https://www.kdnuggets.com/2022/06/nlp-nlu-nlg-difference-comprehensive-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Structure a Data Science Project: A Step-by-Step Guide](https://www.kdnuggets.com/2022/05/structure-data-science-project-stepbystep-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide to Data Science Project Management Methodologies](https://www.kdnuggets.com/2023/07/guide-data-science-project-management-methodologies.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

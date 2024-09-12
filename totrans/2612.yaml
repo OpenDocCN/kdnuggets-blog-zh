@@ -1,0 +1,428 @@
+- en: Learning from machine learning mistakes
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/03/learning-from-machine-learning-mistakes.html](https://www.kdnuggets.com/2021/03/learning-from-machine-learning-mistakes.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Emeli Dral](https://twitter.com/EmeliDral), CTO and Co-founder of Evidently
+    AI**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine learning mistakes](../Images/5a7d435aef231208397a3694ddd82b7b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: When we analyze machine learning model performance, we often focus on a single
+    quality metric. With regression problems, this can be MAE, MAPE, RMSE, or whatever
+    fits the problem domain best.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Optimizing for a single metric absolutely makes sense during training experiments.
+    This way, we can compare different model runs and can choose the best one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**But when it comes to solving a real business problem and putting the model
+    into production, we might need to know a bit more. **How well does the model perform
+    on different user groups? What types of errors does it make?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post, I will present an approach to evaluating the regression model
+    performance in more detail.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Regression errors: too much or too little?'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'When we predict a continuous variable (such as price, demand, and so on), a
+    common-sense definition of error is simple: we want the model predictions to be
+    as close to actual as possible.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In practice, we might care not only about the absolute error value but also
+    other criteria. For example, how well we catch the trend, if there is a correlation
+    between the predicted and actual value — and what is the sign of our error, after
+    all.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Underestimating and overestimating the target value might have different
+    business implications. **Especially if there is some business logic on top of
+    the model output.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imagine you are doing demand forecasting for a grocery chain. Some products
+    are perishables, and delivering too much based on the wrong forecast would lead
+    to waste. Overestimation has a clear cost to factor in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine learning mistakes](../Images/738804148278e5716d0fdbe6cb5857f2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by author. Source images from Unsplash: [1](https://unsplash.com/photos/7n6hNFagvhg), [2](https://unsplash.com/photos/gXnvxmqG2lE).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**In addition to classic error analysis, we might want to track this error
+    skew **(the tendency to over- or underestimate) and how it changes over time.
+    It makes sense both when analyzing model quality during validation and in production
+    monitoring.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To explain this concept of analyzing the error bias, let’s walk through an example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Evaluating the model performance
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s say we have a model that predicts the demand for city bike rentals. (If
+    you want to play with this use case, this [Bike Demand Prediction dataset](https://www.kaggle.com/c/bike-sharing-demand/data) is
+    openly available).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We trained a model, simulated the deployment, and compared its performance in
+    “production” to how well it did on the training set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In practice, we need to know the ground truth for that. Once we learn the actual
+    demand, we can calculate our model’s quality and estimate how far off we are in
+    our predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Here, we can see a major increase in error** between Reference performance
+    in training and current Production performance.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine learning mistakes](../Images/fda9b0e3a1d70a02cf982affcd263067.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Screenshot from the [Evidently](https://github.com/evidentlyai/evidently) report.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**To understand the quality better, we can look at the error distribution.** It
+    confirms what we already know: the error increased. There is some bias towards
+    overestimation, too.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine learning mistakes](../Images/f59ee874f25df209f44b7b62ffcbd48d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Screenshot from the [Evidently](https://github.com/evidentlyai/evidently) report.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Things do not look ideal, and we want to dig deeper into what is going on.** As
+    do our business stakeholders. Why do these errors happen? Where exactly? Will
+    retraining help us improve the quality? Do we need to engineer new features or
+    create further post-processing?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is an idea of how to explore it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Looking at the edges
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Aggregate quality metrics show us the mean performance. However, these are the
+    extreme cases that can often give us helpful information. Let us look directly
+    there!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**We can group the predictions where we have high errors and learn something
+    useful from them.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How can we implement this approach?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s take each individual prediction and calculate the error. Then, we create
+    two groups based on the types of errors:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Overestimation.** Cases where the model predicts the values that are higher
+    than actual.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Underestimation. **Cases where the model predicts the values that are lower
+    than actual.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Let us limit the size of each group by choosing only 5% of the most extreme
+    examples with the largest error. This way, we have the top-5% of predictions where
+    the model overestimates and the top-5% where the model underestimates.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The rest 90% of predictions are the “majority.” The error in this group should
+    be close to the mean.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'That is how we can visualize the proposed segments. That is a sort of situation
+    we’d like to see: most of the predictions are close to the actual values. Analyzing
+    outliers can bring meaningful insight.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine learning mistakes](../Images/1985b93335e61b2d580cda9ecaf5a1b2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How can it be useful?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Let’s take a time series example. **If we built a great model and “learned”
+    all the signal from the data, the error should be random. There should be no pattern.
+    Except for a few likely outliers, the error would be close to the average in all
+    groups. Sometimes slightly larger, sometimes smaller. But on average, about the
+    same.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**If there is some useful signal in the data that can explain the error, the
+    situation can look differently. **There can be a large error in specific groups.
+    There can also be a clear skew towards under- or overestimation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**In these cases, the error may be dependent on specific feature values. **What
+    if we could find and describe the instances where it is higher than usual? That
+    is precisely what we want to investigate!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spotting the flaws
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In our case, we can see that the error both in the over- and underestimation
+    groups are significantly higher than the one in the “majority” group.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine learning mistakes](../Images/1fe3e7d1be5219ccd6404893b0d25f9f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Screenshot from the [Evidently](https://github.com/evidentlyai/evidently) report.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can then try to investigate and explore the new patterns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To do that, we look at the objects inside both 5%-groups and see what feature
+    values correspond to them. Feature by feature, if we can.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Our goal is to identify if there is a relationship between the specific feature
+    values and high error. T**o get deeper insight, we also distinguish between over-
+    or under-estimation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imagine that we predict healthcare costs and consistently over-estimate the
+    price for patients of certain demographics? Or, the error is unbiased but large,
+    and our model fails on a specific segment? That is a sort of insight we want to
+    find.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine learning mistakes](../Images/565675d69b0486675b3e7d8df1d80b76.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can make a complex (and computationally heavy) algorithm to perform this
+    search for underperforming segments. As a reasonable replacement, we can just
+    do this analysis feature by feature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**How can we do it? Let’s plot the feature distributions and our target demand
+    and color-code the examples where we made high errors.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our bike demand prediction use case, we can already get some insights. If
+    we plot the “humidity” feature, we can notice that our model now significantly
+    overestimates the demand when the humidity values are between 60 and 80 (plotted
+    to the right).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We saw these values in our training dataset (plotted to the left), but the error
+    was unbiased and similar on the whole range.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine learning mistakes](../Images/21d3fa8efd7f5fd20964e1835cfe390e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Screenshot from the [Evidently](https://github.com/evidentlyai/evidently) report.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can notice other patterns, too. For example, in temperature. The model also
+    overestimates the demand when the temperature is above 30°C.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine learning mistakes](../Images/6e33ffbcebb718f57f3b3532502a91c9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Screenshot from the [Evidently](https://github.com/evidentlyai/evidently) report.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can now suspect that something happened to the weather, and new related patterns
+    emerged. In reality, we trained the model using the data from only cold months
+    of the year. When it went to “production,” summer just started. With the new weather
+    came new seasonal patterns that the model failed to grasp before.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The good news is that by looking at these plots, we can see that there seems
+    to be some useful signal in the data. Retraining our model on new data would likely
+    help.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to do the same for my model?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We implemented this approach in the [Evidently](https://github.com/evidentlyai/evidently) open-source
+    library. To use it, you should prepare your model application data as a pandas
+    DataFrame, including model features, predictions, and actual (target) values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The library will work with a single DataFrame or two — if you want to compare
+    your model performance in production with your training data or some other past
+    period.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Machine learning mistakes](../Images/2d7e4b0deb1eab0725a55fa4e5f797d6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Regression performance report will generate a set of plots on model performance
+    and an Error Bias table. The table helps explore the relations between the feature
+    values and the error type and size.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can also quickly sort the features to find those where the “extreme” groups
+    look differently from the “majority.” It helps identify the most interesting segments
+    without manually looking at each feature one by one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can read the full docs on [Github](https://github.com/evidentlyai/evidently).
+  prefs: []
+  type: TYPE_NORMAL
+- en: When is this useful?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We believe this sort of analysis can be helpful more than once in your model
+    lifecycle. You can use it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**To analyze the results of the model test**. For example, once you validate
+    your model an offline test or after A/B test or shadow deployment.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**To perform ongoing monitoring of your model in production. **You can do this
+    at every run of a batch model or schedule it as a regular job.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**To decide on the model retraining.** Looking at the report, you can identify
+    if it is time to update the model or if retraining would help.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**To debug models in production.** If the model quality fails, you can spot
+    the segments where the model underperforms and decide how to address them. For
+    example, you might provide more data for the low-performing segments, rebuild
+    your model or add business rules on top of it.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'If you want a practical example, here is a [tutorial](https://towardsdatascience.com/how-to-break-a-model-in-20-days-a-tutorial-on-production-model-analytics-25497e2eab9c) on
+    debugging the performance of the machine learning model in production: “How to
+    break a model in 20 days”.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Emeli Dral](https://twitter.com/EmeliDral)** is a Co-founder and CTO
+    at Evidently AI where she creates tools to analyze and monitor ML models. Earlier
+    she co-founded an industrial AI startup and served as the Chief Data Scientist
+    at Yandex Data Factory. She is a co-author of the Machine Learning and Data Analysis
+    curriculum at Coursera with over 100,000 students.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://evidentlyai.com/blog/tutorial-1-model-analytics-in-production).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Machine Learning Model Monitoring Checklist: 7 Things to Track](/2021/03/machine-learning-model-monitoring-checklist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[MLOps: Model Monitoring 101](/2021/01/mlops-model-monitoring-101.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Evaluating Object Detection Models Using Mean Average Precision](/2021/03/evaluating-object-detection-models-using-mean-average-precision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Software Mistakes and Tradeoffs: New book by Tomasz Lelek and…](https://www.kdnuggets.com/2021/12/manning-software-mistakes-tradeoffs-book.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mistakes That Newbie Data Scientists Should Avoid](https://www.kdnuggets.com/2022/06/mistakes-newbie-data-scientists-avoid.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Mistakes That Could Be Affecting the Accuracy of Your Data Analytics](https://www.kdnuggets.com/2023/03/3-mistakes-could-affecting-accuracy-data-analytics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Mistakes I Made While Switching to Data Science Career](https://www.kdnuggets.com/2023/07/5-mistakes-made-switching-data-science-career.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Avoid These 5 Common Mistakes Every Novice in AI Makes](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Common Data Science Mistakes and How to Avoid Them](https://www.kdnuggets.com/5-common-data-science-mistakes-and-how-to-avoid-them)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

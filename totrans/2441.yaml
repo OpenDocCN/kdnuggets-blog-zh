@@ -1,0 +1,236 @@
+- en: Time Series Forecasting with Ploomber, Arima, Python, and Slurm
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html](https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Time Series Forecasting with Ploomber, Arima, Python, and Slurm](../Images/294263a827d6c7340aedc7571d2a26c7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In this blog, we’ll review how we took a raw .ipynb notebook that does time
+    series forecasting with Arima, modularized it into a [Ploomber](https://ploomber.io/)
+    pipeline, and ran parallel jobs on Slurm. You can follow the steps in this guide
+    to deploy it yourself. We’ve been using [this notebook](https://github.com/williewheeler/time-series-demos/blob/master/arima/arima-python.ipynb)
+    by Willie Wheeler.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Short Notebook Explanation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The notebook is composed of 8 tasks as we’ll see in the graph below. It includes
+    most of the basic steps for modeling - getting the data cleaning it, fitting,
+    hyperparameter tuning, validation, and visualization. As a shortcut, I took the
+    notebook and used the [Soorgeon](https://github.com/ploomber/soorgeon) tool to
+    automatically modularize this notebook into a Ploomber pipeline. This extracted
+    all the dependencies into a requirements.txt file, broke the headers into standalone
+    tasks, and created a pipeline out of these modular tasks.  The primary benefit
+    of using Ploomber is that it allows me to experiment faster since it caches results
+    from previous runs, plus, it makes it simple to submit parallel jobs to SLURM
+    to fine-tune the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Running The Pipeline Locally?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Start by running this command to clone the example locally (in case you don’t
+    have ploomber, [install Ploomber](https://docs.ploomber.io/en/latest/get-started/install.html)
+    first):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now you have the pipeline locally, you can perform a sanity check and run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This should show you all of the steps of the pipeline and its status (**Has
+    not been run**), this is a reference output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Time Series Forecasting with Ploomber, Arima, Python, and Slurm](../Images/309db41925bceccb5caf11bd03a40c1f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can also build the pipeline locally if you’re only interested in the time
+    series piece. Next, we’ll see how we can start executing on our Slurm cluster
+    and how we can have parallel runs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Orchestrating on Slurm
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: For simplicity, we’ll show you how to launch a SLURM cluster with Docker, but
+    if you have access to an existing cluster, you can use that one. We’ve created
+    a tool called Soopervisor, which allows us to deploy pipelines to SLURM and other
+    platforms such as Kubernetes, Airflow, and AWS Batch. We’ll be following the [Slurm
+    guide here](https://soopervisor.readthedocs.io/en/latest/tutorials/slurm.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: You have to have a running docker agent to launch the cluster, [read more here](https://docs.docker.com/get-docker/)
+    on getting started with Docker.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 1
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Create a docker-compose.yml.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Once it’s done, spin up the cluster:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can now connect to the cluster via this command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Step 2
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Now that we’re inside the cluster, we need to bootstrap it and make sure we
+    have the pipeline we want to run.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Get the bootstrapping script and run it, this is the script to bootstrap the
+    cluster:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Get the time series pipeline template:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Install requirements and add through soopervisor:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: This will create a cluster directory with the template that soopervisor uses
+    to submit Slurm tasks (template.sh).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We execute the export command to convert the pipeline and submit the jobs to
+    the cluster. Once it’s done we can see all of our outputs in the `output` folder:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can see here some of the predictions that were generated by the model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Time Series Forecasting with Ploomber, Arima, Python, and Slurm](../Images/7728da87e41838b878859dbf34b88ebd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Time Series Forecasting with Ploomber, Arima, Python, and Slurm](../Images/14df096bc7bbac6d21e96a951f560a2a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Note that if you’ll run it again, only the tasks that changed will run (there’s
+    a cache to manage it). Once you’re done, don’t forget to shut down the cluster:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Summary
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: This blog showed how to run time series as a modular pipeline that can scale
+    into distribute cluster training. We started from a notebook, moved into a pipeline,
+    and executed it on a SLURM cluster. Once we’re past the stage of an individual
+    working on a notebook (for instance a team, or production tasks) it’s important
+    to make sure you can scale, collaborate and reliably execute your work. Since
+    data science is an iterative process, Ploomber gives you an easy mechanism to
+    standardize your work and move quickly between your dev and production environments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Make sure to connect with us and hundreds of other community members [via slack](https://ploomber.io/community).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have any feedback or comments, I’d love to hear them!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Ido Michael](https://www.linkedin.com/in/ido-michael/)** co-founded Ploomber
+    to help data scientists build faster. He''d been working at AWS leading data engineering/science
+    teams. Single handedly he built 100’s of data pipelines during those customer
+    engagements together with his team. Originally from Israel, he came to NY for
+    his MS at Columbia University. He focused on building Ploomber after he constantly
+    found that projects dedicated about 30% of their time just to refactor the dev
+    work (prototype) into a production pipeline.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Time Series Analysis: ARIMA Models in Python](https://www.kdnuggets.com/2023/08/times-series-analysis-arima-models-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Time Series Forecasting with statsmodels and Prophet](https://www.kdnuggets.com/2023/03/time-series-forecasting-statsmodels-prophet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Leveraging XGBoost for Time-Series Forecasting](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ploomber vs Kubeflow: Making MLOps Easier](https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[From Google Colab to a Ploomber Pipeline: ML at Scale with GPUs](https://www.kdnuggets.com/2022/03/google-colab-ploomber-pipeline-ml-scale-gpus.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,453 @@
+- en: Deep Learning for Virtual Try On Clothes – Challenges and Opportunities
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/10/deep-learning-virtual-try-clothes.html](https://www.kdnuggets.com/2020/10/deep-learning-virtual-try-clothes.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Maksym Tatariants](https://www.linkedin.com/in/maksym-tatariants/), Data
+    Science Engineer at [MobiDev](https://mobidev.biz/services/machine-learning-consulting)**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The research described below was held by MobiDev as a part of an investigation
+    on bringing [AR & AI technologies for virtual fitting room development](https://mobidev.biz/blog/ar-ai-technologies-virtual-fitting-room-development).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Exploring 2D Cloth Transfer onto an Image of a Person
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When working on virtual fitting room apps, we conducted a series of experiments
+    with virtual try on clothes and found out that the proper rendering of a 3D clothes
+    model on a person still remains a challenge. For a convincing AR experience, the
+    deep learning model should detect not only the basic set of keypoints corresponding
+    to the joints of the human body. It should also identify the body's actual shape
+    in three dimensions so that the clothing could be appropriately fitted to the
+    body.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For an example of this model type, we can look at the [DensePose](https://github.com/facebookresearch/Densepose)
+    by the Facebook research team (**Fig. 1**). However, this approach is not accurate,
+    slow for mobile, and expensive.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c454a7b8aa2c0b2598991b23e2054bb1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Figure 1**: Body mesh detection using DensePose ([source](https://www.skylab.ai/product/product-pose-recognition)).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, it is required to search for simpler alternatives to virtual clothing try-on
+    techniques.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A popular option here is, instead of going for fitting 3D clothing items, working
+    with 2D clothing items and 2D person silhouettes. It is exactly what [Zeekit](https://zeekit.me/)
+    company does, giving users a possibility to apply several clothing types (dresses,
+    pants, shirts, etc.) to their photo.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/43af6ef9d0a9b7ecb05a7ea14e0c3f24.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Figure 2**: 2D clothing try-on, Zeekit ([source](https://www.youtube.com/watch?v=IXIbeBQwgDA),
+    0:29 - 0:39).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since the cloth transferring techniques used by the company have not been revealed
+    besides incorporating deep learning models, let's refer to scientific articles
+    on the topic. Upon reviewing several of the most recent works ([source 1](https://arxiv.org/abs/1807.07688),
+    [source 2](https://arxiv.org/abs/2003.05863), [source 3](https://arxiv.org/abs/1912.06324)),
+    the predominant approach to the problem is to use Generative Adversarial Networks
+    ([GANs](https://towardsdatascience.com/generative-adversarial-networks-explained-34472718707a))
+    in combination with Pose Estimation and [Human Parsing](http://sysu-hcp.net/lip/index.php)
+    models. The utilization of the last two models helps identify the areas in the
+    image corresponding to specific body parts and determine the position of body
+    parts. The use of Generative Models helps produce a warped image of the transferred
+    clothing and apply it to the image of the person so as to minimize the number
+    of produced artifacts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Selected Model and Research Plan
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For this research, we chose the Adaptive Content Generating and Preserving Network
+    (ACGPN) model described in the “[Towards Photo-Realistic Virtual Try-On by Adaptively
+    GeneratingPreserving](https://arxiv.org/abs/2003.05863v1)[↔](https://arxiv.org/abs/2003.05863v1)[Image
+    Content](https://arxiv.org/abs/2003.05863v1)” paper. In order to explain how ACGPN
+    works, let’s review its architecture shown in **Fig. 3**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/896bc1e05c38321ad1b5c84d7231b686.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Figure 3**: Architecture of the ACGPN model (credit: [Yang et al.,2020](https://arxiv.org/abs/2003.05863)).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The model consists of three main modules: Semantic Generation, Clothes Warping,
+    and Content Fusion.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Semantic Generation module receives the image of a target clothing and its
+    mask, data on the person's pose, a segmentation map with all the body parts (hands
+    are especially important), and clothing items identified.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first generative model (G1) in the Semantic Generation module modifies the
+    person’s segmentation map so that it clearly identifies the area on the person’s
+    body that should be covered with the target clothes. Having this information received,
+    the second generative model (G2) warps the clothing mask so as to correspond to
+    the area it should occupy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After that, the warped clothing mask is passed to the Clothes Warping module,
+    where the Spatial Transformation Network ([STN](https://arxiv.org/abs/1506.02025))
+    warps the clothing image according to the mask. And finally, the warped clothing
+    image, the modified segmentation map from Semantic Generation Module, and a person’s
+    image are fed into the third generative module (G3), and the final result is produced.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**For testing the capabilities of the selected model, we went through the following
+    steps in the order of increasing difficulty:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Replication of the [authors’ results](https://arxiv.org/abs/2003.05863v1) on
+    the original data and our preprocessing models (Simple).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Application of custom clothes to default images of a person (Medium).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Application of default clothes to custom images of a person (Difficult).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Application of custom clothes to custom images of a person (Very difficult).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Replication of the Authors’ Results on the Original Data and Our Preprocessing
+    Models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The authors of the [original paper](https://arxiv.org/abs/2003.05863v1) did
+    not mention the models they used to create person segmentation labels and detect
+    the keypoints on a human body. Thus, we picked the models ourselves and ensured
+    the quality of the ACGPN model’s outputs were similar to the one reported in the
+    paper.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a keypoint detector, we chose the **OpenPose** model because it provided
+    the appropriate order of keypoints (COCO keypoint dataset) and was used in other
+    researches related to the virtual try-on for clothes replacement.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4c8cce74b90e1f59fd210a896d4af14a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Figure 4**: Example of COCO keypoint detections using OpenPose.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We chose the SCHP model presented in the [Self Correction for Human Parsing](https://arxiv.org/abs/1910.09777)
+    paper for the body part segmentation. This model utilizes the common for human
+    parsing architecture [CE2P](https://arxiv.org/abs/1809.05996) with some modifications
+    of the loss functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: SCHP segmentation model uses a pre-trained backbone (encoder) to extract features
+    from the input image. The recovered features are then used for the contour prediction
+    of the person in the edge branch and the person segmentation in the parsing branch.
+    The outputs of these two branches alongside feature maps from the encoder were
+    fed into the fusion branch to improve the segmentation maps' quality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/3ba651a21dee45db067048896a831b04.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Figure 5**: Architecture of the SCHP model (based on CE2P), image credit
+    – [Li, et al.](https://arxiv.org/abs/1910.09777)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another new element in the SCHP model is the self-correction feature used to
+    iteratively improve the model’s prediction on noisy ground truth labels. These
+    labels are commonly used in human parsing tasks since it can be difficult for
+    human annotators to produce segmentation labels. During this process, the model,
+    firstly trained on inaccurate human annotations, is aggregated with new models
+    trained on pseudo-ground truth masks obtained from the previously trained model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The process is repeated several times until both the model and pseudo-ground
+    truth masks reach better accuracy. For the human parsing task, we used the model
+    trained on the [Look Into Person (LIP)](http://sysu-hcp.net/lip/) dataset because
+    it is the most appropriate for this task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7bbd637e56f932ceeef597b5df735c19.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Figure 6**: Examples of human parsing using SCHP model (person - left, segmentation
+    - right).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, when the keypoint and human parsing models were ready, we used their
+    outputs for running the ACGPN model on the same data used by the authors for training.
+    In the image below, you can see the results we obtained from the VITON dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The semantic generation module modifies the original segmentation so that it
+    reflects the new clothing type. For example, the pullover on the original image
+    has long sleeves, whereas the target cloth (T-shirt) has short sleeves. Therefore,
+    the segmentation mask should be modified so that the arms are more revealed. This
+    transformed segmentation is then used by the Content Fusion module to inpaint
+    modified body parts (e.g., draw naked arms), and it is one of the most challenging
+    tasks for the system to perform (**Fig. 7**).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/60f40ab66588e961626777359429ac2c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Figure 7**: Inputs and outputs of the ACGPN model.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the image below (**Fig. 8**), you can see the compilation results of successful
+    and unsuccessful clothing replacement using the ACGPN model. The most frequent
+    errors we encountered were poor inpainting (B1), new clothing overlapping with
+    body parts (B2), and edge defects (B3).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/893869661dd8d833c61984105067b884.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Figure 8**: Successful (A1-A3) and unsuccessful (B1-B3) replacement of clothing.
+    Artefacts are marked with red rectangles.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Application of Custom Clothes to Default Person Images
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For this experiment, we picked several clothing items (**Fig. 9**) and applied
+    them to images of a person from the VITON dataset. Please note that some images
+    are not real clothing photos, but 3D renders or 2D drawings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f35954c550e02a8624e596186f1eb490.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Figure 9**: Clothing images used for virtual try-on (A - photo of an item,
+    B, C - 3D renders, D - 2D drawing).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Moving on to the results of clothing replacement (**Fig. 10**), we can see that
+    they may be roughly split into three groups.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f47a6e251df27ec5d73d4d1963a7a963.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Figure 10**: Examples of clothing replacement using custom clothes (Row
+    A - successful with minor artifacts, Row B - moderate artifacts, Row C - major
+    artifacts).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The images in Row A have no defects and look the most natural. This can be attributed
+    to the fact that people in the images have a similar upright, facing camera pose.
+    As the authors of the [paper](https://arxiv.org/abs/2003.05863v1) explained, such
+    a pose makes it easier for the model to define how the new clothing should be
+    warped and applied to the person’s image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The images in Row B present the more challenging pose to be processed by the
+    model. The person’s torso is slightly bent, and arms partially occlude the body
+    area where the clothing is supposed to be applied. As shown in **Fig. 8**, a bent
+    torso results in the edge defects. Notice that difficult long-sleeve clothing
+    (item C from **Fig. 9**) is processed correctly. It is because sleeves should
+    go through complicated transformations to be appropriately aligned with the person’s
+    arms. It is incredibly complicated if the arms are bent or their silhouette is
+    occluded by clothing in the original image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The images in Row C show examples where the model fails almost completely. It
+    is expected behavior since the person in the input images has a hard torso twist
+    and arms bent so that they occlude nearly half of the stomach and chest area.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Application of Default Clothes to the Custom Person Images
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s review the experiments of the model application to the unconstrained images
+    of people in natural environments. The VITON dataset used for the model training
+    has very static lighting conditions and not many variants of camera perspectives
+    and poses.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When using real images for testing the model, we realized that the difference
+    between the training data and unconstrained data significantly diminishes the
+    quality of the model’s output. The example of this issue you can see in **Fig.
+    11.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d1d1cba475ffc62fc9df0e4f30e679de.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Figure 11**: Clothing replacement - the impact of background dissimilarity
+    with the training data. Row A - original background, row B - background replaced
+    with a background similar to the one in VITON dataset.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We found images of a person who had a similar pose and camera perspective to
+    the training dataset images and saw numerous artifacts present after processing
+    (Row A). However, after removing the unusual background texture and filling the
+    area with the same background color as in the training dataset, the received output
+    quality was improved (although some artifacts were still present).
+  prefs: []
+  type: TYPE_NORMAL
+- en: When testing the model using more images, we discovered that the model performed
+    semi-decently on the images similar to the ones from the training distribution
+    and failed completely where the input was distinct enough. You can see the more
+    successful attempts of applying the model and the typical issues we found in **Fig
+    12**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/307810ddde2af8e850da9ecc203c0086.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Figure 12**: Outputs of clothing replacement on images with an unconstrained
+    environment (Row A -minor artifacts, Row B- moderate artifacts, Row C - major
+    artifacts).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The images in Row A show the examples of places where the main defects are edge
+    defects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The images in Row B show more critical cases of masking errors. For example,
+    cloth blurring, holes, and skin/clothing patches in those places where they should
+    not be present.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The images in Row C show severe inpainting errors like poorly drawn arms and
+    masking errors, like the unmasked part of the body.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Application of Custom Clothes to the Custom Person Images
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here we tested how well the model can handle both custom clothing and custom
+    person photos and divided results into three groups again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/502d7f03aefd18a3fad64187f8420a64.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Figure 13**: Clothing replacement with an unconstrained environment and
+    custom clothing images.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The images in Row A display the best result we could obtain from the model.
+    The combination of custom clothes and custom person images proved to be too difficult
+    for processing without at least moderate artifacts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The images in Row B display results where the artifacts became more abundant.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The images in Row C display the most severely distorted results due to the transformation
+    errors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Future Plans
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: ACGPN model has its limitations, such as the training data must contain paired
+    images of target clothes and people wearing those specific clothes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Considering everything described above, there might be an impression that a
+    virtual try on clothes is non-implementable, but it’s not. Being a challengeable
+    task now, it is also providing a window of opportunity for AI-based innovations
+    in the future. And there are already new approaches designed to solve those issues.
+    Another important thing is to take the technology capabilities into account when
+    choosing a proper use case scenario.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data Science in Fashion](https://www.kdnuggets.com/2018/03/data-science-fashion.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Graduating in GANs: Going From Understanding Generative Adversarial Networks
+    to Running Your Own](https://www.kdnuggets.com/2019/04/graduating-gans-understanding-generative-adversarial-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3D Human Pose Estimation Experiments and Analysis](https://www.kdnuggets.com/2020/08/3d-human-pose-estimation-experiments-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Be Part of The AI Con USA 2024 with a Free Virtual Pass](https://www.kdnuggets.com/2024/05/ai-con-usa-navigate-the-future-of-ai-with-a-free-virtual-pass)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Simple Things to Try Before Neural Networks](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Amazing & Free LLMs Playgrounds You Need to Try in 2023](https://www.kdnuggets.com/5-amazing-free-llms-playgrounds-you-need-to-try-in-2023)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Best Vector Databases You Must Try in 2024](https://www.kdnuggets.com/the-5-best-vector-databases-you-must-try-in-2024)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 5 AI Coding Assistants You Must Try](https://www.kdnuggets.com/top-5-ai-coding-assistants-you-must-try)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 End-to-End MLOps Platforms You Must Try in 2024](https://www.kdnuggets.com/7-end-to-end-mlops-platforms-you-must-try-in-2024)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

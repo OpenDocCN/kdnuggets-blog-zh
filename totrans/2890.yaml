@@ -1,0 +1,553 @@
+- en: Can graph machine learning identify hate speech in online social networks?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/09/graph-machine-learning-hate-speech-social-networks.html](https://www.kdnuggets.com/2019/09/graph-machine-learning-hate-speech-social-networks.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By Pantelis Elinas, Anna Leontjeva, and Yuriy Tyshetskiy**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ddd24baf552f68f88b2b391bd337ce2b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Over three decades, the Internet has grown from a small network of computers
+    used by research scientists to communicate and exchange data to a technology that
+    has penetrated almost every aspect of our day-to-day lives. Today, it is hard
+    to imagine a life without online access for business, shopping, and socialising.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A technology that has connected humanity at a scale never before possible has
+    also amplified some of our worst qualities. Online hate speech spreads virally
+    across the globe with short- and long-term consequences for individuals and societies.
+    These consequences are often difficult to measure and predict. Online social media
+    websites and mobile apps have inadvertently become the platform for the spread
+    and proliferation of hate speech.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is online hate speech?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: “Hate speech is a type of speech that takes place online (e.g., the Internet,
+    online social media platforms) with the purpose to attack a person or a group
+    on the basis of attributes such as race, religion, ethnic origin, sexual orientation,
+    disability, or gender.” [[source](https://en.wikipedia.org/wiki/Online_hate_speech)]
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: A number of international institutions, including the [UN Human Rights Council](https://www.ohchr.org/en/hrbodies/hrc/pages/home.aspx)
+    and the [Online Hate Prevention Institute](https://ohpi.org.au/) are engaged in
+    understanding the nature, proliferation, and prevention of online hate speech.
+    Recent advances in machine learning have shown promising results to aid in these
+    efforts, especially as a scalable automated system for early detection and prevention.
+    Academic researchers are constantly improving machine learning systems for hate
+    speech classification. Simultaneously, all major social media networks are deploying
+    and constantly fine-tuning similar tools and systems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Online hate speech is a complex subject. In this article, we consider using
+    machine learning to detect hateful users based on their activities on the Twitter
+    social network. The problem and dataset were first published in [1]. The data
+    are freely available for download from Kaggle [here](https://www.kaggle.com/manoelribeiro/hateful-users-on-twitter).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In what follows, we develop and compare two machine learning methods for classifying
+    a small subset of Twitter’s users as hateful or normal (not hateful). First, we
+    employ a traditional machine learning method to train a classifier based on users’
+    lexicons and social profiles. Next, we apply a state-of-the-art graph neural network
+    (GNN) machine learning algorithm to solve the same problem, but now also considering
+    the relationships between users.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*If you wish to follow along, the Python code in a Jupyter Notebook can be
+    found* [*here*](https://github.com/stellargraph/stellargraph/tree/develop/demos/use-cases)*.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**Dataset**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We demonstrate applying machine learning for online hate speech detection using
+    a dataset of Twitter users and their activities on the social media network. The
+    dataset was originally published by researchers from Universidade Federal de Minas
+    Gerais, Brazil [1], and we use it without modification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data covers 100,368 Twitter users. For each user, a number of activity-related
+    features is available. Such features include the frequency of tweeting, the number
+    of followers, the number of favourites, and the number of hashtags. Furthermore,
+    an analysis of each user’s lexicon derived from their last 200 tweets yielded
+    a large number of features with regards to language content. Stanford’s [Empath](http://empath.stanford.edu/)
+    tool [2], was used to analyse each user’s lexicon with regards to categories such
+    as love, violence, community, warmth, ridicule, independence, envy, and politics,
+    and assign numeric values indicating the user’s alignment with each category.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In total, we use 204 features to characterise each user in the dataset. For
+    each user, we collect these features to form a 204-dimensional *feature vector*
+    to be used as input to a machine learning model for classifying users as hateful
+    or normal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The dataset also includes relationships between the users. A user is considered
+    connected with another user if the former has re-tweeted the latter. This relationship
+    structure gives rise to a network which is different from Twitter’s network of
+    follower and followee relationships. Followees are hidden from us since users
+    can elect to keep their network private, while the retweet network remains public
+    so long as the original tweets are public.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9229077a5a84c30f9595fa27eae80ae3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*The relative proportions of annotated users in the dataset where red are **hateful**,
+    green are **normal**, and blue are **other**. Few of the users are known to be
+    hateful or not.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally, users are labelled as belonging to one of three categories: **hateful**,
+    **normal**, or **other**. Out of ~100k (we use the symbol ~ to denote approximate
+    numbers) users in the dataset, only ~5k have been manually annotated as **hateful**
+    or **normal**; the remaining ~95k users belong to the **other** category, meaning
+    they haven’t been annotated. The relative proportions of annotated users in the
+    dataset are shown on the left where red is **hateful**, green is **normal**, and
+    blue are **other**. Few of the users are known to be hateful or not. The authors
+    in [1] describe in more detail the protocol guiding the data annotation process.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Figure 1 shows a graphical representation of the dataset. We show users annotated
+    as **hateful** in red circles, whereas we show users annotated as **normal** in
+    green circles. Users labelled as **other** (not annotated) are left blank.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/734b5a2c75c48b6c5d43eb5ce33b4a45.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 1: The hateful Twitter dataset structure and basic statistics.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hateful user classification using Machine Learning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Our objective is to train a binary classification model that can be used to
+    classify users as hateful or normal. However, the dataset used to train the model
+    presents two challenges.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Firstly, only a small subset of users is annotated as **hateful** or **normal**,
+    with majority of users’ labels unknown (**other** category). Secondly, the labelled
+    data is highly imbalanced in terms of label distribution: out of the ~5k annotated
+    users, only ~500 (~10%) have been annotated as **hateful** and the remaining as
+    **normal**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Semi-supervised machine learning](https://en.wikipedia.org/wiki/Semi-supervised_learning)
+    methods can help us alleviate the small labelled sample issue by making use of
+    both labelled and unlabelled data. We will consider such methods later in this
+    article within the context of GNNs.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To deal with class imbalance in the labelled training set, we calculate and
+    use class weights; these weights are used in the model’s loss function (that is
+    optimised during model training) to penalise the model’s mistakes in classifying
+    users from the “minority” class (the class with fewer examples, or in this case
+    the **hateful** class of users) proportionally more than mistakes in classifying
+    users from the “majority” class (the **normal** class of users).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Splitting the data into training and test sets**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We split this data into a training and a test sets using stratified sampling
+    such that 15% of the annotated user data is selected for training, and the remaining
+    85% for testing the trained classification model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The statistics of our train and test sets are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Train normal: 664, hateful: 81**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Test normal: 3,763, hateful: 463**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The training dataset exhibits high-class imbalance. We can compensate for this
+    imbalance by using class weights such that more emphasis is given to the underrepresented
+    class when the loss function is evaluated during model training. We calculated
+    class weights **normal: 0.56 and hateful: 4.60;** that is, the positive class
+    will be given **~8 times** the weight in calculating the loss function.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Evaluation metrics**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In order to evaluate the performance and compare the trained classification
+    models, we are going to consider the following three metrics (for a description
+    of evaluation metrics for binary classifiers see [here](https://en.wikipedia.org/wiki/Evaluation_of_binary_classifiers)),
+    evaluated on the held-out test set of annotated users:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Accuracy
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Receiver Operating Characteristic (ROC) curve
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Area Under the ROC curve (AU-ROC)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Logistic regression model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s begin by training a [logistic regression](https://en.wikipedia.org/wiki/Logistic_regression)
+    (LR) model to predict a **normal** or **hateful** label for a user.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When training and evaluating this model, we will ignore users that are not annotated
+    as either **normal** or **hateful** as well as the relationships between users
+    due to lack of direct support for such information in LR.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The training and test data are structured in tabular format, as shown in Figure
+    2\. The annotated users in the training set are shown using red and green circles.
+    The feature vectors for each of the users are stacked vertically to create the
+    design matrix input to the LR model. After training the LR model, we can make
+    predictions for the users in the held-out test set in order to measure the generalisation
+    performance of the trained model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/378420260464df07c36d2e90b039f399.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 2: The setup for training and evaluating a logistic regression model
+    for online hate speech classification.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After training the model, we can use it to make a prediction for each user in
+    the test set and calculate the accuracy and AU-ROC metrics as well as plot the
+    ROC curve. The accuracy on the test set is **85.9%,** and the AU-ROC is **0.81**.
+    A plot of the ROC curve can be seen in the below figure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bb2bd9a950bec8f272459c2e60af965b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 3: The ROC curve for the logistic regression classifier calculated
+    using the test data. The area under the ROC curve is 0.81.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Graph Neural Networks**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the specification and training of the LR model, we ignored the ~95k users
+    that have not been annotated as **hateful** or **normal**. Furthermore, we ignored
+    the relationships between users.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is conceivable that a hateful user would take measures to avoid easy identification
+    by, for example, being cautious not to use obviously hateful vocabulary. However,
+    the same user might be comfortable retweeting other users’ hateful tweets. This
+    information is hidden in the relationships between users. The LR model we employed
+    above did not utilise these relationships.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*This leads us to ask; can we exploit the relationships between users, as well
+    as the data about non-annotated users to improve the predictive performance of
+    a machine learning model? And if so, what kind of machine learning model can we
+    use, and how?*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: One way to use the relationship data is to do manual [feature engineering](https://en.wikipedia.org/wiki/Feature_engineering),
+    introducing network-related features into the LR model. Examples of such features
+    include various [centrality measures](https://en.wikipedia.org/wiki/Centrality)
+    that quantify the positional importance of nodes in the graph. In fact, the dataset
+    as published in [1] includes such engineered network-related features, but we
+    have deliberately removed them from the data in order to demonstrate one of the
+    core ideas in modern machine learning. This idea popularised by deep learning
+    methods is that it is possible to let the machine learning algorithm *automatically*
+    learn suitable features that maximise model performance, thus avoiding the laborious
+    process of manual feature engineering. (This automation of feature engineering,
+    however, comes at a price of interpretability of the resulting model — a subject
+    of another discussion.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Guided by the above idea, we forgo feature engineering and tackle online hate
+    speech classification using a state-of-the-art GNN algorithm. The GNN model jointly
+    exploits user features and relationships between all users in the dataset, including
+    those users that are not annotated. We expect that the GNN model using this additional
+    information will outperform the baseline LR model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*The article* [*Knowing Your Neighbours: Machine Learning on Graphs*](https://medium.com/stellargraph/knowing-your-neighbours-machine-learning-on-graphs-9b7c3d0d5896)
+    *provides an introductory yet comprehensive overview of graph machine learning.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The particular GNN algorithm we employ here was published in [3]. It is called
+    Graph Sample and Aggregate (GraphSAGE) and builds on the insight that a prediction
+    for a node should be based on the node’s feature vector but also those of its
+    neighbours, perhaps their neighbours as well, and so on. Using the example of
+    classifying hateful users, our working assumption is that a hateful user is likely
+    to be connected with other hateful users. The strength of this connection will
+    depend on both the graph distance between the two users (the [graph distance](https://en.wikipedia.org/wiki/Distance_%28graph_theory%29)
+    between the two user nodes) and their feature vectors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: GraphSAGE introduces a new type of graph convolutional neural network layer
+    that propagates information from a node’s neighbourhood while training a classifier.
+    This new layer is summarised in Figure 4\. As described in [3] such a layer “generates
+    embeddings by sampling and aggregating features from a node’s local neighbourhood.”
+    An embedding is a latent representation of a node that can be used as input to
+    a classification model, typically a fully connected neural network, such that
+    we can train all the model parameters in an end-to-end fashion. We can stack several
+    such layers in sequence to construct a deeper network that fuses information from
+    larger network neighbourhoods. The number of GraphSAGE layers to use is problem
+    specific and should be tuned appropriately as a model hyperparameter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0df8c1b7670b5ef2edebf19dd1a79110.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 4: Description of a GraphSAGE neural network layer. It uses aggregate
+    information to form a node’s neighbourhood to learn how to make better predictions.
+    The blue arrows indicate the node’s neighbours considered during the aggregation
+    step.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generally, graph neural network models can become computationally unwieldy for
+    large graphs with high degree nodes. To avoid this, GraphSAGE employs a sampling
+    scheme to limit the number of neighbours whose feature information is passed to
+    the central node, as shown in the “AGGREGATE” step in Figure 4\. Furthermore,
+    GraphSAGE models learn functions that can be used to generate latent representations
+    for nodes that were not present in the network during training. In consequence,
+    GraphSAGE can suitably be used to make predictions in an inductive setting when
+    only part of the graph is available at training time (while this is not the case
+    for our working example, you can find such a demonstration in the Jupyter Notebook
+    [here](https://github.com/stellargraph/stellargraph/blob/develop/demos/node-classification/graphsage/graphsage-pubmed-inductive-node-classification-example.ipynb).)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The open source [StellarGraph Python Library](https://github.com/stellargraph/stellargraph)
+    provides an easy to use implementation of the GraphSAGE algorithm. In this article,
+    we will use StellarGraph to build and train a GraphSAGE model for predicting hateful
+    Twitter users. See the Jupyter notebook [here](https://github.com/stellargraph/stellargraph/tree/develop/demos/use-cases)
+    for how to do this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can visualise the node latent representations for annotated users. We take
+    the output activations of the first GraphSAGE layer as the node representations.
+    These are shown in 2-D in Figure 5 where **hateful** users are shown in red and
+    **normal** users in blue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f6b789d1de743112302a276b377d0c27.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 5: Visualisation of the node embeddings for annotated users. Hateful
+    users are shown in red and normal users are shown in blue.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The node latent representations shown in Figure 6 indicate that the majority
+    of hateful users tend to cluster together. However, some normal users are also
+    in the same neighbourhood, and these will be difficult to distinguish from hateful
+    ones. Similarly, there are a small number of hateful users dispersed among normal
+    users, and these will also be difficult to classify correctly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The GraphSAGE user classification model achieves an accuracy of **88.9%** on
+    the test data and an AU-ROC score of **0.88**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Comparison between models**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s now compare the GraphSAGE and logistic regression models, to see whether
+    using the additional information about unlabelled users and relationships between
+    users actually helped to make a better user classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The ROC curves for both models are drawn together in Figure 6\. The AU-ROC is
+    **0.81** and **0.88** for the LR and GraphSAGE models respectively (larger numbers
+    denote better performance). By this measure, we see that utilising relationship
+    information in the machine learning model improves overall predictive performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cf98f511b9f19c8e6571fcba01a32580.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 6: Plot of the ROC curves for logistic regression (orange) and GraphSAGE
+    (blue) models. Also shown are the areas under the curves. The curves are drawn
+    using data in the test set.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When classifying users as **hateful** (positive class) or **normal** (negative
+    class) it is important to minimise the number of false positives or the number
+    of normal users that are incorrectly classified as hateful. At the same time,
+    we want to correctly classify as many hateful users as possible. We can achieve
+    both these goals by setting decision thresholds guided by the ROC curve.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Assuming we are willing to tolerate a false positive rate of approximately 2%,
+    the two models achieve true positive rates of **0.378** and **0.253** for GraphSAGE
+    and LR respectively. We thus see that for a fixed false positive rate of 2%, the
+    GraphSAGE model achieves a true positive rate that is **12%** higher than the
+    LR model. That is, we can correctly identify more hateful users for the same low
+    number of misclassified normal users. We can conclude that by using the relationship
+    information available in the data, as well as the unlabelled user information,
+    the performance of a machine learning model on sparsely labelled datasets with
+    underlying network structure is greatly improved.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, we considered the rise of online hate speech fuelled by the
+    Internet’s growth and asked the question; *“Can graph machine learning identify
+    hate speech in online social networks?”*
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our technical analysis answers this question with a resounding; *“Yes, but there
+    is still plenty of room for improvement.”* We demonstrated that modern GNNs could
+    help identify online hate speech at a much higher accuracy than traditional machine
+    learning methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The [Council on Foreign Relations](https://www.cfr.org/) recently published
+    [this article](https://www.cfr.org/backgrounder/hate-speech-social-media-global-comparisons)
+    stating; “Violence attributed to online hate speech has increased worldwide.”
+    We have shown that graph machine learning is a suitably powerful weapon in the
+    fight against online hate speech. Our results provide encouragement for additional
+    research for online hate speech classification with larger network datasets and
+    more complex GNN methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to learn more about how to use state-of-the-art GNN models for predictive
+    modelling, have a look at the [StellarGraph graph machine learning library](https://github.com/stellargraph/stellargraph)
+    and the numerous accompanying [demos](https://github.com/stellargraph/stellargraph/tree/develop/demos).
+  prefs: []
+  type: TYPE_NORMAL
+- en: This work is supported by [CSIRO’s Data61](https://www.data61.csiro.au/), Australia’s
+    leading digital research network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**References**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '“[Like Sheep Among Wolves](https://arxiv.org/abs/1801.00317)”: Characterizing
+    Hateful Users on Twitter. M. H. Ribeiro, P. H. Calais, Y. A. Santos, V. A. F.
+    Almeida, and W. Meira Jr. 2018.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Empath: Understanding Topic Signals in Large-Scale Text](https://arxiv.org/abs/1602.06979).
+    E. Fast, B. Chen, M. S. Bernstein, Proceedings of the CHI Conference on Human
+    Factors in Computing Systems, 2016.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Inductive Representation Learning on Large Graphs](http://papers.nips.cc/paper/6703-inductive-representation-learning-on-large-graphs).
+    W. L. Hamilton, R. Ying, and J. Leskovec, NeurIPS, 2017'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/stellargraph/can-graph-machine-learning-identify-hate-speech-in-online-social-networks-58e3b80c9f7e).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bios: **[Pantelis Elinas](https://au.linkedin.com/in/pantelis-elinas-370971119)
+    is a Senior Research Engineer working at CSIRO’s Data61, Australia’s leading digital
+    research network. He enjoys working on interesting problems, sharing knowledge,
+    and developing useful software tools.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Anna Leontjeva](https://au.linkedin.com/in/anna-leontjeva-datascientist) is
+    a Senior Data Scientist with more than 10+ years of experience currently working
+    in CSIRO''s Data61 on StellarGraph, the machine learning library for graphs.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Yuriy Tyshetskiy](https://au.linkedin.com/in/yuriy-tyshetskiy-b42bb216) is
+    a Senior Research Engineer leading the Graph Machine Learning Systems team at
+    CSIRO''s Data61, developing the StellarGraph library. His experience ranges across
+    disciplines such as theoretical plasma physics, computer vision, and graph machine
+    learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Top 30 Social Network Analysis and Visualization Tools](https://www.kdnuggets.com/2015/06/top-30-social-network-analysis-visualization-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Knowing Your Neighbours: Machine Learning on Graphs](https://www.kdnuggets.com/2019/08/neighbours-machine-learning-graphs.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Graphs Are The Next Frontier In Data Science](https://www.kdnuggets.com/2018/10/graphs-next-frontier-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[4 Factors to Identify Machine Learning Solvable Problems](https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Identify Missing Data in Time-Series Datasets](https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Comprehensive Survey on Trustworthy Graph Neural Networks:…](https://www.kdnuggets.com/2022/05/comprehensive-survey-trustworthy-graph-neural-networks-privacy-robustness-fairness-explainability.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Machine Learning Can Benefit Online Learning](https://www.kdnuggets.com/2022/12/machine-learning-benefit-online-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build a Text-to-Speech Converter with Python in 5 Minutes](https://www.kdnuggets.com/2022/09/build-texttospeech-converter-python-5-minutes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Evolution of Speech Recognition Metrics](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

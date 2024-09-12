@@ -1,0 +1,648 @@
+- en: Avoid These Mistakes with Time Series Forecasting
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/12/avoid-mistakes-time-series-forecasting.html](https://www.kdnuggets.com/2021/12/avoid-mistakes-time-series-forecasting.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Roman Orac](https://www.linkedin.com/in/romanorac/?originalSubdomain=si),
+    Senior Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9b567f3145f24d737b19d46ab7c9e0c8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Photoholgic](https://unsplash.com/@photoholgic?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Time series forecasting is a subfield of Data Science, which deals with forecasting
+    the spread of COVID, forecasting the prices of stocks, forecasting the daily consumption
+    of electricity… we could go on and on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Science is a wide field of study and there aren’t many “Jack of all trades”
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The Data Science field is a wide field of study. Many Data Scientists work their
+    whole careers with non-sequential data (classical classification and regression
+    Machine Learning) and they never train a time series forecasting model in their
+    professional career.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is to be expected because of the rapid growth of the Data Science field.
+    It’s harder and harder to keep up with all the subfields.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Scientists who plan to pivot into the world of time series can prepare
+    for a fun ride because working with this kind of data requires different, specialized
+    approaches.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we’ll go through a few common Time Series forecasting pitfalls
+    that are easy to fall into. I based the examples on financial stock data but the
+    approaches can be used with any other time-series data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'By reading this article, you’ll learn:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to download financial time series data with pandas
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to find peaks and troughs in a time series signal
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: What is (and how to use) autocorrelation plot
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to check if a time series has any statistically significant signal
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Jack of all trades, master of none
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: We simply need to collect the data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/6d0b63aa58b06e886e1e2cb223f3b563.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Hans Eiskonen](https://unsplash.com/@eiskonen?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: One fallacy (and a doomed project from the start) is when software engineers
+    think that they can simply collect the stock market data and then put it in a
+    Deep Neural Network to find profitable patterns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Deep Neural Net will find profitable patterns automatically, right?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Don’t get me wrong, having data is useful, but the hardest part comes with the
+    modeling.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are Data Service sites, like [EOD Historical Data](https://eodhistoricaldata.com/),
+    which offer all kinds of financial data with a free plan. It makes more sense
+    to try to identify profitable patterns first as you can download historical data
+    with single pandas command.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/377f71388254c1c852a6d4a9d48ca1a5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[EOD Historical Data](https://eodhistoricaldata.com/) offers all kinds of financial
+    data with a free plan (screenshot made by author)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What’s that pandas command to download the data?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Let’s look at the example below, in which I download daily Apple stock prices
+    from 1st January 2018 and onward:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/a391d7dcec47e70b49321693e6a5b35b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Daily Apple stock prices from 1st January 2018 and onwards (image by author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can then visualize the adjusted close prices of Apple stock and prices distribution
+    with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/7daab9a2f54ce739e3f1ee8376f78c6a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Adjusted close prices and distribution of Apple stock price (image by author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finding Peaks and Troughs
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/11fdb15e417bd909850030ffdd8079e9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Claudel Rheault](https://unsplash.com/@claudelrheault?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: A common way a time series forecasting learning problem is then defined is to
+    find peaks and troughs on the time-series signal, which serve as a target variable
+    for the Machine Learning algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s first reduce the data size so that we can visualize it easier:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then finds peaks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/ea5f1cfed40ef8deab30d5acef295679.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Array with indices of peaks (image by author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Then find troughs:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Then we can visualize the
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/41903a452139864b09812d92bf48add4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Apple stock time series with peaks and troughs (image by author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that the dataset is marked with entry and exit signals, we just take Neural
+    Net out of the box and sit back and relax, right?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Not exactly!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Technical analysts might point out the lookahead bias in the example above.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Why?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Because the find peaks function worked with the whole signal at once. If we
+    would define decision logic based on lagging indicators on top of it, it would
+    suffer from lookahead bias.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[From wikipedia](https://en.wikipedia.org/wiki/Technical_analysis):'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In finance, technical analysis is an analysis methodology for forecasting the
+    direction of prices through the study of past market data, primarily price and
+    volume.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: But that’s a problem only if we would rely on technical analysis.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Let’s go back to Machine Learning.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'From a Machine Learning point of view, the definition above is OK if we split
+    the signal into 3 parts. Eg.:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: the first part for training (first 60%)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the second part for validation (second 10%)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: and last part for out of sample test (last 30%)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The output of the find peaks function is only used for the target and there
+    is no data leak to features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So what’s wrong with this definition of learning problem?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The one million dollar question we need to answer before applying a Machine
+    Learning algorithm to the data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is there any signal in the time series or is it all random noise?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Is there any signal in the time series?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/a215626c46d66ae476cb449a960e28fa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Clarisse Meyer](https://unsplash.com/@clarissemeyer?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s compare randomly generated numbers drawn from the Gaussian distribution
+    with the Apple stock time series.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With the command below I generate 1000 random numbers from Gaussian distribution
+    with zero mean and the standard deviation equal to 1 (aka. normal distribution):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/044a1622ea1680719ce87eed41569608.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Random numbers were drawn from a normal distribution (image by author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, let’s visualize generated numbers and compare them with Apple stock time
+    series:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/fe3ad1927569582501432c232da24ae8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Comparing random samples from Gaussian distribution with Apple stock time series
+    (image by author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: You don’t need to be a scientist to notice that the Apple stock time series
+    has an increasing pattern and Gaussian numbers just randomly jump up and down.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Does the Apple stock time series really have a pattern from which a Machine
+    Learning algorithm can learn a pattern?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Let me take you for a (random) walk
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/33c84bd20da985a81f5e0c32b2c92c62.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Jonas Weckschmied](https://unsplash.com/@jweckschmied?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: A random walk is a statistical tool, which generates random numbers with -1
+    and 1 and the next number is dependent on the previous state. This provides some
+    consistency, unlike independent random numbers. The random walk can help us determine
+    if our time series is predictable or not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s look at the example below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the first step, we generate a list of 1000 numbers with randomly selected
+    -1 and 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then we cumulative summarize generated random values to add dependence on the
+    previous state:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The initial adjusted close of the Apple stock was 34.55\. Let’s add this number
+    to the random_walk so that we work with the same scale:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The end result is a pandas Dataframe with a generated random walk:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/96e8de1a2dbff3bbd8aedcb893019266.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Dataframe with a generated random walk (image by author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, let’s compare randomly generated walk with the actual Apple stock time
+    series:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/afe120a35c191abec1787a72ec51bbeb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Apple stock time series and random walk (image by author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: I intentionally didn’t include the title on the plots above. Could you tell
+    which is random and which is the actual Apple stock time series?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is our time series predictable or is it random?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/581d9f7eff608ed344e475301638003c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Universal Eye](https://unsplash.com/@universaleye?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: To answer this question, we need to compare the properties of the randomly generated
+    sequence with the properties of the Apple stock time series.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One useful tool is the autocorrelation plot, which shows how correlated is each
+    observation with observations from the previous time steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[From Wikipedia](https://en.wikipedia.org/wiki/Autocorrelation):'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Autocorrelation is the correlation of a signal with a delayed copy of itself
+    as a function of delay. Informally, it is the similarity between observations
+    as a function of the time lag between them.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The way random walk is constructed (the current state is calculated as +1 or
+    -1 from the previous state — high dependency on the previous state), we would
+    expect that there would be a high autocorrelation in the first few time steps,
+    which would linearly fall by increasing the lag.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pandas has an [autocorrelation_plot](https://pandas.pydata.org/docs/reference/api/pandas.plotting.autocorrelation_plot.html) function,
+    which calculates autocorrelation and visualizes it on an autocorrelation plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s visualize autocorrelation plots for the random walk and the Apple stock
+    time series.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/bb6bc1d74686fdc57c1547f4e925dd1e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Autocorrelation plots for the random walk and the Apple stock time series (image
+    by author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The plot shows autocorrelation on the x-axis and lag on the y-axis. The horizontal
+    lines in the plot correspond to 95% and 99% confidence bands. The dashed line
+    is 99%, confidence band. Values above these lines are statistically significant.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we expected for the random walk sequence, there is a high autocorrelation
+    in the first 100 time steps, which linearly falls with increasing lag.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Surprisingly (or not surprisingly to some), the autocorrelation on the Apple
+    stock time series is similar to the random walk autocorrelation plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Put Deep Neural Nets back to sleep…
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/3cebb99e2c29e467653d374f3869472f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Pierre Bamin](https://unsplash.com/@bamin?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/noise?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s make both time series stationary by removing the value of the previous
+    observation from the current observation — differencing. By applying differencing
+    operation we remove the function of time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Commands below apply differencing operating to Apple stock and random walk
+    time series:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/6ba26507ed89ab0e9893ee84b8df1208.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Differenced Apple stock time series (image by author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, let’s visualize differenced time series:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/c2fd5308494123484dee6b82650ecefb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Differenced time series of Apple stock and random walk (image by author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Differenced random walk time series has only -1 and +1 as expected. Differenced
+    Apple stock time series has more spikes, but are they significant?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can check this with an autocorrelation plot on a differenced time series:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/5096aa0d7a18f588157fdaaaa9b5f6fd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Autocorrelation plots for the differenced random walk and the Apple stock time
+    series (image by author)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Remember, autocorrelation values above horizontal lines are statistically significant.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Differenced Apple stock time series has a few autocorrelation values that are
+    over the 99% confidence band, but also differenced random walk time series has
+    a few values over the 95% confidence band and we know that the signal is random
+    so we can attribute these to statistical mistakes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/ab538fe37138397dce95f99c7f9c6f70.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Ferdinand Stöhr](https://unsplash.com/@fellowferdi?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the article, we applied a few statistical checks on real-world time series
+    data and we determined that the signal from it is random.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**What are my two cents on this?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You were probably surprised (as I was) that we didn’t find any statistically
+    significant signal in the Apply stock time series.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How is that possible when we constantly hear stories on how Machine Learning
+    algorithms are used to make automated decisions on the stock market?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, while I’m sure Machine Learning algorithms are used to make such decisions
+    — Marcos López de Prado wrote a whole book on this topic — I’m also sure that
+    they use more data. And I don’t mean more price data, but a different kind of
+    data, which influenced the stock price movements.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can read the [Random walk hypothesis on Wikipedia](https://en.wikipedia.org/wiki/Random_walk_hypothesis),
+    which states that stock market prices evolve according to a random walk (so price
+    changes are random) and thus cannot be predicted.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What are your thoughts about this? Let me know in the comments below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Roman Orac](https://www.linkedin.com/in/romanorac/?originalSubdomain=si)**
+    is a Machine Learning engineer with notable successes in improving systems for
+    document classification and item recommendation. Roman has experience with managing
+    teams, mentoring beginners and explaining complex concepts to non-engineers.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://python.plainenglish.io/avoid-these-mistakes-with-time-series-forecasting-7ee84b80ed65).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Top 5 Time Series Methods](/2021/11/top-5-time-series-methods.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Advice to aspiring Data Scientists – your most common questions answered](/2021/01/advice-aspiring-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Multivariate Time Series Analysis with an LSTM based RNN](/2021/10/multivariate-time-series-analysis-lstm-based-rnn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Avoid These 5 Common Mistakes Every Novice in AI Makes](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Time Series Forecasting with Ploomber, Arima, Python, and Slurm](https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Time Series Forecasting with statsmodels and Prophet](https://www.kdnuggets.com/2023/03/time-series-forecasting-statsmodels-prophet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Leveraging XGBoost for Time-Series Forecasting](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mistakes That Newbie Data Scientists Should Avoid](https://www.kdnuggets.com/2022/06/mistakes-newbie-data-scientists-avoid.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Common Data Science Mistakes and How to Avoid Them](https://www.kdnuggets.com/5-common-data-science-mistakes-and-how-to-avoid-them)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

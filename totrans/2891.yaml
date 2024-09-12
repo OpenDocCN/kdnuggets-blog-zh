@@ -1,0 +1,332 @@
+- en: Train sklearn 100x Faster
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/09/train-sklearn-100x-faster.html](https://www.kdnuggets.com/2019/09/train-sklearn-100x-faster.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Evan Harris](https://www.linkedin.com/in/evan-harris-387375b2/), Manager,
+    Machine Learning and Data Science at Ibotta, Inc.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: At Ibotta we train a lot of machine learning models. These models power our
+    recommendation system, search engine, pricing optimization engine, data quality,
+    and more. They make predictions for millions of users as they interact with our
+    mobile app.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While we do much of our data processing with [Spark](https://spark.apache.org/),
+    our preferred machine learning framework is [scikit-learn](https://scikit-learn.org/stable/).
+    As compute gets cheaper and time to market for machine learning solutions becomes
+    more critical, we’ve explored options for speeding up model training. One of those
+    solutions is to combine elements from Spark and scikit-learn into our own hybrid
+    solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introducing sk-dist
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We are excited to announce the launch of our open source project [sk-dist](https://github.com/Ibotta/sk-dist).
+    The goal of the project is to provide a general framework for distributing scikit-learn
+    meta-estimators with Spark. Examples of meta-estimators are decision tree ensembles
+    ([random forests](https://en.wikipedia.org/wiki/Random_forest) and [extra randomized
+    trees](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.ExtraTreesClassifier.html)), [hyperparameter
+    tuners](https://scikit-learn.org/stable/modules/grid_search.html) ([grid search](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV) and [randomized
+    search](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV))
+    and multi-class techniques ([one vs rest](https://scikit-learn.org/stable/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#sklearn.multiclass.OneVsRestClassifier) and [one
+    vs one](https://scikit-learn.org/stable/modules/generated/sklearn.multiclass.OneVsOneClassifier.html#sklearn.multiclass.OneVsOneClassifier)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4df608e27f8783fb241b1762eed6f489.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Our primary motivation is to fill a void in the space of options for distributing
+    traditional machine learning models. Outside of the space of neural networks and
+    deep learning, we find that much of our compute time for training models is not
+    spent on training a single model on a single dataset. The bulk of time is spent
+    training multiple iterations of a model on multiple iterations of a dataset using
+    meta-estimators like grid search or ensembles.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Example
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Consider the [hand written digits dataset](https://scikit-learn.org/stable/auto_examples/classification/plot_digits_classification.html).
+    Here we have encoded images of hand written digits to be classified appropriately.
+    We can train a [support vector machine](https://en.wikipedia.org/wiki/Support-vector_machine) on
+    this dataset of 1797 records very quickly on a single machine. It takes under
+    a second. But hyperparameter tuning requires a number of training jobs on different
+    subsets of the training data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Shown below, we’ve built a parameter grid totaling 1050 required training jobs.
+    It takes only 3.4 seconds with sk-dist on a Spark cluster with over a hundred
+    cores. The total task time of this job is 7.2 minutes, meaning it would take this
+    long to train on a single machine with no parallelization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This example illustrates the common scenario where fitting data into memory
+    and training a single classifier is trivial but the number of required fits for
+    hyperparameter tuning adds up quickly. Here is a look under the hood at running
+    a grid search problem like the above example with sk-dist:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/282b2a6db0d1e7459055893272e39ba7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Grid Search with sk-dist
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For real-world applications of traditional machine learning at Ibotta, we often
+    find ourselves in a similar situation: small to medium sized data (100k to 1M
+    records) with many iterations of simple classifiers to fit for hyperparameter
+    tuning, ensembles and multi-class solutions.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Existing Solutions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'There are existing solutions to distributing traditional machine learning meta-estimator
+    training. The first is the simplest: scikit-learn’s built-in parallelization of
+    meta-estimators using [joblib](https://joblib.readthedocs.io/en/latest/). This
+    operates very similarly to sk-dist, except for one major constraint: performance
+    is limited to the resources of any one machine. Even versus a theoretical single
+    machine with hundreds of cores, Spark still has advantages like [fine tuned memory
+    specification for executors](https://spark.apache.org/docs/latest/tuning.html), [fault
+    tolerance](https://techvidvan.com/tutorials/fault-tolerance-in-spark/), as well
+    as cost control options like using [spot instances](https://aws.amazon.com/ec2/spot/) for
+    worker nodes.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another existing solution is [Spark ML](https://spark.apache.org/docs/latest/ml-guide.html).
+    This is Spark’s native machine learning library, supporting many of the same algorithms
+    as scikit-learn for classification and regression problems. It also has meta-estimators
+    like tree ensembles and grid search, as well as support for multi-class problems.
+    While this sounds like it may be a sufficient solution for distributing scikit-learn
+    style machine learning workloads, it distributes training in a way that doesn’t
+    solve the kind of parallelism of interest to us.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/3fcf7a970a8832f2998bd8ca037f6870.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Distributed on Different Dimensions
+  prefs: []
+  type: TYPE_NORMAL
+- en: As shown above, Spark ML will train a single model on data that is distributed
+    on many executors. This works well when data is large and won’t fit into memory
+    on a single machine. However, when data is small this can *underperform* scikit-learn
+    on a single machine. Furthermore, when training a random forest for example, Spark
+    ML trains each decision tree in sequence. Wall time for this job will scale linearly
+    with the number of decision trees regardless of the resources allocated to the
+    job.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For [grid search, Spark ML](http://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.tuning.CrossValidator) does
+    implement a [parallelism](http://spark.apache.org/docs/latest/api/python/pyspark.ml.html#pyspark.ml.tuning.CrossValidator.parallelism) parameter
+    that will train [individual models in parallel](https://issues.apache.org/jira/browse/SPARK-19357).
+    However each individual model is still training on data that is distributed across
+    executors. The total parallelism of the job is a [fraction of what it could be](https://github.com/Ibotta/sk-dist/blob/master/examples/search/spark_ml.py) if
+    distributed purely along the dimension of models rather than data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ultimately, we want to distribute our training on a different dimension than
+    that of Spark ML. When using small or medium data, fitting the data into memory
+    is not a problem. For the random forest example, we want to broadcast the training
+    data in full to each executor, fit an independent decision tree on each executor,
+    and bring those fitted decision trees back to the driver to assemble a random
+    forest. Distributing along this dimension can be [orders of magnitude faster](https://github.com/Ibotta/sk-dist/blob/master/examples/search/spark_ml.py) than
+    distributing the data and training decision trees in serial. This behavior is
+    similar for other meta-estimator techniques like grid search and multi-class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Features
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Given the limitations of these existing solutions in our problem space, we decided
+    to develop sk-dist in-house. The bottom line is that we want to **distribute models,
+    not data**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While the primary focus is on distributed training of meta-estimators, sk-dist
+    also includes modules for distributed prediction of scikit-learn models with Spark,
+    several pre/post processing scikit-learn transformers for use without Spark, and
+    a flexible feature encoder for use with or without Spark.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Distributed Training** — Distribute meta-estimator training with Spark. The
+    following algorithms are supported: [Hyperparameter optimization](https://github.com/Ibotta/sk-dist/blob/master/skdist/distribute/search.py) with
+    grid search and randomized search, [tree ensembles](https://github.com/Ibotta/sk-dist/blob/master/skdist/distribute/ensemble.py) with
+    random forests, extra trees, and random trees embedding, and [multi-class strategies](https://github.com/Ibotta/sk-dist/blob/master/skdist/distribute/multiclass.py) with
+    one-vs-rest and one-vs-one. All of these meta-estimators mirror their scikit-learn
+    counterparts after the fit.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Distributed Prediction** — [Distribute the prediction methods](https://github.com/Ibotta/sk-dist/blob/master/skdist/distribute/predict.py) of
+    fitted scikit-learn estimators with [Spark DataFrames](https://spark.apache.org/docs/latest/sql-programming-guide.html).
+    This enables large scale distributed prediction with portable scikit-learn estimators
+    that can be used with or without Spark.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Feature Encoding** — Distribute feature encoding with a flexible feature
+    transformer called [Encoderizer](https://github.com/Ibotta/sk-dist/blob/master/skdist/distribute/encoder.py).
+    It functions with or without Spark parallelization. It will infer data types and
+    shapes, automatically applying default feature transformers as a best guess implementation
+    of standard feature encoding techniques. It can also be used as a fully customizable
+    feature union-like encoder with the added advantage of distributed transformer
+    fitting with Spark.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use Cases
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Here are some guidelines for deciding whether or not sk-dist is a good fit
+    for your machine learning problem space:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Traditional Machine Learning** — Methods like [generalized linear models](https://scikit-learn.org/stable/modules/linear_model.html), [stochastic
+    gradient descent](https://scikit-learn.org/stable/modules/sgd.html), [nearest
+    neighbors](https://scikit-learn.org/stable/modules/neighbors.html), [decision
+    trees](https://scikit-learn.org/stable/modules/tree.html), and [naive bayes](https://scikit-learn.org/stable/modules/naive_bayes.html) work
+    well with sk-dist. These all have implementations in scikit-learn which are ready
+    for direct implementation with sk-dist meta-estimators.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Small to Medium Sized Data** — Big data won’t work well with sk-dist. Keep
+    in mind that the dimensionality of distribution of training is along the axis
+    of the models, not the data. Data needs to not only fit in memory on each executor,
+    but also be small enough to broadcast. Depending on Spark configuration, the maximum
+    broadcast size can be limiting.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Spark Orientation and Access** — The core functionality of sk-dist requires
+    running Spark. This isn’t always feasible for individuals or small data science
+    teams. Additionally, some Spark tuning and configuration will be necessary to
+    get the most out of sk-dist in a cost effective way, which requires some training
+    in Spark fundamentals.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: An important note here is that while neural networks and deep learning could
+    technically be used with sk-dist, these techniques require large amounts of training
+    data and sometimes specialized infrastructure to be effective. Deep learning is
+    not an intended use case of sk-dist, as it violates (1) and (2) above. Alternatively,
+    at Ibotta [we’ve been using](https://medium.com/building-ibotta/heating-up-word2vec-blazingtext-for-real-time-search-c2121bd1396) [Amazon
+    SageMaker](https://aws.amazon.com/sagemaker/) for these techniques, which we’ve
+    found to be a more efficient use of compute than Spark for these workloads.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting Started
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To get started with sk-dist, check out the [installation guide](https://github.com/Ibotta/sk-dist#installation).
+    The code repository also contains a library of [examples](https://github.com/Ibotta/sk-dist/tree/master/examples) to
+    illustrate some of the use cases of sk-dist. [All are welcome](https://github.com/Ibotta/sk-dist/blob/master/CODE_OF_CONDUCT.md) to
+    submit issues and contribute to the project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If these kinds of projects and challenges sound interesting to you, Ibotta is
+    hiring! Check out our [jobs page](https://ibotta.com/careers) for more information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks to charley frazier, Chad Foley, and Sam Weiss.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Evan Harris](https://www.linkedin.com/in/evan-harris-387375b2/)** is
+    an experienced technologist specializing in data science and machine learning.
+    He is currently leading a machine learning team which is building services for
+    search relevancy, content recommendations, pricing optimization and fraud detection,
+    powering a mobile application serving millions of users.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/building-ibotta/train-sklearn-100x-faster-bec530fc1f45).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Understanding Decision Trees for Classification in Python](/2019/08/understanding-decision-trees-classification-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Advanced Keras — Accurately Resuming a Training Process](/2019/03/advanced-keras-accurately-resuming-training-process.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Distributed Artificial Intelligence: A primer on Multi-Agent Systems, Agent-Based
+    Modeling, and Swarm Intelligence](/2019/04/distributed-artificial-intelligence-multi-agent-systems-agent-based-modeling-swarm-intelligence.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

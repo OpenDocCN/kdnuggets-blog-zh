@@ -1,0 +1,128 @@
+- en: Implementing Your Own k-Nearest Neighbor Algorithm Using Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/01/implementing-your-own-knn-using-python.html](https://www.kdnuggets.com/2016/01/implementing-your-own-knn-using-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Natasha Latysheva**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Editor''s note*: Natasha is active in the [Cambridge Coding Academy](https://cambridgecoding.com/),
+    which is holding an upcoming [Data Science Bootcamp in Python](https://cambridgecoding.com/datascience-bootcamp)
+    on 20-21 February 2016, where you can learn state-of-the-art machine learning
+    techniques for real-world problems.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In machine learning, you may often wish to build predictors that allows to
+    classify things into categories based on some set of associated values. For example,
+    it is possible to provide a diagnosis to a patient based on data from previous
+    patients. Classification can involve constructing highly non-linear boundaries
+    between classes, as in the case of the red, green and blue classes [below](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![kNN boundaries](../Images/4322b5f9ae66be35375b65bec3b6c05f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Many algorithms have been developed for automated classification, and common
+    ones include random forests, support vector machines, Naïve Bayes classifiers,
+    and many types of neural networks. To get a feel for how classification works,
+    we take a simple example of a classification algorithm - k-Nearest Neighbours
+    (kNN) - and build it from scratch in Python 2\. You can use a mostly imperative
+    [style of coding](http://latentflip.com/imperative-vs-declarative/), rather than
+    a declarative/functional one with [lambda functions](http://www.secnetix.de/olli/Python/lambda_functions.hawk)
+    and [list comprehensions](http://www.secnetix.de/olli/Python/list_comprehensions.hawk)
+    to keep things simple if you are starting with Python. Here, we will provide an
+    introduction to the latter approach. kNN classifies new instances by grouping
+    them together with the most similar cases. Here, you will use kNN on the popular
+    (if idealized) iris dataset, which consists of flower measurements for three species
+    of iris flower. Our task is to predict the species labels of a set of flowers
+    based on their flower measurements. Since you’ll be building a predictor based
+    on a set of known correct classifications, kNN is a type of supervised machine
+    learning (though somewhat confusingly, in kNN there is no explicit training phase;
+    see [lazy learning](https://en.wikipedia.org/wiki/Lazy_learning)). The kNN task
+    can be broken down into writing 3 primary functions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Calculate the distance between any two points
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Find the nearest neighbours based on these pairwise distances
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Majority vote on a class labels based on the nearest neighbour list
+  prefs: []
+  type: TYPE_NORMAL
+- en: The steps in the following diagram provide a high-level overview of the tasks
+    you'll need to accomplish in your code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![kNN algorithm](../Images/39dbb98036b866c0b324bcb95cf9762c.png)](https://cambridgecoding.files.wordpress.com/2016/01/knn2.jpg)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The algorithm**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Briefly, you would like to build a script that, for each input that needs classification,
+    searches through the entire training set for the k-most similar instances. The
+    class labels of the most similar instances should then be summarised by majority
+    voting and returned as predictions for the test cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The complete code is at the end of the post. Now, let's go through the different
+    parts separately and explain what they do.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Loading the data and splitting into train and test sets To get up and running,
+    you’ll use some helper functions: although we can [download the iris data](https://archive.ics.uci.edu/ml/datasets/Iris)
+    ourselves and use [csv.reader](https://docs.python.org/2/library/csv.html) to
+    load it in, you can also quickly fetch the iris data straight from scikit-learn.
+    Further, you can do a 60/40 train/test split using the train_test_split function,
+    but you could have also randomly assigned the rows yourself (see this type of
+    implementation here). In machine learning, the train/test split is used in order
+    to reduce overfitting - training models on the full dataset tends to lead to the
+    model being overfitted to the noise and peculiarities of the data, rather than
+    the real, underlying trend. You do any sort of model tuning (e.g. picking the
+    number of neighbours, k) on the training set only - the test set acts as a stand-alone,
+    untouched dataset that you use to test your final model performance on.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here is an overview of the iris dataset, the data split, and a quick guide to
+    the indexing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Splitting the iris dataset](../Images/8099def34ac1f68142c2841020df09ca.png)](https://cambridgecoding.files.wordpress.com/2016/01/knn3.jpg)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[From Theory to Practice: Building a k-Nearest Neighbors Classifier](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Nearest Neighbors for Classification](https://www.kdnuggets.com/2022/04/nearest-neighbors-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[K-nearest Neighbors in Scikit-learn](https://www.kdnuggets.com/2022/07/knearest-neighbors-scikitlearn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[LangChain 101: Build Your Own GPT-Powered Applications](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build Your Own PandasAI with LlamaIndex](https://www.kdnuggets.com/build-your-own-pandasai-with-llamaindex)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Make Your Own GPTs with ChatGPT''s GPTs!](https://www.kdnuggets.com/make-your-own-gpts-with-chatgpts-gpts)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,433 @@
+- en: Computer Vision at Scale With Dask And PyTorch
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/11/computer-vision-scale-dask-pytorch.html](https://www.kdnuggets.com/2020/11/computer-vision-scale-dask-pytorch.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Stephanie Kirmer](https://www.linkedin.com/in/skirmer/), Senior Data
+    Scientist at [Saturn Cloud](https://www.saturncloud.io/s/tryhosted/?utm_source=KDNuggets%20blog%3A%20Pytorch%20on%20a%20GPU%20cluster&utm_medium=Try%20Hosted)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Applying deep learning strategies to computer vision problems has opened up
+    a world of possibilities for data scientists. However, to use these techniques
+    at scale to create business value, substantial computing resources need to be
+    available – and this is just the kind of challenge Saturn Cloud is built to solve!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this tutorial, you’ll see the steps to conducting image classification inference
+    using the popular Resnet50 deep learning model at scale using NVIDIA GPU clusters
+    on Saturn Cloud. Using the resources Saturn Cloud makes available, we can run
+    the task 40x faster than a non-parallelized approach!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/bbb23403f8c85487a730973cc0647e36.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We’ll be classifying dog images today!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'What you’ll learn here:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: How to set up and manage a GPU cluster on Saturn Cloud for deep learning inference
+    tasks
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to run inference tasks with Pytorch on the GPU cluster
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to use batch processing to accelerate your inference tasks with Pytorch
+    on the GPU cluster
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Setup
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To begin, we need to ensure that our image dataset is available and that our
+    GPU cluster is running.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our case, we have stored the data on S3 and use the [`s3fs`](https://s3fs.readthedocs.io/en/latest/) library
+    to work with it, as you’ll see below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you would like to use this same dataset, it is the Stanford Dogs dataset,
+    available here: [http://vision.stanford.edu/aditya86/ImageNetDogs/](http://vision.stanford.edu/aditya86/ImageNetDogs/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: To set up our Saturn GPU cluster, the process is very straightforward.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: We are not explicitly stating it, but we are using 32 threads each on our cluster
+    nodes, making 128 total threads.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Tip: Individual users may find that you want to adjust the number of threads,
+    reducing it down if your files are very large – too many threads running large
+    tasks simultaneously might require more memory than your workers have available
+    at one time.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This step may take a moment to complete because all the AWS instances that we
+    are requesting need to be spun up. Calling `client` at the end, there will monitor
+    the spin-up process and let you know when things are ready to rock!
+  prefs: []
+  type: TYPE_NORMAL
+- en: GPU Capability
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: At this point, we can confirm that our cluster has GPU capabilities, and make
+    sure we have set everything up correctly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, check that the Jupyter instance has GPU capability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Awesome- now let’s also check each of our four workers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here then we’ll set the “device” to always be cuda, so we can use those GPUs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Note: If you need some help establishing how to run a single image classification,
+    we have an [expanded code notebook](https://github.com/saturncloud/saturn-cloud-examples/tree/main/pytorch-demo) available
+    at our github that can give you those instructions as well as the rest of this
+    content.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Inference
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now, we’re ready to start doing some classification! We’re going to use some
+    custom-written functions to do this efficiently and make sure our jobs can take
+    full advantage of the parallelization of the GPU cluster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Preprocessing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Single Image Processing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: This function allows us to process one image, but of course, we have a lot of
+    images to work with here! We’re going to use some list comprehension strategies
+    to create our batches and get them ready for our inference.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we break the list of images we have from our S3 file path into chunks
+    that will define the batches.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Then we’ll process each file into nested lists. Then we’ll reformat this list
+    setup slightly and we’re ready to go!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Notice that we have used the Dask `delayed` decorator on all of this- we don’t
+    want it to actually run yet, but to wait until we are doing work in parallel on
+    the GPU cluster!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Format Batches
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This little step just makes sure that the batches of images are organized in
+    the way that the model will expect them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Run the Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now we are ready to do the inference task! This is going to have a few steps,
+    all of which are contained in functions described below, but we’ll talk through
+    them so everything is clear.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our unit of work at this point is batches of 60 images at a time, which we created
+    in the section above. They are all neatly arranged in lists so that we can work
+    with them effectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One thing we need to do with the lists is to “stack” the tensors. We could do
+    this earlier in our process, but because we are using the Dask `delayed` decorator
+    on the preprocessing, our functions actually do not know that they are receiving
+    tensors until later in the process. Therefore, we’re delaying the “stacking” as
+    well by putting it inside this function that comes after the preprocessing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'So now we have our tensors stacked so that batches can be passed to the model.
+    We are going to retrieve our model using pretty simple syntax:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: Conveniently, we load the library `torchvision` which contains several useful
+    pretrained models and datasets. That’s where we are grabbing Resnet50 from. Calling
+    the method `.to(device)` allows us to pass the model object to our workers, giving
+    them the ability to run the inference without having to reach back to the client.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now we are ready to run inference! It is inside the same function, styled this
+    way:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: We pass our image stack (just the batch we are working on) to the workers and
+    then run the inference, returning predictions for that batch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Result Evaluation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The predictions and truth we have so far, however, are not really human-readable
+    or comparable, so we’ll use the functions that follow to fix them up and get us
+    interpretable results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: This takes our results from the model, and a few other elements, to return nice
+    readable predictions and the probabilities the model assigned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: From here, we’re nearly done! We want to pass our results back to S3 in a tidy,
+    human-readable way, so the rest of the function handles that. It will iterate
+    over each image because these functionalities are not batch handling. `is_match` is
+    one of our custom functions, which you can check out below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: Put It All Together
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now, we aren’t going to patch together all these functions by hand, instead,
+    we have assembled them in one single delayed function that will do the work for
+    us. Importantly, we can then map this across all our batches of images across
+    the cluster!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: On the Cluster
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We have really done all the hard work already and can let our functions take
+    it from here. We’ll be using the `.map` method to distribute our tasks efficiently.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: With `map` we ensure all our batches will get the function applied to them.
+    With `gather`, we can collect all the results simultaneously rather than one by
+    one. With `compute(sync=False)` we return all the futures, ready to be calculated
+    when we want them. This may seem arduous, but these steps are required to allow
+    us to iterate over the future.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we actually run the tasks, and we also have a simple error handling system
+    just in case any of our files are messed up or anything goes haywire.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: Evaluate
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We want to make sure we have high-quality results coming out of this model,
+    of course! First, we can peek at a single result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'While we have a wrong prediction here, we have the sort of results we expect!
+    To do a more thorough review, we would download all the results files, then just
+    check to see how many have `evaluation: True`.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Number of dog photos examined: 20580'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Number of dogs classified correctly: 13806'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The percent of dogs classified correctly: 67.085%'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Not perfect, but good looking results overall!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Comparing Performance
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So, we have managed to classify over 20,000 images in about 5 minutes. That
+    sounds good, but what is the alternative?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Computer Vision at Scale With Dask And PyTorch](../Images/120e727c28f37e3e011ffef3a5fc3b8d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '| Technique | Runtime |'
+  prefs: []
+  type: TYPE_TB
+- en: '| --- | --- |'
+  prefs: []
+  type: TYPE_TB
+- en: '| No Cluster with Batching | 3 hours, 21 minutes, 13 sec |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **GPU Cluster with Batching** | **5 minutes, 15 sec** |'
+  prefs: []
+  type: TYPE_TB
+- en: Adding a GPU cluster makes a HUGE difference! If you’d like to see this work
+    for yourself, [sign up for your free trial of Saturn Cloud today!](https://www.saturncloud.io/s/tryhosted/?utm_source=KDNuggets%20blog%3A%20Pytorch%20on%20a%20GPU%20cluster&utm_medium=Try%20Hosted)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Stephanie Kirmer](https://www.linkedin.com/in/skirmer/)** is a Senior
+    Data Scientist at Saturn Cloud.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.saturncloud.io/s/computer-vision-at-scale-with-dask-and-pytorch/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data Science in the Cloud with Dask](/2020/10/data-science-cloud-dask.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Python Libraries for Deep Learning, Natural Language Processing & Computer
+    Vision](/2020/11/top-python-libraries-deep-learning-natural-language-processing-computer-vision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Acquire the Most Wanted Data Science Skills](/2020/11/acquire-most-wanted-data-science-skills.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[6 Things You Need To Know About Data Management And Why It Matters…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Discover the World of Computer Vision: Introducing MLM''s Latest…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Applications of Computer Vision](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DINOv2: Self-Supervised Computer Vision Models by Meta AI](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News March 9, 2022: Build a Machine Learning Web App in 5…](https://www.kdnuggets.com/2022/n10.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

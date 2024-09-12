@@ -1,0 +1,247 @@
+- en: Keras Hyperparameter Tuning in Google Colab Using Hyperas
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html](https://www.kdnuggets.com/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Nils Schlüter](https://www.nilsschlueter.de/), Software Engineer**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/74dd91f3826239a8e41b79238d097c74.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Tuning Hyperparameters for your neural network can be tricky (Photo by [Anthony
+    Roberts](https://unsplash.com/@aroberts1228) on [Unsplash](https://unsplash.com/))
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hyperparameter Tuning is one of the most computationally expensive tasks when
+    creating deep learning networks. Luckily, you can use Google Colab to speed up
+    the process significantly. In this post, I will show you how you can tune the
+    hyperparameters of your existing keras models using Hyperas and run everything
+    in a Google Colab Notebook.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Creating a new notebook and enable the GPU Runtime**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0c1e8c2d44298030433f11f92ebf900a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Dialog to change the runtime to GPU
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First, you need to create a new notebook. Open your [Colab Console ](https://colab.research.google.com/)and
+    select **New Python 3 Notebook.** In your notebook, choose **Runtime **from the
+    menu and then **Change runtime type.** Select Hardware accelerator: GPU and hit
+    save. This will significantly speed up every calculation you do in this notebook.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Installing the packages**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can install new packages using *pip*. In this case, we need [hyperas](https://github.com/maxpumperla/hyperas) and [hyperopt](https://github.com/hyperopt/hyperopt).
+    Copy and paste the following into the first cell of your notebook:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: When you run the cell you will see that pip is downloading and installing the
+    dependencies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Getting the data and creating the model**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For this post I’m going to use the example from the [hyperas github page](https://github.com/maxpumperla/hyperas).
+    You can find the finished Colab Notebook [here](https://colab.research.google.com/drive/184Tas98M-pPQanCfTbOHRBRUeE9dtdM9#scrollTo=rdo3mScvBHF4).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Data Function****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You’ll need a data function to load your data. It needs to return your X_train,
+    Y_train, X_test and Y_test values. Here is an example for a data function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note: **Your data function needs to return the values in exactly this order:
+    X_train, Y_train, X_test, Y_test. Be careful if you’re using scikit learns [train_test_split](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html),
+    as this returns the values in a different order'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '****Model Function****'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Model Function is where you define your model. You can use your all available
+    keras functions and layers. To add Hyperparameters for tuning, you can use the
+    **{{uniform()}}** and **{{choice()}}** keywords.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s say you want to try out different values for your *batch_size*. You can
+    simply write *batch_size={{choice([32, 64, 128])}}* and during each trial, one
+    of the values will be chosen and tried out . A more in-depth explanation on how
+    to define the parameters to tune can be found on the [Hyperas Github Page](https://github.com/maxpumperla/hyperas) or
+    you can look at the example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note: **Your model function has to return a python dictionary with a loss
+    key and a status key'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Problems with Colab
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you try to run this example now, the trial will fail because Hyperas won’t
+    be able to find your notebook. You need to copy your notebook and upload it again
+    to your google drive folder. Luckily, you can do this from inside your notebook
+    as described in this [stackoverflow answer](https://stackoverflow.com/questions/49920031/get-the-path-of-the-notebook-on-google-colab).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note: **In lines 16 and 18, you’ll need to change *HyperasMediumExample *to
+    the name of your own notebook'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'After running this cell, you will be prompted to open a website in your browser
+    and copy & paste a code back into the notebook:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a63e8b80c734ae22092fabe6bdbe1844.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The output after you run the cell above
+  prefs: []
+  type: TYPE_NORMAL
+- en: Follow the link, log in with your google account and copy & paste the code back
+    into the notebook. If you open the **Files **Tab in the left sidebar, you should
+    now see a File called <YourNotebook>.ipynb
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Starting the Trial**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now you can start the trial. Be careful, you have to set the parameter *notebook_name* to
+    the name of your Notebook. Otherwise the Trial will fail:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After running this cell, the Scan starts you can see the result in the output
+    of the cell.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Troubleshooting**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If you have any problems while doing this, I recommend to do the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the left sidebar, open **Files. **There will be a file called <YourNotebook>.ipynb.
+    Delete that file
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In the menu, select **Runtime **and then **Restart Runtime**.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Reload the page
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: After your runtime is connected again, you can start again by running every
+    cell from top to bottom
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With just a few tweaks you can use Google colab to tune the hyperparameters
+    of your keras network. Again, the full example can be found [here](https://colab.research.google.com/drive/184Tas98M-pPQanCfTbOHRBRUeE9dtdM9#scrollTo=rdo3mScvBHF4).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Nils Schlüter](https://www.nilsschlueter.de/)** (**[@schlueter_nils](https://twitter.com/schlueter_nils)**)
+    is a Software Engineer & Machine learning enthusiast.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/keras-hyperparameter-tuning-in-google-colab-using-hyperas-624fa4bbf673).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[The Current State of Automated Machine Learning](/2017/01/current-state-automated-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Auto-Keras, or How You can Create a Deep Learning Model in 4 Lines of Code](/2018/08/auto-keras-create-deep-learning-model-4-lines-code.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automated Machine Learning vs Automated Data Science](/2018/07/automated-machine-learning-vs-automated-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Fine Tuning LLAMAv2 with QLora on Google Colab for Free](https://www.kdnuggets.com/fine-tuning-llamav2-with-qlora-on-google-colab-for-free)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[From Google Colab to a Ploomber Pipeline: ML at Scale with GPUs](https://www.kdnuggets.com/2022/03/google-colab-ploomber-pipeline-ml-scale-gpus.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Running Mixtral 8x7b On Google Colab For Free](https://www.kdnuggets.com/running-mixtral-8x7b-on-google-colab-for-free)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Running Redis on Google Colab](https://www.kdnuggets.com/2022/01/running-redis-google-colab.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,445 @@
+- en: 'Evaluating Ray: Distributed Python for Massive Scalability'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/03/domino-ray-distributed-python-massive-scalability.html](https://www.kdnuggets.com/2020/03/domino-ray-distributed-python-massive-scalability.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By [Dean Wampler](https://twitter.com/deanwampler), Domino Data Lab**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c0247476e8e4562f2562f6155f97b3c2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*[Dean](mailto:dean@anyscale.io) [Wampler](https://twitter.com/deanwampler) provides
+    a distilled overview of Ray, an open source system for scaling Python systems
+    from single machines to large clusters. If you are interested in additional insights,
+    register for the [upcoming Ray Summit](https://events.linuxfoundation.org/ray-summit/).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This post is for people making technology decisions, by which I mean data science
+    team leads, architects, dev team leads, even managers who are involved in strategic
+    decisions about the technology used in their organizations. If your team has started
+    using ​[Ray](https://ray.io/)​ and you’re wondering what it is, this post is for
+    you. If you’re wondering if Ray should be part of your technical strategy for
+    Python-based applications, especially ML and AI, this post is for you. If you
+    want a more in-depth technical introduction to Ray, see ​this post on the [Ray
+    project blog](https://medium.com/distributed-computing-with-ray/ray-for-the-curious-fa0e019e17d3)​.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Ray: Scaling Python Applications'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Ray is an open-source system for scaling Python applications from single machines
+    to large clusters. Its design is driven by the unique challenges of next-generation
+    ML and AI systems, but its features make Ray an excellent choice for all Python-based
+    applications that need to scale across a cluster, especially if they have distributed
+    state. Ray also provides a minimally-invasive and intuitive API, so you get these
+    benefits without a lot of effort and expertise in distributed systems programming.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Developers indicate in their code which parts should be distributed across a
+    cluster and run asynchronously, then Ray handles the distribution for you. If
+    run locally, the application can use all the cores in the machine (you can also
+    specify a limit). When one machine isn’t enough, it’s straightforward to run Ray
+    on a cluster of machines and have the application leverage the cluster. The only
+    code change required at this point is the options you pass when initializing Ray
+    in the application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ML libraries that use Ray, such as ​[RLlib](https://ray.readthedocs.io/en/latest/rllib.html)​
+    for reinforcement learning (RL), ​[Tune](https://ray.readthedocs.io/en/latest/tune.html)​
+    for hyper parameter tuning, and ​[Serve](https://ray.readthedocs.io/en/latest/serve.html)​
+    for model serving (experimental), are implemented with Ray internally for its
+    scalable, distributed computing and state management benefits, while providing
+    a domain-specific API for the purposes they serve.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Motivations for Ray: Training a Reinforcement Learning (RL) Model'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To understand the motivations for Ray, consider the example of training a reinforcement
+    learning (RL) model. RL is the type of machine learning that was used recently [to
+    ​beat the world’s best Go players](https://deepmind.com/research/case-studies/alphago-the-story-so-far)​
+    and ​achieve expert game play for Atari and similar games​.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Scalable RL requires many capabilities that Ray was designed to provide:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Highly parallelized and efficient execution of *​tasks*​** (millions or more)
+    – When training models, we repeat the same calculations over and over again to
+    find the best model *approach* (“hyper parameters”) and, once the best structure
+    is chosen, to find the model *parameters*​ that work best. We also require proper
+    sequencing of tasks when they have dependencies on the results of other tasks.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**​Automatic Fault Tolerance** – With all these tasks, a percentage of them
+    may fail for a variety of reasons so we need a system that supports monitoring
+    of tasks and recovery from failures.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Diverse computing patterns​** – Model training involves a lot of computational
+    mathematics. Most RL model training, in particular, also requires efficient execution
+    of a simulator—for example, a game engine we want to beat or a model representing
+    real-world activity like autonomous driving. The computing patterns used (algorithms,
+    memory access patterns, etc.) are more typical of general computing systems, which
+    can be very different from the computing patterns common in data systems where
+    high-throughput transformations and aggregations of records are the norm. Another
+    difference is the dynamic nature of these computations. Think of how a game player
+    (or simulator) adapts to the evolving state of a game, improving strategy, trying
+    new tactics, etc. These diverse requirements are seen in a variety of newer ML-based
+    systems like robotics, autonomous vehicles, computer vision systems, automatic
+    dialog systems, etc.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Distributed state management​**– With RL, the current model parameters and
+    the simulator state need to be tracked between training iterations. This state
+    becomes distributed because the tasks are distributed. Proper state management
+    also requires proper sequencing of stateful operations..'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Of course, other ML/AI systems require some or all of these capabilities. So
+    do general Python applications operating at scale.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Gist of Ray
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Ray libraries like ​RLlib​, ​Tune​, and ​Serve​, use Ray but mostly hide it
+    from users. However, using the Ray API itself is straightforward. Suppose you
+    have an “expensive” function to run repeatedly over data records. If it’s ​stateless​,
+    meaning it doesn’t maintain any state between invocations,​ a​nd you want to invoke
+    it in parallel, all you need to do is turn the function into a Ray ​task​ by adding
+    the `​@ray.remote​` annotation as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then initialize Ray and call it over your data set as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Notice how we invoke the function `slow` using `​slow.remote` instead.​ Each
+    call returns immediately with a future​. We have a collection of them. If we’re
+    running in a cluster, Ray manages the resources available and places this task
+    on a node with the resources necessary to run the function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can now ask Ray to return each result as it finishes using `​ray.wait`.
+    ​Here’s one idiomatic way to do this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As written, we’ll wait until one of the invocations of ​slow ​completes, at
+    which point ​`ray.wait` will return two lists. The first will have a single entry,
+    the id of the *future* for the completed ​slow invocation. The rest of the list
+    of futures that we passed in will be in the second list—`​rest`.​ We call `​ray.get` ​to
+    retrieve the value of the finished future. *(Note: that’s a blocking call, but
+    it returns immediately because we already know it’s done.)* We finish the loop
+    by resetting our list to be what’s remaining, then repeat until all remote invocations
+    have completed and the results have been processed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can also pass arguments to ​`ray.wait` ​to return more than one at a time
+    and to set a timeout. If you aren’t waiting on a collection of concurrent tasks,
+    you can also wait on a specific future by calling `​ray.get(future_id)​`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Without arguments, ​ray.init ​assumes local execution and uses all available
+    CPU cores. You can provide arguments to specify a cluster to run on, the number
+    of CPU or GPU cores to use, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Suppose one remote function has passed the future from another remote function
+    invocation. Ray will automatically sequence such dependencies so they are evaluated
+    in the required order. You don’t have to do anything yourself to handle this situation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Suppose you have a ​stateful​ computation to do. When we used ​`ray.get`​ above,
+    we were actually retrieving the values from a distributed object store. You can
+    explicitly put objects there yourself if you want with `​ray.put`​ which returns
+    an id you can pass later to ​`ray.get` ​to retrieve it again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Handling Stateful Computation with an Actor Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Ray supports a more intuitive and flexible way to manage setting and retrieving
+    state with an actor model.​ It uses regular Python classes that are converted
+    into remote ​actors ​with the same `@ray.remote`​ annotation. For simplicity,
+    suppose you need to count the number of times that slow​ is called. Here is a
+    class to do just that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Except for the annotation, this looks like a normal Python class declaration,
+    although normally you wouldn’t define the ​`get_count`​ method just to retrieve
+    the ​count. ​I’ll come back to this shortly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now use it in a similar way. Note how an instance of the class is constructed
+    and how methods on the instance are invoked, using `remote`​ as before:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: The last line should print the number that equals the size of the original collection.
+    Note that I called the method `​get_count` ​to retrieve the value of the ​`count` ​attribute.
+    At this time, Ray doesn’t support retrieving instance ​*attributes*​ like `​count`​
+    directly, so adding the method to retrieve it is the one required difference when
+    compared to a regular Python class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ray Unifies Tasks and Actors
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In both of the above cases, Ray keeps track of where the tasks and actors are
+    located in the cluster, eliminating the need to explicitly know and manage such
+    locations in user code. Mutation of state inside actors is handled in a thread-safe
+    way, without the need for explicit concurrency primitives. Hence, Ray provides
+    intuitive, distributed state management for applications, which means that Ray
+    is an excellent platform for implementing *​stateful*​ [serverless](https://en.wikipedia.org/wiki/Serverless_computing) applications
+    in general. Furthermore, when communicating between tasks and actors on the same
+    machine, the state is transparently managed through shared memory, with zero-copy
+    serialization between the actors and tasks, for optimal performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** ​Let me emphasize an important benefit Ray is providing here. Without
+    Ray, when you need to scale out an application over a cluster, you have to decide
+    how many instances to create, where to place them in the cluster (or use a system
+    like Kubernetes), how to manage their life cycles, how they will communicate information
+    and coordinate between themselves, etc., etc. Ray does all this for you with minimal
+    effort on your part. You mostly just write normal Python code. It’s a powerful
+    tool for simplifying the design and management of your microservice architecture.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adopting Ray
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'What if you’re already using other concurrency APIs like ​[multiprocessing](https://docs.python.org/3.8/library/multiprocessing.html),
+    ​[asyncio](https://docs.python.org/3.8/library/asyncio.html?highlight=asyncio#module-asyncio)​,
+    or [joblib](https://joblib.readthedocs.io/en/latest/)? While they work well for
+    scaling on a single machine, they don’t provide scaling to a cluster. Ray recently
+    introduced experimental implementations of these APIs that allow your applications
+    to scale to a cluster. The only change required in your code is the import statement.
+    For example, if you are using ​`multiprocessing.Pool` ​this is the usual import
+    statement:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To use the Ray implementation, use this statement instead:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: That’s all it takes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What about [Dask](https://dask.org/), which appears to provide many of the same
+    capabilities as Ray? Dask is a good choice if you want distributed collections,
+    like numpy arrays and Pandas DataFrames. (A research project called [Modin](https://github.com/modin-project/modin) that
+    uses Ray will eventually meet this need.) Ray is designed for more general scenarios
+    where distributed state management is required and where heterogeneous task execution
+    must be very efficient at massive scale, like we need for reinforcement learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We’ve seen how Ray’s abstractions and features make it a straightforward tool
+    to use, while providing powerful distributed computing and state-management capabilities.
+    Although the design of Ray was motivated by the specific needs of high-performance,
+    highly demanding ML/AI applications, it is broadly applicable, even offering a
+    new way to approach microservice-based architectures.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I hope you found this brief explanation of Ray intriguing. Please ​give it a
+    try​ and let me know what you think! Send to: [dean@anyscale.io](mailto:dean@anyscale.io)
+  prefs: []
+  type: TYPE_NORMAL
+- en: To Learn More
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'For more information about Ray, take a look at the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Ray Summit](https://events.linuxfoundation.org/ray-summit/) in San Francisco,
+    May 27–28, 2020\. Hear about case studies, research projects, and deep dives into
+    Ray, plus morning keynotes from leaders in the data science and AI communities!'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ray website](https://ray.io/) is the starting point for all things Ray.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Several notebook-based [Ray tutorials](https://github.com/ray-project/tutorial) let
+    you try out Ray.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The [Ray GitHub page](https://github.com/ray-project/tutorial) is where you’ll
+    find all the Ray source code.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The Ray documentation explains everything: [landing page](https://ray.readthedocs.io/en/latest/), [installation
+    instructions](https://ray.readthedocs.io/en/latest/installation.html).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Direct questions about Ray addressed to the [Ray Slack workspace](https://docs.google.com/forms/d/e/1FAIpQLSfAcoiLCHOguOm8e7Jnn-JJdZaCxPGjgVCvFijHB5PLaQLeig/viewform?usp=send_form) or
+    the [ray-dev Google Group](https://groups.google.com/forum/?nomobile=true#!forum/ray-dev).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The [Ray account on Twitter](https://twitter.com/raydistributed).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Some Ray projects:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[RLlib](https://ray.readthedocs.io/en/latest/rllib.html): Scalable reinforcement
+    learning with Ray (and this [RLlib research paper](https://arxiv.org/abs/1712.09381))'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tune](https://ray.readthedocs.io/en/latest/tune.html): Efficient hyper parameter
+    tuning with Ray'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Serve](https://ray.readthedocs.io/en/latest/serve.html): Flexible, scalable
+    model serving with Ray'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Modin](https://github.com/modin-project/modin): Research project on speeding
+    up Pandas with Ray'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[FLOW](https://flow-project.github.io/): a computational framework using reinforcement
+    learning for traffic control modeling'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Anyscale](https://anyscale.io/): the company behind Ray'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'For even more technical details:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A [research paper describing the Ray system](https://arxiv.org/abs/1712.05889) in
+    detail
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A [research paper describing the flexible primitives internal to Ray for deep
+    learning](https://pdfs.semanticscholar.org/0e8f/5cd8d8dbbe4a55427e90ed35977e238b1eed.pdf?_ga=2.179761508.1978760042.1576357334-1293756462.1576357334)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fast serialization with Ray](https://ray-project.github.io/2017/10/15/fast-python-serialization-with-ray-and-arrow.html) and [Apache
+    Arrow](https://arrow.apache.org/)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Originally posted on the Domino Data Science Blog](https://blog.dominodatalab.com/evaluating-ray-distributed-python-for-massive-scalability/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Beyond Accuracy: Evaluating & Improving a Model with the NLP Test Library](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Evaluating Methods for Calculating Document Similarity](https://www.kdnuggets.com/evaluating-methods-for-calculating-document-similarity)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Mesh & Its Distributed Data Architecture](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n07, Feb 16: How to Learn Math for Machine…](https://www.kdnuggets.com/2022/n07.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Your LLM for Performance and Scalability](https://www.kdnuggets.com/optimizing-your-llm-for-performance-and-scalability)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

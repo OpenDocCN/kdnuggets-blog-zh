@@ -1,0 +1,374 @@
+- en: 'In-Database Analytics: Leveraging SQL’s Analytic Functions'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/07/indatabase-analytics-leveraging-sql-analytic-functions.html](https://www.kdnuggets.com/2023/07/indatabase-analytics-leveraging-sql-analytic-functions.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/bac87ca5cda06af5bde65dd09ed02edb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: We all know the importance of data analysis in today’s data-driven world and
+    how it offers us valuable insights from the available data. But sometimes, data
+    analysis becomes very challenging and time-consuming for the data analyst. The
+    main reason it has become hectic nowadays is the exploded volume of generated
+    data and the need for external tools to perform complex analysis techniques on
+    it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: But what if we analyse data within the database itself and with significantly
+    simplified queries? This can be made possible using SQL Analytic functions. This
+    article will discuss various SQL analytic functions that can be executed within
+    the SQL Server and obtain us valuable results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These functions calculate the aggregate value based on a group of rows and go
+    beyond basic row operations. They provide us with tools for ranking, time series
+    calculations, windowing and trend analysis. So without wasting any further time,
+    let’s start discussing these functions one by one with some details and practical
+    examples. The pre-requisite of this tutorial is the basic practical knowledge
+    of SQL queries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating a Demo Table
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We will create a demo table and apply all the analytic functions on this table
+    so that you easily follow along with the tutorial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** Some functions discussed in this tutorial are not present in SQLite.
+    So it is preferable to use MySQL or PostgreSQL Server.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This table contains the data of several university students, containing four
+    columns Student ID, Student Name, Subject and Final Marks out of 100.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Creating a Students Table containing 4 columns:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now, we will insert some dummy data into that table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now we will visualize our table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/3d0c9081c0486f45d134196c06789bb9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We are ready to execute the analytic functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: RANK() & DENSE_RANK()
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '`RANK()` function will assign a particular rank to each row within a partition
+    based on the specified order. If the rows have identical values within the same
+    partition, it assigns them the same rank.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s understand it more clearly with the below example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/cdf3a4bd5d633ebc9a99aa7b97a914c7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can observe that the final marks are arranged in descending order, and a
+    particular rank is associated with each row. You can also observe that the students
+    with the same marks get the same rank, and the following rank after the duplicate
+    row is skipped.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can also find toppers of each subject, i.e. we can partition the rank based
+    on the subjects. Let’s see how to do it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/03f0c92fadd781802a6d4d3571dd2e20.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In this example, we have partitioned the ranking based on subjects and the ranks
+    are allocated separately for each subject.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** Please observe that two students got the same marks in the Chemistry
+    subject, ranked as 1, and the rank for the next row directly starts from 3\. It
+    skips the rank of 2.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: This is the feature of the `RANK()` function that it is not always necessary
+    to produce ranks consecutively. The next rank will be the sum of the previous
+    rank and the duplicate numbers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To overcome this problem, `DENSE_RANK()` is introduced to work similarly to
+    the `RANK()` function, but it always assigns rank consecutively. Follow the below
+    example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/1f8ae03b64bcb357568fb94dc9f96bd9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The above figure shows that all the ranks are consecutive, even if duplicate
+    marks are in the same partition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: NTILE()
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '`NTILE()` function is used to divide the rows into a specified number (N) of
+    roughly equal-sized buckets. Each row is assigned a bucket number starting from
+    1 to N (Total number of buckets).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can also apply `NTILE()` function on a specific partition or order, which
+    are specified in the PARTITION BY and ORDER BY clauses.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Suppose N is not perfectly divisible by the number of rows. Then the function
+    will create buckets of different sizes with the difference of one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Syntax:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: The `NTILE()` function takes one required parameter N, i.e. the number of buckets
+    and some optional parameters like PARTITION BY and ORDER BY clause. `NTILE()`
+    will divide the rows based on the order specified by these clauses.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s take an example considering our “Students” table. Suppose we want to divide
+    the students into groups based on their final marks. We will create three groups.
+    Group 1 will contain the students with the highest marks. Group 2 will have all
+    the mediocre students, and Group 3 will include the students with low marks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/46fd16d152cf0f8885394512de82bce4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The above example shows that all the rows are ordered by `final_marks` and divided
+    into three groups containing five rows per group.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`NTILE()` is useful when we want to divide some data into equal groups according
+    to some specified criteria. It can be used in the applications like customer segmentation
+    based on items purchased or categorizing employee performance, etc.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: CUME_DIST()
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The `CUME_DIST()` function finds the cumulative distribution of a particular
+    value in each row within a partition or order specified. Cumulative Distribution
+    Function (CDF) denotes the probability that the random variable X is less than
+    or equal to x. It is denoted by F(x), and its mathematical formula is represented
+    as,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/17036c11ae11d9ecac9ce6684b3e2949.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: P(x) is the Probability Distribution Function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In simple language, `CUME_DIST()` function returns the percentage of rows whose
+    value is less than equal to the current row value. It will help to analyze the
+    distribution of data and also the relative position of a value with the set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Output:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/558a725f23ad5dab291d060b534deb8d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The above code will order all the rows based on `final_marks` and find the Cumulative
+    Distribution, but if you want to partition the data based on the subjects, you
+    can use the PARTITION BY clause. Below is an example of how to do it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Output:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/2997e0696d94e9394e5c221929737457.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the above output, we have seen the cumulative distribution of `final_marks`
+    partitioned by the subject name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: STDDEV() and VARIANCE()
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The`VARIANCE()` function is used to find the variance of a given value within
+    the partition. In statistics, Variance represents how a number is far from its
+    mean value, or it represents the degree of spread between numbers. It is represented
+    by ?^2.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `STDDEV()` function is used to find the standard deviation of a given value
+    within the partition. Standard Deviation also measures the variation in the data,
+    and it equals the square root of the variance. It is represented by ?.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These parameters can help us to find dispersion and variability in the data.
+    Let’s see how can we do it practically.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/3d65caf7f43247b4361270860c25851f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The above output shows the Standard Variation and the Variance of the final
+    marks for each subject.
+  prefs: []
+  type: TYPE_NORMAL
+- en: FIRST_VALUE() and LAST_VALUE()
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The `FIRST_VALUE()` function will output the first value of a partition based
+    on a specific ordering. Similarly, the `LAST_VALUE()` function will output the
+    last value of that partition. These functions can be used when we want to identify
+    the first and last occurrence of a specified partition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Syntax:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: SQL Analytic Functions provide us with the functions to perform data analysis
+    within the SQL server. Using these functions, we can unlock the true potential
+    of the data and get valuable insights from it to increase our business. Other
+    than the functions discussed above, there are many more excellent functions that
+    may solve your complex problems very quickly. You can read more about these Analytical
+    Functions from [this](https://learn.microsoft.com/en-us/sql/t-sql/functions/analytic-functions-transact-sql?view=sql-server-ver16)
+    article by Microsoft.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Aryan Garg](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)** is a B.Tech.
+    Electrical Engineering student, currently in the final year of his undergrad.
+    His interest lies in the field of Web Development and Machine Learning. He have
+    pursued this interest and am eager to work more in these directions.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[SQL For Data Science: Understanding and Leveraging Joins](https://www.kdnuggets.com/2023/08/sql-data-science-understanding-leveraging-joins.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Leveraging GPT Models to Transform Natural Language to SQL Queries](https://www.kdnuggets.com/leveraging-gpt-models-to-transform-natural-language-to-sql-queries)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Free SQL and Database Course](https://www.kdnuggets.com/2022/09/free-sql-database-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, September 21: 7 Machine Learning Portfolio Projects…](https://www.kdnuggets.com/2022/n37.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Back to Basics Week 2: Database, SQL, Data Management and…](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

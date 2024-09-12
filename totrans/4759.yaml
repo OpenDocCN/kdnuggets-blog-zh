@@ -1,0 +1,268 @@
+- en: Multi-Class Text Classification Model Comparison and Selection
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/11/multi-class-text-classification-model-comparison-selection.html](https://www.kdnuggets.com/2018/11/multi-class-text-classification-model-comparison-selection.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/11/multi-class-text-classification-model-comparison-selection.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Susan Li](https://www.linkedin.com/in/susanli/), Sr. Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/9b64f7c1a5f857cb61411ba48d204dbb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Photo credit: Pixabay'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When working on a [supervised machine learning](https://en.wikipedia.org/wiki/Supervised_learning) problem
+    with a given data set, we try different algorithms and techniques to search for
+    models to produce general hypotheses, which then make the most accurate predictions
+    possible about future instances. The same principles apply to text (or document)
+    classification where there are many models can be used to train a text classifier. [The
+    answer to the question “What machine learning model should I use?” is always “It
+    depends.” Even the most experienced data scientists can’t tell which algorithm
+    will perform best before experimenting them](https://docs.microsoft.com/en-us/azure/machine-learning/studio/algorithm-choice).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is what we are going to do today: use everything that we have presented
+    about text classification in the previous articles (and more) and comparing between
+    the text classification models we trained in order to choose the most accurate
+    one for our problem.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'We are using a relatively large data set of Stack Overflow questions and tags.
+    The data is available in [Google BigQuery](https://bigquery.cloud.google.com/dataset/bigquery-public-data:stackoverflow),
+    it is also publicly available at this Cloud Storage URL: [https://storage.googleapis.com/tensorflow-workshop-examples/stack-overflow-data.csv](https://storage.googleapis.com/tensorflow-workshop-examples/stack-overflow-data.csv).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Exploring the Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/a5cabad690901acd935be6fd74d840d2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 1
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***10276752***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have over 10 million words in the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/452d3fe88135ada3e259b741efa43955.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 2
+  prefs: []
+  type: TYPE_NORMAL
+- en: The classes are very well balanced.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We want to have a look a few post and tag pairs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/9be95e3d1a25f01dd32295fac28865e9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 3
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/00beb827a9a27fc750727df3b6562c61.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 4
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see, the texts need to be cleaned up.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Text Pre-processing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The text cleaning techniques we have seen so far work very well in practice.
+    Depending on the kind of texts you may encounter, it may be relevant to include
+    more complex text cleaning steps. But keep in mind that the more steps we add,
+    the longer the text cleaning will take.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this particular data set, our text cleaning step includes HTML decoding,
+    remove stop words, change text to lower case, remove punctuation, remove bad characters,
+    and so on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now we can have a look a cleaned post:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/dec6390974584bf90a0941482a627b0c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 5
+  prefs: []
+  type: TYPE_NORMAL
+- en: Way better!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '***3421180***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After text cleaning and removing stop words, we have only over 3 million words
+    to work with!
+  prefs: []
+  type: TYPE_NORMAL
+- en: After splitting the data set, the next steps includes feature engineering. We
+    will convert our text documents to a matrix of token counts (CountVectorizer),
+    then transform a count matrix to a normalized tf-idf representation (tf-idf transformer).
+    After that, we train several classifiers from [Scikit-Learn library](http://scikit-learn.org/stable/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Naive Bayes Classifier for Multinomial Models**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After we have our features, we can train a classifier to try to predict the
+    tag of a post. We will start with a [Naive Bayes](http://scikit-learn.org/stable/modules/naive_bayes.html#naive-bayes) classifier,
+    which provides a nice baseline for this task. `scikit-learn` includes several
+    variants of this classifier; the one most suitable for text is the multinomial
+    variant.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To make the vectorizer => transformer => classifier easier to work with, we
+    will use `Pipeline` class in Scilkit-Learn that behaves like a compound classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c3a81dd575687d97955c8bea7f4b2346.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 6
+  prefs: []
+  type: TYPE_NORMAL
+- en: We achieved 74% accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Linear Support Vector Machine**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Linear Support Vector Machine](http://scikit-learn.org/stable/modules/svm.html#svm) is
+    widely regarded as one of the best text classification algorithms.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8a17b5a7232e05f83bf4c7e26052b9d4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 7
+  prefs: []
+  type: TYPE_NORMAL
+- en: We achieve a higher accuracy score of 79% which is 5% improvement over Naive
+    Bayes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Logistic Regression
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Logistic regression is a simple and easy to understand classification algorithm,
+    and Logistic regression can be easily generalized to multiple classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d7389cf061c3db22f58eda8311724fd2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 8
+  prefs: []
+  type: TYPE_NORMAL
+- en: We achieve an accuracy score of 78% which is 4% higher than Naive Bayes and
+    1% lower than SVM.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see, following some very basic steps and using a simple linear model,
+    we were able to reach as high as an 79% accuracy on this multi-class text classification
+    data set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using the same data set, we are going to try some advanced techniques such as
+    word embedding and neural networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, let’s try some complex features than just simply counting words.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Comparison of Machine Learning Algorithms in Python and R](https://www.kdnuggets.com/2023/06/machine-learning-algorithms-python-r.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Linear Regression Model Selection: Balancing Simplicity and Complexity](https://www.kdnuggets.com/2023/02/linear-regression-model-selection-balancing-simplicity-complexity.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is Text Classification?](https://www.kdnuggets.com/2022/07/text-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Best Architecture for Your Text Classification Task: Benchmarking…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[ChatGPT vs Google Bard: A Comparison of the Technical Differences](https://www.kdnuggets.com/2023/03/chatgpt-google-bard-comparison-technical-differences.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Deep Dive into GPT Models: Evolution & Performance Comparison](https://www.kdnuggets.com/2023/05/deep-dive-gpt-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

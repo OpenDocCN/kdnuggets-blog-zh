@@ -1,0 +1,343 @@
+- en: Find the Best-Matching Distribution for Your Data Effortlessly
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/10/best-matching-distribution-data-effortlessly.html](https://www.kdnuggets.com/2021/10/best-matching-distribution-data-effortlessly.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What’s our goal?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/41545270ddfcb885cff64684966c28c7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Image source**: Prepared by the author with [Pixabay image](https://pixabay.com/vectors/mixer-grinder-blender-machine-575443/) (Free
+    to use)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You have some data points. Numeric, preferably.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And you want to find out **which statistical distribution they might have come
+    from**. Classic statistical inference problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are, of course, rigorous statistical methods to accomplish this goal.
+    But, maybe you are a busy data scientist. Or, a busier software engineer who happens
+    to be given this dataset to quickly write an application endpoint to find the
+    best distribution that matches the data. So that another machine learning app
+    can use some synthetic data generated based on this distribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In short, you don’t have a lot of time on hand and want to find a **quick method
+    to discover the *best-matching* distribution** that the data could have come from.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basically, you want to run an **automated batch of **[**goodness-of-fit (GOF)
+    tests**](https://en.wikipedia.org/wiki/Goodness_of_fit) on a number of distributions
+    and summarize the result in a flash.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can, of course, write code from scratch to run the data through standard
+    GOF tests using say Scipy library, one by one, for a number of distributions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Or, you can use this [**small but useful Python library**](https://erdogant.github.io/distfit/pages/html/index.html) —
+    distfit to do the heavy lifting for you.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Distfit — a Python library to automatically fit distributions to data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: As per their[ website](https://erdogant.github.io/distfit/pages/html/index.html), `**distfit**` is
+    a python package for probability density fitting of univariate distributions.
+    It determines the **best fit across 89 theoretical distributions** using the Residual
+    Sum of Squares (RSS) and other measures of GOF.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s see how to use it. Here is the [**demo notebook**](https://github.com/tirthajyoti/Stats-Maths-with-Python/blob/master/Fitting-data-to-univariate-distributions-with-distfit.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Install as usual,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Generate test data and fit it
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Generate some Normally distributed test data and fit them to the distfit object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basically, you want to run an **automated batch of goodness-of-fit (GOF) tests** on
+    a number of distributions and summarize the result in a flash
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: How good is the fit?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: So, was the fit any good?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note, in the code above the model `dist1` has no knowledge of the generative
+    distribution or its parameters i.e. the `loc` or `scale` parameters of the Normal
+    distribution or the fact that we called `np.random.normal` to generate the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can test the goodness of fit and the estimated parameters in one shot by
+    a simple piece of code,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here is the expected plot (note that the plot will definitely look somewhat
+    different in your case because of the random nature of the generated data).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note the **`**loc**`** and **`**scale**`** parameters as estimated** by the
+    fitting process in the plot subtitle. Pretty close to the parameter values we
+    set earlier, aren’t they? The estimated distribution type is displayed as `norm` i.e.
+    a Normal Distribution. Right on.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/51a67da51520eb4bb0651786e07c891f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Image created by the author**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More info about the fitted model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: With another one-liner code, you can get the summary of all the distributions
+    that were fitted to the data (internally) and tested for the goodness of fit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: You will get something like this,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/af790616e227ba9718d2f4b59f03ce33.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Image created by the author**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This shows all the parameters of various distributions tested with the given
+    data. It also shows the `**score**`** which indicates the goodness of fit **—
+    the distance between the expected data and the given data i.e. lower is better.
+    Note that more than one distribution had the identical score of zero in this model
+    but the Normal distribution was chosen as the most plausible one under internal
+    logic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Why only 10 distributions in this summary**? Because, by default, it uses
+    a list of the most popular 10 distributions to scan through. You can specify the
+    exact list as an argument to the `distfit` object while initializing it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using Scipy internally
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: If you type `dist1.distributions` then you will see a list of functions that
+    were used for the fitting process and they are from the Scipy package.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/dcf7e7bc5917c1bbf644af8cbeaa5e47.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Don’t stop at the fitting, generate synthetic data too
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: As an add-on, `distfit` model provides the API to generate data based on the
+    best-fitted distribution easily. Here, we generate 10 random variates with `loc=5.5` and `scale=9.79` (as
+    fitted earlier).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4428d41f2bbd135f8a4fc6387c14aade.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Things you have to watch out for
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The estimation can be wrong if there is a lot of similarity between the shape
+    of the data of two or more distributions. **Particularly, if the sample size (training
+    data) is small**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, let’s generate some data from the [**Beta distribution**](https://en.wikipedia.org/wiki/Beta_distribution) with
+    parameters chosen such as they *look almost like Normal distribution*. If we choose
+    the parameters **α** and **β** to be equal or close, we can accomplish this. And
+    then, if you fit 1000 data points, you may get Normal distribution as the best-fitted
+    distribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/207b149774c531971df3cca60c0bd892.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/d55d5c444c82f9a9dd0badf173387836.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Image created by the author**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, if you extend that to 10,000 points sample size, you will most likely
+    get the correct answer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/adf824b5936282a3b591417ae69fe6be.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Image created by the author**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Other things you can do
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: You can choose which **statistical test** (RSS, Kolmogorov-Smirnov, etc.) to
+    use for determining the best fit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can also specify the **exact list** of distributions you want to run through.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can use the `distfit.predict` method to **predict the probability** of a
+    response variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have shown examples of continuous distribution fitting only. You can do fitting
+    with **discrete distributions** too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why is this an example of “productive data science”?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: I consider using utility packages such as `distfit` a prime example of doing ***productive
+    data science***.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have written about what productive data science is in this article. Essentially,
+    it means **doing the same data science activities at a higher speed, in a robust
+    manner**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Why and how should you learn “Productive Data Science”?**](https://medium.com/productive-data-science/why-and-how-should-you-learn-productive-data-science-53377b473f37)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can write pure Python code with Scipy functions from scratch to loop through
+    various distributions and run GOF tests for the data you have. But **why would
+    you waste your time when somebody has already written an excellent library (with
+    high-quality documentation) for the exact same task**?
+  prefs: []
+  type: TYPE_NORMAL
+- en: That’s why you can think of `distfit` whenever you want to fit your univariate
+    data to the optimum distribution and get all the statistical properties in one
+    shot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can check the author’s [**GitHub**](https://github.com/tirthajyoti?tab=repositories)** repositories **for
+    code, ideas, and resources in machine learning and data science. If you are, like
+    me, passionate about AI/machine learning/data science, please feel free to [add
+    me on LinkedIn](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) or [follow
+    me on Twitter](https://twitter.com/tirthajyotiS).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/find-the-best-matching-distribution-for-your-data-effortlessly-bcc091aa08ab).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Tirthajyoti Sarkar](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)**
+    is a Data Science/ML Manager at Adapdix Corp. He contributes regularly to publications
+    such as KDnuggets and TDS on diverse topics related to data science and machine
+    learning. He has authored data science books and contributes to open source software.
+    Tirthajyoti holds a Ph.D. in EE and is working on an M.S. degree in Computational
+    Data Analytics. Email him at tirthajyoti at gmail[dot]com.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Create Synthetic Time-series with Anomaly Signatures in Python](/2021/10/synthetic-time-series-anomaly-signatures-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to do “Limitless” Math in Python](/2021/10/limitless-math-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Teaching AI to Classify Time-series Patterns with Synthetic Data](/2021/10/teaching-ai-classify-time-series-patterns-synthetic-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyTest: Effortlessly Write and Run Tests in Python](https://www.kdnuggets.com/getting-started-with-pytest-effortlessly-write-and-run-tests-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Determine the Best Fitting Data Distribution Using Python](https://www.kdnuggets.com/2021/09/determine-best-fitting-data-distribution-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Comprehensive Guide to the Normal Distribution](https://www.kdnuggets.com/2022/06/comprehensive-guide-normal-distribution.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Find The Best Data Science Remote Jobs](https://www.kdnuggets.com/2022/12/find-best-data-science-remote-jobs.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Quick Guide to Find the Right Minds for Annotation](https://www.kdnuggets.com/2022/04/quick-guide-find-right-minds-annotation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,263 @@
+- en: 'A/B Testing: 7 Common Questions and Answers in Data Science Interviews, Part
+    2'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/04/ab-testing-7-common-questions-answers-data-science-interviews-2.html](https://www.kdnuggets.com/2021/04/ab-testing-7-common-questions-answers-data-science-interviews-2.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note**: This is the second part of this article. You can read the first part
+    [here](/2021/04/ab-testing-7-common-questions-answers-data-science-interviews-1.html).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Analyzing Tests Results
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ba0fb626475d727e8ad4e9abf3d7b835.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Scott Graham](https://unsplash.com/@sctgrhm?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Novelty and Primacy Effects
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'When there’s a change in the product, people react to it differently. Some
+    are used to the way a product works and are reluctant to change. This is called
+    the **primacy effect** or change aversion. Others may welcome changes, and a new
+    feature attracts them to use the product more. This is called the **novelty effect**.
+    However, both effects will not last long as people’s behavior will stabilize after
+    a certain amount of time. If an A/B test has a larger or smaller initial effect,
+    it’s probably due to novel or primacy effects. This is a common problem in practice,
+    and many interview questions are about this topic. A sample interview question
+    is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We ran an A/B test on a new feature and the test won, so we launched the change
+    to all users. However, after launching the feature for a week, we found that the
+    treatment effect quickly declined. What is happening?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The answer is the novelty effect. Over time, as the novelty wears off, repeat
+    usage will be decreased so we observe a declining treatment effect.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now you understand both novelty and primacy effects, **how do we address the
+    potential issues**? This is a typical follow-up question during interviews.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One way to deal with such effects is to completely rule out the possibility
+    of those effects. We could run tests only on first-time users because the novelty
+    effect and primacy effect obviously doesn’t affect such users. If we already have
+    a test running and we want to analyze if there’s a novelty or primacy effect,
+    we could 1) compare new users’ results in the control group to those in the treatment
+    group to evaluate novelty effect 2) compare first-time users’ results with existing
+    users’ results in the treatment group to get an actual estimate of the impact
+    of the novelty or primacy effect.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Multiple testing problem
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In the simplest form of an A/B test, there are two variants: Control (A) and
+    treatment (B). Sometimes, we run a test with multiple variants to see which one
+    is the best amongst all the features. It can happen when we want to test multiple
+    colors of a button or test different home pages. Then we’ll have more than one
+    treatment group. In this case, we should not simply use the same significance
+    level of 0.05 to decide whether the test is significant because we are dealing
+    with more than 2 variants, and the probability of false discoveries increases.
+    For example, if we have 3 treatment groups to compare with the control group,
+    what is the chance of observing at least 1 false positive (assume our significance
+    level is 0.05)?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We could get the probability that there is no false positives (assuming the
+    groups are independent),
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pr(FP = 0) = 0.95 * 0.95 * 0.95 = 0.857
+  prefs: []
+  type: TYPE_NORMAL
+- en: then obtain the probability that there’s at least 1 false positive
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pr(FP >= 1) = 1 — Pr(FP = 0) = 0.143
+  prefs: []
+  type: TYPE_NORMAL
+- en: With only 3 treatment groups (4 variants), the probability of a false positive
+    (or Type I error) is over 14%. This is called the “**multiple testing**” problem.
+    A sample interview question is
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are running a test with 10 variants, trying different versions of our landing
+    page. One treatment wins and the p-value is less than .05\. Would you make the
+    change?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The answer is no because of the multiple testing problem. There are several
+    ways to approach it. One commonly used method is **Bonferroni correction**. It
+    divides the significance level 0.05 by the number of tests. For the interview
+    question, since we are measuring 10 tests, then the significance level for the
+    test should be 0.05 divided by 10 which is 0.005\. Basically, we only claim a
+    test if significant if it shows a p-value of less than 0.005\. The drawback of
+    Bonferroni correction is that it tends to be too conservative.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Another method is to control the **false discovery rate** (FDR):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'FDR = E[# of false positive / # of rejections]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It measures out of all of the rejections of the null hypothesis, that is, all
+    the metrics that you declare to have a statistically significant difference. How
+    many of them had a real difference as opposed to how many were false positives.
+    This only makes sense if you have **a huge number of metrics**, say hundreds.
+    Suppose we have 200 metrics and cap FDR at 0.05\. This means we’re okay with seeing
+    false positives 5 of the time. We will observe at least 10 false positive in those
+    200 metrics every time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Making Decisions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/383fec710c8c2560b462536873c210b6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [You X Ventures](https://unsplash.com/@youxventures?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Ideally, we see practically significant treatment results, and we could consider
+    launching the feature to all users. But sometimes, we see **contradicting results**,
+    such as one metric goes up while another one goes down, so we need to make a win-lost
+    tradeoff. A sample interview question is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After running a test, you see the desired metric, such as the click-through
+    rate is going up while the number of impressions is decreasing. How would you
+    make a decision?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In reality, it can be very involved to make product launch decisions because
+    various factors are taken into consideration, such as the complexity of implementation,
+    project management effort, customer support cost, maintenance cost, opportunity
+    cost, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: During interviews, we could provide a simplified version of the solution, focusing
+    on the **current objective** of the experiment. Is it to maximize engagement,
+    retention, revenue, or something else? Also, we want to quantify the negative
+    impact, i.e. the negative shift in a non-goal metric, to help us make the decision.
+    For instance, if revenue is the goal, we could choose it over maximizing engagement
+    assuming the negative impact is acceptable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Resources
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Lastly, I’d like to recommend two resources for you to learn more about A/B
+    testing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Udacity’s free A/B testing course](https://www.udacity.com/course/ab-testing--ud257) covers
+    all the fundamentals of A/B testing.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Trustworthy online controlled experiments — A practical guide to A/B testing](https://www.amazon.com/Trustworthy-Online-Controlled-Experiments-Practical/dp/1108724264) by
+    Ron Kohavi, Diane Tang, and Ya Xu. It has in-depth knowledge on how to run A/B
+    tests in industry, the potential pitfalls, and solutions. It contains a lot of
+    useful stuff, so I actually plan to write a post to summarize the content of the
+    book. Stay tuned if you are interested!'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Emma Ding](https://www.youtube.com/c/DataInterviewPro)** is a Data
+    Scientist & Software Engineer at Airbnb.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/@emmading/48df1844ae4c). Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A/B Testing: 7 Common Questions and Answers in Data Science Interviews, Part
+    1](/2021/04/ab-testing-7-common-questions-answers-data-science-interviews-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Things to Know About A/B Testing](/2018/09/5-things-know-about-ab-testing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Get Data Science Interviews: Finding Jobs, Reaching Gatekeepers, and
+    Getting Referrals](/2021/02/data-science-interviews-finding-jobs-reaching-gatekeepers-getting-referrals.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[24 A/B Testing Interview Questions in Data Science Interviews and…](https://www.kdnuggets.com/2022/09/24-ab-testing-interview-questions-data-science-interviews-crack.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[20 Questions (with Answers) to Detect Fake Data Scientists: ChatGPT…](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[20 Questions (with Answers) to Detect Fake Data Scientists: ChatGPT…](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Data Analytics Interview Questions & Answers](https://www.kdnuggets.com/2022/09/7-data-analytics-interview-questions-answers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Python Interview Questions & Answers](https://www.kdnuggets.com/2022/09/5-python-interview-questions-answers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hypothesis Testing and A/B Testing](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

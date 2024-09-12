@@ -1,0 +1,619 @@
+- en: 'Data Observability, Part II: How to Build Your Own Data Quality Monitors Using
+    SQL'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/02/data-observability-part-2-build-data-quality-monitors-sql.html](https://www.kdnuggets.com/2021/02/data-observability-part-2-build-data-quality-monitors-sql.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Barr Moses](https://www.linkedin.com/in/barrmoses/), CEO and Co-founder
+    of Monte Carlo & [Ryan Kearns](https://www.linkedin.com/in/ryan-kearns-203686a9),
+    Machine Learning Engineer at Monte Carlo**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*In this article series, we walk through how you can create your own data observability
+    monitors from scratch, mapping to *[***five key pillars of data health***](https://towardsdatascience.com/introducing-the-five-pillars-of-data-observability-e73734b263d5)*.
+    Part I can be found *[*here*](https://www.montecarlodata.com/data-observability-in-practice-using-sql-1/)*.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Part II of this series was adapted from Barr Moses and Ryan Kearns’ O’Reilly
+    training, *[***Managing Data Downtime: Applying Observability to Your Data Pipelines***](https://www.oreilly.com/live-training/courses/managing-data-downtime/0636920508717/)*,
+    the industry’s first-ever course on data observability. The associated exercises
+    are available *[*here*](https://github.com/monte-carlo-data/data-downtime-challenge)*,
+    and the adapted code shown in this article is available *[*here*](https://github.com/monte-carlo-data/data-observability-in-practice)*.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As the world’s appetite for data increases, robust data pipelines are all the
+    more imperative. When data breaks — whether from schema changes, null values,
+    duplication, or otherwise — data engineers need to know.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Most importantly, we need to assess the root cause of the breakage — and fast
+    — before it affects downstream systems and consumers. We use “[**data downtime**](https://towardsdatascience.com/the-rise-of-data-downtime-841650cedfd5)”
+    to refer to periods of time when data is missing, erroneous, or otherwise inaccurate.
+    If you’re a data professional, you may be familiar with asking the following questions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is the data up to date?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Is the data complete?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Are fields within expected ranges?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Is the null rate higher or lower than it should be?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Has the schema changed?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To answer these questions in an effective way, we can take a page from the software
+    engineer’s playbook: [**monitoring and observability**](https://observability.workshop.aws/en/anomalydetection.html)**.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To refresh your memory since Part I, we define [**data observability**](https://towardsdatascience.com/what-is-data-observability-40b337971e3e) as
+    an organization’s ability to answer these questions and assess the health of their
+    data ecosystem. Reflecting key variables of data health, the five pillars of data
+    observability are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Freshness**: is my data up to date? Are there gaps in time where my data
+    has not been updated?'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Distribution**: how healthy is my data at the field-level? Is my data within
+    expected ranges?'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Volume**: is my data intake meeting expected thresholds?'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Schema**: has the formal structure of my data management system changed?'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Lineage**: if some of my data is down, what is affected upstream and downstream?
+    How do my data sources depend on one another?'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In this article series, we’re interested in pulling back the curtain, and investigating
+    what data observability looks like — *in the code*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In [Part I](https://medium.com/swlh/data-observability-building-your-own-data-quality-monitors-using-sql-a4c848b6882d),
+    we looked at the first two pillars, freshness and distribution, and showed how
+    a little SQL code can operationalize these concepts. These are what we would call
+    more “classic” [**anomaly detection problems**](https://en.wikipedia.org/wiki/Anomaly_detection) —
+    given a steady stream of data, does anything look out of whack? Good anomaly detection
+    is certainly part of the data observability puzzle, but it’s not everything.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Equally important is [***context***](https://www.montecarlodata.com/data-teams-your-metadata-is-useless/).
+    If an anomaly occurred, great. But where? What upstream pipelines may be the cause?
+    What downstream dashboards will be affected? And has the formal structure of my
+    data changed? Good data observability hinges on our ability to properly leverage
+    metadata to answer these questions — and many others — so we can identify the
+    root cause and fix the issue before it becomes a bigger problem.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In this article, we’ll look at the two data observability pillars designed to
+    give us this critical context — **schema** and **lineage**. Once again, we’ll
+    use lightweight tools like Jupyter and SQLite, so you can easily spin up our environment
+    and try these exercises out yourself. Let’s get started.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Data Environment
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*This tutorial is based on *[*Exercises 2 and 3*](https://github.com/monte-carlo-data/data-downtime-challenge/blob/master/exercise_text/ex2.md)* of
+    our O’Reilly course, *[*Managing Data Downtime*](https://www.oreilly.com/live-training/courses/managing-data-downtime/0636920508717/)*.
+    You’re welcome to try out these exercises on your own using a Jupyter Notebook
+    and SQL. We’ll be going into more detail, including exercise *[*4*](https://github.com/monte-carlo-data/data-downtime-challenge/blob/master/exercise_text/ex4.md)*,
+    in future articles.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you read [Part I](https://medium.com/swlh/data-observability-building-your-own-data-quality-monitors-using-sql-a4c848b6882d) of
+    this series, you should be familiar with our data. As before, we’ll work with [mock
+    astronomical data](https://github.com/monte-carlo-data/data-observability-in-practice/blob/main/EXOPLANETS.db) about
+    habitable exoplanets. We generated the dataset with Python, modeling data and
+    anomalies off of real incidents I’ve come across in production environments. This
+    dataset is entirely free to use, and the [utils folder](https://github.com/monte-carlo-data/data-downtime-challenge/tree/master/data/utils) in
+    the repository contains the code that generated the data, if you’re interested.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’m using SQLite 3.32.3, which should make the database accessible from either
+    the command prompt or SQL files with minimal setup. The concepts extend to really
+    any query language, and [these implementations](https://github.com/monte-carlo-data/data-observability-in-practice/tree/main/queries) can
+    be extended to MySQL, Snowflake, and other database environments with minimal
+    changes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once again, we have our EXOPLANETS table:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'A database entry in EXOPLANETS contains the following information:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '0. `_id`: A UUID corresponding to the planet.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '1\. `distance`: Distance from Earth, in lightyears.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '2. `g`: Surface gravity as a multiple of g, the gravitational force constant.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '3. `orbital_period`: Length of a single orbital cycle in days.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '4. `avg_temp`: Average surface temperature in degrees Kelvin.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '5. `date_added`: The date our system discovered the planet and added it automatically
+    to our databases.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that one or more of `distance`, `g`, `orbital_period`, and `avg_temp` may
+    be `NULL` for a given planet as a result of missing or erroneous data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`sqlite> SELECT * FROM EXOPLANETS LIMIT 5;`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that this exercise is retroactive — we’re looking at historical data. In
+    a production data environment, data observability is real time and applied at
+    each stage of the data life cycle, and thus will involve a slightly different
+    implementation than what is done here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It looks like our oldest data is dated 2020–01–01 (*note*: most databases will
+    not store timestamps for individual records, so our `DATE_ADDED` column is keeping
+    track for us). Our newest data…'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: … looks to be from 2020–07–18\. Of course, this is the same table we used in
+    the past article. If we want to explore the more context-laden pillars of schema
+    and lineage, we’ll need to expand our environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, in addition to `EXOPLANETS`, we have a table called `EXOPLANETS_EXTENDED`,
+    which is a superset of our past table. It’s useful to think of these as the same
+    table at *different moments in time*. In fact, `EXOPLANETS_EXTENDED` has data
+    dating back to 2020–01–01…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '… but also contains data up to 2020–09–06, further than `EXOPLANETS`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Visualizing schema changes
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Something else is different between these tables:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'In addition to the 6 fields in `EXOPLANETS`, the `EXOPLANETS_EXTENDED` table
+    contains two additional fields:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '6. `eccentricity`: the [orbital eccentricity](https://en.wikipedia.org/wiki/Orbital_eccentricity) of
+    the planet about its host star.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '7. `atmosphere`: the dominant chemical makeup of the planet’s atmosphere.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that like `distance`, `g`, `orbital_period`, and `avg_temp`, both `eccentricity`
+    and `atmosphere` may be `NULL` for a given planet as a result of missing or erroneous
+    data. For example, [rogue planets](https://en.wikipedia.org/wiki/Rogue_planet) have
+    undefined orbital eccentricity, and many planets don’t have atmospheres at all.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note also that data is not backfilled, meaning data entries from the beginning
+    of the table (data contained also in the `EXOPLANETS` table) will not have eccentricity
+    and atmosphere information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The addition of two fields is an example of a [**schema** **change**](https://www.educative.io/blog/what-are-database-schemas-examples) —
+    our data’s formal blueprint has been modified. Schema changes occur when an alteration
+    is made to the structure of your data, and can be frustrating to manually debug.
+    Schema changes can indicate any number of things about your data, including:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The addition of new API endpoints
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Supposedly deprecated fields that are not yet… deprecated
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The addition or subtraction of columns, rows, or entire tables
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In an ideal world, we’d like a record of this change, as it represents a vector
+    for possible issues with our pipeline. Unfortunately, our database is not naturally
+    configured to keep track of such changes. It has no versioning history.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We ran into this issue in [Part I](https://medium.com/swlh/data-observability-building-your-own-data-quality-monitors-using-sql-a4c848b6882d) when
+    querying for the age of individual records, and added the `DATE_ADDED` column
+    to cope. In this case, we’ll do something similar, except with the addition of
+    an entire table:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The `EXOPLANETS_COLUMNS` table “versions” our schema by recording the columns
+    in `EXOPLANETS_EXTENDED` at any given date. Looking at the very first and last
+    entries, we see that the columns definitely changed at some point:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now, returning to our original question: when, exactly, did the schema change?
+    Since our column lists are indexed by dates, we can find the date of the change
+    with a quick SQL script:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here’s the data returned, which I’ve reformatted for legibility:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'With this query, we return the offending date: 2020–07–19\. Like freshness
+    and distribution observability, achieving schema observability follows a pattern:
+    we identify the [useful metadata](https://towardsdatascience.com/metadata-is-useless-535e43311cd8) that
+    signals pipeline health, track it, and build detectors to alert us of potential
+    issues. Supplying an additional table like `EXOPLANETS_COLUMNS` is one way to
+    track schema, but there are many others. We encourage you to think about how you
+    could implement a schema change detector for your own data pipeline!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Visualizing lineage
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We’ve described lineage as [the most holistic](https://towardsdatascience.com/introducing-the-five-pillars-of-data-observability-e73734b263d5) of
+    the 5 pillars of data observability, and for good reason.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lineage contextualizes incidents by telling us (1) which downstream sources
+    may be impacted, and (2) which upstream sources may be the root cause. While it’s
+    not intuitive to “visualize” lineage with SQL code, a quick example may illustrate
+    how it can be useful.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: For this, we’ll need to expand our data environment once again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Introducing: HABITABLES'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let’s add another table to our database. So far, we’ve been recording data
+    on exoplanets. Here’s one fun question to ask: how many of these planets may harbor
+    life?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `HABITABLES` table takes data from `EXOPLANETS` to help us answer that
+    question:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'An entry in `HABITABLES` contains the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '0. `_id`: A UUID corresponding to the planet.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '1. `perihelion`: The [closest distance](https://en.wikipedia.org/wiki/Apsis#Perihelion_and_aphelion) to
+    the celestial body during an orbital period.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '2. `aphelion`: The [furthest distance](https://en.wikipedia.org/wiki/Apsis#Perihelion_and_aphelion) to
+    the celestial body during an orbital period.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '3. `atmosphere`: The dominant chemical makeup of the planet’s atmosphere.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '4. `habitability`: A real number between 0 and 1, indicating how likely the
+    planet is to harbor life.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '5. `min_temp`: The minimum temperature on the planet’s surface.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '6. `max_temp`: The maximum temperature on the planet’s surface.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '7. `date_added`: The date our system discovered the planet and added it automatically
+    to our databases.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Like the columns in `EXOPLANETS`, values for `perihelion`, `aphelion`, `atmosphere`,
+    `min_temp`, and `max_temp` are allowed to be `NULL`. In fact, `perihelion` and `aphelion` will
+    be `NULL` for any `_id` in `EXOPLANETS` where `eccentricity` is `NULL`, since
+    you use orbital eccentricity to calculate these metrics. This explains why these
+    two fields are always `NULL` in our older data entries:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'So, we know that `HABITABLES` depends on the values in `EXOPLANETS` (or, equally, `EXOPLANETS_EXTENDED`),
+    and `EXOPLANETS_COLUMNS` does as well. A dependency graph of our database looks
+    like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/d71210e8268ae60c9ab0032bc91921ee.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image courtesy of [Monte Carlo](http://www.montecarlodata.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Very simple lineage information, but already useful. Let’s look at an anomaly
+    in `HABITABLES` in the context of this graph, and see what we can learn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Investigating an anomaly
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When we have a key metric, like habitability in `HABITABLES`, we can assess
+    the health of that metric in several ways. For a start, what is the average value
+    of `habitability` for new data on a given day?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Looking at this data, we see that something is wrong. The average value for `habitability` is
+    normally around 0.5, but it halves to around 0.25 later in the recorded data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/cbc0ab591e234f730b65dc895ab2426a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A distribution anomaly… but what caused it?
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a clear distributional anomaly, but what exactly is going on? In other
+    words, what is the *root cause* of this anomaly?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why don’t we look at the `NULL` rate for habitability, like we did in [Part
+    I](https://ryanothnielkearns.medium.com/data-observability-building-your-own-data-quality-monitors-using-sql-a4c848b6882d)?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Fortunately, nothing looks out of character here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: But this doesn’t look promising as the cause of our issue. What if we looked
+    at another distributional health metric, the **rate of zero values**?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Something seems evidently more amiss here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Historically, `habitability` was virtually never zero, but at later dates it
+    spikes up to nearly 40% on average. This has the detected effect of lowering the
+    field’s average value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ca0aa0e21a7d21ac69d342c325b39a5d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A distribution anomaly… but what caused it?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can adapt one of the distribution detectors we built in Part I to get the
+    first date of appreciable zero rates in the `habitability` field:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I ran this query through the command line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 2020–07–19 was the first date the zero rate began showing anomalous results.
+    Recall that this is the same day as the schema change detection in `EXOPLANETS_EXTENDED`. `EXOPLANETS_EXTENDED` is
+    upstream from `HABITABLES`, so it’s very possible that these two incidents are
+    related.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'It is in this way that lineage information can help us identify the **root
+    cause** of incidents, and move quicker towards resolving them. Compare the two
+    following explanations for this incident in `HABITABLES`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: On 2020–07–19, the zero rate of the habitability column in the `HABITABLES` table
+    jumped from 0% to 37%.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: On 2020–07–19, we began tracking two additional fields, `eccentricity` and `atmosphere`,
+    in the `EXOPLANETS` table. This had an adverse effect on the downstream table `HABITABLES`,
+    often setting the fields `min_temp` and `max_temp` to extreme values whenever `eccentricity` was
+    not `NULL`. In turn, this caused the `habitability` field spike in zero rate,
+    which we detected as an anomalous decrease in the average value.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Explanation (1) uses just the fact that an anomaly took place. Explanation (2)
+    uses lineage, in terms of dependencies between both tables and fields, to put
+    the incident in context and determine the root cause. Everything in (2) is actually
+    correct, by the way, and I encourage you to mess around with the environment to
+    understand for yourself what’s going on. While these are just simple examples,
+    an engineer equipped with (2) would be faster to *understand* and *resolve* the
+    underlying issue, and this is all owed to proper observability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What’s next?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Tracking schema changes and lineage can give you unprecedented visibility into
+    the health and usage patterns of your data, providing vital contextual information
+    about who, what, where, why, and how your data was used. In fact, schema and lineage
+    are the two most important data observability pillars when it comes to understanding
+    the downstream (and often real-world) implications of data downtime.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To summarize:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Observing our data’s **schema** means understanding the formal structure of
+    our data, and when and how it changes.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Observing our data’s **lineage** means understanding the upstream and downstream
+    dependencies in our pipeline, and putting isolated incidents in a larger context.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Both of these pillars of **data observability** involve tracking the proper
+    metadata, and transforming our data in a way that makes anomalies understandable.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Better observability means **better understanding of why and how data breaks**,
+    reducing both time-to-detection and time-to-resolution.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We hope that this second installment of “Data Observability in Context” was
+    useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Until Part III, here’s wishing you no data downtime!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Interested in learning more about Monte Carlo’s approach to data observability?
+    Reach out to*** [***Ryan***](https://www.linkedin.com/in/ryan-kearns-203686a9)***, ***[***Barr***](https://www.linkedin.com/in/barrmoses/)***,
+    and the ***[***Monte Carlo team***](http://www.montecarlodata.com/)***.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Barr Moses](https://www.linkedin.com/in/barrmoses/)** is the CEO and Co-founder
+    of Monte Carlo, a data observability company. Prior, she served as a VP of Operations
+    at Gainsight.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Ryan Kearns](https://www.linkedin.com/in/ryan-kearns-203686a9)** is a data
+    and machine learning engineer at Monte Carlo and a rising senior at Stanford University.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/data-observability-in-practice-using-sql-part-ii-schema-lineage-5ca6c8f4f56a).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data Observability: Building Data Quality Monitors Using SQL](/2021/02/data-observability-building-data-quality-monitors-using-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Catalogs Are Dead; Long Live Data Discovery](/2020/12/data-catalogs-dead-long-live-data-discovery.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Cleaning and Wrangling in SQL](/2021/01/data-cleaning-wrangling-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Data Quality Dimensions: Assuring Your Data Quality with Great Expectations](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Governance and Observability, Explained](https://www.kdnuggets.com/2022/08/data-governance-observability-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[IMPACT 2022: The Data Observability Summit, on Oct. 25-26](https://www.kdnuggets.com/2022/09/monte-carlo-impact-2022-data-observability-summit.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[IMPACT: The Data Observability Summit is back November 8th and the…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[LangChain 101: Build Your Own GPT-Powered Applications](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build Your Own PandasAI with LlamaIndex](https://www.kdnuggets.com/build-your-own-pandasai-with-llamaindex)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

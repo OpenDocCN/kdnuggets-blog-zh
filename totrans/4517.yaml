@@ -1,0 +1,292 @@
+- en: Adversarial Validation Overview
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/02/adversarial-validation-overview.html](https://www.kdnuggets.com/2020/02/adversarial-validation-overview.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you were to study some of the competition-winning solutions on Kaggle, you
+    might notice references to “adversarial validation” ([like this one](https://www.kaggle.com/c/ieee-fraud-detection/discussion/111284)).
+    What is it?
+  prefs: []
+  type: TYPE_NORMAL
+- en: In short, we build a classifier to try to predict which data rows are from the
+    training set, and which are from the test set. If the two datasets came from the
+    same distribution, this should be impossible. But if there are systematic differences
+    in the feature values of your training and test datasets, then a classifier will
+    be able to successfully learn to distinguish between them. The better a model
+    you can learn to distinguish them, the bigger the problem you have.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But the good news is that *you can analyze the learned model to help you diagnose
+    the problem*. And once you understand the problem, you can go about fixing it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This post is meant to accompany a [YouTube video](https://youtu.be/7cUCDRaIZ7I)
+    I made to explain the intuition of Adversarial Validation. This blog post walks
+    through the code implementation of the example presented in this video but is
+    complete enough to be self-contained. You can find the complete code for this
+    post on [GitHub](https://github.com/zjost/blog_code/tree/master/adversarial_validation).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Learning the Adversarial Validation model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'First, some boilerplate import statements to avoid confusion:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Data Preparation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For this tutorial, we're going to be using the [IEEE-CIS Credit Card Fraud Detection
+    dataset](https://www.kaggle.com/c/ieee-fraud-detection/data) from Kaggle. First,
+    I'll assume you've loaded the training and test data into pandas DataFrames and
+    called them *df_train* and *df_test*, respectively. Then we'll do some basic cleaning
+    by replacing missing values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'For adversarial validation, we want to learn a model that predicts which rows
+    are in the training dataset, and which are in the test set. We, therefore, create
+    a new target column in which the test samples are labeled with 1 and the train
+    samples with 0, like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This is the target that we''ll train a model to predict. Right now, the train
+    and test datasets are separate, and each dataset has only one label for the target
+    value. If we trained a model on *this* training set, it would just learn that
+    everything was 0\. We want to instead shuffle the train and test datasets, and
+    then create new datasets for fitting and evaluating the adversarial validation
+    model. I define a function for combining, shuffling, and re-splitting:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The new datasets, *adversarial_train* and *adversarial_test*, include a mix
+    of the original training and test sets, and the target indicates the original
+    dataset. *Note: I added* TransactionDT *to the feature list. The reason for this
+    will become apparent.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For modeling, I'm going to be using Catboost. I finish data preparation by putting
+    the DataFrames into Catboost Pool objects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Modeling
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'This part is simple: we just instantiate a Catboost Classifier and fit it on
+    our data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let''s go ahead and plot the ROC curve on the holdout dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f85665598d59b9f283d690f8207dbbfb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This is a perfect model, which means there's a clear way to tell whether any
+    given record is in the training or test sets. This is a violation of the assumption
+    that our training and test sets are identically distributed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Diagnosing the problem and iterating
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To understand how the model was able to do this, let''s look at the most important
+    features:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/41ce4a631fbd77d8648a2dffc386b240.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The TransactionDT is by far the most important feature. And that makes total
+    sense given that the original training and test datasets came from different periods
+    (the test set occurs in the future of the training set). The model has just learned
+    that if the TransactionDT is larger than the last training sample, it's in the
+    test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I included the TransactionDT just to make this point–it's not advised to throw
+    a raw date in as a model feature normally. But it's good news that this technique
+    found it in such a dramatic fashion. This analysis would clearly help you identify
+    such an error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's eliminate TransactionDT, and run this analysis again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now the ROC curve looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ad8f85b1360a4d48945cf9297ee74bdf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'It''s still a fairly strong model with AUC > 0.91, but much weaker than before.
+    Let''s look at the feature importances for this model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e4ee0d6af6f44b5053021a591cf35934.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, *id_31* is the most important feature. Let's look at some values to understand
+    what it is.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: This column contains software version numbers. Clearly, this is similar in concept
+    to including a raw date, because the first occurrence of a particular software
+    version will correspond to its release date.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s get around this problem by dropping any characters that are not letters
+    from the column:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now the values of our column look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let''s train a new adversarial validation model using this cleaned column:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The ROC plot now looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5e0a44192531181d62184c1f42b7b23f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The performance has dropped from an AUC of 0.917 to 0.906\. This means that
+    we've made it a little harder for a model to distinguish between our training
+    and test datasets, but it's still quite capable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When we naively tossed the transaction date into the feature set, the adversarial
+    validation process helped to clearly diagnose the problem. Additional iterations
+    gave us more clues that a column containing software version information had clear
+    differences between the training and test sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But what the process is not able to do is tell us *how to fix it*. We still
+    need to apply our creativity here. In this example, we simply removed all numbers
+    from the software version information, but this is throwing away potentially useful
+    information and might ultimately hurt our fraud modeling task, which is our real
+    goal. The idea is that *you want to remove information that is not important for
+    predicting fraud but is important for separating your training and test sets*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A better approach might have been to find a dataset that gave the software release
+    dates for each software version, and then created a “days since release” column
+    that replaced the raw version number. This might make for a better match for the
+    train and test distributions while also maintaining the predictive power that
+    software version information encodes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Adversarial Validation, Explained](https://www.kdnuggets.com/2016/10/adversarial-validation-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Reproducibility, Replicability, and Data Science](https://www.kdnuggets.com/2019/11/reproducibility-replicability-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Careful! Looking at your model results too much can cause information leakage](https://www.kdnuggets.com/2019/05/careful-looking-model-results-cause-information-leakage.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[What is Adversarial Machine Learning?](https://www.kdnuggets.com/2022/03/adversarial-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why Use k-fold Cross Validation?](https://www.kdnuggets.com/2022/07/kfold-cross-validation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Validation for PySpark Applications using Pandera](https://www.kdnuggets.com/2023/08/data-validation-pyspark-applications-pandera.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Pydantic Tutorial: Data Validation in Python Made Simple](https://www.kdnuggets.com/pydantic-tutorial-data-validation-in-python-made-simple)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[MarshMallow: The Sweetest Python Library for Data Serialization and…](https://www.kdnuggets.com/marshmallow-the-sweetest-python-library-for-data-serialization-and-validation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Approaches to Text Summarization: An Overview](https://www.kdnuggets.com/2019/01/approaches-text-summarization-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

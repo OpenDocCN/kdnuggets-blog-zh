@@ -1,0 +1,697 @@
+- en: GPT4All is the Local ChatGPT for your Documents and it is Free!
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/06/gpt4all-local-chatgpt-documents-free.html](https://www.kdnuggets.com/2023/06/gpt4all-local-chatgpt-documents-free.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In this article we will learn **how to deploy and use GPT4All model on your
+    CPU only computer** (I am using a *Macbook Pro* without GPU!)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![GPT4All is the Local ChatGPT for your Documents and it is Free!](../Images/164c034be698c48aeca6a7141b048cc9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Use GPT4All on Your Computer — Picture by the author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article we are going to install on our local computer GPT4All (a powerful
+    LLM) and we will discover how to interact with our documents with python. A collection
+    of PDFs or online articles will be the knowledge base for our question/answers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is GPT4All
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: From the [official website GPT4All](https://gpt4all.io/index.html) it is described
+    as *a free-to-use, locally running, privacy-aware chatbot. ****No GPU or internet
+    required.***
+  prefs: []
+  type: TYPE_NORMAL
+- en: GTP4All is an ecosystem to train and deploy **powerful** and **customized** large
+    language models that run **locally** on consumer grade CPUs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our GPT4All model is a 4GB file that you can download and plug into the GPT4All
+    open-source ecosystem software. *Nomic AI* facilitates high quality and secure
+    software ecosystems, driving the effort to enable individuals and organizations
+    to effortlessly train and implement their own large language models locally.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How it will work?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '![GPT4All is the Local ChatGPT for your Documents and it is Free!](../Images/d2645a736b7389d955c7058f9ea42dc4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Workflow of the QnA with GPT4All — created by the author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The process is really simple (when you know it) and can be repeated with other
+    models too. The steps are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: load the GPT4All model
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: use *Langchain* to retrieve our documents and Load them
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: split the documents in small chunks digestible by Embeddings
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use FAISS to create our vector database with the embeddings
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Perform a similarity search (semantic search) on our vector database based
+    on the question we want to pass to GPT4All: this will be used as a *context* for
+    our question'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Feed the question and the context to GPT4All with *Langchain* and wait for the
+    the answer.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'So what we need is Embeddings. An embedding is a numerical representation of
+    a piece of information, for example, text, documents, images, audio, etc. The
+    representation captures the semantic meaning of what is being embedded, and this
+    is exactly what we need. For this project we cannot rely on heavy GPU models:
+    so we will download the Alpaca native model and use from *Langchain* the *LlamaCppEmbeddings*.
+    Don’t worry! Everything is explained step by step'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s start coding
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Create a Virtual Environment
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Create a new folder for your new Python project, for example GPT4ALL_Fabio
+    (put your name…):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Next, create a new Python virtual environment. If you have more than one python
+    version installed, specify your desired version: in this case I will use my main
+    installation, associated to python 3.10.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The command `python3 -m venv .venv` creates a new virtual environment named `.venv` (the
+    dot will create a hidden directory called venv).
+  prefs: []
+  type: TYPE_NORMAL
+- en: A virtual environment provides an isolated Python installation, which allows
+    you to install packages and dependencies just for a specific project without affecting
+    the system-wide Python installation or other projects. This isolation helps maintain
+    consistency and prevent potential conflicts between different project requirements.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once the virtual environment is created, you can activate it using the following
+    command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![GPT4All is the Local ChatGPT for your Documents and it is Free!](../Images/3ee7e916d5dcc6c4d1a6da8715b77627.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Activated virtual environment
+  prefs: []
+  type: TYPE_NORMAL
+- en: The libraries to install
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'For the project we are building we don’t need too many packages. We need only:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: python bindings for GPT4All
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Langchain to interact with our documents
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: LangChain is a framework for developing applications powered by language models.
+    It allows you not only to call out to a language model via an API, but also connect
+    a language model to other sources of data and allow a language model to interact
+    with its environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: For LangChain you see that we specified also the version. This library is receiving
+    a lot of updates recently, so to be certain the our setup is going to work also
+    tomorrow it is better to specify a version we know is working fine. Unstructured
+    is a required dependency for the pdf loader and *pytesseract* and *pdf2image* as
+    well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**NOTE**: on the GitHub repository there is a requirements.txt file (suggested
+    by [jl adcr](https://medium.com/u/816bd47943c0?source=post_page-----df1016bc335--------------------------------))
+    with all the versions associated to this project. You can do the installation
+    in one shot, after downloading it into the main project file directory with the
+    following command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: At the end of the article I created a [section for the troubleshooting](https://artificialcorner.com/gpt4all-is-the-local-chatgpt-for-your-documents-and-it-is-free-df1016bc335#3706).
+    The GitHub repo has also an updated READ.ME with all these information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bear in mind that some **libraries have versions available depending on the
+    python version** you are running on your virtual environment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Download on your PC the models
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: This is a really important step.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For the project we certainly need GPT4All. The process described on Nomic AI
+    is really complicated and requires hardware that not all of us have (like me).
+    So [here is the link to the model](https://huggingface.co/mrgaang/aira/blob/main/gpt4all-converted.bin) already
+    converted and ready to be used. Just click on download.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![GPT4All is the Local ChatGPT for your Documents and it is Free!](../Images/d2c094d736d30e97efaf5e8ca711fa8b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Download the GPT4All model
+  prefs: []
+  type: TYPE_NORMAL
+- en: As described briefly in the introduction we need also the model for the embeddings,
+    a model that we can run on our CPU without crushing. Click the [link here to download
+    the alpaca-native-7B-ggml](https://huggingface.co/Pi3141/alpaca-native-7B-ggml/tree/397e872bf4c83f4c642317a5bf65ce84a105786e) already
+    converted to 4-bit and ready to use to act as our model for the embedding.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![GPT4All is the Local ChatGPT for your Documents and it is Free!](../Images/c7ba2460adee0a81425d5fdcdd3541d4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Click the download arrow next to [ggml-model-q4_0.bin](https://huggingface.co/Pi3141/alpaca-native-7B-ggml/blob/397e872bf4c83f4c642317a5bf65ce84a105786e/ggml-model-q4_0.bin)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why we need embeddings? If you remember from the flow diagram the first step
+    required, after we collect the documents for our knowledge base, is to *embed *them.
+    The LLamaCPP embeddings from this Alpaca model fit the job perfectly and this
+    model is quite small too (4 Gb). By the way you can also use the Alpaca model
+    for your QnA!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Update 2023.05.25: Mani Windows users are facing problems to use the llamaCPP
+    embeddings. This mainly happens because during the installation of the python
+    package llama-cpp-python with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: the pip package is going to compile from source the library. Windows usually
+    does not have CMake or C compiler installed by default on the machine. But don’t
+    warry there is a solution
+  prefs: []
+  type: TYPE_NORMAL
+- en: Running the installation of llama-cpp-python, required by LangChain with the
+    llamaEmbeddings, on windows CMake C complier is not installed by default, so you
+    cannot build from source.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On Mac Users with Xtools and on Linux, usually the C complier is already available
+    on the OS.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To avoid the issue **you MUST use pre complied wheel**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Go here [https://github.com/abetlen/llama-cpp-python/releases](https://github.com/abetlen/llama-cpp-python/releases)
+  prefs: []
+  type: TYPE_NORMAL
+- en: and look for the complied wheel for your architecture and python version — **you
+    MUST take Weels Version 0.1.49 **because higher versions are not compatible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![GPT4All is the Local ChatGPT for your Documents and it is Free!](../Images/059c34d6ca9fb76e5db455d7252a6238.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Screenshot from [https://github.com/abetlen/llama-cpp-python/releases](https://github.com/abetlen/llama-cpp-python/releases)
+  prefs: []
+  type: TYPE_NORMAL
+- en: In my case I have Windows 10, 64 bit, python 3.10
+  prefs: []
+  type: TYPE_NORMAL
+- en: so my file is llama_cpp_python-0.1.49-cp310-cp310-win_amd64.whl
+  prefs: []
+  type: TYPE_NORMAL
+- en: This [issue is tracked on the GitHub repository](https://github.com/fabiomatricardi/GPT4All_Medium/issues/2)
+  prefs: []
+  type: TYPE_NORMAL
+- en: After downloading you need to put the two models in the models directory, as
+    shown below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![GPT4All is the Local ChatGPT for your Documents and it is Free!](../Images/2fdc93855b6963db59ee794c8fd8e21f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Directory structure and where to put the model files
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basic Interaction with GPT4All
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Since we want to have control of our interaction the the GPT model, we have
+    to create a python file (let’s call it *pygpt4all_test.py*), import the dependencies
+    and give the instruction to the model. You will see that is quite easy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is the python binding for our model. Now we can call it and start asking.
+    Let’s try a creative one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We create a function that read the callback from the model, and we ask GPT4All
+    to complete our sentence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: The first statement is telling our program where to find the model (remember
+    what we did in the section above)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The second statement is asking the model to generate a response and to complete
+    our prompt "Once upon a time,".
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To run it, make sure that the virtual environment is still activated and simply
+    run :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: You should se a loading text of the model and the completion of the sentence.
+    Depending on your hardware resources it may take a little time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![GPT4All is the Local ChatGPT for your Documents and it is Free!](../Images/2c46d0381e481042610ded3f36e4bde4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The result may be different from yours… But for us the important is that it
+    is working and we can proceed with LangChain to create some advanced stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**NOTE (updated 2023.05.23)**: if you face an error related to pygpt4all, check
+    the troubleshooting section on this topic with the solution given by [Rajneesh
+    Aggarwal](https://artificialcorner.com/gpt4all-is-the-local-chatgpt-for-your-documents-and-it-is-free-df1016bc335#25f6) or [by
+    Oscar Jeong.](https://artificialcorner.com/gpt4all-is-the-local-chatgpt-for-your-documents-and-it-is-free-df1016bc335#a6a6)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: LangChain template on GPT4All
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: LangChain framework is a really amazing library. It provides *Components* to
+    work with language models in a easy to use way, and it also provides *Chains*.
+    Chains can be thought of as assembling these components in particular ways in
+    order to best accomplish a particular use case. These are intended to be a higher
+    level interface through which people can easily get started with a specific use
+    case. These chains are also designed to be customizable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our next python test we will use a *Prompt Template*. Language models take
+    text as input — that text is commonly referred to as a prompt. Typically this
+    is not simply a hardcoded string but rather a combination of a template, some
+    examples, and user input. LangChain provides several classes and functions to
+    make constructing and working with prompts easy. Let’s see how we can do it too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Create a new python file and call it *my_langchain.py*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: We imported from LangChain the Prompt Template and Chain and GPT4All llm class
+    to be able to interact directly with our GPT model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then, after setting our llm path (as we did before) we instantiate the callback
+    managers so that we are able to catch the responses to our query.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To create a template is really easy: following the [documentation tutorial](https://python.langchain.com/en/latest/modules/prompts/prompt_templates/getting_started.html) we
+    can use something like this…'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The *template* variable is a multi-line string that contains our interaction
+    structure with the model: in curly braces we insert the external variables to
+    the template, in our scenario is our *question*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Since it is a variable you can decide if it is an hard-coded question or an
+    user input question: here the two examples.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: For our test run we will comment the user input one. Now we only need to link
+    together our template, the question and the language model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Remember to verify your virtual environment is still activated and run the
+    command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: You may get a different results from mine. What is amazing is that you can see
+    the entire reasoning followed by GPT4All trying to get an answer for you. Adjusting
+    the question may give you better results too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![GPT4All is the Local ChatGPT for your Documents and it is Free!](../Images/37f6fc0d50f8004779fd138b45aca20f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Langchain with Prompt Template on GPT4All
+  prefs: []
+  type: TYPE_NORMAL
+- en: Answering Question About your Documents Using LangChain and GPT4All
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Here we start the amazing part, because we are going to talk to our documents
+    using GPT4All as a chatbot who replies to our questions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The sequence of steps, referring to *Workflow of the QnA with GPT4All*, is to
+    load our pdf files, make them into chunks. After that we will need a Vector Store
+    for our embeddings. We need to feed our chunked documents in a vector store for
+    information retrieval and then we will embed them together with the similarity
+    search on this database as a context for our LLM query.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For this purposes we are going to use FAISS directly from *Langchain* library.
+    FAISS is an open-source library from Facebook AI Research, designed to quickly
+    find similar items in big collections of high-dimensional data. It offers indexing
+    and searching methods to make it easier and faster to spot the most similar items
+    within a dataset. It is particularly convenient for us because it simplifies **information
+    retrieval **and allow us to save locally the created database: this means that
+    after the first creation it will be loaded very fast for any further usage.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creation of the vector index db
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Create a new file and call it *my_knowledge_qna.py*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The first libraries are the same we used before: in addition we are using *Langchain* for
+    the vector store index creation, the *LlamaCppEmbeddings* to interact with our
+    Alpaca model (quantized to 4-bit and compiled with the cpp library) and the PDF
+    loader.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s also load our LLMs with their own paths: one for the embeddings and one
+    for the text generation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'For test let’s see if we managed to read all the pfd files: the first step
+    is to declare 3 functions to be used on each single document. The first is to
+    split the extracted text in chunks, the second is to create the vector index with
+    the metadata (like page numbers etc…) and the last one is for testing the similarity
+    search (I will explain better later).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now we can test the index generation for the documents in the *docs* directory:
+    we need to put there all our pdfs. *Langchain* has also a method for loading the
+    entire folder, regardless of the file type: since it is complicated the post process,
+    I will cover it in the next article about LaMini models.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![GPT4All is the Local ChatGPT for your Documents and it is Free!](../Images/08db5a1bdd2f487dab7db09671d6910f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: my docs directory contains 4 pdf files
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will apply our functions to the first document in the list
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: In the first lines we use os library to get the **list of pdf files** inside
+    the docs directory. We then load the first document (*doc_list[0]*) from the docs
+    folder with *Langchain*, split in chunks and then we create the vector database
+    with the *LLama* embeddings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As you saw we are using the [pyPDF method](https://python.langchain.com/en/latest/modules/indexes/document_loaders/examples/pdf.html?highlight=pypdf#using-pypdf).
+    This one is a bit longer to use, since you have to load the files one by one,
+    but loading PDF using `pypdf` into array of documents allows you to have an array
+    where each document contains the page content and metadata with `page` number.
+    This is really convenient when you want to know the sources of the context we
+    will give to GPT4All with our query. Here the example from the readthedocs:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![GPT4All is the Local ChatGPT for your Documents and it is Free!](../Images/57c5bcbffab238b4be4b1c8fdabbfa8f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Screenshot from [Langchain documentation](https://python.langchain.com/en/latest/modules/indexes/document_loaders/examples/pdf.html)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can run the python file with the command from terminal:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After the loading of the model for embeddings you will see the tokens at work
+    for the indexing: don’t freak out since it will take time, specially if you run
+    only on CPU, like me (it took 8 minutes).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![GPT4All is the Local ChatGPT for your Documents and it is Free!](../Images/7c0e84382e2c6cec24cb602d31b91ab4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Completion of the first vector db
+  prefs: []
+  type: TYPE_NORMAL
+- en: As I was explaining the pyPDF method is slower but gives us additional data
+    for the similarity search. To iterate through all our files we will use a convenient
+    method from FAISS that allows us to MERGE different databases together. What we
+    do now is that we use the code above to generate the first db (we will call it *db0*)
+    and the with a for loop we create the index of the next file in the list and merge
+    it immediately with *db0*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is the code: note that I added some logs to give you the status of the
+    progress using *datetime.datetime.now()* and printing the delta of end time and
+    start time to calculate how long the operation took (you can remove it if you
+    don’t like it).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The merge instructions is like this
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'One of the last instructions is for saving our database locally: the entire
+    generation can take even hours (depends on how many documents you have) so it
+    is really good that we have to do it only once!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here the entire code. We will comment many part of it when we interact with
+    GPT4All loading the index directly from our folder.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![GPT4All is the Local ChatGPT for your Documents and it is Free!](../Images/b7462d11c62eb0ad963007bac8f2c01f.png)Running
+    the python file took 22 minutes'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ask questions to GPT4All on your documents
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Now we are here. We have our index, we can load it and with a Prompt Template
+    we can ask GPT4All to answer our questions. We start with an hard-coded question
+    and then we will loop through our input questions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Put the following code inside a python file *db_loading.py* and run it with
+    the command from terminal *python3 db_loading.py*
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: The printed text is the list of the 3 sources that best matches with the query,
+    giving us also the document name and the page number.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![GPT4All is the Local ChatGPT for your Documents and it is Free!](../Images/cb666d32a09071a7e154c4b2610c1394.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Results of the semantic search running the file *db_loading.py*
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now we can use the similarity search as the context for our query using the
+    prompt template. After the 3 functions just replace all the code with the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: After running you will get a result like this (but may vary). Amazing no!?!?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE24]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you want a user-input question to replace the line
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE25]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'with something like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE26]'
+  prefs: []
+  type: TYPE_PRE
+- en: Conclusions
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'It is time for you to experiment. Ask different questions on all the topics
+    related to your documents, and see the results. There is a big room for improvement,
+    certainly on the prompt and template: you can have a look [here for some inspirations](https://github.com/hwchase17/langchain/blob/master/docs/modules/prompts/prompt_templates/examples/custom_prompt_template.ipynb).
+    But *Langchain* documentation is really amazing (I could follow it!!).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can follow the code from the article or check it on [my github repo](https://github.com/fabiomatricardi/GPT4All_Medium).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Fabio Matricardi](https://www.linkedin.com/in/fabio-matricardi-29354835/)**
+    an educator, teacher, engineer and learning enthusiast. He have been teaching
+    for 15 years to young students, and now he train new employees at Key Solution
+    Srl. He started my career as Industrial Automation Engineer in 2010\. Passionate
+    about programming since he was a teenager, he discovered the beauty of building
+    software and Human Machine Interfaces to bring something to life. Teaching and
+    coaching is part of my daily routine, as well as studying and learning how to
+    be a passionate leader with up to date management skills. Join me in the journey
+    toward a better design, a predictive system integration using Machine Learning
+    and Artificial Intelligence throughout the entire engineering lifecycle.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://artificialcorner.com/gpt4all-is-the-local-chatgpt-for-your-documents-and-it-is-free-df1016bc335).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Convert Text Documents to a TF-IDF Matrix with tfidfvectorizer](https://www.kdnuggets.com/2022/09/convert-text-documents-tfidf-matrix-tfidfvectorizer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Converting Text Documents to Token Counts with CountVectorizer](https://www.kdnuggets.com/2022/10/converting-text-documents-token-counts-countvectorizer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[LangChain + Streamlit + Llama: Bringing Conversational AI to Your…](https://www.kdnuggets.com/2023/08/langchain-streamlit-llama-bringing-conversational-ai-local-machine.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Llama, Llama, Llama: 3 Simple Steps to Local RAG with Your Content](https://www.kdnuggets.com/3-simple-steps-to-local-rag-with-your-content)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[ChatGPT CLI: Transform Your Command-Line Interface Into ChatGPT](https://www.kdnuggets.com/2023/07/chatgpt-cli-transform-commandline-interface-chatgpt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

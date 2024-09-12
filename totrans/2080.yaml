@@ -1,0 +1,215 @@
+- en: How to Build and Train a Transformer Model from Scratch with Hugging Face Transformers
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Hugging Face Transformers library](../Images/7c2590f4db8e141e3008c7f98ba82fe5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Editor | Midjourney
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hugging Face Transformers library provides tools for easily loading and using
+    pre-trained Language Models (LMs) based on the transformer architecture. But,
+    did you know this library also allows you to implement and train your transformer
+    model from scratch? This tutorial illustrates how through a step-by-step sentiment
+    classification example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Important note:** Training a transformer model from scratch is computationally
+    expensive, with a training loop typically requiring hours to say the least. To
+    run the code in this tutorial, it is highly recommended to have access to high-performance
+    computing resources, be it on-premises or via a cloud provider.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step-by-Step Process
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Initial Setup and Dataset Loading
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Depending on the type of Python development environment you are working on,
+    you may need to install Hugging Face's **transformers** and **datasets** libraries,
+    as well as the **accelerate** library to train your transformer model in a distributed
+    computing setting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Once the necessary libraries are installed, let''s load the [emotions dataset](https://huggingface.co/datasets/jeffnyman/emotions)
+    for sentiment classification of Twitter messages from Hugging Face hub:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Using the data for training a transformer-based LM requires tokenizing the text.
+    The following code initializes a BERT tokenizer (BERT is a family of transformer
+    models suitable for text classification tasks), defines a function to tokenize
+    text data with padding and truncation, and applies it to the dataset in batches.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before moving on to initialize the transformer model, let's verify the unique
+    labels in the dataset. Having a verified set of existing class labels helps prevent
+    GPU-related errors during training by verifying label consistency and correctness.
+    We will use this label set later on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, we create and define a model configuration, and then instantiate the transformer
+    model with this configuration. This is where we specify hyperparameters about
+    the transformer architecture like embedding size, number of attention heads, and
+    the previously calculated set of unique labels, key in building the final output
+    layer for sentiment classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We are almost ready to train our transformer model. It just remains to instantiate
+    two necessary instances: **TrainingArguments**, with specifications about the
+    training loop such as the number of epochs, and **Trainer**, which glues together
+    the model instance, the training arguments, and the data utilized for training
+    and validation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Time to train the model, sit back, and relax. Remember this instruction will
+    take a significant amount of time to complete:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Once trained, your transformer model should be ready for passing in input examples
+    for sentiment prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Troubleshooting
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'If problems appear or persist when executing the training loop or during its
+    setup, you may need to inspect the configuration of the GPU/CPU resources being
+    used. For instance, if using a CUDA GPU, adding these instructions at the beginning
+    of your code can help prevent errors in the training loop:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: These lines disable the GPU and make CUDA operations synchronous, providing
+    more immediate and accurate error messages for debugging.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'On the other hand, if you are trying this code in a Google Colab instance,
+    chances are this error message shows up during execution, even if you have previously
+    installed the accelerate library:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To address this issue, try restarting your session in the ''Runtime'' menu:
+    the accelerate library typically requires resetting the run environment after
+    being installed.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary and Wrap-Up
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'This tutorial showcased the key steps to build your transformer-based LM from
+    scratch using Hugging Face libraries. The main steps and elements involved can
+    be summarized as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loading the dataset and tokenizing the text data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Initializing your model by using a model configuration instance for the type
+    of model (language task) it is intended for, e.g. **BertConfig**.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Setting up a **Trainer** and **TrainingArguments** instances and running the
+    training loop.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As a next learning step, we encourage you to explore how to make predictions
+    and inferences with your newly trained model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[](https://www.linkedin.com/in/ivanpc/)****[Iván Palomares Carrascosa](https://www.linkedin.com/in/ivanpc/)****
+    is a leader, writer, speaker, and adviser in AI, machine learning, deep learning
+    & LLMs. He trains and guides others in harnessing AI in the real world.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Fine-Tune BERT for Sentiment Analysis with Hugging Face Transformers](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Use GPT for Generating Creative Content with Hugging Face…](https://www.kdnuggets.com/how-to-use-gpt-for-generating-creative-content-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Recommendation System with Hugging Face Transformers](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Hugging Face Transformers for Emotion Detection in Text](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build AI Chatbot in 5 Minutes with Hugging Face and Gradio](https://www.kdnuggets.com/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,497 @@
+- en: An Intuitive Explanation of Convolutional Neural Networks
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/11/intuitive-explanation-convolutional-neural-networks.html/3](https://www.kdnuggets.com/2016/11/intuitive-explanation-convolutional-neural-networks.html/3)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Putting it all together – Training using Backpropagation
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: As discussed above, the Convolution + Pooling layers act as Feature Extractors
+    from the input image while Fully Connected layer acts as a classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that in **Figure 15** below, since the input image is a boat, the target
+    probability is 1 for Boat class and 0 for other three classes, i.e.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Input Image = Boat
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Target Vector = [0, 0, 1, 0]
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Screen Shot 2016-08-07 at 9.15.21 PM.png](../Images/5bb4a90b9c753c8a606458431de7e989.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 15: Training the ConvNet
+  prefs:
+  - PREF_H6
+  type: TYPE_NORMAL
+- en: 'The overall training process of the Convolution Network may be summarized as
+    below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step1:** We initialize all filters and parameters / weights with random values'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Step**2:**** The network takes a training image as input, goes through the
+    forward propagation step (convolution, ReLU and pooling operations along with
+    forward propagation in the Fully Connected layer) and finds the output probabilities for each
+    class.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Lets say the output probabilities for the boat image above are [0.2, 0.4, 0.1,
+    0.3]
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Since weights are randomly assigned for the first training example, output probabilities
+    are also random.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Step3:** Calculate the total error at the output layer (summation over all
+    4 classes)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Total Error = ∑  ½ (target probability – output probability) ²**'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Step4:** Use Backpropagation to calculate the *gradients* of the error with
+    respect to all weights in the network and use *gradient descent* to update all
+    filter values / weights and parameter values to minimize the output error.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The weights are adjusted in proportion to their contribution to the total error.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: When the same image is input again, output probabilities might now be [0.1,
+    0.1, 0.7, 0.1], which is closer to the target vector [0, 0, 1, 0].
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This means that the network has *learnt* to classify this particular image correctly
+    by adjusting its weights / filters such that the output error is reduced.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Parameters like number of filters, filter sizes, architecture of the network
+    etc. have all been fixed before Step 1 and do not change during training process
+    – only the values of the filter matrix and connection weights get updated.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Step5:** Repeat steps 2-4 with all images in the training set.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The above steps *train* the ConvNet – this essentially means that all the weights
+    and parameters of the ConvNet have now been optimized to correctly classify images
+    from the training set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When a new (unseen) image is input into the ConvNet, the network would go through
+    the forward propagation step and output a probability for each class (for a new image,
+    the output probabilities are calculated using the weights which have been optimized
+    to correctly classify all the previous training examples). If our training set
+    is large enough, the network will (hopefully) generalize well to new images and
+    classify them into correct categories.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note 1:** The steps above have been oversimplified and mathematical details
+    have been avoided to provide intuition into the training process. See [4] and [12]
+    for a mathematical formulation and thorough understanding.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note 2:** In the example above we used two sets of alternating Convolution
+    and Pooling layers. Please note however, that these operations can be repeated
+    any number of times in a single ConvNet. In fact, some of the best performing
+    ConvNets today have tens of Convolution and Pooling layers! Also, it is not necessary to
+    have a Pooling layer after every Convolutional Layer. As can be seen in the **Figure
+    16** below, we can have multiple Convolution + ReLU operations in succession before
+    a having a Pooling operation. Also notice how each layer of the ConvNet is visualized
+    in the Figure 16 below.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![car.png](../Images/408e15a0f1b5418c7f4a5849f161bdb3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 16: Source [4]'
+  prefs:
+  - PREF_H6
+  type: TYPE_NORMAL
+- en: Visualizing Convolutional Neural Networks
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'In general, the more convolution steps we have, the more complicated features
+    our network will be able to learn to recognize. For example, in Image Classification
+    a ConvNet may learn to detect edges from raw pixels in the first layer, then use
+    the edges to detect simple shapes in the second layer, and then use these shapes
+    to deter higher-level features, such as facial shapes in higher layers [14]. This
+    is demonstrated in **Figure 17** below – these features were learnt using a [Convolutional
+    Deep Belief Network](http://web.eecs.umich.edu/~honglak/icml09-ConvolutionalDeepBeliefNetworks.pdf) and
+    the figure is included here just for demonstrating the idea (this is only an example:
+    real life convolution filters may detect objects that have no meaning to humans).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Screen Shot 2016-08-10 at 12.58.30 PM.png](../Images/b2e500c81759b10bf09e7ce4132e932a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 17: Learned features from a Convolutional Deep Belief Network'
+  prefs:
+  - PREF_H6
+  type: TYPE_NORMAL
+- en: Adam Harley created amazing visualizations of a Convolutional Neural Network
+    trained on the MNIST Database of handwritten digits [13]. I highly recommend [playing
+    around with it](http://scs.ryerson.ca/~aharley/vis/conv/flat.html) to understand
+    details of how a CNN works.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will see below how the network works for an input ‘8’. Note that the visualization
+    in **Figure 18** does not show the ReLU operation separately.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![conv_all.png](../Images/1cd0018da396b25aab0d675ef4fbfae2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 18: Visualizing a ConvNet trained on handwritten digits'
+  prefs:
+  - PREF_H6
+  type: TYPE_NORMAL
+- en: The input image contains 1024 pixels (32 x 32 image) and the first Convolution
+    layer (Convolution Layer 1) is formed by convolution of six unique 5 × 5 (stride
+    1) filters with the input image. As seen, using six different filters produces
+    a feature map of depth six.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Convolutional Layer 1 is followed by Pooling Layer 1 that does 2 × 2 max pooling
+    (with stride 2) separately over the six feature maps in Convolution Layer 1\.
+    You can move your mouse pointer over any pixel in the Pooling Layer and observe
+    the 4 x 4 grid it forms in the previous Convolution Layer (demonstrated in **Figure
+    19**). You’ll notice that the pixel having the maximum value (the brightest one)
+    in the 4 x 4 grid makes it to the Pooling layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Screen Shot 2016-08-06 at 12.45.35 PM.png](../Images/c92ebd4788136abee4a516bfb643eea5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 19: Visualizing the Pooling Operation'
+  prefs:
+  - PREF_H6
+  type: TYPE_NORMAL
+- en: Pooling Layer 1 is followed by sixteen 5 × 5 (stride 1) convolutional filters
+    that perform the convolution operation. This is followed by Pooling Layer 2 that
+    does 2 × 2 max pooling (with stride 2). These two layers use the same concepts
+    as described above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We then have three fully-connected (FC) layers. There are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 120 neurons in the first FC layer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 100 neurons in the second FC layer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 10 neurons in the third FC layer corresponding to the 10 digits – also called
+    the Output layer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Notice how in **Figure 20**, each of the 10 nodes in the output layer are connected
+    to all 100 nodes in the 2nd Fully Connected layer (hence the name Fully Connected).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, note how the only bright node in the Output Layer corresponds to ‘8’ –
+    this means that the network correctly classifies our handwritten digit (brighter
+    node denotes that the output from it is higher, i.e. 8 has the highest probability
+    among all other digits).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![final.png](../Images/2ba5a08fc4e55407d80314354c093f4b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure 20: Visualizing the Filly Connected Layers'
+  prefs:
+  - PREF_H6
+  type: TYPE_NORMAL
+- en: The 3d version of the same visualization is available [here](http://scs.ryerson.ca/~aharley/vis/conv/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Other ConvNet Architectures
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: Convolutional Neural Networks have been around since early 1990s. We discussed
+    the LeNet above whichwas one of the very first convolutional neural networks.
+    Some other influential architectures are listed below [3] [4].
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**LeNet (1990s):** Already covered in this article.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**1990s to 2012:** In the years from late 1990s to early 2010s convolutional
+    neural network were in incubation. As more and more data and computing power became
+    available, tasks that convolutional neural networks could tackle became more and
+    more interesting.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**AlexNet (2012) – **In 2012, Alex Krizhevsky (and others) released [AlexNet](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
+    which was a deeper and much wider version of the LeNet and won by a large margin
+    the difficult ImageNet Large Scale Visual Recognition Challenge (ILSVRC) in 2012\.
+    It was a significant breakthrough with respect to the previous approaches and
+    the current widespread application of CNNs can be attributed to this work.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**ZF Net (2013) –** The ILSVRC 2013 winner was a Convolutional Network from
+    Matthew Zeiler and Rob Fergus. It became known as the [ZFNet](http://arxiv.org/abs/1311.2901)
+    (short for Zeiler & Fergus Net). It was an improvement on AlexNet by tweaking
+    the architecture hyperparameters.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**GoogLeNet (2014) – **The ILSVRC 2014 winner was a Convolutional Network from
+    [Szegedy et al.](http://arxiv.org/abs/1409.4842) from Google. Its main contribution
+    was the development of an *Inception Module* that dramatically reduced the number
+    of parameters in the network (4M, compared to AlexNet with 60M).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**VGGNet (2014) –** The runner-up in ILSVRC 2014 was the network that became
+    known as the [VGGNet](http://www.robots.ox.ac.uk/~vgg/research/very_deep/). Its
+    main contribution was in showing that the depth of the network (number of layers)
+    is a critical component for good performance.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**ResNets (2015) – **[Residual Network](http://arxiv.org/abs/1512.03385) developed
+    by Kaiming He (and others) was the winner of ILSVRC 2015. ResNets are currently
+    by far state of the art Convolutional Neural Network models and are the default
+    choice for using ConvNets in practice (as of May 2016).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**DenseNet (August 2016) –** Recently published by Gao Huang (and others),
+    the [Densely Connected Convolutional Network](http://arxiv.org/abs/1608.06993) has
+    each layer directly connected to every other layer in a feed-forward fashion.
+    The DenseNet has been shown to obtain significant improvements over previous state-of-the-art
+    architectures on five highly competitive object recognition benchmark tasks. Check
+    out the Torch implementation [here](https://github.com/liuzhuang13/DenseNet).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: In this post, I have tried to explain the main concepts behind Convolutional
+    Neural Networks in simple terms. There are several details I have oversimplified
+    / skipped, but hopefully this post gave you some intuition around how they work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This post was originally inspired from [Understanding Convolutional Neural Networks
+    for NLP](http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/)
+    by Denny Britz (which I would recommend reading) and a number of explanations
+    here are based on that post. For a more thorough understanding of some of these
+    concepts, I would encourage you to go through the [notes](http://cs231n.github.io/) from
+    [Stanford’s course on ConvNets](http://cs231n.stanford.edu/) as well as other
+    excellent resources mentioned under References below. If you face any issues understanding
+    any of the above concepts or have questions / suggestions, feel free to leave
+    a comment below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: All images and animations used in this post belong to their respective authors
+    as listed in References section below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: References
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: '[Clarifai Home Page](https://www.clarifai.com/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Shaoqing Ren, *et al, *“Faster R-CNN: Towards Real-Time Object Detection with
+    Region Proposal Networks”, 2015, [arXiv:1506.01497 ](http://arxiv.org/pdf/1506.01497v3.pdf)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Neural Network Architectures](http://culurciello.github.io/tech/2016/06/04/nets.html), Eugenio
+    Culurciello’s blog'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[CS231n Convolutional Neural Networks for Visual Recognition, Stanford](http://cs231n.github.io/convolutional-networks/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Clarifai / Technology](https://www.clarifai.com/technology)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Machine Learning is Fun! Part 3: Deep Learning and Convolutional Neural Networks](https://medium.com/@ageitgey/machine-learning-is-fun-part-3-deep-learning-and-convolutional-neural-networks-f40359318721#.2gfx5zcw3)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Feature extraction using convolution, Stanford](http://deeplearning.stanford.edu/wiki/index.php/Feature_extraction_using_convolution)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Wikipedia article on Kernel (image processing) ](https://en.wikipedia.org/wiki/Kernel_(image_processing))'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Deep Learning Methods for Vision, CVPR 2012 Tutorial ](http://cs.nyu.edu/~fergus/tutorials/deep_learning_cvpr12)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Neural Networks by Rob Fergus, Machine Learning Summer School 2015](http://mlss.tuebingen.mpg.de/2015/slides/fergus/Fergus_1.pdf)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[What do the fully connected layers do in CNNs? ](http://stats.stackexchange.com/a/182122/53914)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Convolutional Neural Networks, Andrew Gibiansky ](http://andrew.gibiansky.com/blog/machine-learning/convolutional-neural-networks/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: A. W. Harley, “An Interactive Node-Link Visualization of Convolutional Neural
+    Networks,” in ISVC, pages 867-877, 2015 ([link](http://scs.ryerson.ca/~aharley/vis/harley_vis_isvc15.pdf))
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Understanding Convolutional Neural Networks for NLP](http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Backpropagation in Convolutional Neural Networks](http://andrew.gibiansky.com/blog/machine-learning/convolutional-neural-networks/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[A Beginner’s Guide To Understanding Convolutional Neural Networks](https://adeshpande3.github.io/adeshpande3.github.io/A-Beginner''s-Guide-To-Understanding-Convolutional-Neural-Networks-Part-2/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Vincent Dumoulin, *et al*, “A guide to convolution arithmetic for deep learning”,
+    2015, [arXiv:1603.07285](http://arxiv.org/pdf/1603.07285v1.pdf)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[What is the difference between deep learning and usual machine learning?](https://github.com/rasbt/python-machine-learning-book/blob/master/faq/difference-deep-and-normal-learning.md)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[How is a convolutional neural network able to learn invariant features?](https://www.quora.com/How-is-a-convolutional-neural-network-able-to-learn-invariant-features)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[A Taxonomy of Deep Convolutional Neural Nets for Computer Vision](http://journal.frontiersin.org/article/10.3389/frobt.2015.00036/full)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Original post](https://ujjwalkarn.me/2016/08/11/intuitive-explanation-convnets/): Reposted
+    with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Ujjwal Karn](https://ujjwalkarn.me/) has 3 years of industry and
+    research experience in machine learning and is interested in practical applications
+    of deep learning to language and vision understanding.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deep Learning cleans podcast episodes from ‘ahem’ sounds](/2016/11/deep-learning-cleans-podcast-ahem-sounds.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Convolutional Neural Networks Work](/2016/08/brohrer-convolutional-neural-networks-explanation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deep Learning Key Terms, Explained](/2016/10/deep-learning-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[An Intuitive Explanation of Collaborative Filtering](https://www.kdnuggets.com/2022/09/intuitive-explanation-collaborative-filtering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Image Classification with Convolutional Neural Networks (CNNs)](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Comprehensive Guide to Convolutional Neural Networks](https://www.kdnuggets.com/2023/06/comprehensive-guide-convolutional-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Convolutional Neural Network with PyTorch](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Support Vector Machines: An Intuitive Approach](https://www.kdnuggets.com/2022/08/support-vector-machines-intuitive-approach.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Linear vs Logistic Regression: A Succinct Explanation](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

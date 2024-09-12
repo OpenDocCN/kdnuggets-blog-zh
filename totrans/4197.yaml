@@ -1,0 +1,482 @@
+- en: Create Synthetic Time-series with Anomaly Signatures in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/10/synthetic-time-series-anomaly-signatures-python.html](https://www.kdnuggets.com/2021/10/synthetic-time-series-anomaly-signatures-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2853b86d2ee323dcee3a240c620cd80d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Image source**: Author created with [Pixabay](https://pixabay.com/illustrations/digitization-cyborg-chip-circuit-6399664/) (Free
+    to use) image'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why synthetic time-series?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: As I wrote in my [highly-cited article](https://towardsdatascience.com/synthetic-data-generation-a-must-have-skill-for-new-data-scientists-915896c0c1ae),
+    “ *a synthetic dataset is a repository of data that is generated programmatically.
+    So, it is not collected by any real-life survey or experiment. Its main purpose,
+    therefore, is to be flexible and rich enough to help an ML practitioner conduct
+    fascinating experiments with various classification, regression, and clustering
+    algorithms*.”
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Synthetic data generation — a must-have skill for new data scientists**](https://towardsdatascience.com/synthetic-data-generation-a-must-have-skill-for-new-data-scientists-915896c0c1ae)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Synthetic time-series is no exception — it helps a data scientist to experiment
+    with various algorithmic methods and to prepare for real-life deployment in ways
+    that could not have been possible with only real datasets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Time-series data in an industrial setting
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: There are a variety of rich applications of time-series analysis in modern industrial
+    settings where an army of sensors are creating a never-ending stream of digital
+    data from machines, factories, operators, and business processes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pressure. Temperature. Vibration and acceleration of the motorized components.
+    Quality inspection data. Operator action logs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The numbers never stop coming. This is the new norm for [Industry 4.0](https://www.epicor.com/en-us/resource-center/articles/what-is-industry-4-0/) or
+    the [Age of Smart Factory](https://metrology.news/factory-2030-the-coming-of-age-of-the-smart-factory/).
+    Although both structured and semi-structured data are on the rise, a lot of it
+    is still a wide variety of time-series (or time-series-like) data coming from
+    all the measurement taps embedded in a modern factory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Factory 2030 - The ''Coming of Age'' of The Smart Factory - Metrology and
+    Quality News - Online…**](https://metrology.news/factory-2030-the-coming-of-age-of-the-smart-factory/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2148876c777ba46aff97a88897de4575.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Image source**: [Pixabay](https://pixabay.com/illustrations/industry-web-network-artificial-4330186/) (Free
+    to use)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Anomaly detection is critical
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Most of the time, they are ‘OK’, ‘within range’, ‘as expected’. But on rare
+    occasions, they are not. And, that’s where you need to pay attention. These are
+    ‘anomalies’ in an otherwise normal data stream and they need to be caught, analyzed,
+    and acted upon — almost always on a real-time basis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Anomaly detection in these data streams is the bread and butter of all modern
+    data analytics products, services, and startups. They are employing everything
+    from tried and tested time-series algorithms to the latest neural-network-based
+    sequence models to detect these anomalous signatures and to create alerts or to
+    act as the business logic demands.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are a variety of rich applications of time-series analysis in modern industrial
+    settings where an army of sensors are creating a never-ending stream of digital
+    data…
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Synthetic data generation is a powerful aid
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: There are a few points about these industrial data streams that are worthy of
+    repeating to understand why a synthetic time-series generation may turn out to
+    be incredibly useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Real-life anomalies are rare** and one needs to monitor and process a lot
+    of data to detect all kinds of interesting anomalies. This is not favorable news
+    to the data scientist who wants to test and re-test a laundry list of algorithms
+    in a short amount of time.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The **occurrence of anomalies is so unpredictable** that their patterns are
+    hardly captured in any well-rounded statistical distributions. Rapid experimentation
+    with a lot of anomaly types is critical to producing a **robust and reliable** anomaly
+    detection system. In the absence of a regular, trustworthy source of anomaly data,
+    a synthetic approach provides the only hope of achieving some sort of **controlled
+    experimentation**.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Many of the industrial sensor-generated data are considered **highly secretive** and
+    are not allowed to go beyond the local private cloud or the edge-analytics system
+    in place. To **reproduce the signature of anomalies without compromising data
+    security**, a synthetic approach is an obvious choice.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: These are ‘anomalies’ in an otherwise normal data stream and they need to be
+    caught, analyzed, and acted upon — almost always on a real-time basis.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In this article, we show a simple yet intuitive way to create a few common types
+    of anomaly signatures in one-dimensional synthetic time series data mimicking
+    an industrial process. We will use everyone’s favorite Python language for this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**NOTE**: This is not an article about anomaly detection algorithms. I only
+    discuss the ideas and methods related to the synthetic generation of anomaly-infused
+    time-series data (focused on a particular application area).'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Synthetic time-series with anomalies
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Here is the [**Jupyter notebook**](https://github.com/tirthajyoti/Synthetic-data-gen/blob/master/Notebooks/Time%20series%20synthesis%20with%20anomaly.ipynb) and
+    here is the Python module with the main class object for you to play with it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The idea of an industrial process and ‘unit process time’
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/b76d062be63451034d17935114d1af0c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Image source**: Author created'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Above, we show an illustration of a typical industrial process and a ‘unit process
+    time’. Imagine some raw material (***Process I/P*** in the image) is entering
+    a complex machine and finished goods (***Process O/P*** in the image) are coming
+    out at the other end.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We don’t need to know what exactly goes on inside the machine except that it
+    generates some data at regular intervals i.e. we can measure the states of the
+    process in a time-series fashion (using some sensors, perhaps). We want to look
+    at this data stream and detect anomalies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Therefore, to define our synthetic time-series module, we need the following
+    at the minimum,
+  prefs: []
+  type: TYPE_NORMAL
+- en: Process start time
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Process end time
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Unit process time (the interval at which we receive the data)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Therefore, that’s how the definition of the base `SyntheticTS` class starts,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ed4b5f58af6c096601acc2f45ec74acc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The ‘normal’ process
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To generate anomalies, we need a baseline normal. We can literally use the ‘Normal
+    distribution’ for this. You can change it anytime depending on your specific process
+    type and situation, but a significant majority of industrial processes do follow
+    the Normal distribution in terms of their sensor measurements.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e32ada8481560ebd81bfd8d9391070a3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Imagine we have an industrial process/machine starting up on 1st May 2021 and
+    running till 6th May 2021 (a 6-day run typical in many situations before the weekly
+    maintenance). The unit process time is 15 minutes. We chose the mean of the process
+    as 100 with a standard deviation of 5.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/3ba564c75732b06bb1ae60d36299efab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/9f417dbfdf355caaa98c3e2bdf945ea8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/b6a6be0e912f49b1b714a147b6fb3f8c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The essential ‘anomalize’ method
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: As a synthetic data generation method, you want to control the following characteristics
+    of the anomalies,
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fraction of the data that need to be anomalous
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The scale of the anomaly (how far they lie from the normal)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: One-sided or two-sided (higher or lower than the normal data in magnitude)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We will not bother about the exact code but show you some key results instead.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One-sided anomaly
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Here is an example,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6be322f5559cf1884c3f0e69526f9061.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Varying the anomaly scale
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We can place the anomalies at various distances by simply varying the `anomaly_scale` parameter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a4110279666cf9be3d20e78c5f347898.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here are the resulting plots. Note how the vertical scale of the plots is changing
+    to accommodate larger and larger anomalies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5e9e65cc2a880eb4769d0fc8e113c313.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Varying fraction of anomalies
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Next, we change the fraction of the anomalies (keeping the scale the same at
+    2.0).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/17582c98f11117f388f269bb89a1b4f0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Introducing a ‘positive shift’
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: This is a fairly common situation in industrial processes where a visible shift
+    is introduced in the process due to a sudden change in the process/ machine settings
+    or some other reason. **Sometimes it is planned and sometimes it is unintentional**.
+    Depending on the situation, the anomaly detection algorithm may have to analyze
+    and process it differently. In any case, we need a method to introduce such a
+    shift in the synthetic data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case, we have chosen a 10% shift in the data i.e. mean with `pct_drift_mean=10` argument.
+    Note that if we do not specify the argument `time_drift` in the method then the
+    code automatically introduces the drift exactly at the halfway point between the
+    start and end times of the whole process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0b340736ebd60dad544790d407e55aad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Negative shift at a particular location
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In the following example, we show a situation where,
+  prefs: []
+  type: TYPE_NORMAL
+- en: the data is drifted in a negative direction
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the spread (variance) of the data has changed along with the mean
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the drift started at a particular location which can be chosen by the user
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is a more realistic situation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6871007d9e376f58d62c63de14f440ef.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Chunked anomalies
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In many cases, the **anomalies come in chunks and disappear**. We can synthesize
+    this situation too. Note, here we create “two-sided anomalies”, but similar to
+    all other options, we can create “one-sided” variation too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Right now, the code creates the chunked anomalies scattered uniformly throughout
+    the time period. But this can be customized with individual time-points and anomaly
+    characteristics for the chunks in the next code update.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/57676a76d6f787b595cf7595589aa315.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/c0fe23837bc4599f186de8de4dd7be77.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Summary
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We demonstrate the idea of a simple and intuitive way to create synthetic one-dimensional
+    time-series data with various anomaly signatures which are common in industrial
+    use cases. This kind of synthetic data generation technique can be highly useful
+    for algorithmic iteration and model testing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keeping it simple
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To focus on the industrial use cases, **we have not added traditional time-series
+    patterns (e.g. seasonality, upward/downward trend) in the baseline data** generation
+    and kept it extremely simple as a Gaussian process. There is also no auto-regressive
+    nature to the data. Although algorithms such as ARIMA are extremely popular and
+    helpful for financial and business data analysis, independent sensor-generated
+    in the industrial settings are often Normally distributed and we stick to that
+    principle.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Further improvements
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: There are so many ways you can build upon this and add additional features.
+    Some of them could be,
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adding the choice of various statistical distributions as the baseline data
+    generation process
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Arbitrary location and characteristics for chunked anomalies
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Composition methods for multiple synthetic data classes/objects
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Better visualization methods
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Again, the example [Jupyter notebook is here](https://github.com/tirthajyoti/Synthetic-data-gen/blob/master/Notebooks/Time%20series%20synthesis%20with%20anomaly.ipynb).
+    Please feel free to fork and experiment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can check the author’s [**GitHub**](https://github.com/tirthajyoti?tab=repositories)** repositories **for
+    code, ideas, and resources in machine learning and data science. If you are, like
+    me, passionate about AI/machine learning/data science, please feel free to [add
+    me on LinkedIn](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) or [follow
+    me on Twitter](https://twitter.com/tirthajyotiS).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Tirthajyoti Sarkar](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)**
+    is a Data Science/ML Manager at Adapdix Corp. He contributes regularly to publications
+    such as KDnuggets and TDS on diverse topics related to data science and machine
+    learning. He has authored data science books and contributes to open source software.
+    Tirthajyoti holds a Ph.D. in EE and is working on an M.S. degree in Computational
+    Data Analytics. Email him at tirthajyoti at gmail[dot]com.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Teaching AI to Classify Time-series Patterns with Synthetic Data](/2021/10/teaching-ai-classify-time-series-patterns-synthetic-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Data Acquisition, Annotation, and Augmentation Tools](/2021/08/3-data-labeling-synthesizing-augmentation-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build a synthetic data pipeline using Gretel and Apache Airflow](/2021/09/build-synthetic-data-pipeline-gretel-apache-airflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Beginner''s Guide to Anomaly Detection Techniques in Data Science](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Anomaly Detection in BigQuery: Uncover Hidden Insights and Drive Action](https://www.kdnuggets.com/anomaly-detection-in-bigquery-uncover-hidden-insights-and-drive-action)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Use Synthetic Data To Overcome Data Shortages For Machine…](https://www.kdnuggets.com/2022/03/synthetic-data-overcome-data-shortages-machine-learning-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fake It Till You Make It: Generating Realistic Synthetic Customer Datasets](https://www.kdnuggets.com/2022/01/fake-realistic-synthetic-customer-datasets-projects.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Generate Synthetic Tabular Dataset](https://www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Community for Synthetic Data is Here and This is Why We Need It](https://www.kdnuggets.com/2022/04/community-synthetic-data-need.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

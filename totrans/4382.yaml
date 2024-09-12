@@ -1,0 +1,624 @@
+- en: Building Deep Learning Projects with fastai — From Model Training to Deployment
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/11/building-deep-learning-projects-fastai-model-training-deployment.html](https://www.kdnuggets.com/2020/11/building-deep-learning-projects-fastai-model-training-deployment.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/), Consultant,
+    Web & Data Science Instructor**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/d82eb971a1046cbb93425da40507e14c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Unsplash](https://unsplash.com/s/photos/neural-network)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Deep learning is inducing revolutionary changes across many disciplines. It
+    is also becoming more accessible to domain experts and AI enthusiasts with the
+    advent of libraries like TensorFlow, PyTorch, and now **fastai**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With the mission of democratizing deep learning, **fastai** is a research institute
+    dedicated to helping everyone from a beginner level coder to a proficient deep
+    learning practitioner to achieve world-class results with state-of-the-art models
+    and techniques from the latest research in the field.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Goal
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This blog post will walk you through the process of developing **a dog classifier** using **fastai**.
+    The goal is to learn how easy it is to get started with deep learning models and
+    be able to achieve near-perfect results with a limited amount of data using pre-trained
+    models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prerequisite
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The only prerequisite to get started is that you **know how to code in python** and
+    that you are familiar with high school math.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What You’ll Learn
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Importing the libraries and setting up the notebook
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Collecting Imagery Data using Microsoft Azure
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Converting downloaded data into DataLoader objects
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Data Augmentation
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Cleaning Data using Model Training
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Exporting the Trained Model
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Building an Application out of your Jupyter Notebook
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Importing the libraries and setting up the notebook
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before we get down to building our model, we need to import the required libraries
+    and utility function from [the set of notebooks](https://github.com/fastai/fastbook) called [fastbook](https://github.com/fastai/fastbook),
+    developed to cover the introduction to Deep Learning using fastai and PyTorch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s install the fastbook package to set up the notebook:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then, let’s import all the functions and classes from the fastbook package
+    and fastai vision widgets API:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Collecting Imagery Data using Microsoft Azure
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For most types of projects, you can find the data online from various [data
+    repositories and websites](https://towardsdatascience.com/data-repositories-for-almost-every-type-of-data-science-project-7aa2f98128b?source=---------6----------------------------).
+    To develop a Dog Classifier, we need to have images of dogs and there are many
+    images of Dogs available on the internet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To download these images, we’ll use the [Bing Image Search API](https://azure.microsoft.com/en-us/services/cognitive-services/bing-image-search-api/) provided
+    by Microsoft Azure. So, Sign up for a free account on Microsoft Azure and you’ll
+    get credits worth $200.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Go to your portal and create a new Cognitive Service resource using [this quickstart.](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Clinux) Enable
+    the Bing Image Search API and then from the `Keys and Endpoint` option in the
+    left panel copy the **keys** to your resource.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/b1635692e4f14ba07b05e665499d349f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'With the retrieved keys, set these keys to the environment as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Now, fastbook comes with several utility functions like `search_images_bing` that
+    returns URLs corresponding to your search query. We can learn about such functions
+    using the help function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/5ba1ecb1f0f3ae1ce09b34269ff1340f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'You can check the `search_image_bing` function in this help guide. The function
+    accepts a key to your resource that you’ve defined above and the search query
+    and we can access the URLs of the search results using the `attrgot` method:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We have got 150 URLs of images of German shepherd Dogs:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/094d201cad16cd816977b958f37ee8f3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now, we can download these images using the `download_url` function. But let’s
+    first define the type of Dogs that we want. For this tutorial, I’m going to work
+    with three types of dogs, german shepherds, black dogs, and labradors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So, let’s define a list of dog types:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: You’ll then need to define the path where your images will be downloaded along
+    with the semantic names of the folder for each class of dogs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: This will create a “dogs” directory which further contains 3 directories for
+    each type of dog image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After that, we’ve passed the search query(which is the dog_type) and the key
+    to the search function, followed by the download function to download all the
+    URLs from the search results in their respective destination(`dest`) directories.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can check the images downloaded to a path using the `get_image_file` function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/0c8ab2e51754d8fd12a377a98eaf7402.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Verifying Images
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'You can also check for the number of corrupt files/images in the files:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'You can remove all the corrupt files(if any) by mapping the unlink method to
+    the list of corrupt files:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: That’s it, we have 379 dog images ready with us to train and validate our model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Converting downloaded data into DataLoader objects
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now, we need a mechanism to provide data to our model and fastai has this concept
+    of DataLoaders that stores multiple DataLoader objects passed to it and makes
+    them available as `training` and `validation` set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, to convert the downloaded data into a DataLoader object, we have to provide
+    four things:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What kinds of data we are working with
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to get the list of items
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to label these items
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How to create the validation set
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Now, to create these DataLoaders object along with the information mentioned
+    above, fastai offers a flexible system called the ***data block API. ***We can
+    specify all the details of the DataLoader creation using the arguments and an
+    array of transformation methods that the API offers:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here, we have a bunch of arguments that we should understand:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**blocks** — this specifies the feature variables(images) and the target variable(a
+    category for each image)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**get_items** — retrieves the underlying items which are images in our case
+    and we have `**get_image_files**` function that returns a list of all of the images
+    in that path.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**splitter** — splits the data as per the provided method; we are using random
+    split with 20% of the data reserved for the validation set and specified the seed
+    to get the same split on every run.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**get_y — **the target variable is referred to as y; to create the labels,
+    we are using the `**parent_label**` function which gets the name of the folder
+    where the file resides as its label.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**item_tfms** — we have images of different sizes and this causes a problem
+    because we always send a batch of files to the model instead of a single file;
+    therefore we need to preprocess these images by resizing them to a standard and
+    then group them in a tensor to pass through the model. We are using the `**Resize**` transformation
+    here.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Now, we have the DataBlock object which needs to be converted to a DataLoader
+    by providing the path to the dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can then check for the images in the dataloader object using the `show_batch` method:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/905ebbbe0feea2002d8a362f147239db.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Data Augmentation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We can add transformations to these images to create random variations of the
+    input images, such that they appear different but still represent the same facts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can rotate, warp, flip, or change the brightness/contrast of the images to
+    create these variations. We also have a standard set of augmentations encapsulated
+    in `aug_transforms` function that works pretty well for a majority of computer
+    vision datasets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can now apply these transformations to an entire batch of images as all
+    the images are of the same size(224 pixels, standard for image classification
+    problems) now using the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/4d0126ce252304e84a31439057e37e93.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Model Training and Data Cleaning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It’s time to train the model with these limited number of images. fastai offers
+    many architectures to use from which makes it very easy to use transfer learning.
+    We can create a convolutional neural network(CNN) model using the pre-trained
+    models that work for most of the applications/datasets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We are going to use ResNet architecture, it is both fast and accurate for many
+    datasets and problems. The 18 in the `**resnet18**` represents the number of layers
+    in the neural network. We also pass the metric to measure the quality of the model’s
+    predictions using the validation set from the dataloader. We are using **error_rate** which
+    tells how frequently is the model making incorrect predictions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: The `fine_tune` method is analogous to `fit()` method in other ML libraries.
+    Now, to train the model, we need to specify the number of times(epochs) we want
+    to train the model on each image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here, we are training for only 4 epochs:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/ea4101cbd794989ac53cb4c5d8af0ce4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'We can also visualize the predictions and compare them with the actual labels
+    using the confusion matrix:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/8a6baf884e7e0baaf717aeece6ab931d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'As you can see, we only have five incorrect predictions. Let’s check for the
+    top losses i.e. the images with the highest loss in the dataset:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/87ebd9b850855e69b6f80cd69d91c73d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can see that the model got confused between black and labrador. Thus, we
+    can specify these images to be in a particular category using the ImageClassifierCleaner
+    class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pass the model to the class and it will open up a widget with an intuitive GUI
+    for data cleaning. We can change the labels of training and validation set images
+    and view the highest-loss images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/2d5f81b449d3b9e0918ce5cb795462bf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'After adding each image to their respective correct class, we have to move
+    them to their right directory using:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: Exporting the Trained Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After a couple of rounds of hyperparameter tuning and once you’re happy with
+    your model, you need to save it so that we can deploy it on a server to be used
+    in production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While saving a model, we have the model architecture and the trained parameters
+    that are of value to us. fastai offers `export()` method to save the model in
+    a pickle file with the extension `.pkl`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can then load the model and make inferences by passing an image to the loaded
+    model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Use this loaded model to make inferences:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/f1efd5b6d2d141dd8e61dd0afc4c4a0b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'We can check the labels from the models dataloader vocabulary:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/6d0eb76f457dfb1eb5c650c3d8b083f8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Building an Application out of your Jupyter Notebook
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The next step is to create an application that we can share with our friends,
+    colleagues, recruiters, etc. To create an application, we need to add interactive
+    elements so that we can try and test the application’s features and we need to
+    make it available on the web as a webpage which includes deploying it via some
+    framework like flask or simply using Voila.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can simply use Voila to convert this Jupyter Notebook into a standalone
+    app. I have not covered it here but you can go through my blog/video which covers
+    it in entirety.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Building COVID-19 analysis dashboard using Python and Voila**](https://towardsdatascience.com/building-covid-19-analysis-dashboard-using-python-and-voila-ee091f65dcbb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating a dashboard out of your jupyter notebook with interactive visualizations
+    and flexibility.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Deployment
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'I’ve covered deploying an ML model in my post here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Deploying a Trained ML Model using Flask**](https://towardsdatascience.com/deploying-a-trained-ml-model-using-flask-541520b3cbe9)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Part-2 of the End-to-End ML project tutorial series
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But if you want another easy and free way of deploying your Voila application,
+    you can use [Binder](https://mybinder.org/). Follow these steps to deploy the
+    application on Binder:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Add your notebook to a [GitHub repository](https://github.com/).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Insert the URL of that repo into Binder’s URL field.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Change the File drop-down to instead select URL.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In the “URL to open” field, enter `/voila/render/<*name>*.ipynb`
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Click the clipboard button at the bottom right to copy the URL and paste it
+    somewhere safe.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Click Launch.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: And there you go, your dog classifier is live!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you prefer to watch me carrying out all of these steps, here’s the video
+    version of this blog:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data Science with Harshit](https://www.youtube.com/c/DataSciencewithHarshit?sub_confirmation=1)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'With this channel, I am planning to roll out a couple of [series covering the
+    entire data science space](https://towardsdatascience.com/hitchhikers-guide-to-learning-data-science-2cc3d963b1a2?source=---------8------------------).
+    Here is why you should be subscribing to the [channel](https://www.youtube.com/channel/UCH-xwLTKQaABNs2QmGxK2bQ):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: These series would cover all the required/demanded quality tutorials on each
+    of the topics and subtopics like [Python fundamentals for Data Science](https://towardsdatascience.com/python-fundamentals-for-data-science-6c7f9901e1c8?source=---------5------------------).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Explained [Mathematics and derivations](https://towardsdatascience.com/practical-reasons-to-learn-mathematics-for-data-science-1f6caec161ea?source=---------9------------------) of
+    why we do what we do in ML and Deep Learning.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Podcasts with Data Scientists and Engineers](https://www.youtube.com/watch?v=a2pkZCleJwM&t=2s) at
+    Google, Microsoft, Amazon, etc, and CEOs of big data-driven companies.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Projects and instructions](https://towardsdatascience.com/building-covid-19-analysis-dashboard-using-python-and-voila-ee091f65dcbb?source=---------2------------------) to
+    implement the topics learned so far. Learn about new certifications, Bootcamp,
+    and resources to crack those certifications like this [**TensorFlow Developer
+    Certificate Exam by Google.**](https://youtu.be/yapSsspJzAw)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Feel free to connect with me on [Twitter](https://twitter.com/tyagi_harshit24) or [LinkedIn](https://www.linkedin.com/in/tyagiharshit/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/)** is a Consultant
+    and Web & Data Science Instructor.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/deep-learning-projects-with-fastai-from-model-training-to-deployment-2be3135bd757).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[10 Days With “Deep Learning for Coders”](/2020/10/10-days-deep-learning-coders.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploying Secure and Scalable Streamlit Apps on AWS with Docker Swarm, Traefik
+    and Keycloak](/2020/10/deploying-secure-scalable-streamlit-apps-aws-docker-swarm-traefik-keycloak.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Challenges to Scaling Machine Learning Models](/2020/10/5-challenges-scaling-machine-learning-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[From Data Collection to Model Deployment: 6 Stages of a Data…](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 7 Model Deployment and Serving Tools](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Full End-to-End Deployment of a Machine Learning Algorithm into a…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Back to Basics Week 4: Advanced Topics and Deployment](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn Deep Learning by Building 15 Neural Network Projects in 2022](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

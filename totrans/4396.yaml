@@ -1,0 +1,274 @@
+- en: Exploring The Brute Force K-Nearest Neighbors Algorithm
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/10/exploring-brute-force-nearest-neighbors-algorithm.html](https://www.kdnuggets.com/2020/10/exploring-brute-force-nearest-neighbors-algorithm.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Murugan Yuvaraaj](https://www.linkedin.com/in/murugan-yuvaraaj-m-p-a369019a/),
+    Praxis Business School**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Header image](../Images/97ae97e55099f6b9421805e97dcccecb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Did you find any difference between the two graphs?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Both show the accuracy of a classification problem for K values between 1 to
+    10.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Both of the graphs use the KNN classifier model with 'Brute-force' algorithm
+    and 'Euclidean' distance metric on same dataset. Then why is there a difference
+    in the accuracy between the two graphs?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before answering that question, let me just walk you through the KNN algorithm
+    pseudo code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I hope all are familiar with k-nearest neighbour algorithm. If not, you can
+    read the basics about it at [https://www.analyticsvidhya.com/blog/2018/03/introduction-k-neighbours-algorithm-clustering/](https://www.analyticsvidhya.com/blog/2018/03/introduction-k-neighbours-algorithm-clustering/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can implement a KNN model by following the below steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Load the data
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Initialise the value of k
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For getting the predicted class, iterate from 1 to total number of training
+    data points
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Calculate the distance between test data and each row of training data. Here
+    we will use Euclidean distance as our distance metric since it’s the most popular
+    method. Some of the other metrics that can be used are Chebyshev, cosine, etc.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Sort the calculated distances in ascending order based on distance values
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Get top k rows from the sorted array
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Get the most frequent class of these rows
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Return the predicted class
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For our analysis, lets just focus on step 7, getting the most frequent class
+    of these rows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After getting the top k rows, we pick the most frequent class (mode) from these
+    rows. There is a little problem with that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In case of an odd k neighbours, there will be always a majority class in the
+    list. Thus, there will be no problem with odd k neighbours.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But what about an even k neighbours number and if two or more classes get the
+    same majority?
+  prefs: []
+  type: TYPE_NORMAL
+- en: The KNN algorithm can also give high accuracy for a dataset for k even neighbours.
+    It is not restricted to only use odd k neighbours to get the majority class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Take for example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If k = 4 and we have Class A = 2 and Class B = 2 in our list. In that case,
+    the algorithm will take the class what falls in the first rows of the top K rows
+    instead of looking at the distance metric.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To solve this problem, we used **distance - mode - distance** as our criteria
+    for even-numbered k neighbours in our algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our algorithm works the same way as the brute-force algorithm, but the difference
+    that it makes with even k neighbours is great.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What our algorithm does is very simple. It takes the top k rows from the distance
+    metric. In the case of an odd k value, it takes the majority. For an even number
+    of k rows, majority classes are selected. If it happens to have two or more classes
+    having a majority, those two or more major class distances will go to the distance
+    metric loop again and check which class has the lowest distance metric, and that
+    class is chosen as the majority class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's see an example of how this works.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For our analysis we used the penguin dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Brute-force Algorithm:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/e2ffb131bc18c7520ff8bad8817223fd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here we gave k = 4.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Class ‘Chinstrap’ and ‘Adelie’ ended up with mode as 2\. After arranging the
+    K neighbours based on mode, brute-force ended up picking the first class instead
+    of picking the class which had least distance in the distance metric.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This affects the accuracy for the brute-force algorithm when k value is even.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Our Model:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/811e79aeb0610d3b53c518090d21cdef.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Our model is able to increase the accuracy in case of even numbered neighbours.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Results:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have compared the accuracy of our model with brute-force and below are the
+    results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **K** | **Brute Force** | **Our Model** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | 0.805 | 0.805 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | 0.746 | 0.805 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | 0.761 | 0.761 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | 0.746 | 0.791 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 5 | 0.776 | 0.776 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 6 | 0.716 | 0.791 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 7 | 0.746 | 0.746 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 8 | 0.686 | 0.746 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 9 | 0.746 | 0.746 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 10 | 0.701 | 0.776 |'
+  prefs: []
+  type: TYPE_TB
+- en: I compared the results with **kd tree and ball tree algorithms** also, and similar
+    results were obtained.
+  prefs: []
+  type: TYPE_NORMAL
+- en: GitHub Link: [https://github.com/myuvarajmp/Exploring_KNN_Algorithm](https://github.com/myuvarajmp/Exploring_KNN_Algorithm)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for your time and be kind with your feedback as this is my first article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Murugan Yuvaraaj](https://www.linkedin.com/in/murugan-yuvaraaj-m-p-a369019a/)**
+    is a Student at Praxis Business School in Bangalore, India.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Beginner’s Guide to K-Nearest Neighbors in R: from Zero to Hero](/2020/01/beginners-guide-nearest-neighbors-r.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to the K-nearest Neighbour Algorithm Using Examples](/2020/04/introduction-k-nearest-neighbour-algorithm-using-examples.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Classifying Heart Disease Using K-Nearest Neighbors](/2019/07/classifying-heart-disease-using-k-nearest-neighbors.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[From Theory to Practice: Building a k-Nearest Neighbors Classifier](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Nearest Neighbors for Classification](https://www.kdnuggets.com/2022/04/nearest-neighbors-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[K-nearest Neighbors in Scikit-learn](https://www.kdnuggets.com/2022/07/knearest-neighbors-scikitlearn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[40% of Labour Force Will be Affected by AI in 3 Years](https://www.kdnuggets.com/40-of-labour-force-will-be-affected-by-ai-in-3-years)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Exploring the Latest Trends in AI/DL: From Metaverse to Quantum Computing](https://www.kdnuggets.com/2023/07/exploring-latest-trends-aidl-metaverse-quantum-computing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

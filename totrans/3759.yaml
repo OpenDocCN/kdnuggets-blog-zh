@@ -1,0 +1,381 @@
+- en: 'Introduction to Natural Language Processing, Part 1: Lexical Units'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/02/datascience-introduction-natural-language-processing-part1.html](https://www.kdnuggets.com/2017/02/datascience-introduction-natural-language-processing-part1.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By [DataScience.com](https://www.datascience.com/blog/introduction-to-natural-language-processing-lexical-units-learn-data-science-tutorials)**
+    Sponsored Post.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this series, we will explore core concepts related to the study and application
+    of natural language processing. Part one below provides an introduction to the
+    field and explains how to identify lexical units as a means of data preprocessing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction to Natural Language Processing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Natural language processing](https://www.datascience.com/resources/article/2017-predictions-data-science-providing-value)
+    is a set of techniques that allows computers and people to interact. Consider
+    the process of extracting information from some data generating process: A company
+    wants to predict user traffic on its website so it can provide enough compute
+    resources (server hardware) to service demand. Engineers can define the relevant
+    information to be the amount of data requested. Because they control the data
+    generating process, they can add logic to the website that stores every request
+    for data as a variable. Then, they can define the unit of measurement as the amount
+    of data requested as a byte, in turn allowing us to represent the information
+    as integers. With an excellent representation of the information in hand, the
+    engineers can store it in a tabular database so analysts can make predictions
+    based on this historical data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Natural language processing is the application of the steps above — defining
+    representations of information, parsing that information from the data generating
+    process, and constructing, storing, and using data structures that store information
+    — to information embedded in natural languages.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What makes a language natural is precisely what makes natural language processing
+    difficult; the rules governing the representation of information in natural languages
+    evolved without predetermination. These rules can be high level and abstract,
+    such as how sarcasm is used to convey meaning; or quite low level, such as using
+    the character "s" to denote plurality of nouns. Natural language processing involves
+    identifying and exploiting these rules with code to translate unstructured language
+    data into information with a schema. Language data may be formal and textual,
+    such as newspaper articles, or informal and auditory, such as a recording of a
+    telephone conversation. Language expressions from different contexts and data
+    sources will have varying rules of grammar, syntax, and semantics. Strategies
+    for extracting and representing information from natural languages that work in
+    one setting often fail in others.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Business Uses
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Companies often have access to records of natural language that contain valuable
+    information. Product reviews or even tweets on Twitter can contain specific complaints
+    or feature requests related to a product that can help prioritize and evaluate
+    proposals. [Online marketplaces](https://www.datascience.com/resources/article/business-intelligence-to-data-science-for-retailers)
+    may have item descriptions available that can help define a taxonomy of products.
+    A digital newspaper may have an archive of online articles that can be used to
+    build a search engine to allow users to find relevant content. Information that
+    is representational of natural language can also be useful for building powerful
+    applications, such as [bots that respond to questions](https://www.datascience.com/blog/training-a-predictive-model-chatbot-for-business-applications)
+    or software that translates from one language to another.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![intro-to-natural-language-processing-part-1-lexical-units-sentiment.png](../Images/e477b47b0cdf19f3986ca94599611841.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Natural language processing can be used to identify specific complaints from
+    text.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Projects requiring natural language processing are generally organized by these
+    sorts of challenges. Solving them usually requires us to serially piece multiple
+    subtasks together, where there may be many approaches for each subtask. The universe
+    of natural language processing methods can be daunting, as it's highly specialized,
+    vast, and somewhat lacking in an overarching conceptual framework. While a complete
+    summary of natural language processing is well beyond the scope of this article,
+    we will cover some concepts that are commonly used in general purpose natural
+    language processing work. We'll assume that we have access to textual data with
+    which to work (not auditory, which requires the additional step of speech recognition).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Identifying Lexical Units
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As natural languages are generally composed of words, an initial step of many
+    natural language processing projects is identifying words within some raw text.
+    The concept of a word, however, may be too restrictive or ambiguous. The strings
+    "cats" and "cat" are different forms of the same entry in the dictionary; should
+    they be treated equivalently? "Star Wars" has no entry in the dictionary, and
+    though it contains a space, we think of it a singular entity. These are the sorts
+    of challenges involved in defining lexical units, which represent basic elements
+    of a vocabulary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For a given task, the researcher must define what constitutes an appropriate
+    lexical unit. Should singular and plural forms of a word be considered to belong
+    to the same lexical unit? Assume we are building a question answering system,
+    and receive the following queries:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A: "Find the closest theaters to me."'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'B: "Find the closest theater to me."'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In A, the user is implying that she wants to view multiple theaters, whereas
+    in B, she just wants the single closest theater. Throwing away the distinction
+    between singular and plural will degrade the quality of our application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![intro-to-natural-language-processing-part-1-lexical-units-plurals.png](../Images/64fe1fa4313cf54542605a72ff6aa6a3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Alternatively, assume that we want to summarize the following product reviews:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A: "The product had some connectivity problems."'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'B: "The product had a connectivity problem."'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here, the distinction between "problems" and "problem" is not relevant.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While not at all exhaustive, tokenization and normalization are two common steps
+    to parsing lexical units from natural language. [Tokenization](https://www.ibm.com/developerworks/community/blogs/nlp/entry/tokenization?lang=en)
+    is the process of separating a sequence of characters into tokens, each of which
+    represents an instance of a term. [Normalization](http://nlp.stanford.edu/IR-book/html/htmledition/normalization-equivalence-classing-of-terms-1.html)
+    is the set of steps we take to condense terms into lexical units.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tokenization algorithms can be simple and deterministic, such as separating
+    characters into tokens every time a character is not alphanumeric. Non-alphanumeric
+    characters could be spaces, punctuation marks, hashtags, etc. We can implement
+    this approach with [pattern matching](https://en.wikipedia.org/wiki/Pattern_matching),
+    checking for the presence of characters or character sequences according to some
+    rules where we define these patterns as [regular expressions](https://en.wikipedia.org/wiki/Regular_expression)
+    (often abbreviated "regex"). For example, we can denote the set of all numeric
+    characters with regex string "*0-9*" or "*\d.*" We can combine terms with modifiers
+    into complex search patterns. We can split characters on non-alphanumeric characters
+    by splitting every time the query `[^A-Za-z0-9]+` is matched. Application of regular
+    expressions is so widespread that implementations are available in almost all
+    modern programming languages.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It's easy to find examples where this strategy will fail ("didn't ≠ ["didn",
+    "t"]). In some applications, researchers capture these patterns with multiple
+    complex regex queries and morphology-specific rules, and pass the text input through
+    a [finite state machine](http://www.cs.rochester.edu/u/james/CSC248/Lec7.pdf)
+    to determine the correct tokenization. Encoding an exhaustive set of rules can
+    be difficult, and will depend on the application and the type of text data under
+    analysis (though there are some [partial rulesets](https://github.com/explosion/spaCy/blob/master/spacy/en/tokenizer_exceptions.py)
+    that have been assembled). To adapt to a new corpus, tokenizers can be built by
+    training statistical models on hand-tokenized text, though this approach is rarely
+    used in practice due to the success of deterministic approaches. These models
+    may look at sequences of character properties, such as whether the contiguous alphanumeric
+    begins with a capital letter, and model tokenizations as a function of these properties.
+    The rules the model learns to use will depend on the provided training corpus
+    (Twitter, medical articles, etc.).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another challenge is that multi-term character sequences can comprise a lexical
+    unit. These multi-term sequences could be named entities such as "New York," in
+    which we case, we are doing [named entity recognition](https://en.wikipedia.org/wiki/Named-entity_recognition) or
+    simply common phrases. One approach to this problem is to allow for some redundancy
+    in our representation by including all n-length sets of terms (n-grams) as tokens.
+    If we limit ourselves to unigrams and bigrams, New York would be tokenized as
+    "New,""York,""New York." To add some sophistication instead of exhausting all
+    n-grams, we could select the highest order n-gram representation of a set of terms
+    subject to some condition, like whether it exists in a hard-coded dictionary (called
+    a gazetteer) or if it is common in our dataset. Alternatively, we could employ
+    machine learning models. If the probability of a given word, *p*(word[*i*] | word[*i*-1]),
+    is high enough given the preceding word, we might consider the sequence a two-term
+    lexical unit (alternatively, we could use the formulation *p*(word[*i*] | word[*i*-1 ]=
+    bigram) using labeled examples). Though smoothing can help ameliorate the problem,
+    these language models tend to have trouble generalizing, and require some amount
+    of transfer learning, feature engineering, determinism, or abstraction. Probabilistic
+    n-gram models require labeled examples, machine learning algorithms, and feature
+    extractors (the latter two are bundled in [Stanford's NER software](http://nlp.stanford.edu/software/CRF-NER.shtml)).
+    If such models are not worth the investment, high quality pretrained models can
+    often be used successfully on new data sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After tokenization, we may wish to normalize our tokens. [Normalization](http://nlp.stanford.edu/IR-book/html/htmledition/normalization-equivalence-classing-of-terms-1.html)
+    is a set of rules that aim to reduce all instances of a lexical equivalence class
+    to their canonical form.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This may include procedures like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: plural -> singular (e.g. cats -> cat)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: past tense -> present tense (e.g. ran -> run)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: adverb form -> adjective form (quickly -> quick)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: hyphenation -> concatenation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'One approach to normalization is to reduce a word to its dictionary form through
+    a process called [lemmatisation](https://en.wikipedia.org/wiki/Lemmatisation).
+    The lemma of a term has all the metadata contained in a dictionary entry: part
+    of speech, definition (word sense), and stem. Lemmatisation traditionally requires
+    a [morphological parser](http://cs.union.edu/%7Estriegnk/courses/nlp-with-prolog/html/node21.html),
+    in which we completely featurize some unprocessed term (tense, plurality, part
+    of speech, etc.) based on its morphological elements (prefix, suffix, etc.). To
+    build a parser, we create a dictionary of known stems and affixes (lexicon) with
+    metadata about them, like possible parts of speech, enumerate the rules (morphotactics)
+    governing how morphemes can be compiled together (plural modifier "-s" must follow
+    the noun, for example), and finally enumerate rules ([orthographic rules](https://en.wikipedia.org/wiki/Orthography))
+    that govern changes in a word under different morphological states (for instance,
+    a past tense verb ending in "-c" must have a "k" added, such as "picnic -> picnicked").
+    These rules and terms are passed to a finite state machine that pass over some
+    input, maintaining a state or set of feature values that is then updated as rules
+    and lexicon are checked against the text (similar to how regular expressions work).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The degree of specificity in how we define the equivalence class (which morphological
+    elements are relevant) and, thus, the degree of normalization we use and morphological
+    metadata we extract depends on our application. In information retrieval, we often
+    only care about the high-level semantics of some text. All [morphemes](https://en.wikipedia.org/wiki/Morpheme),
+    or meaning-conveying elements of the word other than the stem, can be discarded
+    along with all morphological metadata (such as tense). Stemming algorithms usually
+    use substitution rules, such as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: if a given stem contains a vowel, we remove "-ing" from all tokens that contain
+    the stem ("barking" → "bark" but "string" → "string")
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The Porter stemmer is probably the most prominent substitution-type stemming
+    algorithm, though there are others. All of these types of stemmers are error prone,
+    but are simple and easy to implement and are good starting points for most applied
+    work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Ultimately, the goals of building a preprocessing pipeline include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: All relevant information is extracted
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: All irrelevant information is discarded
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Text is represented in sufficiently few equivalence classes
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The data is in a useful form, such as lists of ascii-encoded strings or as abstract
+    data structures such as sentences or documents
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The definition of relevant, sufficient, and useful depends on the requirements
+    of the project, the strength of the development team, and availability of time
+    and resources. Furthermore, in many cases, the strength of a preprocessing pipeline
+    can determine the overall success of a project. Therefore, care should be taken
+    while building a pipeline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After translating raw text into a string or tokenized array of lexical units,
+    the researcher or developer may take steps to preprocess his or her text data,
+    such as string encoding, stop word and punctuation removal, spelling correction,
+    part-of-speech tagging, chunking, sentence segmentation, and syntax parsing. The
+    table below illustrates some examples of the types of processing a researcher
+    may use given a task and some raw text:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Raw Text | Processed | Steps | Task | How Pipeline Suits Task |'
+  prefs: []
+  type: TYPE_TB
+- en: '| She sells seashells by the seashore. | [''she'',''sell'',''seashell'',''seashore'']
+    | tokenization, lemmatization, stop word removal, punctuation removal | topic
+    modeling | We only care about high level, thematic, and semantically heavy words
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| John is capable. | John/PROPN is/VERB capable/ADJ ./PUNCT | tokenization,
+    part of speech tagging | named entity recognition | We care about every word,
+    but want to indicate the role each word plays to build a list of NER candidates
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Who won? I didn''t check the scores. | [u''who'', u''win''], [u''i'',u''do'',u''not'',u''check'',u''score'']
+    | tokenization, lemmatization, sentence segmentation, punctuation removal, string
+    encoding | sentiment analysis | We need all words, including negations since they
+    can negate positive statements, but don''t care about tense or word form |'
+  prefs: []
+  type: TYPE_TB
+- en: After preprocessing, we often need to take additional steps to represent the
+    information in some text quantitatively. In part two of this series, we'll discuss
+    various abstracted and numerical representations of text.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The dependency plots included in this post were build using the awesome open
+    source library DisplaCy. Check it out [here](https://github.com/explosion/displacy).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Want to keep learning? Download our [new study from Forrester](https://www.datascience.com/resources/white-papers/forrester-data-science-platforms-create-business-value)
+    about the tools and practices keeping companies on the forefront of data science.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.datascience.com/blog/introduction-to-natural-language-processing-lexical-units-learn-data-science-tutorials).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[N-gram Language Modeling in Natural Language Processing](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Gentle Introduction to Natural Language Processing](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Natural Language Processing](https://www.kdnuggets.com/introduction-to-natural-language-processing)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing Key Terms, Explained](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Representation for Natural Language Processing Tasks](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

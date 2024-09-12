@@ -1,0 +1,356 @@
+- en: Pytorch Lightning vs PyTorch Ignite vs Fast.ai
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/08/pytorch-lightning-vs-pytorch-ignite-vs-fast-ai.html](https://www.kdnuggets.com/2019/08/pytorch-lightning-vs-pytorch-ignite-vs-fast-ai.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [William Falcon](https://www.linkedin.com/in/wfalcon/), AI Researcher**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/631434f0400fb0206fffbdd18564e11f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Apparently a lion, bear, and tiger are friends
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PyTorch-lightning](https://github.com/williamFalcon/pytorch-lightning) is
+    a recently released library which is a Keras-like ML library for PyTorch. It leaves
+    core training and validation logic to you and automates the rest. (BTW, by Keras
+    I mean no boilerplate, not overly-simplified).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As the core author of lightning, I’ve been asked a few times about the core
+    differences between lightning and fast.ai, [PyTorch ignite](https://github.com/pytorch/ignite).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here, I will **attempt** an objective comparison between all three frameworks.
+    This comparison comes from laying out similarities and differences objectively
+    found in tutorials and documentation of all three frameworks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Motivations
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Fast.ai was originally created to facilitate teaching the [fast.ai curriculum](https://www.fast.ai/2018/10/02/fastai-ai/).
+    It’s recently also morphed into a library of implementations of common approaches
+    such as GANs, RL and transfer learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PyTorch Ignite](https://github.com/pytorch/ignite#why-ignite) and [Pytorch
+    Lightning](https://github.com/williamFalcon/pytorch-lightning#why-do-i-want-to-use-lightning) were
+    both created to give the researchers as much flexibility by requiring them to
+    define functions for what happens in the training loop and validation loop.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Lightning has two additional, more ambitious motivations: reproducibility and
+    democratizing best practices which only PyTorch power-users would implement (Distributed
+    training, 16-bit precision, etc…). I’ll discuss these motivations in detail in
+    later sections.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So, at a base level, the target user is clear: For fast.ai it’s **people interested
+    in getting into deep learning**, while the other two are focused on **active researchers** either
+    in ML or who use ML (ie: biologists, neuroscientists, etc…)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Learning Curve
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Both Lightning and Ignite have very simple interfaces, as most of the work is
+    still done in pure PyTorch by the user. The main work happens inside the [Engine](https://pytorch.org/ignite/engine.html) and [Trainer](https://williamfalcon.github.io/pytorch-lightning/Trainer/) objects
+    respectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fast.ai however, does require learning another library on top of PyTorch. The
+    API doesn’t operate directly on pure PyTorch code most of the time (there are
+    places it does), but it requires abstractions like [DataBunches](https://docs.fast.ai/basic_data.html#DataBunch), [DataBlocs](https://docs.fast.ai/data_block.html#The-data-block-API),
+    etc… Those APIs are extremely useful when the “best” way of doing something isn’t
+    obvious.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For researchers, however, it’s crucial to not have to learn yet another library,
+    and directly control key parts of research such as data-processing without having
+    other abstractions operate on those.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case, the fast.ai library has a much higher learning curve, but it’s
+    worth it if you don’t necessarily know the “best” way to do something and just
+    want to take good approaches as black-boxes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lightning vs Ignite
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/44b0a765c5c71a65d171a63c0a797a65.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: More like sharing
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s clear from the above that comparing fast.ai to these two frameworks isn’t
+    fair given that the use cases and users are different (However, I’ll still add
+    fast.ai to the comparison table at the end of this article).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first major difference between Lightning and ignite is the interface in
+    which it operates on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Lightning, there is a standard interface (see [LightningModule](https://williamfalcon.github.io/pytorch-lightning/LightningModule/RequiredTrainerInterface/))
+    of 9 required methods EVERY model has to follow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This flexible format allows for the most freedom in training and validating.
+    This interface should be thought of as a ***system,*** not as a model. The system
+    might have multiple models (GANs, seq-2-seq, etc…) or it might be as model, such
+    as this simple MNIST example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thus researchers are free to try as many crazy things as they want, and ONLY
+    have to worry about these 9 methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ignite requires a very similar setup, but does not have a ***standard*** interface
+    which every model needs to follow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Notice the **run** function might be defined differently, ie: there could be
+    many different events added to the trainer, or it could even be named something
+    different such as ***main, train, etc…***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In a complicated system where training might be happening in strange ways (looking
+    at you GANs and RL), it wouldn’t be immediately obvious to people looking at this
+    code what is happening. Whereas in Lightning, you’d know to look at the training_step
+    to figure out what’s happening.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reproducibility
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/04f9431f398d5f0d0a8b1e65afbd8c1b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When you try to reproduce work
+  prefs: []
+  type: TYPE_NORMAL
+- en: As I mentioned, Lightning was created with a second more ambitious broad motivation: **Reproducibility**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you’ve tried to read someone’s implementation of a paper, it’s very hard
+    to figure out what’s happening. Long gone are the days where we were just designing
+    different neural network architectures.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Modern SOTA models are actually ***systems*, **which employ many models or training
+    techniques to achieve specific results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As I said earlier, a LightningModule is a ***system***, not a model. Thus if
+    you want to know where all the crazy tricks and super complicated training is
+    happening you can look at the training_step and validation_step.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If every research project and paper is implemented using the LightningModule
+    template, it will be **very** easy to find out what’s going on (but perhaps not
+    easy to understand haha).
+  prefs: []
+  type: TYPE_NORMAL
+- en: A standardization of this kind across the AI community would also allow an ecosystem
+    to flourish which could use the LightningModule interface to do cool things like
+    automate deployments, audit systems for biases, or even support hashing weights
+    into a blockchain backend to reconstruct models used for key predictions which
+    may need to be audited.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Out-of-the-box Features
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Another major difference between Ignite and Lightning are the features Lightning
+    supports out of the box. Out-of-the-box means there’s **no**additional code on
+    your part.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To illustrate, let’s try to train a model on multiple GPUs on the same machine
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Ignite (**[**demo**](https://github.com/pytorch/ignite/blob/master/examples/mnist/mnist_dist.py)**)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Lightning (**[**demo**](https://github.com/williamFalcon/pytorch-lightning/blob/master/examples/new_project_templates/single_gpu_node_ddp_template.py)**)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ok, neither is bad… But what about if we want to use multiple-GPUs across many
+    machines? Let’s train on 200 GPUs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Ignite**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: …
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, there’s no built-in support for this… You’d have to extend [this example](https://github.com/pytorch/ignite/blob/master/examples/mnist/mnist_dist.py) quite
+    a bit and add a way to submit scripts easily. Then you’d have to take care of
+    loading/saving, not overwriting weights/logs with all the processes, etc… you
+    get the idea.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Lightning**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: With lightning, you just set the number of nodes and submit the appropriate
+    job. [Here’s an in-depth tutorial on configuring jobs correctly](https://medium.com/@_willfalcon/trivial-multi-node-training-with-pytorch-lightning-ff75dfb809bd).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Out-of-the-box features are these features you ***don’t need to do anything
+    to get.* **That means you may not need most of them right now, but when you need
+    to say… accumulate gradients, or gradient clip, or 16-bit train, you won’t spend
+    days/weeks reading through tutorials to get it to work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Just set the appropriate Lightning flag and move on with your research.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lightning comes prebuilt with these features so users spend more time researching
+    and not engineering. This is especially useful for non-CS/DS researchers such
+    as physicists, biologists, etc… who may not be as well-versed in the programming
+    department.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These features democratize features of PyTorch only a power-user might take
+    the time to implement.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here are tables comparing the features across all 3 frameworks grouped by sets
+    of functionality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*If I missed anything critical please post a comment and I will update the
+    table!*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: High-Performance Computing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Debugging Tools
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Usability
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Closing Thoughts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here we did a deep comparison on multiple levels for the three frameworks. Each
+    is great in its own regard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you’re just learning or aren’t up-to-date with all the latest best practices,
+    don’t need super-advanced training tricks, and can afford time to learn a new
+    library, then go with fast.ai.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you need the most flexibility, go with either Ignite of Lightning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you don’t need super-advanced features and are OK with adding your Tensorboard
+    support, accumulated gradients, distributed training, etc… then go with Ignite.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you need more advanced features, distributed training, the latest and greatest
+    deep-learning training tricks, and would love to see a world where implementations
+    are standardized across the world then use Lightning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [William Falcon](https://www.linkedin.com/in/wfalcon/)** is an AI Researcher,
+    startup founder, CTO, Google Deepmind Fellow, and current PhD AI research intern
+    at Facebook AI.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/pytorch-lightning-vs-pytorch-ignite-vs-fast-ai-61dc7480ad8a).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Pytorch Cheat Sheet for Beginners and Udacity Deep Learning Nanodegree](/2019/08/pytorch-cheat-sheet-beginners.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting started with NLP using the PyTorch framework](/2019/04/nlp-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[XLNet Outperforms BERT on Several NLP Tasks](/2019/07/xlnet-outperforms-bert-several-nlp-tasks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Deep Learning Libraries: PyTorch and Lightning AI](https://www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Lightning AI Studio For Free](https://www.kdnuggets.com/using-lightning-ai-studio-for-free)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Speed up Machine Learning with Fast Kriging (FKR)](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Fast Can BERT Go With Sparsity?](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simple and Fast Data Streaming for Machine Learning Projects](https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

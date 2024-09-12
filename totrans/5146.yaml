@@ -1,0 +1,332 @@
+- en: Analyzing Diversity & Inclusion with SQL
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/11/analyzing-diversity-inclusion-sql.html](https://www.kdnuggets.com/2022/11/analyzing-diversity-inclusion-sql.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Analyzing Diversity & Inclusion with SQL](../Images/e1f05e5d564df44e964521d749145439.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Editor
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There has been a well-documented surge in positions related to Diversity, Equity,
+    and Inclusion over the past 3-5 years. DEI Analysts may spend their time tracking,
+    analyzing, and answering questions such as,
+  prefs: []
+  type: TYPE_NORMAL
+- en: How do salaries compare across gender?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How do our departments rank in terms of diversity of race?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Which positions and titles are the least diverse?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: While DEI Analysts focus on answering different types of questions than Business
+    Analysts, they still use the same technical skills and techniques.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Protected classes are typically **categorical**:  Gender, Race, Ethnicity, and
+    Age (usually Age is broken down into categories)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Numeric** data, such as salary, can be aggregated across protected classes
+    with'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Average
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Median
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Minimum
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Maximum
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'When you analyze the combination of a **Categorical** and a **Numeric** variables,
+    SQL makes it quite easy:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| Ethnicity | AVG_SALARY | MEDIAN_SALARY |'
+  prefs: []
+  type: TYPE_TB
+- en: '| White | $68,513 | $60,050 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| African American | $67,691 | $55,114 |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Asian | $68,842 | $65,632 |'
+  prefs: []
+  type: TYPE_TB
+- en: 'But what methods exist to analyze **Categorical** and **Categorical** variables
+    together? The standard choices are quite limited:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Mode (most common)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Count Distinct
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '| Department | Employees | Distinct Genders | Most Common Gender |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Sales | 100 | 2 | Male |'
+  prefs: []
+  type: TYPE_TB
+- en: '| IT | 100 | 2 | Male |'
+  prefs: []
+  type: TYPE_TB
+- en: 'At first glance, the departments look to be very similar. But how would you
+    tell the difference between:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sales has **99** male employees and **1** female employee
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: IT has **51** male employees and **49** female employees
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Surely, we would consider the latter to be more diverse, but how would we know
+    that quickly using SQL?
+  prefs: []
+  type: TYPE_NORMAL
+- en: I am here to teach you about an underrated aggregate function called **Entropy**,
+    which will help us quantify exactly how diverse each department is.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| Department | Employees | Distinct Genders | Most Common Gender | **Entropy**
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Sales | 100 | 2 | Male | **0.08** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| IT | 100 | 2 | Male | **0.99** |'
+  prefs: []
+  type: TYPE_TB
+- en: Unfortunately it isn’t as easy as simply doing SELECT Department, ENTROPY(ethnicity),
+    but I will teach you the SQL logic, as well as add it into the open-source [SQL
+    Generator 5000](https://app.rasgoml.com/sql), so that you can generate this SQL
+    anytime you need it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some example HR data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[Dr. Rich Huebner](https://www.linkedin.com/in/RichHuebner/) provides some
+    sample HR data on [Kaggle.com](https://www.kaggle.com/datasets/rhuebner/human-resources-data-set)
+    that we can use to explore some of the ways to analyze Diversity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s start by querying the data to compare the Position with the Race. We’ll
+    begin with the basics: Count, Count Distinct, and Mode.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Looking at the results, the 3 most popular positions appear to be very similar
+    in diversity:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Entropy to the rescue
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: So, how would we rank these 3 departments in terms of diversity? This is where
+    Entropy comes in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Entropy?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Before we continue, let’s take a minute to understand what Entropy is, and how
+    we can interpret it. The concept of Entropy is rooted deep in the study of Information
+    Theory, and has many different applications including machine learning, thermodynamics,
+    and cryptography. Therefore, if you look up the definition, it can be confusing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Yet the most simple definition of entropy is something along the lines of this:
+    *Entropy is a numeric measure to describe how diverse something is*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Consider a bag of marbles that only have two colors: red, and blue.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, imagine we counted up the marbles in the bag and discovered that there
+    were 99 blue and only 1 red marble. This situation is not very diverse, so the
+    entropy of the bag is low.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, imagine a bag that has 50 blue and 50 red marbles. This bag is very diverse,
+    in fact it can’t get any more diverse. A bag with 51 blue and 49 red marbles is
+    slightly *less* diverse. Therefore, this bag has high entropy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thus,
+  prefs: []
+  type: TYPE_NORMAL
+- en: A bag with 100 blue marbles and 0 blue marbles is the least diverse:  Entropy
+    = 0
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A bag with 50 blue marbles and 50 red marbles is the most diverse:  Entropy
+    = 1
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Therefore, entropy reaches a maximum of 1 at 50/50\. Here is a common plot
+    of how Entropy changes with the Blue % of marbles:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Analyzing Diversity & Inclusion with SQL](../Images/4c41822a4863f67541e052d634ae1b0b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Credit: [https://commons.wikimedia.org/wiki/File:Binary_entropy_plot.png](https://commons.wikimedia.org/wiki/File:Binary_entropy_plot.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To calculate entropy, we calculate the percentage for each color, and remember
+    the formula:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Analyzing Diversity & Inclusion with SQL](../Images/843de5c849e8054a964644e5d0983fae.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Then, for a bag that is 70% blue marbles, we construct the formula like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Analyzing Diversity & Inclusion with SQL](../Images/58698d3d7717a45869408e32423b1245.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When you extend this to more than 2 choices, you simply change the log’s base
+    to match the number of possibilities.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using SQL
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: This is a rather simple and efficient operation for SQL to handle.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The final result shows us that while neither position is perfectly diverse,
+    Area Sales Manager is more diverse than Production Technician.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can confirm this visually by plotting this on a graph.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Analyzing Diversity & Inclusion with SQL](../Images/29c45e1f0eda26a2e616d2346e89b202.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Entropy is a helpful method for describing diversity. It allows you to sort
+    or rank departments, positions, or companies by combining those categories with
+    a protected class such as race or gender. Even though the function doesn’t exist
+    directly in most RDMBS, we can easily construct the SQL to calculate it. I believe
+    it is important for anyone who works in Diversity, Equity, and Inclusion to use
+    these calculations when looking at their oganizations workforce. Additionally,
+    having worked in data for most of my career it’s great to see that the power of
+    SQL works across all data informed teams, from traditional data analysts all the
+    way to DEI analysts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Josh Berry](https://www.linkedin.com/in/joshberry022/)** ([**@Twitter**](https://mobile.twitter.com/itsamejoshabee))
+    leads Customer Facing Data Science at Rasgo and has been in the data and analytics
+    profession since 2008\. Josh spent 10 years at Comcast where he built the data
+    science team and was a key owner of the internally developed Comcast feature store
+    - one of the first feature stores to hit the market. Following Comcast, Josh was
+    a critical leader in building out Customer Facing Data Science at DataRobot. In
+    his spare time Josh performs complex analysis on interesting topics such as baseball,
+    F1 racing, housing market predictions, and more.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Analyzing Scientific Articles with fine-tuned SciBERT NER Model and Neo4j](https://www.kdnuggets.com/2021/12/analyzing-scientific-articles-finetuned-scibert-ner-model-neo4j.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Analyzing the Probability of Future Success with Intelligence…](https://www.kdnuggets.com/2022/02/analyzing-probability-future-success-intelligence-node-attributes-evolution-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Master the Power of Data Analytics: The Four Approaches to Analyzing Data](https://www.kdnuggets.com/2023/03/master-power-data-analytics-four-approaches-analyzing-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Analytics: The Four Approaches to Analyzing Data and How To…](https://www.kdnuggets.com/2023/04/data-analytics-four-approaches-analyzing-data-effectively.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Query Your Pandas DataFrames with SQL](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Preparation with SQL Cheatsheet](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,321 @@
+- en: 'Graduating in GANs: Going From Understanding Generative Adversarial Networks
+    to Running Your Own'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/04/graduating-gans-understanding-generative-adversarial-networks.html](https://www.kdnuggets.com/2019/04/graduating-gans-understanding-generative-adversarial-networks.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/04/graduating-gans-understanding-generative-adversarial-networks.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Cecilia Shao](https://www.linkedin.com/in/ceceliashao/), Product Growth
+    at [comet.ml](https://www.comet.ml/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![mnist-latent-space](../Images/d757d9e5e97d515b566d4f17d11d1070.png)Visualization
+    of the latent space for the MNIST dataset — you can make your own GAN that generates
+    MNIST-like handwritten digits later in the post!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generative Adversarial Networks (GANs) have taken over the public imagination
+    —permeating pop culture with [AI- generated celebrities](https://www.technologyreview.com/the-download/609290/meet-the-fake-celebrities-dreamed-up-by-ai/)
+    and creating art that is [selling for thousands of dollars](https://www.christies.com/features/A-collaboration-between-two-artists-one-human-one-a-machine-9332-1.aspx)
+    at high-brow art auctions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this post, we’ll explore:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Brief primer on GANs**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Understanding and Evaluating GANs**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Running your own GAN**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: There is a wealth of resources for catching up on GANs, so our focus for this
+    article is to understand how GANs can be evaluated. We’ll also walk you through
+    running your own GAN to generate handwritten digits like MNIST.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/73f05e6c26e0c67ae6ecd8b196667f73.png)Here’s one run
+    of the GAN we’ll show you how to implement later on — see how the handwritten
+    digits it generates become increasingly realistic as training progresses!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Brief primer on GANs**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Since its inception in 2014 with Ian Goodfellow’s ‘[Generative Adversarial Networks](https://arxiv.org/abs/1406.2661)’
+    paper, progress with GANs has exploded and led to increasingly realistic outputs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '4.5 years of GAN progress on face generation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://t.co/kiQkuYULMC](https://t.co/kiQkuYULMC)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://t.co/8di6K6BxVC](https://t.co/8di6K6BxVC)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Just three years ago, you could find Ian Goodfellow’s reply on [this Reddit
+    thread](https://www.reddit.com/r/MachineLearning/comments/40ldq6/generative_adversarial_networks_for_text/)
+    to a user asking about whether you can use GANs for text:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/31214937a5af80aff8525f2b59783624.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: “GANs have not been applied to NLP because GANs are only defined for real-valued
+    data.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: GANs work by training a generator network that outputs synthetic data, then
+    running a discriminator network on the synthetic data. The gradient of the output
+    of the discriminator network with respect to the synthetic data tells you how
+    to slightly change the synthetic data to make it more realistic.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: You can make slight changes to the synthetic data only if it is based on continuous
+    numbers. If it is based on discrete numbers, there is no way to make a slight
+    change.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: For example, if you output an image with a pixel value of 1.0, you can change
+    that pixel value to 1.0001 on the next step.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: If you output the word “penguin”, you can’t change that to “penguin + .001”
+    on the next step, because there is no such word as “penguin + .001”. You have
+    to go all the way from “penguin” to “ostrich”.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Since all NLP is based on discrete values like words, characters, or bytes,
+    no one really knows how to apply GANs to NLP yet.”
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Now GANs are being used to create all kinds of content including images, video,
+    audio, and (yup) [text](https://www.semanticscholar.org/paper/Adversarial-Generation-of-Natural-Language-Rajeswar-Subramanian/cea578d555fbc1aa72c04a83f834c4a3add302ef).
+    These outputs can be used as synthetic data for training other models or just
+    for spawning interesting side projects like [thispersondoesnotexist.com](https://thispersondoesnotexist.com),
+    [thisairbnbdoesnotexist.com/](https://thisairbnbdoesnotexist.com/), and [This
+    Machine Learning Medium post does not exist](https://medium.com/comet-ml/this-machine-learning-medium-post-does-not-exist-c4705215b4a0).
+    ????
+  prefs: []
+  type: TYPE_NORMAL
+- en: Behind the GAN
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A GAN is comprised of two neural networks — a **generator** that synthesizes
+    new samples from scratch, and a **discriminator** that compares training samples
+    with these generated samples from the generator. The discriminator’s goal is to
+    distinguish between ‘real’ and ‘fake’ inputs (ie. classify if the samples came
+    from the model distribution or the real distribution). As we described, these
+    samples can be images, videos, audio snippets, and text.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![gan-overiew](../Images/5521f4e3212e4ed43d468d962ce19069.png)Simple GAN overview
+    from [Kiran Sudhir](https://medium.com/@kiransudhir95)'
+  prefs: []
+  type: TYPE_IMG
+- en: To synthesize these new samples, the generator is given random noise and attempts
+    to generate realistic images from the learnt distribution of the training data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The gradient of the output of the discriminator network (a convolutional neural
+    network) with respect to the synthetic data informs how to slightly change the
+    synthetic data to make it more realistic. Eventually the generator converges on
+    parameters that reproduce the real data distribution, and the discriminator is
+    unable to detect the difference.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**You see and play with these converging data distributions with GAN Lab:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**GAN Lab: Play with Generative Adversarial Networks in Your Browser!**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*GAN Lab was created by Minsuk Kahng, Nikhil Thorat, Polo Chau, Fernanda Viégas,
+    and Martin Wattenberg, which was the…*poloclub.github.io](https://poloclub.github.io/ganlab/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Here’s a selection of the best guides on GANs :**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Stanford CS231 Lecture 13 — Generative Models](https://www.youtube.com/watch?v=5WoItGTWV54)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Style-based GANs](https://www.lyrn.ai/2018/12/26/a-style-based-generator-architecture-for-generative-adversarial-networks/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understanding Generative Adversarial Networks](https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Generative Adversarial Networks](https://heartbeat.fritz.ai/introduction-to-generative-adversarial-networks-gans-35ef44f21193)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Lillian Weng: From Gan to WGAN](https://lilianweng.github.io/lil-log/2017/08/20/from-GAN-to-WGAN.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Dive head first into advanced GANs: exploring self-attention and spectral
+    norm](https://medium.freecodecamp.org/dive-head-first-into-advanced-gans-exploring-self-attention-and-spectral-norm-d2f7cdb55ede)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Guim Perarnau: Fantastic GANs and where to find them](http://guimperarnau.com/blog/2017/03/Fantastic-GANs-and-where-to-find-them)
+    (Parts I & II)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Understanding and Evaluating GANs**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Quantifying the progress of a GAN can feel very subjective —* “Does this generated
+    face look realistic enough?” , “Are these generated images diverse enough?” — *and
+    GANs can feel like black boxes where it’s not clear which components of the model
+    impact learning or result quality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To this end, a group from the MIT Computer Science and Artificial Intelligence
+    (CSAIL) Lab, recently released a paper, ‘[GAN Dissection: Visualizing and Understanding
+    Generative Adversarial Networks](https://arxiv.org/abs/1811.10597)’, that introduced
+    a method for visualizing GANs and how GAN units relate to objects in an image
+    as well as the relationship between objects.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/d7b61822362d83148c2dec6eb5067e74.png)Figure 1 from
+    [Bau et. al 2019](https://arxiv.org/pdf/1811.10597v2.pdf) showing image modification
+    through intervention with certain GAN units.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using a segmentation-based network dissection method, the paper’s framework
+    allow us to dissect and visualize the inner workings of a generator neural network.
+    This occurs by looking for agreements between a set of GAN units, referred to
+    as neurons, and concepts in the output image such as tree, sky, clouds, and more.
+    As a result, we’re able to identify neurons that are responsible for certain objects
+    such as buildings or clouds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Having this level of granularity into the neurons allows for edits to existing
+    images (e.g. to add or remove trees as shown in the image) by forcefully activating
+    and deactivating (ablating) the corresponding units for those objects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'However, it’s not clear if the network is able to reason about objects in a
+    scene or if it’s simply memorizing these objects. One way to get closer to an
+    answer for this question was to try to distort the image in unrealistic ways.
+    Perhaps the most impressive part of [MIT CSAIL’s interactive web demo of GAN Paint](https://gandissect.csail.mit.edu/)
+    was how the model is seemingly able to limit these edits to ‘photorealistic’ changes.
+    If you try to impose grass onto the sky, here’s what happens:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/03f687a052952abcca8a603a3b9d25e1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Even though we’re activating the corresponding neurons, it appears as though
+    the GAN has suppressed the signal in later layers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/700d2acc1fbb617c452a50a4bda84775.png)Figure 11 from
+    [Bau et. al. 2019](https://arxiv.org/pdf/1811.10597v2.pdf) shows how the local
+    context for an object impacts the likelihood of the object synthesis (in this
+    case, the likelihood of a door being generated on a building versus on a tree
+    or in the sky).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another interesting way of visualizing GANs is to conduct **latent space interpolation**
+    (remember, the GAN generate new instances by sampling from the learned latent
+    space). This can be a useful way of seeing how smooth the transitions across generated
+    samples are.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/cf5ee9e58a32b3a50968934fa023895d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**These visualizations can help us understand the internal representations
+    of a GAN, but finding quantifiable ways to understand GAN progress and output
+    quality is still an active area of research.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Two commonly used evaluation metrics for image quality and diversity are: the
+    **Inception Score** and the **Fréchet Inception Distance (FID)**. Most practitioners
+    have shifted from the Inception Score to FID after Shane Barratt and Rishi Sharma
+    released their paper ‘[A Note on the Inception Score](https://arxiv.org/pdf/1801.01973.pdf)’
+    on key shortcomings of the former.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Stay on Top of What''s Going on in the AI World](https://www.kdnuggets.com/2022/03/stay-top-going-ai-world.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sentiment Analysis in Python: Going Beyond Bag of Words](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[LangChain 101: Build Your Own GPT-Powered Applications](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build Your Own PandasAI with LlamaIndex](https://www.kdnuggets.com/build-your-own-pandasai-with-llamaindex)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Make Your Own GPTs with ChatGPT''s GPTs!](https://www.kdnuggets.com/make-your-own-gpts-with-chatgpts-gpts)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is Adversarial Machine Learning?](https://www.kdnuggets.com/2022/03/adversarial-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

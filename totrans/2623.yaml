@@ -1,0 +1,587 @@
+- en: Feature Store as a Foundation for Machine Learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/02/feature-store-foundation-machine-learning.html](https://www.kdnuggets.com/2021/02/feature-store-foundation-machine-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [German Osin](https://medium.com/@gosin), Senior Solutions Architect at
+    Provectus**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8a053a3e594b7ae88e123c3c59eaa957.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Image by [Yurchanka Siarhei](https://www.shutterstock.com/ru/g/Yurchanka+Siarhey)
+    from [shutterstock](https://www.shutterstock.com/ru/image-illustration/artificial-digital-neural-network-blockchain-technology-1046678647).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Artificial intelligence and machine learning have reached an inflection point.
+    In 2020, organizations in diverse industries of various sizes began evolving their
+    ML projects from experimentation to production on an industrial scale. While doing
+    so, they realized they were wasting a lot of time and effort on feature definition
+    and extraction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature store is a fundamental component of the ML stack and of any robust data
+    infrastructure because it enables efficient feature engineering and management.
+    It also allows for simple re-use of features, feature standardization across the
+    company, and feature consistency between offline and online models. A centralized,
+    scalable feature store allows organizations to innovate faster and drive ML processes
+    at scale.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The team at [Provectus](https://provectus.com/) has built several feature stores,
+    and we would like to share our experience and lessons learned. In this article,
+    we will explore how feature stores can help eliminate rework and enforce data
+    traceability from source to model across teams. We will look into the specifics
+    of building a scalable feature store and discuss how to achieve consistency between
+    real-time and training features, and to improve reproducibility with time traveling
+    for data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What Is a Feature Store?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A Feature Store is a data management layer for machine learning features. ML
+    features are measurable properties of phenomena under observation, like raw words,
+    pixels, sensor values, rows of data in a data store, fields in a CSV file, aggregates
+    (min, max, sum, mean), or derived representations (embedding or cluster).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'From a business perspective, feature stores offer two major benefits:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Better ROI from feature engineering through reduction of cost per model, **which
+    facilitates collaboration, sharing, and re-using of features'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Faster time to market for new models, driven by increased productivity of
+    ML Engineers**. This enables organizations to decouple storage implementation
+    and features serving API from ML engineers, freeing them to work on models, not
+    on latency problems, for more efficient online serving.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Some use cases do not require a centralized, scalable feature store. Feature
+    stores work for projects where models need a stateful, ever-changing representation
+    of the system. Examples of such use cases include demand forecasting, personalization
+    and recommendation engines, dynamic pricing optimization, supply chain optimization,
+    logistics and transportation optimization, fraud detection, and predictive maintenance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Concepts of a Feature Store
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'A standardized feature store has certain key concepts that revolve around it.
+    Those concepts are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Online Feature Store**. Online applications look for a feature vector that
+    is sent to an ML model for predictions.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**ML Specific Metadata**. Enables the discovery and re-use of features.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**ML Specific API and SDK**. High-level operations for fetching training feature
+    sets and online access.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Materialized Versioned Datasets**. Maintains versions of feature sets used
+    to train ML models.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![](../Images/b5c0cf077bef1de58208af3fba90ff37.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Image by Author.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: All of the concepts are represented in the above image. Analytical data is taken
+    from a data lake and pushed through the feature engineering pipeline, where output
+    is stored in the feature store. From there, ML engineers can discover the features,
+    use them for training new models, and then re-use the features for serving.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'These four concepts are supported by multiple products. The leaders of the
+    market are Feast, Tecton, Hopsworks, and [AWS SageMaker Feature Store](https://aws.amazon.com/ru/sagemaker/feature-store/).
+    We will focus on open source products: Feast and Hopsworks.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**#1 Feast**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Feast](https://feast.dev/) is an ML service that helps teams bridge the gap
+    between data and machine learning models. It allows teams to register, ingest,
+    serve, and monitor features in production.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This service is in the active development stage, but it has already been battle-tested
+    with GoJek, Farfetch, Postmates, and Zulily. It can be integrated with Kubeflow
+    and is backed by Kubeflow’s strong community.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As of 2020, Feast is a GCP-only service. It is a bit infrastructure-heavy, lacks
+    composability, and does not offer data versioning. Note that the company plans
+    to address these challenges in its roadmap for 2021\. And starting November 2020,
+    Feast is available as an [open source version of Tecton](https://www.tecton.ai/blog/feast-announcement/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/13d04dd4ea899acf7b32c2b7650cc663.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Image by Author.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**#2 Hopsworks**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Hopsworks](https://www.logicalclocks.com/) is an Enterprise Platform for developing
+    and operating AI applications. It allows teams to manage ML features quickly and
+    efficiently. The team behind Hopsworks are feature store evangelists, and they
+    offer a lot of great educational content.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Hopsworks feature store can be integrated with most Python libraries for
+    ingestion and training. It also supports offline stores with time travel. Most
+    importantly, it is AWS-, GCP-, Azure-, and on-premise ready.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What makes Hopsworks a challenge to use is its heavy reliance on the HopsML
+    infrastructure. Also, the Hopsworks online store may not satisfy all latency requirements.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8120e64ab22de4eb69a4bc5f6d1880e7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Image by Author.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Challenges of Modern Data Platforms
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before looking into the specifics of building feature stores, the challenges
+    of modern data platforms have to be considered. Feature stores cannot be examined
+    in isolation from the rest of the data and the [ML infrastructure](https://provectus.com/machine-learning-infrastructure/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Traditionally, a canonical data lake architecture looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e4c5b8080b8fe1fe1fdca994a96f228d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Image by Author.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This high-level architecture has components for sourcing, ingestion, processing,
+    persisting, querying, and a consumer component. While it works fine for most tasks,
+    it is not ideal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data access and discoverability** can be a problem. Data is scattered across
+    multiple data sources and services. This once helped protect data, but now it
+    only adds a new layer of complexity and creates data silos. Such architecture
+    entails the tedious process of managing AWS IAM roles, Amazon S3 policies, API
+    Gateways, and database permissions. This becomes even more complicated in a multi-account
+    setup. As a result, engineers are confused about what data exists and which is
+    actually accessible to them since metadata is not discoverable by default. This
+    creates an environment where investments in data and machine learning are curtailed
+    due to data access issues.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Monolithic data teams** are another issue to consider. Since data and machine
+    learning teams are extremely specialized, they often have to operate out of context.
+    Lack of ownership and domain context creates silos between data producers and
+    data consumers, making it considerably more difficult for a backlogged data team
+    to keep up with business demands. Data and ML Engineering fall victim to complex
+    dependencies, failing to sync their operations. Any fast, end-to-end experimentation
+    is not possible in such circumstances.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Machine learning experimentation infrastructure** is uncharted territory.
+    Traditional architecture lacks an experimentation component, which not only leads
+    to data discovery and data access issues but also makes it more complex to maintain
+    the reproducibility of datasets, ML pipelines, ML environments, and offline experiments.
+    Although Amazon SageMaker and Kubeflow have made some progress here, reproducibility
+    is problematic. Production experimentation frameworks are immature and cannot
+    be entirely relied upon. As a result, it can take from three to six months to
+    push one end-to-end experiment from data to production ML.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Scaling ML in production** is complex and requires a lot of time and effort.
+    While machine learning is mostly discussed as an offline activity (e.g., data
+    collection, processing, model training, evaluating results, etc.), the ways models
+    are used and served online in the real world are what actually matter. With a
+    traditional architecture, you cannot access features during model serving in a
+    unified and consistent way. You also cannot re-use features between multiple training
+    pipelines and ML applications. The monitoring and maintenance of ML applications
+    are also more complicated. As a result, the time and cost required to scale from
+    1 to 100 models in production grow exponentially, which limits the ability of
+    organizations to innovate at the desired pace.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Emerging Architectural Shifts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To address these challenges, several architectural shifts have emerged:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**From Data Lakes to Hudi/Delta lakes**. A data lake is not just a folder in
+    Amazon S3\. It is a feature-rich, fully managed layer for Data Ingestion, Incremental
+    Processing, and Serving with ACID transactions and point-in-time queries.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**From Data Lakes to Data Mesh**. Ownership of data domains, data pipelines,
+    metadata, and APIs is moving away from centralized teams to product teams. Another
+    impactful benefit is treating and owning data as a complete product rather than
+    a side effect that nobody cares about.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**From Data Lakes to Data Infrastructure as a Platform**. If the ownership
+    of data is decentralized, platform components have to be unified and packaged
+    into a reusable data platform.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**From Endpoint Protection to Global Data Governance**. As part of the shift
+    towards centralized data platforms, organizations are moving away from Endpoint
+    Protection to Global Data Governance, which is a higher-level control plan for
+    managing security and data access policies across available data sources.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**From Metadata Store to Global Data Catalog**. Metadata stores like Hive meta
+    store cannot aggregate many data sources. The industry needs a Global Data Catalog
+    to support User Experience around data discovery, lineage, and versioning.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Feature Store**. Feature store is a new emerging component of the ML stack
+    that enables scaling of ML experimentation and operations by adding a separate
+    data management layer for ML Features.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: All of these transformations are happening in parallel and should be thought
+    of holistically. You cannot start designing a feature store and end up having
+    separate data catalogs for features and for other data applications. While building
+    a feature store, you have to rely on data versioning features, which can easily
+    be part of other parallel projects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before moving forward, just a few words about four major components that drive
+    the aforementioned transformations from disjointed ML jobs to MLOps, to provide
+    a wider context for the importance of feature stores.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**#1 Delta/Hudi Lakes**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ACID data lakes enable managed ingestion, efficient dataset versioning for ML
+    training, cheap “deletes” to make it GDPR/CCPA compliant, and “upserts” for data
+    ingestions. They also offer an audit log to keep track of dataset changes and
+    ACID transactions while enforcing data quality through schemas. Delta and Hudi
+    lakes bring stream processing to Big Data, providing fresh data much more efficiently
+    than traditional batch processing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**#2 Global Data Governance**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Because it is no longer a standard to manage AWS IAM roles, Amazon S3 policies,
+    API Gateways, and database permissions at the user level, a company-wide data
+    governance structure should be used to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Accelerate privacy operations with data you already have. **Automate business
+    processes, data mapping, and PI discovery and classification for privacy workflows.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Operationalize policies in a central location. **Govern privacy policies
+    to ensure policies are effectively managed across the enterprise. Define and document
+    workflows, traceability views, and business process registers.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Scale compliance across multiple regulations. **Use a platform designed and
+    built with privacy in mind that can be easily extended to support new regulations.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**#3 Global Data Catalog**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although there is no single market leader here, Marquez, Amundsen, Apache Atlas,
+    Collibra, Alation, and Data Hub are worth mentioning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A global data catalog is extremely useful for answering questions such as Does
+    this data exist? Where is it? What is the source of truth of this data? Do I have
+    access? Who is the owner? Who are the users of this data? Are there existing assets
+    I can re-use? Can I trust this data? Basically, it acts as a meta metadata store
+    of sorts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**#4 Reproducible ML Pipelines**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The final component is reproducible ML pipelines for experimentation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5a8b5c216502e2c4140d967af886ef0c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Image by Author.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The above chart represents the architecture for MLOps and reproducible experimentation
+    pipelines. It starts with four inputs: ML model code, ML pipeline code, Infrastructure
+    as a code, and Versioned dataset. The versioned dataset — an input for your machine
+    learning pipeline — should be sourced from the feature store.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Modern Data Infrastructure
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now let’s look at modern data infrastructure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2f227109fbb270392716e650b5887c69.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Image by Author.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have batch processing for raw data and stream processing for event data.
+    We store processed artifacts in cold storage for business reports and in a near-real-time,
+    incrementally updated hot index for our API. The same data can be used in both
+    scenarios and, to make it consistent, we use different pub/subsystems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is the traditional architecture for data platforms. Its goal is to provide
+    consistency between cold and hot storage and to allow for discoverability from
+    the data catalog, data quality, and global security with a fine-grained control
+    on top of it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ace40a36e71664547bdeffd20faed4c8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Image by Author.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we look at a feature store design, we will see features and infrastructure
+    components almost identical to what we have in the data platform. In this case,
+    the feature store is not a separate silo that brings yet another ingestion system,
+    storage, catalog, and quality gates. It serves as a lightweight API between our
+    data platform and ML tools. It can be nicely integrated with everything that has
+    already been done in your data infrastructure. It should be composable and lightweight
+    and without an opinionated design.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/50e21624a2b4d21d88456d3623d3e582.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Image by Author.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When you begin designing and building your data infrastructure, consider the
+    following “lessons learned” so far:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Start by designing a consistent ACID Data Lake before investing in a Feature
+    Store.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Value from existing open-source products does not justify investments in integration
+    and the dependencies they bring.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: A feature store is not a new infrastructure and data storage solution but a
+    lightweight API and SDK integrated into your existing data infrastructure.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Data Catalog, Data Governance, and Data Quality components are horizontal for
+    the entire Data Infrastructure, including the feature store.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: There are no mature open source or cloud solutions for Global Data Catalog and
+    Data Quality monitoring.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Reference Architecture
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/4a450dc45d6a68c15c829c926193b483.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Image by Author.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This chart depicts the reference architecture we have been using for our customers.
+    It features the services we have opted to use, but you should not be limited by
+    our choices. The idea here is that you have to choose cold *and* hot storage based
+    on your data workloads and on your business needs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For hot storage, you may choose from DynamoDB, Cassandra, Hbase, or traditional
+    RDBMS like Mysql, PostgreSQL, or even Redis. It is important that your hot storage
+    be composable, pluggable, and in alignment with your data infrastructure strategy
+  prefs: []
+  type: TYPE_NORMAL
+- en: For cold storage, Apache Hudi and Delta lake are our favorites. They offer such
+    features as Time Travel, Incremental ingestion, and Materialized views.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are some blank spaces on the diagram, which we hope to fill soon. For
+    example, so far, there is no over-the-shelf leader for the data catalog. Data
+    quality tools are also in the early stages. For now, you can choose from Great
+    Expectations or Apache Deequ, which are great tools, but they do not provide a
+    complete solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a093eae1e03827cd3ac564cd25dfe120.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Image by Author.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the image above, the question marks occupy spaces where you can choose from
+    solutions built by open source communities, build your own solution in-house,
+    or collaborate with cloud providers (e.g., AWS’ latest addition — [Amazon SageMaker
+    Feature Store for Machine Learning](https://aws.amazon.com/ru/sagemaker/feature-store/)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Moving Forward with Feature Store
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Although it is still early in the game for feature stores, organizations that
+    are not just experimenting but actively moving machine learning projects to production
+    have already realized the need to have a centralized repository to store, update,
+    retrieve, and share features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this article, we have shown how to design and build such a repository. While
+    some of the points featured here are debatable and open for feedback from the
+    community, it is clear that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Your existing data infrastructure should cover at least 90% of feature store
+    requirements, including streaming ingestion, consistency, data catalog, and versioning,
+    to achieve the desired outcome.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It makes sense to build a lightweight Feature Store API to integrate with your
+    existing storage solutions in-house.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: You should collaborate with community and cloud vendors to maintain compatibility
+    with standards and state-of-the-art ecosystems.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: You should be ready to migrate to a managed service or to an open-source alternative
+    as the market matures.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/feature-store-as-a-foundation-for-machine-learning-d010fc6eb2f3).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Feature Store vs Data Warehouse](https://www.kdnuggets.com/2020/12/feature-store-vs-data-warehouse.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Key Missing Part of the Machine Learning Stack](https://www.kdnuggets.com/2020/04/missing-part-machine-learning-stack.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Hitchhiker’s Guide to Feature Extraction](https://www.kdnuggets.com/2019/06/hitchhikers-guide-feature-extraction.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2023: Practical Strategies for Deploying ML…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Metadata Store](https://www.kdnuggets.com/2022/08/machine-learning-metadata-store.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Are Foundation Models and How Do They Work?](https://www.kdnuggets.com/2023/05/foundation-models-work.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Segment Anything Model: Foundation Model for Image Segmentation](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Metadata Store for Production ML!](https://www.kdnuggets.com/2022/05/layer-metadata-store-production-ml.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

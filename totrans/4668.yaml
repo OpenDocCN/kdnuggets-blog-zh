@@ -1,0 +1,356 @@
+- en: Linear Programming and Discrete Optimization with Python using PuLP
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/05/linear-programming-discrete-optimization-python-pulp.html/2](https://www.kdnuggets.com/2019/05/linear-programming-discrete-optimization-python-pulp.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/05/linear-programming-discrete-optimization-python-pulp.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: Solving the problem and printing the solution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: PuLP has [quite a few choices of solver algorithms](https://pythonhosted.org/PuLP/solvers.html)
+    (e.g. COIN_MP, Gurobi, CPLEX, etc.). For this problem, we do not specify any choice
+    and let the program default to its own choice depending on the problem structure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can print the **status** of the solution. Note, although the status is *optimal*
+    in this case, it does not need to be so. In case the problem is ill-formulated
+    or there is not sufficient information, the solution may be *infeasible* or *unbounded*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The full solution contains all the variables including the ones with zero weights.
+    But to us, **only those variables are interesting which have non-zero coefficients**
+    i.e. which should be included in the optimal diet plan. So, we can scan through
+    the problem variables and print out only if the variable quantity is positive.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: So, the optimal solution is to eat 6.923 servings of frozen broccoli, 6.06 servings
+    of scrambled eggs and 1.08 servings of a baked potato!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/8c51d2b4285256094b43f79f0c1255ab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You are welcome to download the whole notebook, the data file, and experiment
+    with various constraints to change your diet plan. [The code is here in my Github
+    repository](https://github.com/tirthajyoti/Optimization-Python).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, we can print the **objective function i.e. cost of the diet** in this
+    case,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: What if we want a solution with whole numbers?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As we can see that the optimal result came back with a set of fractional numbers
+    of servings for the food items. This may not be practical and we may want the
+    solution to be forced to have only integer quantities as servings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This brings to us the technique of [**integer programming**](https://en.wikipedia.org/wiki/Integer_programming).
+    The algorithm used for the previous optimization is simple linear programming
+    where the variables were allowed to assume any real number value. **Integer programming
+    forces some or all of the variables to assume only integer values.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: In fact, integer programming is a [harder computational problem](https://stackoverflow.com/questions/51084738/what-is-the-run-time-complexity-of-integer-linear-programming-ilp)
+    than linear programming. Integer variables make an optimization problem [non-convex](https://www.solver.com/convex-optimization),
+    and therefore far more difficult to solve. Memory and solution time may rise exponentially
+    as you add more integer variables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fortunately, PuLP can solve an optimization problem with this kind of restrictions
+    too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code is almost identical as before, so it is not repeated here. The only
+    difference is that the variables are defined as belonging to `**Integer**` category
+    as opposed to `**Continuous**`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: For this problem, it changes the optimal solution slightly, adding iceberg lettuce
+    to the diet and increasing the cost by $0.06\. You will also notice a **perceptible
+    increase in the computation time** for the solution process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: A cool application of integer programming is solving a [**driver-scheduling
+    problem**](https://en.wikipedia.org/wiki/Driver_scheduling_problem) which can
+    be an [NP-hard](https://en.wikipedia.org/wiki/NP-hardness) problem. See this article
+    (also note in the article, how they compute the costs of various actions and use
+    them in the optimization problem),
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**An Intro to Integer Programming for Engineers: Simplified Bus Scheduling**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*This article is part of Remix’s series on the software engineering problems
+    we face. In this installment, Remix…*blog.remix.com](https://blog.remix.com/an-intro-to-integer-programming-for-engineers-simplified-bus-scheduling-bd3d64895e92)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to incorporate binary decisions in a linear programming problem?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Often, we want to include some kind of *‘If-then-else*” kind of decision logic
+    in the optimization problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What if we don’t want both broccoli and iceberg lettuce to be included in the
+    diet (but only one of them is fine)?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: How do we represent such decision logic in this framework?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![figure-name](../Images/0ff0686336587e9951a2deb8ee9d14e4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Turns out, for this kind of logic, you need to introduce another type of variables
+    called **indicator variables**. They are binary in nature and can indicate the
+    presence or absence of a variable in the optimal solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Involving indicator function as a constraint in a LP problem**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Thanks for contributing an answer to Mathematics Stack Exchange! Please be
+    sure to answer the question. Provide details…*math.stackexchange.com](https://math.stackexchange.com/questions/2220355/involving-indicator-function-as-a-constraint-in-a-lp-problem)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: But for this particular problem, there is an apparent problem with using indicator
+    variables. Ideally, you want the cost/nutritional value of a food item to be included
+    in the constraint equation if the indicator variable is 1 and ignore it if is
+    zero. Mathematically, it is intuitive to write this as a **product of the original
+    term (involving the food item) and the indicator variable**. But the moment you
+    do that, you are multiplying two variables and making the problem nonlinear! It
+    falls under the domain of [**quadratic programming**](https://en.wikipedia.org/wiki/Quadratic_programming)
+    (QP) in that case (*quadratic* because the terms are now the product of two linear
+    terms).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The popular machine learning technique Support Vector Machine essentially solves
+    a quadratic programming problem.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[**What is an intuitive explanation of quadratic programming, and how is it
+    defined in SVM?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Answer: Quadratic programming involves minimizing a form that is quadratic
+    in the components of the unknown vector…*www.quora.com](https://www.quora.com/What-is-an-intuitive-explanation-of-quadratic-programming-and-how-is-it-defined-in-SVM)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, this general concept of using an indicator variable for expressing
+    binary logic in a linear programming problem is also extremely useful. We have
+    given a link to a problem of solving Sudoku puzzle by LP in the next section where
+    this trick is used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It turns out that there is a clever trick to incorporate such binary logic in
+    this LP without making it a QP problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can denote the binary variables as `food_chosen` and instantiate them as
+    `Integer` with lower and upper bounds of 0 and 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Then we write a special code to link the usual `food_vars` and the binary `food_chosen`
+    and add this constraint to the problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you stare at the code long enough, you will realize this effectively means
+    that we are giving `food_vars` importance only if the corresponding `food_chosen`indicator
+    variable is 1\. But this way we avoid the direct multiplication and keep the problem
+    structure linear.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To incorporate the either/or condition of broccoli and iceberg lettuce, we just
+    put a simple code,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: This ensures the sum of these two binary variables is at most 1, which means
+    only one of them can be included in the optimal solution but not both.
+  prefs: []
+  type: TYPE_NORMAL
+- en: More applications of linear/integer programming
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, we showed the basic flow of setting up and solving a simple
+    linear programming problem with Python. However, if you look around, you will
+    find countless examples of engineering and business problems which can be transformed
+    into some form of LP and then solved using efficient solvers. Following are some
+    of the canonical examples to get you started thinking,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Solving Sudoku as an LP problem](https://pythonhosted.org/PuLP/CaseStudies/a_sudoku_problem.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Maximizing return on the long-term investment as an LP problem](https://www.mathworks.com/help/optim/ug/maximize-long-term-investments-using-linear-programming.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[LP applied to production planning](http://www.me.utexas.edu/~jensen/or_site/models/unit/lp_model/prod/prod.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Solving warehouse location problem using ILP](https://www.ibm.com/support/knowledgecenter/SSSA5P_12.8.0/ilog.odms.ide.help/OPL_Studio/opllanguser/topics/opl_languser_app_areas_IP_warehse.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Many machine learning algorithms also use the general class of optimization
+    of which linear programming is a subset — [**convex optimization**](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf).
+    See the following article for more information about it,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**What lies beneath? Optimization at the heart of Machine Learning**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*We show the core optimization frameworks behind the most popular machine learning/statistical
+    modeling techniques.*towardsdatascience.com](https://towardsdatascience.com/a-quick-overview-of-optimization-models-for-machine-learning-and-statistics-38e3a7d13138)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary and conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, we illustrated solving a simple diet optimization problem with
+    linear and integer programming techniques using Python package PuLP. It is noteworthy
+    that even the widely-used [SciPy has a linear optimization method built-in](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html#scipy.optimize.linprog).
+    Readers are encouraged to try various other Python libraries and choose a good
+    method for themselves.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have any questions or ideas to share, please contact the author at [**tirthajyoti[AT]gmail.com**](mailto:tirthajyoti@gmail.com).
+    Also, you can check the author’s [**GitHub**](https://github.com/tirthajyoti?tab=repositories)
+    **repositories** for other fun code snippets in Python, R, or MATLAB and machine
+    learning resources. If you are, like me, passionate about machine learning/data
+    science, please feel free to [add me on LinkedIn](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)
+    or [follow me on Twitter.](https://twitter.com/tirthajyotiS)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Tirthajyoti Sarkar - Sr. Principal Engineer - Semiconductor, AI, Machine
+    Learning - ON…**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Georgia Institute of Technology Master of Science - MS, Analytics This MS
+    program imparts theoretical and practical…*www.linkedin.com](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Tirthajyoti Sarkar](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)**
+    is the Senior Principal Engineer at ON Semiconductor working on Deep Learning/Machine
+    Learning based design automation projects.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/linear-programming-and-discrete-optimization-with-python-using-pulp-449f3c5f6e99?sk=881261aaf3fcbc3c45bd7c47e6a41ef0).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How Optimization Works](/2019/04/how-optimization-works.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimization Using R](/2018/05/optimization-using-r.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimization in Machine Learning: Robust or global minimum?](/2017/06/robust-global-minimum.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Linear Programming 101 for Data Scientists](https://www.kdnuggets.com/2023/02/linear-programming-101-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Research-Driven Advanced Prompting Techniques for LLM Efficiency…](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Pipeline Optimization with TPOT](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

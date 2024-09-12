@@ -1,0 +1,378 @@
+- en: Iterative Initial Centroid Search via Sampling for k-Means Clustering
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/09/iterative-initial-centroid-search-sampling-k-means-clustering.html](https://www.kdnuggets.com/2018/09/iterative-initial-centroid-search-sampling-k-means-clustering.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: In this post, we will look at using an iterative approach to searching for a
+    **better** set of initial centroids for k-means clustering, and will do so by
+    performing this process on a sample of our full dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What do we mean by "better?" Since k-means clustering aims to converge on an
+    optimal set of cluster centers (centroids) and cluster membership based on distance
+    from these centroids via successive iterations, it is intuitive that the more
+    optimal the positioning of these initial centroids, the fewer iterations of the
+    k-means clustering algorithms will be required for convergence. Therefore, thinking
+    about ways to find a **better** set of initial centroid positions is a valid approach
+    to optimizing the k-means clustering process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What we will do differently, specifically, is to draw a sample of data from
+    our full dataset, and run short runs of of the k-means clustering algorithm on
+    it (not to convergence), short runs which will include, out of necessity, the
+    centroid initialization process. We will repeat these short runs with a number
+    of randomly initialized centroids, and will track the improvement to the measurement
+    metric -- within-cluster sum-of-squares -- for determining goodness of cluster
+    membership (or, at least, one of the valid metrics for measuring this). The final
+    centroids associated with the random centroid initialization iteration process
+    which provide the lowest inertia is the set of centroids which we will carry forward
+    to our full dataset clustering process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The hope is that this up-front work will lead to a better set of initial centroids
+    for our full clustering process, and, hence, a lesser number of k-means clustering
+    iterations and, ultimately, less time required to fully cluster a dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This would obviously not be the only method of optimizing centroid initialization.
+    In the past we have discussed the [naive sharding centroid initialization method](/2017/03/naive-sharding-centroid-initialization-method.html),
+    a deterministic method for optimal centroid initialization. Other forms of modifications
+    to the k-means clustering algorithm take different approaches to this problem
+    as well (see [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) for comparison).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This post will approach our task as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: prepare the data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: prepare our sample
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: perform centroid initialization search iterations to determine our "best" collection
+    of initial centroids
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: use results to perform clustering on full dataset
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A future post will perform and report comparisons of results between various
+    approaches to centroid initialization, for a more comprehensive understanding
+    of the practicalities of implementation. For now, however, let's introduce and
+    explore this particular approach to centroid initialization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Preparing the data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For this overview, we will use the [3D road network dataset](https://archive.ics.uci.edu/ml/machine-learning-databases/00246/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/cc415cd127859d36ec700e056464955c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Since this particular dataset has no missing values, and no class labels, our
+    data preparation will primarily constitute normalization, along with dropping
+    a column which identifies a geographical location from where the additional 3
+    columns worth of measurements come from, which is not useful for our task. See
+    the [dataset description for additional details](https://archive.ics.uci.edu/ml/datasets/3D+Road+Network+(North+Jutland,+Denmark)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let''s check out a sampling of our data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![dataset sample](../Images/11a1d744521afd259993b79de39b450d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Preparing the sample
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Next, we will pull our sample that will be used to find our "best" initial
+    centroids. Let''s be clear about exactly what we are doing:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: we are pulling a single set of samples from our dataset
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'we will then perform successive rounds k-means clustering on this sample data,
+    each iteration of which will:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: randomly initialize k centroids and perform n iterations of the k-means clustering
+    algorithm
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: the initial inertia (within-cluster sum-of-squares) of each centroid will be
+    noted, as will its final inertia, and the initial centroids which provide the
+    greatest increase in inertia over n iterations will be chosen as our initial centroids
+    for the full dataset clustering
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: we will then perform full k-means clustering on the full dataset, using the
+    initial clusters found in the previous step
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '2 important points:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why not use greatest decrease in inertia? (The hope being that the initial momentum
+    in this area will continue.) Doing so would also be a valid choice to explore
+    (and changing a single line of code would allow for this). An arbitrary initial
+    experimentation choice, and one which could use more investigation. However, the
+    repetitive execution and comparison on a number of samples initially showed that
+    the lowest inertia and greatest decrease in inertia coincide a great majority
+    of the time, and so the decision *may*, in fact, be arbitrary, but also inconsequential
+    in practice.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Of particular clarification, we are not sampling multiple times from our dataset
+    (e.g. once from our dataset for each iteration of centroid initialization). We
+    are sampling once for all iterations of a single centroid initialization **search**.
+    One sample, from which we will randomly derive initial centroids many times. Contrast
+    this with the idea of repetitive sampling, once for each centroid initialization
+    iteration.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Below, we set:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: sample size as a ratio of our full dataset
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: random state for reproducibility
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: number of clusters (k) for our dataset
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: number of iterations (n) for our k-means algorithm
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: number of attempts at finding our best chance initial centroids while clustering
+    on our sample dataset
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We then set our sample data
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now that we have our data sample (`data_sample`) we are ready to perform iterations
+    of centroid initialization for comparison and selection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Clustering the sample data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Since Scikit-learn's k-means clustering implementation does not allow for easily
+    obtaining centroids between clustering iterations, we have to hack the workflow
+    a bit. While the `verbose` option does output some useful information in this
+    regard directly to screen, and redirecting this output and then post-parsing it
+    would be one approach to getting what we need, what we will do is write our own
+    outer iteration loop to control for our *n* variable ourselves.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This means that we need to count iterations and capture what we need between
+    these iterations, after each clustering step has run. We will then wrap that clustering
+    iteration loop in a centroid initialization loop, which will initialize *k* centroids
+    from our sample data m times. This is the hyperparameter specific to our particular
+    instantiation of the k-means centroid initialization process, beyond "regular"
+    k-means.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given our above parameters, we will be clustering our dataset into 10 clusters
+    (NUM_CLUSTERS, or *k*), we will run our centroid search for 3 iterations (NUM_ITER,
+    or *n*), and we will attempt this with 5 random initial centroids (NUM_ATTEMPTS,
+    or *m*), after which we will determine our "best" set of centroids to initialize
+    with for full clustering (in our case, the metric is the lowest within-cluster
+    sum-of-squares, or inertia).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prior to any clustering, however, let's see what a sample of what a single initialization
+    of our k-means looks like, prior to any clustering iterations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: In the code below, note that we have to manually track our centroids at the
+    start of each iteration and at the end of each iteration, given that we are managing
+    these successive iterations ourselves. We then feed these end centroids into our
+    next loop iteration as the initial centroids, and run for one iteration. A bit
+    tedious, and aggravating that we can't get this out of Scikit-learn's implementation
+    directly, but not difficult.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: After this is done, let's see how we did in our centroid search. First we check
+    a list of our final inertias (or within-cluster sum-of-squares), looking for the
+    lowest value. We then set the associated centroids as the initial centroids for
+    our next step.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'And here''s what those centroids look like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Running full k-means clustering
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: And now, with our best initial centroids in hand, we can run k-means clustering
+    on our full dataset. As Scikit-learn allows us to pass in a set of initial centroids,
+    we can exploit this by the comparatively straightforward lines below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This particular run of k-means converged in 13 iterations:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'For comparison, here''s a full k-means clustering run using only randomly-initialized
+    centroids ("regular" k-means):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This run took 39 iterations, with a nearly-identical inertia:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: I leave finding the difference of execution times between the 13 iterations
+    and 39 iterations (or similar) to the reader. Needless to say, eating up a few
+    cycles ahead of time on a sample of data (in our case, 10% of the full dataset)
+    saved considerable cycles in the long run, without sacrifice to our overall clustering
+    metric.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Of course, additional testing before drawing any generalizations is warranted,
+    and in a future post I will run some experiments on a number of centroid initializiation
+    methods on a variety of datasets and compare with some additional metrics, hopefully
+    to get a clearer picture of ways to go about optimizing unsupervised learning
+    workflows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Toward Increased k-means Clustering Efficiency with the Naive Sharding Centroid
+    Initialization Method](/2017/03/naive-sharding-centroid-initialization-method.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Comparing Distance Measurements with Python and SciPy](/2017/08/comparing-distance-measurements-python-scipy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Workflows in Python from Scratch Part 2: k-means Clustering](/2017/06/machine-learning-workflows-python-scratch-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Clustering Unleashed: Understanding K-Means Clustering](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is K-Means Clustering and How Does its Algorithm Work?](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hands-On with Unsupervised Learning: K-Means Clustering](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Elevate Your Search Engine Skills with Uplimit''s Search with ML Course!](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

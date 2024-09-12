@@ -1,0 +1,546 @@
+- en: How Much Memory is your Machine Learning Code Consuming?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/07/memory-machine-learning-code-consuming.html](https://www.kdnuggets.com/2021/07/memory-machine-learning-code-consuming.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e666b93a66f863d32faf7f17039496f7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image source: [Pixabay](https://pixabay.com/photos/hourglass-clock-time-period-hours-2910951/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why profile the memory usage?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Suppose you have written a cool machine learning (ML) app or created a shiny
+    neural network model. Now you want to deploy this model over some web service
+    or REST API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Or, you might have developed this model based on data streams coming from industrial
+    sensors in a manufacturing plant and now you have to deploy the model on one of
+    the industrial control PCs to serve decisions based on continuously incoming data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d3c66c70d3e3d5a01f9a613c092c6a39.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: “Excited to have developed a shiny ML model”. Image source: [Pixabay](https://pixabay.com/photos/children-win-success-video-game-593313/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a data scientist, an extremely common question that you may expect from the
+    engineering/platform team is “***how much memory footprint does your model/code
+    have?***” or “***what’s the peak memory usage by your code when running with some
+    given data load?***”
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is natural to wonder about because **hardware resources may be limited** and
+    one single ML module should not hog all the memory of the system. This is **particularly
+    true for edge computing scenarios** i.e. where the ML app may be running on the
+    edge e.g. inside a virtualized container on an industrial PC.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, your model may be one of the hundreds of models running on that piece
+    of hardware and you must have **some idea about the peak memory usage** because
+    if a multitude of models peaks in their memory usage at the same time, it can
+    crash the system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, that got you wondering, didn’t it?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/60dfc75688808c42908777a9085c8b0e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image source: [Pixabay](https://pixabay.com/photos/child-surprise-think-interactivity-2800835/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**… hardware resources may be limited** and one single ML module should not
+    hog all the memory of the system. This is **particularly true for edge computing
+    scenarios…**'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Don’t make this cardinal mistake
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Note, we are talking about the runtime memory profile (a dynamic quantity) of
+    your entire code. This has nothing to do with the size or compression of your
+    ML model (which you may have saved as a special object on the disk e.g. [Scikit-learn
+    Joblib dump](https://scikit-learn.org/stable/modules/model_persistence.html),
+    a simple Python Pickle dump, a [TensorFlow HFD5](https://www.tensorflow.org/tutorials/keras/save_and_load),
+    or likes).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Scalene: A neat little memory/CPU/GPU profiler'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here is an article about some older memory profilers to use with Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**How To Manage Memory in Python**](https://www.pluralsight.com/guides/profiling-memory-usage-in-python)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we will discuss **Scalene** — your one-stop shop for answering
+    these questions, posed by your engineering team.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As per its [GitHub page](https://github.com/plasma-umass/scalene), “*Scalene
+    is a high-performance CPU, GPU and memory profiler for Python that does a number
+    of things that other Python profilers do not and cannot do. It runs orders of
+    magnitude faster than other profilers while delivering far more detailed information.*”
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is developed at the Univ. of Massachusetts. Check this video for a comprehensive
+    introduction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Install
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It’s a Python package after all. So, install usually,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Currently, works only for Linux OS. I did not test it on Windows 10.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use on a CLI or inside a Jupyter Notebook
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The use of Scalene is extremely straight-forward,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Alternatively, you can use it inside the Jupyter notebook by using this magic
+    command,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Example output
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here is an example output. We will delve deeper into this shortly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/56327d172e1146bf408b00075cfc9130.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Features
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here are some of the cool features of Scalene. Most of them are self-explanatory
+    and can be gauged from the screenshot above,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Lines or functions**: Reports information both for entire functions and for
+    every independent code line'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Threads**: It supports Python threads.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Multiprocessing**: supports use of the `multiprocessing` library'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Python vs. C time**: Scalene breaks out time spent in Python vs. native code
+    (e.g., libraries)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**System time**: It distinguishes system time (e.g., sleeping or performing
+    I/O operations)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**GPU**: It also can report the time spent on an NVIDIA GPU (if present)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Copy volume**: It reports MBs of data being copied per second'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Detects leaks**: Scalene can automatically pinpoint lines responsible for
+    likely memory leaks!'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A concrete machine learning code example
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s get down to the business of putting Scalene to use for memory profiling
+    standard machine learning code. We will look at two different types of ML models
+    — for reasons that will be clarified soon. We will use the Scikit-learn library
+    for all three models and utilize its synthetic data generation function to create
+    our dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A multiple linear regression model
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A deep neural network model with the same dataset
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The modeling code follows the exact same structure for all three models. External
+    I/O ops are also indicated in the following figure as we will see that they may
+    or may not dominate the memory profile depending on the type of the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bad072eafb90ed13e967f39d8e78549e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Image source: Author produced (owns the copyright)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Linear regression model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The code file is [here in my GitHub repo](https://github.com/tirthajyoti/Machine-Learning-with-Python/blob/master/Memory-profiling/Scalene/linearmodel.py).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We use standard imports and two variables `NUM_FEATURES` and `NUM_SMPLES` for
+    doing some experiments later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/13f542dad7e5f782d08833165ac26985.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We are not showing the data generation and model fitting code. They are pretty
+    standard and can be seen [here](https://github.com/tirthajyoti/Machine-Learning-with-Python/blob/master/Memory-profiling/Scalene/linearmodel.py).
+    We save the fitted model as a pickled dump and load it along with a test CSV file
+    for the inference.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/58d405dfd5cbd73c8c812d6b95f98183.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We run everything under a `main` loop for clarity with Scalene execution and
+    reporting (you will understand shortly).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ff5d40503e1cab93aaa148f919586e68.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When we run the command,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: We get these results as output. **Note, here I used the **`**--html**`** flag
+    and piped the output to an HTML file for easy reporting**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b9a015457f196fb99f274789ee2c8455.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/f47459e528414a38fd1903b9ed9792b7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**So, what is striking in this result?**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The memory footprint is almost entirely dominated by the external I/O such as
+    Pandas and Scikit-learn estimator loading and a tiny amount going to writing out
+    the test data into a CSV file on the disk.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The actual ML modeling, Numpy or Pandas operations, and inference do not impact
+    the memory at all!
+  prefs: []
+  type: TYPE_NORMAL
+- en: What happens as the model and data scale?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We can scale the dataset size (number of rows) and the model complexity (number
+    of features) and run the same memory profiling to document how the various operations
+    behave in terms of memory consumption. The result is shown here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here the **X-axis represents the # of features/# of data points as a pair**.
+    Note that this plot depicts percentage and not the absolute values to showcase
+    the relative importance of the various types of operations.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bfadee308ec5d1872491b943029cc923.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Image source: Author produced (owns the copyright)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, for the linear regression model…
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: From these experiments, we conclude that a Scikit-learn linear regression estimator
+    is quite efficient and **does not consume much memory for actual model fitting
+    or inference**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It does, however, have a fixed memory footprint in terms of the code and consumes
+    that much while getting loaded. However, the percentage of that code footprint
+    as a whole goes down as the data size and model complexity increase.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Therefore, if you are working with such a **small linear model, then you may
+    want to focus on data file I/O to optimize your code** for better memory performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What happens with a deep neural network?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If we run similar experiments with a 2-hidden-layer neural network (with 50
+    neurons in each hidden layer), then the result looks like the following. The [code
+    file is here](https://github.com/tirthajyoti/Machine-Learning-with-Python/blob/master/Memory-profiling/Scalene/mlp.py).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bdc5ab77dc5b38015239b35d40d382bd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Image source: Author produced (owns the copyright)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Clearly, the **neural network model consumes a lot of memory at the training/fitting
+    step, unlike the linear regression model**. However, for a small number of features
+    and large data size, the fitting takes a low amount of memory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can also experiment with various architectures and hyperparameters and document
+    the memory usage to arrive at the setting which works for your situation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Follow the experimental approach
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you repeat the experiments with the same [code files](https://github.com/tirthajyoti/Machine-Learning-with-Python/tree/master/Memory-profiling/Scalene),
+    the results will vary widely depending on your hardware, disk/ CPU/ GPU/ memory
+    type. The purpose of this article is not to focus on the actual values or even
+    on the trends. I want you to take away the approach to do memory profiling experiments
+    for your own code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some key advice
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Preferably write **small functions** focused on one single task in your code
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Keep some **free variables** like the number of features and number of data
+    points so that you can run the same code file with minimal changes to check the
+    memory profile when the data/ model scales
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If you are comparing one ML algorithm to another, try to keep the **structure
+    and flow of the overall code as much identical as possible** to reduce confusion.
+    Preferably, just change the estimator class and compare the memory profiles.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Data and model I/O** (import statements, model persistence on the disk) can
+    be surprisingly dominating in terms of memory footprint depending on your modeling
+    scenario. Never ignore them while doing optimization.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For the same reason above, consider comparing the memory profiles of the **same
+    algorithm from multiple implementation/packages** (e.g. Keras vs. PyTorch vs.
+    Scikit-learn). If memory optimization is your primary goal, you may have to look
+    for the implementation that has a minimal memory footprint yet can do the job
+    satisfactorily even if it is not the absolute best in terms of features or performance.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the data I/O becomes a bottleneck, explore **faster options or other storage
+    types** e.g. replacing Pandas CSV by parquet file and Apache Arrow storage. Check
+    this article,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**How fast is reading Parquet file (with Arrow) vs. CSV with Pandas?**](https://towardsdatascience.com/how-fast-is-reading-parquet-file-with-arrow-vs-csv-with-pandas-2f8095722e94)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Other things you can do with Scalene
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, we just discussed the bare minimum memory profiling with a
+    focus on a canonical ML modeling code. Scalene CLI has other options which you
+    can take advantage of,
+  prefs: []
+  type: TYPE_NORMAL
+- en: profiling CPU time only and no memory profile
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: reduced profiling with non-zero memory footprint only
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: specifying CPU and memory allocation minimum thresholds
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: setting the CPU sampling rate
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: multithreading and check the difference
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Final validation is sometimes necessary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For low-resource situations, it would be a good idea to host a validation environment/
+    server which will accept a given modeling code (when developed) and run it through
+    such a memory profiler to create runtime statistics. If it passes pre-determined
+    criteria of memory footprint, only then the modeling code will be accepted for
+    further deployment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/834d9c2379f2cc82d9c48a779e04b4cc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Image source: Author produced (owns the copyright)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If memory optimization is your primary goal, you may have to look for an implementation
+    that has a minimal memory footprint yet can do the job satisfactorily.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, we discussed the importance of memory profiling your ML code
+    for smooth and easy interfacing with the platform/engineering team that will deploy
+    the code on a service/machine. Profiling memory can also show you surprising ways
+    to optimize the code based on the particular data and algorithms you are dealing
+    with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We showed a typical ML modeling code example being profiled with a powerful
+    yet lightweight Python library Scalene. We demonstrated some representative results
+    with linear regression and neural network models and also provided some general
+    advice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hope you get more success in implementing and deploying your ML code into production
+    using these tools and techniques.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can check the author’s [**GitHub**](https://github.com/tirthajyoti?tab=repositories)** repositories **for
+    code, ideas, and resources in machine learning and data science. If you are, like
+    me, passionate about AI/machine learning/data science, please feel free to [add
+    me on LinkedIn](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) or [follow
+    me on Twitter](https://twitter.com/tirthajyotiS).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/how-much-memory-is-your-ml-code-consuming-98df64074c8f).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Managing Your Reusable Python Code as a Data Scientist](/2021/06/managing-reusable-python-code-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Python Data Processing Tips & Code Snippets](/2021/07/python-tips-snippets-data-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GitHub Copilot: Your AI pair programmer – what is all the fuss about?](/2021/07/github-copilot-ai-pair-programmer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A (Much) Better Approach to Evaluate Your Machine Learning Model](https://www.kdnuggets.com/2022/01/much-better-approach-evaluate-machine-learning-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Much Math Do You Need in Data Science?](https://www.kdnuggets.com/2020/06/math-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Much Do Data Scientists Make in 2022?](https://www.kdnuggets.com/2022/02/much-data-scientists-make-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Perform Memory-Efficient Operations on Large Datasets with Pandas](https://www.kdnuggets.com/how-to-perform-memory-efficient-operations-on-large-datasets-with-pandas)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Memory Complexity with Transformers](https://www.kdnuggets.com/2022/12/memory-complexity-transformers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Memory Profiling in Python](https://www.kdnuggets.com/introduction-to-memory-profiling-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

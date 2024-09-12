@@ -1,0 +1,322 @@
+- en: 'Data Cleaning in SQL: How To Prepare Messy Data for Analysis'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Data Cleaning in SQL: How To Prepare Messy Data for Analysis](../Images/cefee85bcf1824dbe72931f73db523ea.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image generated with Segmind SSD-1B model
+  prefs: []
+  type: TYPE_NORMAL
+- en: Excited to start analyzing data using SQL? Well, you may have to wait just a
+    bit. But why?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data in database tables can often be messy. Your data may contain missing values,
+    duplicate records, outliers, inconsistent data entries, and more. So cleaning
+    the data before you can analyze it using SQL is super important.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When you're learning SQL, you can spin up database tables, alter them, update
+    and delete records as you like. But in practice, this is almost never the case.
+    You may not have permission to alter tables, update and delete records. But you’ll
+    have read access to the database and will be able to run a bunch of SELECT queries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this tutorial, we’ll spin up a database table, populate it with records,
+    and see how we can clean the data with SQL. Let's start coding!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating a Database Table with Records
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'For this tutorial, let’s create an `employees` table like so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Next, let’s insert some fictional sample records into the table:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you can tell, I’ve used a small set of first and last names to sample from
+    and construct the name field for the records. You can be more creative with the
+    records, though.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note**: All the queries in this tutorial are for [MySQL](https://www.mysql.com/).
+    But you’re free to use the RDBMS of your choice.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Missing Values
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Missing values in data records are always a problem. So you have to handle them
+    accordingly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A naive approach is to drop all the records that contain missing values for
+    one or more fields. However, you should not do this unless you’re sure there is
+    no other better way of handling missing values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In the `employees` table, we see that there is a NULL value in the ‘department’
+    column (see row of employee_id 13) indicating that the field is missing:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Data Cleaning in SQL: How To Prepare Messy Data for Analysis](../Images/182a6d2a11cfa7a62989c7966dae25e5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'You can use the [COALESCE() function](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_coalesce)
+    to use the ‘Unknown’ string for the NULL value:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Running the above query should give you the following result:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Data Cleaning in SQL: How To Prepare Messy Data for Analysis](../Images/0c9890c3c0762ab25515a03e3561d51e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 2\. Duplicate Records
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Duplicate records in a database table can distort the results of analysis. We’ve
+    chosen the employee_id as the primary key in our database table. So we’ll not
+    have any repeating employee records in the `employee_data` table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can still the SELECT DISTINCT statement:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As expected, the result set contains all the 20 records:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Data Cleaning in SQL: How To Prepare Messy Data for Analysis](../Images/e5d4d878576c2bc007f8781ef7f5a7ac.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 3\. Data Type Conversion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'If you notice, the ‘hire_date’ column is currently VARCHAR and not a date type.
+    To make it easier when working with dates, it’s helpful to use the [STR_TO_DATE()](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_str-to-date)
+    function like so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here, we’ve only selected the ‘hire_date’ column amongst others and haven’t
+    performed any operations on the date values. So the query output should be the
+    same as that of the previous query.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But if you want to perform operations such as adding an offset date to the values,
+    this function can be helpful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. Outliers
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Outliers in one or more numeric fields can skew analysis. So we should check
+    for and remove outliers so as to filter out the data that is not relevant.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But deciding which values constitute outliers requires domain knowledge and
+    data using knowledge of both the domain and historical data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our example, let's say we *know* that the ‘salary’ column has an upper limit
+    of 100000\. So any entry in the ‘salary’ column can be at most 100000\. And entries
+    greater than this value are outliers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can check for such records by running the following query:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As seen, all entries in the ‘salary’ column are valid. So the result set is
+    empty:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Data Cleaning in SQL: How To Prepare Messy Data for Analysis](../Images/0c5dd3614ce2ebe99e7e9742d9e30e4e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 5\. Inconsistent Data Entry
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Inconsistent data entries and formatting are quite common especially in date
+    and string columns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the `employees` table, we see that the record corresponding to employee ‘joe
+    smith’ is not in the title case.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But for consistency let''s select all the names formatted in the title case.
+    You have to use the [CONCAT()](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
+    function in conjunction with [UPPER()](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_upper)
+    and [SUBSTRING()](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring)
+    like so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Data Cleaning in SQL: How To Prepare Messy Data for Analysis](../Images/f20a9e444f3ac9c7ff43f46a632d57a9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 6\. Validating Ranges
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: When talking about outliers, we mentioned how we’d like the upper limit on the
+    ‘salary’ column to be 100000 and considered any salary entry above 100000 to be
+    an outlier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But it''s also true that you don''t want any negative values in the ‘salary’
+    column. So you can run the following query to validate that all employee records
+    contain values between 0 and 100000:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'As seen, the result set is empty:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Data Cleaning in SQL: How To Prepare Messy Data for Analysis](../Images/b58b8b318272b4a2d110c21337adb4fc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 7\. Deriving New Columns
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Deriving new columns is not essentially a data cleaning step. However, in practice,
+    you may need to use existing columns to derive new columns that are more helpful
+    in analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, the `employees` table contains a ‘hire_date’ column. A more helpful
+    field is, perhaps, a ‘years_of_service’ column that indicates how long an employee
+    has been with the company.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The following query finds the difference between the current year and the year
+    value in ‘hire_date’ to compute the ‘years_of_service’:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'You should see the following output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Data Cleaning in SQL: How To Prepare Messy Data for Analysis](../Images/dcf584bdbc66099479f9feeac668d13f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As with other queries we’ve run, this does not modify the original table. To
+    add new columns to the original table, you need to have permissions to ALTER the
+    database table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrapping Up
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: I hope you understand how relevant data cleaning tasks can improve data quality
+    and facilitate more relevant analysis. You’ve learned how to check for missing
+    values, duplicate records, inconsistent formatting, outliers, and more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Try spinning up your own relational database table and run some queries to perform
+    common data cleaning tasks. Next, learn about [SQL for data visualization](/sql-for-data-visualization-how-to-prepare-data-for-charts-and-graphs).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)****
+    is a developer and technical writer from India. She likes working at the intersection
+    of math, programming, data science, and content creation. Her areas of interest
+    and expertise include DevOps, data science, and natural language processing. She
+    enjoys reading, writing, coding, and coffee! Currently, she''s working on learning
+    and sharing her knowledge with the developer community by authoring tutorials,
+    how-to guides, opinion pieces, and more. Bala also creates engaging resource overviews
+    and coding tutorials.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[SQL for Data Visualization: How to Prepare Data for Charts and Graphs](https://www.kdnuggets.com/sql-for-data-visualization-how-to-prepare-data-for-charts-and-graphs)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Faster Way to Prepare Time-Series Data with the AI & Analytics Engine](https://www.kdnuggets.com/2021/12/piexchange-faster-way-prepare-timeseries-data-ai-analytics-engine.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Prepare Your Data for Effective Tableau & Power BI Dashboards](https://www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Prepare for a Data Science Interview](https://www.kdnuggets.com/2022/12/prepare-data-science-interview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Collection of Guides on Mastering SQL, Python, Data Cleaning, Data…](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Importance of Data Cleaning in Data Science](https://www.kdnuggets.com/2023/08/importance-data-cleaning-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

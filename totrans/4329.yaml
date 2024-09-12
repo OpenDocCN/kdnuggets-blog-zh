@@ -1,0 +1,482 @@
+- en: Working With The Lambda Layer in Keras
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/01/working-lambda-layer-keras.html](https://www.kdnuggets.com/2021/01/working-lambda-layer-keras.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Working With The Lambda Layer in Keras](../Images/c3a523288bdaacf398ad685f673c0a8e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Keras is a popular and easy-to-use library for building deep learning models.
+    It supports all known type of layers: input, dense, convolutional, transposed
+    convolution, reshape, normalization, dropout, flatten, and activation. Each layer
+    performs a particular operations on the data.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: That being said, you might want to perform an operation over the data that is
+    not applied in any of the existing layers, and then these preexisting layer types
+    will not be enough for your task. As a trivial example, imagine you need a layer
+    that performs the operation of adding a fixed number at a given point of the model
+    architecture. Because there is no existing layer that does this, you can build
+    one yourself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this tutorial we'll discuss using the `Lambda` layer in Keras. This allows
+    you to specify the operation to be applied as a function. We'll also see how to
+    debug the Keras loading feature when building a model that has lambda layers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The sections covered in this tutorial are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Building a Keras model using the `Functional API`
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Adding a `Lambda` layer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Passing more than one tensor to the lambda layer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Saving and loading a model with a lambda layer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Solving the SystemError while loading a model with a lambda layer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Bring this project to life
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[RUN ON GRADIENT](https://www.paperspace.com/account/signup)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Building a Keras Model Using the `Functional API`**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'There are three different APIs which can be used to build a model in Keras:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sequential API
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Functional API
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Model Subclassing API
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: You can find more information about each of these in [this post](https://www.pyimagesearch.com/2019/10/28/3-ways-to-create-a-keras-model-with-tensorflow-2-0-sequential-functional-and-model-subclassing),
+    but in this tutorial we'll focus on using the Keras `Functional API` for building
+    a custom model. Since we want to focus on our architecture, we'll just use a simple
+    problem example and build a model which recognizes images in the MNIST dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To build a model in Keras you stack layers on top of one another. These layers
+    are available in the `keras.layers` module (imported below). The module name is
+    prepended by `tensorflow` because we use TensorFlow as a backend for Keras.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The first layer to create is the `Input` layer. This is created using the `tensorflow.keras.layers.Input()`
+    class. One of the necessary arguments to be passed to the constructor of this
+    class is the `shape` argument which specifies the shape of each sample in the
+    data that will be used for training. In this tutorial we're just going to use
+    dense layers for starters, and thus the input should be 1-D vector. The `shape` argument
+    is thus assigned a tuple with one value (shown below). The value is 784 because
+    the size of each image in the MNIST dataset is 28 x 28 = 784\. An optional `name` argument
+    specifies the name of that layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The next layer is a dense layer created using the `Dense` class according to
+    the code below. It accepts an argument named `units` to specify the number of
+    neurons in this layer. Note how this layer is connected to the input layer by
+    specifying the name of that layer in parentheses. This is because a layer instance
+    in the functional API is callable on a tensor, and also returns a tensor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Following the dense layer, an activation layer is created using the `ReLU` class
+    according to the next line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Another couple of dense-ReLu layers are added according to the following lines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: The next line adds the last layer to the network architecture according to the
+    number of classes in the MNIST dataset. Because the MNIST dataset includes 10
+    classes (one for each number), the number of units used in this layer is 10.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: To return the score for each class, a `softmax` layer is added after the previous
+    dense layer according to the next line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: We've now connected the layers but the model is not yet created. To build a
+    model we must now use the `Model` class, as shown below. The first two arguments
+    it accepts represent the input and output layers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before loading the dataset and training the model, we have to compile the model
+    using the `compile()` method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Using `model.summary()` we can see an overview of the model architecture. The
+    input layer accepts a tensor of shape (None, 784) which means that each sample
+    must be reshaped into a vector of 784 elements. The output `Softmax` layer returns
+    10 numbers, each being the score for that class of the MNIST dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now that we've built and compiled the model, let's see how the dataset is prepared.
+    First we'll load MNIST from the `keras.datasets` module, got their data type changed
+    to `float64` because this makes training the network easier than leaving its values
+    in the 0-255 range, and finally reshaped so that each sample is a vector of 784
+    elements.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Because the used loss function in the `compile()` method is `categorical_crossentropy`,
+    the labels of the samples should be on hot encoded according to the next code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Finally, the model training starts using the `fit()` method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: At this point, we have created the model architecture using the already existing
+    types of layers. The next section discusses using the `Lambda` layer for building
+    custom operations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Using Lambda Layers**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let's say that after the dense layer named `dense_layer_3` we'd like to do some
+    sort of operation on the tensor, such as adding the value 2 to each element. How
+    can we do that? None of the existing layers does this, so we'll have to build
+    a new layer ourselves. Fortunately, the `Lambda` layer exists for precisely that
+    purpose. Let's discuss how to use it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Start by building the function that will do the operation you want. In this
+    case, a function named `custom_layer` is created as follows. It just accepts the
+    input tensor(s) and returns another tensor as output. If more than one tensor
+    is to be passed to the function, then they will be passed as a list.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this example just a single tensor is fed as input, and 2 is added to each
+    element in the input tensor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: After building the function that defines the operation, next we need to create
+    the lambda layer using the `Lambda` class as defined in the next line. In this
+    case, only one tensor is fed to the `custom_layer` function because the lambda
+    layer is callable on the single tensor returned by the dense layer named `dense_layer_3`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here is the code that builds the full network after using the lambda layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: In order to see the tensor before and after being fed to the lambda layer we'll
+    create two new models in addition to the previous one. We'll call these `before_lambda_model` and `after_lambda_model`.
+    Both models use the input layer as their inputs, but the output layer differs.
+    The `before_lambda_model` model returns the output of `dense_layer_3` which is
+    the layer that exists exactly before the lambda layer. The output of the `after_lambda_model`
+    model is the output from the lambda layer named `lambda_layer`. By doing this,
+    we can see the input before and the output after applying the lambda layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: The complete code that builds and trains the entire network is listed below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that you do not have to compile or train the 2 newly created models because
+    their layers are actually reused from the main model that exists in the `model` variable.
+    After that model is trained, we can use the `predict()` method for returning the
+    outputs of the `before_lambda_model` and `after_lambda_model` models to see how
+    the result of the lambda layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: The next code just prints the outputs of the first 2 samples. As you can see,
+    each element returned from the `m2`  array is actually the result of `m1` after
+    adding 2\. This is exactly the operation we applied in our custom lambda layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE19]'
+  prefs: []
+  type: TYPE_PRE
+- en: In this section the lambda layer was used to do an operation over a single input
+    tensor. In the next section we see how we can pass two input tensors to this layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Passing More Than One Tensor to the Lambda Layer**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Assume that we want to do an operation that depends on the two layers named
+    `dense_layer_3` and `relu_layer_3`. In this case we have to call the lambda layer
+    while passing two tensors. This is simply done by creating a list with all of
+    these tensors, as given in the next line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE20]'
+  prefs: []
+  type: TYPE_PRE
+- en: This list is passed to the `custom_layer()` function and we can fetch the individual
+    layers simply according to the next code. It just adds these two layers together.
+    There is actually layer in Keras named `Add` that can be used for adding two layers
+    or more, but we are just presenting how you could do it yourself in case there's
+    another operation not supported by Keras.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE21]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The next code builds three models: two for capturing the outputs from the `dense_layer_3`
+    and `activ_layer_3` passed to the lambda layer, and another one for capturing
+    the output from the lambda layer itself.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE22]'
+  prefs: []
+  type: TYPE_PRE
+- en: To see the outputs from the `dense_layer_3`, `activ_layer_3`, and `lambda_layer` layers,
+    the next code predicts their outputs and prints it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE23]'
+  prefs: []
+  type: TYPE_PRE
+- en: Using the lambda layer is now clear. The next section discusses how you can
+    save and load a model that uses a lambda layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Saving and Loading a Model With a Lambda Layer**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In order to save a model (whether it uses a lambda layer or not) the `save()` method
+    is used. Assuming we are just interested in saving the main model, here's the
+    line that saves it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE24]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can also load the saved model using the `load_model()` method, as in the
+    next line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE25]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Hopefully, the model could be successfully loaded. Unfortunately there are
+    some issues in Keras that may result in the `SystemError: unknown opcode` while
+    loading a model with a lambda layer. It might be due to building the model using
+    a Python version and using it in another version. We are going to discuss the
+    solution in the next section.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solving The SystemError While Loading a Model with a Lambda Layer**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To solve this issue we're not going to save the model in the way discussed above.
+    Instead, we'll save the model weights using the `save_weights()` method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we've only saved the weights. What about the model architecture? The model
+    architecture will be recreated using the code. Why not save the model architecture
+    as a JSON file and then load it again? The reason is that the error persists after
+    loading the architecture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In summary, the trained model weights will be saved, the model architecture
+    will be reproduced using the code, and finally the weights will be loaded into
+    that architecture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The weights of the model can be saved using the next line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE26]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here's the code that reproduces the model architecture. The `model` will not
+    be trained, but the saved weights will be assigned to it again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE27]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here's how the saved weights are loaded using the `load_weights()` method, and
+    assigned to the reproduced architecture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE28]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Conclusion**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This tutorial discussed using the `Lambda` layer to create custom layers which
+    do operations not supported by the predefined layers in Keras. The constructor
+    of the `Lambda` class accepts a function that specifies how the layer works, and
+    the function accepts the tensor(s) that the layer is called on. Inside the function,
+    you can perform whatever operations you want and then return the modified tensors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although Keras has an issue with loading models that use the lambda layer, we
+    also saw how to solve this simply by saving the trained model weights, reproducing
+    the model architecture using code, and loading the weights into this architecture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** received his B.Sc.
+    degree with excellent with honors in information technology from the Faculty of
+    Computers and Information (FCI), Menoufia University, Egypt, in July 2015\. For
+    being ranked first in his faculty, he was recommended to work as a teaching assistant
+    in one of the Egyptian institutes in 2015 and then in 2016 to work as a teaching
+    assistant and a researcher in his faculty. His current research interests include
+    deep learning, machine learning, artificial intelligence, digital signal processing,
+    and computer vision.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://blog.paperspace.com/working-with-the-lambda-layer-in-keras/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[From Y=X to Building a Complete Artificial Neural Network](/2020/11/building-complete-artificial-neural-network.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Build PyTorch Models Easily Using torchlayers](/2020/04/pytorch-models-torchlayers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Create Custom Real-time Plots in Deep Learning](/2020/12/create-custom-real-time-plots-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Python Lambda Functions, Explained](https://www.kdnuggets.com/2023/01/python-lambda-functions-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Power of a Semantic Layer: A Data Engineer''s Guide](https://www.kdnuggets.com/2023/10/cube-power-of-a-semantic-layer-a-data-engineers-guide)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Semantic Layer: The Backbone of AI-powered Data Experiences](https://www.kdnuggets.com/2023/10/cube-semantic-layer-backbone-aipowered-data-experiences)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Reasons Why a Universal Semantic Layer is Beneficial to Your Data Stack](https://www.kdnuggets.com/2024/01/cube-6-reasons-why-a-universal-semantic-layer-is-beneficial)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Working with Big Data: Tools and Techniques](https://www.kdnuggets.com/working-with-big-data-tools-and-techniques)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide to Working with SQLite Databases in Python](https://www.kdnuggets.com/a-guide-to-working-with-sqlite-databases-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

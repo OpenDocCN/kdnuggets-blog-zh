@@ -1,0 +1,456 @@
+- en: Time Series Forecasting with PyCaret Regression Module
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/04/time-series-forecasting-pycaret-regression-module.html](https://www.kdnuggets.com/2021/04/time-series-forecasting-pycaret-regression-module.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Moez Ali](https://www.linkedin.com/in/profile-moez/), Founder & Author
+    of PyCaret**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a6cdf841abae5640ac801eefa26bb36f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Lukas Blazek](https://unsplash.com/@goumbik?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyCaret
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: PyCaret is an open-source, low-code machine learning library and end-to-end
+    model management tool built-in Python for automating machine learning workflows.
+    It is incredibly popular for its ease of use, simplicity, and ability to build
+    and deploy end-to-end ML prototypes quickly and efficiently.
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyCaret is an alternate low-code library that can be used to replace hundreds
+    of lines of code with few lines only. This makes the experiment cycle exponentially
+    fast and efficient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyCaret is **simple and** **easy to use**. All the operations performed in PyCaret
+    are sequentially stored in a **Pipeline** that is fully automated for **deployment. **Whether
+    it's imputing missing values, one-hot-encoding, transforming categorical data,
+    feature engineering, or even hyperparameter tuning, PyCaret automates all of it.
+    To learn more about PyCaret, watch this 1-minute video.
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyCaret — An open-source, low-code machine learning library in Python
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This tutorial assumes that you have some prior knowledge and experience with
+    PyCaret. If you haven’t used it before, no problem — you can get a quick headstart
+    through these tutorials:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PyCaret 2.2 is here — what’s new](https://towardsdatascience.com/pycaret-2-2-is-here-whats-new-ad7612ca63b)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Announcing PyCaret 2.0](https://towardsdatascience.com/announcing-pycaret-2-0-39c11014540e)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Five things you don’t know about PyCaret](https://towardsdatascience.com/5-things-you-dont-know-about-pycaret-528db0436eec)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Installing PyCaret
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Installing PyCaret is very easy and takes only a few minutes. We strongly recommend
+    using a virtual environment to avoid potential conflicts with other libraries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyCaret’s default installation is a slim version of pycaret which only installs
+    hard dependencies that are [listed here](https://github.com/pycaret/pycaret/blob/master/requirements.txt).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: When you install the full version of pycaret, all the optional dependencies
+    as [listed here](https://github.com/pycaret/pycaret/blob/master/requirements-optional.txt) are
+    also installed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? PyCaret Regression Module
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: PyCaret **Regression Module** is a supervised machine learning module used for
+    estimating the relationships between a **dependent variable** (often called the
+    ‘outcome variable’, or ‘target’) and one or more **independent variables** (often
+    called ‘features’, or ‘predictors’).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The objective of regression is to predict continuous values such as sales amount,
+    quantity, temperature, number of customers, etc. All modules in PyCaret provide
+    many [pre-processing](https://www.pycaret.org/preprocessing) features to prepare
+    the data for modeling through the [setup ](https://www.pycaret.org/setup)function.
+    It has over 25 ready-to-use algorithms and [several plots](https://www.pycaret.org/plot-model) to
+    analyze the performance of trained models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Time Series with PyCaret Regression Module
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Time series forecasting can broadly be categorized into the following categories:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Classical / Statistical Models** — Moving Averages, Exponential smoothing,
+    ARIMA, SARIMA, TBATS'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Machine Learning **— Linear Regression, XGBoost, Random Forest, or any ML
+    model with reduction methods'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Deep Learning **— RNN, LSTM'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This tutorial is focused on the second category i.e. *Machine Learning*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: PyCaret’s Regression module default settings are not ideal for time series data
+    because it involves few data preparatory steps that are not valid for ordered
+    data (*data with a sequence such as time series data*).
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, the split of the dataset into train and test set is done randomly
+    with shuffling. This wouldn’t make sense for time series data as you don’t want
+    the recent dates to be included in the training set whereas historical dates are
+    part of the test set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Time-series data also requires a different kind of cross-validation since it
+    needs to respect the order of dates. PyCaret regression module by default uses
+    k-fold random cross-validation when evaluating models. The default cross-validation
+    setting is not suitable for time-series data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The following section in this tutorial will demonstrate how you can change default
+    settings in PyCaret Regression Module easily to make it work for time series data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? Dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For the purpose of this tutorial, I have used the US airline passengers dataset.
+    You can download the dataset from [Kaggle](https://www.kaggle.com/chirag19/air-passengers).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/bff8971948d09ca06d2bb13f82d49f0a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample rows
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/500c1623248cc70c070c429bf959d673.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: US Airline Passenger Dataset Time Series Plot with Moving Average = 12
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since algorithms cannot directly deal with dates, let’s extract some simple
+    features from dates such as month and year, and drop the original date column.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/626a01d41c208d90c7927c7aa9fba070.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample rows after extracting features
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: I have manually split the dataset before initializing the `setup` . An alternate
+    would be to pass the entire dataset to PyCaret and let it handle the split, in
+    which case you will have to pass `data_split_shuffle = False` in the `setup` function
+    to avoid shuffling the dataset before the split.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? **Initialize Setup**
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now it’s time to initialize the `setup` function, where we will explicitly pass
+    the training data, test data, and cross-validation strategy using the `fold_strategy` parameter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: ???? **Train and Evaluate all Models**
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/136857b2f9293dd6a7fba035c903266e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Results from compare_models
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The best model based on cross-validated MAE is **Least Angle Regression **(MAE:
+    22.3). Let’s check the score on the test set.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/dafd830ef21a6dc14c1c98221ba18d03.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Results from predict_model(best) function
+  prefs: []
+  type: TYPE_NORMAL
+- en: MAE on the test set is 12% higher than the cross-validated MAE. Not so good,
+    but we will work with it. Let’s plot the actual and predicted lines to visualize
+    the fit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/e8ad08b37882bfa2695d5ae59b04070c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Actual and Predicted US airline passengers (1949–1960)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The grey backdrop towards the end is the test period (i.e. 1960). Now let’s
+    finalize the model i.e. train the best model i.e. *Least Angle Regression* on
+    the entire dataset (this time, including the test set).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: ???? Create a future scoring dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now that we have trained our model on the entire dataset (1949 to 1960), let’s
+    predict five years out in the future through 1964\. To use our final model to
+    generate future predictions, we first need to create a dataset consisting of the
+    Month, Year, Series column on the future dates.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/800ac186d10003a1706f0c7524d37c30.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample rows from future_df
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, let’s use the `future_df` to score and generate predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/63b6571d92576786419df63d7b29506e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample rows from predictions_future
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s plot it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/fde746a874f0f85f086fb18718ce69d3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Actual (1949–1960) and Predicted (1961–1964) US airline passengers
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wasn’t that easy?
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is no limit to what you can achieve using this lightweight workflow automation
+    library in Python. If you find this useful, please do not forget to give us ⭐️
+    on our GitHub repository.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To hear more about PyCaret follow us on [LinkedIn](https://www.linkedin.com/company/pycaret/) and [Youtube](https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Join us on our slack channel. Invite link [here](https://join.slack.com/t/pycaret/shared_invite/zt-p7aaexnl-EqdTfZ9U~mF0CwNcltffHg).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You may also be interested in:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Build your own AutoML in Power BI using PyCaret 2.0](https://towardsdatascience.com/build-your-own-automl-in-power-bi-using-pycaret-8291b64181d)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploy Machine Learning Pipeline on Azure using Docker](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-cloud-using-docker-container-bec64458dc01)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploy Machine Learning Pipeline on Google Kubernetes Engine](https://towardsdatascience.com/deploy-machine-learning-model-on-google-kubernetes-engine-94daac85108b)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploy Machine Learning Pipeline on AWS Fargate](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-aws-fargate-eb6e1c50507)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Build and deploy your first machine learning web app](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploy PyCaret and Streamlit app using AWS Fargate serverless](https://towardsdatascience.com/deploy-pycaret-and-streamlit-app-using-aws-fargate-serverless-infrastructure-8b7d7c0584c2)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Build and deploy machine learning web app using PyCaret and Streamlit](https://towardsdatascience.com/build-and-deploy-machine-learning-web-app-using-pycaret-and-streamlit-28883a569104)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploy Machine Learning App built using Streamlit and PyCaret on GKE](https://towardsdatascience.com/deploy-machine-learning-app-built-using-streamlit-and-pycaret-on-google-kubernetes-engine-fd7e393d99cb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Important Links
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Documentation](https://pycaret.readthedocs.io/en/latest/installation.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Blog](https://medium.com/@moez_62905)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[GitHub](https://www.github.com/pycaret/pycaret)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[StackOverflow](https://stackoverflow.com/questions/tagged/pycaret)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Install PyCaret](https://pycaret.readthedocs.io/en/latest/installation.html)
+    [Notebook Tutorials](https://pycaret.readthedocs.io/en/latest/tutorials.html)
+    [Contribute in PyCaret](https://pycaret.readthedocs.io/en/latest/contribute.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Want to learn about a specific module?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Click on the links below to see the documentation and working examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Classification](https://pycaret.readthedocs.io/en/latest/api/classification.html)
+    [Regression](https://pycaret.readthedocs.io/en/latest/api/regression.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Clustering](https://pycaret.readthedocs.io/en/latest/api/clustering.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Anomaly Detection](https://pycaret.readthedocs.io/en/latest/api/anomaly.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Natural Language Processing](https://pycaret.readthedocs.io/en/latest/api/nlp.html)
+    [Association Rule Mining](https://pycaret.readthedocs.io/en/latest/api/arules.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Moez Ali](https://www.linkedin.com/in/profile-moez/)** is a Data Scientist,
+    and is Founder & Author of PyCaret.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/time-series-forecasting-with-pycaret-regression-module-237b703a0c63).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploy a Machine Learning Pipeline to the Cloud Using a Docker Container](/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automated Anomaly Detection Using PyCaret](/2021/04/automated-anomaly-detection-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GitHub is the Best AutoML You Will Ever Need](/2020/08/github-best-automl-ever-need.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Time Series Forecasting with Ploomber, Arima, Python, and Slurm](https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Time Series Forecasting with statsmodels and Prophet](https://www.kdnuggets.com/2023/03/time-series-forecasting-statsmodels-prophet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Leveraging XGBoost for Time-Series Forecasting](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Say Goodbye to Print(): Use Logging Module for Effective Debugging](https://www.kdnuggets.com/say-goodbye-to-print-use-logging-module-for-effective-debugging)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Handle Missing Data with Scikit-learn''s Imputer Module](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Binary Classification with PyCaret](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

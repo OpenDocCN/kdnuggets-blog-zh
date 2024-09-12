@@ -1,0 +1,677 @@
+- en: Overview of Different Approaches to Deploying Machine Learning Models in Production
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/06/approaches-deploying-machine-learning-production.html](https://www.kdnuggets.com/2019/06/approaches-deploying-machine-learning-production.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Julien Kervizic,](https://www.linkedin.com/in/julienkervizic/) Senior
+    Enterprise Data Architect at GrandVision NV**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Overview](../Images/ce0a597f4c1c6e1fb4ae387d6727da48.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are different approaches to putting models into productions, with benefits
+    that can vary dependent on the specific use case. Take for example the use case
+    of churn prediction, there is value in having a static value already that can
+    easily be looked up when someone call a customer service, but there is some extra
+    value that could be gained if for specific events, the model could be re-run with
+    the newly acquired information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There is generally different ways to both train and server models into production:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Train**: one off, batch and real-time/online training'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Serve:** Batch, Realtime (Database Trigger, Pub/Sub, web-service, inApp)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Each approach having its own set of benefits and tradeoffs that need to be considered.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One off Training
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Models don’t necessarily need to be continuously trained in order to be pushed
+    to production. Quite often a model can be just trained ad-hoc by a data-scientist,
+    and pushed to production until its performance deteriorates enough that they are
+    called upon to refresh it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f86924f2ec8ad58a1101e565195c5c47.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**From Jupyter to Production**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Scientists prototyping and doing machine learning tend to operate in their
+    environment of choice [Jupyter](https://jupyter.org/) Notebooks. Essentially an
+    advanced GUI on a [repl](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop),
+    that allows you to save both code and command outputs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using that approach it is more than feasible to push an ad-hoc trained model
+    from some piece of code in Jupyter to production. Different types of libraries
+    and other notebook providers help further tie the link between the data-scientist
+    workbench and production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Model Format**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Pickle](https://docs.python.org/3/library/pickle.html) converts a python object
+    to to a bitstream and allows it to be stored to disk and reloaded at a later time.
+    It is provides a good format to store machine learning models provided that their
+    intended applications is also built in python.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[ONNX](https://github.com/onnx) the Open Neural Network Exchange format, is
+    an open format that supports the storing and porting of predictive model across
+    libraries and languages. Most deep learning libraries support it and sklearn also
+    has a library extension to convert their model to [ONNX’s format](https://github.com/onnx/sklearn-onnx/blob/master/docs/tutorial.rst).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PMML](https://en.wikipedia.org/wiki/Predictive_Model_Markup_Language) or Predictive
+    model markup language, is another interchange format for predictive models. Like
+    for ONNX sklearn also has another library extension for converting the models
+    to [PMML format](https://github.com/jpmml/sklearn2pmml). It has the drawback however
+    of only supporting certain type of prediction models.PMML has been around since
+    1997 and so has a large footprint of applications leveraging the format. Applications
+    such as [SAP](https://archive.sap.com/kmuuid2/a07faefd-61d7-2c10-bba6-89ac5ffc302c/Integrating%20Real-time%20Predictive%20Analytics%20into%20SAP%20Applications.pdf)
+    for instance is able to leverage certain versions of the PMML standard, likewise
+    for CRM applications such as [PEGA](https://community.pega.com/knowledgebase/supported-pmml-model-types).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[POJO and MOJO](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/productionizing.html#about-pojos-and-mojos)
+    are [H2O.ai](https://www.h2o.ai/)’s export format, that intendeds to offers an
+    easily embeddable model into java application. They are however very specific
+    to using the H2O’s platform.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Training**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For one off training of models, the model can either be trained and fine tune
+    ad hoc by a data-scientists or training through AutoML libraries. Having an easily
+    reproducible setup, however helps pushing into the next stage of productionalization,
+    ie: batch training.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Batch Training
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: While not fully necessary to implement a model in production, batch training
+    allows to have a constantly refreshed version of your model based on the latest
+    train.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Batch training can benefit a-lot from AutoML type of frameworks, AutoML enables
+    you to perform/automate activities such as feature processing, feature selection,
+    model selections and parameter optimization. Their recent performance has been
+    on par or bested the most diligent data-scientists.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/55b92ce5dd110284bdb0b317125b48f9.png)[LinkedIn post](https://www.linkedin.com/pulse/future-data-science-one-image-charles-givre/?fbclid=IwAR0zVvLTmiDT4ReAqe59HjCXym_pNXW6AvC2RgeC-zY5sEESnhKHYI_TfT8)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Using them allows for a more comprehensive model training than what was typically
+    done prior to their ascent: simply retraining the model weights.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Different technologies exists that are made to support this continuous batch
+    training, these could for instance be setup through a mix of [airflow](https://medium.com/analytics-and-data/airflow-the-easy-way-f1c26859ee21)
+    to manage the different workflow and an AutoML library such as [tpot](https://epistasislab.github.io/tpot/),
+    Different cloud providers offer their solutions for AutoML that can be put in
+    a data workflow. Azure for instance integrates machine learning prediction and
+    model training with their [data factory offering](https://azure.microsoft.com/es-es/blog/retraining-and-updating-azure-machine-learning-models-with-azure-data-factory/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Real time training
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Real-time training is possible with ‘Online Machine Learning’ models, algorithms
+    supporting this method of training includes K-means (through mini-batch), Linear
+    and Logistic Regression (through Stochastic Gradient Descent) as well as Naive
+    Bayes classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Spark has StreamingLinearAlgorithm/StreamingLinearRegressionWithSGD to perform
+    these operations, sklearn has SGDRegressor and SGDClassifier that can be incrementally
+    trained. In sklearn, the incremental training is done through the partial_fit
+    method as shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: When deploying this type of models there needs to be serious operational support
+    and monitoring as the model can be sensitive to new data and noise, and model
+    performance needs to be monitored on the fly. In offline training, you can filter
+    points of [high leverage](https://en.wikipedia.org/wiki/Leverage_%28statistics%29)
+    and correct for this type of incoming data. This is much harder to do when you
+    are constantly updating your model training based on a stream of new data points.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another challenge that occurs with training online model is that they don’t
+    decay historical information. This means that, on case there are structural changes
+    in your datasets, the model will need to be anyway re-trained and that there will
+    be a big onus in model lifecycle management.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Batch vs. Real-time Prediction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When looking at whether to setup a batch or real-time prediction, it is important
+    to get an understanding of why doing real-time prediction would be important.
+    It can potentially be for getting a new score when significant event happen, for
+    instance what would be the churn score of customer when they call a contact center.
+    These benefits needs to be weighted against the complexity and cost implications
+    that arise from doing real-time predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Load implications**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Catering to real time prediction, requires a way to handle peak load. Depending
+    on the approach taken and how the prediction ends up being used, choosing a real-time
+    approach, might also require to have machine with extra computing power available
+    in order to provide a prediction within a certain SLA. This contrasts with a batch
+    approach where the predictions computing can be spread out throughout the day
+    based on available capacity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Infrastructure Implications**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Going for real-time, put a much higher operational responsibility. People need
+    to be able to monitor how the system is working, be alerted when there is issue
+    as well as take some consideration with respect to failover responsibility. For
+    batch prediction, the operational obligation is much lower, some monitoring is
+    definitely needed, and altering is desired but the need to be able to know of
+    issues arising directly is much lower.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Cost Implications**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Going for real-time predictions also has costs implications, going for more
+    computing power, not being able to spread the load throughout the day can force
+    into purchasing more computing capacity than you would need or to pay for spot
+    price increase. Depending on the approach and requirements taken there might also
+    be extra cost due to needing more powerful compute capacity in order to meet SLAs.
+    Furthermore, there would tend to be a higher infrastructure footprint when choosing
+    for real time predictions. One potential caveat there is where the choice is made
+    to rely on in app prediction, for that specific scenario the cost might actually
+    end up being cheaper than going for a batch approach.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Evaluation Implications**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Evaluating the prediction performance in real-time manner can be more challenging
+    than for batch predictions. How do you evaluate performance when you are faced
+    with a succession of actions in a short burst producing multiple predictions for
+    a given customer for instance? Evaluating and debugging real-time prediction models
+    are significantly more complex to manage. They also require a log collection mechanism
+    that allows to both collect the different predictions and features that yielded
+    the score for further evaluation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Batch Prediction Integration
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Batch predictions rely on two different set of information, one is the predictive
+    model and the other one is the features that we will feed the model. In most type
+    of batch prediction architecture, ETL is performed to either fetch pre-calculated
+    features from a specific datastore (feature-store) or performing some type of
+    transformation across multiple datasets to provide the input to the prediction
+    model. The prediction model then iterates over all the rows in the datasets providing
+    the different score.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/60d22376a65ac66c24b3e0dc68902dcf.png)example flow to model
+    serving for batch prediction'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once all the predictions have been computed, we can then “serve” the score to
+    the different systems wanting to consume the information. This can be done in
+    different manner depending on thee use case for which we want to consume the score,
+    for instance if we wanted to consume the score on a front-end application, we
+    would most likely push the data to a “cache” or NoSQL database such as Redis so
+    that we can offer milliseconds responses, while for certain use cases such as
+    the creation of an email journey, we might just be relying on a CSV SFTP export
+    or a data load to a more traditional RDBMS.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Real-time Prediction integration**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Being able to push model into production for real-time applications require
+    3 base components. A customer/user profile, a set of triggers and predictive models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a92fec2b10f8928597a646450dd5dde4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Profile:** The customer profile contains all the related attribute to the
+    customer as well as the different attributes (eg: counters) necessary in order
+    to make a given prediction. This is required for customer level prediction in
+    order to reduce the latency of pulling the information from multiple places as
+    well as to simplify the integration of machine learning models in productions.
+    In most cases a similar type of data store would be needed in order to effectively
+    fetch the data needed to power the prediction model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Triggers:** Triggers are events causing the initiation of process, they can
+    be for churn for instance, call to a customer service center, checking information
+    within your order history, etc …'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Models:** models need to have been pre-trained and typically exported to
+    one of the 3 formats previously mentioned (pickle, ONNX or PMML) to be something
+    that we could easily port to production.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are quite a few different approach to putting models for scoring purpose
+    in production:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Relying on in Database integration:* a lot of database vendors have made a
+    significant effort to tie up advanced analytics use cases within the database.
+    Be it by direct integration of Python or R code, to the import of PMML model.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Exploiting a Pub/Sub model*: The prediction model is essentially an application
+    feeding of a data-stream and performing certain operations, such as pulling customer
+    profile information.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Webservice:* Setting up an API wrapper around the model prediction and deploying
+    it as a web-service. Depending on the way the web-service is setup it might or
+    might not do the pull or data needed to power the model.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*inApp:* it is also possible to deploy the model directly into a native or
+    web application and have the model be run on local or external datasources.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***Database integrations***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If the overall size of your database is fairly small (< 1M user profile) and
+    the update frequency is occasional it can make sense to integrate some of the
+    real-time update process directly within the database.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Postgres possess an integration that allows to run Python code as functions
+    or stored procedure called [PL/Python](http://PL/Python). This implementation
+    has access to all the libraries that are part of the **PYTHONPATH**, and as such
+    are able to use libraries such as Pandas and SKlearn to run some operations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This can be coupled with Postgres’ [Triggers](https://www.tutorialspoint.com/postgresql/postgresql_triggers.htm)
+    Mechanism to perform a run of the database and update the churn score. For instance
+    if a new entry is made to a complaint table, it would be valuable to have the
+    model be re-run in real-time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/28b9641a71155fe9744fd6bd06c66070.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Sequence flow**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The flow could be setup in the following way:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*New Event:* When a new row is inserted in the complain table, an event trigger
+    is generated.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Trigger:* The trigger function would update the number of complaint made by
+    this customer in the customer profile table and fetch the updated record for the
+    customer.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Prediction Request:* Based on that it would re-run the churn model through
+    PL/Python and retrieve the prediction.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Customer Profile Update:* It can then re-update the customer profile with
+    the updated prediction. Downstream flows can then happen upon checking if the
+    customer profile has been updated with new churn prediction value.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Technologies**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Different databases are able to support the running of Python script, this is
+    the case of PostGres which has a native Python integration as previously mentioned,
+    but also of Ms SQL Server through its’ [Machine Learning Service (in Database)](https://www.sqlshack.com/how-to-use-python-in-sql-server-2017-to-obtain-advanced-data-analytics/),
+    other databases such as Teradata, are able to run R/Python script through an external
+    script command. While Oracle supports [PMML model](https://docs.oracle.com/database/121/DMPRG/GUID-55C6ADBF-DA64-48B6-A424-5F0A59CD406D.htm#DMPRG701)
+    through its data mining extension.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Pub/Sub**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Implementing real-time prediction through a pub/sub model allows to be able
+    to properly handle the load through throttling. For engineers, it also means that
+    they can just feed the event data through a single “logging” feed, to which different
+    application can subscribe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'An example, of how this could be setup is shown below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/473338fb8960a92196c2b0b5106e85fb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The page view event is fired to a specific event topic, on which two application
+    subscribe a page view counter, and a prediction. Both of these application filter
+    out specific relevant event from the topic for their purpose and consume the different
+    messages in the topics. The page view counter app, provides data to power a dashboard,
+    while the prediction app, updates the customer profile.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ec05d3e486382ceeb9a2616bb6aff4ab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Sequence flow:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Event messages are pushed to the pub/sub topic as they occur, the prediction
+    app poll the topic for new messages. When a new message is retrieved by the prediction
+    app, it will request and retrieve the customer profile and use the message and
+    the profile information to make a prediction. which it will ultimately push back
+    to the customer profile for further use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A slightly different flow can be setup where the data is first consumed by an
+    “enrichment app” that adds the profile information to the message and then pushes
+    it back to a new topic to finally be consumed by the prediction app and pushed
+    onto the customer profile.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Technologies:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The typical open source combination that you would find that support this kind
+    of use case in the data ecosystem is a combination of Kafka and Spark streaming,
+    but a different setup is possible on the cloud. On google notably a google pub-sub/dataflow
+    (Beam) provides a good alternative to that combination, on azure a combination
+    of Azure-Service Bus or Eventhub and Azure Functions can serve as a good way to
+    consume the messages and generate these predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Web Service*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can implement models into productions as web-services. Implementing predictions
+    model as web-services are particularly useful in engineering teams that are fragmented
+    and that need to handle multiple different interfaces such as web, desktop and
+    mobile.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Interfacing with the web-service could be setup in different way:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Either providing an identifier and having the web-service pull the required
+    information, compute the prediction and return its’ value
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Or by accepting a payload, converting it to a data-frame, making the prediction
+    and returning its’ value.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The second approach is usually recommended in cases, when there is a lot of
+    interaction happening and a local cache is used to essentially buffer the synchronization
+    with the backend systems, or when needing to make prediction at a different grain
+    than a customer id, for instance when doing session based predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The systems making use of local storage, tend to have a reducer function, which
+    role is to calculate what would be the customer profile, should the event in local
+    storage be integrated back. As such it provides an approximation of the customer
+    profile based on local data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/715d2d6161321c99fcf2cec609365c2f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Sequence Flow**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The flow for handling the prediction using a mobile app, with local storage
+    can be described in 4 phases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Application Initialization (1 to 3)****:*** The application initializes, and
+    makes a request to the customer profile, and retrieve its initial value back,
+    and initialize the profile in local storage.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Applications (4):* The application stores the different events happening with
+    the application into an array in local storage.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Prediction Preparation (5 to 8)****:*** The application wants to retrieve
+    a new churn prediction, and therefore needs to prepare the information it needs
+    to provide to the Churn Web-service. For that, it makes an initial request to
+    local storage to retrieve the values of the profile and the array of events it
+    has stored. Once they are retrieve, it makes a request to a reducer function providing
+    these values as arguments, the reducer function outputs an updated* profile with
+    the local events incorporated back into this profile.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Web-service Prediction (9 to 10):* The application makes a request to the
+    churn prediction web-service, providing the different the updated*/reduced customer
+    profile from step 8 as part of the payload. The web-service can then used the
+    information provided by the payload to generate the prediction and output its
+    value, back to the application.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Technologies**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are quite a few technologies that can be used to power a prediction web-service:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Functions*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: AWS Lambda functions, Google Cloud functions and Microsoft Azure Functions (although
+    Python support is currently in Beta) offer an easy to setup interface to easily
+    deploy scalable web-services.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For instance on Azure a prediction web-service could be implemented through
+    a function looking roughly like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*Container*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: An alternative to functions, is to deploy a flask or django application through
+    a docker container (Amazon ECS, Azure Container Instance or Google Kubernetes
+    Engine). Azure for instance provides an easy way to setup prediction containers
+    through its’ [Azure Machine Learning service](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-deploy-and-where).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Notebooks*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Different notebooks providers such as [databricks](https://docs.databricks.com/applications/mlflow/models.html)
+    and [dataiku](https://www.dataiku.com/dss/features/model-deployment/) have notably
+    worked on simplifying the model deployment from their environments. These have
+    the feature of setting up a web service to a local environment or deploying to
+    external systems such as Azure ML Service, Kubernetes engine etc…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**In App**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In certain situations when there are legal or privacy requirements that do not
+    allow for data to be stored outside of an application, or there exists constraints
+    such as having to upload a large amount of files, leveraging a model within the
+    application tend to be the right approach.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Android-ML Kit or the likes of Caffe2 allows to leverage models within native
+    applications, while [Tensorflow.js](https://www.tensorflow.org/js) and [ONNXJS](https://github.com/Microsoft/onnxjs)
+    allow for running models directly in the browser or in apps leveraging javascripts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Considerations
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Beside the method of deployments of the models, they are quite a few important
+    considerations to have when deploying to production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Model Complexity**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The complexity of the model itself, is the first considerations to have. Models
+    such as a linear regressions and logistic regression are fairly easy to apply
+    and do not usually take much space to store. Using more complex model such as
+    a neural network or complex ensemble decision tree, will end up taking more time
+    to compute, more time to load into memory on cold start and will prove more expensive
+    to run.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Data Sources**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is important to consider the difference that could occur between the datasource
+    in productions and the one used for training. While it is important for the data
+    used for the training to be in sync with the context it would be used for in production,
+    it is often impractical to recalculate every value so that it becomes perfectly
+    in-sync.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Experimentation framework**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Setting up an experimentation framework, A/B testing the performance of different
+    models versus objective metrics. And ensuring that there is sufficient tracking
+    to accurately debug and evaluate models performance a posteriori.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Wrapping Up
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Choosing how to deploy a predictive models into production is quite a complex
+    affair, there are different way to handle the lifecycle management of the predictive
+    models, different formats to stores them, multiple ways to deploy them and very
+    vast technical landscape to pick from.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understanding specific use cases, the team’s technical and analytics maturity,
+    the overall organization structure and its’ interactions, help come to the the
+    right approach for deploying predictive models to production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Julien Kervizic](https://www.linkedin.com/in/julienkervizic/)** is
+    a Senior Enterprise Data Architect at GrandVision NV.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/analytics-and-data/overview-of-the-different-approaches-to-putting-machinelearning-ml-models-in-production-c699b34abf86).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to build an API for a machine learning model in 5 minutes using Flask](/2019/01/build-api-machine-learning-model-using-flask.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Manage your Machine Learning Lifecycle with MLflow  –  Part 1](/2018/07/manage-machine-learning-lifecycle-mlflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Putting Machine Learning in Production](/2017/09/putting-machine-learning-production.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Automated Machine Learning with Python: A Comparison of Different…](https://www.kdnuggets.com/2023/03/automated-machine-learning-python-comparison-different-approaches.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2023: Practical Strategies for Deploying ML…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI-Generated Sports Highlights: Different Approaches](https://www.kdnuggets.com/2022/03/aigenerated-sports-highlights-different-approaches.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploying Your Machine Learning Model to Production in the Cloud](https://www.kdnuggets.com/deploying-your-ml-model-to-production-in-the-cloud)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Labeling for Machine Learning: Market Overview, Approaches, and Tools](https://www.kdnuggets.com/2021/12/data-labeling-ml-overview-and-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Approaches to Text Summarization: An Overview](https://www.kdnuggets.com/2019/01/approaches-text-summarization-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

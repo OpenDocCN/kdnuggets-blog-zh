@@ -1,0 +1,405 @@
+- en: The Forgotten Algorithm
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/02/forgotten-algorithm-monte-carlo-simulation.html](https://www.kdnuggets.com/2020/02/forgotten-algorithm-monte-carlo-simulation.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Ian Xiao](https://www.linkedin.com/in/ianxiao/), Engagement Lead at Dessa**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**TL;DR** —When we talk about Machine Learning, we often think of supervised
+    and unsupervised learning. In this article, I want to discuss an often forgotten
+    but equally powerful algorithm: Monte Carlo Simulation. I will share a general
+    design framework and a few techniques with an interactive tool. Finally, you can
+    also find a list of good simulation tools at the end of the article.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Disclaimer:**** this is not sponsored by Streamlit, any of the tools I mention,
+    nor any of the firms I work for. I use data science and machine learning interchangeably.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Like What You Read?**** Follow me on *[*Medium*](https://medium.com/@ianxiao)*, *[*LinkedIn*](https://www.linkedin.com/in/ianxiao/)*, *[*Twitter*](https://twitter.com/ian_xxiao)*.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Undeserving One
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Inthe recent Machine Learning (ML) uprising, supervised and unsupervised learning
+    algorithms, such as classification with [Deep Learning](https://machinelearningmastery.com/what-is-deep-learning/) and
+    clustering with KNN, got most of the spotlight. When these algorithms receive
+    flattering praises from the enthusiastic community, something equally powerful
+    and elegant sits in the dark corner calmly and quietly. Its name is **Monte Carlo **—
+    the forgotten and undeserving hero of atomic physics, modern finance, and gambling
+    (or a villain depends on your opinions of these matters).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Note: I will refer to supervise and unsupervised learning methods as “ML algorithm”
+    and Monte Carlo methods as “Simulation” for brevity.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Short History
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stanislaw Ulam](https://en.wikipedia.org/wiki/Stanislaw_Ulam), [Enrico Fermi](https://en.wikipedia.org/wiki/Enrico_Fermi),
+    and [John von Neumann](https://en.wikipedia.org/wiki/John_von_Neumann) — the geniuses
+    at Los Alamos — invented, improved, and popularized the Monte Carlo method in
+    the 1930s for a not-so-noble cause *(hint: it’s not for the bomb)*. Watch the
+    video to find out more.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Short History of Monte Carlo Simulation (YouTube)
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Monte Carlo Simulation?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If I were to summarize what Monte Carlo simulation is in one sentence, here
+    it is: **Fake it a billion times until we kind of know what the reality is.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[via GIPHY](https://giphy.com/gifs/mrw-someone-aVytG2ds8e0tG)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: On a technical (and more serious) level, the goal of the Monte Carlo method
+    is to **approximate the** **expectations** of outcomes given various inputs, uncertainty,
+    and system dynamics. This video walks through some high-level mathematics for
+    those who are interested.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Monte Carlo Approximation, [YouTube](https://youtu.be/7TybpwBlcMk)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why use Simulation?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If I were to highlight one (oversimplified) advantage of Simulation over ML
+    algorithms, it would be this: **Exploration. **We use Simulation to understand
+    the inner working *of any systems at any scale* (e.g. the world, a community,
+    a company, a team, a person, a fleet, a car, a wheel, an atom, etc.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: By re-creating a system virtually with simulations, we can calculate and analyze
+    hypothetical results without actually changing the world or waiting for real events
+    to happen. In other words, Simulations allow us to **ask bold questions** and **develop
+    tactics **to manage various future outcomes without much risk and investment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When to use Simulation, instead of ML?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: According to [Benjamin Schumann](https://www.benjamin-schumann.com/blog/2018/5/7/time-to-marry-simulation-models-and-machine-learning),
+    a well-known simulation expert, Simulation is *process-driven* while ML is *data-centric*.
+    To produce good Simulation, we need to understand the process and underlying principles
+    of a system. In contrast, we can create reasonably good predictions using ML by
+    only using data from a data warehouse and some out-of-box algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In other words, creating good simulation is often **more expensive **financially
+    and cognitively. Why would we ever use Simulation?
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Well, consider three simple questions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Do you have data in a data warehouse to represent the business problem?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Do you have enough of these data — quantity- and quality-wise — to build a good
+    ML model?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Is prediction more important than exploration (e.g. ask what-if questions and
+    develop tactics to support business decisions)?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If you answer “No” to any of these, then you should consider using Simulation
+    instead of ML algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to Design a Monte Carlo Simulation?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To create a Monte Carlo Simulation, at the minimum, it follows a 3-step process:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/7cfa3ac902ecabf6ad63a7b51e6ec576.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Simulation Process, Author’s Analysis
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see, creating a Monte Carlo simulation still requires data, and more
+    importantly, some understanding of the system dynamics (e.g. the relationship
+    between sales volume and price). To obtain such knowledge, it typically requires
+    talking to experts, studying process flows, and observing real business operations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Yet Another Simulator
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To see how the basic concepts come to live, you can go to [**Yet Another Simulator**](https://yet-another-sim.herokuapp.com/)—
+    it’s an interactive tool I developed using [Streamlit](https://www.streamlit.io/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the **Welcome Page**, you can play with various input setup and observe how
+    the outcome changes depending on the function you apply.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/d6aa3e2960ecb980663c0431c87d3809.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Welcome Page of [Yet Another Simulator](https://yet-another-sim.herokuapp.com/),
+    Author’s Work
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition to the basic example, the tool includes 4 case studies that discuss
+    various design techniques, such as Influence Diagram, Sensitivity Analysis, Optimization,
+    and Combining ML with Simulation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, in the **CMO example**, I discuss how to use the Influence Diagram
+    to help design a simulation to solve an advertisement budget allocation problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/170a8bada18519a92027c156df36e9da.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Influence Diagram, Author’s Work
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, you will step into the shoes of a Data Scientist who advises the Chief
+    Marketing Officer (CMO). Your goal is to help the CMO to decide how much to spend
+    on advertising, explore various scenarios, and come up with tactics to maximize
+    return under different uncertainties.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/97f89c1ef8e9b93adfbdfce136f81e8a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Ad Budget Allocation, Author’s Work
+  prefs: []
+  type: TYPE_NORMAL
+- en: I hope the examples illustrate how Monte Carlo Simulation works, its strength
+    in allowing us to explore compared to ML algorithms, and how you can design useful
+    simulations with different design techniques.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some of the case studies are still under active development. Sign-up [**here**](https://docs.google.com/forms/d/e/1FAIpQLSfL57Eb6Kd7fK3OLfXNUENa3H0rLhmcgxnLQp6SwSWNZ_pLaQ/viewform?usp=sf_link) to
+    get notified when they are ready.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To Sum Up
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I hope this article offers another look at the Monte Carlo method; we often
+    forget such a useful tool in today’s ML discussion. Simulation has many strengths
+    that traditional ML algorithms can’t provide — for example, the ability to explore
+    big questions under tremendous uncertainty.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In **an upcoming article**, I will discuss **how to combine ML and Simulation** in
+    a real business setting to get the best of both worlds and how to articulate the
+    implications of the different simulated scenarios.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Stay tuned by following me on[**Medium**](https://medium.com/@ianxiao)**, **[**LinkedIn**](https://www.linkedin.com/in/ianxiao/)**, **or[**Twitter**](https://twitter.com/ian_xxiao)**.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: Until next time,
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ian
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[via GIPHY](https://giphy.com/gifs/two-9-two-9-nine-l4FGsEzqS8Zz8aOWs)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you like this article, you may also like these:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[**12-Hour ML Challenge**](https://towardsdatascience.com/build-full-stack-ml-12-hours-50c310fedd51)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to build & deploy an ML app with Streamlit and DevOps tools
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**A Doomed Marriage of ML and Agile**](https://towardsdatascience.com/a-doomed-marriage-of-ml-and-agile-b91b95b37e35)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How not to apply Agile on an ML project
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Data Science is Boring**](https://towardsdatascience.com/data-science-is-boring-1d43473e353e)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How I cope with the boring days of deploying Machine Learning
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**The Last Defense against Another AI Winter**](https://towardsdatascience.com/the-last-defense-against-another-ai-winter-c589b48c561)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The numbers, five tactical solutions, and a quick survey
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**The Last-Mile Problem of AI**](https://towardsdatascience.com/fixing-the-last-mile-problems-of-deploying-ai-systems-in-the-real-world-4f1aab0ea10)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One Thing Many Data Scientists Don’t Think Enough About
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**We Created a Lazy AI**](https://towardsdatascience.com/we-created-a-lazy-ai-5cea59a2a749)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to Design and Implement Reinforcement Learning for the Real World
+  prefs: []
+  type: TYPE_NORMAL
+- en: Popular Tools
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When I discuss Simulation, many people asked for suggestions on tools. Here
+    is a list of tools I know, choose the ones that fit your purpose. Enjoy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[AnyLogic](https://www.anylogic.com/) (This is probably the go-to tool for
+    simulation professionals; Freemium)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simio](https://www.simio.com/index.php) (Freemium)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Yasai](http://yasai.rutgers.edu/) (Excel Add-In, Free)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Oracle Crystal Ball](https://www.crystalballservices.com/Store/Oracle-Crystal-Ball) (Freemium)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SimPy](https://simpy.readthedocs.io/en/latest/index.html) (Python Package,
+    Free)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hash](https://hash.ai/) (start-up in stealth mode as of the time of writing.
+    Pretty solid founding team. Probably Freemium)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Reference
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**History of Decision Tree** — [http://pages.stat.wisc.edu/~loh/treeprogs/guide/LohISI14.pdf](http://pages.stat.wisc.edu/~loh/treeprogs/guide/LohISI14.pdf)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**History of Clustering **— [https://link.springer.com/chapter/10.1007/978-3-540-73560-1_15](https://link.springer.com/chapter/10.1007/978-3-540-73560-1_15)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Time to Marry Simulation and ML** — [https://www.benjamin-schumann.com/blog/2018/5/7/time-to-marry-simulation-models-and-machine-learning](https://www.benjamin-schumann.com/blog/2018/5/7/time-to-marry-simulation-models-and-machine-learning)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Taxonomy of Simulation **— [https://gamingthepast.net/theory-practice/simulation-design-guide/](https://gamingthepast.net/theory-practice/simulation-design-guide/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**What is Monte Carlo and How it works** — [https://www.palisade.com/risk/monte_carlo_simulation.asp](https://www.palisade.com/risk/monte_carlo_simulation.asp)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Ian Xiao](https://www.linkedin.com/in/ianxiao/)** is Engagement Lead
+    at Dessa, deploying machine learning at enterprises. He leads business and technical
+    teams to deploy Machine Learning solutions and improve Marketing & Sales for the
+    F100 enterprises.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/how-to-design-monte-carlo-simulation-138e9214910a).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Data Science is Boring (Part 1)](/2019/09/data-science-boring-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[We Created a Lazy AI](/2020/01/created-lazy-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[12-Hour Machine Learning Challenge: Build & deploy an app with Streamlit and
+    DevOps tools](/2020/02/machine-learning-challenge-build-deploy-app-streamlit-devops.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Genetic Algorithm Key Terms, Explained](https://www.kdnuggets.com/2018/04/genetic-algorithm-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Decision Tree Algorithm, Explained](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Full End-to-End Deployment of a Machine Learning Algorithm into a…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unlock the Secrets to Choosing the Perfect Machine Learning Algorithm!](https://www.kdnuggets.com/2023/07/ml-algorithm-choose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Choosing the Right Clustering Algorithm for Your Dataset](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DBSCAN Clustering Algorithm in Machine Learning](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

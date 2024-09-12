@@ -1,0 +1,340 @@
+- en: Forget PIP, Conda, and requirements.txt! Use Poetry Instead And Thank Me Later
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/07/forget-pip-conda-requirementstxt-poetry-instead-thank-later.html](https://www.kdnuggets.com/2023/07/forget-pip-conda-requirementstxt-poetry-instead-thank-later.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Forget PIP, Conda, and requirements.txt! Use Poetry Instead And Thank Me
+    Later](../Images/884ed43e371c84d662e8cb34e29d8451.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by me with Midjourney
+  prefs: []
+  type: TYPE_NORMAL
+- en: Library A requires Python 3.6\. Library B relies on Library A but needs Python
+    3.9, and Library C depends on Library B but requires the specific version of Library
+    A that is compatible with Python 3.6.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Welcome to dependency hell!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since native Python is rubbish without external packages for data science, data
+    scientists can often find themselves trapped in catch-22 dependency situations
+    like the one above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tools like PIP, Conda, or the laughable requirements.txt files can’t solve this
+    problem. Actually, dependency nightmares exist largely *because of them*. So,
+    to end their suffering, the Python open-source community developed the charming
+    tool known as Poetry.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Poetry is an all-in-one project and dependency management framework with over
+    25k stars on GitHub. This article will introduce Poetry and list the problems
+    it solves for data scientists.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s get started.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Installation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'While Poetry can be installed as a library with PIP, it is recommended to install
+    it system-wide so you can call `poetry` on the CLI anywhere you like. Here is
+    the command that runs the installation script for Unix-like systems, including [Windows
+    WSL2](https://towardsdatascience.com/how-to-create-perfect-machine-learning-development-environment-with-wsl2-on-windows-10-11-2c80f8ea1f31):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'If, for some weird reason, you use Windows Powershell, here is the suitable
+    command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To check if Poetry is installed correctly, you can run:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Poetry also supports tab completion for a variety of shells like Bash, Fish,
+    Zsh, etc. Learn more about it [here](https://python-poetry.org/docs/#enable-tab-completion-for-bash-fish-or-zsh).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Consistent structure for all projects
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Since Poetry is an all-in-one tool, you can use it from the start to the very
+    end of your project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When starting a fresh project, you can run `poetry new project_name`. It will
+    create a default directory structure that is almost ready to build and publish
+    to PyPI as a Python package:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'But we, data scientists, rarely create Python packages, so it is recommended
+    to start the project yourself and call `poetry init` inside:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The CLI will ask you a series of questions for setup, but you can leave most
+    of them blank as they can be updated later:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Forget PIP, Conda, and requirements.txt! Use Poetry Instead And Thank Me
+    Later](../Images/cf5f618e50562be15c569838ab5606cc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: GIF. Mine.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The `init` command will produce the most critical file of Poetry - `pyproject.toml`.
+    The file contains some project metadata, but most importantly, it lists the dependencies:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Right now, the only dependency under `tool.poetry.dependencies` is Python 3.9
+    (we will learn what `^` is later). Let's populate it with more libraries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to learn what all the fields in `pyproject.toml` file do, jump over [here](https://python-poetry.org/docs/pyproject/).
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 2\. Dependency specification
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: To install dependencies for your project, you will no longer have to use PIP
+    or Conda, at least directly. Instead, you will start using `poetry add library_name` commands.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here is an example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Adding the `@latest` flag installs the most recent version of Sklearn from
+    PyPI. It is also possible to add multiple dependencies without any flags (constraints):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: The beauty of `add` is that if the specified packages don't have any version
+    constraints, it will find the versions of all packages that resolve, i.e., not
+    throw any errors when installed together. It will also check against the dependencies
+    already specified in the `pyproject.toml`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s try downgrading `numpy` to v1.24 and see what happens:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Poetry won’t let it happen because the downgraded version would conflict with
+    Seaborn. If this was PIP or conda, they would gladly install Numpy 1.24 and would
+    grin back at us as the nightmare starts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition to standard installations, Poetry provides a versatile syntax for
+    defining version constraints. This syntax allows you to specify exact versions,
+    set boundaries for version ranges (greater than, less than, or in between), and
+    pin down major, minor, or patch versions. The following tables, taken from the
+    Poetry documentation (MIT License), serve as examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Caret requirements:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Forget PIP, Conda, and requirements.txt! Use Poetry Instead And Thank Me
+    Later](../Images/4c88c9190cfd2197d076b74cc427097e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Tilde requirements:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Forget PIP, Conda, and requirements.txt! Use Poetry Instead And Thank Me
+    Later](../Images/94eccfa6a6659400d3f4f4afffe22f71.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Wildcard requirements:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Forget PIP, Conda, and requirements.txt! Use Poetry Instead And Thank Me
+    Later](../Images/67b0640c3ce181e6844938ed6ff4a493.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: For even more advanced constraint specifications, visit [this page](https://python-poetry.org/docs/dependency-specification/) of
+    the Poetry docs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Environment management
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: One of the core features of Poetry is isolating the project environment from
+    the global namespace in the most efficient way possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When you run the `poetry add library` command, here is what happens:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you initialized Poetry inside an existing project with a virtual environment
+    already activated, the `library` will be installed into that environment (it can
+    be any environment manager like Conda, venv, etc.).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If you created a blank project with `poetry new` or initialized Poetry with `init` when
+    no virtual environment is activated, Poetry will create a new virtual environment
+    for you.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: When case 2 happens, the resulting environment will be under `/home/user/.cache/pypoetry/virtualenvs/` folder.
+    The Python executable will be there somewhere as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To see which Poetry-created env is active, you can run `poetry env list`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'To switch between Poetry-created environments, you can run `poetry env use` command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can learn more about environment management from [here](https://python-poetry.org/docs/managing-environments/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. Fully reproducible projects
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: When you run the `add` command, Poetry will generate a `poetry.lock` file. Rather
+    than specifying version constraints, like `1.2.*`, it will lock the exact versions
+    of libraries you are using, like `1.2.11`. All subsequent runs of `poetry add` or `poetry
+    update` will modify the lock file to reflect the changes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using such lock files ensures that people who are using your project can fully
+    reproduce the environment on their machines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: People have long used alternatives like `requirements.txt` but its format is
+    very loose and error-prone. A typical human-created `requirements.txt` is not
+    thorough as developers don't usually bother with listing the exact library versions
+    they are using and just state version ranges or worse, simply write the library
+    name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then, when others try to reproduce the environment with `pip install -r requirements.txt`,
+    PIP itself tries to resolve the version constraints, and that's how you quietly
+    end up in dependency hell.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When using Poetry and lock files, none of that happens. So, if you are initializing
+    Poetry in a project with `requirements.txt` already present, you can add the dependencies
+    inside with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: and delete the `requirements.txt`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But, please note that some services like Streamlit or Heroku still require
+    old `requirements.txt` files for deployment. When using those, you can export
+    your `poetry.lock` file to a text format with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: The workflow to follow
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: I want to leave the article with a step-by-step workflow to integrate Poetry
+    into any data project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 0: [Install Poetry](https://python-poetry.org/docs/) for your system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Step 1: Create a new project with `mkdir` and call `` [poetry init](https://python-poetry.org/docs/cli/#init) inside
+    to initialize Poetry. If you want to convert your project into a Python package
+    later, create the project with `[poetry new project_name](https://python-poetry.org/docs/cli/#new).`
+    ``'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14] Step 2: Install and add dependencies with `poetry add lib_name`. It
+    is also possible to manually edit `pyproject.toml` and add the dependencies under
+    the `[tool.poetry.dependencies]` section. In this case, you have to run `[poetry
+    install](https://python-poetry.org/docs/cli/#install) to resolve the version constraints
+    and install the libraries.`   ``After this step, Poetry creates a virtual environment
+    for the project and generates a `poetry.lock` file.    Step 3: Initialize Git
+    and other tools such as [DVC](https://medium.com/towards-data-science/data-version-control-for-the-modern-data-scientist-7-dvc-concepts-you-cant-ignore-bb2433ccec88) and
+    start tracking the appropriate files. Put `pyproject.toml` and `poetry.lock` files
+    under Git.    Step 4: Develop your code and models. To run Python scripts, you
+    must use `poetry run python script.py` so that Poetry''s virtual environment is
+    used.    Step 5: Test your code and make any necessary adjustments. Iterate on
+    your data analysis or machine learning algorithms, experiment with different techniques,
+    and refine your code as needed.    Optional steps:    1.  To update already-installed
+    dependencies, use the `poetry update library` command. `update` only works within
+    the constraints inside `pyproject.toml` so, check [the caveats here](https://python-poetry.org/docs/managing-dependencies/).
+    2.  If you are starting from a project with requirements.txt, use poetry add cat
+    requirements.txt to automatically add and install the dependencies. 3.  If you
+    want to export your poetry.lock file, you can use `poetry export --output requirements.txt`.
+    4.  If you chose a package structure for your project (`poetry add`), you can
+    build the package with `poetry build` and it will be ready to push to PyPI. 5.  Switch
+    between virtual environments with `poetry env use other_env`.    With these steps,
+    you will ensure that you are never in dependency hell again.    Thank you for
+    reading!        **[Bex Tuychiev](https://www.linkedin.com/in/bextuychiev/)** is
+    a Top 10 AI writer on Medium and a Kaggle Master with over 15k followers. He loves
+    writing detailed guides, tutorials, and notebooks on complex data science and
+    machine learning topics with a bit of a sarcastic style.      [Original](https://medium.com/towards-artificial-intelligence/forget-pip-conda-requirements-txt-use-poetry-instead-and-thank-me-later-226a0bc38a56).
+    Reposted with permission.       * * *      ## Our Top 3 Course Recommendations      ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png)
+    1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity)
+    - Get on the fast track to a career in cybersecurity.    ![](../Images/e225c49c3c91745821c8c0368bf04711.png)
+    2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics)
+    - Up your data analytics game    ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png)
+    3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport)
+    - Support your organization in IT    * * *      ### More On This Topic    *   [Managing
+    Python Dependencies with Poetry vs Conda & Pip](https://www.kdnuggets.com/managing-python-dependencies-with-poetry-vs-conda-pip)
+    *   [Stop Hard Coding in a Data Science Project - Use Config Files Instead](https://www.kdnuggets.com/2023/06/stop-hard-coding-data-science-project-config-files-instead.html)
+    *   [3 Reasons Why You Should Use Linear Regression Models Instead of…](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
+    *   [Forget ChatGPT, This New AI Assistant Is Leagues Ahead and Will…](https://www.kdnuggets.com/2023/08/forget-chatgpt-new-ai-assistant-leagues-ahead-change-way-work-forever.html)
+    *   [Pip Install YOU: A Beginner''s Guide to Creating Your Python Library](https://www.kdnuggets.com/pip-install-you-a-beginners-guide-to-creating-your-python-library)
+    *   [KDnuggets™ News 22:n06, Feb 9: Data Science Programming…](https://www.kdnuggets.com/2022/n06.html)``
+    [PRE15]`'
+  prefs: []
+  type: TYPE_NORMAL

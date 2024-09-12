@@ -1,0 +1,336 @@
+- en: Combining Different Methods to Create Advanced Time Series Prediction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/11/combining-different-methods-create-advanced-time-series-prediction.html](https://www.kdnuggets.com/2016/11/combining-different-methods-create-advanced-time-series-prediction.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Taras Firman, Data Scientist at [ELEKS](http://eleks.com/)**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Today, businesses need to be able to predict demand and trends to stay in line
+    with any sudden market changes and economy swings. This is exactly where forecasting
+    tools, powered by Data Science, come into play, enabling organizations to successfully
+    deal with strategic and capacity planning. Smart forecasting techniques can be
+    used to reduce any possible risks and assist in making well-informed decisions.
+    One of our customers, an enterprise from the Middle East, needed to predict their
+    market demand for the upcoming twelve weeks. They required a market forecast to
+    help them set their short-term objectives, such as production strategy, as well
+    as assist in capacity planning and price control. So, we came up with an idea
+    of creating a custom time series model capable of tackling the challenge. In this
+    article, we will cover the modelling process as well as the pitfalls we had to
+    overcome along the way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is a number of approaches to building time series prediction... and neither
+    fit us
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'With the emergence of the powerful forecasting methods based on Machine Learning,
+    future predictions have become more accurate. In general, forecasting techniques
+    can be grouped into two categories: qualitative and quantitative. Qualitative
+    forecasts are applied when there is no data available and prediction is based
+    only on expert judgement. Quantitative forecasts are based on time series modeling.
+    This kind of models uses historical data and is especially efficient in forecasting
+    some events that occur over periods of time: for example prices, sales figures,
+    volume of production etc.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The existing models for time series prediction include the [ARIMA models](https://onlinecourses.science.psu.edu/stat510/node/49)
+    that are mainly used to model time series data without directly handling seasonality;
+    [VAR models](https://onlinecourses.science.psu.edu/stat510/node/79), [Holt-Winters](https://www.otexts.org/fpp/7/5)
+    seasonal methods, [TAR models](https://onlinecourses.science.psu.edu/stat510/node/82)
+    and other. Unfortunately, these algorithms may fail to deliver the required level
+    of the prediction accuracy, as they can involve raw data that might be incomplete,
+    inconsistent or contain some errors. As quality decisions are based only on quality
+    data, it is crucial to perform preprocessing to prepare entry information for
+    further processing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why combining models is an answer
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'It is clear that one particular forecasting technique cannot work in every
+    situation. Each of the methods has its specific use case and can be applied with
+    regard to many factors (the period over which the historical data is available,
+    the time period that has to be observed, the size of the budget, the preferred
+    level of accuracy) and the output required. So, we faced the question: which method/methods
+    to use to obtain the desired result? As different approaches had their unique
+    strengths and weaknesses, we decided to combine a number of methods and make them
+    work together. In this way, we could build a time series model capable of providing
+    trustworthy predictions to ensure data reliability and time/cost saving. And this
+    is how we did it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The modeling process; let's dive into the details
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The demand data depends on various factors that can influence the result of
+    the forecast, such as the price and types of goods, geographical location, the
+    country’s economics, manufacturing technology, etc. As we wanted our time series
+    model to provide the customer with high-accuracy predictions, we used the [interpolation](https://ece.uwaterloo.ca/~dwharder/NumericalAnalysis/05Interpolation/)
+    method for missing values to ensure that the input is reliable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When conducting the time series analysis in Python 2.7., we analyzed the past
+    data starting from 2010 to 2015 to calculate precisely the demand and predict
+    its behavior in the future.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Fig. 1.png](../Images/86badad37232a5c8711be816bb1564bd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Fig. 1\. The demand data over the 2010-2015 timeframe*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: At first sight, it may seem that there is no constant demand value, as the variance
+    goes up and down, making the prediction hardly possible. But, there is a method
+    that can help here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We used the decomposition method to separately extract trend (the increase
+    or decrease in the series over a period of time), seasonality (the fluctuation
+    that occurs within the series over each week, each month, etc.) and residuals
+    (the data point that falls outside of the expected data range). With these three
+    components we built the additive model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![add model.png](../Images/d8ddfef548870c9874d06e48bf409dce.png),'
+  prefs: []
+  type: TYPE_NORMAL
+- en: where yt is the data, Tt is the trend-cycle component, St is the seasonal component
+    and Rt is the residual component, all defined over the time period t.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An important first step in describing various components of the series is smoothing,
+    although it does not really provide you with a ready-to-use model. In the beginning,
+    we estimated the trend (behavior) component. Such methods as Moving Average, Exponential
+    Smoothing, Chow’s Adaptive Control, Winter’s Linear and Seasonal Exponential Smoothing
+    methods did not provide us with the trend estimation accuracy we expected. The
+    most reliable result was obtained using the [Hodrick-Prescott Filter](https://cran.r-project.org/web/packages/mFilter/mFilter.pdf)
+    technique.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Fig. 2.png](../Images/6f79492c6e66bb6df38997bfccb249f9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Fig. 2\. The estimated trend*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then, we defined the seasonality from the available data. This component could
+    change over time, so we applied a powerful tool for decomposing the time series
+    - the [Loess method](https://www.otexts.org/fpp/6/5). [This](https://www.otexts.org/fpp/6/5)
+    approach can handle any type of seasonality, and the rate of change can be controlled
+    by a user.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Fig. 3.png](../Images/eefcf56cefa0b1d4fb572f5c49d8f160.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Fig. 4.png](../Images/27e4843cceabd21b1cd4b09856a4c4d9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Fig. 3\. Multi-seasonality*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We obtained a multi-seasonal component with some high and low variances, causing
+    large fluctuations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After applying [Elastic Net Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html)
+    and [Fourier transformation](http://www.le.ac.uk/users/dsgp1/COURSES/LEIMETZ/FOURIER.pdf),
+    we built a forecast for the trend based on the results obtained. The approximation
+    of the trend can be found from the formula below,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation 2](../Images/e30b3af647ca14f237c8b792b2f81dea.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: where Pn(t) is a degree polynomial and Ak is a set of indexes, including the
+    first k indexes with highest amplitudes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then, we calculated the Fourier coefficients using The Discrete Fourier Transform
+    ( DFT).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Fig. 4](../Images/086695b214ec1256df3fc9e7530c74a4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Fig. 4\. The example of code of the DFT in Python*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The effect of the Fourier terms, used as external regressors in the model, is
+    visualised below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Fig. 5](../Images/bcd8ece08daf2471c898b20faa7f1634.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Fig. 5\. The visualised effect of Fourier terms*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We built the trend prediction using the additive model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Fig. 6](../Images/87d3d4c8cbc944be9ded0491037ac1c5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Fig. 6\. Trend prediction*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When the trend and seasonal components are removed from the model, we can obtain
+    the residuals (the difference between an observed value and its forecast based
+    on other observations) from the remaining part to validate and fit our mathematical
+    model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Fig. 7](../Images/6417102941576a34f4eb53cbdaea22b8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Fig. 7\. Obtained residuals*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You may notice that there are some negative values present, showing that something
+    unusual was happening during that period of time. We aimed to find out the circumstances
+    causing such behaviour, so we came up with an idea to compile the outliers with
+    a simple calendar and discovered that the negative values tightly correlate with
+    such public holidays as Ramadan, Eid Al Fitr and other. Having collected and summarized
+    all the data, we applied Machine Learning methods based on previous data points
+    as entry features and Machine Learning Strategies for Time Series Prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After a few training sessions conducted with ML models, we built a prediction
+    for residuals that can be observed below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Fig. 8](../Images/cf4526aa370979c19e6bf0a1f6362325.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Fig. 8\. Prediction for residuals*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a result, we got a final forecasting model that minimizes the mean absolute
+    percentage error (MAPE) to 6% for one particular city and 10% for the entire country
+    in general.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Fig. 9](../Images/9c4e934d50df51c7838165b2a9f11b5c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Fig. 9\. The forecast at the original scale*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A 24-times faster prediction? Yes, it's possible
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When building our model, we attempted not only to use the available information,
+    but also discover the factors which could affect the results. This approach helped
+    us develop the model generating more accurate forecasting results faster than
+    the existing models. For example, to train the developed model to make a prediction
+    for 300 different cities, we need about 15 minutes, while other methods require
+    about 6 hours.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, the fact that the deviation between the actual demand and the predicted
+    demand was only 6% resulted in possibilities to resolve mismatches between supply
+    and demand. Now, the customer can more quickly and more easily plan the capacity,
+    minimize future risks and optimize inventory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What’s next?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Well, the results are quite promising. And there is a long way we can go further
+    in improvement of this model, so it could provide accurate long-term forecasts
+    as well. As for now, the degree of error for long-term predictions is still quite
+    high. Sounds like a challenge? So stay tuned! Some new experiments are coming!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Taras Firman](https://www.facebook.com/profile.php?id=100009049483326)**
+    is a Data Scientist at ELEKS, working with statistical analysis, optimization,
+    forecasting and other serious stuff. A mathematician by education and by calling,
+    Taras develops his professional skills at a postgraduate program, and teaches
+    operations research and data analysis. Moreover, he never misses any interesting
+    data science or machine learning news in blogs, and having a lot to contribute,
+    he also decided to blog. When he’s done with math and data science, Taras is aso
+    into football and music.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deriving Better Insights from Time Series Data with Cycle Plots](/2016/03/better-insights-time-series-cycle-plots.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A simple approach to anomaly detection in periodic big data streams](/2016/08/anomaly-detection-periodic-big-data-streams.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Great Algorithm Tutorial Roundup](/2016/09/great-algorithm-tutorial-roundup.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Multivariate Time-Series Prediction with BQML](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Create a Time Series Ratio Analysis Dashboard](https://www.kdnuggets.com/2023/06/wolfer-create-time-series-ratio-analysis-dashboard.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Combining Pandas DataFrames Made Simple](https://www.kdnuggets.com/2022/09/combining-pandas-dataframes-made-simple.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Combining Data Management and Data Storytelling to Generate Value](https://www.kdnuggets.com/combining-data-management-and-data-storytelling-to-generate-value)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Different Ways to Load Data in Python](https://www.kdnuggets.com/2020/08/5-different-ways-load-data-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Ultimate Guide To Different Word Embedding Techniques In NLP](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

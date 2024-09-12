@@ -1,0 +1,506 @@
+- en: 'Data Version Control: iterative machine learning'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/05/data-version-control-iterative-machine-learning.html](https://www.kdnuggets.com/2017/05/data-version-control-iterative-machine-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By Dmitry Petrov, [@FullStackML](https://twitter.com/fullstackml)**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is hardly possible in real life to develop a good machine learning model
+    in a single pass. ML modeling is an iterative process and it is extremely important
+    to keep track of your steps, dependencies between the steps, dependencies between
+    your code and data files and all code running arguments. This becomes even more
+    important and complicated in a team environment where data scientists’ collaboration
+    takes a serious amount of the team’s effort.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![data-version-control](../Images/d94170a17e22b183d6db453a8b004034.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Today, we are pleased to announce the beta version release of new open source
+    tool — [data version control](https://dataversioncontrol.com/) or DVC. DVC is
+    designed to help data scientists keep track of their ML processes and file dependencies
+    in the simple form of git-like commands: “**dvc run python train_model.py data/train_matrix.p
+    data/model.p**”. Your existing ML processes can be easily transformed into reproducible
+    DVC pipelines regardless of which programming language or tool was used.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This blog post walks you through an iterative process of building a machine
+    learning model with DVC using [stackoverflow posts dataset](https://archive.org/details/stackexchange).
+    First, you should initialize a Git repository and download a modeling source code
+    that we will be using to show DVC in action:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ mkdir myrepo*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ cd myrepo*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ mkdir code*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ wget -nv -P code/ https://s3-us-west-2.amazonaws.com/dvc-share/so/code/featurization.py
+    \*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/evaluate.py \*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/train_model.py \*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/split_train_test.py \*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/xml_to_tsv.py \*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*https://s3-us-west-2.amazonaws.com/dvc-share/so/code/requirements.txt*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ pip install -r code/requirements.txt*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ git init*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ git add code/*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ git commit -m ‘Download code’*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The full pipeline could be built by running the bash code below. If you use
+    Python version 3, please replace python to python3 and pip to pip3.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Install DVC*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ pip install dvc*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Initialize DVC repository*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ dvc init*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Download a file and put to data/ directory.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ dvc import https://s3-us-west-2.amazonaws.com/dvc-share/so/25K/Posts.xml.tgz
+    data/*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Extract XML from the archive.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ dvc run tar zxf data/Posts.xml.tgz -C data/*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Prepare data.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ dvc run python code/xml_to_tsv.py data/Posts.xml data/Posts.tsv python*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Split training and testing dataset. Two output files.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# 0.33 is the test dataset splitting ratio. 20170426 is a seed for randomization.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ dvc run python code/split_train_test.py data/Posts.tsv 0.33 20170426 data/Posts-train.tsv
+    data/Posts-test.tsv*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Extract features from text data. Two TSV inputs and two pickle matrixes
+    outputs.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ dvc run python code/featurization.py data/Posts-train.tsv data/Posts-test.tsv
+    data/matrix-train.p data/matrix-test.p*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Train ML model out of the training dataset. 20170426 is another seed value.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ dvc run python code/train_model.py data/matrix-train.p 20170426 data/model.p*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Evaluate the model by the testing dataset.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ dvc run python code/evaluate.py data/model.p data/matrix-test.p data/evaluation.txt*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# The result.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ cat data/evaluation.txt*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*AUC: 0.596182*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The one thing to wrap your head around is that DVC automatically derives the
+    dependencies between the steps and builds the dependency graph ([DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph))
+    transparently to the user. This graph is used for reproducing parts of your pipeline
+    which were affected by recent changes. In the next code sample we are changing
+    feature extraction step of the pipeline and reproduce the final result. DVC derives
+    that only three steps out of seven need to be rebuilt and runs these steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Improve feature extraction step.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ vi code/featurization.py*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Commit all the changes.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ git commit -am “Add bigram features”*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*[master 50b5a2a] Add bigram features*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*1 file changed, 5 insertion(+), 2 deletion(-)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Reproduce all required steps to get our target metrics file.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ dvc repro data/evaluation.txt*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Reproducing run command for data item data/matrix-train.p. Args: python code/featurization.py
+    data/Posts-train.tsv data/Posts-test.tsv data/matrix-train.p data/matrix-test.p*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Reproducing run command for data item data/model.p. Args: python code/train_model.py
+    data/matrix-train.p 20170426 data/model.p*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Reproducing run command for data item data/evaluation.txt. Args: python code/evaluate.py
+    data/model.p data/matrix-test.p data/evaluation.txt*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Data item “data/evaluation.txt” was reproduced.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Take a look at the target metric improvement.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ cat data/evaluation.txt*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*AUC: 0.627196*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you replace the input file that affects all the steps, then the entire pipeline
+    will be reproduced.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Replace small input dataset (25K items) to a bigger one (100K).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ dvc remove data/Posts.xml.tgz*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ dvc import https://s3-us-west-2.amazonaws.com/dvc-share/so/100K/Posts.xml.tgz
+    data/*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Reproduce the metric file.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ dvc repro data/evaluation.txt*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Reproducing run command for data item data/Posts.xml. Args: tar zxf data/Posts.xml.tgz
+    -C data*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Reproducing run command for data item data/Posts.tsv. Args: python code/xml_to_tsv.py
+    data/Posts.xml data/Posts.tsv python*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Reproducing run command for data item data/Posts-train.tsv. Args: python code/split_train_test.py
+    data/Posts.tsv 0.33 20170426 data/Posts-train.tsv data/Posts-test.tsv*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Reproducing run command for data item data/matrix-train.p. Args: python code/featurization.py
+    data/Posts-train.tsv data/Posts-test.tsv data/matrix-train.p data/matrix-test.p*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Reproducing run command for data item data/model.p. Args: python code/train_model.py
+    data/matrix-train.p 20170426 data/model.p*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Reproducing run command for data item data/evaluation.txt. Args: python code/evaluate.py
+    data/model.p data/matrix-test.p data/evaluation.txt*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Data item “data/evaluation.txt” was reproduced.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ cat data/evaluation.txt*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*AUC: 0.633541*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Not only can DVC streamline your work into a single, reproducible environment,
+    it also makes it easy to share this environment by Git including the dependencies
+    (DAG) — an exciting collaboration feature which gives the ability to reproduce
+    the research results in different computers. Moreover, you can share your data
+    files through cloud storage services like AWS S3 or GCP Storage since DVC does
+    not push data files to Git repositories.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![data-git](../Images/e992418268b6a645a274161e612fc858.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The code below shows how to share your code and DAG through the Git and data
+    files through S3:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Setup cloud settings. Example: Cloud = AWS, StoragePath=/dvc-share/projects/tag_classifier*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ vi dvc.conf*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ git commit -am “Set up AWS path”*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*[master ec994b6] Set up AWS path*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*1 file changed, 1 insertion(+), 1 deletion(-)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Share the repository with the pipeline and the cloud settings.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ git remote add origin https://github.com/dmpetrov/tag_classifier.git*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ git push -u origin master*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Share the most important data files.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ dvc sync data/matrix-train.p data/matrix-test.p*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Uploading cache file “.cache/matrix-train.p_1fa3a9b” to S3 “projects/tag_classifier/.cache/matrix-train.p_1fa3a9b”*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Uploading completed*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Uploading cache file “.cache/matrix-test.p_1fa3a9b” to S3 “projects/tag_classifier/.cache/matrix-test.p_1fa3a9b”*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Uploading completed*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, another data scientist can use this repository and reproduce the data files
+    the same way you just did. If she doesn’t want (or has not enough computational
+    resources) to reproduce everything, she can sync and lock shared data files. After
+    that, only the last steps of the ML process will be reproduced.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Get the repository.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ git clone https://github.com/dmpetrov/tag_classifier.git*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Sync the data files from S3.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ dvc sync data/*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Uploading cache file “.cache/empty_0000000” to S3 “projects/tag_classifier/.cache/empty_0000000”*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Uploading completed*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Downloading cache file from S3 “dvc-share/projects/tag_classifier/.cache/matrix-test.p_1fa3a9b”*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Downloading completed*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Downloading cache file from S3 “dvc-share/projects/tag_classifier/.cache/matrix-train.p_1fa3a9b”*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Downloading completed*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Lock the reproduction process in the feature extraction step*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# since these data files were synced.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ dvc lock data/matrix-t**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Data item data/matrix-test.p was locked*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Data item data/matrix-train.p was locked*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Improve the model.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ vi code/train_model.py*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ git commit -am “Tune the model”*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*[master 77e2943] Tune the model*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*1 file changed, 1 insertion(+), 1 deletion(-)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*# Reproduce required steps of the pipeline.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ dvc repro data/evaluation.txt*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Reproducing run command for data item data/model.p. Args: python code/train_model.py
+    data/matrix-train.p 20170426 data/model.p*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Reproducing run command for data item data/evaluation.txt. Args: python code/evaluate.py
+    data/model.p data/matrix-test.p data/evaluation.txt*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Data item “data/evaluation.txt” was reproduced.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*$ cat data/evaluation.txt*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*AUC: 0.670531*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The steps that were reproduced (red):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![data-mining](../Images/6d2e0ad482fb831ad427aa29277f20e1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Thus, the model can be improved iteratively and DVC simplifies the iterative
+    ML process and aids collaboration between data scientists.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are very interested in your opinion and feedback. Please post your comments
+    here or contact us in twitter — [FullStackML](https://twitter.com/FullStackML).
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you found this tool useful, **please “star” the** [**DVC Github repository**](https://github.com/dataversioncontrol/dvc).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://blog.dataversioncontrol.com/data-version-control-beta-release-iterative-machine-learning-a7faf7c8be67).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Dmitry Petrov](https://blog.dataversioncontrol.com/@fullstackml)**
+    is building the future of data science tooling DataVersionControl. Ex-Data Scientist
+    at Microsoft. Ex-Researcher. PhD in CS.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Fixing Deployment and Iteration Problems in CRISP-DM](/2017/02/fixing-deployment-iteration-problems-crisp-dm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Automation: Debunking Misconceptions](/2016/08/data-science-automation-debunking-misconceptions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[RCloud – DevOps for Data Science](/2016/11/rcloud-devops-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Python Basics: Syntax, Data Types, and Control Structures](https://www.kdnuggets.com/python-basics-syntax-data-types-and-control-structures)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Control Flow Cheat Sheet](https://www.kdnuggets.com/2022/11/python-control-flow-cheatsheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Nota AI releases beta version of NetPresso Model Search, their…](https://www.kdnuggets.com/2022/04/nota-ai-releases-beta-version-netpresso-model-search-hardwareaware-automl-tool.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

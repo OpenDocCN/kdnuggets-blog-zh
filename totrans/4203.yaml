@@ -1,0 +1,478 @@
+- en: Teaching AI to Classify Time-series Patterns with Synthetic Data
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/10/teaching-ai-classify-time-series-patterns-synthetic-data.html](https://www.kdnuggets.com/2021/10/teaching-ai-classify-time-series-patterns-synthetic-data.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What do we want to achieve?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We want to train an AI agent or model that can do something like this,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Teaching AI to Classify Time-series Patterns with Synthetic Data](../Images/09a0bbf71a73d15eca77d3c0da527966.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Image source**: Prepared by the author using this [Pixabay image](https://pixabay.com/illustrations/alien-robot-android-antennae-blue-1905155/) (Free
+    to use)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Variances, anomalies, shifts
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Little more specifically, we want to train an AI agent (or model) to identify/classify
+    time-series data for,
+  prefs: []
+  type: TYPE_NORMAL
+- en: low/medium/high variance
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: anomaly frequencies (*little or high fraction of anomalies*)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: anomaly scales (*are the anomalies too far from the normal or close*)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: a positive or negative shift in the time-series data (in the presence of some
+    anomalies)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: But, we don’t want to complicate things
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: However, we don’t want to do a ton of feature engineering or learn complicated
+    time-series algorithms (e.g. ARIMA) and properties (e.g. seasonality, stationarity)
+    for this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We just want to feed our time-series data (with proper labels) into some kind
+    of supervised ‘learning’ machine that can *learn these categories* (high or low
+    variance, too few or too many anomalies, etc.) *from the raw data*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A helpful Python library
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Why don’t we take advantage of a Python library which can do this kind of classification
+    for us automatically and all we have to do is to throw the data into it using
+    standard Numpy/Pandas format?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Even better if that library has the looks and feels of our favorite Scikit-learn
+    package!
+  prefs: []
+  type: TYPE_NORMAL
+- en: We find such features in the beautiful library — [**tslearn**](https://tslearn.readthedocs.io/en/stable/index.html).
+    Put it simply, it is a Python package that provides machine learning tools for
+    the analysis of time series. This package builds on (and hence depends on) `scikit-learn`, `numpy` and `scipy` libraries.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b38a62759752c6e95a2e978c6e14b4cb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image source:[ tslearn documentation](https://tslearn.readthedocs.io/en/stable/index.html)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why (and how) Synthetic Data?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: As I wrote in this article — “ *a synthetic dataset is a repository of data
+    that is generated programmatically. So, it is not collected by any real-life survey
+    or experiment. Its main purpose, therefore, is to be flexible and rich enough
+    to help an ML practitioner conduct fascinating experiments with various classification,
+    regression, and clustering algorithms*.”
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Synthetic data generation — a must-have skill for new data scientists**](https://towardsdatascience.com/synthetic-data-generation-a-must-have-skill-for-new-data-scientists-915896c0c1ae)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: …and then extended the argument in this article — “*Synthetic time-series is
+    no exception — it helps a data scientist to experiment with various algorithmic
+    methods and to prepare for real-life deployment in ways that could not have been
+    possible with only real datasets.*”
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Create synthetic time-series with anomaly signatures in Python**](https://towardsdatascience.com/create-synthetic-time-series-with-anomaly-signatures-in-python-c0b80a6c093c)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basically, we want to **synthesize time-series data with anomalies and other
+    patterns**, automatically label them, and feed them to the `tslearn` algorithms
+    for teaching our AI agent about these patterns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In particular, if we want to use deep-learning-based classifiers (as offered
+    by `tslearn`), then we may need a significant amount of data covering all possible
+    variations, which may not be available readily in real-life situations. This is
+    where synthetic data comes in handy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Off to the adventure then!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Teaching the AI agent about time-series patterns
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The demo notebook can be [**found here in my Github repo**](https://github.com/tirthajyoti/Synthetic-data-gen/blob/master/Notebooks/Anomaly-training-tslearn.ipynb).
+    The process of converting time-series data to a format suitable for training by
+    a `tslearn` model is rather simple and is illustrated in the notebook. Here, we
+    mainly focus on the various types of classification results as illustrations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: High or low variance in the data?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: I deal with a lot of industrial data i.e. where an army of sensors are creating
+    a never-ending stream of digital data from machines, factories, operators, and
+    business processes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Detecting whether a time-series data stream has high or low variance can be
+    critical for many process decisions downstream. So, we start there.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The flow is simple,
+  prefs: []
+  type: TYPE_NORMAL
+- en: generate synthetic data using `SyntheticTS` module (discussed in my article
+    here and can be found here)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: generate corresponding class labels to match these Numpy/Pandas data series
+    (Note the **auto-generation of labels based on domain knowledge injection**)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: convert the synthetic series data to `tslearn` time-series objects(arrays)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: store them in the training dataset
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: feed the training data to a suitable time-series classifier from `tslearn`.
+    We chose the `TimeSeriesMLPClassifier` method which is built atop the familiar
+    multi-layer perceptron method of Scikit-learn essentially implementing a **fully
+    connected deep learning network**.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/554f86dbdfcd97576b41b75895ed3e4d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Training flow with Synthetic data, **Source**: Prepared entirely by the author'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `TimeSeriesMLPClassifier` has all the bells and whistles of the standard
+    Scikit-learn MLP classifier,
+  prefs: []
+  type: TYPE_NORMAL
+- en: hidden layer size and number of neurons
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: activation function
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: solver/optimizer (e.g. ‘Adam’)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: learning rate
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: batch size
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: tolerance
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: momentum settings
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: early stopping criterion
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/e34a112829b154665fdd83338d88fa35.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Basically, we want to **synthesize time-series data with anomalies and other
+    patterns**, automatically label them, and feed them to the `tslearn` algorithms
+    for teaching our AI agent about these patterns.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: For brevity, in the notebook, I do not show the train/test split but that must
+    be done as a standard data science workflow practice for real applications.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can plot the standard loss curve after training and do all sorts of hyperparameter
+    tuning to make the performance top-notch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e9b9fd191f5200237f93a4559c46b4ec.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: However, showing the deep learning classifier tuning is not the goal of this
+    article. We would rather focus on the end re***sults i.e. what kind of classification
+    decisions it made***.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here are some random test results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/18c8bee51733c8200e54b626cf8c14fc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Label generation — manual or automatic?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The entire point of the article was to show that one can avoid manual labeling
+    by synthetic data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I generated hundreds of synthetic time series with **random variances or shifts** to
+    train the classifier. Because they were generated programmatically, they could
+    be labeled automatically too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This point will be clear once you see the generation code in the actual Notebook.
+    Here is the idea for the variance training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/db52def0fe9ae4de102b47b85135ac99.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Anomalies — high or low fractions of data?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Identifying anomalies is not enough. In most real-life situations, you have
+    to also identify their frequency and occurrence pattern.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is because industrial data analytics systems are often responsible for
+    generating alerts once they detect sufficient anomalies in the data stream. Consequently,
+    to decide whether to raise an alert or not, they need to have a good idea about
+    whether the anomaly count represents a significant fraction of the normal data
+    or not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You don’t want to raise too many false alerts, do you? That will be bad for
+    the reputation of an AI-driven system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, we went through the same process of training an AI model about the fraction
+    of anomalies in time series data. Here are the random test results,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/932b3681b4556146a930cd4681073738.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Anomalies — how big are they in magnitude?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In many cases, we are also interested in classifying the incoming data as having
+    a high/medium/low magnitude of anomalies. For industrial data analytics, this
+    feature may give an indication of the state of the machine or process abnormality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We followed the same training process as above and obtained these results,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/64dba33cf025f15193e48850717ee135.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Data drifts or shifts — where and how?
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Another classic operation in industrial data analytics is the detect the drift/
+    shift in the incoming sensor data from a machine. There could be a multitude of
+    reasons,
+  prefs: []
+  type: TYPE_NORMAL
+- en: the machine may be agings,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: a process recipe/setting is changed suddenly without proper logging,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: a small sub-component may be degrading over time
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Bottom line is that an AI-driven system should be able to identify these categories
+    — at least in terms of positive or negative shifts and their point of occurrence
+    i.e.* whether the drift started early or late in the process lifecycle*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Identifying anomalies is not enough. In most real-life situations, you have
+    to also identify their frequency and occurrence pattern. This is because industrial
+    data analytics systems are often responsible for generating alerts once they detect
+    sufficient anomalies in the data stream
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In this case, we added the location of the shift (early or late in the whole
+    time period) to the mix. So, we have the following classes to train the data on,
+  prefs: []
+  type: TYPE_NORMAL
+- en: early positive shift
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: late positive shift
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: early negative shift
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: late negative shift
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Because of this increased complexity, we needed to generate a larger amount
+    of synthetic data** than the previous experiments. Here are the results,'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c877eb1b4d9a62e96d312bf6c24d0cdb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Summary
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Time-series classification is a highly interesting topic for many wonderful
+    use cases. In this article, we showed, how **using synthetic data, we can train
+    AI models** (deep learning networks with a few fully connected layers) for one-dimensional **time-series
+    data mimicking industrial processes or sensor streams**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In particular, we focused on **teaching the AI model about various anomaly properties
+    and data drift patterns** as these classifications are highly important indicators
+    of machine degradation. In short, they form the bedrock of the so-called [**predictive
+    analytics**](https://www.industr.com/en/how-convergence-of-data-analytics-iot-drives-industry-2551064) in
+    the realm of **Industry 4.0** or **Smart Manufacturing**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We hope that the use of synthetic data for AI-driven predictive analytics will
+    grow significantly in the future.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can check the author’s [**GitHub**](https://github.com/tirthajyoti?tab=repositories)** repositories **for
+    code, ideas, and resources in machine learning and data science. If you are, like
+    me, passionate about AI/machine learning/data science, please feel free to [add
+    me on LinkedIn](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) or [follow
+    me on Twitter](https://twitter.com/tirthajyotiS).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Tirthajyoti Sarkar](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)**
+    is a Data Science/ML Manager at Adapdix Corp. He contributes regularly to publications
+    such as KDnuggets and TDS on diverse topics related to data science and machine
+    learning. He has authored data science books and contributes to open source software.
+    Tirthajyoti holds a Ph.D. in EE and is working on an M.S. degree in Computational
+    Data Analytics. Email him at tirthajyoti at gmail[dot]com.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/teaching-ai-to-classify-time-series-patterns-with-synthetic-data-555d8e75ee8a).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[GPU-Powered Data Science (NOT Deep Learning) with RAPIDS](/2021/08/gpu-powered-data-science-deep-learning-rapids.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why and how should you learn “Productive Data Science”?](/2021/07/learn-productive-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Monte Carlo integration in Python](/2020/12/monte-carlo-integration-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

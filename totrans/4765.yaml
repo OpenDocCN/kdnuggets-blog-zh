@@ -1,0 +1,330 @@
+- en: 'Notes on Feature Preprocessing: The What, the Why, and the How'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/10/notes-feature-preprocessing-what-why-how.html](https://www.kdnuggets.com/2018/10/notes-feature-preprocessing-what-why-how.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)![Image](../Images/936e98582a437454bc4a6a7480f46cbf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Original vs shifted vs shifted & scaled data (Source: [Artificial Intelligence
+    GitBook](https://leonardoaraujosantos.gitbooks.io/artificial-inteligence/content/feature_scaling.html))'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article covers a few important points related to the preprocessing of numeric
+    data, focusing on the scaling of feature values, and the broad question of dealing
+    with outliers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Effects of Feature Scaling**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Feature scaling](https://en.wikipedia.org/wiki/Feature_scaling) can be defined
+    as "a method used to standardize the range of independent variables or features
+    of data." Feature scaling is one of the main components of data preprocessing,
+    and can be applied to all types of data one might come across.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some models are influenced by features scaling, while others are not. Non-tree-based
+    models can be easily influenced by feature scaling:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Linear models
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Nearest neighbor classifiers
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Neural networks
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Conversely, tree-based models are not influenced by feature scaling. It should
+    be obvious, but examples of tree-based modeling algorithms include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Plain old decision trees
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Random forests
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Gradient boosted trees
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Why is this?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imagine we multiply the scale of a particular feature's values (and only that
+    feature's values) by 100\. If we think in terms of the positioning of data points
+    along an axis corresponding to this feature, there will be a clear effect on a
+    model such as a nearest neighbors classifier, for instance. Linear models, nearest
+    neighbors, and neural networks are all sensitive to the relative positioning of
+    data point values to one another; in fact, that's how the explicit premise of
+    K-nearest neighbors (kNN).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since tree-based models search for the best split positions along a feature's
+    data axis, this relative positioning is far less important. If the determined
+    split position is between points a and b, this will remain constant if both points
+    are multiplied or divided by some constant.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/666fca2f624b4f62bddf531313ba86a3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Resulting models from algorithms such as kNN on the left are susceptible to
+    feature scaling; tree-based models such as those on the right are not susceptible
+    to feature scaling
+  prefs: []
+  type: TYPE_NORMAL
+- en: A potential use of feature scaling beyond the obvious is testing feature importance.
+    For kNN, for example, the larger a given feature's values are, the more impact
+    they will have on a model. This fact can be taken advantage of by intentionally
+    boosting the scale of a feature or features which we may believe to be of greater
+    importance, and see if slight deviations in these larger values impact the resulting
+    model. Conversely, multiplying a feature's data point values by zero will result
+    in stacked data points along that axis, rendering this feature useless in the
+    modeling process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This covers linear models, but what about neural networks? It turns out that
+    neural networks are greatly affected by scale as well: the impact of [regularization](https://en.wikipedia.org/wiki/Regularization_(mathematics))
+    is proportional to feature scale. Gradient descent methods can have trouble without
+    proper scaling.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finally, to provide the simplest example of why feature scaling is important:
+    consider k-means clustering. If your data has 4 columns, with 3 of the columns''
+    values being scaled between 0 and 1, and the fourth possessing values between
+    0 and 1,000, it is relatively easy to determine which of these features will be
+    the sole determinant of clustering results.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Feature Scaling Methods**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Min/Max Scaling**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Formula](../Images/8ec67a92d352f40501d4e8c926490369.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This method scales values between 0 and 1 ???? [0, 1]
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Sets minimum equal to zero, maximum equal to one, and all other values scaled
+    accordingly in between
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The Scikit-learn [`sklearn.preprocessing.MinMaxScaler`](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html)
+    module is such an implementation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Standard Scaling**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Formula](../Images/20e63d6c5f250e7fd176da67e0a378ba.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This method scales by setting the mean of the data to 0, and the standard deviation
+    to 1
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Subtracts the mean value from feature value, and divides by standard deviation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This results in the standardized distribution
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The Scikit-learn [`sklearn.preprocessing.StandardScaler`](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html)
+    module is such an implementation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: What is the difference between these (and other) scaling methods in practice?
+    This is dependent on the specific dataset they are applied to, but in practice
+    the results are often *roughly* similar.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dealing with Outliers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: People often push back hard against talk of "removing outliers." The reality
+    is that outliers can unhelpfully skew a model. The real issue is not that removing
+    outliers is, in itself, an issue; however, you need to understand outliers as
+    they relate to the data, and make an informed judgement as to whether or not they
+    should be removed, and exactly why this is the case. An alternative to removing
+    outliers is using some form of scaling to manage them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Outliers can be an issue not just for features, but also potentially for target
+    values. If all target values are between 0 and 1, for example, and a new data
+    point is introduced with a target value of 100,000, a resulting regression model
+    would start predicting artificially high values for the rest of our data points
+    in the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keep in mind that outliers can often represent NaNs, especially if they fall
+    outside of upper and lower bounds and are tightly clustered (all NaNs may have
+    been converted to -999, for example). This type of outlier skews distribution
+    artificially, and some approach to dealing with them is absolutely necessary.
+    Domain knowledge and data inspection are the most useful tools for deciding how
+    to deal with outliers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Clipping**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One approach to fix outliers for linear models is to keep values between upper
+    and lower bounds. How do we choose these bounds? A reasonable approach is using
+    percentiles -- keep the values between, say, the first and 99th percentiles only.
+    This form of clipping is referred to as [winsorization](https://en.wikipedia.org/wiki/Winsorizing).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Refer to [`scipy.stats.mstats.winsorize`](https://docs.scipy.org/doc/scipy-0.13.0/reference/generated/scipy.stats.mstats.winsorize.html)
+    for more info on winsorization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Rank Transform**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Rank transform removes the relative distance between feature values and replaces
+    them with a consistent interval representing feature value ranking (think: first,
+    second, third...). This moves outliers closer to other feature values (at a regular
+    interval), and can be a valid approach for linear models, kNN, and neural networks.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Refer to [`scipy.stats.rankdata`](https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.rankdata.html)
+    for more on rank transform.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Log Transform**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Log transforms can be useful for non-tree-based models. They can be used to
+    drive larger feature values away from extremes and closer to the mean feature
+    values. It also has the effect of making values closer to zero more distinguishable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: See [`numpy.log`](https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.log.html)
+    and [`numpy.sqrt`](https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.sqrt.html)
+    for more information on implementing these transforms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It may be useful to combine a variety of preprocessing methods together into
+    one model, by preprocessing percentages of your dataset instances using different
+    methods, and concatenating the results into a single training set. Alternatively,
+    mixing models which were trained on differently preprocessed data (compare with
+    the former method description) via ensembling could also prove useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Preprocessing is not a "one size fits all" situation, and your willingness to
+    experiment with alternative approaches based on sound mathematical principles
+    can perhaps lead to increased model robustness.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**References:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to Win a Data Science Competition: Learn from Top Kagglers](https://www.coursera.org/learn/competitive-data-science),
+    National Research University Higher School of Economics (Coursera)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Data Preparation with Python](/2017/06/7-steps-mastering-data-preparation-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Text Data Preprocessing: A Walkthrough in Python](/2018/03/text-data-preprocessing-walkthrough-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Preparation Tips, Tricks, and Tools: An Interview with the Insiders](/2016/10/data-preparation-tips-tricks-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[SQL Notes for Professionals: The Free eBook Review](https://www.kdnuggets.com/2022/05/sql-notes-professionals-free-ebook-review.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, May 11: SQL Notes for Professionals; How To…](https://www.kdnuggets.com/2022/n19.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Data Cleaning and Preprocessing Techniques](https://www.kdnuggets.com/2023/08/7-steps-mastering-data-cleaning-preprocessing-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Harnessing ChatGPT for Automated Data Cleaning and Preprocessing](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Cleaning and Preprocessing Text Data in Pandas for NLP Tasks](https://www.kdnuggets.com/cleaning-and-preprocessing-text-data-in-pandas-for-nlp-tasks)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,343 @@
+- en: Testing Your Machine Learning Pipelines
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/11/testing-machine-learning-pipelines.html](https://www.kdnuggets.com/2019/11/testing-machine-learning-pipelines.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Kristina Young](https://www.linkedin.com/in/kristina-georgieva/), Senior
+    Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When it comes to data products, a lot of the time there is a misconception that
+    these cannot be put through automated testing. Although some parts of the pipeline
+    can not go through *traditional* testing methodologies due to their experimental
+    and stochastic nature, most of the pipeline can. In addition to this, the more
+    unpredictable algorithms can be put through specialised validation processes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s take a look at traditional testing methodologies and how we can apply
+    these to our data/ML pipelines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Testing Pyramid
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Your standard simplified testing pyramid looks like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Testing pyramid](../Images/c91452a8dddea3d572e7c48be6b02998.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This pyramid is a representation of the types of tests that you would write
+    for an application. We start with a lot of Unit Tests, which test a single piece
+    of functionality in isolation of others. Then we write Integration Tests which
+    check whether bringing our isolated components together works as expected. Lastly
+    we write UI or acceptance tests, which check that the application works as expected
+    from the user’s perspective.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When it comes to data products, the pyramid is not so different. We have more
+    or less the same levels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Testing pyramid.png](../Images/73bc12f0b893c1efe5ad944fee1ddaa8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note that the UI tests would still take place for the product, but this blog
+    post focuses on tests most relevant to the data pipeline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s take a closer look at what each of these means in the context of Machine
+    Learning, and with the help fo some sci-fi authors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unit tests
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*“It’s a system for testing your thoughts against the universe, and seeing
+    whether they match” Isaac Asimov.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Most of the code in a data pipeline consists of a data cleaning process. Each
+    of the functions used to do data cleaning has a clear goal. Let’s say, for example,
+    that one of the features that we have chosen for out model is the change of a
+    value between the previous and current day. Our code might look somewhat like
+    this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here we know that for a given input we expect a certain output, therefore,
+    we can test this with the following code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: For each piece of independent functionality, you would write a unit test, making
+    sure that each part of the data transformation process has the expected effect
+    on the data. For each piece of functionality you should also consider different
+    scenarios (is there an if statement? then all conditionals should be tested).
+    These would then be ran as part of your continuous integration (CI) pipeline on
+    every commit.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition to checking that the code does what is intended, unit tests also
+    give us a hand when debugging a problem. By adding a test that reproduces a newly
+    discovered bug, we can ensure that the bug is fixed when we think that is fixed,
+    and we can ensure that the bug does not happen again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lastly, these tests not only check that the code does what is intended, but
+    also help us document the expectations that we had when creating the functionality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Integration tests
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*Because “The unclouded eye was better, no matter what it saw.” Frank Herbert*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'These tests aim to determine whether modules that have been developed separately
+    work as expected when brought together. In terms of a data pipeline, these can
+    check that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data cleaning process results in a dataset appropriate for the model
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The model training can handle the data provided to it and outputs results (ensurign
+    that code can be refactored in the future)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'So if we take the unit tested function above and we add the following two functions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then we can test that combining the functions inside *clean_data* will yield
+    the expected result with the following code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now let’s say that the next thing we do is feed the above data to a logistic
+    regression model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Although we don’t know the expectation, we can ensure that we always result
+    in the same value. It is useful for us to test this integration to ensure that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data is consumable by the model (a label exists for every input, the types
+    of the data are accepted by the type of model chosen, etc)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We are able to refactor our code in the future, without breaking the end to
+    end functionality.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'We can ensure that the results are always the same by providing the same seed
+    for the random generator. All major libraries allow you to set the seed (Tensorflow
+    is a bit special, as it requires you to set the seed via numpy, so keep this in
+    mind). The test could look as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: There won’t be as many of these kinds of tests as unit tests, but they would
+    still be part of your CI pipeline. You would use these to check the end to end
+    functionality for a component and would therefore test more major scenarios.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ML Validation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*Why? “To exhibit the perfect uselessness of knowing the answer to the wrong
+    question.” Ursula K. Le Guin.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we have tested our code, we need to also test that the ML component
+    is solving the problem that we are trying to solve. When we talk about product
+    development, the raw results of an ML model (however accurate based on statistical
+    methods) are almost never the desired end outputs. These results are usually combined
+    with other business rules before consumed by a user or another application. For
+    this reason, we need to validate that the model solves the user problem, and not
+    only that the accuracy/f1-score/other statistical measure is high enough.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How does this help us?
+  prefs: []
+  type: TYPE_NORMAL
+- en: It ensures that the model actually helps the product solve the problem at hand
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For example, a model that classifies a snake bite as deadly or not with 80%
+    accuracy is not a good model if the 20% that is incorrect leads to patients not
+    getting the treatment that they need.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It ensures that the values produced by the model make sense in terms of the
+    industry
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For example, a model that predicts changes in price with 70% accuracy is not
+    a good model, if the end price displayed to the user has a value that’s too low/high
+    to make sense in that industry/market.
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It provides an extra layer of documentation of the decisions made, helping engineers
+    joining the team later in the process.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It provides visibility of the ML components of the product in a common language
+    understood by clients, product managers and engineers in the same way.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This kind of validation should be ran periodically (either through the CI pipeline
+    or a cron job), and its results should be made visible to the organisation. This
+    ensures that progress in the data science components is visible to the organisation,
+    and ensures that issues caused by changes or stale data are caught early.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*After all “Magic’s just science that we don’t understand yet” Arthur C. Clarke.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'ML components can be tested in various ways, bringing us the following advantages:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Resulting in a data driven approach to ensure that the code does what is expected
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Ensuring that we can refactor and cleanup code without breaking the functionality
+    of the product
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Documenting functionality, decisions and previous bugs
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Providing visibility of the progress and state of the ML components of a product
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: So don’t be afraid, if you have the skillset to write the code, you have the
+    skillset to write the test and gain all of the above advantages ????.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So long and thanks for all the testing!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Kristina Young](https://www.linkedin.com/in/kristina-georgieva/)**
+    is a Senior Data Scientist at BCG Digital Ventures. She has previously worked
+    at SoundCloud as a Backend and Data Engineer in the Recommendations team. Her
+    previous experience is as a consultant and researcher. She has worked as a back
+    end, web and mobile developer in the past on a variety of technologies.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://intothedepthsofdataengineering.wordpress.com/2019/07/18/testing-your-machine-learning-ml-pipelines/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[5 Step Guide to Scalable Deep Learning Pipelines with d6tflow](/2019/09/5-step-guide-scalable-deep-learning-pipelines-d6tflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How I Got Better at Machine Learning](/2019/11/better-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Pipelines, Luigi, Airflow: Everything you need to know](/2019/03/data-pipelines-luigi-airflow-everything-need-know.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Hypothesis Testing and A/B Testing](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Streamline Your Machine Learning Workflow with Scikit-learn Pipelines](https://www.kdnuggets.com/streamline-your-machine-learning-workflow-with-scikit-learn-pipelines)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Effective Testing for Machine Learning](https://www.kdnuggets.com/2022/01/effective-testing-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Difference Between Training and Testing Data in Machine Learning](https://www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beginner’s Guide to Machine Learning Testing With DeepChecks](https://www.kdnuggets.com/beginners-guide-to-machine-learning-testing-with-deepchecks)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Answering Questions with HuggingFace Pipelines and Streamlit](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

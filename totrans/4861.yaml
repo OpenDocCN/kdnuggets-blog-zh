@@ -1,0 +1,465 @@
+- en: Neural Network based Startup Name Generator
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/04/neural-network-startup-name-generator.html](https://www.kdnuggets.com/2018/04/neural-network-startup-name-generator.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Alexander Engelhardt](http://www.alpha-epsilon.de/), freelance Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In this post I present a Python script that automatically generates suggestions
+    for startup names. You feed it a text corpus with a certain theme, e.g. a Celtic
+    text, and it then outputs similar sounding suggestions. An example call looks
+    like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ./generate.py -n 10 -t 1.2 -m models/gallic_500epochs.h5 wordlists/gallic.txt
+    --suffix Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: =======
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ercos Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: Riuri Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: Palia Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: Critim Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: Arios Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: Veduos Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: Eigla Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: Isbanos Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: Edorio Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: Emmos Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: I applied the script to “normal” texts in English, German, and French, and then
+    experimented with corpora of Celtic songs, Pokemon names, and J.R.R. Tolkien’s
+    Black Speech, the language of Mordor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I’ve made a few longer lists of sampled proposals available [here](https://github.com/AlexEngelhardt/startup-name-generator/tree/master/sample-outputs/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can find the code, all the text corpora I’ve used, and some pre-computed
+    models in my GitHub repo:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://github.com/AlexEngelhardt/startup-name-generator](https://github.com/AlexEngelhardt/startup-name-generator)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Goal
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Recently, an associate and I started to found a software company, but most name
+    ideas we came up with were already in use. We wanted a name with a Celtic touch,
+    and we needed a large number of candidates to find one that was still available.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So I started to create a neural network that generates new, artificial words.
+    You’d feed it a corpus of sample words in a certain style you like, for example,
+    Celtic songs, and it would be able to pick up the peculiarities of the text (the
+    “language”) and generate new similar sounding words. The famous [blog post by
+    Andrej Karpathy](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) provided
+    me with the necessary knowledge and the confidence that this is a realistic idea.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data preprocessing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I first built a corpus of raw text. For preprocessing, I stripped out all non-letter
+    characters. Then, I split the text up in words and kept only unique words. I figured
+    this step was reasonable since I did not want the model to learn the most common
+    words, but instead to get an understanding of the entire corpus’ structure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After this, most text corpora ended up as a list of 1000 to 2000 words.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The RNN architecture
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Recurrent neural networks can model language particularly well, and were the
+    appropriate type for this task of word generation. However, finding the ‘perfect’
+    RNN architecture is still somewhat of a black art. Questions like how many layers
+    or how many units to use have no definite answer, but rely on experience and intuition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To save training time, I wanted a model that was as complex as necessary, but
+    as simple as possible. I settled for a character-level two-layer LSTM with 50
+    units each, training it for 500 epochs. The words this model outputs sound very
+    good already.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sampling temperature
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The RNN generates a new name character by character. It doesn’t just output
+    the next character, but the *distribution* for the next character. This allows
+    us to either just pick the letter with the highest probability, or to sample from
+    the provided distribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A nice touch I found is to vary the [temperature](https://cs.stackexchange.com/questions/79241/what-is-temperature-in-lstm-and-neural-networks-generally)
+    of the sampling procedure. The temperature is a parameter that adapts the weights
+    to sample from. The “standard” temperature 1 does not change the weights. For
+    a lower temperature, the sampling becomes less random, i.e. more conservative,
+    and the letter corresponding to the maximum weight is chosen almost always. The
+    other extreme, a large temperature, will adjust the weights approaching a uniform
+    distribution, representing total randomness. For actual text sampling, a temperature
+    below 1 might be appropriate, but since I wanted new words, a higher temperature
+    seemed better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![The effect of varying the temperature](../Images/aa677edde1f381f8c762b7caaefe6fde.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the image above, imagine we want to sample one letter from A, B, …, J. The
+    original weights output by your RNN might be the red bars. If you lower the temperature,
+    the weights change to the yellow-ish bars (temperature = 0.1), and if you raise
+    it, they change to the green bars (temperature = 3).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Example calls and sample output
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Call the script with the -h parameter to have it print an overview of all possible
+    parameters. The following command trains an LSTM model on the wordlists/english.txt
+    corpus for 500 epochs (-e 500), saves the model (-s) to models/english_500epochs.h5,
+    and then samples 10 company names (-n 10) with a temperature of 1.2 (-t 1.2),
+    and finally appends the word “Software” (--suffix) to the names (I found a long
+    list of possible suffixes [here](https://www.reddit.com/r/Entrepreneur/comments/4jfrgl/is_there_a_list_of_generic_company_name_endings/)).
+    While training, I like to pass the -v argument to run in verbose mode. Then, the
+    model prints some extra information as well as a few sample generated words each
+    10 epochs:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: ./generate.py -v -e 500 -n 10 -t 1.2 -s models/english_500epochs.h5 wordlists/english.txt
+    --suffix Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'My call returned these suggestions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Officers Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ahips Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: Appearing Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduce Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alarmed Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: Interettint Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: Entwrite Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understood Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: Aspemardan Software
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some other fine name suggestions I encountered, and are too good not to share:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Indeed (see, it works!)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Unifart (I dare you!)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Lyston
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Alton
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Rocking
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Moor
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Purrs
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Ture
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Exace
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Overheader
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: After you stored the model (with the -s option), word generation is quicker
+    when you load instead of re-compute the model (using the -m instead of the -s
+    argument).
+  prefs: []
+  type: TYPE_NORMAL
+- en: More exotic corpora
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I collected a text each in German, English and French, just to have some realistic
+    sounding words and gauge how well the model has learned the corpus structure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, most of my time was then spent on more fun corpora. Below, I’ll briefly
+    describe them and also show some randomly sampled output for the generated words.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Celtic
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'This corpus is composed of a Gallic dictionary, and selected song lyrics in
+    the Gaulish language by [Eluveitie](http://www.darklyrics.com/e/eluveitie.html):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lucia
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reuoriosi
+  prefs: []
+  type: TYPE_NORMAL
+- en: Iacca
+  prefs: []
+  type: TYPE_NORMAL
+- en: Helvetia
+  prefs: []
+  type: TYPE_NORMAL
+- en: Eburo
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ectros
+  prefs: []
+  type: TYPE_NORMAL
+- en: Uxopeilos
+  prefs: []
+  type: TYPE_NORMAL
+- en: Etacos
+  prefs: []
+  type: TYPE_NORMAL
+- en: Neuniamins
+  prefs: []
+  type: TYPE_NORMAL
+- en: Nhellos
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pokemon
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'If you provide a [list of all Pokemon](https://github.com/AlexEngelhardt/startup-name-generator/blob/master/wordlists/pokemon.txt),
+    you get Pokemon-themed names:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Grubbin
+  prefs: []
+  type: TYPE_NORMAL
+- en: Agsharon
+  prefs: []
+  type: TYPE_NORMAL
+- en: Oricorina
+  prefs: []
+  type: TYPE_NORMAL
+- en: Erskeur
+  prefs: []
+  type: TYPE_NORMAL
+- en: Electrode
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ervivare
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unfeon
+  prefs: []
+  type: TYPE_NORMAL
+- en: Whinx
+  prefs: []
+  type: TYPE_NORMAL
+- en: Onterdas
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cagbanitl
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tolkien’s Black Speech
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: 'Tolkien’s [Black Speech](http://www.angelfire.com/ia/orcishnations/englishorcish.html),
+    the language of Mordor, was a just-for-fun experiment:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Aratani
+  prefs: []
+  type: TYPE_NORMAL
+- en: Arau
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ushtarak
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ishi
+  prefs: []
+  type: TYPE_NORMAL
+- en: Kakok
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ulig
+  prefs: []
+  type: TYPE_NORMAL
+- en: Ruga
+  prefs: []
+  type: TYPE_NORMAL
+- en: Arau
+  prefs: []
+  type: TYPE_NORMAL
+- en: Lakan
+  prefs: []
+  type: TYPE_NORMAL
+- en: Udaneg
+  prefs: []
+  type: TYPE_NORMAL
+- en: This tool has already proved useful for us, coming up with a few very pleasant-sounding
+    names. It might prove helpful to others too, I
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Alexander Engelhardt](http://www.alpha-epsilon.de/)**, recently earned
+    a MSc and PhD degree in statistics at the LMU in Munich, and then became a freelance
+    data scientist specialized in machine learning with R. Alexander recently caught
+    the open source bug and started contributing to the R package ‘mlr’. This post
+    introduces my first own personal side project.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://alpha-epsilon.de/python/2018/04/04/an-lstm-based-startup-name-generator/).Reposted
+    with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Ten Machine Learning Algorithms You Should Know to Become a Data Scientist](https://www.kdnuggets.com/2018/04/10-machine-learning-algorithms-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyTorch Part 1: Understanding How Automatic Differentiation
+    Works](https://www.kdnuggets.com/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Practical Data Science: Building Minimum Viable Models](https://www.kdnuggets.com/2016/11/practical-data-science-building-minimum-viable-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[12 Tips: From Data Analyst to Startup Co-Founder](https://www.kdnuggets.com/2021/12/12-tips-data-analyst-to-co-founder.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Hurdles of Building a Deep Tech Startup in the Age of ChatGPT](https://www.kdnuggets.com/2023/04/10-hurdles-building-deep-tech-startup-age-chatgpt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn Deep Learning by Building 15 Neural Network Projects in 2022](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Neural Network Optimization with AIMET](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Convolutional Neural Network with PyTorch](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

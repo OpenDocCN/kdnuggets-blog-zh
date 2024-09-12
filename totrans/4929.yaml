@@ -1,0 +1,253 @@
+- en: 'Python Data Preparation Case Files: Removing Instances & Basic Imputation'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/09/python-data-preparation-case-files-basic-imputation.html](https://www.kdnuggets.com/2017/09/python-data-preparation-case-files-basic-imputation.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Basic Imputation](../Images/136f58512f2655eb9fcfe8fe229e5386.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Data preparation covers a lot of potential ground: data integration, data transformation,
+    feature selection, feature engineering, and much, much more. One of the most basic,
+    and most important, aspects of data preparation is dealing with missing values.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'From a practical standpoint, there are 3 general approaches to dealing with
+    data instances which include missing values:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Delete data instances with missing values
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Fill in missing values with some derived value
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Leave missing values as is, if your algorithm can handle them
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Keep in mind that these approaches are only from a technical point of view.
+    There do not in any way address which approach, or combination of approaches,
+    are appropriate in a given scenario. Such decisions depend on an understanding
+    of the data, the domain, and the desired outcome, and cannot be covered in a post
+    such as this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are, of course, varying implementations of the first approach, deleting
+    data instances with missing values: delete all instances with any number of missing
+    values; delete all instances with 2 or more missing values; delete all instances
+    missing only a particular feature''s value. Likewise, the second approach, filling
+    in missing values -- or imputation -- can be based on a variety of measures, including
+    mean, median, mode, regression, or other strategies. The third approach alludes
+    to the fact that some machine learning algorithms, such as Random Forests, can
+    often sufficiently deal with missing values, while others cannot.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As points #1 and #3 are quite straightforward (again, the **reasoning** behind
+    their selections may be complex, but the actions taken after deciding to adopt
+    them are quite simple), point #2, imputation, is what we will be mainly discussing
+    in this series of posts. As you will see, imputation is varied enough to warrant
+    extra consideration.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I just want to caution, again, that this is a brief outline of a few approaches
+    to dealing with missing data values, and stress that there is no endorsement of
+    any particular approach to any particular scenario, especially concerning domain-related
+    holistic decisions to dealing with missing data. You should be warned that you
+    need to look elsewhere for guidance in these matters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For these exercises, we will use a mock banking information dataset built using
+    [Mockaroo](https://www.mockaroo.com/). The small dataset includes 10 variables,
+    or features (including the class, or target, variable) -- coinciding with columns
+    of a table -- and 1000 instances -- coinciding with rows of a table (see Figure
+    1). The idea of our exercise is to emulate a process which uses bank customer
+    data to decide (and predict) whether or not a special offer will be extended to
+    the customer, with the assumption that "better" customers will receive an offer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What exactly is a "better" customer? How will we be modeling our data? We don't
+    really care right yet. We will partake in some amateur speculation during our
+    data preparation exercise, but ultimately we are concerned with getting our dataset
+    ready for this modeling and prediction process, as opposed to performing said
+    process. In real life you don't want to fake it til you make it with domain knowledge,
+    but we'll make some reasoned assumptions about our data usefulness as we proceed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our plan of attack includes some data inspection along with using some basic
+    imputation methods to help fill in our dataset's missing values, as well as deciding
+    as to whether we should drop some instances based on which variables they are
+    missing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's start with importing the dataset and having a look at it. We will also
+    summarize the missing values. First, [grab the dataset here](https://drive.google.com/file/d/0B6GhBwm5vaB2S3V6bXdBNE1jLUU/view?usp=sharing).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0] import pandas as pd  import numpy as np    # Importing the dataset  dataset_filename
+    = ''mock_bank_data_original.csv''  df = pd.read_csv(dataset_filename)    # Summarize
+    missing values  print ''Null values by variable:''  print ''------------------------''  df.isnull().sum()
+    [PRE1]`  [PRE2] Null values by variable:  ------------------------  customer_id         18  name                 0  email              158  sex                111  age                113  state               40  cheq_balance        23  savings_balance     96  credit_score         0  special_offer        0  dtype:
+    int64 [PRE3]` ![Bank data](../Images/b084dbd6d8e7cb9b84cc90d63eca151f.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 1:** Mock bank dataset for our exercise.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Process
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This post will deal with the first set of data preprocessing tasks, specifically
+    dropping some instances and preforming some basic imputation. A pair of follow
+    up posts will demonstrate imputing a value based on the category membership of
+    a different variable (such as using the mean salary of everyone living in Washington
+    state to determine the missing salary values of Washington state residents) and
+    performing imputation by regression (such as using a combination of variables
+    to perform linear regression, and basing missing values of a different variable
+    on the resultant linear regression model).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Dropping Instances with Missing State Value**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our first half-educated assumption is that we will be basing much of our preparation
+    around states in which our customers live, and so we will unfortunately be sacrificing
+    any instance that lacks a value for this variable. The bad news is that we will
+    be down to 960 instances; the good news is that (hopefully) we won't have to sacrifice
+    any more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Imputing Missing Credit Scores**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's assume that those with domain knowledge have indicated that the median
+    credit score for all customers would be a valid missing value replacement. Sure,
+    mean could be used, or the most frequent value, or could be devised by some other
+    more complex scheme, but our experts assure us this is appropriate for filling
+    in this particular variable's missing values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that something state-specific, such as replacing with the mean credit score
+    of bank customers in the same state, could also have been used. We will save this
+    approach for use in the next post's tasks, however.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Discarding Unnecessary Variables**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since we don't need all of the variables to be able to make predictions about
+    which customer gets the offer (for example, whether the customer's name is "Daniel"
+    or Michael" should not make a difference), we will go ahead and discard the unnecessary
+    data. We might save this task for after all data preprocessing has been complete,
+    but since this first post is a bit shy on steps, let's take advantage and work
+    it out now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Specifically, we definitely won't be needing the 'customer_id', 'name', or 'email'
+    variables.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Saving the New Dataset**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, since we want to save the dataset in its new form to use in the next tutorial,
+    we will create a new, up-to-date CSV.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The full code with comments to accomplish the above is shown below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This was a slow start, and we didn't break much ground, but hopefully the trouble
+    was worth it for next time, when we cover imputation by category membership, or
+    group-based imputation, followed by regression-based imputation. It's also good
+    that we have demonstrated basic imputation based on all values of the same variable
+    at this point as well, in order to have something to compare our more creative
+    methods to.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hey, at least we've done the boring stuff already, at this point. The next post
+    will be live sooner than later; in the meantime, check out the related posts below
+    for some more data preparation-related reading material.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Data Preparation with Python](/2017/06/7-steps-mastering-data-preparation-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Workflows in Python from Scratch Part 1: Data Preparation](/2017/05/machine-learning-workflows-python-scratch-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Preparation Tips, Tricks, and Tools: An Interview with the Insiders](/2016/10/data-preparation-tips-tricks-tools.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Removing Outliers Using Standard Deviation in Python](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Approaches to Data Imputation](https://www.kdnuggets.com/2022/12/3-approaches-data-imputation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Approaches to Data Imputation](https://www.kdnuggets.com/2023/01/approaches-data-imputation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Datawig, an AWS Deep Learning Library for Missing Value Imputation](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Preparation and Raw Data in Machine Learning](https://www.kdnuggets.com/2022/07/data-preparation-raw-data-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Preparation with SQL Cheatsheet](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

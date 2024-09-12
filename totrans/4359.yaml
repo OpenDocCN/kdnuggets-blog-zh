@@ -1,0 +1,416 @@
+- en: Pruning Machine Learning Models in TensorFlow
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/12/pruning-machine-learning-models-tensorflow.html](https://www.kdnuggets.com/2020/12/pruning-machine-learning-models-tensorflow.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[In a previous article](https://heartbeat.fritz.ai/research-guide-pruning-techniques-for-neural-networks-d9b8440ab10d),
+    we reviewed some of the pre-eminent literature on pruning neural networks. We
+    learned that pruning is a model optimization technique that involves eliminating
+    unnecessary values in the weight tensor. This results in smaller models with accuracy
+    very close to the baseline model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we’ll work through an example as we apply pruning and view
+    the effect on the final model size and prediction errors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Import the Usual Suspects
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Our first step is to get a couple of imports out of the way:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Os` and `Zipfile` will help us in assessing the size of the models.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`tensorflow_model_optimization` for model pruning.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`load_model` for loading a saved model.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: and of course `tensorflow` and `keras`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Finally, we initialize TensorBoard so that we’ll able to visualize the models:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Dataset Generation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'For this experiment, we’ll generate a regression dataset using scikit-learn.
+    Thereafter, we split the dataset into a training and test set:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Model Without Pruning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We’ll create a simple neural network to predict the target variable `y`. We’ll
+    then check the mean squared error. After this, we’ll compare this with the entire
+    model pruned, and then with just the `Dense` layer pruned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next, we step up a callback to stop training the model once it stops improving,
+    after 30 epochs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s print a summary of the model so that we can compare it with the summary
+    of the pruned models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/2557a1d142f91122421703dfb64bc1dd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let’s compile the model and train it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Since it’s a regression problem, we’re monitoring the mean absolute error and
+    the mean squared error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here’s the model plotted to an image. The input is 10 since the dataset we generated
+    has 10 features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/17359d8f180680b7254944b99f740797.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let’s now check the mean squared error. We can move on to the next section and
+    see how this error changes when we prune the entire model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Pruning the Entire Model with a ConstantSparsity Pruning Schedule
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s compared the above MSE with the one obtained upon pruning the entire model.
+    The first step is to define the pruning parameters. The weight pruning is magnitude-based.
+    This means that some weights are converted to zeros during the training process.
+    The model becomes sparse, hence making it easier to compress. Sparse models also
+    make inferencing faster since the zeros can be skipped.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The parameters expected are the pruning schedule, the block size, and the block
+    pooling type.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case, we’re setting a 50% [sparsity](https://www.tensorflow.org/model_optimization/api_docs/python/tfmot/sparsity/keras/ConstantSparsity),
+    meaning that 50% of the weights will be zeroed.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`block_size` — The dimensions (height, weight) for the block'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: sparse pattern in matrix weight tensors.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '`block_pooling_type` — The function to use to pool weights in the'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: block. Must be `AVG` or `MAX`.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: We can now prune the entire model by applying our pruning parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s check the model summary. Compare this with the summary of the unpruned
+    model. From the image below we can see that the entire model has been pruned—we’ll
+    see the difference shortly with the summary obtained after pruning one dense layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/600a83cad46033ad4505372e7850a817.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We have to compile the model before we can fit it to the training and testing
+    set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Since we’re applying pruning, we have to define a couple of pruning callbacks
+    in addition to the early stopping callback. We define the folder to log the model,
+    then create a list with the callbacks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`tfmot.sparsity.keras.UpdatePruningStep()` updates pruning wrappers with the
+    optimizer step. Failure to specify it will result in an error.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`tfmot.sparsity.keras.PruningSummaries()` adds pruning summaries to the Tensorboard.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: With that out of the way, we can now fit the model to the training set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Upon checking the mean squared error for this model, we notice that it’s slightly
+    higher than the one for the unpruned model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: Pruning the Dense Layer Only with PolynomialDecay Pruning Schedule
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s now implement the same model—but this time, we’ll prune the dense layer
+    only. Notice the use of the `[PolynomialDecay](https://www.tensorflow.org/model_optimization/api_docs/python/tfmot/sparsity/keras/PolynomialDecay)`[ function](https://www.tensorflow.org/model_optimization/api_docs/python/tfmot/sparsity/keras/PolynomialDecay) in
+    the pruning schedule.
+  prefs: []
+  type: TYPE_NORMAL
+- en: From the summary, we can see that only the first dense layer will be pruned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Image for post](../Images/cb575b67fcf38555ae54a9132353e9bc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We then compile and fit the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now, let’s check the mean squared error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can’t compare the MSE obtained here with the previous one since we’ve used
+    different pruning parameters. If you’d like to compare them, then ensure that
+    the pruning parameters are similar. Upon testing, `layer_pruning_params` gave
+    a lower error than the `pruning_params` for this specific case. Comparing the
+    MSE obtained from different pruning parameters is useful so that you can settle
+    for the one that doesn’t make the model’s performance worse.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Comparing Model Sizes
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s now compare the sizes of the models with and without pruning. We start
+    by training and saving the model weights for later use.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll set up our base model and load the saved weights. We then prune the entire
+    model. We compile, fit the model, and visualize the results on Tensorboard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here’s a single snapshot of the pruning summaries from TensorBoard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/869fe54127f831eb2c443bd69ffb8251.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The other pruning summaries can also be viewed on Tensorboard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/1df0795bf97341e8e19402d6820ba186.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let’s now define a function to compute the sizes of the models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And now we define the model for export and then compute the sizes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For a pruned model,` tfmot.sparsity.keras.strip_pruning()` is used to restore
+    the original model with the sparse weights. Notice the difference in size for
+    the stripped and unstripped models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: Running predictions on both models, we see that they have the same mean squared
+    error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: Final Thoughts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can go ahead and test how different pruning schedules affect the size of
+    the model. Obviously, the observations made here are not universal. You’ll have
+    to try different pruning parameters and learn how they affect your model size,
+    prediction error, and/or accuracy depending on your problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To optimize the model even more, **you could quantize it**. If you’d like to
+    explore that and more, check the repo and the resources below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Resources
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[**Pruning in Keras example | TensorFlow Model Optimization**](https://www.tensorflow.org/model_optimization/guide/pruning/pruning_with_keras)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Welcome to an end-to-end example for magnitude-based weight pruning. For an
+    introduction to what pruning is and to…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Pruning comprehensive guide | TensorFlow Model Optimization**](https://www.tensorflow.org/model_optimization/guide/pruning/comprehensive_guide)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: TensorFlow Lite for mobile and embedded devices
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**mwitiderrick/Pruning-in-TensorFlow**](https://github.com/mwitiderrick/Pruning-in-TensorFlow)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we comb through an example as we apply pruning and view the
+    effect on the final model size …
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**8-Bit Quantization and TensorFlow Lite: Speeding up mobile inference with
+    low precision**](https://heartbeat.fritz.ai/8-bit-quantization-and-tensorflow-lite-speeding-up-mobile-inference-with-low-precision-a882dfcafbbd)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: heartbeat.fritz.ai
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: Derrick Mwiti** is a data scientist who has a great passion for sharing
+    knowledge. He is an avid contributor to the data science community via blogs such
+    as Heartbeat, Towards Data Science, Datacamp, Neptune AI, KDnuggets just to mention
+    a few. His content has been viewed over a million times on the internet. Derrick
+    is also an author and online instructor. He also trains and works with various
+    institutions to implement data science solutions as well as to upskill their staff.
+    Derrick’s studied Mathematics and Computer Science from the Multimedia University,
+    he also is an alumnus of the Meltwater Entrepreneurial School of Technology. If
+    the world of Data Science, Machine Learning, and Deep Learning interest you, you
+    might want to check his [Complete Data Science & Machine Learning Bootcamp in
+    Python course](https://www.udemy.com/course/data-science-bootcamp-in-python/?referralCode=9F6DFBC3F92C44E8C7F4).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://heartbeat.fritz.ai/model-pruning-in-tensorflow-e4e8f5646f6f).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deploying Trained Models to Production with TensorFlow Serving](/2020/11/serving-tensorflow-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Dealing with Imbalanced Data in Machine Learning](/2020/10/imbalanced-data-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to deploy PyTorch Lightning models to production](/2020/11/deploy-pytorch-lightning-models-production.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Decision Tree Pruning: The Hows and Whys](https://www.kdnuggets.com/2022/09/decision-tree-pruning-hows-whys.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyTorch or TensorFlow? Comparing popular Machine Learning frameworks](https://www.kdnuggets.com/2022/02/packt-pytorch-tensorflow-comparing-popular-machine-learning-frameworks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The "Hello World" of Tensorflow](https://www.kdnuggets.com/2022/05/hello-world-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

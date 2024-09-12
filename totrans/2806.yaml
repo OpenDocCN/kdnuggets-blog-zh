@@ -1,0 +1,350 @@
+- en: Phishytics – Machine Learning for Detecting Phishing Websites
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/03/phishytics-machine-learning-detecting-phishing-websites.html](https://www.kdnuggets.com/2020/03/phishytics-machine-learning-detecting-phishing-websites.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Faizan Ahmad](http://faizanahmad.tech/), University of Virginia**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Phishing Detection with Machine Learning](../Images/25eb8aef7508a3c43436ef8774c205f8.png)](https://faizanahmad.tech/blog/2020/02/phishytics-machine-learning-for-phishing-websites-detection/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is hardly a week when you go to Google News and don’t find a news article
+    about Phishing. Just in the last week, hackers are [sending phishing emails to
+    Disney+ subscribers](https://www.cordcuttersnews.com/disney-hackers-are-sending-phishing-emails-heres-how-to-stay-safe/), [‘Shark
+    Tank’ star Barbara Corcoran lost almost $400K in phishing scam](https://pagesix.com/2020/02/26/shark-tank-star-barbara-corcoran-loses-almost-400k-in-phishing-scam/), [a
+    bank issues phishing warnings](https://www.kcci.com/article/bank-issues-warning-over-phishing-attempts-and-phone-scams/31112737#),
+    and [almost three-quarter of all phishing websites now use SSL](https://www.helpnetsecurity.com/2020/02/26/phishing-ssl/).
+    Since phishing is such a widespread problem in the cybersecurity domain, let us
+    take a look at the application of ***machine learning for phishing website detection***.
+    Although there have been many articles and research papers on this topic [[Malicious
+    URL Detection](https://arxiv.org/pdf/1701.07179.pdf)] [[Phishing Website Detection
+    by Visual Whitelists](https://arxiv.org/abs/1909.00300)] [[Novel Techniques for
+    Detecting Phishing](https://arxiv.org/pdf/1510.06501.pdf)], they do not always
+    provide open-source code and dive deeper into the analysis. This post is written
+    to address these gaps. We will use a large phishing website corpus and apply a
+    few simple machine learning methods to garner highly accurate results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The best part about tackling this problem with machine learning is the availability
+    of well-collected phishing website data sets, [one](http://www.fcsit.unimas.my/research/legit-phish-set) of
+    which is collected by folks at the Universiti Malaysia Sarawak. The ***[‘Phishing
+    Dataset – A Phishing and Legitimate Dataset for Rapid Benchmarking’](http://www.fcsit.unimas.my/research/legit-phish-set)*** dataset
+    consists of 30,000 websites out of which 15,000 are phishing and 15,000 are legitimate.
+    Each website in the data set comes with HTML code, whois info, URL, and all the
+    files embedded in the web page. This is a goldmine for someone looking to apply
+    machine learning for phishing detection. There are several ways this data set
+    can be used. We can try to detect phishing websites by looking at the URLs and
+    whois information and manually extracting features as some previous studies have
+    done [[1](https://arxiv.org/pdf/1701.07179.pdf)]. However, we are going to use
+    the raw HTML code of the web pages to see if we can effectively combat phishing
+    websites by building a machine learning system. Among URLs, whois information,
+    and HTML code, the last is the most difficult to obfuscate or change if an attacker
+    is trying to prevent a system from detecting his/her phishing websites, hence
+    the use of HTML code in our system. Another approach is to combine all three sources,
+    which should give better and more robust results but for the sake of simplicity,
+    we will only use HTML code and show that it alone garners effective results for
+    phishing website detection. One final note on the data set: we will only be using
+    20,000 total samples because of computing constraints. We will also only consider
+    websites written in *English* since data for other languages is sparse.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Byte Pair Encoding for HTML Code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For a naive person, HTML code does not look as simple as a language. Moreover,
+    developers often do not follow all the good practices while writing code. This
+    makes it hard to parse HTML code and extract words/tokens. Another challenge is
+    the scarcity of many words and tokens in HTML code. For instance, if a web page
+    is using a special library with a complex name, we might not find that name on
+    other websites. Finally, since we want to deploy our system in the real world,
+    there might be new web pages using completely different libraries and code practices
+    that our model has not seen before. This makes it harder to use simple language
+    tokenizers and split code into tokens based on space or any other tag or character.
+    Fortunately, we have an algorithm called **[Byte Pair Encoding](https://en.wikipedia.org/wiki/Byte_pair_encoding)** (BPE)
+    that* splits the text into sub-word tokens* based on the frequency and solves
+    the challenge of unknown words. In BPE, we start by considering each character
+    as a token and iteratively merge tokens based on the highest frequencies. For
+    instance, if a new word “*googlefacebook*” comes, BPE will split it into *“google”*
+    and *“facebook”* as these words could be frequently there in the corpus. BPE has
+    been widely used in recent deep learning models [[2](https://arxiv.org/abs/1508.07909)].
+  prefs: []
+  type: TYPE_NORMAL
+- en: There have been numerous libraries to train BPE on a text corpus. We will use
+    a great one called **[tokenizer](https://github.com/huggingface/tokenizers)** by [Huggingface](https://huggingface.co/).
+    It is extremely easy to follow the instruction on the [github repository](https://github.com/huggingface/tokenizers) of
+    the library. We train BPE with a vocabulary size of **10,000 tokens** on top of
+    raw HTML data. The beauty of BPE is that it automatically separates HTML keywords
+    such as “tag”, “script”, “div” into individual tokens even though these tags are
+    mostly written with brackets in an HTML file e.g <tag>, <script>. After training,
+    we get a saved instance of the tokenizer which we can use to tokenize any HTML
+    file into individual tokens. These tokens are used with machine learning models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/53aded7e5f0ccf06b2922c1d7ec60c43.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure: Histogram of number of BPE tokens in HTML Code'
+  prefs: []
+  type: TYPE_NORMAL
+- en: TFIDF with Byte Pair Encoding
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Once we have tokens from an HTML file, we can apply any model. However, contrary
+    to what most people do these days, we will not be using a deep learning model
+    such as a Convolutional Neural Network (CNN) or Recurrent Neural Network (RNN).
+    This is mainly because of the computational complexity and the relatively small
+    size of the data set for deep learning models. The figure above shows a histogram
+    of tokens from BPE in 1000 HTML files. We can see that these files contain thousands
+    of tokens whose processing will incur high computational cost in more complex
+    models like CNN and RNN. Moreover, it is not necessary that token order matters
+    for phishing detection. This will be empirically evident once we look at the results.
+    Therefore, we will simply apple TFIDF weights on top of each token from the BPE.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As explained in the previous post on [Authorship Attribution](https://faizanahmad.tech/blog/2020/02/large-scale-authorship-attribution-machine-learning/),
+    TFIDF stands for term frequency, inverse document frequency and can be calculated
+    by the formula given below. Term frequency (tf) is the count of a term ***i*** in
+    a document ***j*** while inverse document frequency (idf) indicates the rarity
+    and importance of each word in the corpus. Document frequency is calculated by
+    totaling the number of times a term ***i*** appears in all documents.  TF-IDF
+    gives us weights as tfidf scores for each term in a document which is a product
+    of tf and idf.
+  prefs: []
+  type: TYPE_NORMAL
+- en: (1) ![\begin{equation*} w_{i,j} = tf_{i,j} * df_i \end{equation*}](../Images/35939d2378d3032bd22800d8f9e61f66.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Machine Learning Classifier
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Sticking with simplicity, we will use a [Random Forest Classifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html) (RF)
+    from scikit-learn. For training the classifier, we split the data into 90% training
+    and 10% testing. No cross-validation is done since we are not trying to extensively
+    tune any hyper-parameters. We will stick with the default hyperparameters of Random
+    Forest from the scikit-learn implementation. Contrary to deep learning models
+    that take a long time to train, RF takes less than 2 minutes on a CPU to train
+    and demonstrate effective results as are shown next. To show robustness in performance,
+    we train the model 5 times on different splits of the data and report the average
+    test results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Results
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '| Accuracy | Precision | Recall | Fscore | AUC |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 98.55 | 98.29 | 98.82 | 98.55 | 99.68 |'
+  prefs: []
+  type: TYPE_TB
+- en: Phishing Website Detection Results
+  prefs: []
+  type: TYPE_NORMAL
+- en: The table above shows the results on test data averaged across 5 experiments.
+    Looking at the surface, these seem like great results especially without any hyperparameter
+    tuning and with a simple model. However, these are not so great. The model has
+    98% precision for both classes which means it gives around 2% false positives
+    when it is detecting phishing websites. That is a huge number in the security
+    context. False positives are the websites that the machine learning model deems
+    to be phishing but are in fact legitimate. If users frequently encounter false
+    positives, they have a bad user experience and they might not want to use the
+    model anymore. Moreover, the security folks [encounter threat alert fatigue](https://www.csoonline.com/article/3191379/false-positives-still-cause-alert-fatigue.html) when
+    dealing with false positives. False positives are further quantified in the confusion
+    matrix below where x-axis shows the actual classes and y-axis has the predicted
+    classes. Even though the model is achieving a high accuracy score, there are 11
+    instances where the model predicted “Phishing” for the website but in reality,
+    it was a safe website.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| 16 (False Negative) | 912 (True Negative) | **Legitimate** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 920 (True Positive) | 11 (False Positive) | **Phishing** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **Phishing** | **Legitimate** | Predicted Class |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Actual Class |'
+  prefs: []
+  type: TYPE_TB
+- en: Confusion matrix for the model
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we know there is still a problem with the model and we cannot deploy
+    it as it is, let us look at a potential solution. We are going to use the [Receiver
+    Operating Curve (ROC)](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) to
+    look at the false and true positive rates. In the figure below, it is easy to
+    see that for up to 80% true positive rate, we have a 0% false-positive rate which
+    is something we can use for decision making.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/0ac09f5d79947d25d35c34f52f3aa575.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure: ROC Curve'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The ROC curve demonstrates that for a particular confidence threshold (**red
+    dot**), the true positive rate would be around 80-90% while the false positive
+    rate would be close to zero. To prove this, let us look at different confidence
+    thresholds and plot metrics against them. To apply a confidence threshold of ***x%***,
+    We will only keep websites where the model is more than ***x%*** confident that
+    the website is either legitimate or a phishing one. When we do this, the total
+    number of phishing websites (true positive rate) we can identify decreases but
+    our accuracy increases considerably and precision also becomes close to 100%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ac107008e1b165f321164654f1051663.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Figure: Effect of Confidence Threshold on Accuracy, TPR, and FP'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The above figure demonstrates the effect of confidence threshold on **test accuracy**, **the
+    number of false positives**, and** the true positive rate**. We can see that when
+    we are using the default threshold of 0.5, we have 11 false positives. As we start
+    to increase our confidence score, our true positive rate decreases but the number
+    of false positives starts getting very low. Finally, at the last point in the
+    graph, we have zero false positives for precision. This means that whenever our
+    model says a website is trying to phish, it is ***always*** accurate. However,
+    since our true positive rate has declined to 82%, the model can only detect around
+    82% phishing websites now. This is how machine learning could be used in cybersecurity
+    by looking at the tradeoff between false positives and true positives. Most of
+    the time, we want an extremely low false-positive rate. In such settings, one
+    can adopt the approach above to get effective results from the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Limitations
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before concluding this post, let us discuss a few limitations of the methods
+    we have seen above. First, our data set is pretty decent sized but it is not comprehensive
+    at all for all the types of phishing websites out there. There might have been
+    millions of phishing websites in the last couple of years but the data set contains
+    15,000 only. As hackers are advancing their techniques, newly made phishing websites
+    might not be making the same mistakes that the old ones were making which might
+    make them hard to detect using the model above. Secondly, since TFIDF feature
+    representation does not take into account the order in which code is written,
+    we can potentially lose information. This problem does not arise in deep learning
+    methods as they can sequentially process sequences and take into account the order
+    of the code. Moreover, since we are using raw HTML code, an attacker can observe
+    the predictions of the model and spend some time trying to come up with obfuscations
+    in the code that will render the model ineffective. Finally, someone can use off
+    the shelf code obfuscators to obfuscate the HTML code which will again render
+    the model useless since it has only seen plain HTML code files. However, despite
+    some of these limitations, machine learning can still be very effective in complementing
+    phishing blacklists such as the ones used by [Google Safe Browsing](https://safebrowsing.google.com/).
+    Combining blacklists with machine learning systems can provide better results
+    than relying on blacklists alone.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Open-Source Code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As I discussed in the first post of this blog, I will always open-source the
+    code for the projects I discuss in this blog. Keeping the tradition alive, here
+    is the link for replicating all experiments, training your own phishing detection
+    models, and testing new websites using my pre-trained model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Github Repository:** https://github.com/faizann24/phishytics-machine-learning-for-phishing'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Faizan Ahmad](http://faizanahmad.tech/)** is currently a Masters student
+    at the University of Virginia (UVA) and works as a graduate research assistant
+    at the Mcintire School of Commerce in UVA. He will be joining Facebook as a Security
+    Engineer in June 2020\. His interests lie at the intersection of cyber security,
+    machine learning, and business analytics and he has done plenty of research and
+    industrial projects on these topics.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://faizanahmad.tech/blog/2020/02/phishytics-machine-learning-for-phishing-websites-detection/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Applying Data Science to Cybersecurity Network Attacks & Events](/2019/09/applying-data-science-cybersecurity-network-attacks-events.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 7 Data Science Use Cases in Trust and Security](/2019/12/top-7-data-science-use-cases-trust-security.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deepfakes Security Risks](/2020/01/deepfakes-security-risks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Scrape Images Easily from Websites in A No-Coding Way](https://www.kdnuggets.com/2022/06/octoparse-scrape-images-easily-websites-nocoding-way.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Websites to Get Amazing Data for Data Science Projects](https://www.kdnuggets.com/2023/04/10-websites-get-amazing-data-data-science-projects.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Free Tools For Detecting ChatGPT, GPT3, and GPT2](https://www.kdnuggets.com/2023/02/5-free-tools-detecting-chatgpt-gpt3-gpt2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 Tools for Detecting ChatGPT, GPT-4, Bard, and Claude](https://www.kdnuggets.com/2023/05/top-10-tools-detecting-chatgpt-gpt4-bard-llms.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

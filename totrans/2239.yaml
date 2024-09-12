@@ -1,0 +1,186 @@
+- en: 'Text-2-Video Generation: Step-by-Step Guide'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/08/text2video-generation-stepbystep-guide.html](https://www.kdnuggets.com/2023/08/text2video-generation-stepbystep-guide.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Text-2-Video Generation: Step-by-Step Guide](../Images/d49e4f6113c87792b1bbf9caa97904ab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Gif by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Diffusion-based image generation models represent a revolutionary breakthrough
+    in the field of Computer Vision. Pioneered by models including Imagen, DallE,
+    and MidJourney, these advancements demonstrate remarkable capabilities in text-conditioned
+    image generation. For an introduction to the inner workings of these models, you
+    can read this [article](/2023/06/stable-diffusion-basic-intuition-behind-generative-ai.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, the development of Text-2-Video models poses a more formidable challenge.
+    The goal is to achieve coherence and consistency across each generated frame and
+    maintain generation context from the video's inception to its conclusion.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Yet, recent advancements in Diffusion-based models offer promising prospects
+    for Text-2-Video tasks as well. Most Text-2-Video models now employ fine-tuning
+    techniques on pre-trained Text-2-Image models, integrating dynamic image motion
+    modules, and leveraging diverse Text-2-Video datasets like WebVid or HowTo100M.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, our approach involves utilizing a fine-tuned model provided
+    by HuggingFace, which proves instrumental in generating the videos.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Implementation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Pre-requisites
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We use the Diffusers library provided by HuggingFace, and a utility library
+    called Accelerate, that allows PyTorch code to run in parallel threads. This speeds
+    up our generation process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we must install our dependencies and import relevant modules for our
+    code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Then, import the relevant modules from each library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Creating Pipelines
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We load the Text-2-Video model provided by [ModelScope](https://modelscope.cn/)
+    on [HuggingFace](https://huggingface.co/damo-vilab/text-to-video-ms-1.7b), in
+    the Diffusion Pipeline. The model has 1.7 billion parameters and is based on UNet3D
+    architecture that generates a video from pure noise through an iterative de-noising
+    process. It works in a 3-part process. The model firsts perform text-feature extraction
+    from the simple English prompt. The text features are then encoded to the video
+    latent space and de-noised. Lastly, the video latent space is decoded back to
+    the visual space and a short video is generated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Moreover, we use 16-bit floating-point precision to reduce GPU utilization.
+    In addition, CPU offloading is enabled that removes unnecessary parts from GPU
+    during runtime.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generating Video
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: We then pass a prompt to the Video Generation pipeline that provides a sequence
+    of generated frames. We use 25 inference steps so that the model will perform
+    25 de-noising iterations. A higher number of inference steps can improve video
+    quality but requires higher computational resources and time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The separate image frames are then combined using a diffuser's utility function,
+    and a video is saved on the disk.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We then pass a prompt to the Video Generation pipeline that provides a sequence
+    of generated frames. The separate image frames are then combined using a diffuser's
+    utility function, and a video is saved on the disk.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[FinalVideo](https://vimeo.com/846481462) from [Muhammad Arham](https://vimeo.com/user182110512)
+    on [Vimeo](https://vimeo.com).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Simple enough! We get a video of Spiderman surfing. Although it is a short not-so-high-quality
+    video, it still symbolizes the promising prospect of this process, which can attain
+    similar results as Image-2-Text models soon. Nonetheless, testing your creativity
+    and playing with the model is still good enough. You can use this [Colab Notebook](https://colab.research.google.com/drive/1IYe2MQZX86n3o22PR7HmSFgw54h31poZ?usp=sharing)
+    to try it out.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Muhammad Arham](https://www.linkedin.com/in/muhammad-arham-a5b1b1237/)**
+    is a Deep Learning Engineer working in Computer Vision and Natural Language Processing.
+    He has worked on the deployment and optimizations of several generative AI applications
+    that reached the global top charts at Vyro.AI. He is interested in building and
+    optimizing machine learning models for intelligent systems and believes in continual
+    improvement.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Retrieval Augmented Generation: Where Information Retrieval Meets…](https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide On How To Become A Data Scientist (Step By Step Approach)](https://www.kdnuggets.com/2021/05/guide-become-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Structure a Data Science Project: A Step-by-Step Guide](https://www.kdnuggets.com/2022/05/structure-data-science-project-stepbystep-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Step-by-Step Guide to Web Scraping with Python and Beautiful Soup](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Step by Step Guide to Reading and Understanding SQL Queries](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Breaking Down DENSE_RANK(): A Step-by-Step Guide for SQL Enthusiasts](https://www.kdnuggets.com/breaking-down-denserank-a-step-by-step-guide-for-sql-enthusiasts)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

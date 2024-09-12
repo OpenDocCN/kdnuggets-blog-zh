@@ -1,0 +1,516 @@
+- en: How to Rank 10% in Your First Kaggle Competition
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/11/rank-ten-precent-first-kaggle-competition.html/4](https://www.kdnuggets.com/2016/11/rank-ten-precent-first-kaggle-competition.html/4)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Home Depot Search Relevance
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this section I will share my solution in [Home Depot Search Relevance Competition](https://www.kaggle.com/c/home-depot-product-search-relevance) and
+    what I learned from top teams after the competition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The task in this competition is to predict how relevant a result is for a search
+    term on Home Depot website. The relevance is an average score from three human
+    evaluators and ranges between 1 ~ 3\. Therefore it’s a regression task. The datasets
+    contains search terms, product titles / descriptions and some attributes like
+    brand, size and color. The metric is[RMSE](https://en.wikipedia.org/wiki/Root-mean-square_deviation).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is much like [Crowdflower Search Results Relevance](https://www.kaggle.com/c/crowdflower-search-relevance).
+    The difference is that [Quadratic Weighted Kappa](https://en.wikipedia.org/wiki/Cohen%27s_kappa#Weighted_kappa) is
+    used in Crowdflower competition and therefore complicated the final cutoff of
+    regression scores. Also there were no attributes provided in Crowdflower.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**EDA**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There were several quite good EDAs by the time I joined the competition, especially [this
+    one](https://www.kaggle.com/briantc/home-depot-product-search-relevance/homedepot-first-dataexploreation-k).
+    I learned that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Many search terms / products appeared several times.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Text similarities are great features.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Many products don’t have attributes features. Would this be a problem?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Product ID seems to have strong predictive power. However the overlap of product
+    ID between the training set and the testing set is not very high. Would this contribute
+    to overfitting?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Preprocessing**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can find how I did preprocessing and feature engineering [on GitHub](https://github.com/dnc1994/Kaggle-Playground/blob/master/home-depot/Preprocess.ipynb).
+    I’ll only give a brief summary here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use [typo dictionary](https://www.kaggle.com/steubk/home-depot-product-search-relevance/fixing-typos) posted
+    in the forum to correct typos in search terms.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Count attributes. Find those frequent and easily exploited ones.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Join the training set with the testing set. This is important because otherwise
+    you’ll have to do feature transformation twice.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Do **[stemming](https://en.wikipedia.org/wiki/Stemming)** and **[tokenizing](https://en.wikipedia.org/wiki/Text_segmentation#Word_segmentation)** for
+    all the text fields. Some **normalization** (with digits and units) and **synonym
+    substitutions** are performed manually.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Feature**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Attribute Features'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Whether the product contains a certain attribute (brand, size, color, weight,
+    indoor/outdoor, energy star certified …)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Whether a certain attribute matches with the search term
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Meta Features
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Length of each text field
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Whether the product contains attribute fields
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Brand (encoded as integers)
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Product ID
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Matching
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Whether search term appears in product title / description / attributes
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Count and ratio of search term’s appearance in product title / description /
+    attributes
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Whether the i-th word of search term appears in product title / description
+    / attributes'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Text similarities between search term and product title/description/attributes
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[BOW](https://en.wikipedia.org/wiki/Bag-of-words_model) [Cosine Similairty](https://en.wikipedia.org/wiki/Cosine_similarity)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) Cosine Similarity'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Jaccard Similarity](https://en.wikipedia.org/wiki/Jaccard_index)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*[Edit Distance](https://en.wikipedia.org/wiki/Edit_distance)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Word2Vec](https://en.wikipedia.org/wiki/Word2vec) Distance (I didn’t include
+    this because of its poor performance and slow calculation. Yet it seems that I
+    was using it wrong.)'
+  prefs:
+  - PREF_IND
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**[Latent Semantic Indexing](https://en.wikipedia.org/wiki/Latent_semantic_indexing):
+    By performing [SVD decomposition](https://en.wikipedia.org/wiki/Singular_value_decomposition) to
+    the matrix obtained from BOW/TF-IDF Vectorization, we get a latent representation
+    of different search term / product groups. This enables our model to distinguish
+    between groups and assign different weights to features, therefore solving the
+    issue of dependent data and products lacking some features (to an extent).**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Note that features listed above with `*` are the last batch of features I added.
+    The problem is that the model trained on data that included these features performed
+    worse than the previous ones. At first I thought that the increase in number of
+    features would require re-tuning of model parameters. However, after wasting much
+    CPU time on grid search, I still could not beat the old model. I think it might
+    be the issue of **feature correlation**mentioned above. I actually knew a solution
+    that might work, which is to **combine models trained on different version of
+    features by stacking**. Unfortunately I didn’t have enough time to try it. **As
+    a matter of fact, most of top teams regard the ensemble of models trained with
+    different preprocessing and feature engineering pipelines as a key to success**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: At first I was using `RandomForestRegressor` to build my model. Then I tried**Xgboost** and
+    it turned out to be more than twice as fast as Sklearn. From that on what I do
+    everyday is basically running grid search on my work station while working on
+    features on my laptop.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dataset in this competition is not trivial to validate. It’s not i.i.d. and
+    many records are dependent. Many times I used better features / parameters only
+    to end with worse LB scores. As repeatedly stated by many accomplished Kagglers,
+    you have to trust your own CV score under such situation. Therefore I decided
+    to use 10-fold instead of 5-fold in cross validation and ignore the LB score in
+    the following attempts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Ensemble**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'My final model is an ensemble consisting of 4 base models:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`RandomForestRegressor`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`ExtraTreesRegressor`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`GradientBoostingRegressor`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`XGBRegressor`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The stacker is also a `XGBRegressor`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The problem is that all my base models are highly correlated (with a lowest
+    correlation of 0.9). I thought of including linear regression, SVM regression
+    and `XGBRegressor`with linear booster into the ensemble, but these models had
+    RMSE scores that are 0.02 higher (this accounts for a gap of hundreds of places
+    on the leaderboard) than the 4 models I finally used. Therefore I decided not
+    to use more models although they would have brought much more diversity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The good news is that, despite base models being highly correlated, stacking
+    still bumps up my score a lot. **What’s more, my CV score and LB score are in
+    complete sync after I started stacking.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: During the last two days of the competition, I did one more thing: **use 20
+    or so different random seeds to generate the ensemble and take a weighted average
+    of them as the final submission**. This is actually a kind of **bagging**. It
+    makes sense in theory because in stacking I used 80% of the data to train base
+    models in each iteration, whereas 100% of the data is used to train the stacker.
+    Therefore it’s less clean. Making multiple runs with different seeds makes sure
+    that **different 80% of the data are used each time**, thus reducing the risk
+    of information leak. Yet by doing this I only achieved an increase of `0.0004`,
+    which might be just due to randomness.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After the competition, I found out that my best single model scores `0.46378` on
+    the private leaderboard, whereas my best stacking ensemble scores `0.45849`. That
+    was the difference between the 174th place and the 98th place. In other words,
+    feature engineering and model tuning got me into 10%, whereas stacking got me
+    into 5%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Lessons Learned**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There’s much to learn from the solutions shared by top teams:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There’s a pattern in the product title. For example, whether a product is accompanied
+    by a certain accessory will be indicated by `With/Without XXX` at the end of the
+    title.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use external data. For example use [WordNet](https://wordnet.princeton.edu/) or [Reddit
+    Comments Dataset](https://www.kaggle.com/reddit/reddit-comments-may-2015) to train
+    synonyms and [hypernyms](https://en.wikipedia.org/wiki/Hyponymy_and_hypernymy).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some features based on **letters** instead of **words**. At first I was rather
+    confused by this. But it makes perfect sense if you consider it. For example,
+    the team that won the 3rd place took the number of letters matched into consideration
+    when computing text similarity. They argued that **longer words are more specific
+    and thus more likely to be assigned high relevance scores by human**. They also
+    used char-by-char sequence comparison (`difflib.SequenceMatcher`) to measure **visual
+    similarity**, which they claimed to be important for human.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: POS-tag words and find **[head](https://en.wikipedia.org/wiki/Head_(linguistics))** in
+    phrases and use them when computing various distance metrics.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Extract top-ranking trigrams from the TF-IDF of product title / description
+    field and compute the ratio of word from search terms that appear in these trigrams.
+    Vice versa. This is like computing latent indexes from another point of view.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Some novel distance metrics like [Word Movers Distance](http://jmlr.org/proceedings/papers/v37/kusnerb15.pdf)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Apart from SVD, some used [NMF](https://en.wikipedia.org/wiki/Non-negative_matrix_factorization).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Generate **pairwise polynomial interactions** between top-ranking features.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**For CV, construct splits in which product IDs do not overlap between training
+    set and testing set, and splits in which IDs do. Then we can use these with corresponding
+    ratio to approximate the impact of public/private LB split in our local CV.**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Takeaways**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It was a good call to **start doing ensembles early in the competition**. As
+    it turned out, I was still playing with features during the very last days.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It’s of high priority that I build a pipeline capable of automatic model training
+    and recording best parameters.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Features matter the most!** I didn’t spend enough time on features in this
+    competition.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If possible, spend some time to manually inspect raw data for patterns.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Issues Raised**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Several issues I encountered in this competitions are of high research values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to do reliable CV with dependent data.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: How to quantify **the trade-off between diversity and accuracy** in ensemble
+    learning.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: How to deal with feature interaction which harms the model’s performance. And**how
+    to determine whether new features are effective in such situations**.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Beginner Tips**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Choose a competition you’re interested in. **It would be better if you’ve already
+    have some insights about the problem domain.**
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Following my approach or somebody else’s, start exploring, understanding and
+    modeling data.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Learn from forum and scripts. See how others interpret data and construct features.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Find winner interviews / blog posts of previous competitions. They’re extremely
+    helpful, especially if from competitions that share some similarities with that
+    one you’re working on.**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Start doing ensemble after you have reached a pretty good score (e.g. 10% ~
+    20%) or you feel that there isn’t much room for new features (which, sadly, always
+    turns out to be false).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: If you think you may have a chance to win the prize, try teaming up!
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Don’t give up until the end of the competition. At least try something new
+    every day.**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Learn from the sharings of top teams after the competition. Reflect on your
+    approaches. **If possible, spend some time verifying what you learn.**
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Get some rest!
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Reference
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Beating Kaggle the Easy Way - Dong Ying](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwiPxZHewLbMAhVKv5QKHb3PCGwQFggcMAA&url=http%3A%2F%2Fwww.ke.tu-darmstadt.de%2Flehre%2Farbeiten%2Fstudien%2F2015%2FDong_Ying.pdf&usg=AFQjCNE9o2BcEkqdnu_-lQ3EFD3eRAFWiw&sig2=oiU8TCEH57EYF9v9l6Scrw&bvm=bv.121070826,d.dGo)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[Search Results Relevance Winner’s Interview: 1st place, Chenglong Chen](https://github.com/ChenglongChen/Kaggle_CrowdFlower/blob/master/BlogPost/BlogPost.md)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[(Chinese) Solution for Prudential Life Insurance Assessment - Nutastray](http://rstudio-pubs-static.s3.amazonaws.com/158725_5d2f977f4004490e9b095c0ef9357c6b.html)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![Linghao Zhang](../Images/47effce75b02d75ca99360d2793970ea.png)**Bio: [Linghao
+    Zhang](https://www.linkedin.com/in/linghaozh)** is a senior year Computer Science
+    student at Fudan University and Data Mining Engineer at Strikingly. His interests
+    include machine learning, data mining, natural language processing, knowledge
+    graphs, and big data analytics.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://dnc1994.com/2016/05/rank-10-percent-in-first-kaggle-competition-en/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Approaching (Almost) Any Machine Learning Problem](/2016/08/approaching-almost-any-machine-learning-problem.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automated Data Science & Machine Learning: An Interview with the Auto-sklearn
+    Team](/2016/10/interview-auto-sklearn-automated-data-science-machine-learning-team.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Basics: An Introduction to Ensemble Learners](/2016/11/data-science-basics-intro-ensemble-learners.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How LinkedIn Uses Machine Learning To Rank Your Feed](https://www.kdnuggets.com/2022/11/linkedin-uses-machine-learning-rank-feed.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Get Your First Job in Data Science without Any Work Experience](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[It''s alive! Build your first robots with Python and some cheap,…](https://www.kdnuggets.com/2023/06/manning-build-first-robots-python-cheap-basic-components.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[From Zero to Hero: Create Your First ML Model with PyTorch](https://www.kdnuggets.com/from-zero-to-hero-create-your-first-ml-model-with-pytorch)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploying Your First Machine Learning Model](https://www.kdnuggets.com/deploying-your-first-machine-learning-model)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

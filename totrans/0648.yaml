@@ -1,0 +1,667 @@
+- en: 'Fighting Coronavirus With AI: Improving Testing with Deep Learning and Computer
+    Vision'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/04/fighting-coronavirus-ai-improving-testing-deep-learning-computer-vision.html](https://www.kdnuggets.com/2020/04/fighting-coronavirus-ai-improving-testing-deep-learning-computer-vision.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Ayoosh Kathuria](https://www.linkedin.com/in/ayoosh-kathuria-44a319132/),
+    Indraprastha Institute of Information Technology, Delhi**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/90bf4db2b2006363b5dafe1cd5224503.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The above quote is from the book Fight Club, which was also made into a movie
+    starring Brad Pitt, Edward Norton, and Helena Bonham Carter. I was only a year
+    old when the book came out in 1996\. Tyler Durden, the protagonist, talks about
+    how the current generation is in a crisis because they haven't been witness to
+    a landmark event which broke their lives in two, before and after. In a way, that
+    was also true for a millennial like me, until the new coronavirus pandemic hit
+    us.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let me be clear. It's not as if economies haven't tanked in the last few
+    decades (e.g. Zimbabwe, Venezuela). Neither am I denying that parts of world have
+    faced pandemics that have ravaged thousands of lives (SARS, Ebola, etc.). But
+    almost all of these have been limited to certain parts of the world, so the other
+    parts could come to the rescue. The devastation that the coronavirus has bought
+    to the world at large–whether it be the overburdened health care systems, millions
+    being put into lockdown, children missing school, or the economies taking a massive
+    hit–has been largely unprecedented.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is a live dashboard by Johns Hopkins University, which keeps track of the
+    cases around the world. At the time of publishing the article, there are nearly
+    900,000 cases in the world already.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While Tyler Durden advocated an amateur fight club where people would beat each
+    other to a pulp as a way to cope up with their existential rage, advances in AI
+    and data science have put many of us in positions to help humanity beat the coronavirus
+    to a pulp. Of course, the latter option is also better, since the former doesn't
+    play very well with the idea of social distancing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What's this series about?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Unlike earlier series I've done (covering [GauGAN](https://blog.paperspace.com/nvidia-gaugan-introduction/), [implementing
+    YOLO from scratch](https://blog.paperspace.com/how-to-implement-a-yolo-object-detector-in-pytorch/), [data
+    augmentation for bounding boxes](https://blog.paperspace.com/data-augmentation-for-bounding-boxes/),
+    among others), how this series will evolve is much more open-ended. Research into
+    how AI can be used to tackle the coronavirus is a work in progress as we speak.
+    At this point, the medical data on COVID-19 (say CT scans of patients) in the
+    public domain is scant at best. Of course, medical data can take time to reach
+    the public eye due to privacy concerns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'That being said, we are seeing research pop up in several areas that deal with
+    the use of AI to tackle the coronavirus. Some of these include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using computer vision-based deep learning as a tool to help diagnose COVID-19
+    given a lung CT scan of a patient.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Trying to come up with treatments using deep learning-based protein folding
+    solutions.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Using NLP to extract meaningful insights from the large corpus of literature
+    on COVID-19.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Using computer vision-assisted surveillance to monitor crowds and, for example,
+    enforce social distancing.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/066dad71374a690f778be95de0e43d6c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Medical imaging has been a hot topic in computer vision research
+  prefs: []
+  type: TYPE_NORMAL
+- en: The idea of this series to look into such avenues of research, and if possible,
+    provide you with toy examples so that you can start working towards a solution
+    when the data becomes available.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What we'll cover in this article
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this post, I will talk about:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The importance of testing in addressing the pandemic.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Challenges with the current testing kits.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Several new papers that outline how deep learning can be used to diagnose COVID-19
+    from CT Scans
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: How to interpret the results of a deep learning diagnosis system, and some caveats.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: First, A Disclaimer...
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before I go further, let me say that I am not a medical or radiology professional.
+    My experience is in machine learning, deep learning, and computer science. Whatever
+    I write comes from my limited study of medical imaging, and if I write something
+    incorrect and you happen to be a professional, please hit the comment section
+    below and let me know so I can fix it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: TEST. TEST. TEST.
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/070279c9512009dc0ceab9a309f9eb15.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: These are folks from the World Health Organisation (WHO). In one of their press
+    conferences, the guy in the middle said that his foremost advice to countries
+    would be to "*Test, Test, Test*" as many people as possible, and if possible,
+    to test each symptomatic person for coronavirus, regardless of travel or contact
+    history.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When it comes to the coronavirus, testing becomes really important because you
+    might not show symptoms from 5-14 days (this is called the Incubation Period).
+    In this time, if you're not isolating yourself, you would be spreading the virus
+    to the people you come in contact with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: RT-PCR Test
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The gold standard that is being used right now to test COVID-19 patients is
+    something called the *Reverse transcription polymerase chain reaction test*, or
+    an RT-PCR. It involves taking a swab from a person's nose or throat, and then
+    sending it to a machine that checks for the presence of the virus. However, the
+    RT-PCR approach is not without its faults.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These swab samples need to be transported to a testing center where the RT-PCR
+    machines are. If this takes too long, the virus may die and an infected patient's
+    swab may turn negative.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: They are expensive.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It has been observed that the RT-PCR test has a low sensitivity, i.e. a high
+    likelihood of giving false negatives. This is why governments often do multiple
+    tests for confirmation.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: They also give a lot of false positives. This is problematic because you may
+    end up unnecessarily burdening your health system with people who don't actually
+    have the virus.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If you are still not convinced, sample collection may involve shoving a Q-tip
+    so far into your nose that it feels like it's touching your brain. That's how
+    people describe it. No kidding.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/659d4e63535ab0af3d27edb4eba8564b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If this doesn't motivate you to come up with a better way to test for corona,
+    nothing will.
+  prefs: []
+  type: TYPE_NORMAL
+- en: CT Scan
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Research on data collected from hospitals in Wuhan has shown that among infected
+    people, CT scans have a much better sensitivity than RT-PCR when it comes to diagnosis
+    of COVID-19\. According to t[his study](https://pubs.rsna.org/doi/10.1148/radiol.2020200642) conducted
+    on 1014 COVID-19 patients published in *Radiology*, RT-PCR could only flag 601/1014
+    (59 %) patients as positive, whereas the CT-Scan flagged 888/1014 (88%) patients
+    as positive.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '"The results showed that 601 patients (59 percent) had positive RT-PCR results,
+    and 888 (88 percent) had positive chest CT scans. The sensitivity of chest CT
+    in suggesting COVID-19 was 97 percent, based on positive RT-PCR results. In patients
+    with negative RT-PCR results, 75 percent (308 of 413 patients) had positive chest
+    CT findings. Of these, 48 percent were considered as highly likely cases, with
+    33% as probable cases. By analysis of serial RT-PCR assays and CT scans, the interval
+    between the initial negative to positive RT-PCR results was 4 to 8 days."'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[This study](https://pubs.rsna.org/doi/10.1148/radiol.2020200432) reports that
+    sensitivity for CT  scans is about 97 percent, while for RT-PCR, it''s about 71
+    percent.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Based on these findings, we have some reason to believe that using CAT scans
+    for diagnosis would beneficial. However, given a CAT scan, you'd still need a
+    qualified radiologist to confirm the presence of COVID -19\. Unfortunately, radiologists
+    are limited in number and can be really pressed for time, especially if cases
+    explode as they did in Italy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Characteristics of COVID-19
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This is what a CT scan of a healthy patient looks like.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f4debd03c060830234bedc764ff92b83.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A few Lung Nodules are normal
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now let's consider the CT scan of a patient who's suffering from pneumonia brought
+    on by COVID-19.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/248f5f29148ba2a65b89fa54f09ddaa1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Notice the "ground glass"-like opacity marked by the arrow on the left. We see
+    there are a couple of such opacities on the periphery of the left lung.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generally, pneumonia causes fluid to build up in the lung, which manifests itself
+    as opacities in the lung. The literature on application of deep learning to diagnose
+    COVID-19 using CT scans does point to some distinct characteristic features found
+    in lung CT scans of COVID-19 as compared to other types of pneumonia, resulting
+    from different causes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A paper, titled *[Deep Learning System to Screen Coronavirus Disease 2019 Pneumonia](https://arxiv.org/pdf/2002.09334.pdf)*,
+    lists three such characteristics:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '"...ground-glass appearance, striking peripheral distribution along with the
+    pleura, and usually more than one independent focus of infections for one case."'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The first means that the opacities in the lung look like ground-glass.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The second means that the majority of these opacities occur along the edge of
+    the lung.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The third means that we can have more than one such cluster of opacities.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: All three of these characteristics can be observed in the CT scan image of the
+    lung above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to know more about features of CT scans of COVID-19 patients, [here's
+    a brilliant article that covers this topic](https://www.businessinsider.in/science/news/china-is-diagnosing-coronavirus-patients-by-looking-for-ground-glass-in-their-lungs-take-a-look-at-the-ct-scans-/articleshow/74126644.cms).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Detecting Coronavirus Using Deep Learning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The last few years have seen a surge of applications of computer vision in the
+    field of medical imaging to diagnose various ailments. Examples include Stanford's [CheXNet](https://stanfordmlgroup.github.io/projects/chexnet/) for
+    diagnosing pneumonia from lung X-rays, prediction of cardiovascular risk factors
+    from retina images, and skin cancer classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On similar lines, a few recent research papers have been published that basically
+    take CT scans and try to predict whether the person is suffering from COVID-19
+    or not. To keep yourself updated, you can always check Google scholar.
+  prefs: []
+  type: TYPE_NORMAL
+- en: CT Scan Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A CT scan (or computed tomography scan) is done using a machine where a scanner
+    goes around your body to create a 3-D model of your organs. Here's a demonstration
+    how a CT Scanner works.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, your data in this case is going to be either...
+  prefs: []
+  type: TYPE_NORMAL
+- en: A 3-D volume, for which you will have to use a 3-D Convolutional Net.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Multiple cross-sectional slices, for which we can use a 2-D neural network.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Extracting Regions of Interest (ROI)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: All of these approaches involve some amount of data preprocessing to carve out *Regions
+    of Interest* from the CT Scan as a first step. Once these ROIs are extracted,
+    they are sent to a deep neural network to classify the cases as COVID-19 or another
+    category, such as Bacterial Pneumonia, Viral Pneumonia, No Infection, etc. (the
+    "other" categories vary throughout the papers).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here's an example from the paper *[Deep Learning System to Screen Coronavirus
+    Disease 2019 Pneumonia](https://arxiv.org/pdf/2002.09334.pdf)*, which works on
+    2-D slices of the CT scan.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b1708cccc9933e807b4395421eee5a1f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The small bounding box around a diffuse opacity in the third figure is an example
+    of RoI.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The paper first segments the lung using image preprocessing methods. Then regions
+    of interest are extracted using the VNET20-based segmentation model VNET-IR-RPN17\.
+    The model itself was trained for extracting ROIs from pulmonary tuberculosis,
+    but it was found that it worked well enough for the COVID-19 use case as well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then each RoI is run through a classification model, where we get the class
+    probabilities. There can be one or more RoIs, giving us multiple probabilities.
+    These probabilities are then combined using something called a *Noisy-or-Bayesian* function.
+    More details about this can be found in the paper linked above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/41dbf1f3a11f67e87511263c3f9b19e5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The paper also leverages the fact that for coronavirus, often the opacities
+    are found around the edges of the lungs, which is used as an input to the network
+    at a later phase. The details on how exactly this distance is calculated can be
+    found in the paper.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/0d5161a1d5f7fdd9179f3dbe53af31d9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Architecture of the classification network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The network architecture is inspired by ResNet, with local-attention on the
+    final classification layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Deep Learning System to Screen Coronavirus Disease 2019 Pneumonia](https://arxiv.org/abs/2002.09334v1)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using 3-D Information
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In yet another paper, titled *[Rapid AI Development Cycle for the Coronavirus
+    (COVID-19) Pandemic: Initial Results for Automated Detection & Patient Monitoring
+    using Deep Learning CT Image Analysis](https://arxiv.org/abs/2003.05037)*, the
+    authors use a [3-D U-Net architecture](https://arxiv.org/abs/1606.06650) to extract
+    the lung out of the scan (same function as the VNET20 model).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then these *lung crops* are classified by a neural network. The entire lung
+    is passed to the classification network, unlike the previous work where ROIs were
+    extracted from the lung before classification. The authors then use the [Grad-CAM](https://arxiv.org/abs/1610.02391) technique
+    to create "heatmaps" of the lungs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c83c38637fe1b7e72112083de2a761ee.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The red spot shows the areas of the lung that correspond most strongly to CoViD-19,
+    whereas the blue colors show the unimportant regions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To classify each patient, multiple slices of the CT scan are used. Each of these
+    scans are used to compute the class probabilities. The patient is classified as
+    COVID-19 *positive* if a majority of the slices have COVID-19 as the highest class
+    probability. (In other words, each slice counts as a vote).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition to classifying 2-D lung crops, the authors also use an off-the-shelf
+    software, [RADLogics](http://radlogics.com/), that detects nodules and small opacities
+    within a 3-D lung volume. Then, the patches from the software and the heatmaps
+    from the earlier stages are combined to create a 3-D visualization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5fb678f02ea24dd7392c6599867b8083.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The patches in red correspond to the spots picked up by the classification system,
+    whereas the spots in green are the ones which are picked by the software.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The volume of patches is then used to create a "Corona Score".
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Rapid AI Development Cycle for the Coronavirus (COVID-19) Pandemic: Initial
+    Results for Automated Detection & Patient Monitoring using Deep Learning CT Image
+    Analysis](https://arxiv.org/abs/2003.05037v3)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: CovNet
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In a very recent paper published by the Radiological Society of North America, *[Artificial
+    Intelligence Distinguishes COVID-19 from Community Acquired Pneumonia on Chest
+    CT](https://pubs.rsna.org/doi/pdf/10.1148/radiol.2020200905)*, an architecture
+    called CovNet was proposed to work on multiple 2-D slices of the same CT scan.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/62eb76b9ed661106a0af3e5acede9592.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Feature vectors are derived from each slice. Then these multiple feature vectors
+    are max-pooled to obtain a single feature vector. This feature vector is then
+    fed to fully connected layers that classify a case as either COVID-19, Community
+    Acquired Pneumonia, or Non-Pneumonia.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Evaluating Results
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: While evaluating the results of any coronavirus diagnosis method, the accuracy
+    is not enough. This is because of all the people we test, only a few of them are
+    going to have the virus. Hardly any country in the world has had a positive hit
+    rate of more than 20 percent (positives cases out of all tests done). In such
+    a case, let's say we develop a solution that just calls everything negative. From
+    an accuracy point of view, the solution would still have 80 percent accuracy,
+    despite being a totally useless classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We therefore need to focus on other metrics, such as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Sensitivity**, or the true positive rate. This is the proportion of true
+    positives out of the total number of positive samples, or simply put, the number
+    of coronavirus infected patients that we correctly classify as positive. Having
+    a sensitivity which is too low would mean that there are many people who have
+    the virus which our algorithm classified as negative. This is a particularly alarming
+    shortcoming to have, since it would allow many infected people to go home and
+    perhaps spread the virus.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Specificity**, or the true negative rate. This is the proportion of the true
+    negatives to the total number of negative samples, or simply put, the number of
+    non-infected people that we correctly classify as negative. Having a specificity
+    which is too low would mean that we will be telling many people who don''t have
+    the virus that they do. While not as alarming as a low sensitivity, it could put
+    undue pressure on health systems if we get too many false positives in our system.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6429c80ce22266e7b757927eb46973c2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: People also use metrics like **Precision** (of all the patients we have diagnosed
+    as positive, how many people actually had the disease; this is useful for measuring
+    how resourceful our test is) and the **F1 Score** (which combines Precision and
+    Sensitivity).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Area under ROC Curve** is a measure of how well our classifier separates
+    two classes. Typically all cases are given a probability by the classifier, and
+    then we use a threshold to determine the outcome. We ideally want all the positive
+    cases to score much higher than the threshold, and the negative cases to score
+    much lower than the threshold. Why? Because if an example is closer to the threshold,
+    it is difficult to be confident about the prediction.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, let's say we use a threshold of 0.5\. Suppose a classifier assigns
+    a case a probability of 0.9\. We can confidently say that this case is a positive
+    one. However, consider another case as 0.52\. We can't say this example is positive
+    with the same confidence. One could think, had the input varied a bit, we could
+    have gotten a score of 0.48, and we would have called that same example negative.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**AUROC** is the graph between sensitivity and the false positive rate (1 -
+    specificity). It can be computed only for binary classification cases, so when
+    we have **n** classes, we have to make **n** "one class" vs "all other classes"
+    AUC curves.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5b5b167124262f4b2f0913fa226625ee.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 1-vs-all AOC curves for results in the paper *[Artificial Intelligence Distinguishes
+    COVID-19 from Community Acquired Pneumonia on Chest CT](https://pubs.rsna.org/doi/pdf/10.1148/radiol.2020200905)*
+  prefs: []
+  type: TYPE_NORMAL
+- en: The area under the ROC curve can range from 0 to 1, where 1 represents the perfect
+    classifier and 0.5 (meaning the curve follows the line y=x) represents a classifier
+    which is as good as flipping a coin (random chance). An area under 0.5 means your
+    classifier is even worse, and makes incorrect predictions more often than not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In case you want to dig deeper into why AUROC works, here''s a good resource
+    for you:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Understanding AUC - ROC Curve**](https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Caveat Though...
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before ending this article, I'd like to point out some challenges which we face
+    while applying deep learning tools to medical use cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As far as COVID-19 is concerned, in this post we basically covered how to *detect*
+    the disease through CT scans. But truth be told, you can't really detect pneumonia
+    through CT scans. This is because pneumonia is what we call a "clinical diagnosis".
+    Radiologists don't merely look at CT scans and pronounce patients as having COVID-19\.
+    They may also look at blood work, clinical history, additional symptoms, etc.
+    to arrive at a conclusion. This is because pneumonia caused by different reasons
+    may or may not result in vastly distinct features in the CT scan. When a paper
+    reports that a CT scan has better sensitivity than a RT-PCR, it actually means
+    a method where doctors combine a CT Scan with other symptoms and features to diagnose
+    a patient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While this in no way demerits the usage of deep learning for diagnosis of COVID-19,
+    one must be wary of flashy headlines such as this one when CheXNet came out.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Should radiologists be worried about their jobs? Breaking news: We can now
+    diagnose pneumonia from chest X-rays better than radiologists. [https://t.co/CjqbzSqwTx](https://t.co/CjqbzSqwTx)'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: — Andrew Ng (@AndrewYNg) [November 15, 2017](https://twitter.com/AndrewYNg/status/930938692310482944?ref_src=twsrc%5Etfw)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: No, radiologists are not going anywhere. But what these deep learning tools
+    will do, however, is ease their work when there's a barrage of cases, as has happened
+    with the coronavirus outbreak, and when time is of paramount importance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: That's all for this part folks. In the next part we'll be creating a classifier
+    to identify lung X-Rays as COVID-19 or another infection. Currently there is no
+    open source CT Scan dataset available for COVID-19, so we'll have to stick with
+    X-Ray scans for now. (The data that was used in the papers we discussed above
+    has not been made available in the public domain).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Ayoosh Kathuria](https://www.linkedin.com/in/ayoosh-kathuria-44a319132/)**
+    is a Research Assistant at Indraprastha Institute of Information Technology, Delhi.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://blog.paperspace.com/fighting-corona-virus-with-ai-medical-imaging-testing/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Best Free Epidemiology Courses for Data Scientists](/2020/04/epidemiology-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Steps to ensure your AI/Machine Learning system survives COVID-19](/2020/04/ai-machine-learning-system-survives-covid-19.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Data Science Is Being Used to Understand COVID-19](/2020/04/data-science-understand-covid-19.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Fighting AI with AI Fraud Monitoring for Deepfake Applications](https://www.kdnuggets.com/2023/05/fighting-ai-ai-fraud-monitoring-deepfake-applications.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Things You Need To Know About Data Management And Why It Matters…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News March 9, 2022: Build a Machine Learning Web App in 5…](https://www.kdnuggets.com/2022/n10.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hypothesis Testing and A/B Testing](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Discover the World of Computer Vision: Introducing MLM''s Latest…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

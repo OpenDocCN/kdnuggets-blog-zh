@@ -1,0 +1,327 @@
+- en: 'Hands-On with Unsupervised Learning: K-Means Clustering'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Hands-On with Unsupervised Learning: K-Means Clustering](../Images/6c271a0a353692c348f98759efcd5a59.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: K-Means clustering is one of the most commonly used unsupervised learning algorithms
+    in data science. It is used to automatically segment datasets into clusters or
+    groups based on similarities between data points.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this short tutorial, we will learn how the K-Means clustering algorithm works
+    and apply it to real data using scikit-learn. Additionally, we will visualize
+    the results to understand the data distribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is K-Means Clustering?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: K-Means clustering is an unsupervised machine learning algorithm that is used
+    to solve clustering problems. The goal of this algorithm is to find groups or
+    clusters in the data, with the number of clusters represented by the variable
+    K.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**The K-Means algorithm works as follows:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Specify the number of clusters K that you want the data to be grouped into.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Randomly initialize K cluster centers or centroids. This can be done by randomly
+    picking K data points to be the initial centroids.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Assign each data point to the closest cluster centroid based on Euclidean distance.
+    The data points closest to a given centroid are considered part of that cluster.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Recompute the cluster centroids by taking the mean of all data points assigned
+    to that cluster.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Repeat steps 3 and 4 until the centroids stop moving or the iterations reach
+    a specified limit. This is done when the algorithm has converged.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![Hands-On with Unsupervised Learning: K-Means Clustering](../Images/c0e044b06cd030678cea310f7a36cd7e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Gif [by Alan Jeffares](https://towardsdatascience.com/k-means-a-complete-introduction-1702af9cd8c)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The objective of K-Means is to minimize the sum of squared distances between
+    data points and their assigned cluster centroid. This is achieved by iteratively
+    reassigning data points to the closest centroid and moving the centroids to the
+    center of their assigned points, resulting in more compact and separated clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: K-Means Clustering Real-World Example
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In these examples, we will use [Mall Customer Segmentation](https://www.kaggle.com/datasets/vjchoudhary7/customer-segmentation-tutorial-in-python)
+    data from Kaggle and apply the K-Means algorithm. We will also find the optimum
+    number of **K** (clusters) using the Elbow method and visualize the clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Loading
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We will load a CSV file using pandas and make “CustomerID” as an index.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The data set has 4 columns and we are interested in only three: Age, Annual
+    Income, and Spending Score of the customers.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![XXXXX](../Images/05d61632ccda918cab988849f0140354.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Visualization
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To visualize all four columns, we will use seaborn’s `scatterplot` .
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Even without K-Means clustering, we can clearly see the cluster in between 40-60
+    spending score and 40k to 70k annual income. To find more clusters, we will use
+    the clustering algorithm in the next part.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-On with Unsupervised Learning: K-Means Clustering](../Images/38b8c1066d3a86496db4547ab7d7d960.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Normalizing
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Before applying a clustering algorithm, it's crucial to normalize the data to
+    eliminate any outliers or anomalies. We are dropping the “Gender” and “Age” columns
+    and will be using the rest of them to find the clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Elbow Method
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The optimal value of K in the K-Means algorithm can be found using the Elbow
+    method. This involves finding the inertia value of every K number of clusters
+    from 1-10 and visualizing it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: We obtained an optimal value of 3.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-On with Unsupervised Learning: K-Means Clustering](../Images/d03eca3f8033dd0406d4473fce5632ab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: KMeans Clustering
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We will now use KMeans algorithm from scikit-learn and provide it the K value.
+    After that we will fit it on our training dataset and get cluster labels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can use scatterplot to visualize the three clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '“0”: From high spender with low annual income.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '“1”: Average to high spender with medium to high annual income.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '“2”: From Low spender with High annual income.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Hands-On with Unsupervised Learning: K-Means Clustering](../Images/2cbd08954d81e44a5f8d7b4ac1e03d78.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This insight can be used to create personalized ads, increasing customer loyalty
+    and boosting revenue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using different features
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Now, we will use Age and Spending Score as the feature for the clustering algorithm.
+    It will give us a complete picture of customer distribution. We will repeat the
+    process of normalizing the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Calculate the optimal number of clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Train the K-Means algorithm on K=3 clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-On with Unsupervised Learning: K-Means Clustering](../Images/d7cc507c1b0db3178ac1dacc78a68880.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Use a scatter plot to visualize the three clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: '“0”: Young High spender.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '“1”: Medium spender from middle age to old ages.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '“2”: Low spenders.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The result suggests that companies can increase profits by targeting individuals
+    aged 20-40 with disposable income.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hands-On with Unsupervised Learning: K-Means Clustering](../Images/59754c9b907b34492adf93f13ea991ec.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can even go deep by visualizing the boxplot of spending scores. It clearly
+    shows that the clusters are formed based on spending habits.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Hands-On with Unsupervised Learning: K-Means Clustering](../Images/2822e2c1ea52d934a8411cc100ec36a2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In this K-Means clustering tutorial, we explored how the K-Means algorithm can
+    be applied for customer segmentation to enable targeted advertising. Though K-Means
+    is not a perfect, catch-all clustering algorithm, it provides a simple and effective
+    approach for many real-world use cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By walking through the K-Means workflow and implementing it in Python, we gained
+    insight into how the algorithm functions to partition data into distinct clusters.
+    We learned techniques like finding the optimal number of clusters with the elbow
+    method and visualizing the clustered data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While scikit-learn provides many other [clustering algorithms](https://scikit-learn.org/stable/modules/clustering.html),
+    K-Means stands out for its speed, scalability, and ease of interpretation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan/))
+    is a certified data scientist professional who loves building machine learning
+    models. Currently, he is focusing on content creation and writing technical blogs
+    on machine learning and data science technologies. Abid holds a Master''s degree
+    in Technology Management and a bachelor''s degree in Telecommunication Engineering.
+    His vision is to build an AI product using a graph neural network for students
+    struggling with mental illness.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Clustering Unleashed: Understanding K-Means Clustering](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Clustering with scikit-learn: A Tutorial on Unsupervised Learning](https://www.kdnuggets.com/2023/05/clustering-scikitlearn-tutorial-unsupervised-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is K-Means Clustering and How Does its Algorithm Work?](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unsupervised Disentangled Representation Learning in Class…](https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Exploring Unsupervised Learning Metrics](https://www.kdnuggets.com/2023/04/exploring-unsupervised-learning-metrics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

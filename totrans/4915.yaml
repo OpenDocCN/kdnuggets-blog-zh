@@ -1,0 +1,276 @@
+- en: 'TensorFlow: What Parameters to Optimize?'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/11/tensorflow-parameters-optimize.html](https://www.kdnuggets.com/2017/11/tensorflow-parameters-optimize.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/f161d5c08245164a3a4d69b47351e0e8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This article targets whom have a basic understanding for TensorFlow Core API.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Learning TensorFlow Core API, which is the lowest level API in TensorFlow, is
+    a very good step for starting learning TensorFlow because it let you understand
+    the kernel of the library. Here is a very simple example of TensorFlow Core API
+    in which we create and train a linear regression model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The steps are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Read the trainable parameters of the model (Just a weight and a bias in this
+    example).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Read the training data into placeholders.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Create the linear regression model function.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Create a loss function to assess the prediction errors of the model.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Create a TensorFlow session.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Initialize the trainable parameters.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Run the session to train the regression model.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The loss returned is 53.76\. Existence of error, specially for large error,
+    means that the parameters used must be updated. These parameters are expected
+    to be updated automatically but we can start updating it manually until reaching
+    zero error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For W=0.8 and b=0.4, the loss is 3.44
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For W=1.0 and b=0.8, the loss is 12.96
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For W=1.0 and b=-0.5, the loss is 1.0
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For W=1.0 and b=-1.0, the loss is 0.0
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Thus when W=1.0 and b=-1.0 the desired results is identical to the predicted
+    results and thus we can`t enhance the model more than this. We reached the optimal
+    values for the parameters but not using the optimal way. The optimal way of calculating
+    the parameters is automatic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are a number of optimizers already exist in TensorFlow for making things
+    simpler. These optimizers exist in APIs in TensorFlow such as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: tensorflow.train
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: tensorflow.estimator
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Here is how we can use tensorflow.train for updating the parameters automatically.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**tensorflow.train API**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are a number of optimizers that TensorFlow provides that makes the previous
+    manual work of calculating the best values for the model parameters automatically.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The simplest optimizer is the gradient descent that changes the values of each
+    parameter slowly until reaching the value that minimizes the loss. Gradient descent
+    modifies each variable according to the magnitude of the derivative of loss with
+    respect to the variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because doing such operations of calculating the derivatives is complex and
+    error prone, TensorFlow can calculate the gradients automatically. After calculating
+    the gradients, you need to optimize the parameters yourself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But TensorFlow makes things easier and easier by providing optimizers that will
+    calculate the derivatives in addition to optimizing the parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'tensorflow.train API contains a class called GradientDescentOptimizer that
+    can both calculate the derivatives and optimizing the parameters. For example,
+    the following code shows how to minimize the loss using the GradientDescentOptimizer:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here is the result returned by the optimizer. It seems that it deduced the right
+    values of the parameters automatically in order to get the least loss.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: There is some advantages of using such built-in optimizers rather than building
+    it manually. This is because the code for creating such simple linear regression
+    model using TensorFlow Core API is not complex. But it won`t be like that when
+    working with much more complex models. Thus it is preferred to use the frequently
+    used tasks from high-level APIs in TensorFlow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is the dataflow graph of the previous program when visualized using TensorBoard
+    (TB).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/fa500fc8c03adc571355f6d468cc6e68.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: But there is a very important question. **How the optimizer deduced the parameters
+    that it should change? How it deduced that we are to optimize the weight (W) and
+    bias (b)? **We have not explicitly told the optimizer that these are the parameters
+    that it will change in order to reduce the loss but it deduced it itself. **So,
+    how?**
+  prefs: []
+  type: TYPE_NORMAL
+- en: In line 35, we run the session and asked to evaluate the train Tensor. TensorFlow
+    will follow the chain of graph nodes to evaluate that Tensor. In line 23, TensorFlow
+    found that to evaluate the train Tensor it should evaluate the optimizer.minimize
+    operation. This operation will try to minimize its input arguments as much as
+    possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Following back, to evaluate the minimize operation it will accept one Tensor
+    which is the loss. So, the goal now is to minimize the loss Tensor. But how to
+    minimize the loss? It will still follow the graph back and it will find it is
+    evaluated using the tensorflow.reduce_sum() operation. So, our goal now is to
+    minimize the result of the tensorflow.reduce_sum() operation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Following back, this operation is evaluated using one Tensor as input which
+    is squared_deltas. So, rather than having our goal to minimize the tensorflow.reduce_sum()
+    operation, our goal now is to minimize the squared_deltas Tensor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Following the chain back, we find that the squared_deltas Tensor depends on
+    the tensorflow.square() operation. So, we should minimize tensorflow.square()
+    the operation. Minimizing that operation will ask us to minimize its input Tensors
+    which are linear_model and y_train. Looking for thse two tensors, which one can
+    be modified? The Tensors of type Variables can be modified. Because y_train is
+    not a Variable but placeholder, then we can`t modify it and thus we can modify
+    the linear_model to minimize the result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In line 15, the linear_model Tensor is calculated based on three inputs which
+    are W, x, and b. Looking for these Tensors, only W and x can be changed because
+    they are variables. So, our goal is to minimize these two Tensors W and x.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is how TensorFlow deduced that to minimize the loss it should minimize
+    the weight and bias parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** received his B.Sc.
+    degree with excellent with honors in information technology from the Faculty of
+    Computers and Information (FCI), Menoufia University, Egypt, in July 2015\. For
+    being ranked first in his faculty, he was recommended to work as a teaching assistant
+    in one of the Egyptian institutes in 2015 and then in 2016 to work as a teaching
+    assistant and a researcher in his faculty. His current research interests include
+    deep learning, machine learning, artificial intelligence, digital signal processing,
+    and computer vision.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.linkedin.com/pulse/tensorflow-what-hyperparameters-optimize-ahmed-gad/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[TensorFlow: Building Feed-Forward Neural Networks Step-by-Step](/2017/10/tensorflow-building-feed-forward-neural-networks-step-by-step.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Free Resources for Furthering Your Understanding of Deep Learning](/2017/10/5-free-resources-furthering-understanding-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Types of Artificial Neural Networks for Natural Language Processing](/2017/10/7-types-artificial-neural-networks-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Tuning Adam Optimizer Parameters in PyTorch](https://www.kdnuggets.com/2022/12/tuning-adam-optimizer-parameters-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 MLOps Tools to Optimize & Manage Machine Learning Lifecycle](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Optimize SQL Queries for Faster Data Retrieval](https://www.kdnuggets.com/2023/06/optimize-sql-queries-faster-data-retrieval.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Optimize Dockerfile Instructions for Faster Build Times](https://www.kdnuggets.com/how-to-optimize-dockerfile-instructions-for-faster-build-times)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The "Hello World" of Tensorflow](https://www.kdnuggets.com/2022/05/hello-world-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

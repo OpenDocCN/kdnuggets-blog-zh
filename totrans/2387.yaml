@@ -1,0 +1,323 @@
+- en: Tuning XGBoost Hyperparameters
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Tuning XGBoost Hyperparameters](../Images/0ed85dd2a0f411bb383af072d8093e46.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Garett Mizunaka](https://unsplash.com/@garett3) via Unsplash'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To recap, XGBoost stands for Extreme Gradient Boosting and is a supervised learning
+    algorithm that falls under the gradient-boosted decision tree (GBDT) family of
+    machine learning algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: They make their predictions based on combining a set of weaker models and evaluate
+    other decision trees through if-then-else true/false feature questions. They are
+    created in sequential form to assess and estimate the probability of producing
+    a correct decision.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Before we get into the tuning of XGBoost hyperparamters, let’s understand why
+    tuning is important
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why is Hyperparamter Tuning Important?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Hyperparameter tuning is a vital part of improving the overall behavior and
+    performance of a machine learning model. It is a type of parameter that is set
+    before the learning process and happens outside of the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A lack of hyperparameter tuning can lead to inaccurate results if the loss function
+    is not minimized. Our aim is that our model produces as few errors as possible.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hyperparameters are used to calculate the model parameters where the different
+    hyperparameter values have the ability to produce different model parameter values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hyperparameter tuning is all about finding a set of optimal hyperparameter values
+    which maximizes the models performance, minimizes loss and produces better outputs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Features of XGBoost
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 1\. Gradient Tree Boosting
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: There are a fixed number of trees added and with each iteration which should
+    show a reduction in loss function value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Regularized Learning
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Regularized Learning helps to minimize the loss function and prevent overfitting
+    or underfitting from occurring - helping to smooth out the final learnt weight.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Shrinkage and Feature Subsampling
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'These two techniques are used to further prevent overfitting: Shrinkage and
+    Feature Subsampling.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: These features will be further explored in the hyperparameter tuning of XGBoost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: XGBoost Parameter Tuning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'XGBoost parameters are divided into 4 groups:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. General parameters
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: This relates to the type of booster we are using to do boosting. The most common
+    types are tree or linear model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Booster parameters
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: This depend on which booster you have chosen
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Learning task parameters
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: This is about deciding on the learning scenario.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. Command line parameters
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: This relates to the behavior of the CLI version of XGBoost
+  prefs: []
+  type: TYPE_NORMAL
+- en: General parameters, Booster parameters and Task parameters are set before running
+    the XGBoost model. The Command line parameters are only used in the console version
+    of XGBoost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: General Parameters
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'These are the general parameters in XGBoost:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`booster [default=gbtree]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Choosing which booster to use such as gbtree and dart for tree based models
+    and gblinear for linear functions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`verbosity [default=1]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is printing of messages where valid values are 0 (silent), 1 (warning),
+    2 (info), 3 (debug).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`validate_parameters [default to false, except for Python, R and CLI interface]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When this is set to True, XGBoost will perform validation of input parameters
+    to check whether a parameter is used or not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`nthread`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is the number of parallel threads used to run XGBoost.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`disable_default_eval_metric [default=false]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This will flag to disable the default metric. You can set it to 1 or true to
+    disable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`num_feature `'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feature dimension used in boosting, set to maximum dimension of the feature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Tree-based Learners Most Common Parameters
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '`max_depth [default=6]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Increasing this value will make the model more complex and more likely to overfit,
+    therefore you need to be careful when choosing your value. The value must be an
+    integer greater than 0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`eta [default=0.3, alias: learning_rate]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This determines the step size at each iteration. The value must be between 0
+    and 1 and the default is 0.3\. A low learning rate makes computation slower, and
+    will need more rounds to achieve a reduction in error in comparison with a model
+    with a higher learning rate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`n_estimators [default=100]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is the number of trees in our ensemble which is the same number of boosting
+    rounds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The value must be an integer greater than 0 and the default is 100.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`subsample [default=1]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This represents the fraction of observations that need to be sampled for each
+    tree. A lower value helps to prevent overfitting, but raises the possibility of
+    under-fitting. The value must be between 0 and 1, where the default is 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`colsample_bytree, colsample_bylevel, colsample_bynode [default=1]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a family of parameters for subsampling of columns. Feature subsampling
+    helps to prevent overfitting and also speeds up computations of the parallel algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Regularization Parameters
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '`alpha [default=0, alias: reg_alpha]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: L1 (Lasso Regression) regularization on weights. When you increase this value
+    it will make the model more conservative. When you work with a large number of
+    features, there is a possibility of an improvement in speed performance. It can
+    be any integer and the default is 0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`lambda [default=1, alias: reg_lambda]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: L2 (Ridge Regression) regularization on weights. When you increase this value
+    it will make the model more conservative. It can also be used to help to reduce
+    overfitting. It can be any integer and the default is 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`gamma [default=0, alias: min_split_loss]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Minimum loss reduction required to make a further partition on a leaf node of
+    the tree. The higher the Gamma value is, the higher the regularization. It can
+    be any integer and the default is 0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can find the [complete list of XGBoost parameters here](https://xgboost.readthedocs.io/en/latest/parameter.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: From this article, you would have understood how the 3 features of XGBoost are
+    achieved by the 4 divided parameter tuning groups. Which were then further explored
+    through the different XGBoost parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** is a Data Scientist
+    and Freelance Technical Writer. She is particularly interested in providing Data
+    Science career advice or tutorials and theory based knowledge around Data Science.
+    She also wishes to explore the different ways Artificial Intelligence is/can benefit
+    the longevity of human life. A keen learner, seeking to broaden her tech knowledge
+    and writing skills, whilst helping guide others.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Tuning Random Forest Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-random-forest-hyperparameters.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tuning Hyperparameters in Neural Networks](https://www.kdnuggets.com/tuning-hyperparameters-in-neural-networks)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What are the Assumptions of XGBoost?](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Leveraging XGBoost for Time-Series Forecasting](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[WTF is the Difference Between GBM and XGBoost?](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

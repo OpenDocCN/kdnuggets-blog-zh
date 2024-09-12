@@ -1,0 +1,528 @@
+- en: The 5 Graph Algorithms That Data Scientists Should Know
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/09/5-graph-algorithms-data-scientists-know.html](https://www.kdnuggets.com/2019/09/5-graph-algorithms-data-scientists-know.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/4b410eb2ecdf09cf1fc254d5fdae2a0d.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We as data scientists have gotten quite comfortable with Pandas or SQL or any
+    other relational database.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are used to seeing our users in rows with their attributes as columns. But
+    does the real world really behave like that?
+  prefs: []
+  type: TYPE_NORMAL
+- en: In a connected world, users cannot be considered as independent entities. They
+    have got certain relationships between each other and we would sometimes like
+    to include such relationships while building our machine learning models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now while in a relational database, we cannot use such relations between different
+    rows(users), in a graph database it is fairly trivial to do that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***In this post, I am going to be talking about some of the most important
+    graph algorithms you should know and how to implement them using Python.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, here is a [Graph Analytics for Big Data course on Coursera by UC San Diego](https://www.coursera.org/learn/big-data-graph-analytics?ranMID=40328&ranEAID=lVarvwc5BD0&ranSiteID=lVarvwc5BD0-uD3tAFL0mCUdzcfwDd6FTQ&siteID=lVarvwc5BD0-uD3tAFL0mCUdzcfwDd6FTQ&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0) which
+    I highly recommend to learn the basics of graph theory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Connected Components
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f227f7e9ec2a5381e321bfe86830c792.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A graph with 3 connected components
+  prefs: []
+  type: TYPE_NORMAL
+- en: We all know how clustering works?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*You can think of Connected Components in very layman’s terms as a sort of
+    a hard clustering algorithm which finds clusters/islands in related/connected
+    data.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*As a concrete example: ****Say you have data about roads joining any two cities
+    in the world. And you need to find out all the continents in the world and which
+    city they contain.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: How will you achieve that? Come on give some thought.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The connected components algorithm that we use to do this is based on a special
+    case of **BFS/DFS**. I won’t talk much about how it works here, but we will see
+    how to get the code up and running using `Networkx`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Applications
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'From a **Retail Perspective**: Let us say, we have a lot of customers using
+    a lot of accounts. One way in which we can use the Connected components algorithm
+    is to find out distinct families in our dataset.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can assume edges(roads) between CustomerIDs based on same credit card usage,
+    or same address or same mobile number, etc. Once we have those connections, we
+    can then run the connected component algorithm on the same to create individual
+    clusters to which we can then assign a family ID.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can then use these family IDs to provide personalized recommendations based
+    on family needs. We can also use this family ID to fuel our classification algorithms
+    by creating grouped features based on family.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'From a **Finance Perspective**: Another use case would be to capture fraud
+    using these family IDs. If an account has done fraud in the past, it is highly
+    probable that the connected accounts are also susceptible to fraud.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The possibilities are only limited by your own imagination.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We will be using the `Networkx` module in Python for creating and analyzing
+    our graphs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us start with an example graph which we are using for our purpose. Contains
+    cities and distance information between them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/0f9a5ab2c75434fd56b2f1054431e5dc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Graph with Some random distances
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We first start by creating a list of edges along with the distances which we
+    will add as the weight of the edge:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let us create a graph using `Networkx`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now ***we want to find out distinct continents and their cities from this graph.***
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can now do this using the connected components algorithm as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: As you can see we are able to find distinct components in our data. Just by
+    using Edges and Vertices. This algorithm could be run on different data to satisfy
+    any use case that I presented above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Shortest Path
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/fb28cd8bcd9912a10eeca6e986a6a1a7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Continuing with the above example only, we are given a graph with the cities
+    of Germany and the respective distance between them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**You want to find out how to go from Frankfurt (The starting node) to Muenchen
+    by covering the shortest distance**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The algorithm that we use for this problem is called **Dijkstra**. In Dijkstra’s
+    own words:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'What is the shortest way to travel from [Rotterdam](https://en.wikipedia.org/wiki/Rotterdam) to [Groningen](https://en.wikipedia.org/wiki/Groningen),
+    in general: from given city to given city. [It is the algorithm for the shortest
+    path](https://en.wikipedia.org/wiki/Shortest_path_problem), which I designed in
+    about twenty minutes. One morning I was shopping in [Amsterdam](https://en.wikipedia.org/wiki/Amsterdam) with
+    my young fiancée, and tired, we sat down on the café terrace to drink a cup of
+    coffee and I was just thinking about whether I could do this, and I then designed
+    the algorithm for the shortest path. As I said, it was a twenty-minute invention.
+    In fact, it was published in ’59, three years later. The publication is still
+    readable, it is, in fact, quite nice. One of the reasons that it is so nice was
+    that I designed it without pencil and paper. I learned later that one of the advantages
+    of designing without pencil and paper is that you are almost forced to avoid all
+    avoidable complexities. Eventually that algorithm became, to my great amazement,
+    one of the cornerstones of my fame.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: — Edsger Dijkstra, in an interview with Philip L. Frana, Communications of the
+    ACM, 2001[[3]](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#cite_note-Dijkstra_Interview-3)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Applications
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Variations of the Dijkstra algorithm is used extensively in Google Maps to find
+    the shortest routes.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You are in a Walmart Store. You have different Aisles and distance between all
+    the aisles. You want to provide the shortest pathway to the customer from Aisle
+    A to Aisle D.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/0c5ad8c169957881384dc7569124e8ea.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You have seen how LinkedIn shows up 1st-degree connections, 2nd-degree connections.
+    What goes on behind the scenes?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/091b0f441ab50491d95c8dbb8a60c49d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'You can also find Shortest paths between all pairs using:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 3\. Minimum Spanning Tree
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/b1c0422c0bda13b46391bdfefab29c8b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Now we have another problem. We work for a water pipe laying company or an internet
+    fiber company.*** We need to connect all the cities in the graph we have using
+    the minimum amount of wire/pipe. ***How do we do this?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/677a92f263dd0a398551eac6d666666a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: An Undirected Graph and its MST on the right.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Applications
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Minimum spanning trees have direct applications in the design of networks, including
+    computer networks, telecommunications networks, transportation networks, water
+    supply networks, and electrical grids (which they were first invented for)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: MST is used for approximating the traveling salesman problem
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Clustering — First construct MST and then determine a threshold value for breaking
+    some edges in the MST using Intercluster distances and Intracluster distances.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Image Segmentation — It was used for Image segmentation where we first construct
+    an MST on a graph where pixels are nodes and distances between pixels are based
+    on some similarity measure(color, intensity, etc.)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/63f765d13c6868568be507c058a2a57f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The MST of our graph.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you can see the above is the wire we gotta lay.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. Pagerank
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/59eaabe2b166f762b0b574d3739a17c3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This is the page sorting algorithm that powered google for a long time. It assigns
+    scores to pages based on the number and quality of incoming and outgoing links.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Applications
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Pagerank can be used anywhere where we want to estimate node importance in any
+    network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It has been used for finding the most influential papers using citations.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Has been used by Google to rank pages
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: It can be used to rank tweets- User and Tweets as nodes. Create Link between
+    user if user A follows user B and Link between user and Tweets if user tweets/retweets
+    a tweet.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Recommendation engines
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'For this exercise, we are going to be using Facebook data. We have a file of
+    edges/links between facebook users. We first create the FB graph using:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This is how it looks:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/a66ef34f848ca9e7a05d55f67fde7989.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: FB User Graph
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we want to find the users having high influence capability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Intuitively, the Pagerank algorithm will give a higher score to a user who has
+    a lot of friends who in turn have a lot of FB Friends.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can get the sorted PageRank or most influential users using:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: The above IDs are for the most influential users.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can see the subgraph for the most influential user:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Figure](../Images/65588b2ba8f7f2fbfdf7deadaa850856.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Our most influential user(Yellow)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5. **Centrality Measures**
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are a lot of centrality measures which you can use as features to your
+    machine learning models. I will talk about two of them. You can look at other
+    measures [here](https://networkx.github.io/documentation/networkx-1.10/reference/algorithms.centrality.html#current-flow-closeness).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Betweenness Centrality: **It is not only the users who have the most friends
+    that are important, the users who connect one geography to another are also important
+    as that lets users see content from diverse geographies. ***Betweenness centrality
+    quantifies how many times a particular node comes in the shortest chosen path
+    between two other nodes.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Degree Centrality:** It is simply the number of connections for a node.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Applications
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Centrality measures can be used as a feature in any machine learning model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Here is the code for finding the Betweenness centrality for the subgraph.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/f099b9fa5e8842ff2778748973ef73a7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can see the nodes sized by their betweenness centrality values here. They
+    can be thought of as information passers. Breaking any of the nodes with a high
+    betweenness Centrality will break the graph into many parts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '***In this post, I talked about some of the most influential graph algorithms
+    that have changed the way we live.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: With the advent of so much social data, network analysis could help a lot in
+    improving our models and generating value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***And even understanding a little more about the world.***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are a lot of graph algorithms out there, but these are the ones I like
+    the most. Do look into the algorithms in more detail if you like. In this post,
+    I just wanted to get the required breadth into the area.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let me know if you feel I have left your favorite algorithm in the comments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is the [Kaggle Kernel](https://www.kaggle.com/mlwhiz/top-graph-algorithms) with
+    the whole code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to read up more on Graph Algorithms here is a [Graph Analytics for
+    Big Data course on Coursera by UCSanDiego](https://www.coursera.org/learn/big-data-graph-analytics?ranMID=40328&ranEAID=lVarvwc5BD0&ranSiteID=lVarvwc5BD0-uD3tAFL0mCUdzcfwDd6FTQ&siteID=lVarvwc5BD0-uD3tAFL0mCUdzcfwDd6FTQ&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0) which
+    I highly recommend to learn the basics of graph theory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for the read. I am going to be writing more beginner-friendly posts in
+    the future too. Follow me up at [**Medium**](https://medium.com/@rahul_agarwal?source=post_page---------------------------) or
+    Subscribe to my [**blog**](http://eepurl.com/dbQnuX?source=post_page---------------------------) to
+    be informed about them. As always, I welcome feedback and constructive criticism
+    and can be reached on Twitter [@mlwhiz](https://twitter.com/MLWhiz?source=post_page---------------------------).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Rahul Agarwal](https://www.linkedin.com/in/rahulagwl/)** is a Data
+    Scientist at Walmart Labs.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/data-scientists-the-five-graph-algorithms-that-you-should-know-30f454fa5513).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[10 Great Python Resources for Aspiring Data Scientists](/2019/09/10-great-python-resources-aspiring-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Coding Random Forests in 100 lines of code*](/2019/08/coding-random-forests.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Populating a GRAKN.AI Knowledge Graph with the World](/2017/07/populating-grakn-ai-knowledge-graph.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

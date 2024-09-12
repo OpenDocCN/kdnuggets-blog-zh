@@ -1,0 +1,464 @@
+- en: Hyperparameter Optimization for Machine Learning Models
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/05/hyperparameter-optimization-machine-learning-models.html](https://www.kdnuggets.com/2020/05/hyperparameter-optimization-machine-learning-models.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/e60360ab2907502e8bfd8adc536d14bf.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Credits](https://swisscognitive.ch/2020/01/13/machine-learning-in-adversity/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Model optimization is one of the toughest challenges in the implementation of
+    machine learning solutions. Entire branches of machine learning and deep learning
+    theory have been dedicated to the optimization of models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hyperparameter optimization in machine learning intends to find the hyperparameters
+    of a given machine learning algorithm that deliver the best performance as measured
+    on a validation set. Hyperparameters, in contrast to model parameters, are set
+    by the machine learning engineer before training. The number of trees in a random
+    forest is a hyperparameter while the weights in a neural network are model parameters
+    learned during training. I like to think of hyperparameters as the model settings
+    to be tuned so that the model can optimally solve the machine learning problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some examples of model hyperparameters include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `learning rate` for training a neural network.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `**C**` and `**????**` hyperparameters for support vector machines.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The `**k**` in k-nearest neighbors.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Hyperparameter optimization finds a combination of hyperparameters that returns
+    an optimal model which reduces a predefined loss function and in turn increases
+    the accuracy on given independent data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/1a76857e56c4740636dc8f28879c8971.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Classification models with their respective hyperparameters.](https://www.computer.org/csdl/journal/ts/2018/06/07990590/13rRUx0gerA)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hyperparameter Optimization methods
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Hyperparameters can have a direct impact on the training of machine learning
+    algorithms. Thus, to achieve maximal performance, it is important to understand
+    how to optimize them. Here are some common strategies for optimizing hyperparameters:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. Manual Hyperparameter Tuning**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Traditionally, hyperparameters were tuned manually by trial and error. This **is** still
+    commonly done, and experienced engineers can “guess” parameter values that will
+    deliver very high accuracy for ML models. However, there isa continual search
+    for better, faster, and more automatic methods to optimize hyperparameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Grid Search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Grid search is arguably the most basic hyperparameter tuning method. With this
+    technique, we simply build a model for each possible combination of all of the
+    hyperparameter values provided, evaluating each model, and selecting the architecture
+    which produces the best results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0d65f74594b1f825f12beb47db397245.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Grid-search does NOT only apply to one model type but can be applied across
+    machine learning to calculate the best parameters to use for any given model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For example, a typical soft-margin SVM classifier equipped with an RBF kernel
+    has at least two hyperparameters that need to be optimized for good performance
+    on unseen data: a regularization constant *C* and a kernel hyperparameter γ. Both
+    parameters are continuous, so to perform grid search, one selects a finite set
+    of “reasonable” values for each, let’s say'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e78be57e455f5dfa0eac00be4c135791.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Grid search then trains an SVM with each pair (*C*, γ) in the c[artesian product](https://www.wikiwand.com/en/Cartesian_product) of
+    these two sets and evaluates their performance on a held-out validation set (or
+    by internal cross-validation on the training set, in which case multiple SVMs
+    are trained per pair). Finally, the grid search algorithm outputs the settings
+    that achieved the highest score in the validation procedure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**How does it work in python?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here’s a python implementation of grid search using `[GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html)` from
+    the `sklearn` library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Fitting the Grid Search:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Methods to Run on Grid-Search:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: We then use the best set of hyperparameter values chosen in the grid search,
+    in the actual model as shown above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the **drawbacks** of grid search is that when it comes to dimensionality,
+    it suffers when evaluating the number of hyperparameters grows exponentially.
+    However, there is no guarantee that the search will produce the perfect solution,
+    as it usually finds one by aliasing around the right set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Random Search
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Often some of the hyperparameters matter much more than others. Performing random
+    search rather than grid search allows a much more precise discovery of good values
+    for the important ones.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8292a0cb03eeaa9f5cf4f473a2581516.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Random Search sets up a grid of hyperparameter values and selects random combinations
+    to train the model and score. This allows you to explicitly control the number
+    of parameter combinations that are attempted. The number of search iterations
+    is set based on time or resources. Scikit Learn offers the `RandomizedSearchCV` function
+    for this process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While it’s possible that `RandomizedSearchCV` will not find as accurate a result
+    as `GridSearchCV`, it surprisingly picks the best result more often than not and
+    in a *fraction* of the time it takes `GridSearchCV` would have taken. Given the
+    same resources, Randomized Search can even outperform Grid Search. This can be
+    visualized in the graphic below when continuous parameters are used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The chances of finding the optimal parameter are comparatively higher in random
+    search because of the random search pattern where the model might end up being
+    trained on the optimized parameters without any aliasing. Random search works
+    best for lower dimensional data since the time taken to find the right set is
+    less with less number of iterations. Random search is the best parameter search
+    technique when there is less number of dimensions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the case of deep learning algorithms, it outperforms the grid search.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b1b1600a34c9a27779b36bbb9d9a02cc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Credits](https://community.alteryx.com/t5/Data-Science-Blog/Hyperparameter-Tuning-Black-Magic/ba-p/449289)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the above figure, yay that you have two parameters, with 5x6 grid search
+    you check only 5 different parameter values from each of the parameters (six rows
+    and five columns on the plot on the left), while with the random search you check
+    14 different parameter values of each of the parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**How does it work in python?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here’s a python implementation of grid search using `RandomizedSearchCV` of
+    the `sklearn` library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Fitting the Random Search:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Methods to Run on Grid-Search:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 4\. Bayesian Optimization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The previous two methods performed individual experiments building models with
+    various hyperparameter values and recording the model performance for each. Because
+    each experiment was performed in isolation, it’s very easy to parallelize this
+    process. However, because each experiment was performed in isolation, we’re not
+    able to use the information from one experiment to improve the next experiment.
+    Bayesian optimization belongs to a class of *sequential model-based optimization* (SMBO)
+    algorithms that allow for one to use the results of our previous iteration to
+    improve our sampling method of the next experiment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This, in turn, limits the number of times a model needs to be trained for validation
+    as solely those settings that are expected to generate a higher validation score
+    are passed through for evaluation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bayesian optimization works by constructing a posterior distribution of functions
+    (Gaussian process) that best describes the function you want to optimize. As the
+    number of observations grows, the posterior distribution improves, and the algorithm
+    becomes more certain of which regions in parameter space are worth exploring and
+    which are not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can see this in the image below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/23d29016155406c3b70ff0644e409dd3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source: [bayesian-optimization](https://github.com/fmfn/BayesianOptimization)
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you iterate over and over, the algorithm balances its needs of exploration
+    and exploitation taking into account what it knows about the target function.
+    At each step, a Gaussian Process is fitted to the known samples (points previously
+    explored), and the posterior distribution, combined with an exploration strategy
+    (such as UCB (Upper Confidence Bound), or EI (Expected Improvement)), is used
+    to determine the next point that should be explored.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using Bayesian Optimization, we can explore the parameter space more smartly,
+    and thus reduce the time required to do this process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can check the python implementation of Bayesian optimization below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**thuijskens/bayesian-optimization**](https://github.com/thuijskens/bayesian-optimization/blob/master/ipython-notebooks/svm-optimization.ipynb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5\. Gradient-based Optimization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It is specially used in the case of Neural Networks. It computes the gradient
+    with respect to hyperparameters and optimizes them using the gradient descent
+    algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The calculation of the gradient is the least of problems. At least in times
+    of advanced [automatic differentiation](https://en.wikipedia.org/wiki/Automatic_differentiation) software.
+    (**Implementing this in a general way for all sklearn-classifiers, of course,
+    is not easy**).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/43a7177eaea30f7a4c2b619f758eb304.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Credits](https://www.mathworks.com/matlabcentral/fileexchange/27631-derivative-based-optimization)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And while there are works of people who used this kind of idea, they only did
+    this for some specific and well-formulated problem (e.g. SVM-tuning). Furthermore,
+    there probably were a lot of assumptions because:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why is this not a good idea?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**1\. Hyperparameter optimization is in general non-smooth**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: GD really likes smooth functions as a gradient of zero is not helpful
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Each hyper-parameter which is defined by some discrete-set (e.g. choice of l1
+    vs. l2 penalization) introduces non-smooth surfaces.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**2\. Hyperparameter optimization is in general non-convex**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The whole convergence-theory of gradient descent assumes, that the underlying
+    problem is convex.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Good-case: you obtain some local-minimum (can be arbitrarily bad).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Worst-case: gradient descent is not even converging to some local-minimum.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To get python implementation and more about the Gradient Descent Optimization
+    algorithm [click here.](https://hackernoon.com/implementing-different-variants-of-gradient-descent-optimization-algorithm-in-python-using-numpy-809e7ab3bab4)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**6\. Evolutionary Optimization**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Evolutionary optimization follows a process inspired by the biological concept
+    of evolution and since natural evolution is a dynamic process in a changing environment,
+    they are also well suited to dynamic optimization problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/801484956ac7dd0a3414aecce35df824.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Evolutionary algorithms are often used to find good approximate solutions that
+    cannot be easily solved by other techniques. Optimization problems often don’t
+    have an exact solution as it may be too time-consuming and computationally intensive
+    to find an optimal solution. However, evolutionary algorithms are ideal in such
+    situations as they can be used to find a near-optimal solution which is often
+    sufficient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One advantage of evolutionary algorithms is that they develop solutions free
+    of any human misconceptions or biases, which means they can produce surprising
+    ideas which we might never generate ourselves.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can learn more about evolutionary algorithms [here](https://en.wikipedia.org/wiki/Evolutionary_algorithm).
+    You can also check python implementation [here](https://github.com/MorvanZhou/Evolutionary-Algorithm).
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a general rule of thumb, any time you want to optimize tuning hyperparameters,
+    think Grid Search and Randomized Search!
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, we’ve learned that finding the right values for hyperparameters
+    can be a frustrating task and can lead to underfitting or overfitting machine
+    learning models. We saw how this hurdle can be overcome by using Grid Search &
+    Randomized Search and other algorithms — which optimize tuning of hyperparameters
+    to save time and eliminate the chance of overfitting or underfitting by random
+    guessing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, this concludes this article**. **I hope you guys have enjoyed reading
+    it, feel free to share your comments/thoughts/feedback in the comment section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for reading !!!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)**
+    is a Data Science enthusiast. Interested in Big Data, Python, Machine Learning.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/swlh/hyperparameter-optimization-for-machine-learning-models-12582f00ae52).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to Do Hyperparameter Tuning on Any Python Script in 3 Easy Steps](/2020/04/hyperparameter-tuning-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Coronavirus COVID-19 Genome Analysis using Biopython](/2020/04/coronavirus-covid-19-genome-analysis-biopython.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Practical Hyperparameter Optimization](/2020/02/practical-hyperparameter-optimization.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Pipeline Optimization with TPOT](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,250 @@
+- en: How To Create Minimal Docker Images for Python Applications
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/how-to-create-minimal-docker-images-for-python-applications](https://www.kdnuggets.com/how-to-create-minimal-docker-images-for-python-applications)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![How To Create Minimal Docker Images for Python Applications](../Images/ae992706a0204663973d2080d2e67d71.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Editor | Midjourney & Canva
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating minimal Docker images for Python apps enhances security by reducing
+    the attack surface, facilitates faster image builds, and improves overall application
+    maintainability. Let’s learn how to create minimal Docker images for Python applications.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prerequisites
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Before you get started:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You should have Docker installed. [Get Docker](https://docs.docker.com/get-docker/)
+    for your operating system if you haven’t already.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A sample Python application you need to build the minimal image for. You can
+    also follow along with the [example app](https://github.com/balapriyac/data-science-tutorials/tree/main/docker/minimal-img-python-apps)
+    we create.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Create a Sample Python Application
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Let's create a simple Flask application for inventory management. This application
+    will allow you to add, view, update, and delete inventory items. We'll then dockerize
+    the application using the standard Python 3.11 image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In your project directory, you should have app.py, requirements.txt, and Dockerfile:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here’s the code for the Flask app for inventory management:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This is a minimal Flask application that implements basic CRUD (Create, Read,
+    Update, Delete) operations for an in-memory inventory database. It uses Flask
+    to create a web server that listens for HTTP requests on port 5000\. When a request
+    is received:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For a POST request to `/inventory`, it adds a new item to the inventory.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For a GET request to `/inventory/<item_id>`, it retrieves the item with the
+    specified ID from the inventory.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For a PUT request to `/inventory/<item_id>`, it updates the item with the specified
+    ID in the inventory.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For a DELETE request to `/inventory/<item_id>`, it deletes the item with the
+    specified ID from the inventory.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Now create the requirements.txt file:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Next create the Dockerfile:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Finally build the image (we use the tag `full` to identify that this uses the
+    default Python image):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Once the build is complete you can run the `docker images` command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: You’ll see that this super simple app is about 1.02 GB in size. Well, this is
+    because the base image we used the default Python 3.11 image has a large number
+    of Debian packages and is about 1.01 GB in size. **So we need to find a smaller
+    base image.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Well, here are the options:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`python:version-alpine` images are based on Alpine Linux and will give you
+    the smallest final image. But you need to be able to install packages as well,
+    yes? But that’s a challenge with alpine images.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`python:version-slim` comes with the minimal number of Debian packages needed
+    to run Python. And you’ll (almost always) be able to install most required Python
+    packages with `pip`.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: So your base image should be small. But not too small that you face compatibility
+    issues and wrap your head around installing dependencies (quite common for Python
+    applications). That’s why we’ll use the `python:3.11-slim` base image in the next
+    step and build our image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![base-image](../Images/ceb96d9bfe9d23b760c9d28c4fd47030.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Choosing the Optimal Base Image | Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use the Slim Python Base Image
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Now rewrite the Dockerfile to use the `python:3.11-slim` base image like so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Let’s build the image (tagged `slim`):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The `python:3.11-slim` base image is of size 131 MB. And the `inventory-app:slim`
+    image is around 146 MB which is much smaller than the 1.02GB image we had earlier:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: You can also use multi-stage builds to make the final image smaller. But that's
+    for another tutorial!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Additional Resources
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Here are a few useful resources:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Containerize Python Apps with Docker in 5 Easy Steps](https://www.kdnuggets.com/containerize-python-apps-with-docker-in-5-easy-steps)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[python - Official Image | Docker Hub](https://hub.docker.com/_/python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Differences Between Standard Docker Images and Alpine \ Slim Versions](https://forums.docker.com/t/differences-between-standard-docker-images-and-alpine-slim-versions/134973)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)****
+    is a developer and technical writer from India. She likes working at the intersection
+    of math, programming, data science, and content creation. Her areas of interest
+    and expertise include DevOps, data science, and natural language processing. She
+    enjoys reading, writing, coding, and coffee! Currently, she''s working on learning
+    and sharing her knowledge with the developer community by authoring tutorials,
+    how-to guides, opinion pieces, and more. Bala also creates engaging resource overviews
+    and coding tutorials.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Create a Dashboard Using Python and Dash](https://www.kdnuggets.com/2023/08/create-dashboard-python-dash.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How To Create Custom Context Managers in Python](https://www.kdnuggets.com/how-to-create-custom-context-managers-in-python)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Containerize Python Apps with Docker in 5 Easy Steps](https://www.kdnuggets.com/containerize-python-apps-with-docker-in-5-easy-steps)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Best Python Tools for Building Generative AI Applications Cheat Sheet](https://www.kdnuggets.com/2023/08/best-python-tools-generative-ai-cheat-sheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Create a Sampling Plan for Your Data Project](https://www.kdnuggets.com/2022/11/create-sampling-plan-data-project.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Create a Dataset for Machine Learning](https://www.kdnuggets.com/2022/02/create-dataset-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

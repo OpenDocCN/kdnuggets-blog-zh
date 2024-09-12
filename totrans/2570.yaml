@@ -1,0 +1,495 @@
+- en: An introduction to Explainable AI (XAI) and Explainable Boosting Machines (EBM)
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/06/explainable-ai-xai-explainable-boosting-machines-ebm.html](https://www.kdnuggets.com/2021/06/explainable-ai-xai-explainable-boosting-machines-ebm.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Chaitanya Krishna Kasaraneni](https://chaitanya-kasaraneni.medium.com/),
+    Data Science Intern at Predmatic AI**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Robot](../Images/92c068288f90d97b1434d25654c75827.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Photo by [Rock’n Roll Monkey](https://unsplash.com/@rocknrollmonkey?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/artificial-intelligence?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In recent times, machine learning has become the core of developments in many
+    fields such as sports, medicine, science, and technology. Machines (computers)
+    have become so intelligent that they even [defeated professionals in games like
+    Go](https://deepmind.com/research/case-studies/alphago-the-story-so-far). Such
+    developments raise questions if machines would also make for better drivers (autonomous
+    vehicles) or even better doctors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In many machine learning applications, the users rely on the model to make decisions.
+    But, a doctor certainly cannot operate on a patient simply because “the model
+    said so.” Even in low-risk situations, such as when choosing a movie to watch
+    from a streaming platform, a certain measure of trust is required before we surrender
+    hours of our time based on a model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Despite the fact that many machine learning models are black boxes, understanding
+    the rationale behind the model’s predictions would certainly help users decide
+    when to trust or not to trust their predictions. This “understanding the rationale”
+    leads to the concept called Explainable AI (XAI).
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Explainable AI (XAI)?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '*Explainable AI refers to methods and techniques in the application of artificial
+    intelligence technology (AI) such that the results of the solution can be understood
+    by human experts. [[Wikipedia](https://en.wikipedia.org/wiki/Explainable_artificial_intelligence)]*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**How is Explainable AI different from Artificial Intelligence?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Ai Process 5 questions](../Images/6eb762743cef3ed7230454c3c62cfa56.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![XAI Process 5 statements](../Images/023db49bccdcea5df635cf0e503d679d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Difference Between AI and XAI.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In general, AI arrives at a result using an ML algorithm, but the architects
+    of the AI systems do not fully understand how the algorithm reached that result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the other hand, XAI is a set of processes and methods that allows users to
+    understand and trust the results/output created by a machine learning model/algorithm.
+    XAI is used to describe an AI model, its expected impact, and potential biases.
+    It helps characterize model accuracy, fairness, transparency, and outcomes in
+    AI-powered decision-making. Explainable AI is crucial for an organization in building
+    trust and confidence when putting AI models into production. AI explainability
+    also helps an organization adopt a responsible approach to AI development.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Famous examples of such explainers are **Local Interpretable Model-agnostic
+    Explanations** ([LIME](https://www.oreilly.com/content/introduction-to-local-interpretable-model-agnostic-explanations-lime/)) and **SHapley
+    Additive exPlanations** ([SHAP](https://shap.readthedocs.io/en/latest/)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: LIME explains the predictions of any classifier in an interpretable and faithful
+    manner by learning an interpretable model locally around the prediction.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: SHAP is a game theoretic approach to explain the output of any machine learning
+    model.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Explaining Predictions using SHAP
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: SHAP is a novel approach to XAI developed by Scott Lundberg here at Microsoft
+    and eventually opened sourced.
+  prefs: []
+  type: TYPE_NORMAL
+- en: SHAP has a strong mathematical foundation. It connects optimal credit allocation
+    with local explanations using the classic Shapley values from game theory and
+    their related extensions (see [papers](https://github.com/slundberg/shap#citations) for
+    details).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Shapley values**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: With Shapley values, each prediction can be broken down into individual contributions
+    for every feature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, consider your input data has 4 features (x1, x2, x3, x4) and the
+    output of a model is 75, using Shapley values, you can say that feature x1 contributed
+    30, feature x2 contributed 20, feature x3 contributed -15, and feature x4 contributed
+    40\. The sum of these 4 Shapley values is 30+20–15+40=75, i.e., the output of
+    your model. This feels great, but sadly, these values are extremely hard to calculate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For a general model, the time taken to compute Shapley values is **exponential
+    to the number of features**. If your data has 10 features, this might still be
+    okay. But if the data has more features, say 20, depending on your hardware, it
+    might be impossible already. To be fair, if your model consists of trees, there
+    are faster approximations to compute Shapley values, but it can still be slow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: SHAP using Python
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article, we’ll be using [red wine quality data](https://www.kaggle.com/uciml/red-wine-quality-cortez-et-al-2009) to
+    understand SHAP. The target value of this dataset is the quality rating from low
+    to high (0–10). The input variables are the content of each wine sample, including
+    fixed acidity, volatile acidity, citric acid, residual sugar, chlorides, free
+    sulfur dioxide, total sulfur dioxide, density, pH, sulfates, and alcohol. There
+    are 1,599 wine samples. The code can be found via this [GitHub link](https://github.com/chaitanyakasaraneni/SHAP_EBM_Examples).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post, we will build a random forest regression model and will use the
+    TreeExplainer in SHAP. There is a SHAP Explainer for any ML algorithm — either
+    tree-based or non-tree-based algorithms. It is called the *KernelExplainer. *If
+    your model is a tree-based machine learning model, you should use the tree explainer *TreeExplainer()* that
+    has been optimized to render fast results. If your model is a deep learning model,
+    use the deep learning explainer *DeepExplainer()*. For all other types of algorithms
+    (such as KNNs), use *KernelExplainer()*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The SHAP value works for either the case of a continuous or binary target variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Variable Importance Plot — Global Interpretability**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A variable importance plot lists the most significant variables in descending
+    order. The top variables contribute more to the model than the bottom ones and
+    thus have high predictive power. Please refer to this [notebook](https://nbviewer.jupyter.org/github/chaitanyakasaraneni/SHAP_EBM_Examples/blob/main/SHAP%20Example.ipynb) for
+    code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/a24a19e60535025b430d3bd0c44228eb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Variable Importance Plot using SHAP.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Summary Plot**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although the SHAP does not have built-in functions, you can output the plot
+    using the matplotlib library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The SHAP value plot can further show the positive and negative relationships
+    of the predictors with the target variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/358189896a588348df58aba92b190874.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Summary Plot.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This plot is made of all the dots in the train data. It demonstrates the following
+    information:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Variables are ranked in descending order.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The horizontal location shows whether the effect of that value *is associated
+    with a higher or lower prediction*.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The color shows whether that variable is high (in red) or low (in blue) for
+    that observation.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Using SHAP, we can generate partial dependence plots. The partial dependence
+    plot shows the marginal effect one or two features have on the predicted outcome
+    of a machine learning model ([J. H. Friedman 2001](https://statweb.stanford.edu/~jhf/ftp/trebst.pdf)).
+    It tells whether the relationship between the target and a feature is linear,
+    monotonic, or more complex.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Black-box explanations are much better than no explanation at all. However,
+    as we have seen, both LIME and SHAP have some shortcomings. It would be better
+    if the model is performing well *and* is interpretable at the same time—**Explainable
+    Boosting Machine** (EBM) is a representative of such a method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Explainable Boosting Machine (EBM)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: EBM is a glassbox model designed to have accuracy comparable to state-of-the-art
+    machine learning methods like Random Forest and BoostedTrees, while being highly
+    intelligible and explainable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The EBM Algorithm is a fast implementation of the GA²M algorithm. In turn, the
+    GA²M algorithm is an extension of the GAM algorithm. Therefore, let’s start with
+    what the GAM algorithm is.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**GAM Algorithm**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'GAM stands for Generalized Additive Model. It is more flexible than logistic
+    regression but still interpretable. The hypothesis function for GAM is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bd07a8265307454aaf50fba70ef87f5e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The key part to notice is that instead of a linear term ????ixi for a feature,
+    now we have a function fi(xi). We will come back later to how this function is
+    computed in EBM.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One limitation of GAM is that each feature function is learned independently.
+    This prevents the model from capturing interactions between features and pushes
+    the accuracy down.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**GA²M algorithm**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: GA²M seeks to improve this. To do so, it also considers some pairwise interaction
+    terms in addition to the function learned for each feature. This is not an easy
+    problem to solve because there are a larger number of interaction pairs to consider,
+    which increases compute time drastically. In GA²M, they use the FAST algorithm
+    to pick up useful interactions efficiently. This is the hypothesis function for
+    GA²M. Note the extra pairwise interaction terms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4cd867d7302fdbfeb77ee56eeafa4edb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: By adding pairwise interaction terms, we get a stronger model while still being
+    interpretable. This is because one can use a heatmap and visualize two features
+    in 2D and their effect on the output clearly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**EBM Algorithm**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, let us talk about the EBM algorithm. In EBM, we learn each feature
+    function fi(xi) using methods such as bagging and gradient boosting. To make the
+    learning independent of the order of features, the authors use a very low learning
+    rate and cycle through the features in a round robin fashion. The feature function
+    fi for each feature represents how much each feature contributes to the model’s
+    prediction for the problem and is hence directly interpretable. One can plot the
+    individual function for each feature to visualize how it affects the prediction.
+    The pairwise interaction terms can also be visualized on a heatmap as described
+    earlier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This implementation of EBM is also parallelizable, which is invaluable in large-scale
+    systems. It also has the added advantage of having an extremely fast inference
+    time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Training the EBM**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The EBM training part uses a combination of boosted trees and bagging. A good
+    definition would probably be *bagged boosted bagged shallow trees*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Shallow trees are trained in a boosted way. These are tiny trees (with a maximum
+    of 3 leaves by default). Also, the boosting process is specific: Each tree is
+    trained on only one feature. During each boosting round, trees are trained for
+    each feature one after another. It ensures that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The model is additive.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Each shape function uses only one feature.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'This is the base of the algorithm, but other techniques further improve the
+    performance:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Bagging, on top of this base model.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Optional bagging, for each boosting step. This step is disabled by default because
+    it increases the training time.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pairwise interactions.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Depending on the task, the third technique can dramatically boost performance.
+    Once a model is trained with individual features, a second pass is done (using
+    the same training procedure) but with pairs of features. The pair selection uses
+    a dedicated algorithm that avoids trying all possible combinations (which would
+    be infeasible when there are many features).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, after all these steps, we have a tree ensemble. These trees are discretized
+    simply by running them with all the possible values of the input features. This
+    is easy since all features are discretized. So the maximum number of values to
+    predict is the number of bins for each feature. In the end, these thousands of
+    trees are simplified to binning and scoring vectors for each feature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: EBM using Python
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We will use the same [red wine quality data](https://www.kaggle.com/uciml/red-wine-quality-cortez-et-al-2009) to
+    understand InterpretML. The code can be found via this [GitHub Link](https://github.com/chaitanyakasaraneni/SHAP_EBM_Examples).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Exploring Data**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The “summary” of training data displays a histogram of the target variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/dcd538236c0981bc12596139a1cc4112.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Summary displaying a histogram of Target.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When an individual feature (here fixed acidity) is selected, the graph shows
+    the Pearson Correlation of that feature with the target. Also, a histogram of
+    the selected feature is shown in blue color against the histogram of the target
+    variable in red color.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/19ea16427ab8add173778630dcc08f8b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Individual Feature against Target.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Training the Explainable Boosting Machine (EBM)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The *ExplainableBoostingRegressor() *model of the InterpretML library with the
+    default hyper-parameters is used here. *RegressionTree()* and *LinearRegression()*
+    are also trained for comparison.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6b6a60ef8a3cdee9dc55d372abd4f873.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*ExplainableBoostingRegressor Model.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Explaining EBM Performance**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*RegressionPerf()* is used to assess the performance of each model on the test
+    data. The R-squared value of EBM is 0.37, which outperforms the R-squared error
+    of linear regression and regression tree models.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9e06bd3c3bac680be5d10be4bd7bfc98.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/7b2b346deddab8e053b3a79928cedf19.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/772a3475eb7a159a7909d1a3861b43a3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Performance of (a) EBM, (b) Linear Regression, and (c) Regression Tree.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The global and local interpretability of each model can also be generated using
+    the *model.explain_global()* and *model.explain_local()*methods, respectively.
+  prefs: []
+  type: TYPE_NORMAL
+- en: InterpretML also provides a feature to combine everything and generate an interactive
+    dashboard. Please refer to the [notebook](https://github.com/chaitanyakasaraneni/SHAP_EBM_Examples/blob/main/InterpretML_Example.ipynb) for
+    graphs and a dashboard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: With the increasing growth of requirements for explainability and existing shortcomings
+    of the XAI models, the times when one had to choose between accuracy and explainability
+    are long gone. EBMs can be as efficient as boosted trees while being as easily
+    explainable as logistic regression.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://chaitanya-kasaraneni.medium.com/understanding-xai-and-ebm-5482da5cb1d0).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Machine Learning Model Interpretation](https://www.kdnuggets.com/2021/06/machine-learning-model-interpretation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Explainable Boosting Machine](https://www.kdnuggets.com/2021/05/explainable-boosting-machine.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to the White-Box AI: the Concept of Interpretability](https://www.kdnuggets.com/2021/03/introduction-white-box-ai-interpretability.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Gentle Introduction to Support Vector Machines](https://www.kdnuggets.com/2023/07/gentle-introduction-support-vector-machines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Ultimate Guide to Mastering Seasonality and Boosting Business Results](https://www.kdnuggets.com/2023/08/media-mix-modeling-ultimate-guide-mastering-seasonality-boosting-business-results.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Boosting Machine Learning Algorithms: An Overview](https://www.kdnuggets.com/2022/07/boosting-machine-learning-algorithms-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Support Vector Machines: An Intuitive Approach](https://www.kdnuggets.com/2022/08/support-vector-machines-intuitive-approach.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Ethics of AI: Navigating the Future of Intelligent Machines](https://www.kdnuggets.com/2023/04/ethics-ai-navigating-future-intelligent-machines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,293 @@
+- en: 'Data Augmentation For Bounding Boxes: Rethinking image transforms for object
+    detection'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/09/data-augmentation-bounding-boxes-image-transforms.html/2](https://www.kdnuggets.com/2018/09/data-augmentation-bounding-boxes-image-transforms.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/09/data-augmentation-object-detection-rethinking-image-transforms-bounding-boxes.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: Random Horizontal Flip
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: First, we import all the necessary stuff and make sure the path is added even
+    if we call the functions from outside the folder containing the files.  The following
+    code goes in the file `data_aug.py`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The data augmentation will be implementing is `RandomHorizontalFlip` which flips
+    an image horizontally with a probability *p.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: We first start by defining the class, and it's `__init__` method. The init method
+    contains the parameters of the augmentation. For this augmentation it is the probability
+    with each image is flipped. For another augmentation like rotation, it may contain
+    the  angle by which the object is to be rotated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The docstring of the function has been written in *Numpy *docstring format.
+    This will be useful to generate documentation using Sphinx.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `__init__` method of each function is used to define all the parameters
+    of the augmentation. However, the actually logic of the augmentation is defined
+    in the   `__call__` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The call function, when invoked from a class instance takes two arguments, `img` and `bboxes`where `img` is
+    the OpenCV numpy array containing the pixel values and `bboxes` is the numpy array
+    containing the bounding box annotations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `__call__` function also returns the same arguments, and this helps us chain
+    together a bunch of augmentations to be applied in a Sequence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let us break by bit by bit what's going on in here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In a horizontal flip, we rotate the image about a verticle line passing through
+    its center.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The new coordinates of each corner can be then described as the **mirror image
+    of the corner in the vertical line passing through the center of the image**.
+    For the mathematically inclined, the **vertical line passing through the center
+    would be the perpendicular bisector of the line joining the original corner and
+    the new, transformed corner.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: To have a better understanding of what is going on, consider the following image.
+    The pixels in the right half of the transformed image and the left half of the
+    original image are mirror images of each other about the central line.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9746142705fcd6fba513a5ca22f10ae8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The above is accomplished by the following piece of code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Note that the line `img = img[:,::-1,:]` basically takes the array containing
+    the image and reverses it's elements in the 1st dimension, or the dimensional
+    which stores the x-coordinates of the pixel values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, one must notice that the mirror image of the top left corner is the
+    top right corner of the resultant box. Infact, the resultant coordinates are the
+    top-right as well as bottom-left coordinates of the bounding box. However, we
+    need them in the top-left and bottom right format.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ab97c08274eef2d4efac9d3e0a19fd1a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The side-effect of our code
+  prefs: []
+  type: TYPE_NORMAL
+- en: The following piece of code takes care of the conversion.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: We end up by returning the image and the array containing the bounding boxes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Deterministic Version of* HorizontalFlip*
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The above code applies the transformation stochastically with the probability *p*.
+    However, if we want to build a deterministic version we can simply pass the argument *p *as
+    1\. Or we could write another class, where we do not have the parameter *p* at
+    all, and implement the `__call__`function like this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Seeing it in action
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now, let's suppose you have to use the *HorizontalFlip *augmentation with your
+    images. We will use it on one image, but you can use it on any number you like.
+    First, we create a file `test.py`. We begin by importing all the good stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Then, we import the image and load the annotation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: In order to see whether our augmentation really worked or not, we define a helper
+    function `draw_rect` which takes in `img` and `bboxes` and returns a numpy image
+    array, with the bounding boxes drawn on that image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us create a file `bbox_utils.py` and import the neccasary stuff.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now, we define the function `draw_rect`
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: Once, this is done, let us go back to our `test.py` file, and plot the original
+    bounding boxes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: This produces something like this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8c6ead560f1bdbb932f6849e28fcaffb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Let us see the effect of our transformation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'You should get something like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/af813c433a38d666473552b2842c5e70.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Takeaway Lessons
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The bounding box annotation should be stored in a numpy array of size N x 5,
+    where N is the number of objects, and each box is represented by a row having
+    5 attributes; **the coordinates of the top-left corner, the coordinates of the
+    bottom right corner and the class of the object.**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Each data augmentation is defined as a class, where the `__init__` method is
+    used to define the parameters of the augmentation whereas the `__call__` method
+    describes the actual logic of the augmentation. It takes two arguments, the image `img` and
+    the bounding box annotations `bboxes` and returns the transformed values.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This is it for this article. In the next article we will be dealing with `Scale`
+    and `Translate`augmentations. Not only they are more complex transformations,
+    given there are more parameters (the scaling and translation factors), but also
+    bring some challenges that we didn't have to deal with in the `HorizontalFlip` transformation.
+    An example is to decide whether to retain a box if a portion of it is outside
+    the image after the augmentation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Ayoosh Kathuria](https://www.linkedin.com/in/ayoosh-kathuria-44a319132/)**
+    currently an intern at the Defense Research and Development Organization, India,
+    where he is working on improving object detection in grainy videos. When he''s
+    not working, he''s either sleeping or playing pink floyd on his guitar. You can
+    connect with him on [LinkedIn](https://www.linkedin.com/in/ayoosh-kathuria-44a319132/) or
+    look at more of what he does at [GitHub](https://github.com/ayooshkathuria).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://blog.paperspace.com/data-augmentation-for-bounding-boxes/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to Implement a YOLO (v3) Object Detector from Scratch in PyTorch: Part
+    1](/2018/05/implement-yolo-v3-object-detector-pytorch-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Toy Detector with Tensorflow Object Detection API](/2018/02/building-toy-detector-tensorflow-object-detection-api.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyTorch Part 1: Understanding How Automatic Differentiation
+    Works](/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Bounding Box Deep Learning: The Future of Video Annotation](https://www.kdnuggets.com/2022/07/bounding-box-deep-learning-future-video-annotation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[IT Staff Augmentation: How AI Is Changing the Software Development Industry](https://www.kdnuggets.com/2023/05/staff-augmentation-ai-changing-software-development-industry.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Semantic Vector Search Transforms Customer Support Interactions](https://www.kdnuggets.com/how-semantic-vector-search-transforms-customer-support-interactions)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n09, Mar 2: Telling a Great Data Story: A…](https://www.kdnuggets.com/2022/n09.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Is the Difference Between SQL and Object-Relational Mapping (ORM)?](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Beginner''s Guide to Anomaly Detection Techniques in Data Science](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,262 @@
+- en: 'The Augmented Scientist Part 1: Practical Application Machine Learning in Classification
+    of SEM Images'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/03/the-augmented-scientist-practical-application-machine-learning-classification-images.html](https://www.kdnuggets.com/2020/03/the-augmented-scientist-practical-application-machine-learning-classification-images.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Iain Keaney](https://www.linkedin.com/in/iain-keaney-9a668b47), [Skellig.ai](https://www.skellig.ai/)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Augmented Science Graphic](../Images/475e10bf83a0678190e37f8e537318e8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Welcome to the first blog in our Augmented Scientist series, where we will be
+    looking at how machine learning can be used to improve the way that Scientists
+    work on a day-to-day basis. As this series grows we’ll be looking at more applications
+    for ML to work as a research aid for scientists, removing a lot of repetitive
+    analysis work and allowing them to explore their fields deeper. Both my wife and
+    I come from science backgrounds, her chemistry and me physics. What struck me
+    when I started working on machine learning is the enormous opportunity to speed
+    up much of the tedious analysis that consumes so much time in research labs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As our first exploration into the concept of the Augmented Scientist, our goal
+    here is to see if we can build a classifier that can identify patterns in [Scanning
+    Electron Microscope](https://en.wikipedia.org/wiki/Scanning_electron_microscope) (SEM)
+    images, and compare the performance of our classifier to the current state-of-the-art.
+    Later posts will investigate more focused applications of SEM image classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is SEM?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first area that we’re going to look at is SEM image analysis, a technique
+    my wife, as an electrochemist, has worked with extensively throughout her career.
+    SEM is used extensively in chemistry and biology to create images of surfaces
+    at a nanometer scale. It works by scanning a surface with a focused electron beam.
+    The reflection of electrons off the surface creates an image of the topography
+    and composition of the surface.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e60e3debf9b711715a308547a15e58aa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: source: [https://en.wikipedia.org/wiki/Scanning_electron_microscope](https://en.wikipedia.org/wiki/Scanning_electron_microscope)
+  prefs: []
+  type: TYPE_NORMAL
+- en: This type of detailed imaging has a vast array of applications, each one having
+    different analysis requirements, such as optimizing the surfaces of electrodes
+    in biosensors, or for producing electricity in fuel cells. The structure of the
+    surface can tell us a lot about the properties and characteristics of an object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Previous Work:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this blog post we’re going to see if we can make any advancements on the
+    work of [Modarres et al 2017](https://www.nature.com/articles/s41598-017-13565-z#Sec2),
+    who previously looked at classifying the patterns in 18,577 SEM images (you can
+    find the dataset [here](https://b2share.eudat.eu/records/19cc2afd23e34b92b36a1dfd0113a89f)).
+    These examples show you the type of patterns categorised in Modarres et al 2017’s
+    dataset, who’s labels are Tips, Particles, Patterned Surfaces, MEMS devices and
+    electrodes, Nanowires, Porous Sponge, Biological, Powder, Films Coated Surfaces
+    and Fibres.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/285f799e82ab7ee3482f1e3cfab59984.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: source: [https://www.nature.com/articles/s41598-017-13565-z#Sec2](https://www.nature.com/articles/s41598-017-13565-z#Sec2)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The blow tables shows the distribution of images in the categories.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/fba5b29ddf02cdb4cd1a3450f3698937.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: source: [https://www.nature.com/articles/s41598-017-13565-z#Sec2](https://www.nature.com/articles/s41598-017-13565-z#Sec2)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Using the pretrained Inception-v3 model, implemented in Tensorflow, Modarres
+    et al achieved an accuracy of ~90%, with a precision of ~80% and a recall@1 of
+    ~90%. Modarres et al also reported that an imbalance in the dataset had no effect
+    on the classifier’s performance in accurately predicting the under represented
+    categories. Their confusion matrix, shown below, shows that the least populated
+    categories, Porous Sponge, Films Coated Surface and Fibers, all performed quite
+    well. Modarres et al credited this to the distinct patterns of these categories.
+    (Note: the values presented in Modarres et al’s confusion matrix are percentages
+    of the validation sample for each actual/true label)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ada5a524eed11450706d76ea8152fb76.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: source: [https://www.nature.com/articles/s41598-017-13565-z#Sec2](https://www.nature.com/articles/s41598-017-13565-z#Sec2)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Two things that are worth bearing in mind at this point is that Modarres et
+    al did not use any data augmentations, and the training process for the Inception-v3
+    implementation took ~7 min on 2 GPUs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Our Approach:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Wanting to see if we could achieve a higher accuracy than Modarres et al, we
+    recreated their study with some of our own changes. First off we used the Resnet
+    50 implementation on the Fastai v1 framework and executed on a Colab GPU. To avoid
+    overfitting, we adopted two approaches introduced by Fast.ai: Data augmentation
+    and progressive resizing.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Data Augmentation:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Data augmentation is essentially altering/distorting each image, effectively
+    creating a new image. Fastai v1 has a great tool called get_transforms that handles
+    this process for us. The [get_transforms](https://docs.fast.ai/vision.transform.html) function
+    transforms the images in a number of different ways, such as flipping, rotating,
+    changing its contrast and distorting it, meaning that small datasets effectively
+    become much bigger.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/2d2d112b9a2c478b16cd2b7efcbba602.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: sources: [https://docs.fast.ai/vision.transform.html](https://docs.fast.ai/vision.transform.html)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Progressive Resizing:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Progressive resizing is an approach that was introduced by [Jeremy Howard](https://twitter.com/jeremyphoward) at [Fast.ai](https://www.fast.ai/).
+    The concept is to crop the images in the dataset to a much smaller size, then
+    after we’ve trained the model on the cropped images we increase their size and
+    train the model again. We repeat this process a number of times, each time increasing
+    the size of the images in the dataset. In this case we started with images of
+    size 64x64 pixels. We trained the Resnet 50 on this dataset for a total of 15
+    epochs and then increased it iteratively to 128 and finally 224\. Progressive
+    resizing has two advantages. First off a lot of the early training is carried
+    out on smaller images, which means the computational cost is lower and training
+    takes less time. Secondly, repeatedly changing the size of the images and retraining
+    the model can make it very difficult for the model to overfit. This means that
+    your final model is more stable on new data it’s never seen before.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Results:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Our implementation can be found in our GitHub repository, [here](https://github.com/skellig-ai/ikeaney.github.io/blob/master/SEM_Classification_ResNet50.ipynb).
+    We achieved an overall accuracy of 94.5%, more than 4.5% of an increase on the
+    previous state-of-the-art by Modarres et al, although our training process did
+    take nearly 400 mins. Given that there is an imbalance in the data set, it is
+    useful to consider metrics other than accuracy, such as [precision and recall](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall).
+    Precision is essentially what proportion of the positive identification is actually
+    correct, while recall is the proportion of actual positives which were identified
+    correctly. Our model, while slightly over-fitting, achieved a precision of 94.2%
+    and a recall of 91.8%. Comparing these to the values that Modarres et al reported
+    of ~80% and ~90% respectively indicates that our model also performs better on
+    the underrepresented categories in the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Concluding Remarks:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I hope you enjoyed the first blog post in our Augmented Scientist series. This
+    series will explore more avenues where machine learning can be used to assist
+    the work of Scientists across many disciplines. If you’re interested in getting
+    involved, or have examples of where you’ve used machine learning to augment your
+    own work please let us know, we’d love to hear from you.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Iain Keaney](https://www.linkedin.com/in/iain-keaney-9a668b47)** ([**@Iain_Keaney**](https://twitter.com/Iain_Keaney))
+    is a Machine Learning Engineer and Program Facilitator at [Skellig.ai](https://www.skellig.ai/).
+    You can find the [Skellig.ai blog here](https://skellig-ai.github.io/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://skellig-ai.github.io/2020/02/03/The-Augmented-Scientist-Part-1.html).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Deep Learning for Image Classification with Less Data](/2019/11/deep-learning-image-classification-less-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Does it Mean to Deploy a Machine Learning Model?](/2020/02/deploy-machine-learning-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Single Function to Streamline Image Classification with Keras](/2019/09/single-function-streamline-image-classification-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Meet Gorilla: UC Berkeley and Microsoft’s API-Augmented LLM…](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Retrieval Augmented Generation: Where Information Retrieval Meets…](https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Essential Math for Data Science: Eigenvectors and Application to PCA](https://www.kdnuggets.com/2022/06/essential-math-data-science-eigenvectors-application-pca.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Geospatial Application in Python with Google Earth…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[8 Ways to Improve Your Search Application this Week](https://www.kdnuggets.com/2022/09/corise-8-ways-improve-search-application-week.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

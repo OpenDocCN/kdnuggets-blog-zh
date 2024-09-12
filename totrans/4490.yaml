@@ -1,0 +1,397 @@
+- en: 'Better notebooks through CI: automatically testing documentation for graph
+    machine learning'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/04/better-notebooks-through-ci-automatically-testing-documentation-graph-machine-learning.html](https://www.kdnuggets.com/2020/04/better-notebooks-through-ci-automatically-testing-documentation-graph-machine-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Huon Wilson](https://www.linkedin.com/in/huon-wilson/), CSIRO Data61**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/fefd5799b6761494a8dc174865f849f7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Martin Adams](https://unsplash.com/@martinadams?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/kite?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Building a data science library is walking between two worlds: data science
+    is dominated by Python notebooks, a fast and convenient way to experiment and
+    demonstrate code in the browser, while software engineering focuses on making
+    software reliable and repeatable. [StellarGraph](https://github.com/stellargraph/stellargraph) uses
+    continuous integration to keep the benefits of both.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: StellarGraph is an open source, user-friendly Python library for [graph machine
+    learning](https://medium.com/stellargraph/knowing-your-neighbours-machine-learning-on-graphs-9b7c3d0d5896) built
+    on TensorFlow and Keras. It provides [a lot of demonstrations](https://github.com/stellargraph/stellargraph/tree/develop/demos) of
+    its functionality, in the form of [Jupyter notebooks](https://jupyter.org/), to
+    get data scientists and anyone else started on solving their real-world problems.
+    The demos are viewable directly on GitHub, and even have links to run automatically
+    in the [Binder](https://mybinder.org/) and [Google Colab](https://colab.research.google.com/) cloud
+    services.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With the release of StellarGraph version 1.0 planned later this month, we’ve
+    developed automatic processes so that our demos work — and will continue to work
+    — even as we make major enhancements to the library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we’ll walk through the detailed and helpful continuous integration
+    (CI) that supports us in keeping the library’s demos current and informative.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How it works
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'StellarGraph’s CI for notebooks works in three main ways:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Validates that every notebook is **up to date and runs successfully**, using [papermill](https://papermill.readthedocs.io/en/latest/)to **keep
+    CI fast** for a good developer experience
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Provides links to [nbviewer](https://nbviewer.jupyter.org/) to **view failures
+    conveniently** in a nicely rendered way, directly in the browser
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Checks that we’re providing **a consistent experience** by ensuring every notebook
+    has links to cloud services and the same formatting, via [black](https://github.com/psf/black) and
+    custom code.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Let’s look at the finer details of each of these.
+  prefs: []
+  type: TYPE_NORMAL
+- en: High velocity; reliable; humans — pick two
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Documentation and examples are most useful when they’re accurate. StellarGraph
+    is an active project with [constant improvements and bug fixes](https://github.com/stellargraph/stellargraph/pulse/monthly);
+    many of these allow us to make our notebooks better, and some changes require
+    adjusting a notebook or two. All of this has to be done *perfectly*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our goal is to make sure **every demo works every time**, following the [“not
+    rocket science” rule of software engineering](https://graydon2.dreamwidth.org/1597.html).
+    It’s much easier to keep notebooks working on a pull-request-by pull-request basis.
+    If we don’t keep them up to date, it may take us a long time to even realise they’re
+    broken, let alone diagnose the cause and fix them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are careful, and update and rerun notebooks as required, but it’s easy for
+    humans to make mistakes. StellarGraph has more than 40 notebooks, and about 25
+    pull requests being merged each week. This means that even a low rate of mistakes
+    still results in a *lot* of broken notebooks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/22b9d8f2bf8e32b11c6ad188a095207f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Software rot: With 25 pull requests a week and even a low chance of each pull
+    request breaking a notebook (1%), the probability of all notebooks working quickly
+    decreases to zero.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For instance, suppose each pull request has only a 1% chance of making some
+    notebooks stop working. Be it a small chance, this would mean that there’s only
+    a 78% chance of all notebooks working after a week, and less than 40% chance of
+    all notebooks working after a month.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We try to keep our notebooks working with manual code review, using the [ReviewNB](https://www.reviewnb.com/) app.
+    ReviewNB provides more useful diffs than the raw JSON, making it easy to discuss
+    good and not-so-good changes. However, humans are fallible and can miss problems.
+    Furthermore, code review only highlights notebooks that have had edits; it does
+    not highlight notebooks that *should* have edits!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Automatically-run notebooks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'To help us humans, we utilise computers to check the notebooks too: CI checks
+    that most of them run properly on every pull request and every merge, in addition
+    to the unit tests. But CI works best if it is fast, and, as most of our notebooks
+    demonstrate heavyweight machine learning, *it’s not fast enough*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The easiest way to reduce CI time is to do work in parallel. Almost all of
+    the notebooks depend solely on the StellarGraph library, so they can be executed
+    independently of each other. We [run](https://github.com/stellargraph/stellargraph/blob/59d269a10f207b6b5e5c2b891de8bd3d5408cb3b/.buildkite/steps/test-demo-notebooks.sh) them [concurrently](https://github.com/stellargraph/stellargraph/blob/59d269a10f207b6b5e5c2b891de8bd3d5408cb3b/.buildkite/pipeline.yml#L86) using
+    a [parallel job](https://buildkite.com/docs/tutorials/parallel-builds#parallel-jobs) on [Buildkite
+    CI](https://buildkite.com/), but it’s still not enough: some of the notebooks
+    individually take too long.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We use [papermill](https://papermill.readthedocs.io/en/latest/) to [execute
+    our notebooks](https://github.com/stellargraph/stellargraph/blob/59d269a10f207b6b5e5c2b891de8bd3d5408cb3b/.buildkite/steps/test-single-notebook.sh#L14) because
+    it supports [parameterisation](https://papermill.readthedocs.io/en/latest/usage-parameterize.html):
+    when running on CI, our notebooks train their models for less time, or compute
+    shorter random walks, or other optimisations.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Papermill’s parameterisation allows this to be done without having to add ugly
+    “are we on CI” conditional code to each demo. For notebooks that need parameterisation,
+    we only need to refactor slightly to have a single cell that contains the parameters
+    that need to be adjusted. Then, new values can be substituted in via [a YAML file](https://github.com/stellargraph/stellargraph/blob/develop/.buildkite/notebook-parameters.yml) and
+    the parameters_file option.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These notebooks are running transiently on CI, so the accuracy of the model
+    isn’t so important. The main thing that’s needed is the execution of every code
+    path, to validate that it all works. We optimise parameters to be as small as
+    possible while still exercising every edge case, such as only reducing the number
+    of training epochs to two instead of one, to catch any problems that occur between
+    epochs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If there’s a problem, like function arguments changing or even running out of
+    memory, the notebook will fail to run and our testing fails. This tells us immediately
+    that more changes are required to keep everything working.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Highlighting errors with Buildkite artifacts and annotations
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: CI helps us see when something has gone wrong, but it’s even better to know
+    the exact problem. Papermill is helpful by logging all of the stdout and stderr
+    output of the notebook; but digging through verbose CI logs is cumbersome. Furthermore,
+    these logs often don’t have enough context to easily understand the problem especially
+    compared to the rendered view of a notebook, where the error is attached to an
+    individual cell, along with any other relevant cells.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After running a notebook, the CI [attaches the resulting notebook](https://github.com/stellargraph/stellargraph/blob/59d269a10f207b6b5e5c2b891de8bd3d5408cb3b/.buildkite/steps/test-single-notebook.sh#L18-L20) as [an
+    “artifact”](https://buildkite.com/docs/pipelines/artifacts) to the step that ran
+    it, whether it passed or not. If execution failed, this output notebook will include
+    the exception or other error inside it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’re using a [public pipeline on Buildkite](https://buildkite.com/stellar/stellargraph-public),
+    so the artifacts are publicly viewable, meaning the pull request author — or anyone
+    else — can click through and download them to inspect the problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/326ce690d7d67dab2ec57dffe229d878.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*When *[*a notebook fails on CI*](https://github.com/stellargraph/stellargraph/pull/1215)*,
+    a link to *[*view the failed notebook*](https://nbviewer.jupyter.org/urls/buildkite.com/organizations/stellar/pipelines/stellargraph-public/builds/2998/jobs/3203e1e3-77c6-45a5-a1b0-bb2fec15f795/artifacts/0d8d3f6e-f14e-4475-9d08-3921a3db1847)* on
+    nbviewer is automatically *[*added to the build*](https://buildkite.com/stellar/stellargraph-public/builds/2998#annotation-gcn-cora-node-classification-example.ipynb-3203e1e3-77c6-45a5-a1b0-bb2fec15f795)*.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We do a lot more with Buildkite too. [Nbviewer](https://nbviewer.jupyter.org/) can
+    render any public Jupyter notebook URL, including these artifacts. Our CI creates
+    links to view them directly in the browser and, for notebooks that failed, [adds
+    an annotation](https://github.com/stellargraph/stellargraph/blob/59d269a10f207b6b5e5c2b891de8bd3d5408cb3b/.buildkite/steps/test-single-notebook.sh#L35-L43) to
+    the top of the build with that link. All it takes to understand the problem is
+    to view the failing build and click on one of the highlighted links.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A consistent demo experience
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'StellarGraph works to provide a consistent experience for each demo because
+    this makes it easier for:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: users of StellarGraph to switch between demos without having to understand the
+    idiosyncrasies of each one
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: developers of StellarGraph to write and edit the notebooks, because more parts
+    of the process have an expected behaviour, and there’s no time-wasting on things
+    like formatting
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: automatic tools to help us maintain demos, because the input notebooks are more
+    structured.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/653d5801ad9c42d3a69b48ff41a2df28.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*The Binder button in a notebook, like the one in *[*the introductory node
+    classification demo using GCN*](https://github.com/stellargraph/stellargraph/blob/master/demos/node-classification/gcn/gcn-cora-node-classification-example.ipynb)*,
+    takes readers directly to *[*an executable environment*](https://mybinder.org/v2/gh/stellargraph/stellargraph/master?urlpath=lab/tree/demos/node-classification/gcn/gcn-cora-node-classification-example.ipynb)* in
+    less than one minute.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The foundational piece of this is [a custom script](https://github.com/stellargraph/stellargraph/blob/develop/scripts/format_notebooks.py) that
+    uses [nbconvert](https://github.com/jupyter/nbconvert) to run some notebook preprocessors.
+    These preprocessors do things like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[format the code](https://github.com/stellargraph/stellargraph/blob/59d269a10f207b6b5e5c2b891de8bd3d5408cb3b/scripts/format_notebooks.py#L97-L124) with
+    the [black](https://github.com/psf/black) formatter'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[renumber the cell execution counts](https://github.com/stellargraph/stellargraph/blob/59d269a10f207b6b5e5c2b891de8bd3d5408cb3b/scripts/format_notebooks.py#L68-L77) from
+    1, so that someone making edits can run and rerun the notebook as many times as
+    they need until it works and the notebook still shows “In [1], Out [1], In [2],
+    Out [2], …” when published'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[insert the appropriate link](https://github.com/stellargraph/stellargraph/blob/59d269a10f207b6b5e5c2b891de8bd3d5408cb3b/scripts/format_notebooks.py#L127-L181) for
+    each notebook to the [Binder](https://mybinder.org/) and [Google Colab](https://colab.research.google.com/) cloud
+    services, so that people viewing the demos on GitHub can switch to executing them
+    in a flash.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This script makes it easy for a developer to keep the notebooks consistent by
+    applying all that formatting directly with a single command. Unfortunately, making
+    it easy is only half the story; requiring humans to *remember* to do it will mean
+    it is occasionally forgotten.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The solution here is the same as for running the notebooks: check the formatting
+    on CI. Our script supports this via a mode where it reformats the notebook to
+    a temporary path, and then [compares the reformatted notebook](https://github.com/stellargraph/stellargraph/blob/59d269a10f207b6b5e5c2b891de8bd3d5408cb3b/scripts/format_notebooks.py#L393-L394) with
+    the original: they should be the same.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/93c071d8a1cbbb6416dc95c3b9130061.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*When *[*notebooks aren’t formatted correctly*](https://github.com/stellargraph/stellargraph/pull/1215)*,
+    the CI build is *[*annotated*](https://buildkite.com/stellar/stellargraph-public/builds/2998#annotation-format_notebooks)* with
+    the list of those notebooks and the command to run to fix it.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If there’s a difference, the script will [add an annotation](https://github.com/stellargraph/stellargraph/blob/59d269a10f207b6b5e5c2b891de8bd3d5408cb3b/scripts/format_notebooks.py#L426-L435) to [the
+    build](https://buildkite.com/stellar/stellargraph-public/builds/2998#annotation-format_notebooks) that
+    suggests an appropriate command for fixing it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[StellarGraph](https://github.com/stellargraph/stellargraph) prides itself
+    on [its demos](https://github.com/stellargraph/stellargraph/tree/develop/demos) and
+    we rely on automation to keep them great, even in a high-velocity project as we
+    build up to our 1.0 release. We get a nice review experience via ReviewNB, and
+    get alerted when a notebook fails to run or has inappropriate formatting. All
+    of this happens before landing any changes, and problems are flagged with convenient
+    links and suggested fixes using Buildkite CI.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: All our code is [open source](https://github.com/stellargraph/stellargraph),
+    so we hope by sharing others can mesh the worlds of data science and software
+    engineering and see the benefits of both.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Get started with graph machine learning in the StellarGraph library with our
+    demo of [node classification using a Graph Convolutional Network](https://github.com/stellargraph/stellargraph/blob/master/demos/node-classification/gcn/gcn-cora-node-classification-example.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*The CI work in StellarGraph was largely done by *[*Tim Pitman*](https://github.com/timpitman)*,
+    with contributions from *[*Huon Wilson*](https://github.com/huonw)*. The formatting
+    script was mostly written by *[*Andrew Docherty*](https://github.com/adocherty)* with
+    extensions from Tim and Huon. *[*Denis Khoshaba*](https://github.com/TheDen)* keeps
+    our CI and infrastructure working smoothly. To make papermill work even better
+    on CI, Huon *[*contributed several tweaks*](https://github.com/nteract/papermill/pulls?q=is%3Apr+author%3Ahuonw+)*.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*This work is supported by CSIRO’s Data61, Australia’s leading digital research
+    network.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Huon Wilson](https://www.linkedin.com/in/huon-wilson/)** is a software
+    engineer with a strong background in mathematics and statistics, with significant
+    experience in low-level systems programming fields like compilers, and languages
+    like C++, C as well as more exotic ones like Rust. At a higher level, he has experience
+    with numerical programming in R and Python, and with most language paradigms and
+    many other areas of software engineering.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/stellargraph/better-notebooks-through-ci-automatically-testing-documentation-for-graph-machine-learning-5789e277e597).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Graph Neural Network model calibration for trusted predictions](/2020/03/graph-neural-network-model-calibration-trusted-predictions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Scalable graph machine learning: a mountain we can climb?](/2019/12/scalable-graph-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Graph Machine Learning Meets UX: An uncharted love affair](/2020/01/graph-machine-learning-ux.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[The 5 Rules For Good Data Science Project Documentation](https://www.kdnuggets.com/2022/12/5-rules-good-data-science-project-documentation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How You Can Use Machine Learning to Automatically Label Data](https://www.kdnuggets.com/2022/02/machine-learning-automatically-label-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hypothesis Testing and A/B Testing](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 5 Free Cloud Notebooks in 2022](https://www.kdnuggets.com/2022/04/top-5-free-cloud-notebooks-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[New From Anaconda! Data Science Training and Cloud Hosted Notebooks](https://www.kdnuggets.com/2022/11/anaconda-new-anaconda-data-science-training-cloud-hosted-notebooks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 7 Free Cloud Notebooks for Data Science](https://www.kdnuggets.com/top-7-free-cloud-notebooks-for-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

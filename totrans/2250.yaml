@@ -1,0 +1,462 @@
+- en: A Gentle Introduction to Support Vector Machines
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/07/gentle-introduction-support-vector-machines.html](https://www.kdnuggets.com/2023/07/gentle-introduction-support-vector-machines.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![A Gentle Introduction to Support Vector Machines](../Images/7b00a41551917bcba47147dd6d0ffce5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Support vector machines, commonly called SVM, are a class of simple yet powerful
+    machine learning algorithms used in both classification and regression tasks.
+    In this discussion, we’ll focus on the use of support vector machines for classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll start by looking at the basics of classification and hyperplanes that
+    separate classes. We’ll then go over maximum margin classifiers, gradually building
+    up to support vector machines and the scikit-learn implementation of the algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Classification Problem and Separating Hyperplanes
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Classification is a supervised learning problem where we have labeled data points
+    and the goal of the machine learning algorithm is to predict the label of a new
+    data point.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For simplicity, let's take a binary classification problem with two classes,
+    namely, class A and class B. And we need to find a hyperplane that separates these
+    two classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Mathematically, a [hyperplane](https://en.wikipedia.org/wiki/Hyperplane) is
+    a subspace whose dimension is one less than the ambient space. Meaning if the
+    ambient space is a line, the hyperplane is a point. And if the ambient space is
+    a two-dimensional plane, the hyperplane is a line, and so on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So when we have a hyperplane separating the two classes, the data points belonging
+    to class A lie on one side of the hyperplane. And those belonging to class B lie
+    on the other side.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Therefore, in one-dimensional space, the separating hyperplane is a point:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Gentle Introduction to Support Vector Machines](../Images/46cbe06565d915dd36c4116902288e01.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Separating Hyperplane in 1D (A Point) | Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In two dimensions, the hyperplane that separates class A and class B is a line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Gentle Introduction to Support Vector Machines](../Images/53c25e614feb8f18306b077bd5d6a383.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Separating Hyperplane in 2D (A Line) | Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And in three dimensions, the separating hyperplane is a plane:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Gentle Introduction to Support Vector Machines](../Images/abec17eadf00b1deae963c1c056ad508.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Separating Hyperplane in 3D (A Plane) | Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similarly in N dimensions the separating hyperplane will be an (N-1)-dimensional
+    subspace.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you take a closer look, for the two dimensional space example, each of the
+    following is a valid hyperplane that separates the classes A and B:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Gentle Introduction to Support Vector Machines](../Images/c1b4f9a708b0738ea32aacb8da482837.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Separating Hyperplanes | Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: So how do we decide which hyperplane is the most optimal? Enter **maximum margin
+    classifier**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Maximum Margin Classifier
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The optimal hyperplane is the one that separates the two classes while *maximizing*
+    the margin between them. And a classifier that functions thus is called a maximum
+    margin classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Gentle Introduction to Support Vector Machines](../Images/854cf0d37c606519be7c5de5409f4797.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Maximum Margin Classifier | Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hard and Soft Margins
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We considered a super simplified example where the classes were perfectly separable
+    *and* the maximum margin classifier was a good choice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'But what if your data points were distributed like this? The classes are still
+    perfectly separable by a hyperplane, and the hyperplane that maximizes the margin
+    will look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Gentle Introduction to Support Vector Machines](../Images/857788e5e96b8f33ce6f9bfd6f670c1f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Is the Maximum Margin Classifier Optimal? | Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**But do you see the problem with this approach?** Well, it still achieves
+    class separation. However, this is a high variance model that is, perhaps, trying
+    to fit the class A points too well.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice, however, that the margin does not have any misclassified data point.
+    Such a classifier is called a *hard margin* classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Take a look at this classifier instead. Won't such a classifier perform better?
+    This is a substantially lower variance model that would do reasonably well on
+    classifying both points from class A and class B.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Gentle Introduction to Support Vector Machines](../Images/ab1f86099e9db0fa4f2094a582054a97.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Linear Support Vector Classifier | Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Notice that we have a misclassified data point inside the margin. Such a classifier
+    that allows minimal misclassifications is a *soft margin* classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Support Vector Classifier
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The soft margin classifier we have is a linear support vector classifier. The
+    points are separable by a line (or a linear equation). If you’ve been following
+    along so far, it should be clear *what* **support vectors** are and *why* they
+    are called so.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Each data point is a vector in the feature space. The data points that are closest
+    to the separating hyperplane are called support vectors because they *support*
+    or aid the classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It's also interesting to note that if you remove a single data point or a subset
+    of data points that are *not* support vectors, the separating hyperplane does
+    not change. But, if you remove one or more support vectors, the hyperplane changes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the examples so far, the data points were linearly separable. So we could
+    fit a soft margin classifier with the least possible error. But what if the data
+    points were distributed like this?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Gentle Introduction to Support Vector Machines](../Images/25775bd8bd2e29efd3a71c137a5e0ff7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Non-linearly Separable Data | Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this example, the data points are *not* linearly separable. Even if we have
+    a soft margin classifier that allows for misclassification, we will *not* be able
+    to find a line (separating hyperplane) that achieves good performance on these
+    two classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So what do we do now?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Support Vector Machines and the Kernel Trick
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Here’s a summary of what we’d do:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Problem**: The data points are not linearly separable in the original feature
+    space.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Solution**: Project the points onto a higher dimensional space where they
+    are linearly separable.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: But projecting the points onto a higher dimensional features space requires
+    us to *map the data points* from the original feature space to the higher dimensional
+    space.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This recomputation comes with non-negligible overhead, especially when the space
+    that we want to project onto is of much higher dimensions than the original feature
+    space. Here's where the kernel trick comes into play.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Mathematically, the support vector classifier you can be represented by the
+    following equation [1]:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Gentle Introduction to Support Vector Machines](../Images/9aca69ff10aec36da8e052f7fc1467ea.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here, ![Equation](../Images/2c347378f2ee2bc697f446c3ba7bacb8.png) is a constant,
+    and ![Equation](../Images/23ebc3d72025ed5d4573ed6871057c1e.png) indicates that
+    we sum over the set of indices corresponding to the support points.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Equation](../Images/007ad425101defc9bc1d798ba51cac2c.png) is the inner product
+    between the points ![Equation](../Images/1dbc38918833301a90090733151a713f.png)
+    and ![Equation](../Images/584073cbd8da3032d36a754d5eb06ae5.png). The inner product
+    between any two vectors a and b is given by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Gentle Introduction to Support Vector Machines](../Images/7e703e73635506306343d94cbd90ad20.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The kernel function K(.) allows to generalize the linear support vector classifier
+    to non-linear cases. We replace the inner product with the kernel function:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Gentle Introduction to Support Vector Machines](../Images/94e016d8687c25956b6b2e0323337b1d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The kernel function accounts for the non-linearity. And also allows for computations
+    to be performed—on the data points in the original features space—without having
+    to recompute them in the higher dimensional space.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For the linear support vector classifier, the kernel function is simply the
+    inner product and takes the following form:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A Gentle Introduction to Support Vector Machines](../Images/30bf58066461aa90a1853b6dbec8b8b3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Support Vector Machines in Scikit-Learn
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Now that we understand the intuition behind support vector machines, let's code
+    a quick example using the scikit-learn library.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The [svm module](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.svm)
+    in the scikit-learn library comes with implementations of classes like [Linear
+    SVC](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC),
+    [SVC](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC),
+    and [NuSVC](https://scikit-learn.org/stable/modules/generated/sklearn.svm.NuSVC.html#sklearn.svm.NuSVC).
+    These classes can be used for both binary and multiclass classification. Scikit-learn’s
+    extended docs lists the [supported kernels](https://scikit-learn.org/stable/modules/svm.html#svm-kernels).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We’ll use the [built-in wine dataset](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_wine.html).
+    It’s a classification problem where the features of wine are used to predict the
+    output label which is one of the three classes: 0, 1, or 2\. It’s a small dataset
+    with about 178 records and 13 features.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here, we’ll only focus on:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: loading and preprocessing the data and
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: fitting the classifier to the dataset
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Step 1 – Import the Necessary Libraries and Load the Dataset
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'First, let’s load the wine dataset available in scikit-learn’s datasets module:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Step 2 – Split the Dataset Into Training and Test Datasets
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Let’s split the dataset into train and test sets. Here, we use an 80:20 split
+    where 80% and 20% of the data points go into the train and test datasets, respectively:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Step 3 – Preprocess the Dataset
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Next, we preprocess the dataset. We use a `StandardScaler` to transform the
+    data points such that they follow a distribution with zero mean and unit variance:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Remember not to use `fit_transform` on the test dataset as it would lead to
+    the subtle problem of data leakage.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Step 4 – Instantiate an SVM Classifier and Fit it to the Training Data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'We’ll use `SVC` for this example. We instantiate `svm`, an SVC object, and
+    fit it to the training data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Step 5 – Predict the Labels for the Test Samples
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'To predict the class labels for the test data, we can call the `predict` method
+    on the `svm` object:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Step 6 – Evaluate the Accuracy of the Model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To wrap up the discussion, we’ll only compute the accuracy score. But we can
+    also get a much detailed classification report and confusion matrix.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Here’s the complete code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: We have a simple support vector classifier. There are hyperparameters that you
+    can tune to improve the performance of the support vector classifier. Commonly
+    tuned hyperparameters include the regularization constant C and the gamma value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: I hope you found this introductory guide to support vector machines helpful.
+    We covered just enough intuition and concepts to understand how support vector
+    machines work. If you’re interested in diving deeper, you can check the references
+    linked to below. Keep learning!
+  prefs: []
+  type: TYPE_NORMAL
+- en: References and Learning Resources
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[1] Chapter on Support Vector Machines, [An Introduction to Statistical Learning
+    (ISLR)](https://www.statlearning.com/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[2] Chapter on Kernel Machines, [Introduction to Machine Learning](https://mitpress.mit.edu/9780262043793/introduction-to-machine-learning/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[3] Support Vector Machines, [scikit-learn docs](https://scikit-learn.org/stable/modules/svm.html)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** is a developer
+    and technical writer from India. She likes working at the intersection of math,
+    programming, data science, and content creation. Her areas of interest and expertise
+    include DevOps, data science, and natural language processing. She enjoys reading,
+    writing, coding, and coffee! Currently, she''s working on learning and sharing
+    her knowledge with the developer community by authoring tutorials, how-to guides,
+    opinion pieces, and more.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Support Vector Machines: An Intuitive Approach](https://www.kdnuggets.com/2022/08/support-vector-machines-intuitive-approach.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Semantic Vector Search Transforms Customer Support Interactions](https://www.kdnuggets.com/how-semantic-vector-search-transforms-customer-support-interactions)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Gentle Introduction to Natural Language Processing](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Python Vector Databases and Vector Indexes: Architecting LLM Apps](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Ethics of AI: Navigating the Future of Intelligent Machines](https://www.kdnuggets.com/2023/04/ethics-ai-navigating-future-intelligent-machines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI for Ukraine is a new educational project from AI HOUSE to…](https://www.kdnuggets.com/2022/08/ai-house-ai-ukraine-new-educational-project-support-ukrainian-tech-community.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

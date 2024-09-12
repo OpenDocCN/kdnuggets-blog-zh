@@ -1,0 +1,472 @@
+- en: How to Train a BERT Model From Scratch
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/08/train-bert-model-scratch.html](https://www.kdnuggets.com/2021/08/train-bert-model-scratch.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [James Briggs](https://youtube.com/c/JamesBriggs), Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1219fc30e3c1359d89549b3b904a982e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: BERT, but in Italy — image by author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Many of my articles have been focused on BERT — the model that came and dominated
+    the world of natural language processing (NLP) and marked a new age for language
+    models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For those of you that may not have used transformers models (eg what BERT is)
+    before, the process looks a little like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`pip install transformers`'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Initialize a pre-trained transformers model — `from_pretrained`.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Test it on some data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*Maybe* fine-tune the model (train it some more).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Now, this is a great approach, but if we only ever do this, we lack the understanding
+    behind creating our own transformers models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And, if we cannot create our own transformer models — we must rely on there
+    being a pre-trained model that fits our problem, this is not always the case:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/62a875f531afa61a4d0e549c6b97b6c4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: A few comments asking about non-English BERT models
+  prefs: []
+  type: TYPE_NORMAL
+- en: So in this article, we will explore the steps we must take to build our own
+    transformer model — specifically a further developed version of BERT, called RoBERTa.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An Overview
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'There are a few steps to the process, so before we dive in let’s first summarize
+    what we need to do. In total, there are four key parts:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting the data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Building a tokenizer
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Creating an input pipeline
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Training the model
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Once we have worked through each of these sections, we will take the tokenizer
+    and model we have built — and save them both so that we can then use them in the
+    same way we usually would with `from_pretrained`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting The Data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: As with any machine learning project, we need data. In terms of data for training
+    a transformer model, we really are spoilt for choice — we can use almost any text
+    data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Video walkthrough for downloading OSCAR dataset using HuggingFace’s datasets
+    library
+  prefs: []
+  type: TYPE_NORMAL
+- en: And, if there’s one thing that we have plenty of on the internet — it’s unstructured
+    text data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the largest datasets in the domain of text scraped from the internet
+    is the OSCAR dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The OSCAR dataset boasts a huge number of different languages — and one of the
+    clearest use-cases for training from scratch is so that we can apply BERT to some
+    less commonly used languages, such as Telugu or Navajo.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unfortunately, the only language I can speak with any degree of competency is
+    English — but my girlfriend is Italian, and so she — Laura, will be assessing
+    the results of our Italian-speaking BERT model — FiliBERTo.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So, to download the Italian segment of the OSCAR dataset we will be using HuggingFace’s `datasets` library
+    — which we can install with `pip install datasets`. Then we download OSCAR_IT
+    with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s take a look at the `dataset` object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Great, now let’s store our data in a format that we can use when building our
+    tokenizer. We need to create a set of plaintext files containing just the `text` feature
+    from our dataset, and we will split each *sample* using a newline `\n`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Over in our `data/text/oscar_it` directory we will find:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![A screenshot displaying a Windows explorer window full of .txt files — representing
+    the plaintext OSCAR data](../Images/b859ea91862835c1e2c7b7018e5ba4c6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The directory containing our plaintext OSCAR files
+  prefs: []
+  type: TYPE_NORMAL
+- en: Building a Tokenizer
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Next up is the tokenizer! When using transformers we typically load a tokenizer,
+    alongside its respective transformer model — the tokenizer is a key component
+    in the process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Video walkthrough for building our custom tokenizer
+  prefs: []
+  type: TYPE_NORMAL
+- en: When building our tokenizer we will feed it all of our OSCAR data, specify our
+    vocabulary size (number of tokens in the tokenizer), and any special tokens.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now, the RoBERTa special tokens look like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, we make sure to include them within the `special_tokens` parameter of our
+    tokenizer’s `train` method call.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Our tokenizer is now ready, and we can save it file for later use:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now we have two files that define our new *FiliBERTo *tokenizer:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*merges.txt* — performs the initial mapping of text to tokens'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '*vocab.json* — maps the tokens to token IDs'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: And with those, we can move on to initializing our tokenizer so that we can
+    use it as we would use any other `from_pretrained` tokenizer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Initializing the Tokenizer
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'We first initialize the tokenizer using the two files we built before — using
+    a simple `from_pretrained`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now our tokenizer is ready, we can try encoding some text with it. When encoding
+    we use the same two methods we would typically use, `encode` and `encode_batch`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: From the encodings object `tokens` we will be extracting the `input_ids` and `attention_mask` tensors
+    for use with FiliBERTo.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Creating the Input Pipeline
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The input pipeline of our training process is the more complex part of the entire
+    process. It consists of us taking our raw OSCAR training data, transforming it,
+    and loading it into a `DataLoader` ready for training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Video walkthrough of the MLM input pipeline
+  prefs: []
+  type: TYPE_NORMAL
+- en: Preparing the Data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We’ll start with a single sample and work through the preparation logic.
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, we need to open our file — the same files that we saved as *.txt* files
+    earlier. We split each based on newline characters `\n` as this indicates the
+    individual samples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then we encode our data using the `tokenizer` — making sure to include key parameters
+    like `max_length`, `padding`, and `truncation`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And now we can move onto creating our tensors — we will be training our model
+    through masked-language modeling (MLM). So, we need three tensors:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***input_ids*** — our *token_ids* with ~15% of tokens masked using the mask
+    token `<mask>`.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***attention_mask*** — a tensor of **1**s and **0**s, marking the position
+    of ‘real’ tokens/padding tokens — used in attention calculations.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '***labels*** — our *token_ids* with **no** masking.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If you’re not familiar with MLM, I’ve explained it [here](https://towardsdatascience.com/masked-language-modelling-with-bert-7d49793e5d2c).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our `attention_mask` and `labels` tensors are simply extracted from our `batch`.
+    The `input_ids` tensors require more attention however, for this tensor we mask
+    ~15% of the tokens — assigning them the token ID `3`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the final output, we can see part of an encoded `input_ids` tensor. The very
+    first token ID is `1` — the `[CLS]` token. Dotted around the tensor we have several `3` token
+    IDs — these are our newly added `[MASK]` tokens.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Building the DataLoader
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Next, we define our `Dataset` class — which we use to initialize our three encoded
+    tensors as PyTorch `torch.utils.data.Dataset` objects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, our `dataset` is loaded into a PyTorch `DataLoader` object — which
+    we use to load our data into our model during training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training the Model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: We need two things for training, our `DataLoader` and a model. The `DataLoader` we
+    have — but no model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Initializing the Model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: For training, we need a raw (not pre-trained) `BERTLMHeadModel`. To create that,
+    we first need to create a RoBERTa config object to describe the parameters we’d
+    like to initialize FiliBERTo with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then, we import and initialize our RoBERTa model with a language modeling (LM)
+    head.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training Preparation
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Before moving onto our training loop we need to set up a few things. First,
+    we set up GPU/CPU usage. Then we activate the training mode of our model — and
+    finally, initialize our optimizer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Finally — training time! We train just as we usually would when training via
+    PyTorch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If we head on over to Tensorboard we’ll find our loss over time — it looks promising.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/03de89b00d40ec89c847eab41c735b6b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Loss / time — multiple training sessions have been threaded together in this
+    chart
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Real Test
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Now it’s time for the real test. We set up an MLM pipeline — and ask Laura
+    to assess the results. You can watch the video review at 22:44 here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We first initialize a `pipeline` object, using the `''fill-mask''` argument.
+    Then begin testing our model like so:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*“ciao ****come**** va?” *is the right answer! That’s as advanced as my Italian
+    gets — so, let’s hand it over to Laura.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We start with *“buongiorno, come va?”* — or *“good day, how are you?”*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first answer, “buongiorno, chi va?” means “good day, who is there?” — eg
+    nonsensical. But, our second answer is correct!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Next up, a slightly harder phrase, *“ciao, dove ci incontriamo oggi pomeriggio?”* —
+    or *“hi, where are we going to meet this afternoon?”*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And we return some more positive results:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Finally, one more, harder sentence, *“cosa sarebbe successo se avessimo scelto
+    un altro giorno?”* — or “what would have happened if we had chosen another day?”:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We return a few good more good answers here too:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Overall, it looks like our model passed Laura’s tests — and we now have a competent
+    Italian language model called FiliBERTo!
+  prefs: []
+  type: TYPE_NORMAL
+- en: That’s it for this walkthrough of training a BERT model from scratch!
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ve covered a lot of ground, from getting and formatting our data — all the
+    way through to using language modeling to train our raw BERT model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I hope you enjoyed this article! If you have any questions, let me know via [Twitter](https://twitter.com/jamescalam) or
+    in the comments below. If you’d like more content like this, I post on [YouTube](https://www.youtube.com/c/jamesbriggs) too.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Thanks for reading!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '70% Off! Natural Language Processing: NLP With Transformers in Python'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Transformer models are the de-facto standard in modern NLP. They have proven
+    themselves as the most expressive…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**All images are by the author except where stated otherwise*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [James Briggs](https://youtube.com/c/JamesBriggs)** is a data scientist
+    specializing in natural language processing and working in the finance sector,
+    based in London, UK. He is also a freelance mentor, writer, and content creator.
+    You can reach the author via email ([jamescalam94@gmail.com](mailto:jamescalam94@gmail.com)).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/how-to-train-a-bert-model-from-scratch-72cfce554fc6).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[How to Apply Transformers to Any Length of Text](/2021/04/apply-transformers-any-length-text.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understanding BERT with Hugging Face](/2021/07/understanding-bert-hugging-face.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Topic Modeling with BERT](/2020/11/topic-modeling-bert.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fine-Tuning BERT for Tweets Classification with HuggingFace](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How Fast Can BERT Go With Sparsity?](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[8 Innovative BERT Knowledge Distillation Papers That Have Changed…](https://www.kdnuggets.com/2022/09/eight-innovative-bert-knowledge-distillation-papers-changed-nlp-landscape.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

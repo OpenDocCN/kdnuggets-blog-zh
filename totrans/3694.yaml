@@ -1,0 +1,481 @@
+- en: 'Multi-label NLP: An Analysis of Class Imbalance and Loss Function Approaches'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/03/multilabel-nlp-analysis-class-imbalance-loss-function-approaches.html](https://www.kdnuggets.com/2023/03/multilabel-nlp-analysis-class-imbalance-loss-function-approaches.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Multi-label NLP refers to the task of assigning multiple labels to a given text
+    input, rather than just one label. In traditional NLP tasks, such as text classification
+    or sentiment analysis, each input is typically assigned a single label based on
+    its content. However, in many real-world scenarios, a piece of text can belong
+    to multiple categories or express multiple sentiments simultaneously.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Multi-label NLP is important because it allows us to capture more nuanced and
+    complex information from text data. For example, in the domain of customer feedback
+    analysis, a customer review may express both positive and negative sentiments
+    at the same time, or it may touch upon multiple aspects of a product or service.
+    By assigning multiple labels to such inputs, we can gain a more comprehensive
+    understanding of the customer's feedback and take more targeted actions to address
+    their concerns.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article delves into a noteworthy case of Provectus’ use of multi-label
+    NLP.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Context:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A client approached us with a request to help them [automate labeling documents
+    of a certain type](https://provectus.com/case-studies/automating-document-processing-hcls-ai/).
+    At first glance, the task appeared to be straightforward and easily solved. However,
+    as we worked on the case, we encountered a dataset with inconsistent annotations.
+    Though our customer had faced challenges with varying class numbers and changes
+    in their review team over time, they had invested significant efforts into creating
+    a diverse dataset with a range of annotations. While there existed some imbalances
+    and uncertainties in the labels, this dataset provided a valuable opportunity
+    for analysis and further exploration.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Let’s take a closer look at the dataset, explore the metrics and our approach,
+    and recap how Provectus solved the problem of multi-label text classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Overview of the Dataset
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The dataset has 14,354 observations, with 124 unique classes (labels). Our task
+    is to assign one or multiple classes to every observation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Table 1 provides descriptive statistics for the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On average, we have about two classes per observation, with an average of 261
+    different texts describing a single class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Multi-label NLP: An Analysis of Class Imbalance and Loss Function Approaches](../Images/bb3651bc604356e68fe1c4edcc7a7745.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Table 1: Dataset Statistic'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In Figure 1, we see the distribution of classes in the top graph, and we have
+    a certain number of HEAD labels with the highest frequency of occurrence in the
+    dataset. Also note that the majority of classes have a low frequency of occurrence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Multi-label NLP: An Analysis of Class Imbalance and Loss Function Approaches](../Images/60e2e51874303c662937949527a7bb6f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In the bottom graph we see that there is frequent overlap between the classes
+    that are best represented in the dataset, and the classes that have low significance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We changed the process of splitting the dataset into train/val/test sets. Instead
+    of using a traditional method, we have employed iterative stratification, to provide
+    a well-balanced distribution of evidence of label relations. For that, we used
+    [Scikit Multi-learn](http://scikit.ml/api/skmultilearn.model_selection.iterative_stratification.html)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We obtained the following distribution:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The training dataset contains 60% of the data and covers all 124 labels
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The validation dataset contains 20% of the data and covers all 124 labels
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The test dataset contains 20% of the data and covers all 124 labels
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Metrics Applied
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Multi-label classification is a type of supervised machine learning algorithm
+    that allows us to assign multiple labels to a single data sample. It differs from
+    binary classification where the model predicts only two categories, and multi-class
+    classification where the model predicts only one out of multiple classes for a
+    sample.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Evaluation metrics for multi-label classification performance are inherently
+    different from those used in multi-class (or binary) classification due to the
+    inherent differences of the classification problem. More detailed information
+    can be found on Wikipedia.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We selected metrics that are most suitable for us:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Precision** measures the proportion of true positive predictions among the
+    total positive predictions made by the model.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Recall** measures the proportion of true positive predictions among all actual
+    positive samples.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**F1-score** is the harmonic mean of precision and recall, which helps to restore
+    balance between the two.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Hamming loss** is the fraction of labels that are incorrectly predicted'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: We also track **the number of predicted labels** in the set { defined as count
+    for labels, for which we achieve an F1 score > 0}.
+  prefs: []
+  type: TYPE_NORMAL
+- en: K. I. S. S. Approach
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Multi-Label Classification is a type of supervised learning problem where a
+    single instance or example can be associated with multiple labels or classifications,
+    as opposed to traditional single-label classification, where each instance is
+    only associated with a single class label.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To solve multi-label classification problems, there are two main categories
+    of techniques:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Problem transformation methods
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Algorithm adaptation methods
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Problem transformation methods enable us to transform multi-label classification
+    tasks into multiple single-label classification tasks. For example, the Binary
+    Relevance (BR) baseline approach treats every label as a separate binary classification
+    problem. In this case, the multi-label problem is transformed into multiple single-label
+    problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Algorithm adaptation methods modify the algorithms themselves to handle multi-label
+    data natively, without transforming the task into multiple single-label classification
+    tasks. An example of this approach is [the BERT model](https://arxiv.org/abs/1810.04805),
+    which is a pre-trained transformer-based language model that can be fine-tuned
+    for various NLP tasks, including multi-label text classification. BERT is designed
+    to handle multi-label data directly, without the need for problem transformation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the context of using BERT for multi-label text classification, the standard
+    approach is to use Binary Cross-Entropy (BCE) loss as the loss function. BCE loss
+    is a commonly used loss function for binary classification problems and can be
+    easily extended to handle multi-label classification problems by computing the
+    loss for each label independently, and then summing the losses. In this case,
+    the BCE loss function measures the error between predicted probabilities and true
+    labels, where predicted probabilities are obtained from the final sigmoid activation
+    layer in the BERT model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, let's take a closer look at Figure 2 below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Multi-label NLP: An Analysis of Class Imbalance and Loss Function Approaches](../Images/4971951b46f1f03a6b6529986e8bff95.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 2\. Metrics for baseline models
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The graph on the left shows a comparison of metrics for a “baseline: BERT”
+    and “baseline: ML”. Thus, it can be seen that for “baseline: BERT”, the F1 and
+    Recall scores are approximately 1.5 times higher, while the Precision for “baseline:
+    ML” is 2 times higher than that of model 1\. By analyzing the overall percentage
+    of predicted classes shown on the right, we see that “baseline: BERT” predicted
+    classes more than 10 times that of “baseline: ML”.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Because the maximum result for the “baseline: BERT” is less than 50% of all
+    classes, the results are quite discouraging. Let’s figure out how to improve these
+    results.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Golden Ratio of Approaches
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Based on the outstanding article ["Balancing Methods for Multi-label Text Classification
+    with Long-Tailed Class Distribution"](https://arxiv.org/abs/2109.04712), we learned
+    that distribution-balanced loss may be the most suitable approach for us.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Distribution-balanced loss
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Distribution-balanced loss is a technique used in multi-label text classification
+    problems to address imbalances in class distribution. In these problems, some
+    classes have a much higher frequency of occurrence compared to others, resulting
+    in model bias toward these more frequent classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To address this issue, distribution-balanced loss aims to balance the contribution
+    of each sample in the loss function. This is achieved by re-weighting the loss
+    of each sample based on the inverse of its frequency of occurrence in the dataset.
+    By doing so, the contribution of less frequent classes is increased, and the contribution
+    of more frequent classes is decreased, thus balancing the overall class distribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This technique has been shown to be effective in improving the performance of
+    models on long-tailed class distribution problems. By reducing the impact of frequent
+    classes and increasing the impact of infrequent classes, the model is able to
+    better capture patterns in the data and produce more balanced predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Multi-label NLP: An Analysis of Class Imbalance and Loss Function Approaches](../Images/7b53f29d83fccde71f82595269c4f134.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Implementation of Resample Class
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: DBLoss
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: By closely investigating the dataset, we have concluded that the parameter ![Equation](../Images/9d0e5bd3c7e47b028bb4c39c81a7c7ce.png)
+    = 0.405.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Threshold tuning
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Another step in improving our model was the process of tuning the threshold,
+    both in the training stage, and in the validation and testing stages. We calculated
+    the dependencies of metrics such as f1-score, precision, and recall on the threshold
+    level, and we selected the threshold based on the highest metric score. Below
+    you can see the function implementation of this process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Optimization of the F1 score by tuning the threshold:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Evaluation and comparison with baseline
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'These approaches allowed us to train a new model and obtain the following result,
+    which is compared to the baseline: BERT in Figure 3 below.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Multi-label NLP: An Analysis of Class Imbalance and Loss Function Approaches](../Images/784e95194919a213efd587587a54fb47.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 3\. Comparison metrics by baseline and newer approach.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'By comparing the metrics that are relevant for classification, we see a significant
+    increase in performance measures almost by 5-6 times:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The F1 score increased from 12% → 55%, while Precision increased from 9% → 59%
+    and Recall increased from 15% → 51%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With the changes shown in the right graph in Figure 3, we can now predict 80%
+    of the classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Slices of classes
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'We divided our labels into four groups: HEAD, MEDIUM, TAIL, and ZERO. Each
+    group contains labels with a similar amount of supporting data observations.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As seen in Figure 4, the distributions of the groups are distinct. The rose
+    box (HEAD) has a negatively skewed distribution, the middlebox (MEDIUM) has a
+    positively skewed distribution, and the green box (TAIL) appears to have a normal
+    distribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: All groups also have outliers, which are points outside the whiskers in the
+    box plot. The HEAD group has a major impact on a MAJOR class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Additionally, we have identified a separate group named "ZERO" which contains
+    labels that the model was unable to learn and cannot recognize due to the minimal
+    number of occurrences in the dataset (less than 3% of all observations).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Multi-label NLP: An Analysis of Class Imbalance and Loss Function Approaches](../Images/723740823a636593c7ebb8fe04cf09ac.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 4\. Label counts vs. groups
+  prefs: []
+  type: TYPE_NORMAL
+- en: Table 2 provides information about metrics per each group of labels for the
+    test subset of data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Multi-label NLP: An Analysis of Class Imbalance and Loss Function Approaches](../Images/8966526cd3060ab95b9b0f377314041e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Table 2\. Metrics per group.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The HEAD group contains 21 labels with an average of 112 support observations
+    per label. This group is impacted by outliers and, due to its high representation
+    in the dataset, its metrics are high: F1 - 73%, Precision - 71%, Recall - 75%.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'The MEDIUM group consists of 44 labels with an average support of 67 observations,
+    which is approximately two times lower than the HEAD group. The metrics for this
+    group are expected to decrease by 50%: F1 - 52%, Precision - 56%, Recall - 51%.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'The TAIL group has the largest number of classes, but all are poorly represented
+    in the dataset, with an average of 40 support observations per label. As a result,
+    the metrics drop significantly: F1 - 21%, Precision - 32%, Recall - 16%.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The ZERO group includes classes that the model cannot recognize at all, potentially
+    due to their low occurrence in the dataset. Each of the 24 labels in this group
+    has an average of 7 support observations.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Figure 5 visualizes the information presented in Table 2, providing a visual
+    representation of the metrics per group of labels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Multi-label NLP: An Analysis of Class Imbalance and Loss Function Approaches](../Images/44dde3b61f89dc50bd17ecf406545bfd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 5\. Metrics vs. label groups. All ZERO values = 0.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In this comprehensive article, we have demonstrated that a seemingly simple
+    task of multi-label text classification can be challenging when traditional methods
+    are applied. We have proposed the use of distribution-balancing loss functions
+    to tackle the issue of class imbalance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have compared the performance of our proposed approach to the classic method,
+    and evaluated it using real-world business metrics. The results demonstrate that
+    utilizing loss functions to address class imbalances and label co-occurrences
+    offer a viable solution for multi-label text classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The proposed use case highlights the importance of considering different approaches
+    and techniques when dealing with multi-label text classification, and the potential
+    benefits of distribution-balancing loss functions in addressing class imbalances.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*If you are facing a similar issue and seeking to* [*streamline document processing
+    operations*](https://provectus.com/intelligent-document-processing/) *within your
+    organization, please contact me or the Provectus team. We will be happy to assist
+    you in finding more efficient methods for automating your processes.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Oleksii Babych**](https://www.linkedin.com/in/babycholeks/) is a Machine
+    Learning Engineer at Provectus. With a background in physics, he possesses excellent
+    analytical and math skills, and has gained valuable experience through scientific
+    research and international conference presentations, including SPIE Photonics
+    West. Oleksii specializes in creating end-to-end, large-scale AI/ML solutions
+    for healthcare and fintech industries. He is involved in every stage of the ML
+    development life cycle, from identifying business problems to deploying and running
+    production ML models.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Rinat Akhmetov**](https://www.linkedin.com/in/rinat-akhmetov/) is the ML
+    Solution Architect at Provectus. With a solid practical background in Machine
+    Learning (especially in Computer Vision), Rinat is a nerd, data enthusiast, software
+    engineer, and workaholic whose second biggest passion is programming. At Provectus,
+    Rinat is in charge of the discovery and proof of concept phases, and leads the
+    execution of complex AI projects.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Multilabel Classification: An Introduction with Python''s Scikit-Learn](https://www.kdnuggets.com/2023/08/multilabel-classification-introduction-python-scikitlearn.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Loss Functions: An Explainer](https://www.kdnuggets.com/2022/03/loss-functions-explainer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning’s Sweet Spot: Pure Approaches in NLP and Document Analysis](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unsupervised Disentangled Representation Learning in Class…](https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Get World-class Data Science Learning with DataCamp at 25% off](https://www.kdnuggets.com/2023/03/datacamp-world-class-data-science-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Concepts You Should Know About Gradient Descent and Cost Function](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,372 @@
+- en: Deep Learning for Detecting Pneumonia from X-ray Images
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/06/deep-learning-detecting-pneumonia-x-ray-images.html](https://www.kdnuggets.com/2020/06/deep-learning-detecting-pneumonia-x-ray-images.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d49fa976c57ed7289c4b1189f37487d1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The risk of pneumonia is immense for many, especially in developing nations
+    where billions face energy poverty and rely on polluting forms of energy. The
+    WHO estimates that over 4 million premature deaths occur annually from household
+    air pollution-related diseases including pneumonia. Over 150 million people get
+    infected with pneumonia on an annual basis especially children under 5 years old.
+    In such regions, the problem can be further aggravated due to the dearth of medical
+    resources and personnel. For example, in Africa’s 57 nations, a gap of 2.3 million
+    doctors and nurses exists. For these populations, accurate and fast diagnosis
+    means everything. It can guarantee timely access to treatment and save much needed
+    time and money for those already experiencing poverty.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This project is a part of the [Chest X-Ray Images (Pneumonia)](https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia) held
+    on Kaggle.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Challenge
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Build an algorithm to automatically identify whether a patient is suffering
+    from pneumonia or not by looking at chest X-ray images. The algorithm had to be
+    extremely accurate because lives of people is at stake.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4b67cf92ea0fd4391f7604b225aa87a9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Environment and tools
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[scikit-learn](https://scikit-learn.org/stable/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[keras](https://keras.io/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[numpy](https://www.numpy.org/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[pandas](https://pandas.pydata.org/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[matplotlib](https://matplotlib.org/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The dataset can be downloaded from the kaggle website which can be found [here](https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Where is the code?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Without much ado, let’s get started with the code. The complete project on github
+    can be found [here](https://github.com/abhinavsagar/Kaggle-tutorial).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s start with loading all the libraries and dependencies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next I displayed some normal and pneumonia images to just have a look at how
+    much different they look from the naked eye. Well not much!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8b91a2bc39b67e7f27bac236ed565b8a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample Images
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then I split the data-set into three sets — train, validation and test sets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next I wrote a function in which I did some data augmentation, fed the training
+    and test set images to the network. Also I created labels for the images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The practice of data augmentationis an effective way to increase the size of
+    the training set. Augmenting the training examples allow the network to “see”
+    more diversified, but still representative, data points during training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Then I defined a couple of data generators: one for training data, and the
+    other for validation data. A data generatoris capable of loading the required
+    amount of data (a mini batch of images) directly from the source folder, convert
+    them into *training data *(fed to the model) and *training targets *(a vector
+    of attributes — the supervision signal).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*For my experiments, I usually set the *`*batch_size = 64*`*. In general a
+    value between 32 and 128 should work well. Usually you should increase/decrease
+    the batch size according to computational resources and model’s performances.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: After that I defined some constants for later usage.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The next step was to build the model. This can be described in the following
+    5 steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I used five convolutional blocks comprised of convolutional layer, max-pooling
+    and batch-normalization.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: On top of it I used a flatten layer and followed it by four fully connected
+    layers.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Also in between I have used dropouts to reduce over-fitting.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Activation function was Relu throughout except for the last layer where it was
+    Sigmoid as this is a binary classification problem.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: I have used Adam as the optimizer and cross-entropy as the loss.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Before training the model is useful to define one or more callbacks. Pretty
+    handy one, are: `ModelCheckpoint` and `EarlyStopping`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ModelCheckpoint**: when training requires a lot of time to achieve a good
+    result, often many iterations are required. In this case, it is better to save
+    a copy of the best performing model only when an epoch that improves the metrics
+    ends.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**EarlyStopping**: sometimes, during training we can notice that the generalization
+    gap (i.e. the difference between training and validation error) starts to increase,
+    instead of decreasing. This is a symptom of overfitting that can be solved in
+    many ways (*reducing model capacity*, *increasing training data*, *data augumentation*, *regularization*, *dropout*,
+    etc). Often a practical and efficient solution is to stop training when the generalization
+    gap is getting worse.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/a2178b2ca7950ac3ba5d484af1f8b9e7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Early stopping
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next I trained the model for 10 epochs with a batch size of 32\. Please note
+    that usually a higher batch size gives better results but at the expense of higher
+    computational burden. Some research also claim that there is an optimal batch
+    size for best results which could be found by investing some time on hyper-parameter
+    tuning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Let’s visualize the loss and accuracy plots.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f3250e6fe03f526a861d5e9524353ed2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Accuracy vs Epoch | Loss vs Epoch**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: So far so good. The model is converging which can be observed from the decrease
+    in loss and validation loss with epochs. Also it is able to reach 90% validation
+    accuracy in just 10 epochs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s plot the confusion matrix and get some of the other results also like
+    precision, recall, F1 score and accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: The model is able to achieve an accuracy of 91.02% which is quite good considering
+    the size of data that is used.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Although this project is far from complete but it is remarkable to see the success
+    of deep learning in such varied real world problems. I have demonstrated how to
+    classify positive and negative pneumonia data from a collection of X-ray images.
+    The model was made from scratch, which separates it from other methods that rely
+    heavily on transfer learning approach. In the future this work could be extended
+    to detect and classify X-ray images consisting of lung cancer and pneumonia. Distinguishing
+    X-ray images that contain lung cancer and pneumonia has been a big issue in recent
+    times, and our next approach should be to tackle this problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: References/Further Readings
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[**Training a CNN to detect Pneumonia**](https://medium.com/datadriveninvestor/training-a-cnn-to-detect-pneumonia-c42a44101deb)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I remember the day so well. My grandfather started getting random coughs and
+    began having trouble breathing. He was...
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Detecting Pneumonia with Deep Learning**](https://becominghuman.ai/detecting-pneumonia-with-deep-learning-3cf49b640c14)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pneumonia is lung inflammation caused by infection with virus, bacteria, fungi
+    or other pathogens. According to...
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**CheXNet: Radiologist-Level Pneumonia Detection on Chest X-Rays with Deep
+    Learning**](https://stanfordmlgroup.github.io/projects/chexnet/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The dataset, released by the NIH, contains 112,120 frontal-view X-ray images
+    of 30,805 unique patients, annotated with...
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before You Go
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The corresponding source code can be found here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**abhinavsagar/Kaggle-tutorial**](https://github.com/abhinavsagar/Kaggle-tutorial)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sample notebooks for Kaggle competitions. Automatic segmentation of microscopy
+    images is an important task in medical...
+  prefs: []
+  type: TYPE_NORMAL
+- en: Happy reading, happy learning and happy coding!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Contacts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If you want to keep updated with my latest articles and projects [follow me
+    on Medium](https://medium.com/@abhinav.sagar). These are some of my contacts details:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Personal Website](https://abhinavsagar.github.io/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Linkedin](https://in.linkedin.com/in/abhinavsagar4)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Medium Profile](https://medium.com/@abhinav.sagar)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GitHub](https://github.com/abhinavsagar)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Kaggle](https://www.kaggle.com/abhinavsagar)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Abhinav Sagar](https://www.linkedin.com/in/abhinavsagar4)** is a senior
+    year undergrad at VIT Vellore. He is interested in data science, machine learning
+    and their applications to real-world problems.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/deep-learning-for-detecting-pneumonia-from-x-ray-images-fc9a3d9fdba8).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Convolutional Neural Network for Breast Cancer Classification](/2019/10/convolutional-neural-network-breast-cancer-classification.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI and Machine Learning for Healthcare](/2020/05/ai-machine-learning-healthcare.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How AI Can Help Manage Infectious Diseases](/2020/04/ai-manage-infectious-diseases.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

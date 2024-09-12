@@ -1,0 +1,251 @@
+- en: Building an Audio Classifier using Deep Neural Networks
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/12/audio-classifier-deep-neural-networks.html](https://www.kdnuggets.com/2017/12/audio-classifier-deep-neural-networks.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](/2017/12/audio-classifier-deep-neural-networks.html/#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By** [Narayan Srinivasan](https://www.linkedin.com/in/narayansrinivasan97/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understanding sound is one of the basic tasks that our brain performs. This
+    can be broadly classified into Speech and Non-Speech sounds. We have noise robust
+    speech recognition systems in place but there is still no general purpose acoustic
+    scene classifier which can enable a computer to listen and interpret everyday
+    sounds and take actions based on those like humans do, like moving out of the
+    way when we listen to a horn or hear a dog barking behind us etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our model is only as complex as our data, thus getting labelled ‘data is very
+    important in machine learning’. The complexity of the Machine Learning systems
+    arise from the data itself and not from the algorithms. In the past few years
+    we’ve seen deep learning systems take over the field of image recognition and
+    captioning, with architectures like [ResNet](https://arxiv.org/abs/1512.03385),
+    [GoogleNet](https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Szegedy_Going_Deeper_With_2015_CVPR_paper.pdf)
+    shattering benchmarks in the ImageNet competition with 1000 categories of images,
+    classified at above 95% accuracy (top 5 accuracy). This was due to a large amount
+    of labelled dataset that were available for the Models to train on and also faster
+    computers with GPU acceleration which makes it easier to train Deep Models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The problem we face with building a noise robust acoustic classifier is the
+    lack of a large dataset, but Google recently launched the [AudioSet](https://research.google.com/audioset/)
+    - which is a large collection of labelled audio taken from YouTube videos (10s
+    excerpts). Earlier, we had the [ESC-50](https://github.com/karoldvl/ESC-50) dataset
+    with 2000 recordings, 40 from each class covering many everyday sounds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 1\. Extracting Features**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although deep learning eliminates the need for hand-engineered features, we
+    have to choose a representation model for our data. Instead of directly using
+    the sound file as an amplitude vs time signal we use a log-scaled mel-spectrogram
+    with 128 components (bands) covering the audible frequency range (0-22050 Hz),
+    using a window size of 23 ms (1024 samples at 44.1 kHz) and a hop size of the
+    same duration. This conversion takes into account the fact that human ear hears
+    sound on log-scale, and closely scaled frequency are not well distinguished by
+    the human Cochlea. The effect becomes stronger as frequency increases. Hence we
+    only take into account power in different frequency bands. This sample code gives
+    an insight into converting audio files into spectrogram images. We use glob and
+    librosa library - this code is a standard one for conversion into spectrogram
+    and you’re free to make modifications to suit the needs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the code that follows,
+  prefs: []
+  type: TYPE_NORMAL
+- en: parent_dir = string with name of main directory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: sub_dirs = a list of directories inside parent we want to explore
+  prefs: []
+  type: TYPE_NORMAL
+- en: So all *.wav files in the area parent_dir/sub_dirs/*.wav are extracted, iterating
+    through all subdirs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is an interesting article about mel-scale and mfcc coefficients for people
+    who are interested. [Ref](https://practicalcryptography.com/miscellaneous/machine-learning/guide-mel-frequency-cepstral-coefficients-mfccs/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now the audio file is represented as a 128(frames) x 128(bands) spectrogram
+    image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Audio Classifier Code](../Images/794b6ba0f37b7c82566bca64995ba0b0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/ffb438457a621ff28aa5db91e4ef8223.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The Audio-classification problem is now transformed into an image classification
+    problem. We need to detect presence of a particular entity ( ‘Dog’,’Cat’,’Car’
+    etc) in this image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 2\. Choosing an Architecture**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We use a convolutional Neural Network, to classify the spectrogram images.This
+    is because CNNs work better in detecting local feature patterns (edges etc) in
+    different parts of the image and are also good at capturing hierarchical features
+    which become subsequently complex with every layer as illustrated in the image
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/03c83c4f60de3b6acb959d2753c28df5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Another way to think about this is to use a Recurrent Neural Network to capture
+    the sequential information in sound data by passing one frame at a time, but as
+    in most cases CNNs have outperformed standalone RNNs - we haven’t used it in this
+    particular experiment. In many cases RNNs are used along with CNNs to improve
+    performance of networks and we would be experimenting with those architectures
+    in the future. [[Ref]](https://arxiv.org/abs/1704.07709)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 3\. Transfer Learning**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As the CNNs learn features hierarchically, we can observe that the initial few
+    layers learn basic features like various edges which are common to many different
+    types of images. Transfer learning is the concept of training the model on a dataset
+    with large amounts of similar data and then modifying the network to perform well
+    on the target task where we do not have a lot of data. This is also called ***fine-tuning***
+    - [this blog](https://sebastianruder.com/transfer-learning/index.html) explains
+    transfer learning very well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Step 4\. Data Augmentation**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: While dealing with small datasets, learning complex representations of the data
+    is very prone to overfitting as the model just memorises the dataset and fails
+    to generalise. One way to beat this is to augment the audio files into producing
+    many files each with a slight variation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The ones we used here are time-stretching and pitch-shifting - [Rubberband](https://github.com/breakfastquay/rubberband)
+    is an easy to use library for this purpose.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: This one line terminal command, gives us a new audio file which is 50% longer
+    than original and has pitch shifted up by one octave.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To visualise what this means, look at this image of a cat I took from the internet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/06ff45551a975c58b22cca5b6fe5b348.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If we only have the image on our right, we can use data augmentation to make
+    a mirror image of that image and it’s still a cat (Additional training data!).
+    For a computer these are two completely different pixel distributions and helps
+    it learn more general concepts (if A is a dog, mirror image of A is dog too).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similarly we apply time-stretching (either slow down the sound or speed it up)
+    , and
+  prefs: []
+  type: TYPE_NORMAL
+- en: pitch-shifting (make it more or less shrill) to get more generalised training
+    data for our network (also improved the validation accuracy by 8-9% in this case
+    due to a small training set).
+  prefs: []
+  type: TYPE_NORMAL
+- en: We observed that the performance of the model for each sound class is influenced
+    differently by each augmentation set, suggesting that the performance of the model
+    could be improved further by applying class-conditional data augmentation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Overfitting is a major problem in the field of deep learning and we can use
+    Data Augmentation as one way to combat this problem , other ways of implicitly
+    generalising include using dropout layers and L1,L2 regularisation. [[Ref]](https://www.jmlr.org/papers/volume15/srivastava14a.old/source/srivastava14a.pdf)
+  prefs: []
+  type: TYPE_NORMAL
+- en: So in this article we proposed a deep convolutional neural network architecture
+    which helps us classify audio and how to effectively use transfer learning and
+    data-augmentation to improve model accuracy in case of small datasets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Narayan Srinivasan](https://www.linkedin.com/in/narayansrinivasan97/)
+    is interested in building autonomous vehicle. He is a graduate of Indian Institute
+    of Technology, Madras.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**The 10 Deep Learning Methods AI Practitioners Need to Apply**](https://www.kdnuggets.com/2017/12/10-deep-learning-methods-ai-practitioners-need-apply.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**MLDB: The Machine Learning Database**](https://www.kdnuggets.com/2016/10/mldb-machine-learning-database.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Bill Inmon on Hearing The Voice Of Your Customer**](https://www.kdnuggets.com/2017/12/hearing-voice-your-customer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[From Theory to Practice: Building a k-Nearest Neighbors Classifier](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bark: The Ultimate Audio Generation Model](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[WavJourney: A Journey into the World of Audio Storyline Generation](https://www.kdnuggets.com/wavjourney-a-journey-into-the-world-of-audio-storyline-generation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Neural Networks and Deep Learning: A Textbook (2nd Edition)](https://www.kdnuggets.com/2023/07/aggarwal-neural-networks-deep-learning-textbook-2nd-edition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deep Neural Networks Don''t Lead Us Towards AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

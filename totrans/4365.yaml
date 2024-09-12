@@ -1,0 +1,509 @@
+- en: How to Incorporate Tabular Data with HuggingFace Transformers
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/11/tabular-data-huggingface-transformers.html](https://www.kdnuggets.com/2020/11/tabular-data-huggingface-transformers.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Ken Gu](https://www.linkedin.com/in/ken-gu/), Applied Research Scientist
+    Intern at Georgian**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Transformer-based models are a game-changer when it comes to using unstructured
+    text data. As of September 2020, the top-performing models in the General Language
+    Understanding Evaluation (GLUE) benchmark are all BERT transformer-based models.
+    At [Georgian](http://georgian.io/), we find ourselves working with supporting
+    tabular feature information as well as unstructured text data. We found that by
+    using the tabular data in [our models](http://georgian.io/platform/research-at-georgian/),
+    we could further improve performance, so we set out to build a toolkit that makes
+    it easier for others to do the same.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f61083950afa7309c6727bd485c6062b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*The 9 tasks that are part of the GLUE benchmark.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Building on Top of Transformers
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The main benefits of using transformers are that they can learn long-range dependencies
+    between text and can be trained in parallel (as opposed to sequence to sequence
+    models), meaning they can be pre-trained on large amounts of data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Given these advantages, BERT is now a staple model in many real-world applications.
+    Likewise, with libraries such as [HuggingFace Transformers](https://huggingface.co/transformers/),
+    it’s easy to build high-performance transformer models on common NLP problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Transformer models using unstructured text data are well understood. However,
+    in the real-world, text data is often supported by rich structured data or other
+    unstructured data like audio or visual information. Each one of these might provide
+    signals that one alone would not. We call these different ways of experiencing
+    data — audio, visual, or text — modalities.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Think about e-commerce reviews as an example. In addition to the review text
+    itself, we also have information about the seller, buyer, and product available
+    as numerical and categorical features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We set out to explore how we could use text and tabular data together to provide
+    stronger signals in our projects. We started by exploring the field known as multimodal
+    learning, which focuses on how to process different modalities in machine learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Multimodal Literature Review
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The current models for multimodal learning mainly focus on learning from the
+    sensory modalities such as audio, visual, and text.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Within multimodal learning, there are several branches of research. The MultiComp
+    Lab at Carnegie Mellon University provides an excellent [taxonomy](http://multicomp.cs.cmu.edu/research/taxonomy/).
+    Our problem falls under what is known as **Multimodal Fusion — **joining information
+    from two or more modalities to make a prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As text data is our primary modality, our review focues on the literature that
+    treats text as the main modality and introduces models that leverage the transformer
+    architecture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Trivial Solution to Structured Data**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Before we dive into the literature, it’s worth mentioning that there is a simple
+    solution that can be used where the structured data is treated as regular text
+    and is appended to the standard text inputs. Taking the e-commerce reviews example,
+    the input can be structured as follows: Review. Buyer Info. Seller Info. Numbers/Labels.
+    Etc. One caveat with this approach, however, is that it is limited by the maximum
+    token length that a transformer can handle.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Transformer on Images and Text
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the last couple of years, transformer extensions for image and text have
+    really advanced. [Supervised Multimodal Bitransformers for Classifying Images
+    and Text](https://arxiv.org/pdf/1909.02950.pdf) by Kiela et al. (2019) uses pre-trained
+    ResNet and pre-trained BERT features on unimodal images and text, respectively,
+    and feeds this into a Bidirectional transformer. The key innovation is adapting
+    the image features as additional tokens to the transformer model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ef286dead61facdee4957f8ef1ec5b29.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*An illustration of the multimodal transformer. This model takes the output
+    of ResNet on subregions of the image as input image tokens.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Additionally, there are models — [ViLBERT](https://arxiv.org/abs/1908.02265) (Lu
+    et al. 2019) and [VLBert](https://arxiv.org/pdf/1908.08530.pdf) (Su et al. 2020)
+    — that define pretraining tasks for images and text. Both models pre-train on
+    the [Conceptual Captions dataset](https://ai.google.com/research/ConceptualCaptions),
+    which contains roughly 3.3 million image-caption pairs (web images with captions
+    from alt text). In both cases, for any given image, a pre-trained object detection
+    model like Faster R-CNN obtains vector representations for regions of the image,
+    which count as input token embeddings to the transformer model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/90d0dd095ad4a5abb47417f9c112168a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*The VLBert model diagram. It takes image regions outputted by Faster R-CNN
+    as input image tokens.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As an example, ViLBert pre-trains on the following training objectives:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Masked multimodal modeling: **Mask input image and word tokens. For the image,
+    the model tries to predict a vector capturing image features for the corresponding
+    image region, while for text, it predicts the masked text based on the textual
+    and visual clues.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Multimodal alignment: **Whether the image and text pair are actually from
+    the same image and caption pair.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '![](../Images/1be6a703b698972f151b8964c46bfb09.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*The two pre-training tasks for ViLBert.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f4fa4d30f67670e2cb7bc7237297819d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/e64e06ac18027d7ebda7c21140686ce2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*An example of masked multimodal learning. Given the image and text, if we
+    mask out *dog*, then the model should be able to use the unmasked visual information
+    to correctly predict the masked word to be *dog*.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: All these models use the bidirectional transformer model that is the backbone
+    of BERT. The differences are the pre-training tasks the models are trained on
+    and slight additions to the transformer. In the case of ViLBERT, the authors also
+    introduce a co-attention transformer layer (shown below) to define the attention
+    mechanism between the modalities explicitly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/3c2cee8e6ff7f49649f4b2b8f2627a38.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*The standard transformer block vs. the co-attention transformer block. The
+    co-attention block injects attention-weighted vectors of another modality (linguistic,
+    for example) into the hidden representations of the current modality (visual).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, there’s also [LXMERT](https://arxiv.org/abs/1908.07490) (Tan and Mohit
+    2019), another pre-trained transformer model that, as of [Transformers version
+    3.1.0](https://pypi.org/project/transformers/3.1.0/), is implemented as part of
+    the library. The input to LXMERT is the same as ViLBERT and VLBERT. However, LXMERT
+    pre-trains on aggregated datasets, which also include visual question answering
+    datasets. In total, LXMERT pre-trains on 9.18 million image text pairs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Transformers on Aligning Audio, Visual, and Text
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Beyond transformers for combining image and text, there are multimodal models
+    for audio, video, and text modalities in which there is a natural ground truth
+    temporal alignment. Papers for this approach include MulT,[ Multimodal Transformer
+    for Unaligned Multimodal Language Sequences](https://arxiv.org/pdf/1906.00295.pdf) (Tsai
+    et al. 2019), and the Multimodal Adaptation Gate (MAG) from[ Integrating Multimodal
+    Information in Large Pretrained Transformers](https://www.aclweb.org/anthology/2020.acl-main.214.pdf) (Rahman
+    et al. 2020).
+  prefs: []
+  type: TYPE_NORMAL
+- en: MuIT is similar to ViLBert in which co-attention is used between pairs of modalities.
+    MAG, meanwhile, injects other modality information at certain transformer layers
+    via a gating mechanism.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Transformers with Text and Knowledge Graph Embeddings
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Some works have also identified knowledge graphs as a vital piece of information
+    in addition to text data. [Enriching BERT with Knowledge Graph Embeddings for
+    Document Classification](https://arxiv.org/pdf/1909.08402.pdf) (Ostendorff et
+    al. 2019) uses features from the author entities in the Wikidata knowledge graph
+    in addition to metadata features for book category classification. In this case,
+    the model is a simple concatenation of these features and BERT output text features
+    of the book title and description before some final classification layers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/36a31b4dd50e91186d80c891e7bdb9d6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*The simple model architecture to incorporate knowledge graph embeddings and
+    tabular metadata.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the other hand, [ERNIE](https://arxiv.org/abs/1905.07129) (Zhang et al. 2019)
+    matches the tokens in the input text with entities in the knowledge graph. They
+    fuse these embeddings to produce entity aware text embeddings and text-aware entity
+    embeddings with this matching.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Key Takeaway
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The main takeaway for adapting transformers for multimodal data is to ensure
+    that there is an attention or weighting mechanism between the different modalities.
+    These attention mechanisms can occur at different points of the transformer architecture,
+    as encoded input embeddings, injected in the middle, or combined after the transformer
+    encodes the text data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Multimodal Transformers Toolkit
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Using what we’ve learned from the literature review and the comprehensive [HuggingFace](https://huggingface.co/)
+    library of state-of-the-art transformers, we’ve developed a toolkit. The **multimodal-transformers** package
+    extends any HuggingFace transformer for tabular data. To see the code, documentation,
+    and working examples, check out [the project repo](https://github.com/georgianpartners/Multimodal-Toolkit).
+  prefs: []
+  type: TYPE_NORMAL
+- en: At a high level, the outputs of a transformer model on text data and tabular
+    features containing categorical and numerical data are combined in a combining
+    module. Since there is no alignment in our data, we choose to combine the text
+    features after the transformer’s output. The combining module implements several
+    methods for integrating the modalities, including attention and gating methods
+    inspired by the literature survey. More details of these methods are available
+    [here](https://multimodal-toolkit.readthedocs.io/en/latest/notes/combine_methods.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/eb26b789b45570eadbc807594df6838c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*High-level diagram of multimodal-transformers. The adaptation of transformers
+    to incorporate data is all contained in the combining module.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Walkthrough
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s work through an example where we classify clothing review recommendations.
+    We’ll use a simplified version of the example included in the Colab notebook.
+    We will use the [Women’s E-Commerce Clothing Reviews](https://www.kaggle.com/nicapotato/womens-ecommerce-clothing-reviews) from
+    Kaggle, which contains 23,000 customer reviews.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8b90adc7515e33fdd0d1fe2814d20360.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*A sample of the clothing review dataset.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this dataset, we have text data in the Title and Review Text columns. We
+    also have categorical features from the *Clothing ID, Division Name, Department
+    Name, and Class Name* columns and numerical features from the *Rating and Positive
+    Feedback Count.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loading The Dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We first load our data into a **TorchTabularTextDataset**, which works with
+    PyTorch’s data loaders that include the text inputs for HuggingFace Transformers
+    and our specified categorical feature columns and numerical feature columns. For
+    this, we also need to load our HuggingFace tokenizer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Loading Transformer with Tabular Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now we load our transformer with a tabular model. First, we specify our tabular
+    configurations in a **TabularConfig** object. This config is then set as the **tabular_config** member
+    variable of a HuggingFace transformer config object. Here, we also specify how
+    we want to combine the tabular features with the text features. In this example,
+    we will use a weighted sum method.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once we have the **tabular_config** set, we can load the model using the same
+    API as HuggingFace. See the [documentation](https://multimodal-toolkit.readthedocs.io/en/latest/modules/model.html#module-multimodal_transformers.model.tabular_transformers) for
+    the list of currently supported transformer models that include the tabular combination
+    module.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For training, we can use HuggingFace’s [trainer](https://huggingface.co/transformers/master/main_classes/trainer.html?highlight=trainer#transformers.Trainer) class.
+    We also need to specify the training arguments, and in this case, we will use
+    the default.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s take a look at our models in training!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/36968204ded1b162b45de0c17de61647.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*The Tensorboard logs from the above experiment. You can also check out this
+    Tensorboard [here](https://tensorboard.dev/experiment/pzG4qrcJTyGhjENIKzE9Dw/#scalars).*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Results
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Using this toolkit, we also ran our experiments on the [Women’s E-Commerce Clothing
+    Reviews](https://www.kaggle.com/nicapotato/womens-ecommerce-clothing-reviews) dataset
+    for recommendation prediction and the [Melbourne Airbnb Open Data](https://www.kaggle.com/tylerx/melbourne-airbnb-open-data) dataset
+    for price prediction. The former is a classification task, while the latter is
+    a regression task. Our results are in the table below. The **text_only** combine
+    method is a baseline that uses only the transformer and is essentially the same
+    as a HuggingFace **forSequenceClassification **model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/82486e33dc986cc9db2ee2043bc85266.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can see that incorporating tabular features improves performance over the **text_only** method.
+    The performance gains depend on how strong the training signals from the tabular
+    data are. For example, in the review recommendation case, the **text_only** model
+    is already a strong baseline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next Steps
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We’ve already used the toolkit successfully in our projects. Feel free to try
+    it out on your next machine learning project!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Check out the [documentation](https://multimodal-toolkit.readthedocs.io/en/latest/) and
+    the included [main](https://github.com/georgianpartners/Multimodal-Toolkit/blob/master/main.py) script
+    for how to do evaluation and inference. If you want support for your favorite
+    transformer, feel free to add transformer support [here](https://github.com/georgianpartners/Multimodal-Toolkit/blob/master/multimodal_transformers/model/tabular_transformers.py).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Appendix
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Readers should check out [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/) and
+    [The Illustrated BERT](http://jalammar.github.io/illustrated-bert/) for a well-summarized
+    overview of transformers and BERT.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below, you’ll find a quick taxonomy of papers we reviewed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Transformer on Image and Text**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Supervised Multimodal Bitransformers for Classifying Images and Text (Kiela
+    et al. 2019)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'ViLBERT: Pretraining Task-Agnostic Visiolinguistic Representations for Vision-and-Language
+    Tasks (Lu et al. 2019)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'VL-BERT: Pretraining of Generic Visual-Linguistic Representations (Su et al.
+    ICLR 2020)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'LXMERT: Learning Cross-Modality Encoder Representations from Transformers (Tan
+    et al. EMNLP 2019)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Transformers on Aligning Audio, Visual, and Text**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Multimodal Transformer for Unaligned Multimodal Language Sequences (Tsai et
+    al. ACL 2019)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Integrating Multimodal Information in Large Pretrained Transformers (Rahman
+    et al. ACL 2020)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Transformers with Knowledge Graph Embeddings**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Enriching BERT with Knowledge Graph Embeddings for Document Classification (Ostendorff
+    et al. 2019)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'ERNIE: Enhanced Language Representation with Informative Entities (Zhang et
+    al. 2019)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/georgian-impact-blog/how-to-incorporate-tabular-data-with-huggingface-transformers-b70ac45fcfb4).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Ken Gu](https://www.linkedin.com/in/ken-gu/) is an Applied Research
+    Intern at Georgian where he is working on various applied machine learning initiatives.
+    He received his BS in Computer Science and a concentration in Mathematics from
+    University of California Los Angeles. At UCLA, Ken has worked on research projects
+    in Graph Deep Learning with a focus on biomedical interaction networks.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A Deep Dive Into the Transformer Architecture – The Development of Transformer
+    Models](https://www.kdnuggets.com/2020/08/transformer-architecture-development-transformer-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Every Complex DataFrame Manipulation, Explained & Visualized Intuitively](https://www.kdnuggets.com/2020/11/dataframe-manipulation-explained-visualized.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Research Guide for Transformers](https://www.kdnuggets.com/2019/10/research-guide-transformers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Simple NLP Pipelines with HuggingFace Transformers](https://www.kdnuggets.com/2023/02/simple-nlp-pipelines-huggingface-transformers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data-centric AI and Tabular Data](https://www.kdnuggets.com/2022/09/datacentric-ai-tabular-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Generate Synthetic Tabular Dataset](https://www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Answering Questions with HuggingFace Pipelines and Streamlit](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fine-Tuning BERT for Tweets Classification with HuggingFace](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Simple to Implement End-to-End Project with HuggingFace](https://www.kdnuggets.com/a-simple-to-implement-end-to-end-project-with-huggingface)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

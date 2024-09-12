@@ -1,0 +1,485 @@
+- en: 2 Things You Need to Know about Reinforcement Learning – Computational Efficiency
+    and Sample Efficiency
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/04/2-things-reinforcement-learning.html](https://www.kdnuggets.com/2020/04/2-things-reinforcement-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The High Cost of Deep Learning
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Have you ever put on a sweater because the air conditioning was too cold? Forgotten
+    to turn off the lights in another room before heading to bed? Do you commute to
+    work more than 30 minutes every day just for the sake of “filling seats” at the
+    office, even though everything you do at work could be done via laptop from home?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/c9abbeb0f5af3bd45a17a2f8e048b315.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*In the counter-intuitive trade-offs between sample and computational efficiency
+    in Reinforcement Learning, choosing evolution strategies can be smarter than it
+    looks.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Modern life is full of inefficiencies small and large, but the energy costs
+    of our deep learning research/passion/enterprise are not so immediately obvious.
+    With a high-powered workstation tower at your desk, the stream of hot air blown
+    out by cooling fans is a constant reminder of the persistence and scale of energy
+    being used. But, if you’re sending jobs to a shared [cluster](https://www.exxactcorp.com/Deep-Learning-HPC-Clusters) down
+    the hall, it’s a little more difficult to intuitively appreciate the impact of
+    your design decisions on your electricity bill. If you use cloud computing for
+    big jobs, the energy use and pursuant consequences are even more abstracted away
+    from your immediate attention. But out-of-sight, out-of-mind is not a viable policy
+    for making decisions about projects that might, at the extreme end of the scale,
+    may represent a greater energy expenditure than the entire product cycle of an
+    automobile.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Energy Requirements for Training Deep Learning Models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Strubell et al.](https://arxiv.org/abs/1906.02243) brought attention to the
+    substantial energy requirements of training modern deep learning models in 2019\.
+    Although they focused mainly on a large type of natural language processing model
+    called a transformer, the considerations and conclusions discussed in their paper
+    should hold roughly true for training deep models for other tasks on similar hardware
+    for about the same amount of time.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: They estimated training the large variant of [Vaswani et al.’s](https://arxiv.org/abs/1706.03762)
+    transformer from scratch emits about 10% of the carbon dioxide equivalent emissions
+    as a flight from New York to San Francisco, based on some assumptions about the
+    energy mix published by major cloud providers, and a financial cost of just less
+    than 1000 USD (assuming cloud compute). For a business-defining project, that’s
+    probably a worthwhile expenditure, but when tuning and experimentation are taken
+    into account, the energy bill can easily be multiplied by a factor of 10 or more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Strubell and colleagues estimated that adding [Neural Architecture Search (NAS)](https://arxiv.org/abs/1901.11117) to
+    NLP model development comes with a price tag in the millions and a carbon footprint
+    to match. Although many of the largest models take advantage of dedicated hardware,
+    like Google’s TPUs, to train, and that may decrease the energy costs by [30 to
+    80X](https://cloud.google.com/blog/products/gcp/an-in-depth-look-at-googles-first-tensor-processing-unit-tpu) and
+    the price of training by a slightly lower factor, but that’s still a substantial
+    cost. In the realm of reinforcement learning that we are concerned with in this
+    article, the consequences of inefficient training can be a dead project, product,
+    or business.
+  prefs: []
+  type: TYPE_NORMAL
+- en: DeepMind Training Example Using Starcraft II
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Over a period of 44 days, [Deepmind trained](https://deepmind.com/blog/article/AlphaStar-Grandmaster-level-in-StarCraft-II-using-multi-agent-reinforcement-learning) agents
+    to achieve grandmaster status in all three playable races in the multiplayer real-time
+    strategy game Starcraft II, beating out 99.8% of all players in the Battle.net
+    rankings. OpenAI’s major game-mastery project for Dota 2 employed 10 real-time
+    months (about 800 petaflop/days) of training time to [defeat world champion, human
+    players](https://openai.com/blog/openai-five-defeats-dota-2-world-champions/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Due to the use of TPUs, virtual workers, etc., it’s not easy to accurately estimate
+    the energy costs for such headline-grabbing game players, but estimates fall in
+    the ballpark of a [12](https://medium.com/swlh/deepmind-achieved-starcraft-ii-grandmaster-level-but-at-what-cost-32891dd990e4) to [18
+    million USD](https://www.aitrends.com/business/openai-establishes-for-profit-company/) cloud
+    compute bill to train champion Alphastar and OpenAI Five, respectively. Clearly,
+    that’s out of reach for a typical academic or industry machine learning team.
+    There’s another danger arising from inefficient learning in the field of reinforcement
+    learning. An agent trying to learn a moderately complex task with bad exploration
+    and poor sample efficiency might never find a viable solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Predicting Protein Structure Using Reinforcement Learning (NL)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As an example, we can compare moderately complex reinforcement learning tasks
+    to the challenge of [predicting protein structure](https://blog.exxactcorp.com/deepminds-protein-folding-upset/) from
+    a sequence. Consider a small protein consisting of 100 amino acids linked together,
+    like a chain with 100 links. Each link is a specific one out of 21 unique link
+    variants, and the structure will take shape based on the angles between each link
+    in turn. Assuming a simplified 9 possible configurations for the bond angles between
+    each amino acid/chain link, it would take
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*999 = 29,512,665,430,652,752,148,753,480,226,197,736,314,359, 272,517,043,832,886,063,884,637,676,943,433,478,020,332,709,411,004,889'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: (that rounds to a 3 followed by 94 zeros) *
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: iterations to see each possible structure. That 100 link protein is roughly
+    analogous to a reinforcement learning environment with 100 time steps and 9 possible
+    actions at each step. *Talk about a combinatorial explosion. *
+  prefs: []
+  type: TYPE_NORMAL
+- en: Of course, a reinforcement learning agent doesn’t set out to randomly sample
+    all possible game states. Instead, an agent will generate learning trajectories
+    through some combination of making their best guess, directed exploration, and
+    random search. But that method of generating experience, typical of what we call
+    “on-policy” learning algorithms, can cut both ways. An agent that finds a local
+    optimum approach to a given reinforcement learning task might just stay there
+    forever, repeating the same mistakes and never solving the overall problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Historically reinforcement learning has benefitted from trying to formulate
+    the problem to resemble supervised learning wherever possible, such as sending
+    students hiking with three cameras strapped to their head. The left camera generates
+    an image with a training label to “turn right,” while the right camera is labeled
+    “go left” and the center camera “straight ahead.”
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the end, you would have a labeled dataset suitable for training a [quadcopter
+    to navigate forest trails](https://www.youtube.com/watch?v=umRdt3zGgpU). In the
+    sections below, we’ll discuss how similar concepts (e.g., imitation learning)
+    and model-based RL can vastly decrease the number of training examples necessary
+    for an agent to learn a task and why that is not always a good thing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Doing More with Less: Reinforcement Learning Agents Learn Best from Examples'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Deep reinforcement learning is a branch of machine learning inspired by fields
+    as diverse as animal and human cognition, optimal control, and deep learning.
+    There are obvious analogs to animal behavior experiments, where an animal (agent)
+    is put in a situation where it must learn to solve a problem to get a food treat
+    (reward). It only takes a few examples before an animal starts to associate a
+    series of actions with a reward, but deep reinforcement learning algorithms may
+    need to consider [10 to 100 thousand time steps](https://youtu.be/8EcdaCk9KaQ?t=736) per
+    epoch in order to make stable updates to the agent’s parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most reinforcement learning environments are formulated in steps. The environment
+    generates an observation, based upon which the agent decides an action that is
+    applied to the environment. The environment makes an update based on its current
+    state and the action chosen by the agent in what we refer to as a time step throughout
+    this article. The fewer time steps, or “samples,” needed to learn, the more efficient
+    the algorithm is.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An important aspect of most modern reinforcement learning algorithms is that
+    they are at their core, a form of trial-and-error. For an agent to learn without
+    employing explicit exploration techniques, [random activity should occasionally
+    do something right](https://youtu.be/8EcdaCk9KaQ?t=417), otherwise, an agent may
+    interact with an environment for (essentially) forever without ever seeing a positive
+    reward. In fact, proximal policy optimization, an algorithm that achieves competitive
+    performance in a range of benchmarks, [completely fails](https://arxiv.org/abs/1912.01588) in
+    OpenAI’s procedurally generated environment suite in hard exploration mode. We
+    can imagine how this is a problem for a wide range of relevant tasks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An agent learning to play a video game will probably experience a positive reward
+    with random actions (aka button-mashing), and that is one reason why the Atari
+    suite is a popular reinforcement learning benchmark. For more complex tasks like
+    figuring out how to tie a complex knot, it’s extremely unlikely that a robot will
+    come across a solution by accident. No matter how much random interaction is allowed,
+    arriving at the desired outcome is just too unlikely.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we’ve seen before in our discussion of [learning Rubik’s cube manipulation](https://blog.exxactcorp.com/timeline-review-of-openais-robotic-hand-project/),
+    there are [custom knot tying robots](https://www.youtube.com/watch?v=erNi07dH5pw) built
+    and programmed manually to create knots, but a reinforcement learning agent that
+    learns to do so from scratch remains out of reach. It goes without saying that
+    humans don’t learn knot-tying from scratch either. A toddler left alone in a room
+    full of untied sneakers will probably have a hard time discovering the standard [“bunny
+    rabbit” knot](https://www.youtube.com/watch?v=erNi07dH5pw) on their own. Like
+    the toddler in the thought experiment, reinforcement learning agents can learn
+    better from examples, even for complicated tasks like making knots.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Example of Teaching Machines to Tie Knots Using Reinforcement Learning & More
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: By combining autonomous learning of rope physics with human demonstrations,
+    researchers at Berkeley were able to tackle the problem of [teaching machines
+    to tie knots](https://arxiv.org/pdf/1703.02018.pdf). First, and this part may
+    be simulated, the robot interacts with a rope on a table surface mostly at random,
+    with the intent of learning a reasonable model of how their limited view of the
+    world works. Following the agent’s autonomous learning tenure, it is shown the
+    desired action of tying a simple knot. When all goes well, the agent is able to
+    mimic the desired action. A mix of autonomously learning a dynamics model of the
+    world (in the example above, a table surface with a rope) and human examples of
+    desired behavior is a powerful combination. Imitation learning and the related
+    inverse reinforcement learning represent some of the most sample-efficient approaches
+    to RL out there.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Knot-tying is a slightly esoteric task (and plainly outside the capabilities
+    of many learning algorithms), but we can compare the sample efficiency of different
+    learning algorithms applied to more standard tasks. Lecture 21, slide 39 from
+    Sergey Levine’s deep RL course at Berkeley ([pdf](http://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-21.pdf)),
+    gives us an idea of the relative sample efficiencies for various RL algorithms
+    by comparing published results from the HalfCheetah task. HalfCheetah is a 2D
+    locomotion task for a simulated robot vaguely resembling half a fast feline. Implementations
+    of HalfCheetah are available in both the Mujoco (requires paid license) and [Bullet](https://github.com/bulletphysics/bullet3/releases) (open
+    source, free) physics simulators.
+  prefs: []
+  type: TYPE_NORMAL
+- en: According to the slide, we expect evolution strategies to be the most sample
+    inefficient and model-based/inverse reinforcement learning to be the most efficient
+    with respect to the total number of time steps. The estimates from the slide are
+    reproduced below, along with specific examples from the literature.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e8e671c1f2d44a829211ecaf0c78129a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*The HalfCheetah robot simulated in PyBullet, where the objective is to move
+    forward as quickly as possible. Although rendered in 3D, movement is constrained
+    to a 2D plane. It’s like a cheetah, but half.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **Method** | *Estimated steps from [CS 285 lec 21](http://rail.eecs.berkeley.edu/deeprlcourse/)*
+    | *Example time steps to solve HalfCheetah* |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **Evolution strategies** | ~1,000,000,000 | ~3,000,000 [(ES, Salimans et
+    al. 2016)](https://arxiv.org/abs/1703.03864) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **Fully online actor-critic methods** | ~100,000,000 | ~100,000,000[ (Trust-A3C,
+    Wang et al. 2016)](https://arxiv.org/abs/1611.01224) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **Policy gradients** | ~10,000,000 | ~1,000,000 [(PPO, Schulman et al. 2017)](https://arxiv.org/abs/1707.06347)
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **Value function (off-policy) methods** | ~1,000,000 | ~1,500,000 [(Gu et
+    al. 2018)](https://arxiv.org/abs/1603.00748) |'
+  prefs: []
+  type: TYPE_TB
+- en: '| (**model-based)** | ~30,000 | ~400,000 [(PE-TS, Kurtland Chua et al. 2018)](https://arxiv.org/abs/1805.12114)
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '*Table 1: Relative sample efficiency of various RL algorithm families.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sample efficiency varies widely between implementations within the same class
+    of algorithm, and I found that the estimates from the slide can be somewhat exaggerated
+    with respect to specific examples in the literature. In particular, OpenAI’s [evolutionary
+    strategies](https://arxiv.org/abs/1703.03864) paper actually reported a better
+    sample efficiency than TRPO, a policy gradient method that they used as a comparison.
+    Their reported solution for HalfCheetah took 3 million timesteps, a far cry from
+    Levine’s estimate of 1 billion.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the other hand, a related [paper published by Uber AI labs](https://arxiv.org/abs/1712.06567) that
+    applied genetic algorithms to Atari games found sample efficiencies that were
+    around the 1 billion time steps mark, about 5 times greater than the value-function
+    algorithm they compared with and in line with Levine’s estimates from the course.
+  prefs: []
+  type: TYPE_NORMAL
+- en: More is Less in Some Cases – Learning from Evolution
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the example discussed above, evolutionary strategies are among the most sample-inefficient
+    methods available, typically requiring at least 10 times more steps to learn a
+    given task than other approaches. On the other end of the spectrum, model-based
+    and imitation methods require the least amount of time steps to learn the same
+    task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: At first glance, it appears to be an open and shut case against the utility
+    of evolution-based methods, but a funny thing happens when you optimize for compute
+    instead of sample efficiency. Due to the decreased overhead of running evolutionary
+    strategies, which don’t even require a backpropagation pass, they can actually
+    require [less compute](https://youtu.be/tzieElmtAjs?list=PLkFD6_40KJIwhWJpGazJ9VSj9CFMkb79A&t=3949).
+    They are also inherently parallelizable. Because each episode or individual agent
+    in a population does not depend on the results of other agents/episodes, the learning
+    algorithm becomes [embarrassingly parallel](https://en.wikipedia.org/wiki/Embarrassingly_parallel).
+    With a fast simulator, it may take substantially less time (as measured by the
+    clock on your wall) to solve a given problem.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/83f38ef1d2b6751c657e82a87a10375a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*The *InvertedPendulumSwingup* task start and goal state. The green capsule
+    slides along the yellow rod, with the goal of bringing the unactuated red pole
+    to balance upright.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To give a rough comparison of computational efficiency, I ran several open source
+    implementations of various learning algorithms on a cart-pole swing-up task InvertedPendulumSwingupBulletEnv-v0 from [PyBullet](https://pybullet.org/wordpress/).
+    Code for the representative evolutionary algorithm, covariance matrix adaptation,
+    is [available on Github](http://bit.ly/exxact_cma), while the other algorithms
+    are all part of OpenAI’s [Spinning Up in Deep RL](https://spinningup.openai.com/) resource.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The policy architectures were all kept the same: a feed-forward dense neural
+    network with two hidden layers of 16 neurons each. I ran all algorithms on a single
+    core of a modest Intel i5 2.4 GHz CPU, so the results can only really be compared
+    to each other, and the differences in training time are without any parallelization
+    speedup. It’s worth noting that OpenAI managed to train the MujoCo humanoid in [10
+    minutes on 1,440 workers ](https://openai.com/blog/evolution-strategies/)with
+    evolution strategies, so parallelization speedups are real and lucrative if you
+    have the CPU cores for it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| *Method family* | *Algorithm* | *Time steps to solve* | *Time to solve (seconds)*
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **Evolution strategies** | [Covariance Matrix Adaptation](https://en.wikipedia.org/wiki/CMA-ES)[[code](http://bit.ly/exxact_cma)]
+    | ~4,100,000 | ~500 s |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **Policy gradients** | [Proximal Policy Optimization](https://spinningup.openai.com/en/latest/algorithms/ppo.html)[[code](https://github.com/openai/spinningup)]
+    | ~1,800,000 | ~2000 s |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **Fully online actor-critic methods** | [Soft Actor-Critic](https://spinningup.openai.com/en/latest/algorithms/sac.html)[[code](https://github.com/openai/spinningup)]
+    | ~1,500,000 | ~17,000 s |'
+  prefs: []
+  type: TYPE_TB
+- en: '| **Value function (off-policy) methods** | [Twin-Delayed DDPG](https://spinningup.openai.com/en/latest/algorithms/td3.html)[[code](https://github.com/openai/spinningup)]
+    | ~2,000,000 | ~17,500 s |'
+  prefs: []
+  type: TYPE_TB
+- en: '*Table 2: Comparing different learning methods wall-clock time and sample efficiency. *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The table above gives a good idea of the relative relationship between the required
+    resources for different methods. The most sample efficient algorithm (soft actor-critic)
+    required about half as many steps but consumed 34 times more CPU time. Twin-delayed
+    DDPG (aka TD3) and soft actor-critic were less stable than the other methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We didn’t look at model-based RL algorithms when running experiments for Table
+    2 due to a lack of open source tools. Research progress in model-based RL suffers
+    from closed source development and a lack of standard environments, but [Wang
+    et al.](https://arxiv.org/abs/1907.02057) made a heroic effort to provide benchmarks
+    for many model-based algorithms. They found that most model-based methods were
+    able to solve a task they called Pendulum, very similar to the task reported in
+    the table above, in about 25,000 steps. Compared to policy gradient methods, training
+    (wall-clock) time was about 100 to 200 times longer for most model-based methods
+    they investigated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Although deep learning still seems to favor “fancy” approaches to reinforcement
+    learning, evolution-based methods have been making a comeback. OpenAI’s “[Evolution
+    Strategies as a Scalable Alternative to Reinforcement Learning](https://openai.com/blog/evolution-strategies/)”
+    from 2016 was joined in 2017 by a large-scale demonstration of genetic algorithms [learning
+    to play Atari games](https://eng.uber.com/deep-neuroevolution). Without all the
+    fancy mathematical trappings surrounding advanced RL algorithms, evolutionary
+    algorithms are conceptually straightforward: generate a population and set the
+    individual to some task, keep the best performers to seed the next generation,
+    and repeat until a performance threshold is met. Due to the somewhat simple concepts
+    behind them and their inherent parallelization potential, you may find that evolutionary
+    algorithms will yield substantial savings in what is arguably your most scarce
+    resource: developer time.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There Are Some Caveats to Know About Compute & Sample Efficiency
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/0247a876640cfeb39f5186b8fbf18dde.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Direct comparisons of compute and sample efficiency between different RL algorithms
+    on a single task isn’t entirely fair due to the many variables which can differ
+    between implementations. One algorithm may converge earlier but never reach the
+    same score as a different, slower algorithm, and in general, you can bet that
+    in any published RL work, the authors spent a lot more effort optimizing and experimenting
+    with their new method than any of the comparison algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, the examples we discussed above give us a good idea of what to expect
+    from reinforcement learning agents. Model-based methods, while promising, are
+    not mature compared to other options and may not be worth the additional effort
+    for most tasks. Perhaps surprisingly, evolutionary algorithms perform well on
+    a variety of tasks and shouldn’t be ignored because of the perception they are
+    “old-fashioned” or “too simple.” When considering the value of all available resources
+    and their consumption by available methods, evolutionary algorithms may indeed
+    offer the best return.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://blog.exxactcorp.com/2-things-you-need-to-know-about-reinforcement-learning/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[We Created a Lazy AI](https://www.kdnuggets.com/2020/01/created-lazy-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Reinforcement-Learning Methods that Allow AlphaStar to Outcompete Almost
+    All Human Players at StarCraft II](https://www.kdnuggets.com/2019/11/reinforcement-learning-methods-alphastar-outcompete-human-players-starcraft.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three Things to Know About Reinforcement Learning](https://www.kdnuggets.com/2019/10/mathworks-reinforcement-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Calculate Computational Efficiency of Deep Learning Models with…](https://www.kdnuggets.com/2023/06/calculate-computational-efficiency-deep-learning-models-flops-macs.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Things You Need To Know About Data Management And Why It Matters…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Things You Need to Know When Building LLM Applications](https://www.kdnuggets.com/2023/08/5-things-need-know-building-llm-applications.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Things You Didn''t Know You Could do with a Low Code Tool](https://www.kdnuggets.com/2022/09/7-things-didnt-know-could-low-code-tool.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, April 13: Python Libraries Data Scientists Should…](https://www.kdnuggets.com/2022/n15.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Things You Should Know When Scaling Your Web Data-Driven Product](https://www.kdnuggets.com/2023/08/things-know-scaling-web-datadriven-product.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

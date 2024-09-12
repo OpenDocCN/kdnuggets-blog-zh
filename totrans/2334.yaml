@@ -1,0 +1,499 @@
+- en: How LinkedIn Uses Machine Learning To Rank Your Feed
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/11/linkedin-uses-machine-learning-rank-feed.html](https://www.kdnuggets.com/2022/11/linkedin-uses-machine-learning-rank-feed.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: LinkedIn feed is the starting point for millions of users on this website and
+    it builds the first impression for the users, which, as you know, will last. Having
+    an interesting personalized feed for each user will deliver LinkedIn's most important
+    core value which is to keep the users connected to their network and their activities
+    and build professional identity and network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: LinkedIn’s Personalized Feed offers users the convenience of being able to see
+    the updates from their connections quickly, efficiently, and accurately. In addition
+    to that, it filters out your spammy, unprofessional, and irrelevant content to
+    keep you engaged. To do this, LinkedIn filters your newsfeed in real-time by applying
+    a set of rules to determine what type of content belongs based on a series of
+    actionable indicators & predictive signals. This solution is powered by Machine
+    Learning and Deep Learning algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In this article, we will cover how LinkedIn uses machine learning to feed the
+    user''s rank. We will follow the workflow of a conventional machine learning project
+    as covered in these two articles before:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[End-to-End Machine Learning Workflow [Part 1]](https://medium.com/mlearning-ai/end-to-end-machine-learning-workflow-part-1-b5aa2e3d30e2)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[End-to-End Machine Learning Workflow [Part 2]](https://medium.com/mlearning-ai/end-to-end-machine-learning-workflow-part-2-e7b6d3fb1d53)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The machine learning project workflow starts with the business problem statement
+    and defining the constraints. Then it is followed by data collection and data
+    preparation. Then modeling part, and finally, the deployment and putting the model
+    into production. These steps will be discussed in the context of ranking the LinkedIn
+    feed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![How LinkedIn Uses Machine Learning To Rank Your Feed](../Images/d6750473ec120950125827d456e005ec.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: LinkedIn / Photo by [Alexander Shatov](https://unsplash.com/@alexbemore?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Clarify Bussines Problems & Constraints
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 1.1\. Problem Statement
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Designing a personalized LinkedIn feed to maximize the long-term engagement
+    of the user. Since the LinkedIn feed should provide beneficial professional content
+    for each user to increase his long-term engagement. Therefore it is important
+    to develop models that eliminate low-quality content and leave only high-quality
+    professional content. However, it is important, not overzealous about filtering
+    content from the feed, or else it will end up with a lot of false positives. Therefore
+    we should aim for high precision and recall for the classification models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can measure user engagement by measuring the click probability or known
+    as the **ClickThroughRate **(CTR). On the LinkedIn feed, there are different activities,
+    and each activity has a different CTR; this should be taken into consideration
+    when collecting data and training the models. There are five main activity types:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Building connections:** Member connects or follows another member or company,
+    or page.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Informational: **Sharing posts, articles, or pictures'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Profile-based activity: **Activities related to the profile, such as changing
+    the profile picture, adding a new experience, changing the profile header, etc.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Opinion-specific activity: **Activities that are related to member opinions
+    such as likes or comments or reposting a certain post, article, or picture.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Site-specific activity**: Activities that are specific to LinkedIn such as
+    endorsement and applying for jobs.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 1.2\. Evaluation Metrics Design
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'There are two main types of metrics: offline and online evaluation metrics.
+    We use offline metrics to evaluate our model during the training and modeling
+    phase. The next step is to move to a staging/sandbox environment to test for a
+    small percentage of the real traffic. In this step, the online metrics are used
+    to evaluate the impact of the model on the business metrics. If the revenue-related
+    business metrics show a consistent improvement, it will be safe to expose the
+    model to a larger percentage of the real traffic.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Offline Metrics
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Maximizing CTR can be formalized as training a supervised binary classifier
+    model. Therefore for the offline metrics, the normalized cross entropy can be
+    used since it helps the model to be less sensitive to background CTR:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![How LinkedIn Uses Machine Learning To Rank Your Feed](../Images/08da4321ad35887c52d4e6ddfc4cde0f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Online Metrics
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Since the online metrics should reflect the level of engagement of users when
+    the model is deployed, we can use the conversion rate, which is the ratio of clicks
+    per feed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1.3\. Technical Requirements
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The technical requirements will be divided into two main categories: during **training **and
+    during **inference**. The technical requirements during **training **are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Large training set**: One of the main requirements during training is to
+    be able to handle the large training dataset. This requires distributed training
+    settings.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Data shift**: In social networks, it is very common to have a data distribution
+    shift from offline training data to online data. A possible solution to this problem
+    is to retrain the models incrementally multiple times per day.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The technical requirements during inference are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Scalability:** To be able to serve customized user feeds for more than 300
+    million users.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Latency:** It is important to have short latency to be able to provide the
+    users with the ranked feed in less than 250 ms. Since multiple pipelines need
+    to pull data from numerous sources before feeding activities into the ranking
+    models, all these steps need to be done within 200 ms. Therefore the'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Data freshness**: It is important that the models be aware of what the user
+    had already seen, else the feeds will show repetitive content, which will decrease
+    user engagement. Therefore the data needs to run really fast.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 1.4\. Technical challenges
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'There are four main technical challenges:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Scalability:** One of the main technical challenges is the **scalability **of
+    the system. Since the number of LinkedIn users that need to be served is extremely
+    large, around 300 million users. Every user, on average, sees 40 activities per
+    visit, and each user visits 10 times per month on average. Therefore we have around
+    120 billion observations or samples.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Storage:** Another technical challenge is the huge data size. Assume that
+    the click-through rate is 1% each month. Therefore the collected positive data
+    will be about 1 billion data points, and the negative labels will be 110 billion
+    negatives. We can assume that for every data point, there are 500 features, and
+    for simplicity of calculation, we can assume every row of features will need 500
+    bytes to be stored. Therefore for one month, there will be 120 billion rows, each
+    of 500 bytes therefore, the total size will be 60 Terabytes. Therefore we will
+    have to only keep the data of the last six months or the last year in the data
+    lake and archive the rest in cold storage.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Personalization:** Another technical challenge will be **personalization **since
+    you will have different users to serve with different interests so you need to
+    make sure that the models are personalized for each user.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Content Quality Assessment**: Since there is no perfect classifier. Therefore
+    some of the content will fall into a gray zone where even two humans can have
+    difficulty agreeing on whether or not it’s appropriate content to show to the
+    users. Therefore it became important to combine man+machine solutions for content
+    quality assessment.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 2\. Data Collection
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Before training the machine learning classifier, we first need to collect labeled
+    data so that the model can be trained and evaluated. Data collection is a critical
+    step in data science projects as we need to collect representative data of the
+    problem we are trying to solve and to be similar to what is expected to be seen
+    when the model is put into production. In this case study, the goal is to collect
+    a lot of data across different types of posts and content, as mentioned in subsection
+    1.1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The labeled data we would like to collect, in our case, will click or not click
+    labeled data from the user''s feeds. There are three main approaches to do collect
+    click and no-click data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Rank user’s feed chronically: The data will be collected from the user feed,
+    which will be ranked chronically. This approach can be used to collect the data.
+    However, it will be based on the user''s attention will be attracted to the first
+    few feeds. Also, this approach will induce a data sparsity problem as some activities,
+    such as job changes, rarely happen compared to other activities, so they will
+    be underrepresented in your data.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Random serving: The second approach will be randomly serving the feed and collecting
+    click and no click data. This approach is not preferred as it will lead to a bad
+    user experience and non-representative data, and also it does not help with the
+    data sparsity problem.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Use an algorithm to rank the feed: The last approach we can use is to use an
+    algorithm to rank the user''s feed and then use permutation to randomly shuffle
+    the top feeds. This will provides some randomness to the feed and will help to
+    collect data from different activities.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 3\. Data Preprocessing & Feature Engineering
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The third step will be preparing the data for the modeling step. This step includes
+    data cleaning, data preprocessing, and feature engineering. Data cleaning will
+    deal with missing data, outliers, and noisy text data. Data preprocessing will
+    include standardization or normalization, handling text data, dealing with imbalanced
+    data, and other preprocessing techniques depending on the data. Feature Engineering
+    will include feature selection and dimensionality reduction. This step mainly
+    depends on the data exploration step as you will gain more understanding and will
+    have better intuition about the data and how to proceed in this step.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The features that can be extracted from the data are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**User profile features: **These features include job title, user industry,
+    demographic, education, previous experience, etc. These features are categorical
+    features, so they will have to be converted into numerical as most of the models
+    cannot handle categorical features. For higher cardinality, we can use feature
+    embeddings, and for lower cardinality, we can use one hot encoding.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Connection strength features: **These features represent the similarities
+    between users. We can use embeddings for users and measure the distance between
+    them to calculate the similarity.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Age of activity features: **These features represent the age of each activity.
+    This can be handled as a continuous feature or can be binned depending on the
+    sensitivity of the click target.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Activity features: **These features represent the type of activity. Such
+    as hashtags, media, posts, and so on. These features will also be categorical,
+    and also as before, they have to be converted into numerical using feature embeddings
+    or one hot encoding depending on the level of cardinality.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Affinity features: **These features represent the similarity between users
+    and activities.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Opinion features: **These features represent the user''s likes/comments on
+    posts, articles, pictures, job changes,s and other activities.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Since the CTR is usually very small (less than 1%) it will result in an imbalanced
+    dataset. Therefore a critical step in the data preprocessing phase is to make
+    sure that the data is balanced. Therefore we will have to resample the data to
+    increase the under-represented class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**However, this should be done only to the training set and not to the validation
+    and testing set, as they should represent the data expected to be seen in production.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. Modeling
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Now the data is ready for the modeling part, it is time to select and train
+    the model. As mentioned, this is a classification problem, with the target value
+    in this classification problem being the click. We can use the Logistic Regression
+    model for this classification task. Since the data is very large, then we can
+    use distributed training using logistic regression in Spark or using the Method
+    of Multipliers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can also use deep learning models in distributed settings. In which the fully
+    connected layers will be used with the sigmoid activation function applied to
+    the final layers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For evaluation, we can follow two approaches the first is the conventional
+    splitting of the data into training and validation sets. Another approach to avoid
+    biased offline evaluation is to use replayed evaluation as the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Assume we have training data up to time point T. The validation data will start
+    from T+1, and we will order their ranking using the trained model.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Then the output of the model is compared with the actual click, and the number
+    of matched predicted clicks is calculated.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: There are a lot of hyperparameters to be optimized one of them is the size of
+    training data and the frequency of retaining the model. To keep the model updated,
+    we can fine-tune the existing deep learning model with training data of the recent
+    six months, for example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5\. High-Level Design
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We can summarize the whole process of the feed ranking with this high-level
+    design shown in figure 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let''s see how the flow of the feed ranking process occurs, as shown in the
+    figure below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When the user visits the LinkedIn homepage, requests are sent to the **Application
+    server **for feeds.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**The Application server **sends feed requests to the **Feed Service.**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Feed Service **then gets the latest model from the **model store **and the
+    right features from the **Feature Store.**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Feature Store: **Feature store, stores the feature values. During inference,
+    there should be low latency to access features before scoring.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Feed Service **receives all the feeds from the **ItemStore.**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Item Store: **Item store stores all activities generated by users. In addition
+    to that, it also stores the models for different users. Since it is important
+    to maintain a consistent user experience by providing the same feed rank method
+    for each user. **ItemStore **provides the right model for the right users.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Feed Service **will then provide the model with the features to get predictions.
+    The feed service here represents both the retrieval and ranking service for better
+    visualization.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The model will return the feeds ranked by CTR likelihood which is then returned
+    to the **application server**.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![How LinkedIn Uses Machine Learning To Rank Your Feed](../Images/b07f927355f906a92f7f123f78f1dcf2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 1\. LinkedIn feed ranking high-level design.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To scale the feed ranking system, we can put a **Load Balancer **in front of
+    the **Application Servers**. This will balance and distribute the load among the
+    several application servers in the system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![How LinkedIn Uses Machine Learning To Rank Your Feed](../Images/ad8ddcaa47b7b4c3ae2e1a64cbbfdfa7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Figure 2\. The scaled LinkedIn feed ranking high-level design.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 6\. References
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[Strategies for Keeping the LinkedIn Feed Relevant](https://engineering.linkedin.com/blog/2017/03/strategies-for-keeping-the-linkedin-feed-relevant)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Machine Learning Design Interview
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**[Youssef Hosni](https://www.linkedin.com/in/youssef-hosni-b2960b135/)** is
+    Co-Founder at Elfehres, Ph.D. Researcher - Computer vision, and Data Scientist'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://pub.towardsai.net/how-linkedin-uses-machine-learning-to-rank-your-feed-95dac90f11c9).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, November 16: How LinkedIn Uses Machine Learning •…](https://www.kdnuggets.com/2022/n45.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Programming Languages and Their Uses](https://www.kdnuggets.com/2021/05/top-programming-languages.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n04, Jan 26: The High Paying Side Hustles…](https://www.kdnuggets.com/2022/n04.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 Interesting Uses of Python''s Context Managers](https://www.kdnuggets.com/3-interesting-uses-of-python-context-managers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Sky''s the Limit: Learn how JetBlue uses Monte Carlo and Snowflake…](https://www.kdnuggets.com/2022/12/monte-carlo-jetblue-snowflake-build-trust-improve-model-accuracy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Increase Your Callback Rate With A LinkedIn Profile](https://www.kdnuggets.com/increase-your-callback-rate-with-a-linkedin-profile)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

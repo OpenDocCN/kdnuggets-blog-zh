@@ -1,0 +1,289 @@
+- en: How to use Machine Learning for Anomaly Detection and Conditional Monitoring
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/12/machine-learning-anomaly-detection-conditional-monitoring.html](https://www.kdnuggets.com/2020/12/machine-learning-anomaly-detection-conditional-monitoring.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Michael Garbade](https://www.linkedin.com/in/garbade), CEO & Founder,
+    Education Ecosystem**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Key Takeaways**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The main goal of Anomaly Detection analysis is to identify the observations
+    that do not adhere to general patterns considered as normal behavior.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Anomaly Detection could be useful in understanding data problems.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: There are domains where anomaly detection methods are quite effective.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Modern ML tools include Isolation Forests and other similar methods, but you
+    need to understand the basic concept for successful implementation
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Isolation Forests method is unsupervised outlier detection method with interpretable
+    results.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Introduction**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before doing any data analysis, the need to find out any outliers in a dataset
+    arises. These outliers are known as anomalies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article explains the goals of anomaly detection and outlines the approaches
+    used to solve specific use cases for anomaly detection and condition monitoring.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**What is Anomaly Detection? Practical use cases.**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The main goal of Anomaly Detection analysis is to identify the observations
+    that do not adhere to general patterns considered as normal behavior. For instance,
+    *Fig. 1* shows anomalies in the classification and regression problems. We can
+    see that some values deviate from most examples.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f2730b87f308c3cbf3fb6177e8f0a588.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Fig. 1\. Outliers in classification (a, left) and regression (b, right)
+    problems***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are two directions in data analysis that search for anomalies: outlier
+    detection and novelty detection. So, the outlier is the observation that differs
+    from other data points in the train dataset. The novelty data point also differs
+    from other observations in the dataset, but unlike outliers, novelty points appear
+    in the test dataset and usually absent in the train dataset. Hence, there are
+    outliers in Fig. 1.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The most common reason for the outliers are;
+  prefs: []
+  type: TYPE_NORMAL
+- en: data errors (measurement inaccuracies, rounding, incorrect writing, etc.);
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: noise data points;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: hidden patterns in the dataset (fraud or attack requests).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: So outlier processing depends on the nature of the data and the domain. Noise
+    data points should be filtered (noise removal); data errors should be corrected.
+    Some applications focus on anomaly selection, and we consider some applications
+    further.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are various business use cases where anomaly detection is useful. For
+    instance, Intrusion Detection Systems (IDS) are based on anomaly detection. Figure
+    2 shows the observed distribution of the NSL-KDD dataset that is a state of the
+    art dataset for IDS. We can see that most observations are the normal requests,
+    and Probe or U2R are some outliers. Naturally, the majority of requests in the
+    computer system are normal, and only some of them are attack attempts.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/835e18c19e149416f7e915d898ab9039.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Fig. 2\. IDS observations distribution***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Credit Card Fraud Detection Systems (CCFDS) is another use case for anomaly
+    detection. For example, the open dataset from kaggle.com (https://www.kaggle.com/mlg-ulb/creditcardfraud)
+    contains transactions made by credit cards in September 2013 by European cardholders.
+    This dataset presents transactions that occurred in two days. There are 492 frauds
+    out of 284,807 transactions. The dataset is highly unbalanced. The positive class
+    (frauds) account for 0.172% of all transactions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are two approaches to anomaly detection:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Supervised methods;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Unsupervised methods.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In supervised anomaly detection methods, the dataset has labels for normal and
+    anomaly observations or data points. IDS and CCFDS datasets are appropriate for
+    supervised methods. Standard machine learning methods are used in these use cases.
+    Supervised anomaly detection is a sort of binary classification problem. It should
+    be noted that the datasets for anomaly detection problems are quite imbalanced.
+    So it's important to use some data augmentation procedure (k-nearest neighbors
+    algorithm, ADASYN, SMOTE, random sampling, etc.) before using supervised classification
+    methods. Jordan Sweeney shows how to use the k-nearest algorithm in a project
+    on Education Ecosystem, [Travelling Salesman - Nearest Neighbour](https://www.education-ecosystem.com/jsweeney91/2oPDm-travelling-salesman-nearest-neighbour).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unsupervised anomaly detection is useful when there is no information about
+    anomalies and related patterns. Isolation Forests, OneClassSVM, or k-means methods
+    are used in this case. The main idea here is to divide all observations into several
+    clusters and to analyze the structure and size of these clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are different open datasets for outlier detection methods testing, for
+    instance, Outlier Detection DataSets ([http://odds.cs.stonybrook.edu/](http://odds.cs.stonybrook.edu/)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Unsupervised Anomaly Detection using Isolation Forests**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Isolation Forests method is based on the random implementation of the Decision
+    Trees and other results ensemble. Each Decision Tree is built until the train
+    dataset is exhausted. A random feature and a random splitting are selected to
+    build the new branch in the Decision Tree. The algorithm separates normal points
+    from outliers by the mean value of the depths of the Decision Tree leaves.  This
+    method is implemented in the scikit-learn library ([https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to illustrate anomaly detection methods, let's consider some toy datasets
+    with outliers that have been shown in Fig. 3\. Points with class 1 are outliers.
+    Column' class' isn't used in the analysis but is present just for illustration.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/30caf3b01255575047765b447f3a9b92.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Fig 3\. Dataset sample and scatterplot***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Lets apply Isolation Forests for this toy example with further testing on some
+    toy test dataset. The results are shown in *Fig. 4.* The full code is present
+    here: https://www.kaggle.com/avk256/anomaly-detection.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ef29303642b6bd78cb8f940a13b47881.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Fig. 4\. Datasets and implementation of the Isolation Forests method***'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It should be noted that ‘y_train’ and ‘y_test’ columns are not in the method
+    fitting. So, the Isolation Forests method uses only data points and determines
+    outliers. Hence, ‘X_test’ dataset consists of two normal points and two outliers
+    and after the prediction method we obtain exactly equal distribution into two
+    clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Conclusion**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'In a nutshell, anomaly detection methods could be used in branch applications,
+    e.g., data cleaning from the noise data points and observations mistakes. On the
+    other hand, anomaly detection methods could be helpful in business applications
+    such as Intrusion Detection or Credit Card Fraud Detection Systems. Andrey demonstrates
+    in his project, [Machine Learning Model: Python Sklearn & Keras](https://www.education-ecosystem.com/andreybu/REaxr-machine-learning-model-python-sklearn-kera/oPGdP-machine-learning-model-python-sklearn-kera/)
+    on Education Ecosystem, that the Isolation Forests method is one of the simplest
+    and effective for unsupervised anomaly detection. In addition, this method is
+    implemented in the state-of-the-art library Scikit-learn.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Michael Garbade](https://www.linkedin.com/in/garbade)** is CEO & Founder,
+    Education Ecosystem Michael is a forward-thinking, global, serial entrepreneur
+    with expertise in software development, backend architecture, data science, artificial
+    intelligence, fintech, blockchain, and venture capital. He combines experience
+    with tech, data, finance and business development with an impressive educational
+    background and a talent for identifying new business models. As co-founder and
+    CEO of Education Ecosystem, his mission is to build the world’s largest decentralized
+    learning ecosystem for professional developers and college students. He writes
+    subject matter expert technical and business articles in leading blogs like Opensource.com,
+    Dzone.com, Cybrary, Businessinsider, Entrepreneur.com, TechinAsia, Coindesk and
+    Cointelegraph.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Anomaly Detection, A Key Task for AI and Machine Learning, Explained](/2019/10/anomaly-detection-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introducing MIDAS: A New Baseline for Anomaly Detection in Graphs](/2020/04/midas-new-baseline-anomaly-detection-graphs.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Anomaly Detection](/2017/04/datascience-introduction-anomaly-detection.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Anomaly Detection in BigQuery: Uncover Hidden Insights and Drive Action](https://www.kdnuggets.com/anomaly-detection-in-bigquery-uncover-hidden-insights-and-drive-action)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Beginner''s Guide to Anomaly Detection Techniques in Data Science](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fighting AI with AI Fraud Monitoring for Deepfake Applications](https://www.kdnuggets.com/2023/05/fighting-ai-ai-fraud-monitoring-deepfake-applications.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Use Conditional Formatting in Pandas to Enhance Data Visualization](https://www.kdnuggets.com/how-to-use-conditional-formatting-in-pandas-to-enhance-data-visualization)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Five Ways to do Conditional Filtering in Pandas](https://www.kdnuggets.com/2022/12/five-ways-conditional-filtering-pandas.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Perform Motion Detection Using Python](https://www.kdnuggets.com/2022/08/perform-motion-detection-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

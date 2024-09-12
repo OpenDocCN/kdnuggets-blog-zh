@@ -1,0 +1,265 @@
+- en: Building Surveillance System Using USB Camera and Wireless-Connected Raspberry
+    Pi
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/11/building-surveillance-system-usb-camera-wireless-connected-raspberry-pi.html](https://www.kdnuggets.com/2018/11/building-surveillance-system-usb-camera-wireless-connected-raspberry-pi.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/11/building-surveillance-system-usb-camera-wireless-connected-raspberry-pi.html?page=2#comments)![Image](../Images/7ecb460338fdae3902be4aab8d9b2b90.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Surveillance System Using Raspberry Pi Connected to a USB Camera and a Circuit
+    that Lights Led When Change Occurs
+  prefs: []
+  type: TYPE_NORMAL
+- en: This tutorial discusses how to build a surveillance system using a USB camera
+    plugged into Raspberry Pi (RPi) which is connected a PC using its wireless interface. PyGame
+    is used for accessing the camera and capturing images which are stored inside
+    the SD card of RPi. A background model is created for the scene to discover the
+    changes from the default state. A simple circuit, connected to the GPIO pins,
+    lights a led as an indication of such states.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The tutorial has the following steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Connecting RPi to a PC using the wireless interface.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Connecting a USB camera to RPi.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Capturing images using **PyGame**.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Building the background model.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Detecting changes to the background model.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Building a simple circuit that lights a led when a change occurs.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'The tutorial assumes that the reader has a PC connected to a wireless network
+    and RPi connected to a router using the Ethernet interface. For doing such work,
+    please read the tutorial titled ”**Building an Image Classifier Running on Raspberry
+    Pi**” which is available at this link:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://www.linkedin.com/pulse/building-image-classifier-running-raspberry-pi-ahmed-gad](https://www.linkedin.com/pulse/building-image-classifier-running-raspberry-pi-ahmed-gad)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You should be able to know the IP address of the devices using a software such
+    as “Advanced IP Scanner” and familiar with establishing the SSH connection using
+    the MobaXterm software. After that, then we can start discussing each of the above
+    steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Connecting RPi to a PC using the Wireless Interface
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the previous tutorial “**Building an Image Classifier Running on Raspberry
+    Pi**”, we built a network with three devices connected which are RPi, a router,
+    and a PC. RPI was connected to the router using the Ethernet interface but the
+    PC is connected to the router using the wireless interface. In this tutorial,
+    we will modify such network by using the wireless interface of the RPi to connect
+    to the router. This makes the network completely connected wirelessly and avoids
+    the restrictions of the wires.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The wireless interface of RPi needs configuration before being able to use it.
+    For such reason, we will still use the connection established using the Ethernet
+    interface for configuring the wireless interface. Using DHCP in the router, the
+    RPi Ethernet interface will be given an IPv4 address. Such an address can then
+    be used for establishing a secure shell (SSH) connection. You can refer to the
+    previous tutorial for more details about establishing the connection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Inside the SSH session created using MobaXterm, we can start configuring the
+    wireless interface using either terminal commands or using the GUI of the Raspbian
+    OS. Both ways are simple.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Using terminal commands, we will start by scanning the available wireless networks
+    to find their service set identifiers (SSIDs). This is done using the following
+    command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The first few lines of the output of this command are given in the following
+    figure. The SSID of the target wireless network is “**TEData_864A**”. Note that
+    you do not have to use a router for connecting the PC to the RPi. Using a smartphone,
+    we can create an access point for connecting them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e00bb22c99f7e98a0bf514ad0d8043d7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'After knowing the SSID of the target network, we can use it for configuring
+    the wireless interface. Such a configuration exists inside a file which can be
+    accessed using the following command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The file will be opened inside the terminal. Using the down arrow, go back
+    to the end of the file to write the network configuration. This is by writing
+    the SSID and the password of the network as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: After that, press CTRL+X to exit the file followed by Y to save the changes.
+    For my case, I configured 2 networks and thus the file content has two configured
+    networks according to the next figure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8c8f3a5bd05976638e6091c288008624.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'You might need to change the status of the wireless interface from up to down
+    them up again to apply such configurations. This is done using these 2 commands:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: To check whether the wireless interface is configured correctly, enter the “**ifconfig**”
+    command to retrieve the configuration of the interface.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: According to the output of this command, the wireless interface is given an
+    IPv4 address of 192.168.1.8\. This is how to configure the wireless connection
+    using terminal commands.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/2f9a1b84ba603eb859c7e2f63456efad.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can do the same using the GUI of the OS which can be accessed using the **startlxde**terminal
+    command. After the GUI opens, there will be an icon for the network connections
+    located inside the right part of the OS bar. Clicking on it will open a menu of
+    the available wireless networks according to the next figure. Clicking any of
+    the items will open a window that allows you to enter the password. By entering
+    the password for the network with SSID “**TEData_864A**” and entering the “**ifconfig**”
+    command, the result will be identical to that shown in the previous figure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9887a4656096aa509325b8a94b45c7c2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: At this point, we have both the PC and the RPi connected wirelessly to the router.
+    The current network is illustrated in the following figure. We can now remove
+    the Ethernet connection and just use the wireless one between RPi and the router.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/aabcf9e426da78e352c0080ade64f188.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 2\. Connecting a USB Camera to RPi
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'RPi has its own camera module that can be used. Rather than buying this module,
+    which might be costly to many, we can just use a USB camera which is might be
+    available everywhere at less cost. The configuration of such a camera is very
+    simple. Just connect the USB camera to one of the USB ports of the RPi. After
+    doing that, we can check whether the camera works well or not by capturing images
+    using the “fswebcam” package. At first, we need to install that package using
+    the following command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After that, we can use it to capture an image. A very basic way to do that
+    is as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: This accesses the camera, captures an image, and saves it to the SD card in
+    the current directory with the name “test_image.jpg”. The output after executing
+    the command is given in the following figure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7f9efd622efe59a63ca7ddfd6f4da000.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Here is the captured image:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4817e837d8c7dc448b431c6e5d47bb3e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building a Recommender System for Amazon Products with Python](https://www.kdnuggets.com/2023/02/building-recommender-system-amazon-products-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Recommendation System with Hugging Face Transformers](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How a Level System can Help Forecast AI Costs](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learning System Design: Top 5 Essential Reads](https://www.kdnuggets.com/learning-system-design-top-5-essential-reads)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Monitor Your File System With Python’s Watchdog](https://www.kdnuggets.com/monitor-your-file-system-with-pythons-watchdog)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building Microservice for Multi-Chat Backends Using Llama and ChatGPT](https://www.kdnuggets.com/building-microservice-for-multichat-backends-using-llama-and-chatgpt)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

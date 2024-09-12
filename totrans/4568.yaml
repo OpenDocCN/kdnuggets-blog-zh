@@ -1,0 +1,498 @@
+- en: Convolutional Neural Network for Breast Cancer Classification
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/10/convolutional-neural-network-breast-cancer-classification.html](https://www.kdnuggets.com/2019/10/convolutional-neural-network-breast-cancer-classification.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Breast cancer is the second most common cancer in women and men worldwide. In
+    2012, it represented about 12 percent of all new cancer cases and 25 percent of
+    all cancers in women.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Breast cancer starts when cells in the breast begin to grow out of control.
+    These cells usually form a tumor that can often be seen on an x-ray or felt as
+    a lump. The tumor is malignant (cancer) if the cells can grow into (invade) surrounding
+    tissues or spread (metastasize) to distant areas of the body.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here are some quick facts:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: About 1 in 8 U.S. women (about 12%) will develop invasive breast cancer over
+    the course of her lifetime.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In 2019, an estimated 268,600 new cases of invasive breast cancer are expected
+    to be diagnosed in women in the U.S., along with 62,930 new cases of non-invasive
+    (in situ) breast cancer.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: About 85% of breast cancers occur in women who have no family history of breast
+    cancer. These occur due to genetic mutations that happen as a result of the aging
+    process and life in general, rather than inherited mutations.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: A woman’s risk of breast cancer nearly doubles if she has a first-degree relative
+    (mother, sister, daughter) who has been diagnosed with breast cancer. Less than
+    15% of women who get breast cancer have a family member diagnosed with it.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The Challenge
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Build an algorithm to automatically identify whether a patient is suffering
+    from breast cancer or not by looking at biopsy images. The algorithm had to be
+    extremely accurate because lives of people is at stake.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The dataset can be downloaded from [here](https://web.inf.ufpr.br/vri/databases/breast-cancer-histopathological-database-breakhis/).
+    This is a binary classification problem. I split the data as shown-
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The training folder has 1000 images in each category while the validation folder
+    has 250 images in each category.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f2cb9d14c585637af37b0437ce8f7a17.png)  ![Figure](../Images/4b49c30b77b0c6cff02faab925c8cf00.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Benign sample![Figure](../Images/b8b93f420b14f7b7c8ad84021226096c.png)  ![Figure](../Images/18b2309410ee4d50e15e0a1818df158f.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Malignant sample
+  prefs: []
+  type: TYPE_NORMAL
+- en: Environment and tools
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[scikit-learn](https://scikit-learn.org/stable/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[keras](https://keras.io/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[numpy](https://www.numpy.org/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[pandas](https://pandas.pydata.org/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[matplotlib](https://matplotlib.org/)'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Image Classification
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The complete image classification pipeline can be formalized as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our input is a training dataset that consists of *N* images, each labeled with
+    one of 2 different classes.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Then, we use this training set to train a classifier to learn what every one
+    of the classes looks like.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the end, we evaluate the quality of the classifier by asking it to predict
+    labels for a new set of images that it has never seen before. We will then compare
+    the true labels of these images to the ones predicted by the classifier.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Where is the code?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Without much ado, let’s get started with the code. The complete project on github
+    can be found [here](https://github.com/abhinavsagar/Breast-cancer-classification).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s start with loading all the libraries and dependencies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next I loaded the images in the respective folders.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After that I created a numpy array of zeroes for labeling benign images and
+    similarly a numpy array of ones for labeling malignant images. I also shuffled
+    the dataset and converted the labels into categorical format.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then I split the data-set into two sets — train and test sets with 80% and 20%
+    images respectively. Let’s see some sample benign and malignant images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/4a80c4818519de53e0c4019857169e20.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Benign vs malignant samples
+  prefs: []
+  type: TYPE_NORMAL
+- en: I used a batch size value of 16. Batch size is one of the most important hyperparameters
+    to tune in deep learning. I prefer to use a larger batch size to train my models
+    as it allows computational speedups from the parallelism of GPUs. However, it
+    is well known that too large of a batch size will lead to poor generalization.
+    On the one extreme, using a batch equal to the entire dataset guarantees convergence
+    to the global optima of the objective function. However this is at the cost of
+    slower convergence to that optima. On the other hand, using smaller batch sizes
+    have been shown to have faster convergence to good results. This is intuitively
+    explained by the fact that smaller batch sizes allow the model to start learning
+    before having to see all the data. The downside of using a smaller batch size
+    is that the model is not guaranteed to converge to the global optima.Therefore
+    it is often advised that one starts at a small batch size reaping the benefits
+    of faster training dynamics and steadily grows the batch size through training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I also did some data augmentation. The practice of data augmentationis an effective
+    way to increase the size of the training set. Augmenting the training examples
+    allow the network to see more diversified, but still representative data points
+    during training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Then I created a data generator to get the data from our folders and into Keras
+    in an automated way. Keras provides convenient python generator functions for
+    this purpose.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The next step was to build the model. This can be described in the following
+    3 steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: I used DenseNet201 as the pre trained weights which is already trained in the
+    Imagenet competition. The learning rate was chosen to be 0.0001.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: On top of it I used a globalaveragepooling layer followed by 50% dropouts to
+    reduce over-fitting.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: I used batch normalization and a dense layer with 2 neurons for 2 output classes
+    ie benign and malignant with softmax as the activation function.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: I have used Adam as the optimizer and binary-cross-entropy as the loss function.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Let’s see the output shape and the parameters involved in each layer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/76dc6598a73fbaa1ba7c88dd69936dd2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Model summary
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Before training the model, it is useful to define one or more callbacks. Pretty
+    handy one, are: ModelCheckpointand ReduceLROnPlateau.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**ModelCheckpoint**: When training requires a lot of time to achieve a good
+    result, often many iterations are required. In this case, it is better to save
+    a copy of the best performing model only when an epoch that improves the metrics
+    ends.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**ReduceLROnPlateau**: Reduce learning rate when a metric has stopped improving.
+    Models often benefit from reducing the learning rate by a factor of 2–10 once
+    learning stagnates. This callback monitors a quantity and if no improvement is
+    seen for a ‘patience’ number of epochs, the learning rate is reduced.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5353840b6648c75cd5a6177fbf9aa5f2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: ReduceLROnPlateau.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I trained the model for 20 epochs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Performance Metrics
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The most common metric for evaluating model performance is the accurcacy. However,
+    when only 2% of your dataset is of one class (malignant) and 98% some other class
+    (benign), misclassification scores don’t really make sense. You can be 98% accurate
+    and still catch none of the malignant cases which could make a terrible classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/2fc09612efa47cda597d62a66a7963c1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Loss vs epoch![Figure](../Images/2b56cf290ee4adc984c8c606ecb3d5ff.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Accuracy vs epoch
+  prefs: []
+  type: TYPE_NORMAL
+- en: Precision, Recall and F1-Score
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For a better look at misclassification, we often use the following metric to
+    get a better idea of true positives (TP), true negatives (TN), false positive
+    (FP) and false negative (FN).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Precision **is the ratio of correctly predicted positive observations to
+    the total predicted positive observations.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Recall **is the ratio of correctly predicted positive observations to all
+    the observations in actual class.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**F1-Score** is the weighted average of Precision and Recall.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/7f7aca4ddb736aa63a306a90d7aeebfb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The higher the F1-Score, the better the model. For all three metric, 0 is the
+    worst while 1 is the best.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Confusion Matrix
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Confusion Matrix is a very important metric when analyzing misclassification.
+    Each row of the matrix represents the instances in a predicted class while each
+    column represents the instances in an actual class. The diagonals represent the
+    classes that have been correctly classified. This helps as we not only know which
+    classes are being misclassified but also what they are being misclassified as.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/2ae1cfb22f54f7708d41210b142553e9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Confusion matrix
+  prefs: []
+  type: TYPE_NORMAL
+- en: ROC Curves
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The 45 degree line is the random line, where the Area Under the Curve or AUC
+    is 0.5 . The further the curve from this line, the higher the AUC and better the
+    model. The highest a model can get is an AUC of 1, where the curve forms a right
+    angled triangle. The ROC curve can also help debug a model. For example, if the
+    bottom left corner of the curve is closer to the random line, it implies that
+    the model is misclassifying at Y=0\. Whereas, if it is random on the top right,
+    it implies the errors are occurring at Y=1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/0ee9c1f37b4d58422aa38ae8954097b2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: ROC-AUC curve
+  prefs: []
+  type: TYPE_NORMAL
+- en: Results
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/753ce211965e1fa67798d0cab91005a9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Final results
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Although this project is far from complete but it is remarkable to see the success
+    of deep learning in such varied real world problems. In this blog, I have demonstrated
+    how to classify benign and malignant breast cancer from a collection of microscopic
+    images using convolutional neural networks and transfer learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: References/Further Readings
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[**Transfer Learning for Image Classification in Keras**](https://towardsdatascience.com/transfer-learning-for-image-classification-in-keras-5585d3ddf54e?source=post_page-----52f1213dcc9----------------------)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One stop guide to Transfer Learning
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Predicting Invasive Ductal Carcinoma using Convolutional Neural Network
+    (CNN) in Keras**](https://towardsdatascience.com/predicting-invasive-ductal-carcinoma-using-convolutional-neural-network-cnn-in-keras-debb429de9a6?source=post_page-----52f1213dcc9----------------------)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Classifying histopathology slides as malignant or benign using Convolutional
+    Neural Network
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Breast cancer histopathological image classification using convolutional
+    neural networks with small…**](https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0214587&source=post_page-----52f1213dcc9----------------------)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although successful detection of malignant tumors from histopathological images
+    largely depends on the long-term...
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Deep Learning for Image Classification with Less Data**](https://becominghuman.ai/deep-learning-for-image-classification-with-less-data-90e5df0a7b8e?source=post_page-----52f1213dcc9----------------------)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Deep Learning is indeed possible with less data
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before You Go
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The corresponding source code can be found here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**abhinavsagar/Breast-cancer-classification**](https://github.com/abhinavsagar/Breast-cancer-classification?source=post_page-----52f1213dcc9----------------------)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benign vs Malignant classifier using convolutional neural networks The dataset
+    can be downloaded from here. pip install…
+  prefs: []
+  type: TYPE_NORMAL
+- en: Contacts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'If you want to keep updated with my latest articles and projects [follow me
+    on Medium](https://medium.com/@abhinav.sagar). These are some of my contacts details:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Personal Website](https://abhinavsagar.github.io/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Linkedin](https://in.linkedin.com/in/abhinavsagar4)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Medium Profile](https://medium.com/@abhinav.sagar)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GitHub](https://github.com/abhinavsagar)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Kaggle](https://www.kaggle.com/abhinavsagar)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Happy reading, happy learning and happy coding!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Abhinav Sagar](https://www.linkedin.com/in/abhinavsagar4)** is a senior
+    year undergrad at VIT Vellore. He is interested in data science, machine learning
+    and their applications to real-world problems.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/convolutional-neural-network-for-breast-cancer-classification-52f1213dcc9).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Detecting Breast Cancer with Deep Learning](/2018/05/detecting-breast-cancer-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Easily Deploy Machine Learning Models Using Flask](/2019/10/easily-deploy-machine-learning-models-using-flask.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Understanding Cancer using Machine Learning](/2019/08/understanding-cancer-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Image Classification with Convolutional Neural Networks (CNNs)](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Convolutional Neural Network with PyTorch](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Comprehensive Guide to Convolutional Neural Networks](https://www.kdnuggets.com/2023/06/comprehensive-guide-convolutional-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn Deep Learning by Building 15 Neural Network Projects in 2022](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Neural Network Optimization with AIMET](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

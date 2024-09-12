@@ -1,0 +1,271 @@
+- en: Adversarial Examples in Deep Learning – A Primer
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/11/adversarial-examples-deep-learning-primer.html](https://www.kdnuggets.com/2020/11/adversarial-examples-deep-learning-primer.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introducing adversarial examples in vision deep learning models
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/ebb427604a83a0db8ff8f1fedaf4fe54.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have seen the advent of state-of-the-art (SOTA) deep learning models for
+    computer vision ever since we started getting bigger and better compute (GPUs
+    and TPUs), more data (ImageNet etc.) and easy to use open-source software and
+    tools (TensorFlow and PyTorch). Every year (and now every few months!) we see
+    the next SOTA deep learning model dethrone the previous model in terms of Top-k
+    accuracy for benchmark datasets. The following figure depicts some of the latest
+    SOTA deep learning vision models (and doesn't depict some like Google's BigTransfer!).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/0fca4b3e363b7c823577a5764247957d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'SOTA Deep Learning Vision Models (Source: https://arxiv.org/abs/1905.11946)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: However most of these SOTA deep learning models are brought down to their knees
+    when it tries to make predictions on a specific class of images, called as adversarial
+    images. The whole idea of an adversarial example can be a natural example or a
+    synthetic example. We will look at a few examples in this article to get familiar
+    with different adversarial examples and attacks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adversarial Examples
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A natural adversarial example is a natural, organic image which is tough for
+    the model to comprehend. A synthetic adversarial example is where an attacker
+    (a malicious user) purposely injects some noise into an image which visually remains
+    very similar to the original image but the model ends up making a vastly different
+    (and wrong) prediction. Let's look at a few of these in more detail!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Natural Adversarial Examples
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: These examples, as defined in the paper *['**Natural Adversarial Examples, **Hendrycks
+    et al.'](https://arxiv.org/abs/1907.07174)*are *real-world, unmodified, and naturally
+    occurring examples that cause classifier accuracy to significantly degrade*.  They
+    have introduced two new datasets of natural adversarial examples. The first dataset
+    contains 7,500 natural adversarial examples for ImageNet classifiers and serves
+    as a hard ImageNet classifier test set, called IMAGENET-A. The following figure
+    shows some of these adversarial examples from the ImageNet-A dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/d167a41fbc511bac464f0c8f5dce96a5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'ResNet-50 fails horribly on examples from ImageNet-A (Source: https://arxiv.org/abs/1907.07174)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can clearly see how wrong (and silly!) are the predictions of a state-of-the-art
+    (SOTA) ResNet-50 model on the above examples. In-fact the DenseNet-121 pre-trained
+    model obtains an accuracy of only 2% on ImageNet-A!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/245adbeec92ee068f7a7a345b6b22a8f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The authors have also curated an adversarial out-of-distribution detection dataset
+    called IMAGENET-O, which they claim is the first out-of-distribution detection
+    dataset created for ImageNet models. The following figure shows some interesting
+    examples of ResNet-50 inference on images from the ImageNet-O dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e98f7763d547bff66c3fe1e8122e6674.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'ResNet-50 fails horribly on examples from ImageNet-O (Source: https://arxiv.org/abs/1907.07174)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The examples are indeed interesting and showcase the limitations of SOTA pre-trained
+    vision models on some of these images which are more complex for these models
+    to interpret. Some of the reasons of failure can be attributed to what deep learning
+    models are trying to focus on when making predictions for a specific image. Let's
+    look at some more examples to try and understand this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/afe0e0bd7d51032c2c476c4f57e34f2e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Natural adversarial examples in ImageNet-A (Source: https://arxiv.org/abs/1907.07174)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Based on the examples showcased in the figure above, it is pretty clear that
+    there are some specific patterns w.r.t mis-interpretations made by deep learning
+    vision models. For instance:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Candles are predicted as a jack-o’-lanterns, despite the absence of a pumpkin
+    due to model focusing more on aspects like the flame and its illumination
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Dragonfly is predicted as a skunk or a banana due to the model focusing more
+    on color and texture
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Mushroom being classified as a nail because the models learn to associate certain
+    elements together e.g. wood - nails
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Models also end up suffering from overgeneralization problems e.g. shadows to
+    sundials
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The overall performance of SOTA deep learning vision models are pretty poor
+    on these examples as depicted in the following figure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ff669216f2adbbe8b99863679db0e866.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'SOTA deep learning vision models performance on ImageNet-A (Source: https://arxiv.org/abs/1907.07174)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The sad part is that robust adversarial training methods hardly help in tacking
+    problems associated with mis-interpreting natural adversarial examples as mentioned
+    in the same paper by Hendrycks et al. Some of these methods include training against
+    specific synthetic attacks like Projected Gradient Descent (PGD) and Fast Gradient
+    Sign Method (FGSM) which we will look at in more detail in subsequent articles.
+    Luckily these methods work well for handling malicious synthetic attacks which
+    are usually a larger concern.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Synthetic Adversarial Examples
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: These examples basically involve artificially inducing some noise in an input
+    image such that visually it still remains very similar to the original image,
+    but the infused noise ends up degrading classifier accuracy. While there are a
+    wide variety of synthetic adversarial attacks, all of them operate on a few core
+    set of principles as depicted in the following figure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/511f0d71af10388e2199ee49f2178b2a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Key Steps for Adversarial Attacks (Source: https://github.com/dipanjanS/adversarial-learning-robustness)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The focus is always to figure out a way to perfect the noise \ perturbation
+    tensor (matrix of values) which can be super-imposed on top of the original image
+    such that these perturbations are invisible to the human eye but ends up making
+    the deep learning model fail in making correct predictions.  The example depicted
+    above showcases a Fast Gradient Sign Method (FGSM) attack where we add in a small
+    multiplier to the sign of the gradients of the input image and super-impose with
+    the image of a panda making the model fail in its prediction thinking that the
+    image is that of a gibbon. The following graphic showcases some of the more popular
+    types of adversarial attacks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/431ae8a31b8b51aae38721c6937e5040.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Popular Adversarial Attacks (Source: https://github.com/dipanjanS/adversarial-learning-robustness)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: What's Next?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the next couple of articles we will discuss about each of the above mentioned
+    adversarial attack methodologies and showcase with hands-on code examples how
+    you can fool the latest and best SOTA vision models. Stay tuned!
+  prefs: []
+  type: TYPE_NORMAL
+- en: The content in this article has been taken from some of the recent work on adversarial
+    learning done by [myself](https://www.linkedin.com/in/dipanzan/) and [Sayak](https://in.linkedin.com/in/sayak-paul)
+    and you can find detailed examples in [this GitHub Repository](https://github.com/dipanjanS/adversarial-learning-robustness).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://blog.djsarkar.ai/adversarial-learning-attacks-1/). Reposted
+    with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Adversarial Validation Overview](/2020/02/adversarial-validation-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Are Computer Vision Models Vulnerable to Weight Poisoning Attacks?](/2020/08/computer-vision-models-vulnerable-weight-poisoning-attacks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Roadmap to Computer Vision](/2020/10/roadmap-computer-vision.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Ensemble Learning with Examples](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Picking Examples to Understand Machine Learning Model](https://www.kdnuggets.com/2022/11/picking-examples-understand-machine-learning-model.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL LIKE Operator Examples](https://www.kdnuggets.com/2022/09/sql-like-operator-examples.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is Adversarial Machine Learning?](https://www.kdnuggets.com/2022/03/adversarial-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Describing Data: A Statology Primer](https://www.kdnuggets.com/describing-data-statology-primer)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Statistics: A Statology Primer](https://www.kdnuggets.com/introduction-to-statistics-statology-primer)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

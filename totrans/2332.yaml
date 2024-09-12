@@ -1,0 +1,695 @@
+- en: 'SHAP: Explain Any Machine Learning Model in Python'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Motivation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Imagine you are trying to train a machine learning model to predict whether
+    an ad is clicked by a particular person. After receiving some information about
+    a person, the model predicts that a person will not click on an ad.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/3b30d440cb417081f0bb238bf94a000c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: But why does the model predict that? How much does each feature contribute to
+    the prediction? Wouldn’t it be nice if you can see a plot indicating how much
+    each feature contributes to the prediction like below?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/4b1a6818bd977e96f5dc0c6b454656c1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: That is when Shapley value comes in handy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is Shapley Value?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The Shapley value is a method used in game theory that involves fairly distributing
+    both gains and costs to actors working in a coalition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since each actor contributes differently to the coalition, the Shapley value
+    makes sure that each actor **gets a fair share depending on how much they contribute**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/3e9bf83ef146048b60cbf1886bafde1e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Simple Example
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Shapley value is used for a wide range of problems that question the contribution
+    of each worker/feature in a group. To understand how Shapley value works, let’s
+    imagine that your company has just done A/B testing, where they test different
+    combinations of advertisement strategies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The revenues for each strategy in a specific month are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'no ad: $150'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'social media: $300'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Google advertisement: $200'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'email marketing: $350'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: social media and Google advertisement $320
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'social media and email marketing: $400'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Google advertisement and email marketing: $350'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'email marketing, Google advertisement, and social media: $450'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/449d824635515d27a596cf0b37eb620e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: The difference in revenues between using three ads and using no ad is $300. **How
+    much does each ad contribute to this difference?**
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/6b4b9968cef63b06a607e3a4c92eacd7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can figure that out by calculating the Shapley value for each type of advertisement. [This
+    article](https://towardsdatascience.com/shap-explained-the-way-i-wish-someone-explained-it-to-me-ab81cc69ef30) provides
+    an excellent way to calculate the Shap value. I will summarize it here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We start by calculating the total contribution of Google advertisements to
+    the company’s revenue. The total contribution of Google advertisement could be
+    calculated by the formula:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/cc602f3fd670a9e28005d002e8543cc8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s find the marginal contribution of Google advertisement and its weights.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Find Marginal Contribution of Google Advertisement
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'First, we will find the marginal contribution of Google advertisement to the
+    following groups:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: no advertisement
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Google advertisement + social media
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Google advertisement + email marketing
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Google advertisement + email marketing + social media
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/400acda745fee657d1d12d91e0a7223d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The marginal contribution of Google advertisement to no advertisement is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/4cdc3cdd36e65e573ef6c2aa9d40cafd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The marginal contribution of Google advertisement to the Google advertisement
+    and social media group is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/a7a5a6a05f437b8228620bf44b6cf4ce.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The marginal contribution of Google advertisement to the Google advertisement
+    and email marketing group is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/00d32e8e7b834e04bc0d42b778eb1208.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The marginal contribution of Google advertisement to the Google advertisement,
+    email marketing, and social media group is:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/09edb469c85e8a6d4c8cdf7b13b096bf.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Find Weights
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: To find the weights, we will organize the combinations of different advertisement
+    strategies into multiple levels like below. Each level corresponds to the number
+    of advertisement strategies in each combination.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Then we will assign weights based on the number of edges in each level. We
+    saw that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first level contains **3 edges** so the weight of each edge will be **1/3**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The second level contains** 6 edges** so the weight of each edge will be **1/6**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The third level contains **3 edges **so the weight of each edge will be **1/3**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/9c86a68002fb59152d2014f2a6979ef3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Find the Total Contribution of Google Advertisement
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Now we are ready to find Google advertisement’s total contribution based on
+    the weights and marginal contribution we found earlier!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/a5a128331e8948d95ede48cda6815deb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/c865e74919223dd7a960cd4fbd8d8d87.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cool! So Google advertisement contributes $36.67 to the total difference in
+    revenues between using 3 advertisement strategies and using no advertisement.
+    36.67 is the Shapey value for Google advertisement.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/4cde13a07089c1fa9093fec319eda42e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Repeat the steps above for two other advertisement strategies, we can see that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Email marketing contributes $151.67
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Social media contributes $111.67
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Google advertisement contributes $36.67
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/27526b46d60f4e9395c71581c8cceb97.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Together they contribute $300 to the difference between using 3 different types
+    of advertisement and using no advertisement! Pretty cool, isn’t it?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we understand the Shapley value, let’s see how we can use it to interpret
+    a machine learning model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: SHAP — Explain Any Machine Learning Models in Python
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '[SHAP](https://github.com/slundberg/shap) is a Python library that uses Shapley
+    values to explain the output of any machine learning model.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To install SHAP, type:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Train a Model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'To understand how SHAP works, we will experiment with an [advertising dataset](https://drive.google.com/file/d/1oMUOmXf67DxPe5CV6YJTiEm9TeozKK5H/view?usp=sharing):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will build a machine learning model to predict whether a user clicked on
+    an ad based on some information about that person.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We will use [Patsy](https://towardsdatascience.com/patsy-build-powerful-features-with-arbitrary-python-code-bb4bb98db67a#3be4-4bcff97738cd) to
+    turn the DataFrame into an array of features and an array of target values:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Split the data into train and test sets:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Next, we will use XGBoost to build a model and make predictions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To see how well the model performs, we will use the F1 score:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Pretty good!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Interpret the Model
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The model did a good job of predicting whether a user clicked an ad. But how
+    did it come up with such predictions? **How much did each feature contribute to
+    the difference between the final prediction and the average prediction?**
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that this problem is very similar to the problem we addressed at the beginning
+    of the article.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'That is why finding the Shapley value of each feature can help us determine
+    their contribution. The steps to get the importance of the feature i, where i
+    is the index of features, is similar to before:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Get all subsets that don’t contain the feature i
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Find the marginal contribution of the feature i to each of these subsets
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Aggregate all marginal contributions to compute the contributions of the feature
+    i
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'To find the Shapley values using SHAP, simply insert your trained model to `shap.Explainer` :'
+  prefs: []
+  type: TYPE_NORMAL
+- en: SHAP Waterfall Plot
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Visualize the first prediction’s explanation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/bd7178c7376b4a180d961773567aceef.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Aha! Now we know the contribution of each feature to the first prediction.
+    Explanations for the graph above:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/238b3e7f3c8a917a6b2a6ba6ef6b4e0b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: The blue bar shows how much a particular feature decreases the value of the
+    prediction.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The red bar shows how much a particular feature increases the value of the prediction.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Negative values imply probabilities of less than 0.5 that the person clicked
+    the ad
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For each of these subsets, SHAP doesn’t remove a feature then retrain the model
+    but replaces that feature with the average value of that feature, then generates
+    the predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We should expect the total contribution to be equal to the difference between
+    the prediction and the mean prediction. Let’s check that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/643dc5338b0e7fe8c2ea0652ea9c61bb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cool! They’re equal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Visualize the second prediction’s explanation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/1aa86245f98e416efa7c029b8b04611b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: SHAP Summary Plot
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Instead of looking at each individual instance, we can visualize the overall
+    impact of these features across multiple instances using SHAP summary plot:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/22ca7fd9b6cebe3fc38f23a61b9d117a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: The SHAP summary plot tells us the most important features and their range of
+    effects over the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'From the plot above, we can gain some interesting insights into the model’s
+    predictions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The daily internet usage of a user has the strongest effect on whether that
+    user clicked on an ad.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As the **daily internet usage** **increases,** a user is **less likely** to
+    click on an ad**.**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As the **daily time spent on the site increases, **a user is **less likely** to
+    click on an ad**.**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As the** area income increases, **a user is **less likely** to click on an ad**.**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As the age **increases, **a user is **more likely** to click on an ad**.**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If a user is** a male**, that user is **less likely** to click on an ad**.**
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: SHAP Bar Plot
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We can also get a global feature importance plot using the SHAP bar plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/a9d0566b64a4029dcf31f0ea63934b37.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: SHAP Dependence Scatter Plot
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: We can observe the effect of a single feature on all predictions made by the
+    model using the SHAP dependence scatter plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Daily Internet Usage
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Scatter plot of the daily internet usage feature:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/fbc15be0826789197d67b3d116e2c1d1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: From the plot above, we can see that as the daily internet usage increases,
+    the SHAP value for the daily internet usage decreases. This confirms what we saw
+    in the earlier plot.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can also observe the interaction between the daily internet usage feature
+    with other features in the same plot by adding `color=shap_values` .
+  prefs: []
+  type: TYPE_NORMAL
+- en: The scatter plot will attempt to pick out the feature column with the strongest
+    interaction with daily internet usage, which is daily time spent on site.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/520b6d842131e2570085e3a9298cc8b6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cool! From the plot above, we can see that a person who uses the internet for
+    150 minutes per day and spends a small amount of time on the website per day is
+    more likely to click the ad.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s look at the scatter plots of some other features:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Daily Time Spent on Site
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/b57a8a8fb5e97ab2050fcd8b726c0c3f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Area Income
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/7b03af5d34caf7a20f509044dd2c22ee.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Age
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/e15a46c55b39439f040ff894113590c0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Gender
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/332c51197f0fe98e3c9c3224de04cb12.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: SHAP Interaction Plot
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: You can also observe the matrix of **interactions between features** with the
+    SHAP interaction value summary plot. In this plot, the main effects are on the
+    diagonal and the interaction effects are off the diagonal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![SHAP: Explain Any Machine Learning Model in Python](../Images/eb70796205fff65c237132a5dfb3c8e3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pretty cool!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Congratulations! You have just learned about Shapey value and how to use it
+    to interpret a machine learning model. I hope this article will give you the essential
+    knowledge to interpret your own machine learning model using Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I recommend checking out [SHAP’s documentation](https://shap.readthedocs.io/en/latest/overviews.html) to
+    learn more about other applications of SHAP.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feel free to play with the source code in [this interactive notebook](https://deepnote.com/project/Data-science-hxlyJpi-QrKFJziQgoMSmQ/%2FData-science%2Fdata_science_tools%2Fshapey_values%2Fshapey_values.ipynb)
+    or fork my [repository](https://github.com/khuyentran1401/Data-science/blob/master/data_science_tools/shapey_values/shapey_values.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reference
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Mazzanti, S. (2021, April 21). *SHAP explained the way I wish someone explained
+    it to me*. Medium. Retrieved September 23, 2021, from [https://towardsdatascience.com/shap-explained-the-way-i-wish-someone-explained-it-to-me-ab81cc69ef30.](https://towardsdatascience.com/shap-explained-the-way-i-wish-someone-explained-it-to-me-ab81cc69ef30.)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Khuyen Tran](https://www.linkedin.com/in/khuyen-tran-1401/)** is a prolific
+    data science writer, and has written [an impressive collection of useful data
+    science topics along with code and articles](https://github.com/khuyentran1401/Data-science).
+    Khuyne is currently looking for a machine learning engineer role, a data scientist
+    role, or a developer advocate role in Bay Area after May 2022, so please reach
+    out if you are looking for someone with her set of skills.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/shap-explain-any-machine-learning-model-in-python-24207127cad7).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Introduction to NExT-GPT: Any-to-Any Multimodal Large Language Model](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using SHAP Values for Model Interpretability in Machine Learning](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Explain NLP Models with LIME](https://www.kdnuggets.com/2022/01/explain-nlp-models-lime.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Get Your First Job in Data Science without Any Work Experience](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Read This Before You Take Any Free Data Science Course](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Segment Anything Model: Foundation Model for Image Segmentation](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

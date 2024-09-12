@@ -1,0 +1,379 @@
+- en: 'DevOps for Data Scientists: Taming the Unicorn'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/07/devops-data-scientists-taming-unicorn.html](https://www.kdnuggets.com/2018/07/devops-data-scientists-taming-unicorn.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Syed Sadat Nazrul](https://www.linkedin.com/in/snazrul1/), Analytic Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Header image](../Images/e0c738a199bc9188bb69a0ec293f0e87.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When most data scientists start working, they are equipped with all the neat
+    math concepts they learned from school textbooks. However, pretty soon, they realize
+    that the majority of data science work involve getting data into the format needed
+    for the model to use. Even beyond that, the model being developed is part of an
+    application for the end user. Now a proper thing a data scientist would do is
+    have their model codes version controlled on Git. VSTS would then download the
+    codes from Git. VSTS would then be wrapped in a Docker Image, which would then
+    be put on a Docker container registry. Once on the registry, it would be orchestrated
+    using Kubernetes. Now, say all that to the average data scientist and his mind
+    will completely shut down. Most data scientists know how to provide a static report
+    or CSV file with predictions. However, how do we version control the model and
+    add it to an app? How will people interact with our website based on the outcome?
+    How will it scale!? All this would involve confidence testing, checking if nothing
+    is below a set threshold, sign off from different parties and orchestration between
+    different cloud servers (with all its ugly firewall rules). This is where some
+    basic DevOps knowledge would come in handy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What is DevOps?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Long story short, DevOps are the people who help the developers (e.g. data scientists)
+    and IT work together.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/44d29a176874740eb3b81c256ac6048d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Usual battle between Developers and IT
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Developers have their own chain of command (i.e. project managers) who want
+    to get features out for their products as soon as possible. For data scientists,
+    this would mean changing model structure and variables. They couldn’t care less
+    what happens to the machinery. Smoke coming out of a data center? As long as they
+    get their data to finish the end product, they couldn’t care less. On the other
+    end of the spectrum is IT. Their job is to ensure that all the servers, networks
+    and pretty firewall rules are maintained. Cybersecurity is also a huge concern
+    for them. They couldn’t care less about the company’s clients, as long as the
+    machines are working perfectly. DevOps is the middleman between developers and
+    IT. Some common DevOps functionalities involve:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Integration
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Testing
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Packaging
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Deployment
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The rest of the blog will explain the entire Continuous Integration and Deployment
+    processin detail (or atleast what is relevant to a Data Scientist). An important
+    note before reading the rest of the blog. Understand the business problem and
+    do not get married to the tools. The tools mentioned in the blog will change,
+    but the underlying problem will remain roughly the same (for the foreseeable future
+    atleast).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Source Control
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Imagine pushing your code to production. And it works! Perfect. No complaints.
+    Time goes on and you keep adding new features and keep developing it. However,
+    one of these features introduce a bug to your code that badly messes up your production
+    application. You were hoping one of your many unit tests may have caught it. However,
+    just because something passed all your tests doesn’t mean it’s bug free. It just
+    means it passed all the tests currently written. Since it’s production level code,
+    you do not have time to debug. Time is money and you have angry clients. Wouldn’t
+    it all be simple to revert back to a point when your code worked??? That’s where
+    version control comes in. In [Agile](https://www.agilealliance.org/agile101/) style
+    code development, the product keeps developing in bits and pieces over an indefinite
+    time period. For such applications, some form of version control would be really
+    useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/69568f4fe7fbd3526985f67f741a00b4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Bitbucket Repository
+  prefs: []
+  type: TYPE_NORMAL
+- en: Personally I like [Git](https://git-scm.com/) but [SVN](https://subversion.apache.org/) users
+    still exist. Git works on all forms of platforms like [GitHub](https://github.com/), [GitLab ](https://gitlab.com/)and [BitBucket ](https://bitbucket.org/)(each
+    with its own unique set of pros and cons). If you are already familiar with Git,
+    consider taking a more [Advanced Git Tutorial On Atlassian](https://www.atlassian.com/git/tutorials/advanced-overview).
+    An advanced feature I recommend looking up is [Git Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules),
+    where you can store specific commit hashes of multiple independent Git repositories
+    to ensure that you have access to a single set of stable dependencies. It is also
+    important to have a README.md, outlining the details of the repository as well
+    as packaging (e.g. using setup.py for Python) when necessary. If you are storing
+    binary files, consider looking into [Git LFS](https://git-lfs.github.com/) (though
+    I recommend avoiding this if possible).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/80e4243a5de1b449a3c385659080221e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Merging Jupyter Notebooks on Git
+  prefs: []
+  type: TYPE_NORMAL
+- en: A data science specific problem with version control is the use of Jupiter/Zeppelin
+    notebooks. Data scientists absolutely LOVE notebooks. However, if you store your
+    codes on a notebook template and try to change the code in version control, you
+    will be left with insane HTML junk when performing diff and merge. You can either
+    completely abandon the use of notebooks in version control (and simply import
+    the math functions from the version controlled libraries) or you can use existing
+    tools like [nbdime](https://nbdime.readthedocs.io/en/stable/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Automatic Testing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: From a data scientist’s perspective, testing usually fall into one of two camps.
+    You have the usual unit testing which checks if the code is working properly or
+    if the code does what you want it to do. The other one, being more specific to
+    the domain of data science, are data quality checks and model performance. Does
+    your model produce for you an accurate score? Now, I am sure many of you are wondering
+    why that’s an issue. You have already done the classification score and ROC curves
+    and the model is satisfactory enough for deployment. Well, lot’s of issues. The
+    primary issue is that, the library versions on the development environment maybe
+    completely different from production. This would mean different implementation,
+    approximations and hence, different model outputs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b94d539ce9c39eb432c66f4c89990eaa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Model output should be the same on dev and prod if integration and deployment
+    are done right
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another classic example is the use of different languages for development and
+    production. Let’s imagine this scenario. You, the noble data scientist, wishes
+    to write a model in R, Python, Matlab, or one of the many new languages whose
+    white paper just came out last week (and may not be well tested). You take your
+    model to the production team. The production team looks at you skeptically, laughs
+    for 5 seconds, only to realize that you are being serious. Scoff they shall. The
+    production code is written in Java. This means re-writing the entire model code
+    to Java for production. This, again, would mean completely different input format
+    and model output. Hence why, automated testing is required.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e226ac4eba9386b1cda221e70575b940.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Jenkins Home Page
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unit tests are very common. [JUnit](https://www.tutorialspoint.com/junit/junit_test_framework.htm) is
+    available for Java users and the [unnittest](https://docs.python.org/3/library/unittest.html)library
+    for Python developers. However, it is possible for someone to forget to properly
+    run the unit tests on the team before pushing codes into production. While you
+    can use [crontab](http://www.adminschoice.com/crontab-quick-reference) to run
+    automated tests, I would recommend using something more professional like [Travis
+    CI](https://travis-ci.org/), [CircleCI](https://circleci.com/) or [Jenkins](https://jenkins.io/).
+    Jenkins allow you to schedule tests, cherry pick specific branches from a version
+    control repository, get emailed if something breaks and even spin Docker container
+    images if you wish to sandbox your tests. Containerization based sand-boxing will
+    be explained in more details in the next section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Containerization
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/3777c02591ba985efc83b012c97249da.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Containers vs VMs
+  prefs: []
+  type: TYPE_NORMAL
+- en: Sand-boxing is an essential part of coding. This might involve having different
+    environments for various applications. It could simply be replicating the production
+    environment into development. It could even mean having multiple production environments
+    with different software versions in order to cater a much larger costumer base.
+    If the best you have in mind is using a VM with [Virtual Box](https://www.virtualbox.org/),
+    I am sure you have noticed that you either need to use the exact same VM for multiple
+    rounds of tests (terrible DevOps hygiene) or re-create a clean VM for every test
+    (which may take close to an hour, depending on your needs). A simpler alternative
+    is using a container instead of a full on VM. A container is simply a unix process
+    or thread that looks, smells and feels like a VM. The advantage is that it is
+    low powered and less memory intensive (meaning you can spin it up or take it down
+    at will… within minutes). Popular containerization technologies include [Docker](https://www.docker.com/) (if
+    you wish to use just 1 container) or [Kubernetes](https://kubernetes.io/) (if
+    you fancy orchestrating multiple containers for a multi-server workflow).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/20297dc1ce895d4d667cf35c2978a5f9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Kubernetes Workflow
+  prefs: []
+  type: TYPE_NORMAL
+- en: Containerization technologies help, not only with tests, but also scalability.
+    This is especially true when you need to think about multiple users using your
+    model based application. This may either be true in terms of training or prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Security
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Security is important but often underestimated in the field of data science.
+    Some of the data used for model training and prediction involves sensitive data
+    such as credit card information or healthcare data. Several compliance policies
+    such as GDPR and HIPPA needs to be addressed when dealing with such data. It is
+    not only the client that needs security. Trade secret model structure and variables,
+    when deployed them on client servers, require a certain level of encryption. This
+    is often solved by deploying the model in encrypted executables (e.g. JAR files)
+    or by encrypting model variables before storing them on the client database (although,
+    please DO NOT write your own encryption unless you absolutely know what you are
+    doing…).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/6632ed2e5747afbc58d3ff2ef0671330.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Encrypted JAR file
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, it would be wise to build models on a tenant-by-tenant basis in order
+    to avoid accidental transfer learning that might cause information leaks from
+    one company to another. In the case of enterprise search, it would be possible
+    for data scientists to build models using all the data available and, based on
+    permission settings, filter out the results a specific user is not authorized
+    to see. While the approach may seem sound, part of the information available in
+    the data used to train the model is actually learned by the algorithm and transferred
+    to the model. So, either way, that makes it possible for the user to infer the
+    content of the forbidden pages. There is no such thing as perfect security. However,
+    it needs to be good enough (the definition of which depends on the product itself).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Collaboration
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/20f7885dbd8326f9c39ce8df8852c206.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When working with DevOps or IT, as a data scientist, it is important to be upfront
+    about requirements and expectations. This may include programming languages, package
+    versions or framework. Last but not the least, it is also important to show respect
+    to one another. After all, both DevOps and Data Scientists have incredibly hard
+    challenges to solve. DevOps do not know much about data science and Data Scientists
+    are not experts in DevOps and IT. Hence, communication is key for a successful
+    business outcome.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Additional Information
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[**Software Development Design Principles**](https://medium.com/@sadatnazrul/software-development-design-principles-79d15ef765f3)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When people start out as self-taught programmers, a lot of the times we think
+    about creating an application that simply...
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**How to make your Software Development experience… painless….**](https://towardsdatascience.com/how-to-make-your-software-development-experience-painless-2591ebcc69b6)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Working at all forms of organizations (from large software development oriented
+    to niche start ups to academic labs), I...
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Data Science Interview Guide**](https://towardsdatascience.com/data-science-interview-guide-4ee9f5dc778)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Science is quite a large and diverse field. As a result, it is really difficult
+    to be a jack of all trades...
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Syed Sadat Nazrul](https://www.linkedin.com/in/snazrul1/)** is using
+    Machine Learning to catch cyber and financial criminals by day... and writing
+    cool blogs by night.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/devops-for-data-scientists-taming-the-unicorn-6410843990de).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Operational Machine Learning: Seven Considerations for Successful MLOps](/2018/04/operational-machine-learning-successful-mlops.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Interview Guide](/2018/04/data-science-interview-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Receiver Operating Characteristic Curves Demystified (in Python)](/2018/07/receiver-operating-characteristic-curves-demystified-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Unlock Your Potential with This FREE DevOps Crash Course](https://www.kdnuggets.com/2023/03/corise-unlock-potential-with-this-free-devops-crash-course.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Essential DevOps Tools Every Beginner Should Learn](https://www.kdnuggets.com/10-essential-devops-tools-every-beginner-should-learn)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[High-Fidelity Synthetic Data for Data Engineers and Data Scientists Alike](https://www.kdnuggets.com/2022/tonic-high-fidelity-synthetic-data-engineers-scientists-alike.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[We Don''t Need Data Scientists, We Need Data Engineers](https://www.kdnuggets.com/2021/02/dont-need-data-scientists-need-data-engineers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What’s the Difference Between Data Analysts and Data Scientists?](https://www.kdnuggets.com/2022/03/difference-data-analysts-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mastering the Art of Data Storytelling: A Guide for Data Scientists](https://www.kdnuggets.com/2023/06/mastering-art-data-storytelling-guide-data-scientists.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

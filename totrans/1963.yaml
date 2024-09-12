@@ -1,0 +1,210 @@
+- en: How To Optimize Dockerfile Instructions for Faster Build Times
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/how-to-optimize-dockerfile-instructions-for-faster-build-times](https://www.kdnuggets.com/how-to-optimize-dockerfile-instructions-for-faster-build-times)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![How To Optimize Dockerfile Instructions for Faster Build Times](../Images/6482b856bf98e0dd989cc253f576f91b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Editor | Midjourney & Canva
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can optimize Dockerfiles for faster build times by leveraging the build
+    cache, reducing the build context, and more. This tutorial goes over these best
+    practices to follow when creating Dockerfiles.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prerequisites
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: You should have Docker installed. [Get Docker](https://docs.docker.com/get-docker/)
+    for your operating system if you haven’t already.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Use a Smaller Base Image
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: First, you can start with a smaller base image to create minimal images. This
+    reduces the overall size of the Docker image and speeds up the build process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, when containerizing Python apps, you can start with a `python:3.x-slim`
+    image, a smaller version of `python:3.x`, containing only the essential components
+    needed to run Python instead of the default `python:3.x`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Read [How To Create Minimal Docker Images for Python Applications](https://www.kdnuggets.com/how-to-create-minimal-docker-images-for-python-applications)
+    to learn more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Leverage Docker Build Cache
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The order of instructions in a Dockerfile influences the build times due to
+    how Docker leverages its build cache.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Docker builds images by executing instructions in the Dockerfile sequentially—creating
+    a new image layer for each instruction. If a layer hasn't changed since the last
+    build, Docker can reuse the cached layer, speeding up the build process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So it’s important to **optimize the order of instructions to maximize cache
+    hits**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Place frequently changing instructions last**: Place instructions that change
+    often, such as copying the application code towards the end of the Dockerfile.
+    This reduces the chances of invalidating the cache for the entire build.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Place less frequently changing instructions early**: Instructions like installing
+    OS packages, setting environment variables, and installing dependencies (if dependencies
+    don''t change often) should be placed early to maximize cache hits.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Let''s take an example Dockerfile:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: In this initial Dockerfile, any change in the application code will invalidate
+    the cache for the entire build process, including the installation of dependencies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here’s the optimized version:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: In this optimized Dockerfile, if there's a change in the application code, Docker
+    can still use the cached layers for installing dependencies. This way, changes
+    to application code do not unnecessarily trigger reinstallation of dependencies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Use Multi-Stage Builds
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Multi-stage builds allow you to separate the build environment from the final
+    runtime environment, which can reduce the size of the final image by only including
+    necessary runtime dependencies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Consider the following Dokcerfile with multi-stage build:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: In this example, the build dependencies are installed in the `builder` stage,
+    and only the necessary runtime dependencies are copied to the final image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. Minimize Build Context with .dockerignore Files
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Ensure you have a `.dockerignore` file to exclude unnecessary files from being
+    copied into the Docker context, reducing the build time. Similar to `.gitignore`,
+    this file tells Docker which files to ignore during the build process, reducing
+    the context size.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the `.dockerignore` file, you can include temporary files, virtual environments,
+    IDE settings, and other unnecessary files that you do not want included in the
+    build context.
+  prefs: []
+  type: TYPE_NORMAL
+- en: From reducing the base image size to optimizing the build context, these optimizations
+    should help you make your Docker builds more efficient.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Additional Resources
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'The following resources should learn more:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Docker build cache](https://docs.docker.com/build/cache/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Best practices for Dockerfile intsructions](https://docs.docker.com/develop/develop-images/instructions/)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)****
+    is a developer and technical writer from India. She likes working at the intersection
+    of math, programming, data science, and content creation. Her areas of interest
+    and expertise include DevOps, data science, and natural language processing. She
+    enjoys reading, writing, coding, and coffee! Currently, she''s working on learning
+    and sharing her knowledge with the developer community by authoring tutorials,
+    how-to guides, opinion pieces, and more. Bala also creates engaging resource overviews
+    and coding tutorials.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Optimize SQL Queries for Faster Data Retrieval](https://www.kdnuggets.com/2023/06/optimize-sql-queries-faster-data-retrieval.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tailor ChatGPT to Fit Your Needs with Custom Instructions](https://www.kdnuggets.com/2023/08/tailor-chatgpt-fit-needs-custom-instructions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 10 MLOps Tools to Optimize & Manage Machine Learning Lifecycle](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Faster Way to Prepare Time-Series Data with the AI & Analytics Engine](https://www.kdnuggets.com/2021/12/piexchange-faster-way-prepare-timeseries-data-ai-analytics-engine.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn Machine Learning 4X Faster by Participating in Competitions](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[oBERT: Compound Sparsification Delivers Faster Accurate Models for NLP](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

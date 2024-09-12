@@ -1,0 +1,487 @@
+- en: How I Redesigned over 100 ETL into ELT Data Pipelines
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/11/redesigned-over-100-etl-elt-data-pipelines.html](https://www.kdnuggets.com/2021/11/redesigned-over-100-etl-elt-data-pipelines.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Nicholas Leong](https://www.linkedin.com/in/nickefy/), Data Engineer,
+    Writer**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/5a64ce73f49a562a81fa5893ec7d42df.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '> Everyone: What do Data Engineers do?'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Me: We build pipelines.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'Everyone: You mean like a plumber?'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Something like that, but instead of water flowing through pipes, **data flows
+    through our pipelines.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Scientists build models and Data Analysts communicate data to stakeholders.
+    So, what do we need Data Engineers for?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Little do they know, without Data Engineers, models won’t even exist. There
+    won’t be any data to be communicated. Data Engineers build warehouses and pipelines
+    to allow data to flow through the organization. We connect the dots.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Should You Become a Data Engineer in 2021?**](https://towardsdatascience.com/should-you-become-a-data-engineer-in-2021-4db57b6cce35)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Engineer is the fastest-growing job in 2019, **growing by 50% YoY**, which
+    is higher than the job growth of Data Scientist, amounting to **32% YoY**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hence, I’m here to shed some light on some of the day-to-day tasks a Data Engineer
+    gets. Data Pipelines is just one of them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: ETL/ELT Pipelines
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: ETL — Extract, Transform, Load
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ELT — Extract, Load, Transform
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: What do these mean and how are they different from each other?
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the data pipeline world, there is a **source **and a **destination**. In
+    the simplest form, the source is where Data Engineers get the data from and the
+    destination is where they want the data to be loaded into.
+  prefs: []
+  type: TYPE_NORMAL
+- en: More often than not, there will need to be some **processing **of data somewhere
+    in between. This can be due to numerous reasons which include but are not limited
+    to —
+  prefs: []
+  type: TYPE_NORMAL
+- en: The difference in types of Data Storage
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Purpose of data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Data governance/quality
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Data Engineers label the processing of data as transformations. This is where
+    they perform their magic to transform all kinds of data into the form they intend
+    it to be.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In **ETL Data Pipelines**, Data Engineers perform transformations before loading
+    data into the destination. If there are relational transformations between tables,
+    these happen within the source itself. In my case, the source was a Postgres Database.
+    Hence, we performed relational joins in the source to obtain the data required,
+    then load it into the destination.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In **ELT Data Pipelines**, Data Engineers load data into the destination raw.
+    They then perform any relational transformations within the destination itself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we will be talking about how I transformed over 100+ ETL Pipelines
+    in my organization into ELT Pipelines, we will also go through the reasons I did
+    it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How I Did It
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Initially, the pipelines were ran using Linux cron jobs. Cron jobs are like
+    your traditional task schedulers, they initialize using the Linux terminal. They
+    are the most basic way of scheduling programs without any functionalities like
+    —
+  prefs: []
+  type: TYPE_NORMAL
+- en: Setting dependencies
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Setting Dynamic Variables
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Building Connections
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/97fc8c807073933c0797cd585086ef7c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: This was the first thing to go as it was causing way too many issues. We needed
+    to scale. To do that, we had to set up a proper Workflow Management System.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We chose **Apache Airflow**. I wrote all about it here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Data Engineering — Basics of Apache Airflow — Build Your First Pipeline**](https://towardsdatascience.com/data-engineering-basics-of-apache-airflow-build-your-first-pipeline-eefecb7f1bb9)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Airflow was originally built by the guys at **Airbnb**, made open source. It
+    is also used by popular companies like **Twitter **as their Pipeline management
+    system. You can read all about the benefits of Airflow above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: After that’s sorted out, we had to change the way we are extracting data. The
+    team suggested **redesigning our ETL pipelines into ELT pipelines.** More on why
+    did we do it later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/15658012ec0844894f7de86408543162.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here’s an example of the pipeline before it was redesigned. The source we were
+    dealing with was a Postgres Database. Hence, to obtain data in the form intended,
+    we had to perform joins in the source database.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is the query ran in the source database. Of course, I’ve simplified the
+    examples to their dumbest form, the actual queries were over 400 lines of SQL.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The query results were saved in a CSV file and then uploaded to the destination,
+    which is a **Google Bigquery database** in our case. Here’s how it looked like
+    in Apache Airflow —
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a simple example of an ETL pipeline. It was working as intended, but
+    the team had realized the **benefits** of redesigning this into an ELT pipeline.
+    More on that later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/36c7974a56ab4e7173aec07e1358e3b6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here’s an example of the pipeline after it was redesigned. Observed how the
+    tables are brought into the destination** as it is**. After all the tables have
+    been successfully extracted, we perform relational transformations in the destination.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: This is the query ran in the source database. Most of the extractions are using
+    ‘Select *’ statements **without any joins**. For appending jobs, we include **where
+    conditions** to properly segregate the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similarly, the query results were saved in a CSV file and then uploaded into
+    the Google Bigquery database. We then made a separate dag for transformation jobs
+    by **setting dependencies within Apache Airflow.** This is to ensure that all
+    the extraction jobs have been completed before running transformation jobs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We set dependencies using **Airflow Sensors.** You can read about them [here](https://towardsdatascience.com/data-engineering-how-to-set-dependencies-between-data-pipelines-in-apache-airflow-using-sensors-fc34cfa55fba).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Data Engineering — How to Set Dependencies Between Data Pipelines in Apache
+    Airflow**](https://towardsdatascience.com/data-engineering-how-to-set-dependencies-between-data-pipelines-in-apache-airflow-using-sensors-fc34cfa55fba)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why I Did it
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/29a9cdb5ff4f6a2b66b1819e49f13a39.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Markus Winkler](https://unsplash.com/@markuswinkler?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that you understand how I did it, we move onto the **why** — Why exactly
+    did we re-wrote all our ETL into ELT pipelines?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cost
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Running with our old Pipeline had cost our team **resources**, specifically
+    time, effort, and money.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To understand the cost aspect of things, you have to understand that our source
+    database (Postgres) was an ancient machine set up back in 2008\. It was hosted
+    on-prem. It was also running an old version of Postgres which makes things even
+    complicated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It wasn’t until recent years when the organization realize the** need** for
+    a centralized data warehouse for Data Scientists and Analysts. This is when they
+    started to build the old pipelines on cron jobs. As the number of jobs increase,
+    it had drained resources on the machine.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The SQL joins written by the previous Data Analysts were also all over the place.
+    There were over **20 joins** in a single query in some pipelines, and we were
+    approaching 100+ pipelines. Our tasks began running during midnight, it usually
+    finished about 1–2 p.m., which amounted to about **12+ hours,** which is absolutely
+    unacceptable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For those of you who don’t know, SQL joins are one of the **most resource-intensive
+    commands** to run. It’ll increase the query’s runtime exponentially as the number
+    of joins increases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/31cd342fe86942f3c1f3a7daedfdc14b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since we were moving onto Google Cloud, the team understood that Google Bigquery
+    is** lightning fast** in computing SQL queries. You can read all about it [**here**](https://cloud.google.com/blog/products/bigquery/anatomy-of-a-bigquery-query).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**How fast is BigQuery? | Google Cloud Blog**](https://cloud.google.com/blog/products/bigquery/anatomy-of-a-bigquery-query)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Hence, the whole point is to only run simple ‘Select *’ statements in the source
+    and perform all the joins on Google Cloud.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This had more than **doubled the** **efficiency and speed** of our Data Pipelines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Scalability
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/995369f87b81e5cf6bb9e7439b0b2a3e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Quinten de Graaf](https://unsplash.com/@quinten149?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: As businesses scale, so do their tools and technologies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By moving onto Google Cloud, we can easily scale our machines and pipelines
+    without worrying much.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Google Cloud utilizes **Cloud Monitoring **which is a tool that collects metrics,
+    events, and metadata of your Google Cloud Technologies like Google Cloud Composer,
+    Dataflow, Bigquery, and many more. You can monitor all sorts of data points which
+    includes but are not limited to —
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cost of Virtual Machines
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The cost of each query ran in Google Bigquery
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The size of each query ran in Google Bigquery
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Duration of Data Pipelines
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This had made monitoring a breeze for us. Hence, by performing all transformations
+    on Google Bigquery, we are able to accurately monitor our query size, duration,
+    and cost as we scale.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Even as we **increase **our machine sizes, data warehouses, data pipelines,
+    etc, we completely **understand the costs and benefits** that come with it and
+    have full control of turning it on and off if needed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This had and will save us from a lot of headaches.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/7d220a315695610328a8d88fc84123d7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Fernando Brasil](https://unsplash.com/@nandovish?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you’ve read until this point, you must really have a thing for data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You should!
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ve already made ETLs and ELTs. Who knows what kind of pipelines we will be
+    building in the **future**?
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we talked about —
+  prefs: []
+  type: TYPE_NORMAL
+- en: What are ELT/ETL Data Pipelines?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How I redesigned ETL to ELT Pipelines
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Why I did it
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As usual, I end with a quote.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data is the new science. Big Data holds the answers
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: —Pet Gelsinger
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[Subscribe to my newsletter to stay in touch.](https://www.nicholas-leong.com/sign-up-here)'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can also support me by signing up for a medium membership through [**my
+    link**](https://nickefy.medium.com/membership). You will be able to read an unlimited
+    amount of stories from me and other incredible writers!
+  prefs: []
+  type: TYPE_NORMAL
+- en: I am working on more stories, writings, and guides in the data industry. You
+    can absolutely expect more posts like this. In the meantime, feel free to check
+    out my other [**articles**](https://nickefy.medium.com/) to temporarily fill your
+    hunger for data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '***Thanks**** for reading! If you want to get in touch with me, feel free to
+    reach me at nickmydata@gmail.com or my *[*LinkedIn Profile*](https://www.linkedin.com/in/nickefy/)*.
+    You can also view the code for previous write-ups in my *[*Github*](https://github.com/nickefy)*.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Nicholas Leong](https://www.linkedin.com/in/nickefy/)** is a data engineer,
+    currently working in an online classifieds tech company. In his years of experience,
+    Nicholas has fully designed batch and streaming pipelines, improved data warehousing
+    solutions, and performed machine learning projects for the organization. During
+    his free time, Nicholas likes to work on his own projects to improve his skills.
+    He also write about his work, projects, and experiences to share them with the
+    world. [Visit my site to check out my work](https://nickefy.github.io/porfoliosite/)!'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/how-i-redesigned-over-100-etl-into-elt-data-pipelines-c58d3a3cb3c).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Prefect: How to Write and Schedule Your First ETL Pipeline with Python](/2021/08/prefect-write-schedule-etl-pipeline-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Design Patterns for Machine Learning Pipelines](/2021/11/design-patterns-machine-learning-pipelines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[ETL and ELT: A Guide and Market Analysis](/2021/10/etl-elt-guide-market-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[ETL vs ELT: Which One is Right for Your Data Pipeline?](https://www.kdnuggets.com/2023/03/etl-elt-one-right-data-pipeline.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[ETL vs ELT: Data Integration Showdown](https://www.kdnuggets.com/2022/08/etl-elt-data-integration-showdown.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[SQL and Data Integration: ETL and ELT](https://www.kdnuggets.com/2023/01/sql-data-integration-etl-elt.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,573 @@
+- en: Using Deep Learning To Extract Knowledge From Job Descriptions
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/05/deep-learning-extract-knowledge-job-descriptions.html](https://www.kdnuggets.com/2017/05/deep-learning-extract-knowledge-job-descriptions.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By [Jan Luts](https://www.linkedin.com/in/jan-luts-5a75a76/), Senior Data
+    Scientist at The Search Party.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'At Search Party we are in the business of creating intelligent recruitment
+    software. One of the problems we deal with is matching candidates and vacancies
+    in order to create a recommendation engine. This usually requires parsing, interpreting
+    and normalising messy, semi-/unstructured, textual data from résumés and vacancies,
+    which is where the following come in: conditional random fields, bag-of-words,
+    TF-IDFs, WordNet, statistical analysis, but also a lot of manual work done by
+    linguists and domain experts for the creation of synonym lists, skill taxonomies,
+    job title hierarchies, knowledge bases or ontologies.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: While these concepts are valuable for the problem we try to solve, they also
+    require a certain amount of manual feature engineering and human expertise. This
+    expertise is certainly a factor that makes these techniques valuable, but the
+    question remains whether more automated approaches can be used to extract knowledge
+    about the job space to complement these more traditional approaches.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here, our goal was to explore the use of deep learning methodology to extract
+    knowledge from recruitment data, thereby leveraging a large amount of job vacancies.
+    The data set included 10 million vacancies originating from the UK, Australia,
+    New Zealand and Canada, covering the period 2014-2016\. The total number of words
+    in the data was 3 billion. This data set was split in a set for training (8.5
+    million) and a set for testing (1.5 million). For each vacancy we had the job
+    description and the corresponding job title. We found that the job titles were
+    usually reliable, but there was definitely a certain amount of noise in the data.
+    The 10 million vacancies had 89,098 different job titles. Minimal preprocessing
+    of the data was done: we tokenized the raw text of the job descriptions in words
+    and all words were transformed to lowercase. No feature engineering was done.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Our model architecture consists of a convolutional neural network (CNN) that
+    generates an embedding for a job description and a lookup table with job title
+    embeddings:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Deep learning in recruitment](../Images/0f2684603067eab97f54d64e3755f4a7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The cosine similarity between the job title embedding and the job description
+    embedding was used as a scoring function. We followed a learning to rank approach
+    using the pairwise hinge loss to train this model. The word lookup table contained
+    100-dimensional embeddings for the 425,845 most frequent words. The job title
+    lookup table consisted of 89,098 100-dimensional job title embeddings. For the
+    convolution layer we set the number of filters to 1,000, the kernel width to 5
+    and the stride to 1\. This model has 52,095,400 parameters and word embeddings
+    were initialized using rescaled Word2Vec coefficients, obtained from running it
+    on our training data. Optimisation was done using stochastic gradient descent
+    and dropout was used for regularisation purposes. The implementation was done
+    using [Torch 7](http://torch.ch/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Predicting Job Titles**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The obvious first results to look at are what the model was trained to do:
+    predicting a job title for a job description. This is a job description for an
+    infrastructure engineer that was not part of the training set:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Deep learning in recruitment](../Images/2f864569f3a7bf27c1231975d4ea84ea.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The job title is included in this job description and is in fact mentioned three
+    times. There are also a lot of detailed duties and skills included for the position.
+    An alternative job description was created by replacing the job title “infrastructure
+    engineer” with “person” and removing the two other references.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Now we run the job title prediction model on both job descriptions and compare
+    the resulting embeddings with the learned job title embeddings from the model
+    using the cosine similarity. These are the 10 most likely job titles under both
+    scenarios:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '|  | ***Original job description*** | ***Without “infrastructure engineer”***
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 1 | infrastructure engineer | linux engineer |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 2 | linux engineer | devops engineer |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 3 | systems engineer | linux systems engineer |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 4 | windows engineer | systems engineer |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 5 | devops engineer | systems administrator |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 6 | automation engineer | devops |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 7 | linux infrastructure engineer | senior devops engineer |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 8 | automation engineer devops | linux systems administrator |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 9 | devops infrastructure engineer | devops consultant |'
+  prefs: []
+  type: TYPE_TB
+- en: '| 10 | linux systems engineer | build automation engineer |'
+  prefs: []
+  type: TYPE_TB
+- en: For the original vacancy the best matching job title was “infrastructure engineer”,
+    which happens to be the correct one. However, most other job titles in the top
+    10 make sense, although the “windows engineer” is a bit of an outlier. For the
+    modified job description, the best matching job title is “linux engineer”. It
+    looks like the other 9 job titles would also be acceptable for this scenario.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This example shows that the model was able to extract the job title, but it
+    also came up with a meaningful prediction when we removed the actual job title
+    from the job description. This suggests that the model was using duties, skills
+    and other types of information in the description to come up with a prediction
+    when the more direct information was missing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'While the model was trained on job description data, we wanted to test it on
+    data that is structured differently: simple queries that do not include the actual
+    job title. This table shows some of the job titles that it came up with for various
+    input:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| ***Input*** | ***Predicted job title*** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| operative for groundworks | groundworker |'
+  prefs: []
+  type: TYPE_TB
+- en: '| babysitting St Martins Primary School | babysitter |'
+  prefs: []
+  type: TYPE_TB
+- en: '| we are Pemberton Truck Co and we are hiring regional drivers and a | truck
+    driver |'
+  prefs: []
+  type: TYPE_TB
+- en: '| taking orders, extensive product knowledge, communication skills, dining
+    skills | wait staff |'
+  prefs: []
+  type: TYPE_TB
+- en: '| our family is looking for someone to take care of our youngest child and
+    a | nanny |'
+  prefs: []
+  type: TYPE_TB
+- en: '| we are urgently looking for a developer with a c++ background with a | c++
+    developer |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Isuzu Technician (AK4679) | auto technician |'
+  prefs: []
+  type: TYPE_TB
+- en: '| we are looking for someone to manage a team of five software developers and
+    a | software development manager |'
+  prefs: []
+  type: TYPE_TB
+- en: '| we are looking for someone to manage a team of five accountants and a | finance
+    manager |'
+  prefs: []
+  type: TYPE_TB
+- en: '| we are looking for someone to manage a team of five sales representatives
+    and a | sales manager |'
+  prefs: []
+  type: TYPE_TB
+- en: These examples suggest that the model (to some extent) captures information
+    about what someone with a particular job title usually does. For example, it predicts
+    that someone who manages a team of accountants is probably a finance manager.
+    By simply replacing “accountants” with “software developers” or “sales representatives”
+    we jump to “software development manager” and “sales manager”, respectively. The
+    model learned that a person who takes care of a child is often a nanny. When a
+    truck company is looking for drivers, it is probably looking for truck drivers.
+    Given the fact that “Isuzu technician” was not part of the job titles in our training
+    data set, the prediction “auto technician” makes sense.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Finding Related Job Titles, Analogies and Relationships**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A by-product of the model architecture is that embedding vectors are obtained
+    for all job titles in our training set. In order to get a feeling for the quality
+    of these job title embeddings, we had a look at the closest neighbours for a particular
+    job title in the embedding space:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| ***statistician*** | ***humanties teacher*** | ***talent acquisition manager***
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| statistical analyst | humanities teacher | talent acquisition specialist
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| senior statistician | qualified humanities teacher | talent manager |'
+  prefs: []
+  type: TYPE_TB
+- en: '| biostatistician | religious studies teacher | talent acquisition partner
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| epidemiologist | qts nqt geography teacher | talent aquisition manager |'
+  prefs: []
+  type: TYPE_TB
+- en: '| research statistician | geography teacher secondary | talent acquisition
+    consultant |'
+  prefs: []
+  type: TYPE_TB
+- en: '| statistical programmer | teacher of humanities | head of talent acquisition
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| data scientist | qualified history teacher | recruitment manager |'
+  prefs: []
+  type: TYPE_TB
+- en: These examples show that we found different variations of job titles (e.g. “statistician”
+    versus ”statistical analyst” and ”talent acquisition manager” versus ”recruitment
+    manager”), related (sub)fields (e.g. biostatistics and epidemiology for statistics),
+    but also spelling errors (e.g. ”humanties teacher”). Even though our approach
+    does not take the actual characters in words into account, it seems that the model
+    in combination with a large amount of data is (to some extent) tolerant to spelling
+    errors.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Something different now. Researchers have already shown that a simple vector
+    offset approach based on the cosine distance can be very effective for finding
+    analogies using word embeddings. There is the well-known example: cos(w(“king”)
+    – w(“man”) + w(“woman”), w(“queen”)). We took the trained word and job title embeddings
+    from our model and found that such relations hold for our approach too:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| ***Example*** | ***Predicted closest neighbour*** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| java developer – java + c++ | c++ developer |'
+  prefs: []
+  type: TYPE_TB
+- en: '| marketing assistant – junior + senior | senior marketing executive |'
+  prefs: []
+  type: TYPE_TB
+- en: '| nurse – nursing + programming | software engineer |'
+  prefs: []
+  type: TYPE_TB
+- en: '| nanny – baby + database | database administrator |'
+  prefs: []
+  type: TYPE_TB
+- en: '| forklift driver – forklift + hadoop | big data architect |'
+  prefs: []
+  type: TYPE_TB
+- en: '| mobile phone technician – samsung + ford | mechanical and electrical trim
+    technician |'
+  prefs: []
+  type: TYPE_TB
+- en: '| vehicle sales executive – ford + insurance | insurance sales executive |'
+  prefs: []
+  type: TYPE_TB
+- en: '| marketing manager – marketing assistant + junior software developer | software
+    development manager |'
+  prefs: []
+  type: TYPE_TB
+- en: '| bank staff – nab + hospital | staff nurse |'
+  prefs: []
+  type: TYPE_TB
+- en: '| bank staff – nab + coles | grocery clerk |'
+  prefs: []
+  type: TYPE_TB
+- en: '| bank staff – nab + woolworths | supermarket retail assistant |'
+  prefs: []
+  type: TYPE_TB
+- en: '**What are the Feature Detectors Looking for?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The filters in the convolutional layer of the model correspond to feature detectors
+    that are trained to be active when a particular pattern is observed. Since the
+    convolutional layer in our model operates on word embeddings, we can easily interpret
+    what these feature detectors are looking for. One straightforward way of doing
+    this is by visualizing the specific input sequences that lead to maximal activation.
+    The following tables show the top 5 input patterns from all job descriptions of
+    the test data set for several filters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'No surprise, some of the feature detectors are looking for job titles. After
+    all, that’s what we optimized for:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| ***Teacher*** | ***Hospitality staff*** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| senior lecturer lecturer senior lecturer | head barista sous chef foh |'
+  prefs: []
+  type: TYPE_TB
+- en: '| teacher teaching citizenship humanities | ideal hospitality assistant manager
+    will |'
+  prefs: []
+  type: TYPE_TB
+- en: '| teacher secondary teacher college lecturer | title hospitality assistant
+    apprentice employer |'
+  prefs: []
+  type: TYPE_TB
+- en: '| description sen teaching assistant sen | page hotel assistant manager m |'
+  prefs: []
+  type: TYPE_TB
+- en: '| senior lecturer clinical psychology lecturer | head waiter chefs de rang
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: 'Other feature detectors are looking for particular duties:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| ***Cleaning*** | ***Office administration*** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| ironing cleaning taking children to | bookings provide typing filing photocopying
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| toilets cleaning oven rubbish bins | filing general typing answering phones
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| janitor janitorial worker maintenance janitor | greeting clients typing filing
+    sending |'
+  prefs: []
+  type: TYPE_TB
+- en: '| toilets cleaning guest bedrooms landings | earner with typing handling calls
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| ironing cleaning bathrooms cleaning toilets | typing copy typing answering
+    switchboard |'
+  prefs: []
+  type: TYPE_TB
+- en: 'Yet other feature detectors focus on leadership:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| ***Leader*** | ***Supervisor*** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| have people leadership experience senior | oversee and supervise welders
+    boilermakers |'
+  prefs: []
+  type: TYPE_TB
+- en: '| mentoring team lead experience senior | supervise homework supervise bathtime
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: '| supervise and lead the floor | motivate and supervise staff valid |'
+  prefs: []
+  type: TYPE_TB
+- en: '| have proven leadership of teams | manage and supervise junior fee |'
+  prefs: []
+  type: TYPE_TB
+- en: '| supervise and lead the team | motivate and supervise team members |'
+  prefs: []
+  type: TYPE_TB
+- en: 'Type of employment and salary:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| ***Casual*** | ***Salary*** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| casual bar porter casual role | hour pro rata weekend hourly |'
+  prefs: []
+  type: TYPE_TB
+- en: '| casual casual operator needed asap | hour pro rata various hours |'
+  prefs: []
+  type: TYPE_TB
+- en: '| casual bar attendant write your | hour pro rata to term |'
+  prefs: []
+  type: TYPE_TB
+- en: '| casual casual cleaner required good | hour pro rata term part |'
+  prefs: []
+  type: TYPE_TB
+- en: '| casual bar attendant worktype casual | hourly rate overtime available saturdays
+    |'
+  prefs: []
+  type: TYPE_TB
+- en: 'Location and language skills:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| ***Australia*** | ***German*** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| sydney cbd nsw sydney cbd | fluent in german consultative professional |'
+  prefs: []
+  type: TYPE_TB
+- en: '| sydney melbourne brisbane perth canberra | a motivated german specialist
+    teacher |'
+  prefs: []
+  type: TYPE_TB
+- en: '| sydney australia australia sydney nsw | specified location german resourcer
+    entry |'
+  prefs: []
+  type: TYPE_TB
+- en: '| sydney adelaide brisbane chatswood melbourne | translation skills german
+    :english . |'
+  prefs: []
+  type: TYPE_TB
+- en: '| sydney adelaide brisbane chatswood melbourne | job description german resourcer
+    entry |'
+  prefs: []
+  type: TYPE_TB
+- en: 'Interestingly, there was also a feature detector for the desired appearance
+    of candidates. Having good manners, a certain standard of personal hygiene and
+    an English accent seem to go hand in hand according to this feature detector:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| ***Appearance*** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| caucasian languages : english hair |'
+  prefs: []
+  type: TYPE_TB
+- en: '| caucasian languages : english accents |'
+  prefs: []
+  type: TYPE_TB
+- en: '| disposition smart clean appearance friendly |'
+  prefs: []
+  type: TYPE_TB
+- en: '| groomed and presentable appearance caring |'
+  prefs: []
+  type: TYPE_TB
+- en: '| presentable with a polite courteous |'
+  prefs: []
+  type: TYPE_TB
+- en: These examples illustrate that the obtained filters not only focus on the job
+    title, but cover most of the relevant sections that one expects to find in a job
+    description. While CNNs are of course known for representation and feature learning,
+    we still found it quite remarkable what it came up with after learning to predict
+    job titles from raw, uncleaned job descriptions with almost no preprocessing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Keyphrases and Related Job Descriptions**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s have another look at the pieces of input text that tend to maximally
+    activate the feature detectors in the CNN. Although this ignores the transfer
+    functions and fully connected layer in the network, it is a helpful way to understand
+    the predictions that the CNN makes. The figure below highlights the parts of a
+    tandoori chef job description that correspond to the description’s 50 text windows
+    with the largest activation over all filters in the network. By assigning a simple
+    colour code (in increasing order of activation: grey, yellow, orange, red) to
+    each word, it becomes clear that these text windows correspond to the keyphrases
+    in this job description that was taken from the test data set:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Deep learning in recruitment](../Images/d13ad790f1f3b737b2229c6b1b07ca7e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note that the first 20 words of the vacancy were not used since they usually
+    contain the job title (it is often the title of the vacancy).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A final insight is that the CNN part of the model is basically a document to
+    vector approach that generates an embedding for a variable-length job description.
+    Hence, there is nothing stopping us from looking for similar job descriptions
+    by comparing their embeddings. This is the closest test set vacancy in the embedding
+    space for the tandoori chef vacancy above:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Deep learning in recruitment](../Images/59c7e6edf32cf2724936b8b68ef6fc59.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'No surprises: this employer is also looking for a tandoori chef. Also not very
+    surprising: looking at which neurons show high activations reveals that these
+    vacancies basically share the same active neurons. For example, neuron 725 gets
+    activated for both “culinary skills, knowledge about food” and “restaurant in
+    Prahan. Friendly” and neuron 444 for “all marinades and Indian dishes” and “a
+    Tandoori chef to work”. So, the model knows that these expressions are semantically
+    related. Based on some experiments we did, it looks like this could be an interesting
+    approach to find similar or related vacancies. Given that the model does not only
+    look at the job title and knows which expressions are related, this adds value
+    compared to a simple approach that only compares the actual words of a job title
+    or job description.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article is a condensed overview of a blog series that was published [here](https://www.searchparty.com/blog/using-deep-learning-extract-knowledge-job-descriptions-introduction-p1/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Jan Luts](https://www.linkedin.com/in/jan-luts-5a75a76/)** is a senior
+    data scientist at Search Party. He received a Master of Information Sciences from
+    Universiteit Hasselt, Belgium, in 2003\. He also received Master degrees in Bioinformatics
+    and Statistics from Katholieke Universiteit Leuven, Belgium, in 2004 and 2005,
+    respectively. After obtaining his PhD at the Department of Electrical Engineering
+    (ESAT) of Katholieke Universiteit Leuven in 2010, he worked in postdoctoral research
+    for a further two years at the institution. In 2012 Jan moved to Australia where
+    he worked as a postdoctoral researcher in Statistics at the School of Mathematical
+    Sciences in the University of Technology, Sydney. In 2013 he moved into the private
+    sector as data scientist at Search Party.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Text Mining Amazon Mobile Phone Reviews: Interesting Insights](/2017/01/data-mining-amazon-mobile-phone-reviews-interesting-insights.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Text Analytics: A Primer](/2017/03/text-analytics-primer.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Measuring Topic Interpretability with Crowdsourcing](/2016/11/measuring-topic-interpretability-crowdsourcing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

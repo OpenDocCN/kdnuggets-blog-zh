@@ -1,0 +1,275 @@
+- en: 'Mining Twitter Data with Python Part 4: Rugby and Term Co-occurrences'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-4.html](https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-4.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Marco Bonzanini, Independent Data Science Consultant**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Last Saturday (*Editor''s note: happened a while ago*) was the closing day
+    of the [Six Nations Championship](https://en.wikipedia.org/wiki/Six_Nations_Championship),
+    an annual international [rugby](https://en.wikipedia.org/wiki/Rugby_union) competition.
+    Before turning on the TV to watch Italy being trashed by Wales, I decided to use
+    this event to collect some data from Twitter and perform some exploratory text
+    analysis on something more interesting than the small list of my tweets.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This article continues the tutorial on Twitter Data Mining, re-using what we
+    discussed in the previous articles with some more realistic data. It also expands
+    the analysis by introducing the concept of term co-occurrence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Twitter](../Images/3da5b4dea824ea453ca3ae25f3548634.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The Application Domain
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'As the name suggests, six teams are involved in the competition: England, Ireland,
+    Wales, Scotland, France and Italy. This means that we can expect the event to
+    be tweeted in multiple languages (English, French, Italian, Welsh, Gaelic, possibly
+    other languages as well), with English being the major language. Assuming the
+    team names will be mentioned frequently, we could decide to look also for their
+    nicknames, e.g. *Les Bleus* for France or *Azzurri* for Italy. During the last
+    day of the competition, three matches are played sequentially. Three teams in
+    particular had a shot for the title: England, Ireland and Wales. At the end, Ireland
+    won the competition but everything was open until the very last minute.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Setting Up
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I used the [streaming API](/2016/06/mining-twitter-data-python-part-1.html) to
+    download all the tweets containing the string `#rbs6nations` during the day. Obviously
+    not all the tweets about the event contained the hashtag, but this is a good baseline.
+    The time frame for the download was from around 12:15PM to 7:15PM GMT, that is
+    from about 15 minutes before the first match, to about 15 minutes after the last
+    match was over. At the end, more than 18,000 tweets have been downloaded in JSON
+    format, making for about 75Mb of data. This should be small enough to quickly
+    do some processing in memory, and at the same time big enough to observe something
+    possibly interesting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The textual content of the tweets has been pre-processed with [tokenisation
+    and lowercasing](/2016/06/mining-twitter-data-python-part-2.html) using the `preprocess()` function
+    introduced in Part 2 of the tutorial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Interesting terms and hashtags
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Following what we discussed in [Part 3 (Term Frequencies)](/2016/06/mining-twitter-data-python-part-3.html),
+    we want to observe the most common terms and hashtags used during day. If you
+    have followed the discussion about creating different lists of tokens in order
+    to capture terms without hashtags, hashtags only, removing stop-words, etc. you
+    can play around with the different lists.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is the unsurprising list of top 10 most frequent terms (`terms_only` in
+    Part 3) in the data set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The first three terms correspond to the teams who had a go for the title. The
+    frequencies also respect the order in the final table. The fourth term is instead
+    a punctuation mark that we missed and didn’t include in the list of stop-words.
+    This is because `string.punctuation` only contains ASCII symbols, while here we’re
+    dealing with a unicode character. If we dig into the data, there will be more
+    examples like this, but for the moment we don’t worry about it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'After adding the suspension-points symbol to the list of stop-words, we have
+    a new entry at the end of the list:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Interestingly, a new token we didn’t account for, an [Emoji symbol](https://en.wikipedia.org/wiki/Emoji) (in
+    this case, the [Irish Shamrock](https://en.wikipedia.org/wiki/Shamrock)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If we have a look at the most common hashtags, we need to consider that`#rbs6nations` will
+    be by far the most common token (that’s our search term for downloading the tweets),
+    so we can exclude it from the list. This leave us with:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can observe that the most common hashtags, a part from `#rugby`, are related
+    to the individual matches. In particular England v France has received the highest
+    number of mentions, probably being the last match of the day with a dramatic finale.
+    Something interesting to notice is that a fair amount of tweets also contained
+    terms in French: the count for`#angfra` should in fact be added to `#engvfra`.
+    Those unfamiliar with rugby probably wouldn’t recognise that also `#crunch` should
+    be included with`#EngvFra` match, as *Le Crunch* is the traditional name for this
+    event. So by far, the last match has received a lot of attention.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Term co-occurrences
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Sometimes we are interested in the terms that occur together. This is mainly
+    because the *context* gives us a better insight about the meaning of a term, supporting
+    applications such as word disambiguation or semantic similarity. We discussed
+    the option of using *bigrams* [in the previous article](/2016/06/mining-twitter-data-python-part-3.html),
+    but we want to extend the context of a term to the whole tweet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can refactor the code from [the previous article](/2016/06/mining-twitter-data-python-part-3.html) in
+    order to capture the co-occurrences. We build a co-occurrence matrix `com` such
+    that`com[x][y]` contains the number of times the term `x` has been seen in the
+    same tweet as the term `y`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: While building the co-occurrence matrix, we don’t want to count the same term
+    pair twice, e.g. `com[A][B] == com[B][A]`, so the inner for loop starts from `i+1` in
+    order to build a triangular matrix, while `sorted` will preserve the alphabetical
+    order of the terms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For each term, we then extract the 5 most frequent co-occurrent terms, creating
+    a list of tuples in the form `((term1, term2), count)`:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The results:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: This implementation is pretty straightforward, but depending on the data set
+    and on the use of the matrix, one might want to look into tools like `scipy.sparse` for
+    building a sparse matrix.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We could also look for a specific term and extract its most frequent co-occurrences.
+    We simply need to modify the main loop including an extra counter, for example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The outcome for “ireland”:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The outcome for “rugby”:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Overall, quite interesting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This article has discussed a toy example of Text Mining on Twitter, using some
+    realistic data taken during a sport event. Using what we have learnt in the previous
+    episodes, we have downloaded some data using the streaming API, pre-processed
+    the data in JSON format and extracted some interesting terms and hashtags from
+    the tweets. The article has also introduced the concept of term co-occurrence,
+    shown how to build a co-occurrence matrix and discussed how to use it to find
+    some interesting insight.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Marco Bonzanini](https://twitter.com/marcobonzanini)** is a Data Scientist
+    based in London, UK. Active in the PyData community, he enjoys working in text
+    analytics and data mining applications. He''s the author of "[Mastering Social
+    Media Mining with Python](https://www.amazon.com/Mastering-Social-Media-Mining-Python-ebook/dp/B01BFD2Z2Q)"
+    (Packt Publishing, July 2016).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://marcobonzanini.com/2015/03/23/mining-twitter-data-with-python-part-4-rugby-and-term-co-occurrences/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Mining Twitter Data with Python Part 1: Collecting Data](/2016/06/mining-twitter-data-python-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mining Twitter Data with Python Part 2: Text Pre-processing](/2016/06/mining-twitter-data-python-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Mining Twitter Data with Python Part 3: Term Frequencies](/2016/06/mining-twitter-data-python-part-3.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Machine Learning Is Not Like Your Brain Part 6: The Importance of…](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, April 6: 8 Free MIT Courses to Learn Data Science…](https://www.kdnuggets.com/2022/n14.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Complete Collection of Data Science Cheat Sheets - Part 1](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Complete Collection of Data Science Cheat Sheets - Part 2](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Complete Collection Of Data Repositories - Part 1](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

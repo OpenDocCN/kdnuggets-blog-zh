@@ -1,0 +1,463 @@
+- en: How causal inference lifts augmented analytics beyond flatland
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/08/causal-inference-augmented-analytics-beyond-flatland.html](https://www.kdnuggets.com/2021/08/causal-inference-augmented-analytics-beyond-flatland.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Michael Klaput](https://www.linkedin.com/in/michael-klaput-67375385),
+    Chief Science Officer and Co-Founder at Kausa**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d6a1b737c9bf044bc70dc03c45304f61.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If the world was two-dimensional, life would be very odd indeed. Think about
+    it: The earth would not be a sphere but a circle — just like all other stars and
+    planets in a 2D universe. Beings would be flattened, too, navigating a plane landscape
+    and existence. For example, to pass somebody on the street, you would have to
+    jump over that person as there would be no depth whatsoever. For the same reason,
+    to just look behind you, you would literally have to turn yourself upside down.
+    Fortunately, this is not the world we live in. But unfortunately, this is the
+    basis on which most enterprises are run today — perhaps even yours. In any technology-driven
+    business, the quality of your decision-making is inevitably based on the quality
+    of your data insights. However, in too many companies, those ’insights’ are effectively
+    two-dimensional: flat, impractical, and hopelessly inconclusive.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Businesses usually measure their performance in terms of a KPI. It has thus
+    become an objective in data analytics to find the best predictive models of future
+    KPI values given historical data. While these models might perform surprisingly
+    well, extracting value out of them is just as hard. Aside from a lack of explainability,
+    this is also because predictive models are unable to capture reality and are limited
+    to low-dimensional explanations. In this article, we will give two arguments why
+    this is the case based on bad scaling and unrealistic assumptions made in most
+    predictive models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But why bother? It is not the well-performing model that improves business performance.
+    Instead, the only way to improve a business is through decisions, which should
+    ultimately be done by a human. The objective of data analytics in business should
+    be to inform decisions by uncovering insights. Unfortunately, these are hidden
+    in your data like needles in a haystack. This far from trivial problem motivated
+    a relatively young branch of data analytics has been coined augmented analytics
+    and has been pushed in a recent Gartner report [[1](https://www.kausa.ai/blog/how-causal-inference-lifts-augmented-analytics-beyond-flatland#7342acb5e89f)].
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/116fd95d11ab92f5bf7081b935807c08.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 1\. Cover of Flatland: a romance of many dimensions / with illustrations
+    by the author, A Square. By Edwin Abbott Abbott (1838-1926). Published: London:
+    Seeley & Co., 1884\. *EC85 Ab264 884f Houghton Library, Harvard University*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We want to challenge the perception that predictive models should be the default
+    option used to inform business decisions. They introduce a costly detour in the
+    search for insights and might even render it practically infeasible. We will highlight
+    in a simple problem that predictive modeling can offer only little aside from
+    a massive overhead. Instead, we will try to mimic how a business analyst would
+    operate. This will naturally bring us to methods from causal inference.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Impactful Change
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'We will consider the problem of diagnosing errors in regression models in big
+    data scenarios. Most of the readers should have encountered the following scenario:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Figure 2\. Key performance indicator actual vs. prediction using a single
+    model.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Clearly, there has been an impactful change in the KPI that seems to persist
+    for the time being. On the technical side, a reasonable reaction would be to retrain
+    your predictive model on the data after the change point. Do you agree? If so,
+    maybe keep this in mind.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Figure 3\. Key performance indicator actual vs. prediction using two models.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The good news is that your model seems to be accurate. The bad news is that
+    your manager will inevitably ask what happened to the KPI. But do not be afraid.
+    This is an ideal situation for proving your value to the company. Can you identify
+    the reason behind this change? Can you uncover insights that will inform the correct
+    decision?
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Quest of Why
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Let''s say your company’s dataset looks something like this:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*Table 1\. Sample company data.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let us further assume that you are dealing with the simplest case: The KPI
+    values of data points before and after the jump are perfectly fit using a linear
+    regression model. Here, you are dealing with categorical data which you need to
+    handle appropriately to use in the regression. A standard approach for this is
+    one-hot encoding of categorical values: for each category value, you introduce
+    a feature that can be either true or false. For example, in the dataset above
+    you would define the feature'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*customer_country = **Germany*.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: To finally enable feature selection, it is necessary to use a form of regularisation.
+    Here,  you will use lasso regularisation (with ten-fold cross-validation).
+  prefs: []
+  type: TYPE_NORMAL
+- en: After training two lasso regularised linear regression models, one before and
+    one after the jump,  you can look at a ranked list of feature weight differences
+    between these.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*Figure 4\. Feature weights using one-hot encoding.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: It looks like subgroups such as android customers or customers older than 46+
+    performed differently before and after the jump. Great, looks like you found the
+    reasons for the KPI jump … or did you?
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Curse of Dimensionality
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'In fact, this is a more non-trivial situation than we have appreciated so far.
+    Imagine presenting this to the KPI owner. They will be very happy that you have
+    delivered them reasons for the KPI change, and they will now be wondering about
+    what to do based on this information. It will automatically lead them to questions
+    like the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: “*Are the actual drivers for the KPI change all android-tv customers, all customers
+    older 46, and all customers who made a purchase before? Maybe it could be the
+    repeat customers older than 46 and the android-tv customers… or the Android-TV
+    customers who purchased something before? Worse, are there maybe other combinations
+    of features which you have missed?*”
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/61163868cd07047afeb209817055d2cd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 5\. Kausa - Because you know better.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Therefore, to be able to more confidently answer such questions, you would have
+    to repeat your regression analysis with more complex one-hot encoded features
+    … now representing finer subgroups than before. Thereby, you are searching among
+    deeper subgroups of the dataset, see Figure 6, with new features like
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*customer_age = 46+ and first_order_made = yes, customer_age = 18−−21 and first_order_made
+    = no.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Again these subgroups enter via one-hot encoding. This is obviously problematic,
+    as you are now falling victim to the *curse of dimensionality*. It is the era
+    of big data, and you just increased your number of features by a factorial amount [[2](https://www.kausa.ai/blog/how-causal-inference-lifts-augmented-analytics-beyond-flatland#7558d6345a50)]. A
+    piece of code that can be used to generate these refined subgroups is
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/130e2a27e777769c746adb14d8cb937a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 6\. Subgroup depth.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Remember that linear regression is based on an inversion of a covariance matrix
+    among all features - which scales
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*O(d³),*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: with d being the number of features, i.e. in our case the number of possible
+    subgroups. This introduces significant opportunity cost in comparison to non-predictive
+    feature selection methods - as will be discussed later.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*Figure 7\. Feature weights of intersections using one-hot encoding.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: After some time, your computation finishes. While your earlier computation took
+    just 0.1 seconds, searching for third-order features already took over a minute.
+    But it seems to be worth it. You find that the number of groups driving the KPI
+    change was actually one, as in Figure 7\. Presenting this insight to your manager,
+    he could quickly point to an update that directly affected the subgroup you reported.
+  prefs: []
+  type: TYPE_NORMAL
+- en: By refining the subgroup, you could render it actionable
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: While your regression approach finally worked out - it took extremely long to
+    compute, resulting in opportunity cost to your company. In a realistic scenario
+    of big data, your approach would have failed horribly. Additionally, original
+    sets containing only shallow subgroups painted an incorrect picture. Only after
+    refining sets and enormous computational effort could you pinpoint the actual
+    subgroup that drove the jump in the KPI.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This begs several questions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Do you actually need to learn a predictive model to answer why the jump happened?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How can you reduce opportunity costs?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: How can you find subgroups at the appropriate level of granularity?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Is it economical to retrain models at every jump for this piece of information?
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: While answering all these questions is out-of-scope for this post, we will offer
+    a new point-of-view that can help to resolve these issues. For this, we will develop
+    an approach to feature selection that improves on linear regression.  Augmented
+    analytics depends on it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Learning from Business Analysts and Causal Inference
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Let’s take a step back… what happened here? You started off with a predictive
+    model, and you saw that it could neither predict nor explain the observed jump
+    in the KPI. Why is that? Because predictive models are unable to capture reality. They
+    assume that all data is independently and identically distributed [[3](https://www.kausa.ai/blog/how-causal-inference-lifts-augmented-analytics-beyond-flatland#c72ace9e8427)].
+    However, in real-life applications, this is often incorrect, as this example shows.
+    Data before and after the jump was generated under different conditions. You even
+    intuitively made use of this fact, when you used two separate predictive models,
+    which (after some tricks) helped us to uncover the reason for that jump.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As you had to give up on prediction and ultimately did not predict anything,
+    what did the prediction models actually do for you? If you think about it, the
+    key is that you are not interested in predicting the KPI as a function of all
+    possible subgroups - you are interested in subgroups affecting the KPI! Thus,
+    to search for insights at deeper levels, you have to get away from predictive
+    modeling. This is where the data scientist can learn from the business analyst.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A business analyst searches for insights through dashboards containing meaningful
+    summaries of data. Instead of correlating all features together, as in the regression
+    approach above, the business analyst will try to pinpoint what changes happened
+    in the data based on summaries (like means, histograms, or metrics) by iteratively
+    filtering the data for different conditions. Most importantly, the business analyst
+    will never have to look at all features at once. How do you teach a machine to
+    do that? How can you learn from a business analyst?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let us formalise the above in mathematical notation. Let X be a subgroup, e.g.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*X = customer_age = 46+ and first_order_made = yes*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: and
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*f(KPI[before], KPI[after])*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: some summary of the KPI distributions before and after the jump in the KPI.
+    Then, you introduce conditional summaries
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*f(KPI[before], KPI[after]* ∣ *X)*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: where you compute summaries of subsets of KPI values for which X is true. All
+    that our method needs to do now, is to compute conditional summaries for each
+    subgroup and rank them. I want to stress, that in practice these abstract summaries
+    can be objects as means, histograms etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The procedure detailed above is actually a common technique from causal inference [[4](https://www.kausa.ai/blog/how-causal-inference-lifts-augmented-analytics-beyond-flatland#8dfc0806606a)].
+    You thereby implicitly changed our point of view. Now, you consider the mysterious
+    jump in the KPI as an intervention that is now assumed to have happened due to
+    external or internal *treatments*. An example for an external treatment might
+    be the holiday season, an internal treatment might be an ad campaign, a change
+    in pricing, or, as in our case, a software update. You are thus explicitly *lifting *the
+    wrong assumption that all data is independently and identically distributed. You
+    are now searching for subgroups that are *causal* to the change in KPI.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Quest of Why, Revisited
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Now that you have a model of how a business analyst operates, let us proceed
+    with the actual implementation. For now, you will use a standard summary used
+    in causal inference called Conditional Average Treatment Effect (CATE) [[5](https://www.kausa.ai/blog/how-causal-inference-lifts-augmented-analytics-beyond-flatland#cc6447b58903)],
+    for which our summary becomes
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*f(KPI[before], KPI[after]* ∣ *X) = E*[*KPI[after]* ∣ *X*] *− E*[*KPI[before]*
+    ∣ *X*]'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The CATE corresponds to the change in the mean of the KPI, conditioned on that
+    subgroup X is true. Ranking by magnitude then gives us the correct subgroup as
+    a result. To detect multiple subgroups, we repeat this procedure after removing
+    the best performing subgroup after each iteration:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '*Figure 8\. CATE Scores using the one-hot encoding of intersections.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This takes a fraction of the cost of our predictive model. The computation for
+    first-order features took just 0.02 seconds, searching for third-order features
+    took less than a  second.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let us take a step back and compare this approach with the earlier one based
+    on regression and what their respective objectives are. Feature selection via
+    regression answers the question: ” Which subgroups best predict your KPI?”. While
+    taking the view of causal inference answers the question: “Which subgroups had
+    the biggest causal effect on the KPI?”.  Comparing run-times of a naive implementation
+    of CATE with the optimised *sklearn* implementation of linear regression in Figure
+    9, we find that they lie order of magnitudes apart. This makes it clear that these
+    questions, while superficially similar, have fundamental differences.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Figure 9\. Log-runtime over subgroup depth of linear regression (sklearn)
+    vs. CATE for exhaustive subgroup search.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Predictive models have strong shortcomings as means to understand KPI changes,
+    especially in multi-dimensional contexts. These models fundamentally answer the
+    wrong questions under the wrong assumptions. Instead, business analytics focuses
+    on why did something happen rather than what will happen. Having their mind free
+    of the auxiliary task of predicting future KPI values, analytics finds reasons
+    in the data to understand why the KPI changed, trying to find the answers for
+    the right question.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Be wary next time you want to explain anything. Firstly, you should ask the
+    right question. In addition, multi-dimensional contexts require a scalable technique
+    based on causal inference and business analytics methods. This is our mission
+    at Kausa: scale business analytics logic and couple it with causal inference to
+    provide the right answers to KPI changes.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*PS: Code and data to reproduce results from this article are available in
+    our GitHub repository [[6](https://www.kausa.ai/blog/how-causal-inference-lifts-augmented-analytics-beyond-flatland#5b4e41206487)].*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.kausa.ai/blog/how-causal-inference-lifts-augmented-analytics-beyond-flatland).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Michael](https://www.linkedin.com/in/michael-klaput-67375385) [Klaput](https://www.linkedin.com/in/michael-klaput-67375385) is
+    the co-founder and CTO at Kausa ([www.kausa.ai](http://www.kausa.ai)), former
+    VP Quantitative Analyst at Bank of America Merrill Lynch, and Ph.D. in Theoretical
+    Physics Oxford University.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Analytics Engineering Everywhere](https://www.kdnuggets.com/2021/06/analytics-engineering-everywhere.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Why machine learning struggles with causality](https://www.kdnuggets.com/2021/04/machine-learning-struggles-causality.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Must Know for Data Scientists and Data Analysts: Causal Design Patterns](https://www.kdnuggets.com/2021/03/causal-design-patterns.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Meet Gorilla: UC Berkeley and Microsoft’s API-Augmented LLM…](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Retrieval Augmented Generation: Where Information Retrieval Meets…](https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unify Batch and ML Systems with Feature/Training/Inference Pipelines](https://www.kdnuggets.com/2023/09/hopsworks-unify-batch-ml-systems-feature-training-inference-pipelines)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[10 Key AI & Data Analytics Trends for 2022 and Beyond](https://www.kdnuggets.com/2021/12/10-key-ai-trends-for-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beyond Pipelines: Graphs as Scikit-Learn Metaestimators](https://www.kdnuggets.com/2022/09/graphs-scikitlearn-metaestimators.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beyond Coding: Why The Human Touch Matters](https://www.kdnuggets.com/beyond-coding-why-the-human-touch-matters)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

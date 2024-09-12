@@ -1,0 +1,1167 @@
+- en: 'Production Machine Learning Monitoring: Outliers, Drift, Explainers & Statistical
+    Performance'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/12/production-machine-learning-monitoring-outliers-drift-explainers-statistical-performance.html](https://www.kdnuggets.com/2020/12/production-machine-learning-monitoring-outliers-drift-explainers-statistical-performance.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Alejandro Saucedo](https://www.linkedin.com/in/axsaucedo/), Engineering
+    Director at Seldon**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/5adde1d0c003e4c846241add464f5b86.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: “The lifecycle of a machine learning model only begins once it’s in production”
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: In this article we present an end-to-end example showcasing best practices,
+    principles, patterns and techniques around monitoring of machine learning models
+    in production. We will show how to adapt standard microservice monitoring techniques
+    towards deployed machine learning models, as well as more advanced paradigms including
+    concept drift, outlier detection and AI explainability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will train an image classification machine learning model from scratch, deploy
+    it as a microservice in Kubernetes, and introduce a broad range of advanced monitoring
+    components. The monitoring components will include outlier detectors, drift detectors,
+    AI explainers and metrics servers — we will cover the underlying architectural
+    patterns used for each, which are developed with scale in mind, and designed to
+    work efficiently across hundreds or thousands of heterogeneous machine learning
+    models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can also view this blog post in video form, which was presented as the keynote
+    at the PyCon Hong Kong 2020 — the main delta is that the talk uses an Iris Sklearn
+    model for the e2e example instead of the CIFAR10 Tensorflow model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: End to end machine learning monitoring example
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article we present an end-to-end hands on example covering each of the
+    high level concepts outlined in the sections below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction to Monitoring Complex ML Systems
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: CIFAR10 Tensorflow Renset32 model training
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Model Packaging & Deployment
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Performance monitoring
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Eventing Infrastructure for Monitoring
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Statistical monitoring
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Outlier detection monitoring
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Concept drift monitoring
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Explainability monitoring
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'We will be using the following open source frameworks in this tutorial:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**Tensorflow **](https://github.com/tensorflow/tensorflow)— Widely used machine
+    learning framework.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Alibi Explain**](https://github.com/SeldonIO/alibi) — White-box and black-box
+    ML model explanation library.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Albi Detect **](https://github.com/SeldonIO/alibi-detect)— Advanced machine
+    learning monitoring algorithms for concept drift, outlier detection and adversarial
+    detection.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Seldon Core**](https://github.com/SeldonIO/seldon-core/) — Machine learning
+    deployment and orchestration of the models and monitoring components.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: You can find the full code for this article in the [jupyter notebook provided](https://github.com/axsaucedo/seldon_experiments/blob/master/monitoring-talk/cifar10_example.ipynb) which
+    will allow you to run all relevant steps throughout the model monitoring lifecycle.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s get started.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Introduction to Monitoring Complex ML Systems
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Monitoring of production machine learning is hard, and it becomes exponentially
+    more complex once the number of models and advanced monitoring components grows.
+    This is partly due to how different production machine learning systems are compared
+    to traditional software microservice-based systems — some of these key differences
+    are outlined below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/0c0298d101c1be5bc129ca939d2ccf2c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Specialized hardware** —Optimized implementation of machine learning algorithms
+    often require access to GPUs, larger amounts of RAM, specialised TPUs/FPGAs, and
+    other even dynamically changing requirements. This results in the need for specific
+    configuration to ensure this specialised hardware can produce accurate usage metrics,
+    and more importantly that these can be linked to the respective underlying algorithms.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Complex Dependency Graphs **— The tools and underlying data involves complex
+    dependencies that can span across complex graph structures. This means that the
+    processing of a single datapoint may require stateful metric assessment across
+    multiple hops, potentially introducing additional layers of domain-specific abstraction
+    which may have to be taken into consideration for reliable interpretation of monitoring
+    state.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Compliance Requirements** — Production systems, especially in highly regulated
+    environments may involve complex policies around auditing, data requirements,
+    as well as collection of resources and artifacts at each stage of execution. Sometimes
+    the metrics that are being displayed and analysed will have to be limited to the
+    relevant individuals, based on the specified policies, which can vary in complexity
+    across use-cases.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Reproducibility **— On top of these complex technical requirements, there
+    is a critical requirement around reproducibility of components, ensuring that
+    the components that are run can be executed at another point with the same results.
+    When it comes to monitoring, it is important that the systems are built with this
+    in mind such that it’s possible to re-run particular machine learning executions
+    to reproduce particular metrics, whether for monitoring or for auditing purposes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The anatomy of production machine learning involves a broad range of complexities
+    that range across the multiple stages of the model’s lifecycle. This includes
+    experimentation, scoring, hyperparameter tuning, serving, offline batch, streaming
+    and beyond. Each of these stages involve potentially different systems with a
+    broad range of heterogeneous tools. This is why it is key to ensure we not only
+    learn how we are able to introduce model-specific metrics to monitor, but that
+    we identify the higher level architectural patterns that can be used to enable
+    the deployed models to be monitored effectively at scale. This is what we will
+    cover in each of the sections below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. CIFAR10 Tensorflow Renset32 model training
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e0fc7f608ee02bb318b6d800cfffeb2a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image from the open source [CIFAR10 dataset](https://www.cs.toronto.edu/~kriz/cifar.html)
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will be using the intuitive [**CIFAR10 dataset**](https://www.cs.toronto.edu/~kriz/cifar.html).
+    This dataset consists of images that can be classified across one of 10 classes.
+    The model will take as an input an array of shape 32x32x3 and as output an array
+    with 10 probabilities for which of the classes it belongs to.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We are able to load the data from the Tensorflow datasets — namely:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The 10 classes include: `cifar_classes = [“airplane”, “automobile”, “bird”,
+    “cat”, “deer”, “dog”, “frog”, “horse”, “ship”, “truck”]`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order for us to train and deploy our machine learning model, we will follow
+    the traditional machine learning workflow outlined in the diagram below. We will
+    be training a model which we will then be able to export and deploy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/dc4efbfe55db9179d41c9b3cd37bb2ba.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We will be using Tensorflow to train this model, leveraging the [Residual Network](https://towardsdatascience.com/an-overview-of-resnet-and-its-variants-5281e2f56035) which
+    is arguably one of the most groundbreaking architectures as it makes it possible
+    to train up to hundreds or even thousands of layers with good performance. For
+    this tutorial we will be using the Resnet32 implementation, which fortunately
+    we’ll be able to use through the utilities provided by the Alibi Detect Package.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using my GPU this model took about 5 hours to train, luckily we will be able
+    to use a pre-trained model which can be retrieved using the Alibi Detect `fetch_tf_model` utils.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to still train the CIFAR10 resnet32 tensorflow model, you can use
+    the helper utilities provided by the Alibi Detect package as outlined below, or
+    even just import the raw Network and train it yourself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can now test the trained model on “unseen data”. We can test it using a CIFAR10
+    datapoint that would be classified as a truck. We can have a look at the datapoint
+    by plotting it using Matplotlib.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/c13d881447de9a1cb03b023f153b0927.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can now process that datapoint through the model, which as you can imagine
+    should be predicted as a “truck”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can find the class predicted by finding the index with the highest probability,
+    which in this case it is `index 9`with a high probability of 99%. From the names
+    of the classes (e.g. `cifar_classes[ np.argmax( X_curr_pred )]`) we can see that
+    class 9 is “truck”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Package & deploy Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We will be using Seldon Core for the deployment of our model into Kubernetes,
+    which provides multiple options to convert our model into a fully fledged microservice
+    exposing REST, GRPC and Kafka interfaces.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The options we have to deploy models with Seldon Core include 1) the [Language
+    Wrappers](https://docs.seldon.io/projects/seldon-core/en/latest/wrappers/language_wrappers.html) to
+    deploy our Python, Java, R, etc code classes, or 2) the [Prepackaged Model Servers](https://docs.seldon.io/projects/seldon-core/en/latest/servers/overview.html) to
+    deploy model artifacts directly. In this tutorial we will be using the [Tensorflow
+    Prepackaged Model](https://docs.seldon.io/projects/seldon-core/en/latest/servers/tensorflow.html) server
+    to deploy the Resnet32 model we were using earlier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This approach will allow us to take advantage of the cloud native architecture
+    of Kubernetes which powers large scale microservice systems through horizontally
+    scalable infrastructure. We will be able to learn about and leverage cloud native
+    and microservice patterns adopted to machine learning throughout this tutorial.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The diagram below summarises the options available to deploy model artifacts
+    or the code itself, together with the abilities we have to deploy either a single
+    model, or build complex inference graphs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/a78e2d4a97e0799410efad8c75bdd0b3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As a side note, you can get set up you on Kubernetes using a development environment
+    like [KIND (Kubernetes in Docker)](https://github.com/kubernetes-sigs/kind) or [Minikube,](https://github.com/kubernetes/minikube) and
+    then following the instructions in the [Notebook for this example](https://github.com/axsaucedo/seldon_experiments/blob/master/monitoring-talk/cifar10_example.ipynb),
+    or in the [Seldon documentation](https://docs.seldon.io/projects/seldon-core/en/latest/workflow/install.html).
+    You will need to make sure you install Seldon with a respective ingress provider
+    like Istio or Ambassador so you can send the REST requests.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'To simplify the tutorial, we have already uploaded the trained Tensorflow Resnet32
+    model, which can be found this public Google bucket: `gs://seldon-models/tfserving/cifar10/resnet32`.
+    If you have trained your model, you are able to upload it to the bucket of your
+    choice, which can be Google Bucket, Azure, S3 or local Minio. Specifically for
+    Google you can do it using the `gsutil` command line with the command below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can deploy our model with Seldon using the custom resource definition configuration
+    file. Below is the script that converts the model artifact into a fully fledged
+    microservice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can now see that the model has been deployed and is currently running.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can now test our deployed model by sending the same image of the truck, and
+    see if we still have the same prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c13d881447de9a1cb03b023f153b0927.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Datapoint displayed with `plt.imshow(X_curr[0])`
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will be able to do this by sending a REST request as outlined below, and
+    then print the results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The output of the code above is the JSON response of the POST request to the
+    url that Seldon Core provides us through [the ingress](https://docs.seldon.io/projects/seldon-core/en/latest/ingress/istio.html).
+    We can see that the prediction is correctly resulting in the “truck” class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 4\. Performance Monitoring
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The first monitoring pillar we will be covering is the good old performance
+    monitoring, which is the traditional and standard monitoring features that you
+    would find in the microservices and infrastructure world. Of course in our case
+    we will be adopting it towards deployed machine learning models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some high level principles of machine learning monitoring include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Monitoring the performance of the running ML service**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Identifying potential bottlenecks or runtime red flags**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Debugging and diagnosing unexpected performance of ML services**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'For this we will be able to introduce the first two core frameworks which are
+    commonly used across production systems:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Elasticsearch for logs — A document key-value store that is commonly used to
+    store the logs from containers, which can then be used to diagnose errors through
+    stack traces or information logs. In the case of machine learning we don’t only
+    use it to store logs but also to store pre-processed inputs and outputs of machine
+    learning models for further processing.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Prometheus for metrics —A time-series store that is commonly used to store real-time
+    metrics data, which can then be visusalised leveraging tools like Grafana.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Seldon Core provides integration with Prometheus and Elasticsearch out of the
+    box for any model deployed. During this tutorial we will be referencing Elasticsearch
+    but to simplify the intuitive grasp of several advanced monitoring concepts we
+    will be using mainly Prometheus for metrics and Grafana for the visualisations.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the diagram below you can visualise how the exported microservice enables
+    any containerised model to export both metrics and logs. The metrics are scraped
+    by prometheus, and the logs are forwarded by the model into elasticsearch (which
+    happens through the eventing infrastructure we cover in the next section. For
+    explicitness it is worth mentioning that Seldon Core also supports Open Tracing
+    metrics using Jaeger, which shows the latency throughout all microservice hops
+    in the Seldon Core model graph.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c143b6a1cd7220fe395eb48ec970de53.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some examples of performance monitoring metrics that are exposed by Seldon
+    Core models, and that can be also added through further integrations include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Requests per second**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Latency per request**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**CPU/memory/data utilisation**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Custom application metrics**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For this tutorial you can set up Prometheus and Grafana by using the [Seldon
+    Core Analytics package](https://docs.seldon.io/projects/seldon-core/en/latest/examples/metrics.html#Install-Seldon-Analytics) that
+    sets everything up for metrics to be collected in real time, and then visualised
+    on the dashboards.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can now visualise the utilization metrics of the deployed models relative
+    to their specific infrastructure. When deploying a model with Seldon you will
+    have multiple attributes that you will want to take into consideration to ensure
+    optimal processing of your models. This includes the allocated CPU, Memory and
+    Filesystem store reserved for the application, but also the respective configuration
+    for running processes and threads relative to the allocated resources and expected
+    requests.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/d0cc2829de8a477556017a2a4e626f43.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similarly, we are also able to monitor the usage of the model itself — every
+    seldon model exposes model usage metrics such as requests-per-second, latency
+    per request, success/error codes for models, etc. These are important as they
+    are able to map into the mode advanced/specialised concepts of the underlying
+    machine learning model. Large latency spikes could be diagnosed and explained
+    based on the underlying requirements of the model. Similarly errors that the model
+    displays are abstracted into simple HTTP error codes, which allows for standardisation
+    of advanced ML components into microservice patterns that then can be managed
+    more easily at scale by DevOps / IT managers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/07c8b6943074a75ba76ace141563087f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5\. Eventing Infrastructure for Monitoring
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In order for us to be able to leverage the more advanced monitoring techniques,
+    we will first introduce briefly the eventing infrastructure that allows Seldon
+    to use advanced ML algorithms for monitoring of data asynchronously and in a scalable
+    architecture.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Seldon Core leverages [KNative Eventing](https://knative.dev/docs/eventing/) to
+    enable Machine Learning models to forward the inputs and outputs of the model
+    into the more advanced machine learning monitoring components like outlier detectors,
+    concept drift detectors, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/a57c4af6face082e2133f577a4bef0a1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We will not be going into too much detail on the eventing infrastructure that
+    KNative introduces, but if you are curious there are multiple hands on examples
+    in the Seldon Core documentation in regards to how it leverages the KNative Eventing
+    infrastructure to [forward payloads to further components](https://docs.seldon.io/projects/seldon-core/en/latest/analytics/log_level.html) such
+    as Elasticsearch, as well as how Seldon models can also be connected to [process
+    events](https://docs.seldon.io/projects/seldon-core/en/latest/streaming/knative_eventing.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this tutorial, we need to enable our model to forward all the payload inputs
+    and ouputs processed by the model into the KNative Eventing broker, which will
+    enable all other advanced monitoring components to subscribe to these events.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code below adds a “logger” attribute to the deployment configuration which
+    specifies the broker location.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 6\. Statistical monitoring
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Performance metrics are useful for general monitoring of microservices, however
+    for the specialised world of machine learning, there are widely-known and widely-used
+    metrics that are critical throughout the lifecycle of the model beyond the training
+    phase. More common metrics can include accuracy, precision, recall, but also metrics
+    like [RMSE](https://en.wikipedia.org/wiki/Root-mean-square_deviation), [KL Divergence](https://en.wikipedia.org/wiki/Relative_entropy),
+    between many many more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The core theme of this article is not just to specify how these metrics can
+    be calculated, as it’s not an arduous task to enable an individual microservice
+    to expose this through some Flask-wrapper magic. The key here is to identify scalable
+    architectural patterns that we can introduce across hundreds or thousands of models.
+    This means that we require a level of standardisation on the interfaces and patterns
+    that are required to map the models into their relevant infrastructure.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some high level principles that revolve around more specialised machine learning
+    metrics are the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Monitoring specific to statistical ML performance**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Benchmarking multiple different models or different versions**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Specialised for the data-type and the input/output format**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Stateful asynchronous provisioning of “feedback” on previous requests (such
+    as “annotations” or “corrections”)**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Given that we have these requirements, Seldon Core introduces a set of architectural
+    patterns that allow us to introduce the concept of “Extensible Metrics Servers”.
+    These metric servers contain out-of-the-box ways to process data that the model
+    processes by subscribing to the respective eventing topics, to ultimately expose
+    metrics such as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Raw metrics: True-Positives, True-Negatives, False-Positives, False-Negatives**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Basic metrics: Accuracy, precision, recall, specificity**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Specialised metrics: KL Divergence, RMSE, etc**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Breakdowns per class, features, and other metadata**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/30cca19ad85dee2babd4ed75c402ce5f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: From an architectural perspective, this can be visualised more intuitively in
+    the diagram above. This showcases how a single datapoint can be submitted through
+    the model, and then processed by any respective Metric Servers. The metric servers
+    can also process the “correct/annotated” labels once they are provided, which
+    can be linked with the unique prediction ID that Seldon Core adds on every request.
+    The specialised metrics are calculated and exposed by fetching the relevant data
+    from the Elasticsearch store.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Currently, Seldon Core provides the following set of out-of-the-box Metrics
+    Servers:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: BinaryClassification — Processes data in the form of binary classifications
+    (e.g. 0 or 1) to expose raw metrics to show basic statistical metrics (accuracy,
+    precision, recall and specificity).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: MultiClassOneHot — Processes data in the form of one hot predictions for classification
+    tasks (e.g. [0, 0, 1] or [0, 0.2, 0.8]), which can then expose raw metrics to
+    show basic statistical metrics.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: MultiClassNumeric — Processes data in the form of numeric datapoints for classification
+    tasks (e.g. 1, or [1]), which can then expose raw metrics to show basic statistical
+    metrics.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For this example we will be able to deploy a Metric Server of the type “MulticlassOneHot”
+    — you can see the parameters used in the summarised code below, but you can find
+    the full YAML in the jupyter notebook.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once we deploy our metrics server, we can now just send requests and feedback
+    to our CIFAR10 model, through the same microservice endpoint. To simplify the
+    workflow, we will not send asynchronous feedback (which would perform the comparisons
+    with the elasticsearch data), but instead we’ll send “self-contained” feedback
+    requests, which contain the inference “response” and the inference “truth”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The following function provides us with a way to send a bunch of feedback requests
+    to achieve an approximate accuracy percent (number of correct vs incorrect predictions)
+    for our usecase.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we can first send feedback to get 90% accuracy, and then to make sure our
+    graphs look pretty, we can send another batch request that would result in 40%
+    accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This now basically gives us the ability to visualise the metrics that the MetricsServer
+    calculates in real time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/331608e4580c21ee4dc09de8b432720f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: From the dashboard above we can get a high level intuition of the type of metrics
+    that we are able to get through this architectural pattern. The stateful statistical
+    metrics above in particular require extra metadata to be provided asynchronously,
+    however even though the metrics themselves may have very different ways of being
+    calculated, we can see that the infrastructural and architectural requirements
+    can be abstracted and standardised in order for these to be approached in a more
+    scalable way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will continue seeing this pattern as we delve further into the more advanced
+    statistical monitoring techniques.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 7\. Outlier detection monitoring
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: For a more advanced monitoring technique, we will be leveraging the Alibi Detect
+    library, particularly around some of the advanced outlier detector algorithms
+    it provides. Seldon Core provides us with a way to perform the deployment of outlier
+    detectors as an architectural pattern, but also provides us with a prepackaged
+    server that is optimized to serve Alibi Detect outlier detector models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Some of the key principles for outlier detection include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Detecting anomalies in data instances
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Flagging / alerting when outliers take place
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Identifying potential metadata that could help diagnose outliers
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Enable drill down of outliers that are identified
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Enabling for continuous / automated retraining of detectors
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the case of outlier detectors it is especially important to allow for the
+    calculations to be performed separate to the model, as these tend to be much heaver
+    and may require more specialised components. An outlier detector that is deployed,
+    may come with similar complexities to the ones from a machine learning model,
+    so it’s important that the same concepts of compliance, governance and lineage
+    are covered with these advanced components.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The diagram below shows how the requests are forwarded by the model using the
+    eventing infrastructure. The outlier detector then processes the datapoint to
+    calculate whether it’s an outlier. The component is then able to store the outlier
+    data in the respective request entry asynchronously, or alternatively it is able
+    to expose the metrics to prometheus, which is what we will visualise in this section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/c8cff05e54c48ecdbb2c4093776237fd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this example we will be using the [Alibi Detect Variational Auto Encoder](https://docs.seldon.io/projects/alibi-detect/en/stable/examples/od_vae_cifar10.html) outlier
+    detector technique. The outlier detector is trained on a batch of unlabeled but
+    normal (inlier) data. The VAE detector tries to reconstruct the input it receives,
+    if the input data cannot be reconstructed well, then it is flagged as an outlier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alibi Detect provides us with utilities that allow us to export the outlier
+    detector from scratch. We can fetch it using the `fetch_detector` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you want to train the outlier, you can do so by simply leveraging the `OutlierVAE` class
+    together with the respective encoder and decoders.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To test the outlier detector we can take the same picture of the truck and see
+    how the outlier detector behaves if noise is added to the image increasingly.
+    We will also be able to plot it using the Alibi Detect visualisation function `plot_feature_outlier_image`.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can create a set of modified images and run it through the outlier detector
+    using the code below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We now have an array of modified samples in the variable `all_X_mask` , each
+    with an increasing amount of noise. We can now run all these 10 through the outlier
+    detector.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When looking at the results, we can see that the first 3 were not marked as
+    outliers, whereas the rest were marked as outliers — we can see it by printing
+    the value `print(od_preds[“data”][“is_outlier”])`. Which displays the array below,
+    where 0 is non-outliers and 1 is outliers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can now visualise how the outlier instance level score maps against the threshold,
+    which reflects the results in the array above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/e223f2ae51a8eef73b4d5f7c5d778253.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Similarly we can dive deeper into the intuition of what the outlier detector
+    score channels look like, as well as the reconstructed images, which should provide
+    a clear picture of how its internals operate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/2354074d9c4f8cd0c9d6d6b73aa0dc2e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We will now be able to productionise our outlier detector. We will be leveraging
+    a similar architectural pattern to the one from the metric servers. Namely the
+    Alibi Detect Seldon Core server, which will be listening to the inference input/output
+    of the data. For every data point that goes through the model, the respective
+    outlier detector will be able to process it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The main step required will be to first ensure the outlier detector we trained
+    above is uploaded to an object store like Google bucket. We have already uploaded
+    it to `gs://seldon-models/alibi-detect/od/OutlierVAE/cifar10,` but if you wish
+    you can upload it and use your own model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once we deploy our outlier detector, we will be able to send a bunch of requests,
+    many which will be outliers and others that won’t be.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can now visualise some outliers in the dashboard — for every data point there
+    will be a new entry point and will include whether it would be an outlier or not.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/22fab564c5d242a7368693f631b1c0d1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 8\. Drift monitoring
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As time passes, data in real life production environments can change. Whilst
+    this change is not drastic, it can be identified through drifts in the distribution
+    of the data itself particularly in respect to the predicted outputs of the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Key principles in drift detection include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Identifying drift in data distribution, as well as drifts in the relationship
+    between input and output data from a model
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Flagging drift that is found together with the relevant datapoints where it
+    was identified
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Allowing for the ability to drill down into the data that was used to calculate
+    the drift
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the concept of drift detection we deal with further complexities when compared
+    to the outlier detection usecase. The main one being the requirement to run each
+    drift prediction on a batch input as opposed to a single datapoint. The diagram
+    below shows a similar workflow to the one outlied in the outlier detector pattern,
+    the main difference is that it keeps a tumbling or sliding window of data to perform
+    the processing against.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/ff4154ac5d02e9d857b37971c4855fb7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this example we will once again be using the Alibi Detect library, which
+    provides us with the [Kolmogorov-Smirnov data drift detector on CIFAR-10](https://docs.seldon.io/projects/alibi-detect/en/stable/examples/cd_ks_cifar10.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: For this technique will be able to use the `KSDrift` class to create and train
+    the drift detector, which also requires a preprocessing step which uses an “Untrained
+    Autoencoder (UAE)”.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order for us to test the outlier detector we will generate a set of detectors
+    with corrupted data. Alibi Detect provides a great set of utilities that we can
+    use to generate corruption/noise into images in an increasing way. In this case
+    we will be using the following noise: `[‘gaussian_noise’, ‘motion_blur’, ‘brightness’,
+    ‘pixelate’].` These will be generated with the code below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below is one datapoint from the created corrupted dataset, which contains images
+    with an increasing amount of corruption of the different types outlined above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/c2995ccd6c4acf96339a6c0835fbe4ac.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can now attempt to run a couple of datapoints to compute whether drift is
+    detected or not. The initial batch will consist of datapoints from the original
+    dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This as expected outputs: `Drift? No!`
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similarly we can run it against the corrupted dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And we can see that all of them are marked as drift as expected:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Deploy Drift Detector
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now we can move towards deploying our drift detector following the architectural
+    pattern provided above. Similar to the outlier detector we first have to make
+    sure that the drift detector we trained above can be uploaded to an object store.
+    We currently will be able to use the Google bucket that we have prepared under `gs://seldon-models/alibi-detect/cd/ks/drift` to
+    perform the deployment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This will have a similar structure, the main difference is that we will also
+    specify the desired batch size to use for the Alibi Detect server to keep as a
+    buffer before running against the model. In this case we select a batch size of
+    1000.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now that we have deployed our outlier detector, we first try sending 1000 requests
+    from the normal dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Next we can send the corrupted data, which would result in drift detected after
+    sending the 10k datapoints.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are able to visualise each of the different drift points detected in the
+    Grafana dashboard.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/895a3bbbb20901101dfc4bd59edbb935.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: 9\. Explainability monitoring
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'AI Explainability techniques are key to understanding the behaviour of complex
+    black box machine learning models. There is a broad range of content that explores
+    the different algorithmic techniques that can be used in different contexts. Our
+    current focus in this context is to provide an intuition and a practical example
+    of the architectural patterns that can allow for explainer components to be deployed
+    at scale. Some key principles of model explainability include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Human-interpretable insights for model behaviour**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Introducing use-case-specific explainability capabilities**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Identifying key metrics such as trust scores or statistical perf. thresholds**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Enabling for use of some more complex ML techniques**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'There are a broad range of different techniques available around explainability,
+    but it’s important to understand the high level themes around the different types
+    of Explainers. These include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Scope (local vs global)**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Model type (black vs white box)**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Task (classification, regression, etc)**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Data type (tabular, images, text, etc)**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Insight (feature attributions, counterfactuals, influential training instances,
+    etc)**'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For explainers as interfaces, these have similarities in the data flow patterns.
+    Namely many of them require interacting with the data that the model processes,
+    as well as the ability to interact with the model itself — for black box techniques
+    it includes the inputs/outputs whereas for white-box techniques it includes the
+    internals of the models themselves.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/81d115b32de0b5399e611f38e790c06d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: From an architectural perspective, this involves primarily a separate microservice
+    which instead of just receiving an inference request, it would be able to interact
+    with the respective model and “reverse engineer” the model by sending the relevant
+    data. This is shown in the diagram above, but it will become more intuitive once
+    we dive into the example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For the example, we will be using the Alibi Explain framework, and we will use
+    the [Anchor Explanation](https://docs.seldon.io/projects/alibi/en/latest/examples/anchor_image_imagenet.html) technique.
+    This local explanation technique tells us what are the features in a particular
+    data point with the highest predictive power.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can simply create our Anchor explainer by specifying the structure of our
+    dataset, together with a `lambda` that allows the explainer to interact with the
+    model’s predict function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are able to identify what are the anchors in our model that would predict
+    in this case the image of the truck.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/c13d881447de9a1cb03b023f153b0927.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can visualise the anchors by displaying the output anchor of the explanation
+    itself.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can see that the anchors of the image include the windshield and the wheels
+    of the truck.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/902de571fd0d5b33d84174f68044924c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here you can see that the explainer interacts with our deployed model. When
+    deploying the explainer we will be following the same principle but instead of
+    using a `lambda` that runs the model locally, this will be a function that will
+    call the remote model microservice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will follow a similar approach where we’ll just need to upload the image
+    above to an object store bucket. Similar to the previous example, we have provided
+    a bucket under `gs://seldon-models/tfserving/cifar10/explainer-py36–0.5.2`. We
+    will now be able to deploy an explainer, which can be deployed as part of the
+    CRD of the Seldon Deployment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can check that the explainer is running with `kubectl get pods | grep cifar` ,
+    which should output both running pods:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Similar to how we send a request to the model, we are able to send a request
+    to the explainer path. This is where the explainer will interact with the model
+    itself and print the reverse engineered explanation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can see that the output of the explanation is the same as the one we saw
+    above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image for post](../Images/902de571fd0d5b33d84174f68044924c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Finally we can also see some of the metric related components that come out
+    of the explainer themselves, which can then be visualised through dashboards.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Similar to the other microservice based machine learning components deployed,
+    the explainers also can expose these and other more specialised metrics for performance
+    or advanced monitoring.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Closing Thoughts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before wrapping up, one thing to outline is the importance of abstracting these
+    advanced machine learning concepts into standardised architectural patterns. The
+    reason why this is crucial is primarily to enable machine learning systems for
+    scale, but also to allow for advanced integration of components across the stack.
+  prefs: []
+  type: TYPE_NORMAL
+- en: All the advanced architectures covered above not only are applicable across
+    each of the advanced components, but it is also possible to enable for what we
+    can refer to as “ensemble patterns” — that is, connecting advanced components
+    on the outputs of other advanced components.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/0ea18befddfeb5c06aa892b9de841118.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is also important to ensure there are structured and standardised architectural
+    patterns also enable developers to provide the monitoring components, which are
+    also advanced machine learning models, have the same level of governance, compliance
+    and lineage required in order to manage the risk efficiently.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These patterns are continuously being refined and evolved through the Seldon
+    Core project, and advanced state of the art algorithms on outlier detection, concept
+    drift, explainability, etc are improving continuously — if you are interested
+    on furthering the discussion, please feel free to reach out. All the examples
+    in this tutorial are open source, so suggestions are greatly appreciated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you are interested in further hands on examples of scalable deployment strategies
+    of machine learning models, you can check out:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Batch Processing with Argo Workflows](https://docs.seldon.io/projects/seldon-core/en/latest/examples/argo_workflows_batch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Serverless eventing with Knative](https://docs.seldon.io/projects/seldon-core/en/latest/streaming/knative_eventing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI Explainability Patterns with Alibi](https://docs.seldon.io/projects/seldon-core/en/latest/analytics/explainers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Seldon Model Containerisation Notebook](https://docs.seldon.io/projects/seldon-core/en/latest/examples/sklearn_spacy_text_classifier_example.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Kafka Seldon Core Stream Processing Deployment Notebook](https://github.com/SeldonIO/seldon-core/blob/master/examples/kafka/sklearn_spacy/README.ipynb)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Alejandro Saucedo](https://www.linkedin.com/in/axsaucedo/)** is the
+    Engineering Director at Seldon, Chief Scientist at The Institute for Ethical AI,
+    and an ACM Council Member-at-Large.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/production-machine-learning-monitoring-outliers-drift-explainers-statistical-performance-d9b1d02ac158).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Interpretability, Explainability, and Machine Learning – What Data Scientists
+    Need to Know](/2020/11/interpretability-explainability-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploying Trained Models to Production with TensorFlow Serving](/2020/11/serving-tensorflow-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI Is More Than a Model: Four Steps to Complete Workflow Success](/2020/11/mathworks-ai-four-steps-workflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Managing Model Drift in Production with MLOps](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fighting AI with AI Fraud Monitoring for Deepfake Applications](https://www.kdnuggets.com/2023/05/fighting-ai-ai-fraud-monitoring-deepfake-applications.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Removing Outliers Using Standard Deviation in Python](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Handle Outliers in Dataset with Pandas](https://www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Full End-to-End Deployment of a Machine Learning Algorithm into a…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

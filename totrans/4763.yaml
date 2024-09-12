@@ -1,0 +1,345 @@
+- en: Introduction to Deep Learning with Keras
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/10/introduction-deep-learning-keras.html/2](https://www.kdnuggets.com/2018/10/introduction-deep-learning-keras.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/10/introduction-deep-learning-keras.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '****Compiling the ANN****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Compiling is basically applying a stochastic gradient descent to the whole neural
+    network. The first parameter is the algorithm you want to use to get the optimal
+    set of weights in the neural network. The algorithm used here is a stochastic
+    gradient algorithm. There are many variants of this. A very efficient one to use
+    is adam. The second parameter is the loss function within the stochastic gradient
+    algorithm. Since our categories are binary we use the *binary_crossentropy *loss
+    function. Otherwise we would have used *categorical_crossentopy. *The final argument
+    is the criterion we’ll use to evaluate our model. In this case we use the accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Fitting our ANN to the training set****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: X_train represents the independent variables we’re using to train our ANN, and
+    y_train represents the column we’re predicting. Epochs represents the number of
+    times we’re going to pass our full dataset through the ANN. Batch_size is the
+    number of observations after which the weights will be updated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Predicting using the training set****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: This will show us the probability of a claim being fraudulent. We then set a
+    threshold of 50% for classifying a claim as fraudulent. This means that any claim
+    with a probability of 0.5 or more will be classified as fraudulent.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: This way the insurance firm can be able to first track claims that are not suspicious
+    and then take more time evaluating claims flagged as fraudulent.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Checking the confusion matrix****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/800b08e12858392425e5c21b213ab1af.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The confusion matrix can be interpreted as follows. Out of 2000 observations,
+    1550 + 175 observations were correctly predicted while 230 + 45 were incorrectly
+    predicted. You can calculate the accuracy by dividing the number of correct predictions
+    by the total number of predictions. In this case (1550+175) / 2000, which gives
+    you 86%.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Making a single Prediction****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s say the insurance company gives you a single claim. They’d like to know
+    if the claim is fraudulent. What would you do to find out?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: where a,b,c,d represents the features you have.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Since our classifier expects numpy arrays, we have to transform the single observation
+    into a numpy array and use the standard scaler to scale it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Evaluating our ANN****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After training the model one or two times, you’ll notice that you keep getting
+    different accuracies. So you’re not quite sure which one is the right one. This
+    introduces the bias variance trade off. In essence, we’re trying to train a model
+    that will be accurate and not have too much variance of accuracy when trained
+    several times. To solve this problem we use the K-fold cross validation with K
+    equal to 10\. This will split the training set into 10 folds. We’ll then train
+    our model on 9 folds and test it on the remaining fold. Since we have 10 folds,
+    we’re going to do this iteratively through 10 combinations. Each iteration will
+    gives us its accuracy. We’ll then find the mean of all accuracies and use that
+    as our model accuracy. We also calculate the variance to ensure that it’s minimal.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keras has a scikit learn wrapper (KerasClassifier) that enables us to include
+    K-fold cross validation in our keras code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next we import the k-fold cross validation function from scikit_learn
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: The KerasClassifier expects one of its arguments to be a function, so we need
+    to build that function.The purpose of this function is to build the architecture
+    of our ANN.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This function will build the classifier and return it for use in the next step.
+    The only thing we have done here is wrap our previous ANN architecture in a function
+    and return the classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We then create a new classifier using K-fold cross validation and pass the parameter *build_fn *as
+    the function we just created above. Next we pass the batch size and the number
+    of epochs, just like we did in the previous classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: To apply the k-fold cross validation function we can use scikit-learn’s *cross_val_score* function.
+    The estimator is the classifier we just built with *make_classifier* and n_jobs=-1
+    will make use of all available CPUs. cv is the number of folds and 10 is a typical
+    choice. The *cross_val_score *will return the ten accuracies of the ten test folds
+    used in the computation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: To obtain the relative accuracies we get the mean of the accuracies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The variance can be obtained as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: The goal is to have a small variance between the accuracies.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Fighting Overfitting****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Overfitting in machine learning is what happens when a model learns the details
+    and noise in the training set such that it performs poorly on the test set. This
+    can be observed when we have huge differences between the accuracies of the test
+    set and training set or when you observe a high variance when applying k-fold
+    cross validation. In artificial neural networks, we counteract this using a technique
+    called dropout regularization. Dropout regularization works by randomly disabling
+    some neurons at each iteration of the training to prevent them from being too
+    dependent on each other.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this case we apply the dropout after the first hidden layer and after the
+    second hidden layer. Using a rate of 0.1 means that 1% of the neurons will be
+    disabled at each iteration. It is advisable to start with a rate of 0.1\. However
+    you should never go beyond 0.4 because you will now start to get underfitting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '****Parameter Tuning****'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Once you obtain your accuracy you can tune the parameters to get a higher accuracy.
+    Grid Search enable us to test different parameters in order to obtain the best
+    parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The first step here is to import the *GridSearchCV *module from sklearn.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: We also need to modify our make_classifier function as follows. We create a
+    new variable called ***optimizer ***that will allow us to add more than one optimizer
+    in our params variable.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ll still use the KerasClassifier, but we won’t pass the batch size and number
+    of epochs since these are the parameters we want to tune.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: The next step is to create a dictionary with the parameters we’d like to tune — in
+    this case the batch size, the number of epochs, and the optimizer function. We
+    still use adam as an optimizer and add a new one called rmsprop. The Keras documentation
+    recommends rmsprop when dealing with Recurrent Neural Networks. However we can
+    try it for this ANN to see if it gives us a better result.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: We then use Grid Search to test these parameters. The grid search function expects
+    our estimator, the parameters we just defined, the scoring metric and the number
+    of k-folds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: Like in previous objects we need to fit our training set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE17]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can get the best selection of parameters using *best_params *from the grid
+    search object. Likewise we use the best_score_ to get the best score.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE18]'
+  prefs: []
+  type: TYPE_PRE
+- en: It’s important to note that this process will take a while as it searches for
+    the best parameters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Conclusion**'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Artificial Neural Networks are just one type of deep neural network. There are
+    other networks such Recurrent Neural Networks (RNN), Convolutional Neural Network
+    (CNN), and Boltzmann machine. RNNs can predict if the price of a stock will go
+    up or down in the future. CNNs are used in computer vision — recognizing cats
+    and dogs in a set of images or recognizing the presence of cancer cells in a brain
+    image. Boltzmann machines are used in programming recommender systems. Maybe we
+    can cover one of these neural networks in the future.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Cheers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Derrick Mwiti](https://derrickmwiti.com/)** is a data analyst, a writer,
+    and a mentor. He is driven by delivering great results in every task, and is a
+    mentor at Lapid Leaders Africa.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://heartbeat.fritz.ai/introduction-to-deep-learning-with-keras-c7c3d14e1527).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[The Keras 4 Step Workflow](/2018/06/keras-4-step-workflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[7 Steps to Mastering Deep Learning with Keras](/2017/10/seven-steps-deep-learning-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Beginner Data Visualization & Exploration Using Pandas](/2018/10/beginner-data-visualization-exploration-using-pandas-beginner.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Keras 3.0: Everything You Need To Know](https://www.kdnuggets.com/2023/07/keras-30-everything-need-know.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Deep Learning Libraries: PyTorch and Lightning AI](https://www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, April 27: A Brief Introduction to Papers With Code;…](https://www.kdnuggets.com/2022/n17.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Statistical Learning, Python Edition: Free Book](https://www.kdnuggets.com/2023/07/introduction-statistical-learning-python-edition-free-book.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

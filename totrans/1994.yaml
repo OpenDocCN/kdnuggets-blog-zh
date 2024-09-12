@@ -1,0 +1,415 @@
+- en: 'CDC Data Replication: Techniques, Tradeoffs, Insights'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/08/cdc-data-replication-techniques-tradeoffs-insights.html](https://www.kdnuggets.com/2023/08/cdc-data-replication-techniques-tradeoffs-insights.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![CDC Data Replication: Techniques, Tradeoffs, Insights](../Images/de50cce7fd391b4711058dae7ad0b0e1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Many organizations across industries operate production databases in which most
+    of the data does not change very frequently; that is, daily changes and updates
+    only account for a relatively small portion of the overall amount of data stored
+    in them. It is these organizations that can benefit most from change data capture
+    (CDC) data replication.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, I will define CDC data replication, briefly discuss the most
+    common use cases, and then talk about common techniques and the tradeoffs of each.
+    Towards the end, I will give some general implementation insights that I’ve learned
+    as the CEO and founder of data integration company Dataddo.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What Is Change Data Capture (CDC) Data Replication?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: CDC data replication is a method of copying data in real or near real time between
+    two databases whereby *only* newly added or modified data is copied.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is an [alternative to snapshot replication](https://ceur-ws.org/Vol-3369/invited1.pdf),
+    which involves moving an entire snapshot of one database to another again and
+    again. Snapshot replication may be suitable for organizations that need to preserve
+    individual snapshots of their data over time, but it’s very processing-intensive
+    and leaves a big financial footprint. For organizations that don’t need to do
+    this, CDC can save a lot of paid processing time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Changes to data can be captured and delivered to their new destination in real
+    time or in small batches (e.g. every hour).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![CDC Data Replication: Techniques, Tradeoffs, Insights](../Images/45ccb8b2d082582facb91e4d7957cf4d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This image illustrates log-based CDC, where the red row is newly added data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s worth mentioning that CDC is not a new process. However, until recently,
+    only large organizations had the engineering resources to implement it. What *is*
+    new is the growing selection of managed tools that enable it for a fraction of
+    the cost, hence its newfound popularity.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most Common CDC Use Cases
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: There’s not enough space in this article to cover all the use cases of CDC data
+    replication, but here are three of the most common.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Warehousing for Business Intelligence and Analytics
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Any organization that runs a proprietary, data-collecting system is likely to
+    have a production database that stores key info from this system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since production databases are designed for write operations, they don’t do
+    much to put data into profitable use. Many organizations will therefore want to
+    copy the data into a [data warehouse](/2022/09/organizations-need-data-warehouses.html),
+    where they can run complex read operations for analytics and business intelligence.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If your analytics team needs data in near real time, CDC is a good way to give
+    it to them, because it will quickly deliver the changes to the analytics warehouse
+    as they are made.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Database Migration
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: CDC is also useful when you are migrating from one database technology to another,
+    and you need to keep everything available in case of downtime. A classic example
+    would be [migration from an on-premise database](/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)
+    to a cloud database.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Disaster Recovery
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Similar to the migration case, CDC is an efficient and potentially cost-effective
+    way to ensure all your data is available in multiple physical locations all the
+    time, in case of downtime in one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Common CDC Techniques and The Tradeoffs of Each
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: There are three main CDC techniques, each with its own set of advantages and
+    disadvantages.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![CDC Data Replication: Techniques, Tradeoffs, Insights](../Images/1213377610dd04eabf3e4df83b21c638.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: CDC implementation involves tradeoffs between flexibility, fidelity, latency,
+    maintenance, and security.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Query-Based CDC
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Query-based CDC is quite straightforward. All you do with this technique is
+    [write a simple select query](/2023/03/sql-query-optimization-techniques.html)
+    to select data from a specific table, followed by some condition, like “only select
+    the data that was updated or added yesterday.” Assuming you already have the schema
+    for a secondary table configured, these queries will then take this changed data
+    and produce a new, two-dimensional table with the data, which can be inserted
+    into a new location.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Advantages
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Highly flexible**. Allows you to define which changes to capture and how
+    to capture them. This makes it easier to customize the replication process in
+    a very granular way.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Reduces overhead**. Only captures changes that meet specific criteria, so
+    it’s much cheaper than CDC that captures all changes to a database.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Easier to troubleshoot**. Individual queries can easily be examined and corrected
+    in case of any issues.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Disadvantages
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Complex maintenance**. Each individual query has to be maintained. If you
+    have a couple hundred tables in your database, for example, you would probably
+    need this many queries as well, and maintaining all of them would be a nightmare.
+    This is the main disadvantage.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Higher latency**. Relies on polling for changes, which can introduce delays
+    in the replication process. This means that you cannot achieve real-time replications
+    using select queries, and that you would need to schedule some kind of batch processing.
+    This may not be much of a problem if you need to analyze something using a long
+    time series, like customer behaviour.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Log-Based CDC
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Most database technologies we use today support clustering, meaning you can
+    run them in multiple replicas to achieve high availability. Such technologies
+    must have some kind of binary log, which captures all changes to the database.
+    In log-based CDC, changes are read from the log rather than the database itself,
+    then replicated to the target system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Advantages
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Low latency**. Data changes can be replicated very quickly to downstream
+    systems.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**High fidelity**. The logs capture *all* changes to the database, including
+    data definition language (DDL) changes and data manipulation language (DML) changes.
+    This makes it possible to track deleted rows (which is impossible with query-based
+    CDC).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Disadvantages
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Higher security risk**. Requires direct access to the database transaction
+    log. This can raise security concerns, as it will require extensive access levels.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Limited flexibility**. Captures all changes to the database, which limits
+    the flexibility to define changes and customize the replication process. In case
+    of high customization requirements, the logs will have to be heavily post-processed.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In general, log-based CDC is difficult to implement. See the “insights” section
+    below for more information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Trigger-Based CDC
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Trigger-based CDC is kind of a blend between the first two techniques. It involves
+    defining triggers for capturing certain changes in a table, which are then inserted
+    into and tracked in a new table. It is from this new table that the changes are
+    replicated to the target system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Advantages
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Flexibility**. Allows you to define which changes to capture and how to capture
+    them (like in query-based CDC), including deleted rows (like in log-based CDC).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Low latency**. Each time a trigger fires, it counts as an event, and events
+    can be processed in real time or near real time.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Disadvantages
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Extremely complex maintenance**. Just like queries in query-based CDC, all
+    triggers need to be maintained individually. So, if you have a database with 200
+    tables and need to capture changes for all of them, your overall maintenance cost
+    will be very high.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Implementation Insights
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: As the CEO of a data integration company, I’ve had a lot of experience implementing
+    CDC on scales large and small. Here are a few things I’ve learned along the way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Different Implementations for Different Logs
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Log-based CDC is particularly complex. This is because all logs—e.g., BinLog
+    for MySQL, WAL for Postgres, Redo Log for Oracle, Oplog for Mongo DB—although
+    conceptually the same, are implemented differently. You will therefore need to
+    dive deep into the low-level parameters of your chosen database to get things
+    working.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Writing Data Changes to the Target Destination
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: You will need to determine how exactly to insert, update, and delete data in
+    your target destination.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In general, inserting is easy, but volume plays a big role in dictating approach.
+    Whether you use batch insert, data streaming, or decide to load changes using
+    a file, you will always face technology tradeoffs.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To ensure proper updating and avoid unnecessary duplicates, you will need to
+    define a virtual key on top of your tables that tells your system what should
+    be inserted and what should be updated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To ensure proper deleting, you will need to have some failsafe mechanism to
+    make sure that bad implementation won’t cause deletion of all the data in the
+    target table.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Maintaining Long-Running Jobs
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: If you are transferring only a few rows, things will be quite easy, but if this
+    is the case, then you probably don’t need CDC. So, in general, we can expect CDC
+    jobs to take several minutes or even hours, and this will require reliable mechanisms
+    for monitoring and maintenance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Error Handling
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: This could be the topic of a separate article altogether. But, in short, I can
+    say that each technology has a different way for how to raise exceptions and present
+    errors. So, you should define a strategy for what to do if a connection fails.
+    Should you retry it? Should you encapsulate everything in the transactions?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![CDC Data Replication: Techniques, Tradeoffs, Insights](../Images/3dd7a5aeffc8c4bc67b20f33407900e9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Implementing CDC data replication in-house is quite complicated and very case-specific.
+    This is why it hasn’t traditionally been a popular replication solution, and also
+    why it’s hard to give general advice about how to implement it. In recent years,
+    managed tools like Dataddo, Informatica, SAP Replication Server, and others have
+    significantly lowered the barrier to accessibility.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Not for All, but Great for Some
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'As I mentioned at the beginning of this article, CDC has the potential save
+    a lot of financial resources for companies:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Whose main database consists largely of data that doesn’t frequently change
+    (i.e. daily changes only account for a relatively small portion of the data in
+    them)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Whose analytics teams need data in near real time
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: That don’t need to retain full snapshots of their main database over time
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Nevertheless, there are no perfect technological solutions, only tradeoffs.
+    And the same applies to CDC data replication. Those who choose to implement CDC
+    will have to unequally prioritize flexibility, fidelity, latency, maintenance,
+    and security.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Petr Nemeth](https://www.linkedin.com/in/petrnemeth/)** is the founder and
+    CEO of Dataddo—a fully managed, no-code data integration platform that connects
+    cloud-based services, dashboarding applications, data warehouses, and data lakes.
+    The platform offers ETL, ELT, reverse ETL, and database replication functionality
+    (including CDC), as well as an extensive portfolio of 200+ connectors, enabling
+    business professionals with any level of technical expertise to send data from
+    virtually any source to any destination. Before founding Dataddo, Petr worked
+    as a developer, analyst, and system architect for telco, IT, and media companies
+    on large-scale projects involving the internet of things, big data, and business
+    intelligence.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Software Mistakes and Tradeoffs: New book by Tomasz Lelek and…](https://www.kdnuggets.com/2021/12/manning-software-mistakes-tradeoffs-book.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[ChatGPT-Powered Data Exploration: Unlock Hidden Insights in Your Dataset](https://www.kdnuggets.com/2023/07/chatgptpowered-data-exploration-unlock-hidden-insights-dataset.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Ways of Converting Unstructured Data into Structured Insights with LLMs](https://www.kdnuggets.com/5-ways-of-converting-unstructured-data-into-structured-insights-with-llms)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unlocking Data Insights: Key Pandas Functions for Effective Analysis](https://www.kdnuggets.com/unlocking-data-insights-key-pandas-functions-for-effective-analysis)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Key Factors Affecting the Time to Insights](https://www.kdnuggets.com/2023/03/key-factors-affecting-time-insights.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Expert Insights on Developing Safe, Secure, and Trustworthy AI Frameworks](https://www.kdnuggets.com/expert-insights-on-developing-safe-secure-and-trustworthy-ai-frameworks)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,412 @@
+- en: Setup and use JupyterHub (TLJH) on AWS EC2
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/01/setup-jupyterhub-tljh-aws-ec2.html](https://www.kdnuggets.com/2023/01/setup-jupyterhub-tljh-aws-ec2.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Video Tutorial
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A Jupyter Notebook is an open source application used throughout academia and
+    industry. The interactive computing application consists of cells that render
+    explanatory text written using the Markdown syntax and cells that execute programming
+    code (including Python, R, Julia, and Scala). This means that notebooks can contain
+    text, code, and visualizations in the same document. A Jupyter notebook can be
+    used on your local machine or, as I covered in a previous tutorial, [in the cloud](https://medium.com/p/61a9648db6c5).
+    However, the problem is that a Jupyter Notebook is only designed for single users.
+    JupyterHub was designed to solve this problem. JupyterHub is a multi-user, container-friendly
+    (e.g., Docker, Kubernetes, etc.) version of the Jupyter Notebook designed for
+    organizations with many [benefits](https://jupyter.org/) including the ability
+    to:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Manage users and authentication (e.g., PAM, OAuth, [SSO](https://saturncloud.io/blog/setting-up-jupyterhub-with-single-sign-on-sso-aws/),
+    etc.)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Create shareable, scalable, and customizable computational resources and data
+    science environments in the cloud (e.g., AWS, Azure, [Google Cloud](https://tljh.jupyter.org/en/latest/install/google.html),
+    etc.) or on your own hardware (on-premise)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Unburden users with installation and maintenance tasks.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'JupyterHub comes in two distributions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Zero-to-JupyterHub (ZTJH), a multi-node version of JupyterHub based on Kubernetes
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The Littlest JupyterHub (TLJH), is a single-node version of JupyterHub.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This tutorial goes a [little beyond the great official JupyterHub tutorial on
+    how to set up JupyterHub (TLJH) on AWS](https://tljh.jupyter.org/en/latest/install/amazon.html#step-3-install-conda-pip-packages-for-all-users)
+    in the hope that the images and [YouTube video](https://youtu.be/h4E4ZvUhYZE)
+    will make you less likely to run into issues in this 15+ step process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1). Go to the [Amazon Web Services’ website](https://aws.amazon.com/) and click
+    Sign In (create an AWS Account if you don’t have one).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/45f00d9e8c3037c7955877c7af4e7151.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: On the **Sign in** page, choose either **Root user** (A) or **IAM user** (B).
+    Enter your email. If you are an IAM user, make sure to have the appropriate permissions
+    so that you can at least create an AWS EC2 instance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/0079782d9e5261fb49a9a0e5af470cf9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The official tutorial highlights that you should choose an AWS region based
+    on where your JupyterHub users are located.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/50a705774fd26129851dd5e50aec218c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 2). Click on **EC2**. If you don’t see it, use the Search bar at the top of
+    the screen and type in EC2.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/2b28a7b5a1aaf0500948644ee65ce675.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 3). On the Dashboard | EC2 Management Console, click on **Instances**. If this
+    screen looks a little different, note that I have toggled **on New EC2 Experience**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/f8055bc5e8748a16eabf67269d4bbe2c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 4). Click on **Launch Instances** (the button could also be labeled **Launch
+    Instance**).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/6cf6748c0d43152bc293f7229069165b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 5). Name and [optionally] add tags to your instance. AWS says that “a tag is
+    a label that you assign to an AWS resource.” I recommend you give your instance
+    a name and tags that identify what the instance will be used for (e.g., MyJupyterHubTutorial).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/4258ee69abdefa548be5974b462e62e8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 6). Go to **Application and OS Images (Amazon Machine Image)** and choose Ubuntu
+    version 18.04 LTS, **Ubuntu 20.04 LTS (what this tutorial uses)**, Ubuntu 22.04
+    LTS (see the **Potential Errors** section if you want to choose this AMI)**,**
+    or whatever else TLJH supports.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/35bc95407c2b0b6fd856ecb00a23dbc6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '7). Go to **Instance type**. Before choosing an instance, I highly recommend
+    checking out [how much each instance costs](https://instances.vantage.sh/) plus
+    JupyterHub’s guide on estimating how much [memory / GPU / disk space you need
+    based on the number of concurrent users](https://tljh.jupyter.org/en/latest/howto/admin/resource-estimation.html#howto-admin-resource-estimation).
+    Basically, at a minimum, you need to use a server with 1GB+ (basically t2.micro
+    or greater) of RAM, but I have found 8GB+ (t2.large or greater) to suit my needs
+    (teaching and practicing data science). If I know that people using JupyterHub
+    will be doing tasks that need to use multiple cores (especially with [Ray](https://www.anyscale.com/blog/writing-your-first-distributed-python-application-with-ray)/Dask/Spark),
+    I pick something that has more vCPU (t2.micro: 1 vCPU, t2.large: 2vCPU, t2.2xlarge:
+    8vCPU).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/5f3781817fc364a8f724fb189e2739d2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Make sure to remember that using AWS costs money (unless you have free credits).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 8). Go to **Key pair (login)**. Select an existing key pair or **Create new
+    key pair** (shown in the images below). If you create a key pair, make sure to
+    download and keep it somewhere safe. You won’t be able to replace it. Selecting
+    a key pair is an important step as you will need a key to be able to SSH to your
+    instance or easily download files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/dbc23330e9093301ca7599a39c1b9bab.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: After clicking on **Create new key pair**, type in your key pair name (e.g.,
+    MyJupyterHubTutorial_pem) and click on **Create Key Pair** (bottom right in the
+    screenshot below).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/c83d40cf96e84f8766f3e75abee232c2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Note:** if you use windows, you can choose ppk instead. However, I am a fan
+    of using GOW on windows (as seen in my [**connect to EC2 Instance using SSH tutorial**](https://medium.com/@GalarnykMichael/aws-ec2-part-2-ssh-into-ec2-instance-c7879d47b6b2))
+    which makes it so you can use a pem file on Windows (instead of needing PuTTY).'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 9). Go to **Network settings**. This is the part of the tutorial where you can
+    either create security group or select an existing security group. This will impact
+    how your instance can be accessed. In this tutorial, you will probably want to
+    add check the following
+  prefs: []
+  type: TYPE_NORMAL
+- en: Allow SSH traffic from
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Allow HTTPS traffic from the internet ([you can enable HTTPS after launching
+    your EC2 instance](https://tljh.jupyter.org/en/latest/howto/admin/https.html#howto-admin-https))
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Allow HTTP traffic from the internet
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Clicking on these options will create 3 security groups.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/7ff47bf9b21178be5ec240a329c7677e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Optionally, you can also view these security groups by clicking on Edit. This
+    will also allow you to change your security group name.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/b1843345704f8c92a1b13e96b3306d10.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In this image, security group 1 allows SSHing using port 22 (image from when
+    I tried using Ubuntu 22.04 instead of Ubuntu 20.04).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 10). Go to **Configure storage**. This allows you to choose how much storage
+    you want (# of GiB) as well as the [volume type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html)
+    (e.g., gp2, gp3, io1, io2, sc1, st1, standard). For this tutorial, I am going
+    with the default storage (gp2) for the AMI I choose in step 6.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/08ade22438eb866aee753c349feb440e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In this image, security group 1 allows SSHing using port 22 (image from when
+    I tried using Ubuntu 22.04 instead of Ubuntu 20.04).Let me know if you prefer
+    a different storage type for JupyterHub like gp3\. [It looks to be more cost-effective
+    than gp2.](https://aws.amazon.com/blogs/storage/migrate-your-amazon-ebs-volumes-from-gp2-to-gp3-and-save-up-to-20-on-costs/)
+  prefs: []
+  type: TYPE_NORMAL
+- en: 11) Go to **Advanced details** and scroll down to User data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/31c4a20ceec5e4ea0bee8c68d0192ac2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This step is about providing a command script that runs when you launch your
+    instance. The installer script below will install JupyterHub ([what does the installer
+    do](https://tljh.jupyter.org/en/latest/topic/installer-actions.html#topic-installer-actions)).
+    **Before proceeding to paste the text into User data, at a minimum, you will need
+    to replace <admin-user-name> with the admin user (e.g., mgalarnyk).** There is
+    no password set in the script as it will be set up later in this tutorial. However,
+    the installer script can be [modified to add passwords, add additional admin users,
+    install python packages in the user environment, and install plugins](https://tljh.jupyter.org/en/latest/topic/customizing-installer.html#topic-customizing-installer).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Code Caption:** The code `--show-progress-page` will create a temporary “TLJH
+    is building” progress page shortly after the instance is launched, which will
+    allow you to see pretty quickly whether the installation is going well.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/870fa8bc776085e9259bca83294dfdb6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note, if you want to make changes after launching JupyterHub, you can always
+    [install additional conda, pip, or apt packages](https://tljh.jupyter.org/en/latest/howto/env/user-environment.html#howto-env-user-environment),
+    as well as [add/remove admin users](https://tljh.jupyter.org/en/latest/howto/admin/admin-users.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 12). Go to **Summary** and click on Launch instance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/67aa92f5c271b862135e96f9d87ce6b7.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 13).  On the **Launch Status** notification screen, click on the link. It will
+    take you to the **EC2 Management Console**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/1d4e0c686186d799c19e556ff175fd65.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 14). You should now be in the EC2 Management Console. This step will require
+    a little patience as you need to wait for the JupyterHub installation to complete.
+    The official documentation says that this can take 10+ minutes (it was much quicker
+    for me).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/57557e415feffdd48ea8ca025d44888b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This is one location where you can find your Public address
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can see if your server is setting up by copying the **Public address** into
+    your browser (I prefer chrome).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/fc395c800bbaacd4cc6f8061235978ba.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: After a couple of minutes, copy the **Public address** into a new tab and you’ll
+    be asked to sign in.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/6dfd0c606c54d28c56966c93f6bccaf9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can learn how to setup HTTPS and SSL for JupyterHub [here](https://saturncloud.io/blog/securing-jupyterhub/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 15). Enter in the admin username you specified in step 11 (e.g., mgalarnyk)
+    and enter in a password which can be 7 characters or longer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/2dd4bca010cb5bbc1240fa4faa2f1a55.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Note** that the installer script in step 11 could have been [modified to
+    add passwords, add additional admin users, install python packages in the user
+    environment, and install plugins](https://tljh.jupyter.org/en/latest/topic/customizing-installer.html#topic-customizing-installer).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Click on Sign in and you are welcome to JupyterHub! **'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/f273489e9b13fdf4872793a5233fd713.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If you want to make changes after launching JupyterHub, you can always [install
+    additional conda, pip, or apt packages](https://tljh.jupyter.org/en/latest/howto/env/user-environment.html#howto-env-user-environment),
+    as well as [add/remove admin users](https://tljh.jupyter.org/en/latest/howto/admin/admin-users.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Potential Errors
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '**404 page not found**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/41b036685ae324f49faf3f60cc77f463.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: There are many reasons you may get this error. If you get this error after the
+    “please wait while your TLJH is setting up” screen, [it might be as simple as
+    copying the address into another tab](https://youtu.be/h4E4ZvUhYZE?t=379).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**‘Connection Refused’ error after restarting server**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Check out the [official documentation](https://tljh.jupyter.org/en/latest/troubleshooting/providers/amazon.html)
+    to learn how to solve this issue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**This site can’t be reached**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Setup and use JupyterHub (TLJH) on AWS EC2](../Images/c184643161b3a84ea1a201f8da28b28b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: I originally wanted to create this tutorial using Ubuntu 22.04, but I was getting
+    this error when I put the IP address in the browser (of course there are other
+    reasons you can get error). If you want to use Ubuntu 22.04, one possible way
+    to solve this would be check the System Log in the EC2 Management Console to verify
+    its a curl issue and to change the installer script using advice from [this askubuntu
+    post](https://askubuntu.com/questions/1387141/curl-23-failure-writing-output-to-destination).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: This tutorial went over how to setup Jupyterhub (TLJH) on AWS. Installations
+    can take significant time to set up and take even more time to manage. If you
+    prefer not to deal with installing and maintaining a server, you can use a product
+    like [Saturn Cloud](https://saturncloud.io/?utm_source=mgalarnyk). Regardless,
+    if you have questions or thoughts on the tutorial, feel free to reach out through
+    [YouTube](https://youtu.be/h4E4ZvUhYZE) or [Twitter](https://twitter.com/GalarnykMichael).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)** is a Data
+    Science Professional, and works in Product Marketing Content Lead at Parallel
+    Domain.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Setup Julia on Jupyter Notebook](https://www.kdnuggets.com/2022/11/setup-julia-jupyter-notebook.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[11 Best Practices of Cloud and Data Migration to AWS Cloud](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using Datawig, an AWS Deep Learning Library for Missing Value Imputation](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AWS AI & ML Scholarship Program Overview](https://www.kdnuggets.com/2022/09/aws-ai-ml-scholarship-program-overview.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 8 GenAI Courses for AWS to Take Now](https://www.kdnuggets.com/top-8-genai-courses-for-aws-to-take-now)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Forget PIP, Conda, and requirements.txt! Use Poetry Instead And…](https://www.kdnuggets.com/2023/07/forget-pip-conda-requirementstxt-poetry-instead-thank-later.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

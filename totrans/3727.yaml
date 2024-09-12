@@ -1,0 +1,589 @@
+- en: 'Market Data and News: A Time Series Analysis'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html](https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Parsa Ghaffari and Chris Hokamp**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Market Data and News: A Time Series Analysis](../Images/08002dff6576a073d994750de3340f79.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**TL;DR** - In this article, we introduce a few tools and techniques for studying
+    relationships between the stock market and the news. We explore time series processing,
+    anomaly detection, and an event-based view of the news. We also generate intuitive
+    charts to demonstrate some of these concepts, and share the code behind all of
+    this in a notebook.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can view the code in [this notebook](https://colab.research.google.com/drive/16--r_CHxnUA6nAka3ByCMMacfBtcKnLR?usp=sharing).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The impact of news on markets has been an area of strong interest for many years,
+    and with the advent of quantitative analysis, many from academics to quants have
+    used statistical methods to better understand the relationship between news and
+    market data, such as stock prices or trade volumes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article we aim to provide a simple practical guide for exploring statistical
+    relationships between news data and the market, as a foundation for deeper and
+    more targeted analyses. Our goal is to provide a set of tools to the reader that
+    will assist them in exploring and cross referencing financial and news data. Our
+    goal is NOT to predict the stock market, or discover specific correlations or
+    causal relationships.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Aligning Market Data with the News
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In order to study the relationship between news and market data, we first leverage
+    [Aylien’s News API](https://aylien.com/product/news-api) which allows users to
+    filter the world’s news data, both real-time and historical, using a comprehensive
+    set of filters. We use these filters to create news feeds that correspond to our
+    securities of interest (e.g. stocks, ETFs, cryptos, etc). We then use Yahoo! Finance
+    to retrieve the market data (price and volume) for these securities. Putting the
+    two together, we can construct a joint dataset consisting of both market and news-related
+    data for any given security, in a timeframe of choice.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The table below summarizes corresponding [News API](https://aylien.com/product/news-api)
+    filters for various types of financial entities:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **Security/market data** | **Corresponding [News API](https://aylien.com/product/news-api)
+    filter** | **Filter description** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Stocks | Entities | Filters the news based on companies, products, people,
+    etc. Supports tickers for companies |'
+  prefs: []
+  type: TYPE_TB
+- en: '| ETFs | Industries (using Smart Tagger) | Filters the news based on 1,500
+    industries and sub-industries |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Events | Subjects & Events (using Smart Tagger) | Filters the news based
+    on a taxonomy of 2,900 subjects and events |'
+  prefs: []
+  type: TYPE_TB
+- en: We can also leverage additional filtering options available in the [News API](https://aylien.com/product/news-api)
+    such as Sources and Geographies to further refine our news feeds, which may be
+    useful depending on the task at hand.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Although we’re primarily using price and volume data from the market in this
+    article, it is worth mentioning that many of the techniques we explore in this
+    post are extendable to other types of financial or economical data, for instance
+    in order to study the relationship between layoffs and the news, we could retrieve
+    historical layoff data from statistics offices, and align them with the news using
+    the [News API](https://aylien.com/product/news-api)’s events filters (e.g. to
+    retrieve news articles that are explicitly about layoffs and workforce-related
+    announcements).
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Few Basic Examples
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'To demonstrate the concept of alignment better, let’s look at a few basic examples.
+    We’re going to study two technology companies, Apple and Tesla, along with the
+    technology sector ETF, XLK, and finally the S&P index (GSPC). For each entity
+    we’re going to fetch and plot the news and market data on a single chart for a
+    period of 1 year from April 1st, 2021 to April 1st, 2022\. There are a number
+    of parameters available to us for market and news data, such as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '| **Market data parameters** | **News data parameters** |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Price (adjusted close price) and derivatives (e.g. daily return) | Volume
+    of articles - retrieved using the Time Series endpoint |'
+  prefs: []
+  type: TYPE_TB
+- en: '| Volume | Average sentiment of articles - retrieved as time series data for
+    articles with positive and negative headlines, and then averaged |'
+  prefs: []
+  type: TYPE_TB
+- en: Example 1\. Apple Inc (AAPL) news volume, sentiment, stock price, and trade
+    volume
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Market Data and News: A Time Series Analysis](../Images/c34fe7a07d7151068bd0b3f2e4a71153.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Example 2\. Tesla Inc (TSLA) news volume, sentiment, stock price, and trade
+    volume
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Market Data and News: A Time Series Analysis](../Images/14dea7865cc9664c2c19381b6833ec50.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Example 3\. Technology sector ETF (XLK) news volume, sentiment, stock price,
+    and trade volume
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Market Data and News: A Time Series Analysis](../Images/871a942cf3c827473f3d1c6ef1dc9f0c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This is a quick and easy way to compare movements between various time series
+    visually. In the next section we will look into how we can find and compare interesting
+    points on these time series more concretely as a step towards studying causal
+    and correlational relationships.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Studying Deeper Relationships
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Time Series Analysis
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: So far we’ve retrieved time series data reflecting news (article count, sentiment)
+    and market (stock price, trade volume) attributes in an aligned fashion. In order
+    to further break down and understand these time series, we will employ a few time
+    series analysis techniques. We will use Meta’s [Kats](https://facebookresearch.github.io/Kats/)
+    library which offers a range of time series analysis tools.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Preprocessing
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Let’s start by decomposing our time series, to identify and normalize trends
+    and seasonality in our time series.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will apply Kats’ decomposition utility in “additive” mode to each of our
+    time series.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Example 4\. News volume time series for Apple Inc (AAPL) decomposed into trend,
+    seasonality and residual
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Market Data and News: A Time Series Analysis](../Images/6ec882884446367a62b2375bd3cca051.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 2\. Forecasting
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Another useful utility in the Kats package is its forecasting module. Kats support
+    various time series forecasting techniques, including SARIMA, Prophet (a forecasting
+    library by Meta), and [Holt-Winters](https://medium.com/analytics-vidhya/a-thorough-introduction-to-holt-winters-forecasting-c21810b8c0e6),
+    as well as ensemble forecasting models. Each of these techniques come with pro’s
+    and con’s and require parameter tuning to work optimally for a given time series.
+    You can read more about the Kats forecasting module [here](https://github.com/facebookresearch/Kats/blob/main/tutorials/kats_201_forecasting.ipynb).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Please note that we’re introducing forecasting as a time series analysis technique
+    here. Our goal is NOT to predict future news volumes or stock prices.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Example 5\. 1 month forecast of news articles volume for Apple Inc (AAPL) using
+    Holt-Winters
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Market Data and News: A Time Series Analysis](../Images/06ab4dee273af72da0b6994ccae41b6d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 3\. Changepoint Detection
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Changepoint detection tries to identify times when the probability distribution
+    of a stochastic process or time series changes, e.g. the change of mean in a time
+    series. It is one of the most popular detection tasks in time series analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Similar to forecasting, Kats supports various changepoint detection models.
+    These include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: CUSUM, as a method to detect an up/down shift of means in a time series
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Bayesian Online Change Point Detection (BOCPD), as a method for detecting sudden
+    changes in a time series that persist over time
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: RobustStatDetector, which similar to CUSUM is a change point detection algorithms
+    that finds mean shifts in time series data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: To demonstrate this concept better, we will apply BOCPD to the Apple news volume
+    time series to identify sudden jumps in the news coverage about Apple.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Example 6\. Bayesian Online Change Point Detection (BOCPD) applied to the volume
+    of news articles about Apple Inc (AAPL)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Market Data and News: A Time Series Analysis](../Images/70bebbdbe9802060be368b08214a3719.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 4\. Anomaly Detection
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Anomalies are an important aspect of any time series data, that for a relatively
+    steady activity such as the number of news articles written about a large company
+    like Apple, reflect fundamental shifts in the underlying inputs, which in turn
+    potentially reflect important real-world changes such as earnings announcements
+    or new product releases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We’ve implemented a simple but powerful algorithm that identifies anomalies
+    in our time series data by detecting points that are outside the interquartile
+    range after correcting the time series data for trend and seasonality. The output
+    from this algorithm is a series of one or more windows of interest.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A similar algorithm is currently in use by some of [Aylien](https://aylien.com/)’s
+    customers who are interested in notifying their traders about interesting movements
+    in the market which may be related to a news headline in that timeframe.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Example 7\. Anomaly detection applied to news volume, news sentiment, stock
+    price and trade volume for Apple Inc (AAPL)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Market Data and News: A Time Series Analysis](../Images/5bf7605933423d29d69b3b24eb7f6ded.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The significance of each anomaly is indicated using a color from blue (weak)
+    to red (strong). For sentiment anomalies we use green to demonstrate positive
+    and red for negative anomalies. We can see some overlaps between anomalies in
+    the news volume and news sentiment. Additionally some anomalies in the positive
+    sentiment time series seem to precede anomalous trade volumes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5\. Correlations (Beta and R-squared)
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: When looking at movements in the stock price or trade volume, it’s important
+    to understand whether those movements happened independently or in correlation
+    with the market. Intuitively, perhaps we could expect to see a more prominent
+    correlation between news and market activity when a security moves independently
+    from the market, or at moments where the movement is less dependent on the market.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In order to study this hypothesis, we can leverage two well known financial
+    indicators: Beta and R-squared.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Beta is a derived statistic that measures the variance or volatility of a stock
+    against the overall market or a benchmark stock/index. In theory, high-beta stocks
+    deliver outsized performance when the market goes up, and outsized underperformance
+    when the market goes down. To calculate beta for a stock, we can plot its change
+    vs. changes in a benchmark stock/index (e.g the S&P 500) and find the linear regression
+    line that best fits the data. The slope of that line represents beta.
+  prefs: []
+  type: TYPE_NORMAL
+- en: R-squared measures the degree to which a security’s performance can be attributed
+    to the performance of the selected benchmark index. In other words, R-squared
+    aims to determine how much of the movement in an asset can be explained by the
+    movements in the market.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Example 8\. News volume/sentiment, and Beta and R-squared relative to the S&P
+    index and the technology sector ETF (XLK) for Apple Inc (AAPL)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Market Data and News: A Time Series Analysis](../Images/06bb5d30d7ceff129d339dc486f18d7c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 6\. News Events
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: A powerful feature in [Aylien’s News API](https://aylien.com/product/news-api)
+    is its ability to categorize articles based on subjects, events, and industries
+    (this feature is called [Smart Tagger](https://aylien.com/smart-tagger-aylien-news-api)).
+    [Aylien](https://aylien.com/) uses highly granular taxonomies and NLP models that
+    identify linguistic fragments that are associated with specific business events
+    (e.g. mergers and acquisitions or commentary from analysts) or industries (e.g.
+    technology or pharmaceuticals).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can leverage this capability to break down the news volume time series into
+    individual time series for key business events, for instance:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: New Products - news about new product releases
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Layoffs - news about layoffs
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Analyst Comments - analyst comments on the stock, earning announcements, etc
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Stocks - articles relevant to the stock market
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Corporate Earnings - corporate earning announcements
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Mergers & Acquisitions - news about M&A events
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Store Openings - new store openings for consumer businesses
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Example 9\. News articles time series broken down by event type for Apple Inc
+    (AAPL)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![Market Data and News: A Time Series Analysis](../Images/03a0af362cdf8bfd27b31b6c59c001ee.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It’s worth paying attention to the consistency of news articles about Apple’s
+    earnings announcements in terms of volume and frequency (quarterly), as well as
+    the spikes in articles labeled as “New Products” when Apple announces new products.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Putting all the previous charts together, we get a fairly rich and comprehensive
+    set of time series data to work with for further analysis:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Market Data and News: A Time Series Analysis](../Images/749b84a583a5bd2d0017a18d09b1442e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In this article we explored some basic and advanced concepts for studying relationships
+    between market and news data, and introduced a few building blocks that can be
+    used to perform more detailed analyses.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We demonstrated how market and news data can be retrieved and aligned for stocks
+    or ETFs of interest;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We introduced a few pre-processing steps for time series data and analysis;
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We explored a few different techniques for identifying and aligning anomalies
+    between various time series data; and
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We looked at how news time series data can be broken down by semantic properties
+    of the underlying news articles, such as sentiment or categories.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Future Work
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'Some of the interesting directions to explore after this work are listed below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Multivariate anomaly detection: To detect anomalies across multiple time series,
+    to identify small anomalies that are persistent across multiple time series, between
+    news and market data.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Similarity search between time series: To identify similarities between various
+    time series using pattern recognition.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Exploring causality models such as Granger Causality, to identify signals in
+    one time series that can be good predictors for another time series.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Expand this work to other types of securities (e.g. crypto or commodities) and
+    market signals (e.g. macroeconomic indicators).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Appendix
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '1\. News volume, news sentiment, stock price and trade volume charts for:'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Apple Inc (AAPL)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Tesla Inc (TSLA)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: XLF - Technology sector ETF
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pfizer Inc (PFE)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Moderna Inc (MRNA)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: XPH - Pharmaceuticals sector ETF
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: S&P Index
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Market Data and News: A Time Series Analysis](../Images/1c0948962e6535b6e7f96a1ae57cb3e9.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Market Data and News: A Time Series Analysis](../Images/7e4a7785437941adb09d5220df1c7f68.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Market Data and News: A Time Series Analysis](../Images/1b9b2849104536ac5741da6364d15ec0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Market Data and News: A Time Series Analysis](../Images/b78d7c30c0663367d6329a2b88959549.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Market Data and News: A Time Series Analysis](../Images/2944077d86962b89f9f875d50ec12a12.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Market Data and News: A Time Series Analysis](../Images/9b9ff13aac251ad5e6c8079bd3748e3c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Market Data and News: A Time Series Analysis](../Images/c8cd1bf7f9644532a75ff32b55ab5233.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '2\. News volume, news sentiment, beta and r-squared for:'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Apple Inc (AAPL)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Tesla Inc (TSLA)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Pfizer Inc (PFE)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Moderna Inc (MRNA)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![Market Data and News: A Time Series Analysis](../Images/06bb5d30d7ceff129d339dc486f18d7c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Market Data and News: A Time Series Analysis](../Images/8024e91f353f0d37e285c1f783916706.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Market Data and News: A Time Series Analysis](../Images/76514454d874b41ed41487c5f21586b2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![Market Data and News: A Time Series Analysis](../Images/4d6f9d67f1abf05a6595215dbe1721c1.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**[Parsa Ghaffari](https://ie.linkedin.com/in/parsa-ghaffari-a7300a24)** ([@parsaghaffari](https://twitter.com/parsaghaffari))
+    is the CEO and founder of [AYLIEN](https://aylien.com/), a Market and Risk Intelligence
+    FinTech with major clients such as Wells Fargo, IHS Markit, Revolut and Fidelity
+    who rely on AYLIEN''s platform to convert the world''s news data into a rich,
+    reliable, and realtime source of information for identifying risks and opportunities.
+    Parsa''s background is in artificial intelligence research and development, with
+    a special interest in quantitative risk modelling based on textual data and natural
+    language processing.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, June 29: 20 Basic Linux Commands for Data Science…](https://www.kdnuggets.com/2022/n26.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Time Series Analysis: ARIMA Models in Python](https://www.kdnuggets.com/2023/08/times-series-analysis-arima-models-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Codeless Time Series Analysis with KNIME](https://www.kdnuggets.com/2022/10/packt-codeless-time-series-analysis-knime.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Create a Time Series Ratio Analysis Dashboard](https://www.kdnuggets.com/2023/06/wolfer-create-time-series-ratio-analysis-dashboard.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Conduct Time Series Analysis in R](https://www.kdnuggets.com/how-to-conduct-time-series-analysis-in-r)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Time Series Forecasting with Ploomber, Arima, Python, and Slurm](https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

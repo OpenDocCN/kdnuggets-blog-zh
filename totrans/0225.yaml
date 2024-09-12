@@ -1,0 +1,287 @@
+- en: Best Practices for Creating Domain-Specific AI Models
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/07/best-practices-creating-domainspecific-ai-models.html](https://www.kdnuggets.com/2022/07/best-practices-creating-domainspecific-ai-models.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Best Practices for Creating Domain-Specific AI Models](../Images/b5cbea59beacf4fad90f4cbfa7430339.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Andrea De Santis](https://unsplash.com/@santesson89?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+    on [Unsplash](https://unsplash.com/s/photos/ai-models?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Large-scale general AI implementations serve as great building blocks for solving
+    certain B2B problems, and most organizations have already or are in the process
+    of leveraging them. However, the desire for immediate RoI, creating fail-fast
+    prototypes, and delivering decision-centric outcomes are driving the need for
+    domain-specific AI initiatives.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use cases and subject matter expertise help, but data scientists and analysts
+    need to adapt the AI implementation cycle to resolve problems that require more
+    specificity and relevancy. The biggest hurdle anyone would encounter while building
+    such AI models is finding quality, domain-specific data. Here are some best practices
+    and techniques for domain-specific model adaptation that worked for us time and
+    again.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data Matters, But Does It?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Begin by mining your organization to discover as many relevant domain-specific
+    data assets as you can. If it is a problem relating directly to your business
+    and industry, you likely have untapped data assets that your implementation can
+    leverage. In the unlikely event of finding yourself with insufficient data assets,
+    all hope is not lost. There are multiple strategies and methodologies to help
+    create or enhance specific datasets, including active learning, transfer learning,
+    self-training to improve pre-training, and data augmentation. Some are detailed
+    below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Active Learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Active learning is a type of semi-supervised learning with a Query Strategy
+    for selecting specific instances that it wants to learn from. Using domain experts
+    with a human-in-the-loop mechanism for labeling such selected instances helps
+    refine the process towards meaningful outcomes in a much faster timeline. In addition,
+    active learning requires smaller amounts of labeled data, thus lowering manual
+    annotation costs while still achieving higher levels of accuracy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here are some tips to help achieve active learning with limited data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: First, split your dataset into seed and unlabeled data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Label the seed and use it to train the learner model.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Based on the query function, select from unannotated data the instance(s) for
+    human annotation (the most critical step). The query strategy could be based on
+    uncertainty sampling (e.g., least confidence, margin sampling, or entropy), query-by-committee
+    (e.g., vote entropy, average Kullback-Leibler divergence), etc.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Add newly annotated data into the seed dataset and re-train the learner model.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Repeat the previous two steps until reaching stopping criteria, e.g., number
+    of instances queried, number of iterations, or performance improvement.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Transfer Learning
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: This method leverages knowledge from the source domain to learn new knowledge
+    on the target domain. The concept has been around for some time, but in the past
+    few years, when people talk about Transfer Learning, they talk about a neural
+    network, possibly because of the successful implementation cases there.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Using ImageNet as an example, here are some lessons learned:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Use a pre-trained network as a feature extractor. Determining which layer to
+    export features depends on how similar to or different your data is from the base
+    training dataset. The difference will determine your strategy, as outlined in
+    the following points.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the domain is different, only use lower-level features of the neural network.
+    The features can be exported and serve as the input for your classifier.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: If the domain is similar, remove the last layer of the neural network, and use
+    the remaining full network as a feature extractor. Or replace the last layer with
+    a new layer that matches the number of target dataset classes.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Try unfreezing the last few layers of the base network and conduct fine-tuning
+    at a low learning rate (e.g., 1e-5). The closer the target and source domains
+    are, the smaller the number of layers that need fine-tuning.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Self-Training to Improve Pre-Training ([Jingfei Du et al., 2020](https://arxiv.org/pdf/2010.02194.pdf))
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: This combination offers a potential method to make the most out of limited labeled
+    data from downstream tasks. It can also help make the best use of the large volume
+    of easily available unlabeled data. Here is how it works.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fine-tune a pre-trained model (e.g., RoBERTa-Large) with a targeted downstream
+    task’s labeled data and use the fine-tuned model as the teacher.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Extract from unlabeled dataset task-specific data using query embeddings and
+    select nearest neighbors from the dataset.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use the teacher model to annotate in-domain data retrieved in bullet 2 and select
+    top k samples from each class with the highest score.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Use the pseudo data generated in Step 3 to fine-tune a new RoBERTa-Large and
+    provide the student model.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Data Augmentation
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Data augmentation includes a set of low-cost, effective techniques to generate
+    new data points from existing data. Bullet 2 in the previous section on self-training
+    also deals with data augmentation, which is crucial for the whole exercise.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Other techniques for NLP applications include back translation, synonym replacement,
+    random insertion/swap/deletion, etc. For computer vision, the main methods include
+    cropping, flipping, zooming, rotation, noise injection, changing brightness/contrast/saturation,
+    and GAN (generative adversarial network).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Determining which methodology to use depends on your use case, initial dataset
+    quality, SME in place, and investment available.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5 Additional Tips to Help Domain-Specific AI Refinement
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: You will find the need to continue refining your domain-specific AI. Here are
+    some lessons we learned from our experiences customizing implementations to meet
+    specific use-cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conduct proper data exploration to check quality and quantity issues with data
+    before starting your proof of concept (POC). Understand whether data complies
+    with actual application scenarios (e.g., the downstream tasks, like NER, Relation
+    Extraction, QA, etc.), its variations and distribution, and its level of accuracy.
+    For variations and distribution with the classification problem – the structure
+    of the taxonomy, the number of classes at each level, amount of data falling under
+    each class, balanced vs. unbalanced, etc. – all of it matters. What you find will
+    impact your data handling approach and your methodology selection to improve domain-specific
+    model performance.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Choose appropriate algorithms/models based on your use case and data characteristics.
+    Consider factors like speed, accuracy, and deployment as well. The balance of
+    these factors is important, as they decide if your development may stop at the
+    POC stage or have the potential for real application and productization.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For example, if your model will eventually be deployed at the edge, large models
+    – although they may have higher prediction accuracy – should not be chosen. It
+    is not realistic for edge devices to run such models, given their computational
+    power.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Start every development/domain adaptation with a strong baseline model. Consider
+    AutoML to quickly check algorithms’ fits for domain-specific datasets, then optimize
+    based on the observations.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Pre-processing data is an essential part of any NLP project. The steps taken
+    should be determined on a case-by-case basis due to domain-specific requirements,
+    and their chosen featurization methods and models. Generic pipelines may not give
+    the best results.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For example, some steps such as removing stop words/punctuation and lemmatizing
+    may not always be necessary for deep learning models. They might cause a loss
+    of context; however, they can be useful if you are using TF-IDF and machine learning
+    models. Modularize the pipeline so that some common steps can be reused while
+    customizing to meet use case needs.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Leverage open-source domain-specific pre-trained language models if they are
+    available. Some well-known models are SciBERT, BioBERT, ClinicalBERT, PatentBERT,
+    and FinBERT. These domain-specific pre-trained models can help achieve better
+    representation and contextualized embeddings for downstream tasks. In case these
+    models are not available for your domain, but you do have sufficient computational
+    resources, consider training your own pre-trained model using in-domain high-quality
+    unannotated data.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Consider incorporating domain-specific vocabulary and rules. For certain scenarios,
+    they provide more efficient and accurate results and avoid model iteration problems.
+    Creating such vocabulary and defining the rules may require considerable effort
+    and domain expertise, which need to be balanced.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Channeling AI to meet domain-specific needs and challenges requires discipline
+    throughout, not only in approach and resources. The good news is that companies
+    are increasingly interested in solutions that address specific challenges and
+    resolve them, which in turn creates best practices for data scientists and AI
+    developers looking to provide faster ROI for their applications.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Cathy Feng](https://www.linkedin.com/in/cathy-feng-46b4792/)** leads Evalueserve’s
+    AI practice, guiding the company into the next era of data analytics. Passionate
+    about educating people on the possibilities of AI and its business applications,
+    her efforts led to creating domain-specific AI applications for companies like
+    McDonald’s, Intel, and Syngenta.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Creating AI-Driven Solutions: Understanding Large Language Models](https://www.kdnuggets.com/creating-ai-driven-solutions-understanding-large-language-models)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[MLOps: The Best Practices and How To Apply Them](https://www.kdnuggets.com/2022/04/mlops-best-practices-apply.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Integrating ChatGPT Into Data Science Workflows: Tips and Best Practices](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Python Best Practices for Data Science](https://www.kdnuggets.com/5-python-best-practices-for-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Warehousing and ETL Best Practices](https://www.kdnuggets.com/2023/02/data-warehousing-etl-best-practices.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[11 Best Practices of Cloud and Data Migration to AWS Cloud](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

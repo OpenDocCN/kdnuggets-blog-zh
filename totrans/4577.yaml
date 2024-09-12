@@ -1,0 +1,671 @@
+- en: A Single Function to Streamline Image Classification with Keras
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/09/single-function-streamline-image-classification-keras.html](https://www.kdnuggets.com/2019/09/single-function-streamline-image-classification-keras.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Plenty has been written about deep learning frameworks such as [Keras](https://towardsdatascience.com/introduction-to-deep-learning-with-keras-17c09e4f0eb2) and [PyTorch](https://www.analyticsvidhya.com/blog/2018/02/pytorch-tutorial/),
+    and how [powerful yet simple to use](https://towardsdatascience.com/keras-vs-pytorch-for-deep-learning-a013cb63870d) they
+    are for constructing and playing with wonderful deep learning models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There are so many tutorials/articles already written about model architecture
+    and optimizers— the concept of [convolution, max pooling, optimizers](http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf) such
+    as [ADAM](https://machinelearningmastery.com/adam-optimization-algorithm-for-deep-learning/) or [RMSprop](https://towardsdatascience.com/a-look-at-gradient-descent-and-rmsprop-optimizers-f77d483ef08b).
+  prefs: []
+  type: TYPE_NORMAL
+- en: What if, all you wanted, is a single function to pull automatically images from
+    a specified directory on your disk, and give you back a fully trained neural net
+    model, ready to be used for prediction?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/e43d04889cb61613bb095a2467c3a66a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Therefore, in this article, **we focus on how to use a couple of utility methods
+    from the Keras (TensorFlow) API to streamline the training of such models** (specifically
+    for a classification task) with a proper data pre-processing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basically, we want to,
+  prefs: []
+  type: TYPE_NORMAL
+- en: grab some data
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: put them inside a directory/folder arranged by classes
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: train a neural net model with minimum code/fuss
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the end, we aim to write **a single utility function**, which can take just
+    the name of your folder where training images are stored, and give you back a
+    fully trained CNN model.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The dataset
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We use a dataset consisting of 4000+ images of flowers for this demo. The dataset
+    can be [downloaded from the Kaggle website here](https://www.kaggle.com/alxmamaev/flowers-recognition).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The data collection is based on the data Flickr, Google images, Yandex images.
+    The pictures are divided into five classes,
+  prefs: []
+  type: TYPE_NORMAL
+- en: daisy,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: tulip,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: rose,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: sunflower,
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: dandelion.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: For each class, there are about 800 photos. Photos are not high resolution,
+    about 320 x 240 pixels. Photos are not reduced to a single size, they have different
+    proportions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, they come **organized neatly in five directories named with the corresponding
+    class labels**. We can take advantage of this organization and apply the Keras
+    methods to streamline the training of our convolutional network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code repo
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The full Jupyter notebook is [**here in my Github repo**](https://github.com/tirthajyoti/Deep-learning-with-Python/blob/master/Notebooks/Keras_flow_from_directory.ipynb).
+    Feel free to fork and extend it, and give it a star if you like it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will use bits and pieces of the code in this article to show the important
+    parts for illustration.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Should you use a GPU?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It is recommended to run this script on a GPU (with `TensorFlow-GPU`), as we
+    will build a CNN with five convolutional layers and consequently, the training
+    process with thousands of images can be computationally intensive and slow if
+    you are not using some sort of GPU.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For the Flowers dataset, a single epoch took ~ 1 minute on my modest laptop
+    with NVidia GTX 1060 Ti GPU (6 GB Video RAM), Core i-7 8770 CPU, 16 GB DDR4 RAM.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Alternatively, you can take advantage of [Google Colab](https://colab.research.google.com/notebooks/basic_features_overview.ipynb),
+    but [loading and pre-processing the datasets](https://stackoverflow.com/questions/46986398/import-data-into-google-colaboratory) can
+    be a bit of hassle there.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data pre-processing
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Housekeeping and showing images
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Note that the first part of the data pre-processing section of the notebook
+    code is not essential for the training of the neural net. This set of code is
+    just for illustration purpose and showing a few training images as an example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On my laptop, the data is stored in a folder one level above my Notebooks folder.
+    Here is the organization,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7c85736a9fee0c34dfa5d24fea44a7eb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: With some basic Python code, we can traverse the sub-directories, count the
+    images, and show a sample of them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some daisy pictures,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ba7a7b581635931f71e6f6755295800c.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: And some beautiful roses,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/aa32d62c2441e728c92853a77277d9dd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note, the pictures vary in their sizes and aspect ratios.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Building the `ImageDataGenerator` object
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This is where the actual magic happens.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The [official description](https://keras.io/preprocessing/image/) of the `ImageDataGenerator` class
+    says "*Generate batches of tensor image data with real-time data augmentation.
+    The data will be looped over (in batches).*"
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basically, it can be used **to augment image data with a lot of built-in pre-processing
+    such as scaling, shifting, rotation, noise, whitening, etc**. Right now, we just
+    use the `rescale` attribute to scale the image tensor values between 0 and 1.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is a useful article on this aspect of the class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Image Augmentation using Keras ImageDataGenerator](https://medium.com/@arindambaidya168/https-medium-com-arindambaidya168-using-keras-imagedatagenerator-b94a87cdefad?source=post_page-----bd04f5cfe6df----------------------)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: A blog for implementation of our custom generator in combination with Keras’
+    ImageDataGenerator to perform various…
+  prefs: []
+  type: TYPE_NORMAL
+- en: But the real utility of this class for the current demonstration is the super
+    useful method `flow_from_directory` which can **pull image files one after another** from
+    the specified directory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that, **this directory just has to be the top-level directory where all
+    the sub-directories of individual classes can be stored separately**. The `flow_from_directory` method
+    automatically scans through all the sub-directories and sources the images along
+    with their appropriate labels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can specify the class names (as we did here with the `classes` argument)
+    but this is optional. However, we will later see, how this can be useful for **selective
+    training from a large trove of data**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Another useful argument is the `target_size`, which **lets us resize the source
+    images to a uniform size of 200 x 200, no matter the original size of the image**.
+    That is some cool image-processing right there with a simple function argument.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We also specify the batch size. If you leave `batch_size` unspecified, by default,
+    it will be set to 32.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We choose the `class_mode` as `categorical` as we are doing a multi-class classification
+    here.
+  prefs: []
+  type: TYPE_NORMAL
+- en: When you run this code, the Keras function scans through the top-level directory,
+    finds all the image files, and automatically labels them with the proper class
+    (based on the sub-directory they were in).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/117569aa643d22de129442fb159fdb8d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Isn’t that cool?
+  prefs: []
+  type: TYPE_NORMAL
+- en: But wait, there is more. This is a [**Python generator object**](https://realpython.com/introduction-to-python-generators/) and
+    that means it will be used to ‘***yield’ the data one by one*** during the training.
+    This significantly reduces the problem of dealing with a very large dataset, whose
+    contents cannot be fitted into memory at one go. Look at this article to understand
+    it better,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Python’s Generator Expressions: Fitting Large Datasets into Memory](https://towardsdatascience.com/pythons-list-generators-what-when-how-and-why-2a560abd3879?source=post_page-----bd04f5cfe6df----------------------)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Generator Expressions are an interesting feature in Python, which allows us
+    to create lazily generated iterable objects…
+  prefs: []
+  type: TYPE_NORMAL
+- en: Building the conv net model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As promised, we will not spend time or energy on analyzing the code behind the
+    CNN model. In brief, it consists of five convolutional layers/max-pooling layers
+    and 128 neurons at the end followed by a 5 neuron output layer with a softmax
+    activation for the multi-class classification.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We use RMSprop with an initial learning rate of 0.001.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Here is the code again](https://github.com/tirthajyoti/Deep-learning-with-Python/blob/master/Notebooks/Keras_flow_from_directory.ipynb).
+    Feel free to experiment with the network architecture and the optimizer.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ec1844ddbc936768a42135a2f127071b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Training with the ‘*fit_generator’* method
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We discussed before what cool things the `train_generator` object does with
+    the `flow_from_directory` method and with its arguments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, we utilize this object in the `fit_generator` method of the CNN model,
+    defined above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note the `steps_per_epoch` argument to `fit_generator`. Since `train_generator` is
+    a generic [Python generator](https://realpython.com/introduction-to-python-generators/),
+    it never stops and therefore the `fit_generator` will not know where a particular
+    epoch is ending and the next one is starting. **We have to let it know the steps
+    in a single epoch**. This is, in most cases, the length of the total training
+    sample divided by the batch size.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the previous section, we found out the total sample size as `total_sample`.
+    Therefore, in this particular case, the `steps_per_epoch` is set to `int(total_sample/batch_size)` which
+    is `34`. Therefore, you will see 34 steps per epoch in the training log below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Partial training log…
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/ffe4fef38eeb911981d9b247da03b91b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: We can check the accuracy/loss with the usual plot code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/3dc7a46e5f494022a881e85c1ffbc13d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/bb2e7ed1557565344a66f0d4ead27b99.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: OK. What have we accomlished so far?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: We have been able to utilize Keras `ImageDataGenerator` and `fit_generator` methods
+    to pull images automatically from a single directory, label them, resize and scale
+    them, and flow them one by one (in batches) for training a neural network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Can we encapsulate all of these in a single function?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Encapsulate all of these in a single function?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: One of the central goals of making useful software/computing systems is [**abstraction**](https://en.wikipedia.org/wiki/Abstraction_(computer_science))** i.e.
+    hide the gory details of internal computation and data manipulation and present
+    a simple and intuitive working interface/ API to the user**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Just as a practice towards that goal, we can try to encapsulate the process
+    we followed above, in a single function. Here is the idea,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cc97728e7a4241619a357939fe64a06b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Aim for a flexible API with useful arguments
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: When you are designing a high-level API, **why not go for more generalization
+    than what is required for this particular demo with flowers dataset**? With that
+    in our mind, we can think of providing additional arguments to this function for
+    making it applicable to other image classification cases (we will see an example
+    soon).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Specifically, we provide the following arguments in the function,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`train_directory`: The directory where the training images are stored in separate
+    folders. These folders should be named as per the classes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`target_size`: Target size for the training images. A tuple e.g. (200,200)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`classes`: A Python list with the classes, for which we want the training to
+    happen. This forces the generator to choose specific files from the `train_directory` and
+    not look at all the data.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`batch_size`: Batch size for training'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`num_epochs`: Number of epochs for training'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`num_classes`: Number of output classes to consider'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`verbose`: Verbosity level of the training, passed on to the `fit_generator` method'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Of course, we could have provided additional arguments corresponding to the
+    whole model architecture or optimizer settings. This article is not focused on
+    such issues, and therefore, we keep it compact.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Again, the full code is in the Github repo. Below, we just show the docstring
+    portion to emphasis on the point of making it a flexible API,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b30a61c123d0e0f598657cd7a3c40b9d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Testing our utility function
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now we test our `train_CNN` function by simply supplying a folder/directory
+    name and getting back a trained model which can be used for predictions!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s also suppose that we want to train only for ‘daisy’, ‘rose’, and ‘tulip’
+    now and ignore the other two flowers’ data. We simply pass on a list to the `classes` argument.
+    In this case, don't forget to set the `num_classes` argument to 3\. You will notice
+    how the steps per epoch are automatically reduced to 20 as the number of training
+    samples is less than the case above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, note that the `verbose` is set to 0 by default in the function above,
+    and therefore you need to specify explicitly `verbose=1` if you want to monitor
+    the progress of the training epoch-wise!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basically, we are able to get a fully trained CNN model with 2 lines of code
+    now!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Is the function useful for another dataset?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This is an acid test for the utility of such a function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Can we just take it and apply to another dataset without much modification?
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Caltech-101
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A rich yet manageable image classification dataset is Caltech-101\. By *manageable* I
+    meant, not as large as the ImageNet database, which requires massive hardware
+    infrastructure to train, and therefore, out of bounds, for testing cool ideas
+    quickly on your laptop, yet diverse enough for practicing and learning the tricks
+    and trades of convolutional neural networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8359b9ee76f7e1baadf3f4b32d961dbe.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Caltech-101 is an image dataset of diverse types of objects belonging to 101
+    categories. There are about 40 to 800 images per category. Most categories have
+    about 50 images. The size of each image is roughly 300 x 200 pixels.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The dataset was built by none other than Prof. Fei Fei Li and her colleagues
+    (Marco Andreetto, and Marc ‘Aurelio Ranzato) at Caltech in 2003 when she was a
+    graduate student there. We can surmise, therefore, that Caltech-101 was a direct
+    precursor for her work on the ImageNet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training Caltech-101 with two lines of codes
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We downloaded the dataset and uncompressed the contents in the same Data folder
+    as before. The directory looks like following,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b9207cf56ceebcd84c3e7a1ade89abcd.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: So, we have what we want — a top-level directory with sub-directories containing
+    training images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: And then, the same two lines as before,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**All we did is to pass on the address of this directory to the function and
+    choose what categories of the image we want to train the model for**. Let’s say
+    we want to train the model for classification between ***‘cup’*** and ***‘crab’***.
+    We can just pass their names as a list to the `classes` argument as before.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also, note that we may have to reduce the `batch_size` significantly for this
+    dataset as the total number of training images will be much lower compared to
+    the Flowers dataset and if the `batch_size` is higher than the total sample then
+    we will have `steps_per_epoch` equal to 0 and that will create an error during
+    training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Voila! The function finds the relevant images (130 of them in total) and trains
+    the model, 4 per batch, i.e. 33 steps per epoch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/bbf9e270c2f083f78c355b501268ecfc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Testing our model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So, we saw how easy it was to just pass on the training images’ directory address
+    to the function and train a CNN model with our chosen classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Is the model any good? **Let’s find out by testing it with random pictures
+    downloaded from the internet.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Remember, the Caltech-101 dataset was created by Fei Fei Li and colleagues back
+    in 2003\. So, there is little chance that any of the newer images on the internet
+    will be in the dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We downloaded following random pictures of ‘crabs’ and ‘cups’.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e5005cd4508526f6259b4767507918ec.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/a100c7f85dd007056158ef9ac466ad75.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '![](../Images/91583cb839fe20bb9e30e02ee44dbba0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: After some rudimentary image processing (resizing and dimension expansion to
+    match the model), we get the following result,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: The model predicted the class correctly for the crab test image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![](../Images/8d7689c0379eba91c30364fa91844a33.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The model predicted the class correctly for the cup test image.
+  prefs: []
+  type: TYPE_NORMAL
+- en: But what about for this one?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: So, the model predicts the test image as a cup. Almost fair, isn’t it?
+  prefs: []
+  type: TYPE_NORMAL
+- en: Validation set and other extensions
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: So far, inside the `fit_generator` we only had a `train_generator` object for
+    training. But what about a validation set? It follows exactly the same concept
+    as a `train_generator`. You can randomly split from your training images a validation
+    set and set them aside in a separate directory (same sub-directory structures
+    as the training directory) and you should be able to pass that on to the `fit_generator` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is even a method of `flow_from_dataframe` for the `ImageDataGenerator` class,
+    where you can pass on the names of the image files as contained in a Pandas DataFrame
+    and the training can proceed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Feel free to experiment with these extensions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In this article we went over a couple of utility methods from Keras, that can
+    help us construct a compact utility function for efficiently training a CNN model
+    for an image classification task. If we can organize training images in sub-directories
+    under a common directory, then this function may allow us to train models with
+    a couple of lines of codes only.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This makes sense since rather than individually scraping and pre-processing
+    images using other libraries (such as PIL or Scikit-image), with these built-in
+    classes/methods and our utility function, we can keep the code/data flow entirely
+    within Keras and train a CNN model in a compact fashion.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have any questions or ideas to share, please contact the author at [**tirthajyoti[AT]gmail.com**](mailto:tirthajyoti@gmail.com).
+    Also, you can check the author’s [**GitHub**](https://github.com/tirthajyoti?tab=repositories)** repositories **for
+    other fun code snippets in Python, R, and machine learning resources. If you are,
+    like me, passionate about machine learning/data science, please feel free to [add
+    me on LinkedIn](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) or [follow
+    me on Twitter.](https://twitter.com/tirthajyotiS)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/a-single-function-to-streamline-image-classification-with-keras-bd04f5cfe6df).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Object-oriented programming for data scientists: Build your ML estimator](/2019/08/object-oriented-programming-data-scientists-estimator.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How a simple mix of object-oriented programming can sharpen your deep learning
+    prototype](/2019/08/simple-mix-object-oriented-programming-sharpen-deep-learning-prototype.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is Benford’s Law and why is it important for data science?](/2019/08/benfords-law-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Streamline Your Machine Learning Workflow with Scikit-learn Pipelines](https://www.kdnuggets.com/streamline-your-machine-learning-workflow-with-scikit-learn-pipelines)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Image Classification with Convolutional Neural Networks (CNNs)](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Concepts You Should Know About Gradient Descent and Cost Function](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What is a Function?](https://www.kdnuggets.com/2022/11/function.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[3 More SQL Aggregate Function Interview Questions for Data Science](https://www.kdnuggets.com/2023/01/3-sql-aggregate-function-interview-questions-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

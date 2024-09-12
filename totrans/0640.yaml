@@ -1,0 +1,616 @@
+- en: 3D Human Pose Estimation Experiments and Analysis
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/08/3d-human-pose-estimation-experiments-analysis.html](https://www.kdnuggets.com/2020/08/3d-human-pose-estimation-experiments-analysis.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Maksym Tatariants](https://www.linkedin.com/in/maksym-tatariants/), Data
+    Science Engineer at [MobiDev](https://mobidev.biz/services/data-science)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The basic idea of human pose estimation is understanding people’s movements
+    in videos and images. By defining keypoints (joints) on a human body like wrists,
+    elbows, knees, and ankles in images or videos, the deep learning-based system
+    recognizes a specific posture in space. Basically, there are two types of pose
+    estimation: 2D and 3D. 2D estimation involves  the extraction of X, Y coordinates
+    for each joint from an RGB image, and 3D - XYZ coordinates from an RGB image.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we explore how 3D human pose estimation works based on our
+    research and experiments, which were part of the analysis of applying [human pose
+    estimation in AI fitness coach applications](https://mobidev.biz/blog/human-pose-estimation-ai-personal-fitness-coach).
+  prefs: []
+  type: TYPE_NORMAL
+- en: How 3D Human Pose Estimation Works
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'The goal of 3D human pose estimation is to detect the XYZ coordinates of a
+    specific number of joints (keypoints) on the human body by using an image containing
+    a person. Visually 3D keypoints (joints) are tracked as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/0d1eebae1652d4ae982fa5db8c576480.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 3D keypoints and their specification (https://mobidev.biz/wp-content/uploads/2020/07/3d-keypoints-human-pose-estimation.png)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once the position of joints is extracted, the movement analysis system checks
+    the posture of a person. When keypoints are extracted from a sequence of frames
+    of a video stream, the system can analyze the person’s actual movement.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'There are multiple approaches to 3D human pose estimation:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**To train a model capable of inferring 3D keypoints directly from the provided
+    images.**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For example, a multi-view model [EpipolarPose](https://arxiv.org/abs/1903.02330)
+    is trained to jointly estimate the positions of 2D and 3D keypoints. The interesting
+    thing is that it requires no ground truth 3D data for training - only 2D keypoints.
+    Instead, it constructs the 3D ground truth in a self-supervised way by applying
+    epipolar geometry to 2D predictions. It is helpful since a common problem with
+    training 3D human pose estimation models is a lack of high-quality 3D pose annotations.
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: '**To detect the 2D keypoints and then transform them into 3D.**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This approach is the most common because 2D keypoint prediction is well-explored
+    and usage of a pre-trained backbone for 2D predictions increases the overall accuracy
+    of the system. Moreover, many existing models provide decent accuracy and real-time
+    inference speed (for example, [PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/posenet),
+    [HRNet](https://github.com/HRNet/HigherHRNet-Human-Pose-Estimation), [Mask R-CNN](https://research.fb.com/publications/mask-r-cnn/),
+    [Cascaded Pyramid Network](https://arxiv.org/abs/1711.07319)).
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: Regardless of the approach (image →2D →3D or image → 3D), 3D keypoints are typically
+    inferred using single-view images. Alternatively, it’s possible to exploit multi-view
+    image data where every frame is captured from several cameras focused on the target
+    scene from different angles.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/a4a2c3f9c9d817b542a85f635e85821e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Multi-camera model pose estimation – multiple 2d detections are combined to
+    predict the final 3D pose  (credit –  Learnable Triangulation of Human Pose, [https://arxiv.org/abs/1905.05754](https://arxiv.org/abs/1905.05754))
+  prefs: []
+  type: TYPE_NORMAL
+- en: The multi-view technique allows for improved depth perception and helps in those
+    cases when some parts of the body are occluded in the image. As a result, predictions
+    of models become more accurate.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Normally this method requires cameras to be synchronized. However, some authors
+    demonstrate that even the video stream from multiple unsynchronized and uncalibrated
+    cameras can be used to estimate 3D joint positions. For example, in the [Human
+    Pose as Calibration Pattern](http://openaccess.thecvf.com/content_cvpr_2018_workshops/papers/w34/Takahashi_Human_Pose_As_CVPR_2018_paper.pdf)
+    paper is described that the initial detections from uncalibrated cameras can be
+    optimized using the external knowledge on the natural proportions of the human
+    body and relaxed reprojection error to obtain the final 3D prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How Human Pose Estimation Model Detects and Analyze Movements
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We took a realistic situation of application development for an AI fitness coach.
+    In this scenario, users should capture themselves while doing an exercise, analyze
+    how correct it is performed by using the app, and review the mistakes made during
+    the exercise performance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It is the case when complicated multi-camera setup and depth sensors are not
+    available. Thereby, we chose the [VideoPose3D](https://github.com/facebookresearch/VideoPose3D)
+    model since it works with simple single-view detections. VideoPose3D belongs to
+    a convolutional neural networks (CNNs) family and employs dilated temporal convolutions
+    (see the illustration below).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/828fa0eee1d3319f4930308cee842139.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 2D to 3D keypoints transfer using VideoPose3D. Note that in this illustration
+    both past and future frames are used to make a prediction. (credit [Pavllo et
+    al](https://arxiv.org/abs/1811.11742).)
+  prefs: []
+  type: TYPE_NORMAL
+- en: As an input, this model requires a set of 2D keypoint detections, where the
+    2D detector is pre-trained on the COCO 2017 dataset. By utilizing the information
+    from multiple frames taken at different periods, VideoPose3D essentially makes
+    a prediction based on the data about the past and the future position of joints,
+    which allows a more accurate prediction of the current joints’ state and partial
+    resolution of the uncertainty issues (for example, when the joint is occluded
+    in one of the frames, the model can “look” at the neighbouring frames to resolve
+    the problem).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to explore the capabilities and limitations of the VideoPose3D, we
+    applied it for analysis of powerlifting and martial arts exercises.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spine Angle Detection
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The spine angle is one of the most important things to be analyzed when squatting.
+    Keeping the back straight is important in this exercise since the more you lean
+    forward, the more the center of mass (body + barbell) is shifted forward (it can
+    be a very bad thing since the shifted center of mass causes extra load on the
+    spine).
+  prefs: []
+  type: TYPE_NORMAL
+- en: To measure the angle, we treated the spine (start keypoint 0, end keypoint 8)
+    as a vector and measured the angle between the vector and the XY plane by taking
+    *arccos* of cosine similarity equation. In the video below, you can see how the
+    model detects the spine angle on an example video. As you can see, when squatting
+    up with incorrect form, the angle can be as small as 28-27°.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Figure](../Images/df31d8b2674b8a085749b57b7057a80d.png)](https://i.ibb.co/XsY88MT/image17.gif)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spine angle detection – the person is leaning forward too much (click for animation)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://youtu.be/yZv-qoKfmqk](https://youtu.be/yZv-qoKfmqk)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When looking at the video where the exercise is executed correctly (see the
+    video below), we can say that the angle is not going below ~47°. It means that
+    the selected method can correctly detect the spine angle when squatting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Figure](../Images/20308a4f7e374145f2193ebebbcc05c0.png)](https://i.ibb.co/T42Sfz8/image11.gif)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Spine angle detection – the person is keeping straight back (click for animation)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://youtu.be/ikQhw9pNMy4](https://youtu.be/ikQhw9pNMy4)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Detection of Exercise Start and End
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To be able to automatically analyze only the active phase of the exercise or
+    detect its duration, we investigated the process of automatic detection of the
+    exercise start and end.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Since squatting with a barbell requires the specific positioning of arms, we
+    decided to use their position as a reference for detection. When squatting, both
+    arms are typically bent at an angle < 90°, and hands are positioned near shoulders
+    (by height). By using some arbitrary thresholds (in our case, we chose angle <
+    78° and distance < 10% from max z-axis value), we can detect this condition as
+    shown below.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Figure](../Images/885c4ef468fec4fb2e5243782417b1c8.png)](https://i.ibb.co/sjqcsDz/image1.gif)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Detection of the squatting start (click for animation)
+  prefs: []
+  type: TYPE_NORMAL
+- en: https://youtu.be/KjtXIoX-KSo
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to see if the condition and thresholds are held up during the exercise,
+    we analyzed another video from a different perspective and reviewed how the system
+    may work during the exercise when the detection is already started. It turned
+    out that the observed parameters remained far below the selected thresholds.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Figure](../Images/350ae89db0544e8798545c668de169b6.png)](https://i.ibb.co/K04qdgT/image19.gif)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Squatting condition stability during the exercise (click for animation)
+  prefs: []
+  type: TYPE_NORMAL
+- en: We also checked how the condition works when the person finishes the exercise
+    and saw that once the barbell is dropped off, the false condition is immediately
+    triggered. And finally, we concluded that this method works well, although it
+    has some nuances (described in the Errors and Possible Solutions in Human Pose
+    Estimation Technology section).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Figure](../Images/6ffc60c182946b60357acbb90d9a51bd.png)](https://i.ibb.co/0QSQ6kH/image6.gif)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Squatting condition – end squat check (click for animation)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Detection of Knee Caving
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Knee valgus or knee caving is a common mistake in squatting. This problem is
+    often encountered in squatting when an athlete reaches the bottom point and begins
+    squatting up. The incorrect technique may cause severe wear of knee joints and
+    lead to snapped tendons or replacement of knee cups.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To see how the model detects the knee caving mistake, we captured the joints'
+    3D position. Since the resulting skeleton (see the image below) can be positioned
+    randomly, we rotated it along the Z-axis to align it with one of the planes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/6eafd263e54706d954e78997073f5774.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Keypoint rotation to match the selected plane (ZY plane in this case)
+  prefs: []
+  type: TYPE_NORMAL
+- en: After that, we projected the 3D keypoint onto the plane and started tracking
+    the position of knees as to the position of feet. The goal was to detect situations
+    when legs are bent, and knees are closer to the center torso than feet.
+  prefs: []
+  type: TYPE_NORMAL
+- en: From the image below, you can see that the incorrect position of knees is well-detected,
+    meaning that this method works well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Figure](../Images/1bc2c78655e23720ff20f9242e47bfd4.png)](https://mobidev.biz/wp-content/uploads/2020/07/detect-mistakes-knee-cave.gif)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Detection of knee caving: original video, 3d detections, and frontal projection
+    onto ZY plane (click for animation)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Comparison of Two Athletes in Powerlifting and Snatch
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Another interesting application of 3D human pose estimation technology is the
+    comparison between the movements of two people. Having the goal to improve an
+    exercise technique, athletes may use the human pose estimation-based app to compare
+    themselves with more experienced athletes. In order to do so, it is required to
+    have a “gold standard” video with a record of a particular movement, and use it
+    to evaluate similarities and differences based on body parts localization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For such comparison, we took the video of the athlete performing the snatch
+    with start and end tags. The goal was to speed it up or slow down for synchronization
+    with the beginning and the end of the target (“gold standard”) video. The process
+    looked as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Detection of the 3D keypoints position for both videos
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Aligning of keypoints so that “skeletons” have the same center point and being
+    rotated similarly
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Analysis of distances between different joints frame by frame
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[![Figure](../Images/e6b494b816174676f52ab1762331c628.png)](https://i.ibb.co/D1vT5fh/image5.gif)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Comparing the movement of two athletes performing snatch: distances between
+    the respective joints are shown in the box in the upper left corner of pose reconstruction
+    view (click for animation)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: https://youtu.be/34z5FI5ldyE
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a result, we discovered that the accurate detection of a human pose during
+    the fast and abrupt movement stretches the limits of a single-view detection method.
+    The network predicts the move better when more frames are available, which is
+    not the case with ~2-sec move (at least if you have 30 fps video).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Deadlift - Reps Counter
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If you were wondering if 3d human pose estimation could be used to count repetitions
+    in an exercise, we have prepared an example based on the deadlift exercise showing
+    how you can determine the number of repetitions and also exercise phase (going
+    up or going down) in an automatic manner. In the image below you can see that
+    we can detect when the person is going up as well as quite reliably count the
+    number of repetitions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Figure](../Images/b9ac9b58f4546d6ec427083fa0339546.png)](https://i.ibb.co/VMF2Pn1/image20.gif)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Reps and movement phase detection in deadlifting (click for animation)
+  prefs: []
+  type: TYPE_NORMAL
+- en: https://youtu.be/zX51qbBCiLM
+  prefs: []
+  type: TYPE_NORMAL
+- en: We achieved that by, first of all, considering how we can define one repetition.
+    Basically, one repetition in deadlifting is when the initially bent forward person
+    begins ascending, reaches a vertical position, and begins to descend again. Therefore
+    we need to look for a spot in time when a group of consecutive “going up” frames
+    is followed by a group of also consecutive “going down” frames. The edge frame
+    between the two groups will be the spot where we can add one repetition to our
+    counter.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In terms of practical implementation, the key to finding going up and down frames
+    is the spine angle, which we already know how to detect. While using it, we can
+    go through all the detected frames and compare the spine angles in the neighboring
+    frames. As a result, we will get a vector of 1s and 0s where continuous stretches
+    of 1s can represent ascent and 0s - descent.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/f97664de1269fa6aec043aa8865524a5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Comparing two poses in a sequence based on the spine angle to determine whether
+    the person is ascending or descending. Comparison filter goes over all the frames
+    in the sequence
+  prefs: []
+  type: TYPE_NORMAL
+- en: Obviously, these detections will need a small cleanup to remove accidental detections
+    and oscillations. It can be done by going over the data using a sliding window
+    of relatively small-size (4-5) frames and replacing all the values inside the
+    window with a majority value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/786f92432e81b86fed7b11512e9fe7f7.png)![Figure](../Images/809195e4f541199ece6f79d1c9bf8ad6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Example movement phase detection on the first 17 frames before (above) and after
+    (below) the value cleanup (1- going up, 0 – going down)
+  prefs: []
+  type: TYPE_NORMAL
+- en: After the cleanup is done, we can move on to detecting the actual edge frames
+    where the person finished one repetition. It is surprisingly simple, as we can
+    apply a convolutional filter (kernel) used for edge detection.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/385cbccbcf90256e0eb7e7ba93dea3e0.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Results of a convolution using edge detection kernel
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a result, when approaching the edge frame, the values begin to grow and become
+    either positive or negative (depending on the edge type). Since we are looking
+    for going up|going down the edge, we need to find indices of all the frames where
+    the value of the filter is -50 (maximum) and then, we will know when to add repetitions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Errors and Possible Solutions in Human Pose Estimation **'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Squatting Start Detection Error
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Problem:** At first glance, it may seem that squatting start detection works
+    appropriately, however, the arbitrary threshold gives an error when one of the
+    arms’ angles briefly goes above it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Figure](../Images/dddacc0934ace589e66efcc1cdc1a43d.png)](https://i.ibb.co/3hsGc6R/image15.gif)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Detection of squatting start – threshold error (click for animation)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** We could increase the threshold to avoid the error in the particular
+    video, but there is no guarantee that processing other videos won’t result in
+    the same error. It means that it is necessary to test the model by using a number
+    of different examples to establish a proper set of rules.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Frontal Perspective Error
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Problem:** When processing unusual movements and strictly frontal views,
+    the model tends to produce low-quality results, especially for keypoints on legs.
+    The possible reason for this issue is the fact that the Human3.6M dataset used
+    for training of the VideoPose3D is, despite its size, still limited in terms of
+    poses, moves, and perspectives.  As a result, the model does not generalize to
+    the presented data (which falls far out of the learned distribution) accurately.
+    Comparatively, the same movement is predicted better when the view has a non-frontal
+    perspective.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Figure](../Images/e7afe1cf672515e103e6fe5983a4dbe6.png)](https://i.ibb.co/hRmGf7S/image10.gif)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Poor 3D detections on snatch move for athletes in frontal position (click for
+    animation)
+  prefs: []
+  type: TYPE_NORMAL
+- en: https://youtu.be/Za1GPq6sHUk
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** The problem can be solved by fine-tuning the model on the domain-specific
+    data. Alternatively, you can utilize synthetic data for training (such as animated
+    3D models rendered with realistic render), or encode the external knowledge about
+    the skeletal system into the loss function.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unusual Movements Error
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Problem:** When working with 3D human pose estimation, we found out that
+    the 2D detection part may cause a low prediction accuracy.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Figure](../Images/683d4e52bdd4c176159422718081fa4c.png)](https://i.ibb.co/VJgLk2j/image9.gif)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Leg position is not detected properly in an unusual move (click for animation)
+  prefs: []
+  type: TYPE_NORMAL
+- en: https://youtu.be/Gu_H3s7eel0
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Keypoint R-CNN model detects the position of quickly moving legs incorrectly,
+    which can be partially attributed to the blurring of leg features caused by the
+    fast transition.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In addition, this kind of limb position is not very similar to what can be found
+    in the COCO 2D keypoint dataset used for pre-training the model. As a result,
+    the 3D model predictions for the lower body part do not correspond to the real
+    movement, while the upper part of the body looks correct since the upper limbs
+    have more degrees of freedom than legs on the images used for model training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Collecting and labeling of own dataset which would contain images from the
+    target domain.** Despite improving the model’s performance on the target domain,
+    this approach may be prohibitively costly to implement.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Using train-time augmentations to make the model less sensitive to rotations
+    of the human body.** This approach requires the application of random rotations
+    to the training images and all the keypoints within. It will definitely help when
+    predicting unusual poses, however, it may not be very helpful when detecting those
+    poses that cannot be obtained by simple rotation like bending over, or high kicks.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Adoption of rotation-invariant models, capable of inferring the position
+    of keypoints regardless of the rotation degree of the body.** It can be done by
+    training an additional rotation network aimed to find the rotation angle needed
+    to transform a given image to a canonical view. Once the network is trained, it
+    can be integrated into the inference pipeline so that the keypoint detection model
+    receives only angle-normalized images.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Occluded Joints Error
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Problem:** The 2D predictor may return poor results when body parts are occluded
+    with other body parts or objects. When weights on barbells obscure the position
+    of hands in powerlifting, the detector may “misfire,” placing the keypoint far
+    from its true position. It leads to instability of 3D keypoint models’ output
+    and “shaky hands” effect.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[![Figure](../Images/ba909d713af0704bda3bab0e9045a824.png)](https://i.ibb.co/9hGMVWM/image16.gif)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2D keypoint model fails to detect the position of the left hand leading to incorrect
+    3D reconstruction (click for animation)
+  prefs: []
+  type: TYPE_NORMAL
+- en: https://youtu.be/1rg1lj-eAaw
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Solution:** It is possible to use multi-view systems to get better accuracy
+    since they can significantly reduce the occlusion problem. There are also 2D keypoint
+    localization models [designed specifically](https://arxiv.org/abs/1907.06922)
+    to deal with occlusions.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In conclusion, I'd say that based on our practical findings, most weaknesses
+    of the 3D human pose estimation technology are avoidable. The main task is to
+    select the right model architecture and training data. Moreover, the rapid developments
+    in 3D human pose estimation indicate that current obstacles may become less of
+    an issue in the future.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Maksym Tatariants](https://www.linkedin.com/in/maksym-tatariants/)**
+    is a Data Science Engineer at [MobiDev](https://mobidev.biz/services/data-science). He
+    has a background in Environmental and Mechanical Engineering, Materials Science,
+    and Chemistry, and is keen on gaining new insights and experience in the Data
+    Science and Machine Learning sectors. He is particularly interested in Deep Learning-based
+    technologies and their application to business use cases.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A 2019 Guide to Human Pose Estimation](/2019/08/2019-guide-human-pose-estimation.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Metrics to Use to Evaluate Deep Learning Object Detectors](/2020/08/metrics-evaluate-deep-learning-object-detectors.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Are Computer Vision Models Vulnerable to Weight Poisoning Attacks?](/2020/08/computer-vision-models-vulnerable-weight-poisoning-attacks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Versioning Machine Learning Experiments vs Tracking Them](https://www.kdnuggets.com/2021/12/versioning-machine-learning-experiments-tracking.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Design Experiments for Data Collection](https://www.kdnuggets.com/2022/04/design-experiments-data-collection.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Hydra Configs for Deep Learning Experiments](https://www.kdnuggets.com/2023/03/hydra-configs-deep-learning-experiments.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Gap Between Deep Learning and Human Cognitive Abilities](https://www.kdnuggets.com/2022/10/gap-deep-learning-human-cognitive-abilities.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Closing the Gap Between Human Understanding and Machine Learning:…](https://www.kdnuggets.com/2023/06/closing-gap-human-understanding-machine-learning-explainable-ai-solution.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Bringing Human and AI Agents Together for Enhanced Customer Experience](https://www.kdnuggets.com/2024/06/softweb/bringing-human-and-ai-agents-together-for-enhanced-customer-experience)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

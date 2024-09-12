@@ -1,0 +1,223 @@
+- en: A Beginner’s Guide to Tweet Analytics with Pandas
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2017/03/beginners-guide-tweet-analytics-pandas.html](https://www.kdnuggets.com/2017/03/beginners-guide-tweet-analytics-pandas.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Twitter provides access to analytics for all of its users, but I am assuming
+    relatively few vanilla tweeples pay much attention to its existence. There are
+    a variety of other services which can help perform tweet and audience analytics,
+    and further analysis such as that related to geographic and natural language processing,
+    but when paired with some simple Python, the Twitter-supplied data can be incredibly
+    useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is a simple guide to getting your hands a bit dirty doing analysis on your
+    own in Python. Unlike a lot of other tutorials which often pull from the real-time
+    Twitter API, we will be using the downloadable Twitter Analytics data, and most
+    of what we do will be done in Pandas.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Before we get started, let's get the obligatory imports out of the way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Get and Inspect the Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: First we need the data. This part is easy enough; go to Twitter, click on the
+    upper right menu (your profile pic), select **Analytics**, choose the **Tweets**
+    tab along the top, use the date range pickers to select a time period, and choose
+    **Export Data**. It doesn't matter how much data you use; our simple example will
+    work with any amount. I chose the default, **Past 28 Days**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/91d318b27d4114f353b60ee7749061af.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Get that Twitter analytics data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once we have the CSV file, we will want to load it into a Pandas DataFrame for
+    analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Don't mind all the dropped columns; while a lot of what is there is useful for
+    our analysis -- tweet text, time, impressions, retweets, etc. -- many are not
+    -- all the **promoted** things -- and so we will just omit them from the start.
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we would with any data analysis project, next we have a look at the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8a31b05d700e5357f276a72da7cf708e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Running:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: tells us that I have tweeted a measly 95 times in the past 4 weeks. Not a very
+    large dataset, and we probably would not want to make any inferences based on
+    our findings, but a good enough toy set to start out with.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let's see what useful analytics we can pull out of this.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basic Tweet Stats
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'So, given what data is shown in the output of running `head()` on the dataset
+    above, and having a rough intuition of what tweet metrics would be useful, we
+    will grab the following stats:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Retweets** - Mean RTs per tweet & top 5 RTed tweets'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Likes** - Mean likes per tweet & top 5 liked tweets'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Impressions** - Mean impressions per tweet & top 5 tweets with most impressions'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: I won't bother with any analysis of these metrics. Needless to say, I should
+    step my social media game up.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Top #Hashtags and @Mentions'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: It's no secret that hashtags play an important role in Twitter, and mentions
+    can also help grow your network and influence. Together they help put the 'social'
+    in social networking, transforming platforms like Twitter from passive experiences
+    to very active ones. With that, getting a handle on the most social aspect of
+    this social network can be a helpful endeavour.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Putting aside some evident bumps like punctuation being removed from tweet text
+    prior to checking Twitter handles (this could be a problem if you have tweeps
+    named both Francesco_AI and FrancescoAI), this works and is at least relatively
+    Pythonic (though I'm sure it could be more so).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Time-series Analysis
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Finally, let's have a look at some very basic temporal data. We will check mean
+    impressions for tweets based -- independently -- on both the hour of day and day
+    of week that they are tweeted. I caution (once gain) that this is based on very
+    little data, and so nothing useful will likely be gleaned. However, given much
+    larger amounts of tweet data, entire social media campaigns are planned.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While this is based on impressions, it could just as reasonably (and easily
+    changed to) be based on engagements, or RTs, or whatever else you pleased. Working
+    in advertising, and promoting tweets? Maybe you are more interested in some of
+    those **promotion*** metrics we hacked off the dataset at the start.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We have to convert the Twitter supplied date field to a legitimate Python datetime
+    object, bin the data based on which hourly slot it falls into, identify days of
+    week, and then capture this data in a couple of additional columns in the DataFrame,
+    which we will pillage for stats afterward.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: It seems I tweet at rather consistent times of day. It also seems that my Wednesday
+    tweets, 11 AM tweets, and 6 PM tweets are my bread and butter. Of course, this
+    is based on 95 tweets, and so is meaningless and inconclusive. However, after
+    performing these same steps on some considerably larger sets of data, some interesting
+    trends have been observed which may help lead to business decisions. All from
+    some simple Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While not earth-shattering, our simple Pandas-based Twitter analytics code is
+    enough to get us thinking about how we may better use social media. Applied to
+    the right data, elementary scripts can be quite powerful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Mining Twitter Data with Python Part 1: Collecting Data](/2016/06/mining-twitter-data-python-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Pandas Cheat Sheet: Data Science and Data Wrangling in Python](/2017/01/pandas-cheat-sheet.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tidying Data in Python](/2017/01/tidying-data-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Beginner''s Guide to Pandas Melt Function](https://www.kdnuggets.com/2023/03/beginner-guide-pandas-melt-function.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Ingestion with Pandas: A Beginner Tutorial](https://www.kdnuggets.com/2022/04/data-ingestion-pandas-beginner-tutorial.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Beginner''s Guide to End to End Machine Learning](https://www.kdnuggets.com/2021/12/beginner-guide-end-end-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Essential Machine Learning Algorithms: A Beginner''s Guide](https://www.kdnuggets.com/2021/05/essential-machine-learning-algorithms-beginners.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Beginner''s Guide to Q Learning](https://www.kdnuggets.com/2022/06/beginner-guide-q-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Beginner’s Guide to Web Scraping Using Python](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

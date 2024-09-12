@@ -1,0 +1,247 @@
+- en: 'Bayesian deep learning and near-term quantum computers: A cautionary tale in
+    quantum machine learning'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/07/bayesian-deep-learning-near-term-quantum-computers.html](https://www.kdnuggets.com/2019/07/bayesian-deep-learning-near-term-quantum-computers.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**By [Peter Wittek](https://peterwittek.com/) (Edited by Amir Feizpour & Nick
+    Morrison)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*This blog post is an overview of quantum machine learning written by the author
+    of the paper [Bayesian deep learning on a quantum computer](https://link.springer.com/article/10.1007%2Fs42484-019-00004-7).
+    In it, we explore the application of machine learning in the quantum computing
+    space. The authors of this paper hope that the results of the experiment help
+    influence the future development of quantum machine learning.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: With no shortage of research problems, education programs, and demand for talent,
+    machine learning is one of the hottest topics in technology today. Parallel to
+    the success of learning algorithms, the development of quantum computing hardware
+    has accelerated over the last few years. In fact, we are at the threshold of achieving
+    a quantum advantage, that is, a speed or other performance boost over classical
+    algorithms, in certain specific application areas – [machine learning](https://en.wikipedia.org/wiki/Quantum_machine_learning) being
+    one of them. This sounds exciting, but don’t ditch your GPU cluster just yet;
+    quantum computers and your parallel processing units solve different classes of
+    problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If you look at the figure below, you’ll get a quick idea of how to think about
+    the role of quantum computing in machine learning. As the complexities of the
+    problems to be solved have grown, AI stacks have begun to include more and more
+    different hardware back-ends, including anything from off-the-shelf CPUs to Tensor
+    Processing Units (TPUs) and neuromorphic chips. Yet, there are still problems
+    that remain too difficult to solve: some of these are amenable to quantum computing.
+    In other words, quantum computers can enable the creation of more complex machine
+    learning and deep learning models in the same way that GPUs have done in the past.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/d054a7663750a7b89adfcca616e64068.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Figure 1.** AI already uses a heterogeneous mix of hardware back-ends. In
+    the future, this blend will incorporate quantum technologies that enable certain
+    learning algorithms. Based on a [talk](http://www.marketforintelligence.com/talks/why-will-machine-intelligence-be-so-transformational/) by
+    Steve Jurvetson at the Machine Learning and the Market for Intelligence Conference.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'A quantum computer uses “quantum bits” (qubits): a qubit is a special probability
+    distribution between 0 and 1\. The number of qubits and the quality (the fidelity)
+    of the operations that we can perform are the most important indicators of how
+    good a quantum computer is. Quantum machine learning uses quantum computers to
+    run certain parts of a learning algorithm. The near-term feasibility of the various
+    quantum machine learning proposals varies. Some quantum algorithms can already
+    be run on current quantum hardware (e.g., algorithms that need few qubits and
+    gates, so-called variational algorithms), others need better quantum computers,
+    with a lot more and higher quality qubits (such as the most famous algorithms
+    like factorization by Shor’s algorithm or unstructured search by Grover’s algorithm).
+    So far, only a handful of benchmark results are available for running actual quantum
+    machine learning algorithms on real hardware.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'All of these benchmarks focus on the more obvious classes of algorithms that
+    were designed for these noisy, early quantum devices. We were interested in the
+    other extreme: let''s take one of the hardest algorithmic primitives (algorithms
+    where all the steps are basic operations and do not make calls to other algorithms)
+    and see what kind of results we can get. Why? A well-known algorithm is the [quantum
+    matrix inversion algorithm](https://en.wikipedia.org/wiki/Quantum_algorithm_for_linear_systems_of_equations) (HHL
+    for short after the authors of the [original article](https://arxiv.org/abs/0811.3171)),
+    which offers an exponential speedup in matrix inversion compared to classical
+    algorithms, is one of the most common algorithmic primitives in quantum machine
+    learning. We believed that there were advantages in using quantum computers, but
+    we also believed that we had to factor in what the current quantum hardware is
+    capable of. So we set out on a quest to show how bad things can get.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Countless caveats apply with the quantum matrix inversion algorithm: it requires
+    quantum circuits that have thousands of [error-corrected qubits](https://en.wikipedia.org/wiki/Quantum_error_correction) and
+    an even larger number of gates. In other words, it needs a perfect, large-scale,
+    universal quantum computer. This is a stark contrast to the handful of noisy qubits
+    we have today and the shallow circuits we can build given the short times the
+    qubits can maintain superpositions (also known as coherence time). The superposition
+    is the special probability distribution between 0 and 1 that we mentioned earlier.
+    If the coherence time is bad, the probability distribution is not under our control:
+    we cannot perform transformations on it to express a calculation.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Given that quantum matrix inversion is a common subroutine in quantum machine
+    learning and it requires very high-quality quantum computers, we wanted to tell
+    a cautionary tale. We found an opportunity: [two](https://arxiv.org/abs/1711.00165) [papers](https://openreview.net/forum?id=H1-nGgWC-) appeared
+    in late 2017 that made a connection between deep learning and Gaussian processes.
+    This is an important feat since combining deep learning with Bayesian techniques
+    (of which Gaussian processes is an example) allows for getting much more information
+    from the network. In particular, it provides easy ways of knowing the uncertainty
+    associated with a prediction. Unfortunately, Bayesian learning is hard, even with
+    the best classical hardware. That is why, exploiting this new-found connection,
+    we came up with a new quantum Bayesian deep learning protocol that internally
+    used quantum matrix inversion for achieving a speedup. On the surface, the new
+    protocol looks good: it is a problem that is hard to solve classically, we applied
+    some mathematical tricks, and we could give it a significant lift in speed by
+    using a quantum algorithm! Unfortunately, this speedup requires very, very high-quality
+    quantum computers.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We used this opportunity to implement the quantum matrix inversion algorithm
+    and benchmark it on contemporary quantum computers. The corresponding [paper](https://doi.org/10.1007/s42484-019-00004-7) has
+    just been published (the open version can be found on [arXiv](https://arxiv.org/abs/1806.11463)),
+    with a matching [git repository](https://gitlab.com/apozas/bayesian-dl-quantum/).
+    The figure below gives an overview of what we proposed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/94f7e58948478db9b352e773c1572538.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Figure 2.** Schematic overview of quantum Bayesian deep learning. A layer
+    of neurons in a neural network can be considered equivalent to a Gaussian process
+    under certain conditions. Recent work showed that the equivalence still holds
+    if we consider many layers. To train the Gaussian process fast, we use the quantum-assisted
+    protocol and run it on a quantum processing unit. Image credit: Alejandro Pozas-Kerstjens.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The results confirmed that despite its widespread usage, quantum matrix inversion
+    is not the first target for achieving a real-world quantum advantage. Any gate
+    noise immediately destroys the calculations, which is intuitive, since we need
+    dozens of gates for even a small matrix inversion. Reading out the result of a
+    quantum computation is done through measurements on the device. Faults in the
+    devices measuring the qubits also affect the performance of the algorithm, however,
+    as there are few measurements to be done, this source of error has a smaller impact.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9a245ce50eaf60da17d2115aea824607.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '***Figure 3.** Fidelity of final state after inverting a 4x4 matrix. Simulations
+    using different noise levels and noise models.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'To run on real hardware, we needed a simplification, because the full-blown
+    algorithm was too deep even for a 2x2 matrix. Fortunately, [we found just what
+    we needed](https://arxiv.org/abs/1110.2232): a shallow circuit specifically designed
+    for inverting 2x2 matrices. While this is not relevant for any practical application,
+    this circuit has slightly over a dozen gates (including state preparation) and
+    interesting results. We used both the [16-qubit IBM chip](https://www.research.ibm.com/ibm-q/technology/devices/#ibmq_16_melbourne) and
+    the [8-qubit Agave chip](https://medium.com/rigetti/how-to-write-a-quantum-program-in-10-lines-of-code-for-beginners-540224ac6b45) by
+    Rigetti. The Agave chip has a specific linear topology, that introduces a handful
+    of extra gates for operating the quantum state as desired. The IBM QPU ran with
+    an 89% success rate after measurement, which translates to about 0.78 fidelity
+    with the correct target state. The Agave QPU achieved a 50% success rate, which
+    translates to zero fidelity, but we believe this is mainly because of the linear
+    topology and the extra gates that need to be inserted. These are not many, but
+    enough to make the execution of the algorithm take longer than the coherence time
+    of the qubits.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: There is no point in creating a QML algorithm for something that can be efficiently
+    done on a GPU cluster. As Bayesian deep learning is difficult to execute when
+    using classical resources, we attacked it with quantum protocols. With this theory,
+    we have made non-trivial advances towards allowing quantum computers to train
+    deep neural networks.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the implementation side, we have established a complete implementation of
+    the quantum matrix inversion algorithm, which can serve as a hard benchmark for
+    future quantum computers. We concluded that it is better to stay away from these
+    abstract algorithms and pay more attention to the limits of the quantum hardware
+    of today. We hope that the classical and the quantum machine learning communities
+    will find the results intriguing and that the next generation of quantum coders
+    can learn from this experiment.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://aisc.ai.science/blog/2019/bayesian-deep-learning-and-near-term-quantim-computers/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Pre-training, Transformers, and Bi-directionality](/2019/07/pre-training-transformers-bi-directionality.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GANs Need Some Attention, Too](/2019/03/gans-need-some-attention-too.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Large-Scale Evolution of Image Classifiers](/2019/05/large-scale-evolution-image-classifiers.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[There and Back Again… a RAPIDS Tale](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Reinforcement Learning: Teaching Computers to Make Optimal Decisions](https://www.kdnuggets.com/2023/07/reinforcement-learning-teaching-computers-make-optimal-decisions.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

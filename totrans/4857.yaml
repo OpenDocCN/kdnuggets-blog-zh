@@ -1,0 +1,272 @@
+- en: 'Implementing Deep Learning Methods and Feature Engineering for Text Data: FastText'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/05/implementing-deep-learning-methods-feature-engineering-text-data-fasttext.html](https://www.kdnuggets.com/2018/05/implementing-deep-learning-methods-feature-engineering-text-data-fasttext.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Editor''s note:** This post is only one part of a far more thorough and in-depth
+    original, [found here](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa),
+    which covers much more than what is included here.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: The FastText Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The [**FastText**](https://fasttext.cc/) model was first introduced by Facebook
+    in 2016 as an extension and supposedly improvement of the vanilla Word2Vec model.
+    Based on the original paper titled [*‘Enriching Word Vectors with Subword Information’ *by
+    Mikolov et al.](https://arxiv.org/pdf/1607.04606.pdf) which is an excellent read
+    to gain an in-depth understanding of how this model works. Overall, FastText is
+    a framework for learning word representations and also performing robust, fast
+    and accurate text classification. The framework is open-sourced by [Facebook](https://www.facebook.com/) on [**GitHub**](https://github.com/facebookresearch/fastText) and
+    claims to have the following.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recent state-of-the-art [English word vectors](https://fasttext.cc/docs/en/english-vectors.html).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Word vectors for [157 languages trained on Wikipedia and Crawl](https://github.com/facebookresearch/fastText/blob/master/docs/crawl-vectors.md).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Models for [language identification](https://fasttext.cc/docs/en/language-identification.html#content) and [various
+    supervised tasks](https://fasttext.cc/docs/en/supervised-models.html#content).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Though I haven’t implemented this model from scratch, based on the research
+    paper, following is what I learnt about how the model works. In general, predictive
+    models like the Word2Vec model typically considers each word as a distinct entity
+    (e.g. ***where***) and generates a dense embedding for the word. However this
+    poses to be a serious limitation with languages having massive vocabularies and
+    many rare words which may not occur a lot in different corpora. The Word2Vec model
+    typically ignores the morphological structure of each word and considers a word
+    as a single entity. The FastText model *considers each word as a Bag of Character
+    n-grams.* This is also called as a subword model in the paper.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We add special boundary symbols **< **and **>** at the beginning and end of
+    words. This enables us to distinguish prefixes and suffixes from other character
+    sequences. We also include the word ***w ***itself in the set of its n-grams,
+    to learn a representation for each word (in addition to its character n-grams).
+    Taking the word ***where ***and ***n=3*** (tri-grams) as an example, it will be
+    represented by the character n-grams: ***<wh, whe, her, ere, re> ***and the special
+    sequence ***<where>*** representing the whole word. Note that the sequence , corresponding
+    to the word ***<her> ***is different from the tri-gram ***her ***from the word ***where***.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In practice, the paper recommends in extracting all the n-grams for ***n ≥*** ***3*** and ***n
+    ≤*** ***6***. This is a very simple approach, and different sets of n-grams could
+    be considered, for example taking all prefixes and suffixes. We typically associate
+    a vector representation (embedding) to each n-gram for a word. Thus, we can represent
+    a word by the sum of the vector representations of its n-grams or the average
+    of the embedding of these n-grams. Thus, due to this effect of leveraging n-grams
+    from individual words based on their characters, there is a higher chance for
+    rare words to get a good representation since their character based n-grams should
+    occur across other words of the corpus.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Applying FastText features for Machine Learning Tasks
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The `gensim` package has nice wrappers providing us interfaces to leverage the
+    FastText model available under the `gensim.models.fasttext` module. Let’s apply
+    this once again on our ***Bible corpus*** and look at our words of interest and
+    their most similar words.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/999728a20ab50605ab08b779dee4097f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: You can see a lot of similarity in the results with our Word2Vec model with
+    relevant similar words for each of our words of interest. Do you notice any interesting
+    associations and similarities?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b3b49b9c52202eed979cbd9f1a64f398.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Moses, his brother Aaron and the Tabernacle of Moses
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Note:** Running this model is computationally expensive and usually takes
+    more time as compared to the skip-gram model since it considers n-grams for each
+    word. This works better if trained using a GPU or a good CPU. I trained this on
+    an AWS `***p2.x***` instance and it took me around 10 minutes as compared to over
+    2–3 hours on a regular system.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Let’s now use [***Principal Component Analysis (PCA)***](https://en.wikipedia.org/wiki/Principal_component_analysis) to
+    reduce the word embedding dimensions to 2-D and then visualize the same.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cd3a3180e4b5a37fc702bbb58d372a6b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Visualizing FastTest word embeddings on our Bible corpus
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can see a lot of interesting patterns! *Noah*, his son *Shem *and grandfather *Methuselah *are
+    close to each other. We also see *God *associated with *Moses *and *Egypt *where
+    it endured the Biblical plagues including *famine *and *pestilence*. Also *Jesus *and
+    some of his *disciples *are associated close to each other.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To access any of the word embeddings you can just index the model with the word
+    as follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Having these embeddings, we can perform some interesting natural language tasks.
+    One of these would be to find out similarity between different words (entities).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can see that ***‘god’ ***is more closely associated with ***‘jesus’*** rather
+    than ***‘satan’*** based on the text in our Bible corpus. Quite relevant!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Considering word embeddings being present, we can even find out odd words from
+    a bunch of words as follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Interesting and relevant results in both cases for the odd entity amongst the
+    other words!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: These examples should give you a good idea about newer and efficient strategies
+    around leveraging deep learning language models to extract features from text
+    data and also address problems like word semantics, context and data sparsity.
+    Next up will be detailed strategies on leveraging deep learning models for feature
+    engineering on image data. Stay tuned!
+  prefs: []
+  type: TYPE_NORMAL
+- en: To read about feature engineering strategies for continuous numeric data, check
+    out [**Part 1**](https://towardsdatascience.com/understanding-feature-engineering-part-1-continuous-numeric-data-da4e47099a7b) of
+    this series!
+  prefs: []
+  type: TYPE_NORMAL
+- en: To read about feature engineering strategies for discrete categoricial data,
+    check out [**Part 2**](https://towardsdatascience.com/understanding-feature-engineering-part-2-categorical-data-f54324193e63) of
+    this series!
+  prefs: []
+  type: TYPE_NORMAL
+- en: To read about traditional feature engineering strategies for unstructured text
+    data, check out [**Part 3**](https://towardsdatascience.com/understanding-feature-engineering-part-3-traditional-methods-for-text-data-f6f7d70acd41) of
+    this series!
+  prefs: []
+  type: TYPE_NORMAL
+- en: All the code and datasets used in this article can be accessed from my [**GitHub**](https://github.com/dipanjanS/practical-machine-learning-with-python/tree/master/bonus%20content/feature%20engineering%20text%20data)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The code is also available as a [**Jupyter notebook**](https://github.com/dipanjanS/practical-machine-learning-with-python/blob/master/bonus%20content/feature%20engineering%20text%20data/Feature%20Engineering%20Text%20Data%20-%20Advanced%20Deep%20Learning%20Strategies.ipynb)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Architecture diagrams unless explicitly cited are my copyright. Feel free to
+    use them, but please do remember to cite the source if you want to use them in
+    your own work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have any feedback, comments or interesting insights to share about my
+    article or data science in general, feel free to reach out to me on my LinkedIn
+    social media channel.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Dipanjan Sarkar](https://www.linkedin.com/in/dipanzan)** is a Data
+    Scientist @Intel, an author, a mentor @Springboard, a writer, and a sports and
+    sitcom addict.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Text Data Preprocessing: A Walkthrough in Python](/2018/03/text-data-preprocessing-walkthrough-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A General Approach to Preprocessing Text Data](/2017/12/general-approach-preprocessing-text-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Framework for Approaching Textual Data Science Tasks](/2017/11/framework-approaching-textual-data-tasks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Practical Approach To Feature Engineering In Machine Learning](https://www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Tractable, Feature Engineering Pipeline for Multivariate…](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Using RAPIDS cuDF to Leverage GPU in Feature Engineering](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Engineering for Beginners](https://www.kdnuggets.com/feature-engineering-for-beginners)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

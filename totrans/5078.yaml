@@ -1,0 +1,267 @@
+- en: Integrating Python and R into a Data Analysis Pipeline, Part 1
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2015/10/integrating-python-r-data-analysis-part1.html/2](https://www.kdnuggets.com/2015/10/integrating-python-r-data-analysis-part1.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Command Line Scripting
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Running scripts from the command line via a Windows/Linux-like terminal environment
+    is similar in both R and Python. The command to be run is broken down into the
+    following parts,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`<command_to_run> <path_to_script> <any_additional_arguments>`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'where:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`<command>` is the executable to run (`Rscript` for R code and `Python` for
+    Python code),'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`<path_to_script>` is the full or relative file path to the script being executed.
+    Note that if there are any spaces in the path name, the whole file path must me
+    enclosed in double quotes.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`<any_additional_arguments>` This is a list of space delimited arguments parsed
+    to the script itself. Note that these will be passed in as strings.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'So for example, an R script is executed by opening up a terminal environment
+    and running the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`Rscript path/to/myscript.R arg1 arg2 arg3`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**A Few Gotchas**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: For the commands `Rscript` and `Python` to be found, these executables must
+    already be on your path. Otherwise the full path to their location on your file
+    system must be supplied.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Path names with spaces create problems, especially on Windows, and so must be
+    enclosed in double quotes so they are recognised as a single file path.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Accessing Command Line Arguments in R
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: In the above example where `arg1`, `arg2` and `arg3` are the arguments parsed
+    to the R script being executed, these are accessible using the `commandArgs` function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`## myscript.R`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`# Fetch command line arguments myArgs <- commandArgs(trailingOnly = TRUE)`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`# myArgs is a character vector of all arguments print(myArgs) print(class(myArgs))`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: By setting `trailingOnly = TRUE`, the vector `myArgs` only contains arguments
+    that you added on the command line. If left as `FALSE` (by default), there will
+    be other arguments included in the vector, such as the path to the script that
+    was just executed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Accessing Command Line Arguments in Python
+  prefs:
+  - PREF_H4
+  type: TYPE_NORMAL
+- en: For a Python script executed by running the following on the command line
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`python path/to/myscript.py arg1 arg2 arg3`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: the arguments `arg1`, `arg2` and `arg3` can be accessed from within the Python
+    script by first importing the `sys` module. This module holds parameters and functions
+    that are system specific, however we are only interested here in the `argv` attribute.
+    This `argv` attribute is a list of all the arguments passed to the script currently
+    being executed. The first element in this list is always the full file path to
+    the script being executed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`# myscript.py import sys`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`# Fetch command line arguments my_args = sys.argv`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`# my_args is a list where the first element is the file executed. print(type(my_args))
+    print(my_args)`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you only wished to keep the arguments parsed into the script, you can use
+    list slicing to select all but the first element.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`# Using a slice, selects all but the first element my_args = sys.argv[1:]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As with the above example for R, recall that all arguments are parsed in as
+    strings, and so will need converting to the expected types as necessary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Writing Outputs to a File
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You have a few options when sharing data between R and Python via an intermediate
+    file. In general for flat files, CSVs are a good format for tabular data, while
+    JSON or YAML are best if you are dealing with more unstructured data (or metadata),
+    which could contain a variable number of fields or more nested data structures.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'All these are very common [data serialisation formats](https://en.wikipedia.org/wiki/Serialization),
+    and parsers already exist in both languages. In R the following packages are recommended
+    for each format:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[readr](https://cran.r-project.org/web/packages/readr/index.html) for CSV files'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html) for
+    JSON files'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[yaml](http://cran.fhcrc.org/web/packages/yaml/index.html) for YAML files'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'And in Python:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[csv](https://docs.Python.org/3/library/csv.html) for CSV files'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[json](https://docs.Python.org/3/library/json.html) for JSON files'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyYAML](http://pyyaml.org/wiki/PyYAMLDocumentation) for YAML files'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The csv and json modules are part of the Python standard library, distributed
+    with Python itself, whereas PyYAML will need installing separately. All R packages
+    will also need installing in the usual way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'So passing data between R and Python (and vice-versa) can be done in a single
+    pipeline by:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: using the command line to transfer arguments, and
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: transferring data through a commonly-structured flat file.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: However, in some instances, having to use a flat file as an intermediate data
+    store can be both cumbersome and detrimental to performance. In the next post,
+    we will look at how R and Python can directly call each other and return the output
+    in memory.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://www.mango-solutions.com/wp/2015/10/integrating-python-and-r-into-a-data-analysis-pipeline-part-1/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[R vs Python: head to head data analysis](/2015/10/r-vs-python-data-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science Programming: Python vs R](/2015/10/data-science-programming-python-vs-r.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[R vs Python for Data Science: The Winner is …](/2015/05/r-vs-python-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[R, Python users show surprising stability, but strong regional differences](/2015/07/poll-primary-analytics-language-r-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Integrating ChatGPT Into Data Science Workflows: Tips and Best Practices](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Cutting Down Implementation Time by Integrating Jupyter and KNIME](https://www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimizing Data Analytics: Integrating GitHub Copilot in Databricks](https://www.kdnuggets.com/optimizing-data-analytics-integrating-github-copilot-in-databricks)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Integrating Generative AI in Content Creation](https://www.kdnuggets.com/integrating-generative-ai-in-content-creation)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Monitor Model Performance in the MLOps Pipeline with Python](https://www.kdnuggets.com/2023/05/monitor-model-performance-mlops-pipeline-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](https://www.kdnuggets.com/building-a-formula-1-streaming-data-pipeline-with-kafka-and-risingwave)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

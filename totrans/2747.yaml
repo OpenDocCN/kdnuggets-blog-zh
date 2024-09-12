@@ -1,0 +1,375 @@
+- en: 'A Classification Project in Machine Learning: a gentle step-by-step guide'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/06/classification-project-machine-learning-guide.html](https://www.kdnuggets.com/2020/06/classification-project-machine-learning-guide.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/da0440bea369d85c1810c4ab99f84b89.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Classification is one of the main kinds of projects you can face in the world
+    of Data Science and Machine Learning. Here is Wikipedia’s definition:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Classification is the problem of identifying to which of a set of categories
+    (sub-populations) a new observation belongs, on the basis of a training set of
+    data containing observations (or instances) whose category membership is known.
+    Examples are assigning a given email to the “spam” or “non-spam.”*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'For this post, I’ll go through a project from my [General Assembly’s Immersive
+    in Data Science](https://generalassemb.ly/education/data-science-immersive/).
+    In this, I explored different machine learning classification models to predict
+    four salary categories for Data Science job posts using publications from Indeed.co.uk:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Salary below percentile 25%
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Salary between percentile 25 and 50%
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Salary between percentile 50 and 75%
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Salary above percentile 75%
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We won’t be able to go through every single aspect of the project, but be aware
+    that the entire repository is available on my [GitHub profile](https://github.com/gonzaferreiro).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First Stage: Scraping and Cleaning'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: First and foremost, no project will ever be anything without data. So I started
+    by scraping [Indeed.co.uk](https://www.indeed.co.uk/jobs?q=data+scientist) in
+    order to obtain a list of job posts looking for ‘data scientists’ in several cities
+    of the UK. I won’t cover how to actually do the scraping here, but I used the
+    same techniques and tools mentioned in another post of mine: [Web scraping in
+    five minutes](https://towardsdatascience.com/web-scraping-in-5-minutes-1caceca13b6c?source=friends_link&sk=3d2c281449fc6584e4efb272245f8865).
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s worth mention though that even though web scraping is great and very useful
+    for those working in data science, always check the completeness of your data
+    once you finish scraping. For example, in this case, having the job post salary
+    was, of course, key. However, not all publications on Indeed include salary, so
+    it was necessary to scrap thousands of pages and job posts in order to have at
+    least 1000 job posts that contain a salary.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Working with scraped data usually also involves lots of feature engineering
+    to add some value from the data we already have. For example, for this project,
+    I developed a ‘Seniority’ feature, which is created from the Title and Summary
+    of each publication, using two different lists with words belonging to senior
+    or junior levels of jobs. If any word of each level was present, either on the
+    job title, in the summary, then the corresponding seniority level was assigned.
+    If none of the words were in those features, the job post was assigned as a middle-level.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Second Stage: Modelling'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'I started this stage exploring three different models:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**A KNN model with bagging**: KNN stands for a K-Nearest Neighbours model.
+    This works by checking the class of the nearest points to the one being predicted,
+    in order to classify it. Combining it with bagging, we can improve the stability
+    and accuracy while also reducing variance and helping to avoid overfitting.*How?* Bagging
+    is an ensemble method — a technique that combines the predictions from multiple
+    machine learning algorithms to make more accurate predictions than any individual
+    model. Although it’s usually applied to decision tree methods, it can be used
+    with any type of method.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**A Decision Tree model with boosting**: in this case a decision tree works
+    as a flowchart-like structure in which each internal node represents a “test”
+    on an attribute (e.g., whether a coin flip comes up heads or tails), each branch
+    represents the outcome of the test, and each leaf node represents a class label
+    and a decision taken. The paths from the root to the leaf represent classification
+    rules. In this model, although boosting is a very different method than bagging,
+    it is also an ensemble method — one that works by building a model from the training
+    data, then creating a second model that attempts to correct the errors from the
+    first model. Models are added until the training set is predicted perfectly, or
+    a maximum number of models are added.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Since these two models are highly dependent on the given hyperparameters, you’ll
+    probably want to use *GridSearch *in order to optimize them as much as possible. *[GridSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) *is
+    simply a tool that trains several models looking for the best parameters from
+    a given list of parameters and values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So, for example, for creating a Decision Tree model with boosting and *GridSearch *you
+    would take the following steps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1\. Instantiate the model**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**2\. Instantiate the ensemble method algorithm**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**3\. Instantiate GridSearch and specify the parameters to be tested**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'When using *GridSearch *you can get the available parameters to be tuned just
+    by calling *get_params()* over the previously instantiated model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Remember: you can always get more detail about how to optimize any hyperparameters
+    in Sklearn’s documentation. For example, here is the [decision trees doc](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, let’s import *GridSearch*, specify the parameters wanted and instantiate
+    the object. Be aware that sklearn’s *GridSearchCV *includes the cross-validation
+    within the algorithm, so you will have to specify the number of CV to be done
+    too,
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**4\. Fit your combined GridSearch and check the results**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Fitting the *GridSearch *is like fitting any model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Once it’s done you can check the best parameters to see if you still have an
+    opportunity to optimize any of them. Just run the following piece of code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: As in any mode, you can use *.score()* and *.predict()* using the *GridSearchCV *object.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Stage Three: Feature Importance'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After modeling, the next stage is always analyzing how our model is performing
+    and why it is doing what it’s doing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, if you’ve had the chance to work with ensemble methods, you probably
+    already know that these algorithms are usually known as “black-box models.” These
+    models lack explicability and interpretability since the way they usually work
+    implies one or several layers of a machine making decisions without human supervision,
+    apart from a group of rules or parameters set. More often than not, not even the
+    most expert professionals in the field can understand the function that is actually
+    created by, for example, training a neural network.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this sense, some of the most classical machine learning models were actually
+    better. That’s why, for the sake of this post, we’ll be analyzing the feature
+    importance of our project using a classic Logistic Regression. However, if you’re
+    interested in knowing how to analyze feature importance for a black-box model,
+    in [this other article of mine](https://towardsdatascience.com/unboxing-machine-learning-feature-importance-for-black-box-models-ea12268ddb23?source=friends_link&sk=52d12526d6c199d78d680ad05118449d), I
+    explored a tool for doing just that.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Starting from a Logistic Regression model, getting the feature importance is
+    as easy as calling:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: A neat way of seeing the overall feature importance is by creating a *DataFrame *with
+    the feature importance for each class. I like to do it using the absolute value
+    for each feature, in order to see the absolute impact each one has in the model.
+    However, mind that if you want to analyze specifically how each feature helps
+    to increase or decrease the possibility of being each class, you should take the
+    original value, whether it is negative or positive.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Remember we were trying to predict four classes, so this is how we should create
+    the Pandas *DataFrame*:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'We can finally put everything in plots and see how each class behaves:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/afac478005552c36df2b63bb8f2ae51a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Even though perhaps the size of the labels doesn’t help, we can conclude from
+    these plots that the following features of our dataset are relevant when predicting
+    the salary category:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Seniority: as we can see, the tree levels created impact very strongly in all
+    categories, being the first coefficients in terms of absolute size.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the second place, comes the *Job_Type* directly scraped from Indeed
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Finally, for all the salary categories, there are two job titles scraped and
+    cleaned from indeed: Web Content Specialist and Test Engineer.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: This dataset contains hundreds of features, but it’s nice to see there’s a clear
+    trend throughout the categories!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Stage Four: Conclusions and Trustworthiness'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the end, the only thing left is to evaluate the performance of our model.
+    For this, we can use several metrics. Unfortunately, going through all the possible
+    metrics in a classification problem would be too long for this post. However,
+    I can refer you to a very good one here in Medium, giving good details about all
+    the key metrics. Enjoy it [here](https://medium.com/thalus-ai/performance-metrics-for-classification-problems-in-machine-learning-part-i-b085d432082b).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As can read in Mohammed’s story linked above, the Confusion Matrix is the mother
+    concept involving all the rest of the metrics. In short, it has the true labels
+    or categories on one axis and the predicted ones on the other. In the end, we’d
+    like to have a diagonal match in between our predictions and the real labels,
+    with ideally zero or few cases mismatching. The metrics library from Sklearn has
+    a beautiful and simple representation that we can plot just by feeding the algorithm
+    with the real label and our predictions:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Using this library, we can see in the following plots that, for this project,
+    both the train and test groups were predicted with a solid accuracy throughout
+    the four salary categories:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/7b651a046f3d4d7ce4ecc1a77d89c30f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: One important final clarification is that, although our final model seems to
+    be accurate, it works well to predict categories when the importance of them is
+    equal, and we don’t have the need to ponder any class or classes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, if we were creating this model for a company, for which it would
+    be more consequential to tell a person incorrectly that they would get a *low *salary
+    job than to tell a client incorrectly that they would get a *high *salary job,
+    our model would struggle, since it wouldn’t be able to predict all the positive
+    values of a class as positive, without predicting a lot of negative values incorrectly
+    as well. In that case, we should work another way around this problem — for example,
+    by creating a model with weighted categories.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/better-programming/facing-a-classification-project-in-machine-learning-462b319873de).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** After 5+ years of experience in eCommerce and Marketing across multiple
+    industries, [Gonzalo Ferreiro Volpi](https://www.linkedin.com/in/gferreirovolpi/)
+    pivoted into the world of Data Science and Machine Learning, and currently works
+    at Ravelin Technology using a combination of machine learning and human insights
+    to tackle fraud in eCommerce.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Model Evaluation Metrics in Machine Learning](https://www.kdnuggets.com/2020/05/model-evaluation-metrics-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Linear to Logistic Regression, Explained Step by Step](https://www.kdnuggets.com/2020/03/linear-logistic-regression-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Idiot’s Guide to Precision, Recall, and Confusion Matrix](https://www.kdnuggets.com/2020/01/guide-precision-recall-confusion-matrix.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How To Structure a Data Science Project: A Step-by-Step Guide](https://www.kdnuggets.com/2022/05/structure-data-science-project-stepbystep-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Gentle Introduction to Natural Language Processing](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Gentle Introduction to Support Vector Machines](https://www.kdnuggets.com/2023/07/gentle-introduction-support-vector-machines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Guide On How To Become A Data Scientist (Step By Step Approach)](https://www.kdnuggets.com/2021/05/guide-become-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Step-by-Step Guide to Web Scraping with Python and Beautiful Soup](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Text-2-Video Generation: Step-by-Step Guide](https://www.kdnuggets.com/2023/08/text2video-generation-stepbystep-guide.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

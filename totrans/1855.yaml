@@ -1,0 +1,209 @@
+- en: A Tutorial on the Expectation Maximization (EM) Algorithm
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2016/08/tutorial-expectation-maximization-algorithm.html](https://www.kdnuggets.com/2016/08/tutorial-expectation-maximization-algorithm.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Elena Sharova, [codefying](https://codefying.wordpress.com/)**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We are presented with some unlabelled data and we are told that it comes from
+    a multi-variate Gaussian distribution. Our task is to come up with the hypothesis
+    for the means and the variances of each distribution. For example, Figure 1 shows
+    (labelled) data drawn from two Gaussians. We need to estimate the means and variances
+    of the x’s and the y’s of the blue and red distribution. How are we going to do
+    this?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![2-dimensional data](../Images/dcef432ff52338018c8ea9f7fd6872b5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 1\. 2-dimensional data drawn from 2 normal distributions.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, we can plot the data of each dimension and estimate the means by looking
+    at the plots. For example, we could use a histogram plot to estimate that the
+    mean of the x’s of the blue distribution is about 0.6 and the mean of the x’s
+    from the red distribution is about 0.0\. By looking at the spread of each cluster
+    we can estimate that the variance of blue x’s is small, perhaps 0.0, and variance
+    of red x’s is about 0.025\. That would be a pretty good guess since the actual
+    distribution was drawn from *N(0.6, 0.003)* for blue and *N(0.02, 0.03)* for red.
+    Can we do better than looking at the plots? Can we come up with a good estimates
+    for the means and the variances in a more robust way?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Histogram](../Images/62aedaeff8b79ae24e91181d2c63b113.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Figure 2\. Histogram of (unlabelled) data drawn from 2 normal distributions.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The **Expectation Maximization (EM)** algorithm can be used to generate the
+    best hypothesis for the distributional parameters of some multi-modal data. Note
+    that we say ‘the best’ hypothesis. But what is ‘the best’? The best hypothesis
+    for the distributional parameters is the maximum likelihood hypothesis – the one
+    that maximizes the probability that this data we are looking at comes from K distributions,
+    each with a mean m[k] and variance sigma[k]². In this tutorial we are assuming
+    that we are dealing with K normal distributions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In a single modal normal distribution this hypothesis *h* is estimated directly
+    from the data as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`estimated m = ­m~ = sum(x[i])/N`*Equation 1*`estimated sigma2= sigma2~= sum(xi-
+    m~)^2/N`*Equation 2*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Which are simply the trusted arithmetic average and variance. In a multi-modal
+    distribution we need to estimate `h = [ m[1],m[2],...,m[K]; sigma[1]²,sigma[2]²,...,sigma[K]²
+    ]`. The EM algorithm is going to help us to do this. Let’s see how.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We begin with some initial estimate for each m[k]~ and sigma[k]²~. We will
+    have a total of K estimates for each parameter. The estimates can be taken from
+    the plots we made earlier, our domain knowledge, or they even can be wild (but
+    not too wild) guesses. We then proceed to take each data point and answer the
+    following question – what is the probability that this data point was generated
+    from a normal distribution with mean m[k]~ and sigma[k]²~? That is, we repeat
+    this question for each set of our distributional parameters. In Figure 1 we plotted
+    data from 2 distributions. Thus we need to answer these questions twice – what
+    is the probability that a data point x[i], i=1,...N, was drawn from N(m[1]~, sigma[1]²~)
+    and what is the probability that it was drawn from N(m[2]~, sigma[2]²~). By the
+    normal density function we get:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`P(x[i] belongs to N(m[1]~ , sigma[1]²~))=1/sqrt(2*pi* sigma[1]²~) * exp(-(x[i]-
+    m[1]~)^2/(2*sigma[1]²~))`*Equation 3*`P(x[i] belongs to N(m[2]~ , sigma[2]²~))=1/sqrt(2*pi*
+    sigma[2]²~) * exp(-(x[i]- m[2]~)^2/(2*sigma[2]²~))`*Equation 4*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The individual probabilities only tell us half of the story because we still
+    need to take into account the probability of picking N(m[1]~, sigma[1]²~) or N(m[2]~,
+    sigma[2]²~) to draw the data from. We now arrive at what is known as responsibilities
+    of each distribution for each data point. In a classification task this responsibility
+    can be expressed as the probability that a data point x[i] belongs to some class
+    c[k]:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`P(x[i] belongs to c[k]) = omega[k]~ * P(x[i] belongs to N(m[1]~ , sigma[1]²~))
+    / sum(omega[k]~ * P(x[i] belongs to N(m[1]~ , sigma[1]²~)))`*Equation 5*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In Equation 5 we introduce a new parameter omega[k]~ which is the probability
+    of picking k’s distribution to draw the data point from. Figure 1 indicates that
+    each of our two clusters are equally likely to be picked. But like with m[k]~
+    and sigma[k]²~ we do not really know the value for this parameter. Therefore we
+    need to guess it and it is a part of our hypothesis:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`h = [ m[1], m[2], ..., m[K]; sigma[1]², sigma[2]², ..., sigma[K]²; omega[1]~,
+    omega[2~], ..., omega[K]~ ]`'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You could be asking yourself where the denominator in Equation 5 comes from.
+    The denominator is the sum of probabilities of observing x[i] in each cluster
+    weighted by that cluster’s probability. Essentially, it is the total probability
+    of observing x[i] in our data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'If we are making hard cluster assignments, we will take the maximum P(x[i]
+    belongs to c[k]) and assign the data point to that cluster. We repeat this probabilistic
+    assignment for each data point. In the end this will give us the first data ‘re-shuffle’
+    into K clusters. We are now in a position to update the initial estimates for
+    *h* to *h''*. These two steps of estimating the distributional parameters and
+    updating them after probabilistic data assignments to clusters is repeated until
+    convergences to *h**. In summary, the two steps of the EM algorithm are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'E-step: perform probabilistic assignments of each data point to some class
+    based on the current hypothesis *h* for the distributional class parameters;'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'M-step: update the hypothesis *h* for the distributional class parameters based
+    on the new data assignments.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: During the E-step we are calculating the expected value of cluster assignments.
+    During the M-step we are calculating a new maximum likelihood for our hypothesis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Elena Sharova](../Images/4909e3d37b8462429b19e2f7b6ddc14a.png)**Bio: [Elena
+    Sharova](https://codefying.wordpress.com/)** is a data scientist, financial risk
+    analyst and software developer. She holds an MSc in Machine Learning and Data
+    Mining from University of Bristol.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[A comparison between PCA and hierarchical clustering](/2016/02/qlucore-comparison-pca-hierarchical-clustering.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 crazy things Deep Learning and Topological Data Analysis can do with your
+    data](/2015/11/crazy-deep-learning-topological-data-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Science 102: K-means clustering is not a free lunch](/2015/01/data-science-102-kmeans-clustering-not-free-lunch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Genetic Algorithm Key Terms, Explained](https://www.kdnuggets.com/2018/04/genetic-algorithm-key-terms-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Decision Tree Algorithm, Explained](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Full End-to-End Deployment of a Machine Learning Algorithm into a…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unlock the Secrets to Choosing the Perfect Machine Learning Algorithm!](https://www.kdnuggets.com/2023/07/ml-algorithm-choose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Choosing the Right Clustering Algorithm for Your Dataset](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[DBSCAN Clustering Algorithm in Machine Learning](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

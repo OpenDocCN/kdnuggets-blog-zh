@@ -1,0 +1,227 @@
+- en: Building Data Pipelines to Create Apps with Large Language Models
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/building-data-pipelines-to-create-apps-with-large-language-models](https://www.kdnuggets.com/building-data-pipelines-to-create-apps-with-large-language-models)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Building Data Pipelines to Create Apps with Large Language Models](../Images/a2f12381d3e4354246e2880210d93050.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image from DALL-E 3
+  prefs: []
+  type: TYPE_NORMAL
+- en: Enterprises currently pursue two approaches for LLM powered Apps -  **Fine tuning**
+    and **Retrieval Augmented Generation (RAG).**  At a very high level, RAG takes
+    an input and retrieves a set of relevant/supporting documents given a source (e.g.,
+    company wiki). The documents are concatenated as context with the original input
+    prompt and fed to the LLM model which produces the final response.  RAG seems
+    to be the most popular approach to get LLMs to market especially in [real-time
+    processing](https://github.com/pathwaycom/pathway/stargazers)  scenarios. The
+    LLM architecture to support that most of the time includes building an effective
+    data pipeline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this post, we’ll explore different stages in the LLM data pipeline to help
+    developers implement production-grade systems which work with their data. Follow
+    along to learn how to ingest, prepare, enrich, and serve data to power GenAI apps.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What are the Different Stages of an LLM pipeline?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'These are the different stages of an LLM pipeline:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data ingestion of unstructured data
+  prefs: []
+  type: TYPE_NORMAL
+- en: Vectorization with enrichment (with metadata)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Vector indexing (with real-time syncing)
+  prefs: []
+  type: TYPE_NORMAL
+- en: AI Query Processor
+  prefs: []
+  type: TYPE_NORMAL
+- en: Natural Language User interaction (with Chat or APIs)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Building Data Pipelines to Create Apps with Large Language Models](../Images/ee54eacc09fc15956d2cbff854208344.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Data Ingestion of unstructured data
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: The first step is gathering the right data to help with the business goals.
+    If you are building a consumer facing chatbot then you have to pay special attention
+    to what data is going to be used. The sources of data could range from a company
+    portal (e.g. Sharepoint, Confluent, Document storage) to internal APIs.  Ideally
+    you want to have a push mechanism from these sources to the index so that your
+    LLM app is up to date for your end consumer.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Organizations should implement data governance policies and protocols when extracting
+    text data for LLM in context training. Organizations can start  by auditing document
+    data sources to catalog sensitivity levels, licensing terms and origin. Identify
+    restricted data that needs redaction or exclusion from datasets.
+  prefs: []
+  type: TYPE_NORMAL
+- en: These data sources should also be assessed for quality - diversity, size, noise
+    levels, redundancy. Lower quality datasets will dilute the responses from [LLM
+    apps](https://github.com/pathwaycom/llm-app).  You might even need an early document
+    classification mechanism to help with the right kind of storage later in the pipeline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Adhering to data governance guardrails, even in fast-paced LLM development,
+    reduces risks. Establishing governance upfront mitigates many issues down the
+    line and enables scalable, robust extraction of text data for context learning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Pulling messages via Slack, Telegram, or Discord APIs gives access for real-time
+    data is what helps RAG but raw conversational data contains noise - typos, encoding
+    issues, weird characters.   Filtering out messages real-time with offensive content
+    or sensitive personal details that could be PII is an important part of data cleansing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Vectorization with metadata
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Metadata like author, date, and conversation context further enriches data.
+    This embedding of external knowledge into vectors helps with smarter and targeted
+    retrieval.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some of the metadata related to documents could lie in the portal or in the
+    document’s metadata itself, however if the document is attached to a business
+    object( e.g.  Case, Customer , Employee information) then you would have to fetch
+    that information from a relational database.  If there are security concerns around
+    data access, this is a place where you can add security metadata which also helps
+    with the retrieval stage later in the pipeline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A critical step here is to convert text and images  into vector representations
+    using the LLM’s embedding models. For documents, you need to do chunking first,
+    then you do encoding preferably using on-prem zero shot embedding models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Vector indexing
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Vector representations have to be stored somewhere. This is where  vector databases
+    or vector indexes are used to efficiently store and index this information as
+    embeddings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This becomes your “LLM source of truth”  and this has to be in sync with your
+    data sources and documents.  [Real-time indexing](https://pathway.com/developers/tutorials/indexing-grouped-tables/)
+    becomes important if your LLM app is servicing customers or generating business
+    related information. You want to avoid your LLM app being out of sync with your
+    data sources.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Fast retrieval with a query processor
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: When you have millions of enterprise documents, getting the right content based
+    on the user query becomes challenging.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is where the early stages of pipeline starts adding value : Cleansing
+    and Data enrichment via metadata addition and most importantly Data indexing.
+      This in-context addition helps with making prompt engineering stronger.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: User interaction
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: In a traditional pipelining environment, you push the data to a data warehouse
+    and the analytics tool will pull the reports from the warehouse.  In an LLM pipeline,
+    an end user interface is usually a chat interface which at the simplest level
+    takes a user query and responds to the query.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The challenge with this new type of pipeline is not just getting a prototype
+    but getting this running in production.  This is where an enterprise grade monitoring
+    solution to track your pipelines and vector stores becomes important.  The ability
+    to get business data from both structured and unstructured data sources becomes
+    an important architectural decision.  LLMs represent the state-of-the-art in natural
+    language processing and building enterprise grade data pipelines for LLM powered
+    apps keeps you at the forefront.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is access to a source available [real-time stream processing framework](https://github.com/pathwaycom/pathway).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[](https://www.linkedin.com/in/anupsurendran/)**[Anup Surendran](https://www.linkedin.com/in/anupsurendran/)****
+    is a Head of Product Marketing at Pathway who specializes in bringing AI products
+    to market. He has worked with startups that have had two successful exits (to
+    SAP and Kroll) and enjoys teaching others about how AI products can improve productivity
+    within an organization.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Top Open Source Large Language Models](https://www.kdnuggets.com/2022/09/john-snow-top-open-source-large-language-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[More Free Courses on Large Language Models](https://www.kdnuggets.com/2023/06/free-courses-large-language-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn About Large Language Models](https://www.kdnuggets.com/2023/03/learn-large-language-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introducing Healthcare-Specific Large Language Models from John Snow Labs](https://www.kdnuggets.com/2023/04/john-snow-introducing-healthcare-specific-large-language-models-john-snow-labs.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What are Large Language Models and How Do They Work?](https://www.kdnuggets.com/2023/05/large-language-models-work.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI: Large Language & Visual Models](https://www.kdnuggets.com/2023/06/ai-large-language-visual-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

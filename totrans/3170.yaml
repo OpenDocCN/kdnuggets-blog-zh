@@ -1,0 +1,323 @@
+- en: Error Analysis to your Rescue – Lessons from Andrew Ng, part 3
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/01/error-analysis-your-rescue.html](https://www.kdnuggets.com/2018/01/error-analysis-your-rescue.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: Welcome to the third chapter of ML lessons from Ng’s experience! Yes, this one
+    is the continuation of the series entirely based on a recent [course](https://www.coursera.org/learn/machine-learning-projects/home/welcome)
+    by Andrew Ng on Coursera. Although this post can be an independent learning, reading
+    the previous two articles will only help understand this one better. Here are
+    the links to the [first](https://www.kdnuggets.com/2017/12/improve-machine-learning-performance-lessons-andrew-ng.html)
+    and [second](https://www.kdnuggets.com/2017/12/improve-machine-learning-algorithm-lessons-andrew-ng-part2.html)
+    articles in the series. Let’s get started!
+  prefs: []
+  type: TYPE_NORMAL
+- en: When trying to solve a new machine learning problem (one which does not have
+    too many online resources available already), Andrew Ng advises to build you first
+    system real quick and then iterate on it. Build a model and then iteratively identify
+    the errors and keep on fixing them. How to find errors and how to approach fixing
+    them? Right when you are thinking this, **Error Analysis** appears in a huge robe,
+    with long beard tuck under his belt, wearing half-moon glasses and says -
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_BQ
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ''
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: ‘It is the errors, Harry, that show us what our model truly is, far more than
+    the accuracy’
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![](../Images/408390db2719285eaf2411fe107abaf8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Why Error Analysis?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When building a new machine learning model, you should try and follow these
+    steps -
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Set Target:* Set-up development/test set and select an evaluation metric to
+    measure performance (Refer first article)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Build an initial model quickly:*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Train using training set — Fit the parameters
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Development set — Tune the parameters
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. Test set — Assess the performance
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Prioritize Next Steps:*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Use Bias and Variance Analysis to deal with underfitting and overfitting
+    (see [second article](https://www.kdnuggets.com/2017/12/improve-machine-learning-algorithm-lessons-andrew-ng-part2.html))
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Analyse what is causing the error and fix them until you have the required
+    model ready!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Manually examining mistakes that your algorithm is making can give you insights
+    into what to do next. This process is called error analysis. Take for example,
+    you built a cat classifier showing 10% test error and one of your colleagues pointed
+    out that your algorithm was misclassifying dog images as cats. Should you try
+    to make your cat classifier do better on dogs?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Which Error to Fix?**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Well, rather than spending a few months doing this, only to risk finding out
+    at the end that it wasn’t that helpful, here’s an error analysis procedure that
+    can let you very quickly tell whether or not this could be worth your effort.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1\. Get ~100 mislabeled dev set examples
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2\. Count up how many are dogs
+  prefs: []
+  type: TYPE_NORMAL
+- en: 3\. If you only have 5% dog pictures and you solve this problem completely,
+    your error will only go down from 10% to 9.5%, max!
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4\. If, in contrast, you have 50% dog pictures, you can be more optimistic about
+    improving your error and hopefully reduce it from 10% to 5%
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is how you evaluate single idea of error fixing. In a similar fashion,
+    you can evaluate multiple ideas by creating a grid and selecting the idea that
+    best improves the performance -
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/cf04c1b6c7390530155b1c7aa582881b.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The conclusion of this process gives you an estimate of how worthwhile it will
+    be to work on each of these different categories of errors. For example, clearly
+    here, a lot of mistakes we made were on blurry images followed by great cat images.
+    This gives you a sense of the best option/s to pursue.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It also tells you, that no matter how much better you do on dog images, or on
+    Instagram images, you at most improve performance by 8%, or 20%. So, depending
+    on how many ideas you have for improving performance on great cats, or blurry
+    images, you could pick one of the two, or if you have enough personnel on your
+    team, maybe you can have two different teams work on each of these independently.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, if during the model building, you identify that your data has some incorrectly
+    labelled data points, what should you do?
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Incorrectly labelled data**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Training set correction*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Deep learning algorithms are quite robust to random errors in the training set.
+    As long as the errors are unintentional and quite random, it’s okay to not invest
+    too much time in fixing them. Take for example, a few mislabeled dog images in
+    the training set of our cat classifier.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However! However, deep learning algorithms are not robust to systematic errors,
+    say, if you have all white dog images labeled as cat, your classifier will learn
+    this pattern.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Dev/Test set correction*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can also choose to do error analysis on Dev /Test set to see what percentage
+    of them are mislabeled and if it is worth fixing them. If your dev set error is
+    10% and you have 0.5% error here due to mislabeled dev set images then, in this
+    case, it is probably not a very good use of your time to try to fix them. But
+    instead, if you have 2% dev set error and 0.5% error here is due to mislabeled
+    dev set, then in such cases, it is wise to fix them because it amounts for 25%
+    of your total error.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You might choose to just fix the training set and not the dev/test set for mislabeled
+    images. In such cases, remember that now, your train set and dev/test set both
+    come from a slightly different distribution. And that is okay. Let’s talk about
+    how to handle such situations where training set and dev/test set come from different
+    distributions
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Mismatched Training and Dev/Test Set**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Training and Testing on different distributions*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Suppose you are building an app that classifies cats from the images clicked
+    by users. You have data from two sources now. First is 200,000 high resolution
+    images from the web and second is 10,000 unprofessional/blurry images on the app,
+    clicked by the users.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, to have same distribution for train and dev/test set, you can shuffle the
+    images from both the sources and randomly distribute between both the groups.
+    In this case, however, your dev set will only have ~200 images from the mobile
+    users in a pool of 2500 images. This will optimise your algorithm to do well on
+    web images. But, an ideal selection of dev/test set is to have them so as to reflect
+    data you expect to get in the future and consider important to do well on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What we can do here is, have all images in dev/test set come from mobile users
+    and put the remaining images from mobile users in the train set along with the
+    web images. This will cause inconsistent distribution in train and dev/test set
+    but it will let you hit where you intend to in the long run.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Bias and Variance with mismatched data distributions*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: When the training set is from a different distribution than the development
+    and test sets, the method to analyze bias and variance changes. You can no longer
+    call the error between train and dev set as variance for obvious reasons (they
+    are already coming from different distributions). What you can do here to analyse
+    actual variance is define a **Training / Dev set** which will have same distribution
+    as training set but will not be used for training. You can then analyse your model
+    as shown in the figure below
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/adb28c942474384fec298c9837b069b4.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '**Conclusion**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understand the application of your machine learning algorithm, collect data
+    accordingly and split train/dev/test sets randomly. Come up with a single optimizing
+    evaluation metric and tune your knobs to improve on this metric. Use Bias/Variance
+    analysis to understand if your model is overfitting or underfitting or is working
+    just fine there. Hop on to error analysis, identify fixing which one helps the
+    most and finally, work to set your model right!
+  prefs: []
+  type: TYPE_NORMAL
+- en: This was the last post in the series. Thanks for reading! Hope it helped you
+    deal with your errors better.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If you have any questions/suggestions, please feel free to reach out with your
+    comments here or connect with me on [LinkedIn](https://www.linkedin.com/in/kritikajalan/)/[Twitter](https://twitter.com/Kritika_Jalan)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/error-analysis-to-your-rescue-773b401380ef).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[**How to Improve Machine Learning Performance? Lessons from Andrew Ng**](https://www.kdnuggets.com/2017/12/improve-machine-learning-performance-lessons-andrew-ng.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**How to Improve Machine Learning Algorithms? Lessons from Andrew Ng, part
+    2**](https://www.kdnuggets.com/2017/12/improve-machine-learning-algorithm-lessons-andrew-ng-part2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[**Machine Learning Model Metrics**](https://www.kdnuggets.com/2018/01/machine-learning-model-metrics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Too Many Python Versions to Manage? Pyenv to the Rescue](https://www.kdnuggets.com/too-many-python-versions-to-manage-pyenv-to-the-rescue)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Ten Key Lessons of Implementing Recommendation Systems in Business](https://www.kdnuggets.com/2022/07/ten-key-lessons-implementing-recommendation-systems-business.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Lessons from a Senior Data Scientist](https://www.kdnuggets.com/2022/09/lessons-senior-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, September 28: Free Algorithms in Python Course •…](https://www.kdnuggets.com/2022/n38.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[4 Career Lessons That Helped Me Navigate the Difficult Job Market](https://www.kdnuggets.com/2023/05/4-lessons-made-difference-navigating-current-job-market.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Is Not Like Your Brain Part One: Neurons Are Slow,…](https://www.kdnuggets.com/2022/04/machine-learning-like-brain-part-one-neurons-slow-slow-slow.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

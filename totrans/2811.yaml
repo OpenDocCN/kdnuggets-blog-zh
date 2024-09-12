@@ -1,0 +1,239 @@
+- en: Uber Unveils a New Service for Backtesting Machine Learning Models at Scale
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/03/uber-unveils-service-backtesting-machine-learning-models-scale.html](https://www.kdnuggets.com/2020/03/uber-unveils-service-backtesting-machine-learning-models-scale.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8d7e3704b78a6417e79487778b9024b5.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Backtesting is an incredibly important aspect of the lifecycle of machine learning
+    models. Any organization running multiple prediction models needs a mechanism
+    to regularly evaluate it effectiveness and recover from errors. The relevance
+    of backtesting scales exponentially with the number of machine learning models
+    used in a given environment. Despite its importance, backtesting remains relatively
+    ignored compared to other aspects of the machine learning lifecycle such as model
+    training or deployment. Recently, Uber unveiled a new service completely built
+    from the ground up to backtest machine learning models at scale.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Uber runs one of the largest machine learning infrastructures in the world.
+    Across its several properties, Uber runs thousands of forecast models across diverse
+    areas such as ride planning or budget management. Ensuring the accuracy of those
+    forecast models is far from being an easy endeavor. The number of models and the
+    scale of computation makes Uber’s environment relatively impractical for most
+    backtesting frameworks. Even Uber itself have built previous backtesting frameworks
+    such as [Omphalos](https://eng.uber.com/omphalos/) which proven to be effective
+    for some specific use cases but unable to scale with Uber’s operation.
+  prefs: []
+  type: TYPE_NORMAL
+- en: What level of scale are we talking about? To put things in context, Uber’s required
+    to orchestrate around 10 million backtests across its different forecast models.
+    In addition to the scale, Uber’s operation have different particularities when
+    comes to backtesting that ended up tipping the scale in favor of building a customer
+    backtesting service.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Understanding Backtesting the Uber Way
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Not al backtests are created equal. Different organizations rely on different
+    vectors to backtest models that reflect the domain-specific nature of their business.
+    In the case of Uber, the transportation giant needed to consider elements such
+    as the number of cities or the testing window in order to back test models efficiently.
+    Models that work well for one city didn’t necessary perform well for another.
+    Similarly, some models needed to be backtested real time while others can afford
+    larger windows. All things considered, Uber identified four key vectors that were
+    relevant in order to backtest forecast models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Number of backtesting windows
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Number of cities
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Number of model parameters
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Number of forecast models
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '![](../Images/3aaec9deb9b15bb8b0b122b578401056.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The combination of the four vectors resulted in a scale that was unmanageable
+    by most mainstream backtesting services.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One of the key elements of effective backtesting is to determine how to split
+    the test data. Unlike techniques such as [cross-validation](https://en.wikipedia.org/wiki/Cross-validation_(statistics)),
+    backtesting leverages time-series data and non-randomized splits. That also means
+    that any backtesting strategy needs to clearly understand how to split the testing
+    data in a way that adapts to the performance of the model. In the case of Uber,
+    that also needs to be done across thousands of models. To address this challenge,
+    Uber chose to leverage two primary backtesting data split mechanisms, backtesting
+    with an expanding window and backtesting with a sliding window. Each window is
+    split into training data, which is used to train the model, and testing data,
+    which is used to calculate the error rate for the trained model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f423bdcc1d2a4159de086ae70773d608.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The last component of a backtesting strategy is to accurately measure the accuracy
+    of the model. One of the most common metrics is the mean absolute percentage error(MAPE)
+    which can be mathematically modeled as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/13d45fa5b93b064da8fc0c285e956ed2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: When comes to model backtesting, the lower the MAPE, the better a forecast model
+    performs. Usually, data scientists rely of the MAPE metric to compare the results
+    of error rate calculation methods used by the same model to ensure they express
+    what actually went wrong with the forecast.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Putting together those three elements: backtesting vectors, backtesting windows
+    and error measure, Uber setup to build a new backtesting service that could streamline
+    forecasting operations across the organization.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Uber’s Backtesting Service
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Over the years, Uber has built different proprietary technologies that help
+    to simplify the lifecycle management of machine learning models. The new backtesting
+    service was able to take advantage of that sophisticated infrastructure by leveraging
+    technologies such as [Data Science Workbench](https://eng.uber.com/dsw/), Uber’s
+    interactive data analytics and machine learning toolbox, and [Michelangelo](https://eng.uber.com/scaling-michelangelo/),
+    Uber’s machine learning platform.
+  prefs: []
+  type: TYPE_NORMAL
+- en: From an architecture standpoint, the new backtesting service consists of a Python
+    library and a service written in Go. The Python library acts like a Python client.
+    Since many machine learning models at Uber are currently written in Python, it
+    was an easy choice to leverage this framework for the backtesting service, which
+    allows users to seamlessly onboard, test, and iterate on their models. The Go
+    service is written as a series of Cadence workflows. [Cadence](https://github.com/uber/cadence) is
+    an open source, orchestration engine written in Go and built by Uber to execute
+    asynchronous long-running business logic in a scalable and resilient way. At a
+    high level, machine learning models are uploaded through Data Science Workbench
+    and backtesting requests on model data are submitted using the Python library
+    that relays the request to the Backtesting Go service. Once an error measurement
+    is calculated, it is either stored in a datastore or immediately put to work by
+    data science teams, who leverage these prediction errors to optimize machine learning
+    models in training.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/83bdfbd192ec9a63223f34227fa212e8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Drilling into the details, the backtesting workflow is composed of four stages.
+    In Stage 1, the model is either written locally in Data Science Workbench (DSW)
+    or uploaded to an machine learning platform, which returns a unique model ID.
+    DSW triggers a backtest through our Go service, which then returns a UUID to DSW.
+    In Stage 2, the Go service fetches training and testing data, stores it in a datastore,
+    and returns a data set. In Stage 3, the backtesting data set is trained on the
+    ML platform and prediction results are generated and returned to the Go service.
+    In Stage 4, the backtesting results are stored in a datastore, to be fetched by
+    users using DSW.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f28124756b9831fa4566f9fc1e349f49.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Uber has started to apply the new backtesting service across several use cases
+    such as financial forecasting and budget management. Beyond the initial applicability,
+    the new backtesting service could serve as a reference architecture for many organizations
+    started to apply machine learning models at scale. The principles outlined in
+    the architecture of the backtesting service can be applied across a different
+    number of machine learning frameworks and platforms. It would be interesting to
+    see if Uber decides to open source the backtesting service stack in the near future.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/uber-unveils-a-new-service-for-backtesting-machine-learning-models-at-scale-430c7b127f4c).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Uber Has Been Quietly Assembling One of the Most Impressive Open Source Deep
+    Learning Stacks in the Market](/2020/01/uber-quietly-assembling-impressive-open-source-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Uber Creates Generative Teaching Networks to Better Train Deep Neural Networks](/2020/01/uber-generative-teaching-networks-train-neural-networks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Open Source Projects by Google, Uber and Facebook for Data Science and AI](/2019/11/open-source-projects-google-uber-facebook-data-science-ai.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Baidu Research Unveils Top 10 Tech Trends Forecast for 2022](https://www.kdnuggets.com/2022/02/baidu-research-unveils-top-10-tech-trends-forecast-2022.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Efficiently Scale Data Science Projects with Cloud Computing](https://www.kdnuggets.com/2023/05/efficiently-scale-data-science-projects-cloud-computing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Playbook to Scale MLOps](https://www.kdnuggets.com/2023/06/playbook-scale-mlops.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[From Google Colab to a Ploomber Pipeline: ML at Scale with GPUs](https://www.kdnuggets.com/2022/03/google-colab-ploomber-pipeline-ml-scale-gpus.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[With Data Privacy learn to implement technical privacy solutions…](https://www.kdnuggets.com/2022/04/manning-data-privacy-learn-implement-technical-privacy-solutions-tools-scale.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[311 Call Centre Performance: Rating Service Levels](https://www.kdnuggets.com/2023/03/boxplot-outlier-311-call-center-performance.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

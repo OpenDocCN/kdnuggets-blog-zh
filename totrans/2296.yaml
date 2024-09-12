@@ -1,0 +1,216 @@
+- en: Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)](../Images/f314c76c07388670f39e82fba455f7ea.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by [fabrikasimf](https://www.freepik.com/free-photo/network-with-pins_20988125.htm#query=Decision%20Trees&position=49&from_view=search&track=ais)
+    on Freepik
+  prefs: []
+  type: TYPE_NORMAL
+- en: I often talk about explainable AI(XAI) methods and how they can be adapted to
+    address a few pain points that prohibit companies from building and deploying
+    AI solutions. You can check my [blog](https://medium.com/@supreetkaur_66831/explainable-ai-xai-building-interpretable-models-d616b0fccd33)
+    if you need a quick refresher on XAI methods.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: One such XAI method is Decision Trees. They have gained significant traction
+    historically because of their interpretability and simplicity. However, many think
+    that decision trees cannot be accurate because they look simple, and greedy algorithms
+    like C4.5 and CART don’t optimize them well.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The claim is partially valid as some variants of decision trees, such as C4.5
+    and CART, have the following disadvantages:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Prone to overfitting, particularly when the tree becomes too deep with too many
+    branches. This can result in poor performance on new, unseen data.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It can be slower to evaluate and make predictions with large datasets because
+    they require making multiple decisions based on the values of the input features.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It can be difficult for them to deal with continuous variables as they require
+    the tree to split the variable into multiple, smaller intervals, which can increase
+    the complexity of the tree and make it difficult to identify meaningful patterns
+    in the data.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Often known as the “greedy” algorithm, it makes the locally optimal decision
+    at each step without considering the consequences of those decisions on future
+    steps. Sub Optimal Trees are an output of CART, but no “real” metric exists to
+    measure it.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: More sophisticated algorithms, such as Ensemble Learning Methods, are available
+    to address these issues. But often can be considered a “black box” because of
+    the underlined functioning of the algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, recent work has shown that if you optimize decision trees (rather than
+    using greedy methods like C4.5 and CART), they can be surprisingly accurate, in
+    many cases, as accurate as the black box. One such algorithm that can help optimize
+    and address some of the disadvantages mentioned above is GOSDT. GOSDT is an algorithm
+    for producing sparse optimal decision trees.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The blog aims to give a gentle introduction to GOSDT and present an example
+    of how it can be implemented on a dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This blog is based on a research paper published by a few fantastic folks. You
+    can read the paper [here](https://arxiv.org/pdf/2006.08690.pdf). This blog is
+    not a substitute for this paper, nor will it touch on extremely mathematical details.
+    This is a guide for data science practitioners to learn about this algorithm and
+    leverage it in their daily use cases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'In a nutshell, GOSDT addresses a few major issues:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Handle Imbalanced datasets well and optimize various objective functions (not
+    just accuracy).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Fully optimizes trees and does not greedily construct them.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: It is almost as fast as greedy algorithms as it solves NP-hard optimization
+    problems for decision trees.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: How do GOSDT trees solve the above issues?
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: GOSDT trees use a dynamic search space through hash trees to improve the model’s
+    efficiency. By limiting the search space and using bounds to identify similar
+    variables, GOSDT trees can reduce the number of calculations needed to find the
+    optimal split. This can significantly improve the computation time, mainly when
+    working with continuous variables.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In GOSDT trees, the bounds for splitting are applied to partial trees, and they
+    are used to eliminate many trees from the search space. This allows the model
+    to focus on one of the remaining trees (which can be a partial tree) and evaluate
+    it more efficiently. By reducing the search space, GOSDT trees can quickly find
+    the optimal split and generate a more accurate and interpretable model.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: GOSDT trees are designed to handle imbalanced data, a common challenge in many
+    real-world applications. GOSDT trees address imbalanced data using a weighted
+    accuracy metric that considers the relative importance of different classes in
+    the dataset. This can be particularly useful when there is a pre-determined threshold
+    for the desired level of accuracy, as it allows the model to focus on correctly
+    classifying samples that are more critical to the application.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Summarizing the observations from GOSDT
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: These trees directly optimize the trade-off between training accuracy and the
+    number of leaves.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Produces excellent training and test accuracy with a reasonable number of leaves
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Perfect for highly non-convex problems
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Most effective for small or medium number of features. But it can handle up
+    to tens of thousands of observations while maintaining its speed and accuracy.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Time to see it all in action!! In my previous blog, I solved a loan application
+    approval problem using Keras Classification. We will use the same dataset to build
+    a classification tree using GOSDT.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Code Example
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Code by Author
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Supreet Kaur](https://www.linkedin.com/in/supreet-kaur1995/)** is an AVP
+    at Morgan Stanley. She is a fitness and tech enthusiast. She is the founder of
+    community called DataBuzz.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Sparse Matrix Representation in Python](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Working With Sparse Features In Machine Learning Models](https://www.kdnuggets.com/2021/01/sparse-features-machine-learning-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Best Machine Learning Model For Sparse Data](https://www.kdnuggets.com/2023/04/best-machine-learning-model-sparse-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning from Scratch: Decision Trees](https://www.kdnuggets.com/2022/11/machine-learning-scratch-decision-trees.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Decision Trees vs Random Forests, Explained](https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Demystifying Decision Trees for the Real World](https://www.kdnuggets.com/demystifying-decision-trees-for-the-real-world)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,275 @@
+- en: 'Topological Analysis and Machine Learning: Friends or Enemies?'
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2015/09/ayasdi-topological-analysis-machine-learning.html](https://www.kdnuggets.com/2015/09/ayasdi-topological-analysis-machine-learning.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '**By Harlan Sexton (Ayasdi)**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: People new to topological data analysis (TDA) often ask me some form of the
+    question, "What’s the difference between Machine Learning and TDA?" It's a hard
+    question to answer, in part because it depends on what you mean by Machine Learning
+    (ML).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Wikipedia has this to say about ML:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*"Machine learning explores the study and construction of algorithms that can
+    learn from and make predictions on data. Such algorithms operate by building a
+    model from example inputs in order to make data-driven predictions or decisions,
+    rather than following strictly static program instructions."*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: At this level of generality one could argue that TDA is a form of ML, but I
+    think most people who work in both of these areas would disagree.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Concrete examples of ML are rather more similar to one another than they are
+    any example of TDA. The same can be said for TDA where examples look more like
+    TDA than ML.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In order to explain the differences between TDA and ML, and perhaps more importantly
+    demonstrate how and why TDA and ML play well together, I’ll make two overly simple
+    definitions and then I’ll illustrate the point with a real example.
+  prefs: []
+  type: TYPE_NORMAL
+- en: One simple way to define ML would be any method that posits a parameterized
+    model of data and learns the parameters from the data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In the same vein we can define TDA as any method that uses as its model of data
+    only a notion of 'similarity' between data points.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this view, ML models are much more specific and detailed, and the success
+    of the model depends on how well it fits the underlying data. The advantage is
+    that when the data fits the model the results can be quite remarkable - apparent
+    chaos is replaced by near perfect understanding.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The advantage for TDA is generality.
+  prefs: []
+  type: TYPE_NORMAL
+- en: With TDA, any notion of similarity is enough to use the methodology. Conversely,
+    with ML you need a strong notion of similarity (and more) to make any progress
+    with any method at all.
+  prefs: []
+  type: TYPE_NORMAL
+- en: For example, from a long list of first names it would be impossible to reliably
+    predict height and weight. You need more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A key element here is that algorithms derived from topology tend to be very,
+    very forgiving of small errors - even if your notion of similarity is somehow
+    flawed, as long as it is 'sort of right' TDA methods will usually yield something
+    useful.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The generality of TDA methods has another advantage over ML techniques that
+    remain in effect even when an ML method is a good fit - namely ML methods often
+    create detailed internal state which generate notions of similarity, making it
+    possible to couple TDA with ML to get even more insight into a data set.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This all sounds great, but it's general enough (or if you’re feeling less charitable,
+    vague enough) it might mean anything.
+  prefs: []
+  type: TYPE_NORMAL
+- en: So let’s be specific.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A Random Forest^(TM) classifier is an ensemble learning method that operates
+    by constructing a multitude of decision trees during training and using 'majority
+    rule' on that 'forest' (collection of decision trees) to classify non-training
+    data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While the details of the construction are quite interesting and clever, they
+    aren't germane at the moment. All you need to recall about a Random Forest is
+    that it operates on each data point by applying a collection of decision trees
+    to the datum and returning a sequence of 'leaf nodes' (the leaf in the decision
+    tree to which the input 'fell').
+  prefs: []
+  type: TYPE_NORMAL
+- en: In normal operation each leaf in each tree has a class C associated with it,
+    which is interpreted as "by the time a datum gets to this node in the tree I know
+    it is overwhelmingly likely to be of class C." The Random Forest classifies by
+    counting the 'leaf node class votes' from each tree and picking a winner. While
+    highly effective on a broad range of data types, this approach drops a great deal
+    of information on the floor.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If all you care about is the best guess for the class of a datum, then you don’t
+    want to see that extra information, but sometimes you want more. This "extraneous"
+    information can be made into a distance function by defining the distance between
+    two data points as the number of times their respective 'leaf nodes' differed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The distance function between two data points is a perfectly good metric (it
+    is, in fact, the Hamming metric on a transformation of the data set), and as such
+    we can apply TDA to it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'As an example, let us look at a random 5,000 point sample drawn from:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[https://archive.ics.uci.edu/ml/datasets/Dataset+for+Sensorless+Drive+Diagnosis](https://archive.ics.uci.edu/ml/datasets/Dataset+for+Sensorless+Drive+Diagnosis)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The data set is moderately complex, having 48 continuous features which appear
+    to be unexplained measurements of signals in the electric current for the hard
+    drives. The data also includes a classification column with 11 possible values
+    that describe different conditions (failure modes, perhaps?) for disc drive components.
+    One obvious thing to try is a Euclidean metric on the feature columns, and then
+    to color the graph by classes. Since we don''t know anything about the feature
+    columns the first thing to try are the neighborhood lenses. The result is a featureless
+    blob:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Featureless Blob](../Images/0011e0d722ed99cad66ab7783451ee92.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: That’s disappointing.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Using some in-house debugging capabilities I looked at the scatterplot of the
+    neighborhood lenses and I see why it''s so bad - it looks like a Christmas tree:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Christmas Tree](../Images/f661256f6b0e80f3d605511d7499ab16.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: There is apparently no localization of the classes in the Euclidean metric.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, if you build a Random Forest on the data set, the classifier has a
+    very small out-of-bag error, which is a strong indication for the classifier working
+    very reliably.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'So I try making a graph using the Random Forest Hamming metric and the neighborhood
+    lenses for that metric:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Hemming Metric With Neighborhood Lenses](../Images/1583ae2543637f20acc5c9c6988feb3e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'That looks very good. Just to confirm we also looked at the scatterplot of
+    the neighborhood lenses and the results are what the figure above suggests:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Neighborhood Lenses Scatterplot](../Images/ecef40df087632cf35281e83f9219ba6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: What is obvious from both the graph and the scatterplot are that the Random
+    Forest 'sees' strong structure below the level of the classification and is revealed
+    by TDA. The reason is that RF doesn't efficiently use the "extraneous" data -
+    but TDA does and benefits substantially from that information.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, one might ask if that structure is illusory - perhaps an artifact of
+    the algorithms we use somewhere in the system? In the case of this data set we
+    can't really tell, since we don't know anything more about the groups.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Still, we have used the Random Forest metric on customer data to analyze possible
+    failure modes for thousands of complex devices based on data collected during
+    device burn-in. The classes were based on post-mortems done on devices returned
+    to the manufacturer for various reasons (not all of which included failures).
+  prefs: []
+  type: TYPE_NORMAL
+- en: What we found in this case was a Random Forest metric did a good job of classifying
+    the failures, and the character of the pictures we got were similar to those above.
+    More importantly, we discovered the distinct groups within a given failure mode
+    sometimes had distinct causes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The takeaway in both of these cases is that these causes would have been much
+    more difficult to find without the further decomposition of the space that we
+    got using TDA with the Random Forest.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The example we have just seen shows how TDA can work with a machine learning
+    method to get better results than are possible by either technique individually.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'This is what we mean when we say [ML & TDA: Better Together](http://www.ayasdi.com/resources/whitepaper/tda-and-machine-learning/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](http://www.ayasdi.com/blog/bigdata/how-tda-and-machine-learning-enhance-each-other/).'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[World Economic Forum Tech Pioneers & Analytics Winners](/2015/08/wef-tech-pioneers-analytics-winners.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Machine Learning Course. Learn to build solutions, Delft, Netherlands, 16-20
+    November](/2015/09/perclass-machine-learning-course-delft-november.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Master Algorithm – new book by top Machine Learning researcher Pedro Domingos](/2015/09/book-master-algorithm-pedro-domingos.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Machine Learning’s Sweet Spot: Pure Approaches in NLP and Document Analysis](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Market Data and News: A Time Series Analysis](https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Best Free Resources to Learn Data Analysis and Data Science](https://www.kdnuggets.com/2024/03/365datascience-best-free-resources-learn-data-analysis-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Comparative Analysis of LangChain and LlamaIndex](https://www.kdnuggets.com/comparative-analysis-of-langchain-and-llamaindex)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets News, June 29: 20 Basic Linux Commands for Data Science…](https://www.kdnuggets.com/2022/n26.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,546 @@
+- en: A Gentle Introduction to PyTorch 1.2
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/09/gentle-introduction-pytorch-12.html](https://www.kdnuggets.com/2019/09/gentle-introduction-pytorch-12.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Elvis Saravia](https://twitter.com/omarsar0), Affective Computing & NLP
+    Researcher**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b4722fc331c461340adab4a229dc2d80.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: In our previous PyTorch [notebook](https://medium.com/dair-ai/pytorch-1-2-quickstart-with-google-colab-6690a30c38d),
+    we learned about how to get started quickly with PyTorch 1.2 using Google Colab.
+    In this tutorial, we are going to take a step back and review some of the basic
+    components of building a neural network model using PyTorch. As an example, we
+    will build an image classifier using a few stacked layers and then evaluate the
+    model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This will be a brief tutorial and will avoid using jargon and over-complicated
+    code. That said, this is perhaps the most basic of neural network models you can
+    build with PyTorch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: If fact, it is so basic that it’s ideal for those starting to learn about PyTorch
+    and machine learning. So if you have a friend or colleague that wants to jump
+    in, I highly encourage you to refer them to this tutorial as a starting point.
+    Let’s get started!
+  prefs: []
+  type: TYPE_NORMAL
+- en: Getting Started
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before you get started with code, you need to install the latest version of
+    PyTorch. We are using Google Colab for our tutorial, so we will use the following
+    command to install PyTorch. *You can also find a Colab notebook towards the end
+    of this blog post.*
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we need to import a few modules which will be useful to obtain the necessary
+    functions that will help us to build our neural network model. The main ones are `torch` and `torchvision`.
+    They contain the majority of the functions that you need to get started with PyTorch.
+    However, as this is a machine learning tutorial we will need `torch.nn`, `torch.nn.functional`
+    and `torchvision.transforms` which all contain utility functions to build our
+    model. We probably won't use all the modules listed below but they are the typical
+    modules you will need to import before starting your machine learning projects.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Below we check for the PyTorch version just to make sure that you are using
+    the proper version that was used for this tutorial. At the time of this tutorial,
+    we are working with PyTorch 1.2.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Loading the Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s get right into it! As with any machine learning project, you need to load
+    your dataset. We are using the [MNIST dataset](http://yann.lecun.com/exdb/mnist/),
+    which is the “Hello World” of datasets in the machine learning world.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The data consists of a series of images (containing hand-written numbers) that
+    are of the size `28 X 28`. We will discuss the images shortly, but our plan is
+    to load the data into batches of `32`, similar to the figure below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/9fe8202824dcd4afffb50905030f2530.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Here are the complete steps we are performing when importing our data:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will import and transform the data into tensors using the `transforms` module.
+    In the context of machine learning, tensors are just efficient data structures
+    used to store data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We will use `DataLoader` to build convenient data loaders, which makes it easy
+    to efficiently feed data in batches to neural network models. We will get to the
+    topic of batches in a bit but for now, just think of them as subsets of your data.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: As hinted above, we will also create batches of the data by setting the `batch` parameter
+    inside the data loader. Notice we use batches of `32` in this tutorial but you
+    can change it to `64` if you like.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Let’s inspect what the `trainset` and `testset` objects contain.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'This is a beginner’s tutorial so I will break down things a bit here:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '`BATCH_SIZE` is a parameter that denotes the batch size we will use for our
+    model'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`transform` holds code for whatever transformations you will apply to your
+    data. I will show you an example below to demonstrate exactly what it does to
+    shed more light into its use'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`trainset` and `testset` contain the actual dataset object. Notice I use `train=True` to
+    specify that this corresponds to the training dataset, and I use `train=False` to
+    specify that this is the remainder of the dataset which we call the test set.
+    From the block I printed above you can see that the split of the data was 85%
+    (60000) / 15% (10000), corresponding to the portions of samples for the training
+    set and testing set, respectively'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`trainloader` is what holds the data loader object which takes care of *shuffling* the
+    data and constructing the batches'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Now let’s take a closer look at that `transforms.Compose(...)` function and
+    see what it does. We will use a randomly generated image to demonstrate its use.
+    Let''s generate an image:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'And let’s render it:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/19604cc32294528da514e4c3ac6d90eb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Okay, we have our image sample, so now let’s apply some dummy transformation
+    to it. We are going to rotate the image by `45` degrees. The transformation below
+    takes care of that:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/79b8103af10513e590b0c2942f378530.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Notice you can put any transformations within `transforms.Compose(...)`. You
+    can use the built-in transformations offered by PyTorch or you can build your
+    own and compose transformations as you wish. In fact, you can place as many transformations
+    in the function as you wish. Let's try another composition of transformations: *rotate* + *vertical
+    flip*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/b43d65f8130b742734c15f34c5998d3a.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: That’s pretty cool right! Keep trying other transform methods. On the topic
+    of exploring our data further, let’s take a closer look at our images dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Exploring the Data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As a practitioner and researcher, I always spend a bit of time and effort exploring
+    and understanding my datasets. It’s fun and this is a good practice to ensure
+    that everything is in order before training the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s check what the train and test dataset contains. I will use the `matplotlib` library
+    to print out some of the images from our dataset. With a bit of `numpy` code,
+    I can convert images into a proper format to print them out. Below I print out
+    an entire batch of 32 images:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8974f9884052ce437df9813fbdb8fdcc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'The dimensions of our batches are as follows:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: The Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Now it’s time to build the neural network model that will be used to perform
+    the image classification task. We will keep things simple and stack a *dense *layer,
+    a *dropout* layer, and an *output* layer to train our model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Let’s discuss a bit about the model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First of all, the following structure, involving a `class` called `MyModel` ,
+    is standard code that''s used to build a neural network model in PyTorch:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The layers are defined inside the `def __init__()` function. `super(...).__init__()` is
+    just there to stick things together. For our model, we stack a hidden layer (`self.d1`)
+    followed by a dropout layer (`self.dropout`), which is then followed by an output
+    layer (`self.d2`).
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`nn.Linear(...)` defines the dense layer and it requires the `in` and `out` dimensions,
+    which corresponds to the size of the input feature and output feature of that
+    layer, respectively.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`nn.Dropout(...)` is used to define a dropout layer. Dropout is an approach
+    in deep learning that helps a model to avoid *overfitting*. This means that dropout
+    acts as a regularization technique that helps the model to not overfit on the
+    images it has seen while training. We want this because we need a model that generalizes
+    well to unseen examples — in our case, the testing dataset. Dropout randomly zeroes
+    some of the units of the neural network layer with the probability of `p=0.2`.
+    Read more about the dropout layer [here](https://pytorch.org/docs/stable/nn.html#dropout).'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The entry point of the model, i.e. where the data is fed into the neural network
+    model, is placed under the `forward(...)` function. Typically, we also place other
+    transformations we perform on the data while training inside this function.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: In the `forward()` function, we are performing a series of computations on the
+    input data: **1)** we flatten the images first, converting it from 2D (`28 X 28`)
+    to 1D (`1 X 784`); **2)** then we feed the batches of those 1D images into the
+    first hidden layer; **3)** the output of that hidden layer is then applied a [non-linear
+    activate function](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)) called `ReLU`.
+    It's not so important to know what `F.relu()` does at the moment, but the effect
+    that it achieves is that it allows faster and more effective training of neural
+    architectures on large datasets; **4)** as explained above, the dropout also helps
+    the model to train more efficiently by avoiding overfitting on the training data; **5)** we
+    then feed the output of that dropout layer into the output layer (`d2`); **6)** the
+    result of that is then fed to the [softmax function](https://en.wikipedia.org/wiki/Softmax_function),
+    which converts or normalizes the output into a probability distribution which
+    helps with outputting proper prediction values that are used to calculate the
+    accuracy of the model; **7)** this will be the final output of the model.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Visually speaking, the following is a diagram of the model that we have just
+    built. Just keep in mind that the hidden layer is much bigger than shown in the
+    diagram but due to space constraint, the diagram should be viewed as an approximation
+    of the actual model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/8ef5afdfb7ea69c95543514a412424cb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As I have done in my previous tutorials, I always encourage to test the model
+    with one batch to ensure that the dimensions of the output are what we expect.
+    Notice how we are iterating over the dataloader which conveniently stores the `images` and `labels` pairs. `out` contains
+    the output of the model, which are the logits applied a `softmax` layer which
+    helps with prediction.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: We can clearly see that we get back the batches with 10 output values associated
+    with each image in the batch; these values are used to check the performance of
+    the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training the Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now we are ready to train the model but before that, we are going to set up
+    a *loss *function, an *optimizer*, and a utility function to calculate the accuracy
+    of the model:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The `learning_rate` is the rate at which the model will try to optimize its
+    weights, so it can be seen as just another parameter of the model.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`num_epochs` is the number of training steps… we don’t need to train this model
+    for long so we just use 5 epochs.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`device` determines what hardware we will use to train the model. If a `gpu` is
+    present, then that will be used, otherwise, it defaults to the `cpu`.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`model` is just the model instance.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`model.to(device)` is in charge of setting the actual device that will be used
+    for training the model.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`criterion` is just the metric that''s used to compute the loss of the model
+    while it forward and backward trains to optimize its weights.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`optimizer` is the optimization technique used to modify the weights in the
+    backward propagation step. Notice that it requires the `learning_rate` and the
+    model parameters which are part of the optimization. More on this in a bit!'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The utility function below helps to calculate the accuracy of the model. For
+    now, it’s not important to understand how it’s calculated but basically it compares
+    the outputs of the model (predictions) with the actual target values (i.e., the
+    labels of the dataset), and tries to compute the average of correct predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Training the Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Now it’s time to train the model. The code portion that follows can be described
+    in the following steps:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The first thing when training a neural network model is defining the training
+    loop, which is achieved by:'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: We define two variables, `training_running_loss` and `train_acc` , that will
+    help us to monitor the running accuracy and loss of the model while it trains
+    over the different batches.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '`model.train()` explicitly indicates that we are ready to start training.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Notice that we are iterating over the *dataloader*, which conveniently gives
+    us the batches in image-label pairs.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: That second `for` loop means that for every training step we will iterate over
+    all the batches and train the model over them.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: We feed the model the images via `model(images)` and the output represents the
+    predictions of the model.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The predictions together with the target labels are used to compute the loss
+    using the loss function we defined earlier.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Before we update our weights for the next round of training, we perform the
+    following steps: **1)** we use the optimizer object to reset all the gradients
+    for the variables it will update (`optimizer.zero_grad()` );** 2)** This is a
+    safe step and it doesn’t overwrite the gradients the model accumulates while training
+    (those are [stored in a buffer](https://pytorch.org/tutorials/beginner/pytorch_with_examples.html#pytorch-optim) via
+    the `loss.backward()` call); **3)**`loss.backward()` simply computes the gradient
+    of the loss with respect to the model parameters; **4)** `optimizer.step()` then
+    ensures that the model parameters are properly updated; 5) and finally we gather
+    and accumulate the loss and accuracy, which is what we will use to tell us if
+    the model is learning effectively.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'The output of the training:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: After all the training steps are over, we can clearly see that the loss keeps
+    decreasing while the training accuracy of the model keeps rising, which is a good
+    sign that the model is effectively learning to classify images.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can verify this by computing the accuracy on the testing dataset to see how
+    well the model performs on the image classification task. As you can see below,
+    our basic neural network model is performing very well on the MNIST classification
+    task.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The output:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: Final Words
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Congratulations ????! You have made it to the end of this tutorial. This is
+    a comprehensive tutorial that aims to give a very basic introduction to the fundamentals
+    of image classification using neural networks and PyTorch.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*This tutorial was heavily inspired by this *[*TensorFlow tutorial.*](https://www.tensorflow.org/beta/tutorials/quickstart/beginner)* We
+    thank the authors of the corresponding reference for their valuable work.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: References
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[PyTorch 1.2 Quickstart with Google Colab](https://medium.com/dair-ai/pytorch-1-2-quickstart-with-google-colab-6690a30c38d)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Get started with TensorFlow 2.0 for beginners](https://www.tensorflow.org/beta/tutorials/quickstart/beginner)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[PyTorch Data Loading Tutorial](https://pytorch.org/tutorials/beginner/data_loading_tutorial.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Neural Networks with PyTorch](https://pytorch.org/tutorials/beginner/blitz/neural_networks_tutorial.html#sphx-glr-beginner-blitz-neural-networks-tutorial-py)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: ???? [Colab Notebook](https://colab.research.google.com/drive/1kl3--YxUIOoCcthoP47YLoSOoTxhNl0V)
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? [ GitHub Repo](https://github.com/omarsar/pytorch_notebooks)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Elvis Saravia](https://twitter.com/omarsar0)** is a researcher and
+    science communicator in Affective Computing and NLP.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://medium.com/dair-ai/pytorch-1-2-introduction-guide-f6fa9bb7597c).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[XLNet Outperforms BERT on Several NLP Tasks](/2019/07/xlnet-outperforms-bert-several-nlp-tasks.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Adapters: A Compact and Extensible Transfer Learning Method for NLP](/2019/07/adapters-compact-extensible-transfer-learning-method-nlp.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[NLP Overview: Modern Deep Learning Techniques Applied to Natural Language
+    Processing](/2019/01/nlp-overview-modern-deep-learning-techniques.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Gentle Introduction to Natural Language Processing](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Gentle Introduction to Support Vector Machines](https://www.kdnuggets.com/2023/07/gentle-introduction-support-vector-machines.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Deep Learning Libraries: PyTorch and Lightning AI](https://www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Interpretable Neural Networks with PyTorch](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Complete Free PyTorch Course for Deep Learning](https://www.kdnuggets.com/2022/10/complete-free-pytorch-course-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Getting Started with PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

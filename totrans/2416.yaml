@@ -1,0 +1,412 @@
+- en: Operationalizing Machine Learning from PoC to Production
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2022/05/operationalizing-machine-learning-poc-production.html](https://www.kdnuggets.com/2022/05/operationalizing-machine-learning-poc-production.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![Operationalizing Machine Learning from PoC to Production](../Images/fc0dc05f4173e5753be08a79d2a55a2e.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Robot cartoon vector created by vectorjuice - www.freepik.com](https://www.freepik.com/vectors/robot-cartoon)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Many companies use machine learning to help create a differentiator and grow
+    their business. However, it’s not easy to make machine learning work as it requires
+    a balance between research and engineering. One can come up with a good innovative
+    solution based on current research, but it might not go live due to engineering
+    inefficiencies, cost and complexity. Most companies haven’t seen much ROI from
+    machine learning since the benefit is realized only when the models are in production.
+    Let’s dive into the challenges and best practices that one can follow to make
+    machine learning work.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First, let’s frame the main phases for a typical AI project:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Proof of Concept (PoC)** – The purpose of this phase is to validate if Machine
+    Learning can really solve the problem at hand. At the same time, estimate the
+    cost and time required to solve the problem in production.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Engineering** – As the name suggests, the focus at this stage is on model
+    engineering for scale and reliability, setting up the validation framework and
+    data pipelines.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Maintenance or AI Operations** – This is an important step as the data is
+    not static and keeps changing, which means the models need to be trained with
+    new data and deployed to production frequently. This cannot be done effectively,
+    without automating the model training, deployment, validation and finally monitoring.'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Next, it’s important to understand the key challenges that data scientists need
+    to address while designing machine learning solutions to ensure an ROI for the
+    business. For each of the challenges, there are recommendations to successfully
+    overcome these challenges.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Data – Quality and Quantity
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Choice of algorithms – Accuracy vis-à-vis Cost
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Model Performance in Production
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Deployment Automation and Monitoring (MLOps)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Handling Scale
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Data – Quality and Quantity
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: The most important part of any machine learning model is data, and to train
+    a model, **quality** and **quantity** are both required. Let’s start with the
+    quantity first.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Challenge 1: Not Enough Data'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Many times, the company or team either has too little data or too much data.
+    In the PoC phase, even if there isn’t a large amount of data, it can easily validate
+    the approach, but the solution may not work for all production scenarios. This
+    is because the dataset used for training and validation may not represent the
+    entire data and in some cases it may be impossible to get the data– for example
+    in the case of rare medical diseases.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let me elaborate this aspect with an instance where one of our customers in
+    the legal domain wanted to classify documents based on regulations and extract
+    information for each regulation. The initial training dataset was just 20 documents
+    and the goal was to classify a million documents. The challenge with a small training
+    dataset is to ensure that the model does not overfit to the data. Overfitting
+    will ensure that the accuracies are good in the PoC stage (where we are not validating
+    a model with unseen data), but not when the model is rolled out to production.
+    We chose a simple one class classification model that could learn patterns from
+    the small data set without overfitting that was rolled out to production and improved
+    once we had more data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recommendation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Choose algorithms that can work with small data, roll out to production by scoping
+    the feature to solve only the seen patterns and collect data for the unseen patterns.
+    Iteratively improve the model to cover other scenarios. Alternatively, use semi-supervised
+    learning which can handle less data problems.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Challenge 2: Too Much Data'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Similar to small data, large data is also a problem because the training time
+    for the machine learning model could be very long and the computation power needed
+    may be very high. We need to look at creating a subset dataset that is representative
+    of the complete dataset. The challenge is not only to pick the right sampling
+    technique, but also to automate the sample collection process to ensure that the
+    data is not outdated.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We faced a similar scenario where we worked on a bid price prediction problem
+    for an advertising company in the real-time bidding space that was getting almost
+    70 billion requests per day. We couldn’t train models on whole data and even capturing
+    the data needed for the PoC required some engineering to be put in place to ensure
+    that the distribution of the original data and the sampled data remained the same.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recommendation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Automate the training dataset creation by integrating the data sampling module
+    into the data processing pipeline. To resolve fewer data issues, use oversampling
+    techniques such as SMOTE (Synthetic Minority Oversampling Technique), which can
+    generate synthetic samples from current data distributions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Challenge 3: Quality of Data'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Quality of data also matters because what the quality of data fed to the model
+    dictates the quality of AI that comes out of the model. The distribution of data
+    for training in the POC phase might be different from the distribution of data
+    in production resulting in higher errors in production. This happens primarily
+    due to using incorrect sampling techniques.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recommendation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To resolve the big data issue, we have to use good sampling techniques to create
+    the best training data for the problem statement. In the real-time bidding project
+    we used random sampling because data is from uniform distribution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Choice of Algorithms
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: In the PoC phase of the project, data scientists mainly focus on solutions and
+    results. However, any organization will approve the project only if the solution
+    is cost-effective (compared to the current solution) and stands out in performance
+    (response time, etc.). It’s important to look at the running cost of the machine
+    learning solution while choosing the algorithm.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The cost of the machine learning solution depends on the algorithm or technique
+    we choose. For example, training a deep learning model from scratch with the domain
+    specific data might result in good accuracies, but will need multiple GPUs to
+    train, while a classical machine learning based solution might not require a GPU.
+    The computation costs could increase non-linearly depending on the approach and
+    the size of the training data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have experienced similar troubles. While working on a voice cloning problem,
+    we had an option of training the Convolution Neural Network based Deep Learning
+    model from scratch or use transfer learning. We chose to go with transfer learning
+    based solution as the cost was 60% lower and the cloning accuracy was good enough
+    to not see the difference in production.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recommendation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'While thinking about machine learning solutions, we should also be careful
+    about infrastructure costs. These costs should be a metric while comparing different
+    models along with the accuracy metric. A few ways to control infrastructure costs
+    are:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Avoid using GPUs where the task can be completed using CPUs. For example, classical
+    machine learning models we can train using CPUs.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Use transfer learning wherever possible.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Train the model only when required. For example, when the data distribution
+    changes or new categories are added. Periodically training models without much
+    change in data, would increase infrastructure overhead for the project.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Model Performance
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Standard metrics such as MAPE, F1 score, IOU etc. are available to measure the
+    model performance. These metrics work well when testing the model in the PoC phase
+    but may not work well when we look at the ROI for business. It’s also possible
+    that the machine learning model could impact the business negatively if implemented
+    incorrectly.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An example of this is a ratings prediction model that we built for an advertising
+    company where the model accuracy was good from a machine learning metrics perspective,
+    but the measure of success for business was revenue maximization. We had to come
+    up with an ensemble approach to achieve the revenue maximization.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recommendation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: To minimize the impact, roll out the solution incrementally using an A/B testing
+    approach. The key thing here is to have the deployment automated to be able to
+    roll back the ML solution when needed.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Deployment Automation & Monitoring
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'This is the most important part of the entire project, but most people ignore
+    it due to a lack of understanding of Machine Learning in the engineering and DevOps
+    teams. It’s important to continuously monitor the model performance, as the model
+    results can change if the incoming data changes. During this phase, you need to
+    overcome the following issues:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most data engineers do not understand the sampling, data preparation and model
+    validation techniques and hence are unable to set up data pipelines that enable
+    collection of training data and validation of models.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: A common lack of machine learning experience in DevOps teams to manage model
+    versioning, rollbacks etc.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Lack of tools to help monitor the machine learning models in production.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: For the bid price prediction problem mentioned earlier, we modified the data
+    processing pipeline to generate the training data by sampling and store it in
+    a common place where the training pipeline could be triggered if the data distribution
+    changed. The DevOps team automated the model deployment by rolling the model incrementally
+    to one cluster at a time. The DevOps team also setup monitoring of the model accuracy
+    to generate alerts when the accuracy dropped below a particular threshold.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recommendation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: A data scientist should define the metrics and indicators for the model performance
+    in the production environment before developing the solution. Once defined, the
+    data scientist needs to work closely with the engineering and the DevOps teams
+    to setup the data processing pipelines and monitoring
+  prefs: []
+  type: TYPE_NORMAL
+- en: Handling Scale
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'There are 2 important factors that define a ML model scale:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Number of requests the model can handle
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Execution time (Latency)
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: We can scale the number of requests a model can handle by linearly scaling the
+    model deployment. Execution time is a critical factor for scale as it adds to
+    the processing latency and thereby affecting the scale.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A machine learning PoC is like a research project with different types of experiments
+    to figure out the right algorithm or approach for the problem at hand. The time
+    complexity of the solution with the best accuracy could be high, resulting in
+    a high latency. It’s important to consider the complexity of the while building
+    the solution as it might be best to let go of the accuracy if it can simplify
+    the solution.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using the bidding problem again as an example, we used reinforcement learning
+    to predict the bid price in real time. The overall time taken for prediction had
+    to be less than 60-70ms which meant that the machine learning model execution
+    time had to be much less to avoid timeouts. To reduce the overall execution time,
+    we reduced the complexity by reducing the complexity of the environment in the
+    Reinforcement Learning model, implemented the model in JAVA instead of python
+    and deployed it in process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recommendation
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Execution time is an important metric while choosing an algorithm. At times
+    it is best to compromise on accuracy if the overall latency can be reduced with
+    simpler algorithms.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 'To successfully deploy machine learning models in production:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Define metrics and indicators for validating the model performance in production
+    during the PoC phase.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Choose a machine learning approach based on the infrastructure budget and the
+    latency requirements.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Automate the data processing pipeline for training and execution.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**[Alakh Sharma](https://www.talentica.com/)** is a Data Scientist at [Talentica
+    Software](https://www.talentica.com/), a global product development company that
+    helps startups build their products. Alakh is an Indian Institute of Science,
+    Bangalore alumnus. He helps businesses gain a competitive edge with the adoption
+    of reinforcement learning, machine learning, and natural language processing.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[A Full End-to-End Deployment of a Machine Learning Algorithm into a…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Deploying Your Machine Learning Model to Production in the Cloud](https://www.kdnuggets.com/deploying-your-ml-model-to-production-in-the-cloud)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Prioritizing Data Science Models for Production](https://www.kdnuggets.com/2022/04/prioritizing-data-science-models-production.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Feature Store Summit 2023: Practical Strategies for Deploying ML…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Metadata Store for Production ML!](https://www.kdnuggets.com/2022/05/layer-metadata-store-production-ml.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,385 @@
+- en: Do You Read Excel Files with Python? There is a 1000x Faster Way
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2021/09/excel-files-python-1000x-faster-way.html](https://www.kdnuggets.com/2021/09/excel-files-python-1000x-faster-way.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Nicolas Vandeput](https://www.linkedin.com/in/vandeputnicolas/), Supply
+    Chain Data Scientist**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/870526c4d2f2a30af50ff93f0461b495.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Source: [https://www.hippopx.com/](https://www.hippopx.com/), public domain
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As a Python user, I use excel files to load/store data as business people like
+    to share data in excel or csv format. Unfortunately, Python is especially slow
+    with Excel files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, I’ll show you five ways to load data in Python. In the end,
+    we’ll achieve a speedup of 3 orders of magnitude. It’ll be lightning-fast.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '*Edit (18/07/2021): I found a way to make the process ****5 times faster ****(resulting
+    in a 5000x speedup). I added it as a bonus at the end of the article.*'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Experimental Setup
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Let’s imagine that we want to load 10 Excel files with 20000 rows and 25 columns
+    (that’s around 70MB in total). This is a representative case where you want to
+    load transactional data from an ERP (SAP) to Python to perform some analysis.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s populate this dummy data and import the required libraries (we’ll discuss
+    pickle and joblib later in the article).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 5 Ways to Load Data in Python
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: 'Idea #1: Load an Excel File in Python'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s start with a straightforward way to load these files. We’ll create a first
+    Pandas Dataframe and then append each Excel file to it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: A simple way to import Excel files in Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It takes around 50 seconds to run. Pretty slow.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Idea #2: Use CSVs rather than Excel Files'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s now imagine that we saved these files as .csv (rather than .xlsx) from
+    our ERP/System/SAP.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: Importing csv files in Python is 100x faster than Excel files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can now load these files in 0.63 seconds. That’s nearly 10 times faster!
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Python loads CSV files 100 times faster than Excel files. Use CSVs.**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Con**: csv files are nearly always bigger than .xlsx files. In this example
+    .csv files are 9.5MB, whereas .xlsx are 6.4MB.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Idea #3: Smarter Pandas DataFrames Creation'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We can speed up our process by changing the way we create our pandas DataFrames.
+    Instead of appending each file to an existing DataFrame,
+  prefs: []
+  type: TYPE_NORMAL
+- en: We load each DataFrame independently in a list.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Then concatenate the whole list in a single DataFrame.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: A smarter way to import csv files in Python
+  prefs: []
+  type: TYPE_NORMAL
+- en: We reduced the time by a few percent. Based on my experience, this trick will
+    become useful when you deal with bigger Dataframes (df >> 100MB).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Idea #4: Parallelize CSV Imports with Joblib'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We want to load 10 files in Python. Instead of loading each file **one by one**,
+    why not loading them all, at once, in parallel?
+  prefs: []
+  type: TYPE_NORMAL
+- en: We can do this easily using [joblib](https://joblib.readthedocs.io/en/latest/parallel.html).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Import CSV files in Python in Parallel using Joblib.
+  prefs: []
+  type: TYPE_NORMAL
+- en: That’s nearly twice as fast as the single core version. However, as a general
+    rule, do not expect to speed up your processes eightfold by using 8 cores (here,
+    I got x2 speed up by using 8 cores on a Mac Air using the new M1 chip).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Simple Paralellization in Python with Joblib**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Joblib](https://joblib.readthedocs.io/en/latest/parallel.html) is a simple
+    Python library that allows you to run a function in //. In practice, joblib works
+    as a list comprehension. Except each iteration is performed by a different thread.
+    Here’s an example.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Think as joblib as a smart list comprehension.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Idea #5: Use Pickle Files'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: You can go (much) faster by storing data in pickle files — a specific format
+    used by Python — rather than .csv files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Con**: you won’t be able to manually open a pickle file and see what’s in
+    it.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: We just cut the running time by 80%!
+  prefs: []
+  type: TYPE_NORMAL
+- en: In general, it is much faster to work with pickle files than csv files. But,
+    on the other hand, pickles files usually take more space on your drive (not in
+    this specific example).
+  prefs: []
+  type: TYPE_NORMAL
+- en: In practice, you will not be able to extract data from a system directly in
+    pickle files.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'I would advise using pickles in the two following cases:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: You want to save data from one of your Python processes (and you don’t plan
+    on opening it on Excel) to use it later/in another process. Save your Dataframes
+    as pickles instead of .csv
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: You need to reload the same file(s) multiple times. The first time you open
+    a file, save it as a pickle so that you will be able to load the pickle version
+    directly next time.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: 'Example: Imagine that you use transactional monthly data (each month you load
+    a new month of data). You can save all historical data as .pickle and, each time
+    you receive a new file, you can load it once as a .csv and then keep it as a .pickle
+    for the next time.'
+  prefs:
+  - PREF_IND
+  type: TYPE_NORMAL
+- en: 'Bonus: Loading Excel Files in Parallel'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Let’s imagine that you received excel files and that you have no other choice
+    but to load them as is. You can also use joblib to parallelize this. Compared
+    to our pickle code from above, we **only **need to update the loop function.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: How to load excel files using parallelization in Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We could reduce the loading time by 70% (from 50 seconds to 13 seconds).
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can also use this loop to create pickle files on the fly. So that, next
+    time you load these files, you’ll be able to achieve lightning fast loading times.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Recap
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: By loading pickle files in parallel, we decreased the loading time from 50 seconds
+    to less than a tenth of a second.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Excel: 50 seconds'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'CSV: 0.63 seconds'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Smarter CSV: 0.62 seconds'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'CSV in //: 0.34 seconds'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Pickle in //: 0.07 seconds'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Excel in //: 13.5 seconds'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Bonus #2: 4x Faster Parallelization'
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: Joblib allows to change the parallelization backend to remove some overheads.
+    You can do this by giving *prefer=”threads"* to *Parallel*.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using prefer=”threads” will allow you to run your process even faster.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We obtain a speed of around 0.0096 seconds (over 50 runs with a 2021 MacBook
+    Air).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Using prefer=”threads” with CSV and Excel parallelization gives the following
+    results.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/f4abcdaa5e2876e17f0f4ef998cc1ec8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As you can see using the “Thread” backend results in a worse score when reading
+    Excel files. But to an astonishing performance with pickles (it takes 50 seconds
+    to load Excel files one by one, and only 0.01 seconds to load the data reading
+    pickles files in //).
+  prefs: []
+  type: TYPE_NORMAL
+- en: ???? [Let’s connect on LinkedIn!](https://www.linkedin.com/in/vandeputnicolas/)
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '**Bio: [Nicolas Vandeput](https://www.linkedin.com/in/vandeputnicolas/)** is
+    a supply chain data scientist specialized in demand forecasting and inventory
+    optimization. He founded his consultancy company [SupChains](http://www.supchains.com/) in
+    2016 and co-founded [SKU Science](https://bit.ly/3ozydFN) — a fast, simple, and
+    affordable demand forecasting platform — in 2018\. Passionate about education,
+    Nicolas is both an avid learner and enjoys teaching at universities: he has taught
+    forecasting and inventory optimization to master students since 2014 in Brussels,
+    Belgium. Since 2020 he is also teaching both subjects at CentraleSupelec, Paris,
+    France. He published [*Data Science for Supply Chain Forecasting*](https://www.amazon.com/Data-Science-Supply-Chain-Forecasting/dp/3110671107) in
+    2018 (2nd edition in 2021) and [*Inventory Optimization: Models and Simulations*](https://www.amazon.com/Inventory-Optimization-Simulations-Nicolas-Vandeput/dp/3110673916) in
+    2020.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Image](../Images/c9c860202a525c83ddd9799118ea3978.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[Original](https://towardsdatascience.com/read-excel-files-with-python-1000x-faster-407d07ad0ed8).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Vaex: Pandas but 1000x faster](/2021/05/vaex-pandas-1000x-faster.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How to Query Your Pandas Dataframe](/2021/08/query-pandas-dataframe.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Make Pandas 3 Times Faster with PyPolars](/2021/05/pandas-faster-pypolars.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Is There a Way to Bridge the MLOps Tools Gap?](https://www.kdnuggets.com/2022/08/way-bridge-mlops-tools-gap.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Faster Way to Prepare Time-Series Data with the AI & Analytics Engine](https://www.kdnuggets.com/2021/12/piexchange-faster-way-prepare-timeseries-data-ai-analytics-engine.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[There and Back Again… a RAPIDS Tale](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

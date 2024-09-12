@@ -1,0 +1,236 @@
+- en: Fraud through the eyes of a machine
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/11/fraud-eyes-machine.html](https://www.kdnuggets.com/2020/11/fraud-eyes-machine.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Jakub Karczewski](https://www.linkedin.com/in/jakub-karczewski-97833b137/),
+    Machine Learning Engineer**.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/493fb3175a3905942d5640f4862a766f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Context
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: There are many approaches to determining whether a particular transaction is
+    fraudulent. From rule-based systems to machine learning models - each method tends
+    to work best under certain conditions. Successful anti-fraud systems should reap
+    the benefits of all the approaches and utilize them where they fit the problem
+    best.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The notion of networks and connection analysis in the world of anti-fraud systems
+    is paramount since it helps uncover hidden characteristics of transactions that
+    are not retrievable any other way. In this blog post, we will try to shed some
+    light on the way networks are created and then used to detect fraudulent transactions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Networks in fraud detection
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Let’s consider a transaction - one of the basic entities in the world of online
+    payments. Each transaction can be described by a set of attributes. In Nethone,
+    we gather over 5,000 data points per transaction, but for the sake of simplicity,
+    let’s focus on a few common ones like:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: what are the characteristics of the payment (amount, card token),
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: who initiated the transaction (name, email),
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: on which device (IP address, device OS, browser cookies)
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 'Having those exemplary transaction attributes in mind, we can now pass on to
+    the stage of network building. The network (or graph) is a set of nodes (“dots”)
+    connected by edges (“lines”). In the world of online payments, the nodes can be
+    either transactions or specific values of transactions’ attributes. The edges
+    can represent various relations but in this case, let’s focus on the most common
+    one: sharing the attribute value. Let’s use this simple network as an example:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/3dff1d6249563442459aba5b5d7effbc.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Fig. 1 - Simple network.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'We can see that the processed transaction (“dot with halo”) shares an IP address
+    (green node), email address (purple node), and cookie (orange node) value with
+    several other transactions (black nodes). The procedure for creating such a network
+    is pretty simple:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Extract values of attributes of the processed transaction (like IP address,
+    cookie, email, etc.).
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Find other transactions that share some of the attributes’ values.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Plot them and connect to the processed transaction via intermediary nodes representing
+    particular attribute values.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In short, it’s all about connecting transactions using some attribute as a matching
+    key. This approach, although simple in principle, provides valuable context.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once the graph is created, we can query it for various properties. We can check
+    what the longest path is or how many nodes connect to a particular node representing,
+    for example, IP address. After extracting the network's features, we can then
+    feed them to rule-based systems or ML models - as mentioned in the beginning -
+    as a hybrid approach works best.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Visualization of fraud attack
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '![](../Images/b3512d0b620a6cfba23882850cdab62d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Fig. 2 - Extended network - carding scheme.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: This network was constructed using a different seed transaction and expanded
+    with an increased depth parameter. It means that now we can connect transactions
+    related to the processed one - taking an analogy from the world of social interactions,
+    we can analyze “friends of friends of friends… etc.” so transactions related to
+    different related transactions. This way, we can broaden our scope and gather
+    more insight. Let’s zoom in and look into some of the clusters.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e4f41401082eaafb642477fc7f54465d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '*Fig. 3 - Suspicious connections via card token.*'
+  prefs: []
+  type: TYPE_NORMAL
+- en: At first glance, we can see that one email and IP address (red and green nodes)
+    are connected to many different credit card tokens (blue nodes). Since it’s quite
+    rare for people to possess a great number of credit cards, this type of network
+    might be an example of carding fraud. In such attacks, fraudsters use stolen credit
+    card credentials to perform numerous transactions. We can distinguish between
+    normal traffic and carding patterns (few people, numerous cards, and transactions)
+    easily when having data structured as a network. After querying our graph and
+    encountering a risky pattern, we can add suspicious attribute values to blacklists.
+    This way, if they are ever encountered by our system, transactions will be automatically
+    flagged as risky.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Benefits and challenges of connection analysis
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: We can extract a lot of insight from connection analysis, but they don’t come
+    for free - there are additional challenges as well. On the one hand, studying
+    connections in networks built from transactional, tabular data might help us uncover
+    relationships that are hard to extract when keeping the data flat. The structure
+    of a network and how it changes in time can be a very rich source of information,
+    as well as a human-friendly interface to our data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: On the other hand, there are no hard rules about what is and is not fraudulent
+    behavior. If we can see multiple transactions coming out of a common IP address,
+    then it can mean a fraud attack, but it can also mean employees using their corporate,
+    proxied network to make purchases. It’s important to take as many factors in as
+    possible - missing out on some may cause serious distortions in the way we perceive
+    the data through our networks. A good example of a crucial factor is **time** -
+    someone making a 10th transaction on the same **day** and cleaning browser cookies
+    after each one will look exactly the same as a legitimate user making a 10th purchase
+    in the same **year**, whose cookies naturally expire between consequent transactions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Context is everything.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://nethone.com/blog/fraud-through-the-eyes-of-a-machine). Reposted
+    with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Knowing Your Neighbours: Machine Learning on Graphs](https://www.kdnuggets.com/2019/08/neighbours-machine-learning-graphs.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Graphs Are The Next Frontier In Data Science](https://www.kdnuggets.com/2018/10/graphs-next-frontier-data-science.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Scalable graph machine learning: a mountain we can climb?](https://www.kdnuggets.com/2019/12/scalable-graph-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How Data Science Fuels Fraud Prevention](https://www.kdnuggets.com/2022/09/data-science-fuels-fraud-prevention.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Fighting AI with AI Fraud Monitoring for Deepfake Applications](https://www.kdnuggets.com/2023/05/fighting-ai-ai-fraud-monitoring-deepfake-applications.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Exploring Tree of Thought Prompting: How AI Can Learn to Reason…](https://www.kdnuggets.com/2023/07/exploring-tree-of-thought-prompting-ai-learn-reason-through-search.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data storytelling - the art of telling stories through data](https://www.kdnuggets.com/2023/07/manning-data-storytelling-the-art-telling-stories-data.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Scaling Data Management Through Apache Gobblin](https://www.kdnuggets.com/2023/01/scaling-data-management-apache-gobblin.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Unlocking Reliable Generations through Chain-of-Verification: A…](https://www.kdnuggets.com/unlocking-reliable-generations-through-chain-of-verification)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

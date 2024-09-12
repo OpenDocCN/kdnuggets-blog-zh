@@ -1,0 +1,332 @@
+- en: 5 Apache Spark Best Practices For Data Science
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/08/5-spark-best-practices-data-science.html](https://www.kdnuggets.com/2020/08/5-spark-best-practices-data-science.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Zion Badash](https://www.linkedin.com/in/zion-badash-a73826a1/?originalSubdomain=il),
+    Data Scientist @ Wix.com**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/8ed183f322d32458e9f9effc15e95c27.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [chuttersnap](https://unsplash.com/@chuttersnap?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why move to Spark?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Although we all [talk about Big Data](https://www.facebook.com/dan.ariely/posts/904383595868),
+    it usually takes some time in your career until you encounter it. For me at [Wix.com](https://www.wix.com/) it
+    came quicker than I thought, having well over 160M users generates a lot of data
+    — and with that comes the need for scaling our data processes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While there are other options out there ([Dask](https://dask.org/) for example),
+    we decided to go with Spark for 2 main reasons — (1) It’s the current state of
+    the art and widely used for Big Data. (2) We had the infrastructure needed for
+    Spark inplace.
+  prefs: []
+  type: TYPE_NORMAL
+- en: How to write in PySpark for pandas people
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Chances are you’re familiar with pandas, and when I say familiar I mean fluent,
+    your mother's tongue :)
+  prefs: []
+  type: TYPE_NORMAL
+- en: The headline of the following talk says it all — [Data Wrangling with PySpark
+    for Data Scientists Who Know Pandas](https://databricks.com/session/data-wrangling-with-pyspark-for-data-scientists-who-know-pandas) and
+    it’s a great one.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This will be a very good time to note that simply getting the syntax right might
+    be a good place to start but you need a lot more for a successful PySpark project,
+    you need to understand how Spark works.
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s hard to get Spark to work properly, but when it works — it works great!
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: Spark in a nutshell
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I would only go knee deep here but I recommend visiting the following article
+    and reading the MapReduce explanation for a more extensive explanation — [The
+    Hitchhikers guide to handle Big Data using Spark](https://towardsdatascience.com/the-hitchhikers-guide-to-handle-big-data-using-spark-90b9be0fe89a).
+  prefs: []
+  type: TYPE_NORMAL
+- en: The concept we want to understand here is **Horizontal Scaling.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: It’s easier to start with **Vertical Scaling. **If we have a pandas code that
+    works great but then the data becomes too big for it, we can potentially move
+    to a stronger machine with more memory and hope it manages. This means we still
+    have one machine handling the entire data at the same time - we scaled **vertically.**
+  prefs: []
+  type: TYPE_NORMAL
+- en: If instead we decided to use MapReduce, and split the data to chunks and let
+    different machines handle each chunk — we’re scaling **horizontally**.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5 Spark Best Practices
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: These are the 5 Spark best practices that helped me reduce runtime by 10x and
+    scale our project.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 1 - Start small — Sample the data
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: If we want to make big data work, we first want to see we’re in the right direction
+    using a small chunk of data. In my project I sampled 10% of the data and made
+    sure the pipelines work properly, this allowed me to use the SQL section in the
+    Spark UI and see the numbers grow through the entire flow, while not waiting too
+    long for the process to run.
+  prefs: []
+  type: TYPE_NORMAL
+- en: From my experience if you reach your desired runtime with the small sample,
+    you can usually scale up rather easy.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 2 - Understand the basics — Tasks, partitions, cores
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'This is probably the single most important thing to understand when working
+    with Spark:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**1 Partition makes for 1 Task that runs on 1 Core**'
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: 'You have to always be aware of the number of partitions you have - follow the
+    number of tasks in each stage and match them with the correct number of cores
+    in your Spark connection. A few tips and rules of thumb to help you do this (all
+    of them require testing with your case):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The ratio between tasks and cores should be around 2–4 tasks for each core.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: The size of each partition should be about 200MB–400MB, this depends on the
+    memory of each worker, tune it to your needs.
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: 3 - Debugging Spark
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Spark works with lazy evaluation, which means it waits until an action is called
+    before executing the graph of computation instructions. Examples of actions are `show(),
+    count(),...`
+  prefs: []
+  type: TYPE_NORMAL
+- en: This makes it very hard to understand where are the bugs / places that need
+    optimization in our code. One practice which I found helpful was splitting the
+    code to sections by using `df.cache()` and then use `df.count()` to force Spark
+    to compute the df at each section.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now, using the Spark UI you can look at the computation of each section and
+    spot the problems. It’s important to note that using this practice without using
+    the sampling we mentioned in (1) will probably create a very long runtime which
+    will be hard to debug.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 4 - Finding and solving skewness
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let’s start with defining skewness. As we mentioned our data is divided to partitions
+    and along the transformations the size of each partition would likely change.
+    This can create a wide variation in size between partitions which means we have
+    a skewness in our data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Finding the Skewness can be done by looking at the stage details in the Spark
+    UI and looking for a significant difference between the max and median:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/4733ff757dca1d055ee94dac6d0ec4d2.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The big variance (Median=3s, Max=7.5min) might suggest a skewness in data
+  prefs: []
+  type: TYPE_NORMAL
+- en: This means that we have a few tasks that were significantly slower than the
+    others.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why is this bad — this might cause other stages to wait for these few tasks
+    and leave cores waiting while not doing anything.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Preferably if you know where the skewness is coming from you can address it
+    directly and change the partitioning. If you have no idea / no option to solve
+    it directly, try the following:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Adjusting the ratio between the tasks and cores**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: As we mentioned, by having more tasks than cores we hope that while the longer
+    task is running other cores will remain busy with the other tasks. Although this
+    is true, the ratio mentioned earlier (2-4:1) can’t really address such a big variance
+    between tasks duration. We can try to increase the ratio to 10:1 and see if it
+    helps, but there could be other downsides to this approach.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Salting the data**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Salting is repartitioning the data with a random key so that the new partitions
+    would be balanced. Here’s a code example for PySpark (using groupby which is the
+    usual suspect for causing skewness):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: 5 - Problems with iterative code in Spark
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: This one was a real tough one. As we mentioned Spark uses lazy evaluation, so
+    when running the code — it only builds a computational graph, a DAG. But this
+    method can be very problematic when you have an iterative process, because the
+    DAG reopens the previous iteration and becomes very big, I mean very very big
+    . This might be too big for the driver to keep in memory. This problem is hard
+    to locate because the application is stuck, but it appears in the Spark UI as
+    if no job is running (which is true) for a long time — until the driver eventually
+    crashes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: This is currently an inherent problem with Spark and the workaround which worked
+    for me was using `df.checkpoint() / df.localCheckpoint()` every 5–6 iterations
+    (find your number by experimenting a bit). The reason this works is that `checkpoint()` is
+    breaking the lineage and the DAG (unlike `cache()`), saving the results and starting
+    from the new checkpoint. The downside is that if something bad happened, you don’t
+    have the entire DAG for recreating the df.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As I said before, it takes time to learn how to make Spark do its magic but
+    these 5 practices really pushed my project forward and sprinkled some Spark magic
+    on my code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To conclude, this is the post I was looking for (and didn’t find) when I started
+    my project — I hope you found it just in time.
+  prefs: []
+  type: TYPE_NORMAL
+- en: References
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Data Wrangling with PySpark for Data Scientists Who Know Pandas](https://databricks.com/session/data-wrangling-with-pyspark-for-data-scientists-who-know-pandas)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The Hitchhikers guide to handle Big Data using Spark](https://towardsdatascience.com/the-hitchhikers-guide-to-handle-big-data-using-spark-90b9be0fe89a)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Spark: The Definitive Guide](https://www.oreilly.com/library/view/spark-the-definitive/9781491912201/) —
+    chapter 18 about monitoring and debugging is amazing.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Bio: [Zion Badash](https://www.linkedin.com/in/zion-badash-a73826a1/?originalSubdomain=il)**
+    is a Data Scientist @ Wix.com on the Forecasting Team. His interests include ML,
+    Time Series, Spark and everything in between.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/5-spark-best-practices-61587a35ac15).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[The Benefits & Examples of Using Apache Spark with PySpark](/2020/04/benefits-apache-spark-pyspark.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Apache Spark Cluster on Docker](/2020/07/apache-spark-cluster-docker.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Apache Spark on Dataproc vs. Google BigQuery](/2020/07/apache-spark-dataproc-vs-google-bigquery.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Integrating ChatGPT Into Data Science Workflows: Tips and Best Practices](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Best Practices for Data Science Team Collaboration](https://www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Python Best Practices for Data Science](https://www.kdnuggets.com/5-python-best-practices-for-data-science)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[11 Best Practices of Cloud and Data Migration to AWS Cloud](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Warehousing and ETL Best Practices](https://www.kdnuggets.com/2023/02/data-warehousing-etl-best-practices.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Visualization Best Practices & Resources for Effective Communication](https://www.kdnuggets.com/2023/04/data-visualization-best-practices-resources-effective-communication.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

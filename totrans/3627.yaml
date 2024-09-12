@@ -1,0 +1,317 @@
+- en: Here’s what you need to look for in a model server to build ML-powered services
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/09/model-server-build-ml-powered-services.html](https://www.kdnuggets.com/2020/09/model-server-build-ml-powered-services.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Ben Lorica](https://twitter.com/bigdata) (helping organize [Ray Summit](https://events.linuxfoundation.org/ray-summit/))
+    and [Ion Stoica](https://people.eecs.berkeley.edu/~istoica/) (Berkeley, Anyscale)**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/06fc71caf07273db0c45fb9d4799718d.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Machine learning is being embedded in applications that involve many data types
+    and data sources. This means that software developers from different backgrounds
+    need to work on projects that involve ML. In our [previous post](https://anyscale.com/blog/five-key-features-for-a-machine-learning-platform/),
+    we listed key features that machine learning platforms need to have in order to
+    meet current and future workloads. We also described MLOps, a set of practices
+    focused on productionizing the machine learning lifecycle.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/05f7f399b092a645e55bd552010d4d55.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: In this post, we focus on model servers, software at the heart of machine learning
+    services that operate in real-time or offline. There are two common approaches
+    used for serving machine learning models. The first approach embeds model evaluation
+    in a web server (e.g., Flask) as an API service endpoint dedicated to a prediction
+    service.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The second approach offloads model evaluation to a separate service. This is
+    an active area for startups, and there are a growing number of options that fall
+    into this category. Offerings include services from *cloud providers* ([SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works-hosting.html), [Azure](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-and-where), [Google
+    Cloud](https://cloud.google.com/ai-platform/prediction/docs/deploying-models)), *open
+    source projects for model serving* ([Ray Serve](https://docs.ray.io/en/master/serve/index.html),
+    Seldon, TorchServe, TensorFlow Serving, etc.), *proprietary software* (SAS, Datatron,
+    ModelOp, etc.), and bespoke solutions usually written in some generic framework.
+  prefs: []
+  type: TYPE_NORMAL
+- en: While machine learning can be used for one-off projects, most developers seek
+    to embed machine learning across their products and services. Model servers are
+    important components of software infrastructure for productionizing machine learning,
+    and as such, companies need to carefully evaluate their options. This post focuses
+    on key features companies should look for in a model server.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Support for popular toolkits
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Your model server is probably separate from your model training system. Choose
+    a model server that is able to use a trained model artifact produced using a number
+    of popular tools. Developers and machine learning engineers build models using
+    many different libraries, including ones for deep learning (PyTorch, TensorFlow),
+    machine learning, and statistics (scikit-learn, XGBoost, SAS, [statsmodel](https://www.statsmodels.org/stable/index.html)).
+    Model builders also continue to use a variety of programming languages. While
+    Python has emerged as the dominant language for machine learning, other languages
+    like R, Java, Scala, Julia, SAS, still have many users as well. More recently,
+    many companies have implemented data science workbenches like Databricks, Cloudera,
+    Dataiku, Domino Data Lab, and others.
+  prefs: []
+  type: TYPE_NORMAL
+- en: A GUI for model deployment and more
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Developers may use a command line interface, but enterprise users will want
+    a graphical user interface that guides them through the process of deploying models
+    and highlights the different stages of the machine learning lifecycle. As the
+    deployment processes mature, they might migrate more to scripting and automation.
+    Model servers with user interfaces include [Seldon Deploy](https://www.youtube.com/watch?v=iTVY4GI1bhs), [SAS
+    Model Manager](https://www.sas.com/en_us/software/model-manager.html), [Datatron](https://www.datatron.com/),
+    and others that target enterprise users.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Easy to operate and deploy, but with high-performance and scalability
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As machine learning gets embedded in critical applications, companies will need
+    low-latency model servers that can power large-scale prediction services. Companies
+    like Facebook and Google have machine learning services that provide real-time
+    responses [billions of times each day](https://engineering.fb.com/ml-applications/transitioning-entirely-to-neural-machine-translation/).
+    While these might be extreme cases, many companies also deploy applications like [recommendation
+    and personalization systems](https://www.sigarch.org/deep-learning-its-not-all-about-recognizing-cats-and-dogs/) that
+    interact with many users on a daily basis. With the availability of open source
+    software like Ray Serve, companies now have access to low-latency model servers
+    that can scale to many machines.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Most model servers use a microservice architecture and are accessible through
+    a REST or gRPC API.  This makes it easier to integrate machine learning (“recommender”)
+    with other services (“shopping cart”). Depending on your setup, you may want a
+    model server that lets you deploy models on the cloud, on-premise, or both. Your
+    model server has to participate in infrastructure features like auto-scaling,
+    resource management, and hardware provisioning.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Some model servers added recent innovations that reduce complexity, boost performance,
+    and provide flexible options for integrating with other services. With the introduction
+    of a new Tensor data type, RedisAI supports *data locality* – a feature that enables
+    users to get and set Tensors from their favorite client and “run their AI model
+    where their data lives.” Ray Serve [brings model evaluation logic closer to business
+    logic ](https://www.youtube.com/watch?v=fABgQ5hA4qI&feature=youtu.be&t=1361)by
+    giving developers end-to-end control from the API endpoint to model evaluation,
+    and back to the API endpoint. In addition, Ray Serve is easy to operate and is
+    as easy to deploy as a simple web server.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Includes tools for testing, deployment, and rollouts
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Once a model is trained, it has to be reviewed and tested before it gets deployed.
+    Seldon Deploy, Datatron, and other model servers have some interesting capabilities
+    that let you test models with a single prediction or using a load test. To facilitate
+    error identification and testing, these model servers also let you upload test
+    data and visualize test predictions.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once your model has been reviewed and tested, your model server should give
+    you the ability to safely promote and demote models. Other popular rollout patterns
+    include:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Canary](https://rollout.io/blog/canary-deployment/): A small part of requests
+    are sent to the new model, while the bulk of requests get routed to an existing
+    model.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Shadowing](https://www.getambassador.io/docs/latest/topics/using/shadowing/):
+    Production traffic is copied to a non-production service to test the model before
+    running it in production.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Ideally, rollout tools are completely automatable, so your deployments tools
+    can be plugged into your CI/CD or MLOps process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Support for complex deployment patterns
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'As you increase your usage of machine learning, your model server should be
+    able to support many models in production. Your model server should also support
+    complex deployment patterns that involve deploying more than one model at a time.
+    It should support a variety of patterns, including:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**A/B tests**: A fraction of predictions use one model, and the rest go to
+    another model.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Ensembles**: Multiple models are combined to form a more powerful predictive
+    model.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Cascade**: If a baseline model produces a prediction with low confidence,
+    traffic is routed to an alternative model. Another use case is refinement: detect
+    whether there is a car in the picture, and, if there is one, send the picture
+    to a model that reads the car’s license plate.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '**Multi-arm bandit**:  A form of reinforcement learning, bandits allocate traffic
+    across several competing models.'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: Out of the box metrics and monitoring
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Machine learning models can degrade over time, and it’s important to have systems
+    in place that indicate when models become less accurate or begin demonstrating
+    bias and other unexpected behavior. Your model server should emit performance,
+    usage, and other custom metrics that can be consumed by visualization and real-time
+    monitoring tools. Some model servers are beginning to provide advanced capabilities,
+    including anomaly detection and alerts. There are even startups ([Superwise](https://superwise.ai/), [Arize](https://techcrunch.com/2020/02/18/tubemogul-execs-launch-arize-ai-for-ai-troublehsooting/))
+    that focus on using “machine learning to monitor machine learning.” While these
+    are currently specialized tools that are separate from and need to be integrated
+    with model servers, it’s quite likely that some model servers will build advanced
+    monitoring and observability capabilities into their offerings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Integrates with model management tools
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As you deploy more models to production, your model server will need to integrate
+    with your model management tools. These tools come under many labels – access
+    control, model catalog, model registry, model governance dashboard – but in essence,
+    they provide you with a 360-degree view of past and current models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Because models will need to be periodically inspected, your model server should
+    interface with services for auditing and reproducing models. *Model versioning* is
+    now standard and comes with most of the model servers we examined. Datatron has
+    a model governance dashboard that provides tools for auditing underperforming
+    models. Many model servers have *data lineage* services that record when requests
+    were sent and what the model inputs and outputs were. Debugging and auditing models
+    also require a refined understanding of their key drivers. Seldon Deploy integrates
+    with [an open source tool](https://github.com/SeldonIO/alibi) for model inspection
+    and explainability.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unifies batch and online scoring
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Suppose you updated your model, or that you were sent a large number of new
+    records. In both of these examples, you may need to apply your model to a large
+    dataset. You will need a model server that can score large datasets efficiently
+    in mini-batches, as well as provide low-latency, online scoring (e.g., Ray Serve
+    supports batch and online scoring).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Summary
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: As machine learning gets embedded in more software applications, companies need
+    to select their model servers carefully. While [Ray Serve](https://docs.ray.io/en/master/serve/index.html) is
+    a relatively new open source model server, it already has many of the features
+    we’ve listed in this post. Ray Serve is a scalable, simple, and flexible tool
+    for deploying, operating, and monitoring machine learning models. As we noted
+    in our [previous post](https://anyscale.com/blog/five-key-features-for-a-machine-learning-platform/),
+    we believe that Ray and Ray Serve will be foundations of many ML platforms in
+    the future.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://anyscale.com/blog/heres-what-you-need-to-look-for-in-a-model-server-to-build-ml-powered-services/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio:** [Ben Lorica](https://twitter.com/bigdata) organizes #SparkAISummit
+    and #raysummit, and has been the Program Chair of Strataconf and OReillyAI.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Demystifying the AI Infrastructure Stack](https://www.kdnuggets.com/2020/05/demystifying-ai-infrastructure-stack.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Optimize Response Time of your Machine Learning API In Production](https://www.kdnuggets.com/2020/05/optimize-response-time-machine-learning-api-production.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Software Interfaces for Machine Learning Deployment](https://www.kdnuggets.com/2020/03/software-interfaces-machine-learning-deployment.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Want to Use Your Data Skills to Solve Global Problems? Here’s What…](https://www.kdnuggets.com/2022/04/jhu-want-data-skills-solve-global-problems.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[High Availability SQL Server Docker Containers in Kubernetes](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[How ML Model Explainability Accelerates the AI Adoption Journey for…](https://www.kdnuggets.com/2022/07/ml-model-explainability-accelerates-ai-adoption-journey-financial-services.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[KDnuggets™ News 22:n03, Jan 19: A Deep Look Into 13 Data…](https://www.kdnuggets.com/2022/n03.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A Community for Synthetic Data is Here and This is Why We Need It](https://www.kdnuggets.com/2022/04/community-synthetic-data-need.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[6 Data Science Technologies You Need to Build Your Supply Chain Pipeline](https://www.kdnuggets.com/2022/01/6-data-science-technologies-need-build-supply-chain-pipeline.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

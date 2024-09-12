@@ -1,0 +1,217 @@
+- en: How to Build a Streaming Semi-structured Analytics Platform on Snowflake
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/07/build-streaming-semistructured-analytics-platform-snowflake.html](https://www.kdnuggets.com/2023/07/build-streaming-semistructured-analytics-platform-snowflake.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![How to Build a Streaming Semi-structured Analytics Platform on Snowflake](../Images/0a41ce35c69079e4de0a6381e75f2dbb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Image by Editor
+  prefs: []
+  type: TYPE_NORMAL
+- en: Introduction
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Snowflake is a SaaS, i.e., software as a service that is well suited for running
+    analytics on large volumes of data. The platform is supremely easy to use and
+    is well suited for business users, analytics teams, etc., to get value from the
+    ever-increasing datasets. This article will go through the components of creating
+    a streaming semi-structured analytics platform on Snowflake for healthcare data.
+    We will also go through some key considerations during this phase.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Context
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: There are a lot of different data formats that the healthcare industry as a
+    whole supports but we will consider one of the latest semi-structured formats
+    i.e. FHIR (Fast Healthcare Interoperability Resources) for building our analytics
+    platform. This format usually possesses all the patient-centric information embedded
+    within 1 JSON document. This format contains a plethora of information, like all
+    hospital encounters, lab results, etc. The analytics team, when provided with
+    a queryable data lake, can extract valuable information such as how many patients
+    were diagnosed with cancer, etc. Let’s go with the assumption that all such JSON
+    files are pushed on AWS S3 (or any other public cloud storage) every 15 minutes
+    through different AWS services or end API endpoints.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Architectural Design
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '![How to Build a Streaming Semi-structured Analytics Platform on Snowflake](../Images/62bc8cb5a28e2c4ab13d65099ab2f1da.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Architectural Components
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: '**AWS S3 to Snowflake RAW zone:**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Data needs to be continuously streamed from AWS S3 into the RAW zone of Snowflake.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Snowflake offers Snowpipe managed service, which can read JSON files from S3
+    in a continuous streaming way.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: A table with a variant column needs to be created in the Snowflake RAW zone
+    to hold the JSON data in the native format.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Snowflake RAW Zone to Streams:**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Streams is managed change data capture service which will essentially be able
+    to capture all the new incoming JSON documents into Snowflake RAW zone
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Streams would be pointed to the Snowflake RAW Zone table and should be set to
+    append=true
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Streams are just like any table and easily queryable.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Snowflake Task 1:**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Snowflake Task is an object that is similar to a scheduler. Queries or stored
+    procedures can be scheduled to run using cron job notations
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In this architecture, we create Task 1 to fetch the data from Streams and ingest
+    them into a staging table. This layer would be truncated and reload
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This is done to ensure new JSON documents are processed every 15 minutes
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: '**Snowflake Task 2:**'
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: This layer will convert the raw JSON document into reporting tables that the
+    analytics team can easily query.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: To convert JSON documents into structured format, the lateral flatten feature
+    of Snowflake can be used.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Lateral flatten is an easy-to-use function that explodes the nested array elements
+    and can be easily extracted using the ‘:’ notation.
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Key Considerations
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Snowpipe is recommended to be used with a few large files. The cost may go high
+    if small files on external storage aren’t clubbed together
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: In a production environment, ensure automated processes are created to monitor
+    streams since once they go stale, data can’t be recovered from them
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: The maximum allowed size of a single JSON document is 16MB compressed that can
+    be loaded into Snowflake. If you have huge JSON documents that exceed these size
+    limits, ensure you have a process to split them before ingesting them into Snowflake
+  prefs:
+  - PREF_OL
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Managing semi-structured data is always challenging due to the nested structure
+    of elements embedded inside the JSON documents. Consider the gradual and exponential
+    increase of the volume of incoming data before designing the final reporting layer.
+    This article aims to demonstrate how easy it is to build a streaming pipeline
+    with semi-structured data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Milind Chaudhari](https://www.linkedin.com/in/milind-chaudhari/)** is a
+    seasoned data engineer/data architect who has a decade of work experience in building
+    data lakes/lakehouses using a variety of conventional & modern tools. He is extremely
+    passionate about data streaming architecture and is also a technical reviewer
+    with Packt & O''Reilly.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Sky''s the Limit: Learn how JetBlue uses Monte Carlo and Snowflake…](https://www.kdnuggets.com/2022/12/monte-carlo-jetblue-snowflake-build-trust-improve-model-accuracy.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Data Warehousing with Snowflake for Beginners](https://www.kdnuggets.com/2022/02/data-warehousing-snowflake-beginners.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top 6 Tools to Improve Your Productivity on Snowflake](https://www.kdnuggets.com/2023/08/top-6-tools-improve-productivity-snowflake.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Simple and Fast Data Streaming for Machine Learning Projects](https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](https://www.kdnuggets.com/building-a-formula-1-streaming-data-pipeline-with-kafka-and-risingwave)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Streaming-LLM: LLMs for Infinite-Length Inputs](https://www.kdnuggets.com/introduction-to-streaming-llm-llms-for-infinite-length-inputs)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,315 @@
+- en: Complete Guide to Build ConvNet HTTP-Based Application using TensorFlow and
+    Flask RESTful Python API
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2018/05/complete-guide-convnet-tensorflow-flask-restful-python-api.html/2](https://www.kdnuggets.com/2018/05/complete-guide-convnet-tensorflow-flask-restful-python-api.html/2)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/05/complete-guide-convnet-tensorflow-flask-restful-python-api.html?page=2#comments)'
+  prefs: []
+  type: TYPE_IMG
+- en: 4\. Training the CNN
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'After building the computational graph of the CNN, next is to train it against
+    the previously prepared training data. The training is done according to the following
+    code. The code starts by preparing the path of the dataset and preparing it into
+    a placeholder. Note that the path should be changed to be suitable to your system.
+    Then it calls the previously discussed functions. The predictions of the trained
+    CNN is used to measure the cost of the network which is to be minimized using
+    the gradient descent optimizer. Note: some of the tensors have a name which is
+    helpful for retrieving such tensors later when testing the CNN.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Rather than feeding the entire training data to the CNN, the data is divided
+    into set of patches and patch by patch will feed the network using a loop. Each
+    patch contains subset of the training data. The patches are returned using the
+    get_patch function. Such function accepts the input data, labels, and percent
+    of samples to be returned from such data. It then returns subset of the data according
+    to the input percent.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 5\. Saving the Trained CNN Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After training the CNN, the model is saved for reuse later for testing it in
+    another Python script. You should also change the path where the model is saved
+    to be suitable to your system.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 6\. Preparing the Test Data and Restoring the Trained CNN Model
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Before testing the trained model, it is required to prepare the test data and
+    restore the previously trained model. Test data preparation is similar to what
+    happened with the training data except that there is just a single binary file
+    to be decoded. The test file is decoded according to the modified get_dataset_images
+    function. This function calls the unpickle_patch function exactly as what done
+    before with training data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: 7\. Testing the Trained CNN Model.
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After preparing the test data and restoring the trained model, we can start
+    testing the model according to the following code. What worth mentioning is that
+    our goal is to just return the network predictions for the input samples. This
+    is why the TF session runs to return just the predictions. When training the CNN,
+    the session runs to minimize the cost. In testing, we are not interested in minimizing
+    the cost anymore. Another interesting point is that the keep probability of the
+    dropout layer is now set to 1\. That means do not drop any node. This is because
+    we are just using the pre-trained model after settling on what nodes to drop.
+    Now we just use what the model did before and not interested in making modification
+    to it by dropping other nodes.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: 8\. Building the Flask Web Application
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: After training the CNN model, we can add it to a HTTP server and allow users
+    to use it online. User will upload an image using a HTTP client. The uploaded
+    image will be received by the HTTP server or more specifically by a Flask Web
+    application. Such application will predict the class label of the image based
+    on the trained model and finally returns the class label back to the HTTP client.
+    Such discussion is summarized in figure 5.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 5**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/69637cf312b68f61aa68f1caf8ee2ceb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Currently, there is no functions the server provide. The first thing the server
+    should do is to allow the user to upload an image. When the user visits the root
+    URL of the application, the application do nothing. The application can redirect
+    the user to an HTML page at which the user could upload an image. To do that,
+    the application has a function called redirect_upload to redirect the user to
+    a page for uploading an image. What lets this function to get executed after the
+    user visits the root of the app is the routing created using the following line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: This line says that if the user visits the root of the app (marked as **"/"**),
+    then the viewer function (redirect_upload) will be called. Such function do nothing
+    except rendering a HTML page called **upload_image.html**. Such page is located
+    under the special **templates**directory of the server. A page inside the templates
+    directory is rendered by calling the render_template function. Note that there
+    is an attribute called endpoint which makes it easy to reuse the same route multiple
+    times without hard coding it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: The screen of the HTML page rendered is shown in figure 6.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 6**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/1358473e1ef19ccaf55b499b530f1ccb.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Here is the HTML code of such page. It is a simple form that allows the user
+    to upload an image file. When submitting such form, a POST HTTP message is to
+    be returned to the URL [**http://localhost:7777/upload/**](http://localhost:7777/upload/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: After returning back to the server from the HTML form, the viewer function that
+    is associated with the URL specified in the **form action **attribute will be
+    called which is the upload_image function. Such function gets the image selected
+    by the user and saves it to the server.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'After uploading the image successfully to the server, we are ready to read
+    the image and predict its class label using the previously trained CNN model.
+    For such reason, the upload_image function redirects the application to the viewer
+    function that is responsible for predicting the class label of an image. Such
+    viewer function is reached by its endpoint as specified in this line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The method associated with endpoint=**"predict" **will be called which is the
+    CNN_predict function. Such method reads the image and checks whether it matches
+    the dimensions of the CIFAR-10 dataset which is 32x32x3\. If the image matches
+    the specifications of the CIFAR-10 dataset, then it will be passed to a function
+    responsible for making prediction as in the following line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: The main function responsible for predicting the class label of an image is
+    defined as shown below. It restores the trained model and runs a session that
+    returns the predicted class of the image. The predicted class is returned back
+    to the Flask Web application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: The main function responsible for predicting the class label of an image is
+    defined as shown below. It restores the trained model and runs a session that
+    returns the predicted class of the image. The predicted class is returned back
+    to the Flask Web application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE13]'
+  prefs: []
+  type: TYPE_PRE
+- en: The returned class label of the image will be rendered on a new HTML page named
+    **prediction_result.html** as instructed by the CNN_predict function in this line
+    as in figure 7.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Figure 7**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4b061d8a8c557877817ec87da3033881.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Note that the Flask app uses the Jinja2 template engine that allows the HTML
+    page to accept input arguments. The input argument passed in this case is predicted_class=predicted_class.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE14]'
+  prefs: []
+  type: TYPE_PRE
+- en: The HTML code of such page is as follows.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE15]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'It is a template that is filled by the predicted class of the image which is
+    passes as an argument to the HTML page as in this part of the code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE16]'
+  prefs: []
+  type: TYPE_PRE
+- en: For more information about the Flask RESTful API, you can visit such tutorial
+    [https://www.tutorialspoint.com/flask/index.htm](https://www.tutorialspoint.com/flask/index.htm).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'The complete project is available at Github in this link: [https://github.com/ahmedfgad/CIFAR10CNNFlask](https://github.com/ahmedfgad/CIFAR10CNNFlask)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** received his B.Sc.
+    degree with excellent with honors in information technology from the Faculty of
+    Computers and Information (FCI), Menoufia University, Egypt, in July 2015\. For
+    being ranked first in his faculty, he was recommended to work as a teaching assistant
+    in one of the Egyptian institutes in 2015 and then in 2016 to work as a teaching
+    assistant and a researcher in his faculty. His current research interests include
+    deep learning, machine learning, artificial intelligence, digital signal processing,
+    and computer vision.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://www.linkedin.com/pulse/complete-guide-build-convnet-http-based-application-using-ahmed-gad/).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Building Convolutional Neural Network using NumPy from Scratch](/2018/04/building-convolutional-neural-network-numpy-scratch.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Derivation of Convolutional Neural Network from Fully Connected Network Step-By-Step](/2018/04/derivation-convolutional-neural-network-fully-connected-step-by-step.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Introduction to Optimization with Genetic Algorithm](/2018/03/introduction-optimization-with-genetic-algorithm.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

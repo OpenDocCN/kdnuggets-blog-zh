@@ -1,0 +1,317 @@
+- en: Automated Machine Learning Project Implementation Complexities
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2019/11/automl-implementation-complexities.html](https://www.kdnuggets.com/2019/11/automl-implementation-complexities.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)![Figure](../Images/09edc90152540fcb82614f36d080450d.png)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Photo by Soroush Zargar on Unsplash
+  prefs: []
+  type: TYPE_NORMAL
+- en: Automated machine learning (AutoML) spans the fairly wide chasm of tasks which
+    could reasonably be thought of as being included within a machine learning pipeline.
+  prefs: []
+  type: TYPE_NORMAL
+- en: An AutoML "solution" could include the tasks of data preprocessing, feature
+    engineering, algorithm selection, algorithm architecture search, and hyperparameter
+    tuning, or some subset or variation of these distinct tasks. Thus, automated machine
+    learning can now be thought of as anything from solely performing a single task,
+    such as automated feature engineering, all the way through to a fully-automated
+    pipeline, from data preprocessing, to feature engineering, to algorithm selection,
+    and so on.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, another important dimension of practical AutoML is its implementation
+    complexity. This is the dimension governing the amount of configuration and engineering
+    elbow grease needed to implement and configure an AutoML project. There are solutions
+    which integrate easily into existing software APIs; those which are wrappers around
+    existing APIs; and those which telescope out even further from existing APIs,
+    being invoked by a command line or a single line of code.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To demonstrate the implementation complexity differences along the AutoML highway,
+    let's have a look at how 3 specific software projects approach the implementation
+    of just such an AutoML "solution," namely Keras Tuner, AutoKeras, and automl-gs.
+    We will see how these projects are philosophically quite different from one another,
+    and will get an idea of the different roles and levels of machine learning learning
+    knowledge may be necessary or appropriate to implement each of these approaches.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Note that the first 2 of these projects are directly tied to Keras and TensorFlow,
+    and so are specific to neural networks. However, there is no reason why other
+    AutoML software at these same relative implementation complexities need be specific
+    to neural networks; these two tools simply provide an easy method of comparison
+    between the implementation complexities.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Also note that the complexity being assessed is that of the practical code implementation
+    of a solution. There are many other complexities of an AutoML undertaking which
+    would contribute to its overall complexity, including the dataset size, dimensionality,
+    and much more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Keras Tuner
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Let's start with [Keras Tuner](https://keras-team.github.io/keras-tuner/), what
+    I will refer to as a "some assembly required" automated machine learning project.
+    In order to successfully implement a solution using the project, you would need
+    a working understanding of neural networks, their architecture, and writing code
+    using the Keras library. As such, this is much more "in the weeds" than the other
+    libraries treated herein.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Essentially, Keras Tuner provides automated hyperparameter tuning for Keras.
+    You define a Keras model and note which hyperparameters you want to have included
+    in the automated tuning, along with a search space, and Keras Tuner performs the
+    heavy lifting. These hyperparameters can include conditional parameters, and the
+    search space can be as restricted as you like, but essentially this is a hyperparameter
+    tuning application.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Recall that the complexity we are referring to in this article is not the number
+    of AutoML tasks that a particular project performs, but that of the code which
+    implements these tasks. In this regard, given that what we can call lower-level
+    base library code must be written and integrated with our AutoML library, Keras
+    Tuner represents the more complex end of the AutoML implementation complexity
+    spectrum.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The most likely user of Keras Tuner would be a machine learning engineer or
+    data scientist. You are not likely to find experts of a particular domain with
+    little to no coding or machine learning expertise jumping straight to Keras Tuner,
+    as opposed to one of the other projects below. To see why, here's a quick overview
+    of how to implement some very basic Keras Tuner code (example from the [Keras
+    Tuner documentation website](https://github.com/keras-team/keras-tuner)).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'First you need a function to return a complied Keras model. It takes an argument
+    from which hyperparameters are sampled:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: Then you need a tuner, which specifies, among other things, the model building
+    function, the objective to optimize, number of trials, and more.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Then start the search for the best hyperparameter configuration:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Finally, either check for the best model or print results summary:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: You may hesitate to refer to this implementation's code as terribly complex,
+    but when you compare it to the following projects I hope you change your mind.
+  prefs: []
+  type: TYPE_NORMAL
+- en: To see more details about the above code, the Keras Tuner process more generally,
+    and what more you can do with the project, see [its website](https://keras-team.github.io/keras-tuner/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: AutoKeras
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: 'Next up is [AutoKeras](https://github.com/keras-team/autokeras), which I will
+    refer to as an "off the shelf" solution, one which is prepackaged and more or
+    less ready to go, using a more restrictive code template. AutoKeras describes
+    itself as:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The ultimate goal of AutoML is to provide easily accessible deep learning tools
+    to domain experts with limited data science or machine learning background.
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: To accomplish this, AutoKeras performs both architecture search and hyperparameter
+    tuning for Keras neural network models.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Here''s a basic code footprint for using AutoKeras:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you've used Scikit-learn, this should be familiar syntax. The above code
+    uses the `task` API; there are others, however, which are of higher complexity.
+    You can find further information on these additional APIs, and more fleshed-out
+    tutorials, on the [project's documentation website](https://autokeras.com/tutorial/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: It should be obvious that the above AutoKeras code is of substantially reduced
+    complexity when compared to that of Keras Tuner. You do, however, give up some
+    degree of precision when you reduce this complexity, the obvious trade-off. For
+    domain experts with limited machine learning expertise, however, this might be
+    a good balance.
+  prefs: []
+  type: TYPE_NORMAL
+- en: automl-gs
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The third of the solutions we will look at is [automl-gs](https://github.com/minimaxir/automl-gs),
+    which takes a 30,000 foot view of AutoML implementations. This goes beyond the
+    "off the shelf" implementation complexity, and offers an approach somewhat akin
+    to the Staples easy button.
+  prefs: []
+  type: TYPE_NORMAL
+- en: automl-gs offers a "zero code/model definition interface." You simply point
+    it at a CSV file, identify the target field to predict, and let it go. It generates
+    Python code which can be integrated into existing machine learning workflows,
+    similar to what [popular AutoML tool TPOT does](https://github.com/EpistasisLab/tpot).
+    automl-gs also boasts that it is no black box, in that you can see how data is
+    processed and models are constructed, allowing for tweaks to be made after-the-fact.
+  prefs: []
+  type: TYPE_NORMAL
+- en: automl-gs performs data preprocessing, and currently builds models using neural
+    networks (via Keras) and XGBoost, while plans to implement CatBoost and LightGBM
+    have been announced.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Here is a comparison of the 2 ways to call automl-gs, via command line and via
+    a single line of code. Note that you can find further information on configuration
+    options, as well as inspecting output, on the [project's website](https://github.com/minimaxir/automl-gs).
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Command line:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Python code:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: It should now be easy to compare the code complexities of these 3 levels of
+    AutoML project undertakings.
+  prefs: []
+  type: TYPE_NORMAL
+- en: automl-gs can be executed via single command line command or single line Python
+    code API call. As such, this project could potentially be used by anyone at all,
+    from professional data scientists looking for a project baseline, to amateurs
+    with limited coding skills or without statistical knowledge looking to test the
+    waters of data science (insert the standard warning about messing with powers
+    you don't understand here). While an amateur undertaking resulting in some important
+    decisions being made based on the predictions may be problematic (not a very likely
+    prospect, IMHO), opening up machine learning and AutoML to anyone looking to learn
+    more about it certainly has value.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/e4120f25b929cc5ab0068e5b77466212.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Sample automl-gs output code ([source](https://github.com/minimaxir/automl-gs))
+  prefs: []
+  type: TYPE_NORMAL
+- en: Similar to TPOT, I see the value here being the potential low-bar entry into
+    creating project baselines. It could be useful to point automl-gs at a CSV and
+    tell it to do its thing in parallel to hand-crafting competing solutions, and
+    comparing results. This could be done with other AutoML tools as well, but the
+    absolute simplicity of a tool of this low level of complexity relies on such little
+    setup and consideration of almost anything that it gets the ball rolling very
+    quickly. Being able to review models afterwards and make edits is also appealing,
+    and could be added as another layer to this parallel AutoML/manual model building
+    process.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Takeaways
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Machine learning presents an array of tasks which can be automated to varying
+    degrees to help simplify pipelines and increase success. Automated machine learning
+    projects take different approaches to which tasks they automate, as well as to
+    the precision of control they allow over the configuration, execution, and follow-up
+    of these tasks. Hopefully the 3 projects spotlighted herein provide some concrete
+    example as to the practical code complexity differences between AutoML tools,
+    and how and who they are useful for.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related**:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[GitHub Repo Raider and the Automation of Machine Learning](/2019/11/github-repo-raider-automated-machine-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automate Hyperparameter Tuning for Your Models](/2019/09/automate-hyperparameter-tuning-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Automated Machine Learning: Just How Much?](/2019/09/automated-machine-learning-just-how-much.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

@@ -1,0 +1,238 @@
+- en: Leveraging XGBoost for Time-Series Forecasting
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[XGBoost](https://xgboost.readthedocs.io/en/stable/) (eXtreme Gradient Boosting)
+    is an open-source algorithm that implements [gradient-boosting](https://en.wikipedia.org/wiki/Gradient_boosting)
+    trees with additional improvement for better performance and speed. The algorithm''s
+    quick ability to make accurate predictions makes the model a go-to model for many
+    competitions, such as the Kaggle competition.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: The common cases for the XGBoost applications are for classification prediction,
+    such as fraud detection, or regression prediction, such as house pricing prediction.
+    However, extending the XGBoost algorithm to forecast time-series data is also
+    possible. How is it works? Let’s explore this further.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Our Top 3 Course Recommendations
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '* * *'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Time-Series Forecasting
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Forecasting in data science and machine learning is a technique used to predict
+    future numerical values based on historical data collected over time, either in
+    regular or irregular intervals.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Unlike common machine learning training data where each observation is independent
+    of the other, data for time-series forecasts must be in successive order and related
+    to each data point. For example, time-series data could include monthly stock,
+    weekly weather, daily sales, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s look at the example time-series data [Daily Climate data from Kaggle](https://www.kaggle.com/datasets/sumanthvrao/daily-climate-time-series-data).
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Leveraging XGBoost for Time-Series Forecasting](../Images/4e0dd5dff273c953c21ee1096c65b841.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: If we look at the dataframe above, every feature is recorded daily. The date
+    column signifies when the data is observed, and each observation is related.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Time-Series forecast often incorporate trend, seasonal, and other patterns from
+    the data to create forecasting. One easy way to look at the pattern is by visualizing
+    them. For example, I would visualize the mean temperature data from our example
+    dataset.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Leveraging XGBoost for Time-Series Forecasting](../Images/a2782ba56cab9368ccae9e34f8651cff.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: It’s easy for us to see in the graph above that each year has a common seasonality
+    pattern. By incorporating this information, we can understand how our data work
+    and decide which model might suit our forecast model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Typical forecast models include ARIMA, Vector AutoRegression, Exponential Smoothing,
+    and Prophet. However, we can also utilize XGBoost to provide the forecasting.
+  prefs: []
+  type: TYPE_NORMAL
+- en: XGBoost Forecasting
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: Before preparing to forecast using XGBoost, we must install the package first.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: After the installation, we would prepare the data for our model training. In
+    theory, XGBoost Forecasting would implement the Regression model based on the
+    singular or multiple features to predict future numerical values. That is why
+    the data training must also be in the numerical values. Also, to incorporate the
+    motion of time within our XGBoost model, we would transform the time data into
+    multiple numerical features.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s start by creating a function to create the numerical features from the
+    date.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Next, we would apply this function to the training and test data.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Leveraging XGBoost for Time-Series Forecasting](../Images/7c6787342de50ffbcacd0fcd0a7781a8.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The required information is now all available. Next, we would define what we
+    want to predict. In this example, we would forecast the mean temperature and make
+    the training data based on the data above.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: I would still use the other information, such as humidity, to show that XGBoost
+    can also forecast values using multivariate approaches. However, in practice,
+    we only incorporate data that we know exists when we try to forecast.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Let’s start the training process by fitting the data into the model. For the
+    current example, we would not do much hyperparameter optimization other than the
+    number of trees.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: After the training process, let’s see the feature importance of the model.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Leveraging XGBoost for Time-Series Forecasting](../Images/56f73cb22289b976d58c6bcda992ca86.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: The three initial features are not surprisingly helpful for forecasting, but
+    the time features also contribute to the prediction. Let’s try to have the prediction
+    on the test data and visualize them.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: '![Leveraging XGBoost for Time-Series Forecasting](../Images/e387e31500c6ac8f829ffbe7d16c36aa.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: As we can see from the graph above, the prediction might seem slightly off but
+    still follow the overall trend. Let’s try to evaluate the model based on the error
+    metrics.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: RMSE:  11.514
+  prefs: []
+  type: TYPE_NORMAL
+- en: MAE:  2.655
+  prefs: []
+  type: TYPE_NORMAL
+- en: MAPE:  0.133
+  prefs: []
+  type: TYPE_NORMAL
+- en: The result shows that our prediction may have an error of around 13%, and the
+    RMSE also shows a slight error in the forecast. The model can be improved using
+    hyperparameter optimization, but we have learned how XGBoost can be used for the
+    forecast.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Conclusion
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: XGBoost is an open-source algorithm often used for many data science cases and
+    in the Kaggle competition. Often the use cases are common classification cases
+    such as fraud detection or regression cases such as house price prediction, but
+    XGBoost can also be extended into time-series forecasting. By using the XGBoost
+    Regressor, we can create a model that can predict future numerical values.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**
+    is a data science assistant manager and data writer. While working full-time at
+    Allianz Indonesia, he loves to share Python and Data tips via social media and
+    writing media.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[What are the Assumptions of XGBoost?](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Tuning XGBoost Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[WTF is the Difference Between GBM and XGBoost?](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Learn modern forecasting techniques to help predict future business…](https://www.kdnuggets.com/2022/12/sphere-learn-modern-forecasting-techniques-help-predict-future-business-outcomes.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL

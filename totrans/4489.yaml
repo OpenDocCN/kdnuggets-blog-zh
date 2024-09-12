@@ -1,0 +1,340 @@
+- en: Dockerize Jupyter with the Visual Debugger
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+- en: 原文：[https://www.kdnuggets.com/2020/04/dockerize-jupyter-visual-debugger.html](https://www.kdnuggets.com/2020/04/dockerize-jupyter-visual-debugger.html)
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+- en: '[comments](#comments)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**By [Manish Tiwari](https://www.linkedin.com/in/manish-kumar-tiwari/), Data
+    Enthusiast**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/b9e0fd2862820e4423939d8b443837c6.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Photo by [Nilantha Ilangamuwa](https://unsplash.com/@ilangamuwa?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  prefs: []
+  type: TYPE_NORMAL
+- en: Jupyter recently announced its first-ever public release of the much-awaited
+    visual debugger. Though it is the first release it supports all the basic debugging
+    requirements needed to debug and inspect variables, etc.
+  prefs: []
+  type: TYPE_NORMAL
+- en: The Data Science community is relied heavily on Jupyter Notebooks due to its
+    ability to easily communicate and share the outcomes in an interactive way.
+  prefs: []
+  type: TYPE_NORMAL
+- en: However, the only concern was the missing visual debugging ability due to which
+    people usually had to switch to other available classical IDEs which offer a better
+    debugging and code refactoring ability. This feature was much awaited by the data
+    science community which is finally released now.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'For a brief overview of how the visual debugger looks in action, please refer
+    below screencast:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/94d10f5444d449de1cebb00591f968a3.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Screencast by [Jeremy](https://github.com/jtpio), on [Github](https://github.com/jupyterlab/debugger/blob/master/screencast.gif)
+  prefs: []
+  type: TYPE_NORMAL
+- en: In this article, we will be going through the steps needed for setting up the
+    visual debugger in the existing JupyterLab environment and will also dockerize
+    the JupyterLab environment with the visual debugger enabled by default.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Prerequisites:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: JupyterLab 2.0+
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basic understanding of debugging in any programming language
+  prefs: []
+  type: TYPE_NORMAL
+- en: Basic understanding of Docker.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Installation:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Assuming that you are already using JupterLab you just need to install JupyterLab
+    debugger extension for the frontend debugging and any kernel supporting the Jupyter
+    debugging protocol at the backend.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Installing JupyterLab extension for enabling the frontend debugging:'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: The JupyterLab uses nodejs to install extensions, so we need to install nodejs
+    as well in order to install the frontend debugger extension.
+  prefs: []
+  type: TYPE_NORMAL
+- en: In future releases, Jupyter may include this extension by default.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE0]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Installing kernel xeus-python :'
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: In the backend as of now, only xeus-python has support for Jupyter debugging
+    protocol. In the future, there may be many other kernels having support for this
+    protocol.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE1]'
+  prefs: []
+  type: TYPE_PRE
+- en: Now if you run the Jupyter Lab, you should be able to see 2 additional icons,
+    1 each in the console and notebook sections for the xeus-python kernel.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Why Containerize?
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Containers enable smoother development across multiple environments. It’s why
+    they’re the technological foundation for the cloud-native approach to app delivery.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Problems arise when the supporting software environment is not identical, says
+    Docker creator Solomon Hykes. “You’re going to test using Python 2.7, and then
+    it’s going to run on Python 3 in production and something weird will happen. Or
+    you’ll rely on the behavior of a certain version of an SSL library and another
+    one will be installed. You’ll run your tests on Debian and production is on Red
+    Hat and all sorts of weird things happen.”
+  prefs: []
+  type: TYPE_NORMAL
+- en: Container solves this problem by bundling the environment needed to run the
+    application, the dependencies, binaries, all the necessary configurations and
+    the application itself into one package. In this way, we no longer need to worry
+    about the OS and other environment-specific dependencies as everything is packaged
+    in one single independent entity that can run anywhere and everywhere.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dockerize Jupyter with the Visual Debugger enabled
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: I assume that you are familiar with basic Docker commands and terminologies.
+    Explaining how docker works is out of the scope of this article. However, if you
+    feel you need to revisit then please refer to the Docker [documentation](https://docs.docker.com/).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now we will create the Dockerfile needed to create the Docker image of our required
+    environment. You can think of the image as the file having instructions to include
+    everything that is required to run our application in the containers.
+  prefs: []
+  type: TYPE_NORMAL
+- en: We will be using Miniconda, a minimal lightweight installer for Anaconda. It
+    is a small, bootstrap version of Anaconda that includes only conda, Python, the
+    packages they depend on, and a small number of other useful packages.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE2]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Define the metadata of the Docker file and working directory:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE3]'
+  prefs: []
+  type: TYPE_PRE
+- en: Install JupyterLab
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE4]'
+  prefs: []
+  type: TYPE_PRE
+- en: Installing nodejs and labextension for frontend debugging
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE5]'
+  prefs: []
+  type: TYPE_PRE
+- en: Installing a kernel supporting Jupyter debugging protocol
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE6]'
+  prefs: []
+  type: TYPE_PRE
+- en: '**Note: **Here we have used conda package manager, you could have also used
+    pip, however, using both together is not recommended as it might break the environment.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Finally, expose the port and define the entry point
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE7]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'Our final Dockerfile should look as below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: Dockerize JupyterLab with Visual Debugger enabled
+  prefs: []
+  type: TYPE_NORMAL
+- en: Build the Docker image from above Dockerfile.
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: Navigate to the folder containing the above Dockerfile and run the below command.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE8]'
+  prefs: []
+  type: TYPE_PRE
+- en: Alternatively, you can also run the command from anywhere providing the absolute
+    path of the Dockerfile.
+  prefs: []
+  type: TYPE_NORMAL
+- en: Once the image is built successfully, verify by listing the docker images by
+    below command
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE9]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The output should look like below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/4d9348c00df9a889ea45e8f5a9d13fed.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: 'Now run the docker image in a new container as below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE10]'
+  prefs: []
+  type: TYPE_PRE
+- en: Here we are mapping the host port(first one before the colon) 8888 to the exposed
+    port in container 8888\. This is required for the host to communicate with the
+    container’s port where Jupiter is listening in the container.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'Once you run the above command you should see the output as below (provided
+    the ports are not already being used by some other process):'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/52ee4e3c29d5a884d81fa56bd5e5c92f.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: This implies that our docker container is up and running. You can now open the
+    URL specified in the above output and play with Jupyter and the visual debugger
+    without even realizing that it is not running on the host machine.
+  prefs: []
+  type: TYPE_NORMAL
+- en: 'You can also see the list of available containers by below command:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE11]'
+  prefs: []
+  type: TYPE_PRE
+- en: 'The above command should list the container along with the metadata of the
+    container(s) as below:'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![](../Images/23094ef9780246a9158aed1a0794f675.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: Once you open the URL specified in the above output you should see JupyterLab
+    running on host machine’s localhost and port 8888.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '![Figure](../Images/109e93190201264d560fd95d2bad0e59.png)'
+  prefs: []
+  type: TYPE_IMG
+- en: JupyterLab with visual debugger running in the container
+  prefs: []
+  type: TYPE_NORMAL
+- en: Now to play around with the visual debugger, open the Notebook or Console with **xpython** shown
+    in the Launcher rather than Python.
+  prefs: []
+  type: TYPE_NORMAL
+- en: I have published the above docker image we just built on [docker hub](https://hub.docker.com/repository/docker/beingmanish/visualdebugger-jupyter) in
+    case you want a ready to use environment for Jupiter with visual debugging enabled.
+  prefs: []
+  type: TYPE_NORMAL
+- en: You can pull the docker image by below command and play around with it.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[PRE12]'
+  prefs: []
+  type: TYPE_PRE
+- en: If you wish to dive deeper into the visual debugging architecture of Jupyter,
+    you may refer [here](https://blog.jupyter.org/a-visual-debugger-for-jupyter-914e61716559).
+  prefs: []
+  type: TYPE_NORMAL
+- en: Suggestions or questions? Please write in the comments.
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**References:** [Jupyter Blog](https://blog.jupyter.org/)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Jupyter@Github](https://github.com/jupyter)'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Bio: [Manish Tiwari](https://www.linkedin.com/in/manish-kumar-tiwari/)**
+    is a Data Enthusiast keen to share learnings and experience in AI space.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[Original](https://towardsdatascience.com/dockerize-jupyter-with-official-visual-debugger-enabled-cbce1840b7f).
+    Reposted with permission.'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '**Related:**'
+  prefs: []
+  type: TYPE_NORMAL
+- en: '[The 4 Best Jupyter Notebook Environments for Deep Learning](/2020/03/4-best-jupyter-notebook-environments-deep-learning.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[5 Google Colaboratory Tips](/2020/03/5-google-colaboratory-tips.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[GitHub Python Data Science Spotlight: High Level Machine Learning & NLP, Ensembles,
+    Command Line Viz & Docker Made Easy](/2018/10/github-python-data-science-spotlight.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: More On This Topic
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+- en: '[Essential Math for Data Science: Visual Introduction to Singular…](https://www.kdnuggets.com/2022/06/essential-math-data-science-visual-introduction-singular-value-decomposition.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Visual ChatGPT: Microsoft Combine ChatGPT and VFMs](https://www.kdnuggets.com/2023/03/visual-chatgpt-microsoft-combine-chatgpt-vfms.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[AI: Large Language & Visual Models](https://www.kdnuggets.com/2023/06/ai-large-language-visual-models.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+- en: '[Cutting Down Implementation Time by Integrating Jupyter and KNIME](https://www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html)'
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
