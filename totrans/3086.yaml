@@ -1,249 +1,373 @@
 - en: Building Reliable Machine Learning Models with Cross-validation
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用交叉验证构建可靠的机器学习模型
 - en: 原文：[https://www.kdnuggets.com/2018/08/building-reliable-machine-learning-models-cross-validation.html](https://www.kdnuggets.com/2018/08/building-reliable-machine-learning-models-cross-validation.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/08/building-reliable-machine-learning-models-cross-validation.html](https://www.kdnuggets.com/2018/08/building-reliable-machine-learning-models-cross-validation.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Gideon Mendels](https://www.linkedin.com/in/mendels/), Co-Founder and
     CEO @ [Comet.ml](https://www.comet.ml/)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Gideon Mendels](https://www.linkedin.com/in/mendels/)，联合创始人兼首席执行官 @ [Comet.ml](https://www.comet.ml/)**'
 - en: Cross-validation is a technique used to measure and evaluate machine learning
     models performance. During training we create a number of partitions of the training
     set and train/test on different subsets of those partitions.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 交叉验证是一种用于测量和评估机器学习模型性能的技术。在训练过程中，我们创建多个训练集的分区，并在这些分区的不同子集上进行训练/测试。
 - en: Cross-validation is frequently used to train, measure and finally select a machine
     learning model for a given dataset because it helps assess how the results of
     a model will generalize to an independent data set* in practice*. Most importantly,
     cross-validation has been shown to produce models with lower bias than other methods.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 交叉验证经常被用来训练、测量并最终选择一个机器学习模型，因为它帮助评估模型的结果如何在独立数据集上*实际应用*。最重要的是，交叉验证已被证明能生成比其他方法偏差更低的模型。
 - en: This tutorial will focus on one variant of cross-validation named** k-fold cross-validation**.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程将重点介绍一种名为**k折交叉验证**的交叉验证变体。
 - en: 'In this tutorial we’ll cover the following:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将涵盖以下内容：
 - en: Overview of K-Fold Cross-Validation
+  id: totrans-8
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: K-Fold 交叉验证概述
 - en: Example using Scikit-Learn and [Comet.ml](https://www.comet.ml/)
+  id: totrans-9
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 Scikit-Learn 和 [Comet.ml](https://www.comet.ml/) 的示例
 - en: K-Fold Cross-Validation
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: K-Fold 交叉验证
 - en: Cross-validation is a resampling technique used to evaluate machine learning
     models on a limited data set.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 交叉验证是一种重采样技术，用于在有限的数据集上评估机器学习模型。
 - en: The most common use of cross-validation is the k-fold cross-validation method.
     Our training set is split into* K* partitions, the model is trained on *K-1 *partitions
     and the test error is predicted and computed on the *Kth* partition. This is repeated
     for each unique group and the test errors are averaged across.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 交叉验证的最常见用法是 k 折交叉验证方法。我们的训练集被拆分为*K*个分区，模型在*K-1*个分区上进行训练，测试误差在*Kth*个分区上预测并计算。这在每个唯一组上重复，测试误差被平均。
 - en: '**The same procedure is described by the following steps:**'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相同的过程由以下步骤描述：**'
 - en: Split the training set into K (K=10 is a common choice) partitions
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将训练集拆分为 K 个（K=10 是常见选择）分区
 - en: 'For each partition:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于每个分区：
 - en: Set the partition is the test set
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 设置分区作为测试集
 - en: Train a model on the rest of the partitions
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在其余的分区上训练模型
 - en: Measure performance on the test set
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在测试集上测量性能
 - en: Retain the performance metric
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 保留性能指标
 - en: Explore model performance over different folds
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 探索不同折叠下的模型性能
 - en: Cross-validation is commonly used since it’s easy to interpret and since it
     generally results in a less biased or less optimistic estimates of the model performance
     than other methods, such as a simple train/test split. One of the biggest downsides
     in using cross-validation is the increased training time as we are essentially
     training K times instead of 1.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 交叉验证通常被使用，因为它易于解释，并且通常会比其他方法，如简单的训练/测试拆分，得到更少偏差或更少乐观的模型性能估计。使用交叉验证的最大缺点之一是训练时间的增加，因为我们实际上是在训练K次而不是1次。
 - en: Cross-validation example using scikit-learn
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 scikit-learn 的交叉验证示例
 - en: '[**Scikit-learn**](http://scikit-learn.org/) is a popular machine learning
     library that also provides many tools for data sampling, model evaluation and
     training. We’ll use the `Kfold`class to generate our folds. Here’s a basic overview:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**Scikit-learn**](http://scikit-learn.org/)是一个流行的机器学习库，它还提供了许多数据采样、模型评估和训练的工具。我们将使用`Kfold`类来生成我们的折叠。以下是基本概述：'
 - en: '[PRE0]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Now let’s train an end-to-end example using scikit-learn and Comet.ml.
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 现在让我们使用 scikit-learn 和 Comet.ml 训练一个端到端的示例。
 - en: 'This example trains a text classifier on the news groups dataset (you can find
     it [here](http://scikit-learn.org/stable/datasets/twenty_newsgroups.html)). Given
     a piece of text (string), the model classifies it to one of the following classes:
     “atheism”,”christian”,”computer graphics”, “medicine”.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个例子在新闻组数据集上训练一个文本分类器（你可以在[这里](http://scikit-learn.org/stable/datasets/twenty_newsgroups.html)找到它）。给定一段文本（字符串），模型将其分类为以下类别之一：“无神论”、“基督教”、“计算机图形学”、“医学”。
 - en: On every fold we report the accuracy to [Comet.ml](https://www.comet.ml/) and
     finally we report the average accuracy of all folds. After the experiment finishes,
     we can [**visit Comet.ml and examine our model**](https://www.comet.ml/gidim/cross-validation/dd73c9696cbc497cb8274abcb883e03e/chart)**:**
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在每一轮中，我们将准确度报告给[Comet.ml](https://www.comet.ml/)，最后我们报告所有轮次的平均准确度。实验结束后，我们可以[**访问
+    Comet.ml 并检查我们的模型**](https://www.comet.ml/gidim/cross-validation/dd73c9696cbc497cb8274abcb883e03e/chart)**:**
 - en: '![](../Images/9c186b05771d604cf5115e3aa2283e35.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9c186b05771d604cf5115e3aa2283e35.png)'
 - en: The following chart was automatically generated by Comet.ml. The right most
     bar (in purple) represents the **average** **accuracy across folds.** As you can
     see some folds preform significantly better than the average and shows how important
     k-fold cross validation is.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下图表由 Comet.ml 自动生成。最右侧的条形（紫色）表示**所有轮次的** **平均** **准确度**。如图所示，一些轮次的表现明显优于平均水平，展示了
+    k 折交叉验证的重要性。
 - en: You might have noticed that we didn’t compute the **test** accuracy. The **test** set
     should not be used in any way until you’re completely finished with all experimentation.
     If we change hyperparameters or model types based on the test accuracy we’re essentially
     over-fitting our hyperparameters to the test distribution.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能注意到我们没有计算**测试**准确度。**测试**集在所有实验完成之前不应以任何方式使用。如果我们根据测试准确度改变超参数或模型类型，我们实际上是在将超参数过拟合到测试分布上。
 - en: 'Still curious about cross-validation? Here are some other great resources:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 对交叉验证仍然感到好奇？以下是一些其他优秀的资源：
 - en: '[Jason Brownlee](https://medium.com/@jason.brownlee05)’s “[Gentle Introduction
     to Cross-validation](https://machinelearningmastery.com/k-fold-cross-validation/)”'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Jason Brownlee](https://medium.com/@jason.brownlee05)的“[交叉验证的温和介绍](https://machinelearningmastery.com/k-fold-cross-validation/)”'
 - en: '[Prashant Gupta](https://medium.com/@prashantgupta17)’s [>Cross-Validation
     in Machine Learning](https://towardsdatascience.com/cross-validation-in-machine-learning-72924a69872f))'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Prashant Gupta](https://medium.com/@prashantgupta17)’s [>机器学习中的交叉验证](https://towardsdatascience.com/cross-validation-in-machine-learning-72924a69872f))'
 - en: '**Found this article useful? Follow us ([Comet.ml](https://medium.com/comet-ml))
     on Medium and check out some other relevant articles below! Please ???? this article
     to share it!**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**觉得这篇文章有用吗？在 Medium 上关注我们 ([Comet.ml](https://medium.com/comet-ml))，并查看下面的一些相关文章！请????分享这篇文章！**'
 - en: '[Comet.ml Release Notes ](https://www.notion.so/cometml/Comet-ml-Release-Notes-93d864bcac584360943a73ae9507bcaa)— updated
     daily with new features and fixes!'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Comet.ml 发布说明](https://www.notion.so/cometml/Comet-ml-Release-Notes-93d864bcac584360943a73ae9507bcaa)——每日更新新功能和修复！'
 - en: '[Using fastText and Comet.ml to classify relationships in Knowledge](https://medium.com/comet-ml/using-fasttext-and-comet-ml-to-classify-relationships-in-knowledge-graphs-e73d27b40d67)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 fastText 和 Comet.ml 来分类知识图谱中的关系](https://medium.com/comet-ml/using-fasttext-and-comet-ml-to-classify-relationships-in-knowledge-graphs-e73d27b40d67)'
 - en: '[Real-time model performance visualizations](https://medium.com/comet-ml/real-time-model-performance-visualizations-with-comet-ml-992fb6226cb6)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[实时模型性能可视化](https://medium.com/comet-ml/real-time-model-performance-visualizations-with-comet-ml-992fb6226cb6)'
 - en: '*Thanks to [Cecelia Shao](https://medium.com/@ceceliashao?source=post_page).*'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '*感谢[Cecelia Shao](https://medium.com/@ceceliashao?source=post_page)。*'
 - en: '**Bio: [Gideon Mendels](https://www.linkedin.com/in/mendels/)** is Co-Founder
     and CEO @ [Comet.ml](https://www.comet.ml/).'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Gideon Mendels](https://www.linkedin.com/in/mendels/)** 是[Comet.ml](https://www.comet.ml/)的联合创始人兼首席执行官。'
 - en: '**[Comet.ml](https://www.comet.ml/)** is doing for ML what Github did for code.
     Our lightweight SDK enables data science teams to automatically track their datasets,
     code changes, experimentation history. This way, data scientists can easily reproduce
     their models and collaborate on model iteration amongst their team!'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Comet.ml](https://www.comet.ml/)** 正为机器学习领域做出与 Github 对代码相同的贡献。我们轻量级的 SDK
+    使数据科学团队能够自动跟踪他们的数据集、代码更改和实验历史。这样，数据科学家可以轻松地重现他们的模型，并在团队中进行模型迭代的协作！'
 - en: '[Original](https://medium.com/comet-ml/building-reliable-machine-learning-models-with-cross-validation-20b2c3e32f3e).
     Reposted with permission.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/comet-ml/building-reliable-machine-learning-models-with-cross-validation-20b2c3e32f3e)。已获许可转载。'
 - en: '**Related:**'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Training Sets, Test Sets, and 10-fold Cross-validation](/2018/01/training-test-sets-cross-validation.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[训练集、测试集和10折交叉验证](/2018/01/training-test-sets-cross-validation.html)'
 - en: '[Visualizing Cross-validation Code](/2017/09/visualizing-cross-validation-code.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[可视化交叉验证代码](/2017/09/visualizing-cross-validation-code.html)'
 - en: '[How (and Why) to Create a Good Validation Set](/2017/11/create-good-validation-set.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何（以及为什么）创建一个好的验证集](/2017/11/create-good-validation-set.html)'
 - en: '* * *'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-47
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的快车道'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 工作'
 - en: '* * *'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Design effective & reliable machine learning systems!](https://www.kdnuggets.com/2023/05/manning-design-effective-reliable-machine-learning-systems.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[设计有效且可靠的机器学习系统！](https://www.kdnuggets.com/2023/05/manning-design-effective-reliable-machine-learning-systems.html)'
 - en: '[Ensuring Reliable Few-Shot Prompt Selection for LLMs](https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[确保 LLM 的可靠少量样本提示选择](https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html)'
 - en: '[Unlocking Reliable Generations through Chain-of-Verification: A…](https://www.kdnuggets.com/unlocking-reliable-generations-through-chain-of-verification)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过链式验证解锁可靠的生成：一个…](https://www.kdnuggets.com/unlocking-reliable-generations-through-chain-of-verification)'
 - en: '[Building Data Pipelines to Create Apps with Large Language Models](https://www.kdnuggets.com/building-data-pipelines-to-create-apps-with-large-language-models)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建数据管道以创建大型语言模型应用](https://www.kdnuggets.com/building-data-pipelines-to-create-apps-with-large-language-models)'
 - en: '[Building Predictive Models: Logistic Regression in Python](https://www.kdnuggets.com/building-predictive-models-logistic-regression-in-python)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建预测模型：Python 中的逻辑回归](https://www.kdnuggets.com/building-predictive-models-logistic-regression-in-python)'
 - en: '[Step-by-Step Tutorial to Building Your First Machine Learning Model](https://www.kdnuggets.com/step-by-step-tutorial-to-building-your-first-machine-learning-model)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[逐步教程：构建你的第一个机器学习模型](https://www.kdnuggets.com/step-by-step-tutorial-to-building-your-first-machine-learning-model)'
