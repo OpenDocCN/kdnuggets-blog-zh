@@ -1,425 +1,666 @@
 - en: Why and How to Use Dask with Big Data
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 为什么以及如何使用Dask处理大数据
 - en: 原文：[https://www.kdnuggets.com/2020/04/dask-big-data.html](https://www.kdnuggets.com/2020/04/dask-big-data.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/04/dask-big-data.html](https://www.kdnuggets.com/2020/04/dask-big-data.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Admond Lee](https://twitter.com/admond1994), Data Scientist, MicronTech.**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Admond Lee](https://twitter.com/admond1994)，数据科学家，MicronTech提供。**'
 - en: '![](../Images/9bcb01535e3669de38aa8ba44b95a5a3.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9bcb01535e3669de38aa8ba44b95a5a3.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '*[Dask](https://dask.org/)*'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[Dask](https://dask.org/)*'
 - en: Being a data scientist, [Pandas](https://pandas.pydata.org/) is one of the best
     tools for data cleaning and analysis used in Python.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为数据科学家，[Pandas](https://pandas.pydata.org/)是Python中用于数据清理和分析的最佳工具之一。
 - en: It’s *seriously *a game-changer when it comes to cleaning, transforming, manipulating,
     and analyzing data.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在数据清理、转换、操作和分析方面，它*确实是*一个游戏规则改变者。
 - en: No doubt about it.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 毫无疑问。
 - en: In fact, I’ve even created my own [toolbox for data cleaning](https://towardsdatascience.com/the-simple-yet-practical-data-cleaning-codes-ad27c4ce0a38) using
     Pandas. The toolbox is nothing but a compilation of common tricks to deal with
     messy data with Pandas.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，我甚至使用Pandas创建了自己的[数据清理工具箱](https://towardsdatascience.com/the-simple-yet-practical-data-cleaning-codes-ad27c4ce0a38)。这个工具箱不过是处理凌乱数据的常用技巧的汇编。
 - en: My Love-Hate Relationship with Pandas
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 我与Pandas的爱恨关系
 - en: Don’t get me wrong.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 别误解我的意思。
 - en: Pandas is great. It’s powerful.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas很棒。它很强大。
 - en: '![](../Images/4e8836a0083d05b8bfd63f01eb32c32a.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4e8836a0083d05b8bfd63f01eb32c32a.png)'
 - en: '*[Stack Overflow Traffic to Questions about Selected Python Packages](https://www.kdnuggets.com/2019/11/speed-up-pandas-4x.html)*'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[Stack Overflow 对选择的Python包的流量](https://www.kdnuggets.com/2019/11/speed-up-pandas-4x.html)*'
 - en: It’s still one of the most popular data science tools for data cleaning and
     analytics.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 它仍然是最受欢迎的数据科学工具之一，用于数据清理和分析。
 - en: However, after being in the data science field for some time, the data volume
     that I’m dealing with increases from 10MB, 10GB, 100GB, to 500GB, or sometimes
     even more than that.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，随着在数据科学领域的时间增长，我处理的数据量从10MB、10GB、100GB，增加到500GB，有时甚至更多。
 - en: My PC either suffered** low performance or long runtime** due to the inefficient
     local memory usage for data that was larger than 100GB.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 我的PC由于局部内存对大于100GB数据的低效使用，遭遇了**低性能或长时间运行**的问题。
 - en: That was the time when I realized Pandas wasn’t initially designed for data
     at large scales.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 那时我意识到Pandas最初并不是为大规模数据设计的。
 - en: That was the time when I realized the **stark difference between large data
     and big data**.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 那时我意识到**大数据和巨大数据之间的明显差异**。
 - en: 'A famous joke by Prof. Dan Ariely:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: Prof. Dan Ariely的一个著名笑话：
 - en: '![](../Images/d1a834ce43eb362e3546f3cac276832b.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d1a834ce43eb362e3546f3cac276832b.png)'
 - en: '*[(Source)](https://www.facebook.com/dan.ariely/posts/904383595868)*'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[(来源)](https://www.facebook.com/dan.ariely/posts/904383595868)*'
 - en: The word large and big are in themselves “relative,” and in my humble opinion,
     large data is data sets that are less than 100GB.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: “大”和“巨大”这两个词本身就是“相对的”，在我看来，大数据是少于100GB的数据集。
 - en: Now, Pandas is very efficient with small data (usually from 100MB up to 1GB),
     and performance is rarely a concern.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，Pandas在处理小数据（通常是100MB到1GB之间）时非常高效，性能很少成为问题。
 - en: But when you have more data that’s way larger than your local [RAM](https://en.wikipedia.org/wiki/Random-access_memory) (say
     100GB), you can either still use [Pandas to handle data with some tricks](https://towardsdatascience.com/why-and-how-to-use-pandas-with-large-data-9594dda2ea4c) to
     a certain extent or choose a better tool — in this case, Dask.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 但当你的数据量远大于本地 [RAM](https://en.wikipedia.org/wiki/Random-access_memory)（例如 100GB）时，你可以选择使用
+    [Pandas 处理数据的一些技巧](https://towardsdatascience.com/why-and-how-to-use-pandas-with-large-data-9594dda2ea4c)
+    在一定程度上处理，或者选择更好的工具——在这种情况下是 Dask。
 - en: This time, I chose the latter.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 这次，我选择了后者。
 - en: Why Dask works like MAGIC
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么 Dask 如同魔法般有效
 - en: To some of us, [Dask](https://dask.org/) might be something that you’re already
     familiar with.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于我们中的一些人来说，[Dask](https://dask.org/) 可能是你已经熟悉的东西。
 - en: But to most aspiring data scientists or people who just got started in data
     science, Dask might sound a little bit foreign.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 但对大多数有志的数据科学家或刚刚入门的数据科学领域的人来说，Dask 可能听起来有点陌生。
 - en: And this is perfectly fine.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 这完全没问题。
 - en: In fact, I didn’t get to know Dask until I faced the real limitation of Pandas.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，直到我遇到 Pandas 的真正局限性，我才了解 Dask。
 - en: '*Keep in mind that Dask is ****not a necessity**** if your data volume is sufficiently
     low and can fit into your PC’s memory space.*'
+  id: totrans-38
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*请记住，如果你的数据量足够小且可以容纳在你计算机的内存空间中，那么 Dask 就****不是必需的****。*'
 - en: So the question now is…
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以现在的问题是……
 - en: '*What’s Dask, and why Dask is better than Pandas to handle big data?*'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '*什么是 Dask，为什么 Dask 比 Pandas 更适合处理大数据？*'
 - en: '**Dask is popularly known as a Python parallel computing library**'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Dask 被广泛称为一个 Python 并行计算库**'
 - en: Through its parallel computing features, [Dask](https://docs.dask.org/en/latest/why.html) allows
     for rapid and efficient scaling of computation.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过其并行计算功能，[Dask](https://docs.dask.org/en/latest/why.html) 允许快速高效地扩展计算。
 - en: It provides an easy way to **handle large and big data** in Python with minimal
     extra effort beyond the regular Pandas workflow.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 它提供了一种简单的方法来 **处理大规模数据**，只需在常规 Pandas 工作流之外付出最小的额外努力。
 - en: In other words, Dask allows us to easily **scale out to clusters** to handle
     big data or **scale down to single computers** to handle large data through harnessing
     the full power of CPU/GPU, all beautifully integrated with Python code.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 换句话说，Dask 允许我们轻松地 **扩展到集群** 以处理大数据，或 **缩减到单台计算机** 以处理大数据，通过充分利用 CPU/GPU 的全部力量，所有这些都与
+    Python 代码完美集成。
 - en: Cool, isn’t it?
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 很酷，不是吗？
 - en: Think of Dask as an extension of Pandas in terms of **performance and scalability**.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 把 Dask 看作是 Pandas 在 **性能和可扩展性** 方面的扩展。
 - en: What’s even cooler is that you can switch between a Dask dataframe and Pandas
     dataframe to do any data transformation and operation on demand.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 更酷的是，你可以在 Dask 数据框和 Pandas 数据框之间切换，根据需要进行数据转换和操作。
 - en: How to use Dask with Big Data?
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何在大数据中使用 Dask？
 - en: Okay, enough of theory.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 好了，理论够多了。
 - en: It’s time to get our hands dirty.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是动手实践的时候了。
 - en: You can [install Dask](https://docs.dask.org/en/latest/install.html) and try
     that in your local PC to use your CPU/GPU.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以 [安装 Dask](https://docs.dask.org/en/latest/install.html) 并在你的本地 PC 上尝试使用你的
+    CPU/GPU。
 - en: '*But we’re talking about **big data** here, so let’s do something **different**.*'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '*但我们在这里讨论的是 **大数据**，所以让我们做一些 **不同的** 事情。*'
 - en: '*Let’s go **BIG**.*'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '*让我们做 **大** 的事。*'
 - en: Instead of taming the “beast” by scaling down to single computers, let’s discover
     the full power of the “beast” by **scaling out to clusters**, for **FREE**.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 与其通过缩减到单台计算机来驯服“巨兽”，不如通过 **扩展到集群** 来发现“巨兽”的全部力量，且 **免费**。
 - en: YES, I mean it.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 是的，我是认真的。
 - en: Understanding that setting up a cluster (AWS, for example) and connecting Jupyter
     notebook to the cloud can be a pain to some data scientists, especially for beginners
     in cloud computing, let’s use [Saturn Cloud](https://www.saturncloud.io/s/).
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 了解设置集群（例如 AWS）并将 Jupyter notebook 连接到云端可能对一些数据科学家，尤其是云计算初学者来说是一件麻烦事，我们可以使用 [Saturn
+    Cloud](https://www.saturncloud.io/s/)。
 - en: This is a new platform that I’ve been trying out recently.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我最近尝试的新平台。
 - en: Saturn Cloud is a managed data science and machine learning platform that automates
     DevOps and ML infrastructure engineering.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: Saturn Cloud 是一个托管的数据科学和机器学习平台，它自动化了 DevOps 和 ML 基础设施工程。
 - en: To my surprise, it uses **Jupyter** and **Dask** to **scale Python for big data** using
     the libraries we know and love (Numpy, Pandas, Scikit-Learn, etc.). It also leverages [Docker](https://www.docker.com/) and [Kubernetes](https://kubernetes.io/) so
     that your data science work is reproducible, shareable, and ready for production.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 令我惊讶的是，它使用 **Jupyter** 和 **Dask** 来 **扩展 Python 以处理大数据**，利用我们所熟知和喜爱的库（Numpy、Pandas、Scikit-Learn
+    等）。它还利用了 [Docker](https://www.docker.com/) 和 [Kubernetes](https://kubernetes.io/)，以确保你的数据科学工作是可重复的、可共享的，并且准备好投入生产。
 - en: There are three main types of Dask user interfaces, namely Array, Bag, and Dataframe.
     We’ll focus mainly on **Dask Dataframe** in the code snippets below, as this is
     what we mostly would be using for data cleaning and analytics as a data scientist.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask 用户界面主要有三种类型，即 Array、Bag 和 Dataframe。我们将主要关注 **Dask Dataframe**，因为在下面的代码片段中，这就是我们作为数据科学家主要用于数据清理和分析的工具。
 - en: '**1\. Read CSV files to Dask dataframe**'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**1. 将 CSV 文件读取到 Dask 数据框架**'
 - en: '[PRE0]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Dask dataframe is no different from Pandas dataframe in terms of normal files
     reading and data transformation, which makes it so attractive to data scientists,
     as you’ll see later.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask 数据框架在读取常规文件和数据转换方面与 Pandas 数据框架没有不同，这使得它对数据科学家非常有吸引力，正如你稍后将看到的那样。
 - en: Here we just read a single CSV file stored in [S3](https://aws.amazon.com/s3/).
     Since we just want to test out Dask dataframe, the file size is quite small, with
     541909 rows.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们只是读取了一个存储在[S3](https://aws.amazon.com/s3/)中的单个 CSV 文件。由于我们只想测试 Dask 数据框架，文件大小相当小，共有
+    541909 行。
 - en: '![](../Images/1ffbd600222b84f6a498fe17fa75daf5.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1ffbd600222b84f6a498fe17fa75daf5.png)'
 - en: '*Dask dataframe after reading CSV file.*'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '*读取 CSV 文件后的 Dask 数据框架。*'
 - en: '**NOTE:** We can also [read multiple files](http://docs.saturncloud.io/en/articles/3760116-read-public-data-from-s3-in-saturn) to
     the Dask dataframe in one line of code, regardless of the file size.'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意：** 我们也可以在一行代码中 [读取多个文件](http://docs.saturncloud.io/en/articles/3760116-read-public-data-from-s3-in-saturn)
+    到 Dask 数据框架中，无论文件大小。'
 - en: When we load up our data from the CSV, Dask will create a DataFrame that is [row-wise
     partitioned](https://docs.dask.org/en/latest/dataframe.html#design)  i.e. rows
     are grouped by an index value. That’s how Dask is able to load the data into memory
     on-demand and process it super fast —** it goes by partition**.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们从 CSV 中加载数据时，Dask 会创建一个 [按行分区](https://docs.dask.org/en/latest/dataframe.html#design)
+    的数据框架，即按索引值对行进行分组。Dask 就是通过这种方式按需将数据加载到内存中并超快处理——**它按分区处理。**
 - en: '![](../Images/0f4bc26f2f57535791451f615dd0f0bc.png)'
+  id: totrans-69
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0f4bc26f2f57535791451f615dd0f0bc.png)'
 - en: '*[Partitioning done by Dask](https://www.saturncloud.io/s/practical-guide-to-dask/).*'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[Dask 进行的分区](https://www.saturncloud.io/s/practical-guide-to-dask/)。*'
 - en: In our case, we see that the Dask dataframe has 2 partitions (this is because
     of the *blocksize* specified when reading CSV) with 8 tasks.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的例子中，我们看到 Dask 数据框架有 2 个分区（这是因为读取 CSV 时指定了 *blocksize*），有 8 个任务。
 - en: '**“Partitions”** here simply mean the number of Pandas dataframes split within
     the Dask dataframe.'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '**“分区”** 这里简单地指在 Dask 数据框架中拆分的 Pandas 数据框架的数量。'
 - en: The more partitions we have, the more tasks we will need for each computation.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 分区越多，每次计算所需的任务就越多。
 - en: '![](../Images/827cbad9e15a7841d1d4732d0c15ea78.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/827cbad9e15a7841d1d4732d0c15ea78.png)'
 - en: '*Dask dataframe structure.*'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Dask 数据框架结构。*'
 - en: '**2\. Use *compute() *to execute the operation**'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '**2. 使用 *compute()* 执行操作**'
 - en: Now that we’ve read the CSV file to Dask dataframe.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经将 CSV 文件读取到 Dask 数据框架中。
 - en: It is important to remember that, while Dask dataframe is very similar to Pandas
     dataframe, some differences do exist.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 重要的是要记住，虽然 Dask 数据框架与 Pandas 数据框架非常相似，但确实存在一些差异。
 - en: The main difference that I notice is this *compute* method in Dask dataframe.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 我注意到的主要区别是 Dask 数据框架中的 *compute* 方法。
 - en: '[PRE1]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Most Dask user interfaces are ***lazy***, meaning that **they don’t evaluate
     until you explicitly ask for a result **using the *compute *method.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 大多数 Dask 用户界面是 ***惰性*** 的，这意味着 **它们不会进行计算，直到你明确要求结果** 使用 *compute* 方法。
 - en: This is how we calculate the mean of the *UnitPrice *by adding *compute* method
     right after the *mean *method.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我们通过在 *mean* 方法后添加 *compute* 方法来计算 *UnitPrice* 平均值的方式。
 - en: '**3\. Check number of missing values for each column**'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '**3. 检查每列的缺失值数量**'
 - en: '[PRE2]'
+  id: totrans-84
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Similarly, if we want to check the number of missing values for each column,
     we need to add *compute *method.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样，如果我们想检查每列的缺失值数量，我们需要添加 *compute* 方法。
 - en: '**4\. Filter rows based on conditions**'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '**4. 根据条件筛选行**'
 - en: '[PRE3]'
+  id: totrans-87
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: During the data cleaning or Exploratory Data Analysis (EDA) process, we often
     need to filter rows based on certain conditions to understand the “story” behind
     the data.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 在数据清理或探索性数据分析（EDA）过程中，我们常常需要根据某些条件过滤行，以理解数据背后的“故事”。
 - en: We can do the exact operation as what we do in Pandas by just adding *compute *method.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们只需添加 *compute* 方法，就能进行与 Pandas 完全相同的操作。
 - en: And BOOM! We get the results!
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后 BOOM！我们得到结果了！
 - en: DEMO to create a Dask cluster & run Jupyter at scale with Python
+  id: totrans-91
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 创建 Dask 集群并在大规模运行 Jupyter 的 DEMO
 - en: Now that we’ve understood how to use Dask in general, it’s time to see how to [create
     a Dask cluster on Saturn Cloud](http://docs.saturncloud.io/en/articles/3652101-spin-up-dask-on-saturn) and
     run Python code in Jupyter at scale.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经了解了如何一般使用 Dask，接下来是如何 [在 Saturn Cloud 上创建 Dask 集群](http://docs.saturncloud.io/en/articles/3652101-spin-up-dask-on-saturn)
+    并在 Jupyter 中大规模运行 Python 代码。
 - en: I recorded a short video to show you exactly how to do the setup and run Python
     code in a Dask cluster in minutes.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 我录制了一个简短的视频，展示如何在几分钟内设置 Dask 集群并运行 Python 代码。
 - en: '*How to create a Dask cluster and run Jupyter Notebook on Saturn Cloud*'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '*如何在 Saturn Cloud 上创建 Dask 集群并运行 Jupyter Notebook*'
 - en: Final Thoughts
+  id: totrans-95
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最后的思考
 - en: Thank you for reading.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢阅读。
 - en: In terms of functionalities, Pandas still wins.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 在功能方面，Pandas 依然胜出。
 - en: In terms of performance and scalability, Dask is ahead of Pandas.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 在性能和可扩展性方面，Dask 优于 Pandas。
 - en: In my opinion, if you have data that’s larger than a few GB (comparable to your
     RAM), go with Dask for the purpose of performance and scalability.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我看来，如果你的数据超过了几 GB（与 RAM 相当），为了性能和可扩展性，建议使用 Dask。
 - en: If you want to create a Dask cluster in minutes and run your Python code at
     scale, I highly recommend you to get the [community edition of Saturn Cloud here
     for FREE](http://bit.ly/saturn-cloud-community-edition).
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想在几分钟内创建 Dask 集群并大规模运行你的 Python 代码，我强烈推荐你 [在这里免费获取 Saturn Cloud 的社区版](http://bit.ly/saturn-cloud-community-edition)。
 - en: '[Original](https://towardsdatascience.com/why-and-how-to-use-dask-with-big-data-746e34dac7c3).
     Reposted with permission.'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/why-and-how-to-use-dask-with-big-data-746e34dac7c3)。已获许可转载。'
 - en: '**Bio:** [Admond Lee](https://www.admondlee.com/) is now in the mission of
     making data science accessible to everyone. He is helping companies and digital
     marketing agencies achieve marketing ROI with actionable insights through innovative
     data-driven approaches. With his expertise in advanced social analytics and machine
     learning, Admond aims to bridge the gaps between digital marketing and data science.'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：** [Admond Lee](https://www.admondlee.com/) 目前致力于让数据科学对每个人都变得可及。他帮助公司和数字营销机构通过创新的数据驱动方法实现营销投资回报。他在高级社会分析和机器学习方面的专长旨在弥合数字营销和数据科学之间的差距。'
 - en: '**Related:**'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[K-means Clustering with Dask: Image Filters for Cat Pictures](https://www.kdnuggets.com/2019/06/k-means-clustering-dask-image-filters.html)'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Dask 的 K-means 聚类：猫咪图片的图像滤镜](https://www.kdnuggets.com/2019/06/k-means-clustering-dask-image-filters.html)'
 - en: '[Five Interesting Data Engineering Projects](https://www.kdnuggets.com/2020/03/data-engineering-projects.html)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[五个有趣的数据工程项目](https://www.kdnuggets.com/2020/03/data-engineering-projects.html)'
 - en: '[The Data Science Puzzle — 2020 Edition](https://www.kdnuggets.com/2020/02/data-science-puzzle-2020-edition.html)'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学难题 — 2020 年版](https://www.kdnuggets.com/2020/02/data-science-puzzle-2020-edition.html)'
 - en: More On This Topic
+  id: totrans-107
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[3 Reasons Why Data Scientists Should Use LightGBM](https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html)'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家为何应该使用 LightGBM 的 3 个理由](https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html)'
 - en: '[3 Reasons Why You Should Use Linear Regression Models Instead of…](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为何你应该使用线性回归模型而不是…的 3 个理由](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)'
 - en: '[4 Reasons Why You Shouldn’t Use Machine Learning](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你不应该使用机器学习的 4 个理由](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)'
 - en: '[Why Use k-fold Cross Validation?](https://www.kdnuggets.com/2022/07/kfold-cross-validation.html)'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为何使用 k-fold 交叉验证？](https://www.kdnuggets.com/2022/07/kfold-cross-validation.html)'
 - en: '[Why the Newest LLMs use a MoE (Mixture of Experts) Architecture](https://www.kdnuggets.com/why-the-newest-llms-use-a-moe-mixture-of-experts-architecture)'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为何最新的 LLM 使用 MoE（专家混合）架构](https://www.kdnuggets.com/why-the-newest-llms-use-a-moe-mixture-of-experts-architecture)'
 - en: '[Big Data Analytics: Why Is It So Crucial For Business Intelligence?](https://www.kdnuggets.com/2023/06/big-data-analytics-crucial-business-intelligence.html)'
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[大数据分析：为何它对商业智能如此关键？](https://www.kdnuggets.com/2023/06/big-data-analytics-crucial-business-intelligence.html)'
