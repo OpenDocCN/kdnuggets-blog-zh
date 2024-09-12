@@ -1,17 +1,25 @@
 - en: Some Things Uber Learned from Running Machine Learning at Scale
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 优步在大规模运行机器学习中学到的一些东西
 - en: 原文：[https://www.kdnuggets.com/2020/07/some-things-uber-learned-machine-learning-scale.html](https://www.kdnuggets.com/2020/07/some-things-uber-learned-machine-learning-scale.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/07/some-things-uber-learned-machine-learning-scale.html](https://www.kdnuggets.com/2020/07/some-things-uber-learned-machine-learning-scale.html)
 - en: '[comments](#comments)![Figure](../Images/eb8f7a43eb80f9a018d9a21faae73c47.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)![图](../Images/eb8f7a43eb80f9a018d9a21faae73c47.png)'
 - en: Source: [https://eng.uber.com/scaling-michelangelo/](https://eng.uber.com/scaling-michelangelo/)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '来源: [https://eng.uber.com/scaling-michelangelo/](https://eng.uber.com/scaling-michelangelo/)'
 - en: Uber has been one of the most active contributors to open source machine learning
     technologies in the last few years. While companies like Google or Facebook have
     focused their contributions in new deep learning stacks like TensorFlow, Caffe2
@@ -22,58 +30,80 @@
     the lessons and guidance from Uber becomes even more valuable for machine learning
     practitioners (I certainly learned a lot and have regularly written about Uber’s
     efforts).
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在过去几年中，优步一直是开源机器学习技术最活跃的贡献者之一。虽然像谷歌或脸书这样的公司将贡献重点放在了新的深度学习技术栈如TensorFlow、Caffe2或PyTorch上，但优步工程团队确实专注于在现实世界中大规模构建机器学习的工具和最佳实践。像[米开朗基罗](https://eng.uber.com/michelangelo/)、[Horovod](https://github.com/uber/horovod)、[PyML](https://towardsdatascience.com/uber-introduces-pyml-their-secret-weapon-for-rapid-machine-learning-development-c0f40009a617)、[Pyro](http://pyro.ai/)等技术是优步对机器学习生态系统贡献的一些例子。由于只有少数公司开发大规模机器学习解决方案，优步的经验和指导对机器学习从业者来说变得更加宝贵（我确实学到了很多，并且经常写关于优步努力的文章）。
 - en: Recently, [the Uber engineering team published an evaluation of the first three
     years of operations of the Michelangelo platform](https://eng.uber.com/scaling-michelangelo/).
     If we remove all the Michelangelo specifics, Uber’s post contains a few non-obvious,
     valuable lessons for organizations starting in their machine learning journey.
     I am going to try to summarize some of those key takeaways in a more generic way
     that can be applicable to any mainstream machine learning scenario.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 最近，[优步工程团队发布了米开朗基罗平台前三年的运营评估](https://eng.uber.com/scaling-michelangelo/)。如果我们去除所有米开朗基罗的具体细节，优步的帖子包含了对开始机器学习之旅的组织者来说几条非显而易见的宝贵经验。我将尝试以更通用的方式总结一些关键收获，以适用于任何主流的机器学习场景。
 - en: What is Michelangelo?
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 米开朗基罗是什么？
 - en: '[Michelangelo](https://eng.uber.com/michelangelo/) is the center piece of the
     Uber machine learning stack. Conceptually, Michelangelo can be seen as a ML-as-a-Service
     platform for internal ML workloads at Uber. From the functional standpoint, Michelangelo
     automates different aspects of the lifecycle of ML models allowing different Uber’s
     engineering teams to build, deploy, monitor and operate ML models at scale. Specifically,
     Michelangelo abstracts the lifecycle of a ML models in a very sophisticated workflow:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '[米开朗基罗](https://eng.uber.com/michelangelo/)是优步机器学习技术栈的核心部分。从概念上看，米开朗基罗可以视作一个针对优步内部机器学习工作负载的机器学习即服务平台。从功能角度讲，米开朗基罗自动化了机器学习模型生命周期的不同方面，使得优步的各个工程团队能够在规模上构建、部署、监控和操作机器学习模型。具体而言，米开朗基罗在一个非常复杂的工作流中抽象了机器学习模型的生命周期：'
 - en: '![](../Images/502e122776a3767aa08fe7cf9b2f4374.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/502e122776a3767aa08fe7cf9b2f4374.png)'
 - en: The architecture behind Michelangelo uses a modern but complex stack based on
     technologies such as [HDFS](http://hadoop.apache.org/), [Spark](https://spark.apache.org/), [Samza](http://samza.apache.org/), [Cassandra](http://cassandra.apache.org/), [MLLib](https://spark.apache.org/mllib/), [XGBoost](https://github.com/dmlc/xgboost),
     and [TensorFlow](https://www.tensorflow.org/).
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 米开朗基罗的架构使用了现代但复杂的技术栈，基于如[HDFS](http://hadoop.apache.org/)、[Spark](https://spark.apache.org/)、[Samza](http://samza.apache.org/)、[Cassandra](http://cassandra.apache.org/)、[MLLib](https://spark.apache.org/mllib/)、[XGBoost](https://github.com/dmlc/xgboost)和[TensorFlow](https://www.tensorflow.org/)等技术。
 - en: '![](../Images/c548e6ba1b27b3e378fd9ba43bbe4650.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c548e6ba1b27b3e378fd9ba43bbe4650.png)'
 - en: Michelangelo powers hundreds of machine learning scenarios across different
     divisions at Uber. For instance, Uber Eats uses machine learning models running
     on Michelangelo to rank restaurant recommendations. Similarly, the incredibly
     exact estimated time of arrivals(ETA) in the Uber app are calculated using incredibly
     sophisticated machine learning models running on Michelangelo that estimate ETAs
     segment-by-segment.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: Michelangelo 支持 Uber 不同部门中的数百种机器学习场景。例如，Uber Eats 使用在 Michelangelo 上运行的机器学习模型来排名餐馆推荐。类似地，Uber
+    应用中的精确到达时间（ETA）是通过在 Michelangelo 上运行的非常复杂的机器学习模型计算的，这些模型逐段估算 ETA。
 - en: To enable this level of scalability across dozens of data science teams and
     hundreds of models, Michelangelo needs to provide a very flexible and scalable
     architecture as well as the corresponding engineering process. The first version
     of Michelangelo was deployed in 2015 and three years and hundreds of machine learning
     models later, there are a few important lessons Uber has learned.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了在数十个数据科学团队和数百个模型之间实现这种级别的可扩展性，Michelangelo 需要提供一个非常灵活和可扩展的架构以及相应的工程流程。Michelangelo
+    的第一个版本于 2015 年部署，在三年和数百个机器学习模型之后，Uber 发现了一些重要的经验教训。
 - en: 1-Training Requires its Own Infrastructure
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1-训练需要独立的基础设施
 - en: If you are building a single model, you are tempted to leverage the same infrastructure
     and tooling for training and development. If you are building a hundred models,
     that approach doesn’t work. Uber’s Michelangelo, uses a proprietary toolset called
@@ -81,12 +111,18 @@
     large GPU clusters and different machine learning toolkits. Beyond the consistent
     infrastructure, Michelangelo’s DSW abstracts common tasks of machine learning
     training processes such as data transformation, model composition, etc.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你正在构建一个模型，你可能会倾向于利用相同的基础设施和工具进行训练和开发。如果你在构建一百个模型，这种方法就不适用了。Uber 的 Michelangelo
+    使用了一种名为 [Data Science Workbench (DSW)](https://eng.uber.com/dsw/) 的专有工具集，在大规模
+    GPU 集群和不同的机器学习工具包上训练模型。除了统一的基础设施外，Michelangelo 的 DSW 抽象了机器学习训练过程中常见的任务，如数据转换、模型组合等。
 - en: 2-Models Need to be Monitored
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2-模型需要监控
 - en: Paraphrasing one of my mentors in this space “models that make stupid predictions
     are worse than models than don’t predict at all”. Even models that performed impeccably
     against training and evaluation data can start making dumb predictions when faced
@@ -95,24 +131,34 @@
     configures machine learning models to log predictions made in production and then
     compare them against actuals. This process produces a series of accuracy metrics
     that can be used to evaluate the performance of the models.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 用我在这一领域的一位导师的话来说：“做出愚蠢预测的模型比完全不预测的模型更糟糕。” 即使是对训练和评估数据表现完美的模型，在面对新的数据集时也可能开始做出愚蠢的预测。从这个角度来看，模型监控和仪器化是实际机器学习解决方案的关键组成部分。Uber
+    Michelangelo 配置机器学习模型以记录生产中的预测，然后将其与实际结果进行比较。这个过程生成一系列准确性指标，可用于评估模型的性能。
 - en: 3-Data is the Hardest Thing to Get Right
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3-数据是最难正确处理的
 - en: In machine learning solutions, data engineers spend a considerable percentage
     of their time running extraction and transformation routines over datasets to
     select features that are then used by training and production models. Michelangelo
     approach to streamline this process was to build a common feature store that allow
     different teams to share high quality features across their models. Similarly,
     Michelangelo provides monitoring tools to evaluate specific features over time.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 在机器学习解决方案中，数据工程师花费相当一部分时间在数据集上运行提取和转换例程，以选择特征，然后这些特征被用于训练和生产模型。Michelangelo
+    精简这一过程的方法是构建一个公共特征库，允许不同团队在其模型中共享高质量的特征。类似地，Michelangelo 提供监控工具，以随时间评估特定特征。
 - en: 4-Machine Learning Should be Measured as a Software Engineering Process
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 4-机器学习应被视为软件工程过程来衡量
 - en: I know it sounds trivial but it’s far from it. Most organizations, orchestrated
     their machine learning efforts separated from other software engineering tasks.
     It is true that is hard to adapt traditional agile or waterfall processes to machine
@@ -120,8 +166,11 @@
     are relevant in the machine learning world. Uber enforces the view that machine
     learning is a software engineering process and has provisioned Michelangelo with
     a series of tools to enforce the correct lifecycle of machine learning models.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 我知道这听起来很简单，但事实远非如此。大多数组织将他们的机器学习工作与其他软件工程任务分开处理。虽然确实很难将传统的敏捷或瀑布流程适应于机器学习解决方案，但有很多软件工程实践在机器学习领域依然适用。Uber
+    强调机器学习是一个软件工程过程，并为 Michelangelo 配备了一系列工具，以确保机器学习模型的正确生命周期。
 - en: Versioning, testing or deployment are some of the software engineering aspects
     that are rigorously enforced by Uber’s Michelangelo. For instance, once Michelangelo
     recognizes that a model is like a compiled software library, it keeps track of
@@ -129,12 +178,17 @@
     the same way that you version control the library’s source code. Similarly, Michelangelo
     runs comprehensive test suites evaluates models against holdout datasets before
     they are deployed to production trying to validate their correct functioning.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 版本控制、测试或部署是 Uber 的 Michelangelo 在软件工程方面严格执行的一些方面。例如，一旦 Michelangelo 认为模型就像一个已编译的软件库，它就会以严格、版本控制的系统跟踪模型的训练配置，就像你对库的源代码进行版本控制一样。类似地，Michelangelo
+    运行全面的测试套件，在将模型部署到生产环境之前，对其进行对比数据集评估，以验证其正确性。
 - en: 5-Automating Optimization
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 5-自动化优化
 - en: Fine tuning and optimizing hyperparameters is a never-ending task in machine
     learning solutions. Many times, data science engineers spend more time finding
     the right hyperparameter configuration than building the model itself. To address
@@ -144,8 +198,12 @@
     Michelangelo’s AutoTune is to use machine learning to optimize machine learning
     models allowing data science engineers to focus more time in the implementation
     of the models instead of their optimization.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 微调和优化超参数是机器学习解决方案中永无止境的任务。许多时候，数据科学工程师花费在寻找正确的超参数配置上的时间，比实际构建模型的时间还要多。为了解决这个问题，Uber
+    的 Michelangelo 推出了一个名为 AutoTune 的优化即服务工具，它使用最先进的黑箱贝叶斯优化算法，更高效地搜索最佳的超参数集合。Michelangelo
+    的 AutoTune 的理念是利用机器学习来优化机器学习模型，使数据科学工程师能更多地集中精力于模型的实现，而不是优化工作。
 - en: From a machine learning perspective, Uber can be considered one of the richest
     lab environments in the world. The scale and sophistication of the tasks tackled
     by Uber’s data scientists is second to none in the industry. The first three years
@@ -153,78 +211,120 @@
     machine learning solutions is still an incredibly complicated effort. The lessons
     learned from Michelangelo are an incredible source of insights for organization
     embarking in their machine learning journey.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 从机器学习的角度来看，Uber 可以被认为是世界上最富有的实验室环境之一。Uber 数据科学家所处理的任务的规模和复杂性在业内无与伦比。Michelangelo
+    运行的前三年无疑表明，实施大规模的机器学习解决方案仍然是一个极其复杂的工作。Michelangelo 的经验教训为那些踏上机器学习之旅的组织提供了宝贵的见解。
 - en: '[Original](https://medium.com/@jrodthoughts/some-things-uber-learned-from-running-machine-learning-at-scale-70dccdfb944d).
     Reposted with permission.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/@jrodthoughts/some-things-uber-learned-from-running-machine-learning-at-scale-70dccdfb944d)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Uber’s Ludwig is an Open Source Framework for Low-Code Machine Learning](/2020/06/uber-ludwig-open-source-framework-machine-learning.html)'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Uber 的 Ludwig 是一个开源的低代码机器学习框架](/2020/06/uber-ludwig-open-source-framework-machine-learning.html)'
 - en: '[Learning by Forgetting: Deep Neural Networks and the Jennifer Aniston Neuron](/2020/06/learning-forgetting-deep-neural-networks-jennifer-aniston.html)'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[遗忘学习：深度神经网络与詹妮弗·安妮斯顿神经元](/2020/06/learning-forgetting-deep-neural-networks-jennifer-aniston.html)'
 - en: '[Google Unveils TAPAS, a BERT-Based Neural Network for Querying Tables Using
     Natural Language](/2020/05/google-tapas-bert-neural-network-querying-natural-language.html)'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[谷歌发布 TAPAS，一种基于 BERT 的神经网络，用于通过自然语言查询表格](/2020/05/google-tapas-bert-neural-network-querying-natural-language.html)'
 - en: '* * *'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-31
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织IT需求'
 - en: '* * *'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Things Aren''t Always Normal: Some of the "Other" Distributions](https://www.kdnuggets.com/2023/01/things-arent-always-normal-distributions.html)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[事情并非总是正常的：一些“其他”分布](https://www.kdnuggets.com/2023/01/things-arent-always-normal-distributions.html)'
 - en: '[It''s alive! Build your first robots with Python and some cheap,…](https://www.kdnuggets.com/2023/06/manning-build-first-robots-python-cheap-basic-components.html)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[它活过来了！用Python和一些便宜的组件构建您的第一个机器人](https://www.kdnuggets.com/2023/06/manning-build-first-robots-python-cheap-basic-components.html)'
 - en: '[I Used ChatGPT (Every Day) for 5 Months. Here Are Some Hidden Gems…](https://www.kdnuggets.com/2023/07/used-chatgpt-every-day-5-months-hidden-gems-change-life.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[我使用ChatGPT（每天）五个月了。这里有一些隐藏的宝藏……](https://www.kdnuggets.com/2023/07/used-chatgpt-every-day-5-months-hidden-gems-change-life.html)'
 - en: '[Some Kick Ass Prompt Engineering Techniques to Boost our LLM Models](https://www.kdnuggets.com/some-kick-ass-prompt-engineering-techniques-to-boost-our-llm-models)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一些提升我们LLM模型的绝佳提示工程技术](https://www.kdnuggets.com/some-kick-ass-prompt-engineering-techniques-to-boost-our-llm-models)'
 - en: '[What I Learned From Using ChatGPT for Data Science](https://www.kdnuggets.com/what-i-learned-from-using-chatgpt-for-data-science)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[我从使用ChatGPT进行数据科学中学到了什么](https://www.kdnuggets.com/what-i-learned-from-using-chatgpt-for-data-science)'
 - en: '[How to Efficiently Scale Data Science Projects with Cloud Computing](https://www.kdnuggets.com/2023/05/efficiently-scale-data-science-projects-cloud-computing.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何利用云计算高效扩展数据科学项目](https://www.kdnuggets.com/2023/05/efficiently-scale-data-science-projects-cloud-computing.html)'

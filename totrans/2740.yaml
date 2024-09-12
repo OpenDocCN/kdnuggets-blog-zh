@@ -1,122 +1,179 @@
 - en: Deploy Machine Learning Pipeline on AWS Fargate
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在 AWS Fargate 上部署机器学习管道
 - en: 原文：[https://www.kdnuggets.com/2020/07/deploy-machine-learning-pipeline-aws-fargate.html](https://www.kdnuggets.com/2020/07/deploy-machine-learning-pipeline-aws-fargate.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/07/deploy-machine-learning-pipeline-aws-fargate.html](https://www.kdnuggets.com/2020/07/deploy-machine-learning-pipeline-aws-fargate.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Moez Ali](https://www.linkedin.com/in/profile-moez/), Founder & Author
     of PyCaret**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Moez Ali](https://www.linkedin.com/in/profile-moez/)，PyCaret 创始人兼作者**'
 - en: '![](../Images/befec28a20f24190d036356e9f022bcc.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/befec28a20f24190d036356e9f022bcc.png)'
 - en: RECAP
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总结
 - en: In our [last post](https://towardsdatascience.com/deploy-machine-learning-model-on-google-kubernetes-engine-94daac85108b) on
     deploying a machine learning pipeline in the cloud, we demonstrated how to develop
     a machine learning pipeline in PyCaret, containerize it with Docker and serve
     it as a web application using Google Kubernetes Engine. If you haven’t heard about
     PyCaret before, please read this [announcement](https://towardsdatascience.com/announcing-pycaret-an-open-source-low-code-machine-learning-library-in-python-4a1f1aad8d46) to
     learn more.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们 [上一篇文章](https://towardsdatascience.com/deploy-machine-learning-model-on-google-kubernetes-engine-94daac85108b) 中，我们展示了如何在云中开发机器学习管道，使用
+    PyCaret 容器化，并通过 Google Kubernetes Engine 作为 Web 应用进行服务。如果你以前没有听说过 PyCaret，请阅读这个 [公告](https://towardsdatascience.com/announcing-pycaret-an-open-source-low-code-machine-learning-library-in-python-4a1f1aad8d46) 以了解更多。
 - en: In this tutorial, we will use the same machine learning pipeline and Flask app
     that we built and deployed previously. This time we will demonstrate how to containerize
     and deploy a machine learning pipeline serverless using AWS Fargate.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将使用之前构建和部署的相同机器学习管道和 Flask 应用。这一次，我们将演示如何使用 AWS Fargate 将机器学习管道容器化并进行无服务器部署。
 - en: ???? Learning Goals of this Tutorial
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 本教程的学习目标
 - en: What is a Container? What is Docker? What is Kubernetes?
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 什么是容器？什么是 Docker？什么是 Kubernetes？
 - en: What is Amazon Elastic Container Service (ECS)?
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 什么是 Amazon Elastic Container Service (ECS)？
 - en: What are AWS Fargate and serverless deployment?
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 什么是 AWS Fargate 和无服务器部署？
 - en: Build and push a Docker image onto Amazon Elastic Container Registry.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 构建并推送 Docker 镜像到 Amazon Elastic Container Registry。
 - en: Create and execute a task definition using AWS-managed infrastructure i.e. AWS
     Fargate.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 AWS 管理的基础设施（即 AWS Fargate）创建并执行任务定义。
 - en: See a web app in action that uses a trained machine learning pipeline to predict
     new data points in real-time.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 看到一个实际运行的 Web 应用，它使用训练好的机器学习管道实时预测新数据点。
 - en: This tutorial will cover the entire workflow starting from building a docker
     image locally, uploading it onto Amazon Elastic Container Registry, creating a
     cluster and then defining and executing task using AWS-managed infrastructure
     i.e. AWS Fargate.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程将涵盖从本地构建 Docker 镜像、将其上传到 Amazon Elastic Container Registry、创建集群，然后使用 AWS
+    管理的基础设施（即 AWS Fargate）定义和执行任务的整个工作流程。
 - en: 'In the past, we have covered deployment on other cloud platforms such as Azure
     and Google. If you are interested in learning more about those, you can read the
     following stories:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在过去，我们已经涵盖了在其他云平台如 Azure 和 Google 上的部署。如果你对了解这些感兴趣，可以阅读以下故事：
 - en: '[Deploy Machine Learning Pipeline on Google Kubernetes Engine](https://towardsdatascience.com/deploy-machine-learning-model-on-google-kubernetes-engine-94daac85108b)'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Google Kubernetes Engine 上部署机器学习管道](https://towardsdatascience.com/deploy-machine-learning-model-on-google-kubernetes-engine-94daac85108b)'
 - en: '[Deploy Machine Learning Pipeline on AWS Web Service](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-cloud-using-docker-container-bec64458dc01)'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 AWS Web 服务上部署机器学习管道](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-cloud-using-docker-container-bec64458dc01)'
 - en: '[Build and deploy your first machine learning web app on Heroku PaaS](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99)'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Heroku PaaS 上构建并部署你的第一个机器学习 Web 应用](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99)'
 - en: ???? Toolbox for this tutorial
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 本教程所需工具箱
 - en: PyCaret
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: PyCaret
 - en: '[PyCaret](https://www.pycaret.org/) is an open source, low-code machine learning
     library in Python that is used to train and deploy machine learning pipelines
     and models into production. PyCaret can be installed easily using pip.'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PyCaret](https://www.pycaret.org/) 是一个开源的、低代码的 Python 机器学习库，用于训练和部署机器学习管道和模型到生产环境中。PyCaret
+    可以通过 pip 轻松安装。'
 - en: '[PRE0]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Flask
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Flask
 - en: '[Flask](https://flask.palletsprojects.com/en/1.1.x/) is a framework that allows
     you to build web applications. A web application can be a commercial website,
     blog, e-commerce system, or an application that generates predictions from data
     provided in real-time using trained models. If you don’t have Flask installed,
     you can use pip to install it.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Flask](https://flask.palletsprojects.com/en/1.1.x/) 是一个允许你构建web应用程序的框架。web应用程序可以是商业网站、博客、电子商务系统，或是利用训练模型从实时提供的数据中生成预测的应用程序。如果你还没有安装Flask，你可以使用pip来安装它。'
 - en: Docker Toolbox for Windows 10 Home
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Docker Toolbox for Windows 10 Home
 - en: '[Docker](https://www.docker.com/)is a tool designed to make it easier to create,
     deploy, and run applications by using containers. Containers are used to package
     up an application with all of its necessary components, such as libraries and
@@ -124,833 +181,1291 @@
     before, this tutorial also covers the installation of Docker Toolbox (legacy)
     on **Windows 10 Home**. In the [previous tutorial](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-cloud-using-docker-container-bec64458dc01) we
     covered how to install Docker Desktop on **Windows 10 Pro edition**.'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Docker](https://www.docker.com/) 是一个旨在通过使用容器简化应用程序创建、部署和运行的工具。容器用于将应用程序与其所有必要组件（如库和其他依赖项）打包，并作为一个整体进行分发。如果你以前没有使用过Docker，本教程还涵盖了在**Windows
+    10 Home**上安装Docker Toolbox（遗留版）。在[前一教程](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-cloud-using-docker-container-bec64458dc01)中，我们讲解了如何在**Windows
+    10 Pro版**上安装Docker Desktop。'
 - en: Amazon Web Services (AWS)
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 亚马逊网络服务（AWS）
 - en: Amazon Web Services (AWS) is a comprehensive and broadly adopted cloud platform,
     offered by Amazon. It has over 175 fully-featured services from data centers globally.
     If you haven’t used AWS before, you can [sign-up](https://aws.amazon.com/) for
     a free account.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 亚马逊网络服务（AWS）是一个全面且广泛采用的云平台，由亚马逊提供。它在全球数据中心提供超过175种功能齐全的服务。如果你以前没有使用过AWS，你可以[注册](https://aws.amazon.com/)一个免费账户。
 - en: ✔️Let’s get started…..
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ✔️让我们开始吧……
 - en: What is a Container?
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是容器？
 - en: Before we get into implementation using AWS Fargate, let’s understand what a
     container is and why we would need one?
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们开始使用AWS Fargate进行实现之前，先来了解一下什么是容器，以及我们为什么需要它？
 - en: '![Figure](../Images/af20cef74cb4bc8bc10d4e8b3422f9e8.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/af20cef74cb4bc8bc10d4e8b3422f9e8.png)'
 - en: '[https://www.freepik.com/free-photos-vectors/cargo-ship](https://www.freepik.com/free-photos-vectors/cargo-ship)'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://www.freepik.com/free-photos-vectors/cargo-ship](https://www.freepik.com/free-photos-vectors/cargo-ship)'
 - en: Have you ever had the problem where your code works fine on your computer but
     when a friend tries to run the exact same code, it doesn’t work? If your friend
     is repeating the exact same steps, he or she should get the same results, right?
     The one-word answer to this is ***the environment*. **Your friend’s environment
     is different than yours.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 你是否曾遇到过这样的情况：你的代码在你的电脑上运行良好，但当朋友尝试运行完全相同的代码时，它却无法运行？如果你的朋友重复完全相同的步骤，他或她应该会得到相同的结果，对吧？这个一词答案就是***环境***。你朋友的环境与你的不同。
 - en: What does an environment include? → The programing language such as Python and
     all the libraries and dependencies with the exact versions using which application
     was built and tested.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 环境包括什么？→ 包括编程语言（如Python）以及构建和测试应用程序时使用的所有库和依赖项的确切版本。
 - en: 'If we can create an environment that we can transfer to other machines (for
     example: your friend’s computer or a cloud service provider like Google Cloud
     Platform), we can reproduce the results anywhere. Hence, ***a******container* **is
     a type of software that packages up an application and all its dependencies so
     the application runs reliably from one computing environment to another.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们能创建一个可以转移到其他机器的环境（例如：你朋友的电脑或像Google Cloud Platform这样的云服务提供商），我们就可以在任何地方重现结果。因此，***容器***
+    是一种软件类型，它打包了应用程序及其所有依赖项，使得应用程序能够在一个计算环境到另一个计算环境之间可靠运行。
 - en: What is Docker?
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是Docker？
 - en: Docker is a company that provides software (also called **Docker**) that allows
     users to build, run and manage containers. While Docker’s container are the most
     common, there are other less famous *alternatives* such as [LXD](https://linuxcontainers.org/lxd/introduction/) and [LXC](https://linuxcontainers.org/).
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: Docker是一家公司，提供名为**Docker**的软件，允许用户构建、运行和管理容器。虽然Docker的容器是最常见的，但也有其他不那么知名的*替代品*，如[LXD](https://linuxcontainers.org/lxd/introduction/)和[LXC](https://linuxcontainers.org/)。
 - en: '![](../Images/5d90553dcb766734cb933c344182dd46.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5d90553dcb766734cb933c344182dd46.png)'
 - en: Now that you theoretically understand what a container is and how Docker is
     used to containerize applications, let’s imagine a scenario where you have to
     run multiple containers across a fleet of machines to support an enterprise level
     machine learning application with varied workloads during day and night. This
     is pretty common for real-life and as simple as it may sound, it is a lot of work
     to do manually.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你在理论上理解了容器是什么以及 Docker 如何用于容器化应用程序，让我们设想一个场景，你需要在一组机器上运行多个容器，以支持一个企业级的机器学习应用程序，在白天和夜晚处理不同的工作负载。这在现实生活中相当常见，虽然听起来简单，但手动完成是非常繁重的工作。
 - en: You need to start the right containers at the right time, figure out how they
     can talk to each other, handle storage considerations, deal with failed containers
     or hardware and million other things!
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 你需要在正确的时间启动正确的容器，搞清楚它们如何互相通信，处理存储问题，应对失败的容器或硬件以及其他各种问题！
 - en: This entire process of managing hundreds and thousands of containers to keep
     the application up and running is known as **container orchestration**. Don’t
     get caught up in the technical details yet.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 管理数百个甚至数千个容器以保持应用程序正常运行的整个过程被称为 **容器编排**。现在不要被技术细节困住。
 - en: At this point, you must recognize that managing real-life applications require
     more than one container and managing all of the infrastructure to keep containers
     up and running is cumbersome, manual and an administrative burden.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 此时，你必须认识到管理实际应用程序需要多个容器，并且管理所有基础设施以保持容器运行是繁琐、手动且具有管理负担的。
 - en: This brings us to **Kubernetes**.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将我们引向 **Kubernetes**。
 - en: What is Kubernetes?
+  id: totrans-46
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是Kubernetes？
 - en: Kubernetes is an open-source system developed by Google in 2014 for managing
     containerized applications. In simple words, Kubernetes is a system for running
     and coordinating containerized applications across a cluster of machines.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: Kubernetes 是一个由 Google 于 2014 年开发的开源系统，用于管理容器化应用程序。简单来说，Kubernetes 是一个用于在一群机器上运行和协调容器化应用程序的系统。
 - en: '![Figure](../Images/b9545b2b3caa066aaaa3d8b48b56b861.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/b9545b2b3caa066aaaa3d8b48b56b861.png)'
 - en: Photo by [chuttersnap](https://unsplash.com/@chuttersnap?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 由 [chuttersnap](https://unsplash.com/@chuttersnap?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral) 拍摄的照片
 - en: While Kubernetes is an open-source system developed by Google, almost all major
     cloud service providers offer Kubernetes as a Managed Service. For example: **Amazon
     Elastic Kubernetes Service (EKS) **offered by Amazon**, Google Kubernetes Engine
     (GKE) **offered by Google**, **and **Azure Kubernetes Service (AKS) **offered
     by Microsoft.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然 Kubernetes 是由 Google 开发的开源系统，但几乎所有主要的云服务提供商都将 Kubernetes 作为托管服务提供。例如：**亚马逊弹性
+    Kubernetes 服务 (EKS) 由亚马逊提供**，**Google Kubernetes 引擎 (GKE) 由 Google 提供**，**和**
+    Azure Kubernetes 服务 (AKS) **由微软提供**。
 - en: 'So far we have discussed and understood:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，我们已经讨论和理解了：
 - en: ✔️ A ***container***
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: ✔️ 一个 ***容器***
 - en: ✔️ Docker
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: ✔️ Docker
 - en: ✔️ Kubernetes
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: ✔️ Kubernetes
 - en: Before introducing AWS Fargate, there is only one thing left to discuss and
     that is Amazon’s own container orchestration service **Amazon Elastic Container
     Service (ECS).**
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 在介绍 AWS Fargate 之前，还剩下一件事要讨论，那就是亚马逊自家的容器编排服务 **Amazon Elastic Container Service
+    (ECS)**。
 - en: AWS Elastic Container Service (ECS)
+  id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: AWS 弹性容器服务 (ECS)
 - en: Amazon Elastic Container Service (Amazon ECS) is Amazon’s home-grown container
     orchestration platform. The idea behind ECS is similar to Kubernetes *(both of
     them are orchestration services)*.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 亚马逊弹性容器服务 (Amazon ECS) 是亚马逊自家研发的容器编排平台。ECS 的理念类似于 Kubernetes *(它们都是编排服务)*。
 - en: ECS is an AWS-native service, meaning that it is only possible to use on AWS
     infrastructure. On the other hand, **EKS** is based on Kubernetes, an open-source
     project which is available to users running on multi-cloud (AWS, GCP, Azure) and
     even On-Premise.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: ECS 是 AWS 原生服务，这意味着它只能在 AWS 基础设施上使用。另一方面，**EKS** 基于 Kubernetes，这是一个开源项目，适用于运行在多云（AWS、GCP、Azure）甚至本地环境中的用户。
 - en: Amazon also offers a Kubernetes based container orchestration service known
     as **Amazon Elastic Kubernetes Service (Amazon EKS). **Even though the purpose
     of ECS and EKS is pretty similar i.e. *orchestrating containerized applications*,
     there are quite a few differences in pricing, compatibility and security. There
     is no best answer and the choice of solution depends on the use-case.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 亚马逊还提供了一种基于 Kubernetes 的容器编排服务，称为 **Amazon Elastic Kubernetes Service (Amazon
+    EKS)。** 尽管 ECS 和 EKS 的目的非常相似，即 *编排容器化应用程序*，但在定价、兼容性和安全性方面存在一些差异。没有最佳答案，解决方案的选择取决于使用案例。
 - en: 'Irrespective of whichever container orchestration service you are using (ECS
     or EKS), there are two ways you can implement the underlying infrastructure:'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 无论你使用的是哪种容器编排服务（ECS 或 EKS），你可以通过两种方式来实现底层基础设施：
 - en: Manually manage the cluster and underlying infrastructure such as Virtual Machines
     / Servers / (also known as EC2 instances in AWS).
+  id: totrans-61
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 手动管理集群和底层基础设施，如虚拟机/服务器（也称为 AWS 中的 EC2 实例）。
 - en: Serverless — Absolutely no need to manage anything. Just upload the container
     and that’s it. ← **This is AWS Fargate.**
+  id: totrans-62
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 无服务器 — 完全不需要管理任何东西。只需上传容器即可。← **这就是 AWS Fargate。**
 - en: '![Figure](../Images/abcd4c3351fab4bc61ba41313d151563.png)'
+  id: totrans-63
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/abcd4c3351fab4bc61ba41313d151563.png)'
 - en: Amazon ECS underlying infrastructure
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: Amazon ECS 底层基础设施
 - en: AWS Fargate — serverless compute for containers
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: AWS Fargate — 为容器提供无服务器计算
 - en: AWS Fargate is a serverless compute engine for containers that works with both
     Amazon Elastic Container Service (ECS) and Amazon Elastic Kubernetes Service (EKS).
     Fargate makes it easy for you to focus on building your applications. Fargate
     removes the need to provision and manage servers, lets you specify and pay for
     resources per application, and improves security through application isolation
     by design.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: AWS Fargate 是一种无服务器计算引擎，支持与 Amazon Elastic Container Service (ECS) 和 Amazon
+    Elastic Kubernetes Service (EKS) 一起使用。Fargate 使你能够专注于构建应用程序。Fargate 消除了配置和管理服务器的需要，允许你按应用程序指定和支付资源，并通过设计上的应用隔离来提高安全性。
 - en: Fargate allocates the right amount of compute, eliminating the need to choose
     instances and scale cluster capacity. You only pay for the resources required
     to run your containers, so there is no over-provisioning and paying for additional
     servers.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: Fargate 分配合适的计算资源，消除了选择实例和扩展集群容量的需要。你只为运行容器所需的资源付费，因此无需担心资源过度配置或额外服务器的费用。
 - en: '![Figure](../Images/9b80301155c032bf10e84cd6744a2c7f.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/9b80301155c032bf10e84cd6744a2c7f.png)'
 - en: How AWS Fargate works — [https://aws.amazon.com/fargate/](https://aws.amazon.com/fargate/)
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: AWS Fargate 的工作原理 — [https://aws.amazon.com/fargate/](https://aws.amazon.com/fargate/)
 - en: 'There is no best answer as to which approach is better. The choice between
     going serverless or manually managing an EC2 cluster depends on the use-case.
     Some pointers that can assist with this choice include:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 哪种方法更好没有最优答案。选择无服务器还是手动管理 EC2 集群取决于具体的使用案例。一些可以帮助你做出选择的指针包括：
 - en: '**ECS EC2 (Manual Approach)**'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '**ECS EC2（手动方法）**'
 - en: You are all-in on AWS.
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你完全依赖于 AWS。
 - en: You have a dedicated Ops team in place to manage AWS resources.
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你有一个专门的运维团队来管理 AWS 资源。
 - en: You have an existing footprint on AWS i.e. you are already managing EC2 instances
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你在 AWS 上已有现有的足迹，即你已经在管理 EC2 实例
 - en: '**AWS Fargate**'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '**AWS Fargate**'
 - en: You do not have huge Ops team to manage AWS resources.
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你没有一个庞大的运维团队来管理 AWS 资源。
 - en: You do not want operational responsibility or want to reduce it.
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你不想承担操作责任或希望减少操作责任。
 - en: Your application is stateless *(A stateless app is an application that does
     not save client data generated in one session for use in the next session with
     that client)*.
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你的应用程序是无状态的 *（无状态应用程序是指在一个会话中生成的客户端数据不会保存到下一次会话中使用的应用程序）*。
 - en: Setting the Business Context
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 设置业务背景
 - en: An insurance company wants to improve its cash flow forecasting by better predicting
     patient charges using demographic and basic patient health risk metrics at the
     time of hospitalization.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 一家保险公司希望通过更好地预测住院时的患者费用来改善其现金流预测，使用的是人口统计数据和基本的患者健康风险指标。
 - en: '![Figure](../Images/a783d299ecd604bc5d1524a793c8d557.png)'
+  id: totrans-81
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/a783d299ecd604bc5d1524a793c8d557.png)'
 - en: '*(*[*data source*](https://www.kaggle.com/mirichoi0218/insurance#insurance.csv)*)*'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '*(*[*数据源*](https://www.kaggle.com/mirichoi0218/insurance#insurance.csv)*)*'
 - en: Objective
+  id: totrans-83
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 目标
 - en: To build and deploy a web application where the demographic and health information
     of a patient is entered into a web-based form which then outputs a predicted charge
     amount.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 构建和部署一个 Web 应用程序，其中患者的群体和健康信息输入到一个基于 Web 的表单中，然后输出预测的费用金额。
 - en: Tasks
+  id: totrans-85
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 任务
 - en: Train and develop a machine learning pipeline for deployment.
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 训练和开发用于部署的机器学习管道。
 - en: Build a web app using a Flask framework. It will use the trained ML pipeline
     to generate predictions on new data points in real-time.
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 Flask 框架构建 Web 应用程序。它将使用训练好的 ML 管道实时生成新数据点的预测。
 - en: Build and push a Docker image onto Amazon Elastic Container Registry.
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将 Docker 镜像构建并推送到 Amazon Elastic Container Registry。
 - en: Create and execute a task to deploy the app using AWS Fargate serverless infrastructure.
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建并执行一个任务，使用 AWS Fargate 无服务器基础设施部署应用程序。
 - en: Since we have already covered the first two tasks in our initial tutorial, we
     will quickly recap them and then focus on the remaining items in the list above.
     If you are interested in learning more about developing a machine learning pipeline
     in Python using PyCaret and building a web app using a Flask framework, please
     read [this tutorial](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99).
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们已经在初始教程中涵盖了前两个任务，我们将快速回顾它们，然后关注上面列表中的剩余项目。如果你有兴趣了解更多关于使用 PyCaret 开发机器学习管道和使用
+    Flask 框架构建 Web 应用程序的内容，请阅读 [本教程](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99)。
 - en: ???? Develop a Machine Learning Pipeline
+  id: totrans-91
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 开发机器学习管道
 - en: 'We are using PyCaret in Python for training and developing a machine learning
     pipeline which will be used as part of our web app. The Machine Learning Pipeline
     can be developed in an Integrated Development Environment (IDE) or Notebook. We
     have used a notebook to run the below code:'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在 Python 中使用 PyCaret 训练和开发机器学习管道，该管道将作为我们 Web 应用程序的一部分。机器学习管道可以在集成开发环境（IDE）或
+    Notebook 中开发。我们使用了 Notebook 来运行以下代码：
 - en: 'When you save a model in PyCaret, the entire transformation pipeline based
     on the configuration defined in the **setup() **function is created . All inter-dependencies
     are orchestrated automatically. See the pipeline and model stored in the ‘deployment_28042020’
     variable:'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你在 PyCaret 中保存模型时，基于 **setup() **函数中定义的配置创建了整个转换管道。所有相互依赖关系都自动协调。查看存储在‘deployment_28042020’变量中的管道和模型：
 - en: '![Figure](../Images/2c64ca792b45cf465473c8266ac2f6a8.png)'
+  id: totrans-94
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/2c64ca792b45cf465473c8266ac2f6a8.png)'
 - en: Machine Learning Pipeline created using PyCaret
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 PyCaret 创建的机器学习管道
 - en: ???? Build a Web Application
+  id: totrans-96
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 构建 Web 应用程序
 - en: 'This tutorial is not focused on building a Flask application. It is only discussed
     here for completeness. Now that our machine learning pipeline is ready we need
     a web application that can connect to our trained pipeline to generate predictions
     on new data points in real-time. We have created the web application using Flask
     framework in Python. There are two parts of this application:'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程不专注于构建 Flask 应用程序。这里只是为了完整性进行讨论。现在我们的机器学习管道已准备好，我们需要一个 Web 应用程序来连接到我们训练好的管道，以实时生成新数据点的预测。我们使用
+    Python 中的 Flask 框架创建了 Web 应用程序。此应用程序分为两个部分：
 - en: Front-end (designed using HTML)
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 前端（使用 HTML 设计）
 - en: Back-end (developed using Flask)
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 后端（使用 Flask 开发）
 - en: 'This is how our web application looks:'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是我们的 Web 应用程序的样子：
 - en: '![Figure](../Images/c5ce94edc4cabf0ca49b06bd68e8e86e.png)'
+  id: totrans-101
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/c5ce94edc4cabf0ca49b06bd68e8e86e.png)'
 - en: Web application on local machine
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 本地机器上的 Web 应用程序
 - en: 'If you haven’t followed along so far, no problem. You can simply fork this [repository](https://www.github.com/pycaret/pycaret-deployment-aws) from
     GitHub. This is how your project folder should look at this point:'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你到目前为止没有跟上进度，没关系。你可以从 GitHub 上简单地 fork 这个 [仓库](https://www.github.com/pycaret/pycaret-deployment-aws)。这就是此时你的项目文件夹的样子：
 - en: '10-steps to deploy a ML pipeline using AWS Fargate:'
+  id: totrans-104
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 AWS Fargate 部署 ML 管道的 10 个步骤：
 - en: ???? Step 1 — Install Docker Toolbox (for Windows 10 Home)
+  id: totrans-105
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 步骤 1 — 安装 Docker Toolbox（适用于 Windows 10 家庭版）
 - en: 'In order to build a docker image locally, you will need Docker installed on
     your computer. If you are using Windows 10 64-bit: Pro, Enterprise, or Education
     (Build 15063 or later) you can download Docker Desktop from [DockerHub](https://hub.docker.com/editions/community/docker-ce-desktop-windows/).'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了在本地构建 Docker 镜像，你需要在计算机上安装 Docker。如果你使用的是 Windows 10 64 位：专业版、企业版或教育版（构建版本
+    15063 或更高），你可以从 [DockerHub](https://hub.docker.com/editions/community/docker-ce-desktop-windows/) 下载
+    Docker Desktop。
 - en: However, if you are using Windows 10 Home, you would need to install the last
     release of legacy Docker Toolbox (v19.03.1) from [Dockers GitHub page](https://github.com/docker/toolbox/releases).
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，如果你使用的是 Windows 10 家庭版，你需要从 [Docker 的 GitHub 页面](https://github.com/docker/toolbox/releases) 安装最后一版的旧版
+    Docker Toolbox（v19.03.1）。
 - en: '![Figure](../Images/6d850c5410b4dbf7528b880ad882727f.png)'
+  id: totrans-108
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/6d850c5410b4dbf7528b880ad882727f.png)'
 - en: '[https://github.com/docker/toolbox/releases](https://github.com/docker/toolbox/releases)'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://github.com/docker/toolbox/releases](https://github.com/docker/toolbox/releases)'
 - en: Download and Run **DockerToolbox-19.03.1.exe** file.
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 下载并运行 **DockerToolbox-19.03.1.exe** 文件。
 - en: The easiest way to check if the installation was successful is by opening the
     command prompt and typing in ‘docker’. It should print the help menu.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 检查安装是否成功的最简单方法是打开命令提示符并输入‘docker’。它应该打印出帮助菜单。
 - en: '![Figure](../Images/5df6389e7f7aba6d1e610041a63b493b.png)'
+  id: totrans-112
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/5df6389e7f7aba6d1e610041a63b493b.png)'
 - en: Anaconda Prompt to check docker
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Anaconda Prompt 检查 Docker
 - en: ???? Step 2— Create a Dockerfile
+  id: totrans-114
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 步骤 2— 创建 Dockerfile
 - en: 'The first step for creating a Docker image is to create a Dockerfile in the
     project directory. A Dockerfile is just a file with a set of instructions. The
     Dockerfile for this project looks like this:'
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建 Docker 镜像的第一步是在项目目录中创建一个 Dockerfile。Dockerfile 只是一个包含一组指令的文件。这个项目的 Dockerfile
+    如下：
 - en: A Dockerfile is case-sensitive and must be in the project folder with the other
     project files. A Dockerfile has no extension and can be created using any text
     editor. You can download the Dockerfile used in this project from this [GitHub
     Repository](https://www.github.com/pycaret/pycaret-deployment-aws).
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: Dockerfile 是区分大小写的，必须与其他项目文件一起放在项目文件夹中。Dockerfile 没有扩展名，可以使用任何文本编辑器创建。你可以从这个
+    [GitHub 存储库](https://www.github.com/pycaret/pycaret-deployment-aws) 下载本项目中使用的
+    Dockerfile。
 - en: ???? Step 3— Create a Repository in Elastic Container Registry (ECR)
+  id: totrans-117
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 步骤 3— 在 Elastic Container Registry (ECR) 中创建一个存储库
 - en: '**(a) Login to your AWS console and search for Elastic Container Registry:**'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(a) 登录到你的 AWS 控制台并搜索 Elastic Container Registry：**'
 - en: '![Figure](../Images/8e2551b255c8e951108e1047f2aae941.png)'
+  id: totrans-119
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/8e2551b255c8e951108e1047f2aae941.png)'
 - en: AWS Console
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: AWS 控制台
 - en: '**(b) Create a new repository:**'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(b) 创建一个新的存储库：**'
 - en: '![Figure](../Images/1f07ecea416f3a78c3682f6f6247a228.png)'
+  id: totrans-122
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/1f07ecea416f3a78c3682f6f6247a228.png)'
 - en: Create New Repository on Amazon Elastic Container Registry
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Amazon Elastic Container Registry 上创建新存储库
 - en: '*For this demo we have created ‘pycaret-deployment-aws-repository’.*'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: '*为了这个演示，我们创建了‘pycaret-deployment-aws-repository’。*'
 - en: '**(c) Click on “View push commands”:**'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(c) 点击“查看推送命令”：**'
 - en: '![Figure](../Images/78b190e6f4e096f16da3ad4cfe2ab3d6.png)'
+  id: totrans-126
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/78b190e6f4e096f16da3ad4cfe2ab3d6.png)'
 - en: pycaret-deployment-aws-repository
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: pycaret-deployment-aws-repository
 - en: '**(d) Copy Push Commands:**'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(d) 复制推送命令：**'
 - en: '![Figure](../Images/1a60488f1db805820837baf7a2db3797.png)'
+  id: totrans-129
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/1a60488f1db805820837baf7a2db3797.png)'
 - en: Push commands for pycaret-deployment-aws-repository
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: pycaret-deployment-aws-repository 的推送命令
 - en: ???? Step 4— Execute push commands
+  id: totrans-131
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 步骤 4— 执行推送命令
 - en: Navigate to your project folder using Anaconda Prompt and execute the commands
     you have copied in the step above. The code below is for demonstration only and
     may not work as it is. To get the right code to execute, you must get a copy of
     code from “View push commands” inside the repository.
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Anaconda Prompt 导航到你的项目文件夹，并执行你在上一步中复制的命令。下面的代码仅用于演示，可能无法直接使用。要获得正确的执行代码，你必须从存储库中的“查看推送命令”获取一份代码。
 - en: You must be in the folder where the Dockerfile and the rest of your code reside
     before executing these commands.
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 在执行这些命令之前，你必须位于包含 Dockerfile 和其他代码的文件夹中。
 - en: '[PRE1]'
+  id: totrans-134
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: ???? Step 5— Check your uploaded image
+  id: totrans-135
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 步骤 5— 检查你上传的镜像
 - en: Click on the repository you created and you will see an image URI of the uploaded
     image in the step above. Copy the image URI (it would be needed in step 7 below).
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 点击你创建的存储库，你将看到在上述步骤中上传的镜像的 URI。复制镜像 URI（在下面的步骤 7 中会用到）。
 - en: '![](../Images/1bb9e9c309111ca1187b93e46884ceb9.png)'
+  id: totrans-137
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1bb9e9c309111ca1187b93e46884ceb9.png)'
 - en: ???? Step 6 — Create and Configure a Cluster
+  id: totrans-138
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 步骤 6 — 创建和配置集群
 - en: '**(a) Click on “Clusters” on left-side menu:**'
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(a) 点击左侧菜单中的“集群”：**'
 - en: '![Figure](../Images/8479d8c5e6b89e517bdc1bc1c02e69f1.png)'
+  id: totrans-140
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/8479d8c5e6b89e517bdc1bc1c02e69f1.png)'
 - en: Create Cluster — Step 1
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建集群 — 步骤 1
 - en: '**(b) Select “Networking only” and click Next step:**'
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(b) 选择“仅网络”并点击下一步：**'
 - en: '![Figure](../Images/53b806267b1b206b797e3c486b370b86.png)'
+  id: totrans-143
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/53b806267b1b206b797e3c486b370b86.png)'
 - en: Select Networking Only Template
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 选择仅网络模板
 - en: '**(c) Configure Cluster (Enter cluster name) and click on Create:**'
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(c) 配置集群（输入集群名称）并点击创建：**'
 - en: '![Figure](../Images/3403126fd1897ec44fe15aa22d607a3a.png)'
+  id: totrans-146
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/3403126fd1897ec44fe15aa22d607a3a.png)'
 - en: Configure Cluster
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: 配置集群
 - en: '**(d) Cluster Created:**'
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(d) 集群创建完成：**'
 - en: '![Figure](../Images/dfe37839ba4e815d33cfb07bba3b88e0.png)'
+  id: totrans-149
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/dfe37839ba4e815d33cfb07bba3b88e0.png)'
 - en: Cluster Created
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: 集群已创建
 - en: ???? Step 7— Create a new Task definition
+  id: totrans-151
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 步骤 7— 创建一个新的任务定义
 - en: 'A **task** definition is required to run Docker containers in Amazon ECS. Some
     of the parameters you can specify in a **task** definition include: The Docker
     image to use with each container in your **task**. How much CPU and memory to
     use with each **task** or each container within a **task**.'
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个**任务**定义是运行Amazon ECS中的Docker容器所必需的。您可以在**任务**定义中指定的一些参数包括：每个容器使用的Docker镜像。每个**任务**或**任务**中每个容器使用的CPU和内存量。
 - en: '**(a) Click on “Create new task definition”:**'
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(a) 点击“创建新任务定义”：**'
 - en: '![Figure](../Images/eef82785c502daff7c68e5fa5a697bca.png)'
+  id: totrans-154
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/eef82785c502daff7c68e5fa5a697bca.png)'
 - en: Create a new task definition
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建新任务定义
 - en: '**(b) Select “FARGATE” as launch type:**'
+  id: totrans-156
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(b) 选择“FARGATE”作为启动类型：**'
 - en: '![Figure](../Images/ff3f03070dd0cde5ea476778e6f6686b.png)'
+  id: totrans-157
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/ff3f03070dd0cde5ea476778e6f6686b.png)'
 - en: Select Launch Type Compatibility
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: 选择启动类型兼容性
 - en: '**(c) Fill in the details:**'
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(c) 填写详细信息：**'
 - en: '![Figure](../Images/b3451fb5fa283044f113fe1cc7a4ae9b.png)'
+  id: totrans-160
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/b3451fb5fa283044f113fe1cc7a4ae9b.png)'
 - en: Configure Task and container definitions (part 1)![Figure](../Images/477c2f78010ed0989e82e957f76eb671.png)
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: 配置任务和容器定义（第1部分）![图示](../Images/477c2f78010ed0989e82e957f76eb671.png)
 - en: Configure Task and container definitions (part 2)
+  id: totrans-162
   prefs: []
   type: TYPE_NORMAL
+  zh: 配置任务和容器定义（第2部分）
 - en: '**(d) Click on “Add Containers” and fill in the details:**'
+  id: totrans-163
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(d) 点击“添加容器”并填写详细信息：**'
 - en: '![Figure](../Images/975bf27b4569936a1c0481e47dff9ddd.png)'
+  id: totrans-164
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/975bf27b4569936a1c0481e47dff9ddd.png)'
 - en: Adding Container in task definitions
+  id: totrans-165
   prefs: []
   type: TYPE_NORMAL
+  zh: 在任务定义中添加容器
 - en: '**(e) Click “Create Task” on the bottom right.**'
+  id: totrans-166
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(e) 点击右下角的“创建任务”。**'
 - en: '![](../Images/46ee98d89d3929b8363ae5dffccb10c0.png)'
+  id: totrans-167
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/46ee98d89d3929b8363ae5dffccb10c0.png)'
 - en: ???? Step 8 —Execute Task Definition
+  id: totrans-168
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 第8步 — 执行任务定义
 - en: In step 7 we created a task that will start the container. Now we will execute
     the task by clicking **“Run Task”** under Actions.
+  id: totrans-169
   prefs: []
   type: TYPE_NORMAL
+  zh: 在第7步中，我们创建了一个将启动容器的任务。现在我们将通过点击**“运行任务”**在操作下执行任务。
 - en: '![Figure](../Images/24344177a60d61949d7fa39beed1d544.png)'
+  id: totrans-170
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/24344177a60d61949d7fa39beed1d544.png)'
 - en: Execute Task Definition
+  id: totrans-171
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行任务定义
 - en: '**(a) Click on “Switch to launch type” to change the type to Fargate:**'
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(a) 点击“切换启动类型”将类型更改为Fargate：**'
 - en: '![Figure](../Images/87a89677f4dca090a7af19c988b27e38.png)'
+  id: totrans-173
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/87a89677f4dca090a7af19c988b27e38.png)'
 - en: Running Task — Part 1
+  id: totrans-174
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行任务 — 第1部分
 - en: '**(b) Select the VPC and Subnet from the dropdown:**'
+  id: totrans-175
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(b) 从下拉菜单中选择VPC和子网：**'
 - en: '![Figure](../Images/5f398c350ade7bbf8f2397ad259ccade.png)'
+  id: totrans-176
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/5f398c350ade7bbf8f2397ad259ccade.png)'
 - en: Running Task — Part 2
+  id: totrans-177
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行任务 — 第2部分
 - en: '**(c) Click on “Run Task” on bottom right:**'
+  id: totrans-178
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(c) 点击右下角的“运行任务”：**'
 - en: '![Figure](../Images/cb75bf5addf1cffde41d5371338f5f41.png)'
+  id: totrans-179
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/cb75bf5addf1cffde41d5371338f5f41.png)'
 - en: Task Created Successfully
+  id: totrans-180
   prefs: []
   type: TYPE_NORMAL
+  zh: 任务创建成功
 - en: ???? Step 9— Allow inbound port 5000 from Network settings
+  id: totrans-181
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 第9步— 从网络设置中允许入站端口5000
 - en: 'One last step before we can see our application in action on Public IP address
     is to allow port 5000 by creating a new rule. In order to do that, follow these
     steps:'
+  id: totrans-182
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们可以在公共IP地址上查看应用运行之前的最后一步是通过创建新规则来允许端口5000。为此，请按以下步骤操作：
 - en: '**(a) Click on Task**'
+  id: totrans-183
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(a) 点击任务**'
 - en: '![Figure](../Images/3d224fd160d524e8f88172140f7d5d37.png)'
+  id: totrans-184
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/3d224fd160d524e8f88172140f7d5d37.png)'
 - en: '**(b) Click on ENI Id:**'
+  id: totrans-185
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(b) 点击ENI Id：**'
 - en: '![](../Images/e5b5700b2be549c5de3569e1da71b840.png)'
+  id: totrans-186
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e5b5700b2be549c5de3569e1da71b840.png)'
 - en: '**(c) Click on Security groups**'
+  id: totrans-187
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(c) 点击安全组**'
 - en: '![](../Images/36d1d2bf37b5e419314938afb6ff3495.png)'
+  id: totrans-188
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/36d1d2bf37b5e419314938afb6ff3495.png)'
 - en: '**(d) Click on “Edit inbound rules”**'
+  id: totrans-189
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(d) 点击“编辑入站规则”**'
 - en: '![](../Images/5f92ced801cc0ba168ad610aaa5af1d1.png)'
+  id: totrans-190
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5f92ced801cc0ba168ad610aaa5af1d1.png)'
 - en: '**(e) Add a Custom TCP rule of port 5000**'
+  id: totrans-191
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(e) 添加端口5000的自定义TCP规则**'
 - en: '![](../Images/284fa69473d3e3a15990af585062249a.png)'
+  id: totrans-192
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/284fa69473d3e3a15990af585062249a.png)'
 - en: ???? Step 10 — See the app in action
+  id: totrans-193
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 第10步 — 查看应用运行情况
 - en: Use public IP address with port 5000 to access the application.
+  id: totrans-194
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用公共IP地址和端口5000访问应用程序。
 - en: '![Figure](../Images/6a118bb981391165a86e4bc695dfe696.png)'
+  id: totrans-195
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/6a118bb981391165a86e4bc695dfe696.png)'
 - en: Task definition logs![Figure](../Images/f2c363e06d336fe092bdbc120ce74ee2.png)
+  id: totrans-196
   prefs: []
   type: TYPE_NORMAL
+  zh: 任务定义日志![图示](../Images/f2c363e06d336fe092bdbc120ce74ee2.png)
 - en: Final app uploaded on [http://35.182.227.98:5000](http://35.182.227.98:5000/)
+  id: totrans-197
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终应用上传至[http://35.182.227.98:5000](http://35.182.227.98:5000/)
 - en: '**Note:** By the time this story is published, the app will be removed from
     the public address to restrict resource consumption.'
+  id: totrans-198
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意：**  在这篇文章发布时，该应用将从公共地址中移除，以限制资源消耗。'
 - en: PyCaret 2.0.0 is coming!
+  id: totrans-199
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: PyCaret 2.0.0 即将来临！
 - en: We have received overwhelming support and feedback from the community. We are
     actively working on improving PyCaret and preparing for our next release. **PyCaret
     2.0.0 will be bigger and better**. If you would like to share your feedback and
     help us improve further, you may [fill this form](https://www.pycaret.org/feedback) on
     the website or leave a comment on our [GitHub ](https://www.github.com/pycaret/)or [LinkedIn](https://www.linkedin.com/company/pycaret/) page.
+  id: totrans-200
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们收到了来自社区的热烈支持和反馈。我们正在积极改进 PyCaret，并为下一个版本做准备。**PyCaret 2.0.0 将更大更好**。如果你想分享你的反馈并帮助我们进一步改进，你可以在网站上
+    [填写此表单](https://www.pycaret.org/feedback) 或在我们的 [GitHub](https://www.github.com/pycaret/)
+    或 [LinkedIn](https://www.linkedin.com/company/pycaret/) 页面留言。
 - en: Follow our [LinkedIn](https://www.linkedin.com/company/pycaret/) and subscribe
     to our [YouTube](https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g) channel
     to learn more about PyCaret.
+  id: totrans-201
   prefs: []
   type: TYPE_NORMAL
+  zh: 关注我们的 [LinkedIn](https://www.linkedin.com/company/pycaret/) 和订阅我们的 [YouTube](https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g)
+    频道，以了解更多关于 PyCaret 的信息。
 - en: Want to learn about a specific module?
+  id: totrans-202
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 想了解特定模块吗？
 - en: As of the first release 1.0.0, PyCaret has the following modules available for
     use. Click on the links below to see the documentation and working examples in
     Python.
+  id: totrans-203
   prefs: []
   type: TYPE_NORMAL
+  zh: 从 1.0.0 版本首次发布开始，PyCaret 提供了以下模块供使用。点击下面的链接查看 Python 中的文档和工作示例。
 - en: '[Classification](https://www.pycaret.org/classification)'
+  id: totrans-204
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分类](https://www.pycaret.org/classification)'
 - en: '[Regression](https://www.pycaret.org/regression)'
+  id: totrans-205
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[回归](https://www.pycaret.org/regression)'
 - en: '[Clustering](https://www.pycaret.org/clustering)'
+  id: totrans-206
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[聚类](https://www.pycaret.org/clustering)'
 - en: '[Anomaly Detection](https://www.pycaret.org/anomaly-detection)'
+  id: totrans-207
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[异常检测](https://www.pycaret.org/anomaly-detection)'
 - en: '[Natural Language Processing](https://www.pycaret.org/nlp)'
+  id: totrans-208
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理](https://www.pycaret.org/nlp)'
 - en: '[Association Rule Mining](https://www.pycaret.org/association-rules)'
+  id: totrans-209
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关联规则挖掘](https://www.pycaret.org/association-rules)'
 - en: 'Also see:'
+  id: totrans-210
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '另见:'
 - en: 'PyCaret getting started tutorials in Notebook:'
+  id: totrans-211
   prefs: []
   type: TYPE_NORMAL
+  zh: PyCaret 入门教程在 Notebook 中：
 - en: '[Clustering](https://www.pycaret.org/clu101)'
+  id: totrans-212
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[聚类](https://www.pycaret.org/clu101)'
 - en: '[Anomaly Detection](https://www.pycaret.org/anom101)'
+  id: totrans-213
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[异常检测](https://www.pycaret.org/anom101)'
 - en: '[Natural Language Processing](https://www.pycaret.org/nlp101)'
+  id: totrans-214
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理](https://www.pycaret.org/nlp101)'
 - en: '[Association Rule Mining](https://www.pycaret.org/arul101)'
+  id: totrans-215
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关联规则挖掘](https://www.pycaret.org/arul101)'
 - en: '[Regression](https://www.pycaret.org/reg101)'
+  id: totrans-216
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[回归](https://www.pycaret.org/reg101)'
 - en: '[Classification](https://www.pycaret.org/clf101)'
+  id: totrans-217
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分类](https://www.pycaret.org/clf101)'
 - en: Would you like to contribute?
+  id: totrans-218
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 你想要贡献吗？
 - en: PyCaret is an open source project. Everybody is welcome to contribute. If you
     would like contribute, please feel free to work on [open issues](https://github.com/pycaret/pycaret/issues).
     Pull requests are accepted with unit tests on dev-1.0.1 branch.
+  id: totrans-219
   prefs: []
   type: TYPE_NORMAL
+  zh: PyCaret 是一个开源项目。欢迎大家贡献。如果你想贡献，请随时处理 [开放问题](https://github.com/pycaret/pycaret/issues)。拉取请求将接受
+    dev-1.0.1 分支上的单元测试。
 - en: Please give us ⭐️ on our [GitHub repo](https://www.github.com/pycaret/pycaret) if
     you like PyCaret.
+  id: totrans-220
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你喜欢 PyCaret，请在我们的 [GitHub 仓库](https://www.github.com/pycaret/pycaret) 上给我们
+    ⭐️。
 - en: Medium: [https://medium.com/@moez_62905/](https://medium.com/@moez_62905/machine-learning-in-power-bi-using-pycaret-34307f09394a)
+  id: totrans-221
   prefs: []
   type: TYPE_NORMAL
+  zh: 'Medium: [https://medium.com/@moez_62905/](https://medium.com/@moez_62905/machine-learning-in-power-bi-using-pycaret-34307f09394a)'
 - en: LinkedIn: [https://www.linkedin.com/in/profile-moez/](https://www.linkedin.com/in/profile-moez/)
+  id: totrans-222
   prefs: []
   type: TYPE_NORMAL
+  zh: 'LinkedIn: [https://www.linkedin.com/in/profile-moez/](https://www.linkedin.com/in/profile-moez/)'
 - en: Twitter: [https://twitter.com/moezpycaretorg1](https://twitter.com/moezpycaretorg1)
+  id: totrans-223
   prefs: []
   type: TYPE_NORMAL
+  zh: '推特: [https://twitter.com/moezpycaretorg1](https://twitter.com/moezpycaretorg1)'
 - en: '**Bio: [Moez Ali](https://www.linkedin.com/in/profile-moez/)** is a Data Scientist,
     and is Founder & Author of PyCaret.'
+  id: totrans-224
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Moez Ali](https://www.linkedin.com/in/profile-moez/)** 是一位数据科学家，也是 PyCaret
+    的创始人兼作者。'
 - en: '[Original](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-aws-fargate-eb6e1c50507).
     Reposted with permission.'
+  id: totrans-225
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-aws-fargate-eb6e1c50507)。已获许可转载。'
 - en: '**Related:**'
+  id: totrans-226
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关:**'
 - en: '[Deploy a Machine Learning Pipeline to the Cloud Using a Docker Container](/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)'
+  id: totrans-227
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Docker 容器将机器学习管道部署到云](/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)'
 - en: '[Build and deploy your first machine learning web app](/2020/05/build-deploy-machine-learning-web-app.html)'
+  id: totrans-228
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建并部署你的第一个机器学习 web 应用](/2020/05/build-deploy-machine-learning-web-app.html)'
 - en: '[Announcing PyCaret 1.0.0](/2020/04/announcing-pycaret.html)'
+  id: totrans-229
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[宣布 PyCaret 1.0.0](/2020/04/announcing-pycaret.html)'
 - en: '* * *'
+  id: totrans-230
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-231
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-232
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-233
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-234
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 工作'
 - en: '* * *'
+  id: totrans-235
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-236
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  id: totrans-237
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
 - en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  id: totrans-238
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
 - en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  id: totrans-239
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-240
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并通过寻找目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-241
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-242
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
