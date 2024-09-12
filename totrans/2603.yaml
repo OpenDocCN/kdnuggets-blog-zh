@@ -1,320 +1,485 @@
 - en: How to Dockerize Any Machine Learning Application
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何 Docker 化任何机器学习应用程序
 - en: 原文：[https://www.kdnuggets.com/2021/04/dockerize-any-machine-learning-application.html](https://www.kdnuggets.com/2021/04/dockerize-any-machine-learning-application.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/04/dockerize-any-machine-learning-application.html](https://www.kdnuggets.com/2021/04/dockerize-any-machine-learning-application.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Arunn Thevapalan](https://www.linkedin.com/in/arunn-thevapalan/), Senior
     Data Scientist at Octave, Mentor, and Writer.**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Arunn Thevapalan](https://www.linkedin.com/in/arunn-thevapalan/)，Octave
+    的高级数据科学家、导师和作家。**'
 - en: '![](../Images/374bfc6c12e4d4a4c9cded164c94e76e.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/374bfc6c12e4d4a4c9cded164c94e76e.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '*Containerize and ship them, models! (Photo by [Andy Li](https://unsplash.com/@andasta?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral))*'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '*容器化并部署模型！（照片由 [Andy Li](https://unsplash.com/@andasta?utm_source=medium&utm_medium=referral)
+    供图，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)）*'
 - en: A month in, as a fresh graduate at work, the founder of our AI startup walks
     to me and asks, *“Arunn, I want you to be an expert in Docker. How long would
     you need?”* Not sure what Docker is, but unable to dodge the question. Eventually,
     I replied, *“Two weeks, 1 sprint.”*
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 刚入职一个月，作为一名应届毕业生，我们的 AI 创始人走到我面前问：*“Arunn，我希望你能成为 Docker 专家。你需要多长时间？”* 我不确定
+    Docker 是什么，但又无法回避这个问题。最后，我回答说：*“两周，1 个冲刺。”*
 - en: My manager, who was also around, tried interrupting to save me, but I had already
     done the damage, and all I had was the next two weeks.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我的经理，也在场，试图打断以拯救我，但我已经造成了损害，我只有接下来的两周时间。
 - en: Looking back, I was never an expert (*nor am I now!)*, but I learned just enough
     to do what was required. In this article, I will tell you what’s just enough to
     dockerize any machine learning web applications.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 回顾过去，我从来不是专家（*现在也不是！*），但我学到的足以完成所需的工作。在这篇文章中，我将告诉你如何将任何机器学习网络应用程序 Docker 化的基本步骤。
 - en: What is Docker?
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是 Docker？
 - en: '**Docker **is a tool designed to create, deploy, and run applications by using
     containers. A **Container **is a standardized software unit, in simple terms —
     nothing but a packaged bundle of application code and required libraries and other
     dependencies. A **Docker Image **is an executable software package that includes
     everything needed to run an application and becomes a **Container **at runtime.'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Docker** 是一个旨在通过使用容器来创建、部署和运行应用程序的工具。**容器** 是一个标准化的软件单元，简单来说——就是一个打包的应用程序代码和所需的库及其他依赖项的包。**Docker
+    镜像** 是一个可执行的软件包，包含运行应用程序所需的一切，并在运行时成为**容器**。'
 - en: It was a lot of new technical terms when I tried to understand Docker. But the
     idea is actually simple.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我尝试理解 Docker 时，有很多新技术术语。但其实这个概念很简单。
 - en: Think of it like you get a fresh mini Ubuntu machine. Then you install some
     packages on top of it. Then you add some code on top of it. And finally, you execute
     the codes to create an application. ***All of this happens on top of your existing
     machine with the operating system of your choice*****.** All you need is to have
     Docker installed in it.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以把它想象成你获得了一台全新的迷你 Ubuntu 机器。然后，你在其上安装一些包。接着，你在其上添加一些代码。最后，你执行这些代码来创建一个应用程序。***所有这一切都发生在你现有的机器上，使用你选择的操作系统*****。**
+    你只需要在其中安装 Docker 即可。
 - en: If you do not have Docker installed on your machine, please find [instructions
     here to set up Docker](https://docs.docker.com/get-docker/).
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你的机器上没有安装 Docker，请查阅 [这里的安装说明](https://docs.docker.com/get-docker/)。
 - en: Why Docker for Data Scientists?
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么数据科学家需要 Docker？
 - en: I get it. You’re in the field of data science. You think the DevOps guys can
     take care of Docker. Your boss didn’t ask you to become an expert (*unlike mine!)*.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 我明白了。你从事数据科学领域的工作。你认为 DevOps 团队可以处理 Docker。你的老板没有要求你成为专家（*不像我的老板！*）。
 - en: You feel you don’t really need to understand Docker.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 你觉得你并不真的需要理解 Docker。
 - en: That’s not true, and let me tell you why.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 这不是真的，让我告诉你为什么。
 - en: '*“Not sure why it’s not working on your machine, it’s working on mine. Do you
     want me to have a look?”*'
+  id: totrans-24
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*“不确定为什么在你的机器上不起作用，它在我的机器上可以正常工作。你要我看看吗？”*'
 - en: Ever heard these words uttered at your workplace? Once you (and your team) understand
     Docker, nobody will ever have to utter those words again. Your code will run smoothly
     in Ubuntu, Windows, AWS, Azure, Google Cloud, or anywhere, as a matter of fact.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 在你的工作场所听过这些话吗？一旦你（和你的团队）理解了 Docker，就不会再有人说这些话了。你的代码将顺利运行在 Ubuntu、Windows、AWS、Azure、Google
+    Cloud 或任何地方。
 - en: '**The applications you build become reproducible anywhere.**'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**你构建的应用程序可以在任何地方重复使用。**'
 - en: You’ll start spinning up environments much faster and distribute your applications
     the right way, and you’ll be saving a lot of time. You’ll (eventually) be known
     as a Data Scientist with software engineering best practices.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 你将开始更快地启动环境，并以正确的方式分发应用程序，这将节省大量时间。你（最终）将被认为是一位具备软件工程最佳实践的数据科学家。
 - en: The 3 Simple Steps
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3 个简单步骤
 - en: As promised, I have simplified the process into 3 simple steps. Here let’s consider
     a use case of a diabetes prediction app, which can predict the onset of diabetes
     based on the diagnostic measure. This would give you an understanding of how we
     can approach containerization in a real-world use case scenario.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如承诺的，我已将过程简化为 3 个简单步骤。在这里，我们以糖尿病预测应用程序的用例为例，该应用程序可以根据诊断措施预测糖尿病的发作。这将帮助你理解我们如何在现实世界的用例场景中接近容器化。
 - en: I highly recommend you go through [this article](https://medium.com/towards-artificial-intelligence/how-i-build-machine-learning-apps-in-hours-a1b1eaa642ed?source=friends_link&sk=66a5df0a2570e1cf0f12211f3b4f2fc2)
     in which we build this Machine Learning App from scratch in a step-by-step process
     using Streamlit.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 我强烈建议你阅读 [这篇文章](https://medium.com/towards-artificial-intelligence/how-i-build-machine-learning-apps-in-hours-a1b1eaa642ed?source=friends_link&sk=66a5df0a2570e1cf0f12211f3b4f2fc2)，其中我们使用
+    Streamlit 从头开始逐步构建这个机器学习应用程序。
 - en: '![](../Images/d6e07d63154495339887923b7e8a35de.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d6e07d63154495339887923b7e8a35de.png)'
 - en: '*Screencast of the Diabetes Prediction App by Author.*'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '*作者制作的糖尿病预测应用程序的屏幕录制。*'
 - en: Please have a look at this [GitHub repository](https://github.com/arunnthevapalan/diabetes-prediction-app)
     with the complete implementation to follow along with the example. Now that we
     know the context, let’s tackle down our 3 steps!
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 请查看这个 [GitHub 仓库](https://github.com/arunnthevapalan/diabetes-prediction-app)
+    ，其中包含完整的实现，可以跟随示例进行操作。既然我们知道了背景，接下来让我们解决这 3 个步骤！
 - en: '**1\. Defining the environment**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**1. 定义环境**'
 - en: The first step is to ensure the exact required environment for the application
     to function properly. There are many ways to do this, but one of the simplest
     ideas is to define a *requirements.txt* file for the project.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一步是确保应用程序正常运行所需的准确环境。有很多方法可以做到这一点，但其中一个最简单的想法是为项目定义一个 *requirements.txt* 文件。
 - en: Please have a look at all the libraries used in your code and list them down
     in a text file named *requirements.tx*t. It’s a good practice to list the exact
     version of the library, which you can find out when you run *pip freeze* on the
     terminal of your environment. My [requirements](https://github.com/arunnthevapalan/diabetes-prediction-app/blob/master/requirements.txt) file
     for the diabetes prediction example looks like this,
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 请查看你代码中使用的所有库，并将它们列在一个名为 *requirements.txt* 的文本文件中。列出库的确切版本是一种好习惯，你可以在环境的终端上运行
+    *pip freeze* 来找到这些版本。我为糖尿病预测示例准备的 [requirements](https://github.com/arunnthevapalan/diabetes-prediction-app/blob/master/requirements.txt)
+    文件如下所示，
 - en: '[PRE0]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '**2\. Writing the Dockerfile**'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**2. 编写 Dockerfile**'
 - en: The idea here is we are trying to create a file named *Dockerfile *that can
     be used to build the required virtual environment for our app to run on. Think
     of it as our instructions manual on building the required environment on top of
     any system!
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里的想法是，我们尝试创建一个名为 *Dockerfile* 的文件，该文件可用于构建我们应用程序运行所需的虚拟环境。把它当作在任何系统上构建所需环境的说明手册！
 - en: Let’s write our Dockerfile for the example at hand,
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们为手头的示例编写 Dockerfile，
 - en: '[PRE1]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: That’s it. 6 lines of code. All in sequence. Every line builds on top of the
     previous one. Let’s dissect the lines.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这些了。6行代码。按顺序排列。每一行都在构建在前一行之上。让我们逐行解析。
 - en: Every Dockerfile has to start with a ***FROM***. What follows ***FROM ***must
     be an already existing image (either locally on your machine or from [the DockerHub
     repository](https://hub.docker.com/search?type=image)). Since our environment
     is based on Python, we use *python:3.7* as our base image and eventually create
     a new image using this Dockerfile.
+  id: totrans-43
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 每个Dockerfile必须以 ***FROM*** 开头。紧接着 ***FROM ***的内容必须是一个已存在的镜像（本地或来自 [DockerHub仓库](https://hub.docker.com/search?type=image)）。由于我们的环境基于Python，我们使用*python:3.7*作为基础镜像，并最终使用此Dockerfile创建一个新镜像。
 - en: Streamlit runs on a default port of 8501\. So for the app to run, it is important
     to expose that particular port. We use the ***EXPOSE ***command for that.
+  id: totrans-44
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Streamlit默认运行在8501端口。因此，为了使应用程序运行，重要的是要暴露该端口。我们使用 ***EXPOSE ***命令来实现。
 - en: '***WORKDIR ***sets the working directory for the application. The rest of the
     commands will be executed from this path.'
+  id: totrans-45
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '***WORKDIR ***设置应用程序的工作目录。其余命令将从这个路径执行。'
 - en: Here ***COPY ***command copies all of the files from your Docker client’s current
     directory to the working directory of the image.
+  id: totrans-46
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 这里的 ***COPY ***命令将Docker客户端当前目录中的所有文件复制到镜像的工作目录。
 - en: '***RUN ***command ensures that the libraries we defined in the *requirements.txt*
     are installed appropriately.'
+  id: totrans-47
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '***RUN ***命令确保我们在*requirements.txt*中定义的库已正确安装。'
 - en: '***CMD ***specifies what command to run within the container as it starts.
     Hence, *streamlit run app.py* ensures that the Streamlit app runs as soon as the
     container has spun up.'
+  id: totrans-48
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '***CMD ***指定在容器启动时运行的命令。因此，*streamlit run app.py*确保Streamlit应用程序在容器启动后立即运行。'
 - en: Writing Dockerfiles takes some practice, and you can’t possibly master all of
     the commands available unless you spend a lot of time with Docker. I recommend
     getting comfortable with some basic commands and referring to [the docker's official
     documentation](https://docs.docker.com/engine/reference/commandline/docker/) for
     everything else.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 编写Dockerfiles需要一些实践，除非你花费大量时间在Docker上，否则无法掌握所有可用命令。我建议先熟悉一些基本命令，然后参考 [Docker的官方文档](https://docs.docker.com/engine/reference/commandline/docker/)
+    。
 - en: '**3\. Building the image**'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**3\. 构建镜像**'
 - en: Now that we have defined the Dockerfile, it’s time to build it and create an
     image. The idea is this image we create is the reproducible environment irrelevant
     to the underlying system.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经定义了Dockerfile，是时候构建它并创建一个镜像了。这个镜像的目的是创建一个与底层系统无关的可重复环境。
 - en: '[PRE2]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: As the name suggests *build *command builds the image layer by layer as defined
     in the Dockerfile. It’s always a good practice to tag an image with a name and
     version number as *<name>:version.number .*
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 如名字所示，*build *命令按Dockerfile中定义的逐层构建镜像。最好给镜像标记一个名称和版本号，如*<name>:version.number*。
 - en: The dot at the end signifies the path for the Dockerfile, which is the current
     directory.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 末尾的点表示Dockerfile的路径，即当前目录。
 - en: Wait, I built the image, but what do I do with it? Depending on the requirements,
     you can [share the built images on DockerHub](https://docs.docker.com/get-started/part3/)
     or [deploy them on the cloud](https://docs.docker.com/engine/context/aci-integration/),
     and so on. But first, now you run the image to get the container.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 等等，我构建了镜像，但我该如何处理它？根据要求，你可以 [在DockerHub上分享构建的镜像](https://docs.docker.com/get-started/part3/)
+    或 [将其部署到云端](https://docs.docker.com/engine/context/aci-integration/)，等等。但首先，你现在需要运行镜像以获取容器。
 - en: As the name suggests, the *run *command runs the specified container on the
     host machine. *--publish 8501:8501* lets the port 8501 of the container to be
     mapped to the port 8501 of the host machine, while *-it* is needed for running
     interactive processes (like shell/terminal).
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 如名字所示，*run *命令在主机上运行指定的容器。*--publish 8501:8501* 将容器的8501端口映射到主机的8501端口，而*-it*
+    用于运行交互式进程（如shell/terminal）。
 - en: '[PRE3]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Now follow the link prompted on your terminal to see the magic yourself! ;)
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在跟随终端上提示的链接，亲自见证奇迹吧！;)
 - en: '![](../Images/8a5514c448dc9fd17532eea0db842931.png)'
+  id: totrans-59
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8a5514c448dc9fd17532eea0db842931.png)'
 - en: '*You did it! (Photo by [Nghia Le](https://unsplash.com/@lephunghia?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral))*'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '*你做到了！（照片由 [Nghia Le](https://unsplash.com/@lephunghia?utm_source=medium&utm_medium=referral)
+    提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)）*'
 - en: '[Original](https://towardsdatascience.com/how-to-dockerize-any-machine-learning-application-f78db654c601).
     Reposted with permission.'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/how-to-dockerize-any-machine-learning-application-f78db654c601)。已获许可转载。'
 - en: '**Bio:** [Arunn Thevapalan](https://www.linkedin.com/in/arunn-thevapalan/)
     is a Senior Data Scientist based in Sri Lanka with a mission to inspire enthusiasts
     to break in and grow in the world of data science by sharing learnings, approaches,
     and everything about the journey to become a successful data scientist.'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：** [Arunn Thevapalan](https://www.linkedin.com/in/arunn-thevapalan/) 是一位总部位于斯里兰卡的高级数据科学家，他的使命是通过分享学习、方法和成为成功数据科学家的全过程，激励热爱者进入并成长于数据科学领域。'
 - en: '**Related:**'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[5 Reasons Why Containers Will Rule Data Science](https://www.kdnuggets.com/2020/11/gigantum-containers-will-rule-data-science.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5 个原因说明容器将主宰数据科学](https://www.kdnuggets.com/2020/11/gigantum-containers-will-rule-data-science.html)'
 - en: '[Strategies of Docker Images Optimization](https://www.kdnuggets.com/2020/10/strategies-docker-images-optimization.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Docker 镜像优化策略](https://www.kdnuggets.com/2020/10/strategies-docker-images-optimization.html)'
 - en: '[Deploy a Machine Learning Pipeline to the Cloud Using a Docker Container](https://www.kdnuggets.com/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Docker 容器将机器学习管道部署到云端](https://www.kdnuggets.com/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)'
 - en: More On This Topic
+  id: totrans-67
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Introduction to NExT-GPT: Any-to-Any Multimodal Large Language Model](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[NExT-GPT 介绍：任意到任意的多模态大型语言模型](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)'
 - en: '[SHAP: Explain Any Machine Learning Model in Python](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SHAP：在 Python 中解释任何机器学习模型](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)'
 - en: '[How to Get Your First Job in Data Science without Any Work Experience](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在没有工作经验的情况下获得数据科学的第一份工作](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)'
 - en: '[Read This Before You Take Any Free Data Science Course](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在参加任何免费数据科学课程之前请阅读此内容](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)'
 - en: '[Essential Math for Data Science: Eigenvectors and Application to PCA](https://www.kdnuggets.com/2022/06/essential-math-data-science-eigenvectors-application-pca.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中的基本数学：特征向量及其在 PCA 中的应用](https://www.kdnuggets.com/2022/06/essential-math-data-science-eigenvectors-application-pca.html)'
 - en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[创建一个从音频中提取主题的 Python Web 应用程序](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
