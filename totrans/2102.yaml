@@ -1,208 +1,311 @@
 - en: How to Fine-Tune BERT for Sentiment Analysis with Hugging Face Transformers
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何使用 Hugging Face Transformers 微调 BERT 进行情感分析
 - en: 原文：[https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)
 - en: '![How to Fine-Tune BERT for Sentiment Analysis with Hugging Face Transformers](../Images/0e059bc833fc77fec44bf0e5333af868.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![如何使用 Hugging Face Transformers 微调 BERT 进行情感分析](../Images/0e059bc833fc77fec44bf0e5333af868.png)'
 - en: Image created by Author using Midjourney
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者使用 Midjourney 创建
 - en: Introduction
+  id: totrans-4
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 介绍
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Sentiment analysis refers to natural language processing (NLP) techniques that
     are used to judge the sentiment expressed within a body of text and is an essential
     technology behind modern applications of customer feedback assessment, social
     media sentiment tracking, and market research. Sentiment helps businesses and
     other organizations assess public opinion, offer improved customer service, and
     augment their products or services.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 情感分析是指自然语言处理（NLP）技术，用于判断文本中的情感表达，是现代客户反馈评估、社交媒体情感跟踪和市场研究应用背后的核心技术。情感分析帮助企业和其他组织评估公众意见，提供更好的客户服务，并增强他们的产品或服务。
 - en: BERT, which is short for Bidirectional Encoder Representations from Transformers,
     is a language processing model that, when initially released, improved the state
     of the art of NLP by having an important understanding of words in context, surpassing
     prior models by a considerable margin. BERT's bidirectionality — reading both
     the left and right context of a given word — proved especially valuable in use
     cases such as sentiment analysis.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: BERT，即双向编码器表示模型，是一种语言处理模型，当初发布时，通过对词语上下文的重要理解，显著提升了 NLP 的最先进水平。BERT 的双向性——同时读取给定词的左右上下文——在情感分析等用例中表现得尤为有价值。
 - en: Throughout this comprehensive walk-through, you will learn how to fine-tune
     BERT for your own sentiment analysis projects, using the Hugging Face Transformers
     library. Whether you are a newcomer or an existing NLP practitioner, we are going
     to cover a lot of practical strategies and considerations in the course of this
     step-by-step tutorial to ensure that you are well equipped to fine-tune BERT properly
     for your own purposes.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个全面的指南中，你将学习如何使用 Hugging Face Transformers 库微调 BERT 以适应你自己的情感分析项目。无论你是新手还是现有的
+    NLP 从业者，我们将在这一步一步的教程中涵盖许多实用的策略和考虑因素，以确保你能够为自己的目的正确地微调 BERT。
 - en: Setting Up the Environment
+  id: totrans-14
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 设置环境
 - en: There are some necessary prerequisites that need to be done prior to fine-tuning
     our model. Specifically, this will require Hugging Face Transformers, in addition
     to both PyTorch and Hugging Face's datasets library at a minimum. You might do
     so as follows.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 在微调模型之前，需要完成一些必要的前置条件。具体而言，这将至少需要 Hugging Face Transformers，以及 PyTorch 和 Hugging
+    Face 的数据集库。你可以按如下方式进行。
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: And that's it.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这样。
 - en: Preprocessing the Data
+  id: totrans-18
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 数据预处理
 - en: You will need to choose some data to be using to train up the text classifier.
     Here, we'll be working with the IMDb movie review dataset, this being one of the
     places used to demonstrate sentiment analysis. Let's go ahead and load the dataset
     using the `datasets` library.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 你需要选择一些数据来训练文本分类器。在这里，我们将使用 IMDb 电影评论数据集，这是展示情感分析的地方之一。让我们使用 `datasets` 库来加载数据集。
 - en: '[PRE1]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: We will need to tokenize our data to prepare it for natural language processing
     algorithms. BERT has a special tokenization step which ensures that when a sentence
     fragment is transformed, it will stay as coherent for humans as it can. Let’s
     see how we can tokenize our data by using `BertTokenizer` from Transformers.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要对数据进行分词，以便为自然语言处理算法做准备。BERT 有一个特殊的分词步骤，可以确保句子片段在转换时尽可能保持对人类的连贯性。让我们看看如何通过使用
+    `BertTokenizer` 从 Transformers 来分词数据。
 - en: '[PRE2]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Preparing the Dataset
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 准备数据集
 - en: Let's split the dataset into training and validation sets to evaluate the model's
     performance. Here’s how we will do so.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将把数据集拆分为训练集和验证集，以评估模型的性能。以下是我们将如何进行。
 - en: '[PRE3]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: DataLoaders help manage batches of data efficiently during the training process.
     Here is how we will create DataLoaders for our training and validation datasets.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: DataLoaders 有助于在训练过程中高效地管理数据批次。以下是我们将如何为训练集和验证集创建 DataLoaders。
 - en: '[PRE4]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Setting Up the BERT Model for Fine-Tuning
+  id: totrans-28
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 为微调设置 BERT 模型
 - en: We will use the `BertForSequenceClassification` class for loading our model,
     which has been pre-trained for sequence classification tasks. This is how we will
     do so.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用 `BertForSequenceClassification` 类来加载我们的模型，该模型已针对序列分类任务进行了预训练。以下是我们将如何进行。
 - en: '[PRE5]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Training the Model
+  id: totrans-31
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 训练模型
 - en: Training our model involves defining the training loop, specifying a loss function,
     an optimizer, and additional training arguments. Here is how we can set up and
     run the training loop.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练我们的模型涉及定义训练循环，指定损失函数、优化器以及其他训练参数。以下是我们如何设置和运行训练循环。
 - en: '[PRE6]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Evaluating the Model
+  id: totrans-34
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 模型评估
 - en: Evaluating the model involves checking its performance using metrics such as
     accuracy, precision, recall, and F1-score. Here is how we can evaluate our model.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 评估模型涉及使用准确率、精确率、召回率和 F1-score 等指标来检查其性能。以下是我们如何评估模型。
 - en: '[PRE7]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Making Predictions
+  id: totrans-37
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 进行预测
 - en: After fine-tuning, we are now able to use the model for making predictions on
     new data. This is how we can perform inference with our model on our validation
     set.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 微调后，我们现在可以使用模型对新数据进行预测。这是我们如何在验证集上进行推断的。
 - en: '[PRE8]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Summary
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 总结
 - en: This tutorial has covered fine-tuning BERT for sentiment analysis with Hugging
     Face Transformers, and included setting up the environment, dataset preparation
     and tokenization, DataLoader creation, model loading, and training, as well as
     model evaluation and real-time model prediction.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程涵盖了使用 Hugging Face Transformers 对 BERT 进行情感分析的微调，并包括环境设置、数据集准备和分词、DataLoader
+    创建、模型加载和训练，以及模型评估和实时模型预测。
 - en: Fine-tuning BERT for sentiment analysis can be valuable in many real-world situations,
     such as analyzing customer feedback, tracking social media tone, and much more.
     By using different datasets and models, you can expand upon this for your own
     natural language processing projects.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 对 BERT 进行情感分析的微调在许多现实世界情境中都非常有价值，例如分析客户反馈、追踪社交媒体的语调等。通过使用不同的数据集和模型，你可以为自己的自然语言处理项目扩展这一方法。
 - en: 'For additional information on these topics, check out the following resources:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关这些主题的更多信息，请查看以下资源：
 - en: '[Hugging Face Transformers Documentation](https://huggingface.co/transformers/)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Hugging Face Transformers 文档](https://huggingface.co/transformers/)'
 - en: '[PyTorch Documentation](https://pytorch.org/docs/stable/index.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyTorch 文档](https://pytorch.org/docs/stable/index.html)'
 - en: '[Hugging Face Datasets Documentation](https://huggingface.co/docs/datasets/)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Hugging Face 数据集文档](https://huggingface.co/docs/datasets/)'
 - en: These resources are worth investigating in order to dive more deeply into these
     issues and advance your natural language processing and sentiment analysis abilities.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些资源值得深入研究，以更好地理解这些问题并提升你的自然语言处理和情感分析能力。
 - en: '[](https://www.linkedin.com/in/mattmayo13/)****[Matthew Mayo](https://www.kdnuggets.com/wp-content/uploads/./profile-pic.jpg)****
     ([**@mattmayo13**](https://twitter.com/mattmayo13)) holds a master''s degree in
     computer science and a graduate diploma in data mining. As managing editor of
@@ -213,33 +316,52 @@
     algorithms, and exploring emerging AI. He is driven by a mission to democratize
     knowledge in the data science community. Matthew has been coding since he was
     6 years old.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '[](https://www.linkedin.com/in/mattmayo13/)****[马修·梅奥](https://www.kdnuggets.com/wp-content/uploads/./profile-pic.jpg)****
+    ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为 [KDnuggets](https://www.kdnuggets.com/)
+    和 [Statology](https://www.statology.org/) 的执行编辑以及 [Machine Learning Mastery](https://machinelearningmastery.com/)
+    的特约编辑，马修旨在让复杂的数据科学概念变得易于理解。他的职业兴趣包括自然语言处理、语言模型、机器学习算法以及探索新兴的人工智能。他致力于使数据科学社区中的知识实现民主化。马修从6岁起就开始编程。'
 - en: More On This Topic
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[How to Finetune Mistral AI 7B LLM with Hugging Face AutoTrain](https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Hugging Face AutoTrain 微调 Mistral AI 7B LLM](https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain)'
 - en: '[How to Use GPT for Generating Creative Content with Hugging Face…](https://www.kdnuggets.com/how-to-use-gpt-for-generating-creative-content-with-hugging-face-transformers)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 GPT 生成创意内容，结合 Hugging Face……](https://www.kdnuggets.com/how-to-use-gpt-for-generating-creative-content-with-hugging-face-transformers)'
 - en: '[Building a Recommendation System with Hugging Face Transformers](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Hugging Face Transformers 构建推荐系统](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)'
 - en: '[Using Hugging Face Transformers for Emotion Detection in Text](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Hugging Face Transformers 进行文本情感检测](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
 - en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何从头开始构建和训练 Transformer 模型……](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
 - en: '[How to Translate Languages with MarianMT and Hugging Face Transformers](https://www.kdnuggets.com/how-to-translate-languages-with-marianmt-and-hugging-face-transformers)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 MarianMT 和 Hugging Face Transformers 翻译语言](https://www.kdnuggets.com/how-to-translate-languages-with-marianmt-and-hugging-face-transformers)'
