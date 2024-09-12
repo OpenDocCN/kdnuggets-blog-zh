@@ -1,11 +1,15 @@
 - en: Building a Scalable ETL with SQL + Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 SQL + Python 构建可扩展的 ETL
 - en: 原文：[https://www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html](https://www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html](https://www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html)
 - en: In this short post, we’ll build a modular ETL pipeline that transforms data
     with SQL and visualizes it with Python and R. This pipeline will be a fully scalable
     ETL pipeline in a cost-effective manner. It can be reproduced in some of your
@@ -16,181 +20,270 @@
     in the [ETL template here](https://github.com/ploomber/projects/tree/master/templates/etl).
     I’ll review some of the principles that are in this template, and provide a deeper
     look into how to achieve those.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇简短的文章中，我们将构建一个模块化的 ETL 流水线，该流水线使用 SQL 转换数据，并使用 Python 和 R 进行可视化。这个流水线将以经济高效的方式实现完全可扩展。它可以在你的一些其他项目中复制使用。我们将利用一个示例数据集（StackExchange），查看如何将数据提取到特定格式，进行转换和清理，然后将其加载到数据库中，以便进行下游分析，比如分析报告或机器学习预测。如果你想直接查看实时示例，你可以在[ETL
+    模板这里](https://github.com/ploomber/projects/tree/master/templates/etl)查看整个流水线。我将回顾一下这个模板中的一些原则，并提供如何实现这些原则的深入了解。
 - en: '**The main concepts we’ll cover:**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**我们将涵盖的主要概念：**'
 - en: Connect to any database via Python.
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过 Python 连接到任何数据库。
 - en: '[Templating SQL tasks](https://docs.ploomber.io/en/latest/user-guide/sql-templating.html)'
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL 任务模板化](https://docs.ploomber.io/en/latest/user-guide/sql-templating.html)'
 - en: Parallelization - running queries in parallel with Ploomber
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 并行化 - 使用 Ploomber 并行运行查询
 - en: Orchestration through DAGs
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过 DAGs 进行协调
 - en: '* * *'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-9
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Architecture Diagram
+  id: totrans-14
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 架构图
 - en: We’ll first start by reviewing the overall architecture of our pipeline with
     the dataset to understand better how it’s built and what we can achieve with this
     demo pipeline.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将首先回顾一下我们流水线的整体架构和数据集，以更好地理解它是如何构建的以及我们可以通过这个演示流水线实现什么。
 - en: '![Architecture diagram](../Images/7ae9bfafceb1faa5c59039dbe93dd9f6.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![架构图](../Images/7ae9bfafceb1faa5c59039dbe93dd9f6.png)'
 - en: 'Here we can see the pipeline; it starts by extracting our dataset using and
     storing it (this snippet’s source can be found at preprocess/download.py):'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里我们可以看到流水线；它开始时提取我们的数据集并存储它（这个代码片段的来源可以在 preprocess/download.py 找到）：
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: With Ploomber you can parameterize the paths and create dependencies on these
     paths. We can see how each output, like the extracted and zipped data, is saved
     back into the task’s path specified in the pipeline.yaml. Breaking this component
     into a modular piece allows us to develop faster. The next time the pipeline changes,
     we won’t have to rerun this task as its outputs are cached.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Ploomber，你可以参数化路径并在这些路径上创建依赖关系。我们可以看到每个输出，如提取和压缩的数据，如何被保存回 pipeline.yaml
+    中指定的任务路径。将这个组件拆分成模块化部分使我们能够更快地开发。下次流水线发生变化时，我们不需要重新运行这个任务，因为它的输出是缓存的。
 - en: Extractions, Formating, and Aggregations
+  id: totrans-20
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 提取、格式化和聚合
 - en: 'The next phase in our pipeline is to transform the raw data and aggregate it.
     We have configured the client once, through a get_client function (taken from
     the db.py):'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们流水线中的下一个阶段是转换原始数据并进行聚合。我们已经通过一个 get_client 函数（取自 db.py）配置了客户端一次：
 - en: '[PRE1]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'I then created SQL queries that leverage this client each time (we can see
     it’s a local DB, but it depends on the use case and can connect to anything SQLAlchemy
     supports). This same client can be used or another one can be used for the aggregations.
     In this pipeline, I took the raw data and push it into 3 different tables: **users,
     comments, and posts**. We’ll talk in the next section about which template I’ve
     used and how does it work.'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我创建了利用这个客户端的 SQL 查询（我们可以看到这是一个本地数据库，但它依赖于用例并可以连接到 SQLAlchemy 支持的任何东西）。可以使用这个相同的客户端，也可以使用其他客户端进行聚合。在这个管道中，我将原始数据推送到
+    3 个不同的表中：**users、comments 和 posts**。我们将在下一节中讨论我使用了哪个模板以及它是如何工作的。
 - en: SQL As Templates
+  id: totrans-24
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SQL 作为模板
 - en: Another capability in Ploomber is that users can just write the SQL queries,
     declare the inputs/output file and Ploomber dumps the data into the correct location.
     This can be completely automated through templates so you can have 1 or many clients,
     multiple input or output tables and it allows you to focus on actually writing
     SQL and not dealing with the DB client, connection strings, or custom scripts
     that can’t be reused.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: Ploomber 还有另一个功能，用户可以直接编写 SQL 查询，声明输入/输出文件，Ploomber 会将数据转储到正确的位置。这可以通过模板完全自动化，因此你可以有一个或多个客户端，多个输入或输出表，这使你可以专注于实际编写
+    SQL，而不是处理数据库客户端、连接字符串或无法重用的自定义脚本。
 - en: 'The first example we’ll see relates to the previous section - uploading our
     CSVs as a table (this snippet is taken from the *pipeline.yaml*):'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将看到的第一个示例与上一节相关——将我们的 CSV 上传为表（此代码片段取自 *pipeline.yaml*）：
 - en: '[PRE2]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'We can see here that our source data is the users.csv we just got from our
     data extraction task, we’re using the SQLUpload class and uploading a users table.
     We’re creating each of these tasks for the three tables we’ve got: users, comments,
     and posts.'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到，我们的源数据是刚从数据提取任务中获得的 `users.csv`，我们正在使用 SQLUpload 类上传 `users` 表。我们为获得的三个表（`users`、`comments`
+    和 `posts`）创建了这些任务。
 - en: 'Now since the raw data was loaded into the database, we’d like to create some
     aggregations, to do so, we can continue with our users table example and see how
     to  leverage .sql files within our pipeline:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，由于原始数据已加载到数据库中，我们希望创建一些聚合。为此，我们可以继续使用 `users` 表的示例，看看如何在我们的管道中利用 .sql 文件：
 - en: '[PRE3]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: We can see our source is the *upvotes-by-location.sql* (right below this paragraph),
     the output product is another table **upvotes_by_location**, and it depends on
     the **upload-users** task.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到我们的源是 *upvotes-by-location.sql*（就在本段下方），输出产品是另一个表 **upvotes_by_location**，它依赖于
+    **upload-users** 任务。
 - en: 'We can dive a level deeper to the source code in the *./sql* folder:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以深入到 *./sql* 文件夹中的源代码：
 - en: '[PRE4]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Here we’re overwriting the table (parameterized from the pipeline.yaml), grouping
     by location, and taking only users with 1+ votes. Separating these tasks and components
     of table uploads, aggregations and grouping will also allow us to parallelize
     our workflow and run faster - we’ll cover it next. The final step in our sample
     pipeline is a plotting task that takes those newly created tables and visualizes
     them.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们正在覆盖表（从 pipeline.yaml 中参数化），按位置分组，并仅保留投票数为 1+ 的用户。将这些任务和表上传、聚合和分组的组件分开，也将允许我们并行化工作流程，加快速度——我们将在下文中讨论。我们示例管道中的最后一步是绘图任务，它将这些新创建的表可视化。
 - en: Parallelization And Orchestration
+  id: totrans-35
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 并行化和协调
 - en: Having this notion of a templatized project, orchestrating the tasks of SQL
     allows us to develop test, and deploy datasets for multiple purposes. In our example,
     we’re running on 3 tables with a limited number of rows and columns. In an enterprise
     setting, for instance, we can easily get to 20+ tables with millions of rows,
     which can become a real pain to run sequentially.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 拥有这种模板化项目的概念，协调 SQL 任务允许我们开发、测试和部署多个目的的数据集。在我们的示例中，我们在 3 个表上运行，具有有限的行数和列数。在企业环境中，例如，我们可以轻松扩展到
+    20+ 个表，拥有数百万行，这可能会成为按顺序运行的实际难题。
 - en: '![Parallelization and orchestration](../Images/3b85db1f729f3aa1dc0313d5149d6f31.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![并行化和协调](../Images/3b85db1f729f3aa1dc0313d5149d6f31.png)'
 - en: In our case, orchestration and parallelization helped us to focus on actual
     code which is the main task, not infrastructure. We’re able to generate those
     3 independent workflows, run them in parallel and reduce our time for insights.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的案例中，协调和并行化帮助我们专注于实际代码，这是主要任务，而不是基础设施。我们能够生成这 3 个独立的工作流程，并行运行它们，减少我们的洞察时间。
 - en: Conclusion
+  id: totrans-39
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: In this post I tried to cover most of the software engineering best practices
     Ploomber can offer through an ETL pipeline (SQL based), some of these concepts
     like modularity, code reusability, and portability can save a lot of time and
     improve the overall efficiency of your team. We’re always up for feedback and
     questions, make sure to give it a try yourself, and share your experiences. Please
     join our slack channel for further updates or questions!
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我尝试覆盖 Ploomber 通过 ETL 管道（基于 SQL）所能提供的大多数软件工程最佳实践。这些概念，如模块化、代码重用和可移植性，可以节省大量时间，并提高团队的整体效率。我们总是欢迎反馈和问题，请务必亲自尝试，并分享你的经验。请加入我们的
+    Slack 频道获取更多更新或提出问题！
 - en: '**[Ido Michael](https://www.linkedin.com/in/ido-michael/)** co-founded Ploomber
     to help data scientists build faster. He''d been working at AWS leading data engineering/science
     teams. Single-handedly he built 100’s of data pipelines during those customer
@@ -198,33 +291,51 @@
     his MS at Columbia University. He focused on building Ploomber after he constantly
     found that projects dedicated about 30% of their time just to refactoring the
     dev work (prototype) into a production pipeline.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Ido Michael](https://www.linkedin.com/in/ido-michael/)** 共同创办了 Ploomber，旨在帮助数据科学家更快地构建数据管道。他曾在
+    AWS 担任数据工程/科学团队的负责人。在与客户的合作中，他与团队一起单独构建了数百条数据管道。他来自以色列，前往纽约在哥伦比亚大学攻读硕士学位。在不断发现项目将约
+    30% 的时间用于将开发工作（原型）重构为生产管道后，他专注于构建 Ploomber。'
 - en: More On This Topic
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Building Your First ETL Pipeline with Bash](https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Bash 构建你的第一个 ETL 管道](https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash)'
 - en: '[Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通用化和可扩展的最优稀疏决策树（GOSDT）](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
 - en: '[How to Build a Scalable Data Architecture with Apache Kafka](https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Apache Kafka 构建可扩展的数据架构](https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html)'
 - en: '[SQL and Data Integration: ETL and ELT](https://www.kdnuggets.com/2023/01/sql-data-integration-etl-elt.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL 和数据集成：ETL 和 ELT](https://www.kdnuggets.com/2023/01/sql-data-integration-etl-elt.html)'
 - en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
 - en: '[What Does ETL Have to Do with Machine Learning?](https://www.kdnuggets.com/2022/08/etl-machine-learning.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ETL 与机器学习有什么关系？](https://www.kdnuggets.com/2022/08/etl-machine-learning.html)'
