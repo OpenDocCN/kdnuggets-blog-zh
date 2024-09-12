@@ -1,19 +1,27 @@
 - en: Urban Sound Classification with Neural Networks in Tensorflow
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Tensorflow 中的神经网络进行城市声音分类
 - en: 原文：[https://www.kdnuggets.com/2016/09/urban-sound-classification-neural-networks-tensorflow.html](https://www.kdnuggets.com/2016/09/urban-sound-classification-neural-networks-tensorflow.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/09/urban-sound-classification-neural-networks-tensorflow.html](https://www.kdnuggets.com/2016/09/urban-sound-classification-neural-networks-tensorflow.html)
 - en: '**By Aaqib Saeed, University of Twente**.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Aaqib Saeed，特文特大学**。'
 - en: We all got exposed to different sounds every day. Like, the sound of car horns,
     siren and music etc. How about teaching computer to classify such sounds automatically
     into categories!
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们每天都会接触到不同的声音，比如汽车喇叭声、警报声和音乐声等。那是否可以教计算机自动将这些声音分类到不同的类别中呢！
 - en: In this blog post, we will learn techniques to classify urban sounds into categories
     using machine learning. Earlier blog posts covered classification problems where
     data can be easily expressed in vector form. For example, in the textual dataset,
@@ -23,32 +31,48 @@
     it comes to sound, feature extraction is not quite straightforward. Today, we
     will first see what features can be extracted from sound data and how easy it
     is to extract such features in Python using open source library called [Librosa](http://librosa.github.io).
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇博客文章中，我们将学习使用机器学习将城市声音分类到不同类别中的技术。早期的博客文章涵盖了可以轻松表达为向量形式的数据分类问题。例如，在文本数据集中，语料库中的每个词汇成为特征，tf-idf
+    评分成为其值。同样，在[异常检测数据集](http://aqibsaeed.github.io/2016-08-10-logistic-regression-tf/)中，我们看到了两个特征“吞吐量”和“延迟”，这些特征输入到分类器中。但是，当涉及到声音时，特征提取并不是很简单。今天，我们将首先看看可以从声音数据中提取哪些特征，以及使用名为[Librosa](http://librosa.github.io)的开源库在
+    Python 中提取这些特征的难易程度。
 - en: 'To get started with this tutorial, please make sure you have following tools
     installed:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 要开始本教程，请确保你已安装以下工具：
 - en: Tensorflow
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Tensorflow
 - en: Librosa
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Librosa
 - en: Numpy
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Numpy
 - en: Matplotlib
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Matplotlib
 - en: Dataset
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据集
 - en: 'We need a labelled dataset that we can feed into machine learning algorithm.
     Fortunately, some researchers published [urban sound dataset.](https://serv.cusp.nyu.edu/projects/urbansounddataset/)
     It contains 8,732 labelled sound clips (4 seconds each) from ten classes: *air
@@ -61,83 +85,131 @@
     It’s because *.mp3* is lossy music compression technique, check this [link](http://www.premiumbeat.com/blog/when-to-use-wav-files-when-to-use-mp3-files-what-is-the-difference-between-the-two-formats/) for
     more information. To keep things simple, we will use sound files from only one
     fold.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要一个标注的数据集，可以将其输入到机器学习算法中。幸运的是，一些研究人员发布了[城市声音数据集。](https://serv.cusp.nyu.edu/projects/urbansounddataset/)
+    该数据集包含来自十个类别的8,732个标注声音片段（每个4秒）：*空调、汽车喇叭、儿童玩耍、狗吠、钻孔、引擎空转、枪声、打桩机、警报声和街头音乐*。该数据集默认被分为10折。要获取数据集，请访问以下[链接](https://serv.cusp.nyu.edu/projects/urbansounddataset/urbansound8k.html)，如果你希望在研究中使用此数据集，请务必注明来源。在该数据集中，声音文件为
+    *.wav* 格式，但如果你有其他格式的文件，如 *.mp3*，则最好将其转换为 *.wav* 格式。这是因为 *.mp3* 是一种有损音乐压缩技术，更多信息请查看[这个链接](http://www.premiumbeat.com/blog/when-to-use-wav-files-when-to-use-mp3-files-what-is-the-difference-between-the-two-formats/)。为了简化，我们将只使用来自一个折的数据集。
 - en: Let’s read some sound files and visualise to understand how different each sound
     clip is from other. Matplotlib’s *specgram* method performs all the required calculation
     and plotting of the spectrum. Likewise, Librosa provide handy method for wave
     and log power spectrogram plotting. By looking at the plots shown in Figure 1,
     2 and 3, we can see apparent differences between sound clips of different classes.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们读取一些声音文件并进行可视化，以理解每个声音片段之间的差异。Matplotlib 的 *specgram* 方法执行了所有必要的计算和谱图绘制。同样，Librosa
+    提供了波形图和对数功率谱图绘制的便捷方法。通过查看图 1、2 和 3 中显示的图形，我们可以看到不同类别声音片段之间的明显差异。
 - en: '![Sound Wave Plot](../Images/3daab059741ffd05668eb233443a168b.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![声音波形图](../Images/3daab059741ffd05668eb233443a168b.png)'
 - en: '*Figure 1\. Waveplot.*'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 1. 波形图。*'
 - en: '![Spectrogram](../Images/b4b540855252b4999b51723f864ee42a.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![谱图](../Images/b4b540855252b4999b51723f864ee42a.png)'
 - en: '*Figure 2\. Spectrogram.*'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 2\. 谱图。*'
 - en: '![Sound Log Power Spectrogram](../Images/28733c619718007d1c2f766578afec0a.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![声音日志功率谱图](../Images/28733c619718007d1c2f766578afec0a.png)'
 - en: '*Figure 3\. Sound Log Power Spectrogram.*'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 3\. 声音日志功率谱图。*'
 - en: '* * *'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-20
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 支持'
 - en: '* * *'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Image Classification with Convolutional Neural Networks (CNNs)](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用卷积神经网络（CNNs）进行图像分类](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
 - en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Tensorflow 训练图像分类模型的指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
 - en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TensorFlow 和 Keras 构建和训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
 - en: '[10 Simple Things to Try Before Neural Networks](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[神经网络前的10个简单尝试](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)'
 - en: '[Interpretable Neural Networks with PyTorch](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 PyTorch 解释性神经网络](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)'
 - en: '[Deep Neural Networks Don''t Lead Us Towards AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度神经网络不会将我们带向 AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)'
