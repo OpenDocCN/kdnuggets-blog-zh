@@ -3,70 +3,87 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 从零实现 AdaBoost 算法
 - en: 原文：[https://www.kdnuggets.com/2020/12/implementing-adaboost-algorithm-from-scratch.html](https://www.kdnuggets.com/2020/12/implementing-adaboost-algorithm-from-scratch.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/12/implementing-adaboost-algorithm-from-scratch.html](https://www.kdnuggets.com/2020/12/implementing-adaboost-algorithm-from-scratch.html)
 - en: '[comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [James Ajeeth J](https://www.linkedin.com/in/jamesajeeth/), Praxis Business
     School**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [James Ajeeth J](https://www.linkedin.com/in/jamesajeeth/)，Praxis 商学院**'
 - en: 'At the end of this article, you will be able to:'
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文结束时，你将能够：
 - en: Understand the working and math behind Adaptive Boosting (AdaBoost) Algorithm.
   id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 理解自适应 Boosting（AdaBoost）算法的工作原理和数学基础。
 - en: Able to write the AdaBoost python code from scratch.
   id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 能够从头编写 AdaBoost 的 Python 代码。
 - en: '* * *'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-8
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你在 IT 领域的职业发展'
 - en: '* * *'
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '**Introduction to Boosting:**'
   id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**Boosting 介绍：**'
 - en: Boosting is an ensemble technique that attempts to create strong classifiers
     from a number of weak classifiers. Unlike many machine learning models which focus
     on high quality prediction done using single model, boosting algorithms seek to
@@ -76,11 +93,14 @@
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: Boosting 是一种集成技术，旨在通过多个弱分类器创建强分类器。与许多专注于单一模型的高质量预测的机器学习模型不同，Boosting 算法通过训练一系列弱模型来提高预测能力，每个模型都弥补了其前身的不足。Boosting
+    赋予机器学习模型改进预测准确性的能力。
 - en: '**AdaBoost:**'
   id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**AdaBoost:**'
 - en: AdaBoost, short for Adaptive [Boosting](https://en.wikipedia.org/wiki/Boosting_(meta-algorithm)),
     is a [machine learning](https://en.wikipedia.org/wiki/Machine_learning) [algorithm](https://en.wikipedia.org/wiki/Meta-algorithm) formulated
     by Yoav Freund and [Robert Schapire](https://en.wikipedia.org/wiki/Robert_Schapire).
@@ -92,10 +112,15 @@
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: AdaBoost，全称为 自适应 [Boosting](https://en.wikipedia.org/wiki/Boosting_(meta-algorithm))，是一个由 Yoav
+    Freund 和 [Robert Schapire](https://en.wikipedia.org/wiki/Robert_Schapire) 制定的 [机器学习](https://en.wikipedia.org/wiki/Machine_learning) [算法](https://en.wikipedia.org/wiki/Meta-algorithm)。AdaBoost
+    技术采用深度为一的决策树模型。AdaBoost 实质上是一片由树桩组成的森林，而不是树。AdaBoost 通过对难以分类的实例加大权重，对已经处理好的实例减小权重来工作。AdaBoost
+    算法用于解决分类和回归问题。
 - en: 'Idea behind AdaBoost:'
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: AdaBoost 背后的理念：
 - en: Stumps (one node and two leaves) are not great in making accurate classification
     so it is nothing but a week classifier/ weak learner. Combination of many weak
     classifier makes a strong classifier and this is the principle behind the AdaBoost
@@ -104,56 +129,68 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 树桩（一个节点和两个叶子）在进行准确分类时效果不佳，因此它只是一个弱分类器/弱学习器。多个弱分类器的组合形成一个强分类器，这就是 AdaBoost 算法背后的原理。
 - en: Some stumps get more performance or classify better than others.
   id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一些树桩的性能比其他的更好或分类效果更佳。
 - en: Consecutive stump is made by taking the previous stumps mistakes into account.
   id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 连续树桩通过考虑之前树桩的错误来制作。
 - en: '**AdaBoost Algorithm from scratch:**'
   id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**从头实现 AdaBoost 算法：**'
 - en: Here I have used Iris dataset as an example in building the algorithm from scratch
     and also considered only two classes (Versicolor and Virginica) for better understanding.
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我使用了 Iris 数据集作为从零构建算法的示例，并且只考虑了两个类别（Versicolor 和 Virginica）以便于理解。
 - en: '![Image](../Images/684d4d2f6b75e9cc52851b944bbcc8bb.png)'
   id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/684d4d2f6b75e9cc52851b944bbcc8bb.png)'
 - en: '**Step 1: Assign Equal Weights to all the observations**'
   id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**步骤 1：为所有观察值分配相等的权重**'
 - en: Initially assign same weights to each record in the dataset.
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 最初为数据集中每个记录分配相同的权重。
 - en: '**Sample weight = 1/N**'
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**样本权重 = 1/N**'
 - en: Where N = Number of records
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中 N = 记录数
 - en: '![Image](../Images/523c83e9b569eaab7c22e1ac785e6e5f.png)'
   id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/523c83e9b569eaab7c22e1ac785e6e5f.png)'
 - en: '**Step 2: Classify random samples using stumps**'
   id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**步骤 2：使用决策桩分类随机样本**'
 - en: Draw random samples with replacement from original data with the probabilities
     equal to the sample weights and fit the model. Here **the model (base learners)
     used in AdaBoost is decision tree.** Decision trees are created with one depth
@@ -162,83 +199,102 @@
   id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 从原始数据中以与样本权重相等的概率进行有放回的随机抽样，并拟合模型。这里**在 AdaBoost 中使用的模型（基学习器）是决策树。** 决策树的深度为
+    1，包含一个节点和两个叶子，也称为决策桩。将模型拟合到随机样本中，并预测原始数据的类别。
 - en: '![Image](../Images/75827366c2da5626c461e8a3b4899753.png)![Image](../Images/b7dfa69c1c768a0195e9d0676398754a.png)![Image](../Images/909572be292032a4501fb9286cf58f17.png)'
   id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/75827366c2da5626c461e8a3b4899753.png)![Image](../Images/b7dfa69c1c768a0195e9d0676398754a.png)![Image](../Images/909572be292032a4501fb9286cf58f17.png)'
 - en: ‘pred1’ is the newly predicted class.
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: ‘pred1’ 是新预测的类别。
 - en: '**Step 3: Calculate Total Error**'
   id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**步骤 3：计算总误差**'
 - en: Total error is nothing but the sum of weights of misclassified record.
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 总误差就是被错误分类记录的权重之和。
 - en: '**Total Error** = **Weights of misclassified records**'
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**总误差** = **错误分类记录的权重**'
 - en: Total error will be always between 0 and 1.
   id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 总误差始终在 0 和 1 之间。
 - en: 0 represents perfect stump (correct classification)
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 0 表示完美的决策桩（正确分类）
 - en: 1 represents weak stump (misclassification)
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 1 表示弱决策桩（错误分类）
 - en: '![Image](../Images/f9fce9002733b6143b12c503b3b4449d.png)'
   id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/f9fce9002733b6143b12c503b3b4449d.png)'
 - en: '**Step 4: Calculate Performance of the Stump**'
   id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**步骤 4：计算决策树的性能**'
 - en: Using the Total Error, determine the performance of the base learner. The calculated
     performance of stump(α) value is used to update the weights in consecutive iteration
     and also used for final prediction calculation.
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用总误差来确定基学习器的性能。计算出的决策树（α）值用于在连续迭代中更新权重，也用于最终预测计算。
 - en: '**Performance of the stump(**α**)** **= ½ ln (1 – Total error/Total error)**'
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**决策树的性能（**α**）** **= ½ ln (1 – 总误差/总误差)**'
 - en: '![Image](../Images/71e36ca2c4146de740943dd37d0dea5c.png)![Image](../Images/820b41fa912784fd293e372d08a276e0.png)'
   id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/71e36ca2c4146de740943dd37d0dea5c.png)![Image](../Images/820b41fa912784fd293e372d08a276e0.png)'
 - en: 'Cases:'
   id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 案例：
 - en: If the total error is 0.5, then the performance of the stump will be zero.
   id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果总误差为 0.5，则决策树的性能将为零。
 - en: If the total error is 0 or 1, then the performance will become infinity or -infinity
     respectively.
   id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果总误差为 0 或 1，那么性能将分别变为无穷大或负无穷大。
 - en: When the total errors are equal to 1 or 0, the above equation will behave in
     a weird manner. So, in practice a small error term is added to prevent this from
     happening.
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 当总误差等于 1 或 0 时，上述方程将表现得很奇怪。因此，实际中会添加一个小的误差项以防止这种情况发生。
 - en: When the performance(α) is relatively large, the stump did a good job in classifying
     the records. When the performance(α) is relatively low, the stump did not do a
     good job in classifying the records. **Using the performance parameter(α), we
@@ -247,29 +303,35 @@
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 当性能（α）相对较高时，决策树在分类记录方面表现良好。当性能（α）相对较低时，决策树在分类记录方面表现不佳。**利用性能参数（α），我们可以增加被错误分类记录的权重，并减少被正确分类记录的权重。**
 - en: '**Step 5: Update Weights**'
   id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**步骤 5：更新权重**'
 - en: Based on the performance of the stump(α) update the weights. We need the next
     stump to correctly classify the misclassified record by increasing the corresponding
     sample weight and decreasing the sample weights of the correctly classified records.
   id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据决策树（α）的性能更新权重。我们需要下一个决策树通过增加相应样本权重和减少正确分类记录的样本权重来正确分类错误分类的记录。
 - en: '**New weight = Weight * e^((performance))** **→** **misclassified records**'
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '**新权重 = 权重 * e^((性能))** **→** **错误分类记录**'
 - en: '**New weight = Weight * e^(-(performance))** **→** **correctly classified records**'
   id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '**新权重 = 权重 * e^(-(性能))** **→** **正确分类记录**'
 - en: '![Image](../Images/26e66e6fc54b7e933e7bcad7f23eb31e.png)'
   id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/26e66e6fc54b7e933e7bcad7f23eb31e.png)'
 - en: If the ‘Label’ and ‘pred1’ are same (i.e. 1 or -1) then substituting the values
     in the above equation will give the equation corresponding to correctly classified
     record. Similarly, if the values are different then substituting the values in
@@ -413,55 +475,66 @@
   id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: t = 1.0*0.2 + 1.0*0.5 - 1.0*0.8 + 1.0*0.2 - 1.0*0.9 = -0.8
 - en: Taking the sign alone into consideration, the final prediction will be -1.0
     or the second class.
   id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅考虑符号的话，最终预测将是-1.0或第二类。
 - en: '![Image](../Images/c77356b05f968155144d230c1b761691.png)'
   id: totrans-78
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/c77356b05f968155144d230c1b761691.png)'
 - en: '**Advantages of AdaBoost Algorithm:**'
   id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '**AdaBoost算法的优点：**'
 - en: One of the many advantages of the AdaBoost Algorithm is it is fast, simple and
     easy to program.
   id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: AdaBoost算法的众多优点之一是它快速、简单且易于编程。
 - en: Boosting has been shown to be robust to overfitting.
   id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提升法已被证明对过拟合具有鲁棒性。
 - en: It has been extended to learning problems beyond binary classification (i.e.)
     it can be used with text or numeric data.
   id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它已被扩展到二分类问题之外的学习问题（即），可以用于文本或数值数据。
 - en: '**Drawbacks:**'
   id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '**缺点：**'
 - en: AdaBoost can be sensitive to noisy data and outliers.
   id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: AdaBoost对噪声数据和异常值可能敏感。
 - en: Weak classifiers being too weak can lead to low margins and overfitting.
   id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 弱分类器过于弱会导致低边际和过拟合。
 - en: '**Conclusion:**'
   id: totrans-86
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**结论：**'
 - en: AdaBoost helps in choosing the training set for each new classifier that is
     trained based on the results of the previous classifier. Also, while combining
     the results; it determines how much weight should be given to each classifier’s
@@ -471,101 +544,122 @@
   id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: AdaBoost通过根据前一个分类器的结果选择每个新分类器的训练集。此外，在组合结果时，它决定每个分类器提议的答案应该给予多少权重。它将弱学习者组合起来，创建一个强学习者，以纠正分类错误，这也是第一个成功的二分类问题的增强算法。
 - en: 'GitHub Link for the code file and data:'
   id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码文件和数据的GitHub链接：
 - en: '[https://github.com/jamesajeeth/Data-Science/tree/master/Adaboost%20from%20scratch](https://github.com/jamesajeeth/Data-Science/tree/master/Adaboost%20from%20scratch)'
   id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://github.com/jamesajeeth/Data-Science/tree/master/Adaboost%20from%20scratch](https://github.com/jamesajeeth/Data-Science/tree/master/Adaboost%20from%20scratch)'
 - en: '**References:**'
   id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '**参考文献：**'
 - en: 'Book:'
   id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 书籍：
 - en: Hastie, Trevor, Tibshirani, Robert, Friedman, Jerome, *The Elements of Statistical
     Learning, Data Mining, Inference, and Prediction, Second Edition.*
   id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Hastie, Trevor, Tibshirani, Robert, Friedman, Jerome, *《统计学习要素：数据挖掘、推断与预测（第二版）》*
 - en: 'Sites:'
   id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 站点：
 - en: '[Brief about Adaboost Algorithm](https://www.educba.com/adaboost-algorithm/)'
   id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关于Adaboost算法的简介](https://www.educba.com/adaboost-algorithm/)'
 - en: '[Statquest](https://statquest.org/adaboost-clearly-explained/)'
   id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Statquest](https://statquest.org/adaboost-clearly-explained/)'
 - en: '[Wikipedia](https://en.wikipedia.org/wiki/AdaBoost)'
   id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[维基百科](https://en.wikipedia.org/wiki/AdaBoost)'
 - en: '**Bio:** [**James Ajeeth J**](https://www.linkedin.com/in/jamesajeeth/) is
     a Postgraduate Student at Praxis Business School in Bangalore, India.'
   id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：** [**James Ajeeth J**](https://www.linkedin.com/in/jamesajeeth/) 是印度班加罗尔Praxis商学院的研究生。'
 - en: '**Related:**'
   id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Ensemble Methods for Machine Learning: AdaBoost](/2019/09/ensemble-methods-machine-learning-adaboost.html)'
   id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的集成方法：AdaBoost](/2019/09/ensemble-methods-machine-learning-adaboost.html)'
 - en: '[Exploring The Brute Force K-Nearest Neighbors Algorithm](/2020/10/exploring-brute-force-nearest-neighbors-algorithm.html)'
   id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[探讨暴力K最近邻算法](/2020/10/exploring-brute-force-nearest-neighbors-algorithm.html)'
 - en: '[Most Popular Distance Metrics Used in KNN and When to Use Them](/2020/11/most-popular-distance-metrics-knn.html)'
   id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KNN中最常用的距离度量及其使用时机](/2020/11/most-popular-distance-metrics-knn.html)'
 - en: More On This Topic
   id: totrans-102
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Implementing Adaboost in Scikit-learn](https://www.kdnuggets.com/2022/10/implementing-adaboost-scikitlearn.html)'
   id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在Scikit-learn中实现Adaboost](https://www.kdnuggets.com/2022/10/implementing-adaboost-scikitlearn.html)'
 - en: '[Machine Learning from Scratch: Decision Trees](https://www.kdnuggets.com/2022/11/machine-learning-scratch-decision-trees.html)'
   id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从零开始的机器学习：决策树](https://www.kdnuggets.com/2022/11/machine-learning-scratch-decision-trees.html)'
 - en: '[Linear Regression from Scratch with NumPy](https://www.kdnuggets.com/linear-regression-from-scratch-with-numpy)'
   id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从零开始的线性回归与NumPy](https://www.kdnuggets.com/linear-regression-from-scratch-with-numpy)'
 - en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
   id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何从零开始构建和训练Transformer模型…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
 - en: '[Understanding by Implementing: Decision Tree](https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html)'
   id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过实现理解：决策树](https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html)'
 - en: '[Ten Key Lessons of Implementing Recommendation Systems in Business](https://www.kdnuggets.com/2022/07/ten-key-lessons-implementing-recommendation-systems-business.html)'
   id: totrans-108
   prefs:
