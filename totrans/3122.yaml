@@ -1,40 +1,59 @@
 - en: 'Operational Machine Learning: Seven Considerations for Successful MLOps'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 运营机器学习：成功实施 MLOps 的七个考虑因素
 - en: 原文：[https://www.kdnuggets.com/2018/04/operational-machine-learning-successful-mlops.html](https://www.kdnuggets.com/2018/04/operational-machine-learning-successful-mlops.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/04/operational-machine-learning-successful-mlops.html](https://www.kdnuggets.com/2018/04/operational-machine-learning-successful-mlops.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By Nisha Talagala, [ParallelM](http://www.parallelm.com/).**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Nisha Talagala，[ParallelM](http://www.parallelm.com/)。**'
 - en: Machine learning is everywhere. From advertising to IoT to healthcare, and beyond,
     virtually all industries are adopting or investigating machine learning (ML) to
     benefit their business. However, to generate a positive return on investment (ROI)
     using ML, it needs to be *operationalized* or put into production.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习无处不在。从广告到物联网到医疗保健，几乎所有行业都在采用或研究机器学习（ML）以惠及其业务。然而，为了利用 ML 产生积极的投资回报（ROI），它需要被*运营化*或投入生产。
 - en: Bringing machine learning into production incurs a [unique set of challenges](http://www.parallelm.com/more-machine-learning-models-than-ever-but-are-they-making-it-into-production/).
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 将机器学习投入生产会面临一组[独特的挑战](http://www.parallelm.com/more-machine-learning-models-than-ever-but-are-they-making-it-into-production/)。
 - en: '*The first step in operationalization is knowing what your ML application looks
     like, what its moving parts are and how they need to work together.*'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '*运营化的第一步是了解你的 ML 应用程序的样子，它的各个组成部分是什么以及它们需要如何协同工作。*'
 - en: '**1: Knowing your ML Application**'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '**1：了解你的 ML 应用程序**'
 - en: In most cases, ML is used to optimize (i.e. add insights to) a business application.
     While this sounds simple, an ML operation frequently requires multiple complementary
     but independent ML programs (training, inference, etc.) to run in cooperation.
     What is an ML application? An ML application is the collection of programs and
     dependencies that together deliver the ML functionality to your business application.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在大多数情况下，ML 用于优化（即增加洞察力）业务应用程序。虽然这听起来很简单，但 ML 操作通常需要多个互补但独立的 ML 程序（训练、推断等）协同运行。那么什么是
+    ML 应用程序？ML 应用程序是一组程序和依赖项，它们共同向你的业务应用程序提供 ML 功能。
 - en: Figure 1(a) shows the most basic way that ML can be added to a business application.
     The business application makes requests for predictions, which can be served by
     an ML inference program (micro-services approaches are popular here). The ML inference
@@ -43,53 +62,80 @@
     frequently (such as Adtech) require models to be frequently retrained to keep
     up with changing circumstances. A re-training pipeline then needs to be added
     to feed the inference, resulting in the pattern in Figure 1(b).
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 1(a) 显示了将 ML 添加到业务应用程序的最基本方式。业务应用程序发出预测请求，这些请求可以由 ML 推断程序（微服务方法在这里很流行）提供。ML
+    推断程序使用的是离线训练的模型，这通常是由数据科学家训练的。虽然这个流程很简单，但它通常是不够的。数据经常变化的行业（如 Adtech）需要频繁地重新训练模型，以跟上变化的环境。因此，需要添加一个重新训练管道来供给推断，结果形成了图
+    1(b) 的模式。
 - en: Retraining brings many models into the mix, and human intervention may be required
     to decide which ones to deploy to production (this is particularly important in
     situations where fiscal, health or other outcomes are tied to ML predictions).
     Adding human approvals results in Figure 1(c). If advanced algorithms (like ensemble
     models) are used to improve accuracy, the pattern becomes that of Figure 1(d).
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 重新训练将许多模型纳入混合中，可能需要人工干预来决定哪些模型部署到生产中（这在财政、健康或其他结果与 ML 预测相关的情况下尤为重要）。添加人工批准会导致图
+    1(c) 的模式。如果使用高级算法（如集成模型）来提高准确性，模式则变为图 1(d) 的样子。
 - en: Finally, many production deployments use multiple prediction pipelines in parallel
     (Champion/Challenger, Canary etc.) to monitor prediction patterns, and detect
     unexpected shifts or anomalies. Adding such test infrastructure generates a pattern
     similar to Figure 1(e).
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，许多生产部署使用多个并行的预测管道（Champion/Challenger、Canary 等）来监控预测模式，并检测意外的变化或异常。添加这样的测试基础设施会产生类似图
+    1(e) 的模式。
 - en: '![Machine Learning Applications](../Images/ff41052418e4c68a37d7bec58e6cec04.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![机器学习应用](../Images/ff41052418e4c68a37d7bec58e6cec04.png)'
 - en: '![Machine Learning Applications 2](../Images/c09837c953a3bbfbc7f43f58f164cb66.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![机器学习应用 2](../Images/c09837c953a3bbfbc7f43f58f164cb66.png)'
 - en: '**Figure 1: ML Applications**'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 1：机器学习应用**'
 - en: Once your ML application is defined, the next step is to ensure that it can
     be safely and successfully put into production.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦您的 ML 应用被定义，下一步是确保它可以安全且成功地投入生产。
 - en: '***Return on Investment****: The ML application should improve its companion
     business application, while staying within the requirements of your industry and
     organization.*'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '***投资回报率****：ML 应用应该在满足您所在行业和组织要求的同时，改善其配套的业务应用。*'
 - en: '**2: Measuring Success**'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**2: 测量成功**'
 - en: ML applications exist to serve a business need. Success metrics or key performance
     indicators (KPIs) for the business application should be tracked and correlated
     with the introduction of, and subsequent optimizations to, the ML application.
     Such correlation provides visibility for all stakeholders, ensures that ML investments
     are generating adequate returns and helps everyone from data scientists, to operations
     personnel measure and justify new operational investments.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: ML 应用存在的目的是满足业务需求。应该跟踪业务应用的成功指标或关键绩效指标（KPI），并将其与 ML 应用的引入以及后续优化相关联。这种相关性为所有利益相关者提供了可见性，确保
+    ML 投资带来了足够的回报，并帮助从数据科学家到运营人员衡量和证明新的运营投资。
 - en: '**3: Manage Production ML Risk**'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**3: 管理生产 ML 风险**'
 - en: Risk management does not end at model development. Once operational, models
     need to be monitored and constantly evaluated to ensure that they are operating
     within expected bounds. Production ML health is complicated by the fact that live
@@ -97,11 +143,16 @@
     Recall etc. cannot be used). Alternative methods (such as Data Deviation Detection,
     Drift Detection, Canary Pipelines, Production A/B tests) should be part of the
     ML application.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 风险管理并不止步于模型开发。一旦投入运营，模型需要被监控和不断评估，以确保它们在预期范围内运行。生产 ML 健康状况复杂的原因在于实时数据没有标签（因此不能使用常见的指标如准确率、精确率、召回率等）。替代方法（如数据偏差检测、漂移检测、金丝雀管道、生产
+    A/B 测试）应该成为 ML 应用的一部分。
 - en: '**4: Ensure Governance and Compliance**'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '**4: 确保治理和合规**'
 - en: Some industries, such as [financial services](https://www.federalreserve.gov/supervisionreg/srletters/sr1107a1.pdf),
     have had ML compliance requirements for many years. Other industries and geographies
     are beginning to introduce guidelines, such as [GDPR](http://www.reubenbinns.com/blog/how-to-comply-with-gdpr-article-22-automated-credit-decisions/)
@@ -109,15 +160,23 @@
     A comprehensive production governance mechanism is critical to ensure that ML
     applications (and all of their consequent models, pipelines, code, executions,
     etc.) are tracked for reproducibility, auditability and to assist [explainability](https://www.cc.gatech.edu/~alanwags/DLAI2016/(Gunning)%20IJCAI-16%20DLAI%20WS.pdf).
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些行业，如[金融服务](https://www.federalreserve.gov/supervisionreg/srletters/sr1107a1.pdf)，已经有了多年的
+    ML 合规要求。其他行业和地区开始引入指导方针，例如欧盟的[GDPR](http://www.reubenbinns.com/blog/how-to-comply-with-gdpr-article-22-automated-credit-decisions/)或[纽约市算法问责法案](https://www.bizjournals.com/newyork/news/2017/12/13/n-y-c-council-passes-landmark-bill-to-ensure.html)。全面的生产治理机制对于确保
+    ML 应用（及其所有后续模型、管道、代码、执行等）能够被跟踪以确保可重复性、可审计性，并协助[可解释性](https://www.cc.gatech.edu/~alanwags/DLAI2016/(Gunning)%20IJCAI-16%20DLAI%20WS.pdf)至关重要。
 - en: '***Harmony with DevOps****: MLOps should integrate with existing DevOps while
     also delivering the additional unique capabilities required to manage ML.*'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '***与 DevOps 的和谐****：MLOps 应与现有 DevOps 集成，同时提供管理 ML 所需的额外独特能力。*'
 - en: '**5: Automation**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**5: 自动化**'
 - en: Machine learning pipelines are code, and classic DevOps toolchain components
     (source code repositories such as Git, automation facilities such as Jenkins,
     orchestrators such as AirFlow, etc.) play an important role in MLOps. However,
@@ -128,11 +187,18 @@
     (such as Model Approval/Propagation or Drift Detection) that also need to be managed.
     This ML CI/CD and ML orchestration needs to integrate seamlessly with the DevOps
     practices already in place in the organization.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习管道是代码，经典的 DevOps 工具链组件（如 Git 的源代码仓库、Jenkins 的自动化工具、AirFlow 的编排器等）在 MLOps
+    中发挥着重要作用。然而，除了业务重点、风险降低和合规需求外，生产机器学习还带来了额外的 CI/CD 和编排挑战，这些挑战是常见 DevOps 工具链无法解决的。例如，像图
+    1(e) 所示的机器学习应用可能会有多个管道并行执行，并且具有需要管理的机器学习特定的相互依赖性（如模型批准/传播或漂移检测）。这种机器学习 CI/CD 和机器学习编排需要与组织中已有的
+    DevOps 实践无缝集成。
 - en: '**6: Scale**'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**6: 规模**'
 - en: ML applications can require hardware configurations and scalability points that
     are different from the business applications that they serve. For example, training
     neural network models can require powerful GPUs and training regular ML models
@@ -142,15 +208,22 @@
     scikit-learn, etc.) exist to execute ML pipelines. The ML application needs to
     be sized and mapped to one or more of these engines as necessary for the pipelines
     within.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习应用可能需要不同于服务的业务应用的硬件配置和可扩展性点。例如，训练神经网络模型可能需要强大的 GPU，而训练常规机器学习模型可能需要 CPU 集群。根据推理实现的不同，可能需要流处理器集群、REST
+    端点或批量推理操作。许多强大的生产级分析引擎（如 Spark、Flink、PyTorch、scikit-learn 等）存在以执行机器学习管道。机器学习应用需要根据管道的需求对这些引擎进行大小调整和映射。
 - en: '***Harmony with Organization****: MLOps should enable all your organizational
     functions to  work together to make ML work for your business application.*'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '***与组织的和谐***：MLOps 应使你组织内的所有职能共同协作，使机器学习能够为你的业务应用服务。'
 - en: '**7: People**'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**7: 人员**'
 - en: Production ML requires multiple competencies within an organization (data scientists,
     data engineers, business analysts and operations) to collaborate. Each needs to
     see different aspects of the ML application. Data scientists may be preoccupied
@@ -159,18 +232,27 @@
     business analysts may want to see improvement of KPIs. The MLOps toolchain needs
     to provide visibility, managed access control, and collaboration for all such
     parties.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 生产机器学习需要组织内多个领域的人员（数据科学家、数据工程师、业务分析师和运营人员）进行协作。每个人需要关注机器学习应用的不同方面。数据科学家可能会专注于训练准确性的指标、生产
+    A/B 测试的置信度或数据偏差检测，而运营人员可能关注正常运行时间和资源利用率，业务分析师可能关注 KPI 的改进。MLOps 工具链需要为所有这些参与方提供可见性、管理的访问控制和协作。
 - en: '***Summary: Combining it All***'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '***总结：将一切结合起来***'
 - en: '![Elements of MLOps](../Images/94c55c1cb9c630c35eac9c47f886a0b5.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![MLOps 的元素](../Images/94c55c1cb9c630c35eac9c47f886a0b5.png)'
 - en: Put together, your MLOps should have all the elements in Figure 2 above, with
     all elements working together to form a cohesive whole for a successful ML operation.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 综合来看，你的 MLOps 应该包含图 2 中的所有元素，所有元素共同作用形成一个连贯的整体，以确保机器学习操作的成功。
 - en: '**Bio: [Nisha Talagala](https://www.linkedin.com/in/nisha-talagala-6a6b20/)**
     is CTO/VP Engineering at ParallelM. Her background is in software development
     for distributed systems, focusing on storage, I/O, file systems, persistent memory
@@ -178,73 +260,115 @@
     (acquired by SanDisk), developing new technologies and software stacks for persistent
     memory, Non-Volatile Memory File System (NVMFS) and application acceleration.
     She has Ph.D. from UC Berkeley and holds 56 patents.'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[尼莎·塔拉加拉](https://www.linkedin.com/in/nisha-talagala-6a6b20/)** 是 ParallelM
+    的首席技术官/工程副总裁。她的背景涉及分布式系统的软件开发，专注于存储、I/O、文件系统、持久内存和闪存非易失性内存。在 ParallelM 之前，她是 Fusion-io（被
+    SanDisk 收购）的首席架构师/研究员，开发了用于持久内存、非易失性内存文件系统 (NVMFS) 和应用加速的新技术和软件栈。她拥有 UC Berkeley
+    的博士学位，并持有 56 项专利。'
 - en: '**Related:**'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Applying Machine Learning to DevOps](https://www.kdnuggets.com/2018/02/applying-machine-learning-devops.html)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将机器学习应用于 DevOps](https://www.kdnuggets.com/2018/02/applying-machine-learning-devops.html)'
 - en: '[Data Version Control in Analytics DevOps Paradigm](https://www.kdnuggets.com/2017/08/data-version-control-analytics-devops-paradigm.html)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分析 DevOps 模式中的数据版本控制](https://www.kdnuggets.com/2017/08/data-version-control-analytics-devops-paradigm.html)'
 - en: '[What should be focus areas for Machine Learning / AI in 2018?](https://www.kdnuggets.com/2018/04/focus-areas-ml-ai-2018.html)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2018 年机器学习/人工智能的重点领域应是什么？](https://www.kdnuggets.com/2018/04/focus-areas-ml-ai-2018.html)'
 - en: '* * *'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速迈向网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Machine Learning is Not Like Your Brain Part Seven: What Neurons…](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-seven-neurons-good.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习与大脑的区别 第七部分：神经元的作用](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-seven-neurons-good.html)'
 - en: '[The Significance of Data Quality in Making a Successful Machine…](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据质量在成功机器学习模型中的重要性](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的五大特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
 - en: '[How to Become a Successful Data Science Freelancer in 2022](https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在 2022 年成为成功的数据科学自由职业者](https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html)'
 - en: '[Design Patterns in Machine Learning for MLOps](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的设计模式用于 MLOps](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)'
 - en: '[Top 10 MLOps Tools to Optimize & Manage Machine Learning Lifecycle](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化和管理机器学习生命周期的十大 MLOps 工具](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)'
