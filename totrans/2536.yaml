@@ -1,46 +1,71 @@
 - en: Model Drift in Machine Learning – How To Handle It In Big Data
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 机器学习中的模型漂移 – 如何在大数据中处理它
 - en: 原文：[https://www.kdnuggets.com/2021/08/model-drift-machine-learning-big-data.html](https://www.kdnuggets.com/2021/08/model-drift-machine-learning-big-data.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/08/model-drift-machine-learning-big-data.html](https://www.kdnuggets.com/2021/08/model-drift-machine-learning-big-data.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Sai Geetha](https://www.saigeetha.in/about), an expert in Big Data Engineering
     and Data Science**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Sai Geetha](https://www.saigeetha.in/about) 编写，她是大数据工程和数据科学领域的专家**。'
 - en: '![](../Images/ac179ecb1bad142c35e7ed68f869139d.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ac179ecb1bad142c35e7ed68f869139d.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: The **Rendezvous architecture** proposed by Ted Dunning and Ellen Friedman in
     their book on *Machine Learning Logistics* was a wonderful solution I found for
     a specific architectural problem I was working on. I was looking for a tried and
@@ -48,76 +73,104 @@
     Champion models together in a maintainable and supportable way. The rendezvous
     architecture was significantly more useful in the big data world because you are
     dealing with heavy data and large pipelines.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Ted Dunning 和 Ellen Friedman 在他们的《*机器学习物流*》一书中提出的 Rendezvous 架构** 是我在处理一个特定架构问题时找到的一个绝妙解决方案。我在寻找一种经过验证的设计模式或架构模式，帮助我以可维护和可支持的方式运行
+    Challenger 和 Champion 模型。在大数据世界中，rendezvous 架构显著更有用，因为你处理的是大量数据和大型数据管道。'
 - en: The ability to run Challenger and Champion models together on all data is a
     very genuine need in machine learning, where the model performance can drift over
     time and where you want to keep improving on the performance of your models to
     something better always.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在机器学习中，同时运行 Challenger 模型和 Champion 模型的能力是一个非常真实的需求，因为模型性能可能随着时间漂移，而你希望不断改进模型的性能，使其始终变得更好。
 - en: So, before I delve deeper into this architecture, I would like to clarify some
     of the jargon I have used above. What is a Champion model? What is a Challenger
     model? What is model drift, and why does it occur? Then, we can look at the rendezvous
     architecture itself and the problems it solves.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我深入探讨这种架构之前，我想澄清一些我在上文中使用的术语。什么是 Champion 模型？什么是 Challenger 模型？什么是模型漂移，为什么会发生？然后，我们可以看看
+    rendezvous 架构本身以及它解决了哪些问题。
 - en: Model Drift
+  id: totrans-14
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 模型漂移
 - en: Once you put your model into production, assuming it will always perform well
     is a mistake. In fact, it is said - "**The moment you put a model into production,
     it starts degrading**." (*Note, most often '**performance**' in ML is used to
     mean statistical performance -- be it accuracy, precision, recall, sensitivity,
     specificity or whatever the appropriate metric is for your use case*).
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦你将模型投入生产，假设它会始终表现良好是一个错误。事实上，有人说 - "**当你把模型投入生产的那一刻起，它就开始退化**。" (*注意，ML 中的“**性能**”通常指的是统计性能——无论是准确度、精确度、召回率、敏感性、特异性还是适用于你用例的其他指标*)。
 - en: Why does this happen? The model is trained on some past data. It performs excellently
     for any data with the same characteristics. However, as time progresses, the actual
     data characteristics can keep changing, and the model is not aware of these changes
     at all. This causes model drift, i.e., degradation in model performance.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 为什么会发生这种情况？模型是在一些过去的数据上训练的。它对具有相同特征的数据表现出色。然而，随着时间的推移，实际数据的特征可能不断变化，而模型对此毫无察觉。这会导致模型漂移，即模型性能退化。
 - en: For example, you trained a model to detect spam mail versus ham mail. The model
     performs well when deployed. Over time, the types of spam keep morphing, and hence
     the accuracy of the prediction comes down. This is called **model drift**.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，你训练了一个模型来检测垃圾邮件与正常邮件。模型部署后表现良好。随着时间的推移，垃圾邮件的类型不断变化，因此预测的准确性下降。这被称为**模型漂移**。
 - en: The model drift could happen because of a **concept drift** or a **data drift.**
     I am not getting into these today, so it will suffice us to understand that the
     performance of a model does not remain constant. Hence we need to continuously
     monitor the performance of a model. Most often, it is best to retrain the model
     with fresher data more frequently or probably based on a threshold level in performance
     degradation.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型漂移可能是由于**概念漂移**或**数据漂移**。今天不讨论这些，了解模型性能不会保持恒定就足够了。因此，我们需要持续监控模型的性能。通常情况下，最好是更频繁地用更新的数据重新训练模型，或者根据性能下降的阈值进行训练。
 - en: Sometimes, even retraining the model does not improve the performance further.
     This would imply that you might have to understand the changes in the characteristics
     of the problem and go through the whole process of data analysis, feature creation,
     and model building with more appropriate models.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时，即使重新训练模型也不能进一步提高性能。这意味着你可能需要理解问题特征的变化，并用更合适的模型经历整个数据分析、特征创建和模型构建过程。
 - en: This cycle can be shortened if you can work with Challenger models even while
     we have one model in production currently. This is a continuous improvement process
     of machine learning and is very much required.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你可以使用挑战者模型，即使我们当前有一个模型在生产中，这个周期可以缩短。这是一个机器学习的持续改进过程，并且是非常必要的。
 - en: Champion-Challenger Models
+  id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 冠军-挑战者模型
 - en: Typically, the model in production is called the **Champion** model. And any
     other model that seems to work well in your smaller trials and is ready for going
     into production is a **Challenger** model. These Challenger models have been proposed
     because we assume there is a chance that they perform better than the Champion
     model. But how do we prove it?
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常，生产中的模型称为**冠军**模型。任何在较小试验中表现良好并准备投入生产的其他模型称为**挑战者**模型。这些挑战者模型被提出是因为我们假设它们有可能比冠军模型表现更好。但是我们如何证明这一点呢？
 - en: A Champion model typically runs on all the incoming data to provide the predictions.
     However, on what data does the Challenger model run?
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 冠军模型通常会在所有输入数据上运行以提供预测。然而，挑战者模型在什么数据上运行呢？
 - en: There are two ways that the Challenger models can be tested. The ideal case
     would be to run the Challenger model in parallel with the Champion model on all
     data and compare the results. This would truly prove the Challenger model can
@@ -125,8 +178,10 @@
     data world, and hence the Challenger is always trialed out on a subset of the
     incoming data. Once that seems to perform well, it is gradually rolled out to
     more and more data, almost like alpha-beta testing.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 挑战者模型可以通过两种方式进行测试。理想情况下，是在所有数据上与冠军模型并行运行挑战者模型，并比较结果。这将真正证明挑战者模型是否能够表现得更好。然而，这在大数据世界中似乎是不可行的，因此挑战者模型总是会在输入数据的一个子集上进行试验。一旦表现良好，它会逐渐推广到更多的数据上，几乎像是alpha-beta测试。
 - en: As you might be aware, in alpha-beta testing, a small percentage of users or
     incoming data, in this case, is sent through a new test or Challenger pipeline,
     and the rest all go through the original Champion pipeline. This kind of alpha-beta
@@ -135,81 +190,117 @@
     can rarely say with confidence that one is better than the other for the whole
     data. There could be lurking surprises once you roll it out for all data, and
     the model drift can start sooner than expected.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如你可能知道的，在alpha-beta测试中，一小部分用户或输入数据（在这种情况下）会通过新的测试或挑战者流程，而其余的全部通过原始冠军流程。这种alpha-beta测试对某些应用程序是有效的，但在机器学习的世界中并不特别令人印象深刻。你无法在相同的数据上比较模型，因此很难自信地说哪个模型在所有数据上更好。一旦推广到所有数据上，可能会出现意外情况，模型漂移可能会比预期更早发生。
 - en: 'A typical alpha-beta pipeline would look like this:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个典型的alpha-beta流程如下：
 - en: '![](../Images/815ebfe995cca0d92ee17be5ae9b10ca.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/815ebfe995cca0d92ee17be5ae9b10ca.png)'
 - en: The data is split between the two pipelines based on some criteria, like the
     category of a product. This data split keeps increasing towards Challenger as
     the confidence in the performance of the Challenger model grows.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据根据某些标准（如产品类别）在两个管道之间分配。随着对 Challenger 模型性能的信心增加，这种数据分配会不断增加，逐渐倾向于 Challenger。
 - en: From a data scientist's perspective, this is not ideal. The ideal would be to
     be able to run the Challenger model in parallel for **all the data** along with
     the Champion model. As I earlier said, this is very expensive.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 从数据科学家的角度来看，这并不理想。理想的是能够与 Champion 模型并行运行**所有数据**的 Challenger 模型。正如我之前所说，这非常昂贵。
 - en: Consider the worst-case scenario. If you want them to run in parallel, you have
     to set up two data pipelines that run through all the steps independently.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑最坏的情况。如果你希望它们并行运行，你必须设置两个数据管道，这两个管道独立地运行所有步骤。
 - en: 'It would look something like this:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 它可能看起来是这样的：
 - en: '![](../Images/79af4a7798d8a039595f6e3b3d2a5d9b.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/79af4a7798d8a039595f6e3b3d2a5d9b.png)'
 - en: This has huge engineering implications and, hence, time to market implications.
     The cost of this can get prohibitive over time.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 这具有巨大的工程意义，因此也会影响市场时间。随着时间推移，这种成本可能变得非常高。
 - en: A few of the top implications are the time and effort in building these pipelines
     over and over again without being sure if the Challenger model is indeed going
     to perform as expected. The CI/CD process, the deployments, the monitoring, authentication
     mechanisms, etc., are a few to mention. In addition, the other cost is around
     the infrastructure that has to be doubly provisioned.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 主要影响之一是不断重复建立这些管道所需的时间和精力，而不确定 Challenger 模型是否会按预期表现。CI/CD 过程、部署、监控、认证机制等，都是需要考虑的一部分。此外，另一个成本是必须双倍配置的基础设施。
 - en: Considering if these pipelines are big data pipelines, it becomes all the more
     significant. Very soon, you realise that this is not a scalable model. We certainly
     have to see how we can move away from parallel pipelines or even from the alpha-beta
     testing method.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果这些管道是大数据管道，这一点就更为重要。很快，你会意识到这不是一个可扩展的模型。我们确实需要看看如何摆脱并行管道，甚至摆脱 alpha-beta 测试方法。
 - en: As a corollary, the best-case scenario would be when we can reuse much of the
     data pipelines. The idea is to minimize the amount one has to develop and deploy
     again into production. This would also ensure optimization of infrastructure usage.
     This is one line of thinking about how to optimize.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为推论，最佳情况是能够重复使用大量的数据管道。这个想法是最小化开发和重新部署到生产环境中的工作量。这也将确保基础设施使用的优化。这是一种思考如何优化的方式。
 - en: Even better would be to be able to just **plug in the Challenger model,** and
     the rest of the pipeline plays as if nothing has changed. Wouldn't that be fantastic?
     And this is what is made possible by the **Rendezvous architecture.**
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 更理想的是能够直接**插入 Challenger 模型，**其余的管道就像什么都没有改变一样运行。难道这不是很棒吗？这正是**Rendezvous 架构**所实现的。
 - en: Rendezvous Architecture
+  id: totrans-38
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Rendezvous 架构
 - en: 'The Rendezvous architecture, as written in the book, is tilted towards ML with
     smaller data. I have tweaked it to meet the needs of the big data world and associated
     pipelines as shown in the diagram below: *(References to the book and another
     article are given below in the references section)*'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 书中所描述的 Rendezvous 架构倾向于处理小规模数据的 ML。我已经对其进行了调整，以满足大数据世界及相关管道的需求，如下图所示：*(书籍和另一篇文章的引用见参考部分)*
 - en: '![](../Images/64f95c58d6146d8d3da9b7dea09f8ef5.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/64f95c58d6146d8d3da9b7dea09f8ef5.png)'
 - en: Let me now explain section by section of this architecture.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我逐部分解释这个架构。
 - en: '**Part 1:**'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第1部分：**'
 - en: This consists of the standard data pipeline for receiving incoming data, cleansing
     it, preparing it, and creating the required features. This should be just one
     pipeline for every model that is to be deployed. The prepared data should maintain
@@ -217,75 +308,106 @@
     irrespective of the model on hand. (*I understand this is not always possible
     and may need tweaking piecemeal over time. But we can deal with that piece in
     isolation when required.*)
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 这包括接收传入数据、清洗数据、准备数据和创建所需特征的标准数据管道。每个要部署的模型应该只有一个管道。准备好的数据应该保持一个标准接口，该接口具有该领域可能需要的所有特征，而与手头的模型无关。(*我理解这并非总是可能，可能需要随着时间的推移进行逐步调整。但我们可以在需要时单独处理这一部分。*)
 - en: '**Part 2:**'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第2部分：**'
 - en: This is a messaging infrastructure like Kafka that comes into play by bringing
     in the sense of asynchronicity. The data that is prepared as features are published
     onto the message bus. Now, every model listens to this message bus and triggers
     off, executing itself with the prepared data. This message bus is what enables
     a plug-and-play architecture here.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个类似 Kafka 的消息基础设施，通过引入异步性发挥作用。作为特征准备好的数据会被发布到消息总线上。现在，每个模型都监听这个消息总线并触发自身，用准备好的数据执行。这个消息总线使得这里的即插即用架构成为可能。
 - en: '**Part 3:**'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第 3 部分：**'
 - en: This is the part where all models are deployed one by one. A new Challenger
     model can be deployed and made to listen to the message bus, and as data flows
     in, it can execute. Any number of models can be deployed here and not just one
     Challenger model! Also, the infra requirement is only for the extra model to run.
     Neither the pre-model pipelines nor the post-model pipelines need to be separately
     developed or deployed.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是所有模型逐一部署的部分。可以部署一个新的 Challenger 模型并使其监听消息总线，随着数据流入，它可以执行。可以在这里部署任意数量的模型，而不仅仅是一个
+    Challenger 模型！此外，基础设施要求仅仅是额外模型的运行。无论是预模型管道还是后模型管道都不需要单独开发或部署。
 - en: As you can see in the figure, you can have many challenger models as long as
     the data scientist sees them mature enough to be tested against real data.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 如图所示，只要数据科学家认为这些 Challenger 模型足够成熟以便与真实数据进行测试，就可以有多个 Challenger 模型。
 - en: Also, there is a special model called the decoy model. In order to ensure that
     each of the model processes is not burdened with persistence, the prepared data
     is also read by what is called a **decoy model,** whose only job is to read the
     prepared data and persist. This helps for audit purposes, tracing, and debugging
     when required.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有一个特殊的模型叫做诱饵模型。为了确保每个模型过程不被持久化负担所困扰，准备好的数据还会被所谓的**诱饵模型**读取，该模型的唯一任务是读取准备好的数据并进行持久化。这有助于审计目的、追踪和调试。
 - en: '**Part 4:**'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第 4 部分：**'
 - en: All these models again output their predictions or scores into another message
     bus, thus not bringing any dependency between themselves. Also, again this plays
     an important role in ensuring the pluggability of a model without disrupting anything
     else in the pipeline.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有这些模型再次将它们的预测或分数输出到另一个消息总线上，从而避免了彼此之间的依赖。此外，这在确保模型的可插拔性而不干扰管道中的其他部分方面也发挥了重要作用。
 - en: From there, the rendezvous process picks up the scores and decides what needs
     to be done, as described in Part 5.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 从那里，Rendezvous 过程会获取分数并决定需要做什么，如第 5 部分所述。
 - en: '**Part 5:**'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第 5 部分：**'
 - en: This is where the new concept of a **Rendezvous process** is introduced, which
     has two important sub-processes. One immediate subprocess takes care of streaming
     out the correct output from the pipeline for a consumer from among the many scores
     it has received, and the other process is to persist the output from all models
     for further comparison and analysis.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里引入了**Rendezvous 过程**的新概念，它有两个重要的子过程。一个即时子过程负责从接收到的众多分数中为消费者提供正确的输出，另一个过程则是将所有模型的输出持久化，以便进行进一步的比较和分析。
 - en: 'So, we have achieved two things here:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，我们在这里实现了两件事：
 - en: The best output is provided to the consumer.
+  id: totrans-56
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 最佳输出提供给消费者。
 - en: All the data has gone through all the models, and hence they are totally comparable
     in like circumstances on their performance.
+  id: totrans-57
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 所有数据都经过了所有模型，因此它们在相似情况下的性能是完全可比的。
 - en: How does it decide which model's output should be sent out? This can be based
     on multiple criteria like a subset of data should always be from Challenger, and
     another subset should always be from Champion. This is almost like achieving the
@@ -293,142 +415,204 @@
     testing for a consumer, for the data scientist, all data has been through both
     the models and so they can compare the two outputs and understand which is performing
     better.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 它如何决定发送哪个模型的输出？这可以基于多个标准，比如数据的一个子集应始终来自 Challenger，另一个子集应始终来自 Champion。这几乎像是实现
+    alpha-beta 测试。然而，优势在于，尽管对消费者来说这听起来像是 alpha-beta 测试，但对于数据科学家而言，所有数据都经过了两个模型，因此他们可以比较两个输出，了解哪个表现更好。
 - en: Another criterion could be that the output should be based on model performance.
     In this case, the rendezvous process waits for all models to complete and publish
     to the message bus. Then, it seeks the best performance metric and sends out that
     as the result.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种标准可能是输出应基于模型性能。在这种情况下，汇合过程会等待所有模型完成并发布到消息总线。然后，它会寻找最佳性能指标，并将其作为结果发送出去。
 - en: Yes, another criterion can be that of time or latency. If we need to have the
     result in, say, less than 5 seconds, for example, the process waits for all the
     results from models, up to 5 seconds, compares only those, and returns the best
     data. Even though another model comes back in the 6th second that may have performed
     much better, that is ignored as it does not meet the latency criteria.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 是的，另一个标准可以是时间或延迟。如果我们需要在例如5秒内获得结果，过程会等待模型返回的所有结果，最多5秒，只比较这些结果，并返回最佳数据。即使另一个模型在第6秒返回，可能表现更好，但也会被忽略，因为它不符合延迟标准。
 - en: But how does this process know what is the criteria to follow for which data
     or which model? This can be put in as part of the input data into the message
     bus in Part 2\. Note that the Rendezvous process is also listening to these messages
     and gets to know what to do with the output that corresponds to an input. There
     could be other clever ways too, but this is one of the ways proposed.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 但这个过程如何知道遵循哪些标准来处理哪些数据或模型呢？这可以作为第2部分输入数据的一部分传入消息总线。请注意，汇合过程也在监听这些消息，并了解如何处理与输入对应的输出。也可能有其他聪明的方式，但这是提出的其中一种方法。
 - en: Conclusion
+  id: totrans-62
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: By introducing asynchronicity through message buses, a level of decoupling has
     been introduced, bringing in the ability to plug-and-play models into an otherwise
     rigid data pipeline.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过引入异步性和消息总线，引入了一种解耦的层次，带来了将模型插入到原本僵化的数据管道中的能力。
 - en: By introducing the rendezvous process, the ability to select between various
     model outputs, persist them, compare them were all introduced. And with this,
     it now does not seem a herculean task to introduce or support any number of new
     models for the same data set.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过引入汇合过程，选择不同模型输出、持久化这些输出、比较它们的能力都被引入了。因此，现在引入或支持任何数量的新模型来处理相同的数据集似乎不再是艰巨的任务。
 - en: '**Summary**'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '**总结**'
 - en: The rendezvous architecture gives great flexibility at various levels.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 汇合架构在各个层面提供了极大的灵活性。
 - en: A variety of criteria can be used to decide what score, output, or prediction
     can be sent out of the prediction process. These criteria could be latency-based,
     model performance-based, or simple time-based.
+  id: totrans-67
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 可以使用多种标准来决定从预测过程中发送什么评分、输出或预测。这些标准可能基于延迟、模型性能或简单的时间。
 - en: It provides the ability to define and change these criteria dynamically through
     the rendezvous process. You can take it to another level by introducing a rule
     engine here.
+  id: totrans-68
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它提供了通过汇合过程动态定义和更改这些标准的能力。你可以通过在这里引入规则引擎将其提升到另一个层次。
 - en: It provides the ability to make all the data go through all the pipelines or
     choose only a subset to go through many pipelines. For example, if you have grocery
     and general merchandising products for which you are forecasting, groceries could
     go through their own Champion and Challenger models, while general merchandise,
     which are typically slow sellers, can have their own pipelines.
+  id: totrans-69
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它提供了使所有数据通过所有管道或仅选择一个子集通过多个管道的能力。例如，如果你有需要预测的杂货和一般商品，杂货可以通过它们自己的冠军和挑战者模型，而一般商品，通常是销售较慢的，可以有自己的管道。
 - en: It also provides the ability to run many models at a time without redeveloping
     or redeploying a large part of a big data pipeline. Apart from effort and time
     savings, the infrastructure costs are also optimised.
+  id: totrans-70
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它还提供了同时运行多个模型的能力，而不需要重新开发或重新部署大部分的大数据管道。除了节省工作量和时间外，还优化了基础设施成本。
 - en: References
+  id: totrans-71
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: '[Machine Learning Logistics](https://learning.oreilly.com/library/view/machine-learning-logistics/9781491997628/)
     by Ted Dunning; Ellen Friedman - 3rd Chapter on "The Rendezvous Architecture for
     Machine Learning"'
+  id: totrans-72
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[机器学习物流](https://learning.oreilly.com/library/view/machine-learning-logistics/9781491997628/)
+    by Ted Dunning; Ellen Friedman - 第3章“机器学习的汇合架构”'
 - en: An article on [towardsdatascience.com](http://towardsdatascience.com/), "[Rendezvous
     Architecture for Data Science in Production](https://towardsdatascience.com/rendezvous-architecture-for-data-science-in-production-79c4d48f12b)"
     by Jan Teichmann
+  id: totrans-73
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一篇来自 [towardsdatascience.com](http://towardsdatascience.com/) 的文章，标题为"[生产中的数据科学约会架构](https://towardsdatascience.com/rendezvous-architecture-for-data-science-in-production-79c4d48f12b)"，作者：Jan
+    Teichmann
 - en: '[Original](https://www.saigeetha.in/post/machine-learning-rendezvous-architecture).
     Reposted with permission.'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.saigeetha.in/post/machine-learning-rendezvous-architecture)。经授权转载。'
 - en: '**Bio:** [Sai Geetha](https://www.linkedin.com/in/saigeethamn/) ([@saigeethamn](https://twitter.com/saigeethamn))
     is an architect with experience in creating strategic roadmaps and innovating
     based on the enterprise needs and leading technologies. A Big Data specialist
     with Data Science knowledge who can bridge the gap between the two worlds and
     bring success to any large data initiative in your enterprise.'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：** [Sai Geetha](https://www.linkedin.com/in/saigeethamn/) ([@saigeethamn](https://twitter.com/saigeethamn))
+    是一名建筑师，具有制定战略路线图和基于企业需求及领先技术进行创新的经验。她是一位大数据专家，具备数据科学知识，能够弥合这两个领域之间的差距，并为您企业中的任何大型数据项目带来成功。'
 - en: '**Related:**'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Good-bye Big Data. Hello, Massive Data!](https://www.kdnuggets.com/2020/10/sqream-massive-data.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[告别大数据，迎接海量数据！](https://www.kdnuggets.com/2020/10/sqream-massive-data.html)'
 - en: '[The Ultimate Guide to Model Retraining](https://www.kdnuggets.com/2019/12/ultimate-guide-model-retraining.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模型重训练的终极指南](https://www.kdnuggets.com/2019/12/ultimate-guide-model-retraining.html)'
 - en: '[The Hidden Risk of AI and Big Data](https://www.kdnuggets.com/2019/09/risk-ai-big-data.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[人工智能和大数据的隐秘风险](https://www.kdnuggets.com/2019/09/risk-ai-big-data.html)'
 - en: More On This Topic
+  id: totrans-80
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Eurybia检测数据漂移以确保生产机器学习模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
 - en: '[Managing Model Drift in Production with MLOps](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用MLOps管理生产中的模型漂移](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)'
 - en: '[KDnuggets News, August 31: The Complete Data Science Study Roadmap…](https://www.kdnuggets.com/2022/n35.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets新闻，8月31日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)'
 - en: '[7 Techniques to Handle Imbalanced Data](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[处理不平衡数据的7种技术](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)'
 - en: '[How to Handle Missing Data with Scikit-learn''s Imputer Module](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用Scikit-learn的Imputer模块处理缺失数据](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)'
 - en: '[Masked Arrays in NumPy to Handle Missing Data](https://www.kdnuggets.com/masked-arrays-in-numpy-to-handle-missing-data)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在NumPy中使用掩码数组处理缺失数据](https://www.kdnuggets.com/masked-arrays-in-numpy-to-handle-missing-data)'
