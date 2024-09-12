@@ -1,155 +1,233 @@
 - en: Machine Learning Over Encrypted Data
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在加密数据上进行机器学习
 - en: 原文：[https://www.kdnuggets.com/2022/08/machine-learning-encrypted-data.html](https://www.kdnuggets.com/2022/08/machine-learning-encrypted-data.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/08/machine-learning-encrypted-data.html](https://www.kdnuggets.com/2022/08/machine-learning-encrypted-data.html)
 - en: '![Machine Learning Over Encrypted Data](../Images/ab000d69b2d278f21817615872dc2a16.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![在加密数据上进行机器学习](../Images/ab000d69b2d278f21817615872dc2a16.png)'
 - en: This blog introduces a Privacy-Preserving Machine Learning (PPML) solution to
     the Titanic challenge found on Kaggle using the [Concrete-ML](https://docs.zama.ai/concrete-ml)
     open-source toolkit. Its main ambition is to show that [Fully Homomorphic Encryption](https://en.wikipedia.org/wiki/Homomorphic_encryption)
     (FHE) can be used for protecting data when using a Machine Learning model to predict
     outcomes without degrading its performance. In this example, an [XGBoost](https://xgboost.readthedocs.io/en/stable/)
     classifier model will be considered as it achieves near state-of-the-art accuracy.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 本博客介绍了一种隐私保护机器学习（PPML）解决方案，用于Kaggle上的泰坦尼克挑战，使用[Concrete-ML](https://docs.zama.ai/concrete-ml)开源工具包。其主要目标是展示[全同态加密](https://en.wikipedia.org/wiki/Homomorphic_encryption)（FHE）如何用于保护数据，同时使用机器学习模型进行预测而不降低其性能。在这个例子中，将考虑[XGBoost](https://xgboost.readthedocs.io/en/stable/)分类器模型，因为它实现了接近最先进的准确度。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织中的 IT 工作'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: The Competition
+  id: totrans-10
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 竞赛
 - en: '[Kaggle](https://www.kaggle.com/) is an online community that lets anyone build
     and share projects around Machine Learning and Data Science. It offers data sets,
     courses, examples and competitions for free to any data scientists willing to
     discover or improve their knowledge of the field. Its simplicity of use makes
     it one of the most popular platforms amongst the ML community.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Kaggle](https://www.kaggle.com/)是一个在线社区，让任何人都可以围绕机器学习和数据科学构建和分享项目。它提供数据集、课程、示例和竞赛，任何愿意发现或提升自己领域知识的数据科学家都可以免费使用。其简易性使其成为ML社区中最受欢迎的平台之一。'
 - en: Additionally, Kaggle provides several tutorials with different difficulty levels
     for new beginners to start manipulating basic data science tools on a real-life
     example. Among those tutorials can be found the [Titanic competition](https://www.kaggle.com/competitions/titanic).
     It introduces a binary classification problem by using a simple data set of passengers
     traveling during the tragic Titanic shipwreck.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，Kaggle 提供了几个难度不同的教程，供新手开始在真实例子中操作基本数据科学工具。在这些教程中可以找到[Titanic 竞赛](https://www.kaggle.com/competitions/titanic)。它通过使用一组简单的乘客数据来介绍一个二分类问题，这些乘客在悲惨的泰坦尼克号船难中旅行。
 - en: The Jupyter Notebook sent by the Concrete-ML team for this competition can be
     found [here](https://www.kaggle.com/code/concretemlteam/titanic-with-privacy-preserving-machine-learning).
     It has been created with the help of several other publicly available notebooks
     in order to offer clear guidelines along with efficient results.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: Concrete-ML团队为本次竞赛发送的Jupyter Notebook可以在[此处](https://www.kaggle.com/code/concretemlteam/titanic-with-privacy-preserving-machine-learning)找到。它是借助几个其他公开可用的笔记本创建的，以提供清晰的指南和高效的结果。
 - en: Preparation
+  id: totrans-14
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 准备工作
 - en: Before being able to build the model, some preparation steps are required.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 在能够构建模型之前，需要进行一些准备步骤。
 - en: Package requirements
+  id: totrans-16
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 包要求
 - en: Concrete-ML is a Python package, the code is therefore made using this programming
     language. A few additional packages are required, including the [Pandas](https://pandas.pydata.org/)
     framework used for pre-processing the data as well as some [scikit-learn](https://scikit-learn.org/stable/)
     cross-validation tools.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: Concrete-ML 是一个 Python 包，因此代码使用这种编程语言编写。还需要一些额外的包，包括用于数据预处理的 [Pandas](https://pandas.pydata.org/)
+    框架以及一些 [scikit-learn](https://scikit-learn.org/stable/) 交叉验证工具。
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Clean the data
+  id: totrans-19
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 清洗数据
 - en: Both training and test data sets are given in the Kaggle platform. Once this
     is done, let’s load the data and extract the target IDs.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: Kaggle 平台提供了训练数据集和测试数据集。完成这些后，让我们加载数据并提取目标 ID。
 - en: '[PRE1]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Here’s what the data looks like:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据的样子如下：
 - en: '![Machine Learning Over Encrypted Data](../Images/240d2ad44fcae3a48bcc2f9452914b07.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![加密数据上的机器学习](../Images/240d2ad44fcae3a48bcc2f9452914b07.png)'
 - en: 'Several statements can be made :'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以做出以下几项陈述：
 - en: '- The target variable is the Survived variable.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '- 目标变量是 Survived 变量。'
 - en: '- Some variables are numerical, such as PassengerID, Pclass, SbSp, Parch or
     Fare'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '- 一些变量是数值型的，如 PassengerID、Pclass、SbSp、Parch 或 Fare。'
 - en: '- Some variables are categorical (non-numerical), such as Name, Sex, Ticket,
     Cabin or Embarked'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '- 一些变量是类别型的（非数值型的），如 Name、Sex、Ticket、Cabin 或 Embarked。'
 - en: A first pre-processing step is to remove the PassengerId and Ticket variables
     as they seem to be random identifiers that have no impact on their survival. Additionally,
     we can notice that some values are missing in the Cabin variable. We must therefore
     further investigate this observation by printing the total amounts of missing
     values for each variable.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一步预处理是删除 PassengerId 和 Ticket 变量，因为它们似乎是随机标识符，对生存没有影响。此外，我们注意到 Cabin 变量中有些值缺失。因此，我们必须通过打印每个变量缺失值的总数来进一步调查这一观察结果。
 - en: '[PRE2]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: This outputs the following results.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将输出以下结果。
 - en: '![Machine Learning Over Encrypted Data](../Images/437589ec739051496df1005ba0be9b92.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![加密数据上的机器学习](../Images/437589ec739051496df1005ba0be9b92.png)'
 - en: 'It seems that four variables are incomplete, Cabin, Age, Embarked and Fare.
     However, the Cabin one seems to be missing quite more data than the others:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 似乎有四个变量是不完整的，即 Cabin、Age、Embarked 和 Fare。然而，Cabin 变量似乎缺失的数据最多：
 - en: '[PRE3]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '[PRE4]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Since the Cabin variable misses more than 2/3 of its values, it also might not
     be appropriate to keep it. We therefore drop those variables from both data sets.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于 Cabin 变量缺失了超过 2/3 的值，因此保留它也可能不合适。因此，我们从两个数据集中删除这些变量。
 - en: '[PRE5]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Regarding the three other variables that witness missing values, removing them
     could mean losing a lot of relevant information that might help the model predicting
     the passengers’ survival. This is mostly true for the Age variable since more
@@ -157,99 +235,147 @@
     fill in these incomplete variables. Since both Age and Fare are numerical, missing
     values can be replaced by the median of the available ones. For the Embarked variable,
     which is categorical, we use the most common value as the substitute.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于其他三个存在缺失值的变量，删除它们可能会丢失大量可能帮助模型预测乘客生存的相关信息。对于年龄变量尤其如此，因为其值中有超过 20% 缺失。因此，可以使用其他技术来填补这些不完整的变量。由于年龄和票价都是数值型的，缺失值可以用现有数据的中位数来替代。对于类别变量
+    Embarked，我们使用最常见的值作为替代。
 - en: '[PRE6]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Engineer new features
+  id: totrans-39
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 工程新特征
 - en: 'Furthermore, we can manually create new variables from already existing ones
     in order to help the model interpret some behaviors for better predictions. Among
     all available possibilities, four new features were selected:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，我们还可以从已有的变量中手动创建新变量，以帮助模型更好地解释一些行为，从而提高预测准确性。在所有可用的选项中，选择了四个新特征：
 - en: '**FamilySize**: The size of the family the individual was traveling with, with
     1 being someone that traveled alone.'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**家庭规模**：个人旅行时所陪伴的家庭成员数，1 表示单独旅行。'
 - en: '**IsAlone**: A boolean variable stating if the individual was traveling alone
     (1) or not (0). This might help the model to emphasize on this idea of traveling
     with relatives or not.'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**IsAlone**：一个布尔变量，表示个人是否单独旅行（1）或非单独旅行（0）。这可能帮助模型强调旅行时是否与亲属同行。'
 - en: '**Title**: The individual''s title (Mr, Mrs, ...), often indicating a certain
     social status.'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**标题**：个人的称谓（如先生、女士等），通常表示某种社会地位。'
 - en: '**Farebin** and **AgeBin**: Binned version of the Fare and Age variables. It
     groups values together, generally reducing the impact of minor observation errors.'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Farebin** 和 **AgeBin**：Fare 和 Age 变量的分箱版本。它将值分组在一起，通常减少了轻微观察误差的影响。'
 - en: Let’s create those new variables for both data sets.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们为两个数据集创建这些新变量。
 - en: '[PRE7]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Additionally, printing the different titles found within the data sets shows
     that only a few of them represent most of the individuals.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，打印数据集中的不同标题显示，只有少数几个标题代表了大多数个体。
 - en: '[PRE8]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![Machine Learning Over Encrypted Data](../Images/de3d409f93d540664b5598ee23998ce0.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![加密数据上的机器学习](../Images/de3d409f93d540664b5598ee23998ce0.png)'
 - en: In order to prevent the model from becoming overly specific, all the "uncommon"
     titles are grouped together into a new “Rare” variable.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了防止模型变得过于特定，将所有“少见”的标题归为一个新的“Rare”变量。
 - en: '[PRE9]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Apply dummification
+  id: totrans-52
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 应用虚拟化
 - en: Finally, we can "dummify" the remaining categorical variables. Dummification
     is a common technique of transforming categorical (non-numerical) data into numerical
     data without having to map values or consider any order between each of them.
     The idea is to take all the different values found in a variable and create a
     new associated binary variable.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们可以对剩余的分类变量进行“虚拟化”。虚拟化是一种将分类（非数值）数据转换为数值数据的常见技术，无需映射值或考虑它们之间的任何顺序。其思想是提取变量中所有不同的值，并创建一个新的相关的二进制变量。
 - en: For example, the "Embarked" variable has three categorical values,  "S", "C"
     and "Q". Dummifying the data will create three new variables, "Embarked_S", "Embarked_C"
     and "Embarked_Q". Then, the value of "Embarked_S" (resp. "Embarked_C" and "Embarked_Q")
     is set to 1 for each data point initially labeled with "S" (resp. "C" and "Q")
     in the "Embarked" variable, and 0 if not.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，“Embarked”变量有三个分类值，“S”、“C”和“Q”。虚拟化数据将创建三个新变量，“Embarked_S”、“Embarked_C”和“Embarked_Q”。然后，“Embarked_S”（或“Embarked_C”和“Embarked_Q”）的值对于在“Embarked”变量中最初标记为“S”（或“C”和“Q”）的每个数据点设置为
+    1，否则设置为 0。
 - en: '[PRE10]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: We then split the target variable from the others, a necessary step before training.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们将目标变量与其他变量分开，这是训练之前的必要步骤。
 - en: '[PRE11]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Building the model
+  id: totrans-58
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 构建模型
 - en: Training with XGBoost
+  id: totrans-59
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用 XGBoost 进行训练
 - en: Let's first build a classifier model using XGBoost. Since several parameters
     have to be fixed beforehand, we use scikit-learn's GridSearchCV method to perform
     cross validation in order to maximize our chance to find the best ones. The given
@@ -257,29 +383,43 @@
     relatively low (below 10 seconds). In fact, we found out that, in this particular
     Titanic example, models with larger numbers of estimators or maximum depth don't
     score a much better accuracy. We then fit this model using the training sets.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，使用 XGBoost 构建一个分类模型。由于需要事先固定几个参数，我们使用 scikit-learn 的 GridSearchCV 方法进行交叉验证，以最大化找到最佳参数的机会。给定的范围故意较小，以保持每次推理的
+    FHE 执行时间相对较低（低于 10 秒）。实际上，我们发现，在这个特定的 Titanic 示例中，具有更多估算器或最大深度的模型并没有显著提高准确率。然后，我们使用训练集来拟合这个模型。
 - en: '[PRE12]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Training with Concrete-ML
+  id: totrans-62
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用 Concrete-ML 进行训练
 - en: Now, let's do the same using Concrete-ML's XGBClassifier method.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们使用 Concrete-ML 的 XGBClassifier 方法进行相同的操作。
 - en: In order to do so, we need to specify the number of bits over which inputs,
     outputs and weights will be quantized. This value can influence the precision
     of the model as well as its inference running time, and therefore can lead the
     grid-search cross-validation to find a different set of parameters. In our case,
     setting this value to 2 bits outputs an excellent accuracy score while running
     faster.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了做到这一点，我们需要指定输入、输出和权重将被量化的位数。这个值会影响模型的精度及其推理运行时间，因此可能导致网格搜索交叉验证找到不同的参数集。在我们的例子中，将该值设置为
+    2 位可以在更快的运行速度下获得出色的准确度评分。
 - en: '[PRE13]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: The Concrete-ML API has been thought to be as close as most common Machine Learning
     and Deep Learning Python libraries in order to make its use as easy as possible.
     Additionally, it enables any data scientists to use Zama’s technology without
@@ -288,119 +428,180 @@
     to common Data Science workflows such as scikit-learn tools. In fact, those observations
     remain valid regarding the prediction process, with only a few additional steps
     to consider.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: Concrete-ML API 设计得尽可能接近最常见的机器学习和深度学习 Python 库，以使其使用尽可能简单。此外，它使任何数据科学家可以在没有加密知识的情况下使用
+    Zama 的技术。因此，构建和拟合 FHE 兼容的模型对任何习惯于使用 scikit-learn 工具等常见数据科学工作流程的人来说，都变得非常直观和方便。实际上，这些观察对于预测过程仍然有效，只需考虑几个额外的步骤。
 - en: Predicting the Outcomes
+  id: totrans-67
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 预测结果
 - en: Let’s first compute the predictions in clear using the XGBoost model.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们使用 XGBoost 模型在清晰的环境中计算预测结果。
 - en: '[PRE14]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: Besides, it is also possible to compute the predictions in clear using the Concrete-ML
     model. This will essentially execute the library’s XGBoost version of the model
     considering the quantization process. No FHE related computations are dealt with
     here.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，也可以使用 Concrete-ML 模型在清晰的环境中计算预测。这将本质上执行库的 XGBoost 版本的模型，并考虑量化过程。这里不涉及任何 FHE
+    相关的计算。
 - en: '[PRE15]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: In order to do the same using FHE, an additional compilation step is needed.
     By giving it a subset of the input data used for representing the reachable range
     of values, the compile method builds an appropriate FHE circuit that will then
     be executed during the prediction. Note that the execute_in_fhe parameter also
     needs to be set to True.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了使用 FHE 实现相同的功能，需要额外的编译步骤。通过提供一个用于表示可达值范围的输入数据子集，编译方法构建一个适当的 FHE 电路，该电路将在预测过程中执行。请注意，execute_in_fhe
+    参数也需要设置为 True。
 - en: '[PRE16]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: Using a machine with 8 11th Gen Intel® Core™ i5-1135G7 processors of 2.40GHz
     (4 cores, 2 threads each), the average execution time per inference lies between
     2 and 3 seconds. This does not include the key generation time, which happens
     only once before all predictions are made and reaches no more than 12 seconds.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用配备 8 个 11 代 Intel® Core™ i5-1135G7 处理器（2.40GHz，4 核心，每个核心 2 线程）的机器，每次推理的平均执行时间在
+    2 到 3 秒之间。这不包括密钥生成时间，密钥生成仅在所有预测之前发生一次，时间不超过 12 秒。
 - en: Additionally, FHE computations are expected to be exact. This means that the
     model executed in FHE results in the same predictions as the Concrete-ML one,
     which is executed in clear and only considers quantization.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，FHE 计算预计是准确的。这意味着 FHE 中执行的模型会产生与 Concrete-ML 模型相同的预测，后者在清晰的环境中执行并仅考虑量化。
 - en: '[PRE17]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: 'Prediction similarity between both Concrete-ML models (quantized clear and
     FHE): 100.00%'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: Concrete-ML 模型（量化清晰和 FHE）之间的预测相似度：100.00%
 - en: However, as seen previously, the grid-search cross-validation was done separately
     between the XGBoost model and the Concrete-ML one. For this reason, the two models
     do not share the same set of hyperparameters, making their decision boundaries
     different.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，正如之前所见，网格搜索交叉验证是在 XGBoost 模型和 Concrete-ML 模型之间分别进行的。因此，这两个模型没有共享相同的超参数集合，使它们的决策边界不同。
 - en: Comparing how similar their predictions are one by one is thus irrelevant and
     only the final accuracy score given by the Kaggle platform should be considered
     to assess their performance.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，逐一比较它们的预测结果的相似性是不相关的，应该仅考虑 Kaggle 平台给出的最终准确性分数来评估它们的表现。
 - en: Therefore, let’s save the predictions from both XGBoost and Concrete-ML models
     as csv files. Then, those files can be submitted in the Kaggle platform using
     this [link](https://www.kaggle.com/competitions/titanic/submit). The FHE model
     outputs an accuracy of around 78%, which can be seen in the public [leaderboard](https://www.kaggle.com/competitions/titanic/leaderboard?search=concrete).
     In comparison, the XGBoost clear one scores 77%.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，我们将 XGBoost 和 Concrete-ML 模型的预测结果保存为 csv 文件。然后，可以使用这个 [链接](https://www.kaggle.com/competitions/titanic/submit)
+    在 Kaggle 平台上提交这些文件。FHE 模型的准确率约为 78%，可在公开的 [排行榜](https://www.kaggle.com/competitions/titanic/leaderboard?search=concrete)
+    上查看。相比之下，XGBoost 清晰模型的得分为 77%。
 - en: In fact, using the given dataset, most of the submitted notebooks do not seem
     to exceed 79% of accuracy. Therefore, additional pre-processing and feature engineering
     might help increase our current score but probably not by much.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，使用给定的数据集，大多数提交的笔记本似乎都没有超过 79% 的准确率。因此，额外的预处理和特征工程可能有助于提高我们当前的分数，但可能不会提高太多。
 - en: '[PRE18]'
+  id: totrans-82
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: 'Thanks for reading! Our main idea here was not only to build a predictive model
     that answers the question: “what sorts of people were more likely to survive?”
     but also to do it on encrypted data.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢阅读！我们的主要目标不仅是建立一个预测模型来回答“哪些人更可能生存？”这个问题，还要在加密数据上实现这一点。
 - en: 'This was possible thanks to our Python package: [Concrete-ML](https://github.com/zama-ai/concrete-ml)
     that aims to simplify the use of fully homomorphic encryption (FHE) for data scientists.'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一切得益于我们的 Python 包：[Concrete-ML](https://github.com/zama-ai/concrete-ml)，旨在简化数据科学家对全同态加密（FHE）的使用。
 - en: '[**Roman Bredehoft**](https://www.linkedin.com/in/roman-bredehoft/?originalSubdomain=fr)
     is a Machine Learning Engineer at Zama.'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**Roman Bredehoft**](https://www.linkedin.com/in/roman-bredehoft/?originalSubdomain=fr)
+    是 Zama 的机器学习工程师。'
 - en: More On This Topic
+  id: totrans-86
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关信息
 - en: '[Sentiment Analysis on Encrypted Data with Homomorphic Encryption](https://www.kdnuggets.com/2022/12/zama-sentiment-analysis-encrypted-data-homomorphic-encryption.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用同态加密对加密数据进行情感分析](https://www.kdnuggets.com/2022/12/zama-sentiment-analysis-encrypted-data-homomorphic-encryption.html)'
 - en: '[Is Academia Obsessing Over Methodology at the Cost of True Insights?](https://www.kdnuggets.com/is-academia-obsessing-over-methodology-at-the-cost-of-true-insights)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学术界是否在过度关注方法论，而忽视了真正的见解？](https://www.kdnuggets.com/is-academia-obsessing-over-methodology-at-the-cost-of-true-insights)'
 - en: '[How to Speed Up Python Pandas by Over 300x](https://www.kdnuggets.com/how-to-speed-up-python-pandas-by-over-300x)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何将Python Pandas的速度提升超过300倍](https://www.kdnuggets.com/how-to-speed-up-python-pandas-by-over-300x)'
 - en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个机器学习工程师都应该掌握的5项机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
 - en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets新闻，12月14日：3个免费的机器学习课程](https://www.kdnuggets.com/2022/n48.html)'
 - en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学、机器学习和深度学习的可靠计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
