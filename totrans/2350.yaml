@@ -1,267 +1,416 @@
 - en: Implementing Adaboost in Scikit-learn
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在 Scikit-learn 中实现 Adaboost
 - en: 原文：[https://www.kdnuggets.com/2022/10/implementing-adaboost-scikitlearn.html](https://www.kdnuggets.com/2022/10/implementing-adaboost-scikitlearn.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/10/implementing-adaboost-scikitlearn.html](https://www.kdnuggets.com/2022/10/implementing-adaboost-scikitlearn.html)
 - en: '![Implementing Adaboost in Scikit-learn](../Images/288548afff2b6f6e99236dd18a4f56ac.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![在 Scikit-learn 中实现 Adaboost](../Images/288548afff2b6f6e99236dd18a4f56ac.png)'
 - en: 'Source: Authors Image'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：作者图片
 - en: What is AdaBoost?
+  id: totrans-4
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么是 AdaBoost？
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全领域的职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: The AdaBoost algorithm, short for Adaptive Boosting, is a type of Boosting technique
     that is used as an Ensemble Method in Machine Learning. It is called Adaptive
     Boosting due to the fact that the weights are re-assigned to each instance, with
     higher weights being assigned to instances that are **not** correctly classified
     - therefore it ‘adapts’.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: AdaBoost 算法，简称为自适应提升，是一种用于机器学习中的集成方法的 Boosting 技术。由于权重会重新分配给每个实例，其中更高的权重分配给那些**未**被正确分类的实例，因此它被称为自适应提升。
 - en: '*If you want to learn more about Ensemble Methods and when to use them, read
     this article:* [*When Would Ensemble Techniques be a Good Choice?*](/2022/07/would-ensemble-techniques-good-choice.html)'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '*如果你想了解更多关于集成方法及其使用时机的信息，请阅读这篇文章：* [*何时使用集成技术会是一个好选择？*](/2022/07/would-ensemble-techniques-good-choice.html)'
 - en: Boosting is a method that comes under ensemble machine learning algorithms and
     is used to reduce errors in predictive data analysis. It does this by combining
     the predictions of weak learners. Boosting was more of a theoretical concept before
     it became a practical concept.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: Boosting 是一种集成机器学习算法的方法，用于减少预测数据分析中的错误。它通过结合弱学习者的预测来实现这一点。在成为一个实际概念之前，Boosting
+    更多是一个理论概念。
 - en: '*If you would like to know more about Boosting, read this article:* [*Boosting
     Machine Learning Algorithms: An Overview*](/2022/07/boosting-machine-learning-algorithms-overview.html)'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '*如果你想了解更多关于 Boosting 的信息，请阅读这篇文章：* [*Boosting 机器学习算法概述*](/2022/07/boosting-machine-learning-algorithms-overview.html)'
 - en: Terminology
+  id: totrans-15
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 术语
 - en: '**What is a weak learner?** A weak learner refers to a simple model that has
     a somewhat level of skill and does slightly better than random chance.'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**什么是弱学习者？** 弱学习者是指一种简单模型，其技能水平较低，但表现稍微优于随机机会。'
 - en: '**What is a Stump?** With tree-based algorithms, a node with two leaves is
     known as a Stump. Weak learners are almost always stumps.'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**什么是 Stump？** 在基于树的算法中，一个有两个叶子的节点被称为 Stump。弱学习者几乎总是 Stumps。'
 - en: How does AdaBoost work?
+  id: totrans-18
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: AdaBoost 如何工作？
 - en: The AdaBoost algorithm uses short decision trees, during the data training period.
     The instances that are incorrectly classified are given priority and are used
     as inputs for the second model - known as weak learners. This process happens
     again and again until the model attempts to correct the predictions made by the
     model before.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: AdaBoost 算法在数据训练期间使用短的决策树。被错误分类的实例会被优先考虑，并作为第二个模型的输入 - 被称为弱学习者。这个过程会一次又一次地重复，直到模型尝试纠正之前模型做出的预测。
 - en: 'The ideas behind AdaBoost:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: AdaBoost 背后的思想：
 - en: The combination of weak learners to make classifications
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 弱学习者的组合用于分类
 - en: Some stumps have more say in the classification than others
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一些 Stumps 在分类中的影响力大于其他 Stumps
 - en: Each stump takes the previous stumps' mistakes into consideration
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 每个 Stump 考虑到之前 Stumps 的错误
 - en: AdaBoost and Scikit-Learn
+  id: totrans-24
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: AdaBoost 和 Scikit-Learn
 - en: '[Scikit-Learn](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.ensemble)
     provides ensemble methods using a Python machine learning library that implements
     AdaBoost. AdaBoost can be used both for classification and regression problems,
     so let’s look into how we can use Scikit-Learn for these types of problems.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Scikit-Learn](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.ensemble)
+    提供了使用 Python 机器学习库实现 AdaBoost 的集成方法。AdaBoost 可用于分类和回归问题，因此让我们看看如何使用 Scikit-Learn
+    解决这些类型的问题。'
 - en: Classification
+  id: totrans-26
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 分类
 - en: '[PRE0]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The aim of the AdaBoost classifier is to start off with fitting a classifier
     on the original dataset for the task at hand and then fit additional classifiers
     where the weights of incorrectly classified instances are adjusted.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: AdaBoost 分类器的目标是首先在原始数据集上拟合一个分类器，然后拟合额外的分类器，其中错误分类实例的权重会被调整。
 - en: 'These are the parameters:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些是参数：
 - en: '[PRE1]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: You can learn more about them and their attributes [here](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html#sklearn.ensemble.AdaBoostClassifier).
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在 [这里](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html#sklearn.ensemble.AdaBoostClassifier)
+    了解更多关于它们及其属性的信息。
 - en: 'Let’s see it as an example:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来看一个例子：
 - en: 'Imports:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 导入：
 - en: '[PRE2]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Load dataset:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 加载数据集：
 - en: '[PRE3]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Encode malignant to 1 and benign to 0:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 将恶性编码为 1，将良性编码为 0：
 - en: '[PRE4]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Training/Test set:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练/测试集：
 - en: '[PRE5]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Fit our model:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 拟合我们的模型：
 - en: '[PRE6]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Make prediction:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 进行预测：
 - en: '[PRE7]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'Evaluate the model:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 评估模型：
 - en: '[PRE8]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Output:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE9]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'Code source: [Cory Maklin](https://github.com/corymaklin/adaboost/blob/master/adaboost.ipynb)'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码来源：[Cory Maklin](https://github.com/corymaklin/adaboost/blob/master/adaboost.ipynb)
 - en: Regression
+  id: totrans-50
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 回归
 - en: '[PRE10]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: The aim of the AdaBoost regressor is to start off with fitting a regressor on
     the original dataset for the task at hand and then fit additional regressors where
     the weights have been adjusted based on the current prediction error.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: AdaBoost 回归器的目标是首先在原始数据集上拟合一个回归器，然后拟合额外的回归器，其中权重根据当前预测误差进行了调整。
 - en: 'These are the parameters:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些是参数：
 - en: '[PRE11]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: If you would like to know more about them and their attributes, click [here](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostRegressor.html).
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想了解更多关于它们及其属性的信息，请点击 [这里](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostRegressor.html)。
 - en: 'Let’s see it as an example:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来看一个例子：
 - en: '[PRE12]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'Code source: [MachineLearningMastery](https://machinelearningmastery.com/adaboost-ensemble-in-python/)'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码来源：[MachineLearningMastery](https://machinelearningmastery.com/adaboost-ensemble-in-python/)
 - en: Wrapping it up
+  id: totrans-59
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 总结
 - en: 'If you want to learn more about ensemble methods and how you can make better
     predictions using the techniques: bagging, boosting, and stacking - check out
     the MachineLearningMastery book: [Ensemble Learning Algorithms With Python](https://machinelearningmastery.com/ensemble-learning-algorithms-with-python/)'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想了解更多关于集成方法以及如何使用技术：装袋、提升和堆叠来提高预测准确性的信息，请查看 MachineLearningMastery 书籍：[Python
+    中的集成学习算法](https://machinelearningmastery.com/ensemble-learning-algorithms-with-python/)
 - en: '[Josh Starmer](https://www.youtube.com/c/joshstarmer), the Statistics and Machine
     Learning Guru helped me to better understand AdaBoost through this video: [AdaBoost,
     Clearly Explained](https://www.youtube.com/watch?v=LsK-xG1cLYA&t=679s)'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Josh Starmer](https://www.youtube.com/c/joshstarmer)，统计和机器学习专家，通过这个视频帮助我更好地理解
+    AdaBoost：[AdaBoost 清晰解释](https://www.youtube.com/watch?v=LsK-xG1cLYA&t=679s)'
 - en: '**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** is a Data Scientist
     and Freelance Technical Writer. She is particularly interested in providing Data
     Science career advice or tutorials and theory based knowledge around Data Science.
     She also wishes to explore the different ways Artificial Intelligence is/can benefit
     the longevity of human life. A keen learner, seeking to broaden her tech knowledge
     and writing skills, whilst helping guide others.'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家和自由撰稿人。她特别关注提供数据科学职业建议或教程以及围绕数据科学的理论知识。她还希望探索人工智能如何及如何可以惠及人类寿命的不同方式。她是一个热衷学习者，寻求拓宽技术知识和写作技能，同时帮助指导他人。'
 - en: More On This Topic
+  id: totrans-63
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Understanding by Implementing: Decision Tree](https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过实现理解：决策树](https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html)'
 - en: '[Ten Key Lessons of Implementing Recommendation Systems in Business](https://www.kdnuggets.com/2022/07/ten-key-lessons-implementing-recommendation-systems-business.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在业务中实施推荐系统的十个关键经验教训](https://www.kdnuggets.com/2022/07/ten-key-lessons-implementing-recommendation-systems-business.html)'
 - en: '[Implementing DBSCAN in Python](https://www.kdnuggets.com/2022/08/implementing-dbscan-python.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Python 中实现 DBSCAN](https://www.kdnuggets.com/2022/08/implementing-dbscan-python.html)'
 - en: '[Chip Huyen shares frameworks and case studies for implementing ML systems](https://www.kdnuggets.com/2023/02/sphere-chip-huyen-shares-frameworks-case-studies-implementing-ml-systems.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Chip Huyen 分享了实施机器学习系统的框架和案例研究](https://www.kdnuggets.com/2023/02/sphere-chip-huyen-shares-frameworks-case-studies-implementing-ml-systems.html)'
 - en: '[KDnuggets News, August 24: Implementing DBSCAN in Python • How to…](https://www.kdnuggets.com/2022/n34.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，8月24日：在 Python 中实现 DBSCAN • 如何…](https://www.kdnuggets.com/2022/n34.html)'
 - en: '[Understanding and Implementing Genetic Algorithms in Python](https://www.kdnuggets.com/understanding-and-implementing-genetic-algorithms-in-python)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[理解和实现 Python 中的遗传算法](https://www.kdnuggets.com/understanding-and-implementing-genetic-algorithms-in-python)'
