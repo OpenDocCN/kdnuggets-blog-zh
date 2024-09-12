@@ -1,299 +1,435 @@
 - en: 'Support Vector Machine (SVM) Tutorial: Learning SVMs From Examples'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 支持向量机（SVM）教程：从示例中学习SVM
 - en: 原文：[https://www.kdnuggets.com/2017/08/support-vector-machines-learning-svms-examples.html](https://www.kdnuggets.com/2017/08/support-vector-machines-learning-svms-examples.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/08/support-vector-machines-learning-svms-examples.html](https://www.kdnuggets.com/2017/08/support-vector-machines-learning-svms-examples.html)
 - en: '**By Abhishek Ghose, 24/7, Inc.**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Abhishek Ghose，24/7, Inc.**'
 - en: '![SVM header](../Images/f320969486bc138a3dc06807f50d8acb.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![SVM header](../Images/f320969486bc138a3dc06807f50d8acb.png)'
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行IT管理'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '*After the *[*Statsbot*](http://statsbot.co/?utm_source=kdnuggets)* team published
     the post about *[*time series anomaly detection*](https://blog.statsbot.co/time-series-anomaly-detection-algorithms-1cef5519aef2)*,
     many readers asked us to tell them about the Support Vector Machines approach.
     It’s time to catch up and introduce you to SVM without hard math and share useful
     libraries and resources to get you started.*'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '*在*[*Statsbot*](http://statsbot.co/?utm_source=kdnuggets)*团队发布关于*[*时间序列异常检测*](https://blog.statsbot.co/time-series-anomaly-detection-algorithms-1cef5519aef2)*的文章后，许多读者要求我们介绍支持向量机（SVM）方法。现在是时候跟进了，我们将不涉及复杂数学地介绍SVM，并分享一些有用的库和资源，帮助你入门。*'
 - en: If you have used machine learning to perform classification, you might have
     heard about *Support Vector Machines (SVM)*. Introduced a little more than 50
     years ago, they have evolved over time and have also been adapted to various other
     problems like *regression, outlier analysis,* and *ranking*.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你曾使用机器学习进行分类，你可能听说过*支持向量机（SVM）*。它们在50多年前被引入，并随着时间的推移不断发展，还被适应于各种其他问题，如*回归、异常值分析*和*排序*。
 - en: SVMs are a favorite tool in the arsenal of many machine learning practitioners.
     At [[24]7](https://www.247-inc.com/), we too use them to solve a variety of problems.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: SVM是许多机器学习从业者常用的工具。在[[24]7](https://www.247-inc.com/)我们也用它们来解决各种问题。
 - en: In this post, we will try to gain a high-level understanding of how SVMs work.
     I’ll focus on developing intuition rather than rigor. What that essentially means
     is we will skip as much of the math as possible and develop a strong intuition
     of the working principle.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将尝试对SVM如何工作有一个高层次的理解。我将重点发展直觉，而不是严格的数学。这意味着我们将尽可能跳过数学部分，建立对工作原理的强直觉。
 - en: '**The Problem of Classification**'
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**分类问题**'
 - en: 'Say there is a machine learning (ML) course offered at your university. The
     course instructors have observed that students get the most out of it if they
     are good at Math or Stats. Over time, they have recorded the scores of the enrolled
     students in these subjects. Also, for each of these students, they have a label
     depicting their performance in the ML course: “Good” or “Bad.”'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你们的大学开设了一门机器学习（ML）课程。课程讲师观察到，学生如果擅长数学或统计学，能够从中获得最大的收益。随着时间的推移，他们记录了注册学生在这些学科的成绩。同时，对于每一个学生，他们也有一个标签，表示他们在ML课程中的表现：“好”或“差。”
 - en: Now they want to determine the relationship between Math and Stats scores and
     the performance in the ML course. Perhaps, based on what they find, they want
     to specify a prerequisite for enrolling in the course.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在他们希望确定数学和统计成绩与机器学习课程表现之间的关系。也许，基于他们的发现，他们想要为课程注册指定一个前提条件。
 - en: How would they go about it? Let’s start with representing the data they have.
     We could draw a two-dimensional plot, where one axis represents scores in Math,
     while the other represents scores in Stats. A student with certain scores is shown
     as a point on the graph.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 他们将如何进行呢？让我们从表示他们拥有的数据开始。我们可以绘制一个二维图，其中一个轴表示数学成绩，另一个轴表示统计成绩。一个具有特定成绩的学生会在图表上显示为一个点。
 - en: 'The color of the point — green or red — represents how he did on the ML course:
     “Good” or “Bad” respectively.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 点的颜色——绿色或红色——表示他在机器学习课程中的表现：“好”或“差”。
 - en: 'This is what such a plot might look like:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一种可能的图示效果：
 - en: '![](../Images/79c4b84c10d4cb0e6e52f98cd05e0d63.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/79c4b84c10d4cb0e6e52f98cd05e0d63.png)'
 - en: When a student requests enrollment, our instructors would ask her to supply
     her Math and Stats scores. Based on the data they already have, they would make
     an informed guess about her performance in the ML course.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 当学生请求报名时，我们的讲师会要求她提供数学和统计学成绩。根据他们已有的数据，他们会对她在机器学习课程中的表现做出有根据的猜测。
 - en: What we essentially want is some kind of an “algorithm,” to which you feed in
     the “score tuple” of the form *(math_score, stats_score)*. It tells you whether
     the student is a red or green point on the plot (red/green is alternatively known
     as a *class *or* label*). And of course, this algorithm embodies, in some manner,
     the patterns present in the data we already have, also known as the *training
     data*.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们本质上想要某种“算法”，你将“分数元组”（形式为*(math_score, stats_score)*) 输入其中。它告诉你学生在图上的位置是红色点还是绿色点（红色/绿色也称为*类别*或*标签*）。当然，这个算法在某种程度上体现了我们已有数据中的模式，也就是*训练数据*。
 - en: In this case, finding a line that passes between the red and green clusters,
     and then determining which side of this line a score tuple lies on, is a good
     algorithm. We take a side — the green side or the red side — as being a good indicator
     of her most likely performance in the course.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，找到一条通过红色和绿色簇之间的线，然后确定一个分数元组位于这条线的哪一侧，是一个好的算法。我们选择一侧——绿色侧或红色侧——作为她在课程中最可能表现的良好指标。
 - en: '![](../Images/3e9989de3e3e721fc6d5f35361f05f31.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3e9989de3e3e721fc6d5f35361f05f31.png)'
 - en: The line here is our *separating boundary *(because it separates out the labels)or* classifier *(we
     use it classify points). The figure shows two possible classifiers for our problem.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里的线是我们的*分隔边界*（因为它分隔了标签）或*分类器*（我们用它来分类点）。图中显示了我们问题的两个可能的分类器。
 - en: '**Good vs Bad Classifiers**'
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**好的与不好的分类器**'
 - en: 'Here’s an interesting question: both lines above separate the red and green
     clusters. Is there a good reason to choose one over another?'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里有个有趣的问题：上面的两条线都将红色和绿色的簇分开。是否有充分的理由选择其中一条而不是另一条？
 - en: Remember that the worth of a classifier is not in how well it separates the
     training data. We eventually want it to classify yet-unseen data points (known
     as *test data*). Given that, we want to choose a line that captures the *general
     pattern* in the training data, so there is a good chance it does well on the test
     data.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 记住，分类器的价值不在于它如何分隔训练数据。我们最终希望它能够对尚未见过的数据点（称为*测试数据*）进行分类。考虑到这一点，我们希望选择一条捕捉*一般模式*的线，以便它在测试数据上有良好的表现。
 - en: The first line above seems a bit “skewed.” Near its lower half it seems to run
     too close to the red cluster, and in its upper half it runs too close to the green
     cluster. Sure, it separates the training data perfectly, but if it sees a test
     point that’s a little farther out from the clusters, there is a good chance it
     would get the label wrong.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的第一条线似乎有些“倾斜”。在其下半部分，它似乎离红色簇过近，在上半部分则离绿色簇过近。虽然它可以完美地分隔训练数据，但如果遇到一个距离簇稍远的测试点，它很可能会标记错误。
 - en: The second line doesn’t have this problem. For example, look at the test points
     shown as squares and the labels assigned by the classifiers in the figure below.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二条线没有这个问题。例如，查看下图中显示为方形的测试点和分类器分配的标签。
 - en: '![](../Images/767fdf264794af85373021d024b0b031.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/767fdf264794af85373021d024b0b031.png)'
 - en: The second line stays as far away as possible from both the clusters while getting
     the training data separation right. By being right in the middle of the two clusters,
     it is less “risky,” gives the data distributions for each class some wiggle room
     so to speak, and thus generalizes well on test data.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二条线尽可能远离两个簇，同时正确分隔训练数据。通过处于两个簇的中间，它减少了“风险”，给每个类别的数据分布留出了一些“弹性空间”，因此在测试数据上表现良好。
 - en: 'SVMs try to find the second kind of line. We selected the better classifier
     visually, but we need to define the underlying philosophy a bit more precisely
     to apply it in the general case. Here’s a simplified version of what SVMs do:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 支持向量机（SVMs）试图找到第二种类型的线。我们通过视觉选择了更好的分类器，但我们需要更准确地定义其基本理念，以便在一般情况下应用。以下是SVMs所做工作的简化版本：
 - en: Find lines that correctly classify the training data
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 找出能够正确分类训练数据的线
 - en: Among all such lines, pick the one that has the greatest distance to the points
     closest to it.
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在所有这样的直线中，选择距离最近点最远的那一条。
 - en: The closest points that identify this line are known as *support vectors*. And
     the region they define around the line is known as the *margin*.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 确定这条线的最近点被称为*支持向量*。它们定义的围绕线的区域被称为*边际*。
 - en: 'Here’s the second line shown with the support vectors: points with black edges
     (there are two of them) and the margin (the shaded region).'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是第二条显示了支持向量的直线：具有黑色边缘的点（有两个）和边际（阴影区域）。
 - en: '![](../Images/cc2ceb6b2e9585689425c23b690358ea.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/cc2ceb6b2e9585689425c23b690358ea.png)'
 - en: Support Vector Machines give you a way to pick between many possible classifiers
     in a way that guarantees a higher chance of correctly labeling your test data.
     Pretty neat, right?
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 支持向量机为你提供了一种在多个可能的分类器之间进行选择的方法，这种方法保证了更高的正确标记测试数据的概率。很不错，对吧？
 - en: While the above plot shows a line and data in two dimensions, it must be noted
     that SVMs work in any number of dimensions; and in these dimensions, they find
     the analogue of the two-dimensional line.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然上述图显示了二维的直线和数据，但必须注意SVM可以在任意维度下工作；在这些维度中，它们找到的是二维直线的类比。
 - en: For example, in three dimensions they find a *plane* (we will see an example
     of this shortly), and in higher dimensions they find a *hyperplane* — a generalization
     of the two-dimensional line and three-dimensional plane to an arbitrary number
     of dimensions.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，在三维中，他们找到一个*平面*（我们将很快看到这个例子），在更高维度中，他们找到一个*超平面*——这是二维直线和三维平面的一个推广，适用于任意数量的维度。
 - en: Data that can be separated by a line (or in general, a hyperplane) is known
     as *linearly separable *data. The hyperplane acts as a *linear classifier.*
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以通过一条直线（或一般来说，通过一个超平面）分开的数据被称为*线性可分*数据。超平面充当了一个*线性分类器*。
 - en: '**Allowing for Errors**'
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**允许误差**'
 - en: We looked at the easy case of perfectly linearly separable data in the last
     section. Real-world data is, however, typically messy. You will almost always
     have a few instances that a linear classifier can’t get right.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在上一节中看到了完美线性可分数据的简单情况。然而，现实世界中的数据通常是混乱的。你几乎总是会遇到一些线性分类器无法正确分类的实例。
 - en: 'Here’s an example of such data:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是这样的数据的一个例子：
 - en: '![](../Images/224a0ce98e517966c72d3e0c79292422.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/224a0ce98e517966c72d3e0c79292422.png)'
 - en: Clearly, if we are using a linear classifier, we are never going to be able
     to perfectly separate the labels. We also don’t want to discard the linear classifier
     altogether because it does seem like a good fit for the problem except for a few
     errant points.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，如果我们使用线性分类器，我们将永远无法完美地分开标签。我们也不希望完全丢弃线性分类器，因为除了少数异常点外，它似乎适合这个问题。
 - en: How do SVMs deal with this? They allow you to specify how many errors you are
     willing to accept.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 支持向量机如何处理这个问题？它们允许你指定你愿意接受多少错误。
 - en: 'You can provide a parameter called “C” to your SVM; this allows you to dictate
     the tradeoff between:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以为你的SVM提供一个名为“C”的参数；这允许你在以下方面进行权衡：
 - en: Having a wide margin.
+  id: totrans-50
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 拥有宽边际。
 - en: Correctly classifying **training **data. A higher value of C implies you want
     lesser errors on the training data.
+  id: totrans-51
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 正确分类**训练**数据。较高的C值意味着你希望在训练数据上减少错误。
 - en: It bears repeating that this is a **tradeoff**. You get better classification
     of training data at the *expense *of a wide margin.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 需要重申的是，这是一个**权衡**。你可以获得更好的训练数据分类，但*代价*是较宽的边际。
 - en: 'The following plots show how the classifier and the margin vary as we increase
     the value of C (support vectors not shown):'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下图表显示了当我们增加C值时，分类器和边际如何变化（未显示支持向量）：
 - en: '![](../Images/2f66ef5206eb12837c8248f957c8518a.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2f66ef5206eb12837c8248f957c8518a.png)'
 - en: Note how the line “tilts” as we increase the value of C. At high values, it
     tries to accommodate the labels of most of the red points present at the bottom
     right of the plots. This is probably not what we want for test data. The first
     plot with C=0.01 seems to capture the general trend better, although it suffers
     from a lower accuracy on the training data compared to higher values for C.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意当我们增加C的值时，线条如何“倾斜”。在高值时，它试图适应大多数位于图表右下角的红色点的标签。这可能不是我们对测试数据的期望。C=0.01时的第一个图似乎更好地捕捉了整体趋势，尽管它在训练数据上的准确性低于C的较高值。
 - en: '*And since this is a trade-off, note how the width of the margin shrinks as
     we increase the value of C.*'
+  id: totrans-56
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*由于这是一个权衡，请注意当我们增加C的值时，边际的宽度如何缩小。*'
 - en: In the previous example, the margin was a “no man’s land” for points. Here,
     we see it’s not possible anymore to have *both *a good separating boundary *and* an
     associated point-free margin. Some points creep into the margin.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 在前面的示例中，边界是一个“无人区”对于点而言。这里，我们看到现在不再可能同时拥有*一个良好的分隔边界*和*一个无点的边界*。一些点会渗入边界。
 - en: An important practical problem is to decide on a good value of C. Since real-world
     data is almost never cleanly separable, this need comes up often. We typically
     use a technique like *cross-validation* to pick a good value for C.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个重要的实际问题是决定一个合适的 C 值。由于现实世界的数据几乎从不干净地可分，这个需求经常出现。我们通常使用像*交叉验证*这样的技术来选择一个合适的
+    C 值。
 - en: More On This Topic
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Support Vector Machines: An Intuitive Approach](https://www.kdnuggets.com/2022/08/support-vector-machines-intuitive-approach.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[支持向量机：直观的方法](https://www.kdnuggets.com/2022/08/support-vector-machines-intuitive-approach.html)'
 - en: '[A Gentle Introduction to Support Vector Machines](https://www.kdnuggets.com/2023/07/gentle-introduction-support-vector-machines.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[支持向量机的温和介绍](https://www.kdnuggets.com/2023/07/gentle-introduction-support-vector-machines.html)'
 - en: '[How Semantic Vector Search Transforms Customer Support Interactions](https://www.kdnuggets.com/how-semantic-vector-search-transforms-customer-support-interactions)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[语义向量搜索如何改变客户支持互动](https://www.kdnuggets.com/how-semantic-vector-search-transforms-customer-support-interactions)'
 - en: '[Python Vector Databases and Vector Indexes: Architecting LLM Apps](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 向量数据库和向量索引：构建 LLM 应用](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)'
 - en: '[Picking Examples to Understand Machine Learning Model](https://www.kdnuggets.com/2022/11/picking-examples-understand-machine-learning-model.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[选择示例以理解机器学习模型](https://www.kdnuggets.com/2022/11/picking-examples-understand-machine-learning-model.html)'
 - en: '[Ensemble Learning with Examples](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[集成学习实例](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
