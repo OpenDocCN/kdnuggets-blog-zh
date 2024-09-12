@@ -1,49 +1,76 @@
 - en: How to easily check if your Machine Learning model is fair?
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何轻松检查您的机器学习模型是否公平？
 - en: 原文：[https://www.kdnuggets.com/2020/12/machine-learning-model-fair.html](https://www.kdnuggets.com/2020/12/machine-learning-model-fair.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/12/machine-learning-model-fair.html](https://www.kdnuggets.com/2020/12/machine-learning-model-fair.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Jakub Wiśniewski](https://medium.com/@jakwisn/about), data science student
     and research software engineer in MI2 DataLab**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Jakub Wiśniewski](https://medium.com/@jakwisn/about)撰写，数据科学学生及MI2 DataLab的研究软件工程师**。'
 - en: '![](../Images/07aa44b896c7106722a8f78b792a2734.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/07aa44b896c7106722a8f78b792a2734.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的快车道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您组织的IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '*Photo by [Eric Krull](https://unsplash.com/@ekrull?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/robot?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).*'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '*照片由[Eric Krull](https://unsplash.com/@ekrull?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)拍摄，刊登于[Unsplash](https://unsplash.com/s/photos/robot?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*'
 - en: We live in a world that is getting more divided each day. In some parts of the
     world, the differences and inequalities between races, ethnicities, and sometimes
     sexes are aggravating. The data we use for modeling is, in the major part, a reflection
@@ -51,18 +78,24 @@
     the model will likely reflect that. **We propose a way in which ML engineers can
     easily check if their model is biased. **Our fairness tool now works only with
     classification models.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们生活在一个日益分裂的世界中。在世界的某些地方，种族、民族以及有时性别之间的差异和不平等正在加剧。我们用于建模的数据在很大程度上反映了其来源的世界。而这个世界可能存在偏见，因此数据和模型也可能反映这种偏见。**我们提出了一种方法，ML工程师可以轻松检查他们的模型是否存在偏见。**我们的公平性工具目前仅适用于分类模型。
 - en: Case study
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 案例研究
 - en: To showcase the abilities of the [dalex fairness module](https://dalex.drwhy.ai/),
     we will be using the well-known [German Credit Data dataset](https://archive.ics.uci.edu/ml/datasets/statlog+(german+credit+data) to
     assign risk for each credit-seeker. This simple task may require using an interpretable *decision
     tree classifier*.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了展示[dalex公平性模块](https://dalex.drwhy.ai/)的功能，我们将使用著名的[德国信用数据集](https://archive.ics.uci.edu/ml/datasets/statlog+(german+credit+data)为每个信用申请者分配风险。这一简单任务可能需要使用可解释的*决策树分类器*。
 - en: Once we have *dx.Explainer* we need to execute the method *model_fairness()*,
     so it can calculate all necessary metrics among the subgroups from the *protected *vector,
     which is an array or a list with sensitive attributes denoting sex, race, nationality,
@@ -70,74 +103,108 @@
     which subgroup (so which unique element of *protected*) is the most privileged,
     and it can be done through *privileged *parameter, which in our case will be older
     males.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们有了*dx.Explainer*，我们需要执行方法*model_fairness()*，以便它可以计算*protected*向量中子组的所有必要指标，该向量是一个包含性别、种族、国籍等敏感属性的数组或列表，适用于每个观察（个体）。除此之外，我们还需要指出哪个子组（即*protected*中的唯一元素）是最有特权的，这可以通过*privileged*参数来完成，在我们的案例中，将是年长男性。
 - en: This object has many attributes, and we will not go through each and every one
     of them. A more detailed overview can be found in this [tutorial](http://dalex.drwhy.ai/python-dalex-fairness.html).
     Instead, we will focus on one method and two plots.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个对象有很多属性，我们不会逐一介绍它们。更详细的概述可以在这个[tutorial](http://dalex.drwhy.ai/python-dalex-fairness.html)中找到。相反，我们将重点关注一种方法和两个图表。
 - en: So is our model biased or not?
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 那么，我们的模型是否存在偏见？
 - en: 'This question is simple, but because of the nature of bias, the response will
     be: it depends. But this method measuring bias from different perspectives so
     that no bias model can go through. To check fairness, one has to use *fairness_check()* method.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个问题很简单，但由于偏差的性质，回答是：这要看情况。但这种方法从不同的角度来衡量偏差，以确保没有偏差模型可以通过。要检查公平性，必须使用*fairness_check()*方法。
 - en: '[PRE0]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The following chunk is the console output from the code above.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下部分是上述代码的控制台输出。
 - en: '[PRE1]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The bias was spotted in metric FPR, which is the False Positive Rate. The output
     above suggests that the model cannot be **automatically **approved (like said
     in the output above). So it is up to the user to decide. In my opinion, it is
     not a fair model. Lower FPR means that the privileged subgroup is getting False
     Positives more frequently than the unprivileged.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在指标 FPR（假正率）中发现了偏差。上面的输出表明，该模型不能被**自动**批准（如上所述）。所以决定权在用户手中。在我看来，这不是一个公平的模型。较低的
+    FPR 表明特权子群体比不利子群体更频繁地出现假正例。
 - en: '**More on *fairness_check()***'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '**更多关于*fairness_check()*的内容**'
 - en: 'We get the information about bias, the conclusion, and metrics ratio raw DataFrame.
     There are metrics TPR (True Positive Rate), ACC (Accuracy), PPV (Positive Predictive
     Value), FPR (False Positive Rate), STP(Statistical parity). The metrics are derived
     from a [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) for
     each unprivileged subgroup and then divided by metric values based on the privileged
     subgroup. There are 3 types of possible conclusions:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们获得了有关偏差、结论和指标比率的原始 DataFrame 数据。这里有指标 TPR（真正率）、ACC（准确率）、PPV（正预测值）、FPR（假正率）、STP（统计公平性）。这些指标来源于每个不利子群体的[混淆矩阵](https://en.wikipedia.org/wiki/Confusion_matrix)，然后将其除以基于特权子群体的指标值。可能的结论有
+    3 种类型：
 - en: '[PRE2]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: A DA true fair model would not exceed any metric, but when true values (target)
     are dependent on sensitive attributes, then things get complicated and out of
     scope for this blog. In short, some metrics will not be equal, but they will not
     necessarily exceed the user's threshold. If you want to know more, then I strongly
     suggest checking out the [Fairness and machine learning](https://fairmlbook.org/) book,
     especially chapter 2.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个真正公平的模型不会超过任何指标，但当真实值（目标）依赖于敏感属性时，情况就变得复杂，并超出了本博客的范围。简而言之，一些指标可能不会相等，但它们不一定会超过用户的阈值。如果你想了解更多，我强烈建议查阅[公平性与机器学习](https://fairmlbook.org/)这本书，特别是第
+    2 章。
 - en: '**But one could ask why our model is not fair, on what grounds are we deciding?**'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**但有人可能会问，为什么我们的模型不公平，我们依据什么做出判断？**'
 - en: 'The answer to this question is tricky, but the method of judging fairness seems
     to be the best so far. Generally, the score for each subgroup should be close
     to the score of the privileged subgroup. To put it in a more mathematical perspective,
     the ratios between scores of privileged and unprivileged metrics should be close
     to 1\. The closer it is to 1, the more fair the model is. But to relax this criterion
     a little bit, it can be written more thoughtfully:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个问题的答案很棘手，但判断公平性的方法似乎是目前最好的。通常，每个子群体的分数应该接近特权子群体的分数。用更数学的角度来看，特权指标和不利指标分数之间的比率应该接近
+    1。越接近 1，模型越公平。但为了稍微放宽这一标准，可以更有思考地表述：
 - en: '![](../Images/8523856f1d4ade2e4315ef6a078b2435.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8523856f1d4ade2e4315ef6a078b2435.png)'
 - en: Where the *epsilon *is a value between 0 and 1, it should be a minimum acceptable
     value of the ratio. By default, it is 0.8, which adheres to the [four-fifths](https://www.hirevue.com/blog/hiring/what-is-adverse-impact-and-why-measuring-it-matters) rule
     (80% rule) often looked at in hiring. It is hard to find a non-arbitrary boundary
@@ -146,34 +213,52 @@
     This is why we decided to choose 0.8 as our default *epsilon *as it is the only
     known value to be a tangible threshold for the acceptable amount of discrimination.
     Of course, a user may change this value to their needs.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中，*epsilon* 是一个介于 0 和 1 之间的值，应该是比率的最小可接受值。默认情况下，它是 0.8，这符合在招聘中常用的[four-fifths](https://www.hirevue.com/blog/hiring/what-is-adverse-impact-and-why-measuring-it-matters)规则（80%
+    规则）。很难找到一个非任意的公平与歧视差异之间的界限，并且检查指标的比率是否恰好为 1 是没有意义的，因为如果比率是 0.99 呢？这就是为什么我们决定选择
+    0.8 作为默认值*epsilon*，因为它是唯一已知的可作为可接受歧视量的具体阈值。当然，用户可以根据需要更改此值。
 - en: Bias can also be plotted
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 偏差也可以被绘制出来。
 - en: There are two bias detection plots available (however, there are more ways to
     visualize bias in the package)
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 提供了两种偏见检测图（不过，包中还有更多可视化偏见的方法）
 - en: '*fairness_check*— visualization of *fairness_check()* method'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*fairness_check*— *fairness_check()* 方法的可视化'
 - en: '*metric_scores*— visualization of *metric_scores *attribute which is raw scores
     of metrics.'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*metric_scores*— *metric_scores* 属性的可视化，它是度量的原始分数。'
 - en: The types just need to be passed to the *type *parameter of the *plot *method.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 类型只需传递给*plot*方法的*type*参数。
 - en: '![](../Images/a3d7b3d913e90fd5fcc699c59f2e32dc.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a3d7b3d913e90fd5fcc699c59f2e32dc.png)'
 - en: '*fobject.plot()*'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '*fobject.plot()*'
 - en: The plot above shows similar things to the fairness check output. Metric names
     are changed to more standard fairness equivalents, but the formulas point to which
     metrics we are referring to. Looking at the plot above, intuition is simple—if
@@ -181,119 +266,182 @@
     range. The length of the bar is equivalent to the |1-M| where M is the unprivileged
     Metric score divided by the privileged Metric score (so just like in fairness
     check before).
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 上图显示了与公平检查输出类似的内容。度量名称已更改为更标准的公平等价物，但公式指明了我们所指的度量。查看上图，直观上很简单——如果条形图进入了红色区域，则意味着度量超过了基于
+    epsilon 的范围。条形图的长度等同于|1-M|，其中 M 是特权度量分数除以非特权度量分数（就像在之前的公平检查中一样）。
 - en: '![](../Images/e78a5b2ff0822266d6fbf6d17f99caa4.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e78a5b2ff0822266d6fbf6d17f99caa4.png)'
 - en: '*fobject.plot(type=’metric_scores’)*'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '*fobject.plot(type=’metric_scores’)*'
 - en: The *Metric Scores* plot paired with the *Fairness Check *give good intuition
     about metrics and their ratios. Here the points are raw (not divided) metric scores.
     The vertical line symbolizes a privileged metric score. The closer to that line,
     the better.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '*度量分数*图与*公平检查*图相结合，可以很好地理解度量和它们的比率。这里的点是原始（未划分）度量分数。垂直线象征着特权度量分数。离那条线越近，越好。'
 - en: '**Multiple models** can be put into one plot so they can be easily compared
     with each other. Let’s add some models and visualize the *metric_scores:*'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**多个模型**可以放入一个图中，以便它们可以彼此轻松比较。让我们添加一些模型并可视化*metric_scores*：'
 - en: '![](../Images/80899c58548296cd6f94338a1999c120.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/80899c58548296cd6f94338a1999c120.png)'
 - en: '*Output of the code above.*'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '*上述代码的输出。*'
 - en: Now let’s check the plot based on *fairness_check:*
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们检查基于*fairness_check*的图：
 - en: '![](../Images/592c232f71c2dbd4549e88530a7ddd96.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/592c232f71c2dbd4549e88530a7ddd96.png)'
 - en: We Can see that *RandomForestClassifier* is within the green zone, and therefore
     in terms of these metrics, it is fair. On the other hand, the *LogisticRegression* is
     reaching red zones in three metrics and, therefore, cannot be called fair.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到*RandomForestClassifier*在绿色区域内，因此在这些度量方面是公平的。另一方面，*LogisticRegression*在三个度量中进入红色区域，因此不能被称为公平。
 - en: Every plot is interactive, made with the python visualization package *plotly*.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个图都是交互式的，使用 Python 可视化包*plotly*制作。
 - en: Summary
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总结
 - en: The fairness module in *dalex *is a unified and accessible way to ensure that
     the models are fair. There are other ways to visualize bias in models, be sure
     to check it out! In the future, bias mitigation methods will be added. There is
     a long term plan to add support for *individual fairness* and *fairness in regression*.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '*dalex*中的公平性模块是一种统一和可访问的方法，以确保模型的公平性。还有其他可视化模型偏见的方法，务必查看一下！未来将添加偏见缓解方法。长期计划是添加对*个体公平性*和*回归公平性*的支持。'
 - en: 'Be sure to check it out. You can install dalex with:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 一定要查看一下。你可以通过以下命令安装dalex：
 - en: '[PRE3]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'If you want to learn more about fairness, the I really recommend:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想了解更多关于公平性的信息，我强烈推荐：
 - en: Blog about an [update in the R package](https://medium.com/responsibleml/what-is-new-in-fairmodels-a1ec6ff44d79)
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 关于[R包更新的博客](https://medium.com/responsibleml/what-is-new-in-fairmodels-a1ec6ff44d79)
 - en: Tutorial about the usage of [dalex fairness module](http://dalex.drwhy.ai/python-dalex-fairness.html)
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 关于使用[dalex 公平性模块](http://dalex.drwhy.ai/python-dalex-fairness.html)的教程
 - en: '[Ebook covering various topics of fairness](https://fairmlbook.org/)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[涵盖公平性各种主题的电子书](https://fairmlbook.org/)'
 - en: '[Original](https://medium.com/responsibleml/how-to-easily-check-if-your-ml-model-is-fair-2c173419ae4c).
     Reposted with permission.'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/responsibleml/how-to-easily-check-if-your-ml-model-is-fair-2c173419ae4c)。转载经许可。'
 - en: '**Related:**'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Overcoming the Racial Bias in AI](https://www.kdnuggets.com/2020/10/overcoming-racial-bias-ai.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[克服 AI 中的种族偏见](https://www.kdnuggets.com/2020/10/overcoming-racial-bias-ai.html)'
 - en: '[The Ethics of AI](https://www.kdnuggets.com/2020/10/ethics-ai-qa-farzindar.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AI 的伦理](https://www.kdnuggets.com/2020/10/ethics-ai-qa-farzindar.html)'
 - en: '[Navigate the road to Responsible AI](https://www.kdnuggets.com/2020/12/navigate-road-responsible-ai.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[探索负责任的 AI 之路](https://www.kdnuggets.com/2020/12/navigate-road-responsible-ai.html)'
 - en: More On This Topic
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多相关话题
 - en: '[Explore LLMs Easily on Your Laptop with openplayground](https://www.kdnuggets.com/2023/04/explore-llms-easily-laptop-openplayground.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在你的笔记本电脑上轻松探索 LLM，使用 openplayground](https://www.kdnuggets.com/2023/04/explore-llms-easily-laptop-openplayground.html)'
 - en: '[Easily Integrate LLMs into Your Scikit-learn Workflow with Scikit-LLM](https://www.kdnuggets.com/easily-integrate-llms-into-your-scikit-learn-workflow-with-scikit-llm)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[轻松将 LLM 集成到你的 Scikit-learn 工作流中，使用 Scikit-LLM](https://www.kdnuggets.com/easily-integrate-llms-into-your-scikit-learn-workflow-with-scikit-llm)'
 - en: '[Scrape Images Easily from Websites in A No-Coding Way](https://www.kdnuggets.com/2022/06/octoparse-scrape-images-easily-websites-nocoding-way.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[无需编码轻松从网站抓取图像](https://www.kdnuggets.com/2022/06/octoparse-scrape-images-easily-websites-nocoding-way.html)'
 - en: '[Leveraging AI to Design Fair and Equitable EV Charging Grids](https://www.kdnuggets.com/leveraging-ai-to-design-fair-and-equitable-ev-charging-grids)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用 AI 设计公平和公正的电动车充电网络](https://www.kdnuggets.com/leveraging-ai-to-design-fair-and-equitable-ev-charging-grids)'
 - en: '[3 New Prompt Engineering Resources to Check Out](https://www.kdnuggets.com/3-new-prompt-engineering-resources)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[3 个新的提示工程资源值得关注](https://www.kdnuggets.com/3-new-prompt-engineering-resources)'
 - en: '[Segment Anything Model: Foundation Model for Image Segmentation](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Segment Anything 模型：图像分割的基础模型](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
